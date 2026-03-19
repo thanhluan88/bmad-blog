@@ -7,6 +7,19 @@ type MarkdownBodyProps = {
   className?: string;
 };
 
+/** Extract YouTube video ID from URL. Supports watch?v=, youtu.be/, embed/ */
+function getYoutubeVideoId(href: string): string | null {
+  if (!href) return null;
+  const trimmed = href.trim();
+  const watchMatch = trimmed.match(/(?:youtube\.com\/watch\?v=)([a-zA-Z0-9_-]{11})/);
+  if (watchMatch) return watchMatch[1];
+  const shortMatch = trimmed.match(/(?:youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  if (shortMatch) return shortMatch[1];
+  const embedMatch = trimmed.match(/(?:youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/);
+  if (embedMatch) return embedMatch[1];
+  return null;
+}
+
 export function MarkdownBody({ content, className = "" }: MarkdownBodyProps) {
   return (
     <div
@@ -64,16 +77,32 @@ export function MarkdownBody({ content, className = "" }: MarkdownBodyProps) {
               {children}
             </pre>
           ),
-          a: ({ href, children }) => (
-            <a
-              href={href}
-              className="text-zinc-900 underline hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-300"
-              target={href?.startsWith("http") ? "_blank" : undefined}
-              rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
-            >
-              {children}
-            </a>
-          ),
+          a: ({ href, children }) => {
+            const videoId = href ? getYoutubeVideoId(href) : null;
+            if (videoId) {
+              return (
+                <div className="my-6 aspect-video w-full overflow-hidden rounded-lg">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${videoId}`}
+                    title="YouTube video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="h-full w-full"
+                  />
+                </div>
+              );
+            }
+            return (
+              <a
+                href={href}
+                className="text-zinc-900 underline hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-300"
+                target={href?.startsWith("http") ? "_blank" : undefined}
+                rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
+              >
+                {children}
+              </a>
+            );
+          },
           blockquote: ({ children }) => (
             <blockquote className="border-l-4 border-zinc-300 dark:border-zinc-600 pl-4 my-4 text-zinc-600 dark:text-zinc-400 italic">
               {children}
