@@ -7,19 +7,23 @@ async function main() {
   const authorEmail = "author@example.com";
   const authorPassword = "author123";
 
+  const adminPasswordHash = await argon2.hash(adminPassword);
   let admin = await db.user.findUnique({ where: { email: adminEmail } });
   if (!admin) {
-    const passwordHash = await argon2.hash(adminPassword);
     admin = await db.user.create({
       data: {
         email: adminEmail,
-        passwordHash,
+        passwordHash: adminPasswordHash,
         role: "ADMIN",
       },
     });
     console.log("Created admin user:", adminEmail);
   } else {
-    console.log("Admin user already exists, skipping.");
+    await db.user.update({
+      where: { email: adminEmail },
+      data: { passwordHash: adminPasswordHash },
+    });
+    console.log("Updated admin password:", adminEmail);
   }
 
   const postCount = await db.post.count();

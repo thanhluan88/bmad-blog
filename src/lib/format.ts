@@ -1,6 +1,9 @@
 export function formatUpdatedAt(date: Date | string): string {
-  return new Intl.DateTimeFormat(undefined, {
+  const d = typeof date === "string" ? new Date(date) : date;
+  if (Number.isNaN(d.getTime())) return "—";
+  return new Intl.DateTimeFormat("en", {
     dateStyle: "medium",
     timeStyle: "short",
-  }).format(typeof date === "string" ? new Date(date) : date);
+    timeZone: "UTC",
+  }).format(d);
 }
