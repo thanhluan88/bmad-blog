@@ -88,25 +88,44 @@ export async function POST(request: NextRequest) {
 
   const objectPath = buildCoverObjectPath(postId, file.name);
 
+  let body: ArrayBuffer;
+  try {
+    body = await file.arrayBuffer();
+  } catch {
+    return NextResponse.json(
+      { error: { code: "STORAGE_ERROR", message: "Failed to read file" } },
+      { status: 500 }
+    );
+  }
+
   try {
     const { objectPath: storedPath, publicUrl } = await uploadCoverToBlob(
-      file,
+      body,
       objectPath,
-      file.type
+      file.type,
+      token
     );
 
     return NextResponse.json({
       objectPath: storedPath,
       publicUrl,
     });
-  } catch {
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
     console.error("[uploads/cover] Blob upload error", {
       route: "/api/uploads/cover",
       errorCode: "STORAGE_ERROR",
       postId,
+      message: msg,
     });
     return NextResponse.json(
-      { error: { code: "STORAGE_ERROR", message: "Unable to upload file" } },
+      {
+        error: {
+          code: "STORAGE_ERROR",
+          message: "Unable to upload file",
+          details: process.env.NODE_ENV === "development" ? msg : undefined,
+        },
+      },
       { status: 500 }
     );
   }

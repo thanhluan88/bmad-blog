@@ -23,17 +23,20 @@ export type UploadCoverResult = {
 
 /**
  * Uploads a cover image to Vercel Blob.
- * Requires BLOB_READ_WRITE_TOKEN in env (set when Blob store is created in Vercel).
+ * Requires BLOB_READ_WRITE_TOKEN (passed explicitly for serverless reliability).
  */
 export async function uploadCoverToBlob(
   body: Blob | ArrayBuffer | ReadableStream,
   pathname: string,
-  contentType: string
+  contentType: string,
+  token: string
 ): Promise<UploadCoverResult> {
   const blob = await put(pathname, body, {
     access: "public",
     contentType,
     addRandomSuffix: true,
+    token,
+    multipart: true, // Better for larger files on serverless
   });
 
   return {

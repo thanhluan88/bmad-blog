@@ -59,8 +59,9 @@ export function CoverUploadWidget({
       if (!res.ok) {
         const msg =
           data?.error?.message ?? (res.status === 401 ? "Please log in again." : "Upload failed. Try again.");
+        const details = data?.error?.details;
         setState("failure");
-        setErrorMessage(msg);
+        setErrorMessage(details ? `${msg} (${details})` : msg);
         return;
       }
 
