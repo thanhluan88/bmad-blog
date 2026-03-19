@@ -2,13 +2,15 @@
 
 import { useRef, useState } from "react";
 
-const MAX_SIZE_BYTES = 5 * 1024 * 1024; // 5MB
+const MAX_SIZE_BYTES = 4 * 1024 * 1024; // 4MB (Vercel request limit)
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 type CoverUploadWidgetProps = {
   postId: string;
   initialCoverUrl?: string | null;
   onCoverAttached: (objectPath: string, publicUrl: string) => void;
+  /** When false, upload is disabled and a setup hint is shown */
+  uploadConfigured?: boolean;
 };
 
 type UploadState = "idle" | "uploading" | "success" | "failure";
@@ -17,6 +19,7 @@ export function CoverUploadWidget({
   postId,
   initialCoverUrl,
   onCoverAttached,
+  uploadConfigured = true,
 }: CoverUploadWidgetProps) {
   const [state, setState] = useState<UploadState>(initialCoverUrl ? "success" : "idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -34,7 +37,7 @@ export function CoverUploadWidget({
     }
     if (file.size > MAX_SIZE_BYTES) {
       setState("failure");
-      setErrorMessage("File must be 5MB or less.");
+      setErrorMessage("File must be 4MB or less.");
       return;
     }
 
@@ -42,15 +45,13 @@ export function CoverUploadWidget({
     setErrorMessage(null);
 
     try {
+      const formData = new FormData();
+      formData.append("postId", postId);
+      formData.append("file", file);
+
       const res = await fetch("/api/uploads/cover", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          postId,
-          filename: file.name,
-          contentType: file.type,
-          size: file.size,
-        }),
+        body: formData,
       });
 
       const data = await res.json();
@@ -63,19 +64,7 @@ export function CoverUploadWidget({
         return;
       }
 
-      const { uploadUrl, objectPath, publicUrl } = data;
-
-      const putRes = await fetch(uploadUrl, {
-        method: "PUT",
-        body: file,
-        headers: { "Content-Type": file.type },
-      });
-
-      if (!putRes.ok) {
-        setState("failure");
-        setErrorMessage("Upload failed. Check CORS or try again.");
-        return;
-      }
+      const { objectPath, publicUrl } = data;
 
       setCoverUrl(publicUrl);
       setState("success");
@@ -94,6 +83,22 @@ export function CoverUploadWidget({
     fileInputRef.current?.click();
   };
 
+  if (!uploadConfigured) {
+    return (
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+          Cover image
+        </label>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          Upload not configured. Create a Blob store in Vercel Dashboard → Storage, then add{" "}
+          <code className="rounded bg-zinc-100 px-1 dark:bg-zinc-800">BLOB_READ_WRITE_TOKEN</code> to{" "}
+          <code className="rounded bg-zinc-100 px-1 dark:bg-zinc-800">.env.local</code>. Run{" "}
+          <code className="rounded bg-zinc-100 px-1 dark:bg-zinc-800">vercel env pull</code> to copy from Vercel.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-2">
       <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
@@ -102,7 +107,7 @@ export function CoverUploadWidget({
       <div className="flex flex-wrap items-start gap-4">
         {state === "success" && coverUrl && (
           <div className="relative">
-            {/* eslint-disable-next-line @next/next/no-img-element -- external GCS URL, thumbnail preview */}
+            {/* eslint-disable-next-line @next/next/no-img-element -- external Blob URL, thumbnail preview */}
             <img
               src={coverUrl}
               alt="Cover preview"

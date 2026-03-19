@@ -38,7 +38,7 @@ type SlugCheckStatus = "idle" | "checking" | "available" | "taken" | "invalid";
 
 const SLUG_DEBOUNCE_MS = 400;
 
-export function PostEditorForm({ post }: { post: Post }) {
+export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; uploadConfigured?: boolean }) {
   const router = useRouter();
   const actionWithId = updateDraftPost.bind(null, post.id);
   const [state, formAction] = useActionState(actionWithId, {} as FormState);
@@ -187,6 +187,7 @@ export function PostEditorForm({ post }: { post: Post }) {
               setCoverObject(obj);
               setCoverImageUrl(url);
             }}
+            uploadConfigured={uploadConfigured}
           />
           <div>
             <label

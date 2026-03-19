@@ -60,7 +60,7 @@ export default async function AdminPostEditPage({
         </Link>
       </div>
 
-      <PostEditorForm post={postData} />
+      <PostEditorForm post={postData} uploadConfigured={!!process.env.BLOB_READ_WRITE_TOKEN} />
     </div>
   );
 }
