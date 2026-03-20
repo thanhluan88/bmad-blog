@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { formatUpdatedAt } from "@/lib/format";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 type Post = {
   id: string;
@@ -17,14 +17,33 @@ type Props = {
 
 export function SidebarMenu({ posts }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const showMenu = () => {
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+    setIsHovered(true);
+  };
+
+  const hideMenu = () => {
+    hideTimeoutRef.current = setTimeout(() => {
+      setIsHovered(false);
+      hideTimeoutRef.current = null;
+    }, 150);
+  };
+
+  const isVisible = isOpen || isHovered;
 
   return (
     <>
-      {/* Hamburger button - fixed top-left */}
+      {/* Hamburger - mobile only */}
       <button
         type="button"
         onClick={() => setIsOpen((o) => !o)}
-        className="fixed left-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-lg border-2 border-amber-900/40 bg-amber-50/95 shadow-md transition-colors hover:bg-amber-100/95 dark:border-amber-700/50 dark:bg-amber-950/95 dark:hover:bg-amber-900/95"
+        className="fixed left-4 top-4 z-20 flex h-10 w-10 md:hidden items-center justify-center rounded-lg border-2 border-amber-900/40 bg-amber-50/95 shadow-md transition-colors hover:bg-amber-100/95 dark:border-amber-700/50 dark:bg-amber-950/95 dark:hover:bg-amber-900/95"
         aria-label={isOpen ? "Đóng menu" : "Mở menu"}
       >
         <svg
@@ -51,6 +70,14 @@ export function SidebarMenu({ posts }: Props) {
         </svg>
       </button>
 
+      {/* Hover trigger strip - desktop only, thin strip on left edge */}
+      <div
+        className="fixed left-0 top-0 z-10 hidden h-full w-3 md:block"
+        onMouseEnter={showMenu}
+        onMouseLeave={hideMenu}
+        aria-hidden
+      />
+
       {/* Overlay when menu is open (mobile) */}
       <div
         role="button"
@@ -63,11 +90,13 @@ export function SidebarMenu({ posts }: Props) {
         aria-hidden="true"
       />
 
-      {/* Sidebar - slides in from left */}
+      {/* Sidebar - hover to show on desktop, click on mobile */}
       <aside
         className={`fixed left-0 top-0 z-10 h-full w-64 border-r-2 border-amber-900/30 bg-amber-50/98 shadow-xl transition-transform duration-300 ease-out dark:border-amber-800/40 dark:bg-amber-950/98 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0`}
+          isVisible ? "translate-x-0" : "-translate-x-full"
+        }`}
+        onMouseEnter={showMenu}
+        onMouseLeave={hideMenu}
       >
         <div className="flex h-full flex-col p-4 pt-16 md:pt-4">
           <Link

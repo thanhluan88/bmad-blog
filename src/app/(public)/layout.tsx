@@ -1,5 +1,7 @@
 import { db } from "@/lib/db";
 import { SidebarMenu } from "@/components/SidebarMenu";
+import { BlogHeader } from "@/components/BlogHeader";
+import { BlogFooter } from "@/components/BlogFooter";
 
 export default async function PublicLayout({
   children,
@@ -18,11 +20,13 @@ export default async function PublicLayout({
   }
 
   return (
-    <div className="min-h-screen bg-amber-50/50 dark:bg-amber-950/30">
+    <div className="flex min-h-screen flex-col bg-amber-50/50 dark:bg-amber-950/30">
+      <BlogHeader />
       <SidebarMenu posts={posts} />
-      <main className="min-h-screen pt-14 md:ml-64 md:pt-0">
+      <main className="flex-1">
         {children}
       </main>
+      <BlogFooter />
     </div>
   );
 }
