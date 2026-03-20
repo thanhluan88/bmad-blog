@@ -52,7 +52,7 @@ export function PostCover({ coverImageUrl, alt = "Cover", className = "" }: Post
   };
 
   return (
-    <figure className={`mb-8 overflow-hidden rounded-lg ${className}`}>
+    <figure className={`mb-8 overflow-hidden rounded-lg border-2 border-amber-200/60 dark:border-amber-800/50 shadow-md ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element -- Intentional: onError fallback for graceful cover load failure per story 4.3 */}
       <img
         src={coverImageUrl}

@@ -27,7 +27,7 @@ export default async function PublicPostPage({ params }: Props) {
         {coverUrl && (
           <PostCover coverImageUrl={coverUrl} alt={post.title || "Cover"} />
         )}
-        <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">
+        <h1 className="text-3xl font-bold text-amber-900 dark:text-amber-100">
           {post.title}
         </h1>
         <div className="mt-8">
