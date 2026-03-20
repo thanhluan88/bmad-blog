@@ -32,15 +32,18 @@ export async function uploadCoverToBlob(
   token: string
 ): Promise<UploadCoverResult> {
   const blob = await put(pathname, body, {
-    access: "public",
+    access: "private",
     contentType,
     addRandomSuffix: true,
     token,
     multipart: true, // Better for larger files on serverless
   });
 
+  // Private store: serve via proxy route (blob.url requires auth)
+  const publicUrl = `/api/blob?pathname=${encodeURIComponent(blob.pathname)}`;
+
   return {
     objectPath: blob.pathname,
-    publicUrl: blob.url,
+    publicUrl,
   };
 }

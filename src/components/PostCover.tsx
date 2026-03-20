@@ -8,7 +8,7 @@ type PostCoverProps = {
   className?: string;
 };
 
-/** Whitelist https/http only; reject javascript:, data:, vbscript:, protocol-relative. */
+/** Whitelist https/http and relative /api/blob; reject javascript:, data:, vbscript:, protocol-relative. */
 function isValidImageUrl(url: string): boolean {
   const trimmed = url?.trim();
   if (!trimmed) return false;
@@ -21,7 +21,9 @@ function isValidImageUrl(url: string): boolean {
   ) {
     return false;
   }
-  return lower.startsWith("https://") || lower.startsWith("http://");
+  if (lower.startsWith("https://") || lower.startsWith("http://")) return true;
+  if (lower.startsWith("/api/blob")) return true;
+  return false;
 }
 
 /**
