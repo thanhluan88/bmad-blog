@@ -104,7 +104,7 @@ export function MarkdownBody({ content, className = "" }: MarkdownBodyProps) {
             );
           },
           blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-amber-400 dark:border-amber-700 pl-4 my-4 text-amber-800/80 dark:text-amber-300/80 italic">
+            <blockquote className="border-l-4 border-amber-400 dark:border-amber-700 pl-4 my-4 text-amber-800/80 dark:text-amber-300/80 italic font-sans">
               {children}
             </blockquote>
           ),
