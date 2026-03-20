@@ -334,7 +334,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
               <>
                 <input type="hidden" name="contentMd" value={contentMd} />
                 <div
-                  className="min-h-[384px] w-full rounded-md border border-zinc-300 px-3 py-2 font-mono text-sm dark:border-zinc-700 dark:bg-zinc-800"
+                  className="min-h-[384px] w-full rounded-md border border-zinc-300 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800 font-sans"
                   aria-hidden="true"
                 >
                   <MarkdownBody content={contentMd} className="py-2" />

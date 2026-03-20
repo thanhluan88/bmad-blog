@@ -23,7 +23,7 @@ function getYoutubeVideoId(href: string): string | null {
 export function MarkdownBody({ content, className = "" }: MarkdownBodyProps) {
   return (
     <div
-      className={`prose prose-stone dark:prose-invert max-w-none ${className}`}
+      className={`prose prose-stone dark:prose-invert max-w-none font-sans ${className}`}
       data-markdown-body
     >
       <ReactMarkdown

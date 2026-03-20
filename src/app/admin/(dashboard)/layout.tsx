@@ -16,6 +16,12 @@ export default async function AdminDashboardLayout({
         <div className="mx-auto flex h-14 max-w-4xl items-center justify-between px-4">
           <div className="flex items-center gap-6">
             <Link
+              href="/"
+              className="font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+            >
+              Blog
+            </Link>
+            <Link
               href="/admin"
               className="font-medium text-zinc-900 hover:text-zinc-600 dark:text-zinc-50 dark:hover:text-zinc-300"
             >
