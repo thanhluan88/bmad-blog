@@ -5,16 +5,16 @@ const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export const slugSchema = z
   .string()
   .trim()
-  .min(1, "Slug is required")
-  .max(200, "Slug must be 200 characters or less")
+  .min(1, "スラッグは必須です")
+  .max(200, "スラッグは200文字以内にしてください")
   .transform((s) => s.toLowerCase())
-  .pipe(z.string().regex(SLUG_REGEX, "Slug must contain only letters, numbers, and hyphens"));
+  .pipe(z.string().regex(SLUG_REGEX, "スラッグは英数字とハイフンのみ使用できます"));
 
 export const draftPostSchema = z.object({
   title: z
     .string()
     .trim()
-    .min(1, "Title is required"),
+    .min(1, "タイトルは必須です"),
   slug: slugSchema,
   contentMd: z.string(),
 });
@@ -23,12 +23,12 @@ export const publishPostSchema = z.object({
   title: z
     .string()
     .trim()
-    .min(1, "Title is required"),
+    .min(1, "タイトルは必須です"),
   slug: slugSchema,
   contentMd: z
     .string()
     .trim()
-    .min(1, "Content is required to publish"),
+    .min(1, "公開するには本文が必要です"),
 });
 
 export type DraftPostInput = z.infer<typeof draftPostSchema>;

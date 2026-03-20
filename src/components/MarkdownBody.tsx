@@ -84,7 +84,7 @@ export function MarkdownBody({ content, className = "" }: MarkdownBodyProps) {
                 <div className="my-6 aspect-video w-full overflow-hidden rounded-lg">
                   <iframe
                     src={`https://www.youtube.com/embed/${videoId}`}
-                    title="YouTube video"
+                    title="YouTube動画"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="h-full w-full"

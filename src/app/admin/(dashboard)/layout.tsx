@@ -19,19 +19,19 @@ export default async function AdminDashboardLayout({
               href="/"
               className="font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
             >
-              Blog
+              ブログ
             </Link>
             <Link
               href="/admin"
               className="font-medium text-zinc-900 hover:text-zinc-600 dark:text-zinc-50 dark:hover:text-zinc-300"
             >
-              Admin
+              管理
             </Link>
             <Link
               href="/admin/posts"
               className="font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
             >
-              Posts
+              記事一覧
             </Link>
           </div>
           <div className="flex items-center gap-4">
@@ -44,12 +44,12 @@ export default async function AdminDashboardLayout({
                 await signOut({ redirectTo: "/admin/login" });
               }}
             >
-              <button
-                type="submit"
-                className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-              >
-                Log out
-              </button>
+          <button
+            type="submit"
+            className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+          >
+            ログアウト
+          </button>
             </form>
           </div>
         </div>

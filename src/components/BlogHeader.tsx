@@ -8,20 +8,20 @@ export function BlogHeader() {
           href="/"
           className="text-lg font-bold text-amber-900 hover:text-amber-700 dark:text-amber-100 dark:hover:text-amber-300"
         >
-          Thanh Luan&apos;s Blog
+          Thanh Luanのブログ
         </Link>
         <nav className="flex items-center gap-6">
           <Link
             href="/"
             className="text-sm font-medium text-amber-800 hover:text-amber-600 dark:text-amber-300 dark:hover:text-amber-200"
           >
-            Trang chủ
+            ホーム
           </Link>
           <Link
             href="/admin"
             className="text-sm text-amber-700/80 hover:text-amber-600 dark:text-amber-400/80 dark:hover:text-amber-300"
           >
-            Admin
+            管理
           </Link>
         </nav>
       </div>

@@ -25,7 +25,7 @@ export default async function PublicPostPage({ params }: Props) {
     <div className="mx-auto max-w-3xl px-8 py-12">
       <article>
         {coverUrl && (
-          <PostCover coverImageUrl={coverUrl} alt={post.title || "Cover"} />
+          <PostCover coverImageUrl={coverUrl} alt={post.title || "カバー"} />
         )}
         <h1 className="text-3xl font-bold text-amber-900 dark:text-amber-100">
           {post.title}

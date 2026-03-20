@@ -30,9 +30,9 @@ async function main() {
   if (postCount === 0 && admin) {
     await db.post.create({
       data: {
-        title: "Sample post",
+        title: "サンプル記事",
         slug: "sample-post",
-        contentMd: "# Hello\n\nThis is a sample post.",
+        contentMd: "# こんにちは\n\nこれはサンプル記事です。",
         status: "DRAFT",
         authorId: admin.id,
       },

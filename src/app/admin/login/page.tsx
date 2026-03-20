@@ -13,18 +13,18 @@ export default async function LoginPage({
   const params = await searchParams;
   const errorMessage =
     params.code === "too_many_attempts"
-      ? "Too many attempts. Please try again later."
+      ? "試行回数が多すぎます。しばらくしてから再度お試しください。"
       : params.error === "CredentialsSignin"
-        ? "Invalid credentials."
+        ? "メールアドレスまたはパスワードが正しくありません。"
         : params.error
-          ? "Something went wrong. Please try again."
+          ? "エラーが発生しました。もう一度お試しください。"
           : null;
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-950">
       <div className="w-full max-w-sm space-y-6 rounded-lg border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
         <h1 className="text-center text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-          Sign in
+          ログイン
         </h1>
         <form
           action={async (formData) => {
@@ -56,7 +56,7 @@ export default async function LoginPage({
               htmlFor="email"
               className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
             >
-              Email
+              メールアドレス
             </label>
             <input
               id="email"
@@ -73,7 +73,7 @@ export default async function LoginPage({
               htmlFor="password"
               className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
             >
-              Password
+              パスワード
             </label>
             <input
               id="password"
@@ -93,7 +93,7 @@ export default async function LoginPage({
             type="submit"
             className="w-full rounded-md bg-zinc-900 px-4 py-2 font-medium text-white hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
           >
-            Sign in
+            ログイン
           </button>
         </form>
       </div>

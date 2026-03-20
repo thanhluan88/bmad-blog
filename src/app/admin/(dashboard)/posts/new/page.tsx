@@ -11,7 +11,7 @@ export default async function AdminPostsNewPage() {
   try {
     const post = await db.post.create({
       data: {
-        title: "Untitled",
+        title: "無題",
         slug: `draft-${randomUUID().replace(/-/g, "").slice(0, 8)}`,
         contentMd: "",
         status: "DRAFT",

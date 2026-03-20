@@ -22,13 +22,13 @@ export default async function AdminPostsPage() {
     return (
       <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
         <p className="text-zinc-600 dark:text-zinc-400">
-          Unable to load posts. Please try again.
+          記事を読み込めませんでした。もう一度お試しください。
         </p>
         <Link
           href="/admin/posts"
           className="mt-4 inline-block text-sm font-medium text-zinc-900 hover:text-zinc-600 dark:text-zinc-50 dark:hover:text-zinc-300"
         >
-          Try again
+          再試行
         </Link>
       </div>
     );
@@ -38,24 +38,24 @@ export default async function AdminPostsPage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">
-          Posts
+          記事一覧
         </h1>
         <Link
           href="/admin/posts/new"
           className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
         >
-          New post
+          新規記事
         </Link>
       </div>
 
       {posts.length === 0 ? (
         <div className="rounded-lg border border-zinc-200 bg-white p-12 text-center dark:border-zinc-800 dark:bg-zinc-900">
-          <p className="text-zinc-600 dark:text-zinc-400">No posts yet.</p>
+          <p className="text-zinc-600 dark:text-zinc-400">記事がまだありません。</p>
           <Link
             href="/admin/posts/new"
             className="mt-4 inline-block rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
           >
-            New post
+            新規記事
           </Link>
         </div>
       ) : (
@@ -67,19 +67,19 @@ export default async function AdminPostsPage() {
                   scope="col"
                   className="px-4 py-3 text-left text-sm font-medium text-zinc-900 dark:text-zinc-50"
                 >
-                  Title
+                  タイトル
                 </th>
                 <th
                   scope="col"
                   className="px-4 py-3 text-left text-sm font-medium text-zinc-900 dark:text-zinc-50"
                 >
-                  Status
+                  ステータス
                 </th>
                 <th
                   scope="col"
                   className="px-4 py-3 text-left text-sm font-medium text-zinc-900 dark:text-zinc-50"
                 >
-                  Updated
+                  更新日時
                 </th>
               </tr>
             </thead>

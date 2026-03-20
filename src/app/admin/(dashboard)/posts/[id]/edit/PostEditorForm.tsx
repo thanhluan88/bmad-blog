@@ -17,9 +17,9 @@ import {
 
 function SaveStateIndicator({ state }: { state: FormState }) {
   const { pending } = useFormStatus();
-  if (pending) return <span className="text-sm text-zinc-500 dark:text-zinc-400">Saving…</span>;
-  if (state.success) return <span className="text-sm text-green-600 dark:text-green-400">Saved</span>;
-  if (state.errors && !state.success) return <span className="text-sm text-red-600 dark:text-red-400">Failed—retry</span>;
+  if (pending) return <span className="text-sm text-zinc-500 dark:text-zinc-400">保存中…</span>;
+  if (state.success) return <span className="text-sm text-green-600 dark:text-green-400">保存しました</span>;
+  if (state.errors && !state.success) return <span className="text-sm text-red-600 dark:text-red-400">失敗—再試行</span>;
   return null;
 }
 
@@ -87,7 +87,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
       setPublishErrors(null);
       router.refresh();
     } else {
-      setPublishErrors(result.errors ?? { title: "Unable to publish" });
+      setPublishErrors(result.errors ?? { title: "公開できませんでした" });
     }
   };
 
@@ -149,7 +149,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
   }, [slugValue, post.slug, post.id]);
 
   const isPublished = post.status === "PUBLISHED";
-  const statusLabel = isPublished ? "PUBLISHED (public)" : "DRAFT (private)";
+  const statusLabel = isPublished ? "公開中" : "下書き";
   const statusClass =
     isPublished
       ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
@@ -165,11 +165,11 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
       <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-50">
-            Post details
+            記事の詳細
           </h2>
           <div className="flex items-center gap-3">
             <span className="text-sm text-zinc-500 dark:text-zinc-400">
-              Last updated: {formatUpdatedAt(post.updatedAt)}
+              最終更新: {formatUpdatedAt(post.updatedAt)}
             </span>
             <span
               className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${statusClass}`}
@@ -194,7 +194,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
               htmlFor="title"
               className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
             >
-              Title
+              タイトル
             </label>
             <input
               id="title"
@@ -218,7 +218,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
               htmlFor="slug"
               className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
             >
-              Slug
+              スラッグ
             </label>
             <input
               id="slug"
@@ -237,22 +237,22 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
             <div className="mt-1 flex flex-wrap items-center gap-2">
               {slugCheck === "checking" && (
                 <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                  checking…
+                  確認中…
                 </span>
               )}
               {slugCheck === "available" && slugValue.trim() && (
                 <span className="text-sm text-green-600 dark:text-green-400">
-                  available
+                  使用可能
                 </span>
               )}
               {slugCheck === "taken" && (
                 <span className="text-sm text-red-600 dark:text-red-400">
-                  already used
+                  既に使用されています
                 </span>
               )}
               {slugCheck === "invalid" && slugValue.trim() && (
                 <span className="text-sm text-amber-600 dark:text-amber-400">
-                  invalid format (letters, numbers, hyphens only)
+                  形式が無効です（英数字とハイフンのみ）
                 </span>
               )}
             </div>
@@ -260,12 +260,12 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
               <div id="slug-error" className="mt-1 space-y-1">
                 {(slugError || slugCheck === "taken" || publishErrors?.slug) && (
                   <p className="text-sm text-red-600 dark:text-red-400">
-                    {slugError ?? publishErrors?.slug ?? "Slug already in use"}
+                    {slugError ?? publishErrors?.slug ?? "このスラッグは既に使用されています"}
                   </p>
                 )}
                 {slugCheck === "taken" && suggestedSlugs.length > 0 && (
                   <p id="slug-suggestions" className="text-sm text-zinc-600 dark:text-zinc-400">
-                    Try:{" "}
+                    例:{" "}
                     {suggestedSlugs.map((s, i) => (
                       <span key={s}>
                         {i > 0 && ", "}
@@ -290,7 +290,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
                 htmlFor="contentMd"
                 className="block text-sm font-medium text-zinc-700 dark:text-zinc-300"
               >
-                Content (Markdown)
+                本文（Markdown）
               </label>
               <div className="flex rounded-md border border-zinc-300 dark:border-zinc-700 p-0.5">
                 <button
@@ -303,7 +303,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
                   }`}
                   aria-pressed={editorMode === "write"}
                 >
-                  Write
+                  編集
                 </button>
                 <button
                   type="button"
@@ -315,7 +315,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
                   }`}
                   aria-pressed={editorMode === "preview"}
                 >
-                  Preview
+                  プレビュー
                 </button>
               </div>
             </div>
@@ -355,7 +355,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
           type="submit"
           className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
         >
-          Save
+          保存
         </button>
         {!isPublished && (
           <button
@@ -364,7 +364,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
             disabled={!canPublish}
             className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-green-700 dark:hover:bg-green-800"
           >
-            Publish
+            公開
           </button>
         )}
         {isPublished && (
@@ -373,7 +373,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
             onClick={() => setUnpublishDialogOpen(true)}
             className="rounded-md border border-amber-600 px-4 py-2 text-sm font-medium text-amber-600 hover:bg-amber-50 dark:border-amber-500 dark:text-amber-500 dark:hover:bg-amber-950/50"
           >
-            Unpublish
+            非公開にする
           </button>
         )}
         {publishResult?.success && (
@@ -383,14 +383,14 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
             rel="noopener noreferrer"
             className="text-sm font-medium text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300"
           >
-            View public post
+            公開記事を見る
           </Link>
         )}
         <Link
           href="/admin/posts"
           className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
         >
-          Back to posts
+          記事一覧に戻る
         </Link>
         <SaveStateIndicator state={state} />
       </div>
@@ -404,10 +404,10 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
         >
           <div className="mx-4 max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-zinc-900">
             <h2 id="publish-dialog-title" className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-              Publish post
+              記事を公開
             </h2>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-              This will make the post public at <code className="font-mono">/p/{slugValue.trim() || "..."}</code>
+              この記事は <code className="font-mono">/p/{slugValue.trim() || "..."}</code> で公開されます。
             </p>
             <div className="mt-4 flex justify-end gap-2">
               <button
@@ -415,7 +415,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
                 onClick={() => setPublishDialogOpen(false)}
                 className="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
               >
-                Cancel
+                キャンセル
               </button>
               <button
                 type="button"
@@ -423,7 +423,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
                 disabled={publishPending || !canPublish}
                 className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 disabled:opacity-50 dark:bg-green-700 dark:hover:bg-green-800"
               >
-                {publishPending ? "Publishing…" : "Publish"}
+                {publishPending ? "公開中…" : "公開"}
               </button>
             </div>
           </div>
@@ -439,10 +439,10 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
         >
           <div className="mx-4 max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-zinc-900">
             <h2 id="unpublish-dialog-title" className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-              Unpublish post
+              記事を非公開にする
             </h2>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-              This will make the post private. It will no longer be visible at the public URL.
+              この記事は非公開になります。公開URLからは表示されなくなります。
             </p>
             <div className="mt-4 flex justify-end gap-2">
               <button
@@ -450,7 +450,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
                 onClick={() => setUnpublishDialogOpen(false)}
                 className="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
               >
-                Cancel
+                キャンセル
               </button>
               <button
                 type="button"
@@ -458,7 +458,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
                 disabled={unpublishPending}
                 className="rounded-md bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-700 disabled:opacity-50 dark:bg-amber-700 dark:hover:bg-amber-800"
               >
-                {unpublishPending ? "Unpublishing…" : "Unpublish"}
+                {unpublishPending ? "非公開処理中…" : "非公開にする"}
               </button>
             </div>
           </div>

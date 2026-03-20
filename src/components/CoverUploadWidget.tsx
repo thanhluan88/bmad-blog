@@ -32,12 +32,12 @@ export function CoverUploadWidget({
 
     if (!ALLOWED_TYPES.includes(file.type)) {
       setState("failure");
-      setErrorMessage("File must be JPEG, PNG, or WebP.");
+      setErrorMessage("JPEG、PNG、またはWebP形式でアップロードしてください。");
       return;
     }
     if (file.size > MAX_SIZE_BYTES) {
       setState("failure");
-      setErrorMessage("File must be 4MB or less.");
+      setErrorMessage("ファイルサイズは4MB以下にしてください。");
       return;
     }
 
@@ -58,7 +58,7 @@ export function CoverUploadWidget({
 
       if (!res.ok) {
         const msg =
-          data?.error?.message ?? (res.status === 401 ? "Please log in again." : "Upload failed. Try again.");
+          data?.error?.message ?? (res.status === 401 ? "再度ログインしてください。" : "アップロードに失敗しました。もう一度お試しください。");
         const details = data?.error?.details;
         setState("failure");
         setErrorMessage(details ? `${msg} (${details})` : msg);
@@ -72,7 +72,7 @@ export function CoverUploadWidget({
       onCoverAttached(objectPath, publicUrl);
     } catch {
       setState("failure");
-      setErrorMessage("Upload failed. Check your connection and try again.");
+      setErrorMessage("アップロードに失敗しました。接続を確認してください。");
     } finally {
       if (fileInputRef.current) fileInputRef.current.value = "";
     }
@@ -88,13 +88,13 @@ export function CoverUploadWidget({
     return (
       <div className="space-y-2">
         <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
-          Cover image
+          カバー画像
         </label>
         <p className="text-sm text-zinc-500 dark:text-zinc-400">
-          Upload not configured. Create a Blob store in Vercel Dashboard → Storage, then add{" "}
-          <code className="rounded bg-zinc-100 px-1 dark:bg-zinc-800">BLOB_READ_WRITE_TOKEN</code> to{" "}
-          <code className="rounded bg-zinc-100 px-1 dark:bg-zinc-800">.env.local</code>. Run{" "}
-          <code className="rounded bg-zinc-100 px-1 dark:bg-zinc-800">vercel env pull</code> to copy from Vercel.
+          アップロードが設定されていません。Vercel Dashboard → Storage で Blob ストアを作成し、
+          <code className="rounded bg-zinc-100 px-1 dark:bg-zinc-800">BLOB_READ_WRITE_TOKEN</code> を{" "}
+          <code className="rounded bg-zinc-100 px-1 dark:bg-zinc-800">.env.local</code> に追加してください。
+          <code className="rounded bg-zinc-100 px-1 dark:bg-zinc-800">vercel env pull</code> で Vercel からコピーできます。
         </p>
       </div>
     );
@@ -103,7 +103,7 @@ export function CoverUploadWidget({
   return (
     <div className="space-y-2">
       <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
-        Cover image
+        カバー画像
       </label>
       <div className="flex flex-wrap items-start gap-4">
         {state === "success" && coverUrl && (
@@ -111,7 +111,7 @@ export function CoverUploadWidget({
             {/* eslint-disable-next-line @next/next/no-img-element -- external Blob URL, thumbnail preview */}
             <img
               src={coverUrl}
-              alt="Cover preview"
+              alt="カバー画像プレビュー"
               className="h-24 w-40 rounded-md border border-zinc-200 object-cover dark:border-zinc-700"
             />
           </div>
@@ -123,10 +123,10 @@ export function CoverUploadWidget({
             accept={ALLOWED_TYPES.join(",")}
             onChange={handleFileChange}
             className="hidden"
-            aria-label="Choose cover image"
+            aria-label="カバー画像を選択"
           />
           {state === "uploading" && (
-            <span className="text-sm text-zinc-500 dark:text-zinc-400">Uploading…</span>
+            <span className="text-sm text-zinc-500 dark:text-zinc-400">アップロード中…</span>
           )}
           {state === "failure" && (
             <>
@@ -136,7 +136,7 @@ export function CoverUploadWidget({
                 onClick={handleRetry}
                 className="text-sm font-medium text-zinc-900 underline hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-300"
               >
-                Retry
+                再試行
               </button>
             </>
           )}
@@ -146,7 +146,7 @@ export function CoverUploadWidget({
               onClick={() => fileInputRef.current?.click()}
               className="rounded-md border border-zinc-300 px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800 disabled:opacity-50"
             >
-              {state === "success" ? "Replace cover" : "Upload cover"}
+              {state === "success" ? "カバーを変更" : "カバーをアップロード"}
             </button>
           )}
         </div>

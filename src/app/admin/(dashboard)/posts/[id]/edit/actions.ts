@@ -18,13 +18,13 @@ export async function updateDraftPost(
   formData: FormData
 ): Promise<FormState> {
   const authResult = await requireAuth();
-  if (!authResult) return { success: false, errors: { title: "Authentication required" } };
+  if (!authResult) return { success: false, errors: { title: "ログインが必要です" } };
 
   const { user } = authResult;
 
   const ownershipResult = await requirePostOwnership(user, postId);
   if ("response" in ownershipResult) {
-    return { success: false, errors: { title: "Access denied" } };
+    return { success: false, errors: { title: "アクセスが拒否されました" } };
   }
 
   const raw = {
@@ -54,7 +54,7 @@ export async function updateDraftPost(
       where: { slug, NOT: { id: postId } },
     });
     if (existing) {
-      return { success: false, code: "SLUG_TAKEN", errors: { slug: "Slug already in use" } };
+      return { success: false, code: "SLUG_TAKEN", errors: { slug: "このスラッグは既に使用されています" } };
     }
 
     await db.post.update({
@@ -67,11 +67,11 @@ export async function updateDraftPost(
     return { success: true };
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === "P2002") {
-      return { success: false, code: "SLUG_TAKEN", errors: { slug: "Slug already in use" } };
+      return { success: false, code: "SLUG_TAKEN", errors: { slug: "このスラッグは既に使用されています" } };
     }
     // eslint-disable-next-line no-console -- intentional server-side error logging
     console.error("[admin/posts/edit] DB error", { route: "admin/posts/edit", errorCode: "DB_ERROR" });
-    return { success: false, errors: { title: "Unable to save. Please try again." } };
+    return { success: false, errors: { title: "保存できませんでした。もう一度お試しください。" } };
   }
 }
 
@@ -136,11 +136,11 @@ export async function publishPost(
   }
 ): Promise<PublishResult> {
   const authResult = await requireAuth();
-  if (!authResult) return { success: false, errors: { title: "Authentication required" } };
+  if (!authResult) return { success: false, errors: { title: "ログインが必要です" } };
 
   const ownershipResult = await requirePostOwnership(authResult.user, postId);
   if ("response" in ownershipResult) {
-    return { success: false, errors: { title: "Access denied" } };
+    return { success: false, errors: { title: "アクセスが拒否されました" } };
   }
 
   const parsed = publishPostSchema.safeParse(data);
@@ -187,7 +187,7 @@ export async function publishPost(
     if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === "P2002") {
       return { success: false, errors: { slug: "Slug already in use" } };
     }
-    return { success: false, errors: { title: "Unable to publish. Please try again." } };
+    return { success: false, errors: { title: "公開できませんでした。もう一度お試しください。" } };
   }
 }
 

@@ -8,20 +8,20 @@ export function BlogFooter() {
       <div className="mx-auto max-w-5xl px-4 md:px-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-sm text-amber-800/80 dark:text-amber-300/80">
-            © {year} Thanh Luan&apos;s Blog. All rights reserved.
+            © {year} Thanh Luanのブログ. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link
               href="/"
               className="text-sm text-amber-700 hover:text-amber-600 dark:text-amber-400 dark:hover:text-amber-300"
             >
-              Trang chủ
+              ホーム
             </Link>
             <Link
               href="/admin"
               className="text-sm text-amber-700 hover:text-amber-600 dark:text-amber-400 dark:hover:text-amber-300"
             >
-              Admin
+              管理
             </Link>
           </div>
         </div>

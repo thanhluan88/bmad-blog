@@ -44,7 +44,7 @@ export function SidebarMenu({ posts }: Props) {
         type="button"
         onClick={() => setIsOpen((o) => !o)}
         className="fixed left-4 top-4 z-20 flex h-10 w-10 md:hidden items-center justify-center rounded-lg border-2 border-amber-900/40 bg-amber-50/95 shadow-md transition-colors hover:bg-amber-100/95 dark:border-amber-700/50 dark:bg-amber-950/95 dark:hover:bg-amber-900/95"
-        aria-label={isOpen ? "Đóng menu" : "Mở menu"}
+        aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
       >
         <svg
           className="h-5 w-5 text-amber-900 dark:text-amber-200"
@@ -109,7 +109,7 @@ export function SidebarMenu({ posts }: Props) {
           <nav className="flex-1 overflow-y-auto">
             {posts.length === 0 ? (
               <p className="text-sm text-amber-800/70 dark:text-amber-300/70">
-                Chưa có bài viết
+                記事がありません
               </p>
             ) : (
               <ul className="space-y-1">
