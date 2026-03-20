@@ -93,7 +93,13 @@ export function SidebarMenu({ posts }: Props) {
                     >
                       <span className="line-clamp-2">{post.title}</span>
                       <time
-                        dateTime={post.publishedAt?.toISOString() ?? ""}
+                        dateTime={
+                          post.publishedAt
+                            ? typeof post.publishedAt === "string"
+                              ? post.publishedAt
+                              : post.publishedAt.toISOString()
+                            : ""
+                        }
                         className="mt-0.5 block text-xs text-amber-800/60 dark:text-amber-400/60"
                       >
                         {post.publishedAt
