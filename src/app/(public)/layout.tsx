@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { incrementPageViewsAndGetTotal } from "@/lib/site-stats";
+import { MenuInteractionProvider } from "@/components/MenuInteractionProvider";
 import { SidebarMenu } from "@/components/SidebarMenu";
 import { BlogHeader } from "@/components/BlogHeader";
 import { BlogFooter } from "@/components/BlogFooter";
@@ -27,11 +28,13 @@ export default async function PublicLayout({
 
   return (
     <div className="flex min-h-screen flex-col bg-amber-50/50 dark:bg-amber-950/30">
-      <BlogHeader />
-      <SidebarMenu posts={posts} />
-      <main className="flex-1">
-        {children}
-      </main>
+      <MenuInteractionProvider>
+        <BlogHeader />
+        <SidebarMenu posts={posts} />
+        <main className="flex-1 md:pl-64">
+          {children}
+        </main>
+      </MenuInteractionProvider>
       <BlogFooter visitCount={visitCount} />
     </div>
   );
