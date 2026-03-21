@@ -42,6 +42,7 @@ export function MarkdownImageInsert({
   contentMd,
   setContentMd,
   textareaRef,
+  canInsert,
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);

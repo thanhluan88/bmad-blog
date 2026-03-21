@@ -79,7 +79,7 @@ export function MarkdownBody({ content, className = "" }: MarkdownBodyProps) {
             </pre>
           ),
           img: ({ src, alt }) => {
-            if (!src || !isValidImageUrl(src)) return null;
+            if (typeof src !== "string" || !isValidImageUrl(src)) return null;
             return (
               <span className="my-6 block">
                 {/* eslint-disable-next-line @next/next/no-img-element -- allow arbitrary blog image URLs */}
