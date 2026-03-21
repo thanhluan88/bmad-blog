@@ -4,6 +4,9 @@ import { SidebarMenu } from "@/components/SidebarMenu";
 import { BlogHeader } from "@/components/BlogHeader";
 import { BlogFooter } from "@/components/BlogFooter";
 
+/** Counter + DB reads must run every request; static cache would show a stale 累計アクセス value. */
+export const dynamic = "force-dynamic";
+
 export default async function PublicLayout({
   children,
 }: {
