@@ -46,37 +46,41 @@ export function SidebarMenu({ posts }: Props) {
         className="fixed left-4 top-4 z-20 flex h-10 w-10 md:hidden items-center justify-center rounded-lg border-2 border-amber-900/40 bg-amber-50/95 shadow-md transition-colors hover:bg-amber-100/95 dark:border-amber-700/50 dark:bg-amber-950/95 dark:hover:bg-amber-900/95"
         aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
       >
-        <svg
-          className="h-5 w-5 text-amber-900 dark:text-amber-200"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          {isOpen ? (
+        {isOpen ? (
+          <svg
+            className="h-5 w-5 text-amber-900 dark:text-amber-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M6 18L18 6M6 6l12 12"
             />
-          ) : (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          )}
-        </svg>
+          </svg>
+        ) : (
+          <span
+            className="text-lg font-medium leading-none text-amber-900 dark:text-amber-200"
+            aria-hidden
+          >
+            三
+          </span>
+        )}
       </button>
 
-      {/* Hover trigger strip - desktop only, thin strip on left edge */}
+      {/* Hover strip: desktop only; top clears BlogHeader (title + tagline) */}
       <div
-        className="fixed left-0 top-0 z-10 hidden h-full w-3 md:block"
+        className="fixed bottom-0 left-0 top-28 z-[8] hidden w-8 cursor-default select-none items-center justify-center border-r border-amber-900/25 bg-amber-50/50 md:flex dark:border-amber-700/30 dark:bg-amber-950/40"
         onMouseEnter={showMenu}
         onMouseLeave={hideMenu}
         aria-hidden
-      />
+      >
+        <span className="text-sm font-medium text-amber-900/45 dark:text-amber-200/45 [writing-mode:vertical-rl]">
+          三
+        </span>
+      </div>
 
       {/* Overlay when menu is open (mobile) */}
       <div

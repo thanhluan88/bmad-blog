@@ -44,3 +44,9 @@ model Post {
   updatedAt    DateTime    @updatedAt
   publishedAt  DateTime?
 }
+
+/// Key-value counters (e.g. public page views for footer)
+model SiteStat {
+  key   String @id
+  value Int    @default(0)
+}

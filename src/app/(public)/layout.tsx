@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { incrementPageViewsAndGetTotal } from "@/lib/site-stats";
 import { SidebarMenu } from "@/components/SidebarMenu";
 import { BlogHeader } from "@/components/BlogHeader";
 import { BlogFooter } from "@/components/BlogFooter";
@@ -19,6 +20,8 @@ export default async function PublicLayout({
     // Sidebar empty on error
   }
 
+  const visitCount = await incrementPageViewsAndGetTotal();
+
   return (
     <div className="flex min-h-screen flex-col bg-amber-50/50 dark:bg-amber-950/30">
       <BlogHeader />
@@ -26,7 +29,7 @@ export default async function PublicLayout({
       <main className="flex-1">
         {children}
       </main>
-      <BlogFooter />
+      <BlogFooter visitCount={visitCount} />
     </div>
   );
 }

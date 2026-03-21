@@ -19,7 +19,7 @@ export default async function HomePage() {
       <div className="mx-auto max-w-3xl px-8 py-12">
         <div className="rounded-xl border-2 border-amber-200 bg-amber-50/80 p-12 text-center shadow-sm dark:border-amber-800/50 dark:bg-amber-950/50">
           <p className="text-amber-900/80 dark:text-amber-200/80">
-            メニューを開く（左端にマウスを乗せる / モバイルでは☰ボタン）で記事を選択できます。
+            メニューを開く（左端にマウスを乗せる / モバイルでは三ボタン）で記事を選択できます。
           </p>
           {latestSlug && (
             <Link
