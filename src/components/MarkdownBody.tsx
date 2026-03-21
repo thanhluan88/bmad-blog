@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSanitize from "rehype-sanitize";
+import { isValidImageUrl } from "@/lib/image-url";
 
 type MarkdownBodyProps = {
   content: string;
@@ -77,6 +78,20 @@ export function MarkdownBody({ content, className = "" }: MarkdownBodyProps) {
               {children}
             </pre>
           ),
+          img: ({ src, alt }) => {
+            if (!src || !isValidImageUrl(src)) return null;
+            return (
+              <span className="my-6 block">
+                {/* eslint-disable-next-line @next/next/no-img-element -- allow arbitrary blog image URLs */}
+                <img
+                  src={src}
+                  alt={alt ?? ""}
+                  loading="lazy"
+                  className="max-h-[min(70vh,720px)] w-auto max-w-full rounded-lg border-2 border-amber-200/70 object-contain shadow-sm dark:border-amber-800/50"
+                />
+              </span>
+            );
+          },
           a: ({ href, children }) => {
             const videoId = href ? getYoutubeVideoId(href) : null;
             if (videoId) {

@@ -43,7 +43,9 @@ export function SidebarMenu({ posts }: Props) {
       <button
         type="button"
         onClick={() => setIsOpen((o) => !o)}
-        className="fixed left-4 top-4 z-20 flex h-10 w-10 md:hidden items-center justify-center rounded-lg border-2 border-amber-900/40 bg-amber-50/95 shadow-md transition-colors hover:bg-amber-100/95 dark:border-amber-700/50 dark:bg-amber-950/95 dark:hover:bg-amber-900/95"
+        className={`fixed left-4 top-4 flex h-10 w-10 md:hidden items-center justify-center rounded-lg border-2 border-amber-900/40 bg-amber-50/95 shadow-md transition-colors hover:bg-amber-100/95 dark:border-amber-700/50 dark:bg-amber-950/95 dark:hover:bg-amber-900/95 ${
+          isOpen ? "z-[26]" : "z-20"
+        }`}
         aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
       >
         {isOpen ? (
@@ -62,7 +64,7 @@ export function SidebarMenu({ posts }: Props) {
           </svg>
         ) : (
           <span
-            className="text-lg font-medium leading-none text-amber-900 dark:text-amber-200"
+            className="text-xl font-semibold leading-none text-amber-900 dark:text-amber-200 [font-family:ui-sans-serif,system-ui,'Segoe_UI','Yu_Gothic_UI','Meiryo','Hiragino_Sans','PingFang_SC',sans-serif]"
             aria-hidden
           >
             三
@@ -70,14 +72,14 @@ export function SidebarMenu({ posts }: Props) {
         )}
       </button>
 
-      {/* Hover strip: desktop only; top clears BlogHeader (title + tagline) */}
+      {/* Hover strip: desktop only; above aside when closed so 三 stays visible */}
       <div
-        className="fixed bottom-0 left-0 top-28 z-[8] hidden w-8 cursor-default select-none items-center justify-center border-r border-amber-900/25 bg-amber-50/50 md:flex dark:border-amber-700/30 dark:bg-amber-950/40"
+        className="fixed bottom-0 left-0 top-28 z-[12] hidden w-8 cursor-default select-none items-center justify-center border-r border-amber-900/30 bg-amber-50/90 md:flex dark:border-amber-700/40 dark:bg-amber-950/80"
         onMouseEnter={showMenu}
         onMouseLeave={hideMenu}
         aria-hidden
       >
-        <span className="text-sm font-medium text-amber-900/45 dark:text-amber-200/45 [writing-mode:vertical-rl]">
+        <span className="text-base font-semibold text-amber-900/90 dark:text-amber-200/90 [font-family:ui-sans-serif,system-ui,'Segoe_UI','Yu_Gothic_UI','Meiryo','Hiragino_Sans','PingFang_SC',sans-serif] [writing-mode:vertical-rl]">
           三
         </span>
       </div>
@@ -88,16 +90,16 @@ export function SidebarMenu({ posts }: Props) {
         tabIndex={0}
         onClick={() => setIsOpen(false)}
         onKeyDown={(e) => e.key === "Escape" && setIsOpen(false)}
-        className={`fixed inset-0 z-10 bg-stone-900/30 transition-opacity duration-300 md:hidden ${
-          isOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        className={`fixed inset-0 bg-stone-900/30 transition-opacity duration-300 md:hidden ${
+          isOpen ? "z-[24] opacity-100" : "pointer-events-none z-10 opacity-0"
         }`}
         aria-hidden="true"
       />
 
       {/* Sidebar - hover to show on desktop, click on mobile */}
       <aside
-        className={`fixed left-0 top-0 z-10 h-full w-64 border-r-2 border-amber-900/30 bg-amber-50/98 shadow-xl transition-transform duration-300 ease-out dark:border-amber-800/40 dark:bg-amber-950/98 ${
-          isVisible ? "translate-x-0" : "-translate-x-full"
+        className={`fixed left-0 top-0 h-full w-64 border-r-2 border-amber-900/30 bg-amber-50/98 shadow-xl transition-transform duration-300 ease-out dark:border-amber-800/40 dark:bg-amber-950/98 ${
+          isVisible ? "z-[25] translate-x-0" : "z-10 -translate-x-full"
         }`}
         onMouseEnter={showMenu}
         onMouseLeave={hideMenu}

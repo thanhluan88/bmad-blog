@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MarkdownBody } from "@/components/MarkdownBody";
 import { CoverUploadWidget } from "@/components/CoverUploadWidget";
+import { MarkdownImageInsert } from "@/components/MarkdownImageInsert";
 import { formatUpdatedAt } from "@/lib/format";
 import {
   checkSlugAvailability,
@@ -59,6 +60,7 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
   const [coverImageUrl, setCoverImageUrl] = useState<string | null>(post.coverImageUrl ?? null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const slugValueRef = useRef(slugValue);
+  const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
 
   slugValueRef.current = slugValue;
 
@@ -319,8 +321,19 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
                 </button>
               </div>
             </div>
+            <div className="mb-2">
+              <MarkdownImageInsert
+                postId={post.id}
+                uploadConfigured={uploadConfigured}
+                contentMd={contentMd}
+                setContentMd={setContentMd}
+                textareaRef={contentTextareaRef}
+                canInsert={editorMode === "write"}
+              />
+            </div>
             {editorMode === "write" ? (
               <textarea
+                ref={contentTextareaRef}
                 id="contentMd"
                 name="contentMd"
                 rows={16}

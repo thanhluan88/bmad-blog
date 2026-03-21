@@ -16,6 +16,22 @@ export function buildCoverObjectPath(postId: string, filename: string): string {
   return `covers/${postId}/${safeFilename}`;
 }
 
+/**
+ * Object path for inline markdown images: markdown/{postId}/{timestamp}-{sanitizedFilename}
+ */
+export function buildMarkdownImageObjectPath(postId: string, filename: string): string {
+  const sanitized = filename
+    .replace(/[^a-zA-Z0-9.-]/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .toLowerCase() || "image";
+  const ext = sanitized.includes(".") ? sanitized.slice(sanitized.lastIndexOf(".")) : "";
+  const base = sanitized.includes(".") ? sanitized.slice(0, sanitized.lastIndexOf(".")) : sanitized;
+  const timestamp = Date.now();
+  const safeFilename = `${base}-${timestamp}${ext}`;
+  return `markdown/${postId}/${safeFilename}`;
+}
+
 export type UploadCoverResult = {
   objectPath: string;
   publicUrl: string;
