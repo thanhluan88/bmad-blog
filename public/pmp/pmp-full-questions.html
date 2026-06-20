@@ -143,6 +143,20 @@
       color: var(--muted);
       font-size: 0.92rem;
     }
+    .jump-controls {
+      display: inline-flex;
+      gap: 0.45rem;
+      align-items: center;
+    }
+    .jump-controls input {
+      width: 6.5rem;
+    }
+    .jump-controls .jump-go {
+      white-space: nowrap;
+    }
+    .jump-controls-bottom {
+      display: none;
+    }
     main { max-width: 920px; margin: 0 auto; padding: 1.25rem; }
     .card {
       background: var(--card);
@@ -262,18 +276,64 @@
       header > p,
       header .hl-hint,
       .toolbar .secondary,
-      .toolbar #jumpInput,
       .toolbar #pageSelect,
-      .toolbar button[onclick="jumpToQuestion()"],
       .footer-note {
         display: none;
       }
       .toolbar {
         margin-top: 0;
         gap: 0.45rem;
+        flex-direction: column;
+        align-items: stretch;
       }
       .toolbar .hl-colors {
         display: none;
+      }
+      .stats {
+        width: 100%;
+        font-size: 0.84rem;
+      }
+      .toolbar .jump-controls {
+        display: flex;
+        width: 100%;
+      }
+      .toolbar .jump-controls input {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+        font-size: 16px;
+      }
+      .toolbar .jump-controls .jump-go {
+        flex-shrink: 0;
+        padding: 0.55rem 0.8rem;
+      }
+      .jump-controls-bottom {
+        display: flex;
+        width: 100%;
+        gap: 0.45rem;
+        align-items: center;
+        margin: 0.35rem 0 0.75rem;
+      }
+      .jump-controls-bottom input {
+        flex: 1;
+        min-width: 0;
+        font: inherit;
+        font-size: 16px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        padding: 0.55rem 0.85rem;
+        background: #fff;
+      }
+      .jump-controls-bottom .jump-go {
+        flex-shrink: 0;
+        font: inherit;
+        border: none;
+        border-radius: 10px;
+        padding: 0.55rem 0.8rem;
+        cursor: pointer;
+        background: var(--primary);
+        color: #fff;
+        white-space: nowrap;
       }
       main {
         padding: 0.5rem 0.65rem 0.75rem;
@@ -301,8 +361,10 @@
         <button type="button" data-color="pink" onclick="setHlColor('pink', this)" title="Hồng"></button>
       </span>
       <button type="button" class="secondary" onclick="clearPageHighlights()">Xóa highlight trang</button>
-      <input id="jumpInput" type="number" min="1" max="1123" placeholder="Câu số..." />
-      <button type="button" onclick="jumpToQuestion()">Đi tới câu</button>
+      <div class="jump-controls">
+        <input id="jumpInput" type="number" inputmode="numeric" min="1" max="1123" placeholder="Câu số..." enterkeyhint="go" />
+        <button type="button" class="jump-go" onclick="jumpToQuestion()">Đi tới câu</button>
+      </div>
       <select id="pageSelect" onchange="goPage(Number(this.value))"></select>
       <button type="button" class="secondary" onclick="checkCurrentPage()">Kiểm tra trang này</button>
       <button type="button" class="secondary" onclick="showAllAnswers()">Hiện tất cả đáp án</button>
@@ -316,6 +378,10 @@
       <button type="button" onclick="goPage(state.page - 1)">← Trang trước</button>
       <span id="pageInfo"></span>
       <button type="button" onclick="goPage(state.page + 1)">Trang sau →</button>
+    </div>
+    <div class="jump-controls jump-controls-bottom">
+      <input id="jumpInputBottom" type="number" inputmode="numeric" min="1" max="1123" placeholder="Câu số..." enterkeyhint="go" aria-label="Số câu hỏi" />
+      <button type="button" class="jump-go" onclick="jumpToQuestion('jumpInputBottom')">Đi tới câu</button>
     </div>
     <p class="footer-note">Nguồn: PMP_Full_Questions.docx · 1123 câu hỏi</p>
   </main>
@@ -744,14 +810,32 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function jumpToQuestion() {
-      const n = Number(document.getElementById("jumpInput").value);
-      if (!n || n < 1 || n > QUESTIONS.length) return;
+    function jumpToQuestion(inputId = "jumpInput") {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      const n = Number(input.value);
+      if (!n || n < 1 || n > QUESTIONS.length) {
+        input.focus();
+        if (input.select) input.select();
+        return;
+      }
+      const topInput = document.getElementById("jumpInput");
+      const bottomInput = document.getElementById("jumpInputBottom");
+      if (topInput) topInput.value = String(n);
+      if (bottomInput) bottomInput.value = String(n);
       state.page = Math.ceil(n / PER_PAGE);
       renderPage();
       const el = document.getElementById(`q-${n}`);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+
+    ["jumpInput", "jumpInputBottom"].forEach(id => {
+      const input = document.getElementById(id);
+      if (!input) return;
+      input.addEventListener("keydown", e => {
+        if (e.key === "Enter") jumpToQuestion(id);
+      });
+    });
 
     document.addEventListener("change", e => {
       const t = e.target;
