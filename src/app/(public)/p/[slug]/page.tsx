@@ -24,14 +24,16 @@ export default async function PublicPostPage({ params }: Props) {
   const coverUrl = post.coverImageUrl?.trim();
   const isPmpQuiz = slug === PMP_QUIZ_SLUG;
 
+  if (isPmpQuiz) {
+    return (
+      <div className="flex min-h-0 flex-1 flex-col md:mx-auto md:max-w-5xl md:px-8 md:py-6">
+        <PmpQuizEmbed />
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={
-        isPmpQuiz
-          ? "mx-auto max-w-5xl px-4 py-8 md:px-8"
-          : "mx-auto max-w-3xl px-8 py-12"
-      }
-    >
+    <div className="mx-auto max-w-3xl px-8 py-12">
       <article>
         {coverUrl && (
           <PostCover coverImageUrl={coverUrl} alt={post.title || "カバー"} />
@@ -39,17 +41,8 @@ export default async function PublicPostPage({ params }: Props) {
         <h1 className="text-3xl font-bold text-amber-900 dark:text-amber-100">
           {post.title}
         </h1>
-        <div className={isPmpQuiz ? "mt-6" : "mt-8"}>
-          {isPmpQuiz ? (
-            <>
-              {post.contentMd.trim() && (
-                <MarkdownBody content={post.contentMd} className="mb-6" />
-              )}
-              <PmpQuizEmbed />
-            </>
-          ) : (
-            <MarkdownBody content={post.contentMd} />
-          )}
+        <div className="mt-8">
+          <MarkdownBody content={post.contentMd} />
         </div>
       </article>
     </div>
