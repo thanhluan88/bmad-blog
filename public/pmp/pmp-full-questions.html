@@ -251,6 +251,40 @@
     @media (max-width: 640px) {
       .stats { margin-left: 0; width: 100%; }
       .q-head { flex-direction: column; }
+
+      /* Mobile: hide intro and bulk toolbar — keep stats + bottom pager */
+      header {
+        position: static;
+        padding: 0.45rem 0.65rem;
+        box-shadow: none;
+      }
+      header h1,
+      header > p,
+      header .hl-hint,
+      .toolbar .secondary,
+      .toolbar #jumpInput,
+      .toolbar #pageSelect,
+      .toolbar button[onclick="jumpToQuestion()"],
+      .footer-note {
+        display: none;
+      }
+      .toolbar {
+        margin-top: 0;
+        gap: 0.45rem;
+      }
+      .toolbar .hl-colors {
+        display: none;
+      }
+      main {
+        padding: 0.5rem 0.65rem 0.75rem;
+      }
+      .card {
+        padding: 1rem 0.85rem;
+        margin-bottom: 0.75rem;
+      }
+      .pager {
+        margin: 1rem 0 0.75rem;
+      }
     }
   </style>
 </head>
