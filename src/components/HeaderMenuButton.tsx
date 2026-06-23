@@ -3,7 +3,7 @@
 import { useBlogMenu } from "@/components/MenuInteractionProvider";
 
 export function HeaderMenuButton() {
-  const { isOpen, setIsOpen, showMenu, hideMenu } = useBlogMenu();
+  const { isOpen, setIsOpen, showMenu, hideMenu, showChrome } = useBlogMenu();
 
   return (
     <div
@@ -13,7 +13,13 @@ export function HeaderMenuButton() {
     >
       <button
         type="button"
-        onClick={() => setIsOpen((o) => !o)}
+        onClick={() => {
+          setIsOpen((open) => {
+            const next = !open;
+            if (next) showChrome();
+            return next;
+          });
+        }}
         className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-amber-900/40 bg-amber-50/95 shadow-md transition-colors hover:bg-amber-100/95 dark:border-amber-700/50 dark:bg-amber-950/95 dark:hover:bg-amber-900/95"
         aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
       >

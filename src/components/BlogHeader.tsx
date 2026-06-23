@@ -1,9 +1,20 @@
+"use client";
+
 import Link from "next/link";
 import { HeaderMenuButton } from "@/components/HeaderMenuButton";
+import { useBlogMenu } from "@/components/MenuInteractionProvider";
 
 export function BlogHeader() {
+  const { chromeVisible } = useBlogMenu();
+
   return (
-    <header className="sticky top-0 z-[15] border-b-2 border-amber-200/80 bg-amber-50/95 shadow-sm backdrop-blur-sm dark:border-amber-800/50 dark:bg-amber-950/95 md:pl-64">
+    <header
+      className={`sticky top-0 z-[15] border-b-2 border-amber-200/80 bg-amber-50/95 shadow-sm backdrop-blur-sm transition-transform duration-300 ease-out dark:border-amber-800/50 dark:bg-amber-950/95 md:pl-64 ${
+        chromeVisible
+          ? "translate-y-0"
+          : "-translate-y-full pointer-events-none"
+      } ${chromeVisible ? "md:pl-64" : "md:pl-0"}`}
+    >
       <div className="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-2 sm:gap-3 sm:py-3 md:flex-row md:items-center md:justify-between md:px-8">
         <div className="flex min-w-0 flex-1 items-start gap-3 md:items-center">
           <HeaderMenuButton />
