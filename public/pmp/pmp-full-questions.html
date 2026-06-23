@@ -180,6 +180,55 @@
       white-space: nowrap;
     }
     .q-text { margin: 0; }
+    .score-table-wrap {
+      margin: 0.85rem 0 1rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+    }
+    .score-table {
+      width: 100%;
+      min-width: 520px;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    .score-table caption {
+      caption-side: top;
+      text-align: left;
+      font-weight: 700;
+      color: var(--primary);
+      padding: 0.75rem 0.85rem 0.35rem;
+    }
+    .score-table th,
+    .score-table td {
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 0.7rem;
+      vertical-align: top;
+    }
+    .score-table thead th {
+      background: #eff6ff;
+      color: var(--primary);
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+    .score-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .score-table td:first-child {
+      min-width: 11rem;
+      font-weight: 500;
+    }
+    .score-table .num {
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      min-width: 3rem;
+    }
+    .q-prompt {
+      margin: 0.75rem 0 0;
+    }
     .options { display: grid; gap: 0.55rem; margin-top: 0.85rem; }
     label.option {
       display: flex;
@@ -246,6 +295,62 @@
       margin-bottom: 0.55rem;
       padding: 0.55rem 0.75rem;
       font-size: 0.88rem;
+    }
+    .drag-drop-instruction {
+      margin-bottom: 0.75rem;
+    }
+    .drag-bank {
+      margin: 0.85rem 0 1rem;
+      padding: 0.85rem 1rem;
+      border: 1px dashed #93c5fd;
+      border-radius: 12px;
+      background: #f8fbff;
+    }
+    .drag-bank h4,
+    .drag-slots h4 {
+      margin: 0 0 0.55rem;
+      font-size: 0.92rem;
+      color: var(--primary);
+    }
+    .drag-bank ul {
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+    .drag-bank li {
+      margin: 0.25rem 0;
+    }
+    .drag-slots {
+      display: grid;
+      gap: 0.75rem;
+    }
+    .drag-slot {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.85rem;
+      background: #fff;
+    }
+    .drag-slot-label {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+    }
+    .drag-slot-desc {
+      margin-bottom: 0.55rem;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+    .drag-slot select {
+      width: 100%;
+      font: inherit;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 0.55rem 0.75rem;
+      background: #fff;
+    }
+    .drag-slot.selected-slot {
+      border-color: #93c5fd;
+      background: #eff6ff;
     }
     .badge.multi {
       background: #fef3c7;
@@ -623,6 +728,185 @@
         .replaceAll('"', "&quot;");
     }
 
+
+    function splitDefinitionSentences(text) {
+      return text
+        .split(/\.\s+(?=[A-Z])/)
+        .map(s => s.trim())
+        .filter(Boolean)
+        .map(s => (s.endsWith(".") ? s : s + "."));
+    }
+
+    function parseExplanationTerms(q) {
+      const segments = String(q.explanation || "").trim().split(/\s+(?=A\s+[a-z])/);
+      const pairs = segments.map(seg => {
+        const idx = seg.lastIndexOf(". ");
+        if (idx < 0) return { definition: seg.trim(), term: "" };
+        return {
+          definition: seg.slice(0, idx + 1).trim(),
+          term: seg.slice(idx + 2).trim(),
+        };
+      }).filter(pair => pair.term);
+      const valid = pairs.length === q.dragSlots
+        && pairs.every(pair => pair.term.length <= 60 && !/examples include|Project professionals should/i.test(pair.term));
+      return valid ? pairs : null;
+    }
+
+    function splitKnownTermsFromBlob(termsBlob, knownTerms) {
+      let rest = termsBlob.trim();
+      const found = [];
+      while (rest.length) {
+        const term = knownTerms.find(item => rest.startsWith(item));
+        if (!term) return null;
+        found.push(term);
+        rest = rest.slice(term.length).trim();
+      }
+      return found.length === knownTerms.length ? found : null;
+    }
+
+    function parseQuestionMatchBody(afterMarker, slots, knownTerms = null) {
+      const idx = afterMarker.lastIndexOf(". ");
+      if (idx < 0) return null;
+      const definitionsText = afterMarker.slice(0, idx + 1).trim();
+      const termsBlob = afterMarker.slice(idx + 2).trim();
+      let terms = null;
+      if (knownTerms) terms = splitKnownTermsFromBlob(termsBlob, knownTerms);
+      if (!terms) {
+        terms = termsBlob.split(/\s+(?=[A-Z])/).map(s => s.trim()).filter(Boolean);
+        if (terms.length !== slots) terms = null;
+      }
+      if (!terms) return null;
+      return { definitionsText, terms, termsBlob };
+    }
+
+    function buildDragDropModel(q) {
+      if (q.type !== "drag_drop" || !q.dragSlots) return null;
+
+      const text = String(q.text || "");
+      const slots = q.dragSlots;
+      const ordinals = ["First", "Second", "Third", "Fourth", "Fifth"].slice(0, slots);
+      const markerMatch = text.match(/Drag and drop[^:]*:/i);
+      const markerIndex = markerMatch ? text.indexOf(markerMatch[0]) : -1;
+      const markerText = markerMatch ? markerMatch[0] : "";
+      const beforeMarker = markerIndex >= 0 ? text.slice(0, markerIndex).trim() : "";
+      const afterMarker = markerIndex >= 0 ? text.slice(markerIndex + markerMatch[0].length).trim() : text.trim();
+
+      if (/\bFirst\b/i.test(text) && q.dragTerms.length === slots) {
+        const firstIdx = text.search(/\bFirst\b/i);
+        const instruction = text.slice(0, firstIdx).trim()
+          || "Sắp xếp các mục theo đúng thứ tự.";
+        const choices = q.dragTerms.map((term, i) => ({
+          key: String.fromCharCode(65 + i),
+          text: term,
+        }));
+        return {
+          mode: "order",
+          instruction,
+          slots: ordinals.map(label => ({ label, description: "" })),
+          choices,
+        };
+      }
+
+      const instructionParts = [];
+      if (beforeMarker) instructionParts.push(beforeMarker);
+      if (markerText) instructionParts.push(markerText.trim());
+      const instruction = instructionParts.join(" ").trim()
+        || "Chọn thuật ngữ phù hợp cho từng mô tả bên dưới.";
+
+      const explanationPairs = parseExplanationTerms(q);
+      if (explanationPairs) {
+        const knownTerms = explanationPairs.map(pair => pair.term);
+        const questionMatch = parseQuestionMatchBody(afterMarker, slots, knownTerms);
+        const choicesTexts = questionMatch?.terms || knownTerms;
+
+        const choices = choicesTexts.map((term, i) => ({
+          key: String.fromCharCode(65 + i),
+          text: term,
+        }));
+
+        let definitions = explanationPairs.map(pair => pair.definition);
+        if (definitions.length > slots) definitions = definitions.slice(-slots);
+        while (definitions.length < slots) definitions.push("");
+
+        return {
+          mode: "match",
+          instruction,
+          slots: definitions.map((description, i) => ({
+            label: `Mô tả ${i + 1}`,
+            description,
+          })),
+          choices,
+        };
+      }
+
+      const questionMatch = parseQuestionMatchBody(afterMarker, slots);
+      if (questionMatch) {
+        let definitions = splitDefinitionSentences(questionMatch.definitionsText);
+        if (definitions.length > slots) definitions = definitions.slice(-slots);
+        while (definitions.length < slots) definitions.push("");
+        const choices = questionMatch.terms.map((term, i) => ({
+          key: String.fromCharCode(65 + i),
+          text: term,
+        }));
+        return {
+          mode: "match",
+          instruction,
+          slots: definitions.map((description, i) => ({
+            label: `Mô tả ${i + 1}`,
+            description,
+          })),
+          choices,
+        };
+      }
+
+      const choices = q.dragTerms.slice(0, slots).map((term, i) => ({
+        key: String.fromCharCode(65 + i),
+        text: term,
+      }));
+      return {
+        mode: "fallback",
+        instruction: text,
+        slots: Array.from({ length: slots }, (_, i) => ({
+          label: `Vị trí ${i + 1}`,
+          description: "",
+        })),
+        choices,
+      };
+    }
+
+    function renderDragDropOptions(q) {
+      const model = buildDragDropModel(q);
+      if (!model) return `<div class="notice">Câu kéo-thả — nhấn Kiểm tra để xem đáp án.</div>`;
+
+      const bank = `<div class="drag-bank">
+        <h4>Danh sách lựa chọn</h4>
+        <ul>${model.choices.map(c => `<li><strong>${c.key}.</strong> ${escapeHtml(c.text)}</li>`).join("")}</ul>
+      </div>`;
+
+      const slotsTitle = model.mode === "order"
+        ? "Chọn giai đoạn đúng cho từng thứ tự"
+        : "Chọn thuật ngữ đúng cho từng mô tả";
+
+      const slots = `<div class="drag-slots">
+        <h4>${slotsTitle}</h4>
+        ${model.slots.map((slot, idx) => `
+          <div class="drag-slot" data-q="${q.id}" data-slot="${idx}">
+            <div class="drag-slot-label">${escapeHtml(slot.label)}</div>
+            ${slot.description ? `<div class="drag-slot-desc highlightable" data-qid="${q.id}" data-field="slot-${idx}">${escapeHtml(slot.description)}</div>` : ""}
+            <select data-q="${q.id}" data-slot="${idx}" aria-label="${escapeHtml(slot.label)}">
+              <option value="">-- Chọn ${model.mode === "order" ? slot.label : "thuật ngữ"} --</option>
+              ${model.choices.map(c => `<option value="${c.key}">${c.key}. ${escapeHtml(c.text)}</option>`).join("")}
+            </select>
+          </div>`).join("")}
+      </div>`;
+
+      return `<div class="drag-drop">
+        <div class="notice drag-drop-instruction">${escapeHtml(model.instruction)}</div>
+        ${bank}
+        ${slots}
+      </div>`;
+    }
+
     function renderOptions(q) {
       if (q.type === "mcq" && q.options.length) {
         const multi = isMultiSelect(q);
@@ -645,22 +929,90 @@
           </label>`;
         }).join("")}</div>`;
       }
-      if (q.type === "drag_drop" && q.dragTerms.length && q.dragSlots) {
-        const labels = ["Vị trí 1", "Vị trí 2", "Vị trí 3", "Vị trí 4", "Vị trí 5"].slice(0, q.dragSlots);
-        return `<div class="notice">Câu kéo-thả: chọn thứ tự đúng cho từng vị trí.</div>
-          <div class="options">${labels.map((label, idx) => `
-            <label class="option">
-              <span style="min-width:5.5rem;font-weight:600;">${label}</span>
-              <select data-q="${q.id}" data-slot="${idx}">
-                <option value="">-- Chọn --</option>
-                ${q.dragTerms.map((t, i) => `<option value="${String.fromCharCode(65 + i)}">${String.fromCharCode(65 + i)}. ${escapeHtml(t)}</option>`).join("")}
-              </select>
-            </label>`).join("")}</div>`;
+      if (q.type === "drag_drop" && q.dragSlots) {
+        return renderDragDropOptions(q);
       }
       const note = q.type === "image_click"
         ? "Câu hỏi có hình ảnh (không có trong file DOCX). Hãy đọc đề và nhấn Kiểm tra để xem đáp án."
         : "Câu hỏi đặc biệt — nhấn Kiểm tra để xem đáp án đúng và giải thích.";
       return `<div class="notice">${note}</div>`;
+    }
+
+    function parseWeightedScoringTable(text) {
+      const marker = "Weighted Scoring Model";
+      const start = text.indexOf(marker);
+      if (start < 0) return null;
+
+      const section = text.slice(start);
+      const questionMatch = section.match(/\s+(What should[\s\S]*)$/i);
+      if (!questionMatch) return null;
+
+      const questionPrompt = questionMatch[1].trim();
+      const tablePart = section.slice(marker.length, section.length - questionMatch[0].length);
+      const headerMatch = tablePart.match(/Criteria\s+Weight\s+((?:Project\s+\d+\s*)+)/i);
+      if (!headerMatch) return null;
+
+      const projects = [...headerMatch[1].matchAll(/Project\s+(\d+)/gi)].map(m => `Project ${m[1]}`);
+      const numCols = 1 + projects.length;
+      const criteriaList = [
+        "Supports key business objectives",
+        "Uses standard technology",
+        "Can be completed within project timeframe",
+        "Provides positive NPV",
+      ];
+
+      const bodyAfterHeader = tablePart.replace(/Criteria\s+Weight\s+(?:Project\s+\d+\s*)+/i, "").trim();
+      const rows = [];
+      for (const criterion of criteriaList) {
+        const pos = bodyAfterHeader.indexOf(criterion);
+        if (pos < 0) continue;
+        const after = bodyAfterHeader.slice(pos + criterion.length).trim();
+        const numMatch = after.match(/^(\d+(?:\s+\d+){0,10})/);
+        if (!numMatch) continue;
+        const nums = numMatch[1].trim().split(/\s+/).map(Number);
+        if (nums.length !== numCols) continue;
+        rows.push({ criterion, weight: nums[0], scores: nums.slice(1) });
+      }
+
+      if (rows.length === 0) return null;
+      return {
+        intro: text.slice(0, start).trim(),
+        rows,
+        projects,
+        questionPrompt,
+      };
+    }
+
+    function renderQuestionBody(q) {
+      const table = parseWeightedScoringTable(q.text);
+      if (!table) {
+        return `<p class="q-text highlightable" data-qid="${q.id}" data-field="text">${escapeHtml(q.text)}</p>`;
+      }
+
+      const headerCols = table.projects.map(p => escapeHtml(p)).join("</th><th>");
+      const bodyRows = table.rows.map(row => `
+        <tr>
+          <td class="highlightable" data-qid="${q.id}" data-field="crit-${escapeHtml(row.criterion).slice(0, 20)}">${escapeHtml(row.criterion)}</td>
+          <td class="num">${row.weight}</td>
+          ${row.scores.map(s => `<td class="num">${s}</td>`).join("")}
+        </tr>`).join("");
+
+      return `
+        ${table.intro ? `<p class="q-text highlightable" data-qid="${q.id}" data-field="text">${escapeHtml(table.intro)}</p>` : ""}
+        <div class="score-table-wrap">
+          <table class="score-table">
+            <caption>Weighted Scoring Model</caption>
+            <thead>
+              <tr>
+                <th>Tiêu chí</th>
+                <th>Trọng số</th>
+                <th>${headerCols}</th>
+              </tr>
+            </thead>
+            <tbody>${bodyRows}</tbody>
+          </table>
+        </div>
+        <p class="q-text q-prompt highlightable" data-qid="${q.id}" data-field="text-prompt">${escapeHtml(table.questionPrompt)}</p>`;
     }
 
     function renderQuestion(q) {
@@ -673,7 +1025,9 @@
         <div class="q-head">
           <div class="q-num">Câu ${q.id}${badge}</div>
         </div>
-        <p class="q-text highlightable" data-qid="${q.id}" data-field="text">${escapeHtml(q.text)}</p>
+        ${q.type === "drag_drop"
+          ? ""
+          : renderQuestionBody(q)}
         ${renderOptions(q)}
         <div class="actions">
           <button type="button" onclick="checkQuestion(${q.id})">Kiểm tra</button>
