@@ -9,16 +9,18 @@ type Props = {
 };
 
 export function BlogFooter({ visitCount }: Props) {
-  const { chromeVisible } = useBlogMenu();
+  const { chromeVisible, showChrome, scheduleHideChrome } = useBlogMenu();
   const year = new Date().getFullYear();
 
   return (
     <footer
-      className={`mt-auto border-t-2 border-amber-200/80 bg-amber-100/50 py-8 transition-transform duration-300 ease-out dark:border-amber-800/50 dark:bg-amber-950/50 md:pl-64 ${
+      onMouseEnter={showChrome}
+      onMouseLeave={scheduleHideChrome}
+      className={`mt-auto border-t-2 border-amber-200/80 bg-amber-100/50 py-8 transition-transform duration-300 ease-out dark:border-amber-800/50 dark:bg-amber-950/50 ${
         chromeVisible
-          ? "translate-y-0"
-          : "translate-y-full pointer-events-none"
-      } ${chromeVisible ? "md:pl-64" : "md:pl-0"}`}
+          ? "translate-y-0 md:pl-64"
+          : "translate-y-full pointer-events-none md:pl-0"
+      }`}
     >
       <div className="mx-auto max-w-5xl px-4 md:px-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row sm:flex-wrap">

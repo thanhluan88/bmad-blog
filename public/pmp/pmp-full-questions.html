@@ -1261,20 +1261,6 @@
       }
     });
 
-    (function notifyParentScroll() {
-      let lastY = window.scrollY;
-      window.addEventListener("scroll", () => {
-        const y = window.scrollY;
-        let direction = null;
-        if (y > lastY + 8) direction = "down";
-        else if (y < lastY - 8) direction = "up";
-        if (direction && window.parent !== window) {
-          window.parent.postMessage({ type: "pmp-quiz-scroll", direction, y }, "*");
-        }
-        lastY = y;
-      }, { passive: true });
-    })();
-
     initPager();
     loadHighlights();
     renderPage();

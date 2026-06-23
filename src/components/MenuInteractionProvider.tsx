@@ -19,9 +19,12 @@ type MenuContextValue = {
   hideMenu: () => void;
   closeOnNavigate: () => void;
   showChrome: () => void;
+  scheduleHideChrome: () => void;
 };
 
 const MenuContext = createContext<MenuContextValue | null>(null);
+
+const CHROME_HIDE_DELAY_MS = 450;
 
 export function MenuInteractionProvider({
   children,
@@ -30,93 +33,81 @@ export function MenuInteractionProvider({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [chromeVisible, setChromeVisible] = useState(true);
-  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const lastScrollYRef = useRef(0);
+  const [chromeVisible, setChromeVisible] = useState(false);
+  const menuHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const chromeHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const clearHideTimer = useCallback(() => {
-    if (hideTimerRef.current) {
-      clearTimeout(hideTimerRef.current);
-      hideTimerRef.current = null;
+  const clearMenuHideTimer = useCallback(() => {
+    if (menuHideTimerRef.current) {
+      clearTimeout(menuHideTimerRef.current);
+      menuHideTimerRef.current = null;
+    }
+  }, []);
+
+  const clearChromeHideTimer = useCallback(() => {
+    if (chromeHideTimerRef.current) {
+      clearTimeout(chromeHideTimerRef.current);
+      chromeHideTimerRef.current = null;
     }
   }, []);
 
   const showMenu = useCallback(() => {
-    clearHideTimer();
+    clearMenuHideTimer();
     setIsHovered(true);
-  }, [clearHideTimer]);
+  }, [clearMenuHideTimer]);
 
   const hideMenu = useCallback(() => {
-    clearHideTimer();
-    hideTimerRef.current = setTimeout(() => {
+    clearMenuHideTimer();
+    menuHideTimerRef.current = setTimeout(() => {
       setIsHovered(false);
-      hideTimerRef.current = null;
+      menuHideTimerRef.current = null;
     }, 150);
-  }, [clearHideTimer]);
-
-  const closeOnNavigate = useCallback(() => {
-    clearHideTimer();
-    setIsOpen(false);
-    setIsHovered(false);
-    setChromeVisible(true);
-  }, [clearHideTimer]);
+  }, [clearMenuHideTimer]);
 
   const showChrome = useCallback(() => {
+    clearChromeHideTimer();
     setChromeVisible(true);
-  }, []);
+  }, [clearChromeHideTimer]);
 
-  useEffect(() => {
-    const scrollThreshold = 40;
+  const scheduleHideChrome = useCallback(() => {
+    clearChromeHideTimer();
+    if (isOpen) return;
+    chromeHideTimerRef.current = setTimeout(() => {
+      setChromeVisible(false);
+      setIsHovered(false);
+      chromeHideTimerRef.current = null;
+    }, CHROME_HIDE_DELAY_MS);
+  }, [isOpen, clearChromeHideTimer]);
 
-    const updateChromeFromScroll = (currentY: number, previousY: number) => {
-      if (isOpen) return;
-      if (currentY < 12) {
-        setChromeVisible(true);
-        return;
-      }
-      if (currentY > previousY + scrollThreshold) {
-        setChromeVisible(false);
-      } else if (currentY < previousY - scrollThreshold) {
-        setChromeVisible(true);
-      }
-    };
-
-    const onScroll = () => {
-      const y = window.scrollY;
-      updateChromeFromScroll(y, lastScrollYRef.current);
-      lastScrollYRef.current = y;
-    };
-
-    const onMessage = (event: MessageEvent) => {
-      if (event.data?.type !== "pmp-quiz-scroll") return;
-      if (isOpen) return;
-      if (event.data.direction === "down") {
-        setChromeVisible(false);
-      } else if (event.data.direction === "up") {
-        setChromeVisible(true);
-      }
-    };
-
-    lastScrollYRef.current = window.scrollY;
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("message", onMessage);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("message", onMessage);
-    };
-  }, [isOpen]);
+  const closeOnNavigate = useCallback(() => {
+    clearMenuHideTimer();
+    clearChromeHideTimer();
+    setIsOpen(false);
+    setIsHovered(false);
+    setChromeVisible(false);
+  }, [clearMenuHideTimer, clearChromeHideTimer]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        clearHideTimer();
+        clearMenuHideTimer();
+        clearChromeHideTimer();
         setIsOpen(false);
         setIsHovered(false);
+        setChromeVisible(false);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [clearHideTimer]);
+  }, [clearMenuHideTimer, clearChromeHideTimer]);
+
+  useEffect(
+    () => () => {
+      clearMenuHideTimer();
+      clearChromeHideTimer();
+    },
+    [clearMenuHideTimer, clearChromeHideTimer],
+  );
 
   const isVisible = isOpen || isHovered;
 
@@ -130,8 +121,18 @@ export function MenuInteractionProvider({
       hideMenu,
       closeOnNavigate,
       showChrome,
+      scheduleHideChrome,
     }),
-    [isOpen, isVisible, chromeVisible, showMenu, hideMenu, closeOnNavigate, showChrome],
+    [
+      isOpen,
+      isVisible,
+      chromeVisible,
+      showMenu,
+      hideMenu,
+      closeOnNavigate,
+      showChrome,
+      scheduleHideChrome,
+    ],
   );
 
   return (

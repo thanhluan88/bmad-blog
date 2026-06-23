@@ -3,7 +3,8 @@
 import { useBlogMenu } from "@/components/MenuInteractionProvider";
 
 export function HeaderMenuButton() {
-  const { isOpen, setIsOpen, showMenu, hideMenu, showChrome } = useBlogMenu();
+  const { isOpen, setIsOpen, showMenu, hideMenu, showChrome, scheduleHideChrome } =
+    useBlogMenu();
 
   return (
     <div
@@ -16,7 +17,11 @@ export function HeaderMenuButton() {
         onClick={() => {
           setIsOpen((open) => {
             const next = !open;
-            if (next) showChrome();
+            if (next) {
+              showChrome();
+            } else {
+              scheduleHideChrome();
+            }
             return next;
           });
         }}

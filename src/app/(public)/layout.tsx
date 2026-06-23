@@ -5,6 +5,7 @@ import { SidebarMenu } from "@/components/SidebarMenu";
 import { BlogHeader } from "@/components/BlogHeader";
 import { BlogFooter } from "@/components/BlogFooter";
 import { PublicMainShell } from "@/components/PublicMainShell";
+import { BlogChromeHotzones } from "@/components/BlogChromeHotzones";
 
 /** Counter + DB reads must run every request; static cache would show a stale 累計アクセス value. */
 export const dynamic = "force-dynamic";
@@ -30,6 +31,7 @@ export default async function PublicLayout({
   return (
     <div className="flex min-h-screen flex-col bg-amber-50/50 dark:bg-amber-950/30">
       <MenuInteractionProvider>
+        <BlogChromeHotzones />
         <BlogHeader />
         <SidebarMenu posts={posts} />
         <PublicMainShell>{children}</PublicMainShell>

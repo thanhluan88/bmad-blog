@@ -16,8 +16,17 @@ type Props = {
 };
 
 export function SidebarMenu({ posts }: Props) {
-  const { isOpen, setIsOpen, isVisible, chromeVisible, showMenu, hideMenu, closeOnNavigate } =
-    useBlogMenu();
+  const {
+    isOpen,
+    setIsOpen,
+    isVisible,
+    chromeVisible,
+    showMenu,
+    hideMenu,
+    showChrome,
+    scheduleHideChrome,
+    closeOnNavigate,
+  } = useBlogMenu();
 
   const sidebarVisible = chromeVisible && (isVisible || isOpen);
 
@@ -36,8 +45,14 @@ export function SidebarMenu({ posts }: Props) {
       />
 
       <aside
-        onMouseEnter={showMenu}
-        onMouseLeave={hideMenu}
+        onMouseEnter={() => {
+          showChrome();
+          showMenu();
+        }}
+        onMouseLeave={() => {
+          hideMenu();
+          scheduleHideChrome();
+        }}
         className={`fixed left-0 top-0 h-full w-64 border-r-2 border-amber-900/30 bg-amber-50/98 shadow-xl transition-transform duration-300 ease-out dark:border-amber-800/40 dark:bg-amber-950/98 md:z-[12] ${
           !chromeVisible
             ? "-translate-x-full max-md:z-10 md:-translate-x-full"
