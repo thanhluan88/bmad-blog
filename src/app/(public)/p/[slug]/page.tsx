@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { ChromeAwarePageFrame } from "@/components/ChromeAwarePageFrame";
 import { MarkdownBody } from "@/components/MarkdownBody";
 import { PmpQuizEmbed } from "@/components/PmpQuizEmbed";
 import { PostCover } from "@/components/PostCover";
@@ -26,14 +27,14 @@ export default async function PublicPostPage({ params }: Props) {
 
   if (isPmpQuiz) {
     return (
-      <div className="flex min-h-0 flex-1 flex-col md:mx-auto md:max-w-5xl md:px-8 md:py-6">
+      <ChromeAwarePageFrame variant="quiz">
         <PmpQuizEmbed />
-      </div>
+      </ChromeAwarePageFrame>
     );
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-8 py-12">
+    <ChromeAwarePageFrame>
       <article>
         {coverUrl && (
           <PostCover coverImageUrl={coverUrl} alt={post.title || "カバー"} />
@@ -45,6 +46,6 @@ export default async function PublicPostPage({ params }: Props) {
           <MarkdownBody content={post.contentMd} />
         </div>
       </article>
-    </div>
+    </ChromeAwarePageFrame>
   );
 }

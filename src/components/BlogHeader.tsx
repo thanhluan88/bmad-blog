@@ -11,10 +11,10 @@ export function BlogHeader() {
     <header
       onMouseEnter={showChrome}
       onMouseLeave={scheduleHideChrome}
-      className={`sticky top-0 z-[15] border-b-2 border-amber-200/80 bg-amber-50/95 shadow-sm backdrop-blur-sm transition-transform duration-300 ease-out dark:border-amber-800/50 dark:bg-amber-950/95 ${
+      className={`top-0 z-[15] border-b-2 border-amber-200/80 bg-amber-50/95 shadow-sm backdrop-blur-sm transition-transform duration-300 ease-out dark:border-amber-800/50 dark:bg-amber-950/95 ${
         chromeVisible
-          ? "translate-y-0 md:pl-64"
-          : "-translate-y-full pointer-events-none md:pl-0"
+          ? "sticky translate-y-0 md:pl-64"
+          : "pointer-events-none fixed right-0 left-0 -translate-y-full md:pl-0"
       }`}
     >
       <div className="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-2 sm:gap-3 sm:py-3 md:flex-row md:items-center md:justify-between md:px-8">

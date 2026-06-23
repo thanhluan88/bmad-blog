@@ -16,10 +16,10 @@ export function BlogFooter({ visitCount }: Props) {
     <footer
       onMouseEnter={showChrome}
       onMouseLeave={scheduleHideChrome}
-      className={`mt-auto border-t-2 border-amber-200/80 bg-amber-100/50 py-8 transition-transform duration-300 ease-out dark:border-amber-800/50 dark:bg-amber-950/50 ${
+      className={`border-t-2 border-amber-200/80 bg-amber-100/50 py-8 transition-transform duration-300 ease-out dark:border-amber-800/50 dark:bg-amber-950/50 ${
         chromeVisible
-          ? "translate-y-0 md:pl-64"
-          : "translate-y-full pointer-events-none md:pl-0"
+          ? "mt-auto translate-y-0 md:pl-64"
+          : "pointer-events-none fixed right-0 bottom-0 left-0 translate-y-full md:pl-0"
       }`}
     >
       <div className="mx-auto max-w-5xl px-4 md:px-8">

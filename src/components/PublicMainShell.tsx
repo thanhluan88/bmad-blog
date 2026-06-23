@@ -8,9 +8,11 @@ export function PublicMainShell({ children }: { children: React.ReactNode }) {
   return (
     <main
       onMouseEnter={scheduleHideChrome}
-      className={`flex-1 transition-[padding] duration-300 ease-out ${
-        chromeVisible ? "md:pl-64" : "md:pl-0"
-      }`}
+      className={
+        chromeVisible
+          ? "flex-1 transition-[padding] duration-300 ease-out md:pl-64"
+          : "fixed inset-0 z-[5] h-[100dvh] w-full overflow-auto transition-[padding] duration-300 ease-out"
+      }
     >
       {children}
     </main>

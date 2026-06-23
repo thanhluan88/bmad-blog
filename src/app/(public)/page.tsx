@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChromeAwarePageFrame } from "@/components/ChromeAwarePageFrame";
 import { MarkdownBody } from "@/components/MarkdownBody";
 import { PostCover } from "@/components/PostCover";
 import { db } from "@/lib/db";
@@ -28,16 +29,16 @@ export default async function HomePage() {
 
   if (!latest) {
     return (
-      <div className="mx-auto max-w-3xl px-8 py-12">
+      <ChromeAwarePageFrame>
         <p className="text-amber-800 dark:text-amber-200">記事がありません。</p>
-      </div>
+      </ChromeAwarePageFrame>
     );
   }
 
   const coverUrl = latest.coverImageUrl?.trim();
 
   return (
-    <div className="mx-auto max-w-3xl px-8 py-12">
+    <ChromeAwarePageFrame>
       <article>
         {coverUrl && (
           <PostCover coverImageUrl={coverUrl} alt={latest.title || "カバー"} />
@@ -57,6 +58,6 @@ export default async function HomePage() {
           </Link>
         </p>
       </article>
-    </div>
+    </ChromeAwarePageFrame>
   );
 }
