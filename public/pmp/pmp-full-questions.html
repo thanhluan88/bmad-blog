@@ -159,8 +159,14 @@
       background: #f3f4f6;
       color: var(--muted);
     }
-    body.exam-active .exam-hide-during-exam {
+    body.exam-active .practice-only {
       display: none !important;
+    }
+    .exam-controls {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
     }
     .stats {
       margin-left: auto;
@@ -414,7 +420,7 @@
       header h1,
       header > p,
       header .hl-hint,
-      .toolbar .secondary,
+      .toolbar .secondary.practice-only,
       .toolbar #pageSelect,
       .footer-note {
         display: none;
@@ -433,6 +439,10 @@
         font-size: 0.84rem;
       }
       .toolbar .jump-controls {
+        display: flex;
+        width: 100%;
+      }
+      .exam-controls {
         display: flex;
         width: 100%;
       }
@@ -500,20 +510,22 @@
         <button type="button" data-color="pink" onclick="setHlColor('pink', this)" title="Hồng"></button>
       </span>
       <button type="button" id="startMockExamBtn" onclick="startMockExam()">Thi thử 180 câu (240 phút)</button>
-      <div id="examTimer" class="exam-timer" hidden></div>
-      <button type="button" id="pauseMockExamBtn" class="secondary exam-hide-during-exam" hidden onclick="togglePauseMockExam()">Tạm dừng</button>
-      <button type="button" id="resetMockExamBtn" class="secondary exam-hide-during-exam" hidden onclick="resetMockExam()">Làm lại đề</button>
-      <button type="button" id="submitMockExamBtn" class="secondary exam-hide-during-exam" hidden onclick="submitMockExam()">Nộp bài</button>
-      <button type="button" id="exitMockExamBtn" class="secondary exam-hide-during-exam" hidden onclick="exitMockExam()">Thoát thi thử</button>
-      <button type="button" class="secondary exam-hide-during-exam" onclick="clearPageHighlights()">Xóa highlight trang</button>
+      <div class="exam-controls" id="examControls" hidden>
+        <div id="examTimer" class="exam-timer" hidden></div>
+        <button type="button" id="pauseMockExamBtn" class="secondary" onclick="togglePauseMockExam()">Tạm dừng</button>
+        <button type="button" id="resetMockExamBtn" class="secondary" onclick="resetMockExam()">Làm lại đề</button>
+        <button type="button" id="submitMockExamBtn" class="secondary" onclick="submitMockExam()">Nộp bài</button>
+        <button type="button" id="exitMockExamBtn" class="secondary" onclick="exitMockExam()">Thoát thi thử</button>
+      </div>
+      <button type="button" class="secondary practice-only" onclick="clearPageHighlights()">Xóa highlight trang</button>
       <div class="jump-controls">
         <input id="jumpInput" type="number" inputmode="numeric" min="1" max="1123" placeholder="Câu số..." enterkeyhint="go" />
         <button type="button" class="jump-go" onclick="jumpToQuestion()">Đi tới câu</button>
       </div>
       <select id="pageSelect" onchange="goPage(Number(this.value))"></select>
-      <button type="button" class="secondary exam-hide-during-exam" onclick="checkCurrentPage()">Kiểm tra trang này</button>
-      <button type="button" class="secondary exam-hide-during-exam" onclick="showAllAnswers()">Hiện tất cả đáp án</button>
-      <button type="button" class="secondary" onclick="resetAll()">Làm lại</button>
+      <button type="button" class="secondary practice-only" onclick="checkCurrentPage()">Kiểm tra trang này</button>
+      <button type="button" class="secondary practice-only" onclick="showAllAnswers()">Hiện tất cả đáp án</button>
+      <button type="button" class="secondary practice-only" onclick="resetAll()">Làm lại</button>
       <div class="stats" id="stats"></div>
     </div>
   </header>
@@ -635,10 +647,10 @@
     function setExamUI(active, submitted = false) {
       document.body.classList.toggle("exam-active", active && !submitted);
       document.getElementById("startMockExamBtn").hidden = active;
-      document.getElementById("submitMockExamBtn").hidden = !active || submitted;
-      document.getElementById("pauseMockExamBtn").hidden = !active || submitted;
-      document.getElementById("resetMockExamBtn").hidden = !active || submitted;
-      document.getElementById("exitMockExamBtn").hidden = !active;
+      document.getElementById("examControls").hidden = !active;
+      document.getElementById("submitMockExamBtn").hidden = submitted;
+      document.getElementById("pauseMockExamBtn").hidden = submitted;
+      document.getElementById("resetMockExamBtn").hidden = submitted;
       document.getElementById("examTimer").hidden = !active;
       const pauseBtn = document.getElementById("pauseMockExamBtn");
       if (pauseBtn && active && !submitted) {
