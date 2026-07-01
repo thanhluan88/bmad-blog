@@ -557,7 +557,31 @@
     const MOCK_EXAM_SIZE = 180;
     const MOCK_EXAM_SECONDS = 240 * 60;
     const EXAM_KEY = "pmp-mock-exam-v1";
+    const USED_KEY = "pmp-mock-exam-used-v1";
     let examTimerId = null;
+
+    function loadUsedQuestionIds() {
+      try {
+        const data = JSON.parse(localStorage.getItem(USED_KEY) || "[]");
+        return new Set(Array.isArray(data) ? data : []);
+      } catch {
+        return new Set();
+      }
+    }
+
+    function saveUsedQuestionIds(ids) {
+      localStorage.setItem(USED_KEY, JSON.stringify([...ids]));
+    }
+
+    function markQuestionsAsUsed(questionIds) {
+      const used = loadUsedQuestionIds();
+      questionIds.forEach(id => used.add(id));
+      saveUsedQuestionIds(used);
+    }
+
+    function clearUsedQuestionIds() {
+      localStorage.removeItem(USED_KEY);
+    }
 
     function questionBank() {
       if (state.exam) return state.exam.questions;
@@ -594,7 +618,30 @@
     }
 
     function pickExamQuestions(count) {
-      return shuffleQuestions(QUESTIONS).slice(0, count);
+      const used = loadUsedQuestionIds();
+      let available = QUESTIONS.filter(q => !used.has(q.id));
+      if (available.length < count) {
+        const canReset = available.length === 0
+          || confirm(
+            `Chỉ còn ${available.length} câu bạn chưa từng chọn trong thi thử (đã chọn ${used.size} câu). Reset danh sách và bắt đầu lại?`
+          );
+        if (!canReset) {
+          alert(`Không đủ câu hỏi mới để tạo đề (cần ${count}, còn ${available.length}).`);
+          return null;
+        }
+        clearUsedQuestionIds();
+        available = QUESTIONS.slice();
+      }
+      return shuffleQuestions(available).slice(0, count);
+    }
+
+    function syncUsedFromExamAnswers() {
+      if (!state.exam || state.exam.submitted) return;
+      const used = loadUsedQuestionIds();
+      const toMark = questionBank()
+        .filter(q => isAnswerFilled(q, state.answers[q.id]) && !used.has(q.id))
+        .map(q => q.id);
+      if (toMark.length) markQuestionsAsUsed(toMark);
     }
 
     function formatExamTime(totalSeconds) {
@@ -642,6 +689,7 @@
         checked: state.checked,
         page: state.page,
       }));
+      syncUsedFromExamAnswers();
     }
 
     function setExamUI(active, submitted = false) {
@@ -699,8 +747,10 @@
       if (!state.exam || state.exam.submitted) return;
       if (!confirm("Làm lại đề thi? Toàn bộ câu trả lời và thời gian sẽ được đặt lại.")) return;
       stopExamTimer();
+      const questions = pickExamQuestions(MOCK_EXAM_SIZE);
+      if (!questions) return;
       state.exam = {
-        questions: pickExamQuestions(MOCK_EXAM_SIZE),
+        questions,
         endAt: Date.now() + MOCK_EXAM_SECONDS * 1000,
         submitted: false,
         paused: false,
@@ -727,8 +777,10 @@
         return;
       }
       stopExamTimer();
+      const questions = pickExamQuestions(MOCK_EXAM_SIZE);
+      if (!questions) return;
       state.exam = {
-        questions: pickExamQuestions(MOCK_EXAM_SIZE),
+        questions,
         endAt: Date.now() + MOCK_EXAM_SECONDS * 1000,
         submitted: false,
         paused: false,
@@ -764,11 +816,12 @@
         clearInterval(examTimerId);
         examTimerId = null;
       }
+      gradeAllExamQuestions();
+      syncUsedFromExamAnswers();
       state.exam.submitted = true;
       state.exam.paused = false;
       state.exam.pausedLeft = null;
       setExamUI(true, true);
-      gradeAllExamQuestions();
       saveExamState();
       let correct = 0;
       state.exam.questions.forEach(q => {
@@ -818,6 +871,7 @@
       state.answers = data.answers || {};
       state.checked = data.checked || {};
       state.page = data.page || 1;
+      syncUsedFromExamAnswers();
       setExamUI(true, state.exam.submitted);
       if (!state.exam.submitted && !state.exam.paused && examSecondsLeft() <= 0) {
         submitMockExam(true);
