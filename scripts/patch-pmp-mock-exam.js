@@ -68,6 +68,22 @@ const examJs = `    const MOCK_EXAM_SIZE = 180;
       return questionBank().length;
     }
 
+    function isAnswerFilled(q, answer) {
+      if (answer == null || answer === "") return false;
+      if (q.type === "drag_drop" && q.dragSlots) {
+        const picks = String(answer).split(",");
+        return picks.length >= q.dragSlots && picks.every(v => v);
+      }
+      if (isMultiSelect(q)) {
+        return parseAnswerKeys(answer).length > 0;
+      }
+      return normalizeAnswer(answer) !== "";
+    }
+
+    function countAnsweredQuestions() {
+      return questionBank().filter(q => isAnswerFilled(q, state.answers[q.id])).length;
+    }
+
     function shuffleQuestions(list) {
       const copy = list.slice();
       for (let i = copy.length - 1; i > 0; i--) {
