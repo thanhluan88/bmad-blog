@@ -554,8 +554,9 @@
     const PER_PAGE = 25;
     const HL_KEY = "pmp-quiz-highlights-v1";
     const state = { page: 1, answers: {}, checked: {}, hlColor: "yellow", exam: null };
-    const MOCK_EXAM_SIZE = 180;
-    const MOCK_EXAM_SECONDS = 240 * 60;
+    const _urlParams = new URLSearchParams(window.location.search);
+    const MOCK_EXAM_SIZE = parseInt(_urlParams.get("size") || "180");
+    const MOCK_EXAM_SECONDS = parseInt(_urlParams.get("minutes") || "240") * 60;
     const EXAM_KEY = "pmp-mock-exam-v1";
     const USED_KEY = "pmp-mock-exam-used-v1";
     let examTimerId = null;
@@ -771,7 +772,7 @@
       if (state.exam && !state.exam.submitted && !force) {
         if (!confirm("Bạn đang có bài thi. Bắt đầu lại?")) return;
       }
-      if (!force && !confirm("Bắt đầu thi thử 180 câu / 240 phút?")) return;
+      if (!force && !confirm(`Bắt đầu thi thử ${MOCK_EXAM_SIZE} câu / ${MOCK_EXAM_SECONDS / 60} phút?`)) return;
       if (QUESTIONS.length < MOCK_EXAM_SIZE) {
         alert("Không đủ câu hỏi để tạo đề thi.");
         return;
@@ -1649,7 +1650,9 @@
     loadHighlights();
     restoreExamState();
     renderPage();
-    if (new URLSearchParams(window.location.search).get("exam") === "1" && !state.exam) {
+    document.getElementById("startMockExamBtn").textContent =
+      `Thi thử ${MOCK_EXAM_SIZE} câu (${MOCK_EXAM_SECONDS / 60} phút)`;
+    if (_urlParams.get("exam") === "1" && !state.exam) {
       startMockExam(true);
     }
   </script>
