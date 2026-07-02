@@ -187,7 +187,6 @@ if (html.includes(renderQHeadOld) && !html.includes("renderQuestionStatBadge")) 
     "    function renderQuestion(q) {",
     `    function renderQuestionStatBadge(id) {
       const stat = getQuestionStat(id);
-      if (!stat.attempts && !stat.wrong) return "";
       const cls = stat.wrong > 0 ? "q-stat has-wrong" : "q-stat";
       return \`<span class="\${cls}">Đã làm: \${stat.attempts} · Sai: \${stat.wrong}</span>\`;
     }

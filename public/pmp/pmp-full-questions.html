@@ -221,7 +221,10 @@
     .q-num {
       font-weight: 700;
       color: var(--primary);
-      white-space: nowrap;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.35rem 0.5rem;
     }
     .q-text { margin: 0; }
     .score-table-wrap {
@@ -1605,7 +1608,6 @@
 
     function renderQuestionStatBadge(id) {
       const stat = getQuestionStat(id);
-      if (!stat.attempts && !stat.wrong) return "";
       const cls = stat.wrong > 0 ? "q-stat has-wrong" : "q-stat";
       return `<span class="${cls}">Đã làm: ${stat.attempts} · Sai: ${stat.wrong}</span>`;
     }
