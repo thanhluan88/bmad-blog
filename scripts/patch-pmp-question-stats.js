@@ -26,12 +26,31 @@ if (!html.includes(".q-stat {")) {
   );
 }
 
-const toolbarBtn = `      <button type="button" id="filterWrongBtn" class="secondary practice-only" onclick="toggleWrongFilter()">Chỉ câu đã sai</button>`;
+const toolbarBtn = `      <button type="button" id="filterWrongBtn" class="secondary practice-only" onclick="toggleWrongFilter()">Ôn câu sai (nhiều nhất)</button>`;
 if (!html.includes("filterWrongBtn")) {
   html = html.replace(
     '      <button type="button" class="secondary practice-only" onclick="resetAll()">Làm lại</button>',
-    `      <button type="button" id="filterWrongBtn" class="secondary practice-only" onclick="toggleWrongFilter()">Chỉ câu đã sai</button>\n      <button type="button" class="secondary practice-only" onclick="resetAll()">Làm lại</button>`,
+    `${toolbarBtn}\n      <button type="button" class="secondary practice-only" onclick="resetAll()">Làm lại</button>`,
   );
+}
+
+if (html.includes('<span class="hl-colors" title="Màu highlight mặc định">')) {
+  html = html.replace(
+    /      <span class="hl-colors" title="Màu highlight mặc định">[\s\S]*?      <\/span>\n/,
+    "",
+  );
+}
+
+const questionBankOld2 = `      return QUESTIONS.filter(q => (stats[String(q.id)]?.wrong || 0) > 0);`;
+const questionBankNew2 = `      return QUESTIONS
+        .filter(q => (stats[String(q.id)]?.wrong || 0) > 0)
+        .sort((a, b) => {
+          const wrongDiff = (stats[String(b.id)]?.wrong || 0) - (stats[String(a.id)]?.wrong || 0);
+          if (wrongDiff !== 0) return wrongDiff;
+          return a.id - b.id;
+        });`;
+if (html.includes(questionBankOld2)) {
+  html = html.replace(questionBankOld2, questionBankNew2);
 }
 
 const stateOld = 'const state = { page: 1, answers: {}, checked: {}, hlColor: "yellow", exam: null };';

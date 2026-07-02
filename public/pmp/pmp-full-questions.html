@@ -445,9 +445,6 @@
         flex-direction: column;
         align-items: stretch;
       }
-      .toolbar .hl-colors {
-        display: none;
-      }
       .stats {
         width: 100%;
         font-size: 0.84rem;
@@ -515,14 +512,8 @@
   <header>
     <h1>PMP Full Questions</h1>
     <p>Tài liệu luyện tập trắc nghiệm — chọn đáp án rồi nhấn <strong>Kiểm tra</strong> để xem Đáp án đúng và Giải thích.</p>
-    <p class="hl-hint">Highlight: bôi đen text trong đề / đáp án / giải thích → chọn màu. Highlight được lưu tự động.</p>
+    <p class="hl-hint practice-only">Bôi đen đoạn text trong đề / đáp án / giải thích để highlight (chọn màu trên thanh nổi).</p>
     <div class="toolbar">
-      <span class="hl-colors" title="Màu highlight mặc định">
-        <button type="button" data-color="yellow" class="active" onclick="setHlColor('yellow', this)" title="Vàng"></button>
-        <button type="button" data-color="green" onclick="setHlColor('green', this)" title="Xanh lá"></button>
-        <button type="button" data-color="blue" onclick="setHlColor('blue', this)" title="Xanh dương"></button>
-        <button type="button" data-color="pink" onclick="setHlColor('pink', this)" title="Hồng"></button>
-      </span>
       <button type="button" id="startMockExamBtn" onclick="startMockExam()">Thi thử 180 câu (240 phút)</button>
       <div class="exam-controls" id="examControls" hidden>
         <div id="examTimer" class="exam-timer" hidden></div>
@@ -539,6 +530,7 @@
       <select id="pageSelect" onchange="goPage(Number(this.value))"></select>
       <button type="button" class="secondary practice-only" onclick="checkCurrentPage()">Kiểm tra trang này</button>
       <button type="button" class="secondary practice-only" onclick="showAllAnswers()">Hiện tất cả đáp án</button>
+      <button type="button" id="filterWrongBtn" class="secondary practice-only" onclick="toggleWrongFilter()">Ôn câu sai (nhiều nhất)</button>
       <button type="button" class="secondary practice-only" onclick="resetAll()">Làm lại</button>
       <div class="stats" id="stats"></div>
     </div>
@@ -657,7 +649,13 @@
       if (state.exam) return state.exam.questions;
       if (!state.filterWrongOnly) return QUESTIONS;
       const stats = loadQuestionStats();
-      return QUESTIONS.filter(q => (stats[String(q.id)]?.wrong || 0) > 0);
+      return QUESTIONS
+        .filter(q => (stats[String(q.id)]?.wrong || 0) > 0)
+        .sort((a, b) => {
+          const wrongDiff = (stats[String(b.id)]?.wrong || 0) - (stats[String(a.id)]?.wrong || 0);
+          if (wrongDiff !== 0) return wrongDiff;
+          return a.id - b.id;
+        });
     }
 
     function questionTotal() {
@@ -1651,7 +1649,7 @@
       const visibleQuestions = pageQuestions();
       document.getElementById("quiz").innerHTML = visibleQuestions.length
         ? visibleQuestions.map(renderQuestion).join("")
-        : '<div class="notice">Chưa có câu nào bị sai. Hãy làm bài và kiểm tra đáp án trước.</div>';
+        : '<div class="notice">Chưa có câu nào bị sai. Hãy làm bài thi thử hoặc kiểm tra đáp án trong luyện tập trước.</div>';
       document.getElementById("pageInfo").textContent = `Trang ${state.page} / ${totalPages}`;
       document.getElementById("pageSelect").value = String(state.page);
       restoreSelections();
@@ -1815,7 +1813,7 @@
       } else if (!state.exam) {
         const wrongCount = countWrongQuestions();
         text += ` · Câu đã sai: ${wrongCount}`;
-        if (state.filterWrongOnly) text += " · Đang lọc câu sai";
+        if (state.filterWrongOnly) text += " · Sắp xếp: sai nhiều → ít";
       }
       document.getElementById("stats").textContent = text;
     }
