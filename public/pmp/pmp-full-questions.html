@@ -509,9 +509,77 @@
         margin: 1rem 0 0.75rem;
       }
     }
+    .nickname-modal {
+      border: none;
+      border-radius: 16px;
+      padding: 0;
+      box-shadow: var(--shadow);
+      max-width: 400px;
+      margin: auto;
+    }
+    .nickname-modal::backdrop {
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .modal-content {
+      padding: 1.5rem;
+    }
+    .modal-content h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+    .modal-content > p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0.5rem 0 1rem;
+    }
+    .modal-content input {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+    .modal-buttons {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+    .modal-btn {
+      flex: 1;
+      border: 1px solid var(--border);
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      background: #fff;
+      color: var(--text);
+      font-family: inherit;
+    }
+    .modal-btn-primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .modal-btn-primary:hover {
+      background: var(--primary-dark);
+    }
   </style>
 </head>
 <body>
+  <dialog id="nicknameModal" class="nickname-modal">
+    <div class="modal-content">
+      <h3>Nhập nickname</h3>
+      <p>Dùng để lưu thống kê câu hỏi riêng của bạn</p>
+      <input type="text" id="nicknameInput" placeholder="Ví dụ: thanh_luan" autofocus>
+      <div class="modal-buttons">
+        <button type="button" class="modal-btn modal-btn-primary" id="nicknameSubmitBtn">Bắt đầu</button>
+        <button type="button" class="modal-btn" id="nicknameCancelBtn">Hủy</button>
+      </div>
+    </div>
+  </dialog>
   <header>
     <h1>PMP Full Questions</h1>
     <p>Tài liệu luyện tập trắc nghiệm — chọn đáp án rồi nhấn <strong>Kiểm tra</strong> để xem Đáp án đúng và Giải thích.</p>
@@ -536,6 +604,7 @@
       <button type="button" id="filterWrongBtn" class="secondary practice-only" onclick="toggleWrongFilter()">Ôn câu sai (nhiều nhất)</button>
       <button type="button" class="secondary practice-only" onclick="resetAll()">Làm lại</button>
       <div class="stats" id="stats"></div>
+      <div id="nicknameDisplay" style="margin-left: auto; font-size: 0.95rem; color: var(--muted); white-space: nowrap;"></div>
     </div>
   </header>
   <main>
@@ -568,11 +637,15 @@
     const MOCK_EXAM_SECONDS = parseInt(_urlParams.get("minutes") || "240") * 60;
     const EXAM_KEY = "pmp-mock-exam-v1";
     const USED_KEY = "pmp-mock-exam-used-v1";
-    const STATS_KEY = "pmp-question-stats-v1";
+
+    function getStatsKey(nickname) {
+      return nickname ? `pmp-question-stats-v1:${nickname}` : "pmp-question-stats-v1";
+    }
 
     function loadQuestionStats() {
+      const key = getStatsKey(state.exam?.nickname);
       try {
-        const data = JSON.parse(localStorage.getItem(STATS_KEY) || "{}");
+        const data = JSON.parse(localStorage.getItem(key) || "{}");
         return data && typeof data === "object" ? data : {};
       } catch {
         return {};
@@ -580,7 +653,8 @@
     }
 
     function saveQuestionStats(stats) {
-      localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+      const key = getStatsKey(state.exam?.nickname);
+      localStorage.setItem(key, JSON.stringify(stats));
     }
 
     function getQuestionStat(id) {
@@ -840,6 +914,7 @@
         submitted: false,
         paused: false,
         pausedLeft: null,
+        nickname: state.exam?.nickname,
       };
       state.page = 1;
       state.answers = {};
@@ -856,6 +931,10 @@
       if (state.exam && !state.exam.submitted && !force) {
         if (!confirm("Bạn đang có bài thi. Bắt đầu lại?")) return;
       }
+      if (!state.exam?.nickname && !force) {
+        document.getElementById("nicknameModal").showModal();
+        return;
+      }
       if (!force && !confirm(`Bắt đầu thi thử ${MOCK_EXAM_SIZE} câu / ${MOCK_EXAM_SECONDS / 60} phút?`)) return;
       if (QUESTIONS.length < MOCK_EXAM_SIZE) {
         alert("Không đủ câu hỏi để tạo đề thi.");
@@ -870,6 +949,7 @@
         submitted: false,
         paused: false,
         pausedLeft: null,
+        nickname: state.exam?.nickname,
       };
       state.page = 1;
       state.answers = {};
@@ -950,6 +1030,7 @@
         submitted: !!data.submitted,
         paused: !!data.paused,
         pausedLeft: data.pausedLeft ?? null,
+        nickname: data.nickname,
       };
       state.answers = data.answers || {};
       state.checked = data.checked || {};
@@ -1854,6 +1935,35 @@
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
+    function updateNicknameDisplay() {
+      const nickname = state.exam?.nickname;
+      const display = document.getElementById("nicknameDisplay");
+      if (nickname) {
+        display.textContent = `Người dùng: ${nickname}`;
+      } else {
+        display.textContent = "";
+      }
+    }
+
+    document.getElementById("nicknameSubmitBtn").addEventListener("click", () => {
+      const nickname = document.getElementById("nicknameInput").value.trim();
+      if (!nickname) {
+        alert("Vui lòng nhập nickname");
+        return;
+      }
+      if (!state.exam) state.exam = {};
+      state.exam.nickname = nickname;
+      document.getElementById("nicknameModal").close();
+      document.getElementById("nicknameInput").value = "";
+      updateNicknameDisplay();
+      startMockExam(true);
+    });
+
+    document.getElementById("nicknameCancelBtn").addEventListener("click", () => {
+      document.getElementById("nicknameModal").close();
+      document.getElementById("nicknameInput").value = "";
+    });
+
     ["jumpInput", "jumpInputBottom"].forEach(id => {
       const input = document.getElementById(id);
       if (!input) return;
@@ -1896,6 +2006,7 @@
     renderPage();
     document.getElementById("startMockExamBtn").textContent =
       `Thi thử ${MOCK_EXAM_SIZE} câu (${MOCK_EXAM_SECONDS / 60} phút)`;
+    updateNicknameDisplay();
     if (_urlParams.get("exam") === "1" && !state.exam) {
       startMockExam(true);
     }
