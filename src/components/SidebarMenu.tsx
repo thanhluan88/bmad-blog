@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useBlogMenu } from "@/components/MenuInteractionProvider";
 import { formatUpdatedAt } from "@/lib/format";
+import { PMP_HUB_SLUG } from "@/lib/pmp-quiz";
+import { PMP_HUB_POST_TITLE } from "@/lib/seed-pmp-post";
 
 type Post = {
   id: string;
@@ -70,38 +72,55 @@ export function SidebarMenu({ posts }: Props) {
             Menu
           </Link>
           <nav className="flex-1 overflow-y-auto">
-            {posts.length === 0 ? (
-              <p className="text-sm text-amber-800/70 dark:text-amber-300/70">
-                記事がありません
-              </p>
-            ) : (
-              <ul className="space-y-1">
-                {posts.map((post) => (
-                  <li key={post.id}>
-                    <Link
-                      href={`/p/${post.slug}`}
-                      onClick={closeOnNavigate}
-                      className="block rounded-lg px-3 py-2 text-sm text-amber-900/90 transition-colors hover:bg-amber-200/60 dark:text-amber-200/90 dark:hover:bg-amber-900/50"
-                    >
-                      <span className="line-clamp-2">{post.title}</span>
-                      <time
-                        dateTime={
-                          post.publishedAt
-                            ? typeof post.publishedAt === "string"
-                              ? post.publishedAt
-                              : post.publishedAt.toISOString()
-                            : ""
-                        }
-                        className="mt-0.5 block text-xs text-amber-800/60 dark:text-amber-400/60"
+            <ul className="space-y-1">
+              <li>
+                <Link
+                  href={`/p/${PMP_HUB_SLUG}`}
+                  onClick={closeOnNavigate}
+                  className="block rounded-lg border border-amber-300/80 bg-amber-100/60 px-3 py-2.5 text-sm font-semibold text-amber-900 transition-colors hover:bg-amber-200/80 dark:border-amber-700/50 dark:bg-amber-900/40 dark:text-amber-100 dark:hover:bg-amber-900/60"
+                >
+                  {PMP_HUB_POST_TITLE}
+                </Link>
+              </li>
+            </ul>
+            {posts.length > 0 && (
+              <>
+                <p className="mb-2 mt-5 px-3 text-xs font-medium uppercase tracking-wide text-amber-800/60 dark:text-amber-400/60">
+                  Bài viết
+                </p>
+                <ul className="space-y-1">
+                  {posts.map((post) => (
+                    <li key={post.id}>
+                      <Link
+                        href={`/p/${post.slug}`}
+                        onClick={closeOnNavigate}
+                        className="block rounded-lg px-3 py-2 text-sm text-amber-900/90 transition-colors hover:bg-amber-200/60 dark:text-amber-200/90 dark:hover:bg-amber-900/50"
                       >
-                        {post.publishedAt
-                          ? formatUpdatedAt(post.publishedAt)
-                          : "—"}
-                      </time>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+                        <span className="line-clamp-2">{post.title}</span>
+                        <time
+                          dateTime={
+                            post.publishedAt
+                              ? typeof post.publishedAt === "string"
+                                ? post.publishedAt
+                                : post.publishedAt.toISOString()
+                              : ""
+                          }
+                          className="mt-0.5 block text-xs text-amber-800/60 dark:text-amber-400/60"
+                        >
+                          {post.publishedAt
+                            ? formatUpdatedAt(post.publishedAt)
+                            : "—"}
+                        </time>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            {posts.length === 0 && (
+              <p className="mt-4 px-3 text-sm text-amber-800/70 dark:text-amber-300/70">
+                Chưa có bài viết khác
+              </p>
             )}
           </nav>
         </div>

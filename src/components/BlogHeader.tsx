@@ -40,12 +40,6 @@ export function BlogHeader() {
             ホーム
           </Link>
           <Link
-            href="/p/pmp"
-            className="text-sm font-medium text-amber-800 hover:text-amber-600 dark:text-amber-300 dark:hover:text-amber-200"
-          >
-            PMP
-          </Link>
-          <Link
             href="/admin"
             className="text-sm text-amber-700/80 hover:text-amber-600 dark:text-amber-400/80 dark:hover:text-amber-300"
           >

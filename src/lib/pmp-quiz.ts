@@ -25,7 +25,12 @@ export const PMP_QUIZ_OPTIONS = [
 ] as const;
 
 export function shouldShowPostInSidebar(slug: string): boolean {
+  if (slug === PMP_HUB_SLUG) return false;
   return !(PMP_QUIZ_SLUGS as readonly string[]).includes(slug);
+}
+
+export function isPmpRouteSlug(slug: string): boolean {
+  return slug === PMP_HUB_SLUG || isPmpQuizSlug(slug);
 }
 
 const QUIZ_HTML_BY_SLUG: Record<PmpQuizSlug, string> = {

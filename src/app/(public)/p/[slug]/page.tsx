@@ -12,6 +12,7 @@ import {
   PMP_HUB_SLUG,
   PMP_QUIZ_SLUG,
 } from "@/lib/pmp-quiz";
+import { getPmpPostFallback } from "@/lib/pmp-post-fallback";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -25,16 +26,19 @@ const QUIZ_TITLES: Record<string, string> = {
 export default async function PublicPostPage({ params }: Props) {
   const { slug } = await params;
 
-  const post = await db.post.findFirst({
+  const dbPost = await db.post.findFirst({
     where: { slug, status: "PUBLISHED" },
     select: { id: true, title: true, contentMd: true, coverImageUrl: true },
   });
+
+  const fallback = getPmpPostFallback(slug);
+  const post = dbPost ?? fallback;
 
   if (!post) {
     notFound();
   }
 
-  const coverUrl = post.coverImageUrl?.trim();
+  const coverUrl = post.coverImageUrl?.trim() || undefined;
 
   if (slug === PMP_HUB_SLUG) {
     return (

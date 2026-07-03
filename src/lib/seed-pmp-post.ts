@@ -22,7 +22,7 @@ export const PMP_HUB_POST_CONTENT_MD = `Trang này giúp bạn chọn bộ đề
 3. Luyện tập từng trang, **Kiểm tra** đáp án, hoặc **Thi thử** 180 câu / 240 phút.
 4. Bấm **Ôn câu sai** để chỉ xem các câu bạn đã trả lời sai (sắp xếp sai nhiều nhất trước).
 
-> Mẹo: dùng cùng tên người dùng trên cùng một bộ đề để giữ lịch sử luyện tập. Đổi bộ đề bằng link **PMP** trên header hoặc quay lại trang này.
+> Mẹo: dùng cùng tên người dùng trên cùng một bộ đề để giữ lịch sử luyện tập. Đổi bộ đề bằng menu **PMP** bên trái hoặc quay lại trang này.
 `;
 
 export const PMP_POST_TITLE = "PMP Full Questions — Luyện tập trắc nghiệm";
