@@ -39,7 +39,20 @@ export default async function PublicPostPage({ params }: Props) {
   if (slug === PMP_HUB_SLUG) {
     return (
       <ChromeAwarePageFrame>
-        <PmpQuizPicker />
+        <article>
+          {coverUrl && (
+            <PostCover coverImageUrl={coverUrl} alt={post.title || "カバー"} />
+          )}
+          <h1 className="text-3xl font-bold text-amber-900 dark:text-amber-100">
+            {post.title}
+          </h1>
+          <div className="mt-8">
+            <MarkdownBody content={post.contentMd} />
+          </div>
+          <div className="mt-10 border-t border-amber-200/80 pt-8 dark:border-amber-800/50">
+            <PmpQuizPicker />
+          </div>
+        </article>
       </ChromeAwarePageFrame>
     );
   }

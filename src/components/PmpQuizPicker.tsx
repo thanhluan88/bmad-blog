@@ -1,17 +1,19 @@
 import Link from "next/link";
 import { PMP_QUIZ_OPTIONS } from "@/lib/pmp-quiz";
 
-export function PmpQuizPicker() {
+type Props = {
+  showIntro?: boolean;
+};
+
+export function PmpQuizPicker({ showIntro = true }: Props) {
   return (
     <div className="mx-auto w-full max-w-2xl">
-      <h1 className="text-2xl font-bold text-amber-900 dark:text-amber-100 sm:text-3xl">
-        PMP — Luyện tập trắc nghiệm
-      </h1>
-      <p className="mt-2 text-sm text-amber-800/85 sm:text-base dark:text-amber-200/80">
-        Chọn bộ đề để bắt đầu. Mỗi bộ lưu thống kê và câu sai riêng theo tên
-        người dùng.
-      </p>
-      <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+      {showIntro && (
+        <p className="text-sm text-amber-800/85 sm:text-base dark:text-amber-200/80">
+          Chọn bộ đề để bắt đầu:
+        </p>
+      )}
+      <ul className={`grid gap-4 sm:grid-cols-2 ${showIntro ? "mt-4" : ""}`}>
         {PMP_QUIZ_OPTIONS.map((option) => (
           <li key={option.slug}>
             <Link

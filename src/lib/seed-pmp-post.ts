@@ -6,8 +6,24 @@ import {
 } from "@/lib/pmp-quiz";
 
 export const PMP_HUB_POST_TITLE = "PMP — Luyện tập trắc nghiệm";
-export const PMP_HUB_POST_CONTENT_MD =
-  "Chọn bộ đề PMP Full Questions hoặc PMP Exam Latest.";
+export const PMP_HUB_POST_CONTENT_MD = `Trang này giúp bạn chọn bộ đề PMP phù hợp. Mỗi bộ đề chạy riêng; thống kê **Đã làm / Sai** và chế độ **Ôn câu sai** được lưu theo **tên người dùng** (không dùng chung giữa hai bộ).
+
+## Hai bộ đề
+
+| Bộ đề | Số câu | Ghi chú |
+| --- | ---: | --- |
+| [PMP Full Questions](/p/pmp-full-questions) | 1123 | Bộ gốc, đủ loại câu (MCQ, kéo-thả, …) |
+| [PMP Exam Latest](/p/pmp-exam-latest) | 1417 | ExamTopics — *PMP Exam Lasted version 1* |
+
+## Cách dùng
+
+1. Chọn một bộ đề bên dưới (hoặc dùng link trong bảng).
+2. Nhập **tên người dùng** khi được hỏi.
+3. Luyện tập từng trang, **Kiểm tra** đáp án, hoặc **Thi thử** 180 câu / 240 phút.
+4. Bấm **Ôn câu sai** để chỉ xem các câu bạn đã trả lời sai (sắp xếp sai nhiều nhất trước).
+
+> Mẹo: dùng cùng tên người dùng trên cùng một bộ đề để giữ lịch sử luyện tập. Đổi bộ đề bằng link **PMP** trên header hoặc quay lại trang này.
+`;
 
 export const PMP_POST_TITLE = "PMP Full Questions — Luyện tập trắc nghiệm";
 export const PMP_EXAM_LATEST_POST_TITLE =
