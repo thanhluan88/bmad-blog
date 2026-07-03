@@ -734,21 +734,25 @@ const USER_KEY = "pmp-quiz-user-v1";
       openUserModal(false);
     }
 
+    const PMP_STAT_REALTIME_ENABLED = true;
     const PMP_STATS_SYNC_ENABLED = true;
     const PMP_STATS_QUIZ_ID = "full";
     const PMP_STATS_API = "/api/pmp/stats";
     let statsSyncTimer = null;
     let statsSyncFailed = false;
 
+    function mergeQuestionStatRow(a, b) {
+      const A = { attempts: Number(a?.attempts) || 0, wrong: Number(a?.wrong) || 0 };
+      const B = { attempts: Number(b?.attempts) || 0, wrong: Number(b?.wrong) || 0 };
+      if (B.attempts > A.attempts) return B;
+      if (A.attempts > B.attempts) return A;
+      return { attempts: A.attempts, wrong: Math.min(A.wrong, B.wrong) };
+    }
+
     function mergeStatsMaps(base, incoming) {
       const out = { ...(base || {}) };
       for (const [id, row] of Object.entries(incoming || {})) {
-        const prev = out[id] || { attempts: 0, wrong: 0 };
-        const next = row || {};
-        out[id] = {
-          attempts: Math.max(Number(prev.attempts) || 0, Number(next.attempts) || 0),
-          wrong: Math.max(Number(prev.wrong) || 0, Number(next.wrong) || 0),
-        };
+        out[id] = mergeQuestionStatRow(out[id], row);
       }
       return out;
     }
@@ -858,9 +862,31 @@ const USER_KEY = "pmp-quiz-user-v1";
       const key = String(id);
       const row = stats[key] || { attempts: 0, wrong: 0 };
       row.attempts = (Number(row.attempts) || 0) + 1;
-      if (!isCorrect) row.wrong = (Number(row.wrong) || 0) + 1;
+      if (!isCorrect) {
+        row.wrong = (Number(row.wrong) || 0) + 1;
+      } else {
+        row.wrong = 0;
+      }
       stats[key] = row;
       saveQuestionStats(stats);
+    }
+
+    function updateQuestionStatBadge(id) {
+      const el = document.getElementById(`q-stat-${id}`);
+      if (!el) return;
+      const stat = getQuestionStat(id);
+      el.textContent = `Đã làm: ${stat.attempts} · Sai: ${stat.wrong}`;
+      el.className = stat.wrong > 0 ? "q-stat has-wrong" : "q-stat";
+    }
+
+    function maybeAutoCheckQuestion(qid) {
+      if (state.exam && !state.exam.submitted) return;
+      if (!getActiveUser()) return;
+      const q = questionBank().find(x => x.id === qid) || QUESTIONS.find(x => x.id === qid);
+      if (!q) return;
+      const answer = getAnswer(q);
+      if (!isAnswerFilled(q, answer)) return;
+      checkQuestion(qid);
     }
 
     function countWrongQuestions() {
@@ -1895,7 +1921,7 @@ const USER_KEY = "pmp-quiz-user-v1";
     function renderQuestionStatBadge(id) {
       const stat = getQuestionStat(id);
       const cls = stat.wrong > 0 ? "q-stat has-wrong" : "q-stat";
-      return `<span class="${cls}">Đã làm: ${stat.attempts} · Sai: ${stat.wrong}</span>`;
+      return `<span class="${cls}" id="q-stat-${id}">Đã làm: ${stat.attempts} · Sai: ${stat.wrong}</span>`;
     }
 
     function renderQuestion(q) {
@@ -2023,6 +2049,12 @@ const USER_KEY = "pmp-quiz-user-v1";
       if (!revealOnly && isAnswerFilled(q, userAnswer)) {
         const ok = answersMatch(q, userAnswer);
         recordQuestionAttempt(id, ok);
+        updateQuestionStatBadge(id);
+        if (state.filterWrongOnly && ok) {
+          initPager();
+          renderPage();
+          return;
+        }
         if (q.type !== "image_click" && q.type !== "special") {
           result.style.borderColor = ok ? "var(--ok)" : "var(--bad)";
           result.style.background = ok ? "var(--ok-bg)" : "var(--bad-bg)";
@@ -2178,8 +2210,10 @@ const USER_KEY = "pmp-quiz-user-v1";
 
     document.addEventListener("change", e => {
       const t = e.target;
+      let autoCheckQid = null;
       if (t.matches('input[type="radio"][name^="q-"]')) {
         const qid = Number(t.name.replace("q-", ""));
+        autoCheckQid = qid;
         state.answers[qid] = t.value;
         document.querySelectorAll(`label.option[data-q="${qid}"]`).forEach(l => l.classList.remove("selected"));
         const lbl = t.closest("label.option");
@@ -2188,6 +2222,7 @@ const USER_KEY = "pmp-quiz-user-v1";
       saveExamState();
       if (t.matches('input[type="checkbox"][name^="q-"]')) {
         const qid = Number(t.name.replace("q-", ""));
+        autoCheckQid = qid;
         const q = questionBank().find(x => x.id === qid) || QUESTIONS.find(x => x.id === qid);
         if (!q) return;
         state.answers[qid] = getAnswer(q);
@@ -2198,9 +2233,11 @@ const USER_KEY = "pmp-quiz-user-v1";
       saveExamState();
       if (t.matches("select[data-q]")) {
         const qid = Number(t.dataset.q);
+        autoCheckQid = qid;
         state.answers[qid] = getAnswer(questionBank().find(x => x.id === qid) || QUESTIONS.find(x => x.id === qid));
       }
       saveExamState();
+      if (autoCheckQid != null) maybeAutoCheckQuestion(autoCheckQid);
       updateStats();
     });
 

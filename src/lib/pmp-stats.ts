@@ -36,12 +36,19 @@ export function mergePmpStatsMaps(
   const merged: PmpStatsMap = { ...base };
 
   for (const [id, row] of Object.entries(incoming)) {
-    const prev = merged[id] ?? { attempts: 0, wrong: 0 };
-    merged[id] = {
-      attempts: Math.max(prev.attempts, row.attempts),
-      wrong: Math.max(prev.wrong, row.wrong),
-    };
+    merged[id] = mergeQuestionStatRow(merged[id], row);
   }
 
   return merged;
+}
+
+function mergeQuestionStatRow(
+  a?: { attempts: number; wrong: number },
+  b?: { attempts: number; wrong: number },
+): { attempts: number; wrong: number } {
+  const A = { attempts: a?.attempts ?? 0, wrong: a?.wrong ?? 0 };
+  const B = { attempts: b?.attempts ?? 0, wrong: b?.wrong ?? 0 };
+  if (B.attempts > A.attempts) return B;
+  if (A.attempts > B.attempts) return A;
+  return { attempts: A.attempts, wrong: Math.min(A.wrong, B.wrong) };
 }
