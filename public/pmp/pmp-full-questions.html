@@ -855,6 +855,19 @@ const USER_KEY = "pmp-quiz-user-v1";
       return copy;
     }
 
+    function countFreshExamQuestions() {
+      const stats = loadQuestionStats();
+      return QUESTIONS.filter(q => (stats[String(q.id)]?.attempts || 0) === 0).length;
+    }
+
+    function confirmMockExamRoundIfNeeded() {
+      const fresh = countFreshExamQuestions();
+      if (fresh >= MOCK_EXAM_SIZE) return true;
+      return confirm(
+        `Đã hết 1 round, chỉ còn ${fresh} câu hỏi, bạn có muốn tiếp tục không?`,
+      );
+    }
+
     function pickExamQuestions(count) {
       const stats = loadQuestionStats();
       const tiers = new Map();
@@ -1027,6 +1040,7 @@ const USER_KEY = "pmp-quiz-user-v1";
         return;
       }
       if (!force && !confirm(`Bắt đầu thi thử ${MOCK_EXAM_SIZE} câu / ${MOCK_EXAM_SECONDS / 60} phút?`)) return;
+      if (!force && !confirmMockExamRoundIfNeeded()) return;
       if (QUESTIONS.length < MOCK_EXAM_SIZE) {
         alert("Không đủ câu hỏi để tạo đề thi.");
         return;

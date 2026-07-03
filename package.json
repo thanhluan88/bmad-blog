@@ -14,7 +14,8 @@
     "db:setup": "prisma migrate deploy && prisma db seed",
     "db:reset-admin": "tsx scripts/reset-admin.ts",
     "db:seed-pmp": "tsx scripts/seed-pmp-post.ts",
-    "build:pmp-exam-latest": "node scripts/build-pmp-exam-latest.js && node scripts/patch-pmp-user-gate.js",
+    "build:pmp-exam-latest": "node scripts/build-pmp-exam-latest.js && node scripts/patch-pmp-user-gate.js && node scripts/patch-pmp-mock-round-confirm.js",
+    "patch:pmp-mock-round-confirm": "node scripts/patch-pmp-mock-round-confirm.js",
     "patch:pmp-user-gate": "node scripts/patch-pmp-user-gate.js",
     "db:studio": "prisma studio"
   },
