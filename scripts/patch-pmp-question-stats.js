@@ -29,8 +29,8 @@ if (!html.includes(".q-stat {")) {
 const toolbarBtn = `      <button type="button" id="filterWrongBtn" class="secondary practice-only" onclick="toggleWrongFilter()">Ôn câu sai (nhiều nhất)</button>`;
 if (!html.includes("filterWrongBtn")) {
   html = html.replace(
-    '      <button type="button" class="secondary practice-only" onclick="resetAll()">Làm lại</button>',
-    `${toolbarBtn}\n      <button type="button" class="secondary practice-only" onclick="resetAll()">Làm lại</button>`,
+    '      <button type="button" id="filterUnattemptedBtn"',
+    `${toolbarBtn}\n      <button type="button" id="filterUnattemptedBtn"`,
   );
 }
 

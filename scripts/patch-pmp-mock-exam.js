@@ -49,10 +49,16 @@ html = html.replace(
   `<button type="button" class="secondary" onclick="checkCurrentPage()">Kiểm tra trang này</button>`,
   `<button type="button" class="secondary exam-hide-during-exam" onclick="checkCurrentPage()">Kiểm tra trang này</button>`
 );
-html = html.replace(
-  `<button type="button" class="secondary" onclick="showAllAnswers()">Hiện tất cả đáp án</button>`,
-  `<button type="button" class="secondary exam-hide-during-exam" onclick="showAllAnswers()">Hiện tất cả đáp án</button>`
-);
+
+for (const line of [
+  `      <button type="button" class="secondary practice-only" onclick="showAllAnswers()">Hiện tất cả đáp án</button>\n`,
+  `      <button type="button" class="secondary exam-hide-during-exam" onclick="showAllAnswers()">Hiện tất cả đáp án</button>\n`,
+  `      <button type="button" class="secondary" onclick="showAllAnswers()">Hiện tất cả đáp án</button>\n`,
+  `      <button type="button" class="secondary practice-only" onclick="resetAll()">Làm lại</button>\n`,
+  `      <button type="button" class="secondary" onclick="resetAll()">Làm lại</button>\n`,
+]) {
+  html = html.replace(line, "");
+}
 
 const examJs = `    const MOCK_EXAM_SIZE = 180;
     const MOCK_EXAM_SECONDS = 240 * 60;
