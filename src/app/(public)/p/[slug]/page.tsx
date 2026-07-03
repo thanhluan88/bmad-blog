@@ -2,12 +2,14 @@ import { notFound } from "next/navigation";
 import { ChromeAwarePageFrame } from "@/components/ChromeAwarePageFrame";
 import { MarkdownBody } from "@/components/MarkdownBody";
 import { PmpQuizEmbed } from "@/components/PmpQuizEmbed";
+import { PmpQuizPicker } from "@/components/PmpQuizPicker";
 import { PostCover } from "@/components/PostCover";
 import { db } from "@/lib/db";
 import {
   getPmpQuizHtmlPath,
   isPmpQuizSlug,
   PMP_EXAM_LATEST_SLUG,
+  PMP_HUB_SLUG,
   PMP_QUIZ_SLUG,
 } from "@/lib/pmp-quiz";
 
@@ -33,6 +35,14 @@ export default async function PublicPostPage({ params }: Props) {
   }
 
   const coverUrl = post.coverImageUrl?.trim();
+
+  if (slug === PMP_HUB_SLUG) {
+    return (
+      <ChromeAwarePageFrame>
+        <PmpQuizPicker />
+      </ChromeAwarePageFrame>
+    );
+  }
 
   if (isPmpQuizSlug(slug)) {
     return (

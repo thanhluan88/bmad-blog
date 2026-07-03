@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { shouldShowPostInSidebar } from "@/lib/pmp-quiz";
 import { incrementPageViewsAndGetTotal } from "@/lib/site-stats";
 import { MenuInteractionProvider } from "@/components/MenuInteractionProvider";
 import { SidebarMenu } from "@/components/SidebarMenu";
@@ -18,11 +19,12 @@ export default async function PublicLayout({
 }) {
   let posts: { id: string; title: string; slug: string; publishedAt: Date | null }[] = [];
   try {
-    posts = await db.post.findMany({
+    const allPosts = await db.post.findMany({
       where: { status: "PUBLISHED" },
       select: { id: true, title: true, slug: true, publishedAt: true },
       orderBy: { publishedAt: "desc" },
     });
+    posts = allPosts.filter((post) => shouldShowPostInSidebar(post.slug));
   } catch {
     // Sidebar empty on error
   }

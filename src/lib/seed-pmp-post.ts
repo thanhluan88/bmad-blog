@@ -1,8 +1,13 @@
 import type { PrismaClient } from "@prisma/client";
 import {
   PMP_EXAM_LATEST_SLUG,
+  PMP_HUB_SLUG,
   PMP_QUIZ_SLUG,
 } from "@/lib/pmp-quiz";
+
+export const PMP_HUB_POST_TITLE = "PMP — Luyện tập trắc nghiệm";
+export const PMP_HUB_POST_CONTENT_MD =
+  "Chọn bộ đề PMP Full Questions hoặc PMP Exam Latest.";
 
 export const PMP_POST_TITLE = "PMP Full Questions — Luyện tập trắc nghiệm";
 export const PMP_EXAM_LATEST_POST_TITLE =
@@ -63,6 +68,15 @@ export async function seedPmpPost(db: PrismaClient) {
     console.log("Skip PMP post seed: no ADMIN user.");
     return;
   }
+
+  await upsertQuizPost(
+    db,
+    PMP_HUB_SLUG,
+    PMP_HUB_POST_TITLE,
+    PMP_HUB_POST_CONTENT_MD,
+    admin.id,
+    admin.email,
+  );
 
   await upsertQuizPost(
     db,
