@@ -711,13 +711,22 @@ const USER_KEY = "pmp-exam-latest-user-v1";
 
     function completeUserEntry() {
       setUserGateMode(false);
-      initPager();
-      renderPage();
-      updateStats();
-      if (userGatePendingMock) {
-        userGatePendingMock = false;
-        startMockExam(true);
+      const afterSync = () => {
+        document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && getActiveUser()) {
+        pullStatsFromServer();
       }
+    });
+
+    initPager();
+        renderPage();
+        updateStats();
+        if (userGatePendingMock) {
+          userGatePendingMock = false;
+          startMockExam(true);
+        }
+      };
+      pullStatsFromServer().finally(afterSync);
     }
 
     function switchUser() {
@@ -731,7 +740,25 @@ const USER_KEY = "pmp-exam-latest-user-v1";
       openUserModal(false);
     }
 
-    function loadQuestionStats() {
+    const PMP_STATS_SYNC_ENABLED = true;
+    const PMP_STATS_QUIZ_ID = "latest";
+    const PMP_STATS_API = "/api/pmp/stats";
+    let statsSyncTimer = null;
+
+    function mergeStatsMaps(base, incoming) {
+      const out = { ...(base || {}) };
+      for (const [id, row] of Object.entries(incoming || {})) {
+        const prev = out[id] || { attempts: 0, wrong: 0 };
+        const next = row || {};
+        out[id] = {
+          attempts: Math.max(Number(prev.attempts) || 0, Number(next.attempts) || 0),
+          wrong: Math.max(Number(prev.wrong) || 0, Number(next.wrong) || 0),
+        };
+      }
+      return out;
+    }
+
+    function readLocalQuestionStats() {
       const key = getStatsKey();
       if (!key) return {};
       try {
@@ -742,10 +769,65 @@ const USER_KEY = "pmp-exam-latest-user-v1";
       }
     }
 
-    function saveQuestionStats(stats) {
+    function writeLocalQuestionStats(stats) {
       const key = getStatsKey();
       if (!key) return;
       localStorage.setItem(key, JSON.stringify(stats));
+    }
+
+    async function pushStatsToServer(stats) {
+      const user = getActiveUser();
+      if (!user) return false;
+      try {
+        const res = await fetch(PMP_STATS_API, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ quiz: PMP_STATS_QUIZ_ID, user, stats }),
+        });
+        return res.ok;
+      } catch (err) {
+        console.warn("PMP stats push failed", err);
+        return false;
+      }
+    }
+
+    function queueStatsSync() {
+      clearTimeout(statsSyncTimer);
+      statsSyncTimer = setTimeout(() => {
+        pushStatsToServer(readLocalQuestionStats());
+      }, 500);
+    }
+
+    async function pullStatsFromServer() {
+      const user = getActiveUser();
+      if (!user) return;
+      try {
+        const res = await fetch(
+          `${PMP_STATS_API}?quiz=${encodeURIComponent(PMP_STATS_QUIZ_ID)}&user=${encodeURIComponent(user)}`,
+        );
+        if (!res.ok) return;
+        const data = await res.json();
+        const merged = mergeStatsMaps(data.stats || {}, readLocalQuestionStats());
+        writeLocalQuestionStats(merged);
+        await pushStatsToServer(merged);
+        updateStats();
+        if (state.filterWrongOnly) {
+          initPager();
+          renderPage();
+        }
+      } catch (err) {
+        console.warn("PMP stats pull failed", err);
+      }
+    }
+
+
+    function loadQuestionStats() {
+      return readLocalQuestionStats();
+    }
+
+    function saveQuestionStats(stats) {
+      writeLocalQuestionStats(stats);
+      queueStatsSync();
     }
 
     function getQuestionStat(id) {
@@ -2137,11 +2219,14 @@ const USER_KEY = "pmp-exam-latest-user-v1";
     if (existingUser) {
       if (!state.user) saveUser(existingUser);
       setUserGateMode(false);
-      renderPage();
       updateNicknameDisplay();
-      if (_urlParams.get("exam") === "1" && !state.exam) {
-        startMockExam(true);
-      }
+      pullStatsFromServer().finally(() => {
+        renderPage();
+        updateStats();
+        if (_urlParams.get("exam") === "1" && !state.exam) {
+          startMockExam(true);
+        }
+      });
     } else {
       setUserGateMode(true);
       openUserModal(false);
