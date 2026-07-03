@@ -712,13 +712,7 @@ const USER_KEY = "pmp-exam-latest-user-v1";
     function completeUserEntry() {
       setUserGateMode(false);
       const afterSync = () => {
-        document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible" && getActiveUser()) {
-        pullStatsFromServer();
-      }
-    });
-
-    initPager();
+        initPager();
         renderPage();
         updateStats();
         if (userGatePendingMock) {
@@ -744,6 +738,7 @@ const USER_KEY = "pmp-exam-latest-user-v1";
     const PMP_STATS_QUIZ_ID = "latest";
     const PMP_STATS_API = "/api/pmp/stats";
     let statsSyncTimer = null;
+    let statsSyncFailed = false;
 
     function mergeStatsMaps(base, incoming) {
       const out = { ...(base || {}) };
@@ -798,14 +793,24 @@ const USER_KEY = "pmp-exam-latest-user-v1";
       }, 500);
     }
 
-    async function pullStatsFromServer() {
+    async function pullStatsFromServer(retry = 0) {
       const user = getActiveUser();
-      if (!user) return;
+      if (!user) return false;
       try {
         const res = await fetch(
           `${PMP_STATS_API}?quiz=${encodeURIComponent(PMP_STATS_QUIZ_ID)}&user=${encodeURIComponent(user)}`,
+          { cache: "no-store" },
         );
-        if (!res.ok) return;
+        if (!res.ok) {
+          if (retry < 2) {
+            await new Promise(r => setTimeout(r, 1000 * (retry + 1)));
+            return pullStatsFromServer(retry + 1);
+          }
+          statsSyncFailed = true;
+          updateStats();
+          return false;
+        }
+        statsSyncFailed = false;
         const data = await res.json();
         const merged = mergeStatsMaps(data.stats || {}, readLocalQuestionStats());
         writeLocalQuestionStats(merged);
@@ -815,8 +820,16 @@ const USER_KEY = "pmp-exam-latest-user-v1";
           initPager();
           renderPage();
         }
+        return true;
       } catch (err) {
         console.warn("PMP stats pull failed", err);
+        if (retry < 2) {
+          await new Promise(r => setTimeout(r, 1000 * (retry + 1)));
+          return pullStatsFromServer(retry + 1);
+        }
+        statsSyncFailed = true;
+        updateStats();
+        return false;
       }
     }
 
@@ -2108,6 +2121,7 @@ const USER_KEY = "pmp-exam-latest-user-v1";
       } else if (!state.exam) {
         const wrongCount = countWrongQuestions();
         text += ` · Câu đã sai: ${wrongCount}`;
+        if (statsSyncFailed) text += " · Chưa đồng bộ server";
         if (state.filterWrongOnly) text += " · Sắp xếp: sai nhiều → ít";
       }
       document.getElementById("stats").textContent = text;
@@ -2208,6 +2222,12 @@ const USER_KEY = "pmp-exam-latest-user-v1";
       }
       saveExamState();
       updateStats();
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && getActiveUser()) {
+        pullStatsFromServer();
+      }
     });
 
     initPager();

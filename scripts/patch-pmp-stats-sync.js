@@ -18,6 +18,7 @@ const SYNC_BLOCK = (quizId) => `    const ${MARKER} = true;
     const PMP_STATS_QUIZ_ID = "${quizId}";
     const PMP_STATS_API = "/api/pmp/stats";
     let statsSyncTimer = null;
+    let statsSyncFailed = false;
 
     function mergeStatsMaps(base, incoming) {
       const out = { ...(base || {}) };
@@ -72,14 +73,24 @@ const SYNC_BLOCK = (quizId) => `    const ${MARKER} = true;
       }, 500);
     }
 
-    async function pullStatsFromServer() {
+    async function pullStatsFromServer(retry = 0) {
       const user = getActiveUser();
-      if (!user) return;
+      if (!user) return false;
       try {
         const res = await fetch(
           \`\${PMP_STATS_API}?quiz=\${encodeURIComponent(PMP_STATS_QUIZ_ID)}&user=\${encodeURIComponent(user)}\`,
+          { cache: "no-store" },
         );
-        if (!res.ok) return;
+        if (!res.ok) {
+          if (retry < 2) {
+            await new Promise(r => setTimeout(r, 1000 * (retry + 1)));
+            return pullStatsFromServer(retry + 1);
+          }
+          statsSyncFailed = true;
+          updateStats();
+          return false;
+        }
+        statsSyncFailed = false;
         const data = await res.json();
         const merged = mergeStatsMaps(data.stats || {}, readLocalQuestionStats());
         writeLocalQuestionStats(merged);
@@ -89,12 +100,54 @@ const SYNC_BLOCK = (quizId) => `    const ${MARKER} = true;
           initPager();
           renderPage();
         }
+        return true;
       } catch (err) {
         console.warn("PMP stats pull failed", err);
+        if (retry < 2) {
+          await new Promise(r => setTimeout(r, 1000 * (retry + 1)));
+          return pullStatsFromServer(retry + 1);
+        }
+        statsSyncFailed = true;
+        updateStats();
+        return false;
       }
     }
 
 `;
+
+const BROKEN_COMPLETE = `    function completeUserEntry() {
+      setUserGateMode(false);
+      const afterSync = () => {
+        document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && getActiveUser()) {
+        pullStatsFromServer();
+      }
+    });
+
+    initPager();
+        renderPage();
+        updateStats();
+        if (userGatePendingMock) {
+          userGatePendingMock = false;
+          startMockExam(true);
+        }
+      };
+      pullStatsFromServer().finally(afterSync);
+    }`;
+
+const FIXED_COMPLETE = `    function completeUserEntry() {
+      setUserGateMode(false);
+      const afterSync = () => {
+        initPager();
+        renderPage();
+        updateStats();
+        if (userGatePendingMock) {
+          userGatePendingMock = false;
+          startMockExam(true);
+        }
+      };
+      pullStatsFromServer().finally(afterSync);
+    }`;
 
 for (const { file, quizId } of FILES) {
   if (!fs.existsSync(file)) {
@@ -104,8 +157,27 @@ for (const { file, quizId } of FILES) {
 
   let html = fs.readFileSync(file, "utf8").replace(/\r\n/g, "\n");
 
+  if (html.includes(BROKEN_COMPLETE)) {
+    html = html.replace(BROKEN_COMPLETE, FIXED_COMPLETE);
+  }
+
+  if (!html.includes('document.addEventListener("visibilitychange"')) {
+    html = html.replace(
+      "    initPager();\n    loadHighlights();",
+      `    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && getActiveUser()) {
+        pullStatsFromServer();
+      }
+    });
+
+    initPager();
+    loadHighlights();`,
+    );
+  }
+
   if (html.includes(MARKER)) {
-    console.log("Already patched:", path.basename(file));
+    fs.writeFileSync(file, html);
+    console.log("Repaired:", path.basename(file));
     continue;
   }
 
@@ -152,24 +224,14 @@ for (const { file, quizId } of FILES) {
       }
     }`;
 
-  const completeNew = `    function completeUserEntry() {
-      setUserGateMode(false);
-      const afterSync = () => {
-        initPager();
-        renderPage();
-        updateStats();
-        if (userGatePendingMock) {
-          userGatePendingMock = false;
-          startMockExam(true);
-        }
-      };
-      pullStatsFromServer().finally(afterSync);
-    }`;
+  const completeNew = FIXED_COMPLETE;
 
-  if (!html.includes(completeOld)) {
+  if (!html.includes(completeOld) && !html.includes(FIXED_COMPLETE)) {
     throw new Error(`completeUserEntry not found in ${file}`);
   }
-  html = html.replace(completeOld, completeNew);
+  if (html.includes(completeOld)) {
+    html = html.replace(completeOld, completeNew);
+  }
 
   const initOld = `    if (existingUser) {
       if (!state.user) saveUser(existingUser);
@@ -199,16 +261,27 @@ for (const { file, quizId } of FILES) {
   }
   html = html.replace(initOld, initNew);
 
-  const visibilityHook = `    document.addEventListener("visibilitychange", () => {
+  if (!html.includes('document.addEventListener("visibilitychange"')) {
+    html = html.replace(
+      "    initPager();\n    loadHighlights();",
+      `    document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible" && getActiveUser()) {
         pullStatsFromServer();
       }
     });
 
-    initPager();`;
+    initPager();
+    loadHighlights();`,
+    );
+  }
 
-  if (!html.includes('document.addEventListener("visibilitychange"')) {
-    html = html.replace("    initPager();", visibilityHook);
+  const statsLineOld = `        text += \` · Câu đã sai: \${wrongCount}\`;
+        if (state.filterWrongOnly) text += " · Sắp xếp: sai nhiều → ít";`;
+  const statsLineNew = `        text += \` · Câu đã sai: \${wrongCount}\`;
+        if (statsSyncFailed) text += " · Chưa đồng bộ server";
+        if (state.filterWrongOnly) text += " · Sắp xếp: sai nhiều → ít";`;
+  if (html.includes(statsLineOld)) {
+    html = html.replace(statsLineOld, statsLineNew);
   }
 
   fs.writeFileSync(file, html);
