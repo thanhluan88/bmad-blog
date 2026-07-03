@@ -4,10 +4,20 @@ import { MarkdownBody } from "@/components/MarkdownBody";
 import { PmpQuizEmbed } from "@/components/PmpQuizEmbed";
 import { PostCover } from "@/components/PostCover";
 import { db } from "@/lib/db";
-import { PMP_QUIZ_SLUG } from "@/lib/pmp-quiz";
+import {
+  getPmpQuizHtmlPath,
+  isPmpQuizSlug,
+  PMP_EXAM_LATEST_SLUG,
+  PMP_QUIZ_SLUG,
+} from "@/lib/pmp-quiz";
 
 type Props = {
   params: Promise<{ slug: string }>;
+};
+
+const QUIZ_TITLES: Record<string, string> = {
+  [PMP_QUIZ_SLUG]: "PMP Full Questions",
+  [PMP_EXAM_LATEST_SLUG]: "PMP Exam Latest",
 };
 
 export default async function PublicPostPage({ params }: Props) {
@@ -23,12 +33,14 @@ export default async function PublicPostPage({ params }: Props) {
   }
 
   const coverUrl = post.coverImageUrl?.trim();
-  const isPmpQuiz = slug === PMP_QUIZ_SLUG;
 
-  if (isPmpQuiz) {
+  if (isPmpQuizSlug(slug)) {
     return (
       <ChromeAwarePageFrame variant="quiz">
-        <PmpQuizEmbed />
+        <PmpQuizEmbed
+          htmlPath={getPmpQuizHtmlPath(slug)}
+          title={QUIZ_TITLES[slug] ?? post.title}
+        />
       </ChromeAwarePageFrame>
     );
   }
