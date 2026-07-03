@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ブログ",
-  description: "シンプルなブログ",
+  title: "Thanh Luan Blog",
+  description: "Ghi chép cá nhân và luyện thi PMP",
 };
 
 export default function RootLayout({

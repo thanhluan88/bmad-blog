@@ -41,16 +41,14 @@ function UserGate({
     <div className="flex min-h-[50vh] flex-1 items-center justify-center p-6">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md rounded-xl border border-amber-200/80 bg-white p-6 shadow-sm dark:border-amber-800/50 dark:bg-zinc-900"
+        className="w-full max-w-md rounded-2xl border border-border bg-surface p-6 shadow-sm"
       >
-        <h2 className="text-xl font-semibold text-amber-900 dark:text-amber-100">
-          {title}
-        </h2>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-          Nhập tên người dùng để vào luyện tập PMP. Thống kê và ôn câu sai được
-          lưu riêng theo từng người.
+        <h2 className="text-xl font-semibold tracking-tight text-foreground">{title}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted">
+          Nhập tên người dùng để vào luyện tập PMP. Thống kê và ôn câu sai được lưu riêng
+          theo từng người và đồng bộ giữa các thiết bị.
         </p>
-        <label className="mt-4 block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+        <label className="mt-5 block text-sm font-medium text-foreground">
           Tên người dùng
           <input
             type="text"
@@ -58,12 +56,12 @@ function UserGate({
             onChange={(e) => setName(e.target.value)}
             placeholder="Ví dụ: thanh_luan"
             autoFocus
-            className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-base dark:border-zinc-600 dark:bg-zinc-800"
+            className="mt-2 w-full rounded-xl border border-border bg-background px-3 py-2.5 text-base text-foreground outline-none ring-ring focus:border-accent focus:ring-2"
           />
         </label>
         <button
           type="submit"
-          className="mt-4 w-full rounded-lg bg-amber-600 px-4 py-2.5 font-medium text-white hover:bg-amber-700"
+          className="mt-5 w-full rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-hover active:scale-[0.98]"
         >
           Vào luyện tập
         </button>
@@ -109,7 +107,7 @@ export function PmpQuizEmbed({ htmlPath, title }: Props) {
   }
 
   return (
-    <div className="flex max-md:min-h-[calc(100dvh-4.5rem)] flex-1 flex-col overflow-hidden md:rounded-xl md:border-2 md:border-amber-200/70 md:shadow-sm dark:md:border-amber-800/50">
+    <div className="flex max-md:min-h-[calc(100dvh-4.5rem)] flex-1 flex-col overflow-hidden md:rounded-2xl md:border md:border-border">
       <iframe
         key={iframeSrc}
         src={iframeSrc}

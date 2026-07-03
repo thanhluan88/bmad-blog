@@ -8,7 +8,7 @@ export function HeaderMenuButton() {
 
   return (
     <div
-      className="relative z-[16] flex shrink-0 items-center self-start md:hidden"
+      className="relative z-[16] flex shrink-0 items-center md:hidden"
       onMouseEnter={showMenu}
       onMouseLeave={hideMenu}
     >
@@ -25,15 +25,16 @@ export function HeaderMenuButton() {
             return next;
           });
         }}
-        className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-amber-900/40 bg-amber-50/95 shadow-md transition-colors hover:bg-amber-100/95 dark:border-amber-700/50 dark:bg-amber-950/95 dark:hover:bg-amber-900/95"
+        className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface text-foreground transition-colors hover:border-accent hover:text-accent active:scale-[0.98]"
         aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
       >
         {isOpen ? (
           <svg
-            className="h-5 w-5 text-amber-900 dark:text-amber-200"
+            className="h-5 w-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden
           >
             <path
               strokeLinecap="round"
@@ -43,11 +44,8 @@ export function HeaderMenuButton() {
             />
           </svg>
         ) : (
-          <span
-            className="text-xl font-semibold leading-none text-amber-900 dark:text-amber-200 [font-family:ui-sans-serif,system-ui,'Segoe_UI','Yu_Gothic_UI','Meiryo','Hiragino_Sans','PingFang_SC',sans-serif]"
-            aria-hidden
-          >
-            三
+          <span className="text-lg font-semibold leading-none" aria-hidden>
+            ≡
           </span>
         )}
       </button>

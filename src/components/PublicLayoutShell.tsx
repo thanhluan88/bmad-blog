@@ -7,7 +7,7 @@ export function PublicLayoutShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className={`flex flex-col bg-amber-50/50 dark:bg-amber-950/30 ${
+      className={`flex flex-col bg-background ${
         chromeVisible ? "min-h-screen" : "h-[100dvh] overflow-hidden"
       }`}
     >

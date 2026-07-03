@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { ChromeAwarePageFrame } from "@/components/ChromeAwarePageFrame";
 import { MarkdownBody } from "@/components/MarkdownBody";
 import { PmpQuizEmbed } from "@/components/PmpQuizEmbed";
-import { PmpQuizPicker } from "@/components/PmpQuizPicker";
+import { PmpHubHero, PmpQuizPicker } from "@/components/PmpQuizPicker";
 import { PostCover } from "@/components/PostCover";
 import { db } from "@/lib/db";
 import {
@@ -42,19 +42,17 @@ export default async function PublicPostPage({ params }: Props) {
 
   if (slug === PMP_HUB_SLUG) {
     return (
-      <ChromeAwarePageFrame>
+      <ChromeAwarePageFrame variant="wide">
         <article>
           {coverUrl && (
             <PostCover coverImageUrl={coverUrl} alt={post.title || "カバー"} />
           )}
-          <h1 className="text-3xl font-bold text-amber-900 dark:text-amber-100">
-            {post.title}
-          </h1>
-          <div className="mt-8">
+          <PmpHubHero />
+          <div className="animate-rise-in border-t border-border pt-10">
             <MarkdownBody content={post.contentMd} />
           </div>
-          <div className="mt-10 border-t border-amber-200/80 pt-8 dark:border-amber-800/50">
-            <PmpQuizPicker />
+          <div id="chon-bo-de" className="animate-rise-in mt-14 border-t border-border pt-10">
+            <PmpQuizPicker showIntro={false} />
           </div>
         </article>
       </ChromeAwarePageFrame>
@@ -74,11 +72,11 @@ export default async function PublicPostPage({ params }: Props) {
 
   return (
     <ChromeAwarePageFrame>
-      <article>
+      <article className="animate-rise-in">
         {coverUrl && (
           <PostCover coverImageUrl={coverUrl} alt={post.title || "カバー"} />
         )}
-        <h1 className="text-3xl font-bold text-amber-900 dark:text-amber-100">
+        <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
           {post.title}
         </h1>
         <div className="mt-8">
