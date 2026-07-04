@@ -12,6 +12,14 @@ const FILES = [
 ];
 
 const BLOCK = `${CSS_START}
+    .pmbok8-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin: 0 0 0.35rem;
+    }
     .pmbok8-badges {
       display: flex;
       flex-wrap: wrap;
@@ -58,6 +66,17 @@ const BLOCK = `${CSS_START}
       color: var(--primary-dark);
       margin: 0 0 0.5rem;
     }
+    .solution-lead {
+      margin: 0 0 0.65rem;
+      padding: 0.65rem 0.75rem;
+      border-radius: 8px;
+      background: #ecfdf5;
+      border-left: 4px solid var(--ok);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .solution-lead strong { color: #047857; }
     .mapping-grid {
       display: grid;
       grid-template-columns: 5.5rem 1fr;
@@ -75,10 +94,11 @@ const BLOCK = `${CSS_START}
       color: var(--text);
     }
     .solution-text {
-      margin: 0;
+      margin: 0 0 0.45rem;
       font-size: 0.94rem;
       line-height: 1.65;
     }
+    .solution-text:last-child { margin-bottom: 0; }
     .reject-list {
       display: flex;
       flex-direction: column;
@@ -139,7 +159,8 @@ const HELPERS = `${JS_START}
       if (p8.focusArea) {
         chips.push(\`<span class="pmbok8-badge focus">\${escapeHtml(p8.focusArea)}</span>\`);
       }
-      return chips.length ? \`<div class="pmbok8-badges">\${chips.join("")}</div>\` : "";
+      if (!chips.length) return "";
+      return \`<div class="pmbok8-label">PMBOK 8</div><div class="pmbok8-badges">\${chips.join("")}</div>\`;
     }
 
     function inlineFormat(text) {
@@ -165,13 +186,23 @@ const HELPERS = `${JS_START}
         .filter(Boolean)
         .map(line => {
           const m = line.match(/^([^:]+):\\s*(.+)$/);
-          if (!m) return \`<dd>\${inlineFormat(line)}</dd>\`;
+          if (!m) return "";
           const key = m[1].trim().toLowerCase();
           const label = labels[key] || m[1].trim();
           return \`<dt>\${escapeHtml(label)}</dt><dd>\${inlineFormat(m[2].trim())}</dd>\`;
         })
+        .filter(Boolean)
         .join("");
-      return \`<dl class="mapping-grid">\${rows}</dl>\`;
+      return rows ? \`<dl class="mapping-grid">\${rows}</dl>\` : "";
+    }
+
+    function renderWhyBody(lines) {
+      return lines.map(line => {
+        if (/^→/.test(line)) {
+          return \`<div class="solution-lead">\${inlineFormat(line.replace(/^→\\s*/, ""))}</div>\`;
+        }
+        return \`<p class="solution-text">\${inlineFormat(line)}</p>\`;
+      }).join("");
     }
 
     function renderRejectList(lines) {
@@ -225,11 +256,12 @@ const HELPERS = `${JS_START}
           : "";
         let body = "";
         if (cls === "mapping") body = renderMappingList(section.lines);
+        else if (cls === "why") body = renderWhyBody(section.lines);
         else if (cls === "reject") body = renderRejectList(section.lines);
         else if (cls === "refs") body = renderRefList(section.lines);
         else body = section.lines.map(line => \`<p class="solution-text">\${inlineFormat(line)}</p>\`).join("");
-        const cardCls = cls ? \` solution-card \${cls}\` : " solution-card";
-        return \`<section class="\${cardCls.trim()}">\${title}\${body}</section>\`;
+        const cardCls = cls ? \`solution-card \${cls}\` : "solution-card";
+        return \`<section class="\${cardCls}">\${title}\${body}</section>\`;
       }).join("");
     }
 
@@ -251,8 +283,23 @@ function stripOldPmbok8Blocks(html) {
     "",
   );
   html = html.replace(
-    /\.pmbok8-badges \{[\s\S]*?\.result \.solution p:last-child \{\n      margin-bottom: 0;\n    \}\n/g,
+    /\.pmbok8-badges \{[\s\S]*?\.solution-card a \{[\s\S]*?word-break: break-word;\n    \}\n/g,
     "",
+  );
+  return html;
+}
+
+function patchHighlightFix(html) {
+  const oldApply = `    function applyStoredHighlights(el) {
+      if (!el) return;`;
+  const newApply = `    function applyStoredHighlights(el) {
+      if (!el || el.dataset.field === "solution") return;`;
+  if (html.includes(oldApply)) {
+    html = html.replace(oldApply, newApply);
+  }
+  html = html.replace(
+    `<div class="solution highlightable" data-qid="\${q.id}" data-field="solution">\${renderSolution(q)}</div>`,
+    `<div class="solution" data-qid="\${q.id}" data-field="solution">\${renderSolution(q)}</div>`,
   );
   return html;
 }
@@ -270,9 +317,7 @@ function patchFile(filePath) {
   if (!html.includes(cssAnchor)) {
     throw new Error(`solution CSS anchor not found in ${filePath}`);
   }
-  if (!html.includes(CSS_START)) {
-    html = html.replace(cssAnchor, `${cssAnchor}\n${BLOCK}`);
-  }
+  html = html.replace(cssAnchor, `${cssAnchor}\n${BLOCK}`);
 
   const fnAnchor = "    function escapeHtml(s) {";
   if (!html.includes(fnAnchor)) {
@@ -281,12 +326,14 @@ function patchFile(filePath) {
   html = html.replace(fnAnchor, `${HELPERS}${fnAnchor}`);
 
   const oldSolution = `<div class="solution highlightable" data-qid="\${q.id}" data-field="solution">\${escapeHtml(q.explanation)}</div>`;
-  const newSolution = `<div class="solution highlightable" data-qid="\${q.id}" data-field="solution">\${renderSolution(q)}</div>`;
+  const newSolution = `<div class="solution" data-qid="\${q.id}" data-field="solution">\${renderSolution(q)}</div>`;
   if (html.includes(oldSolution)) {
     html = html.replace(oldSolution, newSolution);
-  } else if (!html.includes("renderSolution(q)")) {
+  } else if (!html.includes("renderSolution(q)}</div>")) {
     throw new Error(`renderQuestion solution anchor not found in ${filePath}`);
   }
+
+  html = patchHighlightFix(html);
 
   fs.writeFileSync(filePath, html);
   console.log("Patched PMBOK8 display:", path.basename(filePath));

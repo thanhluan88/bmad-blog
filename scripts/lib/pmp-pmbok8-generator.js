@@ -89,31 +89,37 @@ function hasRichOriginalExplanation(q) {
   return exp.length > 120;
 }
 
+function buildSummaryLine(q, correctKeys, scenario, domains) {
+  if (scenario?.summaryLine) return scenario.summaryLine;
+  const correctOpts = (q.options || []).filter((o) => correctKeys.includes(o.key));
+  const action = (correctOpts[0]?.text || q.correctLabel || "").replace(/\s+/g, " ").trim();
+  const short = action.length > 100 ? `${action.slice(0, 97)}…` : action;
+  return `Đáp án này phù hợp vì hành động "${short}" align với miền ${domains.join(", ")} theo PMBOK 8.`;
+}
+
 function buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue) {
   const correctOpts = (q.options || []).filter((o) => correctKeys.includes(o.key));
   const correctText = correctOpts.map((o) => o.text).join(" · ") || q.correctLabel || q.correct;
 
   if (scenario) {
     let text = scenario.whyCorrect;
-    text += ` Đáp án **${correctKeys.join(", ")}** — "${correctText}" — phản ánh đúng hành vi PM được PMBOK 8 khuyến nghị.`;
     if (priorityCue === "FIRST" || priorityCue === "NEXT") {
-      text += ` Câu hỏi hỏi hành động **${priorityCue}** — đây là bước ưu tiên trước ghi nhận, leo thang, hoặc thay đổi baseline.`;
+      text += ` Câu hỏi hỏi **${priorityCue}** — đây là bước ưu tiên trước ghi nhận, leo thang, hoặc thay đổi baseline.`;
     }
     return text;
   }
 
   const domainStr = domains.join(" + ");
-  let text =
-    `Theo PMBOK 8 (miền ${domainStr}, Focus Area: ${focusArea}), PM cần hành động phù hợp bối cảnh: ${summarizeStem(q.text, 100)}. `;
-  text += `Đáp án **${correctKeys.join(", ")}** — "${correctText}" — là lựa chọn phù hợp vì align với quy trình và artifact của miền liên quan. `;
+  let text = `Bối cảnh: ${summarizeStem(q.text, 120)}. `;
+  text += `Theo PMBOK 8 (miền ${domainStr}, Focus Area: ${focusArea}), "${correctText}" là hành động phù hợp nhất. `;
 
   if (isAgileContext(q.text)) {
     text +=
-      "Trong ngữ cảnh Agile/Hybrid, PMBOK 8 nhấn mạnh Build an empowered culture và Focus on value thay vì kiểm soát cứng nhắc.";
+      "Trong Agile/Hybrid, PMBOK 8 nhấn mạnh Build an empowered culture và Focus on value thay vì kiểm soát cứng nhắc.";
   } else if (priorityCue === "FIRST" || priorityCue === "NEXT") {
-    text += `Với câu hỏi **${priorityCue}**, chọn hành động tác động trực tiếp tình huống trước các bước documentation hoặc thay đổi kế hoạch dài hạn.`;
+    text += `Với câu hỏi **${priorityCue}**, ưu tiên hành động xử lý trực tiếp trước documentation hoặc thay đổi baseline.`;
   } else {
-    text += "PMI ưu tiên giải quyết có hệ thống dựa trên plan/artifact hiện có thay vì phản ứng tùy hứng.";
+    text += "PMI ưu tiên giải quyết có hệ thống dựa trên plan/artifact hiện có.";
   }
 
   return text;
@@ -216,6 +222,8 @@ function buildMcqExplanation(q, options = {}) {
   lines.push(`- Nguyên tắc: ${principles.join(", ")}`);
   lines.push("");
   lines.push("**Vì sao chọn đáp án này**");
+  lines.push(`→ **${correctKeys.join(", ")}:** ${buildSummaryLine(q, correctKeys, scenario, domains)}`);
+  lines.push("");
   lines.push(buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue));
   lines.push("");
   lines.push("**Loại trừ phương án khác**");

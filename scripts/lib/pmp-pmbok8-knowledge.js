@@ -113,7 +113,7 @@ const WRONG_OPTION_PATTERNS = [
     priorityOnly: true,
   },
   {
-    re: /direct(?:ed|ing)? (?:the )?team|tell (?:the )?team|order|command|mandate/i,
+    re: /\bdirect(?:ed|ing)? (?:the )?team\b|\btell (?:the )?team\b|\bcommand\b|\bmandate\b/i,
     reason:
       "Trong môi trường Agile/Hybrid, PMBOK 8 khuyến khích Build an empowered culture — PM định hướng và loại bỏ impediment, không micromanage giải pháp.",
     agileContext: true,
@@ -148,6 +148,22 @@ const WRONG_OPTION_PATTERNS = [
     re: /sponsor approval for all change/i,
     reason:
       "Yêu cầu sponsor duyệt mọi change request làm chậm delivery; governance cân bằng kiểm soát và tốc độ thích hợp với phương pháp.",
+  },
+  {
+    re: /incentive|reward.*fix|bonus.*bug/i,
+    reason:
+      "Khuyến khích bằng incentive có thể tạo hành vi lệch (sửa bug để được thưởng) thay vì cải thiện hệ thống và root cause thực sự.",
+  },
+  {
+    re: /external consult|consultancy|outsource|third.?party.*(test|quality)/i,
+    reason:
+      "Thuê bên ngoài giải quyết triệt chứng không thay thế cải thiện nội bộ qua team ceremony (retrospective) và nguyên tắc Embed quality.",
+  },
+  {
+    re: /evaluate the skill|skill set|technical gap|looking for.*gap/i,
+    reason:
+      "Tập trung đánh giá skill cá nhân thay vì phân tích systemic root cause — trong Agile, retrospective hiệu quả hơn để team tự cải thiện.",
+    agileContext: true,
   },
 ];
 
@@ -227,9 +243,26 @@ const SCENARIO_RULES = [
     principles: ["Focus on value", "Adopt a holistic view"],
   },
   {
+    id: "agile_retrospective_quality",
+    match: (q) =>
+      (/retrospective|root cause|bugs|defect|quality problem/i.test(q.text) ||
+        /feedback.*bug|many bugs|poor quality/i.test(q.text)) &&
+      /agile|release|version|iteration|software/i.test(q.text),
+    summaryLine:
+      "Sau release bị phàn nàn về bug/chất lượng, team Agile cần retrospective để phân tích root cause và cải thiện quy trình — không thuê ngoài, không incentive lệch, không đánh giá skill cá nhân.",
+    whyCorrect:
+      "PMBOK 8 (Embed quality + Build empowered culture) khuyến khích continuous improvement. PM facilitate retrospective để team tự phân tích nguyên nhân gốc và đề xuất giải pháp bền vững.",
+    domains: ["Resources", "Scope"],
+    focusArea: "Executing",
+    processes: ["Develop Team", "Manage Team", "Validate Scope"],
+    principles: ["Embed quality", "Build an empowered culture"],
+  },
+  {
     id: "vision_communication",
     match: (q) =>
-      /vision|sprint goal|product owner.*expectation|retrospective/i.test(q.text),
+      (/vision|sprint goal|product owner.*expectation/i.test(q.text) ||
+        (/retrospective/i.test(q.text) && /expectation|vision|goal|communicat/i.test(q.text))) &&
+      !/bugs|defect|quality problem|root cause|many bugs/i.test(q.text),
     whyCorrect:
       "PM/leader phải communicate project vision và sprint goals rõ ràng để team alignment. Miền Stakeholders + Resources — shared understanding là nền tảng delivery hiệu quả.",
     domains: ["Stakeholders", "Resources"],
