@@ -8,6 +8,7 @@ const ACTION_TYPES = [
   { id: "micromanage_control", label: "micromanage / giám sát cứng", re: /micromanag|under the supervision of the project manager|deploy.*staff under|command and control/i },
   { id: "add_to_register", label: "bổ sung register và reevaluate", re: /add.*(?:to )?(?:the )?(?:risk|issue) register|update.*register.*reevaluat|reevaluate.*register|enter.*(?:risk|issue) register/i },
   { id: "confirm_completed", label: "xác nhận đã hoàn thành (không xử lý mới)", re: /confirm.*(?:has been )?(?:completed|validated|approved)|already been completed|register has been completed/i },
+  { id: "update_stakeholder_comms", label: "phân tích stakeholder và cập nhật kế hoạch truyền thông", re: /stakeholder analysis|update the (?:communications|stakeholder engagement) (?:management )?plan|communications management plan to reflect|update.*stakeholder engagement plan/i },
   { id: "consult_artifact", label: "tham chiếu artifact / kế hoạch đã có", re: /consult.*(?:register|plan|log)|review the (?:risk|issue|change|project management plan|charter|backlog)|refer to the|check the (?:risk|issue|plan|register)|risk register for|issue log|change log|project charter|business case|requirements traceability matrix|traceability matrix/i },
   { id: "revise_plan", label: "sửa kế hoạch / baseline / schedule", re: /revise.*plan|update the (?:project management plan|schedule|baseline|timeline)|rebaseline|move the task|adjust the (?:schedule|plan|timeline)|crash|fast.?track/i },
   { id: "develop_solution", label: "cùng phát triển giải pháp / collaborate", re: /develop a solution|work together|jointly develop|collaborate.*solution|co-create|brainstorm.*solution/i },
@@ -58,11 +59,28 @@ const STEM_ISSUES = [
   { id: "new_team", re: /newly formed|new team|just formed|recently assembled|forming stage|team is new/i, label: "team mới hình thành" },
   { id: "virtual_team", re: /virtual|remote|distributed|different (?:countries|time zones)|geographically/i, label: "team phân tán / virtual" },
   { id: "agile_context", re: /agile|scrum|sprint|iteration|backlog|product owner|scrum master|kanban/i, label: "ngữ cảnh Agile/Scrum" },
+  { id: "new_stakeholder", re: /new department|new stakeholder|requested to be involved|wants to be included|reporting cycles|join.*communication|be involved in.*communication/i, label: "stakeholder/phòng ban mới muốn tham gia truyền thông dự án" },
   { id: "ethics_compliance", re: /ethic|integrity|compliance|regulation|legal|policy violation|unethical/i, label: "đạo đức / tuân thủ" },
   { id: "uncertainty", re: /uncertain|unclear|ambigu|unknown|volatile|innovation|highly dynamic/i, label: "mức độ uncertainty cao" },
 ];
 
 const STEM_PROFILES = [
+  {
+    id: "new_stakeholder",
+    re: /new department|new stakeholder|requested to be involved|reporting cycles|be involved in.*communication/i,
+    domains: ["Stakeholders"],
+    principles: ["Lead accountably"],
+    processes: ["Identify Stakeholders", "Plan Stakeholder Engagement", "Manage Stakeholder Engagement"],
+    summaryHint: "Stakeholder/phòng ban mới — phân tích stakeholder và cập nhật communications plan; không thêm ad hoc hay từ chối cứng.",
+    whyCorrect: "Stakeholder mới xuất hiện giữa chừng Executing — PM phải perform stakeholder analysis, xác định nhu cầu thông tin/báo cáo, rồi update communications management plan cho phù hợp.",
+    rejectByAction: {
+      ask_team_act: "Đẩy team tự thêm manager vào email — thiếu kiểm soát; PM phải cập nhật plan truyền thông chính thức.",
+      inform_one_way: "Từ chối stakeholder vì chưa có trong plan cũ — sai; plan cần được cập nhật khi có stakeholder mới.",
+      escalate: "Đẩy sang steering committee/PMO — PM vẫn chịu trách nhiệm stakeholder analysis và update plan.",
+      communicate_inform: "Thông báo một chiều không thay cho phân tích stakeholder và cập nhật plan.",
+    },
+    preferCorrect: ["update_stakeholder_comms"],
+  },
   {
     id: "member_struggle",
     re: /overwhelmed|struggling|not happy|unhappy|having difficulty|difficulty delivering|burned out|demotivat|underperform|complexity of the tasks/i,
@@ -283,6 +301,11 @@ const CONTRAST_MATRIX = {
     direct_command: "Micromanage thay vì trao quyền team tự quyết.",
     shift_responsibility: "PM không remove impediment mà đẩy trách nhiệm.",
   },
+  update_stakeholder_comms: {
+    ask_team_act: "Đẩy team tự thêm stakeholder vào truyền thông — thiếu governance; PM phải update plan chính thức.",
+    inform_one_way: "Từ chối stakeholder mới vì chưa có trong plan cũ — plan phải được cập nhật.",
+    escalate: "Leo thang PMO/steering committee — PM vẫn phải phân tích stakeholder trước.",
+  },
   set_expectations: {
     micromanage_control: "Micromanage contractor thay vì set expectations và thống nhất requirements.",
     direct_command: "Command & control vendor — không phải cách quản lý contractor hiệu quả.",
@@ -341,8 +364,9 @@ function contrastRejection(wrongType, correctType, stemProfile, stemIssues, wron
   if (correctType && CONTRAST_MATRIX[correctType.id]?.[wrongType.id]) {
     return CONTRAST_MATRIX[correctType.id][wrongType.id];
   }
-  const issueLabel = stemIssues[0]?.label || "tình huống trong đề bài";
-  return `Tập trung "${wrongType.label}" không giải quyết ${issueLabel} — đáp án đúng cần "${correctType?.label || "hành động phù hợp hơn"}".`;
+  const issueLabel = stemIssues[0]?.label || describeStemSituation({ text: wrongText }, stemIssues, stemProfile);
+  const correctLabel = correctType?.label || "xử lý trực tiếp trọng tâm câu hỏi";
+  return `Tập trung "${wrongType.label}" không giải quyết ${issueLabel} — đáp án đúng cần ${correctLabel}.`;
 }
 
 function differentiateSameGroupRejection(opt, correctOpt, actionType, q, stemIssues) {
@@ -565,43 +589,143 @@ function inferPriorityRejection(opt, q, correctKeys, priorityCue) {
   return null;
 }
 
-function buildContextualSummary(q, correctKeys, correctType, stemProfile, stemIssues, domains) {
-  if (stemProfile?.summaryHint) return stemProfile.summaryHint;
-  const correctOpt = (q.options || []).find((o) => correctKeys.includes(o.key));
-  const action = (correctOpt?.text || "").replace(/\s+/g, " ").trim();
-  const short = action.length > 85 ? `${action.slice(0, 82)}…` : action;
-  const issue = stemIssues[0]?.label;
+function normalizeText(text) {
+  return String(text || "").replace(/\s+/g, " ").trim();
+}
 
-  if (issue && correctType) {
-    return `Với ${issue}, PM nên ${correctType.label} — "${short}" (miền ${domains.join(", ")}, PMBOK 8).`;
+function describeStemSituation(q, stemIssues, stemProfile) {
+  if (stemProfile?.whyCorrect) {
+    const label = stemIssues[0]?.label || stemProfile.summaryHint?.split("—")[0]?.trim();
+    if (label) return label;
+  }
+  if (stemIssues[0]) return stemIssues[0].label;
+  if (stemProfile?.summaryHint) return stemProfile.summaryHint.split("—")[0].trim();
+
+  const stem = normalizeText(q.text);
+  const questionStart = stem.search(
+    /\b(What should|What is|Which|How should|Who should|What would|What could|What must|What needs|What are|When should|Where should|Why should|During what|The project manager should|The best|Is this|Are these|Does the|Should the|Can the|Will the|Has the|Have the|Did the)\b/i,
+  );
+  const context = questionStart > 20 ? stem.slice(0, questionStart).trim() : stem.replace(/\?\s*$/, "");
+  return context.endsWith(".") ? context : `${context}.`;
+}
+
+const ACTION_RATIONALES = {
+  update_stakeholder_comms: (_stem, _opt, domains) =>
+    `Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền ${domains.join(" + ")}).`,
+  consult_artifact: (_stem, opt) =>
+    `PM tra artifact/plan đã có (${opt.includes("traceability") ? "RTM" : opt.includes("risk register") ? "risk register" : "tài liệu dự án"}) để quyết định có căn cứ, không phản ứng tùy hứng.`,
+  set_expectations: () =>
+    "PM set expectations và thống nhất requirements trước — nền tảng collaboration, tránh hiểu lệch sau này.",
+  stakeholder_engagement: () =>
+    "PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.",
+  meet_discuss: () =>
+    "PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay escalate.",
+  develop_solution: () =>
+    "PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.",
+  listen_support: () =>
+    "Member/stakeholder cần được lắng nghe và hỗ trợ cụ thể trước — servant leadership, Build an empowered culture.",
+  apologize_accountable: () =>
+    "PM thừa nhận lỗi và xin lỗi minh bạch — Lead accountably, giữ tin tưởng stakeholder.",
+  change_control: () =>
+    "Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.",
+  facilitate_retro: () =>
+    "Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân.",
+  define_mvp: () =>
+    "Kick-off sản phẩm mới — define MVP trước để Focus on value, tránh commit toàn bộ roadmap quá sớm.",
+  prioritize_value: () =>
+    "PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.",
+  add_to_register: () =>
+    "Ghi nhận risk/issue mới vào register và reevaluate với team — quản trị rủi ro có hệ thống.",
+  allow_empower: () =>
+    "PM trao quyền team tự quyết trong phạm vi phù hợp — Build an empowered culture.",
+  coach_develop: () =>
+    "PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.",
+  evaluate_individual: () =>
+    "Đánh giá skill gap/root cause trước khi thay thế — hiểu nguyên nhân trước khi hành động.",
+  ensure_compliance: () =>
+    "PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.",
+  vendor_procurement: () =>
+    "Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.",
+  escalate: () =>
+    "Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.",
+  document_first: () =>
+    "Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.",
+  quality_embed: () =>
+    "Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.",
+  work_with_party: () =>
+    "PM phối hợp trực tiếp với bên liên quan để giải quyết vấn đề — collaboration thay vì chỉ đạo một chiều.",
+};
+
+function buildRationaleFromOptionText(optText, stem, domains, focusArea, correctType) {
+  const t = optText.toLowerCase();
+  const domainStr = domains.join(" + ");
+
+  if (/stakeholder analysis.*update.*communication|update the communications management plan/i.test(t)) {
+    return ACTION_RATIONALES.update_stakeholder_comms(stem, optText, domains);
+  }
+  if (/perform a stakeholder analysis|conduct a stakeholder analysis/i.test(t)) {
+    return "PM phân tích stakeholder trước khi điều chỉnh engagement/truyền thông — quyết định dựa trên nhu cầu thực tế, không giả định.";
+  }
+  if (/refer to the requirements traceability matrix|requirements traceability matrix/i.test(t)) {
+    return "RTM giúp truy vết requirement cụ thể và phân tích gap — chính xác hơn thảo luận chung chung.";
+  }
+  if (/consult the risk register|risk register for/i.test(t)) {
+    return "Risk đã identify — PM consult risk register và thực thi planned response thay vì phản ứng ngẫu nhiên.";
+  }
+  if (/facilitate|workshop|brainstorm/i.test(t)) {
+    return "PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.";
+  }
+  if (/evaluate the impact|assess the impact|analyze the impact/i.test(t)) {
+    return "Trước khi đồng ý thay đổi, PM đánh giá impact lên scope/schedule/cost/risk — không quyết định mù quáng.";
+  }
+  if (/change request|submit.*change|integrated change control/i.test(t)) {
+    return ACTION_RATIONALES.change_control(stem, optText, domains);
+  }
+  if (/minimum viable product|\bmvp\b/i.test(t)) {
+    return ACTION_RATIONALES.define_mvp(stem, optText, domains);
+  }
+
+  if (correctType && ACTION_RATIONALES[correctType.id]) {
+    return ACTION_RATIONALES[correctType.id](stem, optText, domains, focusArea);
   }
   if (correctType) {
-    return `PM nên ${correctType.label}: "${short}" — phù hợp miền ${domains.join(", ")} (PMBOK 8).`;
+    return `PM ${correctType.label} để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền ${domainStr}, Focus Area ${focusArea} (PMBOK 8).`;
   }
-  return `"${short}" là hành động phù hợp nhất cho bối cảnh câu hỏi (miền ${domains.join(", ")}).`;
+  return `Hành động này giải quyết trực tiếp vấn đề trong đề — align miền ${domainStr} (${focusArea}, PMBOK 8).`;
+}
+
+function buildSpecificCorrectRationale(q, correctKeys, correctType, stemIssues, stemProfile, domains, focusArea) {
+  const correctOpt = (q.options || []).find((o) => correctKeys.includes(o.key));
+  const optText = normalizeText(correctOpt?.text || "");
+  const stem = normalizeText(q.text);
+
+  if (stemProfile?.whyCorrect) return stemProfile.whyCorrect;
+  return buildRationaleFromOptionText(optText, stem, domains, focusArea, correctType);
+}
+
+function buildContextualSummary(q, correctKeys, correctType, stemProfile, stemIssues, domains, focusArea) {
+  if (stemProfile?.summaryHint) return stemProfile.summaryHint;
+  return buildSpecificCorrectRationale(q, correctKeys, correctType, stemIssues, stemProfile, domains, focusArea);
 }
 
 function buildContextualWhy(q, correctKeys, correctType, stemProfile, stemIssues, domains, focusArea, priorityCue, agile) {
   const correctOpt = (q.options || []).find((o) => correctKeys.includes(o.key));
-  const stem = q.text.replace(/\s+/g, " ").trim();
-  const issue = stemIssues[0]?.label;
+  const optText = normalizeText(correctOpt?.text || "");
+  const situation = describeStemSituation(q, stemIssues, stemProfile);
+  const rationale = buildSpecificCorrectRationale(
+    q,
+    correctKeys,
+    correctType,
+    stemIssues,
+    stemProfile,
+    domains,
+    focusArea,
+  );
   const parts = [];
 
-  if (stemProfile) {
-    parts.push(
-      `Đáp án **${correctKeys.join(", ")}** đúng vì PM ${correctType?.label || "xử lý đúng trọng tâm"} — phù hợp miền ${domains.join(" + ")} (Focus Area: ${focusArea}).`,
-    );
-  } else if (issue && correctType) {
-    parts.push(`Bối cảnh: ${issue}.`);
-    parts.push(
-      `**${correctKeys.join(", ")}** chọn ${correctType.label} vì đây là cách PM xử lý trực tiếp vấn đề cốt lõi, align PMBOK 8 miền ${domains.join(" + ")}.`,
-    );
-  } else {
-    parts.push(`Bối cảnh: ${stem.slice(0, 140)}${stem.length > 140 ? "…" : ""}.`);
-    parts.push(
-      `**${correctKeys.join(", ")}** — "${(correctOpt?.text || "").slice(0, 90)}${(correctOpt?.text || "").length > 90 ? "…" : ""}" — hành động phù hợp nhất theo logic PMP/PMBOK 8.`,
-    );
-  }
+  const situationText = situation.endsWith(".") ? situation : `${situation}.`;
+  parts.push(`Bối cảnh: ${situationText}`);
+  parts.push(`Đáp án **${correctKeys.join(", ")}** — "${optText}" — phù hợp vì ${rationale}`);
 
   if (priorityCue === "FIRST" || priorityCue === "NEXT") {
     const priorityText = buildPriorityExplanation(q, correctKeys, priorityCue, stemIssues, stemProfile);

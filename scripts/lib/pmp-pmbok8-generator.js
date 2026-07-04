@@ -98,14 +98,14 @@ function hasRichOriginalExplanation(q) {
   return exp.length > 120;
 }
 
-function buildSummaryLine(q, correctKeys, scenario, domains) {
+function buildSummaryLine(q, correctKeys, scenario, domains, focusArea) {
   if (scenario?.summaryLine) return scenario.summaryLine;
   const correctType = classifyAction(
     (q.options || []).find((o) => correctKeys.includes(o.key))?.text || "",
   );
   const stemProfile = matchStemProfile(q.text);
   const stemIssues = extractStemIssues(q.text);
-  return buildContextualSummary(q, correctKeys, correctType, stemProfile, stemIssues, domains);
+  return buildContextualSummary(q, correctKeys, correctType, stemProfile, stemIssues, domains, focusArea);
 }
 
 function buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue, agile) {
@@ -230,7 +230,7 @@ function buildMcqExplanation(q, options = {}) {
   lines.push(`- Nguyên tắc: ${principles.join(", ")}`);
   lines.push("");
   lines.push("**Vì sao chọn đáp án này**");
-  lines.push(`→ **${correctKeys.join(", ")}:** ${buildSummaryLine(q, correctKeys, scenario, domains)}`);
+  lines.push(`→ **${correctKeys.join(", ")}:** ${buildSummaryLine(q, correctKeys, scenario, domains, focusArea)}`);
   lines.push("");
   lines.push(buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue, agile));
   lines.push("");
