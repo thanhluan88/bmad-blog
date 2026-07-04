@@ -9,6 +9,13 @@ const {
   WRONG_OPTION_PATTERNS,
   SCENARIO_RULES,
 } = require("./pmp-pmbok8-knowledge");
+const {
+  classifyAction,
+  matchStemProfile,
+  buildContextualSummary,
+  buildContextualWhy,
+  inferWrongReason,
+} = require("./pmp-option-reasoning");
 
 function parseCorrectKeys(correct) {
   const s = String(correct || "").trim().toUpperCase();
@@ -91,16 +98,14 @@ function hasRichOriginalExplanation(q) {
 
 function buildSummaryLine(q, correctKeys, scenario, domains) {
   if (scenario?.summaryLine) return scenario.summaryLine;
-  const correctOpts = (q.options || []).filter((o) => correctKeys.includes(o.key));
-  const action = (correctOpts[0]?.text || q.correctLabel || "").replace(/\s+/g, " ").trim();
-  const short = action.length > 100 ? `${action.slice(0, 97)}…` : action;
-  return `Đáp án này phù hợp vì hành động "${short}" align với miền ${domains.join(", ")} theo PMBOK 8.`;
+  const correctType = classifyAction(
+    (q.options || []).find((o) => correctKeys.includes(o.key))?.text || "",
+  );
+  const stemProfile = matchStemProfile(q.text);
+  return buildContextualSummary(q, correctKeys, correctType, stemProfile, domains);
 }
 
-function buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue) {
-  const correctOpts = (q.options || []).filter((o) => correctKeys.includes(o.key));
-  const correctText = correctOpts.map((o) => o.text).join(" · ") || q.correctLabel || q.correct;
-
+function buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue, agile) {
   if (scenario) {
     let text = scenario.whyCorrect;
     if (priorityCue === "FIRST" || priorityCue === "NEXT") {
@@ -109,25 +114,23 @@ function buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityC
     return text;
   }
 
-  const domainStr = domains.join(" + ");
-  let text = `Bối cảnh: ${summarizeStem(q.text, 120)}. `;
-  text += `Theo PMBOK 8 (miền ${domainStr}, Focus Area: ${focusArea}), "${correctText}" là hành động phù hợp nhất. `;
-
-  if (isAgileContext(q.text)) {
-    text +=
-      "Trong Agile/Hybrid, PMBOK 8 nhấn mạnh Build an empowered culture và Focus on value thay vì kiểm soát cứng nhắc.";
-  } else if (priorityCue === "FIRST" || priorityCue === "NEXT") {
-    text += `Với câu hỏi **${priorityCue}**, ưu tiên hành động xử lý trực tiếp trước documentation hoặc thay đổi baseline.`;
-  } else {
-    text += "PMI ưu tiên giải quyết có hệ thống dựa trên plan/artifact hiện có.";
-  }
-
-  return text;
+  const correctType = classifyAction(
+    (q.options || []).find((o) => correctKeys.includes(o.key))?.text || "",
+  );
+  const stemProfile = matchStemProfile(q.text);
+  return buildContextualWhy(
+    q,
+    correctKeys,
+    correctType,
+    stemProfile,
+    domains,
+    focusArea,
+    priorityCue,
+    agile,
+  );
 }
 
-function rejectWrongOption(opt, q, correctKeys, priorityCue, agile) {
-  if (correctKeys.includes(opt.key)) return null;
-
+function applyPatternRejection(opt, priorityCue, agile) {
   for (const pat of WRONG_OPTION_PATTERNS) {
     if (pat.priorityOnly && !priorityCue) continue;
     if (pat.agileContext && !agile) continue;
@@ -139,23 +142,12 @@ function rejectWrongOption(opt, q, correctKeys, priorityCue, agile) {
       return reason;
     }
   }
+  return null;
+}
 
-  const correctOpt = (q.options || []).find((o) => correctKeys.includes(o.key));
-  if (!correctOpt) {
-    return "Không align với best practice PMBOK 8 cho tình huống này.";
-  }
-
-  if (/plan|define|facilitat|consult|review|communicat|introduc|empower|consensus/i.test(correctOpt.text)) {
-    if (/ignore|wait|delay|without|disregard|assume/i.test(opt.text)) {
-      return "Thiếu chủ động và trách nhiệm — PM cần hành động rõ ràng thay vì trì hoãn hoặc bỏ qua.";
-    }
-  }
-
-  if (priorityCue && /update|document|log|report|lessons/i.test(opt.text)) {
-    return `Ghi nhận/cập nhật tài liệu quan trọng nhưng thường thực hiện sau hành động xử lý chính (câu hỏi hỏi ${priorityCue}).`;
-  }
-
-  return "Không phải hành động ưu tiên hoặc vi phạm logic PMP/PMBOK 8 cho bối cảnh câu hỏi.";
+function rejectWrongOption(opt, q, correctKeys, priorityCue, agile) {
+  if (correctKeys.includes(opt.key)) return null;
+  return inferWrongReason(opt, q, correctKeys, (o) => applyPatternRejection(o, priorityCue, agile));
 }
 
 function appendReferences(lines, domains) {
@@ -206,10 +198,11 @@ function buildMcqExplanation(q, options = {}) {
   const fullText = `${q.text} ${(q.options || []).map((o) => o.text).join(" ")}`;
   const originalExplanation = hasRichOriginalExplanation(q) ? q.explanation.replace(/\s+/g, " ").trim() : "";
   const scenario = matchScenario(q);
-  const domains = scenario?.domains || scoreDomains(fullText);
+  const stemProfile = matchStemProfile(q.text);
+  const domains = scenario?.domains || stemProfile?.domains || scoreDomains(fullText);
   const focusArea = scenario?.focusArea || detectFocusArea(q.text);
-  const processes = scenario?.processes || getProcesses(domains);
-  const principles = scenario?.principles || detectPrinciples(q.text);
+  const processes = scenario?.processes || stemProfile?.processes || getProcesses(domains);
+  const principles = scenario?.principles || stemProfile?.principles || detectPrinciples(q.text);
   const priorityCue = detectPriorityCue(q.text);
   const agile = isAgileContext(q.text);
   const correctKeys = parseCorrectKeys(q.correct);
@@ -224,7 +217,7 @@ function buildMcqExplanation(q, options = {}) {
   lines.push("**Vì sao chọn đáp án này**");
   lines.push(`→ **${correctKeys.join(", ")}:** ${buildSummaryLine(q, correctKeys, scenario, domains)}`);
   lines.push("");
-  lines.push(buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue));
+  lines.push(buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue, agile));
   lines.push("");
   lines.push("**Loại trừ phương án khác**");
 
