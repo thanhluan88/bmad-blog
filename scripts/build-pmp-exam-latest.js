@@ -3,6 +3,7 @@ const path = require("path");
 
 const MD_PATH = path.join(__dirname, "..", "PMP Exam - Lasted version 1.md");
 const SUPPLEMENTS_PATH = path.join(__dirname, "..", "data", "pmp-exam-latest-supplements.json");
+const PMBOK8_PATH = path.join(__dirname, "..", "data", "pmp-exam-latest-pmbok8-explanations.json");
 const TEMPLATE_PATH = path.join(__dirname, "..", "public", "pmp", "pmp-full-questions.html");
 const OUT_PATH = path.join(__dirname, "..", "public", "pmp", "pmp-exam-latest.html");
 const JSON_PATH = path.join(__dirname, "..", "public", "pmp", "pmp-exam-latest-questions.json");
@@ -230,7 +231,7 @@ function buildHtml(template, questions) {
 
   const dragCount = questions.filter((q) => q.type === "drag_drop").length;
   const subtitle =
-    `ExamTopics (Lasted version 1) — ${questions.length} câu (${dragCount} kéo-thả) — chọn đáp án rồi nhấn <strong>Kiểm tra</strong> để xem Đáp án đúng và Giải thích.`;
+    `ExamTopics (Lasted version 1) — ${questions.length} câu (${dragCount} kéo-thả) — giải thích theo <strong>PMBOK 8</strong>. Chọn đáp án rồi nhấn <strong>Kiểm tra</strong> để xem phân tích.`;
 
   const replacements = [
     ["PMP Full Questions — Luyện tập trắc nghiệm", "PMP Exam Latest — Luyện tập trắc nghiệm"],
@@ -253,10 +254,36 @@ function buildHtml(template, questions) {
   return html;
 }
 
+function loadPmbok8Explanations() {
+  if (!fs.existsSync(PMBOK8_PATH)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(PMBOK8_PATH, "utf8"));
+  } catch (err) {
+    console.warn("Could not load PMBOK8 explanations:", err.message);
+    return {};
+  }
+}
+
+function mergePmbok8(questions, pmbok8) {
+  if (!pmbok8 || !Object.keys(pmbok8).length) return questions;
+  return questions.map((q) => {
+    const entry = pmbok8[String(q.id)];
+    if (!entry) return q;
+    return {
+      ...q,
+      explanation: entry.explanation || q.explanation,
+      pmbok8: entry.pmbok8 || q.pmbok8,
+      references: entry.references || q.references,
+    };
+  });
+}
+
 function main() {
   const supplements = JSON.parse(fs.readFileSync(SUPPLEMENTS_PATH, "utf8"));
+  const pmbok8 = loadPmbok8Explanations();
   const md = fs.readFileSync(MD_PATH, "utf8");
-  const questions = parseQuestions(md, supplements);
+  let questions = parseQuestions(md, supplements);
+  questions = mergePmbok8(questions, pmbok8);
 
   const ids = new Set(questions.map((q) => q.id));
   const missing = [];
