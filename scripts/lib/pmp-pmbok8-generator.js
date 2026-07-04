@@ -12,6 +12,7 @@ const {
 const {
   classifyAction,
   matchStemProfile,
+  extractStemIssues,
   buildContextualSummary,
   buildContextualWhy,
   inferWrongReason,
@@ -102,7 +103,8 @@ function buildSummaryLine(q, correctKeys, scenario, domains) {
     (q.options || []).find((o) => correctKeys.includes(o.key))?.text || "",
   );
   const stemProfile = matchStemProfile(q.text);
-  return buildContextualSummary(q, correctKeys, correctType, stemProfile, domains);
+  const stemIssues = extractStemIssues(q.text);
+  return buildContextualSummary(q, correctKeys, correctType, stemProfile, stemIssues, domains);
 }
 
 function buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue, agile) {
@@ -118,11 +120,13 @@ function buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityC
     (q.options || []).find((o) => correctKeys.includes(o.key))?.text || "",
   );
   const stemProfile = matchStemProfile(q.text);
+  const stemIssues = extractStemIssues(q.text);
   return buildContextualWhy(
     q,
     correctKeys,
     correctType,
     stemProfile,
+    stemIssues,
     domains,
     focusArea,
     priorityCue,
@@ -199,6 +203,7 @@ function buildMcqExplanation(q, options = {}) {
   const originalExplanation = hasRichOriginalExplanation(q) ? q.explanation.replace(/\s+/g, " ").trim() : "";
   const scenario = matchScenario(q);
   const stemProfile = matchStemProfile(q.text);
+  const stemIssues = extractStemIssues(q.text);
   const domains = scenario?.domains || stemProfile?.domains || scoreDomains(fullText);
   const focusArea = scenario?.focusArea || detectFocusArea(q.text);
   const processes = scenario?.processes || stemProfile?.processes || getProcesses(domains);
