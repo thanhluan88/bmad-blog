@@ -246,11 +246,6 @@ function patch(html) {
           initPager();
           renderPage();
           return;
-        }
-        if (state.filterUnattemptedOnly && !revealOnly) {
-          initPager();
-          renderPage();
-          return;
         }`,
   );
 
