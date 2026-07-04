@@ -4,23 +4,30 @@ const ACTION_TYPES = [
   { id: "apologize_accountable", label: "thừa nhận lỗi và giải trình minh bạch", re: /apolog|acknowledge the mistake|take responsibility|admit|transparen/i },
   { id: "listen_support", label: "lắng nghe và hỗ trợ cá nhân", re: /actively listen|listen to the|understand.*concern|support (?:their|the) needs|empath|one-on-one|1-on-1/i },
   { id: "facilitate_retro", label: "facilitate retrospective / phân tích root cause", re: /retrospective|root cause|continuous improvement|process improvement|start.?stop.?continue/i },
-  { id: "consult_artifact", label: "tham chiếu artifact / kế hoạch đã có", re: /consult.*(?:register|plan|log)|review the (?:risk|issue|change|project management plan|charter|backlog)|refer to the|check the (?:risk|issue|plan|register)|risk register for|issue log|change log|project charter|business case/i },
+  { id: "set_expectations", label: "set expectations / thống nhất kỳ vọng và yêu cầu", re: /set expectations|agree on the requirements|manage expectations|establish expectations|clarify expectations|align expectations/i },
+  { id: "micromanage_control", label: "micromanage / giám sát cứng", re: /micromanag|under the supervision of the project manager|deploy.*staff under|command and control/i },
+  { id: "add_to_register", label: "bổ sung register và reevaluate", re: /add.*(?:to )?(?:the )?(?:risk|issue) register|update.*register.*reevaluat|reevaluate.*register|enter.*(?:risk|issue) register/i },
+  { id: "confirm_completed", label: "xác nhận đã hoàn thành (không xử lý mới)", re: /confirm.*(?:has been )?(?:completed|validated|approved)|already been completed|register has been completed/i },
+  { id: "consult_artifact", label: "tham chiếu artifact / kế hoạch đã có", re: /consult.*(?:register|plan|log)|review the (?:risk|issue|change|project management plan|charter|backlog)|refer to the|check the (?:risk|issue|plan|register)|risk register for|issue log|change log|project charter|business case|requirements traceability matrix|traceability matrix/i },
+  { id: "revise_plan", label: "sửa kế hoạch / baseline / schedule", re: /revise.*plan|update the (?:project management plan|schedule|baseline|timeline)|rebaseline|move the task|adjust the (?:schedule|plan|timeline)|crash|fast.?track/i },
+  { id: "develop_solution", label: "cùng phát triển giải pháp / collaborate", re: /develop a solution|work together|jointly develop|collaborate.*solution|co-create|brainstorm.*solution/i },
+  { id: "change_scope", label: "thay đổi phạm vi", re: /exclude|remove.*(?:task|feature|requirement)|reduce scope|cut scope|descope|change scope|de-scope|will not be included|not be included in this project/i },
+  { id: "define_mvp", label: "define MVP / minimum viable product", re: /minimum viable product|\bmvp\b|define.*mvp|mvp and/i },
+  { id: "change_control", label: "change control / change request", re: /change request|change control|submit.*change|integrated change|formal change/i },
+  { id: "stakeholder_engagement", label: "engagement stakeholder / làm rõ kỳ vọng", re: /stakeholder engagement|clarify.*expect|negotiat|engage.*stakeholder|meet with (?:the )?(?:stakeholder|customer|sponsor|product owner)|talk to (?:the )?(?:stakeholder|customer|sponsor)/i },
+  { id: "inform_one_way", label: "thông báo một chiều (inform/notify)", re: /\binform (?:them|the|stakeholder|team|manager|customer)\b|\bnotify (?:them|the|stakeholder|team)\b/i },
+  { id: "meet_discuss", label: "họp / thảo luận trực tiếp", re: /meet with|talk to|speak with|discuss with|discuss the|set up a meeting|schedule a meeting|facilitate a (?:meeting|session|workshop)/i },
+  { id: "communicate_inform", label: "thông báo / truyền đạt thông tin", re: /inform the|notify|communicate (?:with|to|the)|send.*(?:report|update|email)|share.*with|present (?:the|a|to)|brief the|briefing with|demonstrate progress/i },
+  { id: "allow_empower", label: "trao quyền / để team tự quyết", re: /allow the team|empower|enable the team|give the team (?:authority|autonomy)|self-organiz|delegate.*decision/i },
   { id: "risk_register", label: "ghi nhận / cập nhật risk register", re: /(?:enter|log|record|update).*(?:risk register|risk log)|risk register|risk log/i },
   { id: "issue_log", label: "ghi nhận issue / theo dõi vấn đề", re: /issue log|log the issue|enter.*issue|track the issue/i },
-  { id: "change_control", label: "change control / change request", re: /change request|change control|submit.*change|integrated change|formal change/i },
-  { id: "stakeholder_engagement", label: "engagement stakeholder / làm rõ kỳ vọng", re: /stakeholder|customer|sponsor|clarify.*expect|negotiat|manage expectations|product owner/i },
-  { id: "meet_discuss", label: "họp / thảo luận trực tiếp", re: /meet with|talk to|speak with|discuss with|discuss the|set up a meeting|schedule a meeting|facilitate a (?:meeting|session|workshop)/i },
-  { id: "communicate_inform", label: "thông báo / truyền đạt thông tin", re: /inform the|notify|communicate|send.*(?:report|update|email)|share.*with|present.*to|brief the/i },
-  { id: "allow_empower", label: "trao quyền / để team tự quyết", re: /allow the team|empower|enable the team|give the team (?:authority|autonomy)|self-organiz|delegate.*decision/i },
   { id: "encourage_collaborate", label: "khuyến khích collaboration / hợp tác", re: /encourage the team|promote collaboration|foster|build trust|collaborate with/i },
   { id: "team_building", label: "team building / hoạt động nhóm", re: /team.?building|team building|social activit|group activit|offsite|icebreaker/i },
   { id: "coach_develop", label: "coaching / phát triển năng lực", re: /coach|mentor|training|develop.*skill|capability|competenc|onboard/i },
   { id: "prioritize_value", label: "ưu tiên theo giá trị / MVP", re: /priorit|mvp|value delivery|business value|backlog.*prior|highest value|focus on value/i },
-  { id: "quality_embed", label: "đảm bảo chất lượng / kiểm soát quality", re: /quality|defect|inspection|testing|acceptance criteria|verification|validation|control chart/i },
-  { id: "vendor_procurement", label: "quản lý vendor / procurement", re: /vendor|supplier|contract|procurement|sow|rfp|subcontract/i },
+  { id: "quality_embed", label: "đảm bảo chất lượng / kiểm soát quality", re: /\bquality (?:plan|control|assurance|management|standard|issue|gate)\b|\bdefect\b|\binspection\b|\btesting\b|acceptance criteria|verification|validation|control chart/i },
+  { id: "vendor_procurement", label: "quản lý vendor / procurement", re: /\b(?:vendor|supplier|procurement|subcontract)\b|(?:sow|rfp)\b|award.*contract/i },
   { id: "add_resources", label: "bổ sung nguồn lực / hire", re: /hire|add.*resource|get additional|onboard.*resource|staff up|external consult|consultancy|outsource/i },
-  { id: "revise_plan", label: "sửa kế hoạch / baseline / schedule", re: /revise.*plan|update the (?:project management plan|schedule|baseline|timeline)|rebaseline|move the task|adjust the (?:schedule|plan|timeline)|crash|fast.?track/i },
-  { id: "change_scope", label: "thay đổi phạm vi", re: /exclude|remove.*(?:task|feature|requirement)|reduce scope|cut scope|descope|change scope|de-scope/i },
   { id: "shift_responsibility", label: "đẩy trách nhiệm cho người khác tự xử lý", re: /unavoidable|find a solution|figure out|deal with it|their responsibility|ask the team member to find|ask them to resolve|tell them to/i },
   { id: "ask_team_act", label: "yêu cầu team hành động (chưa rõ facilitation)", re: /ask the (?:project )?team|ask team members|request the team|tell the team to|direct the team/i },
   { id: "escalate", label: "leo thang lên cấp trên", re: /escalat|inform the sponsor|report to (?:management|senior)|involve (?:senior|executive)|steering committee/i },
@@ -32,7 +39,7 @@ const ACTION_TYPES = [
   { id: "evaluate_individual", label: "đánh giá cá nhân / skill gap", re: /evaluate the skill|skill set|technical gap|performance review|replace the team member|remove.*member/i },
   { id: "work_with_party", label: "phối hợp với bên liên quan", re: /work with the|partner with|coordinate with|reach out to|contact the/i },
   { id: "ensure_compliance", label: "đảm bảo tuân thủ / compliance", re: /ensure.*compliance|regulatory|policy|standard|audit|governance/i },
-  { id: "agile_ceremony", label: "Agile ceremony / iteration event", re: /daily standup|sprint planning|iteration planning|iteration review|demo|backlog refinement|grooming/i },
+  { id: "agile_ceremony", label: "Agile ceremony / iteration event", re: /daily standup|sprint planning|iteration planning|iteration review|\bdemo\b|backlog refinement|grooming/i },
 ];
 
 const STEM_ISSUES = [
@@ -44,7 +51,8 @@ const STEM_ISSUES = [
   { id: "conflict", re: /conflict|disagree|argument|tension|dispute|confrontation|not getting along/i, label: "xung đột trong team hoặc stakeholder" },
   { id: "communication_error", re: /mistake.*(?:email|message|sent)|wrong.*(?:email|message)|miscommunicat|failed to communicate|not informed/i, label: "lỗi truyền thông / thông tin sai" },
   { id: "risk_materialized", re: /risk.*(?:materializ|occurred|happened)|identified a risk|planned risk response|emergency|unexpected event/i, label: "rủi ro đã/sắp xảy ra" },
-  { id: "change_requested", re: /change request|requested a change|new requirement|additional feature|scope change|change in scope/i, label: "yêu cầu thay đổi phạm vi/kế hoạch" },
+  { id: "change_requested", re: /change request|requested a change|requested changes|new requirement|additional feature|wants to include|scope change|change in scope/i, label: "yêu cầu thay đổi phạm vi/kế hoạch" },
+  { id: "new_sponsor", re: /new project sponsor|new sponsor has been assigned|newly assigned sponsor|new sponsor wants/i, label: "sponsor mới với kỳ vọng/thay đổi phạm vi" },
   { id: "resource_gap", re: /resource.*(?:unavailable|shortage|constraint)|not enough|lack of|skill.*(?:gap|missing)|vacant|leave of absence/i, label: "thiếu hụt nguồn lực / kỹ năng" },
   { id: "vendor_issue", re: /vendor|supplier|contractor|subcontract|procurement.*(?:issue|delay|fail)/i, label: "vấn đề vendor / procurement" },
   { id: "new_team", re: /newly formed|new team|just formed|recently assembled|forming stage|team is new/i, label: "team mới hình thành" },
@@ -127,8 +135,23 @@ const STEM_PROFILES = [
     preferCorrect: ["stakeholder_engagement", "meet_discuss"],
   },
   {
+    id: "new_sponsor",
+    re: /new project sponsor(?: has been assigned)?|new sponsor|newly assigned sponsor/i,
+    domains: ["Stakeholders", "Governance", "Scope"],
+    principles: ["Lead accountably", "Focus on value"],
+    processes: ["Manage Stakeholder Engagement", "Perform Integrated Change Control"],
+    summaryHint: "Sponsor mới + yêu cầu thay đổi phạm vi — gặp sponsor, review scope và change request trước rebaseline hay từ chối.",
+    rejectByAction: {
+      revise_plan: "Rebaseline ngay chỉ vì sponsor mới — chưa review scope/yêu cầu thay đổi và impact.",
+      communicate_inform: "Briefing tiến độ chưa giải quyết yêu cầu thay đổi phạm vi — cần align scope với sponsor trước.",
+      proceed_continue: "Từ chối thẳng thay đổi mà chưa thảo luận — vi phạm stakeholder engagement.",
+      change_scope: "Quyết định scope một chiều trước khi thảo luận với sponsor mới.",
+    },
+    preferCorrect: ["meet_discuss", "stakeholder_engagement"],
+  },
+  {
     id: "change_requested",
-    re: /change request|requested a change|new requirement|additional feature|wants to add|scope change/i,
+    re: /change request|requested a change|new requirement|additional feature|wants to add|wants to include|scope change/i,
     domains: ["Governance", "Scope"],
     principles: ["Focus on value"],
     processes: ["Perform Integrated Change Control"],
@@ -236,11 +259,16 @@ const CONTRAST_MATRIX = {
     ignore: "Bỏ qua stakeholder — vi phạm miền Stakeholders.",
     proceed_continue: "Tiếp tục mà chưa align kỳ vọng stakeholder.",
     direct_command: "Ra lệnh thay vì collaborate/negotiate.",
+    revise_plan: "Rebaseline/sửa plan trước khi engagement và làm rõ scope với stakeholder/sponsor.",
+    communicate_inform: "Briefing/thông báo tiến độ không thay cho thảo luận scope/yêu cầu thay đổi.",
   },
   meet_discuss: {
     wait_delay: "Trì hoãn thảo luận khi vấn đề cần giải quyết ngay.",
     escalate: "Escalate trước khi meet/facilitate ở cấp PM.",
     document_first: "Ghi nhận thay vì discuss trực tiếp.",
+    revise_plan: "Rebaseline/sửa plan trước khi thảo luận scope với stakeholder/sponsor.",
+    communicate_inform: "Briefing/thông báo tiến độ không thay cho thảo luận scope/yêu cầu thay đổi.",
+    proceed_continue: "Từ chối hoặc bỏ qua thay đổi mà chưa meet và làm rõ yêu cầu.",
   },
   prioritize_value: {
     proceed_continue: "Làm tất cả features — không prioritize theo value.",
@@ -254,6 +282,26 @@ const CONTRAST_MATRIX = {
   allow_empower: {
     direct_command: "Micromanage thay vì trao quyền team tự quyết.",
     shift_responsibility: "PM không remove impediment mà đẩy trách nhiệm.",
+  },
+  set_expectations: {
+    micromanage_control: "Micromanage contractor thay vì set expectations và thống nhất requirements.",
+    direct_command: "Command & control vendor — không phải cách quản lý contractor hiệu quả.",
+  },
+  add_to_register: {
+    confirm_completed: "Chỉ xác nhận register đã xong — chưa xử lý risk mới stakeholder phát hiện.",
+    risk_register: "Phân tích risk riêng với một người — thiếu reevaluate register có tham gia team.",
+    escalate: "Leo thang committee trước khi update risk register — sai thứ tự.",
+  },
+  develop_solution: {
+    inform_one_way: "Meet chỉ để inform — cần cùng designer phát triển giải pháp.",
+    meet_discuss: "Meet với manager để inform thay vì làm việc trực tiếp với designer giải quyết vấn đề.",
+  },
+  define_mvp: {
+    prioritize_value: "Task board/visual board chung — chưa define MVP cho sản phẩm mới.",
+    proceed_continue: "Roadmap toàn diện trước — cần MVP trước khi commit full roadmap.",
+  },
+  consult_artifact: {
+    consult_artifact: "Consult scope plan chung — RTM/traceability matrix cụ thể hơn để phân tích gap requirement.",
   },
 };
 
@@ -286,7 +334,7 @@ function describeOptionIntent(text) {
   return `"${short}"`;
 }
 
-function contrastRejection(wrongType, correctType, stemProfile, stemIssues) {
+function contrastRejection(wrongType, correctType, stemProfile, stemIssues, wrongText, correctText) {
   if (stemProfile?.rejectByAction?.[wrongType.id]) {
     return stemProfile.rejectByAction[wrongType.id];
   }
@@ -295,6 +343,226 @@ function contrastRejection(wrongType, correctType, stemProfile, stemIssues) {
   }
   const issueLabel = stemIssues[0]?.label || "tình huống trong đề bài";
   return `Tập trung "${wrongType.label}" không giải quyết ${issueLabel} — đáp án đúng cần "${correctType?.label || "hành động phù hợp hơn"}".`;
+}
+
+function differentiateSameGroupRejection(opt, correctOpt, actionType, q, stemIssues) {
+  const wrong = opt.text.replace(/\s+/g, " ").trim();
+  const correct = correctOpt.text.replace(/\s+/g, " ").trim();
+  const wl = wrong.toLowerCase();
+  const cl = correct.toLowerCase();
+  const issue = stemIssues[0]?.label || "vấn đề trong đề bài";
+
+  if (/micromanage|under the supervision of the project manager|deploy.*staff under/i.test(wl)) {
+    return "Micromanage/supervise cứng contractor hoặc team — PMI khuyến khích set expectations và collaboration.";
+  }
+  if (/\binform them\b|\binform the (?:team|manager|stakeholder|customer)\b/i.test(wl) && /develop a solution|work together|facilitate/i.test(cl)) {
+    return "Meet/chỉ để inform một chiều — đáp án đúng cần thảo luận hai chiều và cùng phát triển giải pháp.";
+  }
+  if (/design team manager|team manager/i.test(wl) && /designer/i.test(cl)) {
+    return "Meet với manager thay vì người thực hiện trực tiếp (designer) — chưa giải quyết đúng trọng tâm kỹ thuật.";
+  }
+  if (/confirm.*(?:register|plan).*(?:completed|validated)/i.test(wl)) {
+    return "Chỉ xác nhận artifact đã hoàn thành — không xử lý risk/vấn đề mới stakeholder vừa nêu.";
+  }
+  if (/directly with the stakeholder who raised/i.test(wl)) {
+    return "Phân tích risk chỉ với stakeholder nêu ra — thiếu góc nhìn team; cần add vào register và reevaluate rộng hơn.";
+  }
+  if (/steering committee|senior management/i.test(wl) && !/escalat/i.test(q.text)) {
+    return "Leo thang sớm lên committee — thử xử lý ở cấp PM/team trước.";
+  }
+  if (/visual task board|task board with all/i.test(wl) && /minimum viable product|\bmvp\b/i.test(cl)) {
+    return "Task board chung chung — khi kick-off sản phẩm mới cần define MVP trước.";
+  }
+  if (/comprehensive product roadmap|commit to the full roadmap/i.test(wl) && /minimum viable product|\bmvp\b/i.test(cl)) {
+    return "Roadmap/toàn bộ features quá sớm — PMBOK 8 ưu tiên MVP/value trước.";
+  }
+  if (/scope management plan/i.test(wl) && /traceability matrix|requirements traceability/i.test(cl)) {
+    return "Scope management plan chưa truy vết requirement cụ thể — RTM giúp phân tích gap chính xác hơn.";
+  }
+  if (/continue with the sprint/i.test(wl) && /keep monitoring|monitor/i.test(cl)) {
+    return "Tiếp tục sprint khi có dấu hiệu rủi ro — cần monitor chủ động hơn thay vì assume buffer đủ.";
+  }
+  if (/set expectations|agree on the requirements/i.test(cl) && /roll out|deploy|micromanage/i.test(wl)) {
+    return "Triển khai/micromanage trước khi set expectations và thống nhất requirements với contractor.";
+  }
+
+  const wrongShort = wrong.slice(0, 72);
+  const correctShort = correct.slice(0, 72);
+  return `"${wrongShort}…" cùng nhóm ${actionType.label} nhưng lệch trọng tâm — "${correctShort}…" sát ${issue} hơn.`;
+}
+
+function buildPriorityExplanation(q, correctKeys, priorityCue, stemIssues, stemProfile) {
+  if (priorityCue !== "FIRST" && priorityCue !== "NEXT") return null;
+
+  const correctOpt = (q.options || []).find((o) => correctKeys.includes(o.key));
+  const correctType = classifyAction(correctOpt?.text || "");
+  const wrongOpts = (q.options || []).filter((o) => !correctKeys.includes(o.key));
+  const wrongTypes = wrongOpts.map((o) => classifyAction(o.text)).filter(Boolean);
+  const issueIds = new Set(stemIssues.map((i) => i.id));
+  const stem = q.text.replace(/\s+/g, " ").trim().toLowerCase();
+  const cueLabel =
+    priorityCue === "FIRST"
+      ? "**FIRST** (bước đầu tiên ngay lúc này)"
+      : "**NEXT** (bước tiếp theo hợp lý trong chuỗi hành động)";
+
+  const lines = [`Câu hỏi hỏi ${cueLabel}.`];
+
+  // Sponsor mới + yêu cầu thay đổi phạm vi (Q184)
+  if (
+    /new project sponsor|new sponsor has been assigned/i.test(stem) &&
+    ["meet_discuss", "stakeholder_engagement"].includes(correctType?.id)
+  ) {
+    lines.push(
+      "Sponsor mới muốn thêm phạm vi — chuỗi đúng: **(1) gặp sponsor → review scope hiện tại + yêu cầu thay đổi → (2) đánh giá impact → (3) change request nếu cần → (4) rebaseline sau khi được duyệt**.",
+      `${priorityCue} dừng ở bước (1): làm rõ trước khi rebaseline (B), briefing tiến độ (C), hay từ chối thẳng (D).`,
+    );
+    return lines.join(" ");
+  }
+
+  // Risk đã xảy ra — consult risk register (Q1)
+  if (
+    (issueIds.has("risk_materialized") || /planned risk response|not be available when needed/i.test(stem)) &&
+    correctType?.id === "consult_artifact"
+  ) {
+    lines.push(
+      "Risk đã materialize và đã có planned response trong risk register.",
+      `${priorityCue} = **tra risk register và thực thi response đã lên kế hoạch** — trước khi tự ý sửa baseline (B), cắt scope (C), hay chỉ ghi lessons learned / cập nhật log (D).`,
+    );
+    return lines.join(" ");
+  }
+
+  // Lỗi truyền thông — acknowledge trước
+  if (issueIds.has("communication_error") && correctType?.id === "apologize_accountable") {
+    lines.push(
+      "PM gây ra lỗi truyền thông — **FIRST** là thừa nhận và xin lỗi minh bạch ngay, trước ignore, che giấu (yêu cầu xóa email), hoặc chỉ xử lý riêng một phía.",
+    );
+    return lines.join(" ");
+  }
+
+  // Thành viên quá tải — listen trước
+  if (issueIds.has("member_struggle") && correctType?.id === "listen_support") {
+    lines.push(
+      `${priorityCue} = **lắng nghe và hỗ trợ member trực tiếp** — trước team building chung, ghi risk register, hay đẩy member tự xử lý.`,
+    );
+    return lines.join(" ");
+  }
+
+  // Yêu cầu thay đổi — engagement hoặc change control trước rebaseline
+  if (
+    issueIds.has("change_requested") &&
+    ["meet_discuss", "stakeholder_engagement", "change_control"].includes(correctType?.id)
+  ) {
+    lines.push(
+      "Có yêu cầu thay đổi phạm vi/kế hoạch — phải **làm rõ và đánh giá impact** (hoặc submit change request) trước khi rebaseline hay chấp nhận/từ chối một chiều.",
+    );
+    return lines.join(" ");
+  }
+
+  // Wrong options reveal sequencing pattern
+  const hasLateDoc = wrongTypes.some((t) =>
+    ["document_first", "risk_register", "issue_log"].includes(t.id),
+  );
+  const hasPrematureBaseline = wrongTypes.some((t) => ["revise_plan", "change_scope"].includes(t.id));
+  const hasIgnore = wrongTypes.some((t) => t.id === "wait_delay");
+
+  if (correctType?.id === "consult_artifact" && hasLateDoc) {
+    lines.push(
+      `${priorityCue} ưu tiên **tham chiếu artifact/plan đã có và hành động theo đó** — ghi lessons learned hoặc cập nhật log thường là bước sau khi đã xử lý.`,
+    );
+    return lines.join(" ");
+  }
+
+  if (["meet_discuss", "stakeholder_engagement"].includes(correctType?.id) && hasPrematureBaseline) {
+    lines.push(
+      `${priorityCue} = **engagement/làm rõ với stakeholder trước** — chưa thống nhất scope/impact thì không rebaseline hay thay đổi baseline.`,
+    );
+    return lines.join(" ");
+  }
+
+  if (correctType?.id === "apologize_accountable" && hasIgnore) {
+    lines.push(
+      `${priorityCue} = **phản hồi có trách nhiệm ngay** — không ignore hay giả định mọi người tự hiểu.`,
+    );
+    return lines.join(" ");
+  }
+
+  if (correctType && hasLateDoc) {
+    lines.push(
+      `${priorityCue} ưu tiên **${correctType.label}** — ghi nhận/tài liệu hóa thường đến sau bước xử lý trực tiếp tình huống.`,
+    );
+    return lines.join(" ");
+  }
+
+  if (correctType && hasPrematureBaseline) {
+    lines.push(
+      `${priorityCue} ưu tiên **${correctType.label}** — sửa baseline/rebaseline chỉ sau khi đã phân tích, thống nhất, hoặc được duyệt qua change control.`,
+    );
+    return lines.join(" ");
+  }
+
+  if (correctType) {
+    lines.push(
+      `${priorityCue} chọn hành động **${correctType.label}** vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, rebaseline, hay leo thang.`,
+    );
+    return lines.join(" ");
+  }
+
+  lines.push(
+    `${priorityCue}: chọn hành động xử lý tình huống trực tiếp trước ghi nhận muộn hoặc thay đổi baseline chưa được phân tích.`,
+  );
+  return lines.join(" ");
+}
+
+function inferPriorityRejection(opt, q, correctKeys, priorityCue) {
+  if (priorityCue !== "FIRST" && priorityCue !== "NEXT") return null;
+
+  const wrongType = classifyAction(opt.text);
+  const correctOpt = (q.options || []).find((o) => correctKeys.includes(o.key));
+  const correctType = classifyAction(correctOpt?.text || "");
+  const stem = q.text.replace(/\s+/g, " ").trim().toLowerCase();
+  const optText = opt.text.replace(/\s+/g, " ").trim();
+
+  if (/new project sponsor|new sponsor has been assigned/i.test(stem)) {
+    if (wrongType?.id === "revise_plan") {
+      return `Rebaseline quá sớm — ${priorityCue} cần gặp sponsor và review scope/yêu cầu thay đổi trước khi đụng baseline.`;
+    }
+    if (/briefing|demonstrate progress|seek further support/i.test(optText)) {
+      return `Briefing tiến độ (C) không xử lý yêu cầu thay đổi phạm vi — ${priorityCue} cần align scope với sponsor mới trước.`;
+    }
+    if (/will not be included|not be included|refuse|decline|inform.*that.*will not/i.test(optText)) {
+      return `Từ chối thay đổi mà chưa thảo luận với sponsor mới — vi phạm stakeholder engagement; ${priorityCue} là meet và làm rõ trước.`;
+    }
+  }
+
+  if (/planned risk response|not be available when needed|risk has materialized/i.test(stem)) {
+    if (wrongType?.id === "document_first" || /lessons learned|risk log to reflect|update.*log/i.test(optText)) {
+      return `Ghi lessons learned / cập nhật log là bước sau khi đã thực thi planned response — không phải ${priorityCue}.`;
+    }
+    if (wrongType?.id === "revise_plan") {
+      return `Sửa baseline/plan tùy tiện trước khi consult risk register — sai thứ tự ${priorityCue}.`;
+    }
+    if (wrongType?.id === "change_scope") {
+      return `Cắt scope ngay khi risk materialize — quá nặng trước khi thử planned response từ risk register.`;
+    }
+  }
+
+  if (
+    wrongType?.id === "document_first" &&
+    correctType &&
+    !["consult_artifact", "document_first"].includes(correctType.id)
+  ) {
+    return `Ghi nhận/tài liệu hóa quan trọng nhưng thường **sau** bước xử lý trực tiếp — câu hỏi hỏi ${priorityCue}, ưu tiên ${correctType.label}.`;
+  }
+
+  if (
+    wrongType?.id === "revise_plan" &&
+    correctType &&
+    ["meet_discuss", "stakeholder_engagement", "change_control", "consult_artifact"].includes(correctType.id)
+  ) {
+    return `Rebaseline/sửa plan quá sớm — ${priorityCue} cần ${correctType.label} trước khi thay đổi baseline.`;
+  }
+
+  return null;
 }
 
 function buildContextualSummary(q, correctKeys, correctType, stemProfile, stemIssues, domains) {
@@ -336,7 +604,8 @@ function buildContextualWhy(q, correctKeys, correctType, stemProfile, stemIssues
   }
 
   if (priorityCue === "FIRST" || priorityCue === "NEXT") {
-    parts.push(`Câu hỏi hỏi **${priorityCue}** — ưu tiên hành động xử lý trước documentation/thay đổi baseline.`);
+    const priorityText = buildPriorityExplanation(q, correctKeys, priorityCue, stemIssues, stemProfile);
+    if (priorityText) parts.push(priorityText);
   } else if (agile) {
     parts.push("Agile/Hybrid: ưu tiên empowered culture, collaboration và continuous improvement.");
   }
@@ -344,9 +613,12 @@ function buildContextualWhy(q, correctKeys, correctType, stemProfile, stemIssues
   return parts.join(" ");
 }
 
-function inferWrongReason(opt, q, correctKeys, patternRejectFn) {
+function inferWrongReason(opt, q, correctKeys, patternRejectFn, priorityCue) {
   const patternReason = patternRejectFn(opt);
   if (patternReason) return patternReason;
+
+  const priorityReason = inferPriorityRejection(opt, q, correctKeys, priorityCue);
+  if (priorityReason) return priorityReason;
 
   const correctOpt = (q.options || []).find((o) => correctKeys.includes(o.key));
   if (!correctOpt) return null;
@@ -357,13 +629,11 @@ function inferWrongReason(opt, q, correctKeys, patternRejectFn) {
   const stemIssues = extractStemIssues(q.text);
 
   if (wrongType && correctType && wrongType.id === correctType.id) {
-    const wrongShort = opt.text.replace(/\s+/g, " ").trim().slice(0, 70);
-    const correctShort = correctOpt.text.replace(/\s+/g, " ").trim().slice(0, 70);
-    return `Cùng nhóm hành động nhưng "${wrongShort}…" kém phù hợp hơn "${correctShort}…" với bối cảnh câu hỏi.`;
+    return differentiateSameGroupRejection(opt, correctOpt, wrongType, q, stemIssues);
   }
 
   if (wrongType) {
-    return contrastRejection(wrongType, correctType, stemProfile, stemIssues);
+    return contrastRejection(wrongType, correctType, stemProfile, stemIssues, opt.text, correctOpt.text);
   }
 
   const t = opt.text.toLowerCase();
@@ -405,6 +675,7 @@ module.exports = {
   extractStemIssues,
   buildContextualSummary,
   buildContextualWhy,
+  buildPriorityExplanation,
   inferWrongReason,
   STEM_PROFILES,
 };

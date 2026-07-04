@@ -15,6 +15,7 @@ const {
   extractStemIssues,
   buildContextualSummary,
   buildContextualWhy,
+  buildPriorityExplanation,
   inferWrongReason,
 } = require("./pmp-option-reasoning");
 
@@ -111,7 +112,10 @@ function buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityC
   if (scenario) {
     let text = scenario.whyCorrect;
     if (priorityCue === "FIRST" || priorityCue === "NEXT") {
-      text += ` Câu hỏi hỏi **${priorityCue}** — đây là bước ưu tiên trước ghi nhận, leo thang, hoặc thay đổi baseline.`;
+      const stemIssues = extractStemIssues(q.text);
+      const stemProfile = matchStemProfile(q.text);
+      const priorityText = buildPriorityExplanation(q, correctKeys, priorityCue, stemIssues, stemProfile);
+      if (priorityText) text += ` ${priorityText}`;
     }
     return text;
   }
@@ -151,7 +155,13 @@ function applyPatternRejection(opt, priorityCue, agile) {
 
 function rejectWrongOption(opt, q, correctKeys, priorityCue, agile) {
   if (correctKeys.includes(opt.key)) return null;
-  return inferWrongReason(opt, q, correctKeys, (o) => applyPatternRejection(o, priorityCue, agile));
+  return inferWrongReason(
+    opt,
+    q,
+    correctKeys,
+    (o) => applyPatternRejection(o, priorityCue, agile),
+    priorityCue,
+  );
 }
 
 function appendReferences(lines, domains) {
