@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "postinstall": "prisma generate",
-    "build": "prisma generate && prisma migrate deploy && next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
+    "db:deploy": "node scripts/prisma-migrate-deploy.js",
     "db:seed": "prisma db seed",
-    "db:setup": "prisma migrate deploy && prisma db seed",
+    "db:setup": "node scripts/prisma-migrate-deploy.js && npm run db:seed",
     "db:reset-admin": "tsx scripts/reset-admin.ts",
     "db:seed-pmp": "tsx scripts/seed-pmp-post.ts",
     "generate:pmp-pmbok8": "node scripts/generate-pmp-pmbok8-explanations.js",
@@ -44,14 +45,12 @@
     "remark-gfm": "^4.0.1",
     "zod": "^4.3.6"
   },
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
-  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.1.7",
     "prisma": "6.19.2",
