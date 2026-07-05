@@ -180,7 +180,20 @@ const HELPERS = `${JS_START}
     }
 
     function renderMappingList(lines) {
-      const labels = { "miền": "Miền", "mien": "Miền", "vùng trọng tâm": "Focus Area", "vung trong tam": "Focus Area", "quy trình": "Quy trình", "quy trinh": "Quy trình", "nguyên tắc": "Nguyên tắc", "nguyen tac": "Nguyên tắc" };
+      const labels = {
+        domain: "Domain",
+        "miền": "Domain",
+        mien: "Domain",
+        "focus area": "Focus Area",
+        "vùng trọng tâm": "Focus Area",
+        "vung trong tam": "Focus Area",
+        process: "Process",
+        "quy trình": "Process",
+        "quy trinh": "Process",
+        principle: "Principle",
+        "nguyên tắc": "Principle",
+        "nguyen tac": "Principle",
+      };
       const rows = lines
         .map(line => line.trim().replace(/^-\\s+/, ""))
         .filter(Boolean)

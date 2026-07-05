@@ -178,13 +178,19 @@ function appendReferences(lines, domains) {
   return [...refs];
 }
 
+function formatPmbok8MappingLines(domains, focusArea, processes, principles) {
+  return [
+    `- Domain: ${domains.join(", ")}`,
+    `- Focus Area: ${focusArea}`,
+    `- Process: ${processes.join(", ")}`,
+    `- Principle: ${principles.join(", ")}`,
+  ];
+}
+
 function buildDragDropExplanation(q, domains, focusArea, processes, principles, options = {}) {
   const lines = [];
   lines.push("**PMBOK 8 mapping**");
-  lines.push(`- Miền: ${domains.join(", ")}`);
-  lines.push(`- Vùng trọng tâm: ${focusArea}`);
-  lines.push(`- Quy trình: ${processes.join(", ")}`);
-  lines.push(`- Nguyên tắc: ${principles.join(", ")}`);
+  lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles));
   lines.push("");
   lines.push("**Vì sao mapping đúng**");
   if (q.explanation && q.explanation.length > 30 && q.explanation !== q.correctLabel && !q.explanation.includes("**PMBOK 8 mapping**")) {
@@ -224,10 +230,7 @@ function buildMcqExplanation(q, options = {}) {
 
   const lines = [];
   lines.push("**PMBOK 8 mapping**");
-  lines.push(`- Miền: ${domains.join(", ")}`);
-  lines.push(`- Vùng trọng tâm: ${focusArea}`);
-  lines.push(`- Quy trình: ${processes.join(", ")}`);
-  lines.push(`- Nguyên tắc: ${principles.join(", ")}`);
+  lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles));
   lines.push("");
   lines.push("**Vì sao chọn đáp án này**");
   lines.push(`→ **${correctKeys.join(", ")}:** ${buildSummaryLine(q, correctKeys, scenario, domains, focusArea)}`);
