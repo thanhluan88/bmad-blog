@@ -38,7 +38,7 @@ const replacements = [
         const multi = isMultiSelect(q);
         const inputType = multi ? "checkbox" : "radio";
         const hint = multi
-          ? \`<div class="notice multi-select-hint">Chọn tất cả đáp án đúng (có thể chọn nhiều hơn 1).</div>\`
+          ? \`<div class="notice multi-select-hint">Chọn đúng \${requiredMultiSelectCount(q)} đáp án (phải chọn đủ \${requiredMultiSelectCount(q)} mới chấm điểm).</div>\`
           : "";
         return \`<div class="options">\${hint}\${q.options.map(o => \`
           <label class="option" data-q="\${q.id}" data-key="\${o.key}">
@@ -105,6 +105,15 @@ const replacements = [
 
     function isMultiSelect(q) {
       return q.type === "mcq" && parseAnswerKeys(q.correct).length > 1;
+    }
+
+    function requiredMultiSelectCount(q) {
+      return parseAnswerKeys(q.correct).length;
+    }
+
+    function isMultiSelectComplete(q, answer) {
+      if (!isMultiSelect(q)) return true;
+      return parseAnswerKeys(answer).length === requiredMultiSelectCount(q);
     }
 
     function answersMatch(q, userAnswer) {

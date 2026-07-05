@@ -54,7 +54,7 @@ function UserGate({
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Ví dụ: thanh_luan"
+            placeholder="Ví dụ: ABC123456"
             autoFocus
             className="mt-2 w-full rounded-xl border border-border bg-background px-3 py-2.5 text-base text-foreground outline-none ring-ring focus:border-accent focus:ring-2"
           />

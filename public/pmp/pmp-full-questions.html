@@ -812,7 +812,7 @@
     <div class="modal-content">
       <h3>Nhập tên người dùng</h3>
       <p>Bắt buộc để vào luyện tập PMP. Thống kê và ôn câu sai được lưu riêng theo từng người.</p>
-      <input type="text" id="nicknameInput" placeholder="Ví dụ: thanh_luan" autofocus>
+      <input type="text" id="nicknameInput" placeholder="Ví dụ: ABC123456" autofocus>
       <div class="modal-buttons">
         <button type="button" class="modal-btn modal-btn-primary" id="nicknameSubmitBtn">Bắt đầu</button>
       </div>
@@ -1249,7 +1249,7 @@ const USER_KEY = "pmp-quiz-user-v1";
         return picks.length >= q.dragSlots && picks.every(v => v);
       }
       if (isMultiSelect(q)) {
-        return parseAnswerKeys(answer).length > 0;
+        return isMultiSelectComplete(q, answer);
       }
       return normalizeAnswer(answer) !== "";
     }
@@ -2224,7 +2224,7 @@ const USER_KEY = "pmp-quiz-user-v1";
         const multi = isMultiSelect(q);
         const inputType = multi ? "checkbox" : "radio";
         const hint = multi
-          ? `<div class="notice multi-select-hint">Chọn tất cả đáp án đúng (có thể chọn nhiều hơn 1).</div>`
+          ? `<div class="notice multi-select-hint">Chọn đúng ${requiredMultiSelectCount(q)} đáp án (phải chọn đủ ${requiredMultiSelectCount(q)} mới chấm điểm).</div>`
           : "";
         return `<div class="options">${hint}${q.options.map(o => `
           <label class="option" data-q="${q.id}" data-key="${o.key}">
@@ -2565,6 +2565,15 @@ const USER_KEY = "pmp-quiz-user-v1";
       return q.type === "mcq" && parseAnswerKeys(q.correct).length > 1;
     }
 
+    function requiredMultiSelectCount(q) {
+      return parseAnswerKeys(q.correct).length;
+    }
+
+    function isMultiSelectComplete(q, answer) {
+      if (!isMultiSelect(q)) return true;
+      return parseAnswerKeys(answer).length === requiredMultiSelectCount(q);
+    }
+
     function answersMatch(q, userAnswer) {
       if (isMultiSelect(q)) {
         return formatAnswerKeys(parseAnswerKeys(userAnswer)) === formatAnswerKeys(parseAnswerKeys(q.correct));
@@ -2594,13 +2603,14 @@ const USER_KEY = "pmp-quiz-user-v1";
     function setAnswerHighlight(q, userAnswer) {
       const correctKeys = parseAnswerKeys(q.correct);
       const userKeys = parseAnswerKeys(userAnswer);
+      const showGrade = !isMultiSelect(q) || isMultiSelectComplete(q, userAnswer);
       if (q.type === "mcq" || q.type === "dropdown") {
         document.querySelectorAll(`label.option[data-q="${q.id}"]`).forEach(lbl => {
           const key = lbl.dataset.key;
           lbl.classList.remove("selected", "correct", "incorrect");
           if (userKeys.includes(key)) lbl.classList.add("selected");
-          if (correctKeys.includes(key)) lbl.classList.add("correct");
-          else if (userKeys.includes(key)) lbl.classList.add("incorrect");
+          if (showGrade && correctKeys.includes(key)) lbl.classList.add("correct");
+          else if (showGrade && userKeys.includes(key)) lbl.classList.add("incorrect");
         });
       }
     }
@@ -2611,6 +2621,12 @@ const USER_KEY = "pmp-quiz-user-v1";
       if (!q) return;
       const userAnswer = getAnswer(q);
       state.answers[id] = userAnswer;
+      const incompleteMulti = isMultiSelect(q) && !isMultiSelectComplete(q, userAnswer);
+      const skipIncompleteGate = revealOnly || !!(state.exam && state.exam.submitted);
+      if (!skipIncompleteGate && incompleteMulti) {
+        alert(`Câu ${id}: Hãy chọn đủ ${requiredMultiSelectCount(q)} đáp án trước khi chấm điểm.`);
+        return;
+      }
       state.checked[id] = true;
       setAnswerHighlight(q, userAnswer);
       const card = document.getElementById(`q-${id}`);
@@ -2633,6 +2649,9 @@ const USER_KEY = "pmp-quiz-user-v1";
           result.style.borderColor = "var(--border)";
           result.style.background = "#f8fafc";
         }
+      } else if (!revealOnly && state.exam && state.exam.submitted && incompleteMulti) {
+        result.style.borderColor = "var(--bad)";
+        result.style.background = "var(--bad-bg)";
       } else {
         result.style.borderColor = "var(--border)";
         result.style.background = "#f8fafc";

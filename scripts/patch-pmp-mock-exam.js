@@ -81,7 +81,7 @@ const examJs = `    const MOCK_EXAM_SIZE = 180;
         return picks.length >= q.dragSlots && picks.every(v => v);
       }
       if (isMultiSelect(q)) {
-        return parseAnswerKeys(answer).length > 0;
+        return isMultiSelectComplete(q, answer);
       }
       return normalizeAnswer(answer) !== "";
     }
