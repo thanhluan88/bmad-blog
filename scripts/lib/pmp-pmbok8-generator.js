@@ -18,6 +18,7 @@ const {
   buildPriorityExplanation,
   inferWrongReason,
 } = require("./pmp-option-reasoning");
+const { getChartStemProfile } = require("./pmp-chart-explanations");
 
 function parseCorrectKeys(correct) {
   const s = String(correct || "").trim().toUpperCase();
@@ -98,32 +99,33 @@ function hasRichOriginalExplanation(q) {
   return exp.length > 120;
 }
 
-function buildSummaryLine(q, correctKeys, scenario, domains, focusArea) {
+function buildSummaryLine(q, correctKeys, scenario, domains, focusArea, stemProfileOverride) {
   if (scenario?.summaryLine) return scenario.summaryLine;
   const correctType = classifyAction(
     (q.options || []).find((o) => correctKeys.includes(o.key))?.text || "",
   );
-  const stemProfile = matchStemProfile(q.text);
+  const stemProfile = stemProfileOverride || matchStemProfile(q.text);
   const stemIssues = extractStemIssues(q.text);
   return buildContextualSummary(q, correctKeys, correctType, stemProfile, stemIssues, domains, focusArea);
 }
 
-function buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue, agile) {
+function buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue, agile, stemProfileOverride) {
+  const stemProfile = stemProfileOverride || matchStemProfile(q.text);
   if (scenario) {
     let text = scenario.whyCorrect;
     if (priorityCue === "FIRST" || priorityCue === "NEXT") {
       const stemIssues = extractStemIssues(q.text);
-      const stemProfile = matchStemProfile(q.text);
       const priorityText = buildPriorityExplanation(q, correctKeys, priorityCue, stemIssues, stemProfile);
       if (priorityText) text += ` ${priorityText}`;
     }
     return text;
   }
 
+  if (stemProfile?.whyCorrect) return stemProfile.whyCorrect;
+
   const correctType = classifyAction(
     (q.options || []).find((o) => correctKeys.includes(o.key))?.text || "",
   );
-  const stemProfile = matchStemProfile(q.text);
   const stemIssues = extractStemIssues(q.text);
   return buildContextualWhy(
     q,
@@ -218,7 +220,8 @@ function buildMcqExplanation(q, options = {}) {
   const fullText = `${q.text} ${(q.options || []).map((o) => o.text).join(" ")}`;
   const originalExplanation = hasRichOriginalExplanation(q) ? q.explanation.replace(/\s+/g, " ").trim() : "";
   const scenario = matchScenario(q);
-  const stemProfile = matchStemProfile(q.text);
+  const chartProfile = getChartStemProfile(q);
+  const stemProfile = chartProfile || matchStemProfile(q.text);
   const stemIssues = extractStemIssues(q.text);
   const domains = scenario?.domains || stemProfile?.domains || scoreDomains(fullText);
   const focusArea = scenario?.focusArea || detectFocusArea(q.text);
@@ -233,9 +236,13 @@ function buildMcqExplanation(q, options = {}) {
   lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles));
   lines.push("");
   lines.push("**Vì sao chọn đáp án này**");
-  lines.push(`→ **${correctKeys.join(", ")}:** ${buildSummaryLine(q, correctKeys, scenario, domains, focusArea)}`);
+  lines.push(`→ **${correctKeys.join(", ")}:** ${buildSummaryLine(q, correctKeys, scenario, domains, focusArea, stemProfile)}`);
+  if (chartProfile?.chartCaption) {
+    lines.push("");
+    lines.push(`**Đọc chart:** ${chartProfile.chartCaption}`);
+  }
   lines.push("");
-  lines.push(buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue, agile));
+  lines.push(buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue, agile, stemProfile));
   lines.push("");
   lines.push("**Loại trừ phương án khác**");
 

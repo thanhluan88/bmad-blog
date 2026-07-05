@@ -1,5 +1,7 @@
 /** Comparative reasoning: classify PM actions and explain wrong options vs correct answer. */
 
+const { getChartStemProfile, getChartOptionRejection } = require("./pmp-chart-explanations");
+
 const ACTION_TYPES = [
   { id: "apologize_accountable", label: "thừa nhận lỗi và giải trình minh bạch", re: /apolog|acknowledge the mistake|take responsibility|admit|transparen/i },
   { id: "listen_support", label: "lắng nghe và hỗ trợ cá nhân", re: /actively listen|listen to the|understand.*concern|support (?:their|the) needs|empath|one-on-one|1-on-1/i },
@@ -744,12 +746,15 @@ function inferWrongReason(opt, q, correctKeys, patternRejectFn, priorityCue) {
   const priorityReason = inferPriorityRejection(opt, q, correctKeys, priorityCue);
   if (priorityReason) return priorityReason;
 
+  const chartOptionRejection = getChartOptionRejection(q, opt.key);
+  if (chartOptionRejection) return chartOptionRejection;
+
   const correctOpt = (q.options || []).find((o) => correctKeys.includes(o.key));
   if (!correctOpt) return null;
 
   const wrongType = classifyAction(opt.text);
   const correctType = classifyAction(correctOpt.text);
-  const stemProfile = matchStemProfile(q.text);
+  const stemProfile = getChartStemProfile(q) || matchStemProfile(q.text);
   const stemIssues = extractStemIssues(q.text);
 
   if (wrongType && correctType && wrongType.id === correctType.id) {
