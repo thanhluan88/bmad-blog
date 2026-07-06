@@ -302,15 +302,23 @@
   },
   "1329": {
     "type": "drag_drop",
-    "dragTerms": ["SPI and CV", "CPI and SV", "SPI and SV", "CPI and CV"],
-    "slotDescriptions": [
-      "Schedule ahead of plan and under budget",
-      "Behind schedule and over budget",
-      "Schedule ahead of plan but over budget",
-      "Behind schedule but under budget"
+    "text": "A project manager is leading a project in which key performance indicators (KPIs) are measured through earned value management (EVM). Match each measurement on the left with the correct category on the right.",
+    "dragTerms": [
+      "Project cost variance (CV) is positive.",
+      "Project schedule variance (SV) is negative.",
+      "Project schedule performance index (SPI) is higher than 1.",
+      "Project cost performance index (CPI) is lower than 1."
     ],
-    "correct": "A,B,C,D",
-    "explanation": "SPI>1 & CV>0 → ahead/under. CPI<1 & SV<0 → behind/over. SPI>1 & SV<0 → ahead/over. CPI<1 & CV>0 → behind/under."
+    "dragSlots": 4,
+    "slotDescriptions": [
+      "Project variable is in good standing — First measurement",
+      "Project variable is in good standing — Second measurement",
+      "Project variable is performing poorly — First measurement",
+      "Project variable is performing poorly — Second measurement"
+    ],
+    "correct": "A,C,B,D",
+    "correctLabel": "Good standing: CV positive (A), SPI > 1 (C) · Performing poorly: SV negative (B), CPI < 1 (D)",
+    "explanation": "CV > 0 → under budget (good). SPI > 1 → ahead of schedule (good). SV < 0 → behind schedule (poor). CPI < 1 → over budget (poor)."
   },
   "1335": {
     "type": "mcq",
@@ -387,5 +395,10 @@
     ],
     "correct": "A,B,C,D",
     "explanation": "Investors → unaware. Sales → resistant. Vendors → supportive. Senior management → leading."
+  },
+  "469": {
+    "text": "The tables show the requirements for an agile project with the anticipated return on investment (ROI) and identified project risks, along with the analysis details.\n\nItem Priority ROI ($)\nRequirement 1 1 10,000\nRequirement 2 1 8,000\nRequirement 3 1 25,000\n\nRisk Risk Impact ($) Risk Probability\nRisk 1 5,000 75\nRisk 2 4,000 50\nRisk 3 20,000 45\n\nWhat should be the priority order in the product backlog?",
+    "correct": "D",
+    "correctLabel": "D. Requirement 3, Requirement 1, Risk 3, Requirement 2, Risk 1, Risk 2"
   }
 }
