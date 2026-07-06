@@ -213,14 +213,17 @@ const SLOT_DESCRIPTIONS_PATCH = `      if (Array.isArray(q.slotDescriptions) && 
 `;
 
 function patchDragDropModel(html) {
-  const needle = "      const slots = q.dragSlots;\n";
-  if (!html.includes(needle)) {
-    throw new Error("buildDragDropModel anchor not found");
-  }
-  if (html.includes("q.slotDescriptions")) {
+  if (html.includes("q.slotDescriptions") && html.includes('mode: "match"')) {
     return html;
   }
-  return html.replace(needle, needle + SLOT_DESCRIPTIONS_PATCH);
+  const needle = "const slots = q.dragSlots;";
+  const pos = html.indexOf(needle);
+  if (pos < 0) {
+    throw new Error("buildDragDropModel anchor not found");
+  }
+  const lineEnd = html.indexOf("\n", pos);
+  const insertAt = lineEnd < 0 ? pos + needle.length : lineEnd + 1;
+  return html.slice(0, insertAt) + SLOT_DESCRIPTIONS_PATCH + html.slice(insertAt);
 }
 
 function buildHtml(template, questions) {

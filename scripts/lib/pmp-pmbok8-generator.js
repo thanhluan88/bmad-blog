@@ -1,6 +1,5 @@
 const {
   PMI_PMBOK8,
-  DOMAIN_REFS,
   DOMAIN_KEYWORDS,
   AGILE_KEYWORDS,
   FOCUS_AREA_RULES,
@@ -19,6 +18,7 @@ const {
   inferWrongReason,
 } = require("./pmp-option-reasoning");
 const { getChartStemProfile } = require("./pmp-chart-explanations");
+const { lookupPmbokPages, PDF_NAME } = require("./pmp-pmbok8-rag-pages");
 
 function parseCorrectKeys(correct) {
   const s = String(correct || "").trim().toUpperCase();
@@ -166,33 +166,68 @@ function rejectWrongOption(opt, q, correctKeys, priorityCue, agile) {
   );
 }
 
-function appendReferences(lines, domains) {
-  lines.push("");
-  lines.push("**Tham khảo**");
-  lines.push(`- [PMBOK Guide 8th Edition](${PMI_PMBOK8})`);
-  const refs = new Set([PMI_PMBOK8]);
-  for (const d of domains) {
-    if (DOMAIN_REFS[d] && !refs.has(DOMAIN_REFS[d])) {
-      lines.push(`- [${d} — PMBOK 8](${DOMAIN_REFS[d]})`);
-      refs.add(DOMAIN_REFS[d]);
-    }
-  }
-  return [...refs];
+function extractQuestionMeta(q) {
+  const fullText = `${q.text} ${(q.options || []).map((o) => o.text).join(" ")}`;
+  const scenario = matchScenario(q);
+  const chartProfile = getChartStemProfile(q);
+  const stemProfile = chartProfile || matchStemProfile(q.text);
+  const domains = scenario?.domains || stemProfile?.domains || scoreDomains(fullText);
+  const focusArea = scenario?.focusArea || detectFocusArea(q.text);
+  const processes = scenario?.processes || stemProfile?.processes || getProcesses(domains);
+  const principles = scenario?.principles || stemProfile?.principles || detectPrinciples(q.text);
+  return { domains, focusArea, processes, principles };
 }
 
-function formatPmbok8MappingLines(domains, focusArea, processes, principles) {
-  return [
+function collectMetaForWarmup(questions) {
+  const { buildRagQuery } = require("./pmp-pmbok8-rag-pages");
+  return questions.map((q) => {
+    const meta = extractQuestionMeta(q);
+    return buildRagQuery(meta.domains, meta.processes, meta.focusArea);
+  });
+}
+
+function appendReferences(lines, pageInfo) {
+  const { pages, topic, pdfRef } = pageInfo;
+  lines.push("");
+  lines.push("**Tham khảo**");
+  if (pdfRef && pages.length) {
+    lines.push(`- PMBOK 8 (\`${PDF_NAME}\`), tr. ${pages.join(", ")}: ${topic}`);
+  }
+  lines.push(`- [PMBOK Guide 8th Edition](${PMI_PMBOK8})`);
+  const refs = [];
+  if (pdfRef) refs.push(pdfRef);
+  refs.push(PMI_PMBOK8);
+  return refs;
+}
+
+function formatPmbok8MappingLines(domains, focusArea, processes, principles, pageInfo) {
+  const lines = [
     `- Domain: ${domains.join(", ")}`,
     `- Focus Area: ${focusArea}`,
     `- Process: ${processes.join(", ")}`,
     `- Principle: ${principles.join(", ")}`,
   ];
+  if (pageInfo?.pages?.length) {
+    lines.push(`- PDF: p.${pageInfo.pages.join(", ")} — ${pageInfo.topic}`);
+  }
+  return lines;
+}
+
+function buildPmbok8Payload(domains, focusArea, processes, principles, pageInfo) {
+  return {
+    domains,
+    focusArea,
+    processes,
+    principles,
+    pages: pageInfo.pages,
+  };
 }
 
 function buildDragDropExplanation(q, domains, focusArea, processes, principles, options = {}) {
+  const pageInfo = lookupPmbokPages(domains, processes, focusArea);
   const lines = [];
   lines.push("**PMBOK 8 mapping**");
-  lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles));
+  lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles, pageInfo));
   lines.push("");
   lines.push("**Vì sao mapping đúng**");
   if (q.explanation && q.explanation.length > 30 && q.explanation !== q.correctLabel && !q.explanation.includes("**PMBOK 8 mapping**")) {
@@ -208,10 +243,10 @@ function buildDragDropExplanation(q, domains, focusArea, processes, principles, 
   } else {
     lines.push(`Ghép đúng theo framework chuẩn (Scrum/PMBOK/team development) — đáp án: ${q.correct}.`);
   }
-  const refs = appendReferences(lines, domains);
+  const refs = appendReferences(lines, pageInfo);
   return {
     explanation: lines.join("\n"),
-    pmbok8: { domains, focusArea, processes, principles },
+    pmbok8: buildPmbok8Payload(domains, focusArea, processes, principles, pageInfo),
     references: refs,
   };
 }
@@ -230,10 +265,11 @@ function buildMcqExplanation(q, options = {}) {
   const priorityCue = detectPriorityCue(q.text);
   const agile = isAgileContext(q.text);
   const correctKeys = parseCorrectKeys(q.correct);
+  const pageInfo = lookupPmbokPages(domains, processes, focusArea);
 
   const lines = [];
   lines.push("**PMBOK 8 mapping**");
-  lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles));
+  lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles, pageInfo));
   lines.push("");
   lines.push("**Vì sao chọn đáp án này**");
   lines.push(`→ **${correctKeys.join(", ")}:** ${buildSummaryLine(q, correctKeys, scenario, domains, focusArea, stemProfile)}`);
@@ -257,21 +293,18 @@ function buildMcqExplanation(q, options = {}) {
     lines.push(originalExplanation);
   }
 
-  const refs = appendReferences(lines, domains);
+  const refs = appendReferences(lines, pageInfo);
 
   return {
     explanation: lines.join("\n"),
-    pmbok8: { domains, focusArea, processes, principles },
+    pmbok8: buildPmbok8Payload(domains, focusArea, processes, principles, pageInfo),
     references: refs,
   };
 }
 
 function generateForQuestion(q, options = {}) {
-  const fullText = `${q.text} ${(q.options || []).map((o) => o.text).join(" ")}`;
-  const domains = scoreDomains(fullText);
-  const focusArea = detectFocusArea(q.text);
-  const processes = getProcesses(domains);
-  const principles = detectPrinciples(q.text);
+  const meta = extractQuestionMeta(q);
+  const { domains, focusArea, processes, principles } = meta;
 
   if (q.type === "drag_drop") {
     return buildDragDropExplanation(q, domains, focusArea, processes, principles, options);
@@ -305,4 +338,6 @@ module.exports = {
   generateForQuestion,
   generateBatch,
   parseCorrectKeys,
+  extractQuestionMeta,
+  collectMetaForWarmup,
 };
