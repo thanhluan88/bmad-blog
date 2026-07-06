@@ -7,6 +7,7 @@ const {
 } = require("./lib/pmp-html-questions");
 
 const HTML_PATH = path.join(__dirname, "..", "public", "pmp", "pmp-full-questions.html");
+const JSON_PATH = path.join(__dirname, "..", "public", "pmp", "pmp-full-questions.json");
 const EXPLANATIONS_PATH = path.join(__dirname, "..", "data", "pmp-full-pmbok8-explanations.json");
 
 function main() {
@@ -22,6 +23,7 @@ function main() {
   const rich = merged.filter((q) => q.explanation?.includes("**PMBOK 8 mapping**")).length;
 
   writeQuestionsToHtml(HTML_PATH, merged);
+  fs.writeFileSync(JSON_PATH, JSON.stringify(merged));
 
   let html = fs.readFileSync(HTML_PATH, "utf8");
   const subtitle =
