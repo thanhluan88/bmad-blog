@@ -176,8 +176,12 @@ for (const { file, quizId } of FILES) {
   }
 
   if (html.includes(MARKER)) {
+    html = html.replace(
+      /const PMP_STATS_QUIZ_ID = "[^"]+";/,
+      `const PMP_STATS_QUIZ_ID = "${quizId}";`,
+    );
     fs.writeFileSync(file, html);
-    console.log("Repaired:", path.basename(file));
+    console.log("Repaired:", path.basename(file), `quiz=${quizId}`);
     continue;
   }
 

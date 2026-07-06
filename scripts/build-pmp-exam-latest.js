@@ -245,6 +245,7 @@ function buildHtml(template, questions) {
     ['"pmp-mock-exam-v1"', '"pmp-exam-latest-mock-exam-v1"'],
     ['"pmp-mock-exam-used-v1"', '"pmp-exam-latest-mock-exam-used-v1"'],
     ['pmp-question-stats-v1', "pmp-exam-latest-question-stats-v1"],
+    ['const PMP_STATS_QUIZ_ID = "full"', 'const PMP_STATS_QUIZ_ID = "latest"'],
   ];
 
   for (const [from, to] of replacements) {
