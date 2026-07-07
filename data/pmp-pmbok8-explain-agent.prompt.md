@@ -1,7 +1,7 @@
 ---
 name: pmp-pmbok8-explain-agent
 description: Phân tích đáp án PMP Exam Latest dựa trên PMBOK Guide 8th Edition (PDF gốc) và nguồn tham khảo công khai bổ sung.
-version: 1.3
+version: 1.4
 language: vi
 ---
 
@@ -36,33 +36,46 @@ Mỗi giải thích phải **ground** ít nhất một ý từ PDF (principle, d
 
 ## Trích dẫn trang PMBOK 8 (bắt buộc)
 
-Mỗi câu phải ghi **số trang PDF** (`pmbokguide_eighthed_eng.pdf`) nơi nội dung được lấy. Số trang = **PDF page index 1-based** (cùng metadata `page` từ RAG / `pypdf` khi index).
+Mỗi câu ghi **một số trang PDF** (`pmbokguide_eighthed_eng.pdf`) nơi đoạn nội dung **trực tiếp** hỗ trợ giải thích — không phải trang mở đầu miền hay sơ đồ Process Group.
 
-### Cách lấy số trang
+Số trang = **PDF page index 1-based** (metadata `page` từ RAG / `pypdf`).
 
-1. **RAG (ưu tiên):** `search_docs` với query domain/process/artifact → đọc `page=` trong kết quả
-2. **Đọc PDF:** mở file, ghi trang chứa đoạn trích
-3. **Không bịa:** nếu chưa tra được trang → `reviewFlag: "missing-pmbok-page"`; không điền số giả
+### Cách lấy số trang (đúng)
+
+1. **Query RAG theo nội dung câu hỏi** — không query chung kiểu `Performance Domain Stakeholders Manage Stakeholder Engagement`:
+   - Principle (vd. `Lead accountably`)
+   - Process / artifact trong đề (vd. `risk register`, `planned risk response`)
+   - Từ khóa đáp án đúng (vd. `acknowledge mistake apologize`)
+2. **Chọn 1 trang tốt nhất** trong top-k — ưu tiên section/process có nội dung (vd. `2.7.2.4 Plan Risk Responses`, `Be an Accountable Leader`)
+3. **Loại trừ trang giá trị thấp:**
+   - Trang mở đầu miền: *"2.5 Stakeholders Performance Domain addresses the processes…"* (thường p.172)
+   - Sơ đồ Process Group / Processes Overview (thường p.175, p.200 diagram-only)
+   - Trang chỉ có watermark PMI
+4. **Topic trong Tham khảo** = tiêu đề section/process **trên trang đã chọn**, không copy nhãn Domain/Process chung chung
+
+### Ví dụ đúng / sai
+
+| Câu | Sai (query chung) | Đúng hơn |
+| --- | --- | --- |
+| Full #1 — email gửi nhầm, xin lỗi | tr. 172, 175 (overview Stakeholders) | tr. 71 — *Be an Accountable Leader* |
+| Exam #1 — risk materialize, risk register | tr. 183, 200 (overview / diagram) | tr. 204 hoặc 242 — planned response / risk register |
 
 ### Đồng bộ (phải khớp nhau)
 
-| Chỗ | Trường / section | Format |
-| --- | --- | --- |
-| Markdown | `**PMBOK 8 mapping**` | **không** có dòng PDF (trang chỉ ở Tham khảo) |
-| Markdown | `**Tham khảo**` | một dòng: `- PMBOK 8 (pmbokguide_eighthed_eng.pdf), tr. {pages}: {topic}` |
-| JSON | `pmbok8.pages` | mảng số nguyên, tăng dần, không trùng |
-| JSON | `references` | mảng 1 phần tử — chỉ trích dẫn PDF có trang |
+| Chỗ | Format |
+| --- | --- |
+| `**Tham khảo**` | `- PMBOK 8 (pmbokguide_eighthed_eng.pdf), tr. {page}: {topic từ section PDF}` |
+| `pmbok8.pages` | `[{page}]` — **một** số trang |
+| `references[0]` | `pmbokguide_eighthed_eng.pdf, tr. {page} — {topic}` |
 
-**Ví dụ `references[0]`:** `pmbokguide_eighthed_eng.pdf, tr. 201 — Performance Domain: Risk, Monitor Risks`
-
-**Không** thêm link PMI hay blog trong `references` hay `**Tham khảo**`.
+**Không** gộp nhiều trang từ nhiều hit RAG. **Không** thêm link PMI/blog.
 
 ### Completion criterion (mỗi câu)
 
-- [ ] `pmbok8.pages` có ≥ 1 số trang hợp lệ (1–401)
-- [ ] `references[0]` chứa `pmbokguide_eighthed_eng.pdf` và `tr.` hoặc `p.`
-- [ ] `explanation` có `**Tham khảo**` với cùng số trang
-- [ ] Nội dung giải thích map được tới trang đã trích
+- [ ] Query RAG dựa trên **nội dung câu + đáp án đúng**, không chỉ Domain/Process Group
+- [ ] `pmbok8.pages` có đúng **1** trang (1–401)
+- [ ] Trang không phải overview/diagram; topic khớp section trên trang đó
+- [ ] `references[0]` và `**Tham khảo**` cùng số trang + topic
 
 ## Nguồn dữ liệu đề thi
 
@@ -206,7 +219,7 @@ Với **mỗi phương án không chọn**, viết 1–2 câu:
 - **D:** ...
 
 **Tham khảo**
-- PMBOK 8 (`pmbokguide_eighthed_eng.pdf`), tr. {pages}: {topic}
+- PMBOK 8 tr. {pages}: {topic}
 ```
 
 ### Nhiều câu (batch — cập nhật dữ liệu)
@@ -222,10 +235,10 @@ Xuất JSON object, key = `id` (string), value = object:
       "focusArea": "Monitoring & Controlling",
       "processes": ["Monitor Risks", "Implement Risk Responses"],
       "principles": ["Lead accountably", "Focus on value"],
-      "pages": [201]
+      "pages": [204]
     },
     "references": [
-      "pmbokguide_eighthed_eng.pdf, tr. 201 — Performance Domain: Risk, Monitor Risks"
+      "pmbokguide_eighthed_eng.pdf, tr. 204 — Planning and implementing risk responses with flexibility"
     ]
   }
 }
@@ -266,9 +279,9 @@ Build ghi đè theo `id`: `explanation`, `pmbok8` (gồm `pages`), `references`.
 
 **Trích dẫn (ví dụ sau khi tra RAG):**
 
-- `pmbok8.pages`: `[201]`
-- `references[0]`: `pmbokguide_eighthed_eng.pdf, tr. 201 — Performance Domain: Risk, Monitor Risks`
-- **Tham khảo:** `PMBOK 8 (pmbokguide_eighthed_eng.pdf), tr. 201: Monitor Risks — implement planned responses`
+- `pmbok8.pages`: `[204]`
+- `references[0]`: `pmbokguide_eighthed_eng.pdf, tr. 204 — Planning and implementing risk responses with flexibility`
+- **Tham khảo:** `PMBOK 8 (pmbokguide_eighthed_eng.pdf), tr. 204: …`
 
 ## Lệnh gọi agent (copy-paste)
 

@@ -179,10 +179,7 @@ function extractQuestionMeta(q) {
 
 function collectMetaForWarmup(questions) {
   const { buildRagQuery } = require("./pmp-pmbok8-rag-pages");
-  return questions.map((q) => {
-    const meta = extractQuestionMeta(q);
-    return buildRagQuery(meta.domains, meta.processes, meta.focusArea);
-  });
+  return questions.map((q) => buildRagQuery(q, extractQuestionMeta(q)));
 }
 
 function appendReferences(lines, pageInfo) {
@@ -215,7 +212,8 @@ function buildPmbok8Payload(domains, focusArea, processes, principles, pageInfo)
 }
 
 function buildDragDropExplanation(q, domains, focusArea, processes, principles, options = {}) {
-  const pageInfo = lookupPmbokPages(domains, processes, focusArea);
+  const meta = { domains, focusArea, processes, principles };
+  const pageInfo = lookupPmbokPages(q, meta);
   const lines = [];
   lines.push("**PMBOK 8 mapping**");
   lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles));
@@ -256,7 +254,8 @@ function buildMcqExplanation(q, options = {}) {
   const priorityCue = detectPriorityCue(q.text);
   const agile = isAgileContext(q.text);
   const correctKeys = parseCorrectKeys(q.correct);
-  const pageInfo = lookupPmbokPages(domains, processes, focusArea);
+  const meta = { domains, focusArea, processes, principles };
+  const pageInfo = lookupPmbokPages(q, meta);
 
   const lines = [];
   lines.push("**PMBOK 8 mapping**");
