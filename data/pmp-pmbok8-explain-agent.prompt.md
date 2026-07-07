@@ -1,7 +1,7 @@
 ---
 name: pmp-pmbok8-explain-agent
 description: Phân tích đáp án PMP Exam Latest dựa trên PMBOK Guide 8th Edition (PDF gốc) và nguồn tham khảo công khai bổ sung.
-version: 1.5
+version: 1.6
 language: vi
 ---
 
@@ -30,7 +30,7 @@ Mỗi giải thích phải **ground** ít nhất một ý từ PDF (principle, d
 
 Mỗi câu ghi **một số trang** trong PMBOK8 nơi đoạn nội dung **trực tiếp** hỗ trợ giải thích — không phải trang mở đầu miền hay sơ đồ Focus Area.
 
-Số trang = **PDF page index 1-based** (metadata `page` từ RAG / `pypdf`).
+Số trang = **số trang in trong PMBOK8** (metadata `page` từ RAG — trích từ góc trang PDF, **không** phải chỉ số trang file).
 
 ### Cách lấy số trang (đúng)
 
@@ -40,17 +40,17 @@ Số trang = **PDF page index 1-based** (metadata `page` từ RAG / `pypdf`).
    - Từ khóa đáp án đúng (vd. `acknowledge mistake apologize`)
 2. **Chọn 1 trang tốt nhất** trong top-k — ưu tiên section/process có nội dung (vd. `2.7.2.4 Plan Risk Responses`, `Be an Accountable Leader`)
 3. **Loại trừ trang giá trị thấp:**
-   - Trang mở đầu miền: *"2.5 Stakeholders Performance Domain addresses the processes…"* (thường p.172)
-   - Sơ đồ Focus Area / Processes Overview (thường p.175, p.200 diagram-only)
+   - Trang mở đầu miền: *"2.5 Stakeholders Performance Domain addresses the processes…"* (thường tr. 67 in)
+   - Sơ đồ Focus Area / Processes Overview (diagram-only)
    - Trang chỉ có watermark PMI
 4. **Topic trong Tham khảo** = tiêu đề section/process **trên trang đã chọn**, không copy nhãn Domain/Process chung chung
 
 ### Ví dụ đúng / sai
 
-| Câu | Sai (query chung) | Đúng hơn |
+| Câu | Sai (query chung / file page) | Đúng hơn |
 | --- | --- | --- |
-| Full #1 — email gửi nhầm, xin lỗi | tr. 172, 175 (overview Stakeholders) | tr. 71 — *Be an Accountable Leader* |
-| Exam #1 — risk materialize, risk register | tr. 183, 200 (overview / diagram) | tr. 204 hoặc 242 — planned response / risk register |
+| Full #1 — email gửi nhầm, xin lỗi | tr. 172 (overview Stakeholders, file index) | tr. **48** — *Be an Accountable Leader* |
+| Exam #1 — risk materialize, risk register | tr. 183, 200 (overview / diagram) | tr. **98** — *Implement Risk Responses* |
 
 ### Đồng bộ (phải khớp nhau)
 

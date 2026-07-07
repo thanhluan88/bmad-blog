@@ -160,7 +160,7 @@ function lookupPmbokPages(q, meta) {
   const topicFallback = buildTopicLabel(domains, processes);
   const hit = pageCache.get(query);
   const best = pickBestHit(hit?.hits);
-  const page = Number(best?.page);
+  const page = Number(best?.printed_page ?? best?.page);
 
   if (!Number.isInteger(page) || page < 1 || page > 401) {
     return { pages: [], topic: topicFallback, pdfRef: null, query, fromRag: false };
