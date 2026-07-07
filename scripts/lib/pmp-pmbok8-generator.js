@@ -1,5 +1,4 @@
 const {
-  PMI_PMBOK8,
   DOMAIN_KEYWORDS,
   AGILE_KEYWORDS,
   FOCUS_AREA_RULES,
@@ -193,24 +192,16 @@ function appendReferences(lines, pageInfo) {
   if (pdfRef && pages.length) {
     lines.push(`- PMBOK 8 (\`${PDF_NAME}\`), tr. ${pages.join(", ")}: ${topic}`);
   }
-  lines.push(`- [PMBOK Guide 8th Edition](${PMI_PMBOK8})`);
-  const refs = [];
-  if (pdfRef) refs.push(pdfRef);
-  refs.push(PMI_PMBOK8);
-  return refs;
+  return pdfRef ? [pdfRef] : [];
 }
 
-function formatPmbok8MappingLines(domains, focusArea, processes, principles, pageInfo) {
-  const lines = [
+function formatPmbok8MappingLines(domains, focusArea, processes, principles) {
+  return [
     `- Domain: ${domains.join(", ")}`,
-    `- Focus Area: ${focusArea}`,
+    `- Process Group: ${focusArea}`,
     `- Process: ${processes.join(", ")}`,
     `- Principle: ${principles.join(", ")}`,
   ];
-  if (pageInfo?.pages?.length) {
-    lines.push(`- PDF: p.${pageInfo.pages.join(", ")} — ${pageInfo.topic}`);
-  }
-  return lines;
 }
 
 function buildPmbok8Payload(domains, focusArea, processes, principles, pageInfo) {
@@ -227,7 +218,7 @@ function buildDragDropExplanation(q, domains, focusArea, processes, principles, 
   const pageInfo = lookupPmbokPages(domains, processes, focusArea);
   const lines = [];
   lines.push("**PMBOK 8 mapping**");
-  lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles, pageInfo));
+  lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles));
   lines.push("");
   lines.push("**Vì sao mapping đúng**");
   if (q.explanation && q.explanation.length > 30 && q.explanation !== q.correctLabel && !q.explanation.includes("**PMBOK 8 mapping**")) {
@@ -269,7 +260,7 @@ function buildMcqExplanation(q, options = {}) {
 
   const lines = [];
   lines.push("**PMBOK 8 mapping**");
-  lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles, pageInfo));
+  lines.push(...formatPmbok8MappingLines(domains, focusArea, processes, principles));
   lines.push("");
   lines.push("**Vì sao chọn đáp án này**");
   lines.push(`→ **${correctKeys.join(", ")}:** ${buildSummaryLine(q, correctKeys, scenario, domains, focusArea, stemProfile)}`);
