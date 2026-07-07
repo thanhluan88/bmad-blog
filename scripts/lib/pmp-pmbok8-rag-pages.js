@@ -2,7 +2,7 @@ const { spawnSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-const PDF_NAME = "pmbokguide_eighthed_eng.pdf";
+const PDF_NAME = "PMBOK8";
 const RAG_PYTHON = process.env.RAG_PYTHON || "C:\\MyWork\\PMP\\rag_langchain\\.venv\\Scripts\\python.exe";
 const RAG_BATCH_SCRIPT =
   process.env.RAG_BATCH_SCRIPT || "C:\\MyWork\\PMP\\rag_langchain\\search_pages_batch.py";

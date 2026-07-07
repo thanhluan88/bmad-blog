@@ -187,7 +187,7 @@ function appendReferences(lines, pageInfo) {
   lines.push("");
   lines.push("**Tham khảo**");
   if (pdfRef && pages.length) {
-    lines.push(`- PMBOK 8 (\`${PDF_NAME}\`), tr. ${pages.join(", ")}: ${topic}`);
+    lines.push(`- PMBOK8, tr. ${pages.join(", ")}: ${topic}`);
   }
   return pdfRef ? [pdfRef] : [];
 }
@@ -195,7 +195,7 @@ function appendReferences(lines, pageInfo) {
 function formatPmbok8MappingLines(domains, focusArea, processes, principles) {
   return [
     `- Domain: ${domains.join(", ")}`,
-    `- Process Group: ${focusArea}`,
+    `- Focus Area: ${focusArea}`,
     `- Process: ${processes.join(", ")}`,
     `- Principle: ${principles.join(", ")}`,
   ];
