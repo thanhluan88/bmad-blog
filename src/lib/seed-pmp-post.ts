@@ -2,11 +2,16 @@ import type { PrismaClient } from "@prisma/client";
 import {
   PMP_EXAM_LATEST_SLUG,
   PMP_HUB_SLUG,
+  PMP_MINDSET_SLUG,
   PMP_QUIZ_SLUG,
 } from "@/lib/pmp-quiz";
 
 export const PMP_HUB_POST_TITLE = "PMP — Luyện tập trắc nghiệm";
 export const PMP_HUB_POST_CONTENT_MD = `Trang này giúp bạn chọn bộ đề PMP phù hợp. Mỗi bộ đề chạy riêng; thống kê **Đã làm / Sai** và chế độ **Ôn câu sai** được lưu theo **tên người dùng** (không dùng chung giữa hai bộ).
+
+## Bài học mindset
+
+Trước khi drill hàng trăm câu, nên đọc **[PMP Mindset — Drill tình huống](/p/pmp-mindset)**: nhận diện pattern (Do First / Risk vs Issue), bẫy PMI vs thực tế, flashcard và 10 câu drill tiếng Anh.
 
 ## Hai bộ đề
 
@@ -32,6 +37,21 @@ export const PMP_EXAM_LATEST_POST_TITLE =
 export const PMP_POST_CONTENT_MD = "PMP quiz.";
 export const PMP_EXAM_LATEST_POST_CONTENT_MD =
   "PMP Exam Latest — 1417 câu từ ExamTopics (PMP Exam - Lasted version 1).";
+
+export const PMP_MINDSET_POST_TITLE = "PMP Mindset — Drill tình huống";
+export const PMP_MINDSET_POST_CONTENT_MD = `Bài học tương tác giúp bạn luyện **PMI mindset** trước khi làm đề lớn.
+
+## Nội dung
+
+1. **Mindset cốt lõi** — quy trình 7 bước trả lời, vai trò PM theo PMI
+2. **Nhận diện pattern** — Do First / Do Next, Risk vs Issue, Process Group
+3. **PMI vs Thực tế** — bẫy đề thi theo Knowledge Area, Predictive / Agile / Hybrid
+4. **Flashcard** — lật thẻ ôn nhanh
+5. **Drill 10 câu** — scenario tiếng Anh (exam-style)
+6. **Cheat sheet** — tóm tắt mindset theo từng KA
+
+> Mẹo: hoàn thành drill 10 câu trong bài học, sau đó chuyển sang [luyện đề đầy đủ](/p/pmp).
+`;
 
 async function upsertQuizPost(
   db: PrismaClient,
@@ -108,6 +128,15 @@ export async function seedPmpPost(db: PrismaClient) {
     PMP_EXAM_LATEST_SLUG,
     PMP_EXAM_LATEST_POST_TITLE,
     PMP_EXAM_LATEST_POST_CONTENT_MD,
+    admin.id,
+    admin.email,
+  );
+
+  await upsertQuizPost(
+    db,
+    PMP_MINDSET_SLUG,
+    PMP_MINDSET_POST_TITLE,
+    PMP_MINDSET_POST_CONTENT_MD,
     admin.id,
     admin.email,
   );

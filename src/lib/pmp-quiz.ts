@@ -6,6 +6,9 @@ export const PMP_QUIZ_HTML_PATH = "/pmp/pmp-full-questions.html";
 export const PMP_EXAM_LATEST_SLUG = "pmp-exam-latest";
 export const PMP_EXAM_LATEST_HTML_PATH = "/pmp/pmp-exam-latest.html";
 
+export const PMP_MINDSET_SLUG = "pmp-mindset";
+export const PMP_MINDSET_HTML_PATH = "/pmp/pmp-mindset-teach.html";
+
 export const PMP_QUIZ_SLUGS = [PMP_QUIZ_SLUG, PMP_EXAM_LATEST_SLUG] as const;
 export type PmpQuizSlug = (typeof PMP_QUIZ_SLUGS)[number];
 
@@ -29,8 +32,12 @@ export function shouldShowPostInSidebar(slug: string): boolean {
   return !(PMP_QUIZ_SLUGS as readonly string[]).includes(slug);
 }
 
+export function isPmpMindsetSlug(slug: string): boolean {
+  return slug === PMP_MINDSET_SLUG;
+}
+
 export function isPmpRouteSlug(slug: string): boolean {
-  return slug === PMP_HUB_SLUG || isPmpQuizSlug(slug);
+  return slug === PMP_HUB_SLUG || isPmpQuizSlug(slug) || isPmpMindsetSlug(slug);
 }
 
 const QUIZ_HTML_BY_SLUG: Record<PmpQuizSlug, string> = {

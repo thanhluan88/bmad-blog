@@ -1,15 +1,19 @@
 import { notFound } from "next/navigation";
 import { ChromeAwarePageFrame } from "@/components/ChromeAwarePageFrame";
 import { MarkdownBody } from "@/components/MarkdownBody";
+import { PmpInteractiveEmbed } from "@/components/PmpInteractiveEmbed";
 import { PmpQuizEmbed } from "@/components/PmpQuizEmbed";
 import { PmpHubHero, PmpQuizPicker } from "@/components/PmpQuizPicker";
 import { PostCover } from "@/components/PostCover";
 import { db } from "@/lib/db";
 import {
   getPmpQuizHtmlPath,
+  isPmpMindsetSlug,
   isPmpQuizSlug,
   PMP_EXAM_LATEST_SLUG,
   PMP_HUB_SLUG,
+  PMP_MINDSET_HTML_PATH,
+  PMP_MINDSET_SLUG,
   PMP_QUIZ_SLUG,
 } from "@/lib/pmp-quiz";
 import { getPmpPostFallback } from "@/lib/pmp-post-fallback";
@@ -21,6 +25,7 @@ type Props = {
 const QUIZ_TITLES: Record<string, string> = {
   [PMP_QUIZ_SLUG]: "PMP Full Questions",
   [PMP_EXAM_LATEST_SLUG]: "PMP Exam Latest",
+  [PMP_MINDSET_SLUG]: "PMP Mindset",
 };
 
 export default async function PublicPostPage({ params }: Props) {
@@ -64,6 +69,17 @@ export default async function PublicPostPage({ params }: Props) {
       <ChromeAwarePageFrame variant="quiz">
         <PmpQuizEmbed
           htmlPath={getPmpQuizHtmlPath(slug)}
+          title={QUIZ_TITLES[slug] ?? post.title}
+        />
+      </ChromeAwarePageFrame>
+    );
+  }
+
+  if (isPmpMindsetSlug(slug)) {
+    return (
+      <ChromeAwarePageFrame variant="quiz">
+        <PmpInteractiveEmbed
+          htmlPath={PMP_MINDSET_HTML_PATH}
           title={QUIZ_TITLES[slug] ?? post.title}
         />
       </ChromeAwarePageFrame>

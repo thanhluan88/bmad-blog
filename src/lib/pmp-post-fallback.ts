@@ -2,6 +2,7 @@ import {
   isPmpRouteSlug,
   PMP_EXAM_LATEST_SLUG,
   PMP_HUB_SLUG,
+  PMP_MINDSET_SLUG,
   PMP_QUIZ_SLUG,
 } from "@/lib/pmp-quiz";
 import {
@@ -9,6 +10,8 @@ import {
   PMP_EXAM_LATEST_POST_TITLE,
   PMP_HUB_POST_CONTENT_MD,
   PMP_HUB_POST_TITLE,
+  PMP_MINDSET_POST_CONTENT_MD,
+  PMP_MINDSET_POST_TITLE,
   PMP_POST_CONTENT_MD,
   PMP_POST_TITLE,
 } from "@/lib/seed-pmp-post";
@@ -33,6 +36,11 @@ const FALLBACKS: Record<string, PmpPostView> = {
   [PMP_EXAM_LATEST_SLUG]: {
     title: PMP_EXAM_LATEST_POST_TITLE,
     contentMd: PMP_EXAM_LATEST_POST_CONTENT_MD,
+    coverImageUrl: null,
+  },
+  [PMP_MINDSET_SLUG]: {
+    title: PMP_MINDSET_POST_TITLE,
+    contentMd: PMP_MINDSET_POST_CONTENT_MD,
     coverImageUrl: null,
   },
 };

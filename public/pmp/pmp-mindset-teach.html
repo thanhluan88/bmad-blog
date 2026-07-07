@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMP MINDSET — Bài học tương tác</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --surface2: #243044;
+      --text: #e8edf4;
+      --muted: #8b9cb3;
+      --accent: #e94560;
+      --accent2: #4ade80;
+      --warn: #fbbf24;
+      --info: #60a5fa;
+      --border: #2d3a4f;
+      --shadow: 0 12px 40px rgba(0,0,0,0.35);
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* Layout */
+    .layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .mobile-nav { display: flex !important; }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 1rem;
+    }
+    .sidebar .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+    .sidebar .sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar nav a {
+      display: block;
+      padding: 0.55rem 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+      transition: all 0.15s;
+    }
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background: var(--surface2);
+      color: var(--text);
+    }
+    .sidebar nav a.active { border-left: 3px solid var(--accent); }
+    .progress-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: var(--surface2);
+      border-radius: var(--radius);
+    }
+    .progress-box label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .progress-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+    .progress-text {
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      color: var(--accent2);
+      font-weight: 600;
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+      gap: 0.5rem;
+      overflow-x: auto;
+    }
+    .mobile-nav a {
+      white-space: nowrap;
+      padding: 0.4rem 0.75rem;
+      background: var(--surface2);
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 99px;
+      font-size: 0.8rem;
+    }
+
+    /* Main */
+    main {
+      padding: 2rem 2.5rem 4rem;
+      max-width: 900px;
+    }
+    @media (max-width: 600px) { main { padding: 1.25rem; } }
+
+    .hero {
+      margin-bottom: 2.5rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--surface) 0%, #1e2d42 100%);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .hero h1 {
+      font-size: 1.85rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, var(--accent), #ff8fa3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p { color: var(--muted); max-width: 640px; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 99px;
+      background: var(--surface2);
+      color: var(--info);
+      border: 1px solid var(--border);
+    }
+
+    section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 1rem;
+    }
+    section h2 {
+      font-size: 1.35rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+    section h3 {
+      font-size: 1.05rem;
+      color: var(--warn);
+      margin: 1.25rem 0 0.75rem;
+    }
+    p { margin-bottom: 0.75rem; color: var(--text); }
+    ul, ol { margin: 0 0 1rem 1.25rem; }
+    li { margin-bottom: 0.35rem; color: #c5d0de; }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .card.highlight {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(233,69,96,0.2);
+    }
+    .card.green { border-color: rgba(74,222,128,0.4); }
+    .card.blue { border-color: rgba(96,165,250,0.4); }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.65rem 0.85rem;
+      text-align: left;
+    }
+    th {
+      background: var(--surface2);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    tr:nth-child(even) td { background: rgba(36,48,68,0.4); }
+
+    /* Flow diagram */
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin: 1rem 0;
+    }
+    .flow-step {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .flow-step.emphasis {
+      background: rgba(233,69,96,0.15);
+      border-color: var(--accent);
+      color: #ff8fa3;
+    }
+    .flow-arrow { color: var(--muted); font-size: 1.2rem; }
+
+    /* Quiz */
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-card.answered-correct { border-color: var(--accent2); }
+    .quiz-card.answered-wrong { border-color: var(--accent); }
+    .quiz-num {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-stem {
+      font-weight: 500;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .options { display: flex; flex-direction: column; gap: 0.5rem; }
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      padding: 0.75rem 1rem;
+      background: var(--surface2);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: left;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      width: 100%;
+    }
+    .option:hover:not(:disabled) { border-color: var(--info); }
+    .option:disabled { cursor: default; opacity: 0.85; }
+    .option.correct { border-color: var(--accent2); background: rgba(74,222,128,0.1); }
+    .option.wrong { border-color: var(--accent); background: rgba(233,69,96,0.1); }
+    .option .letter {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .explanation {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(96,165,250,0.08);
+      border-left: 3px solid var(--info);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+    }
+    .explanation.show { display: block; }
+    .explanation strong { color: var(--info); }
+
+    /* Flashcards */
+    .flash-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .flash {
+      perspective: 800px;
+      height: 160px;
+      cursor: pointer;
+    }
+    .flash-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s;
+      transform-style: preserve-3d;
+    }
+    .flash.flipped .flash-inner { transform: rotateY(180deg); }
+    .flash-front, .flash-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .flash-front {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+    .flash-back {
+      background: rgba(233,69,96,0.12);
+      border: 1px solid var(--accent);
+      transform: rotateY(180deg);
+      color: #ffb3c1;
+    }
+    .flash-hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Compare boxes */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 600px) { .compare { grid-template-columns: 1fr; } }
+    .compare .do { border-top: 3px solid var(--accent2); }
+    .compare .dont { border-top: 3px solid var(--accent); }
+    .compare h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+    }
+    .compare .do h4 { color: var(--accent2); }
+    .compare .dont h4 { color: var(--accent); }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: var(--surface2);
+      color: var(--warn);
+      margin-right: 0.35rem;
+      vertical-align: middle;
+    }
+    .reset-btn {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+    .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Part 3 — Framework tabs & traps */
+    .ka-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .ka-tab {
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      border-radius: 99px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.8rem;
+      transition: all 0.15s;
+    }
+    .ka-tab.active {
+      background: rgba(233,69,96,0.15);
+      border-color: var(--accent);
+      color: #ffb3c1;
+    }
+    .trap-panel { display: none; }
+    .trap-panel.active { display: block; }
+    .trap-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .trap-item .real { color: var(--accent); font-size: 0.85rem; margin-bottom: 0.35rem; }
+    .trap-item .pmi { color: var(--accent2); font-size: 0.85rem; }
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 700px) { .framework-grid { grid-template-columns: 1fr; } }
+    .fw-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+    .fw-box h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .fw-box.predictive h4 { color: var(--info); }
+    .fw-box.agile h4 { color: var(--accent2); }
+    .fw-box.hybrid h4 { color: var(--warn); }
+    .fw-box ul { margin: 0; padding-left: 1.1rem; font-size: 0.85rem; }
+    .quiz-card .lang-tag {
+      font-size: 0.7rem;
+      color: var(--info);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-left: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-nav">
+    <a href="#intro">Giới thiệu</a>
+    <a href="#mindset">Mindset</a>
+    <a href="#patterns">Pattern</a>
+    <a href="#part3">Part 3</a>
+    <a href="#flashcards">Flashcard</a>
+    <a href="#quiz">Drill</a>
+    <a href="#cheatsheet">Cheat sheet</a>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="logo">PMP MINDSET</div>
+      <div class="sub">Bài học tương tác · PMI Mindset</div>
+      <nav>
+        <a href="#intro" class="active">0. Giới thiệu</a>
+        <a href="#mindset">1. Mindset cốt lõi</a>
+        <a href="#patterns">2. Nhận diện pattern</a>
+        <a href="#part3">3. PMI vs Thực tế &amp; Framework</a>
+        <a href="#flashcards">4. Flashcard</a>
+        <a href="#quiz">5. Drill 10 câu (EN)</a>
+        <a href="#cheatsheet">6. Cheat sheet</a>
+      </nav>
+      <div class="progress-box">
+        <label>Tiến độ Drill</label>
+        <div class="progress-bar"><span id="progressFill"></span></div>
+        <div class="progress-text" id="progressText">0 / 10 câu</div>
+      </div>
+    </aside>
+
+    <main>
+      <div class="hero" id="intro">
+        <h1>PMP MINDSET — Drill tình huống</h1>
+        <p>
+          Luyện <strong>nhận diện pattern</strong>, <strong>framework</strong> và
+          <strong>trả lời câu hỏi scenario</strong> theo chuẩn PMI.
+          Drill 10 câu viết bằng tiếng Anh — giống format đề thi.
+        </p>
+        <div class="badge-row">
+          <span class="badge">Do First / Do Next</span>
+          <span class="badge">Risk vs Issue</span>
+          <span class="badge">Change Control</span>
+          <span class="badge">Servant Leader</span>
+          <span class="badge">Agile / Hybrid / Predictive</span>
+        </div>
+      </div>
+
+      <!-- Section 1 -->
+      <section id="mindset">
+        <h2>1. Mindset cốt lõi — Nhớ trước khi drill</h2>
+        <div class="card highlight">
+          <p><strong>Thông điệp vàng:</strong> PMP không hỏi bạn làm PM thực tế thế nào — mà hỏi bạn làm PM <em>theo chuẩn PMI</em> thế nào. Trong đời thực bạn có thể fix nhanh; trong đề thi phải <strong>đi đúng quy trình, không cắt bước</strong>.</p>
+        </div>
+
+        <h3>Quy trình 7 bước trả lời mọi câu hỏi</h3>
+        <div class="flow">
+          <span class="flow-step emphasis">1. ASSESS</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">2. Review plan</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">3. Analyze</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">4. Update docs</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">5. Communicate</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">6. Take action</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">7. Review liên tục</span>
+        </div>
+
+        <h3>Vai trò PM trong đề thi</h3>
+        <div class="compare">
+          <div class="card do">
+            <h4>PMI muốn bạn làm</h4>
+            <ul>
+              <li>Proactive + Servant Leader</li>
+              <li>Coach team, không đưa sẵn giải pháp</li>
+              <li>Face-to-face ưu tiên</li>
+              <li>Shield team khỏi gián đoạn</li>
+              <li>Customer success là mục tiêu chính</li>
+              <li>Không bypass quy trình / tài liệu</li>
+            </ul>
+          </div>
+          <div class="card dont">
+            <h4>PMI không muốn bạn làm</h4>
+            <ul>
+              <li>Fire / remove team member</li>
+              <li>Escalate lên Sponsor (trừ viability)</li>
+              <li>Xin tăng budget</li>
+              <li>Tự implement change</li>
+              <li>Đẩy vấn đề cho người khác</li>
+              <li>Terminate contract vì bất tiện</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2 -->
+      <section id="patterns">
+        <h2>2. Nhận diện pattern — Chìa khóa chọn đáp án</h2>
+
+        <div class="card blue">
+          <h3>Do First / Do Next vs Do / Asked for action</h3>
+          <table>
+            <thead>
+              <tr><th>Dạng câu</th><th>Hành vi đúng</th><th>Bẫy thường gặp</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Do First / Do Next</strong></td>
+                <td>Assess → Review plan → Analyze. <em>Chưa hành động.</em></td>
+                <td>Chọn đáp án hành động ngay (implement, escalate, fire)</td>
+              </tr>
+              <tr>
+                <td><strong>Do / Asked for action</strong></td>
+                <td>Hành động ngay — không review dài dòng</td>
+                <td>Chọn "review document" khi câu hỏi yêu cầu action</td>
+              </tr>
+              <tr>
+                <td><strong>Should have done</strong></td>
+                <td>Plan kỹ hơn, phân tích risk/requirements sâu hơn</td>
+                <td>Chọn giải pháp reactive thay vì preventive</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card green">
+          <h3>Risk vs Issue — Phân biệt bằng từ khóa</h3>
+          <table>
+            <thead>
+              <tr><th>Loại</th><th>Từ khóa</th><th>Tài liệu tham chiếu</th><th>Hành động</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Risk</strong> (có thể xảy ra)</td>
+                <td>MAY / MIGHT / COULD</td>
+                <td>Risk Register + Risk Management Plan</td>
+                <td>Plan response, monitor</td>
+              </tr>
+              <tr>
+                <td><strong>Issue</strong> (đã xảy ra)</td>
+                <td>WILL / SHOULD / HAS / đã xảy ra</td>
+                <td>Issue Log</td>
+                <td>Assess root cause → resolve</td>
+              </tr>
+              <tr>
+                <td><strong>Change</strong></td>
+                <td>Stakeholder muốn thay đổi scope/plan</td>
+                <td>Change Management Plan</td>
+                <td>Assess impact → Formal CR → Approval</td>
+              </tr>
+              <tr>
+                <td><strong>Safety / Law</strong></td>
+                <td>Health hazard, mandatory regulation</td>
+                <td>—</td>
+                <td>Stop work → Change control</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Process Group — Nhận diện qua từ khóa ITTO</h3>
+          <table>
+            <thead>
+              <tr><th>Process Group</th><th>Từ khóa</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Planning</td><td>Plan, Estimate, Define</td></tr>
+              <tr><td>Executing</td><td>Manage, Conduct, Implement</td></tr>
+              <tr><td>Monitoring &amp; Controlling</td><td>Monitor, Control, Validate</td></tr>
+            </tbody>
+          </table>
+          <p class="note" style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">
+            Câu hỏi ở Execution → đáp án Planning thường <strong>sai</strong>.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Đáp án ít có khả năng đúng</h3>
+          <p>Từ cực đoan: <code>must, only, all, every, 100%, immediately, bypass, none</code></p>
+          <p>Hành vi cực đoan: terminate contract, fire, stop payment, hire consultant giữa dự án, refuse customer, escalate sponsor.</p>
+          <p style="color:var(--accent2);">Đáp án thường đúng: inclusiveness, collaboration, decisiveness, face-to-face, coach.</p>
+        </div>
+      </section>
+
+      <!-- Section 3 Part 3 -->
+      <section id="part3">
+        <h2>3. PMI vs Thực tế &amp; Framework — Bẫy đề thi</h2>
+        <p>Nhiều câu sai không phải vì thiếu kiến thức ITTO, mà vì bạn chọn theo <strong>thói quen làm việc thực tế</strong> thay vì PMI mindset.</p>
+
+        <h3>Thực tế vs PMI — So sánh nhanh</h3>
+        <div class="compare">
+          <div class="card dont">
+            <h4>Thực tế (thường sai trong đề)</h4>
+            <ul>
+              <li>Fix nhanh, bỏ qua quy trình để kịp deadline</li>
+              <li>Escalate lên sếp / sponsor khi gặp khó</li>
+              <li>Tự quyết thay đổi scope cho “linh hoạt”</li>
+              <li>Sa thải / thay người khi performance kém</li>
+              <li>Email thay vì họp trực tiếp</li>
+              <li>Xin thêm budget khi over cost</li>
+            </ul>
+          </div>
+          <div class="card do">
+            <h4>PMI mindset (đáp án đúng)</h4>
+            <ul>
+              <li>Assess → Review plan → Analyze → rồi mới action</li>
+              <li>Coach, facilitate, servant leadership</li>
+              <li>Formal change control + approval</li>
+              <li>Private meeting, training, ground rules</li>
+              <li>Face-to-face ưu tiên</li>
+              <li>Value analysis, re-plan — không xin budget</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Nhận diện Framework — Loại đáp án sai framework</h3>
+        <p>Câu hỏi thường nói rõ context. Xác định framework trước khi chọn — loại ngay đáp án “đúng” nhưng thuộc framework khác.</p>
+        <div class="framework-grid">
+          <div class="fw-box predictive">
+            <h4>Predictive / Waterfall</h4>
+            <ul>
+              <li>Change Request formal</li>
+              <li>WBS, baseline, CR approval</li>
+              <li>Validate Scope at phase end</li>
+              <li>CCB, Change Management Plan</li>
+            </ul>
+          </div>
+          <div class="fw-box agile">
+            <h4>Agile / Scrum</h4>
+            <ul>
+              <li>PO owns backlog priority</li>
+              <li>Sprint Review, Retrospective</li>
+              <li>Daily Scrum, information radiator</li>
+              <li>MVP, incremental delivery</li>
+            </ul>
+          </div>
+          <div class="fw-box hybrid">
+            <h4>Hybrid</h4>
+            <ul>
+              <li>Predictive planning + Agile delivery</li>
+              <li>CR cho baseline; backlog cho iteration</li>
+              <li>Đọc kỹ câu hỏi: phần nào predictive, phần nào agile</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Bẫy theo Knowledge Area — Click tab</h3>
+        <div class="ka-tabs" id="kaTabs"></div>
+        <div id="trapPanels"></div>
+      </section>
+
+      <!-- Section 4 Flashcards -->
+      <section id="flashcards">
+        <h2>4. Flashcard — Click để lật</h2>
+        <p class="flash-hint">Nhấn vào thẻ để xem đáp án mindset</p>
+        <div class="flash-grid" id="flashGrid"></div>
+      </section>
+
+      <!-- Section 5 Quiz -->
+      <section id="quiz">
+        <h2>5. Drill 10 câu tình huống <span class="lang-tag">English</span></h2>
+        <p>Câu hỏi và đáp án bằng tiếng Anh (exam-style). Giải thích hiện sau khi chọn.</p>
+        <div id="quizContainer"></div>
+        <button class="reset-btn" id="resetQuiz">Làm lại từ đầu</button>
+      </section>
+
+      <!-- Section 6 Cheat sheet -->
+      <section id="cheatsheet">
+        <h2>6. Cheat sheet — Knowledge Area nhanh</h2>
+        <table>
+          <thead>
+            <tr><th>KA</th><th>Mindset đề thi</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Change</td><td>Assess impact toàn dự án → Formal CR → Không tự implement</td></tr>
+            <tr><td>Scope</td><td>Customer approve product scope; Validate Scope = acceptance; Chỉ PO prioritize backlog</td></tr>
+            <tr><td>Schedule</td><td>Không publish schedule trước khi confirm resource; SPI/CPI &gt;1 = good</td></tr>
+            <tr><td>Cost</td><td>Charter = budget range; CPI dùng actual cost; Không xin tăng budget</td></tr>
+            <tr><td>Quality</td><td>Prevention &gt; Inspection; Không có quality baseline</td></tr>
+            <tr><td>Resources</td><td>Negotiate với Functional Manager; Conflict: Confrontation &gt; Compromise &gt; Forcing</td></tr>
+            <tr><td>Communication</td><td>F2F cho dispute; Written cho complex/culture khác; 5C</td></tr>
+            <tr><td>Stakeholder</td><td>Identify suốt dự án; Complaint → review plan; Coach Agile nếu chưa biết</td></tr>
+            <tr><td>Risk</td><td>MAY/MIGHT → Risk Register; Unplanned triggered → workaround</td></tr>
+            <tr><td>Procurement</td><td>Dispute: Claims → Negotiate → Arbitration → Litigation</td></tr>
+            <tr><td>Integration</td><td>PM = integrator; Closure: Sponsor sign-off; Lessons learned suốt dự án</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <footer>
+        PMP MINDSET — Interactive study guide · Cập nhật {{DATE}}
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const FLASH_DATA = [
+      { q: "Team mất động lực — PM làm gì?", a: "Tìm nguyên nhân (assess), coach — không fire, không escalate ngay." },
+      { q: "Stakeholder yêu cầu thêm feature giữa sprint?", a: "Submit Change Request qua formal process — không tự implement." },
+      { q: "Vendor COULD delay 2 tuần do thiên tai?", a: "RISK — check Risk Register (MAY/MIGHT/COULD)." },
+      { q: "Deliverable HAS failed acceptance test?", a: "ISSUE — Issue Log → assess root cause → resolve." },
+      { q: "Câu hỏi: What should you do FIRST?", a: "Assess / Review plan / Analyze — KHÔNG hành động ngay." },
+      { q: "Luật mới bắt buộc về an toàn?", a: "Stop work → Change control process (Emergency/Mandatory)." },
+      { q: "PO không prioritize backlog?", a: "Train/coach PO — PM KHÔNG tự prioritize." },
+      { q: "Conflict giữa 2 team members?", a: "Confrontation (facilitate 1 room) → Compromise → không Forcing/Withdrawal trước." },
+      { q: "Stakeholder complain thiếu info trong report?", a: "Review Communication Management Plan / Stakeholder Engagement Plan." },
+      { q: "Muốn demo giá trị sản phẩm cho stakeholder?", a: "Prototype (khi hầu hết requirements đã biết)." },
+      { q: "Quá nhiều wish list, ít resource?", a: "MVP — deliver minimum viable product trước." },
+      { q: "CPI = 0.5 nghĩa là gì?", a: "Chỉ thu được 50% giá trị trên mỗi đô chi — dùng actual cost, không phải estimated." },
+    ];
+
+    const QUIZ_DATA = [
+      {
+        stem: "A team member has been arriving late repeatedly, affecting the sprint schedule. What should the project manager do <strong>FIRST</strong>?",
+        options: [
+          "Escalate to the functional manager for disciplinary action",
+          "Remove the team member from the project",
+          "Meet privately with the team member to understand the root cause and motivation",
+          "Send a warning email to the entire team"
+        ],
+        correct: 2,
+        explain: "Do FIRST → Assess before acting. Servant leader: face-to-face 1-on-1 to understand root cause. PM does not fire/remove resources; personal issues → private meeting."
+      },
+      {
+        stem: "A key stakeholder requests an additional feature during the current sprint. The project uses Scrum. What should the project manager do?",
+        options: [
+          "Implement the feature immediately because the stakeholder is influential",
+          "Submit a change request and work with the Product Owner through the formal change process",
+          "Refuse the stakeholder's request outright",
+          "Escalate the request to the project sponsor"
+        ],
+        correct: 1,
+        explain: "Any change → assess impact → formal change process with approval. Never implement scope changes on your own. In Agile, the PO manages the backlog, but scope changes still follow the appropriate process."
+      },
+      {
+        stem: "A vendor <em>might</em> delay delivery by two weeks due to a hurricane. What should the project manager do <strong>FIRST</strong>?",
+        options: [
+          "Terminate the vendor contract",
+          "Update the issue log and hold an emergency meeting",
+          "Review the risk register and risk management plan",
+          "Escalate to the project sponsor"
+        ],
+        correct: 2,
+        explain: "MIGHT = potential future event → Risk. Check Risk Register + Risk Management Plan. Issue Log applies only when the event has already occurred (WILL/HAS)."
+      },
+      {
+        stem: "A deliverable has <strong>failed</strong> the customer's acceptance test. What should the project manager do next?",
+        options: [
+          "Review the risk register",
+          "Assess the root cause, update the issue log, and work with the team and stakeholders to resolve it",
+          "Close the project",
+          "Request a budget increase"
+        ],
+        correct: 1,
+        explain: "Failed = Issue (already occurred). Resolution path: assess root cause → review plan → meet stakeholders. Do not request budget increases or close the project."
+      },
+      {
+        stem: "The Product Owner refuses to prioritize the product backlog, believing all features are equally important. What should the project manager do?",
+        options: [
+          "Prioritize the backlog on behalf of the Product Owner",
+          "Coach the Product Owner on the benefits of prioritization",
+          "Escalate to the project sponsor",
+          "Implement all features in parallel"
+        ],
+        correct: 1,
+        explain: "Only the Product Owner prioritizes the backlog. The PM must coach/train the PO — never prioritize yourself. Use MVP when there are too many wish-list items and limited resources."
+      },
+      {
+        stem: "A serious workplace safety violation is discovered at the construction site. What should the project manager do?",
+        options: [
+          "Continue work and document it in the issue log",
+          "Stop work immediately and initiate the change control process",
+          "Wait until the next sprint planning meeting",
+          "Send an email to the team"
+        ],
+        correct: 1,
+        explain: "Safety/health/mandatory regulations → stop work immediately → change control. Exception: only when the question explicitly says work 'may' continue."
+      },
+      {
+        stem: "Two team members are arguing over a technical approach, affecting progress. What should the project manager do?",
+        options: [
+          "Select the senior member's solution and enforce it (forcing)",
+          "Ignore the conflict and let the team resolve it alone (withdrawal)",
+          "Facilitate a meeting (confrontation), understand the root cause, and seek a win-win solution",
+          "Remove one of the team members"
+        ],
+        correct: 2,
+        explain: "Conflict resolution preference: Confrontation > Compromise > Smoothing > Forcing > Withdrawal. Team conflict → put them in one room and facilitate. Never remove a team member."
+      },
+      {
+        stem: "A stakeholder complains that the status report lacks information they need. What should the project manager do <strong>FIRST</strong>?",
+        options: [
+          "Send daily reports to all stakeholders",
+          "Review the communications management plan and stakeholder engagement plan",
+          "Escalate to the PMO",
+          "Hire a consultant to write the reports"
+        ],
+        correct: 1,
+        explain: "Do FIRST → review the relevant plan. Communication complaints → CMP/Stakeholder Engagement Plan. Tailor communications to each stakeholder's needs."
+      },
+      {
+        stem: "The customer wants to see a demonstration of product value before committing a large budget. Most requirements are already known. Which technique is best?",
+        options: [
+          "Analogous estimating",
+          "Prototype",
+          "Terminate the phase and restart",
+          "Monte Carlo analysis"
+        ],
+        correct: 1,
+        explain: "Prototype is the best option to demo product value when most requirements are known. Use MVP when there are too many stakeholder wish-list items and limited resources."
+      },
+      {
+        stem: "CPI = 0.85 and SPI = 1.10. What is the most accurate interpretation?",
+        options: [
+          "The project is over budget and behind schedule",
+          "The project is under budget but behind schedule",
+          "The project is over budget but ahead of schedule",
+          "The project is performing perfectly on both cost and schedule"
+        ],
+        correct: 2,
+        explain: "CPI &lt; 1 = over budget (bad). SPI &gt; 1 = ahead of schedule (good). CPI uses actual cost, not estimated. Treat 1.0 as the 100% baseline."
+      }
+    ];
+
+    const TRAP_DATA = {
+      Change: [
+        { real: "Thực tế: PM tự thêm feature nhỏ cho kịp demo.", pmi: "PMI: Assess impact → Submit CR → Approval. Không tự implement." },
+        { real: "Thực tế: Stakeholder VIP nói là xong → làm luôn.", pmi: "PMI: Mọi change đều qua formal process, kể cả Agile." },
+        { real: "Thực tế: Skip change board vì 'quá nhỏ'.", pmi: "PMI: Never bypass steps/processes/documentation." }
+      ],
+      Scope: [
+        { real: "Thực tế: PM tự prioritize backlog khi PO bận.", pmi: "PMI: Chỉ PO prioritize — PM coach PO nếu cần." },
+        { real: "Thực tế: Gold-plating để impress customer.", pmi: "PMI: WBS prevents gold-plating; scope creep → formal CR." },
+        { real: "Thực tế: QC = customer acceptance.", pmi: "PMI: QC = correctness; Validate Scope = customer acceptance." }
+      ],
+      Risk: [
+        { real: "Thực tế: 'Có thể xảy ra' → ghi Issue Log.", pmi: "PMI: MAY/MIGHT/COULD → Risk Register. HAS/WILL → Issue Log." },
+        { real: "Thực tế: Risk mới phát hiện giữa dự án → bỏ qua.", pmi: "PMI: Risk là agenda mọi team meeting; unplanned triggered → workaround." },
+        { real: "Thực tế: Escalate mọi risk lên sponsor.", pmi: "PMI: Escalation chỉ khi huge impact; thường plan response trong team." }
+      ],
+      Resources: [
+        { real: "Thực tế: PM hire/fire khi cần.", pmi: "PMI: PM negotiate với Functional Manager; coach, không fire." },
+        { real: "Thực tế: Conflict → PM chọn phe senior.", pmi: "PMI: Confrontation + facilitate win-win; Forcing/Withdrawal cuối cùng." },
+        { real: "Thực tế: Estimate do PM một mình.", pmi: "PMI: Team (SME) estimate; bottom-up chính xác hơn." }
+      ],
+      Procurement: [
+        { real: "Thực tế: Vendor delay → terminate ngay.", pmi: "PMI: Meet F2F, brainstorm với team; Claims → Negotiate → Arbitration." },
+        { real: "Thực tế: PM tự quyết payment dispute.", pmi: "PMI: Vendor check với appropriate department; PM protect project interests." },
+        { real: "Thực tế: Litigation đầu tiên khi dispute.", pmi: "PMI: Claims administration → Negotiate → Arbitration → Litigation (last resort)." }
+      ],
+      Integration: [
+        { real: "Thực tế: Lessons learned chỉ viết cuối dự án.", pmi: "PMI: Update Lessons Learned Register throughout; transfer to OPA at closure." },
+        { real: "Thực tế: Dự án cancel → bỏ luôn, không close.", pmi: "PMI: Terminated early vẫn phải Close Project/Phase formally." },
+        { real: "Thực tế: PM focus 100% vào technical.", pmi: "PMI: PM = integrator — balance all components, không bỏ quên mảng khác." }
+      ]
+    };
+
+    // Flashcards
+    const flashGrid = document.getElementById('flashGrid');
+    FLASH_DATA.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'flash';
+      el.innerHTML = `
+        <div class="flash-inner">
+          <div class="flash-front">${item.q}</div>
+          <div class="flash-back">${item.a}</div>
+        </div>`;
+      el.addEventListener('click', () => el.classList.toggle('flipped'));
+      flashGrid.appendChild(el);
+    });
+
+    // Quiz
+    const quizContainer = document.getElementById('quizContainer');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    let answered = new Set();
+
+    function renderQuiz() {
+      quizContainer.innerHTML = '';
+      answered = new Set();
+      updateProgress();
+
+      QUIZ_DATA.forEach((q, qi) => {
+        const card = document.createElement('div');
+        card.className = 'quiz-card';
+        card.dataset.qi = qi;
+
+        const letters = ['A', 'B', 'C', 'D'];
+        let optionsHtml = q.options.map((opt, oi) =>
+          `<button class="option" data-oi="${oi}" type="button">
+            <span class="letter">${letters[oi]}</span>
+            <span>${opt}</span>
+          </button>`
+        ).join('');
+
+        card.innerHTML = `
+          <div class="quiz-num">Question ${qi + 1} / ${QUIZ_DATA.length}</div>
+          <div class="quiz-stem">${q.stem}</div>
+          <div class="options">${optionsHtml}</div>
+          <div class="explanation"><strong>Explanation:</strong> ${q.explain}</div>
+        `;
+
+        card.querySelectorAll('.option').forEach(btn => {
+          btn.addEventListener('click', () => handleAnswer(card, qi, parseInt(btn.dataset.oi)));
+        });
+
+        quizContainer.appendChild(card);
+      });
+    }
+
+    function handleAnswer(card, qi, chosen) {
+      if (answered.has(qi)) return;
+      answered.add(qi);
+
+      const q = QUIZ_DATA[qi];
+      const options = card.querySelectorAll('.option');
+      options.forEach((btn, oi) => {
+        btn.disabled = true;
+        if (oi === q.correct) btn.classList.add('correct');
+        else if (oi === chosen) btn.classList.add('wrong');
+      });
+
+      card.classList.add(chosen === q.correct ? 'answered-correct' : 'answered-wrong');
+      card.querySelector('.explanation').classList.add('show');
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const n = answered.size;
+      const total = QUIZ_DATA.length;
+      const pct = (n / total) * 100;
+      progressFill.style.width = pct + '%';
+      progressText.textContent = `${n} / ${total} câu` + (n === total ? ' — Hoàn thành!' : '');
+    }
+
+    document.getElementById('resetQuiz').addEventListener('click', renderQuiz);
+    renderQuiz();
+
+    // Part 3 — KA trap tabs
+    const kaTabs = document.getElementById('kaTabs');
+    const trapPanels = document.getElementById('trapPanels');
+    const kaNames = Object.keys(TRAP_DATA);
+
+    kaNames.forEach((name, i) => {
+      const tab = document.createElement('button');
+      tab.type = 'button';
+      tab.className = 'ka-tab' + (i === 0 ? ' active' : '');
+      tab.textContent = name;
+      tab.dataset.ka = name;
+      kaTabs.appendChild(tab);
+
+      const panel = document.createElement('div');
+      panel.className = 'trap-panel' + (i === 0 ? ' active' : '');
+      panel.dataset.ka = name;
+      panel.innerHTML = TRAP_DATA[name].map(t => `
+        <div class="trap-item">
+          <div class="real"><strong>Thực tế:</strong> ${t.real.replace(/^Thực tế:\s*/, '')}</div>
+          <div class="pmi"><strong>PMI:</strong> ${t.pmi.replace(/^PMI:\s*/, '')}</div>
+        </div>
+      `).join('');
+      trapPanels.appendChild(panel);
+    });
+
+    kaTabs.addEventListener('click', e => {
+      const tab = e.target.closest('.ka-tab');
+      if (!tab) return;
+      const ka = tab.dataset.ka;
+      kaTabs.querySelectorAll('.ka-tab').forEach(t => t.classList.toggle('active', t === tab));
+      trapPanels.querySelectorAll('.trap-panel').forEach(p => p.classList.toggle('active', p.dataset.ka === ka));
+    });
+
+    // Sidebar active link on scroll
+    const sections = document.querySelectorAll('section, .hero');
+    const navLinks = document.querySelectorAll('.sidebar nav a');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    sections.forEach(s => { if (s.id) observer.observe(s); });
+
+    // Footer date
+    document.querySelector('footer').innerHTML = document.querySelector('footer').innerHTML.replace('{{DATE}}', new Date().toLocaleDateString('vi-VN'));
+  </script>
+</body>
+</html>
