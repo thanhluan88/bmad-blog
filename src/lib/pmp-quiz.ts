@@ -36,6 +36,21 @@ export function isPmpMindsetSlug(slug: string): boolean {
   return slug === PMP_MINDSET_SLUG;
 }
 
+export const PMP_IMMERSIVE_SLUGS = [
+  PMP_QUIZ_SLUG,
+  PMP_EXAM_LATEST_SLUG,
+  PMP_MINDSET_SLUG,
+] as const;
+
+export function isPmpImmersiveSlug(slug: string): boolean {
+  return (PMP_IMMERSIVE_SLUGS as readonly string[]).includes(slug);
+}
+
+export function isPmpImmersivePath(pathname: string): boolean {
+  const slug = pathname.match(/^\/p\/([^/?]+)/)?.[1];
+  return slug ? isPmpImmersiveSlug(slug) : false;
+}
+
 export function isPmpRouteSlug(slug: string): boolean {
   return slug === PMP_HUB_SLUG || isPmpQuizSlug(slug) || isPmpMindsetSlug(slug);
 }

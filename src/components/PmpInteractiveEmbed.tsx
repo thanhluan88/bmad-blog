@@ -13,7 +13,10 @@ export function PmpInteractiveEmbed({ htmlPath, title }: Props) {
 
   useEffect(() => {
     hideChrome();
-  }, [hideChrome]);
+    return () => {
+      showChrome();
+    };
+  }, [hideChrome, showChrome]);
 
   if (!chromeVisible) {
     return (

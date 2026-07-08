@@ -34,7 +34,7 @@ export function MenuInteractionProvider({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [chromeVisible, setChromeVisible] = useState(false);
+  const [chromeVisible, setChromeVisible] = useState(true);
   const menuHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const chromeHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -91,7 +91,7 @@ export function MenuInteractionProvider({
     clearChromeHideTimer();
     setIsOpen(false);
     setIsHovered(false);
-    setChromeVisible(false);
+    setChromeVisible(true);
   }, [clearMenuHideTimer, clearChromeHideTimer]);
 
   useEffect(() => {
@@ -101,7 +101,7 @@ export function MenuInteractionProvider({
         clearChromeHideTimer();
         setIsOpen(false);
         setIsHovered(false);
-        setChromeVisible(false);
+        setChromeVisible(true);
       }
     };
     window.addEventListener("keydown", onKey);

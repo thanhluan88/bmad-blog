@@ -71,7 +71,7 @@ function UserGate({
 }
 
 export function PmpQuizEmbed({ htmlPath, title }: Props) {
-  const { chromeVisible } = useBlogMenu();
+  const { chromeVisible, hideChrome, showChrome } = useBlogMenu();
   const [user, setUser] = useState<string | null>(null);
   const [iframeSrc, setIframeSrc] = useState<string | null>(null);
 
@@ -82,6 +82,14 @@ export function PmpQuizEmbed({ htmlPath, title }: Props) {
       setIframeSrc(buildPmpQuizUrl(htmlPath, { user: stored }));
     }
   }, [htmlPath]);
+
+  useEffect(() => {
+    if (!user || !iframeSrc) return;
+    hideChrome();
+    return () => {
+      showChrome();
+    };
+  }, [user, iframeSrc, hideChrome, showChrome]);
 
   function handleUserSubmit(name: string) {
     storeUser(htmlPath, name);
