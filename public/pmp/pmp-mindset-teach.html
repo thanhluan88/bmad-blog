@@ -21,19 +21,22 @@
       --radius: 12px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; width: 100%; }
     body {
       font-family: 'Be Vietnam Pro', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.65;
+      width: 100%;
+      min-height: 100dvh;
     }
 
     /* Layout */
     .layout {
       display: grid;
-      grid-template-columns: 280px 1fr;
-      min-height: 100vh;
+      grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+      min-height: 100dvh;
+      width: 100%;
     }
     @media (max-width: 960px) {
       .layout { grid-template-columns: 1fr; }
@@ -136,10 +139,18 @@
 
     /* Main */
     main {
-      padding: 2rem 2.5rem 4rem;
-      max-width: 900px;
+      padding: 2rem clamp(1.25rem, 3vw, 3rem) 4rem;
+      width: 100%;
+      min-width: 0;
+      max-width: none;
     }
     @media (max-width: 600px) { main { padding: 1.25rem; } }
+
+    .hero p,
+    section > p,
+    .card > p:first-of-type {
+      max-width: 72ch;
+    }
 
     .hero {
       margin-bottom: 2.5rem;
@@ -364,11 +375,11 @@
     /* Compare boxes */
     .compare {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
       margin: 1rem 0;
     }
-    @media (max-width: 600px) { .compare { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { .compare { grid-template-columns: 1fr; } }
     .compare .do { border-top: 3px solid var(--accent2); }
     .compare .dont { border-top: 3px solid var(--accent); }
     .compare h4 {
@@ -448,11 +459,10 @@
     .trap-item .pmi { color: var(--accent2); font-size: 0.85rem; }
     .framework-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 0.75rem;
       margin: 1rem 0;
     }
-    @media (max-width: 700px) { .framework-grid { grid-template-columns: 1fr; } }
     .fw-box {
       background: var(--surface2);
       border: 1px solid var(--border);
