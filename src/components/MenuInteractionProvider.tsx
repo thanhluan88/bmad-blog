@@ -19,6 +19,7 @@ type MenuContextValue = {
   hideMenu: () => void;
   closeOnNavigate: () => void;
   showChrome: () => void;
+  hideChrome: () => void;
   scheduleHideChrome: () => void;
 };
 
@@ -67,6 +68,12 @@ export function MenuInteractionProvider({
   const showChrome = useCallback(() => {
     clearChromeHideTimer();
     setChromeVisible(true);
+  }, [clearChromeHideTimer]);
+
+  const hideChrome = useCallback(() => {
+    clearChromeHideTimer();
+    setChromeVisible(false);
+    setIsHovered(false);
   }, [clearChromeHideTimer]);
 
   const scheduleHideChrome = useCallback(() => {
@@ -121,6 +128,7 @@ export function MenuInteractionProvider({
       hideMenu,
       closeOnNavigate,
       showChrome,
+      hideChrome,
       scheduleHideChrome,
     }),
     [
@@ -131,6 +139,7 @@ export function MenuInteractionProvider({
       hideMenu,
       closeOnNavigate,
       showChrome,
+      hideChrome,
       scheduleHideChrome,
     ],
   );
