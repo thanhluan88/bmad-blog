@@ -63,7 +63,7 @@ export function SidebarMenu({ posts }: Props) {
         }`}
       >
         <div className="flex h-full flex-col p-5 pt-5 md:pt-20">
-          <p className="mb-4 text-xs font-medium text-muted">Điều hướng</p>
+          <p className="mb-4 text-xs font-medium text-muted">Menu</p>
           <nav className="flex-1 overflow-y-auto">
             <ul className="space-y-1">
               <li>
