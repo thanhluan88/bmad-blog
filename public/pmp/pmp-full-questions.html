@@ -267,6 +267,37 @@
       align-items: baseline;
       gap: 0.35rem 0.5rem;
     }
+    .q-timer-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    .q-timer-display {
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #0f766e;
+      min-width: 3.5rem;
+      text-align: right;
+    }
+    .q-timer-btn {
+      font: inherit;
+      font-size: 0.82rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.3rem 0.65rem;
+      cursor: pointer;
+      background: #fff;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .q-timer-btn:hover { background: #fffbeb; }
+    .q-timer-btn.active {
+      background: #0f766e;
+      border-color: #0f766e;
+      color: #fff;
+    }
     .q-text { margin: 0; }
     .score-table-wrap {
       margin: 0.85rem 0 1rem;
@@ -2819,6 +2850,75 @@ const USER_KEY = "pmp-quiz-user-v1";
       return `<span class="${cls}" id="q-stat-${id}">Đã làm: ${stat.attempts} · Sai: ${stat.wrong}</span>`;
     }
 
+    const questionTimer = { activeId: null, intervalId: null, startedAt: null, elapsed: {} };
+
+    function formatQuestionTimer(seconds) {
+      const s = Math.max(0, Math.floor(seconds));
+      const m = Math.floor(s / 60);
+      const sec = s % 60;
+      return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+    }
+
+    function updateQuestionTimerDisplay(id) {
+      const el = document.getElementById(`q-timer-${id}`);
+      const btn = document.getElementById(`q-timer-btn-${id}`);
+      if (!el) return;
+      const base = questionTimer.elapsed[id] || 0;
+      const running = questionTimer.activeId === id && questionTimer.startedAt;
+      const total = base + (running ? (Date.now() - questionTimer.startedAt) / 1000 : 0);
+      el.textContent = formatQuestionTimer(total);
+      el.hidden = !running && !questionTimer.elapsed[id];
+      if (btn) {
+        btn.textContent = running ? "Stop" : "Start";
+        btn.classList.toggle("active", !!running);
+      }
+    }
+
+    function stopQuestionTimer(id, save = true) {
+      if (questionTimer.activeId !== id) return;
+      if (save && questionTimer.startedAt) {
+        const prev = questionTimer.elapsed[id] || 0;
+        questionTimer.elapsed[id] = prev + (Date.now() - questionTimer.startedAt) / 1000;
+      }
+      clearInterval(questionTimer.intervalId);
+      questionTimer.intervalId = null;
+      questionTimer.activeId = null;
+      questionTimer.startedAt = null;
+      updateQuestionTimerDisplay(id);
+    }
+
+    function stopAllQuestionTimers(save = true) {
+      if (questionTimer.activeId != null) stopQuestionTimer(questionTimer.activeId, save);
+    }
+
+    function startQuestionTimer(id) {
+      if (state.exam && !state.exam.submitted) return;
+      if (questionTimer.activeId === id) return;
+      stopAllQuestionTimers(true);
+      questionTimer.elapsed[id] = 0;
+      questionTimer.activeId = id;
+      questionTimer.startedAt = Date.now();
+      questionTimer.intervalId = setInterval(() => updateQuestionTimerDisplay(id), 250);
+      updateQuestionTimerDisplay(id);
+    }
+
+    function toggleQuestionTimer(id) {
+      if (state.exam && !state.exam.submitted) return;
+      if (questionTimer.activeId === id) {
+        stopQuestionTimer(id, true);
+      } else {
+        startQuestionTimer(id);
+      }
+    }
+
+    function restoreQuestionTimersOnPage() {
+      pageQuestions().forEach(q => {
+        if (questionTimer.elapsed[q.id] || questionTimer.activeId === q.id) {
+          updateQuestionTimerDisplay(q.id);
+        }
+      });
+    }
+
     function renderQuestion(q) {
       const badge = q.type !== "mcq"
         ? `<span class="badge">${q.type}</span>`
@@ -2828,6 +2928,10 @@ const USER_KEY = "pmp-quiz-user-v1";
       return `<article class="card" id="q-${q.id}" data-id="${q.id}">
         <div class="q-head">
           <div class="q-num">Câu ${q.id}${badge}${renderQuestionStatBadge(q.id)}</div>
+          <div class="q-timer-wrap practice-only">
+            <span class="q-timer-display" id="q-timer-${q.id}" hidden>00:00</span>
+            <button type="button" class="q-timer-btn" id="q-timer-btn-${q.id}" onclick="toggleQuestionTimer(${q.id})">Start</button>
+          </div>
         </div>
         ${q.caseStudyId ? renderCaseStudy(q.caseStudyId) : ""}
         ${q.type === "drag_drop"
@@ -2854,6 +2958,7 @@ const USER_KEY = "pmp-quiz-user-v1";
     }
 
     function renderPage() {
+      stopAllQuestionTimers(true);
       const totalPages = Math.ceil(questionTotal() / PER_PAGE);
       state.page = Math.max(1, Math.min(state.page, totalPages));
       const visibleQuestions = pageQuestions();
@@ -2864,6 +2969,7 @@ const USER_KEY = "pmp-quiz-user-v1";
       document.getElementById("pageSelect").value = String(state.page);
       restoreSelections();
       restoreHighlightsOnPage();
+      restoreQuestionTimersOnPage();
       updateStats();
     }
 
@@ -2942,6 +3048,7 @@ const USER_KEY = "pmp-quiz-user-v1";
 
     function checkQuestion(id, revealOnly=false) {
       if (state.exam && !state.exam.submitted) return;
+      stopQuestionTimer(id, true);
       const q = questionBank().find(x => x.id === id) || QUESTIONS.find(x => x.id === id);
       if (!q) return;
       const userAnswer = getAnswer(q);
