@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Organizational Structure</title>
+  <title>PMBOK 8 — Change Management Plan (Q38)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,16 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .authority-bar { margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); }
-    .authority-track { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.35rem; margin-top: 0.75rem; }
-    @media (max-width: 700px) { .authority-track { grid-template-columns: 1fr; } }
-    .auth-cell { text-align: center; padding: 0.65rem 0.4rem; border-radius: 10px; border: 1px solid var(--border); font-size: 0.78rem; }
-    .auth-cell .label { font-weight: 700; display: block; margin-bottom: 0.25rem; }
-    .auth-cell.low { background: #f3f4f6; }
-    .auth-cell.mid { background: #eff6ff; border-color: #bfdbfe; }
-    .auth-cell.high { background: var(--ok-bg); border-color: #a7f3d0; }
-    .auth-cell.highlight { outline: 3px solid var(--primary); font-weight: 600; }
-    .auth-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.75rem; margin-top: 0.5rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -76,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; max-width: 280px; justify-content: flex-end; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -97,11 +87,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Organizational Structure</div>
+      <div class="brand-sub">Change Management Plan · Q38</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#structures">5 loại cấu trúc</a>
-        <a href="#authority">Quyền PM</a>
+        <a href="#plan">Change Management Plan</a>
+        <a href="#chaos">Chaos vs process</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -113,7 +103,7 @@
         <a href="pmp-teach-tangible-intangible-benefits.html">Q2: Tangible/Intangible</a>
         <a href="pmp-teach-enterprise-environmental-factors.html">Q3: EEF</a>
         <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
-        <a href="pmp-teach-organizational-structure.html" class="series-current">Q5: Org Structure</a>
+        <a href="pmp-teach-organizational-structure.html">Q5: Org Structure</a>
         <a href="pmp-teach-functional-organization.html">Q6: Functional</a>
         <a href="pmp-teach-project-functions.html">Q7: Project Functions</a>
         <a href="pmp-teach-project-sponsor.html">Q8: Project Sponsor</a>
@@ -146,16 +136,16 @@
         <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
         <a href="pmp-teach-ishikawa-analysis.html">Q36: Ishikawa Analysis</a>
         <a href="pmp-teach-change-request.html">Q37: Change Request</a>
-        <a href="pmp-teach-change-management-plan.html">Q38: Change Mgmt Plan</a>
+        <a href="pmp-teach-change-management-plan.html" class="series-current">Q38: Change Mgmt Plan</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-38">Luyện câu 38</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#structures">Cấu trúc</a>
-        <a href="#authority">Quyền PM</a>
+        <a href="#plan">Plan</a>
+        <a href="#chaos">Chaos</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -164,205 +154,157 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q5 về <strong>cấu trúc tổ chức</strong> — nhận diện loại hình dựa trên
-            <strong>mức quyền của Project Manager</strong> đối với team, ngân sách và quyết định.
+            Bài học Q38 về <strong>Change Management Plan</strong> — nhiều change requests
+            cùng lúc; developer implement ngay, business họp stakeholder riêng; PM khó theo dõi.
+            Làm gì <em>next</em>?
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.22</span>
-            <span class="badge">Organizational Structures</span>
-            <span class="badge">Resources</span>
-            <span class="badge">Câu 5 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.28–29 &amp; p.116</span>
+            <span class="badge">Assess and Implement Changes</span>
+            <span class="badge">Câu 38 — Practice</span>
           </div>
         </header>
 
-        <section id="structures">
-          <h2>1. Năm loại cấu trúc tổ chức</h2>
+        <section id="plan">
+          <h2>1. Change Management Plan</h2>
           <p>
-            PMBOK 8 mô tả ảnh hưởng của cấu trúc tổ chức lên dự án — đặc biệt là
-            <strong>ai ra quyết định</strong>: Functional manager hay Project Manager.
+            Change management plan định nghĩa <strong>how changes are managed</strong> — thiết lập
+            change control board (CCB), roles, authority, và implementation của change control system.
           </p>
+
+          <div class="card tip">
+            <h4>Change Management Plan (PMBOK p.116)</h4>
+            <p style="margin:0">
+              Defines how changes are managed, establishes the change control board, and outlines
+              roles, authority, and implementation of the change control system. Assess and
+              Implement Changes occurs throughout the project as stakeholders propose changes.
+            </p>
+          </div>
+        </section>
+
+        <section id="chaos">
+          <h2>2. Process chaos — plan trước tool</h2>
 
           <table>
             <thead>
-              <tr><th>Cấu trúc</th><th>Quyền PM</th><th>Đặc điểm</th></tr>
+              <tr><th>Triệu chứng</th><th>Vấn đề gốc</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Functional</strong></td>
-                <td>Rất thấp / không</td>
-                <td>Team báo cáo functional manager; PM có thể chỉ là coordinator</td>
+                <td>Developer implementing immediately</td>
+                <td>Không follow change control process</td>
               </tr>
               <tr>
-                <td><strong>Weak matrix</strong></td>
-                <td>Thấp</td>
-                <td>Functional manager giữ quyền chính; PM hỗ trợ hạn chế</td>
+                <td>Business holding own stakeholder meetings</td>
+                <td>Ad-hoc paths — không aligned process</td>
               </tr>
               <tr>
-                <td><strong>Balanced matrix</strong></td>
-                <td>Trung bình</td>
-                <td>Chia sẻ quyền giữa PM và functional manager</td>
+                <td><em>Hard to keep track</em></td>
+                <td>Team chưa aligned on HOW to manage changes</td>
               </tr>
               <tr>
-                <td><strong>Strong matrix</strong></td>
-                <td>Cao</td>
-                <td>PM có quyền lớn; functional manager hỗ trợ</td>
-              </tr>
-              <tr>
-                <td><strong>Project-oriented</strong> (Projectized)</td>
-                <td><strong>Rất cao</strong></td>
-                <td>PM có full authority — team, budget, quyết định</td>
+                <td>Fix</td>
+                <td>Review change management <strong>plan</strong> with team (A)</td>
               </tr>
             </tbody>
           </table>
         </section>
 
-        <section id="authority">
-          <h2>2. Thang quyền Project Manager</h2>
-
-          <div class="authority-bar">
-            <strong style="font-size:0.9rem">PM authority tăng dần từ trái sang phải →</strong>
-            <div class="authority-track">
-              <div class="auth-cell low"><span class="label">Functional</span>PM ≈ 0</div>
-              <div class="auth-cell low"><span class="label">Weak matrix</span>PM thấp</div>
-              <div class="auth-cell mid"><span class="label">Balanced</span>PM ↔ FM</div>
-              <div class="auth-cell high"><span class="label">Strong matrix</span>PM cao</div>
-              <div class="auth-cell high highlight"><span class="label">Project-oriented</span>PM full</div>
-            </div>
-            <div class="auth-arrow">Functional manager quyền cao ←————————→ PM quyền cao</div>
-          </div>
-
-          <div class="card tip">
-            <h4>Định nghĩa Project-oriented (PMBOK)</h4>
-            <p style="margin:0">
-              Project-oriented organizations are those in which the project manager has a
-              <strong>high level of authority and control</strong> over the project, including
-              authority over the project team and resources.
-            </p>
-          </div>
-
-          <div class="card info">
-            <h4>Keywords nhận diện nhanh</h4>
-            <ul style="margin:0">
-              <li><strong>Full authority / control</strong> → Project-oriented hoặc Strong matrix</li>
-              <li><strong>Dedicated project resources</strong> → thường Project-oriented</li>
-              <li><strong>PM controls budget &amp; decisions</strong> → Project-oriented</li>
-              <li><strong>Share authority / balanced</strong> → Balanced matrix</li>
-              <li><strong>Functional manager decides</strong> → Functional / Weak matrix</li>
-            </ul>
-          </div>
-        </section>
-
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 5</h2>
+          <h2>3. Câu hỏi thực hành — Question 38</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q5</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q38</div>
             <div class="q-text">
-              You are the project manager at BuildMax Engineering, working on a large infrastructure project.
-              The organization assigns you as the project manager, provides
-              <em>dedicated project resources</em>, and gives you
-              <em>full authority over the project budget and decision-making</em>.
-              <em>What type of organizational structure are you working in?</em>
+              A project at EI Solutions is in progress when <em>several change requests are raised
+              simultaneously</em>. One of your developers is <em>implementing their change
+              immediately</em>, while someone from the business is holding stakeholder meetings to
+              review the project impact of their change. You are finding it <em>hard to keep
+              track</em>. What will you do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Functional organization.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Weak-matrix organization.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Project-oriented organization.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Balanced-matrix organization.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Review the change management plan with the team.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Get a recommendation from the Change Control Board.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Review and update the Change Log.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Approve the most critical changes immediately.</button>
 
             <div class="feedback" id="quizFeedback"></div>
-          </div>
-
-          <div class="card info">
-            <h4>Dịch tình huống</h4>
-            <p style="margin:0">
-              PM tại BuildMax Engineering, dự án hạ tầng lớn. Tổ chức chỉ định bạn làm PM,
-              cấp <strong>nguồn lực chuyên trách</strong> và trao
-              <strong>toàn quyền ngân sách &amp; ra quyết định</strong>.
-              Đây là cấu trúc tổ chức nào?
-            </p>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
-          <div class="card tip">
-            <h4>Giải thích chính thức (PMBOK)</h4>
-            <p style="margin:0">
-              Project-oriented organizations — PM có high level of authority and control,
-              including authority over project team and resources.
-              <em>— The Standard for Project Management, p.22, "Influences of Organizational Structures on Projects"</em>
-            </p>
-          </div>
-
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn A?</h3>
           <ul>
-            <li><strong>Dedicated project resources</strong> — team làm full-time cho dự án, không loan từ functional dept.</li>
-            <li><strong>Full authority over budget</strong> — PM kiểm soát ngân sách trực tiếp.</li>
-            <li><strong>Full authority over decision-making</strong> — PM ra quyết định, không chia sẻ với functional manager.</li>
-            <li>Cả ba = đặc trưng <strong>Project-oriented / Projectized</strong>.</li>
+            <li>Chaos = team không follow cùng process → realign via change management plan.</li>
+            <li>Plan defines roles, authority, CCB, change control system.</li>
+            <li>Review with team — everyone follows same HOW before individual requests.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng NEXT</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Functional</strong></td>
-                <td>Functional manager giữ quyền; PM gần như không có authority (PM ✗ trong slide).</td>
+                <td><strong>B. CCB recommendation</strong></td>
+                <td>CCB là part of plan — cần align team on process trước, không jump to CCB.</td>
               </tr>
               <tr>
-                <td><strong>B. Weak matrix</strong></td>
-                <td>PM có vai trò hạn chế; functional manager vẫn quyết định chính (PM ✗).</td>
+                <td><strong>C. Change log</strong></td>
+                <td>Tracking artifact (Q27) — không fix ad-hoc implementation &amp; meetings.</td>
               </tr>
               <tr>
-                <td><strong>D. Balanced matrix</strong></td>
-                <td>Quyền <em>chia sẻ</em> giữa PM và functional manager — không phải “full authority”.</td>
+                <td><strong>D. Approve critical changes</strong></td>
+                <td>Bypass control — worsens chaos, không establish process.</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card warn">
+            <h4>Liên hệ Q27, Q37</h4>
+            <p style="margin:0">
+              Q27: change log tracks modifications. Q37: single change → formal request.
+              Q38: multiple chaotic changes → review change management <em>plan</em> with team.
+            </p>
+          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Chọn cấu trúc tổ chức</h2>
+          <h2>5. Drill — Plan, log hay CCB?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="FUNC">
-              <span>Team reports to department heads; PM is part-time coordinator</span>
+            <div class="classify-row" data-answer="PLAN">
+              <span>Team implementing changes ad-hoc — hard to track</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak</button>
-                <button data-pick="BAL">Balanced</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="PLAN">Mgmt plan</button>
+                <button data-pick="LOG">Change log</button>
+                <button data-pick="CCB">CCB</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PROJ">
-              <span>PM has full budget control and dedicated team members</span>
+            <div class="classify-row" data-answer="LOG">
+              <span>Record all proposed and approved modifications</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak</button>
-                <button data-pick="BAL">Balanced</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="PLAN">Mgmt plan</button>
+                <button data-pick="LOG">Change log</button>
+                <button data-pick="CCB">CCB</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="BAL">
-              <span>PM and functional managers share decision-making equally</span>
+            <div class="classify-row" data-answer="CCB">
+              <span>Decision body reviews assessed change requests</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak</button>
-                <button data-pick="BAL">Balanced</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="PLAN">Mgmt plan</button>
+                <button data-pick="LOG">Change log</button>
+                <button data-pick="CCB">CCB</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="WEAK">
-              <span>Functional manager assigns resources; PM tracks schedule only</span>
+            <div class="classify-row" data-answer="PLAN">
+              <span>Define roles, authority &amp; change control system</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak</button>
-                <button data-pick="BAL">Balanced</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="PLAN">Mgmt plan</button>
+                <button data-pick="LOG">Change log</button>
+                <button data-pick="CCB">CCB</button>
               </div>
             </div>
           </div>
@@ -370,70 +312,80 @@
         </section>
 
         <section id="traps">
-          <h2>6. Bẫy thi thường gặp</h2>
+          <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Matrix” khi thực ra Project-oriented</h4>
-            <p style="margin:0">“Full authority” + “dedicated resources” = Project-oriented, không phải Balanced matrix. Balanced = chia quyền, không full.</p>
+            <h4>Bẫy 1: Can't track → Change log (C)</h4>
+            <p style="margin:0">Log records changes — không stop unauthorized implementation hay align process.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Strong matrix vs Project-oriented</h4>
-            <p style="margin:0">Strong matrix: PM quyền cao nhưng vẫn trong cấu trúc matrix. Project-oriented: PM <strong>full</strong> authority budget + team + decisions — như Q5.</p>
+            <h4>Bẫy 2: Changes pending → CCB (B)</h4>
+            <p style="margin:0">CCB operates within plan — chaos cần review plan with team first.</p>
           </div>
-          <div class="card warn">
-            <h4>Mẹo đọc đề</h4>
-            <p style="margin:0">Tìm từ khóa quyền: <em>full authority, dedicated resources, control budget, decision-making</em> → Project-oriented.</p>
+          <div class="card danger">
+            <h4>Bẫy 3: Urgency → Approve critical (D)</h4>
+            <p style="margin:0">Ad-hoc approval worsens disorder — establish process via plan review.</p>
+          </div>
+          <div class="card tip">
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Multiple simultaneous changes + ad-hoc handling + can't track</strong> → Review change management plan with team (A).</p>
           </div>
         </section>
 
         <section id="flashcards">
           <h2>7. Flashcard</h2>
-          <p class="flash-hint">Nhấn để lật thẻ</p>
+          <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Project-oriented organization?</div>
-            <div class="flashcard-back">PM có high authority &amp; control — team, resources, budget, quyết định.</div>
+            <div class="flashcard-front">Change management plan? (p.116)</div>
+            <div class="flashcard-back">How changes managed · CCB · roles · authority · change control system.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Balanced matrix khác Project-oriented?</div>
-            <div class="flashcard-back">Balanced = chia quyền PM ↔ FM. Project-oriented = PM full authority.</div>
-          </div></div>
-          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q5 đáp án?</div>
-            <div class="flashcard-back"><strong>C — Project-oriented.</strong> Dedicated resources + full budget &amp; decision authority.</div>
+            <div class="flashcard-front">Q38 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Review the change management plan with the team.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ORGANIZATIONAL STRUCTURES — PMBOK 8, p.22
+          <div class="cheat-sheet">CHANGE MANAGEMENT PLAN — Q38 (PMBOK 8, p.28–29 &amp; p.116)
 ─────────────────────────────────────────────────────
-PM AUTHORITY (low → high):
-  Functional → Weak matrix → Balanced → Strong matrix → Project-oriented
+PROCESS: Assess and Implement Changes
+ARTIFACT: Change Management Plan
 
-PROJECT-ORIENTED (Projectized)
-  ✓ PM: HIGH authority &amp; control
-  ✓ Dedicated project resources
-  ✓ Full budget authority
-  ✓ Full decision-making authority
+PLAN defines:
+  - HOW changes are managed
+  - Change Control Board (CCB)
+  - Roles · authority
+  - Change control system implementation
 
-FUNCTIONAL / WEAK MATRIX
-  ✗ PM little or no authority
-  ✗ Functional manager decides
+SCENARIO: EI Solutions — in progress
+           SEVERAL change requests SIMULTANEOUSLY
+           Developer implementing IMMEDIATELY
+           Business holding own stakeholder meetings
+           PM HARD TO KEEP TRACK
+NEXT → A) Review CHANGE MANAGEMENT PLAN with team ✓
 
-BALANCED MATRIX
-  ↔ PM and FM share authority equally
-  ✗ NOT "full authority"
+NOT:
+  B) CCB recommendation — part of plan; align process first
+  C) Change log — tracking only (Q27), not process fix
+  D) Approve critical immediately — ad-hoc, worsens chaos
 
-Q5 ANSWER: C — Project-oriented organization
-  BuildMax: dedicated resources + full budget + full decisions
+SIGNAL: "simultaneously" · "implementing immediately"
+        "hard to keep track" · ad-hoc paths
 
-REF: The Standard for Project Management, p.22
-     "Influences of Organizational Structures on Projects"</div>
+VS Q27: Change log (track modifications)
+VS Q37: Single change request (post-baseline)
+VS Q38: Process chaos → review change MGMT PLAN
+
+Q38 ANSWER: A
+
+REF: PMBOK Guide, 8th Ed., p.28–29 &amp; p.116</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-functional-organization.html">Q6: Functional</a>
+          · <a href="pmp-teach-change-log.html">Q27: Change Log</a>
+          · <a href="pmp-teach-change-request.html">Q37: Change Request</a>
+          · <a href="pmp-full-questions.html#q-38">Luyện câu 38</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
-          · <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
         </footer>
       </main>
     </div>
@@ -441,12 +393,12 @@ REF: The Standard for Project Management, p.22
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "A";
       const EXPL = {
-        A: "Functional — functional manager giữ quyền, PM không có full authority.",
-        B: "Weak matrix — PM quyền thấp, không kiểm soát budget/decisions.",
-        C: "Đúng! Dedicated resources + full budget + full decisions = Project-oriented.",
-        D: "Balanced matrix — chia quyền, không phải full authority như trong đề."
+        A: "Đúng! Review change management plan — align team on HOW changes are managed (p.116).",
+        B: "CCB recommendation sau khi team aligned on plan — không fix ad-hoc chaos.",
+        C: "Change log tracks modifications — không stop unauthorized implementation.",
+        D: "Ad-hoc approval worsens disorder — cần establish process via plan review."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -462,7 +414,7 @@ REF: The Standard for Project Management, p.22
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Project-oriented organization.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Review the change management plan with the team.</strong>" : "");
         });
       });
       let score = 0;
@@ -494,11 +446,9 @@ REF: The Standard for Project Management, p.22
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
       const observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            navLinks.forEach(function (a) {
-              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-            });
-          }
+          if (e.isIntersecting) navLinks.forEach(function (a) {
+            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+          });
         });
       }, { rootMargin: "-20% 0px -60% 0px" });
       sections.forEach(function (s) { observer.observe(s); });
