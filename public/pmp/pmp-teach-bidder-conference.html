@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Adaptive Approach (Q15)</title>
+  <title>PMBOK 8 — Bidder Conference (Q23)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,16 +51,12 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .iter-viz { display: flex; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; flex-wrap: wrap; }
-    .iter-box { padding: 0.5rem 0.75rem; background: var(--ok-bg); border: 1.5px solid var(--ok); border-radius: 8px; font-size: 0.78rem; font-weight: 600; color: #065f46; position: relative; }
-    .iter-box:not(:last-child)::after { content: "↻"; position: absolute; right: -0.65rem; top: 50%; transform: translateY(-50%); color: var(--primary); font-weight: 700; }
-    .po-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; padding: 0.85rem 1rem; background: var(--info-bg); border: 1px solid var(--info); border-radius: var(--radius); font-size: 0.85rem; justify-content: center; }
-    .po-flow strong { color: #1d4ed8; }
-    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
-    @media (max-width: 600px) { .approach-grid { grid-template-columns: 1fr; } }
-    .approach-box { padding: 0.85rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--card); font-size: 0.84rem; }
-    .approach-box strong { display: block; margin-bottom: 0.25rem; color: var(--primary-dark); }
-    .approach-box.ok { border-color: var(--ok); background: var(--ok-bg); }
+    .process-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; font-size: 0.8rem; }
+    .flow-step { padding: 0.45rem 0.7rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--border); background: var(--bg); }
+    .flow-step.done { border-color: var(--muted); color: var(--muted); }
+    .flow-step.current { border-color: var(--ok); background: var(--ok-bg); color: #065f46; }
+    .flow-step.next { border-color: var(--info); background: var(--info-bg); color: #1d4ed8; }
+    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -76,7 +72,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 320px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -97,11 +93,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Adaptive Approach · Q15</div>
+      <div class="brand-sub">Bidder Conference · Q23</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#adaptive">Adaptive</a>
-        <a href="#compare">So sánh Q14</a>
+        <a href="#bidder">Bidder Conference</a>
+        <a href="#signal">Đọc tín hiệu đề</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -131,16 +127,16 @@
         <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
         <a href="pmp-teach-project-management-plan.html">Q21: Project Management Plan</a>
         <a href="pmp-teach-plan-sourcing-strategy.html">Q22: Plan Sourcing Strategy</a>
-        <a href="pmp-teach-bidder-conference.html">Q23: Bidder Conference</a>
+        <a href="pmp-teach-bidder-conference.html" class="series-current">Q23: Bidder Conference</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-23">Luyện câu 23</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#adaptive">Adaptive</a>
-        <a href="#compare">Compare</a>
+        <a href="#bidder">Bidder</a>
+        <a href="#signal">Signal</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -149,117 +145,90 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q15 về <strong>Adaptive Approaches</strong> — agile/change-driven khi
-            requirements volatile; short iterations, feedback, và một người chịu trách nhiệm scope/value.
+            Bài học Q23 về <strong>Bidder Conference</strong> — nhiều vendor quan tâm nhưng
+            hiểu khác nhau về dự án; PM cần đảm bảo mọi seller nhận <em>cùng thông tin</em> công bằng.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.63</span>
-            <span class="badge">Development Approach</span>
-            <span class="badge">Câu 15 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.265</span>
+            <span class="badge">Procurement</span>
+            <span class="badge">Câu 23 — Practice</span>
           </div>
         </header>
 
-        <section id="adaptive">
-          <h2>1. Adaptive Approach (PMBOK 8)</h2>
+        <section id="bidder">
+          <h2>1. Bidder Conference (Pre-Bid Meeting)</h2>
           <p>
-            Adaptive approaches (change-driven / agile) phù hợp khi requirements và technical
-            solution <strong>highly uncertain, volatile, likely to change</strong>.
-            Vision rõ sớm; requirements được elaborate dần theo feedback.
+            Hội nghị nhà thầu giúp <strong>tất cả prospective sellers</strong> nhận cùng thông tin
+            và làm rõ yêu cầu — thúc đẩy <strong>fairness</strong> và shared understanding,
+            không cho vendor nào lợi thế đặc biệt.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.63)</h4>
+            <h4>Mục đích chính (PMBOK p.265)</h4>
             <p style="margin:0">
-              A clear vision is established early, and known requirements are progressively
-              elaborated, changed, or replaced based on stakeholder feedback, the environment,
-              or unexpected events.
+              A bidder conference ensures all prospective sellers receive the same information
+              and clarifications, promoting fairness and a shared understanding of requirements
+              without giving any vendor an advantage.
             </p>
           </div>
 
-          <div class="iter-viz" aria-label="Short iterations cycle">
-            <span class="iter-box">Sprint 1</span>
-            <span class="iter-box">Sprint 2</span>
-            <span class="iter-box">Sprint 3</span>
-            <span class="iter-box">Sprint n</span>
-          </div>
-          <p style="font-size:0.85rem;color:var(--muted);text-align:center;margin-top:-0.5rem">
-            Short iterations · deliver features regularly · refine from feedback
-          </p>
-
-          <div class="po-flow">
-            <strong>Product Owner</strong> — one person responsible for approved scope &amp; value to the organization
-          </div>
-
-          <h3>Keywords trong đề thi → Adaptive</h3>
+          <h3>Quy tắc quan trọng</h3>
           <ul>
-            <li>Short iterations / sprints</li>
-            <li>Deliver features regularly</li>
-            <li>Refine based on stakeholder feedback</li>
-            <li>Mobile app, digital products, high uncertainty</li>
-            <li>Product Owner owns scope &amp; value</li>
+            <li>Trả lời câu hỏi <strong>công khai</strong> — mọi vendor nghe cùng câu trả lời</li>
+            <li>Không trao đổi riêng từng vendor trong conference (tránh unfair advantage)</li>
+            <li>Clarifications quan trọng → cập nhật procurement documents / addendum cho tất cả</li>
           </ul>
         </section>
 
-        <section id="compare">
-          <h2>2. Adaptive vs Predictive (Q14 ↔ Q15)</h2>
+        <section id="signal">
+          <h2>2. Đọc tín hiệu trong đề</h2>
 
-          <div class="approach-grid">
-            <div class="approach-box ok">
-              <strong>Q15 — Adaptive (A) ✓</strong>
-              Iterations, feedback, evolving requirements, Product Owner
-            </div>
-            <div class="approach-box">
-              <strong>Q14 — Predictive (D)</strong>
-              Phase gates, defined early, strict change control, waterfall
-            </div>
+          <div class="process-flow" aria-label="Procurement context Q23">
+            <span class="flow-step done">Outsourcing decided ✓</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step done">Vendors interested ✓</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step current">Different ideas on project</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step next">Bidder conference (A)</span>
           </div>
 
           <table>
             <thead>
-              <tr><th>Approach</th><th>Khi nào</th><th>Đặc điểm</th></tr>
+              <tr><th>Signal trong đề</th><th>Ý nghĩa</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Adaptive (A)</strong></td>
-                <td>Uncertain, volatile requirements</td>
-                <td>Iterations, feedback, progressive elaboration</td>
+                <td>“Multiple vendors expressed interest”</td>
+                <td>Đã qua giai đoạn advertising — không cần B</td>
               </tr>
               <tr>
-                <td><strong>Predictive (B)</strong></td>
-                <td>Scope stable early</td>
-                <td>Upfront planning, phase gates</td>
+                <td>“Different ideas on what the project is about”</td>
+                <td>Thiếu shared understanding → cần clarify cho <em>tất cả</em></td>
               </tr>
               <tr>
-                <td><strong>Hybrid (C)</strong></td>
-                <td>Mix stable + evolving</td>
-                <td>Not described in Q15 scenario</td>
-              </tr>
-              <tr>
-                <td><strong>Incremental (D)</strong></td>
-                <td>Deliver portions over time</td>
-                <td>May overlap agile but Q15 keywords = full adaptive pattern</td>
+                <td>Không nói “chưa quyết outsource”</td>
+                <td>Make-or-buy (C) đã xong — xem Q22</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 15</h2>
+          <h2>3. Câu hỏi thực hành — Question 23</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q15</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q23</div>
             <div class="q-text">
-              Jason is leading a mobile application project at Blue Peak Digital Solutions.
-              The team works in <em>short iterations</em>, delivering <em>features regularly</em>
-              and refining their approach based on feedback.
-              <em>One person is responsible</em> for the approved scope and its value to the organization.
-              Which development approach is being used?
+              A project requires outsourcing specialized engineering work. Multiple vendors have
+              expressed their interest in submitting a proposal, but each have
+              <em>different ideas on what the project is about</em>. What should the project manager do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Adaptive approach.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Predictive approach.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Hybrid approach.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Incremental approach.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Conduct a bidder conference.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Use advertising for the proposal.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Perform a make or buy analysis.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Clarify the source selection criteria.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -270,71 +239,74 @@
 
           <h3>Tại sao chọn A?</h3>
           <ul>
-            <li>Short iterations + regular feature delivery + feedback = agile/adaptive hallmark.</li>
-            <li>One person for scope &amp; value = <strong>Product Owner</strong> role (slide annotation).</li>
-            <li>Mobile app at digital solutions firm = typical adaptive context (volatile requirements).</li>
-            <li>Khớp PMBOK p.63 — change-driven / agile approaches.</li>
+            <li>Vendors hiểu khác nhau về scope/requirements → cần session clarify chung.</li>
+            <li>Bidder conference = cùng thông tin, cùng Q&amp;A, fair competition.</li>
+            <li>Đúng giai đoạn: đã có interest, chưa evaluate proposals.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>B. Predictive</strong></td>
-                <td>Waterfall/plan-driven — trái iterations và evolving requirements (Q14 pattern).</td>
+                <td><strong>B. Advertising</strong></td>
+                <td>Vendors đã express interest — advertising đã đạt mục tiêu hoặc không giải quyết misunderstanding.</td>
               </tr>
               <tr>
-                <td><strong>C. Hybrid</strong></td>
-                <td>Scenario mô tả thuần adaptive, không nhắc phần predictive.</td>
+                <td><strong>C. Make-or-buy</strong></td>
+                <td>Đề đã “requires outsourcing” — quyết định buy đã có (Q22 planning).</td>
               </tr>
               <tr>
-                <td><strong>D. Incremental</strong></td>
-                <td>Deliver từng phần có thể overlap nhưng đề nhấn iterations + feedback + PO = adaptive (A) đầy đủ hơn.</td>
+                <td><strong>D. Source selection criteria</strong></td>
+                <td>Criteria (cost, schedule…) dùng khi <em>chấm</em> proposals — không fix “different ideas on project scope”.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Synonyms Adaptive (p.63)</h4>
+            <h4>Liên hệ Q22</h4>
             <p style="margin:0">
-              change-driven · agile · progressive elaboration · stakeholder feedback ·
-              volatile requirements · Product Owner
+              Q22: chưa contact vendor → Plan Sourcing Strategy. Q23: vendors đã interested nhưng
+              hiểu lệch → Bidder Conference.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Adaptive hay Predictive?</h2>
+          <h2>5. Drill — Procurement action nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="ADAPT">
-              <span>Short iterations with regular feature delivery</span>
+            <div class="classify-row" data-answer="CONF">
+              <span>Vendors misunderstand project scope equally</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="PLAN">Plan strategy</button>
+                <button data-pick="CONF">Bidder conf.</button>
+                <button data-pick="AD">Advertise</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PRED">
-              <span>Phase gate approvals with strict change control</span>
+            <div class="classify-row" data-answer="PLAN">
+              <span>No vendors contacted; define make-or-buy</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="PLAN">Plan strategy</button>
+                <button data-pick="CONF">Bidder conf.</button>
+                <button data-pick="AD">Advertise</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ADAPT">
-              <span>Requirements elaborated based on stakeholder feedback</span>
+            <div class="classify-row" data-answer="AD">
+              <span>Need more prospective sellers in market</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="PLAN">Plan strategy</button>
+                <button data-pick="CONF">Bidder conf.</button>
+                <button data-pick="AD">Advertise</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ADAPT">
-              <span>One person owns approved scope and organizational value</span>
+            <div class="classify-row" data-answer="CONF">
+              <span>Ensure all sellers get same clarifications</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="PLAN">Plan strategy</button>
+                <button data-pick="CONF">Bidder conf.</button>
+                <button data-pick="AD">Advertise</button>
               </div>
             </div>
           </div>
@@ -344,16 +316,16 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn D — Incremental vì “deliver features regularly”</h4>
-            <p style="margin:0">Incremental = usable portions over time. Khi có <strong>short iterations + feedback + PO</strong>, PMBOK 8 gọi là <strong>Adaptive</strong> — đáp án đầy đủ hơn.</p>
+            <h4>Bẫy 1: “Clarify” → source selection criteria (D)</h4>
+            <p style="margin:0">Criteria = cách chọn winner (cost, quality…), không phải làm rõ scope cho mọi bidder.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Nhầm với Q14 Predictive</h4>
-            <p style="margin:0">Q14 = regulated, defined early. Q15 = mobile app, iterations, feedback — đối lập rõ ràng.</p>
+            <h4>Bẫy 2: Procurement → make-or-buy (C)</h4>
+            <p style="margin:0">“Requires outsourcing” = buy decision đã có — đừng quay lại planning quá sớm.</p>
           </div>
           <div class="card tip">
-            <h4>Pair study Q14 + Q15</h4>
-            <p style="margin:0">Đề thi thường đặt predictive và adaptive cạnh nhau — đọc keywords, không đoán theo ngành.</p>
+            <h4>Pattern nhận diện</h4>
+            <p style="margin:0"><strong>Same info + fairness + vendors confused</strong> → Bidder Conference (A).</p>
           </div>
         </section>
 
@@ -361,48 +333,48 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Adaptive approach = gì? (p.63)</div>
-            <div class="flashcard-back">Change-driven/agile — volatile requirements, iterations, feedback, progressive elaboration.</div>
+            <div class="flashcard-front">Bidder conference mục đích? (p.265)</div>
+            <div class="flashcard-back">Same information &amp; clarifications for all sellers · fairness · shared understanding.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q15 đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Adaptive approach (short iterations, features, Product Owner).</div>
+            <div class="flashcard-front">Q23 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Conduct a bidder conference.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ADAPTIVE APPROACH — Q15 (PMBOK 8, p.63)
+          <div class="cheat-sheet">BIDDER CONFERENCE — Q23 (PMBOK 8, p.265)
 ─────────────────────────────────────────────────────
-ALSO CALLED: Change-driven · Agile
+TOOL: Bidder conference (pre-bid meeting)
+PURPOSE:
+  - All prospective sellers get SAME info &amp; clarifications
+  - Fairness — no vendor advantage
+  - Shared understanding of requirements
 
-WHEN: Requirements &amp; technical solution UNCERTAIN, VOLATILE, LIKELY TO CHANGE
-
-HOW:
-  Clear vision early
-  Requirements progressively elaborated/changed/replaced
-  Stakeholder feedback · environment · unexpected events
-
-Q15 KEYWORDS → A (Adaptive):
-  Short iterations · features regularly · feedback
-  One person = scope &amp; value → Product Owner
-  Mobile app / digital solutions
-
-Q15 ANSWER: A — Adaptive approach
-
-VS Q14 PREDICTIVE:
-  Q14: phase gates, defined early, strict CC
-  Q15: iterations, feedback, evolving scope
+SCENARIO: Outsourcing engineering · vendors interested
+           BUT different ideas on what project is about
+ANSWER → A) Conduct a BIDDER CONFERENCE ✓
 
 NOT:
-  B Predictive · C Hybrid (not described) · D Incremental alone
+  B) Advertising — vendors already interested
+  C) Make-or-buy — already outsourcing (buy decided)
+  D) Source selection criteria — for scoring, not scope clarity
 
-REF: The Standard for Project Management, p.63
-     "Adaptive Approaches"</div>
+VS Q22:
+  Q22: no vendors yet → Plan Sourcing Strategy
+  Q23: vendors confused → Bidder Conference
+
+RULE: Public Q&amp;A · update docs for ALL sellers
+
+Q23 ANSWER: A
+
+REF: PMBOK Guide, 8th Ed., p.19–20 &amp; p.265 — Bidder Conference</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
+          · <a href="pmp-teach-plan-sourcing-strategy.html">Q22: Plan Sourcing Strategy</a>
+          · <a href="pmp-full-questions.html#q-23">Luyện câu 23</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -413,10 +385,10 @@ REF: The Standard for Project Management, p.63
     (function () {
       const CORRECT = "A";
       const EXPL = {
-        A: "Đúng! Short iterations, regular features, feedback, PO = Adaptive/change-driven/agile (p.63).",
-        B: "Predictive = waterfall, defined early — trái iterations và evolving requirements.",
-        C: "Hybrid = mix — scenario mô tả thuần adaptive.",
-        D: "Incremental = partial delivery — thiếu full adaptive pattern (iterations + feedback + PO)."
+        A: "Đúng! Bidder conference — cùng thông tin, clarify requirements, fairness cho mọi vendor (p.265).",
+        B: "Vendors đã express interest — advertising không giải quyết misunderstanding về scope.",
+        C: "Đề đã requires outsourcing — make-or-buy đã quyết; xem Q22 cho planning sớm hơn.",
+        D: "Source selection criteria dùng khi đánh giá proposals — không fix vendors hiểu khác về dự án."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -432,7 +404,7 @@ REF: The Standard for Project Management, p.63
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Adaptive approach.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Conduct a bidder conference.</strong>" : "");
         });
       });
       let score = 0;
