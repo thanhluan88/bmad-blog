@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Issue Log (Q29)</title>
+  <title>PMBOK 8 — Quality Report (Q53)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,6 +51,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.82rem; }
+    .flow-box { padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+    .flow-box.highlight { background: var(--primary-bg); border-color: #fde68a; font-weight: 600; }
+    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,7 +70,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 400px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -88,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Issue Log · Q29</div>
+      <div class="brand-sub">Quality Report · Q53</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#issue">Issue vs Risk</a>
-        <a href="#first">FIRST action</a>
+        <a href="#quality-report">Quality Report</a>
+        <a href="#data-flow">Data → Report</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -151,16 +155,16 @@
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
         <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
         <a href="pmp-teach-wbs-dictionary.html">Q52: WBS Dictionary</a>
-        <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
+        <a href="pmp-teach-quality-report.html" class="series-current">Q53: Quality Report</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-29">Luyện câu 29</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-53">Luyện câu 53</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#issue">Issue/Risk</a>
-        <a href="#first">FIRST</a>
+        <a href="#quality-report">Report</a>
+        <a href="#data-flow">Data flow</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -169,152 +173,196 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q29 về <strong>Issue Log</strong> — unauthorized access đã xảy ra
-            (problem occurred) → ghi <strong>issue</strong> trước khi brainstorm hay escalate.
+            Bài học Q53 về <strong>Quality Report</strong> — Diane, pharmaceutical product
+            development tại Redwood Biologics: monitoring phát hiện
+            <em>inconsistencies in deliverable quality</em>; stakeholders cần
+            <em>additional information</em> để hỗ trợ cải tiến.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.123</span>
-            <span class="badge">Manage Project Execution</span>
-            <span class="badge">Câu 29 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.42 &amp; 129–130</span>
+            <span class="badge">Monitor and Control Scope</span>
+            <span class="badge">Quality Reports</span>
+            <span class="badge">Câu 53 — Practice</span>
           </div>
         </header>
 
-        <section id="issue">
-          <h2>1. Issue vs Risk — đã xảy ra hay chưa?</h2>
+        <section id="quality-report">
+          <h2>1. Quality Report (p.129–130)</h2>
+          <p>
+            <strong>Monitor and Control Scope</strong> (p.42) là quá trình liên tục theo dõi scope,
+            đo lường <strong>deliverable quality and value</strong>, và ghi nhận kết quả để đánh giá
+            performance. Khi phát hiện vấn đề chất lượng, PM cần artifact giúp stakeholders hiểu
+            issues và hướng cải tiến — đó là <strong>quality report</strong>.
+          </p>
+
+          <div class="card tip">
+            <h4>Quality report gồm gì?</h4>
+            <p style="margin:0">
+              Documents <strong>quality issues</strong>, <strong>corrective action recommendations</strong>,
+              and findings from <strong>quality control</strong> activities — thông tin đã phân tích,
+              không phải raw data.
+            </p>
+          </div>
 
           <table>
             <thead>
-              <tr><th></th><th>Issue</th><th>Risk</th></tr>
+              <tr><th>Nội dung quality report</th><th>Mục đích</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Quality issues identified</td><td>Mô tả inconsistencies / defects</td></tr>
+              <tr><td>QC findings</td><td>Kết quả kiểm tra, verify deliverables</td></tr>
+              <tr><td>Corrective action recommendations</td><td>Hỗ trợ improvements stakeholders yêu cầu</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="data-flow">
+          <h2>2. Data → Information → Report (liên hệ Q35)</h2>
+
+          <div class="flow-diagram">
+            <div class="flow-box">Work Performance Data</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">Work Performance Information</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box highlight">Quality Report</div>
+          </div>
+
+          <table>
+            <thead>
+              <tr><th>Artifact</th><th>Ví dụ Q53</th><th>Đúng?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Định nghĩa</strong></td>
-                <td>Problem <em>đã xảy ra</em></td>
-                <td>Uncertain event <em>chưa xảy ra</em></td>
+                <td><strong>Work performance data (A)</strong></td>
+                <td>Raw AC, defect counts từ QC — chưa phân tích</td>
+                <td>Input, không phải output cho stakeholders</td>
               </tr>
               <tr>
-                <td><strong>Artifact</strong></td>
-                <td>Issue Log</td>
-                <td>Risk Register</td>
+                <td><strong>Scope baseline (B)</strong></td>
+                <td>Approved scope + WBS + dictionary</td>
+                <td>Planning baseline — không mô tả quality issues hiện tại</td>
               </tr>
               <tr>
-                <td><strong>Q29</strong></td>
-                <td>✓ Unauthorized access reported</td>
-                <td>✗ “Could cause issues” = future — sau khi log issue</td>
+                <td><strong>Change log (C)</strong></td>
+                <td>Danh sách change requests đã ghi</td>
+                <td>Change tracking — không phải quality findings report</td>
+              </tr>
+              <tr>
+                <td><strong>Quality report (D)</strong></td>
+                <td>Issues + recommendations cho improvements</td>
+                <td><strong>Đúng — produce for stakeholders</strong></td>
               </tr>
             </tbody>
           </table>
 
-          <div class="card tip">
-            <h4>Issue Log (PMBOK p.123)</h4>
+          <div class="card info">
+            <h4>Signal trong đề</h4>
             <p style="margin:0">
-              When a problem has already occurred, it is treated as an issue.
-              The issue log is used to document, track, and manage issues before further action is taken.
+              <em>Additional information on these issues to support improvements</em> = analyzed
+              report, không phải raw data (A) hay planning artifact (B).
             </p>
           </div>
         </section>
 
-        <section id="first">
-          <h2>2. “What should the PM do FIRST?”</h2>
-          <p>Thứ tự đúng sau khi phát hiện breach:</p>
-          <ol>
-            <li><strong>Note in issue log</strong> (A) — document &amp; track</li>
-            <li>Assess impact, brainstorm responses (C) — sau khi logged</li>
-            <li>Escalate if needed (D) — khi vượt quyền PM hoặc sau analysis</li>
-            <li>Update risk register nếu có future uncertainty mới — không thay issue log</li>
-          </ol>
-        </section>
-
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 29</h2>
+          <h2>3. Câu hỏi thực hành — Question 53</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q29</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q53</div>
             <div class="q-text">
-              A project team at CD Solutions is developing a customer analytics platform.
-              Midway through execution, a security officer reports
-              <em>unauthorized access to sensitive project data</em>. This could cause issues
-              with the deliverables in the future. What should the project manager do <em>first</em>?
+              At Redwood Biologics, Diane is managing a pharmaceutical product development project.
+              During monitoring, <em>inconsistencies in deliverable quality</em> are identified.
+              Stakeholders request <em>additional information on these issues</em> to support
+              improvements. What should Diane produce?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Note it in the issue log.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Note it in the risk register.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Brainstorm ways to handle the security breach with the team.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Escalate the breach to senior managers within the organization.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Work performance data.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. The scope baseline.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Change requests in the change log.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. The quality report.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn A?</h3>
+          <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>Unauthorized access <em>reports</em> = event đã xảy ra → issue.</li>
-            <li>FIRST = document trong issue log trước action khác.</li>
-            <li>“Could cause issues in future” không đổi bản chất — breach đã occurred.</li>
+            <li>Monitoring phát hiện quality inconsistencies → cần document &amp; communicate.</li>
+            <li>Stakeholders want <em>information</em> to support improvements → quality report.</li>
+            <li>Monitor and Control Scope (p.42) + Quality reports (p.129–130).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không FIRST</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>B. Risk register</strong></td>
-                <td>Risk = chưa xảy ra; breach đã occurred → issue log.</td>
+                <td><strong>A. Work performance data</strong></td>
+                <td>Raw output (defect counts, measurements) — stakeholders cần analyzed report, không phải data thô (Q35).</td>
               </tr>
               <tr>
-                <td><strong>C. Brainstorm with team</strong></td>
-                <td>Valid sau khi issue được documented — không phải bước đầu.</td>
+                <td><strong>B. Scope baseline</strong></td>
+                <td>Approved scope reference từ planning — không mô tả quality issues đang monitoring.</td>
               </tr>
               <tr>
-                <td><strong>D. Escalate</strong></td>
-                <td>Escalate sau assess/document — PMI: PM xử lý trước khi escalate.</td>
+                <td><strong>C. Change log</strong></td>
+                <td>Tracks change requests — quality findings chưa chắc đã thành formal change (Q27).</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q20 &amp; Q27</h4>
+            <h4>Liên hệ Q35 vs Q53</h4>
             <p style="margin:0">
-              Q20: Issue Log vs Assumption/Risk. Q27: Change Log. Q29: breach occurred →
-              <strong>Issue Log FIRST</strong>.
+              Q35: analyze data → <em>work performance information</em> (FIRST). Q53: stakeholders
+              cần <em>quality-specific report</em> về issues &amp; recommendations →
+              <strong>quality report</strong> (D), không đưa raw data (A).
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Issue hay Risk?</h2>
+          <h2>5. Drill — Data, baseline, change log hay quality report?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="ISS">
-              <span>Unauthorized access already reported</span>
+            <div class="classify-row" data-answer="REPORT">
+              <span>Stakeholders need info on quality issues for improvements</span>
               <div class="classify-btns">
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="DATA">Data</button>
+                <button data-pick="BASE">Baseline</button>
+                <button data-pick="CHANGE">Change log</button>
+                <button data-pick="REPORT">Quality report</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RSK">
-              <span>Vendor might delay delivery next month</span>
+            <div class="classify-row" data-answer="DATA">
+              <span>Raw defect counts and measurements from QC</span>
               <div class="classify-btns">
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="DATA">Data</button>
+                <button data-pick="BASE">Baseline</button>
+                <button data-pick="CHANGE">Change log</button>
+                <button data-pick="REPORT">Quality report</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ISS">
-              <span>Defect found in production release</span>
+            <div class="classify-row" data-answer="BASE">
+              <span>Approved scope statement + WBS + dictionary</span>
               <div class="classify-btns">
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="DATA">Data</button>
+                <button data-pick="BASE">Baseline</button>
+                <button data-pick="CHANGE">Change log</button>
+                <button data-pick="REPORT">Quality report</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RSK">
-              <span>Key resource may become unavailable</span>
+            <div class="classify-row" data-answer="CHANGE">
+              <span>Track sequence of approved scope changes</span>
               <div class="classify-btns">
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="DATA">Data</button>
+                <button data-pick="BASE">Baseline</button>
+                <button data-pick="CHANGE">Change log</button>
+                <button data-pick="REPORT">Quality report</button>
               </div>
             </div>
           </div>
@@ -324,16 +372,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Could cause issues in future” → Risk register (B)</h4>
-            <p style="margin:0">Future impact từ event đã xảy ra — log issue trước; risk có thể update sau.</p>
+            <h4>Bẫy 1: Monitoring → Work performance data (A)</h4>
+            <p style="margin:0">Data = raw (AC, # defects). Stakeholders cần <em>information/report</em> — instructor note: Data → Info → Report.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Security breach → Escalate first (D)</h4>
-            <p style="margin:0">Document issue trước — escalate khi cần sau assess.</p>
+            <h4>Bẫy 2: Deliverables → Scope baseline (B)</h4>
+            <p style="margin:0">Baseline = what was approved — không explain current quality inconsistencies.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Issues → Change log (C)</h4>
+            <p style="margin:0">Change log tracks CRs — quality report documents findings trước khi (nếu cần) raise change request.</p>
           </div>
           <div class="card tip">
-            <h4>Mnemonic</h4>
-            <p style="margin:0"><strong>Occurred = Issue</strong> · <strong>Might happen = Risk</strong> · <strong>FIRST = Log it</strong></p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Quality inconsistencies · monitoring · stakeholders want information · support improvements</strong> → Quality report (D).</p>
           </div>
         </section>
 
@@ -341,47 +393,61 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Problem already occurred → artifact? (p.123)</div>
-            <div class="flashcard-back"><strong>Issue Log</strong> — document, track, manage before further action.</div>
+            <div class="flashcard-front">Quality report? (p.129–130)</div>
+            <div class="flashcard-back">Documents quality issues, corrective recommendations, QC findings — for stakeholders.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q29 đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Note it in the issue log (FIRST).</div>
+            <div class="flashcard-front">Q53 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — The quality report.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ISSUE LOG — Q29 (PMBOK 8, p.22–23 &amp; p.123)
+          <div class="cheat-sheet">QUALITY REPORT — Q53 (PMBOK 8, p.42 &amp; 129–130)
 ─────────────────────────────────────────────────────
-RULE: Problem ALREADY OCCURRED = ISSUE (not risk)
-ARTIFACT: Issue log — document, track, manage FIRST
+PROCESS: Monitor and Control Scope (p.42)
+         Quality reports (p.129–130)
 
-SCENARIO: CD Solutions — unauthorized access REPORTED
-           (breach happened) · could affect deliverables later
-FIRST → A) Note in ISSUE LOG ✓
+MONITOR &amp; CONTROL SCOPE:
+  - Ongoing monitoring of scope changes
+  - Measure DELIVERABLE QUALITY and VALUE
+  - Record results to assess performance
 
-NOT FIRST:
-  B) Risk register — event already occurred
-  C) Brainstorm — after logging issue
-  D) Escalate — after document/assess
+QUALITY REPORT:
+  - Quality ISSUES identified
+  - Corrective action RECOMMENDATIONS
+  - Findings from QUALITY CONTROL activities
+  - Information for stakeholders (not raw data)
 
-ISSUE vs RISK:
-  Occurred / reports / happened → Issue Log
-  Might / may / could (uncertain) → Risk Register
+SCENARIO: Diane — Redwood Biologics · pharma dev
+           MONITORING → quality INCONSISTENCIES
+           Stakeholders want ADDITIONAL INFORMATION
+           To SUPPORT IMPROVEMENTS
+→ D) THE QUALITY REPORT ✓
 
-VS Q20: Issue log NOT for assumptions/uncertain timelines
-VS Q27: Change log for change requests
+NOT:
+  A) Work performance DATA — raw (defects, AC); Q35 Data→Info
+  B) Scope BASELINE — approved scope; planning artifact
+  C) Change LOG — tracks change requests; not quality findings
 
-Q29 ANSWER: A
+DATA FLOW (instructor):
+  Data → Information → Report
+  A = data layer; D = quality-specific report layer
 
-REF: PMBOK Guide, 8th Ed., p.123 — Issue Log</div>
+SIGNAL: "inconsistencies in deliverable quality"
+        "additional information on these issues"
+        "support improvements" · monitoring
+
+Q53 ANSWER: D
+
+REF: PMBOK Guide, 8th Ed., p.42, p.129–130</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
-          · <a href="pmp-teach-change-log.html">Q27: Change Log</a>
-          · <a href="pmp-full-questions.html#q-29">Luyện câu 29</a>
+          · <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
+          · <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
+          · <a href="pmp-full-questions.html#q-53">Luyện câu 53</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -390,12 +456,12 @@ REF: PMBOK Guide, 8th Ed., p.123 — Issue Log</div>
 
   <script>
     (function () {
-      const CORRECT = "A";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Đúng! Problem đã xảy ra → issue log FIRST — document &amp; track trước action khác (p.123).",
-        B: "Unauthorized access đã reported — occurred event, không phải risk register.",
-        C: "Brainstorm là bước sau — FIRST là ghi issue log.",
-        D: "Escalate sau khi document và assess — không phải FIRST."
+        A: "Work performance data là raw output (defect counts, measurements) — stakeholders cần analyzed quality report, không phải data thô.",
+        B: "Scope baseline là approved scope từ planning — không mô tả quality inconsistencies đang monitoring.",
+        C: "Change log tracks change requests — không phải artifact document quality issues & recommendations.",
+        D: "Đúng! Quality report documents quality issues, corrective recommendations, QC findings (p.42, 129–130)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -411,7 +477,7 @@ REF: PMBOK Guide, 8th Ed., p.123 — Issue Log</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Note it in the issue log.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — The quality report.</strong>" : "");
         });
       });
       let score = 0;
