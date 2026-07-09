@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Change Log (Q27)</title>
+  <title>PMBOK 8 — Rolling Wave Planning (Q59)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,6 +51,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .wave-diagram { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 1.25rem 0; flex-wrap: wrap; }
+    .wave-ring { border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.75rem; font-weight: 600; color: var(--primary-dark); }
+    .wave-ring.inner { width: 90px; height: 90px; background: var(--primary-bg); }
+    .wave-ring.mid { width: 140px; height: 140px; opacity: 0.85; }
+    .wave-ring.outer { width: 190px; height: 190px; opacity: 0.6; border-style: dashed; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,7 +71,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 400px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -88,11 +93,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Change Log · Q27</div>
+      <div class="brand-sub">Rolling Wave Planning · Q59</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#changelog">Change Log</a>
-        <a href="#logs">Phân biệt logs</a>
+        <a href="#rolling-wave">Rolling Wave</a>
+        <a href="#signals">Signals</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -157,16 +162,16 @@
         <a href="pmp-teach-development-approach-schedule.html">Q56: Dev Approach Input</a>
         <a href="pmp-teach-schedule-baseline.html">Q57: Schedule Baseline</a>
         <a href="pmp-teach-resource-leveling.html">Q58: Resource Leveling</a>
-        <a href="pmp-teach-rolling-wave-planning.html">Q59: Rolling Wave</a>
+        <a href="pmp-teach-rolling-wave-planning.html" class="series-current">Q59: Rolling Wave</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-27">Luyện câu 27</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-59">Luyện câu 59</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#changelog">Change Log</a>
-        <a href="#logs">Logs</a>
+        <a href="#rolling-wave">Wave</a>
+        <a href="#signals">Signals</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -175,102 +180,95 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q27 về <strong>Change Log</strong> — nhiều modifications được request,
-            team confused về <em>what to implement and in what sequence</em> trong execution.
+            Bài học Q59 về <strong>Rolling Wave Planning</strong> — Nexora Labs product launch:
+            near-term requirements rõ, later work <em>uncertain</em> (evolving requirements);
+            sponsor muốn <em>begin quickly</em> nhưng team không finalize được full schedule.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.22 &amp; p.116</span>
-            <span class="badge">Manage Project Execution</span>
-            <span class="badge">Câu 27 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.49–50 &amp; 196</span>
+            <span class="badge">Develop Schedule</span>
+            <span class="badge">Rolling Wave Planning</span>
+            <span class="badge">Câu 59 — Practice</span>
           </div>
         </header>
 
-        <section id="changelog">
-          <h2>1. Change Log</h2>
+        <section id="rolling-wave">
+          <h2>1. Rolling wave planning (p.196)</h2>
           <p>
-            Change log ghi lại <strong>tất cả change requests đã submit</strong> và
-            <strong>trạng thái</strong> của chúng — disposition của từng request
-            xuyên suốt project lifecycle.
+            Kỹ thuật <strong>progressive elaboration</strong> trong Develop Schedule: plan
+            <strong>near-term work in detail</strong>, giữ <strong>future work at higher level</strong>
+            cho đến khi requirements rõ hơn. Cho phép bắt đầu execution sớm mà không giả vờ biết
+            toàn bộ schedule upfront.
           </p>
 
-          <div class="card tip">
-            <h4>Định nghĩa (PMBOK p.116)</h4>
-            <p style="margin:0">
-              A change log records all submitted changes and their status, documenting
-              the disposition of change requests throughout the project.
-            </p>
+          <div class="wave-diagram" aria-hidden="true">
+            <div class="wave-ring outer">Future · high level</div>
+            <div class="wave-ring mid">Mid-term · elaborating</div>
+            <div class="wave-ring inner">Near-term · detail</div>
           </div>
 
-          <div class="card info">
-            <h4>Manage Project Execution (p.22)</h4>
+          <div class="card tip">
+            <h4>Develop Schedule is iterative (p.49–50)</h4>
             <p style="margin:0">
-              Leading and performing work defined in the plan and implementing
-              <strong>approved changes</strong> to meet objectives — deliverables meet scope requirements.
+              Analyze sequences, durations, resources, constraints → schedule model. Estimates
+              revised over time. Rolling wave = cách iterate khi future uncertain.
             </p>
           </div>
         </section>
 
-        <section id="logs">
-          <h2>2. Phân biệt các log/register</h2>
+        <section id="signals">
+          <h2>2. Khi nào chọn rolling wave?</h2>
 
           <table>
             <thead>
-              <tr><th>Artifact</th><th>Ghi gì?</th><th>Q27 fit?</th></tr>
+              <tr><th>Signal trong đề</th><th>Ý nghĩa</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td><strong>Change Log</strong></td>
-                <td>Submitted changes + status + disposition + sequence of approved mods</td>
-                <td>✓ Đúng — modifications throughout project</td>
-              </tr>
-              <tr>
-                <td>Scope Statement / Baseline</td>
-                <td>Authorized scope ban đầu — không track history từng change</td>
-                <td>✗ Thiếu status/sequence của modifications</td>
-              </tr>
-              <tr>
-                <td>Issue Log</td>
-                <td>Impacts đã xảy ra cần xử lý</td>
-                <td>✗ Không phải change request tracking</td>
-              </tr>
-              <tr>
-                <td>Risk Register</td>
-                <td>Uncertainties &amp; planned responses</td>
-                <td>✗ Không liên quan modifications confusion</td>
-              </tr>
+              <tr><td><em>Near-term clear, later uncertain</em></td><td>Detail now, elaborate later → rolling wave</td></tr>
+              <tr><td><em>Evolving requirements</em></td><td>Không force full schedule approval</td></tr>
+              <tr><td><em>Struggles to finalize schedule</em></td><td>Full develop schedule (B) premature</td></tr>
+              <tr><td><em>Pressure to begin quickly</em></td><td>Start near-term detail, không wait for all estimates (A)</td></tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>Liên hệ Q57–Q58</h4>
+            <p style="margin:0">
+              Q57 baseline sau full approval. Q59 — chưa thể approve full schedule → rolling wave
+              trước, elaborate và baseline từng wave sau.
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 27</h2>
+          <h2>3. Câu hỏi thực hành — Question 59</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q27</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q59</div>
             <div class="q-text">
-              Rina is executing a warehouse automation project at Grid Line Logistics.
-              Several <em>modifications have been requested throughout the project</em>,
-              and now there is confusion about <em>what should be implemented and in what sequence</em>.
-              What will Rina do <em>next</em>?
+              While planning a product launch at Nexora Labs, the team struggles to finalize the
+              schedule. <em>Near-term requirements are clear</em>, but work planned for later is
+              <em>uncertain due to evolving requirements</em>. There is pressure from the project
+              sponsor to <em>begin work quickly</em>. What should the project manager do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Review the Scope Statement.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Review the Change Log.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Review the Issue Log.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Review the Risk Register.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Immediately estimate activity durations.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Develop the project schedule for approval.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Use rolling wave planning with the team.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Raise the future uncertainty as a risk.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>“Modifications requested throughout” = change requests cần track.</li>
-            <li>Confusion về implement gì, thứ tự nào → Change Log có status &amp; disposition.</li>
-            <li>Execution phase — implement <em>approved</em> changes per log.</li>
+            <li>Near-term detail + future high-level = classic rolling wave pattern.</li>
+            <li>Begin quickly without fake precision on uncertain later work.</li>
+            <li>Develop Schedule iterative technique (p.49–50, 196).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -280,62 +278,66 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Scope Statement</strong></td>
-                <td>Baseline scope ban đầu — không document lịch sử nhiều modifications &amp; sequence.</td>
+                <td><strong>A. Estimate durations now</strong></td>
+                <td>Force estimates on uncertain future work — thiếu progressive elaboration.</td>
               </tr>
               <tr>
-                <td><strong>C. Issue Log</strong></td>
-                <td>Issues = đã xảy ra — không phải track change requests.</td>
+                <td><strong>B. Full schedule for approval</strong></td>
+                <td>Cannot finalize — stem says later work uncertain; premature baseline.</td>
               </tr>
               <tr>
-                <td><strong>D. Risk Register</strong></td>
-                <td>Risks = uncertainty — không giải quyết confusion về approved modifications.</td>
+                <td><strong>D. Raise as risk</strong></td>
+                <td>Uncertainty acknowledged — PMI prefers rolling wave technique when applicable.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q20 Assumption Log</h4>
+            <h4>Instructor diagram</h4>
             <p style="margin:0">
-              Q20 phân biệt assumption/risk/issue logs ở planning. Q27 = execution —
-              <strong>change log</strong> khi nhiều modifications gây confusion.
+              Concentric circles = near center detailed, outer rings high-level. Đó là rolling
+              wave — không phải full schedule (B) hay chỉ risk register (D).
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Log nào?</h2>
+          <h2>5. Drill — Rolling wave, full schedule, estimates hay risk?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="CHG">
-              <span>Track status of submitted change requests</span>
+            <div class="classify-row" data-answer="WAVE">
+              <span>Near-term clear, future work uncertain — start quickly</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="WAVE">Rolling wave</button>
+                <button data-pick="FULL">Full schedule</button>
+                <button data-pick="EST">Estimates now</button>
+                <button data-pick="RISK">Risk only</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ISS">
-              <span>Document problem that has already occurred</span>
+            <div class="classify-row" data-answer="FULL">
+              <span>All requirements stable — stakeholders ready to approve baseline</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="WAVE">Rolling wave</button>
+                <button data-pick="FULL">Full schedule</button>
+                <button data-pick="EST">Estimates now</button>
+                <button data-pick="RISK">Risk only</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RSK">
-              <span>Uncertain event and planned response</span>
+            <div class="classify-row" data-answer="EST">
+              <span>Activities defined — need duration estimates for known work packages</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="WAVE">Rolling wave</button>
+                <button data-pick="FULL">Full schedule</button>
+                <button data-pick="EST">Estimates now</button>
+                <button data-pick="RISK">Risk only</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="CHG">
-              <span>Confusion about approved mods and sequence</span>
+            <div class="classify-row" data-answer="WAVE">
+              <span>Progressive elaboration as requirements emerge over time</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="WAVE">Rolling wave</button>
+                <button data-pick="FULL">Full schedule</button>
+                <button data-pick="EST">Estimates now</button>
+                <button data-pick="RISK">Risk only</button>
               </div>
             </div>
           </div>
@@ -345,16 +347,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “What to implement” → Scope Statement (A)</h4>
-            <p style="margin:0">Scope baseline = authorized scope; nhiều modifications cần Change Log để biết approved changes &amp; order.</p>
+            <h4>Bẫy 1: Begin quickly → Estimate now (A)</h4>
+            <p style="margin:0">Estimate all durations upfront ignores future uncertainty — rolling wave structures the approach.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Confusion → Issue Log (C)</h4>
-            <p style="margin:0">Issue = đã materialize — đây là change requests chưa rõ implementation sequence.</p>
+            <h4>Bẫy 2: Finalize schedule → Full approval (B)</h4>
+            <p style="margin:0">Stem: cannot finalize — later work uncertain. Don't force full schedule.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Uncertainty → Risk register (D)</h4>
+            <p style="margin:0">Document risk if needed — but direct answer is rolling wave planning (C).</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Modifications + status/sequence confusion</strong> → Change Log (B).</p>
+            <p style="margin:0"><strong>Near-term clear · later uncertain · evolving requirements · begin quickly</strong> → Rolling wave planning (C).</p>
           </div>
         </section>
 
@@ -362,48 +368,59 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Change log ghi gì? (p.116)</div>
-            <div class="flashcard-back">All submitted changes + status + disposition throughout project.</div>
+            <div class="flashcard-front">Rolling wave planning?</div>
+            <div class="flashcard-back">Detail near-term work; future work stays high-level until elaborated — progressive planning.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q27 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Review the Change Log.</div>
+            <div class="flashcard-front">Q59 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Use rolling wave planning with the team.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">CHANGE LOG — Q27 (PMBOK 8, p.22 &amp; p.116)
+          <div class="cheat-sheet">ROLLING WAVE PLANNING — Q59 (PMBOK 8, p.49–50 &amp; 196)
 ─────────────────────────────────────────────────────
-PROCESS: Manage Project Execution
-ARTIFACT: Change log
-  - All submitted changes
-  - Status &amp; disposition
-  - Track approved mods through lifecycle
+PROCESS: Develop Schedule (p.49–50) — ITERATIVE
+         Rolling wave planning (p.196)
 
-SCENARIO: Grid Line — modifications requested throughout
-           confusion: WHAT to implement + SEQUENCE
-NEXT → B) Review the CHANGE LOG ✓
+ROLLING WAVE:
+  - Progressive ELABORATION of schedule
+  - NEAR-TERM work → DETAIL
+  - FUTURE work → HIGH LEVEL until known
+  - Revise estimates as requirements emerge
+  - Start execution without fake full precision
+
+SCENARIO: Nexora Labs product launch
+           Struggles to FINALIZE schedule
+           NEAR-TERM clear · LATER uncertain
+           Evolving requirements
+           Sponsor: BEGIN QUICKLY
+→ C) USE ROLLING WAVE PLANNING WITH TEAM ✓
 
 NOT:
-  A) Scope Statement — baseline, not change history
-  C) Issue Log — occurred problems, not CR tracking
-  D) Risk Register — uncertainties, not modifications
+  A) Estimate ALL durations NOW — future unknown
+  B) FULL schedule for approval — can't finalize yet
+  D) RAISE as RISK only — technique exists (rolling wave)
 
-VS Q20:
-  Assumption/Risk/Issue logs at planning
-  Change log at execution for approved changes
+WAVE MODEL:
+  [Detail] → [Elaborating] → [High level future]
+       ↑ near-term          ↑ uncertain later
 
-SIGNAL: "modifications requested" + "what sequence"
+SIGNAL: "near-term requirements are clear"
+        "planned for later is uncertain"
+        "evolving requirements"
+        "begin work quickly" · "struggles to finalize"
 
-Q27 ANSWER: B
+Q59 ANSWER: C
 
-REF: PMBOK Guide, 8th Ed., p.22 &amp; p.116 — Change log</div>
+REF: PMBOK Guide, 8th Ed., p.49–50, p.196</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
-          · <a href="pmp-full-questions.html#q-27">Luyện câu 27</a>
+          · <a href="pmp-teach-schedule-baseline.html">Q57: Schedule Baseline</a>
+          · <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive Approach</a>
+          · <a href="pmp-full-questions.html#q-59">Luyện câu 59</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -412,12 +429,12 @@ REF: PMBOK Guide, 8th Ed., p.22 &amp; p.116 — Change log</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Scope Statement là baseline ban đầu — không track lịch sử modifications &amp; sequence.",
-        B: "Đúng! Change log ghi submitted changes, status, disposition — clarify what approved &amp; order (p.116).",
-        C: "Issue Log cho problems đã xảy ra — không phải change request tracking.",
-        D: "Risk Register cho uncertainties — không liên quan modifications confusion."
+        A: "Estimate all durations now ignores future uncertainty — rolling wave elaborates progressively.",
+        B: "Full schedule for approval khi later work uncertain — stem says cannot finalize yet.",
+        C: "Đúng! Rolling wave: detail near-term, high-level future, start quickly (p.49–50, 196).",
+        D: "Raising risk documents uncertainty — rolling wave is the direct scheduling technique."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -433,7 +450,7 @@ REF: PMBOK Guide, 8th Ed., p.22 &amp; p.116 — Change log</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Review the Change Log.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Use rolling wave planning with the team.</strong>" : "");
         });
       });
       let score = 0;
