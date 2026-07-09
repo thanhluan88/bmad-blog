@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Cost of Delay Prioritization (Q49)</title>
+  <title>PMBOK 8 — Colocation (Q92)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,7 +50,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    tr.winner td { background: var(--ok-bg); font-weight: 600; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -65,11 +67,10 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
-    .calc-box { background: #1f2937; color: #f3f4f6; border-radius: 10px; padding: 1rem 1.25rem; font-family: Consolas, monospace; font-size: 0.88rem; margin: 1rem 0; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -90,11 +91,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Cost of Delay · Q49</div>
+      <div class="brand-sub">Colocation · Q92</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#cod">Cost of Delay</a>
-        <a href="#methods">Prioritization Methods</a>
+        <a href="#colocation">Colocation</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -150,7 +151,7 @@
         <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
         <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
         <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
-        <a href="pmp-teach-cost-of-delay.html" class="series-current">Q49: Cost of Delay</a>
+        <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
         <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
         <a href="pmp-teach-wbs-dictionary.html">Q52: WBS Dictionary</a>
@@ -193,15 +194,15 @@
         <a href="pmp-teach-retrospective.html">Q89: Retrospective</a>
         <a href="pmp-teach-distributed-management.html">Q90: Distributed Management</a>
         <a href="pmp-teach-tuckman-ladder.html">Q91: Tuckman Ladder</a>
-        <a href="pmp-teach-colocation.html">Q92: Colocation</a>
+        <a href="pmp-teach-colocation.html" class="series-current">Q92: Colocation</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#cod">CoD</a>
-        <a href="#methods">Methods</a>
+        <a href="#colocation">Colocation</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -210,176 +211,297 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q49 về <strong>Cost of Delay</strong> — Crest View Digital mobile banking:
-            chỉ một feature vào sprint tiếp theo; mỗi option có <em>value potential</em> và
-            <em>development time</em> khác nhau — maximize value trong sprint.
+            Bài học Q92 về <strong>Colocation</strong> — bạn quản lý dự án phát triển phần mềm tại Kendra Labs:
+            team nằm rải rác <em>các phòng ban khác nhau trong cùng một tòa nhà</em>, phụ thuộc
+            <em>video conferencing</em>, có <em>hiểu lầm về yêu cầu</em> và <em>học hệ thống mới quá chậm</em>.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.41 &amp; p.187</span>
-            <span class="badge">Prioritization / Ranking</span>
-            <span class="badge">Câu 49 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.85 &amp; 151–152</span>
+            <span class="badge">Lead the Team</span>
+            <span class="badge">Colocation</span>
+            <span class="badge">Câu 92 — Practice</span>
           </div>
         </header>
 
-        <section id="cod">
-          <h2>1. Cost of Delay (PMBOK p.187)</h2>
+        <section id="colocation">
+          <h2>1. Lead the Team &amp; Colocation (p.85, 151–152)</h2>
           <p>
-            Khi prioritize requirements/features, <strong>cost of delay</strong> đo value lost per
-            unit time khi chưa deliver. Công thức trong đề:
+            <strong>Colocation</strong> (p.151–152) là kỹ thuật đặt các thành viên nhóm dự án
+            <strong>cùng một không gian vật lý</strong> (war room, shared workspace) để tăng
+            giao tiếp trực tiếp, collaboration và knowledge sharing. Thuộc
+            <strong>Lead the Team</strong> domain (p.85) — PM chọn team environment phù hợp
+            khi nhận diện rào cản giao tiếp/cộng tác.
           </p>
 
-          <div class="calc-box">Cost of Delay = value potential ÷ duration to deliver
-
-Ví dụ Q49:
-  A = $12,000/week ÷ 4 weeks = 3,000
-  B = $16,000/week ÷ 2 weeks = 8,000  ← highest
-  C = $10,000/week ÷ 3 weeks = 3,333
-  D = $14,000/week ÷ 5 weeks = 2,800</div>
+          <div class="approach-grid">
+            <div class="approach-cell">
+              <strong>Colocation</strong>
+              Team cùng chỗ — face-to-face, osmotic communication, giảm hiểu lầm, học nhanh hơn.
+            </div>
+            <div class="approach-cell">
+              <strong>Team-building</strong>
+              Hoạt động xây dựng trust, morale, bonding — không fix vấn đề giao tiếp hàng ngày.
+            </div>
+            <div class="approach-cell">
+              <strong>Virtual meetings</strong>
+              Sync qua video/call — hữu ích khi team thật sự remote; không thay thế proximity.
+            </div>
+            <div class="approach-cell">
+              <strong>Requirements docs</strong>
+              Ghi chép scope rõ ràng — quan trọng ở planning; không fix collaboration barrier.
+            </div>
+          </div>
 
           <div class="card tip">
-            <h4>Chọn feature nào?</h4>
+            <h4>Signal trong stem Q92</h4>
             <p style="margin:0">
-              Feature có <strong>highest value relative to time</strong> — không phải value cao nhất
-              tuyệt đối (D = $14k) hay duration ngắn nhất, mà <em>tỷ lệ value/time</em> cao nhất.
+              <strong>Same building · different departments · video conferencing · misunderstandings about requirements · taking too long to learn new system</strong>
+              → team gần về địa lý nhưng <em>xa về collaboration</em> — virtual chưa đủ →
+              <strong>Co-locate the team (A)</strong>, không phải thêm meetings (C).
             </p>
           </div>
-        </section>
 
-        <section id="methods">
-          <h2>2. Prioritization methods (p.41 &amp; p.187)</h2>
-
+          <h3>Colocation vs Virtual — Khi nào dùng gì?</h3>
           <table>
             <thead>
-              <tr><th>Method</th><th>Use when</th></tr>
+              <tr><th>Tình huống</th><th>Giải pháp</th><th>Lý do</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Cost of delay</strong></td>
-                <td>Value potential + duration — maximize value per sprint (Q49)</td>
+                <td>Cùng tòa nhà, khác phòng ban; hiểu lầm; học chậm</td>
+                <td><strong>Colocation (A)</strong></td>
+                <td>Proximity tăng spontaneous communication, pair work, knowledge transfer</td>
               </tr>
               <tr>
-                <td>MoSCoW</td>
-                <td>Must / Should / Could / Won't categorization</td>
+                <td>Team toàn cầu, khác múi giờ; cần sync tiến độ</td>
+                <td>Virtual meetings + comms plan</td>
+                <td>Không thể colocate — dùng công cụ remote</td>
               </tr>
               <tr>
-                <td>100-point method</td>
-                <td>Stakeholders allocate points across items</td>
+                <td>Team mới, morale thấp, cần trust</td>
+                <td>Team-building sessions</td>
+                <td>Bonding activity — khác với fix daily collaboration</td>
               </tr>
               <tr>
-                <td>Kano analysis</td>
-                <td>Must-haves vs satisfiers vs delighters (Q46 trap)</td>
+                <td>Scope mơ hồ ở giai đoạn planning</td>
+                <td>Requirements documentation</td>
+                <td>Artifact — không thay thế team environment</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Approach</th><th>Q92?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Co-locate</strong></td>
+                <td>Cùng workspace — face-to-face collaboration</td>
+                <td>✓ Same building, different depts — colocate để fix comms</td>
+              </tr>
+              <tr>
+                <td><strong>B. Team-building</strong></td>
+                <td>Trust, morale, bonding activities</td>
+                <td>✗ Không fix misunderstandings &amp; slow learning hàng ngày</td>
+              </tr>
+              <tr>
+                <td><strong>C. More virtual meetings</strong></td>
+                <td>Tăng video conferencing</td>
+                <td>✗ Đã dùng video — thêm meetings ≠ proximity</td>
+              </tr>
+              <tr>
+                <td><strong>D. Requirements docs</strong></td>
+                <td>Thorough documentation</td>
+                <td>✗ Docs không fix collaboration barrier; stem = team environment</td>
               </tr>
             </tbody>
           </table>
         </section>
 
+        <section id="compare">
+          <h2>2. So sánh các đáp án &amp; Q90 Distributed vs Q92 Colocation</h2>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q92 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Co-locate the team</strong></td>
+                <td>Đặt team cùng không gian vật lý — war room / shared workspace</td>
+                <td><strong>Yes — fix communication &amp; collaboration barrier</strong></td>
+              </tr>
+              <tr>
+                <td><strong>B. Team-building sessions</strong></td>
+                <td>Hoạt động xây dựng trust, morale, team bonding</td>
+                <td>✗ Morale ≠ fix daily misunderstandings &amp; knowledge transfer</td>
+              </tr>
+              <tr>
+                <td><strong>C. Increase virtual meetings</strong></td>
+                <td>Tăng tần suất video conferencing</td>
+                <td>✗ Đã rely on video — more meetings không thay colocation</td>
+              </tr>
+              <tr>
+                <td><strong>D. Thorough requirements documentation</strong></td>
+                <td>Viết tài liệu yêu cầu chi tiết</td>
+                <td>✗ Planning artifact — không fix team environment issue</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card info">
+            <h4>Q90 Distributed vs Q92 Colocation — Khi nào dùng cái nào?</h4>
+            <p style="margin:0">
+              <strong>Q90 Distributed Management (đáp án B):</strong> team toàn cầu, đã mature
+              (resolved conflict, built trust) nhưng <em>chờ PM quyết định</em> → empower,
+              decentralize authority. Không thể colocate team global.<br><br>
+              <strong>Q92 Colocation (đáp án A):</strong> team trong <em>cùng tòa nhà</em> nhưng
+              rải rác phòng ban, dùng video, hiểu lầm &amp; học chậm → đặt cùng chỗ để tăng
+              face-to-face collaboration. Không hỏi leadership style — hỏi team environment.<br><br>
+              <strong>Rule:</strong> Bottleneck = decision authority, team ready →
+              <strong>Distributed</strong>. Communication/collaboration barrier, same building,
+              virtual chưa đủ → <strong>Colocation</strong>.
+            </p>
+          </div>
+        </section>
+
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 49</h2>
+          <h2>3. Câu hỏi thực hành — Question 92</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q49</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q92</div>
             <div class="q-text">
-              Sam is managing feature delivery for a mobile banking app at Crest View Digital. Only
-              one feature can be added to the next sprint. Each option has a different
-              <em>value potential</em> and <em>development time</em>. Sam wants to maximize value
-              delivered within the sprint. Which feature should be selected?
+              You are managing a software development project at Kendra Labs. The team is
+              <em>distributed across different departments within the same building</em> and using
+              <em>video conferencing</em> to collaborate. Recently there have been some
+              <em>misunderstandings about requirements</em>, and the team are
+              <em>taking too long to learn the new system</em>. What will you do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Feature A: $12,000 per week, 4 weeks duration.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Feature B: $16,000 per week, 2 weeks duration.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Feature C: $10,000 per week, 3 weeks duration.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Feature D: $14,000 per week, 5 weeks duration.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Co-locate the team</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Conduct team-building sessions</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Increase the frequency of virtual meetings</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Create thorough requirements documentation</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
+          <h3>Tại sao chọn A?</h3>
+          <ul>
+            <li>Team cùng tòa nhà nhưng khác phòng ban → có thể colocate — không phải global remote.</li>
+            <li>Đã dùng video conferencing mà vẫn hiểu lầm → cần proximity, face-to-face, osmotic communication (p.151–152).</li>
+            <li>Học hệ thống mới quá chậm → colocation giúp pair programming, knowledge sharing trực tiếp.</li>
+            <li>Lead the Team domain (p.85) — chọn team environment phù hợp khi collaboration bị hạn chế.</li>
+          </ul>
+
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Feature</th><th>Value/week</th><th>Duration</th><th>Cost of Delay</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
-              <tr><td>A</td><td>$12,000</td><td>4 weeks</td><td>3,000</td></tr>
-              <tr class="winner"><td><strong>B ✓</strong></td><td>$16,000</td><td>2 weeks</td><td><strong>8,000</strong></td></tr>
-              <tr><td>C</td><td>$10,000</td><td>3 weeks</td><td>3,333</td></tr>
-              <tr><td>D</td><td>$14,000</td><td>5 weeks</td><td>2,800</td></tr>
+              <tr>
+                <td><strong>B. Team-building sessions</strong></td>
+                <td>Team-building xây trust/morale — không fix misunderstandings hàng ngày hay slow knowledge transfer.</td>
+              </tr>
+              <tr>
+                <td><strong>C. Increase virtual meetings</strong></td>
+                <td>Team đã rely on video — thêm meetings không thay thế colocation. Signal = virtual chưa đủ.</td>
+              </tr>
+              <tr>
+                <td><strong>D. Requirements documentation</strong></td>
+                <td>Docs quan trọng ở planning nhưng không fix collaboration barrier. Stem mô tả team environment issue.</td>
+              </tr>
             </tbody>
           </table>
 
-          <h3>Tại sao không chọn D?</h3>
-          <p>
-            Feature D có value/week cao thứ hai ($14,000) nhưng duration 5 weeks → CoD chỉ 2,800.
-            Value cao tuyệt đối ≠ prioritize first khi maximize value <em>within the sprint</em>.
-          </p>
-
           <div class="card warn">
-            <h4>Exam tip — luôn chia, không cộng/trừ</h4>
+            <h4>So với Q90 — Colocation vs Distributed</h4>
             <p style="margin:0">
-              Đề cho value/week và duration → chia ra CoD score. Chọn <strong>highest ratio</strong>,
-              không chọn số dollar lớn nhất hoặc weeks nhỏ nhất một cách mù quáng.
+              Q90: global team, mature, bottleneck = chờ PM quyết → distributed management (B).<br>
+              Q92: same building, comms issues, virtual chưa đủ → co-locate (A). Cùng Lead the Team nhưng vấn đề khác loại.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Highest cost of delay?</h2>
+          <h2>5. Drill — Colocate, Team-build, Meetings, hay Docs?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="B">
-              <span>$20k/week ÷ 2 weeks = ?</span>
+            <div class="classify-row" data-answer="COLOCATE">
+              <span>Same building, different departments; video conf; misunderstandings; slow to learn new system (Q92)</span>
               <div class="classify-btns">
-                <button data-pick="A">5,000</button>
-                <button data-pick="B">10,000</button>
-                <button data-pick="C">8,000</button>
+                <button data-pick="COLOCATE">Colocate</button>
+                <button data-pick="TEAMBUILD">Teambuild</button>
+                <button data-pick="MEETINGS">Meetings</button>
+                <button data-pick="DOCS">Docs</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="C">
-              <span>$24k/week ÷ 3 weeks vs $15k/week ÷ 1 week — pick higher CoD</span>
+            <div class="classify-row" data-answer="COLOCATE">
+              <span>Team on different floors; informal chats rare; delays resolving quick questions</span>
               <div class="classify-btns">
-                <button data-pick="A">$24k / 3w (8,000)</button>
-                <button data-pick="B">Equal</button>
-                <button data-pick="C">$15k / 1w (15,000)</button>
+                <button data-pick="COLOCATE">Colocate</button>
+                <button data-pick="TEAMBUILD">Teambuild</button>
+                <button data-pick="MEETINGS">Meetings</button>
+                <button data-pick="DOCS">Docs</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="A">
-              <span>Q49 — which feature wins?</span>
+            <div class="classify-row" data-answer="TEAMBUILD">
+              <span>New team, low morale after reorg; members don't know each other; need trust building</span>
               <div class="classify-btns">
-                <button data-pick="A">B (8,000)</button>
-                <button data-pick="B">D ($14k value)</button>
-                <button data-pick="C">Shortest (B, 2w only)</button>
+                <button data-pick="COLOCATE">Colocate</button>
+                <button data-pick="TEAMBUILD">Teambuild</button>
+                <button data-pick="MEETINGS">Meetings</button>
+                <button data-pick="DOCS">Docs</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="B">
-              <span>Maximize value in ONE sprint — use which method?</span>
+            <div class="classify-row" data-answer="MEETINGS">
+              <span>Global team across time zones; need daily sync on progress and blockers</span>
               <div class="classify-btns">
-                <button data-pick="A">MoSCoW only</button>
-                <button data-pick="B">Cost of delay</button>
-                <button data-pick="C">Affinity diagram</button>
+                <button data-pick="COLOCATE">Colocate</button>
+                <button data-pick="TEAMBUILD">Teambuild</button>
+                <button data-pick="MEETINGS">Meetings</button>
+                <button data-pick="DOCS">Docs</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="DOCS">
+              <span>Planning phase; stakeholders disagree on scope; need clear requirements baseline</span>
+              <div class="classify-btns">
+                <button data-pick="COLOCATE">Colocate</button>
+                <button data-pick="TEAMBUILD">Teambuild</button>
+                <button data-pick="MEETINGS">Meetings</button>
+                <button data-pick="DOCS">Docs</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Highest $/week → Feature D ($14,000)</h4>
-            <p style="margin:0">Phải chia cho duration — D có 5 weeks nên CoD thấp nhất trong 4 options.</p>
+            <h4>Bẫy 1: "Misunderstandings about requirements" → Docs (D)</h4>
+            <p style="margin:0">Requirements docs hữu ích ở planning — nhưng stem mô tả collaboration barrier (different depts, video, slow learning), không phải scope ambiguity ở planning.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Shortest duration → Feature B (2 weeks)</h4>
-            <p style="margin:0">B đúng nhưng vì CoD cao nhất (8,000), không phải vì duration ngắn alone.</p>
+            <h4>Bẫy 2: "Video conferencing" → thêm meetings (C)</h4>
+            <p style="margin:0">Team đã rely on video — thêm virtual meetings không thay thế colocation. Signal: virtual chưa đủ → cần proximity, không more meetings.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Total value = value × weeks</h4>
-            <p style="margin:0">PMBOK Q49 dùng value ÷ duration — không nhân total project value.</p>
+            <h4>Bẫy 3: Team issues → team-building (B)</h4>
+            <p style="margin:0">Team-building fix morale/trust — không fix daily misunderstandings và knowledge transfer chậm. Khác với colocation.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: "Distributed" keyword → nhầm Q90</h4>
+            <p style="margin:0">"Distributed across departments" ≠ globally distributed. Same building = có thể colocate. Q90 = empower mature global team; Q92 = physical proximity.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Value potential + development time + maximize value in sprint</strong> → Cost of delay (value ÷ duration) → pick highest.</p>
+            <p style="margin:0"><strong>Same building · different departments · video conf · misunderstandings · slow learning</strong> → Co-locate the team (A).</p>
           </div>
         </section>
 
@@ -387,53 +509,65 @@ Ví dụ Q49:
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Cost of Delay formula? (p.187)</div>
-            <div class="flashcard-back">value potential ÷ duration to deliver — pick highest score.</div>
+            <div class="flashcard-front">Colocation là gì? (p.151–152)</div>
+            <div class="flashcard-back">Đặt team cùng không gian vật lý (war room) — tăng face-to-face, osmotic communication, collaboration &amp; knowledge sharing.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q49 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — $16,000/week ÷ 2 weeks = 8,000 (highest).</div>
+            <div class="flashcard-front">Q92 đáp án?</div>
+            <div class="flashcard-back"><strong>A — Co-locate the team</strong>. Same building, different depts; video chưa đủ; misunderstandings; slow learning.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q90 vs Q92?</div>
+            <div class="flashcard-back">Q90: global team mature, chờ PM quyết → distributed (B). Q92: same building, comms issues → colocate (A).</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">COST OF DELAY — Q49 (PMBOK 8, p.41 &amp; p.187)
+          <div class="cheat-sheet">COLOCATION — Q92
+(PMBOK 8, p.85 &amp; 151–152)
 ─────────────────────────────────────────────────────
-PRIORITIZATION METHODS (p.41, p.187):
-  MoSCoW · 100-point · COST OF DELAY · Kano analysis
+DOMAIN: Lead the Team (p.85)
+TECHNIQUE: Colocation (p.151–152)
+  • Team cùng không gian vật lý (war room)
+  • Face-to-face; osmotic communication
+  • Giảm hiểu lầm; tăng knowledge sharing
+  • Khi: collaboration barrier, có thể đặt cùng chỗ
 
-FORMULA:
-  Cost of Delay = value potential ÷ duration to deliver
-
-Q49 DATA:
-  A: $12,000/wk ÷ 4w = 3,000
-  B: $16,000/wk ÷ 2w = 8,000  ← HIGHEST ✓
-  C: $10,000/wk ÷ 3w = 3,333
-  D: $14,000/wk ÷ 5w = 2,800
-
-SCENARIO: One feature per sprint
-           Maximize VALUE within sprint
-           Different value potential + dev time
-→ B) Feature B — highest value RELATIVE TO TIME
+SCENARIO: Kendra Labs software dev (same building, diff depts)
+          Team DISTRIBUTED across DEPARTMENTS
+          in SAME BUILDING
+          Relies on VIDEO CONFERENCING
+          MISUNDERSTANDINGS about requirements
+          Taking TOO LONG to learn new system
+NEXT → A) CO-LOCATE THE TEAM ✓
 
 NOT:
-  Pick highest $/week alone (D loses on duration)
-  Pick shortest duration alone (need ratio)
-  Total value = multiply (wrong formula for this Q)
+  B) TEAM-BUILDING — morale/trust, không fix daily comms
+  C) MORE VIRTUAL MEETINGS — đã dùng video; ≠ proximity
+  D) REQUIREMENTS DOCS — planning artifact; ≠ team environment
 
-SIGNAL: "value potential" · "development time"
-        "maximize value" · "one sprint" · "prioritize"
+SIGNAL KEYWORDS:
+  Colocate:   same building, different depts/floors
+              video not enough, misunderstandings
+              slow learning, collaboration issues
+  Teambuild:  new team, low morale, need trust
+  Meetings:   global/remote, time zones, need sync
+  Docs:       planning, scope ambiguity, baseline
 
-Q49 ANSWER: B
+Q90 vs Q92:
+  Q90: global mature team, wait for direction → Distributed (B)
+  Q92: same building, comms barrier → Colocate (A)
 
-REF: PMBOK Guide, 8th Ed., p.41 &amp; p.187</div>
+Q92 ANSWER: A — Co-locate the team
+
+REF: PMBOK Guide, 8th Ed., p.85 Lead the Team
+      p.151–152 Colocation</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
-          · <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
-          · <a href="pmp-full-questions.html#q-49">Luyện câu 49</a>
+          · <a href="pmp-teach-distributed-management.html">Q90: Distributed Management</a>
+          · <a href="pmp-teach-tuckman-ladder.html">Q91: Tuckman Ladder</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -442,12 +576,12 @@ REF: PMBOK Guide, 8th Ed., p.41 &amp; p.187</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "A";
       const EXPL = {
-        A: "A = 12,000 ÷ 4 = 3,000 — thấp hơn B (8,000).",
-        B: "Đúng! B = 16,000 ÷ 2 = 8,000 — highest cost of delay, maximize value in sprint.",
-        C: "C = 10,000 ÷ 3 = 3,333 — thấp hơn B.",
-        D: "D có $14k/week cao nhưng 5 weeks → 14,000 ÷ 5 = 2,800 — thấp nhất trong 4 options."
+        A: "Đúng! Colocation đặt team cùng không gian vật lý — tăng face-to-face collaboration, giảm hiểu lầm, học nhanh hơn (p.151–152, Lead the Team).",
+        B: "Team-building xây trust/morale — không fix misunderstandings hàng ngày hay slow knowledge transfer giữa các phòng ban.",
+        C: "Team đã rely on video conferencing — thêm virtual meetings không thay thế colocation. Cần proximity, không more meetings.",
+        D: "Requirements documentation là planning artifact — không fix collaboration barrier khi team rải rác phòng ban trong cùng tòa nhà."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -463,7 +597,7 @@ REF: PMBOK Guide, 8th Ed., p.41 &amp; p.187</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Feature B ($16,000/week ÷ 2 weeks = 8,000).</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Co-locate the team</strong>" : "");
         });
       });
       let score = 0;
@@ -491,16 +625,18 @@ REF: PMBOK Guide, 8th Ed., p.41 &amp; p.187</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
