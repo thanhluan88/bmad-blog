@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Initiate Project (Q18)</title>
+  <title>PMBOK 8 — Elicit Requirements (Q43)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .process-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; font-size: 0.8rem; }
-    .flow-step { padding: 0.45rem 0.7rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--border); background: var(--bg); }
-    .flow-step.done { border-color: var(--muted); color: var(--muted); }
-    .flow-step.current { border-color: var(--ok); background: var(--ok-bg); color: #065f46; }
-    .flow-step.next { border-color: var(--info); background: var(--info-bg); color: #1d4ed8; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -72,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 340px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -93,11 +87,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Initiate Project · Q18</div>
+      <div class="brand-sub">Elicit Requirements · Q43</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#initiate">Initiate Project</a>
-        <a href="#sequence">Thứ tự NEXT</a>
+        <a href="#elicit">Elicit &amp; Analyze</a>
+        <a href="#techniques">Techniques</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -147,16 +141,16 @@
         <a href="pmp-teach-close-project.html">Q40: Close Project</a>
         <a href="pmp-teach-final-report.html">Q41: Final Report</a>
         <a href="pmp-teach-scope-management-plan.html">Q42: Scope Mgmt Plan</a>
-        <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
+        <a href="pmp-teach-elicit-requirements.html" class="series-current">Q43: Elicit Requirements</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-43">Luyện câu 43</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#initiate">Initiate</a>
-        <a href="#sequence">Sequence</a>
+        <a href="#elicit">Elicit</a>
+        <a href="#techniques">Techniques</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -165,179 +159,161 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q18 về <strong>Initiate Project or Phase</strong> — sau business case approved,
-            bước tiếp theo là <strong>project charter</strong> với sponsor trước plan hay kick-off.
+            Bài học Q43 về <strong>Elicit and Analyze Requirements</strong> — mobile app mới,
+            <em>differing stakeholder expectations</em> về features; cần
+            <em>gather requirements</em> để solution <em>delivers value</em>.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.17</span>
-            <span class="badge">Project Charter</span>
-            <span class="badge">Câu 18 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.40–41</span>
+            <span class="badge">Elicit and Analyze Requirements</span>
+            <span class="badge">Câu 43 — Practice</span>
           </div>
         </header>
 
-        <section id="initiate">
-          <h2>1. Initiate Project or Phase</h2>
+        <section id="elicit">
+          <h2>1. Elicit and Analyze Requirements</h2>
           <p>
-            Process này <strong>chính thức authorize</strong> bắt đầu dự án và cấp PM quyền
-            phân bổ tài nguyên tổ chức — thông qua <strong>project charter</strong> hoặc tài liệu tương đương.
+            Process define và document stakeholder needs cho features và functions — đảm bảo
+            quality và value delivery. Business requirements outline strategic objectives và
+            alignment với organizational goals.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.17)</h4>
+            <h4>Elicit &amp; Analyze (PMBOK p.40–41)</h4>
             <p style="margin:0">
-              The Initiate Project or Phase process officially authorizes the start of a project
-              and grants the project manager the authority to allocate organizational resources
-              to project activities by creating a project charter or similar document.
+              Define and document stakeholders' needs for features and functions to ensure
+              quality and value delivery. Techniques include focus groups and benchmarking
+              to collect and compare stakeholder requirements.
             </p>
           </div>
-
-          <h3>Project Charter — ai approve?</h3>
-          <ul>
-            <li>PM <strong>làm việc với Sponsor</strong> để develop và obtain approval</li>
-            <li>Sponsor signs/approves charter — grants authority to PM</li>
-            <li>Charter ≠ project management plan (plan comes later in planning)</li>
-          </ul>
         </section>
 
-        <section id="sequence">
-          <h2>2. Thứ tự “What will you do NEXT?”</h2>
-
-          <div class="process-flow" aria-label="Initiation sequence">
-            <span class="flow-step done">Business case approved ✓</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step current">Charter + Sponsor approval</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">Project management plan</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">Kick-off meeting</span>
-          </div>
+        <section id="techniques">
+          <h2>2. Elicitation vs downstream artifacts</h2>
 
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Giai đoạn</th><th>Đúng NEXT?</th></tr>
+              <tr><th>Option</th><th>When</th><th>Q43 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>C. Charter với sponsor</strong></td>
-                <td>Initiating</td>
-                <td>✓ Đúng — ngay sau business case</td>
+                <td><strong>B. Focus groups + benchmarking</strong></td>
+                <td>Gather &amp; compare differing stakeholder needs</td>
+                <td>✓ Elicitation techniques</td>
               </tr>
               <tr>
-                <td><strong>A. Develop PM plan</strong></td>
-                <td>Planning</td>
-                <td>✗ Sau charter (slide ✗)</td>
+                <td><strong>A. RTM</strong></td>
+                <td>Trace requirements to scope — after collected</td>
+                <td>Not gather step</td>
               </tr>
               <tr>
-                <td><strong>B. Kick-off meeting</strong></td>
-                <td>Sau plan / execution</td>
-                <td>✗ Quá sớm nếu chưa charter (slide ✗)</td>
+                <td><strong>C. Scope baseline</strong></td>
+                <td>Approved deliverables — after define scope</td>
+                <td>Too late</td>
               </tr>
               <tr>
-                <td><strong>D. Make-or-buy</strong></td>
-                <td>Planning (acquisition)</td>
-                <td>✗ Không phải bước đầu initiating</td>
+                <td><strong>D. Quality audits</strong></td>
+                <td>Manage QA — compliance review</td>
+                <td>Not requirements gathering</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card info">
-            <h4>CHS scenario</h4>
-            <p style="margin:0">
-              Patient records system — business case approved, stakeholders identified, leadership muốn
-              start <em>immediately</em>. Charter vẫn là bước bắt buộc để authorize — không skip dù urgent.
-            </p>
-          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 18</h2>
+          <h2>3. Câu hỏi thực hành — Question 43</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q18</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q43</div>
             <div class="q-text">
-              You have been assigned to lead a new patient records system project at CHS.
-              The <em>business case has been approved</em>, and key stakeholders are identified.
-              Senior leadership wants the project to <em>start immediately and without delay</em>.
-              What will you do <em>next</em>?
+              A new mobile application is being initiated at Crestview Digital. Early discussions
+              reveal <em>differing stakeholder expectations</em> about features and functionality.
+              As the project manager, you are asked how the team will <em>gather requirements</em>
+              to ensure the solution <em>delivers value</em> to the organization. What should you do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Develop the project management plan to define how the project will be executed.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Perform a kick-off meeting with the project team.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Work with the project sponsor to approve the project charter.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Perform a make-or-buy analysis to determine the resources to be used.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Develop a requirements traceability matrix to trace requirements to their scope.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Conduct focus groups and benchmarking to collect and compare stakeholder requirements.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Create a scope baseline to define approved deliverables and boundaries.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Perform quality audits to ensure requirements meet organizational standards.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Initiate Project or Phase = charter authorizes project + PM authority (p.17).</li>
-            <li>Business case approved → NEXT logical step = charter với sponsor.</li>
-            <li>“Start immediately” không có nghĩa skip charter — charter <em>là</em> cách authorize start.</li>
+            <li>Differing expectations → collect &amp; compare via focus groups + benchmarking.</li>
+            <li>Elicit and Analyze Requirements — elicitation techniques (p.40–41).</li>
+            <li>Deliver value → align business/strategic needs with stakeholder input.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải NEXT</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. PM plan</strong></td>
-                <td>Planning process — sau khi project được authorize bằng charter.</td>
+                <td><strong>A. RTM</strong></td>
+                <td>Traces requirements after elicitation — không phải gather step.</td>
               </tr>
               <tr>
-                <td><strong>B. Kick-off</strong></td>
-                <td>Thường sau charter và/hoặc plan — team cần charter scope/authority trước.</td>
+                <td><strong>C. Scope baseline</strong></td>
+                <td>Output sau define scope — chưa gather requirements.</td>
               </tr>
               <tr>
-                <td><strong>D. Make-or-buy</strong></td>
-                <td>Planning tool for procurement — không phải initiating step đầu tiên.</td>
+                <td><strong>D. Quality audits</strong></td>
+                <td>Manage QA (Q31) — không elicit stakeholder requirements.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q8 Sponsor</h4>
+            <h4>Liên hệ Q42 Scope Plan</h4>
             <p style="margin:0">
-              Sponsor approves charter · grants PM authority · aligns với funding/strategic direction.
+              Q42: scope management plan first. Q43: elicit requirements — next step after planning
+              how scope will be managed.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Initiating hay Planning?</h2>
+          <h2>5. Drill — Gather, trace hay baseline?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="INIT">
-              <span>Obtain sponsor approval of project charter</span>
+            <div class="classify-row" data-answer="ELICIT">
+              <span>Differing stakeholder expectations on features</span>
               <div class="classify-btns">
-                <button data-pick="INIT">Initiating</button>
-                <button data-pick="PLAN">Planning</button>
+                <button data-pick="ELICIT">Elicit</button>
+                <button data-pick="RTM">RTM</button>
+                <button data-pick="BASE">Baseline</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PLAN">
-              <span>Develop integrated project management plan</span>
+            <div class="classify-row" data-answer="RTM">
+              <span>Link requirements to scope components</span>
               <div class="classify-btns">
-                <button data-pick="INIT">Initiating</button>
-                <button data-pick="PLAN">Planning</button>
+                <button data-pick="ELICIT">Elicit</button>
+                <button data-pick="RTM">RTM</button>
+                <button data-pick="BASE">Baseline</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PLAN">
-              <span>Perform make-or-buy analysis</span>
+            <div class="classify-row" data-answer="BASE">
+              <span>Approved deliverables and scope boundaries</span>
               <div class="classify-btns">
-                <button data-pick="INIT">Initiating</button>
-                <button data-pick="PLAN">Planning</button>
+                <button data-pick="ELICIT">Elicit</button>
+                <button data-pick="RTM">RTM</button>
+                <button data-pick="BASE">Baseline</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="INIT">
-              <span>Officially authorize project start</span>
+            <div class="classify-row" data-answer="ELICIT">
+              <span>Benchmarking to compare requirements</span>
               <div class="classify-btns">
-                <button data-pick="INIT">Initiating</button>
-                <button data-pick="PLAN">Planning</button>
+                <button data-pick="ELICIT">Elicit</button>
+                <button data-pick="RTM">RTM</button>
+                <button data-pick="BASE">Baseline</button>
               </div>
             </div>
           </div>
@@ -347,16 +323,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Start immediately” → chọn kick-off (B)</h4>
-            <p style="margin:0">Urgency không bỏ qua charter — authorize trước, rồi plan và kick-off nhanh sau đó.</p>
+            <h4>Bẫy 1: Requirements → RTM (A)</h4>
+            <p style="margin:0">RTM traces requirements — sau khi đã elicit, không phải gather technique.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Chọn A — PM plan nghe productive</h4>
-            <p style="margin:0">Plan cần charter làm input và PM cần authority từ charter trước khi allocate resources.</p>
+            <h4>Bẫy 2: Deliverables → Scope baseline (C)</h4>
+            <p style="margin:0">Baseline sau define scope — đề hỏi how to gather requirements.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Standards → Quality audits (D)</h4>
+            <p style="margin:0">Audits review compliance — không collect differing stakeholder expectations.</p>
           </div>
           <div class="card tip">
-            <h4>Mnemonic NEXT</h4>
-            <p style="margin:0">Business case → <strong>Charter</strong> → Plan → Kick-off. Đề hỏi NEXT = bước kế tiếp trong chuỗi.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Gather requirements + differing expectations + deliver value</strong> → Focus groups &amp; benchmarking (B).</p>
           </div>
         </section>
 
@@ -364,44 +344,54 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Initiate Project or Phase làm gì? (p.17)</div>
-            <div class="flashcard-back">Authorize project start · grant PM authority · project charter với sponsor.</div>
+            <div class="flashcard-front">Elicit requirements techniques? (p.40–41)</div>
+            <div class="flashcard-back">Focus groups · benchmarking · collect &amp; compare stakeholder needs.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q18 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Work with sponsor to approve the project charter.</div>
+            <div class="flashcard-front">Q43 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Conduct focus groups and benchmarking.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">INITIATE PROJECT — Q18 (PMBOK 8, p.17)
+          <div class="cheat-sheet">ELICIT &amp; ANALYZE REQUIREMENTS — Q43 (PMBOK 8, p.40–41)
 ─────────────────────────────────────────────────────
-PROCESS: Initiate Project or Phase
-OUTPUT: Project charter (or similar)
-RESULT: Officially authorize start + PM authority to allocate resources
+PROCESS: Elicit and Analyze Requirements
 
-AFTER BUSINESS CASE APPROVED → NEXT:
-  C) Work with SPONSOR to approve PROJECT CHARTER ✓
+OBJECTIVE: Define &amp; document stakeholder needs
+           Features · functions · quality · VALUE delivery
+           Business requirements → strategic alignment
 
-SEQUENCE:
-  Business case → Charter (C) → PM Plan (A) → Kick-off (B)
-  Make-or-buy (D) = planning, not first
+TECHNIQUES (Q43):
+  - Focus groups — collect stakeholder input
+  - Benchmarking — compare requirements
 
-Q18 ANSWER: C
+SCENARIO: Crestview Digital — new mobile app
+           DIFFERING stakeholder expectations
+           GATHER requirements · DELIVER VALUE
+→ B) Focus groups &amp; BENCHMARKING ✓
 
-TRAPS:
-  "Start immediately" ≠ skip charter
-  Kick-off/plan before charter = wrong order
+NOT:
+  A) RTM — trace after elicitation
+  C) Scope baseline — after define scope
+  D) Quality audits — Manage QA, not elicitation
 
-SPONSOR: Approves charter (links Q8)
+SCOPE FLOW:
+  Q42 Plan scope mgmt → Q43 Elicit requirements → Define scope/WBS → Baseline
 
-REF: PMBOK Guide, 8th Ed., p.17 — "Initiate Project or Phase"</div>
+SIGNAL: "gather requirements" · "differing expectations"
+        "delivers value" · "features and functionality"
+
+Q43 ANSWER: B
+
+REF: PMBOK Guide, 8th Ed., p.40–41</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
-          · <a href="pmp-teach-project-sponsor.html">Q8: Project Sponsor</a>
+          · <a href="pmp-teach-scope-management-plan.html">Q42: Scope Mgmt Plan</a>
+          · <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
+          · <a href="pmp-full-questions.html#q-43">Luyện câu 43</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -410,12 +400,12 @@ REF: PMBOK Guide, 8th Ed., p.17 — "Initiate Project or Phase"</div>
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "B";
       const EXPL = {
-        A: "PM plan là Planning — sau khi project được authorize bằng charter.",
-        B: "Kick-off thường sau charter/plan — chưa phải NEXT sau business case approved.",
-        C: "Đúng! Initiate Project or Phase — charter với sponsor authorize project và PM authority (p.17).",
-        D: "Make-or-buy là planning/procurement — không phải initiating step đầu tiên."
+        A: "RTM traces requirements to scope — sau elicitation, không phải gather technique.",
+        B: "Đúng! Focus groups + benchmarking elicit &amp; compare stakeholder requirements (p.40–41).",
+        C: "Scope baseline sau define scope — chưa gather requirements.",
+        D: "Quality audits là Manage QA — không elicit differing stakeholder expectations."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -431,7 +421,7 @@ REF: PMBOK Guide, 8th Ed., p.17 — "Initiate Project or Phase"</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Work with the project sponsor to approve the project charter.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Conduct focus groups and benchmarking to collect and compare stakeholder requirements.</strong>" : "");
         });
       });
       let score = 0;
