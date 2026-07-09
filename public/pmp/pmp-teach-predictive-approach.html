@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Project Sponsor (Q8)</title>
+  <title>PMBOK 8 — Predictive Approach (Q14)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,11 +51,14 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
-    .role-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; font-size: 0.86rem; }
-    .role-card.sponsor { border-top: 4px solid var(--primary); background: var(--primary-bg); }
-    .role-card h4 { margin: 0 0 0.4rem; font-size: 0.92rem; }
-    .role-card ul { margin: 0; padding-left: 1.1rem; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
+    @media (max-width: 600px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-box { padding: 0.85rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--card); font-size: 0.84rem; }
+    .approach-box strong { display: block; margin-bottom: 0.25rem; color: var(--primary-dark); }
+    .approach-box.ok { border-color: var(--ok); background: var(--ok-bg); }
+    .waterfall-viz { display: flex; align-items: flex-end; gap: 0.35rem; margin: 1rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; flex-wrap: wrap; }
+    .wf-step { padding: 0.45rem 0.65rem; background: var(--info-bg); border: 1px solid var(--info); border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: #1d4ed8; position: relative; }
+    .wf-step:not(:last-child)::after { content: "→"; position: absolute; right: -0.55rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -92,11 +95,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Project Sponsor · Q8</div>
+      <div class="brand-sub">Predictive Approach · Q14</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#sponsor">Vai trò Sponsor</a>
-        <a href="#roles">So sánh vai trò</a>
+        <a href="#predictive">Predictive</a>
+        <a href="#compare">So sánh approaches</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -117,7 +120,7 @@
         <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
         <a href="pmp-teach-accountable-leader.html">Q12: Accountable Leader</a>
         <a href="pmp-teach-variables-over-time.html">Q13: Variables Over Time</a>
-        <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
+        <a href="pmp-teach-predictive-approach.html" class="series-current">Q14: Predictive Approach</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
       <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
@@ -125,8 +128,8 @@
 
     <div>
       <nav class="mobile-nav">
-        <a href="#sponsor">Sponsor</a>
-        <a href="#roles">Vai trò</a>
+        <a href="#predictive">Predictive</a>
+        <a href="#compare">Compare</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -135,189 +138,196 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q8 về <strong>Project Sponsor</strong> — người cấp vốn, định hướng chiến lược
-            và gỡ rào cản tổ chức để dự án thành công.
+            Bài học Q14 về <strong>Predictive Approaches</strong> — waterfall/plan-driven khi
+            scope ổn định sớm, planning upfront và change control chặt (ví dụ drug development regulated).
           </p>
           <div class="badges">
-            <span class="badge">PMBOK 8, p.274</span>
-            <span class="badge">Stakeholders</span>
-            <span class="badge">Câu 8 — Practice</span>
+            <span class="badge">The Standard for PM, p.61</span>
+            <span class="badge">Development Approach</span>
+            <span class="badge">Câu 14 — Practice</span>
           </div>
         </header>
 
-        <section id="sponsor">
-          <h2>1. Project Sponsor là gì?</h2>
+        <section id="predictive">
+          <h2>1. Predictive Approach (PMBOK 8)</h2>
           <p>
-            <strong>Sponsor</strong> là cá nhân hoặc nhóm cung cấp <strong>resources và support</strong>
-            cho portfolio, program hoặc project, và <strong>chịu trách nhiệm</strong> tạo điều kiện thành công.
+            Predictive approach tối ưu khi <strong>scope có thể stabilize sớm</strong>.
+            Còn gọi là waterfall, plan-driven, hoặc traditional approach.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK 8)</h4>
+            <h4>Định nghĩa chính thức (PMBOK p.61)</h4>
             <p style="margin:0">
-              A sponsor is an individual or a group that provides resources and support for the
-              portfolio, program, or project, and is accountable for enabling success.
-              <em>— PMBOK Guide 8th Ed., p.274, "Sponsor"</em>
+              Scope, schedule, cost, resource needs, quality requirements, and risks can be
+              well defined in the early phases of the project life cycle and are expected to
+              remain relatively stable.
             </p>
           </div>
 
-          <h3>Hoạt động điển hình của Sponsor</h3>
+          <div class="waterfall-viz" aria-label="Phase gate waterfall">
+            <span class="wf-step">Plan</span>
+            <span class="wf-step">Design</span>
+            <span class="wf-step">Build</span>
+            <span class="wf-step">Test</span>
+            <span class="wf-step">Deploy</span>
+          </div>
+          <p style="font-size:0.85rem;color:var(--muted);text-align:center;margin-top:-0.5rem">
+            Phase gate approvals · strict change control · extensive upfront planning
+          </p>
+
+          <h3>Keywords trong đề thi → Predictive</h3>
           <ul>
-            <li><strong>Secures funding</strong> — đảm bảo nguồn vốn/ngân sách</li>
-            <li><strong>Strategic direction</strong> — căn chỉnh dự án với mục tiêu tổ chức</li>
-            <li><strong>Remove organizational obstacles</strong> — gỡ rào cản, escalation cấp cao</li>
-            <li>Champion dự án với leadership</li>
+            <li>Highly regulated environment (pharma, aerospace)</li>
+            <li>Phase gate approvals</li>
+            <li>Scope/schedule/cost/risks <strong>defined early</strong></li>
+            <li>Strict change control</li>
+            <li>Extensive upfront planning</li>
           </ul>
         </section>
 
-        <section id="roles">
-          <h2>2. Sponsor vs PM vs Product Owner vs Customer</h2>
+        <section id="compare">
+          <h2>2. So sánh development approaches</h2>
 
-          <div class="role-grid">
-            <div class="role-card sponsor">
-              <h4>Project Sponsor</h4>
-              <ul>
-                <li>Cấp vốn, resources</li>
-                <li>Chiến lược, accountability</li>
-                <li>Gỡ rào cản tổ chức</li>
-              </ul>
+          <div class="approach-grid">
+            <div class="approach-box">
+              <strong>A — Adaptive</strong>
+              Agile/iterative — scope evolves, feedback loops, embrace change
             </div>
-            <div class="role-card">
-              <h4>Project Manager</h4>
-              <ul>
-                <li>Quản lý hàng ngày</li>
-                <li>Planning, executing, team</li>
-                <li>Không phải người “secure funding”</li>
-              </ul>
+            <div class="approach-box">
+              <strong>B — Hybrid</strong>
+              Kết hợp predictive + adaptive elements
             </div>
-            <div class="role-card">
-              <h4>Product Owner</h4>
-              <ul>
-                <li>Vai trò <strong>Agile</strong></li>
-                <li>Backlog, value, stakeholder cho product</li>
-                <li>Không đồng nghĩa Sponsor</li>
-              </ul>
+            <div class="approach-box">
+              <strong>C — Incremental</strong>
+              Deliver usable portions over time — không nhấn upfront planning chặt như predictive
             </div>
-            <div class="role-card">
-              <h4>Project Customer</h4>
-              <ul>
-                <li>Người dùng/bên nhận kết quả</li>
-                <li>Yêu cầu &amp; acceptance</li>
-                <li>Không cấp vốn tổ chức</li>
-              </ul>
+            <div class="approach-box ok">
+              <strong>D — Predictive ✓</strong>
+              Waterfall/plan-driven — scope stable early, change control strict
             </div>
           </div>
 
           <table>
             <thead>
-              <tr><th>Manh mối trong đề</th><th>Vai trò</th></tr>
+              <tr><th>Approach</th><th>Khi nào dùng</th><th>Đặc điểm</th></tr>
             </thead>
             <tbody>
-              <tr><td>Secures funding</td><td><strong>Sponsor</strong></td></tr>
-              <tr><td>Strategic direction</td><td><strong>Sponsor</strong></td></tr>
-              <tr><td>Remove obstacles (organizational)</td><td><strong>Sponsor</strong></td></tr>
-              <tr><td>Manages team day-to-day</td><td>Project Manager</td></tr>
-              <tr><td>Prioritizes backlog (Agile)</td><td>Product Owner</td></tr>
-              <tr><td>Uses the deliverable</td><td>Customer / User</td></tr>
+              <tr>
+                <td><strong>Predictive</strong></td>
+                <td>Scope ổn định sớm, regulated</td>
+                <td>Upfront planning, phase gates, strict CC</td>
+              </tr>
+              <tr>
+                <td><strong>Adaptive</strong></td>
+                <td>High uncertainty, requirements evolve</td>
+                <td>Iterations, frequent feedback</td>
+              </tr>
+              <tr>
+                <td><strong>Incremental</strong></td>
+                <td>Deliver value in chunks</td>
+                <td>Partial deliverables, có thể kết hợp agile</td>
+              </tr>
+              <tr>
+                <td><strong>Hybrid</strong></td>
+                <td>Mix of stable + evolving parts</td>
+                <td>Predictive hardware + adaptive software, v.v.</td>
+              </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 8</h2>
+          <h2>3. Câu hỏi thực hành — Question 14</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q8</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q14</div>
             <div class="q-text">
-              An employee in the organization secures <em>funding</em> for the project, provides
-              <em>strategic direction</em>, and helps <em>remove organizational obstacles</em>
-              to ensure project success.
-              <em>What role is this person performing in the project?</em>
+              Dr. Mitchell is managing a drug development project at EB Inc. The project operates
+              in a <em>highly regulated environment</em> with <em>phase gate approvals</em>.
+              Scope, schedule, cost, and risks are <em>defined early</em>, and
+              <em>strict change control</em> with <em>extensive upfront planning</em> is required.
+              Which development approach is being used?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Product Owner.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Project Sponsor.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Project Customer.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Project Manager.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Adaptive approach.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Hybrid approach.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Incremental approach.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Predictive approach.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn B — Project Sponsor?</h3>
+          <h3>Tại sao chọn D?</h3>
           <ul>
-            <li><strong>Secures funding</strong> — sponsor cung cấp resources/vốn.</li>
-            <li><strong>Strategic direction</strong> — sponsor căn chỉnh với mục tiêu tổ chức.</li>
-            <li><strong>Remove organizational obstacles</strong> — sponsor escalation, champion.</li>
-            <li>Cả ba là pattern kinh điển nhận diện <strong>Sponsor</strong> trong đề PMP.</li>
+            <li>Drug development + regulated + phase gates = classic predictive/waterfall context.</li>
+            <li>Scope/schedule/cost/risks defined early và expected stable — đúng p.61.</li>
+            <li>Strict change control + extensive upfront planning — không phải adaptive.</li>
+            <li>Slide ghi “Waterfall” bên cạnh Predictive.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không phải</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Product Owner</strong></td>
-                <td>Vai trò Agile — quản lý backlog, maximize product value. Không “secure funding” cấp tổ chức.</td>
+                <td><strong>A. Adaptive</strong></td>
+                <td>Embrace change, iterative — trái “strict change control” và “defined early”.</td>
               </tr>
               <tr>
-                <td><strong>C. Project Customer</strong></td>
-                <td>Khách hàng/người dùng — nhận deliverable, không cấp vốn hay gỡ rào cản tổ chức.</td>
+                <td><strong>B. Hybrid</strong></td>
+                <td>Mix approaches — scenario mô tả thuần predictive, không nhắc phần adaptive.</td>
               </tr>
               <tr>
-                <td><strong>D. Project Manager</strong></td>
-                <td>PM quản lý dự án hàng ngày — không phải người đảm bảo funding &amp; strategic direction cấp executive.</td>
+                <td><strong>C. Incremental</strong></td>
+                <td>Deliver từng phần — không nhấn phase gates + upfront planning extensive như đề.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords Sponsor</h4>
+            <h4>Synonyms Predictive (p.61)</h4>
             <p style="margin:0">
-              funding · budget · strategic direction · organizational obstacles ·
-              champion · executive support · accountable for enabling success
+              waterfall · plan-driven · traditional · scope stabilized early ·
+              relatively stable baseline
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Nhận diện vai trò</h2>
+          <h2>5. Drill — Approach nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="SP">
-              <span>Approves budget and removes barriers with senior leadership</span>
+            <div class="classify-row" data-answer="PRED">
+              <span>Phase gates + strict change control + scope defined early</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="PRED">Predictive</button>
+                <button data-pick="ADAPT">Adaptive</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PM">
-              <span>Develops schedule and manages project team daily</span>
+            <div class="classify-row" data-answer="ADAPT">
+              <span>Requirements evolve through frequent iterations</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="PRED">Predictive</button>
+                <button data-pick="ADAPT">Adaptive</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PO">
-              <span>Prioritizes product backlog in Scrum</span>
+            <div class="classify-row" data-answer="PRED">
+              <span>Highly regulated pharma with upfront planning</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="PRED">Predictive</button>
+                <button data-pick="ADAPT">Adaptive</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SP">
-              <span>Provides strategic alignment and project funding</span>
+            <div class="classify-row" data-answer="ADAPT">
+              <span>Embrace change; deliver value in short cycles</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="PRED">Predictive</button>
+                <button data-pick="ADAPT">Adaptive</button>
               </div>
             </div>
           </div>
@@ -327,16 +337,16 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Product Owner (Agile)</h4>
-            <p style="margin:0">Đề nhắc “employee in organization” + funding/strategy → Sponsor, không phải PO. PO = Agile framework.</p>
+            <h4>Bẫy 1: Drug project → chọn Incremental (C)</h4>
+            <p style="margin:0">Pharma có phases nhưng đề nhấn <strong>defined early</strong> + <strong>strict CC</strong> — đó là predictive, không chỉ “deliver từng phần”.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Project Manager</h4>
-            <p style="margin:0">PM làm việc với sponsor, nhưng PM không “secure funding” — đó là vai trò sponsor/executive.</p>
+            <h4>Bẫy 2: Chọn Hybrid vì “phức tạp”</h4>
+            <p style="margin:0">Megaproject phức tạp không tự động = hybrid. Đọc keywords: regulated + phase gates + upfront planning → D.</p>
           </div>
           <div class="card tip">
-            <h4>PM vs Sponsor — nhớ nhanh</h4>
-            <p style="margin:0"><strong>Sponsor:</strong> WHY, money, strategy, obstacles · <strong>PM:</strong> HOW, plan, execute, deliver</p>
+            <h4>Liên hệ Q13</h4>
+            <p style="margin:0">Predictive lifecycle → cost/staffing bell curve và risk giảm dần (Variables Over Time p.59).</p>
           </div>
         </section>
 
@@ -344,38 +354,45 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Sponsor làm gì?</div>
-            <div class="flashcard-back">Cung cấp resources/support · accountable for enabling success · funding, strategy, gỡ rào cản.</div>
+            <div class="flashcard-front">Predictive approach = gì? (p.61)</div>
+            <div class="flashcard-back">Waterfall/plan-driven — scope stable early, upfront planning, strict change control.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q8 đáp án?</div>
-            <div class="flashcard-back"><strong>B — Project Sponsor.</strong> Funding + strategic direction + remove obstacles.</div>
+            <div class="flashcard-front">Q14 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Predictive approach.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">PROJECT SPONSOR — Q8 (PMBOK 8, p.274)
+          <div class="cheat-sheet">PREDICTIVE APPROACH — Q14 (PMBOK 8, p.61)
 ─────────────────────────────────────────────────────
-SPONSOR
-  • Provides resources and support
-  • Accountable for ENABLING SUCCESS
-  • Secures FUNDING
-  • STRATEGIC direction
-  • Removes ORGANIZATIONAL obstacles
+WHEN: Scope can be STABILIZED EARLY
+ALSO CALLED: Waterfall · Plan-driven · Traditional
 
-NOT SPONSOR
-  PM  → day-to-day management, planning, team
-  PO  → Agile, backlog, product value
-  Customer → receives deliverable, requirements
+DEFINED EARLY &amp; STABLE:
+  Scope · Schedule · Cost · Resources · Quality · Risks
 
-Q8 ANSWER: B — Project Sponsor
+KEYWORDS → PREDICTIVE (D):
+  Highly regulated · Phase gate approvals
+  Strict change control · Extensive upfront planning
+  Defined early · Expected to remain stable
 
-REF: PMBOK Guide 8th Ed., p.274, "Sponsor"</div>
+Q14 ANSWER: D — Predictive approach
+
+NOT:
+  A Adaptive → change, iterations
+  B Hybrid → mix (not described here)
+  C Incremental → partial delivery focus
+
+SCENARIO: EB Inc drug development — regulated + phase gates
+
+REF: The Standard for Project Management, p.61
+     "Predictive Approaches"</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-project-functions.html">Q7</a>
+          · <a href="pmp-teach-variables-over-time.html">Q13: Variables Over Time</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -384,12 +401,12 @@ REF: PMBOK Guide 8th Ed., p.274, "Sponsor"</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Product Owner là vai trò Agile — backlog/value, không secure funding tổ chức.",
-        B: "Đúng! Funding + strategic direction + remove obstacles = Project Sponsor.",
-        C: "Customer nhận sản phẩm — không cấp vốn hay định hướng chiến lược tổ chức.",
-        D: "PM quản lý thực thi — sponsor mới đảm bảo funding và gỡ rào cản cấp tổ chức."
+        A: "Adaptive = iterative, embrace change — trái strict change control và defined early.",
+        B: "Hybrid = mix predictive + adaptive — scenario mô tả thuần predictive.",
+        C: "Incremental = deliver từng phần — không khớp phase gates + extensive upfront planning.",
+        D: "Đúng! Regulated drug dev + phase gates + defined early + strict CC = Predictive (waterfall/plan-driven)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -405,7 +422,7 @@ REF: PMBOK Guide 8th Ed., p.274, "Sponsor"</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Project Sponsor.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Predictive approach.</strong>" : "");
         });
       });
       let score = 0;
