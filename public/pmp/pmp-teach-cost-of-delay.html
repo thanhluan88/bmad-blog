@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Assumption Log (Q20)</title>
+  <title>PMBOK 8 — Cost of Delay Prioritization (Q49)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,7 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .log-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
-    @media (max-width: 600px) { .log-grid { grid-template-columns: 1fr; } }
-    .log-box { padding: 0.85rem; border-radius: var(--radius); font-size: 0.84rem; border: 1px solid var(--border); background: var(--card); }
-    .log-box.do { border-color: var(--ok); background: var(--ok-bg); }
-    .log-box.not { border-color: var(--bad); background: var(--bad-bg); }
-    .log-box strong { display: block; margin-bottom: 0.25rem; font-size: 0.9rem; }
+    tr.winner td { background: var(--ok-bg); font-weight: 600; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -70,9 +65,10 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .calc-box { background: #1f2937; color: #f3f4f6; border-radius: 10px; padding: 1rem 1.25rem; font-family: Consolas, monospace; font-size: 0.88rem; margin: 1rem 0; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 380px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -93,11 +89,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Assumption Log · Q20</div>
+      <div class="brand-sub">Cost of Delay · Q49</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#logs">4 loại log/register</a>
-        <a href="#not-trap">Câu hỏi NOT</a>
+        <a href="#cod">Cost of Delay</a>
+        <a href="#methods">Prioritization Methods</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -124,7 +120,7 @@
         <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
         <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
         <a href="pmp-teach-business-case.html">Q19: Business Case</a>
-        <a href="pmp-teach-assumption-log.html" class="series-current">Q20: Assumption Log</a>
+        <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
         <a href="pmp-teach-project-management-plan.html">Q21: Project Management Plan</a>
         <a href="pmp-teach-plan-sourcing-strategy.html">Q22: Plan Sourcing Strategy</a>
         <a href="pmp-teach-bidder-conference.html">Q23: Bidder Conference</a>
@@ -152,16 +148,16 @@
         <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
         <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
         <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
-        <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
+        <a href="pmp-teach-cost-of-delay.html" class="series-current">Q49: Cost of Delay</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-49">Luyện câu 49</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#logs">Logs</a>
-        <a href="#not-trap">NOT</a>
+        <a href="#cod">CoD</a>
+        <a href="#methods">Methods</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -170,190 +166,176 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q20 về <strong>Assumption Log</strong> và phân biệt với Risk Register,
-            Basis of Estimates, và Issue Log — đặc biệt câu hỏi <em>NOT</em> trên đề thi.
+            Bài học Q49 về <strong>Cost of Delay</strong> — Crest View Digital mobile banking:
+            chỉ một feature vào sprint tiếp theo; mỗi option có <em>value potential</em> và
+            <em>development time</em> khác nhau — maximize value trong sprint.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.17 &amp; p.114</span>
-            <span class="badge">Initiate / Planning</span>
-            <span class="badge">Câu 20 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.41 &amp; p.187</span>
+            <span class="badge">Prioritization / Ranking</span>
+            <span class="badge">Câu 49 — Practice</span>
           </div>
         </header>
 
-        <section id="logs">
-          <h2>1. Bốn artifact — ghi gì ở đâu?</h2>
+        <section id="cod">
+          <h2>1. Cost of Delay (PMBOK p.187)</h2>
+          <p>
+            Khi prioritize requirements/features, <strong>cost of delay</strong> đo value lost per
+            unit time khi chưa deliver. Công thức trong đề:
+          </p>
 
-          <div class="log-grid">
-            <div class="log-box do">
-              <strong>A — Assumption Log ✓</strong>
-              Assumptions &amp; constraints · updates · status changes
-            </div>
-            <div class="log-box do">
-              <strong>B — Risk Register ✓</strong>
-              Uncertainties · risks (utility availability, vendor timeline accuracy)
-            </div>
-            <div class="log-box do">
-              <strong>C — Basis of Estimates ✓</strong>
-              How cost/duration estimates derived · supporting detail
-            </div>
-            <div class="log-box not">
-              <strong>D — Issue Log ✗ (NOT)</strong>
-              Impacts that <em>have already occurred</em> — not future uncertainty
-            </div>
-          </div>
+          <div class="calc-box">Cost of Delay = value potential ÷ duration to deliver
+
+Ví dụ Q49:
+  A = $12,000/week ÷ 4 weeks = 3,000
+  B = $16,000/week ÷ 2 weeks = 8,000  ← highest
+  C = $10,000/week ÷ 3 weeks = 3,333
+  D = $14,000/week ÷ 5 weeks = 2,800</div>
 
           <div class="card tip">
-            <h4>Assumption Log (PMBOK p.114)</h4>
+            <h4>Chọn feature nào?</h4>
             <p style="margin:0">
-              Records all project assumptions and constraints throughout the life cycle,
-              including updates and status changes. High-level constraints originate in
-              the business case and flow into the charter; lower-level assumptions are
-              identified during planning and execution.
+              Feature có <strong>highest value relative to time</strong> — không phải value cao nhất
+              tuyệt đối (D = $14k) hay duration ngắn nhất, mà <em>tỷ lệ value/time</em> cao nhất.
             </p>
           </div>
         </section>
 
-        <section id="not-trap">
-          <h2>2. Câu hỏi “NOT” — đọc kỹ</h2>
-          <p>
-            Đề hỏi <strong>what will he NOT do</strong> — đáp án đúng là hành động
-            Elijah <em>không</em> thực hiện. A, B, C đều đúng việc cần làm → chọn D.
-          </p>
+        <section id="methods">
+          <h2>2. Prioritization methods (p.41 &amp; p.187)</h2>
 
           <table>
             <thead>
-              <tr><th>Factor (QGS data center)</th><th>Artifact</th></tr>
+              <tr><th>Method</th><th>Use when</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td>Utility availability (uncertain)</td>
-                <td>Assumption Log + Risk Register</td>
+                <td><strong>Cost of delay</strong></td>
+                <td>Value potential + duration — maximize value per sprint (Q49)</td>
               </tr>
               <tr>
-                <td>Vendor timeline accuracy (uncertain)</td>
-                <td>Assumption Log + Risk Register + Basis of Estimates</td>
+                <td>MoSCoW</td>
+                <td>Must / Should / Could / Won't categorization</td>
               </tr>
               <tr>
-                <td>Initial cost/duration estimates</td>
-                <td>Basis of Estimates (document assumptions behind numbers)</td>
+                <td>100-point method</td>
+                <td>Stakeholders allocate points across items</td>
               </tr>
               <tr>
-                <td>Problem already impacting project</td>
-                <td><strong>Issue Log only</strong> — chưa xảy ra ở đây</td>
+                <td>Kano analysis</td>
+                <td>Must-haves vs satisfiers vs delighters (Q46 trap)</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 20</h2>
+          <h2>3. Câu hỏi thực hành — Question 49</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q20</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q49</div>
             <div class="q-text">
-              Elijah is initiating a data center expansion project at QGS. Early planning
-              relies on <em>uncertain factors</em> such as utility availability and the
-              accuracy of vendor timelines. As Elijah documents these initial estimates for
-              cost and duration, what will he <em>NOT</em> do?
+              Sam is managing feature delivery for a mobile banking app at Crest View Digital. Only
+              one feature can be added to the next sprint. Each option has a different
+              <em>value potential</em> and <em>development time</em>. Sam wants to maximize value
+              delivered within the sprint. Which feature should be selected?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Add the factors to the Assumption Log.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Add the factors to the Risk Register.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Add the factors to the Basis of Estimates.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Add the factors to the Issue Log.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Feature A: $12,000 per week, 4 weeks duration.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Feature B: $16,000 per week, 2 weeks duration.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Feature C: $10,000 per week, 3 weeks duration.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Feature D: $14,000 per week, 5 weeks duration.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn D (NOT do)?</h3>
-          <ul>
-            <li><strong>Issue Log</strong> = impacts <em>that have occurred</em> — không phải uncertain factors chưa xảy ra.</li>
-            <li>Utility availability &amp; vendor timelines = assumptions/uncertainties → A, B, C đúng.</li>
-            <li>Slide: A, B, C có ✓ · D bị loại (Issue Log).</li>
-          </ul>
-
-          <h3>Vì sao A, B, C là việc Elijah SẼ làm</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Lý do</th></tr>
+              <tr><th>Feature</th><th>Value/week</th><th>Duration</th><th>Cost of Delay</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td><strong>A. Assumption Log</strong></td>
-                <td>Ghi assumptions/constraints và status — p.114</td>
-              </tr>
-              <tr>
-                <td><strong>B. Risk Register</strong></td>
-                <td>Uncertainties = risks cần theo dõi</td>
-              </tr>
-              <tr>
-                <td><strong>C. Basis of Estimates</strong></td>
-                <td>Document assumptions behind cost/duration estimates</td>
-              </tr>
+              <tr><td>A</td><td>$12,000</td><td>4 weeks</td><td>3,000</td></tr>
+              <tr class="winner"><td><strong>B ✓</strong></td><td>$16,000</td><td>2 weeks</td><td><strong>8,000</strong></td></tr>
+              <tr><td>C</td><td>$10,000</td><td>3 weeks</td><td>3,333</td></tr>
+              <tr><td>D</td><td>$14,000</td><td>5 weeks</td><td>2,800</td></tr>
             </tbody>
           </table>
 
+          <h3>Tại sao không chọn D?</h3>
+          <p>
+            Feature D có value/week cao thứ hai ($14,000) nhưng duration 5 weeks → CoD chỉ 2,800.
+            Value cao tuyệt đối ≠ prioritize first khi maximize value <em>within the sprint</em>.
+          </p>
+
           <div class="card warn">
-            <h4>Issue vs Risk</h4>
+            <h4>Exam tip — luôn chia, không cộng/trừ</h4>
             <p style="margin:0">
-              <strong>Risk</strong> = may happen (uncertainty) · <strong>Issue</strong> = has happened (impact occurred)
+              Đề cho value/week và duration → chia ra CoD score. Chọn <strong>highest ratio</strong>,
+              không chọn số dollar lớn nhất hoặc weeks nhỏ nhất một cách mù quáng.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Log/Register nào?</h2>
+          <h2>5. Drill — Highest cost of delay?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="ASSUMP">
-              <span>Utility may not be available on schedule (uncertain)</span>
+            <div class="classify-row" data-answer="B">
+              <span>$20k/week ÷ 2 weeks = ?</span>
               <div class="classify-btns">
-                <button data-pick="ASSUMP">Assumption/Risk</button>
-                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="A">5,000</button>
+                <button data-pick="B">10,000</button>
+                <button data-pick="C">8,000</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ISSUE">
-              <span>Vendor missed deadline — project delayed 2 weeks</span>
+            <div class="classify-row" data-answer="C">
+              <span>$24k/week ÷ 3 weeks vs $15k/week ÷ 1 week — pick higher CoD</span>
               <div class="classify-btns">
-                <button data-pick="ASSUMP">Assumption/Risk</button>
-                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="A">$24k / 3w (8,000)</button>
+                <button data-pick="B">Equal</button>
+                <button data-pick="C">$15k / 1w (15,000)</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ASSUMP">
-              <span>Assumption behind duration estimate documented</span>
+            <div class="classify-row" data-answer="A">
+              <span>Q49 — which feature wins?</span>
               <div class="classify-btns">
-                <button data-pick="ASSUMP">Basis/Assumption</button>
-                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="A">B (8,000)</button>
+                <button data-pick="B">D ($14k value)</button>
+                <button data-pick="C">Shortest (B, 2w only)</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ISSUE">
-              <span>Impact to project that has already occurred</span>
+            <div class="classify-row" data-answer="B">
+              <span>Maximize value in ONE sprint — use which method?</span>
               <div class="classify-btns">
-                <button data-pick="ASSUMP">Assumption/Risk</button>
-                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="A">MoSCoW only</button>
+                <button data-pick="B">Cost of delay</button>
+                <button data-pick="C">Affinity diagram</button>
               </div>
             </div>
           </div>
           <p class="drill-score" id="drillScore">0 / 4 đúng</p>
-          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">Uncertain/future → NOT Issue Log</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Quên đọc NOT</h4>
-            <p style="margin:0">Chọn A vì “đúng” — nhưng đề hỏi NOT → phải chọn D (việc không làm).</p>
+            <h4>Bẫy 1: Highest $/week → Feature D ($14,000)</h4>
+            <p style="margin:0">Phải chia cho duration — D có 5 weeks nên CoD thấp nhất trong 4 options.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Issue Log cho mọi “vấn đề”</h4>
-            <p style="margin:0">Uncertainty chưa materialize = risk/assumption — issue chỉ khi impact đã xảy ra.</p>
+            <h4>Bẫy 2: Shortest duration → Feature B (2 weeks)</h4>
+            <p style="margin:0">B đúng nhưng vì CoD cao nhất (8,000), không phải vì duration ngắn alone.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Total value = value × weeks</h4>
+            <p style="margin:0">PMBOK Q49 dùng value ÷ duration — không nhân total project value.</p>
           </div>
           <div class="card tip">
-            <h4>Liên hệ Q18–Q19</h4>
-            <p style="margin:0">Initiating QGS data center — assumptions từ business case/charter flow xuống planning artifacts.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Value potential + development time + maximize value in sprint</strong> → Cost of delay (value ÷ duration) → pick highest.</p>
           </div>
         </section>
 
@@ -361,38 +343,53 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Issue Log ghi gì?</div>
-            <div class="flashcard-back">Impacts to the project that <strong>have occurred</strong> — not uncertainties.</div>
+            <div class="flashcard-front">Cost of Delay formula? (p.187)</div>
+            <div class="flashcard-back">value potential ÷ duration to deliver — pick highest score.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q20 đáp án (NOT)?</div>
-            <div class="flashcard-back"><strong>D</strong> — Will NOT add uncertain factors to Issue Log.</div>
+            <div class="flashcard-front">Q49 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — $16,000/week ÷ 2 weeks = 8,000 (highest).</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ASSUMPTION LOG — Q20 (PMBOK 8, p.17 &amp; p.114)
+          <div class="cheat-sheet">COST OF DELAY — Q49 (PMBOK 8, p.41 &amp; p.187)
 ─────────────────────────────────────────────────────
-UNCERTAIN FACTORS (utility, vendor timelines):
-  DO → A Assumption Log
-  DO → B Risk Register (uncertainties)
-  DO → C Basis of Estimates (support estimates)
-  NOT → D Issue Log ✗
+PRIORITIZATION METHODS (p.41, p.187):
+  MoSCoW · 100-point · COST OF DELAY · Kano analysis
 
-ISSUE LOG: Impacts that HAVE OCCURRED
-RISK REGISTER: Uncertainties
-ASSUMPTION LOG: Assumptions &amp; constraints + status
+FORMULA:
+  Cost of Delay = value potential ÷ duration to deliver
 
-Q20: "what will he NOT do?" → D (Issue Log)
+Q49 DATA:
+  A: $12,000/wk ÷ 4w = 3,000
+  B: $16,000/wk ÷ 2w = 8,000  ← HIGHEST ✓
+  C: $10,000/wk ÷ 3w = 3,333
+  D: $14,000/wk ÷ 5w = 2,800
 
-NOT TRAP: Read NOT — pick the wrong artifact
+SCENARIO: One feature per sprint
+           Maximize VALUE within sprint
+           Different value potential + dev time
+→ B) Feature B — highest value RELATIVE TO TIME
 
-REF: PMBOK Guide 8th Ed., p.17 Initiate + p.114 Assumption log</div>
+NOT:
+  Pick highest $/week alone (D loses on duration)
+  Pick shortest duration alone (need ratio)
+  Total value = multiply (wrong formula for this Q)
+
+SIGNAL: "value potential" · "development time"
+        "maximize value" · "one sprint" · "prioritize"
+
+Q49 ANSWER: B
+
+REF: PMBOK Guide, 8th Ed., p.41 &amp; p.187</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
+          · <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
+          · <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
+          · <a href="pmp-full-questions.html#q-49">Luyện câu 49</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -401,12 +398,12 @@ REF: PMBOK Guide 8th Ed., p.17 Initiate + p.114 Assumption log</div>
 
   <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Assumption Log — Elijah SẼ làm (ghi assumptions). Đề hỏi NOT — không chọn A.",
-        B: "Risk Register — Elijah SẼ ghi uncertainties. Đề hỏi NOT — không chọn B.",
-        C: "Basis of Estimates — Elijah SẼ document estimate assumptions. Đề hỏi NOT — không chọn C.",
-        D: "Đúng! Issue Log chỉ cho impacts đã xảy ra — không dùng cho uncertain factors chưa materialize."
+        A: "A = 12,000 ÷ 4 = 3,000 — thấp hơn B (8,000).",
+        B: "Đúng! B = 16,000 ÷ 2 = 8,000 — highest cost of delay, maximize value in sprint.",
+        C: "C = 10,000 ÷ 3 = 3,333 — thấp hơn B.",
+        D: "D có $14k/week cao nhưng 5 weeks → 14,000 ÷ 5 = 2,800 — thấp nhất trong 4 options."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -422,7 +419,7 @@ REF: PMBOK Guide 8th Ed., p.17 Initiate + p.114 Assumption log</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án (NOT): <strong>D — Will NOT add to Issue Log.</strong><br>A, B, C đều là việc Elijah sẽ làm." : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Feature B ($16,000/week ÷ 2 weeks = 8,000).</strong>" : "");
         });
       });
       let score = 0;
@@ -434,12 +431,10 @@ REF: PMBOK Guide 8th Ed., p.17 Initiate + p.114 Assumption log</div>
           btn.addEventListener("click", function () {
             if (done) return;
             done = true;
-            const pick = btn.dataset.pick;
-            const ok = (ans === "ASSUMP" && pick === "ASSUMP") || (ans === "ISSUE" && pick === "ISSUE");
+            const ok = btn.dataset.pick === ans;
             row.querySelectorAll("button").forEach(function (b) {
               b.disabled = true;
-              const bOk = (ans === "ASSUMP" && b.dataset.pick === "ASSUMP") || (ans === "ISSUE" && b.dataset.pick === "ISSUE");
-              if (bOk) b.classList.add("correct");
+              if (b.dataset.pick === ans) b.classList.add("correct");
               else if (b === btn) b.classList.add("wrong-pick");
             });
             if (ok) score++;
