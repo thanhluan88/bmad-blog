@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Plan Sourcing Strategy (Q22)</title>
+  <title>PMBOK 8 — Scope Baseline at Execution (Q28)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,9 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .process-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; font-size: 0.8rem; }
-    .flow-step { padding: 0.45rem 0.7rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--border); background: var(--bg); }
-    .flow-step.done { border-color: var(--muted); color: var(--muted); }
-    .flow-step.current { border-color: var(--ok); background: var(--ok-bg); color: #065f46; }
-    .flow-step.next { border-color: var(--info); background: var(--info-bg); color: #1d4ed8; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
+    .baseline-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin: 1rem 0; }
+    @media (max-width: 600px) { .baseline-grid { grid-template-columns: 1fr; } }
+    .baseline-box { padding: 0.75rem; border-radius: 10px; border: 1px solid var(--border); background: var(--card); font-size: 0.84rem; text-align: center; font-weight: 600; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -93,11 +90,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Plan Sourcing Strategy · Q22</div>
+      <div class="brand-sub">Scope Baseline · Q28</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#sourcing">Plan Sourcing Strategy</a>
-        <a href="#sequence">Thứ tự NEXT</a>
+        <a href="#execution">Manage Execution</a>
+        <a href="#baseline">Scope Baseline</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -132,16 +129,16 @@
         <a href="pmp-teach-make-or-buy-analysis.html">Q25: Make-or-Buy Analysis</a>
         <a href="pmp-teach-request-for-quote.html">Q26: Request for Quote</a>
         <a href="pmp-teach-change-log.html">Q27: Change Log</a>
-        <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
+        <a href="pmp-teach-scope-baseline-execution.html" class="series-current">Q28: Scope Baseline</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-22">Luyện câu 22</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-28">Luyện câu 28</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#sourcing">Sourcing</a>
-        <a href="#sequence">Sequence</a>
+        <a href="#execution">Execution</a>
+        <a href="#baseline">Baseline</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -150,177 +147,147 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q22 về <strong>Plan Sourcing Strategy</strong> — trước khi liên hệ vendor,
-            PM cần document sourcing decisions, make-or-buy, contract types và source selection approach.
+            Bài học Q28 về <strong>Manage Project Execution</strong> — stakeholder lo ngại
+            <em>consistency và reliability</em> của outputs; PM đảm bảo deliverables theo
+            <strong>scope baseline</strong>.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.19–20</span>
-            <span class="badge">Procurement / Planning</span>
-            <span class="badge">Câu 22 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.22–23</span>
+            <span class="badge">Manage Project Execution</span>
+            <span class="badge">Câu 28 — Practice</span>
           </div>
         </header>
 
-        <section id="sourcing">
-          <h2>1. Plan Sourcing Strategy</h2>
+        <section id="execution">
+          <h2>1. Manage Project Execution</h2>
           <p>
-            Process này ghi lại <strong>quyết định sourcing</strong> của dự án: cách chọn nguồn,
-            phạm vi công việc outsource (SOW), loại hợp đồng phù hợp — bao gồm
-            <strong>make-or-buy decisions</strong>.
+            Process này gồm lead và perform work theo project management plan,
+            implement <strong>approved changes</strong>, và đảm bảo deliverables đáp ứng
+            scope requirements.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa (PMBOK p.19–20)</h4>
+            <h4>Quality focus tại execution (p.22–23)</h4>
             <p style="margin:0">
-              The Plan Sourcing Strategy process entails documenting project sourcing decisions,
-              specifying the source selection approach, determining the scope of work for external sourcing,
-              and selecting the appropriate contracts and sources for delivering the work.
-              These include make-or-buy decisions.
+              At this point, quality should be focused on ensuring that deliverables
+              are being produced according to the agreed-upon requirements set in the
+              <strong>scope baseline</strong>.
             </p>
           </div>
-
-          <h3>Procurement sequence — planning trước, vendor sau</h3>
-          <table>
-            <thead>
-              <tr><th>Bước</th><th>Hành động</th><th>Đã có vendor?</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>1. Plan Sourcing Strategy</strong></td>
-                <td>Make-or-buy, evaluation criteria, contract types, SOW scope</td>
-                <td>Chưa</td>
-              </tr>
-              <tr>
-                <td>2. Issue procurement documents</td>
-                <td>RFP/RFQ, advertise if needed</td>
-                <td>Bắt đầu outreach</td>
-              </tr>
-              <tr>
-                <td>3. Evaluate proposals</td>
-                <td>Source selection, chọn supplier</td>
-                <td>Có proposals</td>
-              </tr>
-              <tr>
-                <td>4. Award contract</td>
-                <td>Negotiate &amp; sign</td>
-                <td>Đã chọn vendor</td>
-              </tr>
-            </tbody>
-          </table>
         </section>
 
-        <section id="sequence">
-          <h2>2. Thứ tự “What should the PM do NEXT?”</h2>
+        <section id="baseline">
+          <h2>2. Scope Baseline gồm gì?</h2>
 
-          <div class="process-flow" aria-label="Procurement planning sequence">
-            <span class="flow-step done">Need identified ✓</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step current">Plan Sourcing Strategy</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">Issue RFP / RFQ</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">Evaluate proposals</span>
+          <div class="baseline-grid">
+            <div class="baseline-box">Scope Statement</div>
+            <div class="baseline-box">WBS</div>
+            <div class="baseline-box">WBS Dictionary</div>
+            <div class="baseline-box">Work Packages</div>
           </div>
 
           <p>
-            Đề nói team đang <em>defining evaluation criteria, contract types, build vs outsource</em>
-            và <strong>no vendors have been contacted yet</strong> — chưa đến bước phát RFP hay đánh giá proposal.
+            Khi stakeholder hỏi về consistency/reliability của outputs — PM xác nhận
+            team đang build đúng <em>agreed-upon requirements</em>, không mở lại planning
+            hay escalate ngay.
           </p>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 22</h2>
+          <h2>3. Câu hỏi thực hành — Question 28</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q22</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q28</div>
             <div class="q-text">
-              A project team at Redwood Industrial Systems is preparing to acquire specialized components.
-              They are defining evaluation criteria, contract types, and deciding whether to
-              <em>build internally or outsource</em> the work. <em>No vendors have been contacted yet.</em>
-              What should the project manager do <em>next</em>?
+              You are managing a production system upgrade at Iron Works Manufacturing.
+              During execution, your team is delivering outputs, implementing approved changes,
+              and tracking performance data. A stakeholder raises concerns about the
+              <em>consistency and reliability of the outputs</em> being produced.
+              What should you do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Issue procurement documents and request proposals from vendors.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Evaluate vendor proposals and select the best supplier.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Develop the sourcing strategy including make-or-buy decisions.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Advertise the opportunity to gather additional vendors.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Reassess the scope and quality plans to improve output consistency.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Ensure deliverables are produced according to the defined scope baseline.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Raise these concerns with the steering committee.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Complete a full analysis of the quality risks being raised.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Plan Sourcing Strategy = document decisions trước khi ra thị trường.</li>
-            <li>Make-or-buy, evaluation criteria, contract types — đúng nội dung process này.</li>
-            <li>“No vendors contacted” = vẫn ở giai đoạn planning, chưa Conduct Procurements.</li>
+            <li>Đang execution — deliver outputs per plan &amp; approved changes.</li>
+            <li>Concern về output consistency → verify against scope baseline requirements.</li>
+            <li>PMBOK: quality tại execution = deliverables theo agreed requirements.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải NEXT</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Issue procurement documents</strong></td>
-                <td>Sau khi sourcing strategy đã xong — cần strategy trước RFP/RFQ.</td>
+                <td><strong>A. Reassess scope &amp; quality plans</strong></td>
+                <td>Planning activity — chưa cần reopen plans; execution focus là conform to baseline.</td>
               </tr>
               <tr>
-                <td><strong>B. Evaluate proposals</strong></td>
-                <td>Chưa có proposals — vendors chưa được contact.</td>
+                <td><strong>C. Steering committee</strong></td>
+                <td>Escalate quá sớm — PM xử lý execution quality trước.</td>
               </tr>
               <tr>
-                <td><strong>D. Advertise opportunity</strong></td>
-                <td>Marketing/outreach — sau strategy; không phải bước planning đầu tiên.</td>
+                <td><strong>D. Full quality risk analysis</strong></td>
+                <td>Concern là output consistency vs requirements — không phải analyze risks mới.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q18 — Make-or-buy</h4>
+            <h4>Liên hệ Q27 Change Log</h4>
             <p style="margin:0">
-              Q18 loại trừ make-or-buy vì quá sớm (initiating). Q22 make-or-buy là <em>đúng</em> vì
-              đã vào procurement planning với specialized components.
+              Q27: confusion về modifications → Change Log. Q28: output consistency →
+              Scope baseline / execution per requirements.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Bước nào trong procurement?</h2>
+          <h2>5. Drill — Execution action nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="PLAN">
-              <span>Document make-or-buy and contract type decisions</span>
+            <div class="classify-row" data-answer="BASE">
+              <span>Stakeholder doubts output matches agreed requirements</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="ISSUE">Issue docs</button>
-                <button data-pick="EVAL">Evaluate</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="ISSUE">
-              <span>Send RFP to shortlisted vendors</span>
-              <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="ISSUE">Issue docs</button>
-                <button data-pick="EVAL">Evaluate</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="EVAL">
-              <span>Score proposals against evaluation criteria</span>
-              <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="ISSUE">Issue docs</button>
-                <button data-pick="EVAL">Evaluate</button>
+                <button data-pick="BASE">Scope baseline</button>
+                <button data-pick="PLAN">Reassess plans</button>
+                <button data-pick="ESC">Escalate</button>
               </div>
             </div>
             <div class="classify-row" data-answer="PLAN">
-              <span>Define SOW scope for external sourcing</span>
+              <span>Approved scope fundamentally wrong — need replan</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="ISSUE">Issue docs</button>
-                <button data-pick="EVAL">Evaluate</button>
+                <button data-pick="BASE">Scope baseline</button>
+                <button data-pick="PLAN">Reassess plans</button>
+                <button data-pick="ESC">Escalate</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="BASE">
+              <span>Team delivering outputs during execution</span>
+              <div class="classify-btns">
+                <button data-pick="BASE">Scope baseline</button>
+                <button data-pick="PLAN">Reassess plans</button>
+                <button data-pick="ESC">Escalate</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="ESC">
+              <span>Issue beyond PM authority after analysis</span>
+              <div class="classify-btns">
+                <button data-pick="BASE">Scope baseline</button>
+                <button data-pick="PLAN">Reassess plans</button>
+                <button data-pick="ESC">Escalate</button>
               </div>
             </div>
           </div>
@@ -330,16 +297,16 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Acquire components” → Issue RFP ngay (A)</h4>
-            <p style="margin:0">Acquire cần strategy trước — criteria, contract type, make-or-buy phải rõ trước khi contact vendor.</p>
+            <h4>Bẫy 1: “Consistency” → Reassess quality plans (A)</h4>
+            <p style="margin:0">Execution = conform to baseline; reassess plans là overreaction khi chưa verify compliance.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: “Evaluation criteria” → Evaluate proposals (B)</h4>
-            <p style="margin:0">Đang <em>define</em> criteria (planning), chưa <em>apply</em> criteria lên proposals.</p>
+            <h4>Bẫy 2: Stakeholder concern → Escalate (C)</h4>
+            <p style="margin:0">PM owns execution — đảm bảo deliverables per scope baseline trước khi escalate.</p>
           </div>
           <div class="card tip">
-            <h4>Signal trong đề</h4>
-            <p style="margin:0"><strong>“No vendors contacted yet”</strong> = loại A, B, D — chỉ còn planning (C).</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Execution + output consistency/reliability</strong> → Scope baseline (B).</p>
           </div>
         </section>
 
@@ -347,50 +314,49 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Plan Sourcing Strategy gồm gì? (p.19–20)</div>
-            <div class="flashcard-back">Sourcing decisions · source selection approach · SOW scope · contracts · make-or-buy.</div>
+            <div class="flashcard-front">Quality focus at execution? (p.22–23)</div>
+            <div class="flashcard-back">Deliverables produced per agreed requirements in scope baseline.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q22 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Develop the sourcing strategy including make-or-buy decisions.</div>
+            <div class="flashcard-front">Q28 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Ensure deliverables per defined scope baseline.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">PLAN SOURCING STRATEGY — Q22 (PMBOK 8, p.19–20)
+          <div class="cheat-sheet">SCOPE BASELINE AT EXECUTION — Q28 (PMBOK 8, p.22–23)
 ─────────────────────────────────────────────────────
-PROCESS: Plan Sourcing Strategy
-INCLUDES:
-  - Sourcing decisions documented
-  - Source selection approach
-  - Scope of work (SOW) for external sourcing
-  - Appropriate contracts &amp; sources
-  - MAKE-OR-BUY decisions
+PROCESS: Manage Project Execution
+  - Perform work per plan
+  - Implement approved changes
+  - Deliverables meet scope requirements
 
-SCENARIO: Redwood — criteria, contract types, build vs outsource
-           NO VENDORS CONTACTED YET
-NEXT → C) Develop SOURCING STRATEGY (make-or-buy) ✓
+QUALITY AT EXECUTION:
+  Ensure outputs per SCOPE BASELINE
+  (Scope stmt + WBS + WBS dict + work packages)
 
-NOT YET:
-  A) Issue procurement docs / RFP — after strategy
-  B) Evaluate proposals — need proposals first
-  D) Advertise — outreach, after strategy
+SCENARIO: Iron Works — execution, outputs, approved changes
+           stakeholder: consistency &amp; reliability of outputs
+ANSWER → B) Ensure deliverables per SCOPE BASELINE ✓
 
-SEQUENCE:
-  Plan Sourcing Strategy (C) → Issue docs (A) → Evaluate (B)
+NOT:
+  A) Reassess scope/quality plans — planning, premature
+  C) Steering committee — escalate too early
+  D) Full quality risk analysis — not the ask
 
-SIGNAL: "no vendors contacted" = still planning
+VS Q27: modifications confusion → Change Log
+       output consistency → Scope baseline
 
-Q22 ANSWER: C
+Q28 ANSWER: B
 
-REF: PMBOK Guide, 8th Ed., p.19–20 — "Plan Sourcing Strategy"</div>
+REF: PMBOK Guide, 8th Ed., p.22–23 — Manage Project Execution</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
-          · <a href="pmp-teach-project-management-plan.html">Q21: PM Plan</a>
-          · <a href="pmp-full-questions.html#q-22">Luyện câu 22</a>
+          · <a href="pmp-teach-change-log.html">Q27: Change Log</a>
+          · <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
+          · <a href="pmp-full-questions.html#q-28">Luyện câu 28</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -399,12 +365,12 @@ REF: PMBOK Guide, 8th Ed., p.19–20 — "Plan Sourcing Strategy"</div>
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Issue procurement documents là bước sau — cần sourcing strategy (make-or-buy, criteria) trước.",
-        B: "Chưa có vendor proposals — đề nói no vendors contacted yet.",
-        C: "Đúng! Plan Sourcing Strategy — document decisions, make-or-buy, contracts, SOW (p.19–20).",
-        D: "Advertise là outreach sau strategy — không phải NEXT khi chưa có plan sourcing."
+        A: "Reassess plans là planning — execution focus là deliverables theo scope baseline đã agreed.",
+        B: "Đúng! Manage Project Execution — ensure deliverables per scope baseline requirements (p.22–23).",
+        C: "PM xử lý execution quality trước — chưa cần escalate steering committee.",
+        D: "Full quality risk analysis không phải first response cho output consistency concern."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -420,7 +386,7 @@ REF: PMBOK Guide, 8th Ed., p.19–20 — "Plan Sourcing Strategy"</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Develop the sourcing strategy including make-or-buy decisions.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Ensure deliverables are produced according to the defined scope baseline.</strong>" : "");
         });
       });
       let score = 0;
