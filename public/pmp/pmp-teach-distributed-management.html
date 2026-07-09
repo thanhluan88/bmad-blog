@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Business Requirements (Q45)</title>
+  <title>PMBOK 8 — Distributed Management (Q90)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,6 +50,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,8 +69,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -88,11 +91,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Business Requirements · Q45</div>
+      <div class="brand-sub">Distributed Management · Q90</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#types">Requirement Types</a>
-        <a href="#signals">Signal Words</a>
+        <a href="#distributed">Distributed Management</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -144,7 +147,7 @@
         <a href="pmp-teach-scope-management-plan.html">Q42: Scope Mgmt Plan</a>
         <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
         <a href="pmp-teach-requirements-traceability.html">Q44: Requirements RTM</a>
-        <a href="pmp-teach-business-requirements.html" class="series-current">Q45: Business Requirements</a>
+        <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
         <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
         <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
         <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
@@ -189,15 +192,15 @@
         <a href="pmp-teach-resource-calendar.html">Q87: Resource Calendar</a>
         <a href="pmp-teach-servant-leadership.html">Q88: Servant Leadership</a>
         <a href="pmp-teach-retrospective.html">Q89: Retrospective</a>
-        <a href="pmp-teach-distributed-management.html">Q90: Distributed Management</a>
+        <a href="pmp-teach-distributed-management.html" class="series-current">Q90: Distributed Management</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#types">Types</a>
-        <a href="#signals">Signals</a>
+        <a href="#distributed">Distributed</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -206,211 +209,264 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q45 về <strong>Business Requirements</strong> — requirements định nghĩa
-            <em>organization's overall goals</em> và <em>intended outcomes</em> cho initiative mới,
-            đảm bảo <em>alignment with long-term objectives</em>.
+            Bài học Q90 về <strong>Distributed Management &amp; Leadership</strong> — Louise tại SG Tech
+            (global software integration): team đã giải quyết conflict, cải thiện skill, xây dựng trust,
+            nhưng <em>vẫn chờ hướng dẫn từ Louise</em> → bộ máy chậm, tắc nghẽn.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.40–41 &amp; p.130</span>
-            <span class="badge">Elicit and Analyze Requirements</span>
-            <span class="badge">Câu 45 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.85 &amp; 168</span>
+            <span class="badge">Lead the Team</span>
+            <span class="badge">Distributed Management</span>
+            <span class="badge">Câu 90 — Practice</span>
           </div>
         </header>
 
-        <section id="types">
-          <h2>1. Four requirement types (PMBOK p.130)</h2>
+        <section id="distributed">
+          <h2>1. Lead the Team &amp; Distributed Management (p.85, 168)</h2>
           <p>
-            Khi elicit requirements, PMBOK phân loại theo mức độ và mục đích. Hiểu đúng loại
-            giúp trả lời câu hỏi “what type of requirements are these?”
+            <strong>Distributed management</strong> (p.168) là approach <em>phân quyền decision-making</em>,
+            cho phép team tự tổ chức (self-organize) và <strong>empower các thành viên</strong> để quyết định
+            thay vì chờ leader. Thuộc <strong>Lead the Team</strong> domain (p.85) — leadership approach
+            cho team hiện đại, đặc biệt trong bối cảnh toàn cầu (global teams) hoặc remote.
           </p>
+
+          <div class="approach-grid">
+            <div class="approach-cell">
+              <strong>Autocratic</strong>
+              Leader quyết định mọi thứ; team thực hiện. Dùng khi cần quyết định nhanh hoặc high-risk.
+            </div>
+            <div class="approach-cell">
+              <strong>Distributed</strong>
+              Leader empower team; các thành viên tự quyết định. Cải thiện ownership, speed, innovation.
+            </div>
+            <div class="approach-cell">
+              <strong>Servant Leadership</strong>
+              Leader hỗ trợ team từ phía sau; focus vào remove barriers. Khi team cần coaching.
+            </div>
+            <div class="approach-cell">
+              <strong>Standup / Reporting</strong>
+              Daily sync; không thay đổi quyền hạn decision-making. Chỉ là coordination tool.
+            </div>
+          </div>
+
+          <div class="card tip">
+            <h4>Signal trong stem</h4>
+            <p style="margin:0">
+              <strong>Team resolved conflicts · improved skills · building trust · BUT waiting for her direction</strong>
+              → team READY cho distributed management (empower + decentralize), không phải servant leadership
+              (B) hay thêm stand-ups (C) hay autocratic (A).
+            </p>
+          </div>
 
           <table>
             <thead>
-              <tr><th>Type</th><th>Focus</th><th>Example signal</th></tr>
+              <tr><th>Approach</th><th>Mục đích</th><th>Q90?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Business requirements</strong></td>
-                <td>Strategic objectives · high-level organizational needs</td>
-                <td>Overall goals · long-term objectives · intended outcomes</td>
+                <td><strong>Distributed (B)</strong></td>
+                <td>Empower team tự quyết định — decentralize decision-making</td>
+                <td>✓ Team ready; break bottleneck; build ownership</td>
               </tr>
               <tr>
-                <td><strong>Stakeholder requirements</strong></td>
-                <td>Needs of stakeholders to achieve business requirements</td>
-                <td>Stakeholder needs · expectations · interests</td>
+                <td><strong>Autocratic (A)</strong></td>
+                <td>Leader quyết định tất cả</td>
+                <td>✗ Create bottleneck; không leverage team capability</td>
               </tr>
               <tr>
-                <td><strong>Solution requirements</strong></td>
-                <td>Features &amp; functions of the product/service</td>
-                <td>Functional · non-functional · product capabilities</td>
+                <td><strong>Increase stand-ups (C)</strong></td>
+                <td>Daily sync meetings</td>
+                <td>✗ Coordination — không fix decision-making bottleneck</td>
               </tr>
               <tr>
-                <td><strong>Transition requirements</strong></td>
-                <td>Capabilities needed to move from current to future state</td>
-                <td>Training · data migration · cutover · temporary</td>
+                <td><strong>Servant Leadership (D)</strong></td>
+                <td>Leader remove barriers; coach team</td>
+                <td>✗ Team không cần coaching; cần empower + authority</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="compare">
+          <h2>2. So sánh các đáp án &amp; Q39 Autocratic vs Q88 Servant</h2>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q90 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Autocratic decision-making</strong></td>
+                <td>Leader quyết định mọi thứ; team thực hiện lệnh</td>
+                <td>Create bottleneck — team chờ, không grow ownership (instructor: X)</td>
+              </tr>
+              <tr>
+                <td><strong>B. Apply distributed management</strong></td>
+                <td>Empower team tự quyết định; decentralize authority</td>
+                <td><strong>Yes — break bottleneck; leverage team readiness</strong></td>
+              </tr>
+              <tr>
+                <td><strong>C. Increase stand-ups/reporting</strong></td>
+                <td>More daily meetings; more visibility</td>
+                <td>Coordination tool — không fix decision bottleneck (instructor: X)</td>
+              </tr>
+              <tr>
+                <td><strong>D. Apply servant leadership</strong></td>
+                <td>Leader support from behind; remove obstacles</td>
+                <td>Team không cần coaching — cần authority to decide (instructor: X)</td>
               </tr>
             </tbody>
           </table>
 
-          <div class="card tip">
-            <h4>Business requirements (p.130)</h4>
+          <div class="card info">
+            <h4>Q39 Autocratic vs Q90 Distributed vs Q88 Servant Leadership</h4>
             <p style="margin:0">
-              Outline <strong>strategic objectives</strong> and <strong>high-level organizational needs</strong>,
-              ensuring alignment with broader organizational goals.
+              <strong>Q39 Autocratic:</strong> dùng khi team inexperienced, high-risk decision, cần nhanh
+              (centralize control).<br>
+              <strong>Q90 Distributed:</strong> dùng khi team ready, skilled, trust built — empower họ quyết định
+              (decentralize control).<br>
+              <strong>Q88 Servant:</strong> dùng khi team cần coaching, remove barriers, leader support từ phía sau.
+              Ba cái khác biệt: autocratic = tight control; distributed = empower; servant = support/coach.
             </p>
           </div>
         </section>
 
-        <section id="signals">
-          <h2>2. Signal words — classify fast</h2>
-
-          <table>
-            <thead>
-              <tr><th>Signal in stem</th><th>Likely type</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Organization's overall goals · long-term objectives · strategic</td>
-                <td><strong>Business</strong> (C)</td>
-              </tr>
-              <tr>
-                <td>Stakeholder needs · expectations · interests</td>
-                <td>Stakeholder (B)</td>
-              </tr>
-              <tr>
-                <td>Features · functions · product behavior</td>
-                <td>Solution (A)</td>
-              </tr>
-              <tr>
-                <td>Transition · migration · training · go-live</td>
-                <td>Transition (D)</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 45</h2>
+          <h2>3. Câu hỏi thực hành — Question 90</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q45</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q90</div>
             <div class="q-text">
-              You are working with your team to gather requirements that define the
-              <em>organization's overall goals</em> and <em>intended outcomes</em> for
-              <em>a new initiative</em>. These requirements will help ensure
-              <em>alignment with long-term objectives</em>. What type of
-              <em>requirements</em> are these?
+              Louise is a project manager at SG Tech, leading a globally distributed software integration
+              team. The team has <em>resolved conflicts with each other</em>, <em>improved their technical skills</em>,
+              and <em>built strong mutual trust</em>. However, the team is <em>waiting for her direction on most
+              decisions</em>, which is <em>slowing progress and creating bottlenecks</em>. What should Louise do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Solution requirements.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Stakeholder requirements.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Business requirements.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Transition requirements.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Continue making all decisions centrally to maintain control and consistency.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Apply distributed management and empower the team to make decisions.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Increase daily stand-ups and reporting to improve visibility and coordination.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Apply servant leadership and focus on coaching team members and removing barriers.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Organization's overall goals + intended outcomes → strategic, high-level.</li>
-            <li>Alignment with long-term objectives → business requirements (p.130).</li>
-            <li>Elicit and Analyze Requirements — define needs for value delivery (p.40–41).</li>
+            <li>Team ready: resolved conflicts, improved skills, strong trust — không cần autocratic hoặc servant support.</li>
+            <li>Bottleneck: waiting for Louise's direction → cần empower họ để quyết định tự do (distributed management, p.168).</li>
+            <li>Distributed = decentralize decision-making, self-organize, ownership — break dependency on leader.</li>
+            <li>Lead the Team domain (p.85) — leadership approach thích hợp khi team mature.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng NEXT</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Solution requirements</strong></td>
-                <td>Features/functions of the solution — không phải organizational goals.</td>
+                <td><strong>A. Centralized control</strong></td>
+                <td>Tạo bottleneck lớn hơn — team chờ lệnh, không grow. Team ready để empower.</td>
               </tr>
               <tr>
-                <td><strong>B. Stakeholder requirements</strong></td>
-                <td>Needs of specific stakeholders — không phải overall organizational objectives.</td>
+                <td><strong>C. Increase stand-ups</strong></td>
+                <td>More meetings ≠ fix decision authority. Bottleneck = lack of autonomy, không lack of sync.</td>
               </tr>
               <tr>
-                <td><strong>D. Transition requirements</strong></td>
-                <td>Capabilities to move current → future state — training, migration, cutover.</td>
+                <td><strong>D. Servant leadership</strong></td>
+                <td>Coaching + remove barriers là tuyệt vời, nhưng team không cần — cần empower + decision rights.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q43–Q45</h4>
+            <h4>So với Q39 Autocratic &amp; Q88 Servant</h4>
             <p style="margin:0">
-              Q43: <em>how</em> to gather (focus groups). Q44: <em>track</em> multiple sources (RTM).
-              Q45: <em>classify</em> requirement type — business vs stakeholder vs solution vs transition.
+              Q39: team inexperienced → autocratic (centralize).<br>
+              Q88: team need coach → servant leadership (support from behind).<br>
+              Q90: team mature &amp; ready → distributed (empower + decentralize). Bối cảnh khác nhau, leader approach khác.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Classify requirement type</h2>
+          <h2>5. Drill — Autocratic, Distributed, Servant, hay Standup?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="BUS">
-              <span>Organization's strategic objectives for a new initiative</span>
+            <div class="classify-row" data-answer="DISTRIBUTED">
+              <span>Team resolved conflicts, built trust, but waiting for manager direction → slowing progress</span>
               <div class="classify-btns">
-                <button data-pick="BUS">Business</button>
-                <button data-pick="STK">Stakeholder</button>
-                <button data-pick="SOL">Solution</button>
-                <button data-pick="TRN">Transition</button>
+                <button data-pick="AUTOCRATIC">Autocratic</button>
+                <button data-pick="DISTRIBUTED">Distributed</button>
+                <button data-pick="SERVANT">Servant</button>
+                <button data-pick="STANDUP">Standup</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="STK">
-              <span>Department head needs reporting dashboard by Q3</span>
+            <div class="classify-row" data-answer="AUTOCRATIC">
+              <span>Inexperienced team, critical decision, high risk → need quick leader decision</span>
               <div class="classify-btns">
-                <button data-pick="BUS">Business</button>
-                <button data-pick="STK">Stakeholder</button>
-                <button data-pick="SOL">Solution</button>
-                <button data-pick="TRN">Transition</button>
+                <button data-pick="AUTOCRATIC">Autocratic</button>
+                <button data-pick="DISTRIBUTED">Distributed</button>
+                <button data-pick="SERVANT">Servant</button>
+                <button data-pick="STANDUP">Standup</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SOL">
-              <span>System must authenticate users within 2 seconds</span>
+            <div class="classify-row" data-answer="SERVANT">
+              <span>Team skilled but facing external blockers; leader removes obstacles and coaches</span>
               <div class="classify-btns">
-                <button data-pick="BUS">Business</button>
-                <button data-pick="STK">Stakeholder</button>
-                <button data-pick="SOL">Solution</button>
-                <button data-pick="TRN">Transition</button>
+                <button data-pick="AUTOCRATIC">Autocratic</button>
+                <button data-pick="DISTRIBUTED">Distributed</button>
+                <button data-pick="SERVANT">Servant</button>
+                <button data-pick="STANDUP">Standup</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="TRN">
-              <span>Staff training before legacy system decommission</span>
+            <div class="classify-row" data-answer="DISTRIBUTED">
+              <span>Mature team, high trust, self-organize — empower to decide without leader approval</span>
               <div class="classify-btns">
-                <button data-pick="BUS">Business</button>
-                <button data-pick="STK">Stakeholder</button>
-                <button data-pick="SOL">Solution</button>
-                <button data-pick="TRN">Transition</button>
+                <button data-pick="AUTOCRATIC">Autocratic</button>
+                <button data-pick="DISTRIBUTED">Distributed</button>
+                <button data-pick="SERVANT">Servant</button>
+                <button data-pick="STANDUP">Standup</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="STANDUP">
+              <span>Daily team coordination; sync on progress, blockers, dependencies</span>
+              <div class="classify-btns">
+                <button data-pick="AUTOCRATIC">Autocratic</button>
+                <button data-pick="DISTRIBUTED">Distributed</button>
+                <button data-pick="SERVANT">Servant</button>
+                <button data-pick="STANDUP">Standup</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Gather requirements → Stakeholder (B)</h4>
-            <p style="margin:0">Stakeholder reqs = needs of stakeholders. Stem nói <em>organization's overall goals</em> — business level.</p>
+            <h4>Bẫy 1: Mature team → keep control (A)</h4>
+            <p style="margin:0">Tempting to stay autocratic khi team ready — thực ra team cần empower để grow ownership và speed.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: New initiative → Solution (A)</h4>
-            <p style="margin:0">Initiative mới không có nghĩa solution reqs — stem hỏi goals/outcomes, không phải features.</p>
+            <h4>Bẫy 2: Bottleneck → more meetings (C)</h4>
+            <p style="margin:0">Stand-ups help coordination nhưng không fix decision authority. Bottleneck = waiting for approval, không lack of sync.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Long-term → Transition (D)</h4>
-            <p style="margin:0">Transition = temporary capabilities during change — không phải long-term strategic alignment.</p>
+            <h4>Bẫy 3: "Support" keyword → servant leadership (D)</h4>
+            <p style="margin:0">Servant leadership tuyệt vời nhưng Q90 context = team ready để tự quyết, không cần coaching/barrier removal từ leader.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: "Global team" confuses với servant</h4>
+            <p style="margin:0">Global = diverse perspectives, need empower + distributed, không servant coaching. Q88 = Q88, Q90 = Q90.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Overall goals · intended outcomes · long-term objectives · strategic</strong> → Business requirements (C).</p>
+            <p style="margin:0"><strong>Team ready (resolved conflict, built trust) · waiting for direction · bottleneck</strong> → Apply distributed management (B).</p>
           </div>
         </section>
 
@@ -418,53 +474,66 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Business requirements? (p.130)</div>
-            <div class="flashcard-back">Strategic objectives · high-level organizational needs · alignment with broader goals.</div>
+            <div class="flashcard-front">Distributed management vs Autocratic?</div>
+            <div class="flashcard-back">Distributed: empower team tự quyết, decentralize authority (team ready, mature). Autocratic: leader quyết mọi thứ (team inexperienced, high-risk).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q45 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Business requirements.</div>
+            <div class="flashcard-front">Q90 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Apply distributed management and empower the team to make decisions.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q39 vs Q88 vs Q90?</div>
+            <div class="flashcard-back">Q39: autocratic (team inexperienced). Q88: servant (team need coach). Q90: distributed (team ready, empower).</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">REQUIREMENT TYPES — Q45 (PMBOK 8, p.40–41 &amp; p.130)
+          <div class="cheat-sheet">DISTRIBUTED MANAGEMENT — Q90
+(PMBOK 8, p.85 &amp; 168)
 ─────────────────────────────────────────────────────
-PROCESS: Elicit and Analyze Requirements
+DOMAIN: Lead the Team (p.85)
+APPROACH: Distributed Management (p.168)
+  • Empower team tự quyết
+  • Decentralize decision-making authority
+  • Self-organize; remove dependency on leader
+  • Build ownership; increase speed &amp; innovation
+  • When: team mature, skilled, high trust
 
-FOUR TYPES (p.130):
-  BUSINESS     → strategic objectives · org overall goals · long-term
-  STAKEHOLDER  → stakeholder needs to achieve business reqs
-  SOLUTION     → features · functions · product/service capabilities
-  TRANSITION   → move current → future (training · migration · cutover)
-
-SCENARIO: Gather requirements defining
-           ORGANIZATION'S OVERALL GOALS
-           INTENDED OUTCOMES for new initiative
-           ALIGNMENT with LONG-TERM OBJECTIVES
-→ C) BUSINESS REQUIREMENTS ✓
+SCENARIO: Louise @ SG Tech (global team)
+          Team RESOLVED conflicts
+          Improved SKILLS
+          Built STRONG TRUST
+          BUT waiting for HER DIRECTION
+          Creating BOTTLENECKS
+NEXT → B) APPLY DISTRIBUTED MANAGEMENT ✓
 
 NOT:
-  A) Solution — features/functions, not org goals
-  B) Stakeholder — specific stakeholder needs, not overall org
-  D) Transition — temporary change capabilities
+  A) AUTOCRATIC — maintain control = bigger bottleneck
+  C) INCREASE STAND-UPS — coordination ≠ fix authority
+  D) SERVANT LEADERSHIP — team don't need coaching; need empower
 
-HIERARCHY (top → bottom):
-  Business → Stakeholder → Solution → (Transition parallel to delivery)
+LEADER APPROACHES:
+  AUTOCRATIC: tight control; team inexperienced (Q39)
+  DISTRIBUTED: empower; team ready, mature (Q90)
+  SERVANT: support, coach, remove barriers (Q88)
+  STANDUP: daily sync; coordination tool
 
-SIGNAL: "overall goals" · "intended outcomes"
-        "long-term objectives" · "strategic" · "organizational"
+SIGNAL: "resolved conflicts" + "improved skills"
+        + "built trust" + "waiting for direction"
+        + "bottleneck"
+        → Distributed Management (NOT servant/autocratic)
 
-Q45 ANSWER: C
+Q90 ANSWER: B
 
-REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.130</div>
+REF: PMBOK Guide, 8th Ed., p.85 Lead the Team
+      p.168 Distributed Management</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-requirements-traceability.html">Q44: Requirements RTM</a>
-          · <a href="pmp-teach-business-case.html">Q19: Business Case</a>
-          · <a href="pmp-full-questions.html#q-45">Luyện câu 45</a>
+          · <a href="pmp-teach-autocratic-decision.html">Q39: Autocratic Decision</a>
+          · <a href="pmp-teach-servant-leadership.html">Q88: Servant Leadership</a>
+          · <a href="pmp-teach-retrospective.html">Q89: Retrospective</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -473,12 +542,12 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.130</div>
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Solution requirements describe features/functions — không phải organization's overall goals.",
-        B: "Stakeholder requirements = needs of stakeholders — stem nói organizational goals, không phải individual stakeholder needs.",
-        C: "Đúng! Business requirements outline strategic objectives và high-level organizational needs (p.130).",
-        D: "Transition requirements = capabilities to move from current to future state — không phải long-term strategic alignment."
+        A: "Autocratic = tiếp tục quyết định tập trung — tạo bottleneck lớn hơn, không leverage team readiness.",
+        B: "Đúng! Distributed management empower team tự quyết, decentralize authority (p.168, Lead the Team) — break bottleneck, build ownership.",
+        C: "Stand-ups = coordination tool — không fix decision authority bottleneck. Team cần empower, không thêm meetings.",
+        D: "Servant leadership = coaching + remove barriers — team không cần coaching; cần authority để tự quyết."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -494,7 +563,7 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.130</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Business requirements.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Apply distributed management and empower the team to make decisions.</strong>" : "");
         });
       });
       let score = 0;
@@ -522,16 +591,18 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.130</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
