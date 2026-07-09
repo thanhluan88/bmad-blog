@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Sourcing Strategy Plan (Q24)</title>
+  <title>PMBOK 8 — After-Action Review (Q34)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .process-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; font-size: 0.8rem; }
-    .flow-step { padding: 0.45rem 0.7rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--border); background: var(--bg); }
-    .flow-step.done { border-color: var(--muted); color: var(--muted); }
-    .flow-step.current { border-color: var(--ok); background: var(--ok-bg); color: #065f46; }
-    .flow-step.next { border-color: var(--info); background: var(--info-bg); color: #1d4ed8; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -93,11 +87,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Sourcing Strategy Plan · Q24</div>
+      <div class="brand-sub">After-Action Review · Q34</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#strategy">Sourcing Strategy Plan</a>
-        <a href="#align">Align conflicting teams</a>
+        <a href="#aar">After-Action Reviews</a>
+        <a href="#tools">AAR vs các tool khác</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -138,16 +132,16 @@
         <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
         <a href="pmp-teach-checklists.html">Q32: Checklists</a>
         <a href="pmp-teach-lessons-learned.html">Q33: Lessons Learned</a>
-        <a href="pmp-teach-after-action-review.html">Q34: After-Action Review</a>
+        <a href="pmp-teach-after-action-review.html" class="series-current">Q34: After-Action Review</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-24">Luyện câu 24</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-34">Luyện câu 34</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#strategy">Strategy</a>
-        <a href="#align">Align</a>
+        <a href="#aar">AAR</a>
+        <a href="#tools">Tools</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -156,171 +150,166 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q24 về <strong>Sourcing Strategy Plan</strong> — khi các team đề xuất
-            cách acquire materials/services <em>conflicting</em>, Irene cần align overall approach
-            (contract types, supplier selection) trước SOW hay bid documents.
+            Bài học Q34 về <strong>After-Action Reviews (AAR)</strong> — sau khi hoàn thành
+            critical migration phase, phát hiện discrepancies giữa expected và actual results,
+            gây rework và missed timelines. PM nên làm gì <em>next</em>?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.20 &amp; p.141</span>
-            <span class="badge">Plan Sourcing Strategy</span>
-            <span class="badge">Câu 24 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.24–26 &amp; p.145</span>
+            <span class="badge">Manage Project Knowledge</span>
+            <span class="badge">Câu 34 — Practice</span>
           </div>
         </header>
 
-        <section id="strategy">
-          <h2>1. Sourcing Strategy Plan</h2>
+        <section id="aar">
+          <h2>1. After-Action Reviews (AAR)</h2>
           <p>
-            Output của <strong>Plan Sourcing Strategy</strong> — mô tả phần nào insource/outsourced,
-            rationale, selection criteria, và considerations (value, schedule, risk, financial impact).
+            AAR là structured process phân tích <strong>what happened</strong>,
+            <strong>why it happened</strong>, và <strong>how it can be improved</strong>.
+            Thường conducted sau projects hoặc <em>major milestones</em> để capture lessons
+            learned và inform future work.
           </p>
 
           <div class="card tip">
-            <h4>Nội dung chính (PMBOK p.20, p.141)</h4>
+            <h4>After-action reviews (PMBOK p.145)</h4>
             <p style="margin:0">
-              Plan Sourcing Strategy documents sourcing decisions, defines the source selection approach,
-              and determines work for external sourcing. The sourcing strategy plan describes what will be
-              insourced or outsourced, including rationale, selection criteria, and considerations such as
-              value, schedule, risk, and financial impact.
+              A structured process used to analyze what happened, why it happened, and how it can
+              be improved. Conducted after projects or major milestones to capture lessons learned
+              and enhance team performance.
             </p>
           </div>
 
+          <p>
+            Đề: phase vừa <em>completed</em> + discrepancies discovered → đúng timing cho AAR
+            trước khi tiếp tục phases tiếp theo.
+          </p>
+        </section>
+
+        <section id="tools">
+          <h2>2. AAR vs Risk Workshop vs SWOT</h2>
+
           <table>
             <thead>
-              <tr><th>Artifact</th><th>Khi nào?</th></tr>
+              <tr><th>Tool</th><th>Mục đích</th><th>Q34 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Sourcing strategy plan</strong></td>
-                <td>Align approach — contract types, selection methods, insource/outsource</td>
+                <td><strong>AAR (A)</strong></td>
+                <td>Reflect on completed work — what/why/how improve</td>
+                <td>✓ Phase completed, analyze discrepancies</td>
               </tr>
               <tr>
-                <td>Statement of work (SOW)</td>
-                <td>Sau strategy — mô tả chi tiết work cho external sourcing</td>
+                <td><strong>Risk Workshop (B)</strong></td>
+                <td>Identify &amp; assess future risks</td>
+                <td>Backward-looking reflection, not risk identification</td>
               </tr>
               <tr>
-                <td>Make-or-buy analysis</td>
-                <td>Một phần của strategy — không thay thế toàn bộ plan</td>
+                <td><strong>SWOT (C)</strong></td>
+                <td>Strategic analysis — Strengths/Weaknesses/Opportunities/Threats</td>
+                <td>Org/strategy level — không phải milestone debrief</td>
               </tr>
               <tr>
-                <td>Project bid documents</td>
-                <td>Sau SOW/strategy — gửi cho vendors</td>
+                <td><strong>Adjust schedule (D)</strong></td>
+                <td>Recovery action on timeline/resources</td>
+                <td>Symptom fix — chưa học từ discrepancies</td>
               </tr>
             </tbody>
           </table>
         </section>
 
-        <section id="align">
-          <h2>2. Conflicting approaches → align trước</h2>
-
-          <div class="process-flow" aria-label="Procurement alignment">
-            <span class="flow-step done">Teams propose conflicting approaches</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step current">Sourcing strategy plan (D)</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">SOW → Bid documents</span>
-          </div>
-
-          <p>
-            Đề nhấn <em>align the overall approach</em> và <em>delays in procurement planning</em> —
-            cần tài liệu tích hợp quyết định sourcing, không nhảy thẳng vào SOW hay bid package.
-          </p>
-        </section>
-
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 24</h2>
+          <h2>3. Câu hỏi thực hành — Question 34</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q24</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q34</div>
             <div class="q-text">
-              Irene is preparing a large infrastructure project at West Core Development.
-              Different teams propose <em>conflicting approaches</em> for acquiring materials and services,
-              causing delays in procurement planning. Irene needs to
-              <em>align the overall approach</em>, including contract types and supplier selection methods.
-              What should she do?
+              You are managing a data migration project at VLM. After <em>completing a critical
+              migration phase</em>, discrepancies are discovered between <em>expected and actual
+              results</em>, leading to rework and missed timelines. What should you do <em>next</em>?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Develop the statement of work.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Perform a make-or-buy analysis.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Develop the project bid documents.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Develop a sourcing strategy plan.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Conduct an AAR with the team.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Conduct a Risk Workshop with the team.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Conduct a SWOT analysis with the team.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Adjust the schedule and resource assignments.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
-          <h3>Tại sao chọn D?</h3>
+          <h3>Tại sao chọn A?</h3>
           <ul>
-            <li>Conflicting team approaches → cần integrated sourcing strategy plan.</li>
-            <li>Align contract types + supplier selection = Plan Sourcing Strategy output.</li>
-            <li>Giải quyết delay ở planning — trước SOW và bid docs.</li>
+            <li>Major milestone completed + unexpected outcomes → AAR timing.</li>
+            <li>Analyze what/why/how improve — capture lessons before next phase.</li>
+            <li>Manage Project Knowledge tool (p.24–26, p.145).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng NEXT</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Statement of work</strong></td>
-                <td>SOW mô tả work detail — cần aligned strategy trước khi viết SOW.</td>
+                <td><strong>B. Risk Workshop</strong></td>
+                <td>Forward-looking risk ID — đề cần reflect on completed phase outcomes.</td>
               </tr>
               <tr>
-                <td><strong>B. Make-or-buy analysis</strong></td>
-                <td>Chỉ một phần của strategy — không align toàn bộ contract types &amp; selection methods.</td>
+                <td><strong>C. SWOT analysis</strong></td>
+                <td>Strategic org analysis — không phải milestone after-action review.</td>
               </tr>
               <tr>
-                <td><strong>C. Bid documents</strong></td>
-                <td>Quá muộn — chưa align approach, chưa có SOW/strategy rõ ràng.</td>
+                <td><strong>D. Adjust schedule</strong></td>
+                <td>May follow AAR — nhưng chưa học why discrepancies occurred.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q22</h4>
+            <h4>Liên hệ Q33 Lessons Learned</h4>
             <p style="margin:0">
-              Q22: chưa contact vendor → develop sourcing strategy. Q24: teams conflict →
-              <strong>sourcing strategy plan</strong> để align. Cùng process, khác scenario.
+              Q33: document vào lessons learned register. Q34: AAR là <em>technique</em> để
+              generate lessons learned sau milestone — output đi vào register.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Bước procurement nào?</h2>
+          <h2>5. Drill — Tool nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="STRAT">
-              <span>Align conflicting acquisition approaches across teams</span>
+            <div class="classify-row" data-answer="AAR">
+              <span>Phase completed — analyze expected vs actual gaps</span>
               <div class="classify-btns">
-                <button data-pick="STRAT">Strategy plan</button>
-                <button data-pick="SOW">SOW</button>
-                <button data-pick="BID">Bid docs</button>
+                <button data-pick="AAR">AAR</button>
+                <button data-pick="RISK">Risk Workshop</button>
+                <button data-pick="SWOT">SWOT</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SOW">
-              <span>Detail scope of work for external supplier</span>
+            <div class="classify-row" data-answer="RISK">
+              <span>Identify future threats before execution starts</span>
               <div class="classify-btns">
-                <button data-pick="STRAT">Strategy plan</button>
-                <button data-pick="SOW">SOW</button>
-                <button data-pick="BID">Bid docs</button>
+                <button data-pick="AAR">AAR</button>
+                <button data-pick="RISK">Risk Workshop</button>
+                <button data-pick="SWOT">SWOT</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="BID">
-              <span>Issue RFP to prospective sellers</span>
+            <div class="classify-row" data-answer="SWOT">
+              <span>Assess org strengths/weaknesses for strategy</span>
               <div class="classify-btns">
-                <button data-pick="STRAT">Strategy plan</button>
-                <button data-pick="SOW">SOW</button>
-                <button data-pick="BID">Bid docs</button>
+                <button data-pick="AAR">AAR</button>
+                <button data-pick="RISK">Risk Workshop</button>
+                <button data-pick="SWOT">SWOT</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="STRAT">
-              <span>Document insource vs outsource with rationale</span>
+            <div class="classify-row" data-answer="AAR">
+              <span>What happened, why, how to improve after milestone</span>
               <div class="classify-btns">
-                <button data-pick="STRAT">Strategy plan</button>
-                <button data-pick="SOW">SOW</button>
-                <button data-pick="BID">Bid docs</button>
+                <button data-pick="AAR">AAR</button>
+                <button data-pick="RISK">Risk Workshop</button>
+                <button data-pick="SWOT">SWOT</button>
               </div>
             </div>
           </div>
@@ -330,16 +319,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Acquiring materials” → SOW (A)</h4>
-            <p style="margin:0">SOW cần strategy aligned trước — đề hỏi align overall approach, không detail work.</p>
+            <h4>Bẫy 1: Problems → Risk Workshop (B)</h4>
+            <p style="margin:0">Risk workshop cho future risks — đề là reflect on completed phase với discrepancies.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Make-or-buy (B) nghe đúng</h4>
-            <p style="margin:0">Make-or-buy là subset — đề cần contract types + supplier selection methods = full strategy plan.</p>
+            <h4>Bẫy 2: Team issues → SWOT (C)</h4>
+            <p style="margin:0">SWOT là strategic analysis — không phải structured milestone debrief (AAR).</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Missed timelines → Adjust schedule (D)</h4>
+            <p style="margin:0">Schedule fix không analyze root cause — AAR trước, recovery actions sau.</p>
           </div>
           <div class="card tip">
-            <h4>Signal</h4>
-            <p style="margin:0"><strong>Conflicting approaches + align + procurement planning delay</strong> → Sourcing Strategy Plan (D).</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>After major milestone + unexpected outcomes</strong> → Conduct AAR (A).</p>
           </div>
         </section>
 
@@ -347,51 +340,54 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Sourcing strategy plan gồm gì? (p.141)</div>
-            <div class="flashcard-back">Insource/outsourced · rationale · selection criteria · value, schedule, risk, financial impact.</div>
+            <div class="flashcard-front">AAR là gì? (p.145)</div>
+            <div class="flashcard-back">What happened · why · how improve · after project or major milestone.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q24 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Develop a sourcing strategy plan.</div>
+            <div class="flashcard-front">Q34 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Conduct an AAR with the team.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">SOURCING STRATEGY PLAN — Q24 (PMBOK 8, p.20 &amp; p.141)
+          <div class="cheat-sheet">AFTER-ACTION REVIEW (AAR) — Q34 (PMBOK 8, p.24–26 &amp; p.145)
 ─────────────────────────────────────────────────────
-PROCESS: Plan Sourcing Strategy
-OUTPUT: Sourcing strategy plan
-  - Sourcing decisions documented
-  - Source selection approach
-  - Work for external sourcing
-  - Insource vs outsource + rationale
-  - Selection criteria (value, schedule, risk, $)
+PROCESS: Manage Project Knowledge
+TOOL: After-action reviews (AAR)
 
-SCENARIO: West Core — teams CONFLICT on acquisition approach
-           procurement planning DELAYED
-           need ALIGN contract types &amp; supplier selection
-ANSWER → D) Develop a SOURCING STRATEGY PLAN ✓
+AAR = structured reflection
+  - WHAT happened · WHY · HOW to improve
+  - After project OR major MILESTONE
+  - Capture lessons learned · enhance performance
+
+SCENARIO: VLM data migration
+           COMPLETED critical migration PHASE
+           DISCREPANCIES: expected vs actual results
+           Rework · missed timelines
+NEXT → A) Conduct AAR with the team ✓
 
 NOT:
-  A) SOW — after strategy aligned
-  B) Make-or-buy only — part of strategy, not full align
-  C) Bid documents — after SOW/strategy
+  B) Risk Workshop — identify future risks (forward-looking)
+  C) SWOT — strategic org analysis, not milestone debrief
+  D) Adjust schedule — recovery without learning first
 
-SEQUENCE:
-  Strategy plan (D) → SOW (A) → Bid docs (C)
+SIGNAL: "after completing [phase/milestone]"
+        "discrepancies" · "expected vs actual"
+        reflect · lessons learned
 
-VS Q22: same process, Q24 = align conflicting teams
+VS Q33: Lessons learned REGISTER (where to document)
+VS Q34: AAR (technique to GENERATE lessons after milestone)
 
-Q24 ANSWER: D
+Q34 ANSWER: A
 
-REF: PMBOK Guide, 8th Ed., p.20 &amp; p.141 — Sourcing strategy plan</div>
+REF: PMBOK Guide, 8th Ed., p.24–26 &amp; p.145</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-plan-sourcing-strategy.html">Q22: Plan Sourcing Strategy</a>
-          · <a href="pmp-teach-bidder-conference.html">Q23: Bidder Conference</a>
-          · <a href="pmp-full-questions.html#q-24">Luyện câu 24</a>
+          · <a href="pmp-teach-lessons-learned.html">Q33: Lessons Learned</a>
+          · <a href="pmp-teach-checklists.html">Q32: Checklists</a>
+          · <a href="pmp-full-questions.html#q-34">Luyện câu 34</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -400,12 +396,12 @@ REF: PMBOK Guide, 8th Ed., p.20 &amp; p.141 — Sourcing strategy plan</div>
 
   <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "A";
       const EXPL = {
-        A: "SOW mô tả chi tiết work — cần sourcing strategy aligned trước khi viết SOW.",
-        B: "Make-or-buy chỉ một phần — đề cần align contract types và supplier selection (full plan).",
-        C: "Bid documents quá muộn — chưa align overall procurement approach.",
-        D: "Đúng! Sourcing strategy plan — align decisions, selection approach, insource/outsource (p.20, p.141)."
+        A: "Đúng! AAR analyze what/why/how improve sau major milestone (Manage Project Knowledge, p.145).",
+        B: "Risk Workshop identify future risks — đề cần reflect on completed phase outcomes.",
+        C: "SWOT là strategic analysis — không phải structured after-action review.",
+        D: "Adjust schedule là recovery — chưa học từ discrepancies; AAR trước."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -421,7 +417,7 @@ REF: PMBOK Guide, 8th Ed., p.20 &amp; p.141 — Sourcing strategy plan</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Develop a sourcing strategy plan.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Conduct an AAR with the team.</strong>" : "");
         });
       });
       let score = 0;
