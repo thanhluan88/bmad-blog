@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Variables Over Time (Q13)</title>
+  <title>PMBOK 8 — Business Case (Q19)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,13 +51,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .curve-chart { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem 0.75rem; margin: 1.25rem 0; }
-    .curve-chart svg { width: 100%; height: auto; max-height: 200px; display: block; }
-    .curve-legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.65rem; font-size: 0.82rem; }
-    .curve-legend span { display: flex; align-items: center; gap: 0.35rem; }
-    .legend-line { width: 24px; height: 3px; border-radius: 2px; }
-    .legend-cost { background: var(--info); }
-    .legend-risk { background: var(--bad); }
+    .cost-benefit { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.9rem; font-weight: 600; flex-wrap: wrap; }
+    .cost-benefit .vs { color: var(--primary); font-size: 1.1rem; }
+    .cost-benefit .cost { color: var(--bad); }
+    .cost-benefit .value { color: var(--ok); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -73,7 +70,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 300px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 360px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -94,11 +91,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Variables Over Time · Q13</div>
+      <div class="brand-sub">Business Case · Q19</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#curves">Cost vs Risk curves</a>
-        <a href="#predictive">Predictive lifecycle</a>
+        <a href="#business-case">Business Case</a>
+        <a href="#documents">So sánh tài liệu</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -124,7 +121,7 @@
         <a href="pmp-teach-hybrid-approach.html">Q16: Hybrid Approach</a>
         <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
         <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
-        <a href="pmp-teach-business-case.html">Q19: Business Case</a>
+        <a href="pmp-teach-business-case.html" class="series-current">Q19: Business Case</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
       <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
@@ -132,8 +129,8 @@
 
     <div>
       <nav class="mobile-nav">
-        <a href="#curves">Curves</a>
-        <a href="#predictive">Lifecycle</a>
+        <a href="#business-case">BC</a>
+        <a href="#documents">Docs</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -142,183 +139,181 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q13 về <strong>Impact of Variables Over Time</strong> — cost/staffing và
-            risk/uncertainty thay đổi <em>ngược chiều</em> theo vòng đời dự án predictive.
+            Bài học Q19 về <strong>Business Case</strong> — khi stakeholders lo
+            <em>cost vs value</em> và dự án còn worthwhile không, review business case
+            (economic feasibility), không phải PM plan hay charter.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.59</span>
-            <span class="badge">Project Lifecycle</span>
-            <span class="badge">Câu 13 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.17 &amp; p.116</span>
+            <span class="badge">Cost / Benefit</span>
+            <span class="badge">Câu 19 — Practice</span>
           </div>
         </header>
 
-        <section id="curves">
-          <h2>1. Hai đường cong quan trọng</h2>
-          <p>
-            PMBOK 8 mô tả hai biến số chính thay đổi theo thời gian — đây là kiến thức cổ điển
-            nhưng vẫn ra thi dưới dạng scenario với executive/sponsor.
-          </p>
+        <section id="business-case">
+          <h2>1. Business Case</h2>
 
-          <div class="curve-chart" aria-label="Cost staffing bell curve and risk decreasing curve">
-            <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-              <line x1="40" y1="130" x2="380" y2="130" stroke="#9ca3af" stroke-width="1.5"/>
-              <line x1="40" y1="20" x2="40" y2="130" stroke="#9ca3af" stroke-width="1.5"/>
-              <text x="210" y="152" text-anchor="middle" fill="#6b7280" font-size="11">Time →</text>
-              <text x="18" y="80" text-anchor="middle" fill="#6b7280" font-size="11" transform="rotate(-90 18 80)">Level</text>
-              <path d="M 50 120 Q 120 115 200 45 Q 280 115 350 120" fill="none" stroke="#2563eb" stroke-width="2.5"/>
-              <text x="200" y="38" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="600">Cost / Staffing</text>
-              <path d="M 50 35 Q 150 55 250 90 Q 320 110 350 118" fill="none" stroke="#dc2626" stroke-width="2.5"/>
-              <text x="75" y="28" fill="#dc2626" font-size="11" font-weight="600">Risk / Uncertainty</text>
-            </svg>
-            <div class="curve-legend">
-              <span><i class="legend-line legend-cost"></i> Cost &amp; staffing: thấp → tăng → giảm mạnh cuối dự án</span>
-              <span><i class="legend-line legend-risk"></i> Risk &amp; uncertainty: cao nhất lúc đầu → giảm dần</span>
-            </div>
+          <div class="cost-benefit">
+            <span class="cost">Cost ↑ (materials)</span>
+            <span class="vs">vs</span>
+            <span class="value">Delivered Value</span>
+            <span class="vs">→</span>
+            <span>Review <strong>Business Case</strong></span>
           </div>
 
           <div class="card tip">
-            <h4>PMBOK p.59 — tóm tắt</h4>
+            <h4>Định nghĩa chính thức (PMBOK p.116)</h4>
             <p style="margin:0">
-              <strong>Cost &amp; staffing:</strong> low at start → increase as work is carried out →
-              drop rapidly near end.<br>
-              <strong>Risk &amp; uncertainty:</strong> highest at start of project/phase → decrease
-              over time as decisions are made and deliverables accepted.
+              A business case is a documented <strong>economic feasibility study</strong> used
+              to establish validity of the benefits to be delivered by a portfolio component,
+              program, or project.
             </p>
           </div>
+
+          <h3>Khi nào review Business Case?</h3>
+          <ul>
+            <li>Stakeholders hỏi project còn <strong>worthwhile</strong> không</li>
+            <li>Cost tăng đáng kể — cần revalidate benefits vs cost</li>
+            <li>Cost versus delivered <strong>value</strong> — cost/benefit analysis</li>
+            <li>Liên hệ Initiate Project or Phase (p.17) — business case là input initiating</li>
+          </ul>
         </section>
 
-        <section id="predictive">
-          <h2>2. Predictive project scenario</h2>
-          <p>
-            PetraCore Energy refinery expansion — executive lo <strong>staffing costs tăng</strong> và
-            <strong>risks identified sớm</strong>. PM giải thích: đó là pattern bình thường —
-            risk cao lúc đầu (nhiều unknowns), cost tăng khi execution ramp up.
-          </p>
+        <section id="documents">
+          <h2>2. So sánh tài liệu — chọn đúng doc</h2>
 
           <table>
             <thead>
-              <tr><th>Giai đoạn</th><th>Cost / Staffing</th><th>Risk / Uncertainty</th></tr>
+              <tr><th>Tài liệu</th><th>Mục đích</th><th>Q19?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Start / Planning</strong></td>
-                <td>Thấp</td>
-                <td>Cao nhất</td>
+                <td><strong>Business Case (D)</strong></td>
+                <td>Economic feasibility · benefits validity · cost/benefit</td>
+                <td>✓ Đúng</td>
               </tr>
               <tr>
-                <td><strong>Execution peak</strong></td>
-                <td>Cao nhất</td>
-                <td>Đang giảm</td>
+                <td><strong>Project Charter (C)</strong></td>
+                <td>Authorize project · high-level scope · PM authority</td>
+                <td>✗ Không trả lời cost vs value feasibility</td>
               </tr>
               <tr>
-                <td><strong>Near completion</strong></td>
-                <td>Giảm nhanh</td>
-                <td>Thấp nhất</td>
+                <td><strong>PM Plan (A)</strong></td>
+                <td>How project executed/monitored/controlled</td>
+                <td>✗ Planning doc — slide ✗</td>
+              </tr>
+              <tr>
+                <td><strong>Financial Management Plan (B)</strong></td>
+                <td>How project finances managed</td>
+                <td>✗ Process/plan — không phải feasibility study</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Lưu ý thi</h4>
+            <h4>Retail expansion scenario</h4>
             <p style="margin:0">
-              Risk giảm dần áp dụng <strong>regardless of project life cycle</strong> (PMBOK p.59).
-              Cost curve mô tả chủ yếu cho <strong>predictive</strong> scenarios — agile có thể khác
-              nhưng đáp án C vẫn là chuẩn cho câu này.
+              Planning begins, material costs rise — senior stakeholders lo cost vs value.
+              PM review <strong>business case</strong> để assess economic feasibility trước khi tiếp tục plan/execute.
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 13</h2>
+          <h2>3. Câu hỏi thực hành — Question 19</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q13</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q19</div>
             <div class="q-text">
-              You are in the planning phase of a refinery expansion project at PetraCore Energy Ltd.
-              An executive manager raises concerns about increasing staffing costs and several
-              identified risks early in the project.
-              What will you tell them about the <em>cost and risk</em> on the project?
+              You have been hired to manage a retail expansion initiative. As planning begins,
+              the cost of some materials <em>rises significantly</em>. Senior stakeholders raise
+              concerns about the <em>cost versus the delivered value</em> of the project, and
+              whether it will be <em>worthwhile</em>.
+              What will you do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Cost and staffing are highest at the beginning, while risk and uncertainty increase toward project completion.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Cost and staffing gradually decrease throughout the project, while risk and uncertainty remain constant.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Cost and staffing increase as work progresses and drop near completion, while risk and uncertainty decrease over time.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Cost and staffing remain stable throughout the project, while risk and uncertainty fluctuate unpredictably.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Review the Project Management Plan.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Review the Financial Management Plan.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Review the Project Charter.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Review the Business Case.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>Khớp PMBOK p.59: cost/staffing tăng khi work progresses, drop near completion.</li>
-            <li>Risk/uncertainty <strong>decrease over time</strong> — cao nhất ở đầu phase.</li>
-            <li>Executive thấy cost tăng + risk sớm — PM giải thích đúng pattern, không panic.</li>
+            <li>Business case = economic feasibility study — validate benefits vs rising costs.</li>
+            <li>Keywords: cost vs value, worthwhile, cost/benefit — map trực tiếp business case.</li>
+            <li>PMBOK p.17 (Initiate) + p.116 (Business Case definition).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không phải NEXT</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A</strong></td>
-                <td>Đảo ngược cả hai — cost không cao nhất lúc đầu; risk không tăng về cuối.</td>
+                <td><strong>A. PM Plan</strong></td>
+                <td>Defines execution — không trả lời “còn worthwhile không” khi cost tăng (✗ slide).</td>
               </tr>
               <tr>
-                <td><strong>B</strong></td>
-                <td>Cost giảm dần + risk constant — sai hoàn toàn (✗ slide).</td>
+                <td><strong>B. Financial Management Plan</strong></td>
+                <td>Cách quản lý tài chính dự án — không phải feasibility/benefits validation.</td>
               </tr>
               <tr>
-                <td><strong>D</strong></td>
-                <td>Cost stable + risk unpredictable — không mô tả impact over time p.59.</td>
+                <td><strong>C. Project Charter</strong></td>
+                <td>Authorization document — không chứa economic feasibility analysis như business case.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Mnemonic thi</h4>
+            <h4>Liên hệ Q18 + Q10</h4>
             <p style="margin:0">
-              <strong>Cost</strong> = chuông (bell) · <strong>Risk</strong> = đường xuống dốc (↓ over time)<br>
-              Hai đường <em>ngược chiều</em> — đừng chọn đáp án mô tả cùng hướng cho cả hai.
+              Q18: business case approved → charter · Q19: cost rises → re-review business case ·
+              Q10: Focus on Value — benefits và value realization.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Đầu dự án hay cuối dự án?</h2>
+          <h2>5. Drill — Tài liệu nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="START">
-              <span>Risk and uncertainty are highest</span>
+            <div class="classify-row" data-answer="BC">
+              <span>Is the project still worthwhile given rising costs?</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu dự án</button>
-                <button data-pick="END">Cuối dự án</button>
+                <button data-pick="BC">Business Case</button>
+                <button data-pick="CH">Charter</button>
+                <button data-pick="PM">PM Plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="END">
-              <span>Cost and staffing drop rapidly</span>
+            <div class="classify-row" data-answer="CH">
+              <span>Grant PM authority to allocate resources</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu dự án</button>
-                <button data-pick="END">Cuối dự án</button>
+                <button data-pick="BC">Business Case</button>
+                <button data-pick="CH">Charter</button>
+                <button data-pick="PM">PM Plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="START">
-              <span>Cost and staffing levels are low</span>
+            <div class="classify-row" data-answer="PM">
+              <span>Define how the project will be executed</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu dự án</button>
-                <button data-pick="END">Cuối dự án</button>
+                <button data-pick="BC">Business Case</button>
+                <button data-pick="CH">Charter</button>
+                <button data-pick="PM">PM Plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="MID">
-              <span>Cost and staffing peak during execution</span>
+            <div class="classify-row" data-answer="BC">
+              <span>Economic feasibility and benefits validity</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu</button>
-                <button data-pick="MID">Giữa</button>
-                <button data-pick="END">Cuối</button>
+                <button data-pick="BC">Business Case</button>
+                <button data-pick="CH">Charter</button>
+                <button data-pick="PM">PM Plan</button>
               </div>
             </div>
           </div>
@@ -328,16 +323,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn A — đảo cost và risk</h4>
-            <p style="margin:0">Nhiều thí sinh nhớ “một cái cao đầu, một cái cao cuối” nhưng gán nhầm — cost cao giữa/cuối execution, risk cao đầu.</p>
+            <h4>Bẫy 1: Chọn C — Charter (sau Q18)</h4>
+            <p style="margin:0">Q18 = charter khi mới start. Q19 = cost vs value concern → <strong>business case</strong>, không phải charter lần nữa.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Executive lo risk sớm → nghĩ risk sẽ tăng</h4>
-            <p style="margin:0">Risks <em>identified</em> sớm là bình thường — uncertainty <strong>giảm</strong> khi quyết định và deliverables được chấp nhận.</p>
+            <h4>Bẫy 2: Chọn A — PM Plan vì “planning begins”</h4>
+            <p style="margin:0">Planning đang diễn ra nhưng câu hỏi là feasibility/worthwhile — business case trước khi tiếp tục plan.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Chọn B — Financial plan nghe liên quan cost</h4>
+            <p style="margin:0">Financial management plan = how to manage money — business case = whether benefits justify costs.</p>
           </div>
           <div class="card tip">
-            <h4>Liên hệ Q12 leadership</h4>
-            <p style="margin:0">PM accountable leader giải thích pattern cho executive — data-driven, align với Standard p.59.</p>
+            <h4>Keyword map</h4>
+            <p style="margin:0">worthwhile · cost vs value · economic feasibility · benefits validity → <strong>Business Case</strong></p>
           </div>
         </section>
 
@@ -345,49 +344,43 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Cost/staffing theo thời gian? (predictive)</div>
-            <div class="flashcard-back">Low start → increase during work → drop rapidly near end.</div>
+            <div class="flashcard-front">Business case là gì? (p.116)</div>
+            <div class="flashcard-back">Documented economic feasibility study — establishes validity of benefits.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Risk/uncertainty theo thời gian?</div>
-            <div class="flashcard-back">Highest at start → decrease as decisions made &amp; deliverables accepted.</div>
-          </div></div>
-          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q13 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Cost/staffing increase then drop; risk/uncertainty decrease over time.</div>
+            <div class="flashcard-front">Q19 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Review the Business Case (cost vs value, worthwhile).</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">VARIABLES OVER TIME — Q13 (PMBOK 8, p.59)
+          <div class="cheat-sheet">BUSINESS CASE — Q19 (PMBOK 8, p.17 &amp; p.116)
 ─────────────────────────────────────────────────────
-COST &amp; STAFFING (predictive):
-  Start: LOW
-  Execution: INCREASE (peak mid-project)
-  End: DROP rapidly
+DEFINITION: Documented ECONOMIC FEASIBILITY STUDY
+PURPOSE: Establish validity of BENEFITS delivered
 
-RISK &amp; UNCERTAINTY (any lifecycle):
-  Start/phase start: HIGHEST
-  Over time: DECREASE (decisions + accepted deliverables)
+KEYWORDS → D (Business Case):
+  Cost vs delivered value · worthwhile · cost/benefit
+  Material costs rise · revalidate feasibility
 
-Q13 ANSWER: C
-  Cost/staffing ↑ then ↓ near completion
-  Risk/uncertainty ↓ over time
+Q19 ANSWER: D — Review the Business Case
 
-WRONG PATTERNS:
-  A → cost high at start, risk ↑ at end (inverted)
-  B → cost ↓ throughout, risk constant ✗
-  D → cost stable, risk unpredictable
+NOT:
+  A PM Plan → how to execute (✗)
+  B Financial Mgmt Plan → how finances managed
+  C Charter → authorize project, not feasibility study
 
-VISUAL: Cost = bell curve · Risk = downward slope
+VS Q18:
+  Q18: business case approved → NEXT = charter
+  Q19: cost rises, still worthwhile? → review BUSINESS CASE
 
-REF: The Standard for Project Management, p.59
-     "Impact of Variables Over Time"</div>
+REF: PMBOK Guide 8th Ed., p.17 Initiate + p.116 Business Case</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-accountable-leader.html">Q12: Accountable Leader</a>
+          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
+          · <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -396,12 +389,12 @@ REF: The Standard for Project Management, p.59
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Đảo ngược — cost không cao nhất lúc đầu; risk không tăng về cuối dự án.",
-        B: "Cost giảm dần và risk constant — trái PMBOK p.59 (✗ slide).",
-        C: "Đúng! Cost/staffing tăng khi work progresses, drop near end; risk/uncertainty giảm theo thời gian.",
-        D: "Cost stable và risk unpredictable — không mô tả impact of variables over time."
+        A: "PM Plan định nghĩa execution — không trả lời project còn worthwhile khi cost tăng.",
+        B: "Financial Management Plan = cách quản lý tài chính — không phải economic feasibility study.",
+        C: "Charter authorize project — không phải doc để assess cost vs value feasibility.",
+        D: "Đúng! Business case = economic feasibility study — validate benefits vs rising costs (p.116)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -417,7 +410,7 @@ REF: The Standard for Project Management, p.59
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Cost/staffing increase then drop near completion; risk/uncertainty decrease over time.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Review the Business Case.</strong>" : "");
         });
       });
       let score = 0;
