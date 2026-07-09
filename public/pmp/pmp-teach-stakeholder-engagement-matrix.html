@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Change Log (Q27)</title>
+  <title>PMBOK 8 — Stakeholder Engagement Matrix (Q75)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
-      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --primary: #7c3aed; --primary-dark: #5b21b6; --primary-bg: #f5f3ff;
       --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
       --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
       --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
@@ -30,7 +30,7 @@
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
-    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #ddd6fe; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
     .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
     .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 62ch; }
     .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
@@ -51,10 +51,16 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .matrix-demo { display: grid; grid-template-columns: auto 1fr 1fr; gap: 2px; max-width: 380px; margin: 1rem 0; font-size: 0.78rem; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .matrix-demo > div { background: var(--card); padding: 0.45rem 0.55rem; }
+    .matrix-demo .hdr { background: var(--primary-bg); font-weight: 600; color: var(--primary-dark); text-align: center; }
+    .matrix-demo .gap { background: #fef9c3; font-weight: 600; text-align: center; }
+    .levels { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.75rem 0; }
+    .level-pill { font-size: 0.72rem; padding: 0.2rem 0.5rem; border-radius: 6px; background: var(--primary-bg); color: var(--primary-dark); font-weight: 600; border: 1px solid #ddd6fe; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
-    .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .quiz-card .q-text em { font-style: normal; background: #ede9fe; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -67,7 +73,7 @@
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
     .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 400px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.65rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -77,7 +83,7 @@
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
     .flashcard-front, .flashcard-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); padding: 1.25rem; display: flex; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border); }
     .flashcard-front { background: var(--card); font-weight: 600; }
-    .flashcard-back { background: var(--primary-bg); border-color: #fde68a; transform: rotateY(180deg); font-size: 0.88rem; }
+    .flashcard-back { background: var(--primary-bg); border-color: #ddd6fe; transform: rotateY(180deg); font-size: 0.88rem; }
     .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
     .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
     .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
@@ -88,11 +94,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Change Log · Q27</div>
+      <div class="brand-sub">Engagement Matrix · Q75</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#changelog">Change Log</a>
-        <a href="#logs">Phân biệt logs</a>
+        <a href="#matrix">Engagement Matrix</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -174,16 +180,16 @@
         <a href="pmp-teach-identify-stakeholders.html">Q72: Identify Stakeholders</a>
         <a href="pmp-teach-stakeholder-register.html">Q73: Stakeholder Register</a>
         <a href="pmp-teach-stakeholder-mapping.html">Q74: Stakeholder Mapping</a>
-        <a href="pmp-teach-stakeholder-engagement-matrix.html">Q75: Engagement Matrix</a>
+        <a href="pmp-teach-stakeholder-engagement-matrix.html" class="series-current">Q75: Engagement Matrix</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-27">Luyện câu 27</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-75">Luyện câu 75</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#changelog">Change Log</a>
-        <a href="#logs">Logs</a>
+        <a href="#matrix">Matrix</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -192,102 +198,124 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q27 về <strong>Change Log</strong> — nhiều modifications được request,
-            team confused về <em>what to implement and in what sequence</em> trong execution.
+            Bài học Q75 về <strong>Stakeholder Engagement Assessment Matrix</strong> — city
+            redevelopment tại New Horizon Inc: review stakeholder responses, determine involvement
+            needed, identify <em>gaps</em> để guide engagement strategies.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.22 &amp; p.116</span>
-            <span class="badge">Manage Project Execution</span>
-            <span class="badge">Câu 27 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.71–72 &amp; 200</span>
+            <span class="badge">Plan Stakeholder Engagement</span>
+            <span class="badge">Engagement Assessment Matrix</span>
+            <span class="badge">Câu 75 — Practice</span>
           </div>
         </header>
 
-        <section id="changelog">
-          <h2>1. Change Log</h2>
+        <section id="matrix">
+          <h2>1. Engagement assessment matrix (p.200)</h2>
           <p>
-            Change log ghi lại <strong>tất cả change requests đã submit</strong> và
-            <strong>trạng thái</strong> của chúng — disposition của từng request
-            xuyên suốt project lifecycle.
+            <strong>Plan Stakeholder Engagement</strong> (p.71–72) develops strategies based on needs,
+            expectations, interests, potential impact. The <strong>stakeholder engagement assessment
+            matrix</strong> compares <em>current</em> vs <em>desired</em> engagement levels.
           </p>
 
-          <div class="card tip">
-            <h4>Định nghĩa (PMBOK p.116)</h4>
-            <p style="margin:0">
-              A change log records all submitted changes and their status, documenting
-              the disposition of change requests throughout the project.
-            </p>
+          <div class="levels">
+            <span class="level-pill">U — Unaware</span>
+            <span class="level-pill">R — Resistant</span>
+            <span class="level-pill">N — Neutral</span>
+            <span class="level-pill">S — Supportive</span>
+            <span class="level-pill">L — Leading</span>
           </div>
 
-          <div class="card info">
-            <h4>Manage Project Execution (p.22)</h4>
+          <div class="matrix-demo">
+            <div class="hdr"></div>
+            <div class="hdr">Current (C)</div>
+            <div class="hdr">Desired (D)</div>
+            <div>Regulator</div>
+            <div>R</div>
+            <div class="gap">S ← gap</div>
+            <div>Community</div>
+            <div>U</div>
+            <div class="gap">N ← gap</div>
+          </div>
+
+          <div class="card tip">
+            <h4>Instructor: C vs D = gaps</h4>
             <p style="margin:0">
-              Leading and performing work defined in the plan and implementing
-              <strong>approved changes</strong> to meet objectives — deliverables meet scope requirements.
+              Stem: <strong>gaps</strong> + <strong>represent</strong> engagement info →
+              stakeholder engagement assessment matrix (C). Not risk register, comms plan, or register alone.
             </p>
           </div>
         </section>
 
-        <section id="logs">
-          <h2>2. Phân biệt các log/register</h2>
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
 
           <table>
             <thead>
-              <tr><th>Artifact</th><th>Ghi gì?</th><th>Q27 fit?</th></tr>
+              <tr><th>Option</th><th>Artifact</th><th>Q75 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Change Log</strong></td>
-                <td>Submitted changes + status + disposition + sequence of approved mods</td>
-                <td>✓ Đúng — modifications throughout project</td>
+                <td><strong>A. Risk register</strong></td>
+                <td>Project risks and responses</td>
+                <td>Wrong domain — engagement gaps ≠ risks</td>
               </tr>
               <tr>
-                <td>Scope Statement / Baseline</td>
-                <td>Authorized scope ban đầu — không track history từng change</td>
-                <td>✗ Thiếu status/sequence của modifications</td>
+                <td><strong>B. Comms management plan</strong></td>
+                <td>How/when to communicate</td>
+                <td>Plan output — doesn't map C vs D gaps</td>
               </tr>
               <tr>
-                <td>Issue Log</td>
-                <td>Impacts đã xảy ra cần xử lý</td>
-                <td>✗ Không phải change request tracking</td>
+                <td><strong>C. Engagement assessment matrix</strong></td>
+                <td>Current vs desired engagement per stakeholder</td>
+                <td><strong>Yes — represents gaps</strong></td>
               </tr>
               <tr>
-                <td>Risk Register</td>
-                <td>Uncertainties &amp; planned responses</td>
-                <td>✗ Không liên quan modifications confusion</td>
+                <td><strong>D. Stakeholder register</strong></td>
+                <td>ID, influence, classification</td>
+                <td>Identify output — no C/D gap comparison</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>Stakeholder artifact chain</h4>
+            <p style="margin:0">
+              Q73 register → Q74 mapping → Q75 <strong>engagement matrix</strong> (current vs desired).
+              Each artifact answers a different question.
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 27</h2>
+          <h2>3. Câu hỏi thực hành — Question 75</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q27</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q75</div>
             <div class="q-text">
-              Rina is executing a warehouse automation project at Grid Line Logistics.
-              Several <em>modifications have been requested throughout the project</em>,
-              and now there is confusion about <em>what should be implemented and in what sequence</em>.
-              What will Rina do <em>next</em>?
+              You are currently planning for a city redevelopment project at New Horizon Inc. You
+              review how key stakeholders are responding and determine the degree of involvement
+              needed for project success. You then identify gaps to guide your stakeholder
+              strategies. What will you use to <em>represent</em> this information?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Review the Scope Statement.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Review the Change Log.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Review the Issue Log.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Review the Risk Register.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. The project risk register, listing gaps in engagement.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. The communications management plan.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. The stakeholder engagement assessment matrix.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. The stakeholder register with classifications.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>“Modifications requested throughout” = change requests cần track.</li>
-            <li>Confusion về implement gì, thứ tự nào → Change Log có status &amp; disposition.</li>
-            <li>Execution phase — implement <em>approved</em> changes per log.</li>
+            <li>Matrix compares current vs desired engagement — shows gaps explicitly.</li>
+            <li>Levels: unaware, resistant, neutral, supportive, leading (U/R/N/S/L).</li>
+            <li>Plan Stakeholder Engagement tool to guide strategies (p.71–72, 200).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -297,62 +325,58 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Scope Statement</strong></td>
-                <td>Baseline scope ban đầu — không document lịch sử nhiều modifications &amp; sequence.</td>
+                <td><strong>A. Risk register</strong></td>
+                <td>Risks ≠ engagement gaps — wrong artifact despite word "gaps" in stem.</td>
               </tr>
               <tr>
-                <td><strong>C. Issue Log</strong></td>
-                <td>Issues = đã xảy ra — không phải track change requests.</td>
+                <td><strong>B. Comms plan</strong></td>
+                <td>Describes communication approach — doesn't represent C vs D engagement.</td>
               </tr>
               <tr>
-                <td><strong>D. Risk Register</strong></td>
-                <td>Risks = uncertainty — không giải quyết confusion về approved modifications.</td>
+                <td><strong>D. Stakeholder register</strong></td>
+                <td>Lists stakeholder info/classifications — no current vs desired comparison.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Liên hệ Q20 Assumption Log</h4>
-            <p style="margin:0">
-              Q20 phân biệt assumption/risk/issue logs ở planning. Q27 = execution —
-              <strong>change log</strong> khi nhiều modifications gây confusion.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Log nào?</h2>
+          <h2>5. Drill — Artifact nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="CHG">
-              <span>Track status of submitted change requests</span>
+            <div class="classify-row" data-answer="MAT">
+              <span>Map current (R) vs desired (S) engagement for each stakeholder</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="MAT">Matrix</button>
+                <button data-pick="REG">Register</button>
+                <button data-pick="RISK">Risk Reg</button>
+                <button data-pick="COM">Comms</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ISS">
-              <span>Document problem that has already occurred</span>
+            <div class="classify-row" data-answer="REG">
+              <span>Document contact info, influence, internal/external classification</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="MAT">Matrix</button>
+                <button data-pick="REG">Register</button>
+                <button data-pick="RISK">Risk Reg</button>
+                <button data-pick="COM">Comms</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RSK">
-              <span>Uncertain event and planned response</span>
+            <div class="classify-row" data-answer="COM">
+              <span>Define frequency and format of status reports to stakeholders</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="MAT">Matrix</button>
+                <button data-pick="REG">Register</button>
+                <button data-pick="RISK">Risk Reg</button>
+                <button data-pick="COM">Comms</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="CHG">
-              <span>Confusion about approved mods and sequence</span>
+            <div class="classify-row" data-answer="RISK">
+              <span>Track permit delay as a project threat with response plan</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="MAT">Matrix</button>
+                <button data-pick="REG">Register</button>
+                <button data-pick="RISK">Risk Reg</button>
+                <button data-pick="COM">Comms</button>
               </div>
             </div>
           </div>
@@ -362,16 +386,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “What to implement” → Scope Statement (A)</h4>
-            <p style="margin:0">Scope baseline = authorized scope; nhiều modifications cần Change Log để biết approved changes &amp; order.</p>
+            <h4>Bẫy 1: "Gaps" → risk register (A)</h4>
+            <p style="margin:0">Stem says "gaps" — PMI means engagement gaps (C vs D), not project risks in risk register.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Confusion → Issue Log (C)</h4>
-            <p style="margin:0">Issue = đã materialize — đây là change requests chưa rõ implementation sequence.</p>
+            <h4>Bẫy 2: Stakeholder → register (D)</h4>
+            <p style="margin:0">Register has classifications but doesn't compare current vs desired engagement levels.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Strategies → comms plan (B)</h4>
+            <p style="margin:0">Engagement strategies may inform comms — but matrix is the tool to represent gap information.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Modifications + status/sequence confusion</strong> → Change Log (B).</p>
+            <p style="margin:0"><strong>Current vs desired · engagement gaps · U/R/N/S/L</strong> → stakeholder engagement assessment matrix (C).</p>
           </div>
         </section>
 
@@ -379,48 +407,58 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Change log ghi gì? (p.116)</div>
-            <div class="flashcard-back">All submitted changes + status + disposition throughout project.</div>
+            <div class="flashcard-front">Engagement levels (5)?</div>
+            <div class="flashcard-back">Unaware · Resistant · Neutral · Supportive · Leading (U/R/N/S/L).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q27 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Review the Change Log.</div>
+            <div class="flashcard-front">Q75 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Stakeholder engagement assessment matrix (current vs desired).</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">CHANGE LOG — Q27 (PMBOK 8, p.22 &amp; p.116)
+          <div class="cheat-sheet">ENGAGEMENT ASSESSMENT MATRIX — Q75 (PMBOK 8, p.71–72 &amp; 200)
 ─────────────────────────────────────────────────────
-PROCESS: Manage Project Execution
-ARTIFACT: Change log
-  - All submitted changes
-  - Status &amp; disposition
-  - Track approved mods through lifecycle
+PROCESS: Plan Stakeholder Engagement (p.71–72)
+ARTIFACT: Stakeholder engagement assessment matrix (p.200)
 
-SCENARIO: Grid Line — modifications requested throughout
-           confusion: WHAT to implement + SEQUENCE
-NEXT → B) Review the CHANGE LOG ✓
+PURPOSE: Compare CURRENT vs DESIRED engagement
+         → Identify GAPS → Guide engagement strategies
+
+ENGAGEMENT LEVELS:
+  U — Unaware
+  R — Resistant
+  N — Neutral
+  S — Supportive
+  L — Leading
+
+MATRIX: Stakeholder | Current (C) | Desired (D) | Gap
+
+SCENARIO: New Horizon Inc — city redevelopment
+           Review stakeholder responses
+           Determine involvement needed for success
+           Identify GAPS for strategies
+           REPRESENT this information?
+→ C) STAKEHOLDER ENGAGEMENT ASSESSMENT MATRIX ✓
 
 NOT:
-  A) Scope Statement — baseline, not change history
-  C) Issue Log — occurred problems, not CR tracking
-  D) Risk Register — uncertainties, not modifications
+  A) RISK REGISTER — risks ≠ engagement gaps
+  B) COMMS PLAN — communication approach, not C vs D
+  D) STAKEHOLDER REGISTER — ID/classify, no gap matrix
 
-VS Q20:
-  Assumption/Risk/Issue logs at planning
-  Change log at execution for approved changes
+SIGNAL: "gaps" + "current/desired engagement" + "represent"
+        → engagement assessment matrix
 
-SIGNAL: "modifications requested" + "what sequence"
+Q75 ANSWER: C
 
-Q27 ANSWER: B
-
-REF: PMBOK Guide, 8th Ed., p.22 &amp; p.116 — Change log</div>
+REF: PMBOK Guide, 8th Ed., p.71–72, p.200</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
-          · <a href="pmp-full-questions.html#q-27">Luyện câu 27</a>
+          · <a href="pmp-teach-stakeholder-mapping.html">Q74: Stakeholder Mapping</a>
+          · <a href="pmp-teach-identify-stakeholders.html">Q72: Identify Stakeholders</a>
+          · <a href="pmp-full-questions.html#q-75">Luyện câu 75</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -429,12 +467,12 @@ REF: PMBOK Guide, 8th Ed., p.22 &amp; p.116 — Change log</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Scope Statement là baseline ban đầu — không track lịch sử modifications &amp; sequence.",
-        B: "Đúng! Change log ghi submitted changes, status, disposition — clarify what approved &amp; order (p.116).",
-        C: "Issue Log cho problems đã xảy ra — không phải change request tracking.",
-        D: "Risk Register cho uncertainties — không liên quan modifications confusion."
+        A: "Risk register tracks project risks — engagement gaps belong in engagement assessment matrix, not risk register.",
+        B: "Comms plan defines how to communicate — không represent current vs desired engagement gaps.",
+        C: "Đúng! Matrix compares current vs desired (U/R/N/S/L) — shows gaps to guide strategies (p.200).",
+        D: "Register documents stakeholder info — không có C vs D engagement comparison."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -450,7 +488,7 @@ REF: PMBOK Guide, 8th Ed., p.22 &amp; p.116 — Change log</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Review the Change Log.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Stakeholder engagement assessment matrix.</strong>" : "");
         });
       });
       let score = 0;
