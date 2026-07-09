@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Make-or-Buy Analysis (Q25)</title>
+  <title>PMBOK 8 — Quality Audits (Q31)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .process-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; font-size: 0.8rem; }
-    .flow-step { padding: 0.45rem 0.7rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--border); background: var(--bg); }
-    .flow-step.done { border-color: var(--muted); color: var(--muted); }
-    .flow-step.current { border-color: var(--ok); background: var(--ok-bg); color: #065f46; }
-    .flow-step.next { border-color: var(--info); background: var(--info-bg); color: #1d4ed8; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -87,17 +81,21 @@
     .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
     .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
     .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
+    .flow-diagram { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; margin: 1rem 0; font-size: 0.88rem; }
+    .flow-box { padding: 0.5rem 1.25rem; border-radius: 99px; border: 2px solid var(--border); background: var(--card); font-weight: 600; }
+    .flow-box.highlight { border-color: var(--primary); background: var(--primary-bg); color: var(--primary-dark); }
+    .flow-arrow { color: var(--muted); font-size: 1.1rem; }
   </style>
 </head>
 <body>
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Make-or-Buy Analysis · Q25</div>
+      <div class="brand-sub">Quality Audits · Q31</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#makeorbuy">Make-or-Buy</a>
-        <a href="#signal">Đọc tín hiệu đề</a>
+        <a href="#quality">Manage Quality Assurance</a>
+        <a href="#plan-audit-control">Plan · Audit · Control</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -135,16 +133,16 @@
         <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
         <a href="pmp-teach-issue-log.html">Q29: Issue Log</a>
         <a href="pmp-teach-process-improvement.html">Q30: Process Improvement</a>
-        <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
+        <a href="pmp-teach-quality-audits.html" class="series-current">Q31: Quality Audits</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-25">Luyện câu 25</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-31">Luyện câu 31</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#makeorbuy">Make/Buy</a>
-        <a href="#signal">Signal</a>
+        <a href="#quality">QA</a>
+        <a href="#plan-audit-control">PAC</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -153,178 +151,170 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q25 về <strong>Make-or-Buy Analysis</strong> — component có thể
-            sản xuất nội bộ hoặc mua từ supplier chuyên biệt; áp lực bắt đầu nhanh
-            và budget hạn chế không bỏ qua bước quyết định này.
+            Bài học Q31 về <strong>Quality Audits</strong> — teams không follow procedures và
+            organizational standards nhất quán; leadership muốn <em>identify gaps in processes</em>
+            và <em>improve overall performance</em>.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.180</span>
-            <span class="badge">Plan Sourcing Strategy</span>
-            <span class="badge">Câu 25 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.23–24</span>
+            <span class="badge">Manage Quality Assurance</span>
+            <span class="badge">Câu 31 — Practice</span>
           </div>
         </header>
 
-        <section id="makeorbuy">
-          <h2>1. Make-or-Buy Analysis</h2>
+        <section id="quality">
+          <h2>1. Manage Quality Assurance &amp; Quality Audits</h2>
           <p>
-            Quy trình ra quyết định thu thập và phân tích yêu cầu sản phẩm so với
-            các phương án — <strong>sản xuất nội bộ (make)</strong> hay
-            <strong>mua bên ngoài (buy)</strong> — dựa trên phương án tốt nhất.
+            Manage Quality Assurance thực hiện các hoạt động có kế hoạch và có hệ thống từ
+            quality management plan — xây dựng confidence rằng output tương lai sẽ đáp ứng
+            requirements thông qua các tool như <strong>quality audits</strong> và failure analysis.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa (PMBOK p.180)</h4>
+            <h4>Manage Quality Assurance (PMBOK p.23–24)</h4>
             <p style="margin:0">
-              Make-or-buy analysis is a decision-making process that gathers and analyzes
-              product requirements against alternatives, including internal production or
-              external purchase. It determines whether project work should be performed by
-              the team or acquired from outside sources based on the best option.
+              Implements planned and systematic acts and processes defined within the project's
+              quality management plan. Quality assurance tools include quality audits and failure
+              analysis — helping identify improvement areas and build confidence in future outputs.
             </p>
           </div>
 
-          <table>
-            <thead>
-              <tr><th>Phương án</th><th>Khi nào cân nhắc?</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Make (internal)</strong></td>
-                <td>Team có capacity, kiểm soát chất lượng, có thể rẻ hơn long-term</td>
-              </tr>
-              <tr>
-                <td><strong>Buy (external)</strong></td>
-                <td>Supplier chuyên biệt, nhanh hơn, giảm capex, limited internal budget</td>
-              </tr>
-            </tbody>
-          </table>
+          <p>
+            <strong>Quality audit</strong> = structured review để đánh giá liệu processes có
+            tuân thủ policies, procedures và standards — và tìm gaps cần cải thiện.
+          </p>
         </section>
 
-        <section id="signal">
-          <h2>2. Đọc tín hiệu trong đề</h2>
+        <section id="plan-audit-control">
+          <h2>2. Plan · Audit · Control</h2>
+          <p>Slide instructor phân biệt ba hướng — đừng nhầm inspection/testing với audit:</p>
 
-          <div class="process-flow" aria-label="Make-or-buy decision">
-            <span class="flow-step done">Component identified ✓</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step current">Make-or-buy analysis (C)</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">Procurement plan / RFP</span>
+          <div class="flow-diagram">
+            <div class="flow-box">Plan — thiết kế &amp; chuẩn bị quality approach</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box highlight">Audit — review processes &amp; identify gaps</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box">Control — kiểm tra output / validate performance</div>
           </div>
 
           <table>
             <thead>
-              <tr><th>Signal</th><th>Ý nghĩa</th></tr>
+              <tr><th>Đáp án Q31</th><th>Thuộc nhóm</th><th>Vì sao không phải audit</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td>“Produced internally <em>or</em> sourced from supplier”</td>
-                <td>Chưa quyết make vs buy → cần analysis</td>
+                <td><strong>A. Increase inspections</strong></td>
+                <td>Control / inspection</td>
+                <td>Tìm defects trên deliverables đã hoàn thành — reactive, không review process gaps</td>
               </tr>
               <tr>
-                <td>“Limited budget for additional items”</td>
-                <td>Input cho analysis — không skip sang RFP</td>
+                <td><strong>C. Additional testing</strong></td>
+                <td>Control</td>
+                <td>Validate product performance — không phải process compliance review</td>
               </tr>
               <tr>
-                <td>“Pressure to begin quickly”</td>
-                <td>Không nhảy thẳng RFP — quyết định trước để tránh sai hướng</td>
+                <td><strong>D. Perform audits</strong></td>
+                <td>Assurance (Audit)</td>
+                <td>Identify gaps in how teams follow procedures &amp; standards ✓</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 25</h2>
+          <h2>3. Câu hỏi thực hành — Question 31</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q25</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q31</div>
             <div class="q-text">
-              Ricky is planning a manufacturing project at Trade Corp. A critical component
-              can be <em>produced internally or sourced from a specialized supplier</em>.
-              There is pressure from internal stakeholders to begin work as quickly as possible,
-              and there is <em>limited budget for additional items</em>. What will Ricky do <em>next</em>?
+              You are managing a production system project at Forge Line Industries. During execution,
+              inconsistencies are observed in how teams follow <em>procedures and organizational standards</em>.
+              Leadership wants to <em>identify gaps in processes</em> and <em>improve overall performance</em>.
+              What is the most appropriate action?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Develop the procurement management plan.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Conduct a cost-benefit analysis.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Perform a make-or-buy analysis.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Issue requests for proposal (RFP).</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Increase inspections to find defects in completed deliverables.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Re-baseline the project to address process inconsistencies.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Conduct additional testing to validate product performance.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Perform audits to identify improvement areas.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>Đề đặt rõ hai phương án: internal production vs external purchase.</li>
-            <li>Make-or-buy = bước NEXT trong Plan Sourcing Strategy trước procurement plan/RFP.</li>
-            <li>Budget hạn chế và urgency là inputs cho analysis, không thay thế nó.</li>
+            <li>Signal: <em>identify gaps in processes</em> + <em>organizational standards</em> → quality audit.</li>
+            <li>Audits review process compliance và tìm improvement areas — đúng Manage QA (p.23–24).</li>
+            <li>Focus là process performance, không chỉ defects trên finished products.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải NEXT</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Procurement management plan</strong></td>
-                <td>Plan tổng thể procurement — sau khi biết make hay buy.</td>
+                <td><strong>A. Increase inspections</strong></td>
+                <td>Control activity — tìm defects trên deliverables, không identify process gaps.</td>
               </tr>
               <tr>
-                <td><strong>B. Cost-benefit analysis</strong></td>
-                <td>Quá rộng — PMI dùng thuật ngữ cụ thể <em>make-or-buy analysis</em> cho sourcing decision.</td>
+                <td><strong>B. Re-baseline</strong></td>
+                <td>Scope/schedule/cost baseline change — không phải tool cho process gap analysis.</td>
               </tr>
               <tr>
-                <td><strong>D. Issue RFP</strong></td>
-                <td>Chỉ khi đã quyết <em>buy</em> — chưa phân tích thì chưa gửi RFP.</td>
+                <td><strong>C. Additional testing</strong></td>
+                <td>Validate product — Control, không review procedure compliance across teams.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q18 vs Q22/Q25</h4>
+            <h4>Liên hệ Q30 Process Improvement</h4>
             <p style="margin:0">
-              Q18: make-or-buy quá sớm (sau business case → charter). Q22/Q25: đã vào procurement
-              planning với component cần quyết make vs buy → make-or-buy analysis đúng.
+              Q30: root cause + process analysis &amp; improvement. Q31: identify process gaps
+              via <strong>audits</strong> — cùng domain Manage QA, khác tool emphasis.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Bước nào trước?</h2>
+          <h2>5. Drill — Plan, Audit hay Control?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="MOB">
-              <span>Decide internal production vs external purchase</span>
+            <div class="classify-row" data-answer="AUDIT">
+              <span>Review whether teams follow organizational standards</span>
               <div class="classify-btns">
-                <button data-pick="MOB">Make-or-buy</button>
-                <button data-pick="PLAN">Procurement plan</button>
-                <button data-pick="RFP">RFP</button>
+                <button data-pick="PLAN">Plan</button>
+                <button data-pick="AUDIT">Audit</button>
+                <button data-pick="CTRL">Control</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PLAN">
-              <span>Document how procurement will be managed</span>
+            <div class="classify-row" data-answer="CTRL">
+              <span>Inspect completed deliverables for defects</span>
               <div class="classify-btns">
-                <button data-pick="MOB">Make-or-buy</button>
-                <button data-pick="PLAN">Procurement plan</button>
-                <button data-pick="RFP">RFP</button>
+                <button data-pick="PLAN">Plan</button>
+                <button data-pick="AUDIT">Audit</button>
+                <button data-pick="CTRL">Control</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RFP">
-              <span>Request proposals after buy decision made</span>
+            <div class="classify-row" data-answer="CTRL">
+              <span>Run tests to validate product performance</span>
               <div class="classify-btns">
-                <button data-pick="MOB">Make-or-buy</button>
-                <button data-pick="PLAN">Procurement plan</button>
-                <button data-pick="RFP">RFP</button>
+                <button data-pick="PLAN">Plan</button>
+                <button data-pick="AUDIT">Audit</button>
+                <button data-pick="CTRL">Control</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="MOB">
-              <span>Compare specialized supplier vs in-house capability</span>
+            <div class="classify-row" data-answer="AUDIT">
+              <span>Identify improvement areas in quality processes</span>
               <div class="classify-btns">
-                <button data-pick="MOB">Make-or-buy</button>
-                <button data-pick="PLAN">Procurement plan</button>
-                <button data-pick="RFP">RFP</button>
+                <button data-pick="PLAN">Plan</button>
+                <button data-pick="AUDIT">Audit</button>
+                <button data-pick="CTRL">Control</button>
               </div>
             </div>
           </div>
@@ -334,16 +324,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Begin quickly” → Issue RFP (D)</h4>
-            <p style="margin:0">Vội vàng không bỏ qua make-or-buy — quyết sai hướng tốn thời gian hơn.</p>
+            <h4>Bẫy 1: Inconsistencies → More inspections (A)</h4>
+            <p style="margin:0">Inspections tìm defects trên output — không fix gaps trong cách teams follow procedures.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Cost-benefit analysis (B) nghe hợp lý</h4>
-            <p style="margin:0">Đề PMP dùng đúng tên tool: <strong>make-or-buy analysis</strong> (p.180).</p>
+            <h4>Bẫy 2: Process problem → Re-baseline (B)</h4>
+            <p style="margin:0">Re-baseline là change management cho baseline — không phải quality assurance tool.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Quality issue → More testing (C)</h4>
+            <p style="margin:0">Testing validates product — Control. Đề hỏi process gaps &amp; standards compliance → Audit.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Internal OR supplier</strong> + chưa quyết → Make-or-buy (C).</p>
+            <p style="margin:0"><strong>Process gaps + organizational standards + improve performance</strong> → Perform audits (D).</p>
           </div>
         </section>
 
@@ -351,49 +345,53 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Make-or-buy analysis? (p.180)</div>
-            <div class="flashcard-back">Gather &amp; analyze requirements vs alternatives — internal production or external purchase — best option.</div>
+            <div class="flashcard-front">Quality audit làm gì? (Manage QA)</div>
+            <div class="flashcard-back">Structured review of processes vs policies/standards · identify gaps &amp; improvement areas.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q25 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Perform a make-or-buy analysis.</div>
+            <div class="flashcard-front">Q31 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Perform audits to identify improvement areas.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">MAKE-OR-BUY ANALYSIS — Q25 (PMBOK 8, p.180)
+          <div class="cheat-sheet">QUALITY AUDITS — Q31 (PMBOK 8, p.23–24)
 ─────────────────────────────────────────────────────
-TOOL: Make-or-buy analysis (Plan Sourcing Strategy)
-PURPOSE:
-  - Gather &amp; analyze product requirements
-  - Compare internal production vs external purchase
-  - Decide: team performs work OR acquire outside
+PROCESS: Manage Quality Assurance
+TOOL: Quality audits (+ failure analysis)
 
-SCENARIO: Trade Corp — component internal OR specialized supplier
-           pressure to start fast + limited budget
-NEXT → C) Perform MAKE-OR-BUY ANALYSIS ✓
+AUDIT vs CONTROL:
+  Audit   → review PROCESSES · compliance · identify GAPS
+  Control → inspect OUTPUT · test PRODUCT · find DEFECTS
+
+SCENARIO: Forge Line Industries — execution
+           INCONSISTENT procedure/standards compliance
+           identify GAPS in PROCESSES · improve PERFORMANCE
+→ D) Perform AUDITS to identify improvement areas ✓
 
 NOT:
-  A) Procurement mgmt plan — after make/buy decision
-  B) Cost-benefit analysis — too generic; PMI term = make-or-buy
-  D) Issue RFP — only after BUY decision
+  A) Increase inspections — Control (defects on deliverables)
+  B) Re-baseline — scope/schedule/cost baseline, not QA tool
+  C) Additional testing — Control (product validation)
 
-SEQUENCE:
-  Make-or-buy (C) → Procurement plan (A) → RFP (D) if buy
+PLAN → AUDIT → CONTROL (instructor diagram)
 
-VS Q18: make-or-buy too early at initiating
-VS Q22: no vendors yet → full sourcing strategy
+SIGNAL: "gaps in processes" + "organizational standards"
+        "improve overall performance"
 
-Q25 ANSWER: C
+VS Q30: underlying cause → process analysis &amp; improvement
+VS Q31: process gaps → quality AUDITS
 
-REF: PMBOK Guide, 8th Ed., p.19–20 &amp; p.180 — Make-or-buy analysis</div>
+Q31 ANSWER: D
+
+REF: PMBOK Guide, 8th Ed., p.23–24, Manage Quality Assurance</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-plan-sourcing-strategy.html">Q22: Plan Sourcing Strategy</a>
-          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
-          · <a href="pmp-full-questions.html#q-25">Luyện câu 25</a>
+          · <a href="pmp-teach-process-improvement.html">Q30: Process Improvement</a>
+          · <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
+          · <a href="pmp-full-questions.html#q-31">Luyện câu 31</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -402,12 +400,12 @@ REF: PMBOK Guide, 8th Ed., p.19–20 &amp; p.180 — Make-or-buy analysis</div>
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Procurement management plan document cách quản lý procurement — sau khi biết make hay buy.",
-        B: "Cost-benefit quá chung — PMI dùng make-or-buy analysis cho quyết định sourcing cụ thể.",
-        C: "Đúng! Make-or-buy analysis — so sánh internal production vs external purchase (p.180).",
-        D: "RFP chỉ khi đã quyết buy — chưa phân tích thì chưa issue RFP."
+        A: "Increase inspections là Control — tìm defects trên deliverables, không identify process gaps.",
+        B: "Re-baseline thay đổi project baseline — không phải tool để review procedure compliance.",
+        C: "Additional testing validate product performance — Control, không phải process audit.",
+        D: "Đúng! Quality audits identify gaps in processes &amp; improvement areas (Manage QA, p.23–24)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -423,7 +421,7 @@ REF: PMBOK Guide, 8th Ed., p.19–20 &amp; p.180 — Make-or-buy analysis</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Perform a make-or-buy analysis.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Perform audits to identify improvement areas.</strong>" : "");
         });
       });
       let score = 0;
