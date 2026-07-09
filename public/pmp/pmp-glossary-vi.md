@@ -189,6 +189,40 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | **Folk wisdom** | Kinh nghiệm truyền miệng — thường sai vs data |
 | **Ví dụ** | *folks on the ground*, *right folks in the room* |
 
+### Undermine
+| | |
+|---|---|
+| **Nghĩa** | **Làm suy yếu, làm lung lay** — phá vỡ gián tiếp trust, credibility, adoption, confidence |
+| **≠ Destroy** | Undermine = ăn mòn dần; destroy = phá hủy hoàn toàn |
+
+**Collocations đề PMP:**
+| Cụm | Ý |
+|-----|---|
+| undermine **transparency** | Che/chỉnh metrics → sai |
+| undermine **adoption** | Ignore customer feedback → sai |
+| undermine **confidence** | Combined risks, deferred engagement |
+| undermine **trust / alignment** | Stakeholder resistance, hidden info |
+
+**Mẹo đề:** Đề cảnh báo *"could undermine…"* → chọn hành động **bảo vệ** trust, transparency, adoption — không defer, không modify metrics, không ignore feedback.
+
+### Entail
+| | |
+|---|---|
+| **Nghĩa** | **Đòi hỏi, kéo theo** — hành động A **nhất thiết** bao gồm hệ quả B (logical consequence) |
+| **≠ Include** | Include = có trong danh sách · Entail = **bắt buộc** phải xảy ra |
+| **≠ Imply** | Imply = gợi ý · Entail = hệ quả logic rõ hơn |
+
+**Collocations đề PMP:**
+| Cụm | Ý |
+|-----|---|
+| entail **change request** | Scope change → integrated change control |
+| entail **training** | Triển khai mới → OCM/ADKAR |
+| entail **stakeholder engagement** | Quyết định lớn → engage liên quan |
+| entail **higher costs / schedule impact** | Phân tích trade-off trước khi commit |
+| *What does this entail?* | PM liệt kê impact, risks, next steps |
+
+**Mẹo đề:** *"will entail…"* → không ignore hệ quả · Assess impact, update plans, communicate.
+
 ---
 
 ## 4. Team, Leadership & Tổ chức
@@ -283,7 +317,26 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 |---|---|
 | **Nghĩa** | Khiêm tốn — biết giới hạn, lắng nghe, thừa nhận sai |
 | **PMP** | Acknowledge & apologize; servant leadership |
-| **Đối lập** | Arrogance, blame, hide mistakes |
+| **Đối lập** | Arrogance, **victim mentality**, hide mistakes |
+
+### Victim / Victim mentality
+| | |
+|---|---|
+| **Nghĩa** | **Nạn nhân** — PMP: PM đóng vai bị hại, không chủ động xử lý |
+| **Mindset đề** | *PM là leader, không victim* — Lead accountably |
+| **≠ Humility** | Humility = thừa nhận sai của mình · Victim = đổ lỗi người khác/hoàn cảnh |
+
+**Hành vi victim ✗ (đáp án sai):**
+| Hành vi | Ví dụ |
+|---------|-------|
+| Blame others | *"It wasn't my fault"* |
+| Helpless / passive | *"There's nothing I can do"* |
+| Wait without action | Assume sponsor sẽ fix |
+| Deflect | Hide mistake, cover up |
+
+**PM đúng:** Proactive · Own mistakes (acknowledge & apologize) · Collaborate · Escalate khi cần (sau analyze)
+
+**Khác:** *fall victim to* scope creep / optimism bias → PM phải change control / dùng data
 
 ---
 
@@ -374,6 +427,22 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 
 ## 7. Schedule, Cost & EVM
 
+### Impact of Variables Over Time
+| | |
+|---|---|
+| **Nguồn** | *The Standard for Project Management*, p.59 |
+| **Ngữ cảnh** | Predictive project — executive lo staffing cost & risk **early** trong planning |
+
+**Hai đường cong (ngược chiều):**
+| Biến số | Đầu dự án | Giữa (execution) | Cuối |
+|---------|-----------|------------------|------|
+| **Cost & Staffing** | Thấp | **Cao nhất** (bell curve) | Giảm mạnh |
+| **Risk & Uncertainty** | **Cao nhất** | Giảm dần | Thấp |
+
+**Đáp án đúng (Q13):** Cost/staffing **tăng** khi work progresses → **giảm** gần completion · Risk/uncertainty **giảm over time**
+
+**Bẫy đề ✗:** Cost cao nhất ở đầu · Risk tăng về cuối · Risk không đổi · Cost giảm dần suốt dự án
+
 ### S-Curve Diagram
 | | |
 |---|---|
@@ -458,6 +527,18 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | **PMP** | Change control, decision log, compliance, accountability |
 | **≠ Management** | Governance = rules of the game; Management = playing the game |
 
+### Discrepancies
+| | |
+|---|---|
+| **Nghĩa** | **Sai lệch, không khớp** — khác biệt giữa plan vs actual, forecast vs report, sponsor vs team estimate |
+| **≠ Variance** | Variance = chênh số EVM · Discrepancy = inconsistency rộng hơn (scope, schedule, ROI definition…) |
+
+**Hay gặp:** Forecast ≠ status report · Actual cost ≠ budget · Subsidiary plans không align · ROI measured differently
+
+**PM đúng:** **Reconcile** plans · **Discuss** với stakeholders · **Communicate** transparently · **Align** documentation
+
+**Sai ✗:** Resolve informally · Freeze/hide · Chỉ escalate hoặc tăng budget mà không address inconsistency
+
 ### Hazardous
 | | |
 |---|---|
@@ -501,6 +582,22 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 
 ## 11. Business Environment & Sustainability
 
+### Business Acumen
+| | |
+|---|---|
+| **Nghĩa** | **Sự nhạy bén kinh doanh** — hiểu org tạo value thế nào; quyết định dự án phục vụ mục tiêu kinh doanh |
+| **PMBOK 8** | Năng lực cốt lõi project professional |
+| **≠ Technical skill** | Technical = làm sản phẩm · Acumen = **vì sao** & value cho org |
+
+**Bao gồm:** Strategic alignment · Business value · ROI/NPV/payback · Market context · Benefits realization · Business case
+
+**Mẹo đề:**
+| ✓ Đúng | ✗ Sai |
+|--------|-------|
+| Prioritize highest **business value** | Chỉ focus tasks/schedule |
+| Trade-off giải thích **business outcomes** | Gold plating, vanity features |
+| Hiểu sponsor ROI/benefits goals | Tunnel vision kỹ thuật |
+
 ### Triple Bottom Line (TBL)
 | | |
 |---|---|
@@ -511,6 +608,12 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 ---
 
 ## 12. Bảng so sánh nhanh
+
+### Variables Over Time (Predictive)
+| Biến | Xu hướng |
+|------|----------|
+| Cost & Staffing | Thấp → cao (execution) → giảm mạnh (close) |
+| Risk & Uncertainty | Cao (start) → giảm dần |
 
 ### Change Models
 | Model | Trọng tâm |
@@ -657,6 +760,24 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | sense of urgency, guiding coalition | Kotter 8 Steps |
 | resistance, chaos, emotional stages | Virginia Satir |
 | change vs transition | Change = situation · Transition = people |
+| could undermine transparency | Report honestly — không chỉnh metrics |
+| undermine adoption, ignore feedback | Reprioritize backlog, facilitate alignment |
+| undermine confidence, regulatory trust | Update engagement plans, reassess urgency |
+| staffing cost early, risk early planning | Impact of Variables Over Time |
+| cost increases then drops, risk decreases | Variables Over Time — đáp C |
+| risk highest at start | Uncertainty giảm khi deliverable accepted |
+| will entail, what does this entail | Hệ quả bắt buộc — assess impact, update plans |
+| entail change request | Integrated change control |
+| entail training, additional resources | Plan OCM / capacity |
+| PM là leader không victim | Accountable, proactive |
+| nothing I can do, wait for sponsor | Victim mentality ✗ |
+| fall victim to scope creep | Change control |
+| discrepancy, inconsistencies in plans | Reconcile, align, discuss |
+| forecast vs status report mismatch | Align documentation, communicate |
+| actual vs budget discrepancy | Transparency, assess & adjust plan |
+| business acumen, business value | Strategic alignment, ROI, benefits |
+| highest business value | Prioritize value — không gold-plate |
+| ROI, benefits realization | Business acumen |
 | reserves depleted | Contingency used up |
 | increase exposure | Risk grows with delay |
 | Governance ≠ bureaucracy | Lightweight traceability |
