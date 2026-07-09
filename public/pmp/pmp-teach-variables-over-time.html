@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Functional Organization (Q6)</title>
+  <title>PMBOK 8 — Variables Over Time (Q13)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,13 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .compare-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
-    @media (max-width: 640px) { .compare-pair { grid-template-columns: 1fr; } }
-    .pair-box { border-radius: 12px; padding: 1rem; border: 1px solid var(--border); font-size: 0.88rem; }
-    .pair-box.q5 { background: var(--ok-bg); border-top: 4px solid var(--ok); }
-    .pair-box.q6 { background: #f3f4f6; border-top: 4px solid #6b7280; }
-    .pair-box h4 { margin: 0 0 0.5rem; font-size: 0.92rem; }
+    .curve-chart { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem 0.75rem; margin: 1.25rem 0; }
+    .curve-chart svg { width: 100%; height: auto; max-height: 200px; display: block; }
+    .curve-legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.65rem; font-size: 0.82rem; }
+    .curve-legend span { display: flex; align-items: center; gap: 0.35rem; }
+    .legend-line { width: 24px; height: 3px; border-radius: 2px; }
+    .legend-cost { background: var(--info); }
+    .legend-risk { background: var(--bad); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -72,7 +73,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; max-width: 300px; justify-content: flex-end; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 300px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -93,11 +94,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Functional Organization · Q6</div>
+      <div class="brand-sub">Variables Over Time · Q13</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#concepts">Functional org</a>
-        <a href="#q5-vs-q6">Q5 vs Q6</a>
+        <a href="#curves">Cost vs Risk curves</a>
+        <a href="#predictive">Predictive lifecycle</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -110,14 +111,14 @@
         <a href="pmp-teach-enterprise-environmental-factors.html">Q3: EEF</a>
         <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
         <a href="pmp-teach-organizational-structure.html">Q5: Org Structure</a>
-        <a href="pmp-teach-functional-organization.html" class="series-current">Q6: Functional</a>
+        <a href="pmp-teach-functional-organization.html">Q6: Functional</a>
         <a href="pmp-teach-project-functions.html">Q7: Project Functions</a>
         <a href="pmp-teach-project-sponsor.html">Q8: Project Sponsor</a>
         <a href="pmp-teach-project-management-team.html">Q9: PM Team</a>
         <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
         <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
         <a href="pmp-teach-accountable-leader.html">Q12: Accountable Leader</a>
-        <a href="pmp-teach-variables-over-time.html">Q13: Variables Over Time</a>
+        <a href="pmp-teach-variables-over-time.html" class="series-current">Q13: Variables Over Time</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
       <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
@@ -125,8 +126,8 @@
 
     <div>
       <nav class="mobile-nav">
-        <a href="#concepts">Functional</a>
-        <a href="#q5-vs-q6">Q5 vs Q6</a>
+        <a href="#curves">Curves</a>
+        <a href="#predictive">Lifecycle</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -135,117 +136,121 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q6 về <strong>Functional organization</strong> — dự án/cải tiến làm
-            <em>trong</em> phòng ban hiện có, không có ngân sách bổ sung hay quyền PM riêng.
+            Bài học Q13 về <strong>Impact of Variables Over Time</strong> — cost/staffing và
+            risk/uncertainty thay đổi <em>ngược chiều</em> theo vòng đời dự án predictive.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.22</span>
-            <span class="badge">Organizational Structures</span>
-            <span class="badge">Câu 6 — Practice</span>
+            <span class="badge">The Standard for PM, p.59</span>
+            <span class="badge">Project Lifecycle</span>
+            <span class="badge">Câu 13 — Practice</span>
           </div>
         </header>
 
-        <section id="concepts">
-          <h2>1. Functional Organization</h2>
+        <section id="curves">
+          <h2>1. Hai đường cong quan trọng</h2>
           <p>
-            Trong cấu trúc <strong>Functional</strong>, công việc dự án (kể cả cải tiến quy trình)
-            được thực hiện như một phần của <strong>team chức năng hiện có</strong> — sales, IT, HR...
-            Functional manager giữ quyền chính.
+            PMBOK 8 mô tả hai biến số chính thay đổi theo thời gian — đây là kiến thức cổ điển
+            nhưng vẫn ra thi dưới dạng scenario với executive/sponsor.
           </p>
 
+          <div class="curve-chart" aria-label="Cost staffing bell curve and risk decreasing curve">
+            <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
+              <line x1="40" y1="130" x2="380" y2="130" stroke="#9ca3af" stroke-width="1.5"/>
+              <line x1="40" y1="20" x2="40" y2="130" stroke="#9ca3af" stroke-width="1.5"/>
+              <text x="210" y="152" text-anchor="middle" fill="#6b7280" font-size="11">Time →</text>
+              <text x="18" y="80" text-anchor="middle" fill="#6b7280" font-size="11" transform="rotate(-90 18 80)">Level</text>
+              <path d="M 50 120 Q 120 115 200 45 Q 280 115 350 120" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+              <text x="200" y="38" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="600">Cost / Staffing</text>
+              <path d="M 50 35 Q 150 55 250 90 Q 320 110 350 118" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+              <text x="75" y="28" fill="#dc2626" font-size="11" font-weight="600">Risk / Uncertainty</text>
+            </svg>
+            <div class="curve-legend">
+              <span><i class="legend-line legend-cost"></i> Cost &amp; staffing: thấp → tăng → giảm mạnh cuối dự án</span>
+              <span><i class="legend-line legend-risk"></i> Risk &amp; uncertainty: cao nhất lúc đầu → giảm dần</span>
+            </div>
+          </div>
+
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK)</h4>
+            <h4>PMBOK p.59 — tóm tắt</h4>
             <p style="margin:0">
-              Functional organizations are those in which the project is done as part of an
-              <strong>existing functional team</strong> — there is no designated project coordinator,
-              <strong>additional budget or resources</strong>.
+              <strong>Cost &amp; staffing:</strong> low at start → increase as work is carried out →
+              drop rapidly near end.<br>
+              <strong>Risk &amp; uncertainty:</strong> highest at start of project/phase → decrease
+              over time as decisions are made and deliverables accepted.
             </p>
           </div>
+        </section>
+
+        <section id="predictive">
+          <h2>2. Predictive project scenario</h2>
+          <p>
+            PetraCore Energy refinery expansion — executive lo <strong>staffing costs tăng</strong> và
+            <strong>risks identified sớm</strong>. PM giải thích: đó là pattern bình thường —
+            risk cao lúc đầu (nhiều unknowns), cost tăng khi execution ramp up.
+          </p>
 
           <table>
             <thead>
-              <tr><th>Đặc điểm</th><th>Functional</th></tr>
+              <tr><th>Giai đoạn</th><th>Cost / Staffing</th><th>Risk / Uncertainty</th></tr>
             </thead>
             <tbody>
-              <tr><td>Team</td><td>Đã có sẵn trong phòng ban (existing team)</td></tr>
-              <tr><td>Budget</td><td>Không có ngân sách bổ sung cho “dự án”</td></tr>
-              <tr><td>Authority</td><td>Functional manager quyết định; PM/coordinator không có quyền thêm</td></tr>
-              <tr><td>Loại initiative</td><td>Process improvement, công việc cải tiến trong dept</td></tr>
+              <tr>
+                <td><strong>Start / Planning</strong></td>
+                <td>Thấp</td>
+                <td>Cao nhất</td>
+              </tr>
+              <tr>
+                <td><strong>Execution peak</strong></td>
+                <td>Cao nhất</td>
+                <td>Đang giảm</td>
+              </tr>
+              <tr>
+                <td><strong>Near completion</strong></td>
+                <td>Giảm nhanh</td>
+                <td>Thấp nhất</td>
+              </tr>
             </tbody>
           </table>
-        </section>
 
-        <section id="q5-vs-q6">
-          <h2>2. Đối chiếu Q5 vs Q6 — hai cực quyền PM</h2>
-          <p>Đề thi hay đặt cặp câu “full authority” và “no budget/authority” liên tiếp.</p>
-
-          <div class="compare-pair">
-            <div class="pair-box q5">
-              <h4>Q5 — BuildMax (Project-oriented)</h4>
-              <ul style="margin:0;padding-left:1.1rem">
-                <li>Dedicated resources</li>
-                <li><strong>Full</strong> budget authority</li>
-                <li><strong>Full</strong> decision-making</li>
-              </ul>
-              <p style="margin:0.5rem 0 0"><a href="pmp-teach-organizational-structure.html">→ Bài Q5</a></p>
-            </div>
-            <div class="pair-box q6">
-              <h4>Q6 — Prime Manufacturing (Functional)</h4>
-              <ul style="margin:0;padding-left:1.1rem">
-                <li>Team đã trong sales dept</li>
-                <li><strong>No</strong> additional budget</li>
-                <li><strong>No</strong> additional authority</li>
-              </ul>
-            </div>
+          <div class="card info">
+            <h4>Lưu ý thi</h4>
+            <p style="margin:0">
+              Risk giảm dần áp dụng <strong>regardless of project life cycle</strong> (PMBOK p.59).
+              Cost curve mô tả chủ yếu cho <strong>predictive</strong> scenarios — agile có thể khác
+              nhưng đáp án C vẫn là chuẩn cho câu này.
+            </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 6</h2>
+          <h2>3. Câu hỏi thực hành — Question 13</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q6</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q13</div>
             <div class="q-text">
-              Liam works as a manager in the sales department at Prime Manufacturing and would like
-              to start a <em>process improvement initiative</em>. Any project team members are
-              already within his team, but Liam has <em>no additional budget or authority</em>.
-              <em>What type of organizational structure is Liam working in?</em>
+              You are in the planning phase of a refinery expansion project at PetraCore Energy Ltd.
+              An executive manager raises concerns about increasing staffing costs and several
+              identified risks early in the project.
+              What will you tell them about the <em>cost and risk</em> on the project?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Project-oriented organization.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Functional organization.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Balanced-matrix organization.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Weak-matrix organization.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Cost and staffing are highest at the beginning, while risk and uncertainty increase toward project completion.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Cost and staffing gradually decrease throughout the project, while risk and uncertainty remain constant.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Cost and staffing increase as work progresses and drop near completion, while risk and uncertainty decrease over time.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Cost and staffing remain stable throughout the project, while risk and uncertainty fluctuate unpredictably.</button>
 
             <div class="feedback" id="quizFeedback"></div>
-          </div>
-
-          <div class="card info">
-            <h4>Dịch tình huống</h4>
-            <p style="margin:0">
-              Liam là manager phòng Sales tại Prime Manufacturing, muốn khởi động
-              <strong>initiative cải tiến quy trình</strong>. Thành viên đã nằm trong team của anh,
-              nhưng <strong>không có ngân sách hay quyền bổ sung</strong>. Cấu trúc tổ chức nào?
-            </p>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <div class="card tip">
-            <h4>Giải thích (PMBOK p.22)</h4>
-            <p style="margin:0">
-              Dự án/cải tiến làm trong <strong>existing functional team</strong> — không có
-              project coordinator riêng, không budget/resources bổ sung → <strong>Functional</strong>.
-            </p>
-          </div>
-
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li><strong>Manager in sales department</strong> — initiative nằm trong chức năng sales.</li>
-            <li><strong>Team members already within his team</strong> — không huy động nguồn lực chuyên trách mới.</li>
-            <li><strong>No additional budget or authority</strong> — đặc trưng functional: không cấp thêm cho “project”.</li>
+            <li>Khớp PMBOK p.59: cost/staffing tăng khi work progresses, drop near completion.</li>
+            <li>Risk/uncertainty <strong>decrease over time</strong> — cao nhất ở đầu phase.</li>
+            <li>Executive thấy cost tăng + risk sớm — PM giải thích đúng pattern, không panic.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -255,64 +260,59 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Project-oriented</strong></td>
-                <td>Cần dedicated resources + PM full authority — ngược với “no additional budget/authority”.</td>
+                <td><strong>A</strong></td>
+                <td>Đảo ngược cả hai — cost không cao nhất lúc đầu; risk không tăng về cuối.</td>
               </tr>
               <tr>
-                <td><strong>C. Balanced matrix</strong></td>
-                <td>Matrix có vai trò PM chia quyền với functional manager — không khớp “no authority”.</td>
+                <td><strong>B</strong></td>
+                <td>Cost giảm dần + risk constant — sai hoàn toàn (✗ slide).</td>
               </tr>
               <tr>
-                <td><strong>D. Weak matrix</strong></td>
-                <td>Weak matrix vẫn có project coordinator/PM (dù quyền thấp). Đề nói không có authority bổ sung và làm trong functional team — Functional thuần hơn.</td>
+                <td><strong>D</strong></td>
+                <td>Cost stable + risk unpredictable — không mô tả impact over time p.59.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords</h4>
-            <ul style="margin:0">
-              <li><strong>already within his team</strong> → existing functional team</li>
-              <li><strong>no additional budget</strong> → Functional</li>
-              <li><strong>no additional authority</strong> → Functional (PM ✗)</li>
-              <li><strong>process improvement in department</strong> → không phải project hóa toàn tổ chức</li>
-            </ul>
+            <h4>Mnemonic thi</h4>
+            <p style="margin:0">
+              <strong>Cost</strong> = chuông (bell) · <strong>Risk</strong> = đường xuống dốc (↓ over time)<br>
+              Hai đường <em>ngược chiều</em> — đừng chọn đáp án mô tả cùng hướng cho cả hai.
+            </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Functional hay Matrix?</h2>
+          <h2>5. Drill — Đầu dự án hay cuối dự án?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="FUNC">
-              <span>Improvement done inside dept; no extra budget</span>
+            <div class="classify-row" data-answer="START">
+              <span>Risk and uncertainty are highest</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="START">Đầu dự án</button>
+                <button data-pick="END">Cuối dự án</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PROJ">
-              <span>PM controls budget; dedicated team</span>
+            <div class="classify-row" data-answer="END">
+              <span>Cost and staffing drop rapidly</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="START">Đầu dự án</button>
+                <button data-pick="END">Cuối dự án</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="WEAK">
-              <span>PM tracks schedule; FM assigns people</span>
+            <div class="classify-row" data-answer="START">
+              <span>Cost and staffing levels are low</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="START">Đầu dự án</button>
+                <button data-pick="END">Cuối dự án</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FUNC">
-              <span>Dept manager runs initiative with own staff only</span>
+            <div class="classify-row" data-answer="MID">
+              <span>Cost and staffing peak during execution</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="START">Đầu</button>
+                <button data-pick="MID">Giữa</button>
+                <button data-pick="END">Cuối</button>
               </div>
             </div>
           </div>
@@ -322,12 +322,16 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Có từ “project/initiative” → chọn Project-oriented</h4>
-            <p style="margin:0">Process improvement vẫn có thể chạy trong functional org. Xem <em>quyền và budget</em>, không chỉ tên initiative.</p>
+            <h4>Bẫy 1: Chọn A — đảo cost và risk</h4>
+            <p style="margin:0">Nhiều thí sinh nhớ “một cái cao đầu, một cái cao cuối” nhưng gán nhầm — cost cao giữa/cuối execution, risk cao đầu.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Weak matrix vs Functional</h4>
-            <p style="margin:0">Weak matrix: vẫn có vai trò PM/coordinator. Functional thuần: làm trong team hiện có, <strong>no additional authority</strong>, không chỉ định coordinator riêng.</p>
+            <h4>Bẫy 2: Executive lo risk sớm → nghĩ risk sẽ tăng</h4>
+            <p style="margin:0">Risks <em>identified</em> sớm là bình thường — uncertainty <strong>giảm</strong> khi quyết định và deliverables được chấp nhận.</p>
+          </div>
+          <div class="card tip">
+            <h4>Liên hệ Q12 leadership</h4>
+            <p style="margin:0">PM accountable leader giải thích pattern cho executive — data-driven, align với Standard p.59.</p>
           </div>
         </section>
 
@@ -335,44 +339,49 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Functional organization?</div>
-            <div class="flashcard-back">Dự án/cải tiến trong existing functional team — không coordinator riêng, không budget/resources bổ sung.</div>
+            <div class="flashcard-front">Cost/staffing theo thời gian? (predictive)</div>
+            <div class="flashcard-back">Low start → increase during work → drop rapidly near end.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q6 đáp án?</div>
-            <div class="flashcard-back"><strong>B — Functional.</strong> Team sẵn trong dept + no additional budget/authority.</div>
+            <div class="flashcard-front">Risk/uncertainty theo thời gian?</div>
+            <div class="flashcard-back">Highest at start → decrease as decisions made &amp; deliverables accepted.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q13 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Cost/staffing increase then drop; risk/uncertainty decrease over time.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">FUNCTIONAL ORGANIZATION — Q6 (PMBOK 8, p.22)
+          <div class="cheat-sheet">VARIABLES OVER TIME — Q13 (PMBOK 8, p.59)
 ─────────────────────────────────────────────────────
-FUNCTIONAL
-  ✓ Work done in EXISTING functional team
-  ✓ No designated project coordinator
-  ✓ NO additional budget or resources
-  ✓ Functional manager holds authority
+COST &amp; STAFFING (predictive):
+  Start: LOW
+  Execution: INCREASE (peak mid-project)
+  End: DROP rapidly
 
-Q6 KEYWORDS
-  "already within his team"
-  "no additional budget or authority"
-  "process improvement" in a department
+RISK &amp; UNCERTAINTY (any lifecycle):
+  Start/phase start: HIGHEST
+  Over time: DECREASE (decisions + accepted deliverables)
 
-Q5 vs Q6
-  Q5 full authority + dedicated resources → Project-oriented
-  Q6 no extra budget/authority + existing team → Functional
+Q13 ANSWER: C
+  Cost/staffing ↑ then ↓ near completion
+  Risk/uncertainty ↓ over time
 
-NOT FUNCTIONAL
-  ✗ Full PM budget control (Project-oriented)
-  ✗ Shared PM/FM authority (Balanced matrix)
-  ✗ PM role with limited power (Weak matrix — read carefully)
+WRONG PATTERNS:
+  A → cost high at start, risk ↑ at end (inverted)
+  B → cost ↓ throughout, risk constant ✗
+  D → cost stable, risk unpredictable
 
-Q6 ANSWER: B — Functional organization</div>
+VISUAL: Cost = bell curve · Risk = downward slope
+
+REF: The Standard for Project Management, p.59
+     "Impact of Variables Over Time"</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-organizational-structure.html">Q5: Project-oriented</a>
+          · <a href="pmp-teach-accountable-leader.html">Q12: Accountable Leader</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -381,12 +390,12 @@ Q6 ANSWER: B — Functional organization</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Project-oriented cần full authority và dedicated resources — trái với đề.",
-        B: "Đúng! Existing team + no additional budget/authority = Functional organization.",
-        C: "Balanced matrix chia quyền PM/FM — không phải 'no authority'.",
-        D: "Weak matrix vẫn có vai trò PM. Đề mô tả functional thuần hơn."
+        A: "Đảo ngược — cost không cao nhất lúc đầu; risk không tăng về cuối dự án.",
+        B: "Cost giảm dần và risk constant — trái PMBOK p.59 (✗ slide).",
+        C: "Đúng! Cost/staffing tăng khi work progresses, drop near end; risk/uncertainty giảm theo thời gian.",
+        D: "Cost stable và risk unpredictable — không mô tả impact of variables over time."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -402,7 +411,7 @@ Q6 ANSWER: B — Functional organization</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Functional organization.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Cost/staffing increase then drop near completion; risk/uncertainty decrease over time.</strong>" : "");
         });
       });
       let score = 0;
