@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Change Log (Q27)</title>
+  <title>PMBOK 8 — Process Improvement (Q30)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -66,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 400px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -87,11 +87,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Change Log · Q27</div>
+      <div class="brand-sub">Process Improvement · Q30</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#changelog">Change Log</a>
-        <a href="#logs">Phân biệt logs</a>
+        <a href="#quality">Manage Quality Assurance</a>
+        <a href="#rca">Root cause vs symptoms</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -128,16 +128,16 @@
         <a href="pmp-teach-change-log.html">Q27: Change Log</a>
         <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
         <a href="pmp-teach-issue-log.html">Q29: Issue Log</a>
-        <a href="pmp-teach-process-improvement.html">Q30: Process Improvement</a>
+        <a href="pmp-teach-process-improvement.html" class="series-current">Q30: Process Improvement</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-27">Luyện câu 27</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-30">Luyện câu 30</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#changelog">Change Log</a>
-        <a href="#logs">Logs</a>
+        <a href="#quality">QA</a>
+        <a href="#rca">RCA</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -146,167 +146,159 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q27 về <strong>Change Log</strong> — nhiều modifications được request,
-            team confused về <em>what to implement and in what sequence</em> trong execution.
+            Bài học Q30 về <strong>Process Analysis &amp; Improvement</strong> — defects lặp lại
+            do <em>inconsistent procedures across shifts</em>; cần xử lý root cause, không chỉ
+            ghi nhận defect hay cập nhật instructions.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.22 &amp; p.116</span>
-            <span class="badge">Manage Project Execution</span>
-            <span class="badge">Câu 27 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.23 &amp; p.198</span>
+            <span class="badge">Manage Quality Assurance</span>
+            <span class="badge">Câu 30 — Practice</span>
           </div>
         </header>
 
-        <section id="changelog">
-          <h2>1. Change Log</h2>
+        <section id="quality">
+          <h2>1. Manage Quality Assurance &amp; Process Improvement</h2>
           <p>
-            Change log ghi lại <strong>tất cả change requests đã submit</strong> và
-            <strong>trạng thái</strong> của chúng — disposition của từng request
-            xuyên suốt project lifecycle.
+            Manage Quality Assurance thực hiện các hoạt động có hệ thống từ quality management plan
+            để đảm bảo outputs đáp ứng requirements. Process improvement phân tích và nâng cao
+            processes — giảm waste, tăng consistency và customer satisfaction.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa (PMBOK p.116)</h4>
+            <h4>Process improvement (PMBOK p.198)</h4>
             <p style="margin:0">
-              A change log records all submitted changes and their status, documenting
-              the disposition of change requests throughout the project.
+              Process improvement focuses on analyzing and enhancing processes to increase
+              efficiency, quality, and value by identifying improvements, reducing waste, and
+              achieving better performance and customer satisfaction.
             </p>
           </div>
 
-          <div class="card info">
-            <h4>Manage Project Execution (p.22)</h4>
-            <p style="margin:0">
-              Leading and performing work defined in the plan and implementing
-              <strong>approved changes</strong> to meet objectives — deliverables meet scope requirements.
-            </p>
-          </div>
+          <p>Tools gắn với root cause analysis: <strong>5 Whys</strong>, <strong>Ishikawa</strong> (fishbone).</p>
         </section>
 
-        <section id="logs">
-          <h2>2. Phân biệt các log/register</h2>
+        <section id="rca">
+          <h2>2. Root cause vs triệu chứng</h2>
 
           <table>
             <thead>
-              <tr><th>Artifact</th><th>Ghi gì?</th><th>Q27 fit?</th></tr>
+              <tr><th>Signal trong đề</th><th>Ý nghĩa</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Change Log</strong></td>
-                <td>Submitted changes + status + disposition + sequence of approved mods</td>
-                <td>✓ Đúng — modifications throughout project</td>
+                <td><em>Repeatedly</em> identify defects</td>
+                <td>Pattern — không phải one-off defect</td>
               </tr>
               <tr>
-                <td>Scope Statement / Baseline</td>
-                <td>Authorized scope ban đầu — không track history từng change</td>
-                <td>✗ Thiếu status/sequence của modifications</td>
+                <td><em>Inconsistent procedures across shifts</em></td>
+                <td>Process problem — root cause</td>
               </tr>
               <tr>
-                <td>Issue Log</td>
-                <td>Impacts đã xảy ra cần xử lý</td>
-                <td>✗ Không phải change request tracking</td>
+                <td><em>Address underlying cause</em></td>
+                <td>Process analysis &amp; improvement (D)</td>
               </tr>
               <tr>
-                <td>Risk Register</td>
-                <td>Uncertainties &amp; planned responses</td>
-                <td>✗ Không liên quan modifications confusion</td>
+                <td>Rework and delays</td>
+                <td>Hậu quả — fix process, không chỉ count defects</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 27</h2>
+          <h2>3. Câu hỏi thực hành — Question 30</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q27</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q30</div>
             <div class="q-text">
-              Rina is executing a warehouse automation project at Grid Line Logistics.
-              Several <em>modifications have been requested throughout the project</em>,
-              and now there is confusion about <em>what should be implemented and in what sequence</em>.
-              What will Rina do <em>next</em>?
+              Omar is managing a pharmaceutical packaging project at NCL. Quality inspections
+              repeatedly identify defects caused by <em>inconsistent procedures across shifts</em>,
+              leading to rework and delays. Omar wants to <em>address the underlying cause</em>
+              and improve consistency moving forward. What should Omar do <em>next</em>?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Review the Scope Statement.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Review the Change Log.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Review the Issue Log.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Review the Risk Register.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Update the team's work instructions.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Implement check sheets.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Assign a quality lead.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Apply process analysis &amp; improvement.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>“Modifications requested throughout” = change requests cần track.</li>
-            <li>Confusion về implement gì, thứ tự nào → Change Log có status &amp; disposition.</li>
-            <li>Execution phase — implement <em>approved</em> changes per log.</li>
+            <li>Underlying cause = inconsistent procedures → analyze &amp; improve process.</li>
+            <li>Manage Quality Assurance + process improvement (p.23, p.198).</li>
+            <li>Repeated defects across shifts = systemic process issue, not just documentation tweak.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng NEXT</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Scope Statement</strong></td>
-                <td>Baseline scope ban đầu — không document lịch sử nhiều modifications &amp; sequence.</td>
+                <td><strong>A. Update work instructions</strong></td>
+                <td>Có thể là output sau improvement — chưa analyze root cause trước.</td>
               </tr>
               <tr>
-                <td><strong>C. Issue Log</strong></td>
-                <td>Issues = đã xảy ra — không phải track change requests.</td>
+                <td><strong>B. Check sheets</strong></td>
+                <td>Tool ghi nhận/count defects — không fix inconsistent procedures.</td>
               </tr>
               <tr>
-                <td><strong>D. Risk Register</strong></td>
-                <td>Risks = uncertainty — không giải quyết confusion về approved modifications.</td>
+                <td><strong>C. Assign quality lead</strong></td>
+                <td>Organizational fix — không address process analysis trực tiếp.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q20 Assumption Log</h4>
+            <h4>Liên hệ Q11 Embed Quality</h4>
             <p style="margin:0">
-              Q20 phân biệt assumption/risk/issue logs ở planning. Q27 = execution —
-              <strong>change log</strong> khi nhiều modifications gây confusion.
+              Q11: embed quality vào processes. Q30: khi processes inconsistent gây defects
+              lặp lại → process analysis &amp; improvement.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Log nào?</h2>
+          <h2>5. Drill — Tool/action nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="CHG">
-              <span>Track status of submitted change requests</span>
+            <div class="classify-row" data-answer="PROC">
+              <span>Inconsistent procedures causing repeated defects</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="PROC">Process improvement</button>
+                <button data-pick="CHECK">Check sheet</button>
+                <button data-pick="ROLE">Assign lead</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ISS">
-              <span>Document problem that has already occurred</span>
+            <div class="classify-row" data-answer="CHECK">
+              <span>Tally defect types during inspection</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="PROC">Process improvement</button>
+                <button data-pick="CHECK">Check sheet</button>
+                <button data-pick="ROLE">Assign lead</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RSK">
-              <span>Uncertain event and planned response</span>
+            <div class="classify-row" data-answer="PROC">
+              <span>5 Whys / Ishikawa on shift variance</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="PROC">Process improvement</button>
+                <button data-pick="CHECK">Check sheet</button>
+                <button data-pick="ROLE">Assign lead</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="CHG">
-              <span>Confusion about approved mods and sequence</span>
+            <div class="classify-row" data-answer="ROLE">
+              <span>Need dedicated QA ownership long-term</span>
               <div class="classify-btns">
-                <button data-pick="CHG">Change Log</button>
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="PROC">Process improvement</button>
+                <button data-pick="CHECK">Check sheet</button>
+                <button data-pick="ROLE">Assign lead</button>
               </div>
             </div>
           </div>
@@ -316,16 +308,16 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “What to implement” → Scope Statement (A)</h4>
-            <p style="margin:0">Scope baseline = authorized scope; nhiều modifications cần Change Log để biết approved changes &amp; order.</p>
+            <h4>Bẫy 1: Defects → Check sheets (B)</h4>
+            <p style="margin:0">Check sheet đếm/record — không analyze và improve inconsistent procedures.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Confusion → Issue Log (C)</h4>
-            <p style="margin:0">Issue = đã materialize — đây là change requests chưa rõ implementation sequence.</p>
+            <h4>Bẫy 2: Inconsistency → Update instructions (A)</h4>
+            <p style="margin:0">Cập nhật WI là symptom fix — cần process analysis trước để hiểu root cause across shifts.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Modifications + status/sequence confusion</strong> → Change Log (B).</p>
+            <p style="margin:0"><strong>Underlying cause + repeated process defects</strong> → Process analysis &amp; improvement (D).</p>
           </div>
         </section>
 
@@ -333,48 +325,51 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Change log ghi gì? (p.116)</div>
-            <div class="flashcard-back">All submitted changes + status + disposition throughout project.</div>
+            <div class="flashcard-front">Process improvement làm gì? (p.198)</div>
+            <div class="flashcard-back">Analyze &amp; enhance processes · reduce waste · better performance &amp; satisfaction.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q27 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Review the Change Log.</div>
+            <div class="flashcard-front">Q30 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Apply process analysis &amp; improvement.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">CHANGE LOG — Q27 (PMBOK 8, p.22 &amp; p.116)
+          <div class="cheat-sheet">PROCESS IMPROVEMENT — Q30 (PMBOK 8, p.23 &amp; p.198)
 ─────────────────────────────────────────────────────
-PROCESS: Manage Project Execution
-ARTIFACT: Change log
-  - All submitted changes
-  - Status &amp; disposition
-  - Track approved mods through lifecycle
+PROCESS: Manage Quality Assurance
+FOCUS: Process analysis &amp; improvement
+  - Analyze/enhance processes
+  - Identify improvements, reduce waste
+  - Better performance &amp; customer satisfaction
 
-SCENARIO: Grid Line — modifications requested throughout
-           confusion: WHAT to implement + SEQUENCE
-NEXT → B) Review the CHANGE LOG ✓
+RCA TOOLS: 5 Whys · Ishikawa (fishbone)
+
+SCENARIO: NCL packaging — REPEATED defects
+           INCONSISTENT procedures across SHIFTS
+           address UNDERLYING CAUSE
+NEXT → D) Apply PROCESS ANALYSIS &amp; IMPROVEMENT ✓
 
 NOT:
-  A) Scope Statement — baseline, not change history
-  C) Issue Log — occurred problems, not CR tracking
-  D) Risk Register — uncertainties, not modifications
+  A) Update work instructions — after analysis, symptom-level
+  B) Check sheets — count/record defects only
+  C) Assign quality lead — org fix, not process analysis
 
-VS Q20:
-  Assumption/Risk/Issue logs at planning
-  Change log at execution for approved changes
+SIGNAL: "underlying cause" + "inconsistent procedures" + "repeatedly"
 
-SIGNAL: "modifications requested" + "what sequence"
+VS Q11: Embed quality in processes
+VS Q28: Output per scope baseline (execution conformance)
 
-Q27 ANSWER: B
+Q30 ANSWER: D
 
-REF: PMBOK Guide, 8th Ed., p.22 &amp; p.116 — Change log</div>
+REF: PMBOK Guide, 8th Ed., p.23 &amp; p.198</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
-          · <a href="pmp-full-questions.html#q-27">Luyện câu 27</a>
+          · <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
+          · <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
+          · <a href="pmp-full-questions.html#q-30">Luyện câu 30</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -383,12 +378,12 @@ REF: PMBOK Guide, 8th Ed., p.22 &amp; p.116 — Change log</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Scope Statement là baseline ban đầu — không track lịch sử modifications &amp; sequence.",
-        B: "Đúng! Change log ghi submitted changes, status, disposition — clarify what approved &amp; order (p.116).",
-        C: "Issue Log cho problems đã xảy ra — không phải change request tracking.",
-        D: "Risk Register cho uncertainties — không liên quan modifications confusion."
+        A: "Update work instructions có thể sau improvement — chưa analyze root cause của shift inconsistency.",
+        B: "Check sheets ghi nhận defects — không fix inconsistent procedures across shifts.",
+        C: "Assign quality lead là organizational — không thay process analysis &amp; improvement.",
+        D: "Đúng! Address underlying cause — process analysis &amp; improvement (Manage QA, p.198)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -404,7 +399,7 @@ REF: PMBOK Guide, 8th Ed., p.22 &amp; p.116 — Change log</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Review the Change Log.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Apply process analysis &amp; improvement.</strong>" : "");
         });
       });
       let score = 0;
