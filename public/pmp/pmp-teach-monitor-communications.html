@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Brainstorming (Q48)</title>
+  <title>PMBOK 8 — Monitor Communications (Q81)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,6 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .output-flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .output-flow { grid-template-columns: 1fr; } }
+    .output-step { text-align: center; padding: 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.82rem; }
+    .output-step strong { display: block; color: var(--primary-dark); margin-bottom: 0.25rem; }
+    .output-step.active { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 380px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.65rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -88,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Brainstorming · Q48</div>
+      <div class="brand-sub">Monitor Communications · Q81</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#brainstorming">Brainstorming</a>
-        <a href="#techniques">Technique Compare</a>
+        <a href="#monitor">Monitor Comms</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -147,7 +151,7 @@
         <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
         <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
         <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
-        <a href="pmp-teach-brainstorming.html" class="series-current">Q48: Brainstorming</a>
+        <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
         <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
         <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
@@ -180,15 +184,15 @@
         <a href="pmp-teach-cultural-awareness.html">Q78: Cultural Awareness</a>
         <a href="pmp-teach-manage-communications.html">Q79: Manage Comms</a>
         <a href="pmp-teach-monitor-stakeholder-engagement.html">Q80: Monitor Engagement</a>
-        <a href="pmp-teach-monitor-communications.html">Q81: Monitor Comms</a>
+        <a href="pmp-teach-monitor-communications.html" class="series-current">Q81: Monitor Comms</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#brainstorming">Brainstorm</a>
-        <a href="#techniques">Compare</a>
+        <a href="#monitor">Monitor</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -197,164 +201,191 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q48 về <strong>Brainstorming</strong> — Jane, BLS customer portal: team
-            collaborate tốt nhưng chỉ có <em>handful of ideas</em>; sponsor muốn
-            <em>speed things up</em> khi gather requirements.
+            Bài học Q81 về <strong>Monitor Communications</strong> — Apex Financial Systems upgrade:
+            bản cập nhật <em>mật chứa budget &amp; staffing nhạy cảm</em> bị gửi nhầm cho nhóm
+            stakeholder rộng hơn dự kiến.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.41 &amp; 149</span>
-            <span class="badge">Elicit and Analyze Requirements</span>
-            <span class="badge">Brainstorming</span>
-            <span class="badge">Câu 48 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.77</span>
+            <span class="badge">Monitor Communications</span>
+            <span class="badge">Issue Log</span>
+            <span class="badge">Câu 81 — Practice</span>
           </div>
         </header>
 
-        <section id="brainstorming">
-          <h2>1. Brainstorming (p.149)</h2>
+        <section id="monitor">
+          <h2>1. Monitor Communications (p.77)</h2>
           <p>
-            Kỹ thuật group để <strong>generate ideas quickly</strong>, thường do facilitator dẫn.
-            Bao gồm idea generation và analysis — gather data, solutions, ideas từ stakeholders,
-            SMEs, và team members trong Elicit and Analyze Requirements (p.41).
+            <strong>Monitor Communications</strong> đảm bảo nhu cầu thông tin của dự án và stakeholder
+            được đáp ứng, hỗ trợ luồng thông tin tối ưu. Khi phát hiện sự cố truyền thông
+            (đặc biệt thông tin nhạy cảm bị lộ), đây là <strong>issue đã xảy ra</strong> — cần xử lý
+            ngay, không chỉ cập nhật kế hoạch.
           </p>
 
+          <div class="output-flow">
+            <div class="output-step active"><strong>1. Issue Log</strong><span>Ghi &amp; theo dõi sự cố</span></div>
+            <div class="output-step"><strong>2. Comms Plan</strong><span>Điều chỉnh sau khi log</span></div>
+            <div class="output-step"><strong>3. Actions</strong><span>Contain, notify, prevent</span></div>
+          </div>
+
           <div class="card tip">
-            <h4>Khi nào dùng brainstorming?</h4>
+            <h4>Outputs của Monitor Communications</h4>
             <p style="margin:0">
-              Cần <em>more ideas fast</em> — team đang work well together, chỉ thiếu volume
-              of ideas. Open, rapid ideation session.
+              Bao gồm cập nhật <strong>Issue Log</strong> và <strong>Communications Management Plan</strong>.
+              Thông tin nhạy cảm bị phân phối nhầm = <em>an issue</em> — address issue trước.
             </p>
           </div>
-        </section>
-
-        <section id="techniques">
-          <h2>2. Brainstorming vs các kỹ thuật khác</h2>
 
           <table>
             <thead>
-              <tr><th>Technique</th><th>Best for</th><th>Q48</th></tr>
+              <tr><th></th><th>Issue</th><th>Risk</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Brainstorming (B)</strong></td>
-                <td>Generate many ideas quickly in group</td>
-                <td><strong>Handful of ideas + speed up</strong></td>
+                <td><strong>Trạng thái</strong></td>
+                <td>Đã xảy ra (accidental distribution)</td>
+                <td>Chưa xảy ra (có thể xảy ra)</td>
               </tr>
               <tr>
-                <td><strong>Affinity diagram (A)</strong></td>
-                <td>Organize/group ideas after generation</td>
-                <td>After brainstorm — không tạo ideas nhanh</td>
+                <td><strong>Artifact</strong></td>
+                <td>Issue Log (Q29, Q81)</td>
+                <td>Risk Register</td>
               </tr>
               <tr>
-                <td><strong>Interviews (C)</strong></td>
-                <td>Deep 1-on-1 input, sensitive topics</td>
-                <td>Slower — sequential, không speed up group ideation</td>
+                <td><strong>Q81</strong></td>
+                <td>✓ Email/update đã gửi nhầm</td>
+                <td>✗ Instructor ghi "Risks" — bẫy; sự kiện đã diễn ra</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q81 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Update Comms Plan</strong></td>
+                <td>Revise communication approach</td>
+                <td>Output của process — nhưng sau khi log issue (instructor: arrow → C)</td>
               </tr>
               <tr>
-                <td><strong>NGT (D)</strong></td>
-                <td>Equal participation when loud voices dominate</td>
-                <td>Q47 problem — team already works well together</td>
+                <td><strong>B. Update Stakeholder Engagement Plan</strong></td>
+                <td>Adjust engagement strategies</td>
+                <td>Sai artifact — đây là communications breach</td>
+              </tr>
+              <tr>
+                <td><strong>C. Raise in Issue Log</strong></td>
+                <td>Document &amp; track the incident</td>
+                <td><strong>Yes — sensitive leak already happened</strong></td>
+              </tr>
+              <tr>
+                <td><strong>D. Formal change request</strong></td>
+                <td>Modify reporting deliverables</td>
+                <td>Overkill — không cần CR cho accidental distribution (instructor: X)</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Liên hệ Q47 vs Q48</h4>
+            <h4>Manage vs Monitor Communications</h4>
             <p style="margin:0">
-              Q47: loud voices dominate → <strong>NGT</strong> (structured, equal). Q48: few ideas,
-              need speed → <strong>brainstorming</strong> (rapid group ideation).
+              Q79: <strong>manage</strong> distribution (push/pull). Q81: <strong>monitor</strong> effectiveness —
+              khi có breach, log issue trước khi update plan.
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 48</h2>
+          <h2>3. Câu hỏi thực hành — Question 81</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q48</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q81</div>
             <div class="q-text">
-              Jane is gathering requirements for a customer portal at BLS. The team are working
-              well together but have only generated a <em>handful of ideas</em> so far. The Project
-              Sponsor would like to <em>speed things up</em>. What should Jane do next?
+              You are managing the Apex Financial Systems upgrade project. A confidential project update
+              containing <em>sensitive budget and staffing information</em> was accidentally distributed
+              to a broader stakeholder group than intended. What will you do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Use an affinity diagram.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Use brainstorming.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Conduct interviews with senior users.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Use the nominal group technique.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Update the Communications Management Plan.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Update the Stakeholder Engagement Plan.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Raise it in the Issue Log.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Raise a formal change request to modify project reporting deliverables.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>Need more ideas + sponsor wants speed → facilitated group brainstorming.</li>
-            <li>Team collaborates well — good fit for open ideation session.</li>
-            <li>Elicit and Analyze Requirements — brainstorming (p.41, 149).</li>
+            <li>Accidental distribution = problem <em>đã xảy ra</em> → issue (p.77).</li>
+            <li>Monitor Communications outputs: Issue Log + Comms Management Plan updates.</li>
+            <li>Sensitive info leak cần được document &amp; track trước khi revise plan.</li>
+            <li>Pattern giống Q29: breach/leak → Issue Log first.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng (NEXT)</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Affinity diagram</strong></td>
-                <td>Sort/group existing ideas — không generate volume quickly.</td>
+                <td><strong>A. Update Comms Plan</strong></td>
+                <td>Đúng là output — nhưng issue phải được logged trước. Instructor marks A, arrows to C.</td>
               </tr>
               <tr>
-                <td><strong>C. Interviews</strong></td>
-                <td>1-on-1 sequential — slower than group brainstorm for rapid ideation.</td>
+                <td><strong>B. Engagement Plan</strong></td>
+                <td>Sai process/artifact — communications breach, không phải engagement strategy.</td>
               </tr>
               <tr>
-                <td><strong>D. NGT</strong></td>
-                <td>Structured equal participation — Q47 when dominance is problem, not few ideas.</td>
+                <td><strong>D. Change request</strong></td>
+                <td>Accidental send ≠ scope change. CR cho deliverable modification — overkill.</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Brainstorm, affinity, interview hay NGT?</h2>
+          <h2>5. Drill — Issue, Plan, hay Change Request?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="BRAIN">
-              <span>Few ideas — sponsor wants to speed up ideation</span>
+            <div class="classify-row" data-answer="ISSUE">
+              <span>Confidential update accidentally sent to wrong stakeholder group</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="AFF">Affinity</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="PLAN">Comms Plan</button>
+                <button data-pick="CR">Change Req</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="AFF">
-              <span>Many sticky notes — group into categories</span>
+            <div class="classify-row" data-answer="PLAN">
+              <span>Issue logged — need to revise distribution list &amp; approval workflow</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="AFF">Affinity</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="PLAN">Comms Plan</button>
+                <button data-pick="CR">Change Req</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="NGT">
-              <span>Loud voices dominate — need equal participation</span>
+            <div class="classify-row" data-answer="CR">
+              <span>Sponsor approves adding monthly executive dashboard as new deliverable</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="AFF">Affinity</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="PLAN">Comms Plan</button>
+                <button data-pick="CR">Change Req</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="INTV">
-              <span>Sensitive confidential input from one executive</span>
+            <div class="classify-row" data-answer="ISSUE">
+              <span>Unauthorized access to sensitive project data reported (Q29 pattern)</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="AFF">Affinity</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="PLAN">Comms Plan</button>
+                <button data-pick="CR">Change Req</button>
               </div>
             </div>
           </div>
@@ -364,20 +395,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Ideas → Affinity diagram (A)</h4>
-            <p style="margin:0">Affinity organizes ideas — stem cần generate MORE ideas fast, không sort.</p>
+            <h4>Bẫy 1: Monitor Comms → update plan (A)</h4>
+            <p style="margin:0">Plan update là output — nhưng sensitive leak = issue đã xảy ra. Log issue trước (C).</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Users → Interviews (C)</h4>
-            <p style="margin:0">Interviews chậm hơn group brainstorm — sponsor wants speed.</p>
+            <h4>Bẫy 2: Sensitive → Risk Register</h4>
+            <p style="margin:0">Instructor ghi "Risks" — nhưng accidental distribution <em>đã xảy ra</em> → Issue, không phải Risk.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Group technique → NGT (D)</h4>
-            <p style="margin:0">NGT = Q47 dominance problem. Q48: team works well, chỉ cần more ideas.</p>
+            <h4>Bẫy 3: Reporting problem → change request (D)</h4>
+            <p style="margin:0">CR cho scope/deliverable change — không phải fix accidental distribution mistake.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Handful of ideas · speed things up · team working well</strong> → Brainstorming (B).</p>
+            <p style="margin:0"><strong>Sensitive info leaked · wrong audience · accidental send</strong> → Raise in Issue Log (C).</p>
           </div>
         </section>
 
@@ -385,59 +416,61 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Brainstorming? (p.149)</div>
-            <div class="flashcard-back">Group technique to generate ideas quickly — facilitator-led ideation &amp; analysis.</div>
+            <div class="flashcard-front">Monitor Communications outputs?</div>
+            <div class="flashcard-back">Issue Log updates + Communications Management Plan updates (p.77).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q48 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Use brainstorming.</div>
+            <div class="flashcard-front">Q81 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Raise it in the Issue Log.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">BRAINSTORMING — Q48 (PMBOK 8, p.41 &amp; 149)
+          <div class="cheat-sheet">MONITOR COMMUNICATIONS — Q81
+(PMBOK 8, p.77)
 ─────────────────────────────────────────────────────
-PROCESS: Elicit and Analyze Requirements (p.41)
-         Brainstorming (p.149)
+PROCESS: Monitor Communications
+  • Ensure info needs of project &amp; stakeholders met
+  • Support optimal information flow
+  • OUTPUTS: Issue Log + Comms Management Plan updates
 
-BRAINSTORMING:
-  - GROUP setting · generate ideas QUICKLY
-  - Facilitator-led
-  - Idea generation + analysis
-  - Gather from stakeholders · SMEs · team
+ISSUE vs RISK:
+  Issue = ALREADY HAPPENED → Issue Log
+  Risk  = MAY HAPPEN      → Risk Register
 
-SCENARIO: Jane — BLS customer portal
-           Team WORKING WELL TOGETHER
-           Only HANDFUL OF IDEAS
-           Sponsor: SPEED THINGS UP
-→ B) USE BRAINSTORMING ✓
+SCENARIO: Apex Financial Systems upgrade
+           Confidential update with SENSITIVE budget/staffing
+           ACCIDENTALLY distributed to BROADER stakeholder group
+QUESTION: What will you do NEXT?
+→ C) RAISE IT IN THE ISSUE LOG ✓
 
 NOT:
-  A) AFFINITY DIAGRAM — organize/group ideas (after gen)
-  C) INTERVIEWS — 1-on-1, slower, not rapid group ideation
-  D) NOMINAL GROUP — Q47: loud voices dominate (different)
+  A) UPDATE COMMS PLAN — output, but AFTER logging issue
+  B) UPDATE ENGAGEMENT PLAN — wrong artifact
+  D) FORMAL CHANGE REQUEST — not a scope/deliverable change
 
-Q47 vs Q48:
-  Q47 dominance / unequal → NGT (D)
-  Q48 few ideas / speed up → BRAINSTORM (B)
+SEQUENCE:
+  1. Log issue (C) — document sensitive leak
+  2. Then update Comms Plan (A) — prevent recurrence
+  3. Contain &amp; notify as needed
 
-FLOW:
-  Brainstorm (generate) → Affinity (organize) → analyze
+LINK: Q29 — unauthorized access → Issue Log first
+      Q79 — manage distribution (push/pull)
+      Q76 — plan communications
 
-SIGNAL: "handful of ideas"
-        "speed things up" · "generate ideas quickly"
-        team collaborates well · elicit requirements
+SIGNAL: "accidentally distributed" + "sensitive information"
+        → ISSUE LOG (not plan, not CR)
 
-Q48 ANSWER: B
+Q81 ANSWER: C
 
-REF: PMBOK Guide, 8th Ed., p.41, p.149</div>
+REF: PMBOK Guide, 8th Ed., p.77, Monitor Communications</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
-          · <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
-          · <a href="pmp-full-questions.html#q-48">Luyện câu 48</a>
+          · <a href="pmp-teach-issue-log.html">Q29: Issue Log</a>
+          · <a href="pmp-teach-manage-communications.html">Q79: Manage Comms</a>
+          · <a href="pmp-full-questions.html#q-81">Luyện câu 81</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -446,12 +479,12 @@ REF: PMBOK Guide, 8th Ed., p.41, p.149</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Affinity diagram groups/sorts ideas — không generate nhiều ideas nhanh như brainstorming.",
-        B: "Đúng! Brainstorming generates ideas quickly in group settings — speed up ideation (p.41, 149).",
-        C: "Interviews are 1-on-1 and slower — sponsor wants speed, team already collaborates well.",
-        D: "NGT fixes dominance/unequal participation (Q47) — không phải few ideas + speed problem."
+        A: "Update Comms Plan là output của Monitor Communications — nhưng issue phải được logged trước khi revise plan.",
+        B: "Stakeholder Engagement Plan không phải artifact xử lý communications breach.",
+        C: "Đúng! Sensitive info accidentally distributed = issue đã xảy ra → Issue Log (p.77).",
+        D: "Change request dành cho scope/deliverable change — không phải accidental distribution."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -467,7 +500,7 @@ REF: PMBOK Guide, 8th Ed., p.41, p.149</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Use brainstorming.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Raise it in the Issue Log.</strong>" : "");
         });
       });
       let score = 0;
@@ -495,16 +528,18 @@ REF: PMBOK Guide, 8th Ed., p.41, p.149</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
