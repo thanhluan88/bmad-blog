@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Project Management Team (Q9)</title>
+  <title>PMBOK 8 — Adaptive Approach (Q15)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,9 +51,16 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .interaction-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.85rem; justify-content: center; }
-    .flow-box { padding: 0.5rem 0.85rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--info); background: var(--info-bg); color: #1d4ed8; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
+    .iter-viz { display: flex; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; flex-wrap: wrap; }
+    .iter-box { padding: 0.5rem 0.75rem; background: var(--ok-bg); border: 1.5px solid var(--ok); border-radius: 8px; font-size: 0.78rem; font-weight: 600; color: #065f46; position: relative; }
+    .iter-box:not(:last-child)::after { content: "↻"; position: absolute; right: -0.65rem; top: 50%; transform: translateY(-50%); color: var(--primary); font-weight: 700; }
+    .po-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; padding: 0.85rem 1rem; background: var(--info-bg); border: 1px solid var(--info); border-radius: var(--radius); font-size: 0.85rem; justify-content: center; }
+    .po-flow strong { color: #1d4ed8; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
+    @media (max-width: 600px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-box { padding: 0.85rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--card); font-size: 0.84rem; }
+    .approach-box strong { display: block; margin-bottom: 0.25rem; color: var(--primary-dark); }
+    .approach-box.ok { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -69,7 +76,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 280px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 320px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -90,11 +97,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Project Management Team · Q9</div>
+      <div class="brand-sub">Adaptive Approach · Q15</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#team">PM Team làm gì?</a>
-        <a href="#interaction">Tương tác PM ↔ FM</a>
+        <a href="#adaptive">Adaptive</a>
+        <a href="#compare">So sánh Q14</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -116,7 +123,7 @@
         <a href="pmp-teach-accountable-leader.html">Q12: Accountable Leader</a>
         <a href="pmp-teach-variables-over-time.html">Q13: Variables Over Time</a>
         <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
-        <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive Approach</a>
+        <a href="pmp-teach-adaptive-approach.html" class="series-current">Q15: Adaptive Approach</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
       <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
@@ -124,8 +131,8 @@
 
     <div>
       <nav class="mobile-nav">
-        <a href="#team">PM Team</a>
-        <a href="#interaction">PM ↔ FM</a>
+        <a href="#adaptive">Adaptive</a>
+        <a href="#compare">Compare</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -134,192 +141,211 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q9 về <strong>Project Management Team</strong> — tương tác chủ động
-            với functional managers và các bên để đảm bảo nguồn lực, funding và căn chỉnh mục tiêu.
+            Bài học Q15 về <strong>Adaptive Approaches</strong> — agile/change-driven khi
+            requirements volatile; short iterations, feedback, và một người chịu trách nhiệm scope/value.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.29</span>
-            <span class="badge">Resources</span>
-            <span class="badge">Câu 9 — Practice</span>
+            <span class="badge">The Standard for PM, p.63</span>
+            <span class="badge">Development Approach</span>
+            <span class="badge">Câu 15 — Practice</span>
           </div>
         </header>
 
-        <section id="team">
-          <h2>1. Project Management Team</h2>
+        <section id="adaptive">
+          <h2>1. Adaptive Approach (PMBOK 8)</h2>
           <p>
-            <strong>Project management team</strong> không chỉ lập kế hoạch nội bộ — họ
-            <strong>chủ động tương tác và đàm phán</strong> với nhiều bên trong tổ chức
-            để dự án nhận đủ nguồn lực và căn chỉnh với mục tiêu tổ chức.
+            Adaptive approaches (change-driven / agile) phù hợp khi requirements và technical
+            solution <strong>highly uncertain, volatile, likely to change</strong>.
+            Vision rõ sớm; requirements được elaborate dần theo feedback.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.29)</h4>
+            <h4>Định nghĩa chính thức (PMBOK p.63)</h4>
             <p style="margin:0">
-              The project management team proactively interacts and negotiates with other
-              project management teams, portfolio managers, program managers, project managers,
-              and <strong>functional managers</strong> for demands on <strong>critical resources</strong>,
-              priorities on project funding, receipt or distribution of deliverables, and in
-              aligning project goals and objectives with those of the organization.
+              A clear vision is established early, and known requirements are progressively
+              elaborated, changed, or replaced based on stakeholder feedback, the environment,
+              or unexpected events.
             </p>
           </div>
 
-          <h3>Hoạt động đặc trưng của PM Team</h3>
+          <div class="iter-viz" aria-label="Short iterations cycle">
+            <span class="iter-box">Sprint 1</span>
+            <span class="iter-box">Sprint 2</span>
+            <span class="iter-box">Sprint 3</span>
+            <span class="iter-box">Sprint n</span>
+          </div>
+          <p style="font-size:0.85rem;color:var(--muted);text-align:center;margin-top:-0.5rem">
+            Short iterations · deliver features regularly · refine from feedback
+          </p>
+
+          <div class="po-flow">
+            <strong>Product Owner</strong> — one person responsible for approved scope &amp; value to the organization
+          </div>
+
+          <h3>Keywords trong đề thi → Adaptive</h3>
           <ul>
-            <li>Đàm phán <strong>critical resources</strong> với functional managers</li>
-            <li>Ưu tiên <strong>project funding</strong></li>
-            <li>Phối hợp nhận/phân phối deliverables</li>
-            <li>Căn chỉnh mục tiêu dự án với mục tiêu tổ chức</li>
+            <li>Short iterations / sprints</li>
+            <li>Deliver features regularly</li>
+            <li>Refine based on stakeholder feedback</li>
+            <li>Mobile app, digital products, high uncertainty</li>
+            <li>Product Owner owns scope &amp; value</li>
           </ul>
         </section>
 
-        <section id="interaction">
-          <h2>2. PM Team ↔ Functional Manager</h2>
-          <p>Trong matrix/functional org, nguồn lực thường thuộc functional manager — PM team phải coordinate.</p>
+        <section id="compare">
+          <h2>2. Adaptive vs Predictive (Q14 ↔ Q15)</h2>
 
-          <div class="interaction-flow">
-            <span class="flow-box">PM Team</span>
-            <span class="flow-arrow">⇄ negotiate</span>
-            <span class="flow-box">Functional Manager</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-box">Critical resources</span>
+          <div class="approach-grid">
+            <div class="approach-box ok">
+              <strong>Q15 — Adaptive (A) ✓</strong>
+              Iterations, feedback, evolving requirements, Product Owner
+            </div>
+            <div class="approach-box">
+              <strong>Q14 — Predictive (D)</strong>
+              Phase gates, defined early, strict change control, waterfall
+            </div>
           </div>
 
           <table>
             <thead>
-              <tr><th>Ai làm gì</th><th>Ví dụ hoạt động</th></tr>
+              <tr><th>Approach</th><th>Khi nào</th><th>Đặc điểm</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>PM Team</strong></td>
-                <td>Coordinate với FM về critical resources; align với org objectives</td>
+                <td><strong>Adaptive (A)</strong></td>
+                <td>Uncertain, volatile requirements</td>
+                <td>Iterations, feedback, progressive elaboration</td>
               </tr>
               <tr>
-                <td><strong>Functional Manager</strong></td>
-                <td>Sở hữu nhân sự/chuyên môn; quyết định phân bổ trong phòng ban</td>
+                <td><strong>Predictive (B)</strong></td>
+                <td>Scope stable early</td>
+                <td>Upfront planning, phase gates</td>
               </tr>
               <tr>
-                <td><strong>Sponsor</strong></td>
-                <td>Funding, strategic direction (Q8)</td>
+                <td><strong>Hybrid (C)</strong></td>
+                <td>Mix stable + evolving</td>
+                <td>Not described in Q15 scenario</td>
               </tr>
               <tr>
-                <td><strong>Customer</strong></td>
-                <td>Approve/accept final product — không thay mặt bởi PM team “on behalf”</td>
+                <td><strong>Incremental (D)</strong></td>
+                <td>Deliver portions over time</td>
+                <td>May overlap agile but Q15 keywords = full adaptive pattern</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 9</h2>
+          <h2>3. Câu hỏi thực hành — Question 15</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q9</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q15</div>
             <div class="q-text">
-              Roy is part of the <em>project management team</em> at Transglobal Logistics,
-              working on a system upgrade project. The team collaborates with stakeholders and
-              managers to align with organizational objectives and secure resources, while other
-              activities are also being considered.
-              <em>Which of the following is something the project management team would do?</em>
+              Jason is leading a mobile application project at Blue Peak Digital Solutions.
+              The team works in <em>short iterations</em>, delivering <em>features regularly</em>
+              and refining their approach based on feedback.
+              <em>One person is responsible</em> for the approved scope and its value to the organization.
+              Which development approach is being used?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Provide duration and cost estimates on the deliverables.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Coordinate with functional managers for demands on critical resources.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Verify that deliverables meet their quality requirements.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Approve the final product on behalf of the customer.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Adaptive approach.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Predictive approach.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Hybrid approach.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Incremental approach.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn A?</h3>
           <ul>
-            <li>Khớp trực tiếp PMBOK p.29: negotiate với <strong>functional managers</strong> for <strong>critical resources</strong>.</li>
-            <li>Scenario nhắc collaborate với managers, secure resources, align objectives — đúng pattern PM team ↔ FM.</li>
-            <li>Slide minh họa: PM → FM (coordinate critical resources).</li>
+            <li>Short iterations + regular feature delivery + feedback = agile/adaptive hallmark.</li>
+            <li>One person for scope &amp; value = <strong>Product Owner</strong> role (slide annotation).</li>
+            <li>Mobile app at digital solutions firm = typical adaptive context (volatile requirements).</li>
+            <li>Khớp PMBOK p.63 — change-driven / agile approaches.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải đáp án tốt nhất</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không phải</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Duration and cost estimates</strong></td>
-                <td>PM/team có thể làm estimates, nhưng đề hỏi hoạt động <em>tương tác tổ chức</em> — coordinate resources với FM là đáp án PMBOK nhấn mạnh (A bị ✗ trong slide).</td>
+                <td><strong>B. Predictive</strong></td>
+                <td>Waterfall/plan-driven — trái iterations và evolving requirements (Q14 pattern).</td>
               </tr>
               <tr>
-                <td><strong>C. Verify quality</strong></td>
-                <td>Control quality là công việc QA/QC — không phải mô tả interaction với functional managers trong p.29.</td>
+                <td><strong>C. Hybrid</strong></td>
+                <td>Scenario mô tả thuần adaptive, không nhắc phần predictive.</td>
               </tr>
               <tr>
-                <td><strong>D. Approve on behalf of customer</strong></td>
-                <td>Customer/sponsor chấp nhận sản phẩm — PM team không approve thay customer.</td>
+                <td><strong>D. Incremental</strong></td>
+                <td>Deliver từng phần có thể overlap nhưng đề nhấn iterations + feedback + PO = adaptive (A) đầy đủ hơn.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords PM Team (p.29)</h4>
+            <h4>Synonyms Adaptive (p.63)</h4>
             <p style="margin:0">
-              proactively interact · negotiate · functional managers · critical resources ·
-              project funding · deliverables · align goals with organization
+              change-driven · agile · progressive elaboration · stakeholder feedback ·
+              volatile requirements · Product Owner
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — PM Team hay vai trò khác?</h2>
+          <h2>5. Drill — Adaptive hay Predictive?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="TEAM">
-              <span>Negotiate critical resources with functional managers</span>
+            <div class="classify-row" data-answer="ADAPT">
+              <span>Short iterations with regular feature delivery</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="ADAPT">Adaptive</button>
+                <button data-pick="PRED">Predictive</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OTHER">
-              <span>Secure funding and strategic direction</span>
+            <div class="classify-row" data-answer="PRED">
+              <span>Phase gate approvals with strict change control</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="ADAPT">Adaptive</button>
+                <button data-pick="PRED">Predictive</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="TEAM">
-              <span>Align project objectives with organizational goals</span>
+            <div class="classify-row" data-answer="ADAPT">
+              <span>Requirements elaborated based on stakeholder feedback</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="ADAPT">Adaptive</button>
+                <button data-pick="PRED">Predictive</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OTHER">
-              <span>Formally accept deliverables as the customer</span>
+            <div class="classify-row" data-answer="ADAPT">
+              <span>One person owns approved scope and organizational value</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="ADAPT">Adaptive</button>
+                <button data-pick="PRED">Predictive</button>
               </div>
             </div>
           </div>
           <p class="drill-score" id="drillScore">0 / 4 đúng</p>
-          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">“Khác” = Sponsor, Customer, v.v.</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn A — estimates nghe “đúng” với PM</h4>
-            <p style="margin:0">Estimate là planning task, nhưng câu hỏi PMBOK p.29 tập trung <strong>interaction</strong> với FM về resources — B chính xác hơn.</p>
+            <h4>Bẫy 1: Chọn D — Incremental vì “deliver features regularly”</h4>
+            <p style="margin:0">Incremental = usable portions over time. Khi có <strong>short iterations + feedback + PO</strong>, PMBOK 8 gọi là <strong>Adaptive</strong> — đáp án đầy đủ hơn.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Quality verification (C)</h4>
-            <p style="margin:0">QA/QC thuộc quality domain — không mô tả negotiate với functional managers.</p>
+            <h4>Bẫy 2: Nhầm với Q14 Predictive</h4>
+            <p style="margin:0">Q14 = regulated, defined early. Q15 = mobile app, iterations, feedback — đối lập rõ ràng.</p>
           </div>
           <div class="card tip">
-            <h4>Liên kết Q8 Sponsor</h4>
-            <p style="margin:0">Sponsor: funding + strategy · PM Team: coordinate resources + align với FM và tổ chức</p>
+            <h4>Pair study Q14 + Q15</h4>
+            <p style="margin:0">Đề thi thường đặt predictive và adaptive cạnh nhau — đọc keywords, không đoán theo ngành.</p>
           </div>
         </section>
 
@@ -327,42 +353,48 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PM Team tương tác với FM để làm gì?</div>
-            <div class="flashcard-back">Demands on critical resources, funding priorities, deliverables, align goals với tổ chức.</div>
+            <div class="flashcard-front">Adaptive approach = gì? (p.63)</div>
+            <div class="flashcard-back">Change-driven/agile — volatile requirements, iterations, feedback, progressive elaboration.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q9 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Coordinate with functional managers for demands on critical resources.</div>
+            <div class="flashcard-front">Q15 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Adaptive approach (short iterations, features, Product Owner).</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">PROJECT MANAGEMENT TEAM — Q9 (PMBOK 8, p.29)
+          <div class="cheat-sheet">ADAPTIVE APPROACH — Q15 (PMBOK 8, p.63)
 ─────────────────────────────────────────────────────
-PM TEAM proactively:
-  • Interact &amp; negotiate with FM, PM, program/portfolio managers
-  • CRITICAL RESOURCES (with functional managers)
-  • Project funding priorities
-  • Receipt/distribution of deliverables
-  • ALIGN goals with organization
+ALSO CALLED: Change-driven · Agile
 
-Q9 ANSWER: B
-  Coordinate with functional managers for critical resources
+WHEN: Requirements &amp; technical solution UNCERTAIN, VOLATILE, LIKELY TO CHANGE
 
-NOT the focus here:
-  A → estimates (planning, not p.29 interaction highlight)
-  C → quality verify (QC domain)
-  D → approve for customer (customer/sponsor role)
+HOW:
+  Clear vision early
+  Requirements progressively elaborated/changed/replaced
+  Stakeholder feedback · environment · unexpected events
 
-PM ↔ FM: PM Team negotiates resources FM controls
+Q15 KEYWORDS → A (Adaptive):
+  Short iterations · features regularly · feedback
+  One person = scope &amp; value → Product Owner
+  Mobile app / digital solutions
 
-REF: The Standard for Project Management, p.29
-     "Interaction Between the Project Management Team and Project Aspects"</div>
+Q15 ANSWER: A — Adaptive approach
+
+VS Q14 PREDICTIVE:
+  Q14: phase gates, defined early, strict CC
+  Q15: iterations, feedback, evolving scope
+
+NOT:
+  B Predictive · C Hybrid (not described) · D Incremental alone
+
+REF: The Standard for Project Management, p.63
+     "Adaptive Approaches"</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-project-sponsor.html">Q8: Sponsor</a>
+          · <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -371,12 +403,12 @@ REF: The Standard for Project Management, p.29
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "A";
       const EXPL = {
-        A: "Estimates là planning — đề p.29 nhấn interaction với FM về critical resources.",
-        B: "Đúng! PM team coordinate/negotiate với functional managers về critical resources.",
-        C: "Verify quality là QC — không phải mô tả interaction PM team ↔ FM trong p.29.",
-        D: "Customer approve sản phẩm — PM team không approve thay customer."
+        A: "Đúng! Short iterations, regular features, feedback, PO = Adaptive/change-driven/agile (p.63).",
+        B: "Predictive = waterfall, defined early — trái iterations và evolving requirements.",
+        C: "Hybrid = mix — scenario mô tả thuần adaptive.",
+        D: "Incremental = partial delivery — thiếu full adaptive pattern (iterations + feedback + PO)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -392,7 +424,7 @@ REF: The Standard for Project Management, p.29
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Coordinate with functional managers for critical resources.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Adaptive approach.</strong>" : "");
         });
       });
       let score = 0;
