@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Project Management Team (Q9)</title>
+  <title>PMBOK 8 — Hybrid Approach (Q16)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,9 +51,14 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .interaction-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.85rem; justify-content: center; }
-    .flow-box { padding: 0.5rem 0.85rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--info); background: var(--info-bg); color: #1d4ed8; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
+    .hybrid-split { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.5rem; margin: 1.25rem 0; align-items: stretch; }
+    @media (max-width: 650px) { .hybrid-split { grid-template-columns: 1fr; } .hybrid-plus { display: none; } }
+    .hybrid-part { padding: 1rem; border-radius: var(--radius); font-size: 0.85rem; }
+    .hybrid-part.adapt { background: var(--ok-bg); border: 1.5px solid var(--ok); }
+    .hybrid-part.pred { background: var(--info-bg); border: 1.5px solid var(--info); }
+    .hybrid-part strong { display: block; margin-bottom: 0.35rem; font-size: 0.9rem; }
+    .hybrid-plus { display: flex; align-items: center; font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+    .merge-bar { text-align: center; padding: 0.65rem; margin: 0.5rem 0 1rem; background: var(--primary-bg); border: 1px dashed var(--primary); border-radius: var(--radius); font-size: 0.85rem; font-weight: 600; color: var(--primary-dark); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -69,7 +74,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 280px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 340px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -90,11 +95,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Project Management Team · Q9</div>
+      <div class="brand-sub">Hybrid Approach · Q16</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#team">PM Team làm gì?</a>
-        <a href="#interaction">Tương tác PM ↔ FM</a>
+        <a href="#hybrid">Hybrid</a>
+        <a href="#trio">Q14–Q16 trio</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -117,7 +122,7 @@
         <a href="pmp-teach-variables-over-time.html">Q13: Variables Over Time</a>
         <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
         <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive Approach</a>
-        <a href="pmp-teach-hybrid-approach.html">Q16: Hybrid Approach</a>
+        <a href="pmp-teach-hybrid-approach.html" class="series-current">Q16: Hybrid Approach</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
       <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
@@ -125,8 +130,8 @@
 
     <div>
       <nav class="mobile-nav">
-        <a href="#team">PM Team</a>
-        <a href="#interaction">PM ↔ FM</a>
+        <a href="#hybrid">Hybrid</a>
+        <a href="#trio">Trio</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -135,98 +140,108 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q9 về <strong>Project Management Team</strong> — tương tác chủ động
-            với functional managers và các bên để đảm bảo nguồn lực, funding và căn chỉnh mục tiêu.
+            Bài học Q16 về <strong>Hybrid Approaches</strong> — kết hợp adaptive và predictive
+            khi các deliverable khác nhau cần cách làm việc khác nhau trên cùng một dự án.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.29</span>
-            <span class="badge">Resources</span>
-            <span class="badge">Câu 9 — Practice</span>
+            <span class="badge">The Standard for PM, p.65</span>
+            <span class="badge">Development Approach</span>
+            <span class="badge">Câu 16 — Practice</span>
           </div>
         </header>
 
-        <section id="team">
-          <h2>1. Project Management Team</h2>
+        <section id="hybrid">
+          <h2>1. Hybrid Approach (PMBOK 8)</h2>
           <p>
-            <strong>Project management team</strong> không chỉ lập kế hoạch nội bộ — họ
-            <strong>chủ động tương tác và đàm phán</strong> với nhiều bên trong tổ chức
-            để dự án nhận đủ nguồn lực và căn chỉnh với mục tiêu tổ chức.
+            Hybrid development approach <strong>combines adaptive and predictive</strong>,
+            incorporating elements from both — ví dụ hai deliverable chính, một adaptive một predictive.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.29)</h4>
+            <h4>Định nghĩa chính thức (PMBOK p.65)</h4>
             <p style="margin:0">
-              The project management team proactively interacts and negotiates with other
-              project management teams, portfolio managers, program managers, project managers,
-              and <strong>functional managers</strong> for demands on <strong>critical resources</strong>,
-              priorities on project funding, receipt or distribution of deliverables, and in
-              aligning project goals and objectives with those of the organization.
+              A hybrid development approach combines adaptive and predictive approaches,
+              incorporating elements from both. For example, a project may have two main
+              deliverables, where one is developed using an adaptive approach and the other
+              using a predictive approach.
             </p>
           </div>
 
-          <h3>Hoạt động đặc trưng của PM Team</h3>
+          <div class="hybrid-split">
+            <div class="hybrid-part adapt">
+              <strong>Software (Adaptive)</strong>
+              Constantly evolving requirements · iterations · feedback
+            </div>
+            <div class="hybrid-plus">+</div>
+            <div class="hybrid-part pred">
+              <strong>Data center (Predictive)</strong>
+              Upfront planning · formal change control
+            </div>
+          </div>
+          <div class="merge-bar">Brought together in a final Sprint at the end → Hybrid</div>
+
+          <h3>Keywords trong đề thi → Hybrid</h3>
           <ul>
-            <li>Đàm phán <strong>critical resources</strong> với functional managers</li>
-            <li>Ưu tiên <strong>project funding</strong></li>
-            <li>Phối hợp nhận/phân phối deliverables</li>
-            <li>Căn chỉnh mục tiêu dự án với mục tiêu tổ chức</li>
+            <li><strong>Both</strong> evolving requirements AND upfront planning / change control</li>
+            <li>Two main deliverables / components with different natures</li>
+            <li>Software agile + infrastructure waterfall</li>
+            <li>Integration sprint / final sprint to merge streams</li>
           </ul>
         </section>
 
-        <section id="interaction">
-          <h2>2. PM Team ↔ Functional Manager</h2>
-          <p>Trong matrix/functional org, nguồn lực thường thuộc functional manager — PM team phải coordinate.</p>
-
-          <div class="interaction-flow">
-            <span class="flow-box">PM Team</span>
-            <span class="flow-arrow">⇄ negotiate</span>
-            <span class="flow-box">Functional Manager</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-box">Critical resources</span>
-          </div>
+        <section id="trio">
+          <h2>2. Bộ ba Q14 – Q15 – Q16</h2>
 
           <table>
             <thead>
-              <tr><th>Ai làm gì</th><th>Ví dụ hoạt động</th></tr>
+              <tr><th>Câu</th><th>Scenario signal</th><th>Đáp án</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>PM Team</strong></td>
-                <td>Coordinate với FM về critical resources; align với org objectives</td>
+                <td><strong>Q14</strong></td>
+                <td>Regulated, phase gates, defined early, strict CC</td>
+                <td>Predictive (D)</td>
               </tr>
               <tr>
-                <td><strong>Functional Manager</strong></td>
-                <td>Sở hữu nhân sự/chuyên môn; quyết định phân bổ trong phòng ban</td>
+                <td><strong>Q15</strong></td>
+                <td>Short iterations, feedback, Product Owner</td>
+                <td>Adaptive (A)</td>
               </tr>
               <tr>
-                <td><strong>Sponsor</strong></td>
-                <td>Funding, strategic direction (Q8)</td>
-              </tr>
-              <tr>
-                <td><strong>Customer</strong></td>
-                <td>Approve/accept final product — không thay mặt bởi PM team “on behalf”</td>
+                <td><strong>Q16</strong></td>
+                <td>Software evolving + infra predictive, merged at end</td>
+                <td><strong>Hybrid (B)</strong></td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>West Gate Group scenario</h4>
+            <p style="margin:0">
+              Enterprise platform = <em>một dự án</em> nhưng <em>hai cách phát triển</em>.
+              Chọn Hybrid khi đề mô tả <strong>cả hai</strong> pattern — không chỉ một phía.
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 9</h2>
+          <h2>3. Câu hỏi thực hành — Question 16</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q9</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q16</div>
             <div class="q-text">
-              Roy is part of the <em>project management team</em> at Transglobal Logistics,
-              working on a system upgrade project. The team collaborates with stakeholders and
-              managers to align with organizational objectives and secure resources, while other
-              activities are also being considered.
-              <em>Which of the following is something the project management team would do?</em>
+              Ethan is working on a project at West Gate Group that will deliver a new enterprise platform.
+              The <em>software component</em> has <em>constantly evolving requirements</em>, while the
+              <em>data center infrastructure</em> is built using <em>upfront planning</em> and a
+              <em>formal change control approach</em>, with the two brought together in a
+              <em>final Sprint at the end</em>.
+              Which development approach should Ethan use?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Provide duration and cost estimates on the deliverables.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Coordinate with functional managers for demands on critical resources.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Verify that deliverables meet their quality requirements.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Approve the final product on behalf of the customer.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Predictive approach.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Hybrid approach.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Incremental approach.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Adaptive approach.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -237,90 +252,90 @@
 
           <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Khớp trực tiếp PMBOK p.29: negotiate với <strong>functional managers</strong> for <strong>critical resources</strong>.</li>
-            <li>Scenario nhắc collaborate với managers, secure resources, align objectives — đúng pattern PM team ↔ FM.</li>
-            <li>Slide minh họa: PM → FM (coordinate critical resources).</li>
+            <li>Software = adaptive signals (evolving requirements).</li>
+            <li>Data center = predictive signals (upfront planning, formal change control).</li>
+            <li>Cùng một project, hai deliverables — textbook hybrid (p.65).</li>
+            <li>Final Sprint integrates both streams — vẫn là hybrid, không chỉ adaptive.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải đáp án tốt nhất</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không phải</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Duration and cost estimates</strong></td>
-                <td>PM/team có thể làm estimates, nhưng đề hỏi hoạt động <em>tương tác tổ chức</em> — coordinate resources với FM là đáp án PMBOK nhấn mạnh (A bị ✗ trong slide).</td>
+                <td><strong>A. Predictive</strong></td>
+                <td>Bỏ qua phần software evolving — chỉ mô tả một nửa scenario.</td>
               </tr>
               <tr>
-                <td><strong>C. Verify quality</strong></td>
-                <td>Control quality là công việc QA/QC — không phải mô tả interaction với functional managers trong p.29.</td>
+                <td><strong>C. Incremental</strong></td>
+                <td>Deliver từng phần — không capture adaptive + predictive combo.</td>
               </tr>
               <tr>
-                <td><strong>D. Approve on behalf of customer</strong></td>
-                <td>Customer/sponsor chấp nhận sản phẩm — PM team không approve thay customer.</td>
+                <td><strong>D. Adaptive</strong></td>
+                <td>Bỏ qua data center upfront planning + formal CC — chỉ một nửa.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords PM Team (p.29)</h4>
+            <h4>Rule of thumb</h4>
             <p style="margin:0">
-              proactively interact · negotiate · functional managers · critical resources ·
-              project funding · deliverables · align goals with organization
+              Một approach keyword → Q14 hoặc Q15 · <strong>Hai approach keywords</strong> trong cùng project → <strong>Hybrid</strong>
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — PM Team hay vai trò khác?</h2>
+          <h2>5. Drill — Approach nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="TEAM">
-              <span>Negotiate critical resources with functional managers</span>
+            <div class="classify-row" data-answer="HYBRID">
+              <span>Software agile + infrastructure waterfall on same project</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="HYBRID">Hybrid</button>
+                <button data-pick="SINGLE">Single</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OTHER">
-              <span>Secure funding and strategic direction</span>
+            <div class="classify-row" data-answer="SINGLE">
+              <span>Phase gates only, all scope defined early</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="HYBRID">Hybrid</button>
+                <button data-pick="SINGLE">Single</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="TEAM">
-              <span>Align project objectives with organizational goals</span>
+            <div class="classify-row" data-answer="SINGLE">
+              <span>Short iterations and Product Owner only</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="HYBRID">Hybrid</button>
+                <button data-pick="SINGLE">Single</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OTHER">
-              <span>Formally accept deliverables as the customer</span>
+            <div class="classify-row" data-answer="HYBRID">
+              <span>One deliverable adaptive, another predictive</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="HYBRID">Hybrid</button>
+                <button data-pick="SINGLE">Single</button>
               </div>
             </div>
           </div>
           <p class="drill-score" id="drillScore">0 / 4 đúng</p>
-          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">“Khác” = Sponsor, Customer, v.v.</p>
+          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">“Single” = chỉ predictive hoặc chỉ adaptive</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn A — estimates nghe “đúng” với PM</h4>
-            <p style="margin:0">Estimate là planning task, nhưng câu hỏi PMBOK p.29 tập trung <strong>interaction</strong> với FM về resources — B chính xác hơn.</p>
+            <h4>Bẫy 1: Chọn D — vì có “Sprint”</h4>
+            <p style="margin:0">Final Sprint là integration point — đề cũng nhấn <strong>upfront planning + formal change control</strong> cho infra → cần Hybrid.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Quality verification (C)</h4>
-            <p style="margin:0">QA/QC thuộc quality domain — không mô tả negotiate với functional managers.</p>
+            <h4>Bẫy 2: Chọn A — vì enterprise platform “lớn”</h4>
+            <p style="margin:0">Quy mô không quyết định approach — đọc <strong>how each component is developed</strong>.</p>
           </div>
           <div class="card tip">
-            <h4>Liên kết Q8 Sponsor</h4>
-            <p style="margin:0">Sponsor: funding + strategy · PM Team: coordinate resources + align với FM và tổ chức</p>
+            <h4>Ôn nhanh Q14–16</h4>
+            <p style="margin:0">Predictive · Adaptive · Hybrid — ba câu liên tiếp trong series, pattern rất hay gặp trên đề PMP.</p>
           </div>
         </section>
 
@@ -328,42 +343,48 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PM Team tương tác với FM để làm gì?</div>
-            <div class="flashcard-back">Demands on critical resources, funding priorities, deliverables, align goals với tổ chức.</div>
+            <div class="flashcard-front">Hybrid approach = gì? (p.65)</div>
+            <div class="flashcard-back">Combines adaptive + predictive — e.g. two deliverables, one of each approach.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q9 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Coordinate with functional managers for demands on critical resources.</div>
+            <div class="flashcard-front">Q16 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Hybrid (software evolving + data center predictive).</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">PROJECT MANAGEMENT TEAM — Q9 (PMBOK 8, p.29)
+          <div class="cheat-sheet">HYBRID APPROACH — Q16 (PMBOK 8, p.65)
 ─────────────────────────────────────────────────────
-PM TEAM proactively:
-  • Interact &amp; negotiate with FM, PM, program/portfolio managers
-  • CRITICAL RESOURCES (with functional managers)
-  • Project funding priorities
-  • Receipt/distribution of deliverables
-  • ALIGN goals with organization
+DEFINITION: Combines ADAPTIVE + PREDICTIVE elements
 
-Q9 ANSWER: B
-  Coordinate with functional managers for critical resources
+EXAMPLE (p.65):
+  Two main deliverables
+  One → adaptive · Other → predictive
 
-NOT the focus here:
-  A → estimates (planning, not p.29 interaction highlight)
-  C → quality verify (QC domain)
-  D → approve for customer (customer/sponsor role)
+Q16 SCENARIO (West Gate):
+  Software → constantly evolving (ADAPTIVE)
+  Data center → upfront planning + formal CC (PREDICTIVE)
+  Final Sprint → integrate both
 
-PM ↔ FM: PM Team negotiates resources FM controls
+Q16 ANSWER: B — Hybrid approach
 
-REF: The Standard for Project Management, p.29
-     "Interaction Between the Project Management Team and Project Aspects"</div>
+DECISION RULE:
+  Only predictive signals → Q14 (D)
+  Only adaptive signals → Q15 (A)
+  BOTH in same project → Q16 (B) Hybrid
+
+NOT:
+  A Predictive (ignores software)
+  D Adaptive (ignores infra)
+  C Incremental (partial delivery, not the combo)
+
+REF: The Standard for Project Management, p.65
+     "Hybrid Approaches"</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-project-sponsor.html">Q8: Sponsor</a>
+          · <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive Approach</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -374,10 +395,10 @@ REF: The Standard for Project Management, p.29
     (function () {
       const CORRECT = "B";
       const EXPL = {
-        A: "Estimates là planning — đề p.29 nhấn interaction với FM về critical resources.",
-        B: "Đúng! PM team coordinate/negotiate với functional managers về critical resources.",
-        C: "Verify quality là QC — không phải mô tả interaction PM team ↔ FM trong p.29.",
-        D: "Customer approve sản phẩm — PM team không approve thay customer."
+        A: "Predictive chỉ mô tả data center — bỏ qua software evolving requirements.",
+        B: "Đúng! Adaptive (software) + Predictive (infra) trên cùng project = Hybrid (p.65).",
+        C: "Incremental = deliver portions — không capture adaptive + predictive combo.",
+        D: "Adaptive chỉ mô tả software — bỏ qua upfront planning + formal change control của infra."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -393,7 +414,7 @@ REF: The Standard for Project Management, p.29
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Coordinate with functional managers for critical resources.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Hybrid approach.</strong>" : "");
         });
       });
       let score = 0;
