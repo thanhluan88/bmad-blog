@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Quality Report (Q53)</title>
+  <title>PMBOK 8 — Earned Value Analysis (Q71)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,10 +51,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.82rem; }
-    .flow-box { padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
-    .flow-box.highlight { background: var(--primary-bg); border-color: #fde68a; font-weight: 600; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
+    .ev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+    @media (max-width: 700px) { .ev-grid { grid-template-columns: 1fr; } }
+    .ev-box { text-align: center; padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; }
+    .ev-box strong { display: block; font-size: 1.1rem; color: var(--primary-dark); }
+    .ev-box span { font-size: 0.78rem; color: var(--muted); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -70,7 +71,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 480px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -92,11 +93,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Quality Report · Q53</div>
+      <div class="brand-sub">Earned Value · Q71</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#quality-report">Quality Report</a>
-        <a href="#data-flow">Data → Report</a>
+        <a href="#eva">Earned Value Analysis</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -156,7 +157,7 @@
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
         <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
         <a href="pmp-teach-wbs-dictionary.html">Q52: WBS Dictionary</a>
-        <a href="pmp-teach-quality-report.html" class="series-current">Q53: Quality Report</a>
+        <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
         <a href="pmp-teach-verified-deliverables.html">Q54: Verified Deliverables</a>
         <a href="pmp-teach-schedule-management-plan.html">Q55: Schedule Mgmt Plan</a>
         <a href="pmp-teach-development-approach-schedule.html">Q56: Dev Approach Input</a>
@@ -174,16 +175,16 @@
         <a href="pmp-teach-contingency-reserve.html">Q68: Contingency</a>
         <a href="pmp-teach-cost-aggregation.html">Q69: Cost Aggregation</a>
         <a href="pmp-teach-basis-of-estimates.html">Q70: Basis of Est.</a>
-        <a href="pmp-teach-earned-value-analysis.html">Q71: Earned Value</a>
+        <a href="pmp-teach-earned-value-analysis.html" class="series-current">Q71: Earned Value</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-53">Luyện câu 53</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-71">Luyện câu 71</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#quality-report">Report</a>
-        <a href="#data-flow">Data flow</a>
+        <a href="#eva">EVA</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -192,126 +193,121 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q53 về <strong>Quality Report</strong> — Diane, pharmaceutical product
-            development tại Redwood Biologics: monitoring phát hiện
-            <em>inconsistencies in deliverable quality</em>; stakeholders cần
-            <em>additional information</em> để hỗ trợ cải tiến.
+            Bài học Q71 về <strong>Earned Value Analysis</strong> — Nina tại AU Transit, metro
+            expansion: review <em>budgeted work</em>, <em>completed work</em>, <em>actual
+            spending</em> để evaluate trends và decide corrective action.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.42 &amp; 129–130</span>
-            <span class="badge">Monitor and Control Scope</span>
-            <span class="badge">Quality Reports</span>
-            <span class="badge">Câu 53 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.64–65 &amp; 169</span>
+            <span class="badge">Monitor and Control Finances</span>
+            <span class="badge">Earned Value Analysis</span>
+            <span class="badge">Câu 71 — Practice</span>
           </div>
         </header>
 
-        <section id="quality-report">
-          <h2>1. Quality Report (p.129–130)</h2>
+        <section id="eva">
+          <h2>1. Earned value analysis (p.169)</h2>
           <p>
-            <strong>Monitor and Control Scope</strong> (p.42) là quá trình liên tục theo dõi scope,
-            đo lường <strong>deliverable quality and value</strong>, và ghi nhận kết quả để đánh giá
-            performance. Khi phát hiện vấn đề chất lượng, PM cần artifact giúp stakeholders hiểu
-            issues và hướng cải tiến — đó là <strong>quality report</strong>.
+            <strong>Monitor and Control Finances</strong> (p.64–65) tracks expenditures, updates
+            records, adjusts baselines/forecasts, takes corrective actions.
+            <strong>Earned value analysis (EVA)</strong> compares actual schedule and cost
+            performance to the performance baseline.
           </p>
 
+          <div class="ev-grid">
+            <div class="ev-box">
+              <strong>PV</strong>
+              <span>Planned Value — budgeted work</span>
+            </div>
+            <div class="ev-box">
+              <strong>EV</strong>
+              <span>Earned Value — completed work</span>
+            </div>
+            <div class="ev-box">
+              <strong>AC</strong>
+              <span>Actual Cost — actual spending</span>
+            </div>
+          </div>
+
           <div class="card tip">
-            <h4>Quality report gồm gì?</h4>
+            <h4>Instructor: PV / EV / AC</h4>
             <p style="margin:0">
-              Documents <strong>quality issues</strong>, <strong>corrective action recommendations</strong>,
-              and findings from <strong>quality control</strong> activities — thông tin đã phân tích,
-              không phải raw data.
+              Stem maps directly: budgeted work = PV, completed work = EV, actual spending = AC →
+              <strong>earned value analysis</strong> (A).
             </p>
           </div>
-
-          <table>
-            <thead>
-              <tr><th>Nội dung quality report</th><th>Mục đích</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Quality issues identified</td><td>Mô tả inconsistencies / defects</td></tr>
-              <tr><td>QC findings</td><td>Kết quả kiểm tra, verify deliverables</td></tr>
-              <tr><td>Corrective action recommendations</td><td>Hỗ trợ improvements stakeholders yêu cầu</td></tr>
-            </tbody>
-          </table>
         </section>
 
-        <section id="data-flow">
-          <h2>2. Data → Information → Report (liên hệ Q35)</h2>
-
-          <div class="flow-diagram">
-            <div class="flow-box">Work Performance Data</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box">Work Performance Information</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box highlight">Quality Report</div>
-          </div>
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
 
           <table>
             <thead>
-              <tr><th>Artifact</th><th>Ví dụ Q53</th><th>Đúng?</th></tr>
+              <tr><th>Option</th><th>Technique</th><th>Q71 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Work performance data (A)</strong></td>
-                <td>Raw AC, defect counts từ QC — chưa phân tích</td>
-                <td>Input, không phải output cho stakeholders</td>
+                <td><strong>A. Earned value analysis</strong></td>
+                <td>Compare PV, EV, AC vs baseline; schedule + cost</td>
+                <td><strong>Yes — all three metrics in stem</strong></td>
               </tr>
               <tr>
-                <td><strong>Scope baseline (B)</strong></td>
-                <td>Approved scope + WBS + dictionary</td>
-                <td>Planning baseline — không mô tả quality issues hiện tại</td>
+                <td><strong>B. Variance analysis</strong></td>
+                <td>Compare planned vs actual variances</td>
+                <td>Subset/part of EVA — stem describes full EVA context</td>
               </tr>
               <tr>
-                <td><strong>Change log (C)</strong></td>
-                <td>Danh sách change requests đã ghi</td>
-                <td>Change tracking — không phải quality findings report</td>
+                <td><strong>C. Update cost baseline</strong></td>
+                <td>Change authorized budget</td>
+                <td>Corrective action may follow — not what Nina is doing now</td>
               </tr>
               <tr>
-                <td><strong>Quality report (D)</strong></td>
-                <td>Issues + recommendations cho improvements</td>
-                <td><strong>Đúng — produce for stakeholders</strong></td>
+                <td><strong>D. Work performance report</strong></td>
+                <td>Communication output (Q61)</td>
+                <td>Report package — not the analysis technique</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Signal trong đề</h4>
+            <h4>EVA vs EVM</h4>
             <p style="margin:0">
-              <em>Additional information on these issues to support improvements</em> = analyzed
-              report, không phải raw data (A) hay planning artifact (B).
+              <strong>EVA</strong> = analysis technique comparing performance to baseline.
+              <strong>EVM</strong> = broader system integrating scope, cost, schedule baselines.
+              Q71 describes the analysis Nina performs → EVA (A).
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 53</h2>
+          <h2>3. Câu hỏi thực hành — Question 71</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q53</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q71</div>
             <div class="q-text">
-              At Redwood Biologics, Diane is managing a pharmaceutical product development project.
-              During monitoring, <em>inconsistencies in deliverable quality</em> are identified.
-              Stakeholders request <em>additional information on these issues</em> to support
-              improvements. What should Diane produce?
+              Nina is overseeing a metro expansion project at AU Transit. As she controls the
+              project, she reviews <em>budgeted work</em>, <em>completed work</em>, and
+              <em>actual spending</em> to evaluate performance trends and determine whether
+              corrective action is needed. Nina is:
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Work performance data.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. The scope baseline.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Change requests in the change log.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. The quality report.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Performing earned value analysis.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Conducting variance analysis.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Updating the cost baseline to reflect current financial performance.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Reviewing the work performance report.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
-          <h3>Tại sao chọn D?</h3>
+          <h3>Tại sao chọn A?</h3>
           <ul>
-            <li>Monitoring phát hiện quality inconsistencies → cần document &amp; communicate.</li>
-            <li>Stakeholders want <em>information</em> to support improvements → quality report.</li>
-            <li>Monitor and Control Scope (p.42) + Quality reports (p.129–130).</li>
+            <li>Budgeted work (PV) + completed work (EV) + actual spending (AC) = EVA.</li>
+            <li>Compare schedule &amp; cost performance to baseline (p.169).</li>
+            <li>Evaluate trends → determine corrective action — Monitor and Control Finances.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -321,67 +317,58 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Work performance data</strong></td>
-                <td>Raw output (defect counts, measurements) — stakeholders cần analyzed report, không phải data thô (Q35).</td>
+                <td><strong>B. Variance analysis</strong></td>
+                <td>Focuses on variances — EVA is broader integrated PV/EV/AC comparison PMI wants here.</td>
               </tr>
               <tr>
-                <td><strong>B. Scope baseline</strong></td>
-                <td>Approved scope reference từ planning — không mô tả quality issues đang monitoring.</td>
+                <td><strong>C. Update baseline</strong></td>
+                <td>Changing baseline — analysis comes first; baseline update is separate action.</td>
               </tr>
               <tr>
-                <td><strong>C. Change log</strong></td>
-                <td>Tracks change requests — quality findings chưa chắc đã thành formal change (Q27).</td>
+                <td><strong>D. Work performance report</strong></td>
+                <td>Output/communication artifact — Nina is performing analysis, not reviewing report.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Liên hệ Q35 vs Q53</h4>
-            <p style="margin:0">
-              Q35: analyze data → <em>work performance information</em> (FIRST). Q53: stakeholders
-              cần <em>quality-specific report</em> về issues &amp; recommendations →
-              <strong>quality report</strong> (D), không đưa raw data (A).
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Data, baseline, change log hay quality report?</h2>
+          <h2>5. Drill — Kỹ thuật nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="REPORT">
-              <span>Stakeholders need info on quality issues for improvements</span>
+            <div class="classify-row" data-answer="EVA">
+              <span>Compare PV, EV, AC to evaluate schedule and cost performance trends</span>
               <div class="classify-btns">
-                <button data-pick="DATA">Data</button>
+                <button data-pick="EVA">EVA</button>
+                <button data-pick="VAR">Variance</button>
                 <button data-pick="BASE">Baseline</button>
-                <button data-pick="CHANGE">Change log</button>
-                <button data-pick="REPORT">Quality report</button>
+                <button data-pick="RPT">Report</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="DATA">
-              <span>Raw defect counts and measurements from QC</span>
+            <div class="classify-row" data-answer="VAR">
+              <span>Calculate CV and SV from planned vs actual differences</span>
               <div class="classify-btns">
-                <button data-pick="DATA">Data</button>
+                <button data-pick="EVA">EVA</button>
+                <button data-pick="VAR">Variance</button>
                 <button data-pick="BASE">Baseline</button>
-                <button data-pick="CHANGE">Change log</button>
-                <button data-pick="REPORT">Quality report</button>
+                <button data-pick="RPT">Report</button>
               </div>
             </div>
             <div class="classify-row" data-answer="BASE">
-              <span>Approved scope statement + WBS + dictionary</span>
+              <span>Revise authorized budget after approved change request</span>
               <div class="classify-btns">
-                <button data-pick="DATA">Data</button>
+                <button data-pick="EVA">EVA</button>
+                <button data-pick="VAR">Variance</button>
                 <button data-pick="BASE">Baseline</button>
-                <button data-pick="CHANGE">Change log</button>
-                <button data-pick="REPORT">Quality report</button>
+                <button data-pick="RPT">Report</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="CHANGE">
-              <span>Track sequence of approved scope changes</span>
+            <div class="classify-row" data-answer="RPT">
+              <span>Read monthly status package sent to steering committee</span>
               <div class="classify-btns">
-                <button data-pick="DATA">Data</button>
+                <button data-pick="EVA">EVA</button>
+                <button data-pick="VAR">Variance</button>
                 <button data-pick="BASE">Baseline</button>
-                <button data-pick="CHANGE">Change log</button>
-                <button data-pick="REPORT">Quality report</button>
+                <button data-pick="RPT">Report</button>
               </div>
             </div>
           </div>
@@ -391,20 +378,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Monitoring → Work performance data (A)</h4>
-            <p style="margin:0">Data = raw (AC, # defects). Stakeholders cần <em>information/report</em> — instructor note: Data → Info → Report.</p>
+            <h4>Bẫy 1: Performance → Variance analysis (B)</h4>
+            <p style="margin:0">Variance analysis is part of EVA — stem lists PV/EV/AC trio → full earned value analysis (A).</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Deliverables → Scope baseline (B)</h4>
-            <p style="margin:0">Baseline = what was approved — không explain current quality inconsistencies.</p>
+            <h4>Bẫy 2: Corrective action → Update baseline (C)</h4>
+            <p style="margin:0">Baseline update requires change control — Nina is analyzing performance first.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Issues → Change log (C)</h4>
-            <p style="margin:0">Change log tracks CRs — quality report documents findings trước khi (nếu cần) raise change request.</p>
+            <h4>Bẫy 3: Control → Work performance report (D)</h4>
+            <p style="margin:0">Reports communicate results (Q61) — Nina performs the underlying EVA technique.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Quality inconsistencies · monitoring · stakeholders want information · support improvements</strong> → Quality report (D).</p>
+            <p style="margin:0"><strong>Budgeted work · completed work · actual spending · performance trends</strong> → Earned value analysis (A).</p>
           </div>
         </section>
 
@@ -412,61 +399,56 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Quality report? (p.129–130)</div>
-            <div class="flashcard-back">Documents quality issues, corrective recommendations, QC findings — for stakeholders.</div>
+            <div class="flashcard-front">PV / EV / AC?</div>
+            <div class="flashcard-back">PV = budgeted work. EV = completed work. AC = actual spending. Core of earned value analysis.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q53 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — The quality report.</div>
+            <div class="flashcard-front">Q71 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Performing earned value analysis.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">QUALITY REPORT — Q53 (PMBOK 8, p.42 &amp; 129–130)
+          <div class="cheat-sheet">EARNED VALUE ANALYSIS — Q71 (PMBOK 8, p.64–65 &amp; 169)
 ─────────────────────────────────────────────────────
-PROCESS: Monitor and Control Scope (p.42)
-         Quality reports (p.129–130)
+PROCESS: Monitor and Control Finances (p.64–65)
+         Earned value analysis (p.169)
 
-MONITOR &amp; CONTROL SCOPE:
-  - Ongoing monitoring of scope changes
-  - Measure DELIVERABLE QUALITY and VALUE
-  - Record results to assess performance
+EVA METRICS (instructor: PV / EV / AC):
+  PV — Planned Value     = BUDGETED work
+  EV — Earned Value      = COMPLETED work
+  AC — Actual Cost       = ACTUAL spending
 
-QUALITY REPORT:
-  - Quality ISSUES identified
-  - Corrective action RECOMMENDATIONS
-  - Findings from QUALITY CONTROL activities
-  - Information for stakeholders (not raw data)
+EVA compares actual schedule &amp; cost performance
+to the PERFORMANCE BASELINE
 
-SCENARIO: Diane — Redwood Biologics · pharma dev
-           MONITORING → quality INCONSISTENCIES
-           Stakeholders want ADDITIONAL INFORMATION
-           To SUPPORT IMPROVEMENTS
-→ D) THE QUALITY REPORT ✓
+EVM (broader) integrates scope, cost, schedule baselines
+
+SCENARIO: Nina — AU Transit metro expansion
+           CONTROLS the project
+           Reviews: budgeted work · completed work · actual spending
+           Evaluate PERFORMANCE TRENDS
+           Determine CORRECTIVE ACTION needed
+→ A) PERFORMING EARNED VALUE ANALYSIS ✓
 
 NOT:
-  A) Work performance DATA — raw (defects, AC); Q35 Data→Info
-  B) Scope BASELINE — approved scope; planning artifact
-  C) Change LOG — tracks change requests; not quality findings
+  B) VARIANCE ANALYSIS — subset; stem = full EVA context
+  C) UPDATE COST BASELINE — separate action after analysis
+  D) WORK PERFORMANCE REPORT — comms output (Q61)
 
-DATA FLOW (instructor):
-  Data → Information → Report
-  A = data layer; D = quality-specific report layer
+SIGNAL: "budgeted work" + "completed work" + "actual spending"
+        = PV + EV + AC → EVA
 
-SIGNAL: "inconsistencies in deliverable quality"
-        "additional information on these issues"
-        "support improvements" · monitoring
+Q71 ANSWER: A
 
-Q53 ANSWER: D
-
-REF: PMBOK Guide, 8th Ed., p.42, p.129–130</div>
+REF: PMBOK Guide, 8th Ed., p.64–65, p.169</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
-          · <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
-          · <a href="pmp-full-questions.html#q-53">Luyện câu 53</a>
+          · <a href="pmp-teach-work-performance-information.html">Q61: Work Perf. Info</a>
+          · <a href="pmp-teach-cost-aggregation.html">Q69: Cost Aggregation</a>
+          · <a href="pmp-full-questions.html#q-71">Luyện câu 71</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -475,12 +457,12 @@ REF: PMBOK Guide, 8th Ed., p.42, p.129–130</div>
 
   <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "A";
       const EXPL = {
-        A: "Work performance data là raw output (defect counts, measurements) — stakeholders cần analyzed quality report, không phải data thô.",
-        B: "Scope baseline là approved scope từ planning — không mô tả quality inconsistencies đang monitoring.",
-        C: "Change log tracks change requests — không phải artifact document quality issues & recommendations.",
-        D: "Đúng! Quality report documents quality issues, corrective recommendations, QC findings (p.42, 129–130)."
+        A: "Đúng! PV (budgeted) + EV (completed) + AC (spending) = earned value analysis — compare performance to baseline (p.64–65, 169).",
+        B: "Variance analysis focuses on variances — stem describes full EVA with PV/EV/AC trio.",
+        C: "Updating baseline là separate action — Nina đang analyze performance, chưa change baseline.",
+        D: "Work performance report là communication output — không phải analysis technique Nina performs."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -496,7 +478,7 @@ REF: PMBOK Guide, 8th Ed., p.42, p.129–130</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — The quality report.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Performing earned value analysis.</strong>" : "");
         });
       });
       let score = 0;
