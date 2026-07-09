@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Cost of Delay Prioritization (Q49)</title>
+  <title>PMBOK 8 — Monitor Stakeholder Engagement (Q80)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
-      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --primary: #7c3aed; --primary-dark: #5b21b6; --primary-bg: #f5f3ff;
       --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
       --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
       --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
@@ -30,7 +30,7 @@
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
-    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #ddd6fe; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
     .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
     .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 62ch; }
     .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
@@ -51,11 +51,15 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    tr.winner td { background: var(--ok-bg); font-weight: 600; }
+    .rca-flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .rca-flow { grid-template-columns: 1fr; } }
+    .rca-step { text-align: center; padding: 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.82rem; }
+    .rca-step strong { display: block; color: var(--primary-dark); margin-bottom: 0.25rem; }
+    .rca-step.active { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
-    .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .quiz-card .q-text em { font-style: normal; background: #ede9fe; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -65,11 +69,10 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
-    .calc-box { background: #1f2937; color: #f3f4f6; border-radius: 10px; padding: 1rem 1.25rem; font-family: Consolas, monospace; font-size: 0.88rem; margin: 1rem 0; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 360px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.65rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -79,7 +82,7 @@
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
     .flashcard-front, .flashcard-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); padding: 1.25rem; display: flex; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border); }
     .flashcard-front { background: var(--card); font-weight: 600; }
-    .flashcard-back { background: var(--primary-bg); border-color: #fde68a; transform: rotateY(180deg); font-size: 0.88rem; }
+    .flashcard-back { background: var(--primary-bg); border-color: #ddd6fe; transform: rotateY(180deg); font-size: 0.88rem; }
     .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
     .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
     .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
@@ -90,11 +93,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Cost of Delay · Q49</div>
+      <div class="brand-sub">Monitor Engagement · Q80</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#cod">Cost of Delay</a>
-        <a href="#methods">Prioritization Methods</a>
+        <a href="#monitor">Monitor Engagement</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -150,7 +153,7 @@
         <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
         <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
         <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
-        <a href="pmp-teach-cost-of-delay.html" class="series-current">Q49: Cost of Delay</a>
+        <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
         <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
         <a href="pmp-teach-wbs-dictionary.html">Q52: WBS Dictionary</a>
@@ -181,16 +184,16 @@
         <a href="pmp-teach-communication-styles-assessment.html">Q77: Comms Styles</a>
         <a href="pmp-teach-cultural-awareness.html">Q78: Cultural Awareness</a>
         <a href="pmp-teach-manage-communications.html">Q79: Manage Comms</a>
-        <a href="pmp-teach-monitor-stakeholder-engagement.html">Q80: Monitor Engagement</a>
+        <a href="pmp-teach-monitor-stakeholder-engagement.html" class="series-current">Q80: Monitor Engagement</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-49">Luyện câu 49</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-80">Luyện câu 80</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#cod">CoD</a>
-        <a href="#methods">Methods</a>
+        <a href="#monitor">Monitor</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -199,153 +202,168 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q49 về <strong>Cost of Delay</strong> — Crest View Digital mobile banking:
-            chỉ một feature vào sprint tiếp theo; mỗi option có <em>value potential</em> và
-            <em>development time</em> khác nhau — maximize value trong sprint.
+            Bài học Q80 về <strong>Monitor Stakeholder Engagement</strong> + <strong>RCA</strong> —
+            Javier tại Stanton Group, rail expansion: stakeholder <em>participation declining</em>,
+            key decisions not being made, sắp ảnh hưởng delivery.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.41 &amp; p.187</span>
-            <span class="badge">Prioritization / Ranking</span>
-            <span class="badge">Câu 49 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.73, 76 &amp; 196</span>
+            <span class="badge">Monitor Stakeholder Engagement</span>
+            <span class="badge">Root Cause Analysis</span>
+            <span class="badge">Câu 80 — Practice</span>
           </div>
         </header>
 
-        <section id="cod">
-          <h2>1. Cost of Delay (PMBOK p.187)</h2>
+        <section id="monitor">
+          <h2>1. Monitor Stakeholder Engagement + RCA</h2>
           <p>
-            Khi prioritize requirements/features, <strong>cost of delay</strong> đo value lost per
-            unit time khi chưa deliver. Công thức trong đề:
+            <strong>Monitor Stakeholder Engagement</strong> (p.73, 76) assesses effectiveness of
+            engagement efforts, identifies adjustments, refines strategies. When participation
+            <em>declines</em>, use <strong>root cause analysis</strong> (p.196) to find underlying
+            reasons before updating plans.
           </p>
 
-          <div class="calc-box">Cost of Delay = value potential ÷ duration to deliver
-
-Ví dụ Q49:
-  A = $12,000/week ÷ 4 weeks = 3,000
-  B = $16,000/week ÷ 2 weeks = 8,000  ← highest
-  C = $10,000/week ÷ 3 weeks = 3,333
-  D = $14,000/week ÷ 5 weeks = 2,800</div>
+          <div class="rca-flow">
+            <div class="rca-step active"><strong>1. RCA workshop</strong><span>Why participation declining?</span></div>
+            <div class="rca-step"><strong>2. Identify causes</strong><span>Underlying reasons</span></div>
+            <div class="rca-step"><strong>3. Adjust plan</strong><span>Refine engagement strategy</span></div>
+          </div>
 
           <div class="card tip">
-            <h4>Chọn feature nào?</h4>
+            <h4>Instructor: RCA vs AAR</h4>
             <p style="margin:0">
-              Feature có <strong>highest value relative to time</strong> — không phải value cao nhất
-              tuyệt đối (D = $14k) hay duration ngắn nhất, mà <em>tỷ lệ value/time</em> cao nhất.
+              <strong>RCA</strong> = diagnose ongoing problem (why participation dropping).
+              <strong>AAR</strong> (Q34) = after milestone/phase — not for active decline issue.
             </p>
           </div>
         </section>
 
-        <section id="methods">
-          <h2>2. Prioritization methods (p.41 &amp; p.187)</h2>
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
 
           <table>
             <thead>
-              <tr><th>Method</th><th>Use when</th></tr>
+              <tr><th>Option</th><th>Action</th><th>Q80 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Cost of delay</strong></td>
-                <td>Value potential + duration — maximize value per sprint (Q49)</td>
+                <td><strong>A. RCA workshop</strong></td>
+                <td>Find why participation is declining</td>
+                <td><strong>Yes — diagnose before fixing</strong></td>
               </tr>
               <tr>
-                <td>MoSCoW</td>
-                <td>Must / Should / Could / Won't categorization</td>
+                <td><strong>B. Update engagement plan</strong></td>
+                <td>Revise strategies immediately</td>
+                <td>Premature — need root cause first (instructor: X)</td>
               </tr>
               <tr>
-                <td>100-point method</td>
-                <td>Stakeholders allocate points across items</td>
+                <td><strong>C. AAR workshop</strong></td>
+                <td>After-action review with stakeholders</td>
+                <td>Wrong timing — AAR after completion, not ongoing decline</td>
               </tr>
               <tr>
-                <td>Kano analysis</td>
-                <td>Must-haves vs satisfiers vs delighters (Q46 trap)</td>
+                <td><strong>D. Escalate to managers</strong></td>
+                <td>Raise issue with each manager</td>
+                <td>Escalation without diagnosis — instructor: X</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>RCA vs Ishikawa (Q36)</h4>
+            <p style="margin:0">
+              Both find root causes. Q80 stem = declining participation trend →
+              <strong>RCA workshop</strong> with stakeholders under Monitor Engagement.
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 49</h2>
+          <h2>3. Câu hỏi thực hành — Question 80</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q49</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q80</div>
             <div class="q-text">
-              Sam is managing feature delivery for a mobile banking app at Crest View Digital. Only
-              one feature can be added to the next sprint. Each option has a different
-              <em>value potential</em> and <em>development time</em>. Sam wants to maximize value
-              delivered within the sprint. Which feature should be selected?
+              Javier is overseeing stakeholder involvement for a rail expansion project at Stanton
+              Group, where stakeholder participation has continued to decline over the past few
+              weeks. He is worried that key decisions are not being made, and will soon affect
+              project delivery. What should Javier do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Feature A: $12,000 per week, 4 weeks duration.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Feature B: $16,000 per week, 2 weeks duration.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Feature C: $10,000 per week, 3 weeks duration.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Feature D: $14,000 per week, 5 weeks duration.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Hold a RCA workshop with the stakeholders.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Update the stakeholder engagement plan.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Hold an AAR workshop with the stakeholders.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Raise the issue with each stakeholder's manager.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
+          <h3>Tại sao chọn A?</h3>
+          <ul>
+            <li>Declining participation = symptom — need underlying cause (RCA, p.196).</li>
+            <li>Monitor Engagement: assess effectiveness, then refine strategies (p.73, 76).</li>
+            <li>RCA workshop with stakeholders surfaces why decisions aren't happening.</li>
+          </ul>
+
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Feature</th><th>Value/week</th><th>Duration</th><th>Cost of Delay</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
-              <tr><td>A</td><td>$12,000</td><td>4 weeks</td><td>3,000</td></tr>
-              <tr class="winner"><td><strong>B ✓</strong></td><td>$16,000</td><td>2 weeks</td><td><strong>8,000</strong></td></tr>
-              <tr><td>C</td><td>$10,000</td><td>3 weeks</td><td>3,333</td></tr>
-              <tr><td>D</td><td>$14,000</td><td>5 weeks</td><td>2,800</td></tr>
+              <tr>
+                <td><strong>B. Update plan</strong></td>
+                <td>Comes after RCA — don't revise strategy without knowing root cause.</td>
+              </tr>
+              <tr>
+                <td><strong>C. AAR workshop</strong></td>
+                <td>After-action review — for completed work (Q34), not ongoing participation drop.</td>
+              </tr>
+              <tr>
+                <td><strong>D. Escalate</strong></td>
+                <td>Skips diagnosis — PM should understand why before escalating.</td>
+              </tr>
             </tbody>
           </table>
-
-          <h3>Tại sao không chọn D?</h3>
-          <p>
-            Feature D có value/week cao thứ hai ($14,000) nhưng duration 5 weeks → CoD chỉ 2,800.
-            Value cao tuyệt đối ≠ prioritize first khi maximize value <em>within the sprint</em>.
-          </p>
-
-          <div class="card warn">
-            <h4>Exam tip — luôn chia, không cộng/trừ</h4>
-            <p style="margin:0">
-              Đề cho value/week và duration → chia ra CoD score. Chọn <strong>highest ratio</strong>,
-              không chọn số dollar lớn nhất hoặc weeks nhỏ nhất một cách mù quáng.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Highest cost of delay?</h2>
+          <h2>5. Drill — RCA, AAR, hay Plan?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="B">
-              <span>$20k/week ÷ 2 weeks = ?</span>
+            <div class="classify-row" data-answer="RCA">
+              <span>Participation declining for weeks — find why stakeholders disengaging</span>
               <div class="classify-btns">
-                <button data-pick="A">5,000</button>
-                <button data-pick="B">10,000</button>
-                <button data-pick="C">8,000</button>
+                <button data-pick="RCA">RCA</button>
+                <button data-pick="AAR">AAR</button>
+                <button data-pick="PLAN">Update Plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="C">
-              <span>$24k/week ÷ 3 weeks vs $15k/week ÷ 1 week — pick higher CoD</span>
+            <div class="classify-row" data-answer="AAR">
+              <span>Phase completed — capture lessons from stakeholder interactions</span>
               <div class="classify-btns">
-                <button data-pick="A">$24k / 3w (8,000)</button>
-                <button data-pick="B">Equal</button>
-                <button data-pick="C">$15k / 1w (15,000)</button>
+                <button data-pick="RCA">RCA</button>
+                <button data-pick="AAR">AAR</button>
+                <button data-pick="PLAN">Update Plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="A">
-              <span>Q49 — which feature wins?</span>
+            <div class="classify-row" data-answer="PLAN">
+              <span>RCA complete — root cause identified, refine engagement approach</span>
               <div class="classify-btns">
-                <button data-pick="A">B (8,000)</button>
-                <button data-pick="B">D ($14k value)</button>
-                <button data-pick="C">Shortest (B, 2w only)</button>
+                <button data-pick="RCA">RCA</button>
+                <button data-pick="AAR">AAR</button>
+                <button data-pick="PLAN">Update Plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="B">
-              <span>Maximize value in ONE sprint — use which method?</span>
+            <div class="classify-row" data-answer="RCA">
+              <span>Key decisions stalled — multiple contributing causes suspected</span>
               <div class="classify-btns">
-                <button data-pick="A">MoSCoW only</button>
-                <button data-pick="B">Cost of delay</button>
-                <button data-pick="C">Affinity diagram</button>
+                <button data-pick="RCA">RCA</button>
+                <button data-pick="AAR">AAR</button>
+                <button data-pick="PLAN">Update Plan</button>
               </div>
             </div>
           </div>
@@ -355,20 +373,20 @@ Ví dụ Q49:
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Highest $/week → Feature D ($14,000)</h4>
-            <p style="margin:0">Phải chia cho duration — D có 5 weeks nên CoD thấp nhất trong 4 options.</p>
+            <h4>Bẫy 1: Decline → update plan (B)</h4>
+            <p style="margin:0">Updating plan without RCA = treating symptom. Instructor marks B with X.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Shortest duration → Feature B (2 weeks)</h4>
-            <p style="margin:0">B đúng nhưng vì CoD cao nhất (8,000), không phải vì duration ngắn alone.</p>
+            <h4>Bẫy 2: Workshop → AAR (C)</h4>
+            <p style="margin:0">AAR = after action. Ongoing participation problem needs RCA, not retrospective review.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Total value = value × weeks</h4>
-            <p style="margin:0">PMBOK Q49 dùng value ÷ duration — không nhân total project value.</p>
+            <h4>Bẫy 3: No decisions → escalate (D)</h4>
+            <p style="margin:0">Escalation bypasses collaborative diagnosis — RCA workshop first.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Value potential + development time + maximize value in sprint</strong> → Cost of delay (value ÷ duration) → pick highest.</p>
+            <p style="margin:0"><strong>Participation declining · decisions not made · delivery at risk</strong> → RCA workshop (A).</p>
           </div>
         </section>
 
@@ -376,53 +394,61 @@ Ví dụ Q49:
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Cost of Delay formula? (p.187)</div>
-            <div class="flashcard-back">value potential ÷ duration to deliver — pick highest score.</div>
+            <div class="flashcard-front">RCA purpose?</div>
+            <div class="flashcard-back">Determine underlying reasons for variances, defects, or risks — may have multiple causes (p.196).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q49 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — $16,000/week ÷ 2 weeks = 8,000 (highest).</div>
+            <div class="flashcard-front">Q80 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Hold RCA workshop with stakeholders.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">COST OF DELAY — Q49 (PMBOK 8, p.41 &amp; p.187)
+          <div class="cheat-sheet">MONITOR STAKEHOLDER ENGAGEMENT + RCA — Q80
+(PMBOK 8, p.73, 76 &amp; 196)
 ─────────────────────────────────────────────────────
-PRIORITIZATION METHODS (p.41, p.187):
-  MoSCoW · 100-point · COST OF DELAY · Kano analysis
+PROCESS: Monitor Stakeholder Engagement (p.73, 76)
+  • Assess engagement effectiveness
+  • Identify adjustments
+  • Refine strategies to meet stakeholder needs
 
-FORMULA:
-  Cost of Delay = value potential ÷ duration to deliver
+TECHNIQUE: Root Cause Analysis (p.196)
+  • Underlying reasons for variances/defects/risks
+  • Multiple contributing causes possible
 
-Q49 DATA:
-  A: $12,000/wk ÷ 4w = 3,000
-  B: $16,000/wk ÷ 2w = 8,000  ← HIGHEST ✓
-  C: $10,000/wk ÷ 3w = 3,333
-  D: $14,000/wk ÷ 5w = 2,800
+SEQUENCE:
+  1. RCA workshop → find WHY participation declining
+  2. Then update engagement plan (not before!)
 
-SCENARIO: One feature per sprint
-           Maximize VALUE within sprint
-           Different value potential + dev time
-→ B) Feature B — highest value RELATIVE TO TIME
+SCENARIO: Javier — Stanton Group rail expansion
+           Participation DECLINING (weeks)
+           Key decisions NOT being made
+           Delivery at risk
+QUESTION: What should Javier do NEXT?
+→ A) HOLD RCA WORKSHOP WITH STAKEHOLDERS ✓
 
 NOT:
-  Pick highest $/week alone (D loses on duration)
-  Pick shortest duration alone (need ratio)
-  Total value = multiply (wrong formula for this Q)
+  B) UPDATE ENGAGEMENT PLAN — need root cause first
+  C) AAR WORKSHOP — after action; Q34 pattern
+  D) ESCALATE TO MANAGERS — skip diagnosis
 
-SIGNAL: "value potential" · "development time"
-        "maximize value" · "one sprint" · "prioritize"
+RCA vs AAR:
+  RCA = diagnose ONGOING problem (why?)
+  AAR = review COMPLETED work (what learned?)
 
-Q49 ANSWER: B
+SIGNAL: "participation declining" + "decisions not made"
+        → RCA before plan update
 
-REF: PMBOK Guide, 8th Ed., p.41 &amp; p.187</div>
+Q80 ANSWER: A
+
+REF: PMBOK Guide, 8th Ed., p.73, 76, p.196</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
-          · <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
-          · <a href="pmp-full-questions.html#q-49">Luyện câu 49</a>
+          · <a href="pmp-teach-after-action-review.html">Q34: After-Action Review</a>
+          · <a href="pmp-teach-stakeholder-engagement-matrix.html">Q75: Engagement Matrix</a>
+          · <a href="pmp-full-questions.html#q-80">Luyện câu 80</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -431,12 +457,12 @@ REF: PMBOK Guide, 8th Ed., p.41 &amp; p.187</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "A";
       const EXPL = {
-        A: "A = 12,000 ÷ 4 = 3,000 — thấp hơn B (8,000).",
-        B: "Đúng! B = 16,000 ÷ 2 = 8,000 — highest cost of delay, maximize value in sprint.",
-        C: "C = 10,000 ÷ 3 = 3,333 — thấp hơn B.",
-        D: "D có $14k/week cao nhưng 5 weeks → 14,000 ÷ 5 = 2,800 — thấp nhất trong 4 options."
+        A: "Đúng! Declining participation → RCA workshop tìm underlying cause trước khi adjust plan (p.73, 76, 196).",
+        B: "Update plan là bước sau RCA — chưa biết root cause thì không nên revise strategy.",
+        C: "AAR là after-action review (Q34) — cho completed work, không phải ongoing participation decline.",
+        D: "Escalate bỏ qua diagnosis — Javier cần RCA với stakeholders trước."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -452,7 +478,7 @@ REF: PMBOK Guide, 8th Ed., p.41 &amp; p.187</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Feature B ($16,000/week ÷ 2 weeks = 8,000).</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Hold a RCA workshop with the stakeholders.</strong>" : "");
         });
       });
       let score = 0;
