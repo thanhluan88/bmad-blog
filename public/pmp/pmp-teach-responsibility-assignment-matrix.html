@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Business Case (Q19)</title>
+  <title>PMBOK 8 — Responsibility Assignment Matrix (Q83)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,10 +50,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .cost-benefit { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.9rem; font-weight: 600; flex-wrap: wrap; }
-    .cost-benefit .vs { color: var(--primary); font-size: 1.1rem; }
-    .cost-benefit .cost { color: var(--bad); }
-    .cost-benefit .value { color: var(--ok); }
+    .raci-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .raci-grid { grid-template-columns: repeat(2, 1fr); } }
+    .raci-cell { text-align: center; padding: 0.65rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .raci-cell strong { display: block; color: var(--primary-dark); font-size: 1rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -70,8 +69,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 360px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.62rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -92,11 +91,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Business Case · Q19</div>
+      <div class="brand-sub">RAM / RACI · Q83</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#business-case">Business Case</a>
-        <a href="#documents">So sánh tài liệu</a>
+        <a href="#ram">RAM &amp; RACI</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -122,7 +121,7 @@
         <a href="pmp-teach-hybrid-approach.html">Q16: Hybrid Approach</a>
         <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
         <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
-        <a href="pmp-teach-business-case.html" class="series-current">Q19: Business Case</a>
+        <a href="pmp-teach-business-case.html">Q19: Business Case</a>
         <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
         <a href="pmp-teach-project-management-plan.html">Q21: Project Management Plan</a>
         <a href="pmp-teach-plan-sourcing-strategy.html">Q22: Plan Sourcing Strategy</a>
@@ -186,16 +185,15 @@
         <a href="pmp-teach-monitor-stakeholder-engagement.html">Q80: Monitor Engagement</a>
         <a href="pmp-teach-monitor-communications.html">Q81: Monitor Comms</a>
         <a href="pmp-teach-team-charter.html">Q82: Team Charter</a>
-        <a href="pmp-teach-responsibility-assignment-matrix.html">Q83: RAM</a>
+        <a href="pmp-teach-responsibility-assignment-matrix.html" class="series-current">Q83: RAM</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#business-case">BC</a>
-        <a href="#documents">Docs</a>
+        <a href="#ram">RAM</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -204,181 +202,196 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q19 về <strong>Business Case</strong> — khi stakeholders lo
-            <em>cost vs value</em> và dự án còn worthwhile không, review business case
-            (economic feasibility), không phải PM plan hay charter.
+            Bài học Q83 về <strong>Responsibility Assignment Matrix (RAM)</strong> — Michelle tại VEE
+            smart grid: team mới hình thành, <em>xung đột ai responsible cho task nào</em>, miss
+            deliverable đầu tiên.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.17 &amp; p.116</span>
-            <span class="badge">Cost / Benefit</span>
-            <span class="badge">Câu 19 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.81 &amp; 194</span>
+            <span class="badge">Plan Resource Management</span>
+            <span class="badge">RAM / RACI</span>
+            <span class="badge">Câu 83 — Practice</span>
           </div>
         </header>
 
-        <section id="business-case">
-          <h2>1. Business Case</h2>
+        <section id="ram">
+          <h2>1. RAM — Responsibility Assignment Matrix (p.194)</h2>
+          <p>
+            <strong>RAM</strong> gán resources cho work packages, liên kết activities với team members.
+            Làm rõ <em>roles, responsibilities, và authority</em> — đảm bảo một người accountable
+            cho mỗi task. <strong>RACI</strong> là dạng RAM phổ biến.
+          </p>
 
-          <div class="cost-benefit">
-            <span class="cost">Cost ↑ (materials)</span>
-            <span class="vs">vs</span>
-            <span class="value">Delivered Value</span>
-            <span class="vs">→</span>
-            <span>Review <strong>Business Case</strong></span>
+          <div class="raci-grid">
+            <div class="raci-cell"><strong>R</strong>Responsible — làm việc</div>
+            <div class="raci-cell"><strong>A</strong>Accountable — chịu trách nhiệm cuối</div>
+            <div class="raci-cell"><strong>C</strong>Consulted — tư vấn</div>
+            <div class="raci-cell"><strong>I</strong>Informed — được thông báo</div>
           </div>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.116)</h4>
+            <h4>Signal trong stem</h4>
             <p style="margin:0">
-              A business case is a documented <strong>economic feasibility study</strong> used
-              to establish validity of the benefits to be delivered by a portfolio component,
-              program, or project.
+              <strong>"Performing tasks others feel they are responsible for"</strong> = role overlap /
+              confusion → workshop <strong>RAM</strong> (A), không phải RBS hay Tuckman review.
             </p>
           </div>
 
-          <h3>Khi nào review Business Case?</h3>
-          <ul>
-            <li>Stakeholders hỏi project còn <strong>worthwhile</strong> không</li>
-            <li>Cost tăng đáng kể — cần revalidate benefits vs cost</li>
-            <li>Cost versus delivered <strong>value</strong> — cost/benefit analysis</li>
-            <li>Liên hệ Initiate Project or Phase (p.17) — business case là input initiating</li>
-          </ul>
-        </section>
-
-        <section id="documents">
-          <h2>2. So sánh tài liệu — chọn đúng doc</h2>
-
           <table>
             <thead>
-              <tr><th>Tài liệu</th><th>Mục đích</th><th>Q19?</th></tr>
+              <tr><th>Artifact</th><th>Mục đích</th><th>Q83?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Business Case (D)</strong></td>
-                <td>Economic feasibility · benefits validity · cost/benefit</td>
-                <td>✓ Đúng</td>
+                <td><strong>RAM / RACI</strong></td>
+                <td>Ai responsible/accountable cho task nào</td>
+                <td>✓ Role confusion</td>
               </tr>
               <tr>
-                <td><strong>Project Charter (C)</strong></td>
-                <td>Authorize project · high-level scope · PM authority</td>
-                <td>✗ Không trả lời cost vs value feasibility</td>
+                <td><strong>RBS</strong></td>
+                <td>Phân cấp categories of resources</td>
+                <td>✗ Không clarify task ownership</td>
               </tr>
               <tr>
-                <td><strong>PM Plan (A)</strong></td>
-                <td>How project executed/monitored/controlled</td>
-                <td>✗ Planning doc — slide ✗</td>
+                <td><strong>Team Charter</strong> (Q82)</td>
+                <td>Values, agreements, operating guidelines</td>
+                <td>✗ Blame culture — khác role overlap</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q83 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Workshop RAM</strong></td>
+                <td>Clarify R/A/C/I per activity</td>
+                <td><strong>Yes — fix responsibility overlap</strong></td>
               </tr>
               <tr>
-                <td><strong>Financial Management Plan (B)</strong></td>
-                <td>How project finances managed</td>
-                <td>✗ Process/plan — không phải feasibility study</td>
+                <td><strong>B. Workshop RBS</strong></td>
+                <td>Resource breakdown hierarchy</td>
+                <td>Wrong artifact — instructor: X (instructor: RBS tree)</td>
+              </tr>
+              <tr>
+                <td><strong>C. Update schedule</strong></td>
+                <td>Review project schedule</td>
+                <td>Symptom (missed date) — root cause is role confusion</td>
+              </tr>
+              <tr>
+                <td><strong>D. Tuckman Model</strong></td>
+                <td>Review forming/storming stages</td>
+                <td>Awareness only — doesn't assign who does what</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Retail expansion scenario</h4>
+            <h4>Q82 vs Q83</h4>
             <p style="margin:0">
-              Planning begins, material costs rise — senior stakeholders lo cost vs value.
-              PM review <strong>business case</strong> để assess economic feasibility trước khi tiếp tục plan/execute.
+              Q82: blame + rework → <strong>team charter</strong>. Q83: overlapping responsibilities +
+              missed deliverable → <strong>RAM/RACI</strong>.
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 19</h2>
+          <h2>3. Câu hỏi thực hành — Question 83</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q19</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q83</div>
             <div class="q-text">
-              You have been hired to manage a retail expansion initiative. As planning begins,
-              the cost of some materials <em>rises significantly</em>. Senior stakeholders raise
-              concerns about the <em>cost versus the delivered value</em> of the project, and
-              whether it will be <em>worthwhile</em>.
-              What will you do next?
+              Michelle is planning a smart grid project at VEE, where the team have recently formed.
+              Over the last two weeks several conflicts have arisen, with some team members performing
+              tasks that other team members feel they are <em>responsible</em> for. The team have just
+              missed their first deliverable due date. What should Michelle do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Review the Project Management Plan.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Review the Financial Management Plan.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Review the Project Charter.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Review the Business Case.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Workshop a RAM with the team.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Workshop an RBS with the team.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Review and update the project schedule.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Review the Tuckman Model with the team.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
-          <h3>Tại sao chọn D?</h3>
+          <h3>Tại sao chọn A?</h3>
           <ul>
-            <li>Business case = economic feasibility study — validate benefits vs rising costs.</li>
-            <li>Keywords: cost vs value, worthwhile, cost/benefit — map trực tiếp business case.</li>
-            <li>PMBOK p.17 (Initiate) + p.116 (Business Case definition).</li>
+            <li>Conflict = ai responsible cho task nào không rõ → RAM (p.194).</li>
+            <li>RAM links activities ↔ team members; one accountable per task.</li>
+            <li>Workshop với team — collaborative RACI build.</li>
+            <li>Missed deliverable là hậu quả — fix root cause (roles) trước schedule tweak.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải NEXT</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. PM Plan</strong></td>
-                <td>Defines execution — không trả lời “còn worthwhile không” khi cost tăng (✗ slide).</td>
+                <td><strong>B. RBS</strong></td>
+                <td>Resource Breakdown Structure = hierarchy of resource types — không assign task ownership.</td>
               </tr>
               <tr>
-                <td><strong>B. Financial Management Plan</strong></td>
-                <td>Cách quản lý tài chính dự án — không phải feasibility/benefits validation.</td>
+                <td><strong>C. Schedule</strong></td>
+                <td>Schedule không resolve role overlap — có thể update sau khi RAM clear.</td>
               </tr>
               <tr>
-                <td><strong>C. Project Charter</strong></td>
-                <td>Authorization document — không chứa economic feasibility analysis như business case.</td>
+                <td><strong>D. Tuckman</strong></td>
+                <td>Forming/Storming/Norming/Performing/Adjourning — giáo dục team stage, không gán R/A/C/I.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Liên hệ Q18 + Q10</h4>
-            <p style="margin:0">
-              Q18: business case approved → charter · Q19: cost rises → re-review business case ·
-              Q10: Focus on Value — benefits và value realization.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Tài liệu nào?</h2>
+          <h2>5. Drill — RAM, RBS, Schedule, hay Tuckman?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="BC">
-              <span>Is the project still worthwhile given rising costs?</span>
+            <div class="classify-row" data-answer="RAM">
+              <span>Two members both think they own the same integration task</span>
               <div class="classify-btns">
-                <button data-pick="BC">Business Case</button>
-                <button data-pick="CH">Charter</button>
-                <button data-pick="PM">PM Plan</button>
+                <button data-pick="RAM">RAM</button>
+                <button data-pick="RBS">RBS</button>
+                <button data-pick="SCH">Schedule</button>
+                <button data-pick="TUCK">Tuckman</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="CH">
-              <span>Grant PM authority to allocate resources</span>
+            <div class="classify-row" data-answer="RBS">
+              <span>Break down project resources by skill category and team</span>
               <div class="classify-btns">
-                <button data-pick="BC">Business Case</button>
-                <button data-pick="CH">Charter</button>
-                <button data-pick="PM">PM Plan</button>
+                <button data-pick="RAM">RAM</button>
+                <button data-pick="RBS">RBS</button>
+                <button data-pick="SCH">Schedule</button>
+                <button data-pick="TUCK">Tuckman</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PM">
-              <span>Define how the project will be executed</span>
+            <div class="classify-row" data-answer="SCH">
+              <span>Critical path slipped — rebaseline dates after scope confirmed</span>
               <div class="classify-btns">
-                <button data-pick="BC">Business Case</button>
-                <button data-pick="CH">Charter</button>
-                <button data-pick="PM">PM Plan</button>
+                <button data-pick="RAM">RAM</button>
+                <button data-pick="RBS">RBS</button>
+                <button data-pick="SCH">Schedule</button>
+                <button data-pick="TUCK">Tuckman</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="BC">
-              <span>Economic feasibility and benefits validity</span>
+            <div class="classify-row" data-answer="RAM">
+              <span>No single accountable owner per work package — deliverables slipping</span>
               <div class="classify-btns">
-                <button data-pick="BC">Business Case</button>
-                <button data-pick="CH">Charter</button>
-                <button data-pick="PM">PM Plan</button>
+                <button data-pick="RAM">RAM</button>
+                <button data-pick="RBS">RBS</button>
+                <button data-pick="SCH">Schedule</button>
+                <button data-pick="TUCK">Tuckman</button>
               </div>
             </div>
           </div>
@@ -388,20 +401,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn C — Charter (sau Q18)</h4>
-            <p style="margin:0">Q18 = charter khi mới start. Q19 = cost vs value concern → <strong>business case</strong>, không phải charter lần nữa.</p>
+            <h4>Bẫy 1: Resource → RBS (B)</h4>
+            <p style="margin:0">RAM và RBS đều thuộc Plan Resource Management — nhưng RBS là breakdown hierarchy, không clarify task responsibility.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Chọn A — PM Plan vì “planning begins”</h4>
-            <p style="margin:0">Planning đang diễn ra nhưng câu hỏi là feasibility/worthwhile — business case trước khi tiếp tục plan.</p>
+            <h4>Bẫy 2: Missed date → schedule (C)</h4>
+            <p style="margin:0">Missed deliverable là symptom. Stem nhấn "responsible for" → fix roles trước.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Chọn B — Financial plan nghe liên quan cost</h4>
-            <p style="margin:0">Financial management plan = how to manage money — business case = whether benefits justify costs.</p>
+            <h4>Bẫy 3: New team + conflict → Tuckman (D)</h4>
+            <p style="margin:0">Storming stage giải thích dynamics — nhưng không assign ai làm gì. RAM workshop mới fix overlap.</p>
           </div>
           <div class="card tip">
-            <h4>Keyword map</h4>
-            <p style="margin:0">worthwhile · cost vs value · economic feasibility · benefits validity → <strong>Business Case</strong></p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Role overlap · "responsible for" · task confusion</strong> → Workshop RAM (A).</p>
           </div>
         </section>
 
@@ -409,43 +422,62 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Business case là gì? (p.116)</div>
-            <div class="flashcard-back">Documented economic feasibility study — establishes validity of benefits.</div>
+            <div class="flashcard-front">RAM purpose?</div>
+            <div class="flashcard-back">Link activities to team members; clarify roles, responsibilities, authority — one accountable per task (p.194).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q19 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Review the Business Case (cost vs value, worthwhile).</div>
+            <div class="flashcard-front">Q83 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Workshop a RAM with the team.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">BUSINESS CASE — Q19 (PMBOK 8, p.17 &amp; p.116)
+          <div class="cheat-sheet">RESPONSIBILITY ASSIGNMENT MATRIX — Q83
+(PMBOK 8, p.81 &amp; 194)
 ─────────────────────────────────────────────────────
-DEFINITION: Documented ECONOMIC FEASIBILITY STUDY
-PURPOSE: Establish validity of BENEFITS delivered
+ARTIFACT: RAM (Responsibility Assignment Matrix)
+  • Resources assigned to work packages
+  • Links activities ↔ team members
+  • Clarifies roles, responsibilities, authority
+  • ONE accountable person per task
+  • RACI = common RAM format (R/A/C/I)
 
-KEYWORDS → D (Business Case):
-  Cost vs delivered value · worthwhile · cost/benefit
-  Material costs rise · revalidate feasibility
+RACI:
+  R = Responsible (does the work)
+  A = Accountable (owns outcome)
+  C = Consulted
+  I = Informed
 
-Q19 ANSWER: D — Review the Business Case
+SCENARIO: Michelle — VEE smart grid
+           Team RECENTLY FORMED
+           Conflicts: tasks others feel THEY are responsible for
+           MISSED first deliverable date
+QUESTION: What should Michelle do NEXT?
+→ A) WORKSHOP A RAM WITH THE TEAM ✓
 
 NOT:
-  A PM Plan → how to execute (✗)
-  B Financial Mgmt Plan → how finances managed
-  C Charter → authorize project, not feasibility study
+  B) WORKSHOP RBS — resource hierarchy; not task ownership
+  C) UPDATE SCHEDULE — symptom; root cause = role confusion
+  D) TUCKMAN MODEL — FSNPA stages; doesn't assign roles
 
-VS Q18:
-  Q18: business case approved → NEXT = charter
-  Q19: cost rises, still worthwhile? → review BUSINESS CASE
+Q82 vs Q83:
+  Q82 blame/rework → Team Charter
+  Q83 role overlap  → RAM/RACI
 
-REF: PMBOK Guide 8th Ed., p.17 Initiate + p.116 Business Case</div>
+SIGNAL: "responsible for" + overlapping tasks
+        → RAM workshop
+
+Q83 ANSWER: A
+
+REF: PMBOK Guide, 8th Ed., p.81 Plan Resource Management
+      p.194 Responsibility assignment matrix</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
-          · <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
+          · <a href="pmp-teach-team-charter.html">Q82: Team Charter</a>
+          · <a href="pmp-teach-resource-leveling.html">Q58: Resource Leveling</a>
+          · <a href="pmp-full-questions.html#q-83">Luyện câu 83</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -454,12 +486,12 @@ REF: PMBOK Guide 8th Ed., p.17 Initiate + p.116 Business Case</div>
 
   <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "A";
       const EXPL = {
-        A: "PM Plan định nghĩa execution — không trả lời project còn worthwhile khi cost tăng.",
-        B: "Financial Management Plan = cách quản lý tài chính — không phải economic feasibility study.",
-        C: "Charter authorize project — không phải doc để assess cost vs value feasibility.",
-        D: "Đúng! Business case = economic feasibility study — validate benefits vs rising costs (p.116)."
+        A: "Đúng! Role overlap → workshop RAM/RACI để clarify responsible &amp; accountable per task (p.194).",
+        B: "RBS là resource breakdown hierarchy — không assign ai responsible cho task nào.",
+        C: "Schedule update không fix role confusion — missed date là consequence.",
+        D: "Tuckman Model giải thích team stages — không gán R/A/C/I cho activities."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -475,7 +507,7 @@ REF: PMBOK Guide 8th Ed., p.17 Initiate + p.116 Business Case</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Review the Business Case.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Workshop a RAM with the team.</strong>" : "");
         });
       });
       let score = 0;
@@ -503,16 +535,18 @@ REF: PMBOK Guide 8th Ed., p.17 Initiate + p.116 Business Case</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
