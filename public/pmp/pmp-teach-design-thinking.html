@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Adaptive Approach (Q15)</title>
+  <title>PMBOK 8 — Design Thinking (Q46)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,16 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .iter-viz { display: flex; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; flex-wrap: wrap; }
-    .iter-box { padding: 0.5rem 0.75rem; background: var(--ok-bg); border: 1.5px solid var(--ok); border-radius: 8px; font-size: 0.78rem; font-weight: 600; color: #065f46; position: relative; }
-    .iter-box:not(:last-child)::after { content: "↻"; position: absolute; right: -0.65rem; top: 50%; transform: translateY(-50%); color: var(--primary); font-weight: 700; }
-    .po-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; padding: 0.85rem 1rem; background: var(--info-bg); border: 1px solid var(--info); border-radius: var(--radius); font-size: 0.85rem; justify-content: center; }
-    .po-flow strong { color: #1d4ed8; }
-    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
-    @media (max-width: 600px) { .approach-grid { grid-template-columns: 1fr; } }
-    .approach-box { padding: 0.85rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--card); font-size: 0.84rem; }
-    .approach-box strong { display: block; margin-bottom: 0.25rem; color: var(--primary-dark); }
-    .approach-box.ok { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -76,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 320px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -97,11 +87,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Adaptive Approach · Q15</div>
+      <div class="brand-sub">Design Thinking · Q46</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#adaptive">Adaptive</a>
-        <a href="#compare">So sánh Q14</a>
+        <a href="#design">Design Thinking</a>
+        <a href="#techniques">So sánh techniques</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -154,16 +144,16 @@
         <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
         <a href="pmp-teach-requirements-traceability.html">Q44: Requirements RTM</a>
         <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
-        <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
+        <a href="pmp-teach-design-thinking.html" class="series-current">Q46: Design Thinking</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-46">Luyện câu 46</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#adaptive">Adaptive</a>
-        <a href="#compare">Compare</a>
+        <a href="#design">Design</a>
+        <a href="#techniques">Techniques</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -172,192 +162,176 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q15 về <strong>Adaptive Approaches</strong> — agile/change-driven khi
-            requirements volatile; short iterations, feedback, và một người chịu trách nhiệm scope/value.
+            Bài học Q46 về <strong>Design Thinking</strong> — wearable device tại Fitness Plus:
+            inconsistent user experiences, root cause unclear, competing ideas — stakeholders muốn
+            giải pháp dựa trên <em>user needs</em> thay vì <em>assumptions</em>.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.63</span>
-            <span class="badge">Development Approach</span>
-            <span class="badge">Câu 15 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.40–41 &amp; p.168</span>
+            <span class="badge">Elicit and Analyze Requirements</span>
+            <span class="badge">Câu 46 — Practice</span>
           </div>
         </header>
 
-        <section id="adaptive">
-          <h2>1. Adaptive Approach (PMBOK 8)</h2>
+        <section id="design">
+          <h2>1. Design thinking (PMBOK p.168)</h2>
           <p>
-            Adaptive approaches (change-driven / agile) phù hợp khi requirements và technical
-            solution <strong>highly uncertain, volatile, likely to change</strong>.
-            Vision rõ sớm; requirements được elaborate dần theo feedback.
+            Design thinking và prototyping nhấn mạnh <strong>understanding user needs</strong> qua
+            iterative testing và feedback — validate solutions trong điều kiện thực trước khi deploy.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.63)</h4>
+            <h4>Design thinking</h4>
             <p style="margin:0">
-              A clear vision is established early, and known requirements are progressively
-              elaborated, changed, or replaced based on stakeholder feedback, the environment,
-              or unexpected events.
+              Empathize with users · ideate · prototype · test iteratively. Ensures solutions address
+              real user needs — not team assumptions or untested ideas.
             </p>
-          </div>
-
-          <div class="iter-viz" aria-label="Short iterations cycle">
-            <span class="iter-box">Sprint 1</span>
-            <span class="iter-box">Sprint 2</span>
-            <span class="iter-box">Sprint 3</span>
-            <span class="iter-box">Sprint n</span>
-          </div>
-          <p style="font-size:0.85rem;color:var(--muted);text-align:center;margin-top:-0.5rem">
-            Short iterations · deliver features regularly · refine from feedback
-          </p>
-
-          <div class="po-flow">
-            <strong>Product Owner</strong> — one person responsible for approved scope &amp; value to the organization
-          </div>
-
-          <h3>Keywords trong đề thi → Adaptive</h3>
-          <ul>
-            <li>Short iterations / sprints</li>
-            <li>Deliver features regularly</li>
-            <li>Refine based on stakeholder feedback</li>
-            <li>Mobile app, digital products, high uncertainty</li>
-            <li>Product Owner owns scope &amp; value</li>
-          </ul>
-        </section>
-
-        <section id="compare">
-          <h2>2. Adaptive vs Predictive (Q14 ↔ Q15)</h2>
-
-          <div class="approach-grid">
-            <div class="approach-box ok">
-              <strong>Q15 — Adaptive (A) ✓</strong>
-              Iterations, feedback, evolving requirements, Product Owner
-            </div>
-            <div class="approach-box">
-              <strong>Q14 — Predictive (D)</strong>
-              Phase gates, defined early, strict change control, waterfall
-            </div>
           </div>
 
           <table>
             <thead>
-              <tr><th>Approach</th><th>Khi nào</th><th>Đặc điểm</th></tr>
+              <tr><th>Phase (concept)</th><th>Purpose</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Discover / Empathize</td><td>Understand user experiences and pain points</td></tr>
+              <tr><td>Define</td><td>Frame the real problem (root cause clarity)</td></tr>
+              <tr><td>Develop / Ideate</td><td>Generate competing ideas — then test, not assume</td></tr>
+              <tr><td>Deliver / Test</td><td>Prototype &amp; validate with real users before full deployment</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="techniques">
+          <h2>2. Elicitation techniques — pick the right tool</h2>
+
+          <table>
+            <thead>
+              <tr><th>Technique</th><th>Best for</th><th>Q46 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Adaptive (A)</strong></td>
-                <td>Uncertain, volatile requirements</td>
-                <td>Iterations, feedback, progressive elaboration</td>
+                <td><strong>Design thinking</strong></td>
+                <td>User needs · iterative prototype · validate vs assumptions</td>
+                <td>✓ (C)</td>
               </tr>
               <tr>
-                <td><strong>Predictive (B)</strong></td>
-                <td>Scope stable early</td>
-                <td>Upfront planning, phase gates</td>
+                <td>Affinity diagramming</td>
+                <td>Group/cluster many ideas into themes</td>
+                <td>Organize ideas — không validate user needs</td>
               </tr>
               <tr>
-                <td><strong>Hybrid (C)</strong></td>
-                <td>Mix stable + evolving</td>
-                <td>Not described in Q15 scenario</td>
+                <td>Kano analysis</td>
+                <td>Prioritize features: must-haves, satisfiers, delighters</td>
+                <td>Feature priority — root cause chưa rõ</td>
               </tr>
               <tr>
-                <td><strong>Incremental (D)</strong></td>
-                <td>Deliver portions over time</td>
-                <td>May overlap agile but Q15 keywords = full adaptive pattern</td>
+                <td>Pareto analysis</td>
+                <td>80/20 — focus on vital few causes/problems</td>
+                <td>Quantitative prioritization — cần data, không phải empathize users</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 15</h2>
+          <h2>3. Câu hỏi thực hành — Question 46</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q15</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q46</div>
             <div class="q-text">
-              Jason is leading a mobile application project at Blue Peak Digital Solutions.
-              The team works in <em>short iterations</em>, delivering <em>features regularly</em>
-              and refining their approach based on feedback.
-              <em>One person is responsible</em> for the approved scope and its value to the organization.
-              Which development approach is being used?
+              You are managing a project for a new wearable device at Fitness Plus. Users report
+              <em>inconsistent experiences</em> in the device, but the <em>root cause is unclear</em>.
+              The team has several <em>competing ideas</em> for improvements, and stakeholders want a
+              solution that truly addresses <em>user needs</em> rather than
+              <em>assumptions</em>. What should the project manager do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Adaptive approach.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Predictive approach.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Hybrid approach.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Incremental approach.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Use Affinity Diagramming with the team.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Use Kano Analysis with the team.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Use Design Thinking with the team.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Use Pareto Analysis with the team.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <h3>Tại sao chọn A?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>Short iterations + regular feature delivery + feedback = agile/adaptive hallmark.</li>
-            <li>One person for scope &amp; value = <strong>Product Owner</strong> role (slide annotation).</li>
-            <li>Mobile app at digital solutions firm = typical adaptive context (volatile requirements).</li>
-            <li>Khớp PMBOK p.63 — change-driven / agile approaches.</li>
+            <li>Unclear root cause + inconsistent experiences → empathize &amp; discover with users.</li>
+            <li>Competing ideas → prototype &amp; test iteratively, không chọn theo assumption.</li>
+            <li>User needs vs assumptions → design thinking + prototyping (p.168).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>B. Predictive</strong></td>
-                <td>Waterfall/plan-driven — trái iterations và evolving requirements (Q14 pattern).</td>
+                <td><strong>A. Affinity diagramming</strong></td>
+                <td>Groups ideas into clusters — không validate user needs through real testing.</td>
               </tr>
               <tr>
-                <td><strong>C. Hybrid</strong></td>
-                <td>Scenario mô tả thuần adaptive, không nhắc phần predictive.</td>
+                <td><strong>B. Kano analysis</strong></td>
+                <td>Classifies features (must/satisfier/delighter) — cần hiểu problem trước, không giải root cause unclear.</td>
               </tr>
               <tr>
-                <td><strong>D. Incremental</strong></td>
-                <td>Deliver từng phần có thể overlap nhưng đề nhấn iterations + feedback + PO = adaptive (A) đầy đủ hơn.</td>
+                <td><strong>D. Pareto analysis</strong></td>
+                <td>80/20 prioritization of causes — quantitative, không iterative user-centered validation.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Synonyms Adaptive (p.63)</h4>
+            <h4>Liên hệ Q43 vs Q46</h4>
             <p style="margin:0">
-              change-driven · agile · progressive elaboration · stakeholder feedback ·
-              volatile requirements · Product Owner
+              Q43: gather differing expectations (focus groups, benchmarking). Q46: unclear UX +
+              assumptions → <em>design thinking</em> để empathize, prototype, validate với users.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Adaptive hay Predictive?</h2>
+          <h2>5. Drill — Match technique to scenario</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="ADAPT">
-              <span>Short iterations with regular feature delivery</span>
+            <div class="classify-row" data-answer="DT">
+              <span>Validate solution with users before full deployment</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="AFF">Affinity</button>
+                <button data-pick="KANO">Kano</button>
+                <button data-pick="DT">Design</button>
+                <button data-pick="PAR">Pareto</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PRED">
-              <span>Phase gate approvals with strict change control</span>
+            <div class="classify-row" data-answer="AFF">
+              <span>Cluster many brainstormed ideas into themes</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="AFF">Affinity</button>
+                <button data-pick="KANO">Kano</button>
+                <button data-pick="DT">Design</button>
+                <button data-pick="PAR">Pareto</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ADAPT">
-              <span>Requirements elaborated based on stakeholder feedback</span>
+            <div class="classify-row" data-answer="KANO">
+              <span>Prioritize must-haves vs delighters for features</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="AFF">Affinity</button>
+                <button data-pick="KANO">Kano</button>
+                <button data-pick="DT">Design</button>
+                <button data-pick="PAR">Pareto</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ADAPT">
-              <span>One person owns approved scope and organizational value</span>
+            <div class="classify-row" data-answer="PAR">
+              <span>Focus on vital few causes driving 80% of defects</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="AFF">Affinity</button>
+                <button data-pick="KANO">Kano</button>
+                <button data-pick="DT">Design</button>
+                <button data-pick="PAR">Pareto</button>
               </div>
             </div>
           </div>
@@ -367,16 +341,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn D — Incremental vì “deliver features regularly”</h4>
-            <p style="margin:0">Incremental = usable portions over time. Khi có <strong>short iterations + feedback + PO</strong>, PMBOK 8 gọi là <strong>Adaptive</strong> — đáp án đầy đủ hơn.</p>
+            <h4>Bẫy 1: Competing ideas → Affinity (A)</h4>
+            <p style="margin:0">Affinity groups ideas — stem cần validate user needs, không chỉ organize competing ideas.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Nhầm với Q14 Predictive</h4>
-            <p style="margin:0">Q14 = regulated, defined early. Q15 = mobile app, iterations, feedback — đối lập rõ ràng.</p>
+            <h4>Bẫy 2: Wearable/features → Kano (B)</h4>
+            <p style="margin:0">Kano = feature satisfaction categories — không address unclear root cause hay assumptions vs real needs.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Root cause → Pareto (D)</h4>
+            <p style="margin:0">Pareto needs quantified frequency data — root cause <em>unclear</em>, cần user-centered discovery first.</p>
           </div>
           <div class="card tip">
-            <h4>Pair study Q14 + Q15</h4>
-            <p style="margin:0">Đề thi thường đặt predictive và adaptive cạnh nhau — đọc keywords, không đoán theo ngành.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>User needs · assumptions · prototype · iterative testing · validate</strong> → Design thinking (C).</p>
           </div>
         </section>
 
@@ -384,48 +362,58 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Adaptive approach = gì? (p.63)</div>
-            <div class="flashcard-back">Change-driven/agile — volatile requirements, iterations, feedback, progressive elaboration.</div>
+            <div class="flashcard-front">Design thinking? (p.168)</div>
+            <div class="flashcard-back">Understand user needs · iterative testing &amp; feedback · prototype before full deployment.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q15 đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Adaptive approach (short iterations, features, Product Owner).</div>
+            <div class="flashcard-front">Q46 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Use Design Thinking with the team.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ADAPTIVE APPROACH — Q15 (PMBOK 8, p.63)
+          <div class="cheat-sheet">DESIGN THINKING — Q46 (PMBOK 8, p.40–41 &amp; p.168)
 ─────────────────────────────────────────────────────
-ALSO CALLED: Change-driven · Agile
+PROCESS: Elicit and Analyze Requirements
 
-WHEN: Requirements &amp; technical solution UNCERTAIN, VOLATILE, LIKELY TO CHANGE
+DESIGN THINKING (p.168):
+  - Understand USER NEEDS
+  - Iterative testing &amp; feedback
+  - Prototyping — validate in REAL conditions
+  - Before full deployment
 
-HOW:
-  Clear vision early
-  Requirements progressively elaborated/changed/replaced
-  Stakeholder feedback · environment · unexpected events
-
-Q15 KEYWORDS → A (Adaptive):
-  Short iterations · features regularly · feedback
-  One person = scope &amp; value → Product Owner
-  Mobile app / digital solutions
-
-Q15 ANSWER: A — Adaptive approach
-
-VS Q14 PREDICTIVE:
-  Q14: phase gates, defined early, strict CC
-  Q15: iterations, feedback, evolving scope
+SCENARIO: Fitness Plus — wearable device
+           INCONSISTENT user experiences
+           ROOT CAUSE unclear
+           COMPETING ideas for improvements
+           USER NEEDS vs ASSUMPTIONS
+→ C) USE DESIGN THINKING ✓
 
 NOT:
-  B Predictive · C Hybrid (not described) · D Incremental alone
+  A) Affinity diagramming — cluster ideas, not validate users
+  B) Kano analysis — must/satisfier/delighter feature priority
+  D) Pareto analysis — 80/20 vital few (needs data)
 
-REF: The Standard for Project Management, p.63
-     "Adaptive Approaches"</div>
+TECHNIQUE MAP:
+  User needs · prototype · validate     → Design thinking
+  Group brainstorm ideas                → Affinity diagram
+  Feature satisfaction categories       → Kano
+  Prioritize causes by frequency        → Pareto
+
+SIGNAL: "user needs" · "rather than assumptions"
+        "inconsistent experiences" · "root cause unclear"
+        "validate" · "iterative" · "prototype"
+
+Q46 ANSWER: C
+
+REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.168</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
+          · <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
+          · <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
+          · <a href="pmp-full-questions.html#q-46">Luyện câu 46</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -434,12 +422,12 @@ REF: The Standard for Project Management, p.63
 
   <script>
     (function () {
-      const CORRECT = "A";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Đúng! Short iterations, regular features, feedback, PO = Adaptive/change-driven/agile (p.63).",
-        B: "Predictive = waterfall, defined early — trái iterations và evolving requirements.",
-        C: "Hybrid = mix — scenario mô tả thuần adaptive.",
-        D: "Incremental = partial delivery — thiếu full adaptive pattern (iterations + feedback + PO)."
+        A: "Affinity diagramming groups ideas — không validate user needs through iterative testing.",
+        B: "Kano analysis prioritizes feature types — không address unclear root cause hay assumptions vs real user needs.",
+        C: "Đúng! Design thinking emphasizes user needs via iterative testing, feedback, and prototyping (p.168).",
+        D: "Pareto analysis = 80/20 prioritization — cần quantified data, không phải user-centered discovery khi root cause unclear."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -455,7 +443,7 @@ REF: The Standard for Project Management, p.63
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Adaptive approach.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Use Design Thinking with the team.</strong>" : "");
         });
       });
       let score = 0;
