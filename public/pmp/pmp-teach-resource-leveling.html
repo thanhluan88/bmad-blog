@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Assumption Log (Q20)</title>
+  <title>PMBOK 8 — Resource Leveling (Q58)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,8 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .log-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
-    @media (max-width: 600px) { .log-grid { grid-template-columns: 1fr; } }
-    .log-box { padding: 0.85rem; border-radius: var(--radius); font-size: 0.84rem; border: 1px solid var(--border); background: var(--card); }
-    .log-box.do { border-color: var(--ok); background: var(--ok-bg); }
-    .log-box.not { border-color: var(--bad); background: var(--bad-bg); }
-    .log-box strong { display: block; margin-bottom: 0.25rem; font-size: 0.9rem; }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .compare-grid { grid-template-columns: 1fr; } }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -72,7 +68,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 380px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -94,11 +90,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Assumption Log · Q20</div>
+      <div class="brand-sub">Resource Leveling · Q58</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#logs">4 loại log/register</a>
-        <a href="#not-trap">Câu hỏi NOT</a>
+        <a href="#leveling">Resource Leveling</a>
+        <a href="#vs-smoothing">Leveling vs Smoothing</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -125,7 +121,7 @@
         <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
         <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
         <a href="pmp-teach-business-case.html">Q19: Business Case</a>
-        <a href="pmp-teach-assumption-log.html" class="series-current">Q20: Assumption Log</a>
+        <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
         <a href="pmp-teach-project-management-plan.html">Q21: Project Management Plan</a>
         <a href="pmp-teach-plan-sourcing-strategy.html">Q22: Plan Sourcing Strategy</a>
         <a href="pmp-teach-bidder-conference.html">Q23: Bidder Conference</a>
@@ -162,16 +158,16 @@
         <a href="pmp-teach-schedule-management-plan.html">Q55: Schedule Mgmt Plan</a>
         <a href="pmp-teach-development-approach-schedule.html">Q56: Dev Approach Input</a>
         <a href="pmp-teach-schedule-baseline.html">Q57: Schedule Baseline</a>
-        <a href="pmp-teach-resource-leveling.html">Q58: Resource Leveling</a>
+        <a href="pmp-teach-resource-leveling.html" class="series-current">Q58: Resource Leveling</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-58">Luyện câu 58</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#logs">Logs</a>
-        <a href="#not-trap">NOT</a>
+        <a href="#leveling">Leveling</a>
+        <a href="#vs-smoothing">vs Smoothing</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -180,190 +176,200 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q20 về <strong>Assumption Log</strong> và phân biệt với Risk Register,
-            Basis of Estimates, và Issue Log — đặc biệt câu hỏi <em>NOT</em> trên đề thi.
+            Bài học Q58 về <strong>Resource Leveling</strong> — FI Group: critical activities cần
+            cùng một specialized engineer <em>overlapping times</em> → unrealistic workload,
+            risk delays. PM nên làm gì?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.17 &amp; p.114</span>
-            <span class="badge">Initiate / Planning</span>
-            <span class="badge">Câu 20 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.50 &amp; 193</span>
+            <span class="badge">Develop Schedule</span>
+            <span class="badge">Resource Leveling</span>
+            <span class="badge">Câu 58 — Practice</span>
           </div>
         </header>
 
-        <section id="logs">
-          <h2>1. Bốn artifact — ghi gì ở đâu?</h2>
-
-          <div class="log-grid">
-            <div class="log-box do">
-              <strong>A — Assumption Log ✓</strong>
-              Assumptions &amp; constraints · updates · status changes
-            </div>
-            <div class="log-box do">
-              <strong>B — Risk Register ✓</strong>
-              Uncertainties · risks (utility availability, vendor timeline accuracy)
-            </div>
-            <div class="log-box do">
-              <strong>C — Basis of Estimates ✓</strong>
-              How cost/duration estimates derived · supporting detail
-            </div>
-            <div class="log-box not">
-              <strong>D — Issue Log ✗ (NOT)</strong>
-              Impacts that <em>have already occurred</em> — not future uncertainty
-            </div>
-          </div>
+        <section id="leveling">
+          <h2>1. Resource leveling (p.50, 193)</h2>
+          <p>
+            <strong>Resource leveling</strong> adjusts the project schedule to address
+            <strong>resource constraints</strong> — đảm bảo resources không bị over-allocated và
+            work được scheduled theo actual availability. Có thể reschedule critical activities
+            (có thể extend project end date).
+          </p>
 
           <div class="card tip">
-            <h4>Assumption Log (PMBOK p.114)</h4>
+            <h4>Khi nào dùng leveling?</h4>
             <p style="margin:0">
-              Records all project assumptions and constraints throughout the life cycle,
-              including updates and status changes. High-level constraints originate in
-              the business case and flow into the charter; lower-level assumptions are
-              identified during planning and execution.
+              Same resource assigned to multiple activities at the same time — especially on
+              critical path — → level schedule để eliminate unrealistic workload.
             </p>
           </div>
         </section>
 
-        <section id="not-trap">
-          <h2>2. Câu hỏi “NOT” — đọc kỹ</h2>
-          <p>
-            Đề hỏi <strong>what will he NOT do</strong> — đáp án đúng là hành động
-            Elijah <em>không</em> thực hiện. A, B, C đều đúng việc cần làm → chọn D.
-          </p>
+        <section id="vs-smoothing">
+          <h2>2. Leveling vs Smoothing vs Compression</h2>
+
+          <div class="compare-grid">
+            <div class="card info">
+              <h4>Resource leveling (A) ✓</h4>
+              <p style="margin:0">Fix over-allocation; may change critical path/end date. Overlapping same resource → level.</p>
+            </div>
+            <div class="card warn">
+              <h4>Resource smoothing (D)</h4>
+              <p style="margin:0">Adjust within float only; does not change project end date. Không fix critical over-allocation.</p>
+            </div>
+          </div>
 
           <table>
             <thead>
-              <tr><th>Factor (QGS data center)</th><th>Artifact</th></tr>
+              <tr><th>Technique</th><th>Purpose</th><th>Q58 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td>Utility availability (uncertain)</td>
-                <td>Assumption Log + Risk Register</td>
+                <td><strong>Resource leveling (A)</strong></td>
+                <td>Resolve over-allocation / constraints</td>
+                <td><strong>Yes — overlapping engineer on critical work</strong></td>
               </tr>
               <tr>
-                <td>Vendor timeline accuracy (uncertain)</td>
-                <td>Assumption Log + Risk Register + Basis of Estimates</td>
+                <td><strong>Fast tracking (B)</strong></td>
+                <td>Overlap phases to shorten schedule</td>
+                <td>Worsens resource conflict — opposite need</td>
               </tr>
               <tr>
-                <td>Initial cost/duration estimates</td>
-                <td>Basis of Estimates (document assumptions behind numbers)</td>
+                <td><strong>Risk brainstorm (C)</strong></td>
+                <td>Identify &amp; plan responses</td>
+                <td>PMI prefers direct technique when known solution exists</td>
               </tr>
               <tr>
-                <td>Problem already impacting project</td>
-                <td><strong>Issue Log only</strong> — chưa xảy ra ở đây</td>
+                <td><strong>Resource smoothing (D)</strong></td>
+                <td>Balance demand using float</td>
+                <td>Insufficient when critical activities overlap same resource</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 20</h2>
+          <h2>3. Câu hỏi thực hành — Question 58</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q20</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q58</div>
             <div class="q-text">
-              Elijah is initiating a data center expansion project at QGS. Early planning
-              relies on <em>uncertain factors</em> such as utility availability and the
-              accuracy of vendor timelines. As Elijah documents these initial estimates for
-              cost and duration, what will he <em>NOT</em> do?
+              A project schedule at FI Group shows several critical activities requiring the same
+              specialized engineer at <em>overlapping times</em>. This is creating unrealistic
+              workload expectations and risking delays in the future. What should the project
+              manager do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Add the factors to the Assumption Log.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Add the factors to the Risk Register.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Add the factors to the Basis of Estimates.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Add the factors to the Issue Log.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Apply resource leveling.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Apply schedule fast tracking.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Raise it as a risk and brainstorm responses with your team.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Apply resource smoothing.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
-          <h3>Tại sao chọn D (NOT do)?</h3>
+          <h3>Tại sao chọn A?</h3>
           <ul>
-            <li><strong>Issue Log</strong> = impacts <em>that have occurred</em> — không phải uncertain factors chưa xảy ra.</li>
-            <li>Utility availability &amp; vendor timelines = assumptions/uncertainties → A, B, C đúng.</li>
-            <li>Slide: A, B, C có ✓ · D bị loại (Issue Log).</li>
+            <li>Over-allocation of one specialized resource across critical activities.</li>
+            <li>Resource leveling reschedules work per actual availability (p.193).</li>
+            <li>Develop Schedule technique — direct fix, không chỉ document as risk.</li>
           </ul>
 
-          <h3>Vì sao A, B, C là việc Elijah SẼ làm</h3>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Lý do</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Assumption Log</strong></td>
-                <td>Ghi assumptions/constraints và status — p.114</td>
+                <td><strong>B. Fast tracking</strong></td>
+                <td>Overlap activities to compress — tăng resource conflict, không giải quyết over-allocation.</td>
               </tr>
               <tr>
-                <td><strong>B. Risk Register</strong></td>
-                <td>Uncertainties = risks cần theo dõi</td>
+                <td><strong>C. Risk brainstorm</strong></td>
+                <td>Problem đã rõ (resource constraint) — apply leveling, không chỉ raise risk.</td>
               </tr>
               <tr>
-                <td><strong>C. Basis of Estimates</strong></td>
-                <td>Document assumptions behind cost/duration estimates</td>
+                <td><strong>D. Resource smoothing</strong></td>
+                <td>Chỉ shift within float; critical overlapping work cần leveling, không đủ smoothing.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Issue vs Risk</h4>
+            <h4>Instructor diagram</h4>
             <p style="margin:0">
-              <strong>Risk</strong> = may happen (uncertainty) · <strong>Issue</strong> = has happened (impact occurred)
+              Overlapping tasks (stacked) → sequential reschedule = <strong>leveling</strong>.
+              Smoothing = move within float without changing end date — different problem.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Log/Register nào?</h2>
+          <h2>5. Drill — Level, smooth, fast-track hay risk?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="ASSUMP">
-              <span>Utility may not be available on schedule (uncertain)</span>
+            <div class="classify-row" data-answer="LEVEL">
+              <span>Same engineer on critical tasks at overlapping times</span>
               <div class="classify-btns">
-                <button data-pick="ASSUMP">Assumption/Risk</button>
-                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="LEVEL">Leveling</button>
+                <button data-pick="SMOOTH">Smoothing</button>
+                <button data-pick="FAST">Fast-track</button>
+                <button data-pick="RISK">Risk</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ISSUE">
-              <span>Vendor missed deadline — project delayed 2 weeks</span>
+            <div class="classify-row" data-answer="SMOOTH">
+              <span>Balance resource histogram using available float only</span>
               <div class="classify-btns">
-                <button data-pick="ASSUMP">Assumption/Risk</button>
-                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="LEVEL">Leveling</button>
+                <button data-pick="SMOOTH">Smoothing</button>
+                <button data-pick="FAST">Fast-track</button>
+                <button data-pick="RISK">Risk</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ASSUMP">
-              <span>Assumption behind duration estimate documented</span>
+            <div class="classify-row" data-answer="FAST">
+              <span>Run design and build in parallel to shorten duration</span>
               <div class="classify-btns">
-                <button data-pick="ASSUMP">Basis/Assumption</button>
-                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="LEVEL">Leveling</button>
+                <button data-pick="SMOOTH">Smoothing</button>
+                <button data-pick="FAST">Fast-track</button>
+                <button data-pick="RISK">Risk</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ISSUE">
-              <span>Impact to project that has already occurred</span>
+            <div class="classify-row" data-answer="LEVEL">
+              <span>Over-allocated resource — adjust schedule to actual availability</span>
               <div class="classify-btns">
-                <button data-pick="ASSUMP">Assumption/Risk</button>
-                <button data-pick="ISSUE">Issue Log</button>
+                <button data-pick="LEVEL">Leveling</button>
+                <button data-pick="SMOOTH">Smoothing</button>
+                <button data-pick="FAST">Fast-track</button>
+                <button data-pick="RISK">Risk</button>
               </div>
             </div>
           </div>
           <p class="drill-score" id="drillScore">0 / 4 đúng</p>
-          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">Uncertain/future → NOT Issue Log</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Quên đọc NOT</h4>
-            <p style="margin:0">Chọn A vì “đúng” — nhưng đề hỏi NOT → phải chọn D (việc không làm).</p>
+            <h4>Bẫy 1: Delays → Fast tracking (B)</h4>
+            <p style="margin:0">Fast-track compresses schedule — stem là resource over-allocation, không phải cần shorten.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Issue Log cho mọi “vấn đề”</h4>
-            <p style="margin:0">Uncertainty chưa materialize = risk/assumption — issue chỉ khi impact đã xảy ra.</p>
+            <h4>Bẫy 2: Risk of delays → Brainstorm (C)</h4>
+            <p style="margin:0">PMI: known technique (leveling) beats generic risk meeting khi constraint rõ ràng.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Resource → Smoothing (D)</h4>
+            <p style="margin:0">Smoothing không đổi end date — critical overlap cần leveling, có thể extend schedule.</p>
           </div>
           <div class="card tip">
-            <h4>Liên hệ Q18–Q19</h4>
-            <p style="margin:0">Initiating QGS data center — assumptions từ business case/charter flow xuống planning artifacts.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Same resource · overlapping · over-allocated · critical activities</strong> → Resource leveling (A).</p>
           </div>
         </section>
 
@@ -371,38 +377,62 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Issue Log ghi gì?</div>
-            <div class="flashcard-back">Impacts to the project that <strong>have occurred</strong> — not uncertainties.</div>
+            <div class="flashcard-front">Leveling vs Smoothing?</div>
+            <div class="flashcard-back"><strong>Leveling</strong> fixes over-allocation (may extend). <strong>Smoothing</strong> uses float only (same end date).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q20 đáp án (NOT)?</div>
-            <div class="flashcard-back"><strong>D</strong> — Will NOT add uncertain factors to Issue Log.</div>
+            <div class="flashcard-front">Q58 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Apply resource leveling.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ASSUMPTION LOG — Q20 (PMBOK 8, p.17 &amp; p.114)
+          <div class="cheat-sheet">RESOURCE LEVELING — Q58 (PMBOK 8, p.50 &amp; 193)
 ─────────────────────────────────────────────────────
-UNCERTAIN FACTORS (utility, vendor timelines):
-  DO → A Assumption Log
-  DO → B Risk Register (uncertainties)
-  DO → C Basis of Estimates (support estimates)
-  NOT → D Issue Log ✗
+PROCESS: Develop Schedule (p.50)
+         Resource leveling (p.193)
 
-ISSUE LOG: Impacts that HAVE OCCURRED
-RISK REGISTER: Uncertainties
-ASSUMPTION LOG: Assumptions &amp; constraints + status
+RESOURCE LEVELING:
+  - Adjust schedule for RESOURCE CONSTRAINTS
+  - No over-allocation · work per availability
+  - May reschedule CRITICAL activities
+  - May EXTEND project end date
 
-Q20: "what will he NOT do?" → D (Issue Log)
+RESOURCE SMOOTHING (NOT Q58):
+  - Adjust within FLOAT only
+  - Does NOT change project end date
+  - Cannot fix critical path over-allocation
 
-NOT TRAP: Read NOT — pick the wrong artifact
+SCENARIO: FI Group schedule
+           CRITICAL activities · SAME specialized engineer
+           OVERLAPPING TIMES · unrealistic workload
+           Risking delays
+→ A) APPLY RESOURCE LEVELING ✓
 
-REF: PMBOK Guide 8th Ed., p.17 Initiate + p.114 Assumption log</div>
+NOT:
+  B) FAST TRACKING — overlap phases, worsens conflict
+  C) RISK brainstorm — direct technique preferred
+  D) RESOURCE SMOOTHING — float only, insufficient here
+
+COMPARE:
+  Over-allocation + critical overlap → LEVELING
+  Balance histogram with float       → SMOOTHING
+  Shorten schedule                   → FAST-TRACK / CRASH
+
+SIGNAL: "same resource" · "overlapping times"
+        "over-allocated" · "unrealistic workload"
+        specialized engineer on critical path
+
+Q58 ANSWER: A
+
+REF: PMBOK Guide, 8th Ed., p.50, p.193</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
+          · <a href="pmp-teach-schedule-baseline.html">Q57: Schedule Baseline</a>
+          · <a href="pmp-teach-development-approach-schedule.html">Q56: Dev Approach</a>
+          · <a href="pmp-full-questions.html#q-58">Luyện câu 58</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -411,12 +441,12 @@ REF: PMBOK Guide 8th Ed., p.17 Initiate + p.114 Assumption log</div>
 
   <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "A";
       const EXPL = {
-        A: "Assumption Log — Elijah SẼ làm (ghi assumptions). Đề hỏi NOT — không chọn A.",
-        B: "Risk Register — Elijah SẼ ghi uncertainties. Đề hỏi NOT — không chọn B.",
-        C: "Basis of Estimates — Elijah SẼ document estimate assumptions. Đề hỏi NOT — không chọn C.",
-        D: "Đúng! Issue Log chỉ cho impacts đã xảy ra — không dùng cho uncertain factors chưa materialize."
+        A: "Đúng! Resource leveling adjusts schedule for resource constraints — fix over-allocation on critical work (p.50, 193).",
+        B: "Fast tracking overlaps phases to shorten — worsens same-resource conflict, không fix over-allocation.",
+        C: "Constraint đã rõ — apply leveling trực tiếp, không chỉ raise risk và brainstorm.",
+        D: "Smoothing chỉ dùng float, không đổi end date — không đủ khi critical activities overlap cùng resource."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -432,7 +462,7 @@ REF: PMBOK Guide 8th Ed., p.17 Initiate + p.114 Assumption log</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án (NOT): <strong>D — Will NOT add to Issue Log.</strong><br>A, B, C đều là việc Elijah sẽ làm." : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Apply resource leveling.</strong>" : "");
         });
       });
       let score = 0;
@@ -444,12 +474,10 @@ REF: PMBOK Guide 8th Ed., p.17 Initiate + p.114 Assumption log</div>
           btn.addEventListener("click", function () {
             if (done) return;
             done = true;
-            const pick = btn.dataset.pick;
-            const ok = (ans === "ASSUMP" && pick === "ASSUMP") || (ans === "ISSUE" && pick === "ISSUE");
+            const ok = btn.dataset.pick === ans;
             row.querySelectorAll("button").forEach(function (b) {
               b.disabled = true;
-              const bOk = (ans === "ASSUMP" && b.dataset.pick === "ASSUMP") || (ans === "ISSUE" && b.dataset.pick === "ISSUE");
-              if (bOk) b.classList.add("correct");
+              if (b.dataset.pick === ans) b.classList.add("correct");
               else if (b === btn) b.classList.add("wrong-pick");
             });
             if (ok) score++;
