@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Project Management Team (Q9)</title>
+  <title>PMBOK 8 — Embed Quality (Q11)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,8 +51,8 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .interaction-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.85rem; justify-content: center; }
-    .flow-box { padding: 0.5rem 0.85rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--info); background: var(--info-bg); color: #1d4ed8; }
+    .quality-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.85rem; justify-content: center; }
+    .flow-box { padding: 0.5rem 0.85rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--ok); background: var(--ok-bg); color: #065f46; }
     .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
@@ -90,11 +90,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Project Management Team · Q9</div>
+      <div class="brand-sub">Embed Quality · Q11</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#team">PM Team làm gì?</a>
-        <a href="#interaction">Tương tác PM ↔ FM</a>
+        <a href="#embed">Embed Quality</a>
+        <a href="#approaches">Cách tiếp cận QA</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -112,7 +112,7 @@
         <a href="pmp-teach-project-sponsor.html">Q8: Project Sponsor</a>
         <a href="pmp-teach-project-management-team.html">Q9: PM Team</a>
         <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
-        <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
+        <a href="pmp-teach-embed-quality.html" class="series-current">Q11: Embed Quality</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
       <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
@@ -120,8 +120,8 @@
 
     <div>
       <nav class="mobile-nav">
-        <a href="#team">PM Team</a>
-        <a href="#interaction">PM ↔ FM</a>
+        <a href="#embed">Embed</a>
+        <a href="#approaches">QA</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -130,98 +130,106 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q9 về <strong>Project Management Team</strong> — tương tác chủ động
-            với functional managers và các bên để đảm bảo nguồn lực, funding và căn chỉnh mục tiêu.
+            Bài học Q11 về nguyên tắc <strong>Embed Quality Into Processes and Deliverables</strong> —
+            tích hợp chất lượng vào quy trình để đạt ngưỡng chất lượng mục tiêu một cách nhất quán.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.29</span>
-            <span class="badge">Resources</span>
-            <span class="badge">Câu 9 — Practice</span>
+            <span class="badge">The Standard for PM, p.43</span>
+            <span class="badge">Quality Management</span>
+            <span class="badge">Câu 11 — Practice</span>
           </div>
         </header>
 
-        <section id="team">
-          <h2>1. Project Management Team</h2>
+        <section id="embed">
+          <h2>1. Embed Quality Into Processes</h2>
           <p>
-            <strong>Project management team</strong> không chỉ lập kế hoạch nội bộ — họ
-            <strong>chủ động tương tác và đàm phán</strong> với nhiều bên trong tổ chức
-            để dự án nhận đủ nguồn lực và căn chỉnh với mục tiêu tổ chức.
+            PMBOK 8 nhấn mạnh: chất lượng không phải hoạt động tách rời hay chỉ kiểm tra cuối cùng —
+            mà được <strong>nhúng (embed)</strong> vào processes và deliverables ngay từ đầu.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.29)</h4>
+            <h4>Định nghĩa chính thức (PMBOK p.43)</h4>
             <p style="margin:0">
-              The project management team proactively interacts and negotiates with other
-              project management teams, portfolio managers, program managers, project managers,
-              and <strong>functional managers</strong> for demands on <strong>critical resources</strong>,
-              priorities on project funding, receipt or distribution of deliverables, and in
-              aligning project goals and objectives with those of the organization.
+              Embed quality into processes and deliverables to maintain a consistent focus on
+              achieving <strong>target quality thresholds</strong>. This emphasis on quality helps
+              ensure outcomes that meet project objectives and align with the needs, requirements,
+              and acceptance criteria set by relevant stakeholders.
             </p>
           </div>
 
-          <h3>Hoạt động đặc trưng của PM Team</h3>
+          <div class="quality-flow">
+            <span class="flow-box">Processes</span>
+            <span class="flow-arrow">+</span>
+            <span class="flow-box">Deliverables</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-box">Target quality thresholds</span>
+          </div>
+
+          <h3>Liên hệ Cost of Quality (COQ)</h3>
           <ul>
-            <li>Đàm phán <strong>critical resources</strong> với functional managers</li>
-            <li>Ưu tiên <strong>project funding</strong></li>
-            <li>Phối hợp nhận/phân phối deliverables</li>
-            <li>Căn chỉnh mục tiêu dự án với mục tiêu tổ chức</li>
+            <li><strong>Prevention</strong> — thiết kế chất lượng vào process (đúng hướng B)</li>
+            <li><strong>Appraisal</strong> — kiểm tra/đo lường (hỗ trợ, không thay thế embed)</li>
+            <li><strong>Internal/External failure</strong> — sửa lỗi sau khi phát hiện (tránh làm trọng tâm — D)</li>
           </ul>
         </section>
 
-        <section id="interaction">
-          <h2>2. PM Team ↔ Functional Manager</h2>
-          <p>Trong matrix/functional org, nguồn lực thường thuộc functional manager — PM team phải coordinate.</p>
-
-          <div class="interaction-flow">
-            <span class="flow-box">PM Team</span>
-            <span class="flow-arrow">⇄ negotiate</span>
-            <span class="flow-box">Functional Manager</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-box">Critical resources</span>
-          </div>
+        <section id="approaches">
+          <h2>2. So sánh cách tiếp cận chất lượng</h2>
 
           <table>
             <thead>
-              <tr><th>Ai làm gì</th><th>Ví dụ hoạt động</th></tr>
+              <tr><th>Cách tiếp cận</th><th>Đánh giá</th><th>Đáp án</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>PM Team</strong></td>
-                <td>Coordinate với FM về critical resources; align với org objectives</td>
+                <td><strong>Integrated into processes</strong> (B)</td>
+                <td>Build quality in — nhất quán, đạt thresholds</td>
+                <td>✓ PMBOK p.43</td>
               </tr>
               <tr>
-                <td><strong>Functional Manager</strong></td>
-                <td>Sở hữu nhân sự/chuyên môn; quyết định phân bổ trong phòng ban</td>
+                <td><strong>Final inspection only</strong> (A)</td>
+                <td>Inspection cuối — quá muộn, không “consistent”</td>
+                <td>✗</td>
               </tr>
               <tr>
-                <td><strong>Sponsor</strong></td>
-                <td>Funding, strategic direction (Q8)</td>
+                <td><strong>Managed separately</strong> (C)</td>
+                <td>Tách QA khỏi project — trái nguyên tắc embed</td>
+                <td>✗</td>
               </tr>
               <tr>
-                <td><strong>Customer</strong></td>
-                <td>Approve/accept final product — không thay mặt bởi PM team “on behalf”</td>
+                <td><strong>Correct defects after</strong> (D)</td>
+                <td>Reactive — failure cost, không phải focus chính</td>
+                <td>✗</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>Scenario NG Micro Devices</h4>
+            <p style="margin:0">
+              Functional manager lo deliverables chuyển sang phòng họ không đạt chuẩn và muốn
+              <strong>assurance standards consistently met</strong> — cần quality built-in,
+              không chỉ inspect trước khi bàn giao.
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 9</h2>
+          <h2>3. Câu hỏi thực hành — Question 11</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q9</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q11</div>
             <div class="q-text">
-              Roy is part of the <em>project management team</em> at Transglobal Logistics,
-              working on a system upgrade project. The team collaborates with stakeholders and
-              managers to align with organizational objectives and secure resources, while other
-              activities are also being considered.
-              <em>Which of the following is something the project management team would do?</em>
+              You are a project manager working on a chip fabrication project at NG Micro Devices.
+              A functional manager raises concerns about the quality of deliverables being passed to
+              their department and wants assurance that standards will be <em>consistently met</em>.
+              How will you manage this on your project?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Provide duration and cost estimates on the deliverables.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Coordinate with functional managers for demands on critical resources.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Verify that deliverables meet their quality requirements.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Approve the final product on behalf of the customer.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Quality should be verified through final inspection before delivery.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Quality should be integrated into processes to consistently achieve target quality thresholds.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Quality should be managed separately from project processes to ensure independence.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Quality should focus on correcting defects after they are identified.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -232,9 +240,9 @@
 
           <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Khớp trực tiếp PMBOK p.29: negotiate với <strong>functional managers</strong> for <strong>critical resources</strong>.</li>
-            <li>Scenario nhắc collaborate với managers, secure resources, align objectives — đúng pattern PM team ↔ FM.</li>
-            <li>Slide minh họa: PM → FM (coordinate critical resources).</li>
+            <li>Khớp PMBOK p.43: <strong>embed quality into processes</strong> → consistently achieve <strong>target quality thresholds</strong>.</li>
+            <li>“Consistently met” trong câu hỏi = quality không phải one-time inspection.</li>
+            <li>Slide ghi COQ → prevention / build quality in (hướng B).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -244,78 +252,81 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Duration and cost estimates</strong></td>
-                <td>PM/team có thể làm estimates, nhưng đề hỏi hoạt động <em>tương tác tổ chức</em> — coordinate resources với FM là đáp án PMBOK nhấn mạnh (A bị ✗ trong slide).</td>
+                <td><strong>A. Final inspection</strong></td>
+                <td>Appraisal ở cuối — không đảm bảo quality xuyên suốt process; PMBOK nhấn embed, không chỉ verify trước delivery.</td>
               </tr>
               <tr>
-                <td><strong>C. Verify quality</strong></td>
-                <td>Control quality là công việc QA/QC — không phải mô tả interaction với functional managers trong p.29.</td>
+                <td><strong>C. Managed separately</strong></td>
+                <td>Independence nghe hợp lý nhưng PMBOK 8 yêu cầu tích hợp vào processes — tách rời trái “embed” (✗ trong slide).</td>
               </tr>
               <tr>
-                <td><strong>D. Approve on behalf of customer</strong></td>
-                <td>Customer/sponsor chấp nhận sản phẩm — PM team không approve thay customer.</td>
+                <td><strong>D. Correcting defects after</strong></td>
+                <td>Reactive / failure-focused — không phải cách maintain consistent focus on thresholds.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords PM Team (p.29)</h4>
+            <h4>Keywords Embed Quality (p.43)</h4>
             <p style="margin:0">
-              proactively interact · negotiate · functional managers · critical resources ·
-              project funding · deliverables · align goals with organization
+              embed into processes · deliverables · target quality thresholds ·
+              consistent focus · stakeholder needs · acceptance criteria
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — PM Team hay vai trò khác?</h2>
+          <h2>5. Drill — Embed hay không?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="TEAM">
-              <span>Negotiate critical resources with functional managers</span>
+            <div class="classify-row" data-answer="EMBED">
+              <span>Build quality checks into each fabrication step</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="EMBED">Embed</button>
+                <button data-pick="WRONG">Không embed</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OTHER">
-              <span>Secure funding and strategic direction</span>
+            <div class="classify-row" data-answer="WRONG">
+              <span>Run a separate QA department with no process involvement</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="EMBED">Embed</button>
+                <button data-pick="WRONG">Không embed</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="TEAM">
-              <span>Align project objectives with organizational goals</span>
+            <div class="classify-row" data-answer="WRONG">
+              <span>Inspect only at final delivery gate</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="EMBED">Embed</button>
+                <button data-pick="WRONG">Không embed</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OTHER">
-              <span>Formally accept deliverables as the customer</span>
+            <div class="classify-row" data-answer="EMBED">
+              <span>Define quality thresholds in work processes and deliverables</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="EMBED">Embed</button>
+                <button data-pick="WRONG">Không embed</button>
               </div>
             </div>
           </div>
           <p class="drill-score" id="drillScore">0 / 4 đúng</p>
-          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">“Khác” = Sponsor, Customer, v.v.</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn A — estimates nghe “đúng” với PM</h4>
-            <p style="margin:0">Estimate là planning task, nhưng câu hỏi PMBOK p.29 tập trung <strong>interaction</strong> với FM về resources — B chính xác hơn.</p>
+            <h4>Bẫy 1: Chọn A — final inspection</h4>
+            <p style="margin:0">Inspection là appraisal (COQ) — hữu ích nhưng không thay thế <strong>integrate into processes</strong> để “consistently” đạt chuẩn.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Quality verification (C)</h4>
-            <p style="margin:0">QA/QC thuộc quality domain — không mô tả negotiate với functional managers.</p>
+            <h4>Bẫy 2: Chọn C — independence</h4>
+            <p style="margin:0">QA độc lập nghe chuyên nghiệp, nhưng PMBOK 8 = embed quality <em>into</em> project processes, không tách rời.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Chọn D — fix defects</h4>
+            <p style="margin:0">Sửa lỗi sau phát hiện = failure cost — prevention (B) là hướng PMBOK nhấn mạnh.</p>
           </div>
           <div class="card tip">
-            <h4>Liên kết Q8 Sponsor</h4>
-            <p style="margin:0">Sponsor: funding + strategy · PM Team: coordinate resources + align với FM và tổ chức</p>
+            <h4>Mẹo thi</h4>
+            <p style="margin:0">“Consistently met” + “standards” → tìm đáp án có <strong>integrated into processes</strong> và <strong>target quality thresholds</strong>.</p>
           </div>
         </section>
 
@@ -323,42 +334,43 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PM Team tương tác với FM để làm gì?</div>
-            <div class="flashcard-back">Demands on critical resources, funding priorities, deliverables, align goals với tổ chức.</div>
+            <div class="flashcard-front">PMBOK 8 — quality được quản lý thế nào? (p.43)</div>
+            <div class="flashcard-back">Embed into processes and deliverables — consistently achieve target quality thresholds.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q9 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Coordinate with functional managers for demands on critical resources.</div>
+            <div class="flashcard-front">Q11 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Integrated into processes to consistently achieve target quality thresholds.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">PROJECT MANAGEMENT TEAM — Q9 (PMBOK 8, p.29)
+          <div class="cheat-sheet">EMBED QUALITY — Q11 (PMBOK 8, p.43)
 ─────────────────────────────────────────────────────
-PM TEAM proactively:
-  • Interact &amp; negotiate with FM, PM, program/portfolio managers
-  • CRITICAL RESOURCES (with functional managers)
-  • Project funding priorities
-  • Receipt/distribution of deliverables
-  • ALIGN goals with organization
+PRINCIPLE: Embed quality INTO processes &amp; deliverables
+GOAL: Consistently achieve TARGET QUALITY THRESHOLDS
+ALIGN: Stakeholder needs, requirements, acceptance criteria
 
-Q9 ANSWER: B
-  Coordinate with functional managers for critical resources
+Q11 ANSWER: B
+  Integrated into processes → consistent thresholds
 
-NOT the focus here:
-  A → estimates (planning, not p.29 interaction highlight)
-  C → quality verify (QC domain)
-  D → approve for customer (customer/sponsor role)
+NOT the PMBOK 8 focus:
+  A → final inspection only (too late, not consistent)
+  C → managed separately (opposite of embed) ✗
+  D → correct defects after (reactive / failure cost)
 
-PM ↔ FM: PM Team negotiates resources FM controls
+COQ MINDSET:
+  Prevention (build in) &gt; Appraisal &gt; Failure costs
 
-REF: The Standard for Project Management, p.29
-     "Interaction Between the Project Management Team and Project Aspects"</div>
+SCENARIO: FM wants assurance standards CONSISTENTLY met
+  → Build quality into chip fabrication processes
+
+REF: The Standard for Project Management, p.43
+     "Embed Quality Into Processes and Deliverables"</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-project-sponsor.html">Q8: Sponsor</a>
+          · <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -369,10 +381,10 @@ REF: The Standard for Project Management, p.29
     (function () {
       const CORRECT = "B";
       const EXPL = {
-        A: "Estimates là planning — đề p.29 nhấn interaction với FM về critical resources.",
-        B: "Đúng! PM team coordinate/negotiate với functional managers về critical resources.",
-        C: "Verify quality là QC — không phải mô tả interaction PM team ↔ FM trong p.29.",
-        D: "Customer approve sản phẩm — PM team không approve thay customer."
+        A: "Final inspection là appraisal — không đảm bảo quality nhất quán xuyên suốt process.",
+        B: "Đúng! Embed quality vào processes để consistently đạt target quality thresholds (p.43).",
+        C: "Tách quality khỏi project processes trái nguyên tắc embed — independence không phải đáp án PMBOK.",
+        D: "Sửa defects sau khi phát hiện là reactive — không phải cách maintain consistent quality focus."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -388,7 +400,7 @@ REF: The Standard for Project Management, p.29
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Coordinate with functional managers for critical resources.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Integrated into processes to consistently achieve target quality thresholds.</strong>" : "");
         });
       });
       let score = 0;
