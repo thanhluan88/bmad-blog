@@ -92,4 +92,5 @@ module.exports.SERIES = [
   ["pmp-teach-distributed-management.html", "Q90: Distributed Management"],
   ["pmp-teach-tuckman-ladder.html", "Q91: Tuckman Ladder"],
   ["pmp-teach-colocation.html", "Q92: Colocation"],
+  ["pmp-teach-communication-methods.html", "Q93: Communication Methods"],
 ];

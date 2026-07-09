@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Verified Deliverables (Q54)</title>
+  <title>PMBOK 8 — Communication Methods (Q93)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,10 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.82rem; }
-    .flow-box { padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
-    .flow-box.highlight { background: var(--primary-bg); border-color: #fde68a; font-weight: 600; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -70,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -92,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Verified Deliverables · Q54</div>
+      <div class="brand-sub">Communication Methods · Q93</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#validate-scope">Validate Scope</a>
-        <a href="#verified-vs-validated">Verified vs Validated</a>
+        <a href="#comm-methods">Communication Methods</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -157,7 +157,7 @@
         <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
         <a href="pmp-teach-wbs-dictionary.html">Q52: WBS Dictionary</a>
         <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
-        <a href="pmp-teach-verified-deliverables.html" class="series-current">Q54: Verified Deliverables</a>
+        <a href="pmp-teach-verified-deliverables.html">Q54: Verified Deliverables</a>
         <a href="pmp-teach-schedule-management-plan.html">Q55: Schedule Mgmt Plan</a>
         <a href="pmp-teach-development-approach-schedule.html">Q56: Dev Approach Input</a>
         <a href="pmp-teach-schedule-baseline.html">Q57: Schedule Baseline</a>
@@ -196,14 +196,14 @@
         <a href="pmp-teach-distributed-management.html">Q90: Distributed Management</a>
         <a href="pmp-teach-tuckman-ladder.html">Q91: Tuckman Ladder</a>
         <a href="pmp-teach-colocation.html">Q92: Colocation</a>
-        <a href="pmp-teach-communication-methods.html">Q93: Communication Methods</a>
+        <a href="pmp-teach-communication-methods.html" class="series-current">Q93: Communication Methods</a>
       </nav>
 
 
 
       <div class="sidebar-pager">
-        <a href="pmp-teach-quality-report.html" class="sidebar-pager-link">← Q53: Quality Report</a>
-        <a href="pmp-teach-schedule-management-plan.html" class="sidebar-pager-link">Q55: Schedule Mgmt Plan →</a>
+        <a href="pmp-teach-colocation.html" class="sidebar-pager-link">← Q92: Colocation</a>
+        <span class="sidebar-pager-link disabled" aria-hidden="true">— →</span>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
@@ -213,10 +213,9 @@
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp" class="mobile-series-nav">← Blog PMP</a>
-        <a href="pmp-teach-quality-report.html" class="mobile-series-nav">← Q53: Quality Report</a>
-        <a href="pmp-teach-schedule-management-plan.html" class="mobile-series-nav">Q55: Schedule Mgmt Plan →</a>
-        <a href="#validate-scope">Validate</a>
-        <a href="#verified-vs-validated">Verified</a>
+        <a href="pmp-teach-colocation.html" class="mobile-series-nav">← Q92: Colocation</a>
+        <a href="#comm-methods">Comm Methods</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -225,103 +224,184 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q54 về <strong>Verified Deliverables</strong> — Marcus, bridge construction
-            tại BEL: components đã pass <em>internal quality checks</em>; client đang review để
-            <em>formal approval</em>. Marcus cần obtain <em>input</em> gì để hỗ trợ quyết định?
+            Bài học Q93 về <strong>Communication Methods</strong> — Sydney quản lý dự án xây dựng
+            thương mại tại Altura Construction Group: một key stakeholder trở nên
+            <em>resistant</em> sau khi <em>bỏ lỡ nhiều cập nhật quan trọng</em>, không thể tham dự
+            <em>key meetings</em> và <em>không đọc emailed reports</em>.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.44 &amp; 143</span>
-            <span class="badge">Validate Scope</span>
-            <span class="badge">Verified Deliverables</span>
-            <span class="badge">Câu 54 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.87 &amp; 152</span>
+            <span class="badge">Stakeholders</span>
+            <span class="badge">Push · Pull · Interactive</span>
+            <span class="badge">Câu 93 — Practice</span>
           </div>
         </header>
 
-        <section id="validate-scope">
-          <h2>1. Validate Scope (p.44)</h2>
+        <section id="comm-methods">
+          <h2>1. Communication Methods — Push, Pull, Interactive (p.87, 152)</h2>
           <p>
-            <strong>Validate Scope</strong> formalizes acceptance of completed deliverables with
-            stakeholders/customer. Process kiểm tra rằng deliverables đáp ứng agreed criteria và
-            mang lại value — đây là bước <strong>formal approval</strong>, sau khi team đã xác nhận
-            correctness nội bộ.
+            PMBOK 8 (p.152) phân loại <strong>communication methods</strong> thành ba nhóm chính.
+            PM chọn phương thức phù hợp với nhu cầu stakeholder và loại thông tin — đặc biệt khi
+            phương thức hiện tại không hiệu quả (p.87, Stakeholders domain).
           </p>
 
+          <div class="approach-grid">
+            <div class="approach-cell">
+              <strong>Push (Đẩy)</strong>
+              Người gửi chủ động phân phối thông tin tới người nhận — email, báo cáo gửi định kỳ, memo.
+              Người nhận có thể không đọc hoặc bỏ lỡ.
+            </div>
+            <div class="approach-cell pull">
+              <strong>Pull (Kéo)</strong>
+              Người nhận tự truy cập thông tin khi cần — portal, intranet, repository, PMIS.
+              Phù hợp thông tin lớn/phức tạp; stakeholder tự chọn thời điểm.
+            </div>
+            <div class="approach-cell">
+              <strong>Interactive (Tương tác)</strong>
+              Trao đổi real-time giữa hai hay nhiều bên — họp, video call, workshop, phone call.
+              Cần sự tham gia đồng thời của các bên.
+            </div>
+            <div class="approach-cell">
+              <strong>Engagement Plan (D — bẫy)</strong>
+              Cập nhật stakeholder engagement plan — artifact lập kế hoạch, không phải phương thức
+              phân phối thông tin ngay lúc này.
+            </div>
+          </div>
+
           <div class="card tip">
-            <h4>Input chính: Verified deliverables</h4>
+            <h4>Signal trong stem Q93</h4>
             <p style="margin:0">
-              Completed outputs đã được confirm đúng requirements qua
-              <strong>Monitor and Control Scope</strong> / quality checks — sẵn sàng đưa cho client
-              review và accept.
+              <strong>Resistant stakeholder · missing important updates · unable to attend key meetings · doesn't read emailed reports</strong>
+              → Interactive (A) không khả thi vì không tham dự họp; Push (B) đã thử qua email nhưng
+              stakeholder không đọc → chuyển sang <strong>Pull (C)</strong>: đăng thông tin lên portal/repository
+              để stakeholder tự truy cập theo nhịp của họ.
             </p>
           </div>
-        </section>
 
-        <section id="verified-vs-validated">
-          <h2>2. Verified vs Validated — đừng nhầm!</h2>
-
-          <div class="flow-diagram">
-            <div class="flow-box">Work completed</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box highlight">Verified deliverables (INPUT)</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box">Validate Scope</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box highlight">Validated deliverables (OUTPUT)</div>
-          </div>
-
+          <h3>Push vs Pull vs Interactive — Khi nào dùng gì?</h3>
           <table>
             <thead>
-              <tr><th>Term</th><th>Nghĩa</th><th>Q54</th></tr>
+              <tr><th>Tình huống</th><th>Phương thức</th><th>Lý do</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Verified deliverables (C)</strong></td>
-                <td>Outputs confirmed correct via internal QC / Monitor &amp; Control Scope</td>
-                <td><strong>INPUT</strong> — obtain for client decision</td>
+                <td>Stakeholder không đọc email, không tham dự họp; bỏ lỡ updates (Q93)</td>
+                <td><strong>Pull (C)</strong></td>
+                <td>Tự truy cập portal/intranet theo nhịp riêng — không phụ thuộc push hay interactive</td>
               </tr>
               <tr>
-                <td><strong>Validated deliverables (B)</strong></td>
-                <td>Formally accepted by customer/stakeholder</td>
-                <td><strong>OUTPUT</strong> of Validate Scope — chưa có khi client đang review</td>
+                <td>Gửi status report hàng tuần qua email</td>
+                <td>Push</td>
+                <td>Người gửi chủ động phân phối tới danh sách người nhận</td>
               </tr>
               <tr>
-                <td><strong>Work performance reports (A)</strong></td>
-                <td>Progress &amp; metrics summary</td>
-                <td>Reporting artifact — không phải deliverable package cho acceptance</td>
+                <td>Bidder conference, workshop Q&amp;A real-time</td>
+                <td>Interactive</td>
+                <td>Trao đổi đồng thời, phản hồi tức thì</td>
               </tr>
               <tr>
-                <td><strong>Change requests (D)</strong></td>
-                <td>Formal proposals to modify scope/baseline</td>
-                <td>Sau khi gaps found — không phải input để client approve hiện tại</td>
+                <td>Thông tin lớn/phức tạp; nhiều stakeholder cần tra cứu</td>
+                <td>Pull</td>
+                <td>Repository/portal — truy cập on-demand (p.152)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Method</th><th>Q93?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Interactive</strong></td>
+                <td>Họp, video call, workshop real-time</td>
+                <td>✗ Stakeholder <em>unable to attend key meetings</em></td>
+              </tr>
+              <tr>
+                <td><strong>B. Push</strong></td>
+                <td>Email, báo cáo gửi tới người nhận</td>
+                <td>✗ Stakeholder <em>doesn't read emailed reports</em> — push đã thất bại</td>
+              </tr>
+              <tr>
+                <td><strong>C. Pull</strong></td>
+                <td>Portal, intranet, repository — tự truy cập</td>
+                <td>✓ Cả interactive lẫn push đều không hiệu quả → pull</td>
+              </tr>
+              <tr>
+                <td><strong>D. Update engagement plan</strong></td>
+                <td>Cập nhật stakeholder engagement plan</td>
+                <td>✗ Planning artifact — stem cần phương thức giao tiếp ngay</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="compare">
+          <h2>2. So sánh các đáp án &amp; Q79 Manage Comms vs Q93 Comm Methods</h2>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q93 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Interactive communication</strong></td>
+                <td>Họp, video call, workshop — trao đổi real-time</td>
+                <td>✗ Stakeholder không thể tham dự key meetings</td>
+              </tr>
+              <tr>
+                <td><strong>B. Push communication</strong></td>
+                <td>Email, báo cáo gửi định kỳ tới stakeholder</td>
+                <td>✗ Stakeholder không đọc emailed reports — push đã thất bại</td>
+              </tr>
+              <tr>
+                <td><strong>C. Pull communication approach</strong></td>
+                <td>Portal/intranet/repository — stakeholder tự truy cập khi cần</td>
+                <td><strong>Yes — phương thức phù hợp khi push &amp; interactive đều không hiệu quả</strong></td>
+              </tr>
+              <tr>
+                <td><strong>D. Update stakeholder engagement plan</strong></td>
+                <td>Cập nhật kế hoạch engagement phản ánh thay đổi</td>
+                <td>✗ Artifact lập kế hoạch — không giải quyết phân phối thông tin ngay</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Signal trong đề</h4>
+            <h4>Q79 Manage Comms vs Q93 Communication Methods — Khi nào dùng cái nào?</h4>
             <p style="margin:0">
-              <em>Passed internal quality checks</em> + client <em>formal approval</em> +
-              <em>obtain as an input</em> → verified deliverables (C), không phải validated (B).
+              <strong>Q79 Manage Communications (đáp án A):</strong> Helios Energy — stakeholders
+              phàn nàn không được update dù PM <em>đã gửi project report mỗi tuần</em> (push).
+              Giải pháp: thêm report vào PMIS + <strong>pull approach</strong>. Focus: process
+              Manage Communications + công cụ PMIS khi push thất bại.<br><br>
+              <strong>Q93 Communication Methods (đáp án C):</strong> Altura Construction — stakeholder
+              <em>resistant</em>, bỏ lỡ updates, <em>không tham dự họp</em> (interactive thất bại)
+              và <em>không đọc email</em> (push thất bại). Chọn trực tiếp <strong>pull communication
+              approach</strong> — không nhắc PMIS cụ thể, focus vào phân loại phương thức
+              (Push/Pull/Interactive).<br><br>
+              <strong>Rule:</strong> Push đã gửi nhưng không đọc + không họp được →
+              <strong>Pull</strong>. Q79 = Manage Comms + PMIS tool; Q93 = chọn communication
+              method phù hợp với hành vi stakeholder.
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 54</h2>
+          <h2>3. Câu hỏi thực hành — Question 93</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q54</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q93</div>
             <div class="q-text">
-              Marcus is overseeing a bridge construction project at BEL. Several completed
-              components have passed <em>internal quality checks</em>. The client is now reviewing
-              these outputs against agreed criteria to determine <em>formal approval</em>. What
-              should Marcus obtain as an <em>input</em> to help the client with their decision?
+              You are Sydney, a project manager at Altura Construction Group, managing a commercial
+              building project. A key stakeholder has become <em>resistant</em> after missing several
+              important project updates. The stakeholder is <em>unable to attend key meetings</em> and
+              <em>does not read the emailed reports</em>. What will you do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Work performance reports summarizing project progress and quality metrics.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Validated deliverables.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Verified deliverables.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Change requests addressing gaps identified during stakeholder review.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Use interactive communication</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Use push communication</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Use a pull communication approach</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Update the stakeholder engagement plan to reflect these updates</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -332,9 +412,10 @@
 
           <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>Internal QC passed → deliverables đã <strong>verified</strong> đúng requirements.</li>
-            <li>Client formal approval = Validate Scope — cần <strong>verified deliverables</strong> làm input.</li>
-            <li>PMBOK 8: Validate Scope (p.44), Verified deliverables (p.143).</li>
+            <li>Pull communications phù hợp thông tin lớn/phức tạp — người nhận truy cập qua portal, intranet, repository theo nhịp riêng (p.152).</li>
+            <li>Stakeholder không tham dự họp → interactive (A) không khả thi.</li>
+            <li>Stakeholder không đọc emailed reports → push (B) đã thử và thất bại.</li>
+            <li>Pull cho phép stakeholder resistant tự lấy thông tin khi sẵn sàng — giải quyết gap cập nhật mà không phụ thuộc họp hay email.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -344,86 +425,102 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Work performance reports</strong></td>
-                <td>Tóm tắt progress/metrics — không thay thế completed deliverables cho acceptance review.</td>
+                <td><strong>A. Interactive communication</strong></td>
+                <td>Interactive cần tham gia real-time (họp, call) — stem nói stakeholder <em>unable to attend key meetings</em>.</td>
               </tr>
               <tr>
-                <td><strong>B. Validated deliverables</strong></td>
-                <td>Đây là <em>output</em> sau khi client approves — stem hỏi <em>input</em> trước approval.</td>
+                <td><strong>B. Push communication</strong></td>
+                <td>Push = gửi email/báo cáo — stakeholder <em>does not read emailed reports</em>. Tiếp tục push không giải quyết vấn đề.</td>
               </tr>
               <tr>
-                <td><strong>D. Change requests</strong></td>
-                <td>CR xử lý gaps/sau review — không phải artifact obtain để client quyết định accept.</td>
+                <td><strong>D. Update stakeholder engagement plan</strong></td>
+                <td>Engagement plan là artifact lập kế hoạch — stem hỏi phương thức giao tiếp tiếp theo, không phải cập nhật plan.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Bẫy từ khóa: Validated vs Verified</h4>
+            <h4>So với Q79 — Cùng Pull, khác góc nhìn</h4>
             <p style="margin:0">
-              Instructor ghi chú <em>Validate</em> trên option B — đúng process nhưng
-              <strong>validated</strong> = sau approval. Câu hỏi cần <strong>verified</strong>
-              (đã QC nội bộ) làm input.
+              Q79: weekly report (push) thất bại → PMIS + pull (A) — Manage Communications process.<br>
+              Q93: không họp (interactive fail) + không đọc email (push fail) → pull approach (C) — chọn communication method.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Input, output hay khác?</h2>
+          <h2>5. Drill — Push, Pull, Interactive, hay Plan?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="INPUT">
-              <span>Passed internal QC — ready for client formal approval</span>
+            <div class="classify-row" data-answer="PULL">
+              <span>Stakeholder resistant; misses updates; won't attend meetings; doesn't read emails (Q93)</span>
               <div class="classify-btns">
-                <button data-pick="INPUT">Input</button>
-                <button data-pick="OUTPUT">Output</button>
-                <button data-pick="OTHER">Other</button>
+                <button data-pick="PUSH">Push</button>
+                <button data-pick="PULL">Pull</button>
+                <button data-pick="INTERACTIVE">Interactive</button>
+                <button data-pick="PLAN">Plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OUTPUT">
-              <span>Client formally accepted completed components</span>
+            <div class="classify-row" data-answer="PUSH">
+              <span>PM sends weekly progress report via email to all stakeholders every Friday</span>
               <div class="classify-btns">
-                <button data-pick="INPUT">Input</button>
-                <button data-pick="OUTPUT">Output</button>
-                <button data-pick="OTHER">Other</button>
+                <button data-pick="PUSH">Push</button>
+                <button data-pick="PULL">Pull</button>
+                <button data-pick="INTERACTIVE">Interactive</button>
+                <button data-pick="PLAN">Plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OTHER">
-              <span>Summary of schedule, cost, and quality metrics</span>
+            <div class="classify-row" data-answer="INTERACTIVE">
+              <span>PM hosts bidder conference with live Q&amp;A to clarify procurement requirements</span>
               <div class="classify-btns">
-                <button data-pick="INPUT">Input</button>
-                <button data-pick="OUTPUT">Output</button>
-                <button data-pick="OTHER">Other</button>
+                <button data-pick="PUSH">Push</button>
+                <button data-pick="PULL">Pull</button>
+                <button data-pick="INTERACTIVE">Interactive</button>
+                <button data-pick="PLAN">Plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OTHER">
-              <span>Proposal to fix gaps found during review</span>
+            <div class="classify-row" data-answer="PULL">
+              <span>Large project docs posted to intranet portal — stakeholders access at their own pace</span>
               <div class="classify-btns">
-                <button data-pick="INPUT">Input</button>
-                <button data-pick="OUTPUT">Output</button>
-                <button data-pick="OTHER">Other</button>
+                <button data-pick="PUSH">Push</button>
+                <button data-pick="PULL">Pull</button>
+                <button data-pick="INTERACTIVE">Interactive</button>
+                <button data-pick="PLAN">Plan</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="PLAN">
+              <span>During planning: document each stakeholder's preferred method and frequency in engagement plan</span>
+              <div class="classify-btns">
+                <button data-pick="PUSH">Push</button>
+                <button data-pick="PULL">Pull</button>
+                <button data-pick="INTERACTIVE">Interactive</button>
+                <button data-pick="PLAN">Plan</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Formal approval → Validated deliverables (B)</h4>
-            <p style="margin:0">Validated = kết quả SAU approval. Đề hỏi input TRƯỚC khi client quyết định → verified (C).</p>
+            <h4>Bẫy 1: "Resistant stakeholder" → Interactive (A)</h4>
+            <p style="margin:0">Resistant cần engagement — nhưng stem nói stakeholder <em>unable to attend key meetings</em>. Interactive không khả thi khi không tham dự được.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Quality metrics → Work performance reports (A)</h4>
-            <p style="margin:0">Reports summarize performance — client cần verified deliverables để review against criteria.</p>
+            <h4>Bẫy 2: "Missing updates" → Push thêm (B)</h4>
+            <p style="margin:0">Emailed reports = push đã dùng — stakeholder <em>doesn't read</em>. Gửi thêm email/push không giải quyết; cần chuyển phương thức sang pull.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Gaps → Change requests (D)</h4>
-            <p style="margin:0">CR nếu reject hoặc cần sửa — không phải input obtain để hỗ trợ approval decision.</p>
+            <h4>Bẫy 3: Stakeholder issue → Update engagement plan (D)</h4>
+            <p style="margin:0">Engagement plan là planning artifact — stem hỏi <em>what will you do next</em> về phân phối thông tin, không phải cập nhật plan.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: Nhầm Q79 — assume cần PMIS</h4>
+            <p style="margin:0">Q79 đáp án gồm PMIS + pull. Q93 chỉ hỏi communication method — đáp án C là pull approach, không cần nhắc PMIS trong options.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Internal QC passed · client formal approval · obtain input · Validate Scope</strong> → Verified deliverables (C).</p>
+            <p style="margin:0"><strong>Won't attend meetings · doesn't read emails · missing updates · resistant</strong> → Use a pull communication approach (C).</p>
           </div>
         </section>
 
@@ -431,74 +528,82 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Verified vs Validated?</div>
-            <div class="flashcard-back"><strong>Verified</strong> = QC correct (INPUT). <strong>Validated</strong> = customer accepted (OUTPUT).</div>
+            <div class="flashcard-front">Push vs Pull vs Interactive? (p.152)</div>
+            <div class="flashcard-back">Push = gửi tới người nhận. Pull = người nhận tự truy cập (portal/repository). Interactive = real-time (họp, call, workshop).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q54 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Verified deliverables.</div>
+            <div class="flashcard-front">Q93 đáp án?</div>
+            <div class="flashcard-back"><strong>C — Use a pull communication approach</strong>. Won't attend meetings; doesn't read emails; missing updates.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q79 vs Q93?</div>
+            <div class="flashcard-back">Q79: push (weekly report) fail → PMIS + pull (A). Q93: interactive + push fail → pull approach (C). Cùng pull, khác context &amp; options.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">VERIFIED DELIVERABLES — Q54 (PMBOK 8, p.44 &amp; 143)
+          <div class="cheat-sheet">COMMUNICATION METHODS — Q93
+(PMBOK 8, p.87 &amp; 152)
 ─────────────────────────────────────────────────────
-PROCESS: Validate Scope (p.44)
-         Verified deliverables (p.143)
+DOMAIN: Stakeholders (p.87)
+METHODS: Communication Methods (p.152)
 
-VALIDATE SCOPE:
-  - Formalize ACCEPTANCE of deliverables
-  - Customer/stakeholder review vs agreed criteria
-  - Ensures value and quality
+PUSH:    Sender distributes to recipients
+         (email, reports sent to inbox)
+         → Recipient may NOT read
 
-VERIFIED vs VALIDATED:
-  VERIFIED (INPUT):
-    - Completed outputs confirmed CORRECT
-    - Through Monitor and Control Scope / QC
-    - Passed INTERNAL quality checks
+PULL:    Recipients access when needed
+         (portal, intranet, repository, PMIS)
+         → Self-paced; large/complex info
 
-  VALIDATED (OUTPUT):
-    - Formally ACCEPTED by customer
-    - Result of Validate Scope process
+INTERACTIVE: Real-time exchange
+         (meetings, video call, workshop)
+         → Requires simultaneous participation
 
-SCENARIO: Marcus — BEL bridge construction
-           Components PASSED internal QC
-           Client reviewing for FORMAL APPROVAL
-           Obtain as INPUT for client decision
-→ C) VERIFIED DELIVERABLES ✓
+SCENARIO: Sydney @ Altura Construction Group
+           Commercial building project
+           Key stakeholder RESISTANT
+           MISSING several important updates
+           UNABLE to attend KEY MEETINGS
+           Does NOT READ emailed reports
+NEXT → C) USE A PULL COMMUNICATION APPROACH ✓
 
 NOT:
-  A) Work performance REPORTS — progress summary, not deliverables
-  B) VALIDATED deliverables — OUTPUT after approval (trap!)
-  D) CHANGE REQUESTS — after gaps, not input for acceptance
+  A) INTERACTIVE — can't attend meetings
+  B) PUSH — doesn't read emailed reports
+  D) UPDATE ENGAGEMENT PLAN — planning artifact
 
-FLOW:
-  Complete work → Internal QC → VERIFIED (input)
-              → Validate Scope → VALIDATED (output)
+SIGNAL KEYWORDS:
+  Pull:        won't read emails, can't attend meetings
+               missing updates, resistant stakeholder
+               large/complex info, self-paced access
+  Push:        send email, distribute report, broadcast
+  Interactive: meeting, workshop, live Q&amp;A, video call
+  Plan:        document preferences, update engagement plan
 
-SIGNAL: "internal quality checks" · "formal approval"
-        "obtain as an input" · "help the client"
-        Validate Scope context
+Q79 vs Q93:
+  Q79: weekly push failed → PMIS + Pull (A)
+  Q93: interactive + push failed → Pull (C)
 
-Q54 ANSWER: C
+Q93 ANSWER: C — Use a pull communication approach
 
-REF: PMBOK Guide, 8th Ed., p.44, p.143</div>
+REF: PMBOK Guide, 8th Ed., p.87 Stakeholders
+      p.152 Communication Methods</div>
         </section>
 
 
 
 
         <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
-          <a class="lesson-pager-btn" href="pmp-teach-quality-report.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q53: Quality Report</span></a>
-          <span class="lesson-pager-pos">Q54 / 93</span>
-          <a class="lesson-pager-btn next" href="pmp-teach-schedule-management-plan.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q55: Schedule Mgmt Plan</span></a>
+          <a class="lesson-pager-btn" href="pmp-teach-colocation.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q92: Colocation</span></a>
+          <span class="lesson-pager-pos">Q93 / 93</span>
+          <span class="lesson-pager-btn disabled" aria-hidden="true"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">—</span></span>
         </nav>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
-          · <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
-          · <a href="pmp-full-questions.html#q-54">Luyện câu 54</a>
+          · <a href="pmp-teach-manage-communications.html">Q79: Manage Comms</a>
+          · <a href="pmp-teach-colocation.html">Q92: Colocation</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -509,10 +614,10 @@ REF: PMBOK Guide, 8th Ed., p.44, p.143</div>
     (function () {
       const CORRECT = "C";
       const EXPL = {
-        A: "Work performance reports tóm tắt progress/metrics — không phải verified deliverables cho client acceptance review.",
-        B: "Validated deliverables là OUTPUT sau formal approval — đề hỏi INPUT trước khi client quyết định.",
-        C: "Đúng! Verified deliverables = completed outputs confirmed correct via QC — input to Validate Scope (p.44, 143).",
-        D: "Change requests xử lý gaps sau review — không phải input obtain để hỗ trợ client approval."
+        A: "Interactive cần tham gia real-time (họp, call) — stakeholder unable to attend key meetings nên không khả thi.",
+        B: "Push = gửi email/báo cáo — stakeholder doesn't read emailed reports; tiếp tục push không giải quyết gap cập nhật.",
+        C: "Đúng! Pull cho phép stakeholder tự truy cập thông tin qua portal/intranet/repository theo nhịp riêng — phù hợp khi interactive và push đều thất bại (p.152).",
+        D: "Stakeholder engagement plan là artifact lập kế hoạch — stem hỏi phương thức giao tiếp tiếp theo, không phải cập nhật plan."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -528,7 +633,7 @@ REF: PMBOK Guide, 8th Ed., p.44, p.143</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Verified deliverables.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Use a pull communication approach</strong>" : "");
         });
       });
       let score = 0;
@@ -556,16 +661,18 @@ REF: PMBOK Guide, 8th Ed., p.44, p.143</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
