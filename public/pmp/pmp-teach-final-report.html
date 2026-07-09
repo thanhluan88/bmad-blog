@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Accountable Leader (Q12)</title>
+  <title>PMBOK 8 — Final Report &amp; Handover (Q41)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,11 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .conflict-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
-    @media (max-width: 600px) { .conflict-grid { grid-template-columns: 1fr; } }
-    .conflict-mode { padding: 0.85rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--card); font-size: 0.84rem; }
-    .conflict-mode strong { display: block; margin-bottom: 0.25rem; color: var(--primary-dark); }
-    .conflict-mode.ok { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -71,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 300px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -92,11 +87,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Accountable Leader · Q12</div>
+      <div class="brand-sub">Final Report · Q41</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#leader">Accountable Leader</a>
-        <a href="#conflict">Conflict modes</a>
+        <a href="#closure">Close &amp; Handover</a>
+        <a href="#artifacts">Artifacts closure</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -144,16 +139,16 @@
         <a href="pmp-teach-change-management-plan.html">Q38: Change Mgmt Plan</a>
         <a href="pmp-teach-autocratic-decision.html">Q39: Autocratic Decision</a>
         <a href="pmp-teach-close-project.html">Q40: Close Project</a>
-        <a href="pmp-teach-final-report.html">Q41: Final Report</a>
+        <a href="pmp-teach-final-report.html" class="series-current">Q41: Final Report</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-41">Luyện câu 41</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#leader">Leader</a>
-        <a href="#conflict">Conflict</a>
+        <a href="#closure">Closure</a>
+        <a href="#artifacts">Artifacts</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -162,186 +157,158 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q12 về nguyên tắc <strong>Be an Accountable Leader</strong> — PM chủ động
-            facilitate xung đột, tìm root cause và thỏa thuận giải pháp thay vì ép buộc hoặc bỏ mặc.
+            Bài học Q41 về <strong>Final Report &amp; OPA Updates</strong> — component đã
+            <em>handed over</em> to operations nhưng team vẫn bị kéo về support issues; PM
+            muốn confirm <em>activities and items completed during handover</em>.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.48</span>
-            <span class="badge">Conflict Management</span>
-            <span class="badge">Câu 12 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.31–33 &amp; p.121</span>
+            <span class="badge">Close Project or Phase</span>
+            <span class="badge">Câu 41 — Practice</span>
           </div>
         </header>
 
-        <section id="leader">
-          <h2>1. Be an Accountable Leader</h2>
+        <section id="closure">
+          <h2>1. Close Project or Phase — Handover confirmation</h2>
           <p>
-            Accountable leader không né tránh xung đột ảnh hưởng deliverables — họ
-            <strong>chủ động can thiệp</strong> theo hướng collaborative để giải quyết căn nguyên
-            và giữ team gắn kết, productive.
+            During closure, PM đảm bảo all work completed và documented. <strong>Final report</strong>,
+            updated documents, và <strong>organizational process assets (OPA)</strong> updates confirm
+            closure và summarize what was completed during handover.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.48)</h4>
+            <h4>Final report (PMBOK p.31–33, p.121)</h4>
             <p style="margin:0">
-              A collaborative approach not only resolves the conflict but also removes friction
-              that could undermine quality and productivity, fostering a more cohesive and
-              motivated project team.
+              Summarizes project performance including scope, quality, cost, schedule results,
+              benefits achieved, and how risks and issues were addressed. Together with OPA updates,
+              confirms closure activities completed.
             </p>
           </div>
-
-          <h3>Scenario SGI megaproject</h3>
-          <ul>
-            <li>Multiple vendors — xung đột shift rotations</li>
-            <li>Tension → productivity giảm → <strong>ảnh hưởng deliverables</strong></li>
-            <li>Rafael (PM) phải hành động — không thể để vendors tự xử lý khi đã escalate</li>
-          </ul>
         </section>
 
-        <section id="conflict">
-          <h2>2. Conflict modes — map với đáp án</h2>
-
-          <div class="conflict-grid">
-            <div class="conflict-mode">
-              <strong>A — Force / Direct</strong>
-              Ép vendors theo contract — win-lose, có thể làm căng thẳng tăng
-            </div>
-            <div class="conflict-mode">
-              <strong>B — Withdraw / Avoid</strong>
-              Để vendors tự giải quyết — không phù hợp khi đã ảnh hưởng deliverables
-            </div>
-            <div class="conflict-mode ok">
-              <strong>C — Collaborate / Problem solve ✓</strong>
-              Facilitate discussions → root causes → agree on solution
-            </div>
-            <div class="conflict-mode">
-              <strong>D — Delegate</strong>
-              Giao cho team member — PM vẫn accountable, không phải cách PMBOK nhấn mạnh
-            </div>
-          </div>
+        <section id="artifacts">
+          <h2>2. Artifacts nào confirm handover?</h2>
 
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Mode</th><th>Đánh giá</th></tr>
+              <tr><th>Option</th><th>Fit handover confirmation?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Force contract terms</strong></td>
-                <td>Forcing / Direct</td>
-                <td>✗ Slide ghi “Direct” — không collaborative</td>
+                <td><strong>A. Procurement agreements + OPA</strong></td>
+                <td>Procurement — không phải primary handover confirmation pair</td>
               </tr>
               <tr>
-                <td><strong>B. Let vendors resolve</strong></td>
-                <td>Withdraw / Avoid</td>
-                <td>✗ Đã ảnh hưởng deliverables — PM phải lead</td>
+                <td><strong>B. Quality report + lessons learned</strong></td>
+                <td>Partial — không đủ confirm full handover closure</td>
               </tr>
               <tr>
-                <td><strong>C. Facilitate + root causes</strong></td>
-                <td>Collaborate</td>
-                <td>✓ PMBOK p.48 — đáp án đúng</td>
+                <td><strong>C. Final report + scope mgmt plan</strong></td>
+                <td>Scope plan = planning doc — không confirm handover completion</td>
               </tr>
               <tr>
-                <td><strong>D. Assign team member</strong></td>
-                <td>Delegate</td>
-                <td>✗ Không giải quyết conflict mode đúng ngữ cảnh</td>
+                <td><strong>D. Final report + OPA updates</strong></td>
+                <td>✓ Performance summary + documented closure to org</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 12</h2>
+          <h2>3. Câu hỏi thực hành — Question 41</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q12</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q41</div>
             <div class="q-text">
-              Rafael is managing a government megaproject at SGI involving multiple vendors.
-              A conflict arises between vendor teams over shift rotations, creating tension and
-              affecting productivity. Now the issue is starting to <em>affect project deliverables</em>.
-              How should Rafael address this situation?
+              At Northbridge Utilities Group, a project component has recently been
+              <em>handed over</em> to operations. However, team members are still being pulled back
+              to support ongoing issues. The project manager wants to confirm what
+              <em>activities and items were completed during the project handover</em>. What will
+              she do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Force the vendors to follow the agreed contract terms.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Let the vendors resolve the issue on their own.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Facilitate discussions to identify root causes and agree on a solution.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Assign your best team member to manage the conflict.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Review the procurement agreements and organizational process assets updates.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Review the quality report and lessons learned register.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Review the final report and scope management plan.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Review the final report and organizational process assets updates.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>Accountable leader <strong>facilitate</strong> — không né (B) cũng không ép một chiều (A).</li>
-            <li><strong>Root causes</strong> + <strong>agree on solution</strong> = collaborate/problem-solving mode.</li>
-            <li>Giải quyết friction → bảo vệ quality, productivity, team cohesion (p.48).</li>
+            <li>Confirm handover completion → final report + OPA updates.</li>
+            <li>Final report summarizes scope, quality, cost, schedule, benefits, risks/issues.</li>
+            <li>OPA updates document closure artifacts for the organization (p.121).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải đáp án tốt nhất</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Force contract</strong></td>
-                <td>Forcing/Direct — có thể giải quyết tạm nhưng không collaborative; không phải “Principle in Action” p.48.</td>
+                <td><strong>A. Procurement + OPA</strong></td>
+                <td>Procurement agreements — không focus confirm handover activities/items.</td>
               </tr>
               <tr>
-                <td><strong>B. Let vendors resolve</strong></td>
-                <td>Avoid — conflict đã ảnh hưởng deliverables; accountable leader phải can thiệp (✗ slide).</td>
+                <td><strong>B. Quality report + lessons learned</strong></td>
+                <td>Partial artifacts — không pair chuẩn cho handover closure confirmation.</td>
               </tr>
               <tr>
-                <td><strong>D. Assign team member</strong></td>
-                <td>Delegate conflict — PM vẫn accountable; không mô tả facilitate collaborative resolution.</td>
+                <td><strong>C. Final report + scope plan</strong></td>
+                <td>Scope management plan là planning — không confirm what was completed at handover.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords Accountable Leader (p.48)</h4>
+            <h4>Liên hệ Q40 &amp; Q4</h4>
             <p style="margin:0">
-              collaborative approach · facilitate · root causes · agree on solution ·
-              remove friction · quality · productivity · cohesive team
+              Q40: don't release resources before closure. Q41: review final report + OPA to
+              confirm handover done. Q4: OPA receives project knowledge at closure.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Conflict mode nào?</h2>
+          <h2>5. Drill — Artifact nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="COLLAB">
-              <span>Facilitate discussions to find root causes</span>
+            <div class="classify-row" data-answer="FR">
+              <span>Summarize scope, cost, schedule, benefits, risks at closure</span>
               <div class="classify-btns">
-                <button data-pick="COLLAB">Collaborate</button>
-                <button data-pick="FORCE">Force</button>
-                <button data-pick="AVOID">Avoid</button>
+                <button data-pick="FR">Final report</button>
+                <button data-pick="OPA">OPA updates</button>
+                <button data-pick="SMP">Scope plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FORCE">
-              <span>Enforce contract terms without discussion</span>
+            <div class="classify-row" data-answer="OPA">
+              <span>Archive updated docs &amp; confirm org knowledge transfer</span>
               <div class="classify-btns">
-                <button data-pick="COLLAB">Collaborate</button>
-                <button data-pick="FORCE">Force</button>
-                <button data-pick="AVOID">Avoid</button>
+                <button data-pick="FR">Final report</button>
+                <button data-pick="OPA">OPA updates</button>
+                <button data-pick="SMP">Scope plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="AVOID">
-              <span>Step back and let parties work it out alone</span>
+            <div class="classify-row" data-answer="SMP">
+              <span>How scope will be defined, validated, controlled (planning)</span>
               <div class="classify-btns">
-                <button data-pick="COLLAB">Collaborate</button>
-                <button data-pick="FORCE">Force</button>
-                <button data-pick="AVOID">Avoid</button>
+                <button data-pick="FR">Final report</button>
+                <button data-pick="OPA">OPA updates</button>
+                <button data-pick="SMP">Scope plan</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="COLLAB">
-              <span>Parties agree on a mutually acceptable solution</span>
+            <div class="classify-row" data-answer="FR">
+              <span>Confirm activities completed during handover</span>
               <div class="classify-btns">
-                <button data-pick="COLLAB">Collaborate</button>
-                <button data-pick="FORCE">Force</button>
-                <button data-pick="AVOID">Avoid</button>
+                <button data-pick="FR">Final report</button>
+                <button data-pick="OPA">OPA updates</button>
+                <button data-pick="SMP">Scope plan</button>
               </div>
             </div>
           </div>
@@ -351,20 +318,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn A — contract = đúng pháp lý</h4>
-            <p style="margin:0">Contract enforcement là forcing — PMBOK 8 accountable leader ưu tiên <strong>collaborative</strong> resolution khi friction ảnh hưởng team performance.</p>
+            <h4>Bẫy 1: OPA in answer → pick A (procurement + OPA)</h4>
+            <p style="margin:0">OPA đúng — nhưng pair với final report (D), không procurement agreements.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Chọn B — “empower” vendors</h4>
-            <p style="margin:0">Tự giải quyết chỉ phù hợp khi conflict nhỏ, parties có khả năng — đã ảnh hưởng <strong>deliverables</strong> thì PM phải facilitate.</p>
+            <h4>Bẫy 2: Lessons learned → B</h4>
+            <p style="margin:0">Lessons learned quan trọng closure — nhưng không confirm handover items như final report + OPA.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Chọn D — delegate cho “best” member</h4>
-            <p style="margin:0">Giao việc không thay thế PM leadership trong conflict resolution — không khớp p.48.</p>
+            <h4>Bẫy 3: Final report → auto-pick C</h4>
+            <p style="margin:0">Final report đúng — scope management plan là planning doc, không handover confirmation.</p>
           </div>
           <div class="card tip">
-            <h4>Mẹo thi</h4>
-            <p style="margin:0">Tìm từ khóa: <strong>facilitate</strong>, <strong>root cause</strong>, <strong>agree on solution</strong>, <strong>collaborative</strong> — thường là đáp án PMBOK 8 leadership/conflict.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Confirm handover activities/items completed</strong> → Review final report &amp; OPA updates (D).</p>
           </div>
         </section>
 
@@ -372,45 +339,60 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Accountable leader xử lý conflict thế nào? (p.48)</div>
-            <div class="flashcard-back">Collaborative — facilitate discussions, identify root causes, agree on solution.</div>
+            <div class="flashcard-front">Final report at closure?</div>
+            <div class="flashcard-back">Summarizes scope, quality, cost, schedule, benefits, risks/issues addressed.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q12 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Facilitate discussions to identify root causes and agree on a solution.</div>
+            <div class="flashcard-front">Q41 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Review final report and OPA updates.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ACCOUNTABLE LEADER — Q12 (PMBOK 8, p.48)
+          <div class="cheat-sheet">FINAL REPORT &amp; HANDOVER — Q41 (PMBOK 8, p.31–33 &amp; p.121)
 ─────────────────────────────────────────────────────
-PRINCIPLE: Be an Accountable Leader — Principle in Action
-CONFLICT: Vendor teams, shift rotations, affects DELIVERABLES
+PROCESS: Close Project or Phase
 
-Q12 ANSWER: C
-  Facilitate → root causes → agree on solution (COLLABORATE)
+CONFIRM HANDOVER / CLOSURE:
+  → Review FINAL REPORT
+  → Review OPA UPDATES
 
-CONFLICT MODE MAP:
-  A → Force/Direct (contract enforcement) ✗
-  B → Withdraw/Avoid (let vendors resolve) ✗
-  C → Collaborate/Problem solve ✓
-  D → Delegate to team member ✗
+FINAL REPORT summarizes:
+  - Scope · quality · cost · schedule results
+  - Benefits achieved
+  - How risks &amp; issues addressed
 
-WHY C:
-  Resolves conflict + removes friction
-  Protects quality &amp; productivity
-  Fosters cohesive, motivated team
+OPA UPDATES:
+  - Updated documents archived to organization
+  - Confirms closure documentation complete
 
-WHEN PM MUST ACT:
-  Conflict affecting deliverables → don't avoid (B)
+SCENARIO: Northbridge Utilities — component HANDED OVER
+           Team still pulled for ongoing issues
+           Confirm activities/items COMPLETED at handover
+→ D) Review FINAL REPORT &amp; OPA UPDATES ✓
 
-REF: The Standard for Project Management, p.48
-     "Be an Accountable Leader: Principle in Action"</div>
+NOT:
+  A) Procurement agreements + OPA — wrong primary pair
+  B) Quality report + lessons learned — partial, not handover pair
+  C) Final report + scope mgmt plan — plan is planning, not closure confirm
+
+SIGNAL: "handed over" · "confirm completed during handover"
+        "activities and items"
+
+VS Q40: Don't release resources prematurely
+VS Q41: Confirm handover via final report + OPA
+VS Q4: OPA receives organizational knowledge
+
+Q41 ANSWER: D
+
+REF: PMBOK Guide, 8th Ed., p.31–33 &amp; p.121</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
+          · <a href="pmp-teach-close-project.html">Q40: Close Project</a>
+          · <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
+          · <a href="pmp-full-questions.html#q-41">Luyện câu 41</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -419,12 +401,12 @@ REF: The Standard for Project Management, p.48
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Force contract = Forcing/Direct — không phải collaborative approach p.48 nhấn mạnh.",
-        B: "Để vendors tự xử lý = Avoid — conflict đã ảnh hưởng deliverables, PM phải facilitate.",
-        C: "Đúng! Facilitate + root causes + agree on solution = accountable leader collaborative approach.",
-        D: "Giao cho team member = delegate — không mô tả PM facilitate collaborative resolution."
+        A: "Procurement agreements không phải primary artifact confirm handover completion.",
+        B: "Quality report + lessons learned — partial, không đúng pair cho handover confirmation.",
+        C: "Scope management plan là planning doc — không confirm handover items completed.",
+        D: "Đúng! Final report + OPA updates confirm closure &amp; handover activities (p.121)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -440,7 +422,7 @@ REF: The Standard for Project Management, p.48
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Facilitate discussions to identify root causes and agree on a solution.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Review the final report and organizational process assets updates.</strong>" : "");
         });
       });
       let score = 0;
