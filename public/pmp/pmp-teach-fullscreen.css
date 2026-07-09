@@ -1,0 +1,41 @@
+/* PMP teach + lecture: full-viewport layout */
+html {
+  width: 100%;
+  min-height: 100dvh;
+}
+
+body {
+  width: 100%;
+  min-height: 100dvh;
+}
+
+.layout {
+  width: 100%;
+  min-height: 100dvh;
+  max-width: none;
+}
+
+.layout > :not(.sidebar) {
+  min-width: 0;
+  width: 100%;
+}
+
+main {
+  max-width: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Wider grids on large screens */
+@media (min-width: 1200px) {
+  .teach-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (min-width: 1600px) {
+  main {
+    padding-left: clamp(1.5rem, 4vw, 4rem);
+    padding-right: clamp(1.5rem, 4vw, 4rem);
+  }
+}

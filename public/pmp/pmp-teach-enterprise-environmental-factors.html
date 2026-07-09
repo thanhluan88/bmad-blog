@@ -28,19 +28,13 @@
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    body { margin: 0; width: 100%; min-height: 100dvh; font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: var(--sidebar-w) 1fr;
-      min-height: 100vh;
-    }
+    .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: 100dvh; width: 100%; }
     @media (max-width: 900px) {
       .layout { grid-template-columns: 1fr; }
       .sidebar { display: none; }
@@ -98,7 +92,7 @@
       font-size: 0.78rem; border: 1px solid var(--border);
     }
 
-    main { max-width: 860px; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
+    main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
 
     .hero {
       background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%);
@@ -282,6 +276,7 @@
       border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem;
     }
   </style>
+  <link rel="stylesheet" href="pmp-teach-fullscreen.css">
 </head>
 <body>
   <div class="layout">
