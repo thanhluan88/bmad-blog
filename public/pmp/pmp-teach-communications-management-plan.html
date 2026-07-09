@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Monitor &amp; Control Performance (Q35)</title>
+  <title>PMBOK 8 — Communications Management Plan (Q76)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
-      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --primary: #2563eb; --primary-dark: #1d4ed8; --primary-bg: #eff6ff;
       --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
-      --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
+      --info: #7c3aed; --info-bg: #f5f3ff; --border: #e5e7eb;
       --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
     }
     * { box-sizing: border-box; }
@@ -30,7 +30,7 @@
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
-    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #bfdbfe; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
     .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
     .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 62ch; }
     .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
@@ -51,10 +51,15 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .comms-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+    @media (max-width: 700px) { .comms-trio { grid-template-columns: 1fr; } }
+    .comms-box { text-align: center; padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; }
+    .comms-box strong { display: block; font-size: 1rem; color: var(--primary-dark); }
+    .comms-box span { font-size: 0.78rem; color: var(--muted); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
-    .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .quiz-card .q-text em { font-style: normal; background: #dbeafe; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -67,7 +72,7 @@
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
     .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.65rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -77,14 +82,10 @@
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
     .flashcard-front, .flashcard-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); padding: 1.25rem; display: flex; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border); }
     .flashcard-front { background: var(--card); font-weight: 600; }
-    .flashcard-back { background: var(--primary-bg); border-color: #fde68a; transform: rotateY(180deg); font-size: 0.88rem; }
+    .flashcard-back { background: var(--primary-bg); border-color: #bfdbfe; transform: rotateY(180deg); font-size: 0.88rem; }
     .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
     .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
     .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
-    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.9rem; font-weight: 600; }
-    .flow-box { padding: 0.55rem 1rem; border-radius: 10px; border: 2px solid var(--border); background: var(--card); }
-    .flow-box.highlight { border-color: var(--primary); background: var(--primary-bg); color: var(--primary-dark); }
-    .flow-arrow { color: var(--muted); font-size: 1.2rem; }
   </style>
   <link rel="stylesheet" href="pmp-teach-fullscreen.css">
 </head>
@@ -92,11 +93,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Monitor &amp; Control · Q35</div>
+      <div class="brand-sub">Comms Management Plan · Q76</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#monitor">Monitor &amp; Control</a>
-        <a href="#data-flow">Data → Info → Report</a>
+        <a href="#comms">Plan Communications</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -138,7 +139,7 @@
         <a href="pmp-teach-checklists.html">Q32: Checklists</a>
         <a href="pmp-teach-lessons-learned.html">Q33: Lessons Learned</a>
         <a href="pmp-teach-after-action-review.html">Q34: After-Action Review</a>
-        <a href="pmp-teach-monitor-control-performance.html" class="series-current">Q35: Monitor &amp; Control</a>
+        <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
         <a href="pmp-teach-ishikawa-analysis.html">Q36: Ishikawa Analysis</a>
         <a href="pmp-teach-change-request.html">Q37: Change Request</a>
         <a href="pmp-teach-change-management-plan.html">Q38: Change Mgmt Plan</a>
@@ -179,16 +180,16 @@
         <a href="pmp-teach-stakeholder-register.html">Q73: Stakeholder Register</a>
         <a href="pmp-teach-stakeholder-mapping.html">Q74: Stakeholder Mapping</a>
         <a href="pmp-teach-stakeholder-engagement-matrix.html">Q75: Engagement Matrix</a>
-        <a href="pmp-teach-communications-management-plan.html">Q76: Comms Mgmt Plan</a>
+        <a href="pmp-teach-communications-management-plan.html" class="series-current">Q76: Comms Mgmt Plan</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-35">Luyện câu 35</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-76">Luyện câu 76</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#monitor">Monitor</a>
-        <a href="#data-flow">Data flow</a>
+        <a href="#comms">Comms</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -197,163 +198,182 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q35 về <strong>Monitor and Control Project Performance</strong> — project
-            off track (cost &amp; schedule), stakeholders muốn update. James nên làm gì
-            <em>first</em>?
+            Bài học Q76 về <strong>Communications Management Plan</strong> — Nadia tại CH Systems,
+            hospital expansion: stakeholders phàn nàn không được involve, business units không
+            engaged cho release gần nhất → dissatisfied users.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.26–27</span>
-            <span class="badge">Monitor &amp; Control Project Performance</span>
-            <span class="badge">Câu 35 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.72–73 &amp; 117–118</span>
+            <span class="badge">Plan Communications Management</span>
+            <span class="badge">Communications Management Plan</span>
+            <span class="badge">Câu 76 — Practice</span>
           </div>
         </header>
 
-        <section id="monitor">
-          <h2>1. Monitor and Control Project Performance</h2>
+        <section id="comms">
+          <h2>1. Plan Communications Management (p.72–73)</h2>
           <p>
-            Process theo dõi, review và report overall project progress để đáp ứng performance
-            objectives trong project management plan. Trước khi corrective action hay update plan,
-            PM phải <strong>analyze</strong> raw data thành meaningful information.
+            Process defines <strong>how to communicate</strong> with stakeholders and aligns with
+            stakeholder engagement for consistency. The <strong>communications management plan</strong>
+            (p.117–118) describes <em>how</em>, <em>when</em>, and <em>by whom</em> information will
+            be administered and disseminated.
           </p>
 
+          <div class="comms-trio">
+            <div class="comms-box">
+              <strong>How</strong>
+              <span>Format, channel, method</span>
+            </div>
+            <div class="comms-box">
+              <strong>When</strong>
+              <span>Frequency, timing</span>
+            </div>
+            <div class="comms-box">
+              <strong>By whom</strong>
+              <span>Owner, disseminator</span>
+            </div>
+          </div>
+
           <div class="card tip">
-            <h4>Monitor &amp; Control (PMBOK p.26–27)</h4>
+            <h4>Instructor: Not involved / not engaged</h4>
             <p style="margin:0">
-              Work performance <strong>data</strong> is compared to create work performance
-              <strong>information</strong>, which is ultimately sent as a <strong>report</strong>
-              to stakeholders.
+              Stem signals communication breakdown — parts of business missed the release.
+              Next step: <strong>create communications management plan</strong> (D) to structure
+              how stakeholders stay informed and involved.
             </p>
           </div>
         </section>
 
-        <section id="data-flow">
-          <h2>2. Data → Info → Report</h2>
-
-          <div class="flow-diagram">
-            <div class="flow-box highlight">Work Performance Data</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box highlight">Analyze → Work Performance Information</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box">Report to Stakeholders</div>
-          </div>
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
 
           <table>
             <thead>
-              <tr><th>Artifact</th><th>Ví dụ</th><th>Q35</th></tr>
+              <tr><th>Option</th><th>Action</th><th>Q76 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Work performance data</strong></td>
-                <td>Raw AC, EV, schedule actuals James đang review</td>
-                <td>Input — đã có</td>
+                <td><strong>A. Identify stakeholders</strong></td>
+                <td>Find who can be more involved</td>
+                <td>Stakeholders already complaining — identification done</td>
               </tr>
               <tr>
-                <td><strong>Work performance information</strong></td>
-                <td>Analyzed variances, status vs baseline</td>
-                <td><strong>FIRST step (C)</strong></td>
+                <td><strong>B. Stakeholder register</strong></td>
+                <td>Document stakeholder info</td>
+                <td>Q73 artifact — doesn't fix comms/involvement gap</td>
               </tr>
               <tr>
-                <td><strong>Work performance reports</strong></td>
-                <td>Stakeholder update package</td>
-                <td>After analysis</td>
+                <td><strong>C. Engagement activities</strong></td>
+                <td>Add/update engagement actions</td>
+                <td>Execution — comms plan defines how info reaches them first</td>
+              </tr>
+              <tr>
+                <td><strong>D. Comms management plan</strong></td>
+                <td>How/when/by whom to communicate</td>
+                <td><strong>Yes — aligns engagement + communication</strong></td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Keyword: FIRST</h4>
+            <h4>Engagement vs Communications</h4>
             <p style="margin:0">
-              Analyze data → info trước corrective actions (A), plan update (B), hay escalation (D).
+              Q75 engagement matrix maps gaps. Q76: stakeholders <strong>not informed/involved</strong>
+              in release → plan <strong>how communication happens</strong> (comms management plan).
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 35</h2>
+          <h2>3. Câu hỏi thực hành — Question 76</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q35</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q76</div>
             <div class="q-text">
-              James is managing a commercial build at Evercrest Corp. During execution, he reviews
-              cost and schedule data and notices the project is <em>going off track</em>. Stakeholders
-              are starting to notice and want an update on what's going on. What should James do
-              <em>first</em> to respond to this situation?
+              Nadia is initiating the next phase of a hospital expansion project at CH Systems. Early
+              in planning, Nadia receives complaints from some stakeholders that they are not being
+              involved. Some parts of the business were not engaged for the most recent release,
+              resulting in dissatisfied users. What will Nadia do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Implement corrective actions to bring performance back on track.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Update the project management plan to reflect the changes in cost and schedule.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Analyze performance data and turn it into work performance information.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Escalate the issue to the project management team to avoid further delays.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Identify stakeholders who can be more involved in the project.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Create and update the stakeholder register.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Add and update stakeholder engagement activities.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Create the communications management plan.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn D?</h3>
           <ul>
-            <li><em>First</em> = analyze raw data into work performance information.</li>
-            <li>Stakeholders want update — cần analyzed info, không phải raw data hay premature action.</li>
-            <li>Monitor &amp; Control Project Performance (p.26–27): Data → Info → Report.</li>
+            <li>Not involved + not engaged for release = communication/involvement breakdown.</li>
+            <li>Comms plan defines how, when, by whom info is shared (p.117–118).</li>
+            <li>Aligns with stakeholder engagement for consistency (p.72–73).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không FIRST</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Corrective actions</strong></td>
-                <td>Sau khi đã analyze variances và hiểu root cause — không nhảy thẳng.</td>
+                <td><strong>A. Identify stakeholders</strong></td>
+                <td>They're already voicing complaints — known but not properly communicated with.</td>
               </tr>
               <tr>
-                <td><strong>B. Update PM plan</strong></td>
-                <td>Plan update qua change control — chưa analyze data trước.</td>
+                <td><strong>B. Stakeholder register</strong></td>
+                <td>Documents who they are — doesn't establish how/when they receive information.</td>
               </tr>
               <tr>
-                <td><strong>D. Escalate</strong></td>
-                <td>Escalation khi cần — PM phải analyze &amp; prepare info trước.</td>
+                <td><strong>C. Engagement activities</strong></td>
+                <td>Tactical actions — PMI wants comms plan first to structure dissemination.</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Thứ tự đúng?</h2>
+          <h2>5. Drill — Artifact hay action?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="INFO">
-              <span>Project off track — stakeholders want status update (FIRST)</span>
+            <div class="classify-row" data-answer="COM">
+              <span>Define how, when, and by whom status updates reach business units</span>
               <div class="classify-btns">
-                <button data-pick="INFO">Analyze → Info</button>
-                <button data-pick="FIX">Corrective action</button>
-                <button data-pick="ESC">Escalate</button>
+                <button data-pick="COM">Comms Plan</button>
+                <button data-pick="REG">Register</button>
+                <button data-pick="ENG">Engage Act</button>
+                <button data-pick="ID">Identify</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FIX">
-              <span>Variances analyzed — decide recovery actions</span>
+            <div class="classify-row" data-answer="REG">
+              <span>New vendor stakeholder appears — document contact and influence</span>
               <div class="classify-btns">
-                <button data-pick="INFO">Analyze → Info</button>
-                <button data-pick="FIX">Corrective action</button>
-                <button data-pick="ESC">Escalate</button>
+                <button data-pick="COM">Comms Plan</button>
+                <button data-pick="REG">Register</button>
+                <button data-pick="ENG">Engage Act</button>
+                <button data-pick="ID">Identify</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="INFO">
-              <span>Compare cost/schedule data to baseline</span>
+            <div class="classify-row" data-answer="ENG">
+              <span>Schedule one-on-one meetings with resistant department heads</span>
               <div class="classify-btns">
-                <button data-pick="INFO">Analyze → Info</button>
-                <button data-pick="FIX">Corrective action</button>
-                <button data-pick="ESC">Escalate</button>
+                <button data-pick="COM">Comms Plan</button>
+                <button data-pick="REG">Register</button>
+                <button data-pick="ENG">Engage Act</button>
+                <button data-pick="ID">Identify</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ESC">
-              <span>Issue beyond PM authority after analysis</span>
+            <div class="classify-row" data-answer="ID">
+              <span>Discover community group affected by construction noise</span>
               <div class="classify-btns">
-                <button data-pick="INFO">Analyze → Info</button>
-                <button data-pick="FIX">Corrective action</button>
-                <button data-pick="ESC">Escalate</button>
+                <button data-pick="COM">Comms Plan</button>
+                <button data-pick="REG">Register</button>
+                <button data-pick="ENG">Engage Act</button>
+                <button data-pick="ID">Identify</button>
               </div>
             </div>
           </div>
@@ -363,20 +383,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Off track → Corrective actions (A)</h4>
-            <p style="margin:0">Corrective actions sau analysis — đề hỏi <em>first</em> response.</p>
+            <h4>Bẫy 1: Not involved → identify (A)</h4>
+            <p style="margin:0">Stakeholders are complaining — they're identified. Problem is communication structure, not discovery.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Variance → Update plan (B)</h4>
-            <p style="margin:0">Plan changes qua formal change control — không phải bước đầu khi mới phát hiện variance.</p>
+            <h4>Bẫy 2: Stakeholder → register (B)</h4>
+            <p style="margin:0">Q73 pattern doesn't apply — stem is about missed involvement in release, not new stakeholder.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Stakeholders worried → Escalate (D)</h4>
-            <p style="margin:0">PM analyze &amp; report trước — escalation không phải first step.</p>
+            <h4>Bẫy 3: Engaged → engagement activities (C)</h4>
+            <p style="margin:0">Activities execute engagement — comms plan defines how information reaches stakeholders consistently.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Performance data + stakeholders want update + FIRST</strong> → Analyze into work performance information (C).</p>
+            <p style="margin:0"><strong>Not involved · not engaged · dissatisfied users · missed release</strong> → communications management plan (D).</p>
           </div>
         </section>
 
@@ -384,53 +404,54 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Data → Info → Report?</div>
-            <div class="flashcard-back">Raw work performance DATA → analyzed INFORMATION → stakeholder REPORTS.</div>
+            <div class="flashcard-front">Comms management plan covers?</div>
+            <div class="flashcard-back">How, when, and by whom information is administered and disseminated (p.117–118).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q35 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Analyze performance data into work performance information.</div>
+            <div class="flashcard-front">Q76 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Create the communications management plan.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">MONITOR &amp; CONTROL PERFORMANCE — Q35 (PMBOK 8, p.26–27)
+          <div class="cheat-sheet">COMMUNICATIONS MANAGEMENT PLAN — Q76 (PMBOK 8, p.72–73 &amp; 117–118)
 ─────────────────────────────────────────────────────
-PROCESS: Monitor and Control Project Performance
-  - Track · review · report progress vs plan objectives
+PROCESS: Plan Communications Management (p.72–73)
+ARTIFACT: Communications management plan (p.117–118)
 
-FLOW: Data → Info → Report
-  Work Performance DATA (raw)
-    → analyze/compare
-  Work Performance INFORMATION (analyzed)
-    → communicate
-  Work Performance REPORTS (to stakeholders)
+DEFINES:
+  HOW — format, channel, method
+  WHEN — frequency, timing
+  BY WHOM — owner, disseminator
 
-SCENARIO: Evercrest commercial build — execution
-           Cost &amp; schedule OFF TRACK
-           Stakeholders want UPDATE
-           What to do FIRST?
-→ C) Analyze data → WORK PERFORMANCE INFORMATION ✓
+Aligns with stakeholder engagement for CONSISTENCY
 
-NOT FIRST:
-  A) Corrective actions — after analysis
-  B) Update PM plan — change control, not initial response
-  D) Escalate — after PM analyzes &amp; determines need
+SCENARIO: Nadia — CH Systems hospital expansion
+           Next phase, early planning
+           Stakeholders NOT INVOLVED (complaints)
+           Business units NOT ENGAGED for release
+           Dissatisfied users
+QUESTION: What will Nadia do NEXT?
+→ D) CREATE THE COMMUNICATIONS MANAGEMENT PLAN ✓
 
-SIGNAL: "reviews cost and schedule data"
-        "going off track" · stakeholders want update
-        "FIRST"
+NOT:
+  A) IDENTIFY STAKEHOLDERS — already complaining (known)
+  B) STAKEHOLDER REGISTER — document, not comms structure
+  C) ENGAGEMENT ACTIVITIES — tactical; plan comms first
 
-Q35 ANSWER: C
+SIGNAL: "not involved" + "not engaged" + "release"
+        → communications management plan
 
-REF: PMBOK Guide, 8th Ed., p.26–27</div>
+Q76 ANSWER: D
+
+REF: PMBOK Guide, 8th Ed., p.72–73, p.117–118</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
-          · <a href="pmp-teach-project-management-plan.html">Q21: PM Plan</a>
-          · <a href="pmp-full-questions.html#q-35">Luyện câu 35</a>
+          · <a href="pmp-teach-stakeholder-engagement-matrix.html">Q75: Engagement Matrix</a>
+          · <a href="pmp-teach-stakeholder-register.html">Q73: Stakeholder Register</a>
+          · <a href="pmp-full-questions.html#q-76">Luyện câu 76</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -439,12 +460,12 @@ REF: PMBOK Guide, 8th Ed., p.26–27</div>
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Corrective actions sau khi analyze variances — không phải FIRST step.",
-        B: "Update PM plan qua change control — chưa analyze data thành information.",
-        C: "Đúng! FIRST: analyze work performance data → work performance information (p.26–27).",
-        D: "Escalation sau khi PM analyze — không phải first response."
+        A: "Stakeholders đã phàn nàn — họ đã được identify. Vấn đề là comms/involvement, không phải tìm thêm người.",
+        B: "Register document thông tin — không thiết lập how/when/by whom communicate.",
+        C: "Engagement activities là tactical execution — PMI muốn comms plan structure trước.",
+        D: "Đúng! Comms management plan defines how, when, by whom — aligns engagement (p.72–73, 117–118)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -460,7 +481,7 @@ REF: PMBOK Guide, 8th Ed., p.26–27</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Analyze performance data and turn it into work performance information.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Create the communications management plan.</strong>" : "");
         });
       });
       let score = 0;
