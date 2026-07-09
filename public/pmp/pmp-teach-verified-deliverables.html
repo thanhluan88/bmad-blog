@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Elicit Requirements (Q43)</title>
+  <title>PMBOK 8 — Verified Deliverables (Q54)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,6 +51,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.82rem; }
+    .flow-box { padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+    .flow-box.highlight { background: var(--primary-bg); border-color: #fde68a; font-weight: 600; }
+    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -88,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Elicit Requirements · Q43</div>
+      <div class="brand-sub">Verified Deliverables · Q54</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#elicit">Elicit &amp; Analyze</a>
-        <a href="#techniques">Techniques</a>
+        <a href="#validate-scope">Validate Scope</a>
+        <a href="#verified-vs-validated">Verified vs Validated</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -142,7 +146,7 @@
         <a href="pmp-teach-close-project.html">Q40: Close Project</a>
         <a href="pmp-teach-final-report.html">Q41: Final Report</a>
         <a href="pmp-teach-scope-management-plan.html">Q42: Scope Mgmt Plan</a>
-        <a href="pmp-teach-elicit-requirements.html" class="series-current">Q43: Elicit Requirements</a>
+        <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
         <a href="pmp-teach-requirements-traceability.html">Q44: Requirements RTM</a>
         <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
         <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
@@ -152,16 +156,16 @@
         <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
         <a href="pmp-teach-wbs-dictionary.html">Q52: WBS Dictionary</a>
         <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
-        <a href="pmp-teach-verified-deliverables.html">Q54: Verified Deliverables</a>
+        <a href="pmp-teach-verified-deliverables.html" class="series-current">Q54: Verified Deliverables</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-43">Luyện câu 43</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-54">Luyện câu 54</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#elicit">Elicit</a>
-        <a href="#techniques">Techniques</a>
+        <a href="#validate-scope">Validate</a>
+        <a href="#verified-vs-validated">Verified</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -170,96 +174,116 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q43 về <strong>Elicit and Analyze Requirements</strong> — mobile app mới,
-            <em>differing stakeholder expectations</em> về features; cần
-            <em>gather requirements</em> để solution <em>delivers value</em>.
+            Bài học Q54 về <strong>Verified Deliverables</strong> — Marcus, bridge construction
+            tại BEL: components đã pass <em>internal quality checks</em>; client đang review để
+            <em>formal approval</em>. Marcus cần obtain <em>input</em> gì để hỗ trợ quyết định?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.40–41</span>
-            <span class="badge">Elicit and Analyze Requirements</span>
-            <span class="badge">Câu 43 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.44 &amp; 143</span>
+            <span class="badge">Validate Scope</span>
+            <span class="badge">Verified Deliverables</span>
+            <span class="badge">Câu 54 — Practice</span>
           </div>
         </header>
 
-        <section id="elicit">
-          <h2>1. Elicit and Analyze Requirements</h2>
+        <section id="validate-scope">
+          <h2>1. Validate Scope (p.44)</h2>
           <p>
-            Process define và document stakeholder needs cho features và functions — đảm bảo
-            quality và value delivery. Business requirements outline strategic objectives và
-            alignment với organizational goals.
+            <strong>Validate Scope</strong> formalizes acceptance of completed deliverables with
+            stakeholders/customer. Process kiểm tra rằng deliverables đáp ứng agreed criteria và
+            mang lại value — đây là bước <strong>formal approval</strong>, sau khi team đã xác nhận
+            correctness nội bộ.
           </p>
 
           <div class="card tip">
-            <h4>Elicit &amp; Analyze (PMBOK p.40–41)</h4>
+            <h4>Input chính: Verified deliverables</h4>
             <p style="margin:0">
-              Define and document stakeholders' needs for features and functions to ensure
-              quality and value delivery. Techniques include focus groups and benchmarking
-              to collect and compare stakeholder requirements.
+              Completed outputs đã được confirm đúng requirements qua
+              <strong>Monitor and Control Scope</strong> / quality checks — sẵn sàng đưa cho client
+              review và accept.
             </p>
           </div>
         </section>
 
-        <section id="techniques">
-          <h2>2. Elicitation vs downstream artifacts</h2>
+        <section id="verified-vs-validated">
+          <h2>2. Verified vs Validated — đừng nhầm!</h2>
+
+          <div class="flow-diagram">
+            <div class="flow-box">Work completed</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box highlight">Verified deliverables (INPUT)</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">Validate Scope</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box highlight">Validated deliverables (OUTPUT)</div>
+          </div>
 
           <table>
             <thead>
-              <tr><th>Option</th><th>When</th><th>Q43 fit?</th></tr>
+              <tr><th>Term</th><th>Nghĩa</th><th>Q54</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>B. Focus groups + benchmarking</strong></td>
-                <td>Gather &amp; compare differing stakeholder needs</td>
-                <td>✓ Elicitation techniques</td>
+                <td><strong>Verified deliverables (C)</strong></td>
+                <td>Outputs confirmed correct via internal QC / Monitor &amp; Control Scope</td>
+                <td><strong>INPUT</strong> — obtain for client decision</td>
               </tr>
               <tr>
-                <td><strong>A. RTM</strong></td>
-                <td>Trace requirements to scope — after collected</td>
-                <td>Not gather step</td>
+                <td><strong>Validated deliverables (B)</strong></td>
+                <td>Formally accepted by customer/stakeholder</td>
+                <td><strong>OUTPUT</strong> of Validate Scope — chưa có khi client đang review</td>
               </tr>
               <tr>
-                <td><strong>C. Scope baseline</strong></td>
-                <td>Approved deliverables — after define scope</td>
-                <td>Too late</td>
+                <td><strong>Work performance reports (A)</strong></td>
+                <td>Progress &amp; metrics summary</td>
+                <td>Reporting artifact — không phải deliverable package cho acceptance</td>
               </tr>
               <tr>
-                <td><strong>D. Quality audits</strong></td>
-                <td>Manage QA — compliance review</td>
-                <td>Not requirements gathering</td>
+                <td><strong>Change requests (D)</strong></td>
+                <td>Formal proposals to modify scope/baseline</td>
+                <td>Sau khi gaps found — không phải input để client approve hiện tại</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>Signal trong đề</h4>
+            <p style="margin:0">
+              <em>Passed internal quality checks</em> + client <em>formal approval</em> +
+              <em>obtain as an input</em> → verified deliverables (C), không phải validated (B).
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 43</h2>
+          <h2>3. Câu hỏi thực hành — Question 54</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q43</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q54</div>
             <div class="q-text">
-              A new mobile application is being initiated at Crestview Digital. Early discussions
-              reveal <em>differing stakeholder expectations</em> about features and functionality.
-              As the project manager, you are asked how the team will <em>gather requirements</em>
-              to ensure the solution <em>delivers value</em> to the organization. What should you do?
+              Marcus is overseeing a bridge construction project at BEL. Several completed
+              components have passed <em>internal quality checks</em>. The client is now reviewing
+              these outputs against agreed criteria to determine <em>formal approval</em>. What
+              should Marcus obtain as an <em>input</em> to help the client with their decision?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Develop a requirements traceability matrix to trace requirements to their scope.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Conduct focus groups and benchmarking to collect and compare stakeholder requirements.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Create a scope baseline to define approved deliverables and boundaries.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Perform quality audits to ensure requirements meet organizational standards.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Work performance reports summarizing project progress and quality metrics.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Validated deliverables.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Verified deliverables.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Change requests addressing gaps identified during stakeholder review.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>Differing expectations → collect &amp; compare via focus groups + benchmarking.</li>
-            <li>Elicit and Analyze Requirements — elicitation techniques (p.40–41).</li>
-            <li>Deliver value → align business/strategic needs with stakeholder input.</li>
+            <li>Internal QC passed → deliverables đã <strong>verified</strong> đúng requirements.</li>
+            <li>Client formal approval = Validate Scope — cần <strong>verified deliverables</strong> làm input.</li>
+            <li>PMBOK 8: Validate Scope (p.44), Verified deliverables (p.143).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -269,62 +293,63 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. RTM</strong></td>
-                <td>Traces requirements after elicitation — không phải gather step.</td>
+                <td><strong>A. Work performance reports</strong></td>
+                <td>Tóm tắt progress/metrics — không thay thế completed deliverables cho acceptance review.</td>
               </tr>
               <tr>
-                <td><strong>C. Scope baseline</strong></td>
-                <td>Output sau define scope — chưa gather requirements.</td>
+                <td><strong>B. Validated deliverables</strong></td>
+                <td>Đây là <em>output</em> sau khi client approves — stem hỏi <em>input</em> trước approval.</td>
               </tr>
               <tr>
-                <td><strong>D. Quality audits</strong></td>
-                <td>Manage QA (Q31) — không elicit stakeholder requirements.</td>
+                <td><strong>D. Change requests</strong></td>
+                <td>CR xử lý gaps/sau review — không phải artifact obtain để client quyết định accept.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q42 Scope Plan</h4>
+            <h4>Bẫy từ khóa: Validated vs Verified</h4>
             <p style="margin:0">
-              Q42: scope management plan first. Q43: elicit requirements — next step after planning
-              how scope will be managed.
+              Instructor ghi chú <em>Validate</em> trên option B — đúng process nhưng
+              <strong>validated</strong> = sau approval. Câu hỏi cần <strong>verified</strong>
+              (đã QC nội bộ) làm input.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Gather, trace hay baseline?</h2>
+          <h2>5. Drill — Input, output hay khác?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="ELICIT">
-              <span>Differing stakeholder expectations on features</span>
+            <div class="classify-row" data-answer="INPUT">
+              <span>Passed internal QC — ready for client formal approval</span>
               <div class="classify-btns">
-                <button data-pick="ELICIT">Elicit</button>
-                <button data-pick="RTM">RTM</button>
-                <button data-pick="BASE">Baseline</button>
+                <button data-pick="INPUT">Input</button>
+                <button data-pick="OUTPUT">Output</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RTM">
-              <span>Link requirements to scope components</span>
+            <div class="classify-row" data-answer="OUTPUT">
+              <span>Client formally accepted completed components</span>
               <div class="classify-btns">
-                <button data-pick="ELICIT">Elicit</button>
-                <button data-pick="RTM">RTM</button>
-                <button data-pick="BASE">Baseline</button>
+                <button data-pick="INPUT">Input</button>
+                <button data-pick="OUTPUT">Output</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="BASE">
-              <span>Approved deliverables and scope boundaries</span>
+            <div class="classify-row" data-answer="OTHER">
+              <span>Summary of schedule, cost, and quality metrics</span>
               <div class="classify-btns">
-                <button data-pick="ELICIT">Elicit</button>
-                <button data-pick="RTM">RTM</button>
-                <button data-pick="BASE">Baseline</button>
+                <button data-pick="INPUT">Input</button>
+                <button data-pick="OUTPUT">Output</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ELICIT">
-              <span>Benchmarking to compare requirements</span>
+            <div class="classify-row" data-answer="OTHER">
+              <span>Proposal to fix gaps found during review</span>
               <div class="classify-btns">
-                <button data-pick="ELICIT">Elicit</button>
-                <button data-pick="RTM">RTM</button>
-                <button data-pick="BASE">Baseline</button>
+                <button data-pick="INPUT">Input</button>
+                <button data-pick="OUTPUT">Output</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
           </div>
@@ -334,20 +359,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Requirements → RTM (A)</h4>
-            <p style="margin:0">RTM traces requirements — sau khi đã elicit, không phải gather technique.</p>
+            <h4>Bẫy 1: Formal approval → Validated deliverables (B)</h4>
+            <p style="margin:0">Validated = kết quả SAU approval. Đề hỏi input TRƯỚC khi client quyết định → verified (C).</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Deliverables → Scope baseline (C)</h4>
-            <p style="margin:0">Baseline sau define scope — đề hỏi how to gather requirements.</p>
+            <h4>Bẫy 2: Quality metrics → Work performance reports (A)</h4>
+            <p style="margin:0">Reports summarize performance — client cần verified deliverables để review against criteria.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Standards → Quality audits (D)</h4>
-            <p style="margin:0">Audits review compliance — không collect differing stakeholder expectations.</p>
+            <h4>Bẫy 3: Gaps → Change requests (D)</h4>
+            <p style="margin:0">CR nếu reject hoặc cần sửa — không phải input obtain để hỗ trợ approval decision.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Gather requirements + differing expectations + deliver value</strong> → Focus groups &amp; benchmarking (B).</p>
+            <p style="margin:0"><strong>Internal QC passed · client formal approval · obtain input · Validate Scope</strong> → Verified deliverables (C).</p>
           </div>
         </section>
 
@@ -355,54 +380,65 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Elicit requirements techniques? (p.40–41)</div>
-            <div class="flashcard-back">Focus groups · benchmarking · collect &amp; compare stakeholder needs.</div>
+            <div class="flashcard-front">Verified vs Validated?</div>
+            <div class="flashcard-back"><strong>Verified</strong> = QC correct (INPUT). <strong>Validated</strong> = customer accepted (OUTPUT).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q43 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Conduct focus groups and benchmarking.</div>
+            <div class="flashcard-front">Q54 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Verified deliverables.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ELICIT &amp; ANALYZE REQUIREMENTS — Q43 (PMBOK 8, p.40–41)
+          <div class="cheat-sheet">VERIFIED DELIVERABLES — Q54 (PMBOK 8, p.44 &amp; 143)
 ─────────────────────────────────────────────────────
-PROCESS: Elicit and Analyze Requirements
+PROCESS: Validate Scope (p.44)
+         Verified deliverables (p.143)
 
-OBJECTIVE: Define &amp; document stakeholder needs
-           Features · functions · quality · VALUE delivery
-           Business requirements → strategic alignment
+VALIDATE SCOPE:
+  - Formalize ACCEPTANCE of deliverables
+  - Customer/stakeholder review vs agreed criteria
+  - Ensures value and quality
 
-TECHNIQUES (Q43):
-  - Focus groups — collect stakeholder input
-  - Benchmarking — compare requirements
+VERIFIED vs VALIDATED:
+  VERIFIED (INPUT):
+    - Completed outputs confirmed CORRECT
+    - Through Monitor and Control Scope / QC
+    - Passed INTERNAL quality checks
 
-SCENARIO: Crestview Digital — new mobile app
-           DIFFERING stakeholder expectations
-           GATHER requirements · DELIVER VALUE
-→ B) Focus groups &amp; BENCHMARKING ✓
+  VALIDATED (OUTPUT):
+    - Formally ACCEPTED by customer
+    - Result of Validate Scope process
+
+SCENARIO: Marcus — BEL bridge construction
+           Components PASSED internal QC
+           Client reviewing for FORMAL APPROVAL
+           Obtain as INPUT for client decision
+→ C) VERIFIED DELIVERABLES ✓
 
 NOT:
-  A) RTM — trace after elicitation
-  C) Scope baseline — after define scope
-  D) Quality audits — Manage QA, not elicitation
+  A) Work performance REPORTS — progress summary, not deliverables
+  B) VALIDATED deliverables — OUTPUT after approval (trap!)
+  D) CHANGE REQUESTS — after gaps, not input for acceptance
 
-SCOPE FLOW:
-  Q42 Plan scope mgmt → Q43 Elicit requirements → Define scope/WBS → Baseline
+FLOW:
+  Complete work → Internal QC → VERIFIED (input)
+              → Validate Scope → VALIDATED (output)
 
-SIGNAL: "gather requirements" · "differing expectations"
-        "delivers value" · "features and functionality"
+SIGNAL: "internal quality checks" · "formal approval"
+        "obtain as an input" · "help the client"
+        Validate Scope context
 
-Q43 ANSWER: B
+Q54 ANSWER: C
 
-REF: PMBOK Guide, 8th Ed., p.40–41</div>
+REF: PMBOK Guide, 8th Ed., p.44, p.143</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-scope-management-plan.html">Q42: Scope Mgmt Plan</a>
-          · <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
-          · <a href="pmp-full-questions.html#q-43">Luyện câu 43</a>
+          · <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
+          · <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
+          · <a href="pmp-full-questions.html#q-54">Luyện câu 54</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -411,12 +447,12 @@ REF: PMBOK Guide, 8th Ed., p.40–41</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "C";
       const EXPL = {
-        A: "RTM traces requirements to scope — sau elicitation, không phải gather technique.",
-        B: "Đúng! Focus groups + benchmarking elicit &amp; compare stakeholder requirements (p.40–41).",
-        C: "Scope baseline sau define scope — chưa gather requirements.",
-        D: "Quality audits là Manage QA — không elicit differing stakeholder expectations."
+        A: "Work performance reports tóm tắt progress/metrics — không phải verified deliverables cho client acceptance review.",
+        B: "Validated deliverables là OUTPUT sau formal approval — đề hỏi INPUT trước khi client quyết định.",
+        C: "Đúng! Verified deliverables = completed outputs confirmed correct via QC — input to Validate Scope (p.44, 143).",
+        D: "Change requests xử lý gaps sau review — không phải input obtain để hỗ trợ client approval."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -432,7 +468,7 @@ REF: PMBOK Guide, 8th Ed., p.40–41</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Conduct focus groups and benchmarking to collect and compare stakeholder requirements.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Verified deliverables.</strong>" : "");
         });
       });
       let score = 0;
