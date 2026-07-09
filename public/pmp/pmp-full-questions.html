@@ -999,7 +999,7 @@ const USER_KEY = "pmp-quiz-user-v1";
       setUserGateMode(false);
       const afterSync = () => {
         initPager();
-        renderPage();
+        if (!navigateFromHash()) renderPage();
         updateStats();
         if (userGatePendingMock) {
           userGatePendingMock = false;
@@ -3166,6 +3166,42 @@ if (q.type !== "image_click" && q.type !== "special") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
+    function parseQuestionHash() {
+      const m = /^#q-(\d+)$/.exec(location.hash);
+      return m ? Number(m[1]) : null;
+    }
+
+    function goToQuestionById(n, { updateJumpInputs = true, smoothScroll = true, clearFiltersForDeepLink = false } = {}) {
+      if (!n || n < 1 || !QUESTIONS.some(q => q.id === n)) return false;
+      if (clearFiltersForDeepLink && !state.exam &&
+          (state.filterWrongOnly || state.filterUnattemptedOnly || state.filterCpiSpiOnly)) {
+        clearPracticeFilters();
+        initPager();
+      }
+      const bank = questionBank();
+      const idx = bank.findIndex(q => q.id === n);
+      if (idx < 0) return false;
+      if (updateJumpInputs) {
+        const topInput = document.getElementById("jumpInput");
+        const bottomInput = document.getElementById("jumpInputBottom");
+        if (topInput) topInput.value = String(n);
+        if (bottomInput) bottomInput.value = String(n);
+      }
+      state.page = Math.ceil((idx + 1) / PER_PAGE);
+      renderPage();
+      requestAnimationFrame(() => {
+        const el = document.getElementById(`q-${n}`);
+        if (el) el.scrollIntoView({ behavior: smoothScroll ? "smooth" : "auto", block: "start" });
+      });
+      return true;
+    }
+
+    function navigateFromHash({ smoothScroll = false } = {}) {
+      const n = parseQuestionHash();
+      if (n == null) return false;
+      return goToQuestionById(n, { smoothScroll, clearFiltersForDeepLink: true });
+    }
+
     function jumpToQuestion(inputId = "jumpInput") {
       const input = document.getElementById(inputId);
       if (!input) return;
@@ -3175,26 +3211,14 @@ if (q.type !== "image_click" && q.type !== "special") {
         if (input.select) input.select();
         return;
       }
-      const bank = questionBank();
-      const idx = bank.findIndex(q => q.id === n);
-      if (idx < 0) {
-        alert(state.filterWrongOnly
-          ? `Câu ${n} không nằm trong danh sách câu đã sai.`
-          : state.filterUnattemptedOnly
-            ? `Câu ${n} đã được làm trước đó hoặc không nằm trong danh sách câu chưa làm.`
-            : state.filterCpiSpiOnly
-              ? `Câu ${n} không nằm trong danh sách CPI / SPI.`
-              : `Không tìm thấy câu ${n}.`);
-        return;
-      }
-      const topInput = document.getElementById("jumpInput");
-      const bottomInput = document.getElementById("jumpInputBottom");
-      if (topInput) topInput.value = String(n);
-      if (bottomInput) bottomInput.value = String(n);
-      state.page = Math.ceil((idx + 1) / PER_PAGE);
-      renderPage();
-      const el = document.getElementById(`q-${n}`);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (goToQuestionById(n)) return;
+      alert(state.filterWrongOnly
+        ? `Câu ${n} không nằm trong danh sách câu đã sai.`
+        : state.filterUnattemptedOnly
+          ? `Câu ${n} đã được làm trước đó hoặc không nằm trong danh sách câu chưa làm.`
+          : state.filterCpiSpiOnly
+            ? `Câu ${n} không nằm trong danh sách CPI / SPI.`
+            : `Không tìm thấy câu ${n}.`);
     }
 
     function updateNicknameDisplay() {
@@ -3230,6 +3254,10 @@ if (q.type !== "image_click" && q.type !== "special") {
       input.addEventListener("keydown", e => {
         if (e.key === "Enter") jumpToQuestion(id);
       });
+    });
+
+    window.addEventListener("hashchange", () => {
+      navigateFromHash({ smoothScroll: true });
     });
 
     document.addEventListener("change", e => {
@@ -3283,7 +3311,7 @@ if (q.type !== "image_click" && q.type !== "special") {
       setUserGateMode(false);
       updateNicknameDisplay();
       pullStatsFromServer().finally(() => {
-        renderPage();
+        if (!navigateFromHash()) renderPage();
         updateStats();
         if (_urlParams.get("exam") === "1" && !state.exam) {
           startMockExam(true);

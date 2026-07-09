@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Project Management Team (Q9)</title>
+  <title>PMBOK 8 — Project Management Plan (Q21)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,8 +51,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .interaction-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.85rem; justify-content: center; }
-    .flow-box { padding: 0.5rem 0.85rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--info); background: var(--info-bg); color: #1d4ed8; }
+    .process-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; font-size: 0.8rem; }
+    .flow-step { padding: 0.45rem 0.7rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--border); background: var(--bg); }
+    .flow-step.done { border-color: var(--muted); color: var(--muted); }
+    .flow-step.current { border-color: var(--ok); background: var(--ok-bg); color: #065f46; }
+    .flow-step.next { border-color: var(--info); background: var(--info-bg); color: #1d4ed8; }
     .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
@@ -69,7 +72,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 280px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 380px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -90,11 +93,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Project Management Team · Q9</div>
+      <div class="brand-sub">Project Management Plan · Q21</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#team">PM Team làm gì?</a>
-        <a href="#interaction">Tương tác PM ↔ FM</a>
+        <a href="#pm-plan">PM Plan là gì?</a>
+        <a href="#sequence">Thứ tự NEXT</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -122,16 +125,16 @@
         <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
         <a href="pmp-teach-business-case.html">Q19: Business Case</a>
         <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
-        <a href="pmp-teach-project-management-plan.html">Q21: Project Management Plan</a>
+        <a href="pmp-teach-project-management-plan.html" class="series-current">Q21: Project Management Plan</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-21">Luyện câu 21</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#team">PM Team</a>
-        <a href="#interaction">PM ↔ FM</a>
+        <a href="#pm-plan">PM Plan</a>
+        <a href="#sequence">Sequence</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -140,98 +143,95 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q9 về <strong>Project Management Team</strong> — tương tác chủ động
-            với functional managers và các bên để đảm bảo nguồn lực, funding và căn chỉnh mục tiêu.
+            Bài học Q21 về <strong>Project Management Plan</strong> — sau kick-off meeting,
+            team leads đưa high-level strategies; PM cần tài liệu tích hợp, có thể
+            <em>change và configure over time</em>.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.29</span>
-            <span class="badge">Resources</span>
-            <span class="badge">Câu 9 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.18–19</span>
+            <span class="badge">Integrate and Align Project Plans</span>
+            <span class="badge">Câu 21 — Practice</span>
           </div>
         </header>
 
-        <section id="team">
-          <h2>1. Project Management Team</h2>
+        <section id="pm-plan">
+          <h2>1. Project Management Plan</h2>
           <p>
-            <strong>Project management team</strong> không chỉ lập kế hoạch nội bộ — họ
-            <strong>chủ động tương tác và đàm phán</strong> với nhiều bên trong tổ chức
-            để dự án nhận đủ nguồn lực và căn chỉnh với mục tiêu tổ chức.
+            PM Plan mô tả <strong>cách dự án sẽ được thực hiện, giám sát &amp; kiểm soát, và đóng</strong>.
+            Nội dung thay đổi theo context và độ phức tạp — có thể high-level hoặc chi tiết,
+            và được <strong>cập nhật liên tục</strong> khi dự án tiến triển.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.29)</h4>
+            <h4>Định nghĩa (PMBOK p.18–19)</h4>
             <p style="margin:0">
-              The project management team proactively interacts and negotiates with other
-              project management teams, portfolio managers, program managers, project managers,
-              and <strong>functional managers</strong> for demands on <strong>critical resources</strong>,
-              priorities on project funding, receipt or distribution of deliverables, and in
-              aligning project goals and objectives with those of the organization.
+              The project management plan specifies how the project will be executed, monitored and controlled,
+              and closed. Its content varies depending on the project's application context and complexity.
+              The plan can be either high level or detailed, tailored to the project's specific needs.
             </p>
           </div>
 
-          <h3>Hoạt động đặc trưng của PM Team</h3>
-          <ul>
-            <li>Đàm phán <strong>critical resources</strong> với functional managers</li>
-            <li>Ưu tiên <strong>project funding</strong></li>
-            <li>Phối hợp nhận/phân phối deliverables</li>
-            <li>Căn chỉnh mục tiêu dự án với mục tiêu tổ chức</li>
-          </ul>
-        </section>
-
-        <section id="interaction">
-          <h2>2. PM Team ↔ Functional Manager</h2>
-          <p>Trong matrix/functional org, nguồn lực thường thuộc functional manager — PM team phải coordinate.</p>
-
-          <div class="interaction-flow">
-            <span class="flow-box">PM Team</span>
-            <span class="flow-arrow">⇄ negotiate</span>
-            <span class="flow-box">Functional Manager</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-box">Critical resources</span>
-          </div>
-
+          <h3>PM Plan vs các plan con</h3>
           <table>
             <thead>
-              <tr><th>Ai làm gì</th><th>Ví dụ hoạt động</th></tr>
+              <tr><th>Tài liệu</th><th>Mục đích</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>PM Team</strong></td>
-                <td>Coordinate với FM về critical resources; align với org objectives</td>
+                <td><strong>Project Management Plan</strong></td>
+                <td>Tài liệu tích hợp chính — strategies, cách execute/monitor/close; living document</td>
               </tr>
               <tr>
-                <td><strong>Functional Manager</strong></td>
-                <td>Sở hữu nhân sự/chuyên môn; quyết định phân bổ trong phòng ban</td>
+                <td>Configuration management plan</td>
+                <td>Subsidiary plan — cách quản lý <em>configuration items</em> và baseline</td>
               </tr>
               <tr>
-                <td><strong>Sponsor</strong></td>
-                <td>Funding, strategic direction (Q8)</td>
+                <td>Change management plan</td>
+                <td>Subsidiary plan — quy trình xử lý <em>change requests</em></td>
               </tr>
               <tr>
-                <td><strong>Customer</strong></td>
-                <td>Approve/accept final product — không thay mặt bởi PM team “on behalf”</td>
+                <td>Project charter</td>
+                <td>Initiating — authorize project; đã có trước kick-off</td>
               </tr>
             </tbody>
           </table>
         </section>
 
+        <section id="sequence">
+          <h2>2. Thứ tự “What will you do NEXT?”</h2>
+
+          <div class="process-flow" aria-label="Planning sequence after kick-off">
+            <span class="flow-step done">Charter approved ✓</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step done">Kick-off + team strategies ✓</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step current">Create PM Plan</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step next">Refine subsidiary plans</span>
+          </div>
+
+          <p>
+            Đề nói kick-off <em>đã xong</em> và team leads đã đưa strategies — NEXT là gom vào
+            <strong>integrated project management plan</strong>, không phải tạo charter hay chỉ một subsidiary plan.
+          </p>
+        </section>
+
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 9</h2>
+          <h2>3. Câu hỏi thực hành — Question 21</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q9</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q21</div>
             <div class="q-text">
-              Roy is part of the <em>project management team</em> at Transglobal Logistics,
-              working on a system upgrade project. The team collaborates with stakeholders and
-              managers to align with organizational objectives and secure resources, while other
-              activities are also being considered.
-              <em>Which of the following is something the project management team would do?</em>
+              You are managing a large infrastructure project at Granite Works Engineering.
+              You have conducted a kick-off meeting with the project team and multiple team leads
+              have provided their <em>high-level strategies</em>. You want to put these in a document
+              that you can <em>change and configure over time</em>. What will you do <em>next</em>?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Provide duration and cost estimates on the deliverables.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Coordinate with functional managers for demands on critical resources.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Verify that deliverables meet their quality requirements.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Approve the final product on behalf of the customer.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Create the configuration management plan.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Create the project management plan.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Create the project charter.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Create the change management plan.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -242,90 +242,92 @@
 
           <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Khớp trực tiếp PMBOK p.29: negotiate với <strong>functional managers</strong> for <strong>critical resources</strong>.</li>
-            <li>Scenario nhắc collaborate với managers, secure resources, align objectives — đúng pattern PM team ↔ FM.</li>
-            <li>Slide minh họa: PM → FM (coordinate critical resources).</li>
+            <li>PM Plan = tài liệu tích hợp strategies từ các team lead vào cách execute/monitor/close.</li>
+            <li>“Change and configure over time” = living document — PM Plan được cập nhật qua change control.</li>
+            <li>Process: <strong>Integrate and Align Project Plans</strong> (p.18–19).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải đáp án tốt nhất</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không phải NEXT</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Duration and cost estimates</strong></td>
-                <td>PM/team có thể làm estimates, nhưng đề hỏi hoạt động <em>tương tác tổ chức</em> — coordinate resources với FM là đáp án PMBOK nhấn mạnh (A bị ✗ trong slide).</td>
+                <td><strong>A. Configuration management plan</strong></td>
+                <td>Subsidiary plan — chỉ về configuration baselines, không phải nơi gom toàn bộ strategies.</td>
               </tr>
               <tr>
-                <td><strong>C. Verify quality</strong></td>
-                <td>Control quality là công việc QA/QC — không phải mô tả interaction với functional managers trong p.29.</td>
+                <td><strong>C. Project charter</strong></td>
+                <td>Initiating artifact — đã có trước kick-off; không phải bước sau meeting.</td>
               </tr>
               <tr>
-                <td><strong>D. Approve on behalf of customer</strong></td>
-                <td>Customer/sponsor chấp nhận sản phẩm — PM team không approve thay customer.</td>
+                <td><strong>D. Change management plan</strong></td>
+                <td>Subsidiary plan — mô tả <em>how to handle changes</em>, không phải document chứa strategies.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords PM Team (p.29)</h4>
+            <h4>Liên hệ Q18 Initiate Project</h4>
             <p style="margin:0">
-              proactively interact · negotiate · functional managers · critical resources ·
-              project funding · deliverables · align goals with organization
+              Charter (Q18) → PM Plan (Q21) → các subsidiary plans. Đừng nhầm charter với plan.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — PM Team hay vai trò khác?</h2>
+          <h2>5. Drill — PM Plan hay plan con?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="TEAM">
-              <span>Negotiate critical resources with functional managers</span>
+            <div class="classify-row" data-answer="PMP">
+              <span>Integrate team lead strategies into how project runs</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="PMP">PM Plan</button>
+                <button data-pick="SUB">Subsidiary</button>
+                <button data-pick="INIT">Charter</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OTHER">
-              <span>Secure funding and strategic direction</span>
+            <div class="classify-row" data-answer="SUB">
+              <span>Define how configuration baselines are controlled</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="PMP">PM Plan</button>
+                <button data-pick="SUB">Subsidiary</button>
+                <button data-pick="INIT">Charter</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="TEAM">
-              <span>Align project objectives with organizational goals</span>
+            <div class="classify-row" data-answer="SUB">
+              <span>Document process for submitting and approving changes</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="PMP">PM Plan</button>
+                <button data-pick="SUB">Subsidiary</button>
+                <button data-pick="INIT">Charter</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OTHER">
-              <span>Formally accept deliverables as the customer</span>
+            <div class="classify-row" data-answer="INIT">
+              <span>Authorize project and grant PM authority</span>
               <div class="classify-btns">
-                <button data-pick="TEAM">PM Team</button>
-                <button data-pick="OTHER">Khác</button>
+                <button data-pick="PMP">PM Plan</button>
+                <button data-pick="SUB">Subsidiary</button>
+                <button data-pick="INIT">Charter</button>
               </div>
             </div>
           </div>
           <p class="drill-score" id="drillScore">0 / 4 đúng</p>
-          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">“Khác” = Sponsor, Customer, v.v.</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn A — estimates nghe “đúng” với PM</h4>
-            <p style="margin:0">Estimate là planning task, nhưng câu hỏi PMBOK p.29 tập trung <strong>interaction</strong> với FM về resources — B chính xác hơn.</p>
+            <h4>Bẫy 1: “configure” → Configuration management plan (A)</h4>
+            <p style="margin:0">“Configure over time” = PM Plan living document, không phải configuration management.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Quality verification (C)</h4>
-            <p style="margin:0">QA/QC thuộc quality domain — không mô tả negotiate với functional managers.</p>
+            <h4>Bẫy 2: “change” → Change management plan (D)</h4>
+            <p style="margin:0">Change plan mô tả quy trình change — không phải nơi lưu team strategies.</p>
           </div>
           <div class="card tip">
-            <h4>Liên kết Q8 Sponsor</h4>
-            <p style="margin:0">Sponsor: funding + strategy · PM Team: coordinate resources + align với FM và tổ chức</p>
+            <h4>Mnemonic</h4>
+            <p style="margin:0">Kick-off strategies → <strong>PM Plan</strong> (integrate) → subsidiary plans refine details.</p>
           </div>
         </section>
 
@@ -333,42 +335,47 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PM Team tương tác với FM để làm gì?</div>
-            <div class="flashcard-back">Demands on critical resources, funding priorities, deliverables, align goals với tổ chức.</div>
+            <div class="flashcard-front">PM Plan làm gì? (p.18–19)</div>
+            <div class="flashcard-back">Specifies execute, monitor &amp; control, close — high-level or detailed, tailored, updated over time.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q9 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Coordinate with functional managers for demands on critical resources.</div>
+            <div class="flashcard-front">Q21 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Create the project management plan.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">PROJECT MANAGEMENT TEAM — Q9 (PMBOK 8, p.29)
+          <div class="cheat-sheet">PROJECT MANAGEMENT PLAN — Q21 (PMBOK 8, p.18–19)
 ─────────────────────────────────────────────────────
-PM TEAM proactively:
-  • Interact &amp; negotiate with FM, PM, program/portfolio managers
-  • CRITICAL RESOURCES (with functional managers)
-  • Project funding priorities
-  • Receipt/distribution of deliverables
-  • ALIGN goals with organization
+PROCESS: Integrate and Align Project Plans
+PM PLAN = how to execute, monitor &amp; control, close
+         + living document (change/configure over time)
 
-Q9 ANSWER: B
-  Coordinate with functional managers for critical resources
+SCENARIO: Granite Works — kick-off DONE, team lead strategies collected
+NEXT → B) Create the PROJECT MANAGEMENT PLAN ✓
 
-NOT the focus here:
-  A → estimates (planning, not p.29 interaction highlight)
-  C → quality verify (QC domain)
-  D → approve for customer (customer/sponsor role)
+NOT:
+  A) Configuration mgmt plan — subsidiary, config baselines only
+  C) Project charter — initiating, BEFORE kick-off
+  D) Change mgmt plan — subsidiary, change process only
 
-PM ↔ FM: PM Team negotiates resources FM controls
+SEQUENCE (links Q18):
+  Charter → Kick-off → PM Plan (B) → subsidiary plans
 
-REF: The Standard for Project Management, p.29
-     "Interaction Between the Project Management Team and Project Aspects"</div>
+TRAPS:
+  "configure" ≠ configuration management plan
+  "change over time" ≠ change management plan
+
+Q21 ANSWER: B
+
+REF: PMBOK Guide, 8th Ed., p.18–19 — "Integrate and Align Project Plans"</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-project-sponsor.html">Q8: Sponsor</a>
+          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
+          · <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
+          · <a href="pmp-full-questions.html#q-21">Luyện câu 21</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -379,10 +386,10 @@ REF: The Standard for Project Management, p.29
     (function () {
       const CORRECT = "B";
       const EXPL = {
-        A: "Estimates là planning — đề p.29 nhấn interaction với FM về critical resources.",
-        B: "Đúng! PM team coordinate/negotiate với functional managers về critical resources.",
-        C: "Verify quality là QC — không phải mô tả interaction PM team ↔ FM trong p.29.",
-        D: "Customer approve sản phẩm — PM team không approve thay customer."
+        A: "Configuration management plan là subsidiary — quản lý baselines, không gom team strategies.",
+        B: "Đúng! PM Plan tích hợp strategies và là living document — execute/monitor/close (p.18–19).",
+        C: "Charter là initiating — đã có trước kick-off, không phải NEXT sau meeting.",
+        D: "Change management plan mô tả quy trình change — không phải document chứa strategies."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -398,7 +405,7 @@ REF: The Standard for Project Management, p.29
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Coordinate with functional managers for critical resources.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Create the project management plan.</strong>" : "");
         });
       });
       let score = 0;
