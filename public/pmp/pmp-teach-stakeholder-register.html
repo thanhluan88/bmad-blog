@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Change Management Plan (Q38)</title>
+  <title>PMBOK 8 — Stakeholder Register (Q73)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
-      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --primary: #7c3aed; --primary-dark: #5b21b6; --primary-bg: #f5f3ff;
       --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
       --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
       --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
@@ -30,7 +30,7 @@
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
-    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #ddd6fe; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
     .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
     .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 62ch; }
     .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
@@ -51,10 +51,15 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .seq-list { counter-reset: step; list-style: none; margin: 0 0 1rem; padding: 0; }
+    .seq-list li { counter-increment: step; padding: 0.65rem 0.85rem 0.65rem 2.5rem; margin-bottom: 0.45rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; position: relative; font-size: 0.9rem; }
+    .seq-list li::before { content: counter(step); position: absolute; left: 0.75rem; top: 0.6rem; width: 1.4rem; height: 1.4rem; background: var(--primary-bg); color: var(--primary-dark); border-radius: 50%; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .seq-list li.first-step { border-color: var(--ok); background: var(--ok-bg); }
+    .seq-list li.first-step::before { background: var(--ok); color: #fff; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
-    .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .quiz-card .q-text em { font-style: normal; background: #ede9fe; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -66,7 +71,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 280px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -77,7 +82,7 @@
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
     .flashcard-front, .flashcard-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); padding: 1.25rem; display: flex; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border); }
     .flashcard-front { background: var(--card); font-weight: 600; }
-    .flashcard-back { background: var(--primary-bg); border-color: #fde68a; transform: rotateY(180deg); font-size: 0.88rem; }
+    .flashcard-back { background: var(--primary-bg); border-color: #ddd6fe; transform: rotateY(180deg); font-size: 0.88rem; }
     .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
     .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
     .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
@@ -88,11 +93,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Change Management Plan · Q38</div>
+      <div class="brand-sub">Stakeholder Register · Q73</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#plan">Change Management Plan</a>
-        <a href="#chaos">Chaos vs process</a>
+        <a href="#register">Stakeholder Register</a>
+        <a href="#sequence">Thứ tự hành động</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -137,7 +142,7 @@
         <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
         <a href="pmp-teach-ishikawa-analysis.html">Q36: Ishikawa Analysis</a>
         <a href="pmp-teach-change-request.html">Q37: Change Request</a>
-        <a href="pmp-teach-change-management-plan.html" class="series-current">Q38: Change Mgmt Plan</a>
+        <a href="pmp-teach-change-management-plan.html">Q38: Change Mgmt Plan</a>
         <a href="pmp-teach-autocratic-decision.html">Q39: Autocratic Decision</a>
         <a href="pmp-teach-close-project.html">Q40: Close Project</a>
         <a href="pmp-teach-final-report.html">Q41: Final Report</a>
@@ -172,16 +177,16 @@
         <a href="pmp-teach-basis-of-estimates.html">Q70: Basis of Est.</a>
         <a href="pmp-teach-earned-value-analysis.html">Q71: Earned Value</a>
         <a href="pmp-teach-identify-stakeholders.html">Q72: Identify Stakeholders</a>
-        <a href="pmp-teach-stakeholder-register.html">Q73: Stakeholder Register</a>
+        <a href="pmp-teach-stakeholder-register.html" class="series-current">Q73: Stakeholder Register</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-38">Luyện câu 38</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-73">Luyện câu 73</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#plan">Plan</a>
-        <a href="#chaos">Chaos</a>
+        <a href="#register">Register</a>
+        <a href="#sequence">Thứ tự</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -190,157 +195,164 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q38 về <strong>Change Management Plan</strong> — nhiều change requests
-            cùng lúc; developer implement ngay, business họp stakeholder riêng; PM khó theo dõi.
-            Làm gì <em>next</em>?
+            Bài học Q73 về <strong>Stakeholder Register</strong> — Caleb tại HL Infrastructure,
+            coastal bridge repair: giữa kickoff, fishermen's association phàn nàn không được consult,
+            delay permits. Câu hỏi hỏi Caleb nên làm gì <em>first</em>.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.28–29 &amp; p.116</span>
-            <span class="badge">Assess and Implement Changes</span>
-            <span class="badge">Câu 38 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.71 &amp; 141–142</span>
+            <span class="badge">Identify Stakeholders</span>
+            <span class="badge">Stakeholder Register</span>
+            <span class="badge">Câu 73 — Practice</span>
           </div>
         </header>
 
-        <section id="plan">
-          <h2>1. Change Management Plan</h2>
+        <section id="register">
+          <h2>1. Stakeholder register (p.141–142)</h2>
           <p>
-            Change management plan định nghĩa <strong>how changes are managed</strong> — thiết lập
-            change control board (CCB), roles, authority, và implementation của change control system.
+            Project document chứa stakeholder information: identification details, assessment of
+            expectations and influence, classification. Ghi roles, contact details, impact,
+            categories (internal/external) — hỗ trợ analysis và engagement suốt project.
           </p>
 
           <div class="card tip">
-            <h4>Change Management Plan (PMBOK p.116)</h4>
+            <h4>Instructor: New stakeholder → register first</h4>
             <p style="margin:0">
-              Defines how changes are managed, establishes the change control board, and outlines
-              roles, authority, and implementation of the change control system. Assess and
-              Implement Changes occurs throughout the project as stakeholders propose changes.
+              Khi stakeholder mới xuất hiện (complaint, delay permits), bước đầu tiên là
+              <strong>add/update stakeholder register</strong> — document họ trước khi plan
+              engagement hoặc comms.
             </p>
           </div>
         </section>
 
-        <section id="chaos">
-          <h2>2. Process chaos — plan trước tool</h2>
+        <section id="sequence">
+          <h2>2. Thứ tự hành động — "FIRST"</h2>
+
+          <ol class="seq-list">
+            <li class="first-step"><strong>Add to stakeholder register</strong> — document new stakeholder (C)</li>
+            <li>Conduct stakeholder analysis — assess interests, influence, impact (D)</li>
+            <li>Develop/update stakeholder engagement plan (A)</li>
+            <li>Update communications management plan (B)</li>
+          </ol>
 
           <table>
             <thead>
-              <tr><th>Triệu chứng</th><th>Vấn đề gốc</th></tr>
+              <tr><th>Option</th><th>Action</th><th>FIRST?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td>Developer implementing immediately</td>
-                <td>Không follow change control process</td>
+                <td><strong>A. Engagement plan</strong></td>
+                <td>Develop strategies to engage</td>
+                <td>No — after identify + register</td>
               </tr>
               <tr>
-                <td>Business holding own stakeholder meetings</td>
-                <td>Ad-hoc paths — không aligned process</td>
+                <td><strong>B. Comms plan</strong></td>
+                <td>Update how/when to communicate</td>
+                <td>No — follows engagement planning</td>
               </tr>
               <tr>
-                <td><em>Hard to keep track</em></td>
-                <td>Team chưa aligned on HOW to manage changes</td>
+                <td><strong>C. Stakeholder register</strong></td>
+                <td>Add fishermen's association</td>
+                <td><strong>Yes — document first</strong></td>
               </tr>
               <tr>
-                <td>Fix</td>
-                <td>Review change management <strong>plan</strong> with team (A)</td>
+                <td><strong>D. Stakeholder analysis</strong></td>
+                <td>Analyze with the association</td>
+                <td>No — register before deeper analysis</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>Q72 vs Q73</h4>
+            <p style="margin:0">
+              Q72: boundary Identify vs Plan Engagement. Q73: khi stakeholder mới xuất hiện,
+              <strong>register</strong> là bước đầu tiên — trước analysis session (D) và plans (A, B).
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 38</h2>
+          <h2>3. Câu hỏi thực hành — Question 73</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q38</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q73</div>
             <div class="q-text">
-              A project at EI Solutions is in progress when <em>several change requests are raised
-              simultaneously</em>. One of your developers is <em>implementing their change
-              immediately</em>, while someone from the business is holding stakeholder meetings to
-              review the project impact of their change. You are finding it <em>hard to keep
-              track</em>. What will you do next?
+              Caleb is launching a coastal bridge repair project at HL Infrastructure. Midway through
+              kickoff activities, a local fishermen's association files a complaint after not
+              being consulted, delaying permits. What should Caleb do <em>first</em>?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Review the change management plan with the team.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Get a recommendation from the Change Control Board.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Review and update the Change Log.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Approve the most critical changes immediately.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Develop the stakeholder engagement plan.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Update the communications management plan.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Add them to the stakeholder register.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Conduct stakeholder analysis with the fisherman's association.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <h3>Tại sao chọn A?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>Chaos = team không follow cùng process → realign via change management plan.</li>
-            <li>Plan defines roles, authority, CCB, change control system.</li>
-            <li>Review with team — everyone follows same HOW before individual requests.</li>
+            <li>New stakeholder discovered → update stakeholder register immediately.</li>
+            <li>Register captures ID, expectations, influence, classification (p.141–142).</li>
+            <li>"First" = document before planning engagement or conducting analysis.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không đúng NEXT</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không FIRST</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>B. CCB recommendation</strong></td>
-                <td>CCB là part of plan — cần align team on process trước, không jump to CCB.</td>
+                <td><strong>A. Engagement plan</strong></td>
+                <td>Requires known stakeholders in register — planning step, not first.</td>
               </tr>
               <tr>
-                <td><strong>C. Change log</strong></td>
-                <td>Tracking artifact (Q27) — không fix ad-hoc implementation &amp; meetings.</td>
+                <td><strong>B. Comms plan</strong></td>
+                <td>Communication approach follows stakeholder identification and engagement planning.</td>
               </tr>
               <tr>
-                <td><strong>D. Approve critical changes</strong></td>
-                <td>Bypass control — worsens chaos, không establish process.</td>
+                <td><strong>D. Stakeholder analysis</strong></td>
+                <td>Sounds proactive but PMI wants register updated first — analysis builds on documented stakeholder.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Liên hệ Q27, Q37</h4>
-            <p style="margin:0">
-              Q27: change log tracks modifications. Q37: single change → formal request.
-              Q38: multiple chaotic changes → review change management <em>plan</em> with team.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Plan, log hay CCB?</h2>
+          <h2>5. Drill — FIRST hay LATER?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="PLAN">
-              <span>Team implementing changes ad-hoc — hard to track</span>
+            <div class="classify-row" data-answer="FIRST">
+              <span>New community group complains — add them to stakeholder register</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Mgmt plan</button>
-                <button data-pick="LOG">Change log</button>
-                <button data-pick="CCB">CCB</button>
+                <button data-pick="FIRST">FIRST</button>
+                <button data-pick="LATER">LATER</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="LOG">
-              <span>Record all proposed and approved modifications</span>
+            <div class="classify-row" data-answer="LATER">
+              <span>Develop tailored engagement strategy for resistant stakeholder</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Mgmt plan</button>
-                <button data-pick="LOG">Change log</button>
-                <button data-pick="CCB">CCB</button>
+                <button data-pick="FIRST">FIRST</button>
+                <button data-pick="LATER">LATER</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="CCB">
-              <span>Decision body reviews assessed change requests</span>
+            <div class="classify-row" data-answer="LATER">
+              <span>Update communications management plan for new audience</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Mgmt plan</button>
-                <button data-pick="LOG">Change log</button>
-                <button data-pick="CCB">CCB</button>
+                <button data-pick="FIRST">FIRST</button>
+                <button data-pick="LATER">LATER</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PLAN">
-              <span>Define roles, authority &amp; change control system</span>
+            <div class="classify-row" data-answer="LATER">
+              <span>Facilitate stakeholder analysis workshop with the association</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Mgmt plan</button>
-                <button data-pick="LOG">Change log</button>
-                <button data-pick="CCB">CCB</button>
+                <button data-pick="FIRST">FIRST</button>
+                <button data-pick="LATER">LATER</button>
               </div>
             </div>
           </div>
@@ -350,20 +362,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Can't track → Change log (C)</h4>
-            <p style="margin:0">Log records changes — không stop unauthorized implementation hay align process.</p>
+            <h4>Bẫy 1: Complaint → jump to analysis (D)</h4>
+            <p style="margin:0">Analysis with the association sounds like the right fix — but PMI sequence: register first, then analyze and plan.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Changes pending → CCB (B)</h4>
-            <p style="margin:0">CCB operates within plan — chaos cần review plan with team first.</p>
+            <h4>Bẫy 2: Delay → engagement plan (A)</h4>
+            <p style="margin:0">Engagement plan is needed eventually — not before the stakeholder is documented in the register.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Urgency → Approve critical (D)</h4>
-            <p style="margin:0">Ad-hoc approval worsens disorder — establish process via plan review.</p>
+            <h4>Bẫy 3: Communication issue → comms plan (B)</h4>
+            <p style="margin:0">"Not consulted" suggests comms — but identify/document stakeholder first, then update plans.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Multiple simultaneous changes + ad-hoc handling + can't track</strong> → Review change management plan with team (A).</p>
+            <p style="margin:0"><strong>New stakeholder · complaint · missed consultation</strong> → update <strong>stakeholder register</strong> FIRST (C).</p>
           </div>
         </section>
 
@@ -371,56 +383,57 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Change management plan? (p.116)</div>
-            <div class="flashcard-back">How changes managed · CCB · roles · authority · change control system.</div>
+            <div class="flashcard-front">Stakeholder register contains?</div>
+            <div class="flashcard-back">ID details, expectations, influence, roles, contact, impact, internal/external classification.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q38 đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Review the change management plan with the team.</div>
+            <div class="flashcard-front">Q73 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Add them to the stakeholder register (FIRST).</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">CHANGE MANAGEMENT PLAN — Q38 (PMBOK 8, p.28–29 &amp; p.116)
+          <div class="cheat-sheet">STAKEHOLDER REGISTER — Q73 (PMBOK 8, p.71 &amp; 141–142)
 ─────────────────────────────────────────────────────
-PROCESS: Assess and Implement Changes
-ARTIFACT: Change Management Plan
+ARTIFACT: Stakeholder register
+PROCESS: Identify Stakeholders (p.71)
 
-PLAN defines:
-  - HOW changes are managed
-  - Change Control Board (CCB)
-  - Roles · authority
-  - Change control system implementation
+CONTAINS:
+  • Identification details
+  • Expectations &amp; influence assessment
+  • Classification (internal/external, etc.)
+  • Roles, contact details, impact
 
-SCENARIO: EI Solutions — in progress
-           SEVERAL change requests SIMULTANEOUSLY
-           Developer implementing IMMEDIATELY
-           Business holding own stakeholder meetings
-           PM HARD TO KEEP TRACK
-NEXT → A) Review CHANGE MANAGEMENT PLAN with team ✓
+NEW STAKEHOLDER SEQUENCE ("FIRST"):
+  1. ADD TO STAKEHOLDER REGISTER ✓ (C)
+  2. Stakeholder analysis (D)
+  3. Engagement plan (A)
+  4. Comms plan (B)
 
-NOT:
-  B) CCB recommendation — part of plan; align process first
-  C) Change log — tracking only (Q27), not process fix
-  D) Approve critical immediately — ad-hoc, worsens chaos
+SCENARIO: Caleb — HL Infrastructure
+           Coastal bridge repair
+           Mid-kickoff: fishermen's association complains
+           Not consulted → permits delayed
+QUESTION: What should Caleb do FIRST?
+→ C) ADD THEM TO THE STAKEHOLDER REGISTER ✓
 
-SIGNAL: "simultaneously" · "implementing immediately"
-        "hard to keep track" · ad-hoc paths
+NOT FIRST:
+  A) ENGAGEMENT PLAN — after register populated
+  B) COMMS PLAN — after engagement planning
+  D) STAKEHOLDER ANALYSIS — register documents first
 
-VS Q27: Change log (track modifications)
-VS Q37: Single change request (post-baseline)
-VS Q38: Process chaos → review change MGMT PLAN
+SIGNAL: "new stakeholder" + "first" → stakeholder register
 
-Q38 ANSWER: A
+Q73 ANSWER: C
 
-REF: PMBOK Guide, 8th Ed., p.28–29 &amp; p.116</div>
+REF: PMBOK Guide, 8th Ed., p.71, p.141–142</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-change-log.html">Q27: Change Log</a>
-          · <a href="pmp-teach-change-request.html">Q37: Change Request</a>
-          · <a href="pmp-full-questions.html#q-38">Luyện câu 38</a>
+          · <a href="pmp-teach-identify-stakeholders.html">Q72: Identify Stakeholders</a>
+          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
+          · <a href="pmp-full-questions.html#q-73">Luyện câu 73</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -429,12 +442,12 @@ REF: PMBOK Guide, 8th Ed., p.28–29 &amp; p.116</div>
 
   <script>
     (function () {
-      const CORRECT = "A";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Đúng! Review change management plan — align team on HOW changes are managed (p.116).",
-        B: "CCB recommendation sau khi team aligned on plan — không fix ad-hoc chaos.",
-        C: "Change log tracks modifications — không stop unauthorized implementation.",
-        D: "Ad-hoc approval worsens disorder — cần establish process via plan review."
+        A: "Engagement plan cần stakeholder đã documented — không phải bước FIRST khi mới phát hiện stakeholder.",
+        B: "Comms plan update sau khi identify và plan engagement — không phải bước đầu.",
+        C: "Đúng! Stakeholder mới xuất hiện → add to stakeholder register FIRST (p.141–142).",
+        D: "Analysis quan trọng nhưng register phải được update trước — PMI muốn document trước khi analyze sâu."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -450,7 +463,7 @@ REF: PMBOK Guide, 8th Ed., p.28–29 &amp; p.116</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Review the change management plan with the team.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Add them to the stakeholder register.</strong>" : "");
         });
       });
       let score = 0;
