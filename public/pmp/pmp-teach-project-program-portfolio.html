@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMBOK 8 — Project vs Program vs Portfolio</title>
+  <style>
+    :root {
+      --bg: #fafaf8;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --primary-bg: #fffbeb;
+      --ok: #059669;
+      --ok-bg: #ecfdf5;
+      --bad: #dc2626;
+      --bad-bg: #fef2f2;
+      --info: #2563eb;
+      --info-bg: #eff6ff;
+      --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --radius: 14px;
+      --sidebar-w: 260px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+    }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .mobile-nav { display: flex !important; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem 1rem 2rem;
+    }
+    .sidebar .brand {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+    }
+    .sidebar .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar nav a {
+      display: block;
+      padding: 0.45rem 0.65rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      margin-bottom: 1px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background: var(--primary-bg);
+      color: var(--primary-dark);
+    }
+    .sidebar nav a.active { font-weight: 600; border-left: 3px solid var(--primary); }
+    .sidebar .back-link {
+      display: block;
+      margin-top: 1.25rem;
+      padding: 0.65rem 0.85rem;
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+    .sidebar .back-link:hover { background: var(--primary-dark); }
+
+    .mobile-nav {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 0.85rem;
+      gap: 0.4rem;
+      overflow-x: auto;
+      box-shadow: var(--shadow);
+    }
+    .mobile-nav a {
+      white-space: nowrap;
+      padding: 0.35rem 0.7rem;
+      background: var(--bg);
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      border: 1px solid var(--border);
+    }
+
+    main {
+      max-width: 860px;
+      padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%);
+      border: 1px solid #fde68a;
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+    .hero h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+    }
+    .hero .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 62ch;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--primary-dark);
+      font-weight: 500;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 1rem;
+    }
+    section > h2 {
+      font-size: 1.3rem;
+      margin: 0 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary);
+      color: var(--primary-dark);
+    }
+    section h3 {
+      font-size: 1.05rem;
+      margin: 1.25rem 0 0.65rem;
+    }
+    section p { margin: 0 0 0.75rem; }
+    section ul, section ol { margin: 0 0 1rem 1.2rem; }
+    section li { margin-bottom: 0.35rem; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+    }
+    .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
+    .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
+    .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.88rem;
+      background: var(--card);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 0.55rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--bg);
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.82rem;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .concept-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .concept-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+    .concept-card .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    .concept-card.project .icon { background: #dbeafe; color: #1d4ed8; }
+    .concept-card.program .icon { background: #fef3c7; color: #b45309; }
+    .concept-card.portfolio .icon { background: #ede9fe; color: #6d28d9; }
+    .concept-card.operations .icon { background: #d1fae5; color: #047857; }
+    .concept-card h4 { margin: 0 0 0.35rem; font-size: 0.95rem; }
+    .concept-card p { margin: 0; font-size: 0.82rem; color: var(--muted); }
+
+    .diagram-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+    .diagram-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+    }
+    .diagram-box h4 {
+      margin: 0 0 0.75rem;
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+    }
+    .diagram-box svg { max-width: 100%; height: auto; }
+    .diagram-caption {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .hierarchy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+      padding: 1.25rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .hierarchy-level {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      align-items: center;
+    }
+    .hierarchy-box {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 2px solid;
+    }
+    .hierarchy-box.portfolio { border-color: #7c3aed; background: #f5f3ff; color: #5b21b6; }
+    .hierarchy-box.program { border-color: var(--primary); background: var(--primary-bg); color: var(--primary-dark); }
+    .hierarchy-box.project { border-color: #2563eb; background: #eff6ff; color: #1d4ed8; }
+    .hierarchy-box.ops { border-color: #059669; background: #ecfdf5; color: #047857; }
+    .hierarchy-arrow { color: var(--muted); font-size: 1.2rem; }
+
+    .quiz-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .quiz-card .q-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .quiz-card .q-text {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      line-height: 1.65;
+    }
+    .quiz-card .q-text em {
+      font-style: normal;
+      background: #fef9c3;
+      padding: 0.1rem 0.25rem;
+      border-radius: 4px;
+    }
+    .opt-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 0.7rem 1rem;
+      margin-bottom: 0.45rem;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-bg);
+    }
+    .opt-btn.correct {
+      border-color: var(--ok);
+      background: var(--ok-bg);
+      color: #065f46;
+      font-weight: 600;
+    }
+    .opt-btn.wrong {
+      border-color: var(--bad);
+      background: var(--bad-bg);
+      color: #991b1b;
+      opacity: 0.85;
+    }
+    .opt-btn:disabled { cursor: default; }
+    .feedback {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+    }
+    .feedback.show { display: block; }
+    .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
+    .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+
+    .flashcard {
+      perspective: 1000px;
+      height: 180px;
+      cursor: pointer;
+      margin-bottom: 0.75rem;
+    }
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s;
+      transform-style: preserve-3d;
+    }
+    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+    .flashcard-front,
+    .flashcard-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .flashcard-front {
+      background: var(--card);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .flashcard-back {
+      background: var(--primary-bg);
+      border-color: #fde68a;
+      transform: rotateY(180deg);
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+    .flash-hint {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .cheat-sheet {
+      background: #1f2937;
+      color: #f3f4f6;
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      font-family: "Cascadia Code", "Consolas", monospace;
+      font-size: 0.8rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    .ref-footer {
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">PMBOK 8 Teach</div>
+      <div class="brand-sub">Project · Program · Portfolio · Operations</div>
+      <nav id="sideNav">
+        <a href="#intro" class="active">Giới thiệu</a>
+        <a href="#concepts">4 khái niệm cốt lõi</a>
+        <a href="#diagrams">Sơ đồ phân cấp</a>
+        <a href="#question">Câu hỏi thực hành</a>
+        <a href="#analysis">Phân tích đáp án</a>
+        <a href="#traps">Bẫy thi thường gặp</a>
+        <a href="#flashcards">Flashcard</a>
+        <a href="#cheatsheet">Cheat sheet</a>
+      </nav>
+      <div class="nav-series" style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted);margin:1rem 0 0.35rem 0.65rem;">Practice Series</div>
+      <a href="pmp-teach-tangible-intangible-benefits.html" style="display:block;padding:0.45rem 0.65rem;color:var(--muted);text-decoration:none;border-radius:8px;font-size:0.86rem;">Q2: Tangible/Intangible</a>
+      <a href="pmp-teach-enterprise-environmental-factors.html" style="display:block;padding:0.45rem 0.65rem;color:var(--muted);text-decoration:none;border-radius:8px;font-size:0.86rem;">Q3: EEF →</a>
+      <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
+    </aside>
+
+    <div>
+      <nav class="mobile-nav">
+        <a href="#concepts">Khái niệm</a>
+        <a href="#diagrams">Sơ đồ</a>
+        <a href="#question">Câu hỏi</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#flashcards">Flashcard</a>
+      </nav>
+
+      <main>
+        <header class="hero" id="intro">
+          <h1>Practice Questions — PMBOK 8th Ed</h1>
+          <p class="lead">
+            Bài học dựa trên câu hỏi thực hành về <strong>Portfolios, Programs, Projects</strong>.
+            Mục tiêu: nhận diện đúng loại hình quản lý khi đọc scenario — không bị đánh lừa bởi
+            “nhiều team” hay “nhiều chuyên gia”.
+          </p>
+          <div class="badges">
+            <span class="badge">The Standard for PM, p.12</span>
+            <span class="badge">Governance</span>
+            <span class="badge">Khởi tạo dự án</span>
+            <span class="badge">Câu 1 — Practice</span>
+          </div>
+        </header>
+
+        <!-- Concepts -->
+        <section id="concepts">
+          <h2>1. Bốn khái niệm cốt lõi</h2>
+          <p>
+            Theo <em>The Standard for Project Management</em> (PMBOK 8), tổ chức quản lý công việc
+            theo ba cấp độ chính — cộng thêm <strong>Operations</strong> (vận hành) để phân biệt
+            công việc tạm thời và công việc liên tục.
+          </p>
+
+          <div class="concept-grid">
+            <div class="concept-card project">
+              <div class="icon">Pr</div>
+              <h4>Project (Dự án)</h4>
+              <p>
+                Tạm thời, có thời điểm bắt đầu và kết thúc xác định. Tạo ra deliverable duy nhất
+                (sản phẩm, dịch vụ, kết quả).
+              </p>
+            </div>
+            <div class="concept-card program">
+              <div class="icon">Pg</div>
+              <h4>Program (Chương trình)</h4>
+              <p>
+                Nhóm các dự án <strong>liên quan</strong> được quản lý phối hợp để đạt lợi ích
+                mà từng dự án riêng lẻ không đạt được.
+              </p>
+            </div>
+            <div class="concept-card portfolio">
+              <div class="icon">Pf</div>
+              <h4>Portfolio (Danh mục)</h4>
+              <p>
+                Tập hợp projects, programs <strong>và</strong> operations — quản lý đồng thời
+                để đạt mục tiêu chiến lược tổ chức.
+              </p>
+            </div>
+            <div class="concept-card operations">
+              <div class="icon">Op</div>
+              <h4>Operations (Vận hành)</h4>
+              <p>
+                Công việc lặp lại, liên tục, không có điểm kết thúc rõ ràng. Duy trì hoạt động
+                kinh doanh hàng ngày.
+              </p>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Tiêu chí</th>
+                <th>Project</th>
+                <th>Program</th>
+                <th>Portfolio</th>
+                <th>Operations</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Thời gian</strong></td>
+                <td>Tạm thời</td>
+                <td>Tạm thời (dài hơn project)</td>
+                <td>Liên tục, điều chỉnh theo chiến lược</td>
+                <td>Liên tục, không kết thúc</td>
+              </tr>
+              <tr>
+                <td><strong>Deliverable</strong></td>
+                <td>Một kết quả cụ thể</td>
+                <td>Lợi ích tổng hợp từ nhiều project</td>
+                <td>Giá trị chiến lược, ROI</td>
+                <td>Sản phẩm/dịch vụ ổn định</td>
+              </tr>
+              <tr>
+                <td><strong>Quy mô</strong></td>
+                <td>1 initiative</td>
+                <td>Nhiều project liên quan</td>
+                <td>Nhiều project + program + ops</td>
+                <td>Hoạt động thường ngày</td>
+              </tr>
+              <tr>
+                <td><strong>Mục tiêu</strong></td>
+                <td>Tạo value qua deliverable</td>
+                <td>Phối hợp để tối đa hóa lợi ích</td>
+                <td>Căn chỉnh với chiến lược tổ chức</td>
+                <td>Duy trì &amp; cải tiến liên tục</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card tip">
+            <h4>Ghi nhớ nhanh</h4>
+            <p style="margin:0">
+              <strong>Projects</strong> tạo value bằng deliverable cụ thể ·
+              <strong>Programs</strong> gom nhiều project liên quan ·
+              <strong>Portfolios</strong> gom Programs + Operations theo chiến lược ·
+              <strong>Operations</strong> = công việc không tạm thời.
+            </p>
+          </div>
+        </section>
+
+        <!-- Diagrams -->
+        <section id="diagrams">
+          <h2>2. Sơ đồ phân cấp (như trong bài giảng)</h2>
+          <p>
+            Hình vẽ trong slide minh họa mối quan hệ lồng nhau. Một Program chứa nhiều Project;
+            một Portfolio chứa cả Project, Program và Operations.
+          </p>
+
+          <div class="diagram-row">
+            <div class="diagram-box">
+              <h4>Program = nhóm Project liên quan</h4>
+              <svg viewBox="0 0 220 160" width="220" height="160" aria-label="Program chứa 3 Project">
+                <ellipse cx="110" cy="80" rx="95" ry="70" fill="none" stroke="#d97706" stroke-width="2.5" stroke-dasharray="6 4"/>
+                <text x="110" y="22" text-anchor="middle" font-size="11" fill="#b45309" font-weight="600">Program</text>
+                <circle cx="70" cy="75" r="28" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+                <text x="70" y="79" text-anchor="middle" font-size="12" fill="#b45309" font-weight="700">Pr</text>
+                <circle cx="110" cy="95" r="28" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+                <text x="110" y="99" text-anchor="middle" font-size="12" fill="#b45309" font-weight="700">Pr</text>
+                <circle cx="150" cy="75" r="28" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+                <text x="150" y="79" text-anchor="middle" font-size="12" fill="#b45309" font-weight="700">Pr</text>
+              </svg>
+              <p class="diagram-caption">3 dự án riêng biệt, được quản lý phối hợp</p>
+            </div>
+
+            <div class="diagram-box">
+              <h4>Portfolio = Project + Program + Operations</h4>
+              <svg viewBox="0 0 220 160" width="220" height="160" aria-label="Portfolio chứa Project, Program và Operations">
+                <ellipse cx="110" cy="80" rx="95" ry="70" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="6 4"/>
+                <text x="110" y="22" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="600">Portfolio</text>
+                <circle cx="65" cy="78" r="26" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="65" y="82" text-anchor="middle" font-size="11" fill="#1d4ed8" font-weight="700">Pr</text>
+                <circle cx="110" cy="95" r="26" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="110" y="99" text-anchor="middle" font-size="11" fill="#1d4ed8" font-weight="700">Pr</text>
+                <circle cx="155" cy="78" r="26" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+                <text x="155" y="82" text-anchor="middle" font-size="11" fill="#047857" font-weight="700">Op</text>
+              </svg>
+              <p class="diagram-caption">Hỗn hợp dự án, chương trình và vận hành</p>
+            </div>
+          </div>
+
+          <div class="hierarchy">
+            <div class="hierarchy-level">
+              <span class="hierarchy-box portfolio">Portfolio — chiến lược tổ chức</span>
+            </div>
+            <span class="hierarchy-arrow">▼</span>
+            <div class="hierarchy-level">
+              <span class="hierarchy-box program">Program</span>
+              <span class="hierarchy-box project">Project</span>
+              <span class="hierarchy-box ops">Operations</span>
+            </div>
+            <span class="hierarchy-arrow">▼</span>
+            <div class="hierarchy-level">
+              <span class="hierarchy-box project">Project</span>
+              <span class="hierarchy-box project">Project</span>
+              <span class="hierarchy-box project">Project</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Practice Question -->
+        <section id="question">
+          <h2>3. Câu hỏi thực hành — Question 1</h2>
+
+          <div class="quiz-card" id="mainQuiz">
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q1</div>
+            <div class="q-text">
+              You are working at Stratus Innovations, where leadership proposes the delivery of a
+              new customer platform that will impact <em>multiple teams</em>. They need it to be
+              released <em>before October next year</em>, and <em>multiple experts from other systems
+              or teams may be involved</em>. Leadership asks <em>how this initiative should be managed</em>.
+              What will you tell them?
+            </div>
+
+            <button class="opt-btn" data-opt="A" type="button">A. Manage it as operations.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Manage it as a program.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Manage it as a project.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Manage it as a portfolio.</button>
+
+            <div class="feedback" id="quizFeedback"></div>
+          </div>
+
+          <div class="card info">
+            <h4>Dịch tình huống</h4>
+            <p style="margin:0">
+              Ban lãnh đạo Stratus Innovations đề xuất xây dựng <strong>nền tảng khách hàng mới</strong>,
+              ảnh hưởng nhiều team, cần ra mắt <strong>trước tháng 10 năm sau</strong>, có thể cần
+              chuyên gia từ hệ thống/team khác. Họ hỏi <strong>initiative này nên được quản lý thế nào</strong>?
+            </p>
+          </div>
+        </section>
+
+        <!-- Analysis -->
+        <section id="analysis">
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+
+          <div class="card tip">
+            <h4>Giải thích chính thức (PMBOK)</h4>
+            <p>
+              Projects are initiated to create value by producing tangible and/or intangible
+              deliverables such as products, services, or other results. Unlike ongoing operations,
+              projects are <strong>temporary</strong> and have a <strong>defined beginning and end</strong>.
+              Programs combine multiple projects, and Portfolios combine Programs and Operations.
+            </p>
+            <p style="margin:0">
+              <em>— The Standard for Project Management, p.12, "Portfolios, Programs, Projects"</em>
+            </p>
+          </div>
+
+          <h3>Tại sao chọn C — Project?</h3>
+          <ul>
+            <li><strong>Một deliverable duy nhất:</strong> “new customer platform” — một sản phẩm cụ thể, không phải nhóm dự án.</li>
+            <li><strong>Có deadline rõ ràng:</strong> “before October next year” → tạm thời, có điểm kết thúc.</li>
+            <li><strong>Tạo value:</strong> platform mới = kết quả hữu hình/vô hình rõ ràng.</li>
+            <li><strong>Nhiều team ≠ Program:</strong> cross-functional team vẫn có thể nằm trong <em>một</em> project.</li>
+          </ul>
+
+          <h3>Loại trừ từng đáp án</h3>
+          <table>
+            <thead>
+              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Operations</strong></td>
+                <td>Platform mới có ngày release cụ thể — không phải công việc vận hành liên tục, lặp lại.</td>
+              </tr>
+              <tr>
+                <td><strong>B. Program</strong></td>
+                <td>Program = <em>nhiều project liên quan</em>. Scenario chỉ mô tả <strong>một</strong> initiative (một platform).</td>
+              </tr>
+              <tr>
+                <td><strong>D. Portfolio</strong></td>
+                <td>Portfolio quản lý tập hợp projects/programs/operations theo chiến lược — không phải cách gọi cho một initiative đơn lẻ.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card warn">
+            <h4>Manh mối trong đề (keywords)</h4>
+            <ul style="margin:0">
+              <li><strong>“before October next year”</strong> → temporary → Project</li>
+              <li><strong>“new customer platform”</strong> → unique deliverable → Project</li>
+              <li><strong>“multiple teams / experts”</strong> → độ phức tạp tổ chức, <em>không</em> đổi loại hình quản lý</li>
+              <li><strong>“how this initiative should be managed”</strong> → hỏi phân loại, không hỏi life cycle hay methodology</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Traps -->
+        <section id="traps">
+          <h2>5. Bẫy thi thường gặp</h2>
+
+          <div class="card danger">
+            <h4>Bẫy 1: “Nhiều team” → tưởng là Program</h4>
+            <p style="margin:0">
+              Một dự án lớn thường cần nhiều team, nhiều hệ thống. Program chỉ khi có
+              <strong>nhiều project riêng biệt</strong> cần phối hợp (vd: project app mobile +
+              project backend API + project data migration = program “digital transformation”).
+            </p>
+          </div>
+
+          <div class="card danger">
+            <h4>Bẫy 2: “Chiến lược / leadership” → tưởng là Portfolio</h4>
+            <p style="margin:0">
+              Leadership đề xuất initiative không có nghĩa là portfolio. Portfolio là <em>tầng
+              quản lý</em> của toàn bộ danh mục đầu tư — không phải tên gọi cho từng dự án mới.
+            </p>
+          </div>
+
+          <div class="card danger">
+            <h4>Bẫy 3: “Platform / hệ thống” → tưởng là Operations</h4>
+            <p style="margin:0">
+              Sau khi platform <em>go-live</em>, việc vận hành nó mới thuộc Operations.
+              <strong>Xây mới</strong> platform với deadline = Project.
+            </p>
+          </div>
+
+          <div class="card tip">
+            <h4>Câu hỏi tự kiểm tra trước khi chọn</h4>
+            <ol style="margin:0">
+              <li>Có <strong>một</strong> deliverable duy nhất hay <strong>nhiều</strong> project?</li>
+              <li>Có thời điểm kết thúc xác định không?</li>
+              <li>Đang nói về <strong>một initiative</strong> hay <strong>tầng quản lý chiến lược</strong>?</li>
+              <li>Đang <strong>xây mới</strong> hay <strong>duy trì</strong> công việc hàng ngày?</li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- Flashcards -->
+        <section id="flashcards">
+          <h2>6. Flashcard — Lật thẻ để ôn</h2>
+          <p class="flash-hint">Nhấn vào thẻ để xem mặt sau</p>
+
+          <div class="flashcard" tabindex="0" role="button" aria-label="Flashcard 1">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Project là gì?</div>
+              <div class="flashcard-back">
+                Tạm thời · có điểm bắt đầu &amp; kết thúc · tạo deliverable duy nhất
+                (sản phẩm, dịch vụ, kết quả) để tạo value.
+              </div>
+            </div>
+          </div>
+
+          <div class="flashcard" tabindex="0" role="button" aria-label="Flashcard 2">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Program khác Project thế nào?</div>
+              <div class="flashcard-back">
+                Program = nhóm các <strong>project liên quan</strong> được quản lý phối hợp
+                để đạt lợi ích tổng hợp mà từng project không đạt được.
+              </div>
+            </div>
+          </div>
+
+          <div class="flashcard" tabindex="0" role="button" aria-label="Flashcard 3">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Portfolio chứa những gì?</div>
+              <div class="flashcard-back">
+                Projects + Programs + Operations — quản lý đồng thời để căn chỉnh
+                với mục tiêu chiến lược tổ chức.
+              </div>
+            </div>
+          </div>
+
+          <div class="flashcard" tabindex="0" role="button" aria-label="Flashcard 4">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">“Multiple teams” trong đề thi có nghĩa gì?</div>
+              <div class="flashcard-back">
+                Chỉ ra độ phức tạp tổ chức / stakeholder — <strong>không</strong> tự động
+                biến initiative thành Program hay Portfolio.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Cheat sheet -->
+        <section id="cheatsheet">
+          <h2>7. Cheat sheet — In ra mang theo</h2>
+          <div class="cheat-sheet">PROJECT vs PROGRAM vs PORTFOLIO vs OPERATIONS
+─────────────────────────────────────────────────────
+PROJECT (Pr)
+  • Temporary — defined start &amp; end
+  • Unique deliverable (product, service, result)
+  • Creates value
+  → Signal: deadline, "new", "build", "deliver", ONE initiative
+
+PROGRAM (Pg)
+  • Group of RELATED projects
+  • Coordinated management for combined benefits
+  → Signal: "multiple projects", "related initiatives"
+
+PORTFOLIO (Pf)
+  • Projects + Programs + Operations together
+  • Strategic alignment, investment decisions
+  → Signal: "strategic portfolio", "across the organization"
+
+OPERATIONS (Op)
+  • Ongoing, repetitive, no defined end
+  • Sustain business-as-usual
+  → Signal: "maintain", "run", "daily", "continuous"
+
+EXAM TRAP: Multiple teams/experts ≠ Program
+           Leadership mention ≠ Portfolio
+           Platform/system build ≠ Operations (until go-live)
+
+REF: The Standard for Project Management, p.12
+     "Portfolios, Programs, Projects"</div>
+        </section>
+
+        <footer class="ref-footer">
+          Nguồn: <em>The Standard for Project Management</em> (PMBOK Guide 8th Edition),
+          trang 12 — mục "Portfolios, Programs, Projects".
+          · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
+          · <a href="pmp-full-questions.html">Luyện 1.123 câu</a>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const CORRECT = "C";
+      const EXPLANATIONS = {
+        A: "Operations là công việc liên tục, không có điểm kết thúc. Xây platform mới với deadline cụ thể là Project.",
+        B: "Program cần nhiều project liên quan. Ở đây chỉ có một initiative: customer platform.",
+        C: "Đúng! Một deliverable duy nhất, có deadline — đây là Project tạm thời.",
+        D: "Portfolio quản lý tập hợp projects/programs/operations theo chiến lược, không phải tên cho một initiative đơn."
+      };
+
+      const quiz = document.getElementById("mainQuiz");
+      const feedback = document.getElementById("quizFeedback");
+      const buttons = quiz.querySelectorAll(".opt-btn");
+      let answered = false;
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (answered) return;
+          answered = true;
+          const choice = btn.dataset.opt;
+          const isCorrect = choice === CORRECT;
+
+          buttons.forEach(function (b) {
+            b.disabled = true;
+            if (b.dataset.opt === CORRECT) b.classList.add("correct");
+            else if (b === btn && !isCorrect) b.classList.add("wrong");
+          });
+
+          feedback.className = "feedback show " + (isCorrect ? "ok" : "bad");
+          feedback.innerHTML = isCorrect
+            ? "<strong>Chính xác!</strong> " + EXPLANATIONS[choice]
+            : "<strong>Chưa đúng.</strong> " + EXPLANATIONS[choice] +
+              "<br><br>Đáp án đúng: <strong>C — Manage it as a project.</strong>";
+        });
+      });
+
+      document.querySelectorAll(".flashcard").forEach(function (card) {
+        function flip() { card.classList.toggle("flipped"); }
+        card.addEventListener("click", flip);
+        card.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); }
+        });
+      });
+
+      const sections = document.querySelectorAll("section[id], header[id]");
+      const navLinks = document.querySelectorAll("#sideNav a");
+      const observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              navLinks.forEach(function (a) {
+                a.classList.toggle("active", a.getAttribute("href") === "#" + entry.target.id);
+              });
+            }
+          });
+        },
+        { rootMargin: "-20% 0px -60% 0px" }
+      );
+      sections.forEach(function (s) { observer.observe(s); });
+    })();
+  </script>
+</body>
+</html>

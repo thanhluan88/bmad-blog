@@ -9,9 +9,9 @@ import {
 export const PMP_HUB_POST_TITLE = "PMP — Luyện tập trắc nghiệm";
 export const PMP_HUB_POST_CONTENT_MD = `Trang này giúp bạn chọn bộ đề PMP phù hợp. Mỗi bộ đề chạy riêng; thống kê **Đã làm / Sai** và chế độ **Ôn câu sai** được lưu theo **tên người dùng** (không dùng chung giữa hai bộ).
 
-## Bài học mindset
+## Bài giảng PMP
 
-Trước khi drill hàng trăm câu, nên đọc **[PMP Mindset — Drill tình huống](/p/pmp-mindset)**: nhận diện pattern (Do First / Risk vs Issue), bẫy PMI vs thực tế, flashcard và 10 câu drill tiếng Anh.
+Trước khi drill hàng trăm câu, nên đọc **[Bài giảng PMP — PMBOK 8](/pmp/pmp-exam-prep-lecture.html)**: format đề thi, 7 Domains, 6 Principles, Practice Questions và lộ trình 12 ngày. Trong bài giảng có link tới **[PMP Mindset — Drill tình huống](/pmp/pmp-mindset-teach.html)** (pattern, flashcard, drill 10 câu EN).
 
 ## Hai bộ đề
 

@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMP Exam Prep — Bài giảng PMBOK 8 (Thi 20/7/2026)</title>
+  <style>
+    :root {
+      --bg: #fafaf8;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --primary-bg: #fffbeb;
+      --ok: #059669;
+      --ok-bg: #ecfdf5;
+      --bad: #dc2626;
+      --bad-bg: #fef2f2;
+      --info: #2563eb;
+      --info-bg: #eff6ff;
+      --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --radius: 14px;
+      --sidebar-w: 270px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+    }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .mobile-nav { display: flex !important; }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem 1rem 2rem;
+    }
+    .sidebar .brand {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+    }
+    .sidebar .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .countdown {
+      background: var(--primary-bg);
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+    }
+    .countdown strong {
+      display: block;
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+      font-variant-numeric: tabular-nums;
+    }
+    .sidebar nav a {
+      display: block;
+      padding: 0.45rem 0.65rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      margin-bottom: 1px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background: var(--primary-bg);
+      color: var(--primary-dark);
+    }
+    .sidebar nav a.active { font-weight: 600; border-left: 3px solid var(--primary); }
+    .sidebar .nav-group {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin: 1rem 0 0.35rem 0.65rem;
+    }
+    .sidebar .quiz-link {
+      display: block;
+      margin-top: 1.25rem;
+      padding: 0.65rem 0.85rem;
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+    .sidebar .quiz-link:hover { background: var(--primary-dark); }
+    .progress-box {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: var(--bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .progress-bar {
+      height: 6px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 0.4rem;
+    }
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 0.85rem;
+      gap: 0.4rem;
+      overflow-x: auto;
+      box-shadow: var(--shadow);
+    }
+    .mobile-nav a {
+      white-space: nowrap;
+      padding: 0.35rem 0.7rem;
+      background: var(--bg);
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      border: 1px solid var(--border);
+    }
+
+    /* Main */
+    main {
+      max-width: 860px;
+      padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%);
+      border: 1px solid #fde68a;
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+    .hero h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.4rem, 3vw, 1.85rem);
+      color: var(--text);
+    }
+    .hero .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 62ch;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--primary-dark);
+      font-weight: 500;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 1rem;
+    }
+    section > h2 {
+      font-size: 1.3rem;
+      margin: 0 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary);
+      color: var(--primary-dark);
+    }
+    section h3 {
+      font-size: 1.05rem;
+      margin: 1.25rem 0 0.65rem;
+      color: var(--text);
+    }
+    section p { margin: 0 0 0.75rem; }
+    section ul, section ol { margin: 0 0 1rem 1.2rem; }
+    section li { margin-bottom: 0.3rem; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+    }
+    .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
+    .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
+    .card h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.88rem;
+      background: var(--card);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 0.55rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--bg);
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.82rem;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    .bar-chart { margin: 1rem 0; }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 110px 1fr 48px;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.45rem;
+      font-size: 0.84rem;
+    }
+    .bar-label { color: var(--muted); font-weight: 500; }
+    .bar-track {
+      height: 22px;
+      background: var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #f59e0b);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding-left: 0.5rem;
+      font-size: 0.72rem;
+      color: #fff;
+      font-weight: 600;
+      min-width: 2rem;
+    }
+    .bar-pct { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+      margin: 1rem 0;
+    }
+    .flow-step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .flow-arrow { color: var(--primary); font-weight: 700; }
+
+    .example {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 0.75rem 0;
+      font-size: 0.9rem;
+    }
+    .example .q {
+      font-style: italic;
+      margin-bottom: 0.65rem;
+      color: var(--text);
+    }
+    .opt { display: block; margin: 0.25rem 0; padding-left: 0.25rem; }
+    .opt.ok { color: var(--ok); font-weight: 600; }
+    .opt.bad { color: var(--bad); text-decoration: line-through; opacity: 0.75; }
+
+    .cheat-sheet {
+      background: #1f2937;
+      color: #f3f4f6;
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      font-family: "Cascadia Code", "Consolas", monospace;
+      font-size: 0.8rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+
+    /* 12-day plan */
+    .plan-day {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 0.65rem;
+      overflow: hidden;
+      background: var(--card);
+    }
+    .plan-day summary {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      user-select: none;
+    }
+    .plan-day summary::-webkit-details-marker { display: none; }
+    .plan-day summary::before {
+      content: "▸";
+      color: var(--primary);
+      transition: transform 0.2s;
+    }
+    .plan-day[open] summary::before { transform: rotate(90deg); }
+    .plan-day .day-body {
+      padding: 0 1rem 0.85rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    .plan-day .day-body p { margin: 0.5rem 0 0; }
+    .plan-day input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .plan-day.done summary { opacity: 0.55; text-decoration: line-through; }
+
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .principle-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    .principle-card .num {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .principle-card h4 {
+      margin: 0.35rem 0 0.35rem;
+      font-size: 0.92rem;
+    }
+    .principle-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .checklist { list-style: none; margin-left: 0; padding: 0; }
+    .checklist li {
+      padding: 0.4rem 0 0.4rem 1.5rem;
+      position: relative;
+    }
+    .checklist li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    a.q-link {
+      color: var(--primary-dark);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1.5px dashed var(--primary);
+      transition: color 0.15s;
+    }
+    a.q-link:hover { color: var(--primary); border-bottom-style: solid; }
+
+    .teach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .teach-card {
+      display: block;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .teach-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+    .teach-card .q-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+    }
+    .teach-card h4 {
+      margin: 0 0 0.35rem;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .teach-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .teach-card.mindset {
+      border-color: #fde68a;
+      background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%);
+    }
+
+    .rest-day summary { background: var(--ok-bg); border-color: var(--ok); }
+    .rest-day summary::before { color: var(--ok) !important; }
+
+    @media print {
+      .sidebar, .mobile-nav { display: none !important; }
+      .layout { display: block; }
+      main { max-width: none; padding: 0; }
+      .plan-day { break-inside: avoid; }
+      .plan-day[open] .day-body { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">PMP Exam Prep</div>
+      <div class="brand-sub">Bài giảng PMBOK 8 · 1.123 câu</div>
+
+      <div class="countdown">
+        Ngày thi: <strong>20/07/2026</strong>
+        Còn lại: <strong id="daysLeft">—</strong> ngày
+      </div>
+
+      <nav id="sideNav">
+        <div class="nav-group">Tổng quan</div>
+        <a href="#intro">Giới thiệu</a>
+        <a href="#practice-teach">Practice Q</a>
+        <a href="#mindset-teach">Mindset</a>
+        <a href="#format">Format đề thi</a>
+        <a href="#principles">6 Principles</a>
+        <a href="#first-next">FIRST / NEXT</a>
+
+        <div class="nav-group">7 Domains</div>
+        <a href="#domain-stakeholders">Stakeholders</a>
+        <a href="#domain-resources">Resources</a>
+        <a href="#domain-scope">Scope</a>
+        <a href="#domain-governance">Governance</a>
+        <a href="#domain-schedule">Schedule</a>
+        <a href="#domain-risk">Risk</a>
+        <a href="#domain-finance">Finance & EVM</a>
+
+        <div class="nav-group">Chuyên đề</div>
+        <a href="pmp-glossary-vi.html">Glossary từ vựng</a>
+        <a href="pmp-mindset-teach.html">PMP Mindset — Drill tình huống</a>
+        <a href="#practice-teach">Practice Questions PMBOK 8</a>
+        <a href="pmp-teach-project-program-portfolio.html">Q1: Project/Program/Portfolio</a>
+        <a href="pmp-teach-tangible-intangible-benefits.html">Q2: Tangible/Intangible</a>
+        <a href="pmp-teach-enterprise-environmental-factors.html">Q3: Enterprise Environmental Factors</a>
+        <a href="#agile">Agile & Hybrid</a>
+        <a href="#traps">Bẫy đáp án</a>
+        <a href="#plan">Lộ trình 12 ngày</a>
+        <a href="#exam-day">Ngày thi</a>
+        <a href="#cheatsheet">Cheat sheet</a>
+      </nav>
+
+      <a class="quiz-link" href="pmp-full-questions.html">→ Luyện 1.123 câu</a>
+      <a class="quiz-link secondary" href="pmp-mindset-teach.html" style="margin-top:0.5rem;background:var(--card);color:var(--primary-dark);border:1px solid var(--border);">→ PMP Mindset Drill</a>
+
+      <div class="progress-box">
+        Tiến độ lộ trình
+        <div class="progress-bar"><span id="planProgress"></span></div>
+        <span id="planProgressText">0 / 12 ngày</span>
+      </div>
+    </aside>
+
+    <div>
+      <nav class="mobile-nav">
+        <a href="#format">Format</a>
+        <a href="#practice-teach">Practice</a>
+        <a href="pmp-mindset-teach.html">Mindset</a>
+        <a href="#principles">Principles</a>
+        <a href="#first-next">FIRST/NEXT</a>
+        <a href="#domain-stakeholders">Stakeholders</a>
+        <a href="#agile">Agile</a>
+        <a href="#traps">Bẫy</a>
+        <a href="#plan">12 ngày</a>
+        <a href="#cheatsheet">Cheat</a>
+        <a href="pmp-full-questions.html">Luyện đề</a>
+      </nav>
+
+      <main>
+        <header class="hero" id="intro">
+          <h1>Bài giảng PMP — Đề mới PMBOK 8</h1>
+          <p class="lead">
+            Tổng hợp từ phân tích <strong>1.123 câu</strong> trong bộ <code>pmp-full-questions</code>,
+            giải thích theo 7 Performance Domains và 6 Principles của PMBOK Guide 8th Edition.
+            Mục tiêu: pass kỳ thi PMP ngày <strong>20/07/2026</strong>.
+          </p>
+          <div class="badges">
+            <span class="badge">180 câu / 240 phút</span>
+            <span class="badge">PMBOK 8</span>
+            <span class="badge">79% Executing</span>
+            <span class="badge">63% Stakeholders</span>
+            <span class="badge">32 multi-select</span>
+          </div>
+        </header>
+
+        <section id="mindset-teach">
+          <h2>PMP Mindset — Drill tình huống</h2>
+          <p>
+            Trước khi luyện hàng trăm câu, nên luyện <strong>PMI mindset</strong>: nhận diện pattern
+            (Do First / Risk vs Issue), bẫy PMI vs thực tế, flashcard và drill 10 câu tiếng Anh.
+          </p>
+          <div class="teach-grid">
+            <a class="teach-card mindset" href="pmp-mindset-teach.html">
+              <div class="q-label">Bài học tương tác</div>
+              <h4>PMP Mindset — Drill tình huống</h4>
+              <p>7 bước trả lời, pattern đề thi, PMI vs thực tế, Agile/Hybrid/Predictive, cheat sheet.</p>
+            </a>
+          </div>
+        </section>
+
+        <section id="practice-teach">
+          <h2>Practice Questions — PMBOK 8th Ed</h2>
+          <p>
+            Bài giải chi tiết từng câu practice: khái niệm, phân tích đáp án, drill và flashcard.
+            Mỗi bài tương tác — chọn đáp án và xem giải thích ngay.
+          </p>
+          <div class="teach-grid">
+            <a class="teach-card" href="pmp-teach-project-program-portfolio.html">
+              <div class="q-label">Question 1</div>
+              <h4>Project vs Program vs Portfolio</h4>
+              <p>Stratus Innovations — customer platform, nhiều team. Phân loại initiative đúng cách.</p>
+            </a>
+            <a class="teach-card" href="pmp-teach-tangible-intangible-benefits.html">
+              <div class="q-label">Question 2</div>
+              <h4>Tangible vs Intangible Benefits</h4>
+              <p>FinTrust Solutions — business case mobile banking. Phân loại revenue và customer satisfaction.</p>
+            </a>
+            <a class="teach-card" href="pmp-teach-enterprise-environmental-factors.html">
+              <div class="q-label">Question 3</div>
+              <h4>Enterprise Environmental Factors</h4>
+              <p>Secure Bank Corp — regulations, culture, IT infrastructure khi lập Project Management Plan.</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- FORMAT -->
+        <section id="format">
+          <h2>1. Hiểu format đề thi mới</h2>
+          <div class="card info">
+            <h4>Thông số thi (theo mock trong bộ luyện)</h4>
+            <table>
+              <tr><th>Thông số</th><th>Giá trị</th></tr>
+              <tr><td>Số câu</td><td><strong>180 câu</strong> (PMI có thể thêm câu thử nghiệm không tính điểm)</td></tr>
+              <tr><td>Thời gian</td><td><strong>240 phút</strong> (~1,3 phút/câu)</td></tr>
+              <tr><td>Dạng câu</td><td>MCQ (1.114), drag-drop (4), dropdown (5)</td></tr>
+              <tr><td>Multi-select</td><td><strong>32 câu</strong> — chọn nhiều đáp án</td></tr>
+              <tr><td>Framework</td><td>PMBOK 8 — 7 Domains + 6 Principles</td></tr>
+            </table>
+          </div>
+
+          <h3>Phân bố Performance Domains</h3>
+          <p>Câu có thể map nhiều domain. Đây là tần suất xuất hiện trong bộ đề:</p>
+          <div class="bar-chart" id="domainChart"></div>
+
+          <div class="card warn">
+            <h4>Insight quan trọng — Focus Area</h4>
+            <p style="margin:0"><strong>79% câu nằm ở Executing.</strong> Đề không hỏi "lên kế hoạch thế nào" mà hỏi <em>"đang chạy dự án, gặp vấn đề X — PM làm gì?"</em></p>
+          </div>
+          <div class="bar-chart" id="focusChart"></div>
+        </section>
+
+        <!-- PRINCIPLES -->
+        <section id="principles">
+          <h2>2. Sáu Principles — Bộ não PMI</h2>
+          <p>Học thuộc và áp dụng vào mọi câu. Tần suất trong 1.123 giải thích:</p>
+          <div class="principle-grid">
+            <div class="principle-card">
+              <div class="num">561</div>
+              <h4>Lead accountably</h4>
+              <p>Thừa nhận lỗi, minh bạch, không đổ lỗi, không che giấu.</p>
+            </div>
+            <div class="principle-card">
+              <div class="num">317</div>
+              <h4>Focus on value</h4>
+              <p>Ưu tiên deliverable tạo giá trị, không gold-plating.</p>
+            </div>
+            <div class="principle-card">
+              <div class="num">215</div>
+              <h4>Build an empowered culture</h4>
+              <p>Facilitate, trao quyền team, servant leadership.</p>
+            </div>
+            <div class="principle-card">
+              <div class="num">126</div>
+              <h4>Embed quality</h4>
+              <p>Quality built-in, không để cuối mới test.</p>
+            </div>
+            <div class="principle-card">
+              <div class="num">86</div>
+              <h4>Adopt a holistic view</h4>
+              <p>Nhìn hệ thống, không fix cục bộ.</p>
+            </div>
+            <div class="principle-card">
+              <div class="num">34</div>
+              <h4>Integrate sustainability</h4>
+              <p>ESG, dài hạn — ít câu nhưng dễ gặp.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- FIRST NEXT -->
+        <section id="first-next">
+          <h2>3. Chiến thuật FIRST / NEXT / BEST</h2>
+          <p>Trong bộ đề: <strong>132 câu FIRST</strong>, <strong>97 câu NEXT</strong>, <strong>27 câu BEST</strong>, <strong>7 câu MOST LIKELY</strong>.</p>
+
+          <div class="flow">
+            <span class="flow-step">Đọc stem</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">FIRST / NEXT / BEST?</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Loại passive / escalate</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Chọn align Principle</span>
+          </div>
+
+          <div class="card info">
+            <h4>Phân biệt 3 loại câu hỏi</h4>
+            <table>
+              <tr><th>Từ khóa</th><th>Ý nghĩa</th><th>Cách chọn</th></tr>
+              <tr><td><strong>FIRST</strong></td><td>Bước ngay lập tức — chưa làm gì</td><td>Hành động tức thì: acknowledge, document, facilitate</td></tr>
+              <tr><td><strong>NEXT</strong></td><td>Bước tiếp theo — đã làm bước trước</td><td>Tra artifact có sẵn: risk register, change log</td></tr>
+              <tr><td><strong>BEST / MOST LIKELY</strong></td><td>Cách tối ưu nhất trong dài hạn</td><td>Chọn đáp án cân bằng, sustainable, align value — không cực đoan</td></tr>
+            </table>
+          </div>
+
+          <h3>FIRST — "Làm gì ĐẦU TIÊN?"</h3>
+          <div class="card tip">
+            <ol>
+              <li><strong>An toàn con người</strong> (nếu có)</li>
+              <li><strong>Thừa nhận lỗi / minh bạch</strong> (nếu PM gây ra vấn đề)</li>
+              <li><strong>Ghi nhận / document</strong> vấn đề</li>
+              <li><strong>Facilitate</strong> — tạo không gian team giải quyết</li>
+              <li><strong>Tra artifact</strong> (risk register, change log)</li>
+              <li><strong>Corrective action</strong> (sau khi đã hiểu vấn đề)</li>
+            </ol>
+          </div>
+
+          <div class="example">
+            <div class="q"><a href="pmp-full-questions.html#q-1" class="q-link" target="_blank">Câu 1</a>: Email feedback gửi nhầm cả team. PM làm gì <strong>first</strong>?</div>
+            <span class="opt bad">A. Ignore — passive</span>
+            <span class="opt ok">B. Acknowledge + apologize ✓ (Lead accountably)</span>
+            <span class="opt bad">C. Yêu cầu xóa email — che giấu</span>
+            <span class="opt bad">D. Chỉ xin lỗi riêng 1 người — không đủ</span>
+          </div>
+
+          <div class="example">
+            <div class="q"><a href="pmp-full-questions.html#q-4" class="q-link" target="_blank">Câu 4</a>: Critical path trễ do vendor. PM làm gì <strong>first</strong>?</div>
+            <span class="opt ok">C. Document + work with team on corrective actions ✓</span>
+            <span class="opt bad">Rebaseline ngay — chưa phân tích</span>
+            <span class="opt bad">Escalate sponsor — quá sớm</span>
+          </div>
+
+          <h3>NEXT — "Bước TIẾP THEO?"</h3>
+          <p>Giả định bạn <strong>đã làm bước trước</strong>. Tìm artifact đã có:</p>
+          <table>
+            <tr><th>Tình huống</th><th>NEXT đúng</th></tr>
+            <tr><td>Risk đã materialize</td><td>Tra risk register → implement planned response</td></tr>
+            <tr><td>Đã nghe 2 bên conflict</td><td>Facilitate joint problem-solving session</td></tr>
+            <tr><td>Change request submitted</td><td>Perform Integrated Change Control</td></tr>
+            <tr><td>Sprint có impediment</td><td>Remove impediment / escalate nếu PM không giải quyết được</td></tr>
+          </table>
+
+          <div class="example">
+            <div class="q"><a href="pmp-full-questions.html#q-7" class="q-link" target="_blank">Câu 7</a>: 2 engineer conflict, PM đã nghe riêng từng bên. <strong>Next?</strong></div>
+            <span class="opt ok">B. Facilitate joint problem-solving session ✓</span>
+            <span class="opt bad">Escalate manager — chưa thử facilitate</span>
+            <span class="opt bad">Chọn 1 phương án cho team — không empowered</span>
+          </div>
+
+          <h3>BEST / MOST LIKELY — "Cách TỐT NHẤT?"</h3>
+          <p>Không hỏi bước đầu hay tiếp theo — hỏi <strong>phương án tối ưu nhất</strong> trong bối cảnh dài hạn. Thường có nhiều đáp án "đúng một phần", cần chọn cái <em>cân bằng và bền vững</em> nhất.</p>
+
+          <div class="card tip">
+            <h4>Quy tắc chọn BEST</h4>
+            <ol>
+              <li><strong>Focus on value</strong> — ưu tiên deliverable tạo giá trị, không gold-plating</li>
+              <li><strong>Sustainable</strong> — không overtime vô hạn, không đốt team</li>
+              <li><strong>Proactive + collaborative</strong> — involve team/stakeholder, không dictate</li>
+              <li><strong>Dùng artifact đúng</strong> — stakeholder matrix, engagement plan, risk register</li>
+              <li><strong>Loại cực đoan</strong> — không delay vô thời hạn, không push harder khi team đã kiệt sức</li>
+            </ol>
+          </div>
+
+          <table>
+            <tr><th>Tình huống BEST</th><th>Đáp án tốt nhất</th><th>Ví dụ</th></tr>
+            <tr><td>Constraint từ stakeholder (security, compliance)</td><td>Treat as requirement — loại option vi phạm</td><td><a href="pmp-full-questions.html#q-36" class="q-link" target="_blank">Câu 36</a></td></tr>
+            <tr><td>Team overwork, quality giảm</td><td>Re-assess workload, re-prioritize / de-scope</td><td><a href="pmp-full-questions.html#q-56" class="q-link" target="_blank">Câu 56</a></td></tr>
+            <tr><td>Team thiếu skill cho approach mới</td><td>Targeted training — không delay hay assume tự học</td><td><a href="pmp-full-questions.html#q-100" class="q-link" target="_blank">Câu 100</a></td></tr>
+            <tr><td>Đánh giá stakeholder engagement</td><td>Review stakeholder engagement matrix vs metrics</td><td><a href="pmp-full-questions.html#q-155" class="q-link" target="_blank">Câu 155</a></td></tr>
+            <tr><td>Lessons learned không được chú ý</td><td>Involve team capture (text/audio/video)</td><td><a href="pmp-full-questions.html#q-203" class="q-link" target="_blank">Câu 203</a></td></tr>
+            <tr><td>MOST LIKELY — root cause stakeholder không engage agile</td><td>Stakeholder unclear về role trong adaptive model</td><td><a href="pmp-full-questions.html#q-251" class="q-link" target="_blank">Câu 251</a></td></tr>
+          </table>
+
+          <div class="example">
+            <div class="q"><a href="pmp-full-questions.html#q-56" class="q-link" target="_blank">Câu 56</a>: Team làm overtime nhiều tuần, quality defects tăng. Management muốn push harder. PM làm gì <strong>best</strong>?</div>
+            <span class="opt bad">A. Approve thêm overtime — đốt team ✗</span>
+            <span class="opt ok">B. Re-assess workload, re-prioritize / de-scope noncritical ✓</span>
+            <span class="opt bad">C. Rotate tasks — không giải quyết overload ✗</span>
+            <span class="opt bad">D. Delegate hết cho top performers — burnout ✗</span>
+          </div>
+
+          <div class="example">
+            <div class="q"><a href="pmp-full-questions.html#q-36" class="q-link" target="_blank">Câu 36</a>: Security officer nói không thể go-live không có patch. PM incorporate constraint <strong>best</strong> thế nào?</div>
+            <span class="opt bad">A. Document concern nhưng proceed theo partner ✗</span>
+            <span class="opt bad">B. Yêu cầu security officer accept risk ✗</span>
+            <span class="opt bad">C. Delay decision đến khi patch release ✗</span>
+            <span class="opt ok">D. Treat as requirement — exclude option go-live without patch ✓</span>
+          </div>
+
+          <div class="card warn">
+            <strong>BEST ≠ FIRST.</strong> Câu BEST thường có 2–3 đáp án "có vẻ đúng" — chọn cái <em>cân bằng lâu dài</em>, không phải hành động nhanh nhất hay artifact đầu tiên tìm thấy.
+          </div>
+        </section>
+
+        <!-- DOMAINS -->
+        <section id="domains">
+          <h2>4. Bảy Performance Domains</h2>
+
+          <article id="domain-stakeholders">
+            <h3>4.1 Stakeholders — 704 câu (ôn kỹ nhất)</h3>
+            <p><strong>Processes:</strong> Manage Stakeholder Engagement (458), Identify Stakeholders (339), Plan Stakeholder Engagement (308)</p>
+            <table>
+              <tr><th>Tình huống</th><th>PM làm gì</th><th>Ví dụ</th></tr>
+              <tr><td>Stakeholder mới xuất hiện</td><td>Update stakeholder register + plan engagement</td><td><a href="pmp-full-questions.html#q-228" class="q-link" target="_blank">Câu 228</a></td></tr>
+              <tr><td>Sponsor thay đổi kỳ vọng</td><td>Tạo product backlog, share để align expectations</td><td><a href="pmp-full-questions.html#q-82" class="q-link" target="_blank">Câu 82</a></td></tr>
+              <tr><td>Stakeholder resistant (không hợp tác)</td><td>Understand concerns → adjust engagement strategy</td><td><a href="pmp-full-questions.html#q-2" class="q-link" target="_blank">Câu 2</a></td></tr>
+              <tr><td>Communication breakdown / multicultural</td><td>Facilitate meeting để đồng thuận về communication norms</td><td><a href="pmp-full-questions.html#q-47" class="q-link" target="_blank">Câu 47</a></td></tr>
+              <tr><td>Stakeholder báo report không phù hợp</td><td>Update communications management plan, tailor format</td><td><a href="pmp-full-questions.html#q-34" class="q-link" target="_blank">Câu 34</a></td></tr>
+              <tr><td>Team không hiểu vision</td><td>Review team charter, clarify alignment</td><td><a href="pmp-full-questions.html#q-104" class="q-link" target="_blank">Câu 104</a></td></tr>
+            </table>
+            <div class="card tip"><strong>Mindset:</strong> Stakeholder = partner. PM facilitate, không dictate.</div>
+          </article>
+
+          <article id="domain-resources">
+            <h3>4.2 Resources — 357 câu</h3>
+            <p><strong>Processes:</strong> Develop Team (217), Manage Team (94), Acquire Resources (47)</p>
+            <table>
+              <tr><th>Tình huống</th><th>PM làm gì</th><th>Ví dụ</th></tr>
+              <tr><td>SME mới, resistant với agile</td><td>Servant leadership — giải thích continuous improvement, empower</td><td><a href="pmp-full-questions.html#q-2" class="q-link" target="_blank">Câu 2</a></td></tr>
+              <tr><td>Team mixed-experience (senior + junior)</td><td>Adapt leadership — autonomy cho senior, guidance cho junior</td><td><a href="pmp-full-questions.html#q-15" class="q-link" target="_blank">Câu 15</a></td></tr>
+              <tr><td>Distributed / virtual team</td><td>Recurring check-ins + scheduled meetings theo múi giờ</td><td><a href="pmp-full-questions.html#q-3" class="q-link" target="_blank">Câu 3</a></td></tr>
+              <tr><td>Key member bị rút giữa dự án</td><td>Acknowledge concern → analyze impact on scope/schedule</td><td><a href="pmp-full-questions.html#q-112" class="q-link" target="_blank">Câu 112</a></td></tr>
+              <tr><td>PM mới, senior engineers challenge</td><td>Facilitate workshop clarify roles &amp; authority</td><td><a href="pmp-full-questions.html#q-5" class="q-link" target="_blank">Câu 5</a></td></tr>
+            </table>
+          </article>
+
+          <article id="domain-scope">
+            <h3>4.3 Scope — 315 câu</h3>
+            <table>
+              <tr><th>Tình huống</th><th>PM làm gì</th><th>Ví dụ</th></tr>
+              <tr><td>Stakeholder yêu cầu thêm feature</td><td>Yêu cầu submit change request, đi qua ICC</td><td><a href="pmp-full-questions.html#q-10" class="q-link" target="_blank">Câu 10</a></td></tr>
+              <tr><td>Deliverable bị reject / không đúng kỳ vọng</td><td>Engage stakeholder, review acceptance criteria</td><td><a href="pmp-full-questions.html#q-165" class="q-link" target="_blank">Câu 165</a></td></tr>
+              <tr><td>Scope creep tích lũy</td><td>Consolidate → obtain formal agreement → update baseline</td><td><a href="pmp-full-questions.html#q-394" class="q-link" target="_blank">Câu 394</a></td></tr>
+              <tr><td>Customer yêu cầu minor changes liên tục</td><td>Assess communication styles + establish engagement boundary</td><td><a href="pmp-full-questions.html#q-283" class="q-link" target="_blank">Câu 283</a></td></tr>
+              <tr><td>Sponsor muốn thêm item vào sprint đang chạy</td><td>Confirm DoD, maintain sprint scope — không thêm mid-sprint</td><td><a href="pmp-full-questions.html#q-106" class="q-link" target="_blank">Câu 106</a></td></tr>
+            </table>
+          </article>
+
+          <article id="domain-governance">
+            <h3>4.4 Governance — 277 câu</h3>
+            <table>
+              <tr><th>Tình huống</th><th>PM làm gì</th><th>Ví dụ</th></tr>
+              <tr><td>Quyết định informal, không document</td><td>Establish lightweight decision log</td><td><a href="pmp-full-questions.html#q-38" class="q-link" target="_blank">Câu 38</a></td></tr>
+              <tr><td>Scope changes không qua change control</td><td>Ensure future changes go through formal change control</td><td><a href="pmp-full-questions.html#q-978" class="q-link" target="_blank">Câu 978</a></td></tr>
+              <tr><td>Hybrid: agile + predictive conflict</td><td>Implement hybrid governance framework</td><td><a href="pmp-full-questions.html#q-22" class="q-link" target="_blank">Câu 22</a></td></tr>
+            </table>
+            <div class="card tip"><strong>Mindset:</strong> Governance ≠ bureaucracy. Là lightweight practices đảm bảo traceability.</div>
+          </article>
+
+          <article id="domain-schedule">
+            <h3>4.5 Schedule — 178 câu</h3>
+            <table>
+              <tr><th>Tình huống</th><th>PM làm gì</th><th>Ví dụ</th></tr>
+              <tr><td>Critical path delay</td><td>Document → analyze → corrective (không rebaseline ngay)</td><td><a href="pmp-full-questions.html#q-4" class="q-link" target="_blank">Câu 4</a></td></tr>
+              <tr><td>Key resource bị rút / matrix org</td><td>Meet với functional manager, negotiate resource</td><td><a href="pmp-full-questions.html#q-350" class="q-link" target="_blank">Câu 350</a></td></tr>
+              <tr><td>Burndown ahead (actual dưới ideal)</td><td>Continue sprint, monitor — chưa cắt/thêm scope</td><td><a href="pmp-full-questions.html#q-16" class="q-link" target="_blank">Câu 16</a></td></tr>
+              <tr><td>Burndown behind (troubled project)</td><td>Enable collaboration, shared goals, investigate root cause</td><td><a href="pmp-full-questions.html#q-287" class="q-link" target="_blank">Câu 287</a></td></tr>
+            </table>
+            <div class="card info">
+              <h4>Đọc chart Agile</h4>
+              <ul style="margin:0">
+                <li><strong>Burndown AHEAD:</strong> actual dưới ideal → monitor, không panic</li>
+                <li><strong>Burndown BEHIND:</strong> actual trên ideal → investigate</li>
+                <li><strong>Burnup scope tăng:</strong> scope creep giữa sprint</li>
+                <li><strong>CFD bottleneck:</strong> In Progress rộng, Done không tăng → WIP limit</li>
+              </ul>
+            </div>
+          </article>
+
+          <article id="domain-risk">
+            <h3>4.6 Risk — 124 câu</h3>
+            <table>
+              <tr><th>Tình huống</th><th>PM làm gì</th><th>Ví dụ</th></tr>
+              <tr><td>Risk mới nổi (emerging risk)</td><td>Reassess exposure, adjust response strategies</td><td><a href="pmp-full-questions.html#q-842" class="q-link" target="_blank">Câu 842</a></td></tr>
+              <tr><td>Risk materialized (đã có planned response)</td><td>Review risk register → implement planned response</td><td><a href="pmp-full-questions.html#q-590" class="q-link" target="_blank">Câu 590</a></td></tr>
+              <tr><td>Yếu tố mới ngoài dự kiến</td><td>Conduct risk analysis + submit formal change request</td><td><a href="pmp-full-questions.html#q-497" class="q-link" target="_blank">Câu 497</a></td></tr>
+            </table>
+            <div class="card warn"><strong>Quy tắc:</strong> Risk đã có planned response → dùng nó, không invent giải pháp mới.</div>
+          </article>
+
+          <article id="domain-finance">
+            <h3>4.7 Finance & EVM — 118 câu</h3>
+            <table>
+              <tr><th>Chỉ số</th><th>Công thức</th><th>Ý nghĩa</th></tr>
+              <tr><td>CPI</td><td>EV / AC</td><td>&gt;1 under budget, &lt;1 over budget</td></tr>
+              <tr><td>SPI</td><td>EV / PV</td><td>&gt;1 ahead, &lt;1 behind</td></tr>
+              <tr><td>CV</td><td>EV − AC</td><td>Dương = tiết kiệm</td></tr>
+              <tr><td>SV</td><td>EV − PV</td><td>Dương = ahead schedule</td></tr>
+              <tr><td>EAC</td><td>BAC / CPI</td><td>Estimate at completion</td></tr>
+              <tr><td>ETC</td><td>EAC − AC</td><td>Cost to complete</td></tr>
+            </table>
+            <div class="example">
+              <div class="q"><a href="pmp-full-questions.html#q-389" class="q-link" target="_blank">Câu 389</a>: EV = $350K, AC = $280K → CPI?</div>
+              <span class="opt ok">CPI = 350/280 = 1.25 → under budget ✓</span>
+            </div>
+          </article>
+        </section>
+
+        <!-- AGILE -->
+        <section id="agile">
+          <h2>5. Agile & Hybrid</h2>
+          <p>Bộ đề có <strong>194 câu agile</strong> và <strong>179 câu hybrid</strong>.</p>
+
+          <h3>Scrum — PM behavior</h3>
+          <table>
+            <tr><th>Role / tình huống</th><th>PM làm gì</th><th>Ví dụ</th></tr>
+            <tr><td>Product Owner quản lý backlog</td><td>PM support PO, dùng backlog share với sponsor để align</td><td><a href="pmp-full-questions.html#q-82" class="q-link" target="_blank">Câu 82</a></td></tr>
+            <tr><td>Scrum Master / burndown behind</td><td>Support SM, allow self-organize, dùng retrospective</td><td><a href="pmp-full-questions.html#q-113" class="q-link" target="_blank">Câu 113</a></td></tr>
+            <tr><td>Dev Team — agile transition</td><td>Remove impediments, facilitate, empower team</td><td><a href="pmp-full-questions.html#q-6" class="q-link" target="_blank">Câu 6</a></td></tr>
+          </table>
+
+          <h3>Sprint scenarios</h3>
+          <table>
+            <tr><th>Tình huống</th><th>Đáp án đúng</th><th>Ví dụ</th></tr>
+            <tr><td>Daily standup — member không tuân thủ</td><td>Nhắc nhở theo working agreement</td><td><a href="pmp-full-questions.html#q-277" class="q-link" target="_blank">Câu 277</a></td></tr>
+            <tr><td>Impediment — quá nhiều meeting</td><td>Raise as impediment trong daily coordination</td><td><a href="pmp-full-questions.html#q-263" class="q-link" target="_blank">Câu 263</a></td></tr>
+            <tr><td>Velocity giảm / team overwork</td><td>Scrum Master chịu trách nhiệm bảo vệ sustainable pace</td><td><a href="pmp-full-questions.html#q-152" class="q-link" target="_blank">Câu 152</a></td></tr>
+            <tr><td>Sponsor muốn thêm scope mid-sprint</td><td>Confirm DoD, maintain sprint scope — không thêm</td><td><a href="pmp-full-questions.html#q-106" class="q-link" target="_blank">Câu 106</a></td></tr>
+          </table>
+
+          <div class="example">
+            <div class="q"><a href="pmp-full-questions.html#q-22" class="q-link" target="_blank">Câu 22</a> (Hybrid): Agile dev muốn tự điều chỉnh sprint scope, documentation team cần stable baseline.</div>
+            <span class="opt ok">A. Implement hybrid governance framework ✓</span>
+            <span class="opt bad">Chọn 1 bên / bỏ qua conflict</span>
+          </div>
+        </section>
+
+        <!-- TRAPS -->
+        <section id="traps">
+          <h2>6. Bẫy đáp án — Loại ngay</h2>
+          <p>292 câu có từ khóa <strong>NOT</strong>. Dưới đây là pattern lặp lại nhiều nhất:</p>
+
+          <div class="card danger">
+            <h4>❌ Đáp án SAI — loại ngay</h4>
+            <table>
+              <tr><th>Pattern bẫy</th><th>Câu ví dụ — option sai bị bẫy</th><th>Tại sao sai</th></tr>
+              <tr>
+                <td><strong>Ignore / do nothing</strong></td>
+                <td><a href="pmp-full-questions.html#q-33" class="q-link" target="_blank">Câu 33</a> — stakeholder bypass PM<br><em>❌ A: "Instruct team to ignore any direction not through PM"</em></td>
+                <td>Passive — không giải quyết root cause, team vẫn bị conflicting instructions</td>
+              </tr>
+              <tr>
+                <td><strong>Escalate sớm</strong></td>
+                <td><a href="pmp-full-questions.html#q-10" class="q-link" target="_blank">Câu 10</a> — marketing director yêu cầu thêm feature<br><em>❌ D: "Escalate directly to executive team"</em></td>
+                <td>PM phải giải quyết qua change control trước, không leo thang khi chưa thử</td>
+              </tr>
+              <tr>
+                <td><strong>Bypass ICC / change control</strong></td>
+                <td><a href="pmp-full-questions.html#q-394" class="q-link" target="_blank">Câu 394</a> — nhiều scope change nhỏ tích lũy<br><em>❌ C: "Create informal list, continue under original baseline"</em></td>
+                <td>Không formal → mất traceability, baseline sai → audit fail</td>
+              </tr>
+              <tr>
+                <td><strong>Micromanage</strong></td>
+                <td><a href="pmp-full-questions.html#q-6" class="q-link" target="_blank">Câu 6</a> — PM hỗ trợ team agile<br><em>❌ A: "Closely monitors each team member's daily tasks"</em></td>
+                <td>Phá vỡ empowered culture, team mất tự chủ và ownership</td>
+              </tr>
+              <tr>
+                <td><strong>Rebaseline ngay</strong></td>
+                <td><a href="pmp-full-questions.html#q-4" class="q-link" target="_blank">Câu 4</a> — critical path trễ do vendor<br><em>❌ B: "Rebaseline the project schedule and inform sponsor"</em></td>
+                <td>Rebaseline mà chưa phân tích, chưa qua ICC — sai quy trình governance</td>
+              </tr>
+              <tr>
+                <td><strong>Lessons learned / quá khứ thay vì hành động</strong></td>
+                <td><a href="pmp-full-questions.html#q-1112" class="q-link" target="_blank">Câu 1112</a> — risk identification thiếu sót<br><em>❌ C: "Review lessons learned from similar projects"</em></td>
+                <td>Lessons learned không thay thế được expert validation cho hệ thống phức tạp mới</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="card tip">
+            <h4>✅ Đáp án ĐÚNG — ưu tiên</h4>
+            <table>
+              <tr><th>Pattern đúng</th><th>Câu ví dụ — option đúng</th><th>Khi nào áp dụng</th></tr>
+              <tr>
+                <td><strong>Facilitate</strong></td>
+                <td><a href="pmp-full-questions.html#q-65" class="q-link" target="_blank">Câu 65</a> — nhiều BU conflict priorities<br><em>✅ A: "Facilitate collaborative workshops to identify common goals"</em></td>
+                <td>Conflict, disagreement giữa stakeholders</td>
+              </tr>
+              <tr>
+                <td><strong>Consult risk register</strong></td>
+                <td><a href="pmp-full-questions.html#q-590" class="q-link" target="_blank">Câu 590</a> — internal resistance đã trigger<br><em>✅ A: "Review risk register and implement planned risk response"</em></td>
+                <td>Risk đã materialize — không invent giải pháp mới</td>
+              </tr>
+              <tr>
+                <td><strong>Update stakeholder register</strong></td>
+                <td><a href="pmp-full-questions.html#q-228" class="q-link" target="_blank">Câu 228</a> — stakeholder mới giữa execution<br><em>✅ C: "Update stakeholder register and conduct tailored onboarding"</em></td>
+                <td>Stakeholder mới / thay thế xuất hiện</td>
+              </tr>
+              <tr>
+                <td><strong>Document + analyze</strong></td>
+                <td><a href="pmp-full-questions.html#q-972" class="q-link" target="_blank">Câu 972</a> — thành viên dùng bằng giả<br><em>✅ B: "Document the issue and review misconduct policies"</em></td>
+                <td>Vấn đề mới phát hiện — ghi nhận trước, hành động theo quy trình</td>
+              </tr>
+              <tr>
+                <td><strong>Acknowledge + analyze impact</strong></td>
+                <td><a href="pmp-full-questions.html#q-112" class="q-link" target="_blank">Câu 112</a> — expert bị rút khỏi dự án<br><em>✅ D: "Acknowledge team's concern and analyze impact on scope/schedule"</em></td>
+                <td>Team lo lắng về thay đổi — thừa nhận trước, phân tích sau</td>
+              </tr>
+              <tr>
+                <td><strong>Remove impediment</strong></td>
+                <td><a href="pmp-full-questions.html#q-263" class="q-link" target="_blank">Câu 263</a> — quá nhiều meeting làm giảm velocity<br><em>✅ C: "Raise concern as impediment in daily coordination"</em></td>
+                <td>Agile blockers — raise qua đúng ceremony, không tự cắt giảm</td>
+              </tr>
+            </table>
+          </div>
+        </section>
+
+        <!-- 10-DAY PLAN + REST -->
+        <section id="plan">
+          <h2>7. Lộ trình 9/7 → 19/7 (10 ngày học + 1 ngày nghỉ)</h2>
+          <p>Đánh dấu hoàn thành mỗi ngày — tiến độ lưu trên trình duyệt. Ngày 19/7 <strong>nghỉ hoàn toàn</strong>, không học gì.</p>
+
+          <details class="plan-day" data-day="1">
+            <summary><input type="checkbox" aria-label="Hoàn thành ngày 1"> <span>9/7 (T5) — Foundations: 6 Principles + FIRST/NEXT</span></summary>
+            <div class="day-body">
+              <p>Đọc Phần 2 và 3 bài giảng. Làm <strong>50 câu đầu</strong> trong bộ luyện, đọc kỹ phần PMBOK 8 mapping trong mỗi giải thích.</p>
+              <p>Mục tiêu: nhận diện được Lead accountably và Focus on value trong câu trả lời.</p>
+            </div>
+          </details>
+          <details class="plan-day" data-day="2">
+            <summary><input type="checkbox" aria-label="Hoàn thành ngày 2"> <span>10/7 (T6) — Stakeholders (domain nặng nhất)</span></summary>
+            <div class="day-body">
+              <p>Câu 1–200. Chú ý pattern: Manage Stakeholder Engagement, Identify Stakeholders.</p>
+              <p>Ghi lại 5 tình huống stakeholder hay gặp + đáp án đúng vào sổ tay.</p>
+            </div>
+          </details>
+          <details class="plan-day" data-day="3">
+            <summary><input type="checkbox" aria-label="Hoàn thành ngày 3"> <span>11/7 (T7) — Resources + Conflict + Team dynamics</span></summary>
+            <div class="day-body">
+              <p>Câu 200–400. Tập nhận diện servant leadership vs micromanage.</p>
+              <p>Câu conflict: FIRST = facilitate, KHÔNG escalate sớm.</p>
+            </div>
+          </details>
+          <details class="plan-day" data-day="4">
+            <summary><input type="checkbox" aria-label="Hoàn thành ngày 4"> <span>12/7 (CN) — Scope + Change Control (ICC)</span></summary>
+            <div class="day-body">
+              <p>Câu 400–550. Nhấn mạnh: mọi thay đổi baseline đều qua <strong>ICC</strong>, không rebaseline ngay.</p>
+              <p>Ôn lại <a href="pmp-full-questions.html#q-4" class="q-link" target="_blank">Câu 4</a> và <a href="pmp-full-questions.html#q-22" class="q-link" target="_blank">Câu 22</a>.</p>
+            </div>
+          </details>
+          <details class="plan-day" data-day="5">
+            <summary><input type="checkbox" aria-label="Hoàn thành ngày 5"> <span>13/7 (T2) — Governance + Hybrid</span></summary>
+            <div class="day-body">
+              <p>Câu 550–700. Governance = lightweight traceability, không phải bureaucracy.</p>
+              <p>Hybrid: hiểu khi nào dùng agile, khi nào cần stable baseline.</p>
+            </div>
+          </details>
+          <details class="plan-day" data-day="6">
+            <summary><input type="checkbox" aria-label="Hoàn thành ngày 6"> <span>14/7 (T3) — Schedule + đọc chart Agile</span></summary>
+            <div class="day-body">
+              <p>Câu 700–850. Luyện burndown, burnup, CFD — xem phần 4.5 bài giảng.</p>
+              <p>Critical path delay: document → analyze → corrective, <em>không rebaseline ngay</em>.</p>
+            </div>
+          </details>
+          <details class="plan-day" data-day="7">
+            <summary><input type="checkbox" aria-label="Hoàn thành ngày 7"> <span>15/7 (T4) — Risk + Finance + EVM</span></summary>
+            <div class="day-body">
+              <p>Câu 850–1000. Thuộc công thức: CPI = EV/AC, SPI = EV/PV, EAC = BAC/CPI.</p>
+              <p>Risk trigger → tra risk register → implement planned response (không invent mới).</p>
+            </div>
+          </details>
+          <details class="plan-day" data-day="8">
+            <summary><input type="checkbox" aria-label="Hoàn thành ngày 8"> <span>16/7 (T5) — Agile & Scrum chuyên sâu</span></summary>
+            <div class="day-body">
+              <p>Câu 1000–1123. Filter câu có từ "agile", "sprint", "scrum", "backlog".</p>
+              <p>Ôn: Sprint review vs Retrospective, servant leadership, impediment removal.</p>
+            </div>
+          </details>
+          <details class="plan-day" data-day="9">
+            <summary><input type="checkbox" aria-label="Hoàn thành ngày 9"> <span>17/7 (T6) — Câu sai + multi-select</span></summary>
+            <div class="day-body">
+              <p>Dùng filter <strong>"Chỉ câu sai"</strong> trên bộ luyện. Ôn kỹ 32 câu multi-select.</p>
+              <p>Không học nội dung mới — chỉ ôn điểm yếu.</p>
+            </div>
+          </details>
+          <details class="plan-day" data-day="10">
+            <summary><input type="checkbox" aria-label="Hoàn thành ngày 10"> <span>18/7 (T7) — Mock exam 1 + 2 (thi thử)</span></summary>
+            <div class="day-body">
+              <p>Buổi sáng: <strong>Mock exam 1</strong> — 180 câu / 240 phút (nút "Thi thử 180 câu").</p>
+              <p>Buổi chiều: review câu sai, ghi weak domains. Nếu còn sức: Mock exam 2.</p>
+              <p>Tối: ôn lại cheat sheet, ngủ sớm.</p>
+            </div>
+          </details>
+
+          <details class="plan-day rest-day" data-day="rest">
+            <summary><span>19/7 (CN) — 🌿 NGHỈ NGƠI — Không học gì</span></summary>
+            <div class="day-body">
+              <p>Không mở bộ đề, không đọc PMBOK.</p>
+              <p>Hoạt động nhẹ: đi bộ, xem phim, ngủ sớm (22h). Não cần thời gian consolidate kiến thức.</p>
+              <p>Nếu bồn chồn: chỉ được đọc lại <a href="#cheatsheet">cheat sheet 1 trang</a> — không hơn.</p>
+            </div>
+          </details>
+
+          <div class="card info" style="margin-top:1rem">
+            <strong>20/7 (T2) — NGÀY THI</strong> — Xem <a href="#exam-day">Phần 8</a> bên dưới.
+          </div>
+        </section>
+
+        <!-- EXAM DAY -->
+        <section id="exam-day">
+          <h2>8. Ngày thi (20/7)</h2>
+          <div class="card warn">
+            <h4>Trước khi vào phòng thi</h4>
+            <ul>
+              <li>Ngủ đủ 7–8 tiếng</li>
+              <li>Không học nội dung mới</li>
+              <li>Ôn nhanh: 6 Principles + FIRST/NEXT + EVM</li>
+              <li>Đến sớm 30 phút</li>
+            </ul>
+          </div>
+          <div class="card tip">
+            <h4>Trong phòng thi</h4>
+            <ol>
+              <li><strong>Flag & skip</strong> — câu dài/chart: flag, làm câu ngắn trước</li>
+              <li><strong>Đọc stem cuối</strong> — tìm FIRST / NEXT / NOT / BEST</li>
+              <li><strong>Loại 2 đáp án sai</strong> trước (passive, escalate sớm, bypass)</li>
+              <li><strong>~1,3 phút/câu</strong> — còn buffer review 30 phút cuối</li>
+              <li><strong>Không đổi đáp án</strong> trừ khi chắc chắn</li>
+            </ol>
+          </div>
+          <h3>Checklist tâm lý</h3>
+          <ul class="checklist">
+            <li>PM là leader, không victim</li>
+            <li>Collaborate trước khi escalate</li>
+            <li>Document trước khi rebaseline</li>
+            <li>Risk register khi risk trigger</li>
+            <li>Change control khi scope/schedule/budget thay đổi</li>
+            <li>Facilitate khi conflict</li>
+            <li>Acknowledge khi PM sai</li>
+          </ul>
+        </section>
+
+        <!-- CHEAT SHEET -->
+        <section id="cheatsheet">
+          <h2>9. Cheat sheet — In mang theo</h2>
+          <div class="cheat-sheet">PMBOK 8 PMP CHEAT SHEET
+═══════════════════════
+6 PRINCIPLES
+  Lead accountably | Focus on value | Build empowered culture
+  Embed quality | Holistic view | Sustainability
+
+FIRST → Hành động NGAY (acknowledge > document > facilitate)
+NEXT  → Tra artifact (risk register, change log, stakeholder register)
+NOT   → Loại passive, escalate sớm, bypass process, micromanage
+
+DOMAIN WEIGHT (tần suất bộ đề)
+  Stakeholders >>> Resources > Scope > Governance > Schedule > Risk > Finance
+  Focus Area: 79% EXECUTING
+
+AGILE
+  Servant leader | Remove impediment | PO owns backlog
+  No mid-sprint scope add without discussion
+
+HYBRID
+  Governance framework cho cả agile + predictive
+
+EVM
+  CPI = EV/AC  (>1 under budget)
+  SPI = EV/PV  (>1 ahead)
+  EAC = BAC/CPI (typical)
+
+EXAM: 180 câu / 240 phút | Flag & skip | Review 30 phút cuối</div>
+          <p style="margin-top:1rem">
+            <a href="pmp-full-questions.html" style="color:var(--primary);font-weight:600">→ Mở bộ luyện 1.123 câu</a>
+            &nbsp;·&nbsp;
+            <a href="pmp-exam-latest.html" style="color:var(--primary);font-weight:600">→ Đề latest</a>
+          </p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const EXAM_DATE = new Date("2026-07-20T00:00:00");
+      const STORAGE_KEY = "pmp-lecture-plan-v1";
+
+      // Countdown
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const diff = Math.ceil((EXAM_DATE - today) / 86400000);
+      document.getElementById("daysLeft").textContent = diff > 0 ? diff : 0;
+
+      // Bar charts
+      const domains = [
+        ["Stakeholders", 704, 63],
+        ["Resources", 357, 32],
+        ["Scope", 315, 28],
+        ["Governance", 277, 25],
+        ["Schedule", 178, 16],
+        ["Risk", 124, 11],
+        ["Finance", 118, 11],
+      ];
+      const maxD = domains[0][1];
+      document.getElementById("domainChart").innerHTML = domains.map(([name, count, pct]) => `
+        <div class="bar-row">
+          <span class="bar-label">${name}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${(count / maxD) * 100}%">${count}</div></div>
+          <span class="bar-pct">${pct}%</span>
+        </div>`).join("");
+
+      const focus = [
+        ["Executing", 885, 79],
+        ["Initiating", 116, 10],
+        ["Monitoring & Controlling", 90, 8],
+        ["Closing", 21, 2],
+        ["Planning", 11, 1],
+      ];
+      const maxF = focus[0][1];
+      document.getElementById("focusChart").innerHTML = focus.map(([name, count, pct]) => `
+        <div class="bar-row">
+          <span class="bar-label">${name}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${(count / maxF) * 100}%">${count}</div></div>
+          <span class="bar-pct">${pct}%</span>
+        </div>`).join("");
+
+      // plan progress — only count study days (not rest day)
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      const days = document.querySelectorAll(".plan-day:not(.rest-day)");
+      function updateProgress() {
+        const done = [...days].filter((d) => d.querySelector("input") && d.querySelector("input").checked).length;
+        document.getElementById("planProgress").style.width = (done / days.length * 100) + "%";
+        document.getElementById("planProgressText").textContent = done + " / " + days.length + " ngày học";
+      }
+      days.forEach((el) => {
+        const day = el.dataset.day;
+        const cb = el.querySelector("input");
+        cb.checked = !!saved[day];
+        el.classList.toggle("done", cb.checked);
+        cb.addEventListener("change", () => {
+          saved[day] = cb.checked;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+          el.classList.toggle("done", cb.checked);
+          updateProgress();
+        });
+        cb.addEventListener("click", (e) => e.stopPropagation());
+      });
+      updateProgress();
+
+      // Scroll spy
+      const links = document.querySelectorAll("#sideNav a");
+      const sections = [...links].map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const id = "#" + e.target.id;
+          links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === id));
+        });
+      }, { rootMargin: "-20% 0px -60% 0px", threshold: 0 });
+      sections.forEach((s) => obs.observe(s));
+    })();
+  </script>
+</body>
+</html>

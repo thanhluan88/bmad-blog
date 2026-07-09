@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMBOK 8 — Tangible vs Intangible Benefits</title>
+  <style>
+    :root {
+      --bg: #fafaf8;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --primary-bg: #fffbeb;
+      --ok: #059669;
+      --ok-bg: #ecfdf5;
+      --bad: #dc2626;
+      --bad-bg: #fef2f2;
+      --info: #2563eb;
+      --info-bg: #eff6ff;
+      --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --radius: 14px;
+      --sidebar-w: 260px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+    }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .mobile-nav { display: flex !important; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem 1rem 2rem;
+    }
+    .sidebar .brand {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+    }
+    .sidebar .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar nav a {
+      display: block;
+      padding: 0.45rem 0.65rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      margin-bottom: 1px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background: var(--primary-bg);
+      color: var(--primary-dark);
+    }
+    .sidebar nav a.active { font-weight: 600; border-left: 3px solid var(--primary); }
+    .sidebar .nav-series {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin: 1rem 0 0.35rem 0.65rem;
+    }
+    .sidebar .back-link {
+      display: block;
+      margin-top: 1.25rem;
+      padding: 0.65rem 0.85rem;
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+    .sidebar .back-link:hover { background: var(--primary-dark); }
+    .sidebar .back-link.secondary {
+      background: var(--card);
+      color: var(--primary-dark);
+      border: 1px solid var(--border);
+      margin-top: 0.5rem;
+    }
+    .sidebar .back-link.secondary:hover { background: var(--primary-bg); }
+
+    .mobile-nav {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 0.85rem;
+      gap: 0.4rem;
+      overflow-x: auto;
+      box-shadow: var(--shadow);
+    }
+    .mobile-nav a {
+      white-space: nowrap;
+      padding: 0.35rem 0.7rem;
+      background: var(--bg);
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      border: 1px solid var(--border);
+    }
+
+    main {
+      max-width: 860px;
+      padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%);
+      border: 1px solid #fde68a;
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+    .hero h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+    }
+    .hero .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 62ch;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--primary-dark);
+      font-weight: 500;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 1rem;
+    }
+    section > h2 {
+      font-size: 1.3rem;
+      margin: 0 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary);
+      color: var(--primary-dark);
+    }
+    section h3 {
+      font-size: 1.05rem;
+      margin: 1.25rem 0 0.65rem;
+    }
+    section p { margin: 0 0 0.75rem; }
+    section ul, section ol { margin: 0 0 1rem 1.2rem; }
+    section li { margin-bottom: 0.35rem; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+    }
+    .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
+    .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
+    .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.88rem;
+      background: var(--card);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 0.55rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--bg);
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.82rem;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .concept-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem;
+    }
+    .concept-card.tangible { border-top: 4px solid #2563eb; }
+    .concept-card.intangible { border-top: 4px solid #7c3aed; }
+    .concept-card h4 { margin: 0 0 0.5rem; font-size: 1rem; }
+    .concept-card.tangible h4 { color: #1d4ed8; }
+    .concept-card.intangible h4 { color: #5b21b6; }
+    .concept-card p { margin: 0 0 0.65rem; font-size: 0.88rem; color: var(--muted); }
+    .concept-card ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.85rem;
+    }
+    .concept-card li { margin-bottom: 0.25rem; }
+
+    .benefit-map {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+    @media (max-width: 600px) { .benefit-map { grid-template-columns: 1fr; } }
+    .benefit-col {
+      border-radius: var(--radius);
+      padding: 1rem;
+      border: 1px solid var(--border);
+    }
+    .benefit-col.tangible { background: var(--info-bg); border-color: #bfdbfe; }
+    .benefit-col.intangible { background: #f5f3ff; border-color: #ddd6fe; }
+    .benefit-col h4 {
+      margin: 0 0 0.65rem;
+      font-size: 0.9rem;
+    }
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.6rem;
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+    }
+    .benefit-item .tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .benefit-item .tag.t { background: #dbeafe; color: #1d4ed8; }
+    .benefit-item .tag.i { background: #ede9fe; color: #5b21b6; }
+
+    .quiz-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .quiz-card .q-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .quiz-card .q-text {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      line-height: 1.65;
+    }
+    .quiz-card .q-text em {
+      font-style: normal;
+      background: #fef9c3;
+      padding: 0.1rem 0.25rem;
+      border-radius: 4px;
+    }
+    .opt-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 0.7rem 1rem;
+      margin-bottom: 0.45rem;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-bg);
+    }
+    .opt-btn.correct {
+      border-color: var(--ok);
+      background: var(--ok-bg);
+      color: #065f46;
+      font-weight: 600;
+    }
+    .opt-btn.wrong {
+      border-color: var(--bad);
+      background: var(--bad-bg);
+      color: #991b1b;
+      opacity: 0.85;
+    }
+    .opt-btn:disabled { cursor: default; }
+    .feedback {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+    }
+    .feedback.show { display: block; }
+    .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
+    .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+
+    .classify-drill {
+      display: grid;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .classify-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      align-items: center;
+      padding: 0.65rem 0.85rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.88rem;
+    }
+    .classify-btns {
+      display: flex;
+      gap: 0.35rem;
+    }
+    .classify-btns button {
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-family: inherit;
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .classify-btns button:hover:not(:disabled) { border-color: var(--primary); }
+    .classify-btns button.pick-t.correct,
+    .classify-btns button.pick-i.correct {
+      background: var(--ok-bg);
+      border-color: var(--ok);
+      color: #065f46;
+    }
+    .classify-btns button.wrong-pick {
+      background: var(--bad-bg);
+      border-color: var(--bad);
+      color: #991b1b;
+    }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .flashcard {
+      perspective: 1000px;
+      height: 170px;
+      cursor: pointer;
+      margin-bottom: 0.75rem;
+    }
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s;
+      transform-style: preserve-3d;
+    }
+    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+    .flashcard-front,
+    .flashcard-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .flashcard-front {
+      background: var(--card);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .flashcard-back {
+      background: var(--primary-bg);
+      border-color: #fde68a;
+      transform: rotateY(180deg);
+      font-size: 0.88rem;
+    }
+    .flash-hint {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .cheat-sheet {
+      background: #1f2937;
+      color: #f3f4f6;
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      font-family: "Cascadia Code", "Consolas", monospace;
+      font-size: 0.8rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    .ref-footer {
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">PMBOK 8 Teach</div>
+      <div class="brand-sub">Tangible vs Intangible Benefits</div>
+      <nav id="sideNav">
+        <a href="#intro" class="active">Giới thiệu</a>
+        <a href="#concepts">Tangible &amp; Intangible</a>
+        <a href="#business-case">Business Case</a>
+        <a href="#question">Câu hỏi thực hành</a>
+        <a href="#analysis">Phân tích đáp án</a>
+        <a href="#drill">Drill phân loại</a>
+        <a href="#traps">Bẫy thi</a>
+        <a href="#flashcards">Flashcard</a>
+        <a href="#cheatsheet">Cheat sheet</a>
+        <div class="nav-series">Practice Series</div>
+        <a href="pmp-teach-project-program-portfolio.html">Q1: Project/Program</a>
+        <a href="pmp-teach-enterprise-environmental-factors.html">Q3: EEF →</a>
+      </nav>
+      <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
+      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+    </aside>
+
+    <div>
+      <nav class="mobile-nav">
+        <a href="#concepts">Khái niệm</a>
+        <a href="#question">Câu hỏi</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#flashcards">Flashcard</a>
+      </nav>
+
+      <main>
+        <header class="hero" id="intro">
+          <h1>Practice Questions — PMBOK 8th Ed</h1>
+          <p class="lead">
+            Bài học Q2 về <strong>Business Value</strong> — phân loại lợi ích
+            <strong>Tangible</strong> (hữu hình) và <strong>Intangible</strong> (vô hình)
+            trong Business Case.
+          </p>
+          <div class="badges">
+            <span class="badge">The Standard for PM, p.14</span>
+            <span class="badge">Business Value</span>
+            <span class="badge">Business Case</span>
+            <span class="badge">Câu 2 — Practice</span>
+          </div>
+        </header>
+
+        <section id="concepts">
+          <h2>1. Tangible vs Intangible — Tiêu chí phân loại</h2>
+          <p>
+            Trong PMBOK 8, lợi ích (benefits) được phân loại dựa trên khả năng
+            <strong>đo lường bằng tiền</strong> — không phải dựa trên “có thấy được hay không”.
+          </p>
+
+          <div class="concept-grid">
+            <div class="concept-card tangible">
+              <h4>Tangible Benefits (Hữu hình)</h4>
+              <p>Đo lường được bằng <strong>thuật ngữ tài chính</strong> (financial terms).</p>
+              <ul>
+                <li>Profitability (lợi nhuận)</li>
+                <li>Stockholder equity (vốn chủ sở hữu)</li>
+                <li>Market share (thị phần)</li>
+                <li>Revenue / cost savings (doanh thu / tiết kiệm chi phí)</li>
+              </ul>
+            </div>
+            <div class="concept-card intangible">
+              <h4>Intangible Benefits (Vô hình)</h4>
+              <p><strong>Khó đo lường</strong> bằng tiền — thường là giá trị định tính.</p>
+              <ul>
+                <li>Brand recognition (nhận diện thương hiệu)</li>
+                <li>Customer satisfaction (hài lòng khách hàng)</li>
+                <li>Employee well-being (phúc lợi nhân viên)</li>
+                <li>Reputation (uy tín)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card tip">
+            <h4>Câu hỏi then chốt khi làm bài</h4>
+            <p style="margin:0">
+              “Có thể gán con số tiền trực tiếp, đáng tin cậy không?”
+              → <strong>Có</strong> = Tangible · <strong>Khó/không chắc</strong> = Intangible.
+              Revenue tăng = đo bằng tiền. Customer satisfaction = khảo sát, chỉ số định tính.
+            </p>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Lợi ích</th>
+                <th>Phân loại</th>
+                <th>Lý do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Increased transaction revenue</td>
+                <td><strong>Tangible</strong></td>
+                <td>Doanh thu — đo trực tiếp bằng tiền</td>
+              </tr>
+              <tr>
+                <td>Customer satisfaction</td>
+                <td><strong>Intangible</strong></td>
+                <td>Khó quy đổi chính xác sang financial terms</td>
+              </tr>
+              <tr>
+                <td>Brand reputation</td>
+                <td><strong>Intangible</strong></td>
+                <td>Uy tín thương hiệu — định tính</td>
+              </tr>
+              <tr>
+                <td>Cost reduction 15%</td>
+                <td><strong>Tangible</strong></td>
+                <td>Tiết kiệm chi phí — đo bằng tiền</td>
+              </tr>
+              <tr>
+                <td>Employee morale</td>
+                <td><strong>Intangible</strong></td>
+                <td>Tinh thần nhân viên — khó định lượng tài chính</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="business-case">
+          <h2>2. Business Case — Bối cảnh trong dự án</h2>
+          <p>
+            <strong>Business Case</strong> là tài liệu kinh doanh biện minh cho việc đầu tư vào dự án.
+            PM thường tham gia chuẩn bị (như Daniel trong câu hỏi) để liệt kê
+            <em>expected outcomes</em> — kết quả kỳ vọng.
+          </p>
+
+          <div class="benefit-map">
+            <div class="benefit-col tangible">
+              <h4 style="color:#1d4ed8">Tangible trong Business Case</h4>
+              <div class="benefit-item">
+                <span class="tag t">$</span> ROI, NPV, payback period
+              </div>
+              <div class="benefit-item">
+                <span class="tag t">$</span> Revenue increase
+              </div>
+              <div class="benefit-item">
+                <span class="tag t">$</span> Cost avoidance / savings
+              </div>
+            </div>
+            <div class="benefit-col intangible">
+              <h4 style="color:#5b21b6">Intangible trong Business Case</h4>
+              <div class="benefit-item">
+                <span class="tag i">~</span> Customer satisfaction
+              </div>
+              <div class="benefit-item">
+                <span class="tag i">~</span> Brand reputation
+              </div>
+              <div class="benefit-item">
+                <span class="tag i">~</span> Strategic positioning
+              </div>
+            </div>
+          </div>
+
+          <div class="card info">
+            <h4>Lưu ý: Intangible vẫn có giá trị</h4>
+            <p style="margin:0">
+              “Intangible” không có nghĩa là “không quan trọng”. PMI chỉ phân loại theo
+              <em>khả năng đo lường tài chính</em>. Business case tốt liệt kê cả hai loại
+              để sponsor ra quyết định toàn diện.
+            </p>
+          </div>
+        </section>
+
+        <section id="question">
+          <h2>3. Câu hỏi thực hành — Question 2</h2>
+
+          <div class="quiz-card" id="mainQuiz">
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q2</div>
+            <div class="q-text">
+              Daniel is the project manager at FinTrust Solutions, preparing the business case
+              for a new mobile banking platform. As part of the document, he identifies
+              <em>expected outcomes</em>, including <em>increased transaction revenue</em> and
+              <em>improved customer satisfaction and brand reputation</em>.
+              <em>How should Daniel categorize these benefits in the business case?</em>
+            </div>
+
+            <button class="opt-btn" data-opt="A" type="button">A. Both are tangible benefits.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Both are intangible benefits.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Revenue increase is intangible, while customer satisfaction is tangible.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Revenue increase is tangible, while customer satisfaction is intangible.</button>
+
+            <div class="feedback" id="quizFeedback"></div>
+          </div>
+
+          <div class="card info">
+            <h4>Dịch tình huống</h4>
+            <p style="margin:0">
+              Daniel (PM tại FinTrust Solutions) đang soạn <strong>business case</strong> cho
+              nền tảng mobile banking mới. Anh liệt kê kết quả kỳ vọng:
+              <strong>tăng doanh thu giao dịch</strong>,
+              <strong>cải thiện hài lòng khách hàng</strong> và
+              <strong>uy tín thương hiệu</strong>.
+              Câu hỏi: phân loại các lợi ích này thế nào?
+            </p>
+          </div>
+        </section>
+
+        <section id="analysis">
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+
+          <div class="card tip">
+            <h4>Giải thích chính thức (PMBOK)</h4>
+            <p>
+              Tangible benefits are benefits that can be measured in financial terms, such as
+              profitability, stockholder equity, and market share. Intangible benefits are
+              benefits that are difficult to measure in financial terms, such as brand
+              recognition, customer satisfaction, and employee well-being.
+            </p>
+            <p style="margin:0">
+              <em>— The Standard for Project Management, p.14, "Examples of Business Value"</em>
+            </p>
+          </div>
+
+          <h3>Áp dụng vào câu hỏi</h3>
+          <table>
+            <thead>
+              <tr><th>Outcome trong đề</th><th>Phân loại</th><th>Giải thích</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Increased transaction <strong>revenue</strong></td>
+                <td><strong>Tangible</strong></td>
+                <td>Doanh thu — đo trực tiếp bằng tiền</td>
+              </tr>
+              <tr>
+                <td><strong>Customer satisfaction</strong></td>
+                <td><strong>Intangible</strong></td>
+                <td>PMBOK liệt kê trực tiếp làm ví dụ intangible</td>
+              </tr>
+              <tr>
+                <td><strong>Brand reputation</strong></td>
+                <td><strong>Intangible</strong></td>
+                <td>Tương tự brand recognition trong PMBOK</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            Đáp án D nói “revenue = tangible, customer satisfaction = intangible” — khớp với
+            phân loại trên. (Brand reputation cũng intangible, cùng nhóm với customer satisfaction.)
+          </p>
+
+          <h3>Loại trừ từng đáp án</h3>
+          <table>
+            <thead>
+              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Both tangible</strong></td>
+                <td>Customer satisfaction và brand reputation không đo được trực tiếp bằng tiền.</td>
+              </tr>
+              <tr>
+                <td><strong>B. Both intangible</strong></td>
+                <td>Revenue increase là lợi ích tài chính rõ ràng — tangible.</td>
+              </tr>
+              <tr>
+                <td><strong>C. Revenue intangible, satisfaction tangible</strong></td>
+                <td>Đảo ngược hoàn toàn — bẫy phổ biến khi đọc vội.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="drill">
+          <h2>5. Drill — Phân loại nhanh</h2>
+          <p>Chọn <strong>T</strong> (Tangible) hoặc <strong>I</strong> (Intangible) cho mỗi lợi ích.</p>
+
+          <div class="classify-drill" id="classifyDrill">
+            <div class="classify-row" data-answer="T">
+              <span>Market share growth 5%</span>
+              <div class="classify-btns">
+                <button type="button" class="pick-t">T</button>
+                <button type="button" class="pick-i">I</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="I">
+              <span>Improved brand recognition</span>
+              <div class="classify-btns">
+                <button type="button" class="pick-t">T</button>
+                <button type="button" class="pick-i">I</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="T">
+              <span>$2M annual cost savings</span>
+              <div class="classify-btns">
+                <button type="button" class="pick-t">T</button>
+                <button type="button" class="pick-i">I</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="I">
+              <span>Employee well-being</span>
+              <div class="classify-btns">
+                <button type="button" class="pick-t">T</button>
+                <button type="button" class="pick-i">I</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="T">
+              <span>Increased profitability</span>
+              <div class="classify-btns">
+                <button type="button" class="pick-t">T</button>
+                <button type="button" class="pick-i">I</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="I">
+              <span>Customer satisfaction scores</span>
+              <div class="classify-btns">
+                <button type="button" class="pick-t">T</button>
+                <button type="button" class="pick-i">I</button>
+              </div>
+            </div>
+          </div>
+          <p class="drill-score" id="drillScore">0 / 6 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi thường gặp</h2>
+
+          <div class="card danger">
+            <h4>Bẫy 1: Nhầm “hữu hình” = “nhìn thấy được”</h4>
+            <p style="margin:0">
+              Tangible trong PMP = <strong>đo bằng tiền</strong>, không phải “có vật lý”.
+              Customer satisfaction có thể “đo” bằng survey score nhưng vẫn là
+              <em>intangible</em> vì khó quy đổi sang financial terms đáng tin.
+            </p>
+          </div>
+
+          <div class="card danger">
+            <h4>Bẫy 2: Đảo ngược revenue và satisfaction (đáp án C)</h4>
+            <p style="margin:0">
+              Đề thi hay đặt đáp án gần đúng nhưng hoán đổi vị trí. Revenue = luôn tangible.
+              Đọc kỹ từng mục, không chọn theo cảm giác.
+            </p>
+          </div>
+
+          <div class="card danger">
+            <h4>Bẫy 3: “Cả hai đều cùng loại” khi thực tế khác loại</h4>
+            <p style="margin:0">
+              Business case thực tế thường có <strong>cả hai</strong> loại lợi ích.
+              Câu hỏi hỏi cách <em>categorize</em> — phải phân biệt từng outcome, không gom chung.
+            </p>
+          </div>
+
+          <div class="card warn">
+            <h4>Mẹo nhớ PMBOK p.14</h4>
+            <p style="margin:0">
+              <strong>Tangible:</strong> profitability, stockholder equity, market share, revenue.<br>
+              <strong>Intangible:</strong> brand recognition, customer satisfaction, employee well-being.
+            </p>
+          </div>
+        </section>
+
+        <section id="flashcards">
+          <h2>7. Flashcard</h2>
+          <p class="flash-hint">Nhấn vào thẻ để lật</p>
+
+          <div class="flashcard" tabindex="0" role="button">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Tangible benefit là gì?</div>
+              <div class="flashcard-back">
+                Lợi ích đo lường được bằng thuật ngữ tài chính: profitability,
+                stockholder equity, market share, revenue, cost savings.
+              </div>
+            </div>
+          </div>
+
+          <div class="flashcard" tabindex="0" role="button">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Intangible benefit là gì?</div>
+              <div class="flashcard-back">
+                Lợi ích khó đo bằng tiền: brand recognition, customer satisfaction,
+                employee well-being, reputation.
+              </div>
+            </div>
+          </div>
+
+          <div class="flashcard" tabindex="0" role="button">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Revenue increase thuộc loại nào?</div>
+              <div class="flashcard-back">
+                <strong>Tangible</strong> — doanh thu đo trực tiếp bằng financial terms.
+              </div>
+            </div>
+          </div>
+
+          <div class="flashcard" tabindex="0" role="button">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Business Case dùng để làm gì?</div>
+              <div class="flashcard-back">
+                Biện minh đầu tư dự án — liệt kê expected outcomes, costs, benefits
+                (cả tangible lẫn intangible) để sponsor quyết định.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="cheatsheet">
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">TANGIBLE vs INTANGIBLE BENEFITS (PMBOK 8, p.14)
+─────────────────────────────────────────────────────
+TANGIBLE = measurable in FINANCIAL terms
+  ✓ Profitability
+  ✓ Stockholder equity
+  ✓ Market share
+  ✓ Revenue increase
+  ✓ Cost savings / reduction
+
+INTANGIBLE = difficult to measure in financial terms
+  ✓ Brand recognition / reputation
+  ✓ Customer satisfaction
+  ✓ Employee well-being
+
+BUSINESS CASE
+  • Document justifying project investment
+  • Lists expected outcomes (benefits) + costs
+  • PM may help prepare it
+
+Q2 ANSWER: D
+  Revenue → Tangible
+  Customer satisfaction (+ brand reputation) → Intangible
+
+EXAM TRAP: Don't confuse "visible" with "tangible"
+           Revenue is NEVER intangible
+           Option C reverses the categories — common trap
+
+REF: The Standard for Project Management, p.14
+     "Examples of Business Value"</div>
+        </section>
+
+        <footer class="ref-footer">
+          Nguồn: <em>The Standard for Project Management</em> (PMBOK Guide 8th Edition),
+          trang 14 — mục "Examples of Business Value".
+          · <a href="pmp-teach-project-program-portfolio.html">Q1: Project/Program/Portfolio</a>
+          · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const CORRECT = "D";
+      const EXPLANATIONS = {
+        A: "Customer satisfaction và brand reputation là intangible — không phải cả hai đều tangible.",
+        B: "Revenue increase đo được bằng tiền — đó là tangible, không phải intangible.",
+        C: "Đảo ngược! Revenue = tangible, customer satisfaction = intangible.",
+        D: "Đúng! Revenue đo bằng financial terms (tangible). Customer satisfaction khó đo bằng tiền (intangible)."
+      };
+
+      const quiz = document.getElementById("mainQuiz");
+      const feedback = document.getElementById("quizFeedback");
+      const buttons = quiz.querySelectorAll(".opt-btn");
+      let answered = false;
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (answered) return;
+          answered = true;
+          const choice = btn.dataset.opt;
+          const isCorrect = choice === CORRECT;
+
+          buttons.forEach(function (b) {
+            b.disabled = true;
+            if (b.dataset.opt === CORRECT) b.classList.add("correct");
+            else if (b === btn && !isCorrect) b.classList.add("wrong");
+          });
+
+          feedback.className = "feedback show " + (isCorrect ? "ok" : "bad");
+          feedback.innerHTML = isCorrect
+            ? "<strong>Chính xác!</strong> " + EXPLANATIONS[choice]
+            : "<strong>Chưa đúng.</strong> " + EXPLANATIONS[choice] +
+              "<br><br>Đáp án đúng: <strong>D — Revenue tangible, customer satisfaction intangible.</strong>";
+        });
+      });
+
+      let drillCorrect = 0;
+      let drillDone = 0;
+      const drillTotal = document.querySelectorAll("#classifyDrill .classify-row").length;
+      const scoreEl = document.getElementById("drillScore");
+
+      document.querySelectorAll("#classifyDrill .classify-row").forEach(function (row) {
+        const answer = row.dataset.answer;
+        const btns = row.querySelectorAll(".classify-btns button");
+        let rowDone = false;
+
+        btns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (rowDone) return;
+            rowDone = true;
+            const pick = btn.classList.contains("pick-t") ? "T" : "I";
+            const ok = pick === answer;
+
+            btns.forEach(function (b) { b.disabled = true; });
+            if (ok) {
+              btn.classList.add("correct");
+              drillCorrect++;
+            } else {
+              btn.classList.add("wrong-pick");
+              btns.forEach(function (b) {
+                if ((answer === "T" && b.classList.contains("pick-t")) ||
+                    (answer === "I" && b.classList.contains("pick-i"))) {
+                  b.classList.add("correct");
+                }
+              });
+            }
+            drillDone++;
+            scoreEl.textContent = drillCorrect + " / " + drillTotal + " đúng";
+          });
+        });
+      });
+
+      document.querySelectorAll(".flashcard").forEach(function (card) {
+        function flip() { card.classList.toggle("flipped"); }
+        card.addEventListener("click", flip);
+        card.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); }
+        });
+      });
+
+      const sections = document.querySelectorAll("section[id], header[id]");
+      const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
+      const observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              navLinks.forEach(function (a) {
+                a.classList.toggle("active", a.getAttribute("href") === "#" + entry.target.id);
+              });
+            }
+          });
+        },
+        { rootMargin: "-20% 0px -60% 0px" }
+      );
+      sections.forEach(function (s) { observer.observe(s); });
+    })();
+  </script>
+</body>
+</html>
