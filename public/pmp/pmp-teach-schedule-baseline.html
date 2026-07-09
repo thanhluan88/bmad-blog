@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Focus on Value (Q10)</title>
+  <title>PMBOK 8 — Schedule Baseline (Q57)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,10 +51,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .value-timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
-    @media (max-width: 600px) { .value-timeline { grid-template-columns: 1fr; } }
-    .value-phase { padding: 0.85rem; border-radius: var(--radius); border: 1.5px solid var(--ok); background: var(--ok-bg); text-align: center; font-size: 0.85rem; font-weight: 600; color: #065f46; }
-    .value-phase span { display: block; font-size: 0.72rem; font-weight: 500; color: var(--muted); margin-top: 0.25rem; }
+    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.82rem; }
+    .flow-box { padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+    .flow-box.highlight { background: var(--primary-bg); border-color: #fde68a; font-weight: 600; }
+    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -70,7 +70,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 280px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -92,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Focus on Value · Q10</div>
+      <div class="brand-sub">Schedule Baseline · Q57</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#value">Focus on Value</a>
-        <a href="#timeline">Khi nào có value?</a>
+        <a href="#develop">Develop Schedule</a>
+        <a href="#baseline">Schedule Baseline</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -159,16 +159,16 @@
         <a href="pmp-teach-verified-deliverables.html">Q54: Verified Deliverables</a>
         <a href="pmp-teach-schedule-management-plan.html">Q55: Schedule Mgmt Plan</a>
         <a href="pmp-teach-development-approach-schedule.html">Q56: Dev Approach Input</a>
-        <a href="pmp-teach-schedule-baseline.html">Q57: Schedule Baseline</a>
+        <a href="pmp-teach-schedule-baseline.html" class="series-current">Q57: Schedule Baseline</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-57">Luyện câu 57</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#value">Value</a>
-        <a href="#timeline">Timeline</a>
+        <a href="#develop">Develop</a>
+        <a href="#baseline">Baseline</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -177,192 +177,207 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q10 về nguyên tắc <strong>Focus on Value</strong> — giá trị dự án có thể
-            được thực hiện <em>trong suốt</em>, <em>cuối</em> hoặc <em>sau khi</em> dự án kết thúc.
+            Bài học Q57 về <strong>Schedule Baseline</strong> — Noah, core banking upgrade tại
+            Granite Peak Financial: sau nhiều iterations phân tích sequence, durations, resources,
+            stakeholders <em>approve</em> final schedule. Next step?
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.41</span>
-            <span class="badge">Focus on Value</span>
-            <span class="badge">Câu 10 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.49 &amp; 138</span>
+            <span class="badge">Develop Schedule</span>
+            <span class="badge">Schedule Baseline</span>
+            <span class="badge">Câu 57 — Practice</span>
           </div>
         </header>
 
-        <section id="value">
-          <h2>1. Focus on Value (PMBOK 8)</h2>
+        <section id="develop">
+          <h2>1. Develop Schedule (p.49)</h2>
           <p>
-            Một trong các nguyên tắc quản lý dự án: dự án phải tập trung vào <strong>value</strong>
-            (giá trị) — không chỉ deliverables hay hoàn thành đúng hạn. Khi sponsor hỏi
-            “khi nào dự án bắt đầu mang lại value?”, đừng trả lời quá hẹp.
+            Process phân tích sequences, durations, resource requirements, và constraints để
+            <strong>create a schedule model</strong> cho execution, monitoring, và controlling.
+            Develop Schedule là <strong>iterative</strong> — nhiều vòng phân tích trước khi
+            stakeholders approve version cuối.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.41)</h4>
+            <h4>Output sau approval</h4>
             <p style="margin:0">
-              Value can be realized <strong>throughout the project</strong>,
-              <strong>at the end of the project</strong>, or
-              <strong>following project completion</strong>.
-              Benefits may be delivered incrementally, and value realization is not limited
-              to a single point in time.
+              Khi schedule được approved → <strong>baseline the schedule</strong>. Schedule
+              baseline là approved version dùng để so sánh performance; chỉ thay đổi qua
+              formal change control.
             </p>
           </div>
-
-          <h3>Liên hệ business case</h3>
-          <ul>
-            <li>Cloud platform (CSI scenario): MVP, phase rollout có thể tạo value sớm</li>
-            <li>Một số benefits chỉ đo được sau go-live hoặc vận hành ổn định</li>
-            <li>Business case nên phản ánh <strong>cả ba khung thời gian</strong>, không chỉ “sau khi close project”</li>
-          </ul>
         </section>
 
-        <section id="timeline">
-          <h2>2. Ba thời điểm thực hiện value</h2>
-          <p>PMBOK 8 mô tả value realization là <strong>đa dạng về thời gian</strong> — đáp án D bao trùm cả ba:</p>
+        <section id="baseline">
+          <h2>2. Schedule baseline (p.138)</h2>
 
-          <div class="value-timeline">
-            <div class="value-phase">Throughout<span>Trong suốt dự án — incremental delivery, early wins</span></div>
-            <div class="value-phase">At the end<span>Cuối dự án — go-live, handover</span></div>
-            <div class="value-phase">Following completion<span>Sau khi kết thúc — sustained benefits, ROI dài hạn</span></div>
+          <div class="flow-diagram">
+            <div class="flow-box">Develop Schedule (iterative)</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">Stakeholders approve</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box highlight">Baseline the schedule (B)</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">Execute &amp; monitor</div>
           </div>
 
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Vấn đề</th></tr>
+              <tr><th>Step</th><th>When</th><th>Q57</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A — Chỉ sau khi hoàn thành</strong></td>
-                <td>Quá hẹp — bỏ qua value trong execution và sau completion</td>
+                <td>Iterate sequence / durations / resources</td>
+                <td>During Develop Schedule</td>
+                <td>Already done in stem</td>
               </tr>
               <tr>
-                <td><strong>B — Chỉ trong execution</strong></td>
-                <td>Quá hẹp — bỏ qua value cuối dự án và post-project</td>
+                <td>Stakeholders approve final schedule</td>
+                <td>End of Develop Schedule</td>
+                <td>Trigger for next step</td>
               </tr>
               <tr>
-                <td><strong>C — Khi benefits được đo chính thức</strong></td>
-                <td>Measurement ≠ thời điểm duy nhất value xuất hiện</td>
+                <td><strong>Baseline the schedule (B)</strong></td>
+                <td>Immediately after approval</td>
+                <td><strong>NEXT</strong></td>
               </tr>
               <tr>
-                <td><strong>D — Cả ba khung thời gian</strong></td>
-                <td>Khớp PMBOK p.41 — đáp án đúng</td>
+                <td>Proceed with delivery (A)</td>
+                <td>After baseline set</td>
+                <td>Too early — baseline first</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>Liên hệ Q55</h4>
+            <p style="margin:0">
+              Q55 đề cập schedule baseline để measure performance — Q57 cho thấy
+              <em>when</em>: ngay sau stakeholders approve final schedule.
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 10</h2>
+          <h2>3. Câu hỏi thực hành — Question 57</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q10</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q57</div>
             <div class="q-text">
-              You are working with a project sponsor in the early stages of a cloud platform
-              implementation at CSI. As you work with the project sponsor to put together the
-              business case, they ask <em>when the project will begin delivering value</em>.
-              What will you tell them?
+              Noah is managing a core banking system upgrade at Granite Peak Financial. After
+              multiple iterations analyzing the sequence, durations, and resources, stakeholders
+              <em>approve</em> the final schedule. What will Noah do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. The project value will be realized after the project is fully completed.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. The project benefits can be realized during project execution phases.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Project value will be realized once benefits are formally measured.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Value can be realized throughout the project, at the end of the project, or following project completion.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Proceed with project delivery.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Baseline the schedule.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Review the impact of schedule sequence on project resources.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Add the schedule to the project status report.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn D?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Khớp nguyên văn PMBOK p.41 — Focus on Value.</li>
-            <li>Sponsor hỏi “khi nào <em>bắt đầu</em>” — value có thể bắt đầu sớm (throughout), không chỉ một mốc.</li>
-            <li>Đáp án D là <strong>toàn diện nhất</strong>; A, B, C đều chỉ nêu một phần.</li>
+            <li>Develop Schedule complete → stakeholders approved → baseline is the output step.</li>
+            <li>Schedule baseline = approved version for comparison (p.138).</li>
+            <li>Changes only through formal change control — baseline locks approved plan.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải đáp án tốt nhất</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không NEXT</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. After fully completed</strong></td>
-                <td>Sai với incremental/agile delivery — value có thể xuất hiện trước khi “fully completed” (✗ trong slide).</td>
+                <td><strong>A. Proceed with delivery</strong></td>
+                <td>Execution follows baseline — phải baseline approved schedule trước.</td>
               </tr>
               <tr>
-                <td><strong>B. During execution phases</strong></td>
-                <td>Đúng một phần nhưng thiếu “at the end” và “following completion” — không đủ theo PMBOK.</td>
+                <td><strong>C. Review resource impact</strong></td>
+                <td>Part of iterative Develop Schedule — đã done qua multiple iterations.</td>
               </tr>
               <tr>
-                <td><strong>C. Once formally measured</strong></td>
-                <td>Đo lường là công cụ theo dõi — không phải định nghĩa khi value được realize (✗ trong slide).</td>
+                <td><strong>D. Status report</strong></td>
+                <td>Reporting activity — không phải next step sau schedule approval.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords Focus on Value (p.41)</h4>
+            <h4>Approve → Baseline pattern</h4>
             <p style="margin:0">
-              throughout the project · at the end · following project completion ·
-              incremental benefits · business case · sponsor conversation
+              Instructor underline <em>approve</em> — signal rõ: approval xong →
+              <strong>baseline</strong> (B), không nhảy thẳng delivery (A) hay report (D).
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Đúng hay quá hẹp?</h2>
+          <h2>5. Drill — Sau approve schedule, làm gì?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="FULL">
-              <span>Value throughout, at end, and after completion</span>
+            <div class="classify-row" data-answer="BASE">
+              <span>Stakeholders approved final schedule version</span>
               <div class="classify-btns">
-                <button data-pick="FULL">PMBOK đúng</button>
-                <button data-pick="NARROW">Quá hẹp</button>
+                <button data-pick="BASE">Baseline</button>
+                <button data-pick="DELIVER">Deliver</button>
+                <button data-pick="ITER">Iterate</button>
+                <button data-pick="REPORT">Report</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="NARROW">
-              <span>Value only after project is 100% done</span>
+            <div class="classify-row" data-answer="ITER">
+              <span>Analyze sequence, durations, resources (multiple rounds)</span>
               <div class="classify-btns">
-                <button data-pick="FULL">PMBOK đúng</button>
-                <button data-pick="NARROW">Quá hẹp</button>
+                <button data-pick="BASE">Baseline</button>
+                <button data-pick="DELIVER">Deliver</button>
+                <button data-pick="ITER">Iterate</button>
+                <button data-pick="REPORT">Report</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="NARROW">
-              <span>Value only when benefits are formally measured</span>
+            <div class="classify-row" data-answer="DELIVER">
+              <span>Execute work per approved &amp; baselined schedule</span>
               <div class="classify-btns">
-                <button data-pick="FULL">PMBOK đúng</button>
-                <button data-pick="NARROW">Quá hẹp</button>
+                <button data-pick="BASE">Baseline</button>
+                <button data-pick="DELIVER">Deliver</button>
+                <button data-pick="ITER">Iterate</button>
+                <button data-pick="REPORT">Report</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FULL">
-              <span>Early MVP release delivers value during execution</span>
+            <div class="classify-row" data-answer="REPORT">
+              <span>Include schedule status in periodic stakeholder update</span>
               <div class="classify-btns">
-                <button data-pick="FULL">PMBOK đúng</button>
-                <button data-pick="NARROW">Quá hẹp</button>
+                <button data-pick="BASE">Baseline</button>
+                <button data-pick="DELIVER">Deliver</button>
+                <button data-pick="ITER">Iterate</button>
+                <button data-pick="REPORT">Report</button>
               </div>
             </div>
           </div>
           <p class="drill-score" id="drillScore">0 / 4 đúng</p>
-          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">“PMBOK đúng” = phù hợp Focus on Value p.41</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn A — “sau khi hoàn thành” nghe hợp lý</h4>
-            <p style="margin:0">Waterfall mindset — PMBOK 8 nhấn value có thể xuất hiện <strong>trong suốt</strong> dự án (incremental delivery).</p>
+            <h4>Bẫy 1: Approved → Proceed with delivery (A)</h4>
+            <p style="margin:0">Delivery cần baselined schedule để measure variances — baseline trước execute.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Chọn B — “during execution” gần đúng</h4>
-            <p style="margin:0">B đúng một phần nhưng thiếu end + post-project. Trên đề PMP, chọn đáp án <strong>đầy đủ nhất</strong> khớp Standard.</p>
+            <h4>Bẫy 2: Resources → Review impact (C)</h4>
+            <p style="margin:0">Stem đã nói multiple iterations analyzing resources — Develop Schedule done, không review lại.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Chọn C — đo lường = value</h4>
-            <p style="margin:0">Benefits measurement là governance — không thay thế định nghĩa <em>when</em> value can be realized.</p>
+            <h4>Bẫy 3: Stakeholders → Status report (D)</h4>
+            <p style="margin:0">Status report = communication — next step sau approval là baseline (formal output).</p>
           </div>
           <div class="card tip">
-            <h4>Mẹo thi</h4>
-            <p style="margin:0">Khi các đáp án A/B/C mô tả một mốc thời gian và D gom cả ba — D thường là đáp án PMBOK “Focus on Value”.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Develop Schedule iterative · stakeholders approve final schedule</strong> → Baseline the schedule (B).</p>
           </div>
         </section>
 
@@ -370,41 +385,59 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Khi nào project value được realize? (p.41)</div>
-            <div class="flashcard-back">Throughout the project · at the end · following project completion.</div>
+            <div class="flashcard-front">After schedule approved?</div>
+            <div class="flashcard-back"><strong>Baseline the schedule</strong> — approved version for comparison; change via formal CC only.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q10 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Value throughout, at end, or following completion.</div>
+            <div class="flashcard-front">Q57 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Baseline the schedule.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">FOCUS ON VALUE — Q10 (PMBOK 8, p.41)
+          <div class="cheat-sheet">SCHEDULE BASELINE — Q57 (PMBOK 8, p.49 &amp; 138)
 ─────────────────────────────────────────────────────
-Value can be realized:
-  1. THROUGHOUT the project (incremental, early wins)
-  2. AT THE END of the project (go-live, handover)
-  3. FOLLOWING project completion (sustained ROI)
+PROCESS: Develop Schedule (p.49) — ITERATIVE
+         Schedule baseline (p.138) — OUTPUT
 
-Q10 ANSWER: D
-  "Throughout · at the end · following completion"
+DEVELOP SCHEDULE:
+  - Analyze sequences · durations · resources · constraints
+  - Create SCHEDULE MODEL for execution/monitor/control
+  - Multiple iterations until stakeholders approve
 
-TOO NARROW (wrong on exam):
-  A → only after fully completed
-  B → only during execution
-  C → only when formally measured
+AFTER APPROVAL → BASELINE:
+  Schedule baseline = APPROVED version
+  - Used for performance COMPARISON
+  - Changed only through FORMAL CHANGE CONTROL
 
-SPONSOR / BUSINESS CASE:
-  Explain all three timeframes — not a single milestone
+SCENARIO: Noah — Granite Peak Financial · banking upgrade
+           Multiple ITERATIONS (sequence · durations · resources)
+           Stakeholders APPROVE final schedule
+→ B) BASELINE THE SCHEDULE ✓
 
-REF: The Standard for Project Management, p.41
-     "Focus on Value"</div>
+NOT:
+  A) Proceed with DELIVERY — after baseline, not immediately
+  C) Review resource IMPACT — part of iterative develop (done)
+  D) Add to STATUS REPORT — reporting, not next process step
+
+FLOW:
+  Q55 plan → Q56 input → develop schedule (iterate)
+         → APPROVE → Q57 BASELINE → execute/monitor
+
+SIGNAL: "multiple iterations analyzing..."
+        "stakeholders approve the final schedule"
+        "what will Noah do NEXT"
+
+Q57 ANSWER: B
+
+REF: PMBOK Guide, 8th Ed., p.49, p.138</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-project-management-team.html">Q9: PM Team</a>
+          · <a href="pmp-teach-schedule-management-plan.html">Q55: Schedule Mgmt Plan</a>
+          · <a href="pmp-teach-development-approach-schedule.html">Q56: Dev Approach Input</a>
+          · <a href="pmp-full-questions.html#q-57">Luyện câu 57</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -413,12 +446,12 @@ REF: The Standard for Project Management, p.41
 
   <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Quá hẹp — value không chỉ sau khi 'fully completed'; có thể throughout và sau completion.",
-        B: "Đúng một phần nhưng thiếu 'at the end' và 'following completion' — chọn D vì đầy đủ hơn.",
-        C: "Formal measurement là công cụ theo dõi — không phải định nghĩa khi value được realize.",
-        D: "Đúng! Khớp PMBOK p.41 — value throughout, at end, or following project completion."
+        A: "Proceed with delivery sau khi schedule đã baselined — approval xong phải baseline trước.",
+        B: "Đúng! Sau stakeholders approve → baseline the schedule — output of Develop Schedule (p.49, 138).",
+        C: "Review resource impact là phần iterative Develop Schedule — stem đã multiple iterations rồi.",
+        D: "Status report là communication — không phải next step formal sau schedule approval."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -434,7 +467,7 @@ REF: The Standard for Project Management, p.41
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Value throughout, at the end, or following project completion.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Baseline the schedule.</strong>" : "");
         });
       });
       let score = 0;
