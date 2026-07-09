@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMBOK 8 — Organizational Structure</title>
+  <style>
+    :root {
+      --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
+      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
+      --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: 100vh; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } .mobile-nav { display: flex !important; } }
+    .sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--card); border-right: 1px solid var(--border); padding: 1.25rem 1rem 2rem; }
+    .sidebar .brand { font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .sidebar .brand-sub { font-size: 0.78rem; color: var(--muted); margin: 0.2rem 0 1rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+    .sidebar nav a { display: block; padding: 0.45rem 0.65rem; color: var(--muted); text-decoration: none; border-radius: 8px; font-size: 0.86rem; margin-bottom: 1px; }
+    .sidebar nav a:hover, .sidebar nav a.active { background: var(--primary-bg); color: var(--primary-dark); }
+    .sidebar nav a.active { font-weight: 600; border-left: 3px solid var(--primary); }
+    .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
+    .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
+    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
+    .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
+    .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
+    main { max-width: 860px; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
+    .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 62ch; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 99px; background: #fff; border: 1px solid var(--border); color: var(--primary-dark); font-weight: 500; }
+    section { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
+    section > h2 { font-size: 1.3rem; margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); color: var(--primary-dark); }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
+    section p { margin: 0 0 0.75rem; }
+    section ul, section ol { margin: 0 0 1rem 1.2rem; }
+    section li { margin-bottom: 0.35rem; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
+    .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
+    .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
+    .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
+    th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
+    tr:last-child td { border-bottom: none; }
+    .authority-bar { margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); }
+    .authority-track { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.35rem; margin-top: 0.75rem; }
+    @media (max-width: 700px) { .authority-track { grid-template-columns: 1fr; } }
+    .auth-cell { text-align: center; padding: 0.65rem 0.4rem; border-radius: 10px; border: 1px solid var(--border); font-size: 0.78rem; }
+    .auth-cell .label { font-weight: 700; display: block; margin-bottom: 0.25rem; }
+    .auth-cell.low { background: #f3f4f6; }
+    .auth-cell.mid { background: #eff6ff; border-color: #bfdbfe; }
+    .auth-cell.high { background: var(--ok-bg); border-color: #a7f3d0; }
+    .auth-cell.highlight { outline: 3px solid var(--primary); font-weight: 600; }
+    .auth-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.75rem; margin-top: 0.5rem; }
+    .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+    .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
+    .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
+    .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
+    .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
+    .opt-btn.wrong { border-color: var(--bad); background: var(--bad-bg); color: #991b1b; opacity: 0.85; }
+    .opt-btn:disabled { cursor: default; }
+    .feedback { display: none; margin-top: 1rem; padding: 1rem; border-radius: 10px; font-size: 0.9rem; }
+    .feedback.show { display: block; }
+    .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
+    .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; max-width: 280px; justify-content: flex-end; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
+    .flashcard { perspective: 1000px; height: 170px; cursor: pointer; margin-bottom: 0.75rem; }
+    .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
+    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+    .flashcard-front, .flashcard-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); padding: 1.25rem; display: flex; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border); }
+    .flashcard-front { background: var(--card); font-weight: 600; }
+    .flashcard-back { background: var(--primary-bg); border-color: #fde68a; transform: rotateY(180deg); font-size: 0.88rem; }
+    .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
+    .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
+    .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">PMBOK 8 Teach</div>
+      <div class="brand-sub">Organizational Structure</div>
+      <nav id="sideNav">
+        <a href="#intro" class="active">Giới thiệu</a>
+        <a href="#structures">5 loại cấu trúc</a>
+        <a href="#authority">Quyền PM</a>
+        <a href="#question">Câu hỏi thực hành</a>
+        <a href="#analysis">Phân tích đáp án</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
+        <a href="#flashcards">Flashcard</a>
+        <a href="#cheatsheet">Cheat sheet</a>
+        <div class="nav-series">Practice Series</div>
+        <a href="pmp-teach-project-program-portfolio.html">Q1</a>
+        <a href="pmp-teach-tangible-intangible-benefits.html">Q2</a>
+        <a href="pmp-teach-enterprise-environmental-factors.html">Q3</a>
+        <a href="pmp-teach-organizational-process-assets.html">Q4</a>
+      </nav>
+      <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
+      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+    </aside>
+
+    <div>
+      <nav class="mobile-nav">
+        <a href="#structures">Cấu trúc</a>
+        <a href="#authority">Quyền PM</a>
+        <a href="#question">Câu hỏi</a>
+        <a href="#drill">Drill</a>
+      </nav>
+
+      <main>
+        <header class="hero" id="intro">
+          <h1>Practice Questions — PMBOK 8th Ed</h1>
+          <p class="lead">
+            Bài học Q5 về <strong>cấu trúc tổ chức</strong> — nhận diện loại hình dựa trên
+            <strong>mức quyền của Project Manager</strong> đối với team, ngân sách và quyết định.
+          </p>
+          <div class="badges">
+            <span class="badge">The Standard for PM, p.22</span>
+            <span class="badge">Organizational Structures</span>
+            <span class="badge">Resources</span>
+            <span class="badge">Câu 5 — Practice</span>
+          </div>
+        </header>
+
+        <section id="structures">
+          <h2>1. Năm loại cấu trúc tổ chức</h2>
+          <p>
+            PMBOK 8 mô tả ảnh hưởng của cấu trúc tổ chức lên dự án — đặc biệt là
+            <strong>ai ra quyết định</strong>: Functional manager hay Project Manager.
+          </p>
+
+          <table>
+            <thead>
+              <tr><th>Cấu trúc</th><th>Quyền PM</th><th>Đặc điểm</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Functional</strong></td>
+                <td>Rất thấp / không</td>
+                <td>Team báo cáo functional manager; PM có thể chỉ là coordinator</td>
+              </tr>
+              <tr>
+                <td><strong>Weak matrix</strong></td>
+                <td>Thấp</td>
+                <td>Functional manager giữ quyền chính; PM hỗ trợ hạn chế</td>
+              </tr>
+              <tr>
+                <td><strong>Balanced matrix</strong></td>
+                <td>Trung bình</td>
+                <td>Chia sẻ quyền giữa PM và functional manager</td>
+              </tr>
+              <tr>
+                <td><strong>Strong matrix</strong></td>
+                <td>Cao</td>
+                <td>PM có quyền lớn; functional manager hỗ trợ</td>
+              </tr>
+              <tr>
+                <td><strong>Project-oriented</strong> (Projectized)</td>
+                <td><strong>Rất cao</strong></td>
+                <td>PM có full authority — team, budget, quyết định</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="authority">
+          <h2>2. Thang quyền Project Manager</h2>
+
+          <div class="authority-bar">
+            <strong style="font-size:0.9rem">PM authority tăng dần từ trái sang phải →</strong>
+            <div class="authority-track">
+              <div class="auth-cell low"><span class="label">Functional</span>PM ≈ 0</div>
+              <div class="auth-cell low"><span class="label">Weak matrix</span>PM thấp</div>
+              <div class="auth-cell mid"><span class="label">Balanced</span>PM ↔ FM</div>
+              <div class="auth-cell high"><span class="label">Strong matrix</span>PM cao</div>
+              <div class="auth-cell high highlight"><span class="label">Project-oriented</span>PM full</div>
+            </div>
+            <div class="auth-arrow">Functional manager quyền cao ←————————→ PM quyền cao</div>
+          </div>
+
+          <div class="card tip">
+            <h4>Định nghĩa Project-oriented (PMBOK)</h4>
+            <p style="margin:0">
+              Project-oriented organizations are those in which the project manager has a
+              <strong>high level of authority and control</strong> over the project, including
+              authority over the project team and resources.
+            </p>
+          </div>
+
+          <div class="card info">
+            <h4>Keywords nhận diện nhanh</h4>
+            <ul style="margin:0">
+              <li><strong>Full authority / control</strong> → Project-oriented hoặc Strong matrix</li>
+              <li><strong>Dedicated project resources</strong> → thường Project-oriented</li>
+              <li><strong>PM controls budget &amp; decisions</strong> → Project-oriented</li>
+              <li><strong>Share authority / balanced</strong> → Balanced matrix</li>
+              <li><strong>Functional manager decides</strong> → Functional / Weak matrix</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="question">
+          <h2>3. Câu hỏi thực hành — Question 5</h2>
+
+          <div class="quiz-card" id="mainQuiz">
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q5</div>
+            <div class="q-text">
+              You are the project manager at BuildMax Engineering, working on a large infrastructure project.
+              The organization assigns you as the project manager, provides
+              <em>dedicated project resources</em>, and gives you
+              <em>full authority over the project budget and decision-making</em>.
+              <em>What type of organizational structure are you working in?</em>
+            </div>
+
+            <button class="opt-btn" data-opt="A" type="button">A. Functional organization.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Weak-matrix organization.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Project-oriented organization.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Balanced-matrix organization.</button>
+
+            <div class="feedback" id="quizFeedback"></div>
+          </div>
+
+          <div class="card info">
+            <h4>Dịch tình huống</h4>
+            <p style="margin:0">
+              PM tại BuildMax Engineering, dự án hạ tầng lớn. Tổ chức chỉ định bạn làm PM,
+              cấp <strong>nguồn lực chuyên trách</strong> và trao
+              <strong>toàn quyền ngân sách &amp; ra quyết định</strong>.
+              Đây là cấu trúc tổ chức nào?
+            </p>
+          </div>
+        </section>
+
+        <section id="analysis">
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+
+          <div class="card tip">
+            <h4>Giải thích chính thức (PMBOK)</h4>
+            <p style="margin:0">
+              Project-oriented organizations — PM có high level of authority and control,
+              including authority over project team and resources.
+              <em>— The Standard for Project Management, p.22, "Influences of Organizational Structures on Projects"</em>
+            </p>
+          </div>
+
+          <h3>Tại sao chọn C?</h3>
+          <ul>
+            <li><strong>Dedicated project resources</strong> — team làm full-time cho dự án, không loan từ functional dept.</li>
+            <li><strong>Full authority over budget</strong> — PM kiểm soát ngân sách trực tiếp.</li>
+            <li><strong>Full authority over decision-making</strong> — PM ra quyết định, không chia sẻ với functional manager.</li>
+            <li>Cả ba = đặc trưng <strong>Project-oriented / Projectized</strong>.</li>
+          </ul>
+
+          <h3>Loại trừ từng đáp án</h3>
+          <table>
+            <thead>
+              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Functional</strong></td>
+                <td>Functional manager giữ quyền; PM gần như không có authority (PM ✗ trong slide).</td>
+              </tr>
+              <tr>
+                <td><strong>B. Weak matrix</strong></td>
+                <td>PM có vai trò hạn chế; functional manager vẫn quyết định chính (PM ✗).</td>
+              </tr>
+              <tr>
+                <td><strong>D. Balanced matrix</strong></td>
+                <td>Quyền <em>chia sẻ</em> giữa PM và functional manager — không phải “full authority”.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="drill">
+          <h2>5. Drill — Chọn cấu trúc tổ chức</h2>
+          <div class="classify-drill" id="classifyDrill">
+            <div class="classify-row" data-answer="FUNC">
+              <span>Team reports to department heads; PM is part-time coordinator</span>
+              <div class="classify-btns">
+                <button data-pick="FUNC">Functional</button>
+                <button data-pick="WEAK">Weak</button>
+                <button data-pick="BAL">Balanced</button>
+                <button data-pick="PROJ">Project</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="PROJ">
+              <span>PM has full budget control and dedicated team members</span>
+              <div class="classify-btns">
+                <button data-pick="FUNC">Functional</button>
+                <button data-pick="WEAK">Weak</button>
+                <button data-pick="BAL">Balanced</button>
+                <button data-pick="PROJ">Project</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="BAL">
+              <span>PM and functional managers share decision-making equally</span>
+              <div class="classify-btns">
+                <button data-pick="FUNC">Functional</button>
+                <button data-pick="WEAK">Weak</button>
+                <button data-pick="BAL">Balanced</button>
+                <button data-pick="PROJ">Project</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="WEAK">
+              <span>Functional manager assigns resources; PM tracks schedule only</span>
+              <div class="classify-btns">
+                <button data-pick="FUNC">Functional</button>
+                <button data-pick="WEAK">Weak</button>
+                <button data-pick="BAL">Balanced</button>
+                <button data-pick="PROJ">Project</button>
+              </div>
+            </div>
+          </div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi thường gặp</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: “Matrix” khi thực ra Project-oriented</h4>
+            <p style="margin:0">“Full authority” + “dedicated resources” = Project-oriented, không phải Balanced matrix. Balanced = chia quyền, không full.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 2: Strong matrix vs Project-oriented</h4>
+            <p style="margin:0">Strong matrix: PM quyền cao nhưng vẫn trong cấu trúc matrix. Project-oriented: PM <strong>full</strong> authority budget + team + decisions — như Q5.</p>
+          </div>
+          <div class="card warn">
+            <h4>Mẹo đọc đề</h4>
+            <p style="margin:0">Tìm từ khóa quyền: <em>full authority, dedicated resources, control budget, decision-making</em> → Project-oriented.</p>
+          </div>
+        </section>
+
+        <section id="flashcards">
+          <h2>7. Flashcard</h2>
+          <p class="flash-hint">Nhấn để lật thẻ</p>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Project-oriented organization?</div>
+            <div class="flashcard-back">PM có high authority &amp; control — team, resources, budget, quyết định.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Balanced matrix khác Project-oriented?</div>
+            <div class="flashcard-back">Balanced = chia quyền PM ↔ FM. Project-oriented = PM full authority.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q5 đáp án?</div>
+            <div class="flashcard-back"><strong>C — Project-oriented.</strong> Dedicated resources + full budget &amp; decision authority.</div>
+          </div></div>
+        </section>
+
+        <section id="cheatsheet">
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">ORGANIZATIONAL STRUCTURES — PMBOK 8, p.22
+─────────────────────────────────────────────────────
+PM AUTHORITY (low → high):
+  Functional → Weak matrix → Balanced → Strong matrix → Project-oriented
+
+PROJECT-ORIENTED (Projectized)
+  ✓ PM: HIGH authority &amp; control
+  ✓ Dedicated project resources
+  ✓ Full budget authority
+  ✓ Full decision-making authority
+
+FUNCTIONAL / WEAK MATRIX
+  ✗ PM little or no authority
+  ✗ Functional manager decides
+
+BALANCED MATRIX
+  ↔ PM and FM share authority equally
+  ✗ NOT "full authority"
+
+Q5 ANSWER: C — Project-oriented organization
+  BuildMax: dedicated resources + full budget + full decisions
+
+REF: The Standard for Project Management, p.22
+     "Influences of Organizational Structures on Projects"</div>
+        </section>
+
+        <footer class="ref-footer">
+          · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
+          · <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const CORRECT = "C";
+      const EXPL = {
+        A: "Functional — functional manager giữ quyền, PM không có full authority.",
+        B: "Weak matrix — PM quyền thấp, không kiểm soát budget/decisions.",
+        C: "Đúng! Dedicated resources + full budget + full decisions = Project-oriented.",
+        D: "Balanced matrix — chia quyền, không phải full authority như trong đề."
+      };
+      let answered = false;
+      document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (answered) return;
+          answered = true;
+          const c = btn.dataset.opt;
+          document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (b) {
+            b.disabled = true;
+            if (b.dataset.opt === CORRECT) b.classList.add("correct");
+            else if (b === btn) b.classList.add("wrong");
+          });
+          const fb = document.getElementById("quizFeedback");
+          fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
+          fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Project-oriented organization.</strong>" : "");
+        });
+      });
+      let score = 0;
+      const total = document.querySelectorAll("#classifyDrill .classify-row").length;
+      document.querySelectorAll("#classifyDrill .classify-row").forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            document.getElementById("drillScore").textContent = score + " / " + total + " đúng";
+          });
+        });
+      });
+      document.querySelectorAll(".flashcard").forEach(function (card) {
+        function flip() { card.classList.toggle("flipped"); }
+        card.addEventListener("click", flip);
+        card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      const sections = document.querySelectorAll("section[id], header[id]");
+      const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
+        });
+      }, { rootMargin: "-20% 0px -60% 0px" });
+      sections.forEach(function (s) { observer.observe(s); });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,668 @@
+# PMP Glossary — Khái niệm đã học (Session Study)
+
+> Tài liệu tra cứu nhanh các thuật ngữ PMP/PMBOK 8 đã ôn trong phiên học từ vựng.  
+> **Cách dùng:** Ctrl+F theo từ khóa tiếng Anh hoặc tiếng Việt.
+
+---
+
+## Mục lục
+
+1. [Tài chính & Rủi ro](#1-tài-chính--rủi-ro)
+2. [Quản lý rủi ro (Risk)](#2-quản-lý-rủi-ro-risk)
+3. [Stakeholder & Giao tiếp](#3-stakeholder--giao-tiếp)
+4. [Team, Leadership & Tổ chức](#4-team-leadership--tổ-chức)
+5. [Organisational Change Management](#5-organisational-change-management)
+6. [Development Approach & Agile](#6-development-approach--agile)
+7. [Schedule, Cost & EVM](#7-schedule-cost--evm)
+8. [Kỹ thuật & Công cụ](#8-kỹ-thuật--công-cụ)
+9. [Governance & Quality](#9-governance--quality)
+10. [Metrics, Bias & Phân tích](#10-metrics-bias--phân-tích)
+11. [Business Environment & Sustainability](#11-business-environment--sustainability)
+12. [Bảng so sánh nhanh](#12-bảng-so-sánh-nhanh)
+
+---
+
+## 1. Tài chính & Rủi ro
+
+### Hedging
+| | |
+|---|---|
+| **Nghĩa** | Phòng ngừa rủi ro tài chính (đặc biệt tỷ giá) bằng công cụ/chiến lược bù trừ biến động giá |
+| **PMP** | Risk response cho rủi ro tài chính; PM phối hợp finance/treasury |
+| **Ví dụ** | Forward contract, currency swap khi trả supplier nhiều loại tiền |
+| **Mẹo đề** | *hedging strategies* + exchange rate → financial risk response |
+
+### Deplete
+| | |
+|---|---|
+| **Nghĩa** | Làm cạn kiệt, tiêu hao dần, dùng hết (contingency reserve, funds, supplies) |
+| **PMP** | *"reserves are quickly depleted"* → quỹ dự phòng bị dùng hết nhanh |
+| **Đối lập** | Replenish (bổ sung lại) |
+
+### Exposure
+| | |
+|---|---|
+| **Nghĩa** | Mức độ phơi nhiễm trước rủi ro/tác động — càng chậm xử lý, exposure càng tăng |
+| **PMP** | Financial exposure, currency exposure, risk exposure |
+| **≠ Impact** | Exposure = đang đứng trong vùng rủi ro; Impact = hậu quả nếu xảy ra |
+| **Mẹo đề** | *delays will increase exposure* → trì hoãn làm rủi ro tài chính kéo dài |
+
+### Offset
+| | |
+|---|---|
+| **Nghĩa** | Bù đắp, bù trừ — A giảm tác động của B |
+| **Ví dụ** | Cost savings offset costs; reserves offset penalties |
+| **Bẫy đề** | *Savings will offset compression* — thường lạc quan sai |
+| **≠ Hedge** | Hedge = phòng rủi ro tài chính |
+
+---
+
+## 2. Quản lý rủi ro (Risk)
+
+### Risk
+| | |
+|---|---|
+| **Nghĩa** | Sự kiện/điều kiện **không chắc chắn** có thể ảnh hưởng mục tiêu dự án (tích cực hoặc tiêu cực) |
+| **Ghi nhận** | Risk register (chưa xảy ra) |
+| **Công thức** | Risk = Uncertainty + Impact |
+
+### Threat
+| | |
+|---|---|
+| **Nghĩa** | Rủi ro **tiêu cực** — gây hại nếu xảy ra |
+| **Response** | Avoid, Mitigate, Transfer, Accept |
+| **Ví dụ** | Vendor delay, tỷ giá bất lợi, defect tăng |
+
+### Opportunity
+| | |
+|---|---|
+| **Nghĩa** | Rủi ro **tích cực** — có lợi nếu xảy ra |
+| **Response** | Exploit, Enhance, Share, Accept |
+| **Ví dụ** | Material cost giảm, competitor rút sản phẩm |
+
+### Risk vs Issue
+| | Risk | Issue |
+|---|------|-------|
+| Thời điểm | Chưa xảy ra | **Đã** xảy ra |
+| Artifact | Risk register | Issue log |
+| Hành động | Planned response | Resolve ngay |
+
+### Risk Response Strategies (Threat & Opportunity)
+
+Sau identify & analyze → chọn response trong risk register. Risk **materialize** → **planned response** trước khi chỉ ghi log.
+
+#### Threat — 4 chiến lược
+
+| Strategy | Mục tiêu | Ví dụ PMP |
+|----------|----------|-----------|
+| **Avoid** | Đổi plan → loại bỏ threat | Bỏ scope; đổi vendor/công nghệ |
+| **Mitigate** | Giảm probability và/hoặc impact | Cross-train, backup, testing |
+| **Transfer** | Chuyển impact cho bên thứ ba | Insurance, fixed-price contract |
+| **Accept** | Chấp nhận — passive hoặc active + reserve | Contingency fund, workaround |
+
+| Lưu ý | |
+|-------|---|
+| **Mitigate** | Hay gặp nhất trong đề; còn **residual risk** |
+| **Transfer** | Không xóa rủi ro hoàn toàn |
+| **Accept** | ≠ ignore — active accept có contingency |
+
+#### Opportunity — 4 chiến lược
+
+| Threat | Opportunity | Ý chính |
+|--------|-------------|---------|
+| Avoid | **Exploit** | Đảm bảo opportunity xảy ra |
+| Mitigate | **Enhance** | Tăng chance/benefit |
+| Transfer | **Share** | Chia lợi với partner |
+| Accept | **Accept** | Sẵn sàng nắm nếu xảy ra |
+
+#### Residual & Reserve
+
+| Thuật ngữ | Nghĩa |
+|-----------|--------|
+| **Residual risk** | Rủi ro còn lại sau response |
+| **Secondary risk** | Rủi ro mới do chính response |
+| **Contingency reserve** | Known unknowns — thường trong baseline |
+| **Management reserve** | Unknown unknowns — thường ngoài baseline |
+
+#### Mẹo đề
+
+| Keyword | Strategy |
+|---------|----------|
+| Insurance, fixed-price | **Transfer** |
+| Training, backup | **Mitigate** |
+| Remove scope | **Avoid** |
+| Contingency fund | **Accept** (active) |
+| Risk đã xảy ra | Implement **planned response** |
+
+---
+
+## 3. Stakeholder & Giao tiếp
+
+### Stem (Question stem)
+| | |
+|---|---|
+| **Nghĩa** | Phần mô tả tình huống + câu hỏi chính (trước A/B/C/D) |
+| **Mẹo đề** | Đọc **câu cuối** stem → tìm FIRST / NEXT / NOT / BEST |
+
+### Salience Model
+| | |
+|---|---|
+| **Nghĩa** | Phân loại stakeholder theo **Power, Legitimacy, Urgency** |
+| **Definitive** | P + L + U → ưu tiên cao nhất |
+| **≠ Grid model** | Grid = authority × **interest** |
+| **≠ Influence model** | Upward, downward, outward, sideward |
+| **Mẹo đề** | *power, urgency, legitimacy* → Salience |
+
+### Storytelling
+| | |
+|---|---|
+| **Nghĩa** | Kể chuyện có ngữ cảnh để truyền lessons learned / knowledge transfer |
+| **PMP** | Làm bài học relatable & memorable; bổ sung repository |
+| **Đúng khi** | Lessons đã ghi, cần team nhớ & áp dụng; handover ops |
+| **Sai khi** | Retrospective superficial → cần **categorize patterns**, không phải storytelling |
+
+### Cadence
+| | |
+|---|---|
+| **Nghĩa** | Nhịp độ, chu kỳ lặp lại đều đặn (họp, review, giao hàng) |
+| **PMP** | Meeting cadence, delivery cadence, cadence points |
+| **Tăng cadence** | Làm thường xuyên hơn (monthly → weekly) |
+
+### Discord
+| | |
+|---|---|
+| **Nghĩa** | Bất hòa, mâu thuẫn giữa người/nhóm |
+| **PMP** | Facilitate, understand perspectives — không punish |
+| **≈** | Conflict, disagreement |
+
+### Cohort
+| | |
+|---|---|
+| **Nghĩa** | Nhóm người cùng đặc điểm/thời điểm |
+| **Ví dụ** | Training cohort, pilot cohort, phased rollout |
+| **PMP** | Incremental delivery — giao từng nhóm |
+
+### Folk / Folks
+| | |
+|---|---|
+| **Folks** | Người, mọi người (informal) ≈ people, team |
+| **Folk wisdom** | Kinh nghiệm truyền miệng — thường sai vs data |
+| **Ví dụ** | *folks on the ground*, *right folks in the room* |
+
+---
+
+## 4. Team, Leadership & Tổ chức
+
+### Demoralization
+| | |
+|---|---|
+| **Nghĩa** | Suy sụp tinh thần, mất động lực (overworked and demoralized) |
+| **PM làm** | Engage, acknowledge input, empower — **không** ép overtime hay replace người |
+| **Đối lập** | Morale boost, motivation, engagement |
+
+### Hawthorne Effect
+| | |
+|---|---|
+| **Nghĩa** | Hiệu ứng "được quan sát/chú ý → làm tốt hơn" — không chỉ do thay đổi điều kiện |
+| **PMP** | Coaching, 1-on-1, engagement có giá trị thật |
+| **Cảnh báo** | Đừng nhầm mọi cải thiện đều do tool/process mới |
+
+### Theory X (McGregor)
+| | |
+|---|---|
+| **Nghĩa** | Giả định tiêu cực: người lười, cần ép, micromanage |
+| **PMP** | Thường là đáp án **sai** (enforce overtime, punish) |
+
+### Theory Y (McGregor)
+| | |
+|---|---|
+| **Nghĩa** | Giả định tích cực: tự chủ, tìm trách nhiệm, cần empower |
+| **PMP** | Align Agile, coaching, empowered culture — thường **đúng** |
+
+### Theory Z (Ouchi)
+| | |
+|---|---|
+| **Nghĩa** | Cam kết dài hạn, consensus, loyalty, quality circles (văn hóa Nhật) |
+| **Keyword** | Lifetime employment, collective decision, job security |
+
+### Leadership Styles — 8 phong cách
+
+| Style | Định nghĩa | PMP |
+|-------|------------|-----|
+| **Laissez-faire** | Hands-off — team tự quyết | ✗ Sai khi cần facilitate/coach |
+| **Transactional** | Management by exception; focus thành tích/reward | Carrot/stick — ít phù hợp Agile |
+| **Servant leader** | Phục vụ growth, learning, autonomy, well-being | ✓ **Hay đúng** — Agile, Scrum |
+| **Transformational** | Inspirational motivation — vision | ✓ Truyền cảm hứng, change |
+| **Charismatic** | Năng lượng cao, tự tin, conviction mạnh | Tốt nhưng phụ thuộc cá nhân |
+| **Interactional** | Kết hợp transactional + transformational + charismatic | Linh hoạt theo tình huống |
+| **Distributed** | Team quyết định dân chủ | ✓ Self-organizing team |
+| **Autocratic** | Một người quyết định | ✗ **Thường sai** — ≈ Theory X |
+
+**Mẹo đề:** Agile/impediment → **Servant leader** · Vision → **Transformational** · Self-organizing → **Distributed** · Enforce alone → **Autocratic** ✗
+
+### Democratic
+| | |
+|---|---|
+| **Nghĩa** | Dân chủ — team tham gia quyết định, thảo luận, đồng thuận |
+| **Gắn với** | **Distributed** leadership |
+| **PM role** | **Facilitate** — không dictate (≠ laissez-faire) |
+| **Đối lập** | **Autocratic** |
+| **PMP Agile** | ✓ Self-organizing team |
+
+### Types of Power — 14 loại quyền lực
+
+| Power | Cách dùng | PMP |
+|-------|-----------|-----|
+| **Positional** | Vị trí chính thức | PM title |
+| **Informational** | Thu thập & phân phối thông tin | ✓ Transparency |
+| **Referent** | Uy tín, credibility | ✓ Trust |
+| **Situational** | Quyền lực tình huống (crisis) | Tạm thời |
+| **Personal** | Charm, sức hút | Charismatic |
+| **Relational** | Networking, alliances | Stakeholder |
+| **Expert** | Skill, experience | ✓ SME — hay đúng |
+| **Reward** | Praise, bonus | Transactional |
+| **Coercive** | Discipline, punish | ✗ Thường sai |
+| **Ingratiating** | Flattery | ✗ |
+| **Pressure-based** | Limit choices | ✗ |
+| **Guilt-based** | Impose obligation | ✗ |
+| **Persuasive** | Lập luận thuyết phục | ✓ Democratic |
+| **Avoiding** | Refuse to participate | ✗ ≈ laissez-faire |
+
+**Power hỗ trợ democratic:** Expert, Referent, Informational, Persuasive  
+**Tránh:** Coercive, Pressure-based, Guilt-based, Avoiding
+
+### Swarm / Swarming
+| | |
+|---|---|
+| **Nghĩa** | Cả team tập trung cùng lúc vào một blocker để giải quyết nhanh |
+| **Đúng khi** | Vấn đề **trong quyền** team |
+| **Sai khi** | *Outside team's authority* → **Escalate to sponsor** |
+
+### Humility
+| | |
+|---|---|
+| **Nghĩa** | Khiêm tốn — biết giới hạn, lắng nghe, thừa nhận sai |
+| **PMP** | Acknowledge & apologize; servant leadership |
+| **Đối lập** | Arrogance, blame, hide mistakes |
+
+---
+
+## 5. Organisational Change Management
+
+### Organisational Change Management (OCM)
+| | |
+|---|---|
+| **Nghĩa** | Quản lý thay đổi tổ chức — giúp con người **chấp nhận và áp dụng** thay đổi do dự án mang lại |
+| **PM role** | Communicate, engage stakeholders, assess readiness, support adoption |
+| **Change vs Transition** | **Change** = tình huống mới · **Transition** = hành trình cảm xúc của con người |
+
+**5 Change Models:**
+| Model | Trọng tâm |
+|-------|-----------|
+| PMI Managing Change in Organisations | Readiness, impact, communication |
+| ADKAR (Prosci) | Individual: A→D→K→A→R |
+| Kotter 8 Steps | Organisational leadership |
+| Virginia Satir | Emotional stages |
+| Bridges Transition | Ending → Neutral zone → New beginning |
+
+### Bridges Transition Model
+| | |
+|---|---|
+| **Tác giả** | William Bridges — focus **transition** (con người), không chỉ change (tình huống) |
+
+**3 giai đoạn:**
+| Giai đoạn | Ý nghĩa | PM làm gì |
+|-----------|---------|-----------|
+| **1. Ending** (*Losing & letting go*) | Kết thúc cách cũ — mất mát, lo sợ | Acknowledge loss; communicate **why** |
+| **2. Neutral Zone** | Vùng trung gian — bối rối, năng suất giảm | Support, training, patience |
+| **3. New Beginning** | Chấp nhận cách mới | Celebrate wins, reinforce, monitor |
+
+**Transition Readiness Process:**
+1. **Communicate** the reason for the change
+2. **Understand the impact** from those affected
+3. **Check** the organisation's readiness for change
+4. **Educate leaders** on how the change will affect their people
+5. **Monitor progress** as people go through the stages of transition
+
+**Mẹo đề:** People resist mid-change → Neutral zone · Assess before rollout → Readiness · No follow-up → ✗
+
+### ADKAR · Kotter · Virginia Satir
+
+**ADKAR** — thay đổi cá nhân:
+| Chữ | Giai đoạn |
+|-----|-----------|
+| **A** | Awareness — hiểu **why** |
+| **D** | Desire — muốn tham gia |
+| **K** | Knowledge — biết **how** |
+| **A** | Ability — có kỹ năng |
+| **R** | Reinforcement — duy trì lâu dài |
+
+**Kotter 8 Steps:** Urgency → Guiding coalition → Vision → Communicate → Empower → Short-term wins → Consolidate → Anchor in culture
+
+**Virginia Satir:** Late Status Quo → Resistance → Chaos → Integration → New Status Quo
+
+---
+
+## 6. Development Approach & Agile
+
+### Adaptive
+| | |
+|---|---|
+| **Nghĩa** | Cách tiếp cận PMBOK: linh hoạt, emergent scope, embrace change, backlog |
+| **Quan hệ** | **Ô lớn** — Agile ⊂ Adaptive |
+
+### Agile
+| | |
+|---|---|
+| **Nghĩa** | Một cách cụ thể làm adaptive: Scrum, Kanban, sprint, PO, backlog |
+| **Keyword** | Sprint, Scrum, product owner |
+
+### Iterative
+| | |
+|---|---|
+| **Nghĩa** | Lặp nhiều vòng để **tinh chỉnh** cùng sản phẩm (refine) |
+| **Ẩn dụ** | Vẽ tranh: sketch → màu → hoàn thiện |
+
+### Incremental
+| | |
+|---|---|
+| **Nghĩa** | Giao **từng phần** chức năng có giá trị (MVP, release từng module) |
+| **Ẩn dụ** | Xây nhà: phòng 1 → phòng 2 → phòng 3 |
+| **Thực tế** | Scrum thường = Iterative + Incremental |
+
+---
+
+## 7. Schedule, Cost & EVM
+
+### S-Curve Diagram
+| | |
+|---|---|
+| **Nghĩa** | Đồ thị tích lũy hình chữ S: chậm → nhanh → chậm |
+| **EVM S-curve** | So sánh cumulative **PV, EV, AC** theo thời gian |
+| **Monte Carlo S-curve** | **Xác suất tích lũy** đạt outcome (trục Y = %) |
+| **Đọc EVM** | EV < PV → behind schedule; AC > EV → over budget |
+
+### Variance at Completion (VAC)
+| | |
+|---|---|
+| **Công thức** | **VAC = BAC − EAC** |
+| **VAC > 0** | Dự kiến **dưới** budget |
+| **VAC = 0** | Đúng budget |
+| **VAC < 0** | Dự kiến **vượt** budget |
+| **≠ CV/SV** | VAC = forecast **cuối dự án**; CV/SV = hiện tại |
+
+### COCOMO
+| | |
+|---|---|
+| **Nghĩa** | Constructive Cost Model — ước lượng effort/cost phần mềm từ size (KLOC) |
+| **3 loại** | Organic, Semi-detached, Embedded |
+| **Loại estimating** | **Parametric** |
+| **Mẹo đề** | Software + lines of code + parametric → COCOMO |
+
+### Theory of Constraints (TOC)
+| | |
+|---|---|
+| **Nghĩa** | Hệ thống chỉ mạnh bằng **bottleneck** — tối ưu tại constraint |
+| **5 bước** | Identify → Exploit → Subordinate → Elevate → Repeat |
+| **Critical Chain** | TOC áp dụng schedule + project/feeding/resource buffer |
+| **≠ CPM** | CPM = longest path; Critical Chain = + resource constraints |
+
+### Punch List
+| | |
+|---|---|
+| **Nghĩa** | Danh sách việc nhỏ còn sót trước nghiệm thu/bàn giao |
+| **PMP** | Construction, closeout — punch list = 0 trước final acceptance |
+
+---
+
+## 8. Kỹ thuật & Công cụ
+
+### Delphi Technique
+| | |
+|---|---|
+| **Nghĩa** | Hỏi ý kiến expert **ẩn danh**, nhiều vòng, đạt consensus qua facilitator |
+| **Keyword** | Anonymous, iterative, consensus, facilitated |
+| **Dùng cho** | Estimate, identify risks, forecast khi thiếu data |
+
+### Wideband Delphi
+| | |
+|---|---|
+| **Nghĩa** | Biến thể Delphi — experts **thảo luận/tranh luận** giữa các vòng |
+| **≠ Classic Delphi** | Không hoàn toàn im lặng ẩn danh |
+| **Dùng cho** | Software estimation (Boehm) |
+| **Mẹo đề** | *debate estimates in facilitated rounds* → Wideband Delphi |
+
+### Starbursting
+| | |
+|---|---|
+| **Nghĩa** | Brainstorm **câu hỏi** theo Who/What/Where/When/Why/How quanh chủ đề |
+| **Giai đoạn 1** | Chỉ hỏi — chưa trả lời |
+| **PMP** | Collect requirements, define scope, early exploration |
+
+### Branch and Bound
+| | |
+|---|---|
+| **Nghĩa** | Thuật toán tối ưu: **phân nhánh** + **cận** để cắt nhánh không khả thi |
+| **PMP** | Schedule/resource/cost optimization |
+| **≠ Brainstorming** | Toán học, không phải elicitation |
+
+---
+
+## 9. Governance & Quality
+
+### Governance
+| | |
+|---|---|
+| **Nghĩa** | Cơ chế quyết định, kiểm soát, trách nhiệm, traceability |
+| **Mindset** | Governance **≠** bureaucracy — lightweight practices |
+| **PMP** | Change control, decision log, compliance, accountability |
+| **≠ Management** | Governance = rules of the game; Management = playing the game |
+
+### Hazardous
+| | |
+|---|---|
+| **Nghĩa** | Nguy hiểm, có hại — hazardous conditions, hazardous materials |
+| **PMP** | Ghi risk register; plan risk responses — không ignore safety |
+
+### Vigilant
+| | |
+|---|---|
+| **Nghĩa** | Cảnh giác, theo dõi chủ động, sẵn sàng adapt |
+| **PMP** | Monitor **external environment** (market volatility) |
+| **Đối lập** | Complacent (chủ quan) |
+
+---
+
+## 10. Metrics, Bias & Phân tích
+
+### Vanity Metric
+| | |
+|---|---|
+| **Nghĩa** | Chỉ số đẹp báo cáo nhưng **không actionable** |
+| **Ví dụ ✗** | Page views, social impressions, số cuộc gọi hoàn thành |
+| **Ví dụ ✓** | Qualified recruit rate, time to insight, NPS, CPI+SPI+outcomes |
+| **PMP** | Focus on value — outcome-based metrics |
+
+### Confirmation Bias
+| | |
+|---|---|
+| **Nghĩa** | Chỉ tìm/tin thông tin **ủng hộ** quan điểm sẵn có |
+| **PMP** | Pitfall of metrics (PMBOK 8) |
+| **Chống bias** | Holistic view, seek disconfirming evidence, diverse perspectives |
+
+### Causation
+| | |
+|---|---|
+| **Nghĩa** | Quan hệ nhân quả — X **gây ra** Y |
+| **≠ Correlation** | Cùng biến đổi ≠ có nhân quả |
+| **PMP** | Root cause analysis, cause-and-effect — đừng kết luận vội từ metrics |
+
+---
+
+## 11. Business Environment & Sustainability
+
+### Triple Bottom Line (TBL)
+| | |
+|---|---|
+| **Nghĩa** | Đo thành công trên 3 đáy: **People, Planet, Profit** |
+| **PMP** | Business Environment, ESG, sustainability, beyond cost/schedule |
+| **Keyword** | Social + environmental + economic value |
+
+---
+
+## 12. Bảng so sánh nhanh
+
+### Change Models
+| Model | Trọng tâm |
+|-------|-----------|
+| Bridges | Transition: Ending → Neutral zone → New beginning |
+| ADKAR | Individual: A→D→K→A→R |
+| Kotter | Organisational: Urgency → Coalition → Vision → Anchor |
+| Satir | Emotional: Status quo → Resistance → Chaos → Integration |
+| PMI OCM | Readiness, impact, communicate, educate, monitor |
+
+### Elicitation & Estimation Techniques
+| Kỹ thuật | Đặc điểm chính |
+|----------|----------------|
+| Delphi | Ẩn danh, nhiều vòng, consensus |
+| Wideband Delphi | Delphi + thảo luận/debate |
+| Starbursting | Câu hỏi 5W1H, questions first |
+| Brainstorming | Ý tưởng tự do, có thể dominant voice |
+| COCOMO | Parametric, software, KLOC |
+| Branch and bound | Optimization, prune branches |
+
+### Stakeholder Models
+| Model | Tiêu chí |
+|-------|----------|
+| Salience | Power, Legitimacy, Urgency |
+| Power/Interest Grid | Authority × Interest |
+| RACI | R, A, C, I (vai trò công việc) |
+
+### S-Curve: Hai ngữ cảnh
+| | EVM S-curve | Monte Carlo S-curve |
+|---|-------------|---------------------|
+| Trục Y | $ tích lũy | Probability % |
+| Trục X | Time | Outcome (cost/duration) |
+| Tool | Control Costs | Quantitative risk |
+
+### Risk Responses (Threat)
+| Strategy | Mục tiêu | Keyword đề |
+|----------|----------|------------|
+| Avoid | Loại bỏ threat | Remove scope, change vendor |
+| Mitigate | Giảm P hoặc I | Training, backup, testing |
+| Transfer | Chuyển impact | Insurance, fixed-price |
+| Accept | Chấp nhận + reserve | Contingency, low impact |
+
+### Risk Responses (Opportunity)
+| Strategy | Mục tiêu |
+|----------|----------|
+| Exploit | Đảm bảo xảy ra |
+| Enhance | Tăng chance/benefit |
+| Share | Chia lợi partner |
+| Accept | Sẵn sàng nắm |
+
+### Leadership Styles
+| Style | PMP thường |
+|-------|------------|
+| Servant leader | ✓ Agile, empower |
+| Transformational | ✓ Vision |
+| Distributed | ✓ Self-organizing |
+| Autocratic | ✗ Micromanage |
+| Laissez-faire | ✗ Hands-off khi cần PM |
+| Transactional | Management by exception |
+
+### Types of Power
+| ✓ Ưu tiên | ✗ Tránh |
+|-----------|---------|
+| Expert, Referent, Informational, Persuasive | Coercive, Guilt-based, Pressure-based, Avoiding |
+
+### Development Approaches
+| Thuật ngữ | Tầng |
+|-----------|------|
+| Adaptive | Development approach (PMBOK) |
+| Agile | Framework/method (subset of adaptive) |
+| Iterative | Delivery technique (refine) |
+| Incremental | Delivery technique (add slices) |
+
+### Cognitive & Team Theories
+| Khái niệm | Một câu |
+|-----------|---------|
+| Theory X | Control them — PMP thường sai |
+| Theory Y | Empower them — PMP thường đúng |
+| Theory Z | Long-term loyalty + consensus |
+| Hawthorne | Attention improves performance |
+| Confirmation bias | See what we want to see |
+
+### EVM Forecast
+| Chỉ số | Công thức | Ý nghĩa |
+|--------|-----------|---------|
+| CPI | EV / AC | Hiệu quả chi phí hiện tại |
+| SPI | EV / PV | Hiệu quả tiến độ hiện tại |
+| VAC | BAC − EAC | Dự báo over/under budget cuối dự án |
+| CV | EV − AC | Variance chi phí hiện tại |
+| SV | EV − PV | Variance tiến độ hiện tại |
+
+---
+
+## Keyword → Thuật ngữ (tra cức đề thi)
+
+| Nếu đề có… | Nghĩ đến… |
+|------------|-----------|
+| power, legitimacy, urgency | Salience model |
+| anonymous, iterative, consensus | Delphi |
+| debate estimates, facilitated rounds | Wideband Delphi |
+| Who/What/When/Where/Why/How, questions first | Starbursting |
+| outside team's authority | Escalate (không swarm) |
+| swarming, blocker in team scope | Swarm |
+| page views, impressions | Vanity metric |
+| preexisting view, only supporting data | Confirmation bias |
+| BAC − EAC, forecast at completion | VAC |
+| cumulative PV EV AC | S-curve (EVM) |
+| Monte Carlo iterations, probability | S-curve (Monte Carlo) |
+| People Planet Profit | Triple bottom line |
+| bottleneck, weakest link | TOC |
+| punch list completion | Closeout / acceptance |
+| stay vigilant, external environment | Monitor & adapt |
+| overworked demoralized | Engage & acknowledge (Theory Y) |
+| relatable memorable lessons | Storytelling |
+| correlation vs cause | Causation |
+| hedging, exchange rate | Financial risk response |
+| insurance, fixed-price | Transfer |
+| training, backup, cross-train | Mitigate |
+| remove scope, change vendor | Avoid |
+| contingency reserve | Accept (active) |
+| risk materialized | Planned response from risk register |
+| offset, savings offset | Bù trừ — cẩn thận optimism bias |
+| discord among stakeholders | Facilitate conflict resolution |
+| pilot cohort, first cohort | Incremental rollout |
+| folks on the ground | Engage team doing the work |
+| folk wisdom | Không data-driven — thường sai |
+| acknowledge mistake, apologize | Humility |
+| servant leader, remove impediment | Servant leadership |
+| autocratic, decides alone | Thường sai |
+| hands-off, laissez-faire | Sai khi cần PM action |
+| inspirational vision | Transformational |
+| democratic team decisions | Distributed / Democratic |
+| management by exception | Transactional |
+| expert power, SME | Expert power ✓ |
+| withhold information | Sai — Informational |
+| punish, threaten | Coercive ✗ |
+| refuse to participate | Avoiding ✗ |
+| persuasive arguments | Persuasive ✓ |
+| neutral zone, confusion mid-change | Bridges Transition |
+| ending, letting go | Bridges — Ending stage |
+| readiness for change, assess impact | Transition Readiness / PMI OCM |
+| educate leaders on people impact | Transition Readiness step 4 |
+| awareness desire knowledge ability | ADKAR |
+| sense of urgency, guiding coalition | Kotter 8 Steps |
+| resistance, chaos, emotional stages | Virginia Satir |
+| change vs transition | Change = situation · Transition = people |
+| reserves depleted | Contingency used up |
+| increase exposure | Risk grows with delay |
+| Governance ≠ bureaucracy | Lightweight traceability |
+| iterative + incremental | Agile delivery |
+| lines of code, parametric | COCOMO |
+
+---
+
+*Tạo từ phiên học từ vựng PMP — có thể bổ sung thêm thuật ngữ khi ôn tiếp.*

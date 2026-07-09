@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMP Glossary — Khái niệm đã học (PMBOK 8)</title>
+  <style>
+    :root {
+      --bg: #fafaf8;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --primary-bg: #fffbeb;
+      --ok: #059669;
+      --ok-bg: #ecfdf5;
+      --bad: #dc2626;
+      --bad-bg: #fef2f2;
+      --info: #2563eb;
+      --info-bg: #eff6ff;
+      --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --radius: 14px;
+      --sidebar-w: 280px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+    }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .mobile-nav { display: flex !important; }
+    }
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem 1rem 2rem;
+    }
+    .sidebar .brand {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+    }
+    .sidebar .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar nav a {
+      display: block;
+      padding: 0.4rem 0.65rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      margin-bottom: 1px;
+    }
+    .sidebar nav a:hover { background: var(--primary-bg); color: var(--primary-dark); }
+    .sidebar .nav-group {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin: 1rem 0 0.35rem 0.65rem;
+    }
+    .sidebar .nav-term {
+      font-size: 0.8rem;
+      padding-left: 1rem;
+    }
+    .sidebar .quiz-link {
+      display: block;
+      margin-top: 1rem;
+      padding: 0.65rem 0.85rem;
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+    .sidebar .quiz-link:hover { background: var(--primary-dark); }
+    .sidebar .quiz-link.secondary {
+      background: var(--card);
+      color: var(--primary-dark);
+      border: 1px solid var(--primary);
+      margin-top: 0.5rem;
+    }
+    .mobile-nav {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 0.85rem;
+      gap: 0.4rem;
+      overflow-x: auto;
+      box-shadow: var(--shadow);
+    }
+    .mobile-nav a {
+      white-space: nowrap;
+      padding: 0.35rem 0.7rem;
+      background: var(--bg);
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      border: 1px solid var(--border);
+    }
+    main {
+      max-width: 900px;
+      padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem;
+    }
+    .hero {
+      background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%);
+      border: 1px solid #fde68a;
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
+    .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .search-box {
+      margin-bottom: 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--bg);
+      padding: 0.75rem 0;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 1rem;
+      background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.156a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E") no-repeat 0.85rem center;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+    }
+    .search-box input:focus {
+      outline: 2px solid var(--primary);
+      border-color: var(--primary);
+    }
+    .search-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+    section {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 1rem;
+    }
+    section > h2 {
+      font-size: 1.25rem;
+      margin: 0 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary);
+      color: var(--primary-dark);
+    }
+    .term-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.15rem;
+      margin-bottom: 0.85rem;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+      scroll-margin-top: 4rem;
+    }
+    .term-card.hidden { display: none; }
+    .term-card h3 {
+      margin: 0 0 0.65rem;
+      font-size: 1.05rem;
+      color: var(--primary-dark);
+    }
+    .term-card h3 code {
+      font-size: 0.88em;
+      background: var(--primary-bg);
+      padding: 0.1rem 0.4rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .term-card h4 {
+      margin: 1rem 0 0.5rem;
+      font-size: 0.92rem;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.25rem;
+    }
+    .term-card h4:first-of-type { margin-top: 0.5rem; }
+    .term-card p.note {
+      margin: 0.65rem 0 0;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+    .term-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .term-table td {
+      padding: 0.3rem 0;
+      vertical-align: top;
+    }
+    .term-table td:first-child {
+      width: 7.5rem;
+      font-weight: 600;
+      color: var(--muted);
+      padding-right: 0.75rem;
+    }
+    .term-table .tip-row td:last-child { color: var(--ok); }
+    .term-table .warn-row td:last-child { color: var(--bad); }
+    table.data {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.88rem;
+      background: var(--card);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    table.data th, table.data td {
+      border-bottom: 1px solid var(--border);
+      padding: 0.55rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    table.data th {
+      background: var(--bg);
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.82rem;
+    }
+    table.data tr:last-child td { border-bottom: none; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.15rem;
+      margin-bottom: 1rem;
+    }
+    .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
+    .keyword-table td:first-child { font-family: Consolas, monospace; font-size: 0.82rem; }
+    .keyword-table td:last-child { font-weight: 600; color: var(--primary-dark); }
+    footer {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">PMP Glossary</div>
+      <div class="brand-sub">41+ khái niệm · PMBOK 8</div>
+      <nav>
+        <div class="nav-group">Nhóm</div>
+        <a href="#sec-finance">1. Tài chính & Rủi ro</a>
+        <a href="#sec-risk">2. Risk</a>
+        <a href="#sec-stakeholder">3. Stakeholder</a>
+        <a href="#sec-team">4. Team & Leadership</a>
+        <a href="#sec-change">5. Change Management</a>
+        <a href="#sec-agile">6. Agile & Approach</a>
+        <a href="#sec-evm">7. Schedule & EVM</a>
+        <a href="#sec-tools">8. Kỹ thuật</a>
+        <a href="#sec-governance">9. Governance</a>
+        <a href="#sec-metrics">10. Metrics & Bias</a>
+        <a href="#sec-business">11. Business Env</a>
+        <a href="#sec-compare">12. So sánh nhanh</a>
+        <a href="#sec-keywords">13. Keyword → Thuật ngữ</a>
+
+        <div class="nav-group">Thuật ngữ</div>
+        <a class="nav-term" href="#hedging">Hedging</a>
+        <a class="nav-term" href="#deplete">Deplete</a>
+        <a class="nav-term" href="#exposure">Exposure</a>
+        <a class="nav-term" href="#offset">Offset</a>
+        <a class="nav-term" href="#risk">Risk / Threat / Opportunity</a>
+        <a class="nav-term" href="#risk-response">Risk Response (4+4)</a>
+        <a class="nav-term" href="#stem">Stem</a>
+        <a class="nav-term" href="#salience">Salience Model</a>
+        <a class="nav-term" href="#storytelling">Storytelling</a>
+        <a class="nav-term" href="#cadence">Cadence</a>
+        <a class="nav-term" href="#discord">Discord</a>
+        <a class="nav-term" href="#cohort">Cohort</a>
+        <a class="nav-term" href="#folk">Folk / Folks</a>
+        <a class="nav-term" href="#demoralization">Demoralization</a>
+        <a class="nav-term" href="#hawthorne">Hawthorne Effect</a>
+        <a class="nav-term" href="#theory-xyz">Theory X / Y / Z</a>
+        <a class="nav-term" href="#leadership-styles">Leadership Styles (8)</a>
+        <a class="nav-term" href="#democratic">Democratic</a>
+        <a class="nav-term" href="#types-of-power">Types of Power (14)</a>
+        <a class="nav-term" href="#swarm">Swarm</a>
+        <a class="nav-term" href="#humility">Humility</a>
+        <a class="nav-term" href="#ocm">Organisational Change Management</a>
+        <a class="nav-term" href="#bridges-transition">Bridges Transition Model</a>
+        <a class="nav-term" href="#change-models">ADKAR · Kotter · Satir</a>
+        <a class="nav-term" href="#adaptive">Adaptive / Agile / Iterative / Incremental</a>
+        <a class="nav-term" href="#s-curve">S-Curve</a>
+        <a class="nav-term" href="#vac">VAC</a>
+        <a class="nav-term" href="#cocomo">COCOMO</a>
+        <a class="nav-term" href="#toc">TOC</a>
+        <a class="nav-term" href="#punch-list">Punch List</a>
+        <a class="nav-term" href="#delphi">Delphi / Wideband Delphi</a>
+        <a class="nav-term" href="#starbursting">Starbursting</a>
+        <a class="nav-term" href="#branch-bound">Branch and Bound</a>
+        <a class="nav-term" href="#governance">Governance</a>
+        <a class="nav-term" href="#hazardous">Hazardous</a>
+        <a class="nav-term" href="#vigilant">Vigilant</a>
+        <a class="nav-term" href="#vanity-metric">Vanity Metric</a>
+        <a class="nav-term" href="#confirmation-bias">Confirmation Bias</a>
+        <a class="nav-term" href="#causation">Causation</a>
+        <a class="nav-term" href="#triple-bottom-line">Triple Bottom Line</a>
+      </nav>
+      <a class="quiz-link" href="pmp-exam-prep-lecture.html">← Bài giảng PMP</a>
+      <a class="quiz-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+    </aside>
+
+    <div>
+      <nav class="mobile-nav">
+        <a href="#sec-finance">Tài chính</a>
+        <a href="#sec-risk">Risk</a>
+        <a href="#sec-stakeholder">Stakeholder</a>
+        <a href="#sec-team">Team</a>
+        <a href="#sec-change">Change</a>
+        <a href="#sec-agile">Agile</a>
+        <a href="#sec-evm">EVM</a>
+        <a href="#sec-tools">Kỹ thuật</a>
+        <a href="#sec-keywords">Keywords</a>
+      </nav>
+
+      <main>
+        <header class="hero">
+          <h1>PMP Glossary — Khái niệm đã học</h1>
+          <p class="lead">Tra cứu nhanh thuật ngữ PMP/PMBOK 8 từ phiên học từ vựng. Dùng ô tìm kiếm hoặc sidebar.</p>
+        </header>
+
+        <div class="search-box">
+          <input type="search" id="searchInput" placeholder="Tìm: hedging, VAC, Delphi, swarm…" autocomplete="off">
+          <div class="search-meta"><span id="resultCount">41</span> thuật ngữ</div>
+        </div>
+
+        <!-- 1. Finance -->
+        <section id="sec-finance">
+          <h2>1. Tài chính &amp; Rủi ro</h2>
+
+          <article class="term-card" id="hedging" data-terms="hedging phòng ngừa tỷ giá financial risk">
+            <h3>Hedging</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Phòng ngừa rủi ro tài chính (đặc biệt tỷ giá) bằng công cụ/chiến lược bù trừ biến động giá</td></tr>
+              <tr><td>PMP</td><td>Risk response cho rủi ro tài chính; PM phối hợp finance/treasury</td></tr>
+              <tr><td>Ví dụ</td><td>Forward contract, currency swap khi trả supplier nhiều loại tiền</td></tr>
+              <tr class="tip-row"><td>Mẹo đề</td><td><em>hedging strategies</em> + exchange rate → financial risk response</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="deplete" data-terms="deplete cạn kiệt contingency reserve">
+            <h3>Deplete</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Làm cạn kiệt, tiêu hao dần, dùng hết (contingency reserve, funds)</td></tr>
+              <tr><td>PMP</td><td><em>"reserves are quickly depleted"</em> → quỹ dự phòng bị dùng hết nhanh</td></tr>
+              <tr><td>Đối lập</td><td>Replenish (bổ sung lại)</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="exposure" data-terms="exposure phơi nhiễm risk financial">
+            <h3>Exposure</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Mức độ phơi nhiễm trước rủi ro — càng chậm xử lý, exposure càng tăng</td></tr>
+              <tr><td>≠ Impact</td><td>Exposure = đang trong vùng rủi ro; Impact = hậu quả nếu xảy ra</td></tr>
+              <tr class="tip-row"><td>Mẹo đề</td><td><em>delays will increase exposure</em> → trì hoãn kéo dài rủi ro tài chính</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="offset" data-terms="offset bù đắp bù trừ compensate savings reserves">
+            <h3>Offset</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td><strong>Bù đắp, bù trừ</strong> — A giảm/triệt tiêu tác động của B</td></tr>
+              <tr><td>Ví dụ</td><td>Cost savings offset higher costs; reserves offset penalties</td></tr>
+              <tr class="warn-row"><td>Bẫy đề</td><td><em>Savings will offset compression</em> — thường <strong>lạc quan sai</strong></td></tr>
+              <tr><td>≠ Hedge</td><td>Hedge = phòng rủi ro tài chính; Offset = bù trừ tổng quát</td></tr>
+            </table>
+          </article>
+        </section>
+        <section id="sec-risk">
+          <h2>2. Quản lý rủi ro (Risk)</h2>
+
+          <article class="term-card" id="risk" data-terms="risk threat opportunity issue uncertainty">
+            <h3>Risk · Threat · Opportunity</h3>
+            <table class="term-table">
+              <tr><td>Risk</td><td>Sự kiện <strong>không chắc chắn</strong> ảnh hưởng mục tiêu (tích cực hoặc tiêu cực) → Risk register</td></tr>
+              <tr><td>Threat</td><td>Rủi ro <strong>tiêu cực</strong> → Avoid, Mitigate, Transfer, Accept</td></tr>
+              <tr><td>Opportunity</td><td>Rủi ro <strong>tích cực</strong> → Exploit, Enhance, Share, Accept</td></tr>
+            </table>
+            <table class="data" style="margin-top:0.75rem">
+              <tr><th></th><th>Risk</th><th>Issue</th></tr>
+              <tr><td>Thời điểm</td><td>Chưa xảy ra</td><td><strong>Đã</strong> xảy ra</td></tr>
+              <tr><td>Artifact</td><td>Risk register</td><td>Issue log</td></tr>
+              <tr><td>Hành động</td><td>Planned response</td><td>Resolve ngay</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="risk-response" data-terms="avoid mitigate transfer accept exploit enhance share risk response threat opportunity contingency reserve residual secondary insurance fixed price cross-train">
+            <h3>Risk Response Strategies</h3>
+            <p class="note">Sau khi identify &amp; analyze → chọn response trong risk register. Khi risk <strong>materialize</strong> → thực hiện <strong>planned response</strong> trước khi chỉ ghi log.</p>
+
+            <h4>Threat — 4 chiến lược (tiêu cực)</h4>
+            <table class="data">
+              <tr><th>Strategy</th><th>Mục tiêu</th><th>Ví dụ PMP</th></tr>
+              <tr>
+                <td><strong>Avoid</strong></td>
+                <td>Đổi plan → <strong>loại bỏ</strong> threat</td>
+                <td>Bỏ scope rủi ro cao; đổi vendor/vùng/công nghệ; tránh mùa bão</td>
+              </tr>
+              <tr>
+                <td><strong>Mitigate</strong></td>
+                <td><strong>Giảm</strong> probability và/hoặc impact</td>
+                <td>Cross-train, backup resource; thêm testing/review; penalty clause</td>
+              </tr>
+              <tr>
+                <td><strong>Transfer</strong></td>
+                <td>Chuyển <strong>impact</strong> cho bên thứ ba</td>
+                <td>Insurance; fixed-price contract; performance bond</td>
+              </tr>
+              <tr>
+                <td><strong>Accept</strong></td>
+                <td>Chấp nhận — passive hoặc <strong>active + reserve</strong></td>
+                <td>Low impact → passive; dùng contingency reserve / workaround</td>
+              </tr>
+            </table>
+
+            <table class="term-table" style="margin-top:0.75rem">
+              <tr><td>Avoid</td><td>Mạnh nhất — rủi ro biến mất nhưng có thể mất value/scope</td></tr>
+              <tr><td>Mitigate</td><td><strong>Hay gặp nhất</strong> trong đề — vẫn còn <em>residual risk</em></td></tr>
+              <tr><td>Transfer</td><td>Không xóa rủi ro hoàn toàn (reputation vẫn có thể ảnh hưởng PM)</td></tr>
+              <tr class="warn-row"><td>Accept</td><td>≠ ignore — active accept = có contingency / plan B</td></tr>
+            </table>
+
+            <h4>Opportunity — 4 chiến lược (tích cực)</h4>
+            <table class="data">
+              <tr><th>Threat</th><th>Opportunity</th><th>Ý chính</th></tr>
+              <tr><td>Avoid</td><td><strong>Exploit</strong></td><td>Đảm bảo opportunity <strong>xảy ra</strong> (lock giá, mua ngay)</td></tr>
+              <tr><td>Mitigate</td><td><strong>Enhance</strong></td><td><strong>Tăng</strong> chance hoặc benefit (thêm marketing, resource)</td></tr>
+              <tr><td>Transfer</td><td><strong>Share</strong></td><td>Chia lợi với partner (JV, alliance)</td></tr>
+              <tr><td>Accept</td><td><strong>Accept</strong></td><td>Sẵn sàng nắm nếu xảy ra</td></tr>
+            </table>
+
+            <h4>Chọn strategy — câu hỏi gợi ý</h4>
+            <table class="data">
+              <tr><th>Câu hỏi</th><th>Hướng</th></tr>
+              <tr><td>Có thể bỏ/đổi scope?</td><td><strong>Avoid</strong></td></tr>
+              <tr><td>Giữ scope, giảm rủi ro?</td><td><strong>Mitigate</strong></td></tr>
+              <tr><td>Bên thứ ba gánh được (insurance, contract)?</td><td><strong>Transfer</strong></td></tr>
+              <tr><td>Rủi ro nhỏ / cost response &gt; impact?</td><td><strong>Accept</strong></td></tr>
+            </table>
+
+            <h4>Residual &amp; Secondary risk</h4>
+            <table class="term-table">
+              <tr><td>Residual risk</td><td>Rủi ro <strong>còn lại</strong> sau response (đặc biệt sau Mitigate)</td></tr>
+              <tr><td>Secondary risk</td><td>Rủi ro <strong>mới</strong> do chính response (VD: overtime → burnout)</td></tr>
+            </table>
+
+            <h4>Reserve</h4>
+            <table class="data">
+              <tr><th></th><th>Contingency reserve</th><th>Management reserve</th></tr>
+              <tr><td>Cho</td><td>Known unknowns (đã identify)</td><td>Unknown unknowns</td></tr>
+              <tr><td>Gắn</td><td>Active Accept, Mitigate buffer</td><td>Quyết định management</td></tr>
+              <tr><td>Baseline</td><td>Thường trong cost baseline</td><td>Thường <strong>ngoài</strong> baseline</td></tr>
+            </table>
+
+            <h4>Mẹo đề PMP</h4>
+            <table class="term-table">
+              <tr class="tip-row"><td>Insurance, fixed-price</td><td><strong>Transfer</strong></td></tr>
+              <tr class="tip-row"><td>Training, backup, extra testing</td><td><strong>Mitigate</strong></td></tr>
+              <tr class="tip-row"><td>Remove feature, change tech</td><td><strong>Avoid</strong></td></tr>
+              <tr class="tip-row"><td>Contingency fund cho risk đã biết</td><td><strong>Accept</strong> (active)</td></tr>
+              <tr class="tip-row"><td>Risk đã xảy ra</td><td>Implement <strong>planned response</strong> từ risk register</td></tr>
+              <tr class="warn-row"><td>Chỉ update risk log</td><td>Thường <strong>sai</strong> nếu đề hỏi FIRST/NEXT</td></tr>
+            </table>
+
+            <div class="card tip" style="margin-top:0.85rem;margin-bottom:0">
+              <strong>Ví dụ:</strong> Key engineer có thể nghỉ (critical path) → Mitigate: cross-train + backup; Avoid: đổi tech; Transfer: consultant on-call; Accept: schedule buffer + contingency.
+            </div>
+          </article>
+        </section>
+
+        <!-- 3. Stakeholder -->
+        <section id="sec-stakeholder">
+          <h2>3. Stakeholder &amp; Giao tiếp</h2>
+
+          <article class="term-card" id="stem" data-terms="stem question stem FIRST NEXT">
+            <h3>Stem (Question stem)</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Phần mô tả tình huống + câu hỏi chính (trước A/B/C/D)</td></tr>
+              <tr class="tip-row"><td>Mẹo đề</td><td>Đọc <strong>câu cuối</strong> stem → tìm FIRST / NEXT / NOT / BEST</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="salience" data-terms="salience model power legitimacy urgency stakeholder">
+            <h3>Salience Model</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Phân loại stakeholder: <strong>Power, Legitimacy, Urgency</strong></td></tr>
+              <tr><td>Definitive</td><td>P + L + U → ưu tiên cao nhất</td></tr>
+              <tr><td>≠ Grid</td><td>Grid = authority × <strong>interest</strong></td></tr>
+              <tr class="tip-row"><td>Mẹo đề</td><td><em>power, urgency, legitimacy</em> → Salience</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="storytelling" data-terms="storytelling lessons learned memorable">
+            <h3>Storytelling</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Kể chuyện có ngữ cảnh — lessons learned relatable &amp; memorable</td></tr>
+              <tr class="tip-row"><td>Đúng khi</td><td>Lessons đã ghi, cần áp dụng; handover ops team</td></tr>
+              <tr class="warn-row"><td>Sai khi</td><td>Retrospective superficial → <strong>categorize patterns</strong></td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="cadence" data-terms="cadence nhịp độ meeting delivery">
+            <h3>Cadence</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Nhịp độ, chu kỳ lặp lại đều đặn (họp, review, giao hàng)</td></tr>
+              <tr><td>PMP</td><td>Meeting cadence, delivery cadence, cadence points</td></tr>
+              <tr><td>Tăng cadence</td><td>Làm thường xuyên hơn (monthly → weekly)</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="discord" data-terms="discord conflict disagreement stakeholder tension">
+            <h3>Discord</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td><strong>Bất hòa, mâu thuẫn</strong> giữa người/nhóm (≠ Discord app)</td></tr>
+              <tr><td>PMP</td><td>Discord among stakeholders/teams → conflict resolution</td></tr>
+              <tr class="tip-row"><td>PM làm</td><td>Facilitate, understand perspectives — không punish/replace</td></tr>
+              <tr><td>≈</td><td>Conflict, disagreement (discord formal hơn)</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="cohort" data-terms="cohort nhóm pilot rollout training incremental batch">
+            <h3>Cohort</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td><strong>Nhóm người</strong> cùng đặc điểm/thời điểm — theo dõi hoặc triển khai cùng nhau</td></tr>
+              <tr><td>Ví dụ</td><td>Training cohort; pilot cohort; first cohort of users/sites</td></tr>
+              <tr class="tip-row"><td>PMP</td><td>Phased/incremental rollout — giao từng nhóm trước khi scale</td></tr>
+              <tr><td>≠ Team</td><td>Cohort = cùng đợt/đặc điểm; Team = làm việc chung dự án</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="folk" data-terms="folk folks people informal team stakeholders folk wisdom">
+            <h3>Folk / Folks</h3>
+            <table class="term-table">
+              <tr><td>Folks</td><td><strong>Người, mọi người</strong> (informal) ≈ people, team, stakeholders</td></tr>
+              <tr><td>Ví dụ</td><td><em>folks at HQ</em>, <em>folks on the ground</em>, <em>right folks in the room</em></td></tr>
+              <tr><td>Folk (adj.)</td><td>Dân gian, truyền thống — <em>folk wisdom</em></td></tr>
+              <tr class="warn-row"><td>Folk wisdom</td><td>Kinh nghiệm truyền miệng không data — thường <strong>sai</strong> vs evidence-based</td></tr>
+            </table>
+          </article>
+        </section>
+
+        <!-- 4. Team -->
+        <section id="sec-team">
+          <h2>4. Team, Leadership &amp; Tổ chức</h2>
+
+          <article class="term-card" id="demoralization" data-terms="demoralization morale overworked">
+            <h3>Demoralization</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Suy sụp tinh thần, mất động lực</td></tr>
+              <tr class="tip-row"><td>PM làm</td><td>Engage, acknowledge, empower — <strong>không</strong> ép overtime / replace người</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="hawthorne" data-terms="hawthorne effect observed attention">
+            <h3>Hawthorne Effect</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Được quan sát/chú ý → làm tốt hơn (không chỉ do thay đổi điều kiện)</td></tr>
+              <tr><td>PMP</td><td>Coaching, 1-on-1, engagement có giá trị thật</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="theory-xyz" data-terms="theory x theory y theory z mcgregor ouchi">
+            <h3>Theory X · Y · Z</h3>
+            <table class="data">
+              <tr><th>Lý thuyết</th><th>Giả định</th><th>PMP</th></tr>
+              <tr><td><strong>Theory X</strong></td><td>Người lười, cần ép, micromanage</td><td class="warn-row">Thường <strong>sai</strong></td></tr>
+              <tr><td><strong>Theory Y</strong></td><td>Tự chủ, empower, coaching</td><td class="tip-row">Thường <strong>đúng</strong></td></tr>
+              <tr><td><strong>Theory Z</strong></td><td>Cam kết dài hạn, consensus, loyalty</td><td>Quality circles, job security</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="leadership-styles" data-terms="leadership styles laissez-faire transactional servant leader transformational charismatic interactional distributed autocratic micromanage agile">
+            <h3>Leadership Styles — 8 phong cách</h3>
+            <p class="note">PMP/Agile thường ưu tiên <strong>Servant leader</strong>, <strong>Transformational</strong>, <strong>Distributed</strong>. Thường <strong>sai</strong>: Autocratic, Laissez-faire khi PM phải hành động.</p>
+            <table class="data">
+              <tr><th>Style</th><th>Định nghĩa</th><th>PMP</th></tr>
+              <tr>
+                <td><strong>Laissez-faire</strong></td>
+                <td>Hands-off — để team tự quyết</td>
+                <td class="warn-row">Sai khi cần facilitate, remove impediment, coach</td>
+              </tr>
+              <tr>
+                <td><strong>Transactional</strong></td>
+                <td>Management by exception; focus rewards/thành tích</td>
+                <td>Ít phù hợp Agile — carrot/stick, chỉ can thiện khi lệch chuẩn</td>
+              </tr>
+              <tr>
+                <td><strong>Servant leader</strong></td>
+                <td>Phục vụ sự phát triển, học hỏi, autonomy, well-being của người khác</td>
+                <td class="tip-row"><strong>Hay đúng</strong> — Agile, Scrum, empower team</td>
+              </tr>
+              <tr>
+                <td><strong>Transformational</strong></td>
+                <td>Inspirational motivation — truyền cảm hứng qua vision</td>
+                <td class="tip-row">Tốt — communicate vision, motivate change</td>
+              </tr>
+              <tr>
+                <td><strong>Charismatic</strong></td>
+                <td>Năng lượng cao, tự tin, niềm tin mạnh</td>
+                <td>Có thể tốt nhưng phụ thuộc cá nhân — không thay coaching</td>
+              </tr>
+              <tr>
+                <td><strong>Interactional</strong></td>
+                <td>Kết hợp transactional + transformational + charismatic</td>
+                <td>Framework mô tả — linh hoạt theo tình huống</td>
+              </tr>
+              <tr>
+                <td><strong>Distributed</strong></td>
+                <td>Team ra quyết định <strong>dân chủ</strong></td>
+                <td class="tip-row">Phù hợp empowered / self-organizing team</td>
+              </tr>
+              <tr>
+                <td><strong>Autocratic</strong></td>
+                <td><strong>Một người</strong> quyết định mọi thứ</td>
+                <td class="warn-row"><strong>Thường sai</strong> — ≈ Theory X, micromanage</td>
+              </tr>
+            </table>
+
+            <h4>So sánh nhanh</h4>
+            <table class="data">
+              <tr><th>Đối lập</th><th>Style A</th><th>Style B</th></tr>
+              <tr><td>Quyền quyết định</td><td>Autocratic (1 người)</td><td>Distributed / Laissez-faire (team)</td></tr>
+              <tr><td>PM Agile</td><td>Servant leader (phục vụ team)</td><td>Transactional (chỉ khi exception)</td></tr>
+              <tr><td>Động lực</td><td>Transformational (vision)</td><td>Transactional (reward/punish)</td></tr>
+            </table>
+
+            <h4>Mẹo đề PMP</h4>
+            <table class="term-table">
+              <tr class="tip-row"><td>Agile, Scrum, impediment</td><td><strong>Servant leader</strong></td></tr>
+              <tr class="tip-row"><td>Vision, inspire change</td><td><strong>Transformational</strong></td></tr>
+              <tr class="tip-row"><td>Self-organizing, democratic</td><td><strong>Distributed</strong></td></tr>
+              <tr class="warn-row"><td>PM decides alone, enforce, punish</td><td><strong>Autocratic</strong> — sai</td></tr>
+              <tr class="warn-row"><td>PM absent, no guidance</td><td><strong>Laissez-faire</strong> — sai khi cần action</td></tr>
+              <tr class="warn-row"><td>Reward/punish only</td><td><strong>Transactional</strong> — ít khi best</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="democratic" data-terms="democratic dân chủ distributed self-organizing facilitate consensus">
+            <h3>Democratic</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td><strong>Dân chủ</strong> — quyết định qua tham gia, thảo luận, đồng thuận của nhiều người</td></tr>
+              <tr><td>Gắn với</td><td><strong>Distributed</strong> leadership — team makes democratic decisions</td></tr>
+              <tr class="tip-row"><td>PM role</td><td><strong>Facilitate</strong> — không dictate (≠ laissez-faire)</td></tr>
+              <tr class="warn-row"><td>Đối lập</td><td><strong>Autocratic</strong> — một người quyết định</td></tr>
+            </table>
+            <table class="data" style="margin-top:0.75rem">
+              <tr><th></th><th>Democratic</th><th>Autocratic</th><th>Laissez-faire</th></tr>
+              <tr><td>Ai quyết</td><td>Team cùng tham gia</td><td>1 người</td><td>Team tự xoay, PM vắng</td></tr>
+              <tr><td>PMP Agile</td><td class="tip-row">✓ Thường đúng</td><td class="warn-row">✗ Sai</td><td class="warn-row">✗ Khi cần PM action</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="types-of-power" data-terms="power politics positional informational referent situational personal relational expert reward coercive ingratiating pressure guilt persuasive avoiding stakeholder">
+            <h3>Types of Power — 14 loại quyền lực</h3>
+            <p class="note">Politics &amp; Power (PMBOK). PMP ưu tiên <strong>expert, referent, informational, persuasive</strong>. Tránh <strong>coercive, guilt-based, pressure-based</strong>.</p>
+            <table class="data">
+              <tr><th>Power</th><th>Cách dùng</th><th>PMP</th></tr>
+              <tr><td><strong>Positional</strong></td><td>Vị trí chính thức trong team</td><td>PM title — dùng có trách nhiệm</td></tr>
+              <tr><td><strong>Informational</strong></td><td>Thu thập &amp; phân phối thông tin</td><td class="tip-row">✓ Transparency, stakeholder comms</td></tr>
+              <tr><td><strong>Referent</strong></td><td>Respect/admiration — uy tín, credibility</td><td class="tip-row">✓ Trust, humility</td></tr>
+              <tr><td><strong>Situational</strong></td><td>Quyền lực tình huống (crisis, unique event)</td><td>Tạm thời — không lạm dụng</td></tr>
+              <tr><td><strong>Personal</strong></td><td>Charm, sức hút cá nhân</td><td>Charismatic — bổ trợ, không thay expert</td></tr>
+              <tr><td><strong>Relational</strong></td><td>Networking, alliances</td><td>Stakeholder engagement</td></tr>
+              <tr><td><strong>Expert</strong></td><td>Skill, experience, knowledge</td><td class="tip-row">✓ SME, guide team — hay đúng</td></tr>
+              <tr><td><strong>Reward</strong></td><td>Praise, bonus, recognition</td><td>Transactional — có giới hạn</td></tr>
+              <tr><td><strong>Coercive</strong></td><td>Discipline, negative consequences</td><td class="warn-row">✗ Punish, threaten — thường sai</td></tr>
+              <tr><td><strong>Ingratiating</strong></td><td>Flattery — nịnh</td><td class="warn-row">✗ Không authentic</td></tr>
+              <tr><td><strong>Pressure-based</strong></td><td>Limit freedom/choices</td><td class="warn-row">✗ Ép buộc</td></tr>
+              <tr><td><strong>Guilt-based</strong></td><td>Impose obligation on others</td><td class="warn-row">✗ Thao túng</td></tr>
+              <tr><td><strong>Persuasive</strong></td><td>Right arguments — lập luận thuyết phục</td><td class="tip-row">✓ Facilitate, democratic</td></tr>
+              <tr><td><strong>Avoiding</strong></td><td>Refuse to participate</td><td class="warn-row">✗ PM absent — ≈ laissez-faire</td></tr>
+            </table>
+
+            <h4>Power × Democratic leadership</h4>
+            <table class="data">
+              <tr><th>Hỗ trợ democratic</th><th>Ít / không democratic</th></tr>
+              <tr><td>Expert, Referent, Informational, Persuasive</td><td>Coercive, Pressure-based, Guilt-based</td></tr>
+            </table>
+
+            <h4>Mẹo đề PMP</h4>
+            <table class="term-table">
+              <tr class="tip-row"><td>PM shares info, builds trust</td><td>Informational + Referent</td></tr>
+              <tr class="tip-row"><td>PM uses technical knowledge</td><td>Expert power</td></tr>
+              <tr class="tip-row"><td>PM facilitates with good arguments</td><td>Persuasive</td></tr>
+              <tr class="warn-row"><td>PM punishes, threatens team</td><td>Coercive — sai</td></tr>
+              <tr class="warn-row"><td>PM withholds info, manipulates</td><td>Sai — transparency</td></tr>
+              <tr class="warn-row"><td>PM refuses to engage</td><td>Avoiding — sai</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="swarm" data-terms="swarm swarming agile blocker escalate">
+            <h3>Swarm / Swarming</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Cả team tập trung vào một blocker để giải quyết nhanh</td></tr>
+              <tr class="tip-row"><td>Đúng khi</td><td>Vấn đề <strong>trong quyền</strong> team</td></tr>
+              <tr class="warn-row"><td>Sai khi</td><td><em>Outside team's authority</em> → <strong>Escalate to sponsor</strong></td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="humility" data-terms="humility humble accountable apologize servant leadership acknowledge">
+            <h3>Humility</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td><strong>Khiêm tốn</strong> — biết giới hạn, lắng nghe, thừa nhận sai</td></tr>
+              <tr><td>PMP</td><td>Servant leadership, Lead accountably — acknowledge &amp; apologize</td></tr>
+              <tr class="tip-row"><td>Đúng</td><td>Ask SME, empower team, escalate khi vượt quyền</td></tr>
+              <tr class="warn-row"><td>Đối lập</td><td>Arrogance, blame, hide mistakes, micromanage</td></tr>
+            </table>
+          </article>
+        </section>
+
+        <!-- 5. Change Management -->
+        <section id="sec-change">
+          <h2>5. Organisational Change Management</h2>
+
+          <article class="term-card" id="ocm" data-terms="organisational change management OCM PMI managing change transition readiness">
+            <h3>Organisational Change Management (OCM)</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Quản lý thay đổi tổ chức — giúp con người <strong>chấp nhận và áp dụng</strong> thay đổi do dự án mang lại</td></tr>
+              <tr><td>PM role</td><td>Communicate, engage stakeholders, assess readiness, support adoption — không chỉ giao deliverable</td></tr>
+              <tr class="tip-row"><td>Change vs Transition</td><td><strong>Change</strong> = tình huống mới (process, org chart) · <strong>Transition</strong> = hành trình cảm xúc/tâm lý của con người</td></tr>
+            </table>
+
+            <h4>5 Change Models (PMBOK / đề thi)</h4>
+            <table class="data">
+              <tr><th>Model</th><th>Trọng tâm</th><th>Keyword</th></tr>
+              <tr><td><strong>PMI Managing Change in Organisations</strong></td><td>Khung PMI — readiness, impact, communication</td><td>Organisational readiness</td></tr>
+              <tr><td><strong>ADKAR</strong> (Prosci)</td><td>5 giai đoạn <strong>cá nhân</strong></td><td>Awareness → Desire → Knowledge → Ability → Reinforcement</td></tr>
+              <tr><td><strong>Kotter 8 Steps</strong></td><td>8 bước <strong>dẫn dắt</strong> change ở cấp tổ chức</td><td>Urgency, coalition, vision, wins, anchor</td></tr>
+              <tr><td><strong>Virginia Satir</strong></td><td>Giai đoạn <strong>cảm xúc</strong> khi đối mặt change</td><td>Status quo → Resistance → Chaos → Integration</td></tr>
+              <tr><td><strong>Bridges Transition</strong></td><td>3 giai đoạn <strong>transition</strong> (William Bridges)</td><td>Ending → Neutral zone → New beginning</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="bridges-transition" data-terms="bridges transition model ending neutral zone new beginning losing letting go readiness">
+            <h3>Bridges Transition Model</h3>
+            <table class="term-table">
+              <tr><td>Tác giả</td><td><strong>William Bridges</strong> — tập trung <strong>transition</strong> (con người), không chỉ change (tình huống)</td></tr>
+            </table>
+
+            <h4>3 giai đoạn chính</h4>
+            <table class="data">
+              <tr><th>Giai đoạn</th><th>Ý nghĩa</th><th>PM cần làm</th></tr>
+              <tr><td><strong>1. Ending</strong><br><em>Losing &amp; letting go</em></td><td>Kết thúc cách làm cũ — mất mát, buồn, lo sợ</td><td>Acknowledge loss; communicate <strong>why</strong> change</td></tr>
+              <tr><td><strong>2. The Neutral Zone</strong></td><td>Vùng trung gian — bối rối, năng suất tạm giảm, uncertainty</td><td>Support, training, patience — đừng rush</td></tr>
+              <tr><td><strong>3. The New Beginning</strong></td><td>Chấp nhận &amp; thành thạo cách mới</td><td>Celebrate wins, reinforce, monitor adoption</td></tr>
+            </table>
+
+            <h4>Transition Readiness Process</h4>
+            <table class="data">
+              <tr><th>#</th><th>Bước</th></tr>
+              <tr><td>1</td><td><strong>Communicate</strong> the reason for the change</td></tr>
+              <tr><td>2</td><td><strong>Understand the impact</strong> from those affected</td></tr>
+              <tr><td>3</td><td><strong>Check</strong> the organisation's readiness for change</td></tr>
+              <tr><td>4</td><td><strong>Educate leaders</strong> on how the change will affect their people</td></tr>
+              <tr><td>5</td><td><strong>Monitor progress</strong> as people go through the stages of transition</td></tr>
+            </table>
+
+            <h4>Mẹo đề PMP</h4>
+            <table class="term-table">
+              <tr class="tip-row"><td>People resist, morale drops mid-change</td><td>Neutral zone — support, don't force</td></tr>
+              <tr class="tip-row"><td>Assess before rollout</td><td>Readiness + understand impact on affected</td></tr>
+              <tr class="tip-row"><td>Leaders unaware of team impact</td><td>Educate leaders (step 4)</td></tr>
+              <tr class="warn-row"><td>Announce change, no follow-up</td><td>Sai — monitor transition stages</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="change-models" data-terms="ADKAR kotter 8 steps satir awareness desire knowledge ability reinforcement urgency coalition">
+            <h3>ADKAR · Kotter 8 Steps · Virginia Satir</h3>
+
+            <h4>ADKAR (Prosci) — thay đổi cá nhân</h4>
+            <table class="data">
+              <tr><th>Chữ</th><th>Giai đoạn</th><th>Ý nghĩa</th></tr>
+              <tr><td><strong>A</strong></td><td>Awareness</td><td>Hiểu <strong>why</strong> cần change</td></tr>
+              <tr><td><strong>D</strong></td><td>Desire</td><td>Muốn tham gia &amp; hỗ trợ change</td></tr>
+              <tr><td><strong>K</strong></td><td>Knowledge</td><td>Biết <strong>how</strong> change</td></tr>
+              <tr><td><strong>A</strong></td><td>Ability</td><td>Có kỹ năng thực hiện change</td></tr>
+              <tr><td><strong>R</strong></td><td>Reinforcement</td><td>Duy trì change lâu dài</td></tr>
+            </table>
+
+            <h4>Kotter — 8 Steps to Change</h4>
+            <table class="data">
+              <tr><th>#</th><th>Bước</th></tr>
+              <tr><td>1</td><td>Create a sense of <strong>urgency</strong></td></tr>
+              <tr><td>2</td><td>Form a <strong>guiding coalition</strong></td></tr>
+              <tr><td>3</td><td>Create a <strong>vision</strong> for change</td></tr>
+              <tr><td>4</td><td><strong>Communicate</strong> the vision</td></tr>
+              <tr><td>5</td><td><strong>Empower</strong> broad-based action</td></tr>
+              <tr><td>6</td><td>Generate <strong>short-term wins</strong></td></tr>
+              <tr><td>7</td><td>Consolidate gains &amp; produce more change</td></tr>
+              <tr><td>8</td><td><strong>Anchor</strong> new approaches in culture</td></tr>
+            </table>
+
+            <h4>Virginia Satir — giai đoạn cảm xúc</h4>
+            <table class="data">
+              <tr><th>Giai đoạn</th><th>Mô tả</th></tr>
+              <tr><td>Late Status Quo</td><td>Ổn định cũ — trước change</td></tr>
+              <tr><td>Resistance</td><td>Phản kháng, deny change</td></tr>
+              <tr><td>Chaos</td><td>Hỗn loạn, không chắc chắn (≈ neutral zone)</td></tr>
+              <tr><td>Integration</td><td>Bắt đầu thích nghi</td></tr>
+              <tr><td>New Status Quo</td><td>Ổn định mới</td></tr>
+            </table>
+
+            <p class="note">Bridges = <strong>transition</strong> · ADKAR = <strong>individual adoption</strong> · Kotter = <strong>organisational leadership</strong> · Satir = <strong>emotional curve</strong></p>
+          </article>
+        </section>
+
+        <!-- 6. Agile -->
+        <section id="sec-agile">
+          <h2>6. Development Approach &amp; Agile</h2>
+
+          <article class="term-card" id="adaptive" data-terms="adaptive agile iterative incremental predictive hybrid">
+            <h3>Adaptive · Agile · Iterative · Incremental</h3>
+            <table class="data">
+              <tr><th>Thuật ngữ</th><th>Tầng</th><th>Ý chính</th></tr>
+              <tr><td><strong>Adaptive</strong></td><td>Development approach (PMBOK)</td><td>Linh hoạt, emergent scope, backlog</td></tr>
+              <tr><td><strong>Agile</strong></td><td>Framework (⊂ Adaptive)</td><td>Scrum, sprint, PO</td></tr>
+              <tr><td><strong>Iterative</strong></td><td>Delivery technique</td><td>Lặp để <strong>tinh chỉnh</strong> cùng sản phẩm</td></tr>
+              <tr><td><strong>Incremental</strong></td><td>Delivery technique</td><td>Giao <strong>từng phần</strong> có value (MVP)</td></tr>
+            </table>
+            <p style="margin:0.65rem 0 0;font-size:0.88rem;color:var(--muted)">Scrum thường = Iterative + Incremental cùng lúc.</p>
+          </article>
+        </section>
+
+        <!-- 7. EVM -->
+        <section id="sec-evm">
+          <h2>7. Schedule, Cost &amp; EVM</h2>
+
+          <article class="term-card" id="s-curve" data-terms="s-curve evm monte carlo PV EV AC">
+            <h3>S-Curve Diagram</h3>
+            <table class="data">
+              <tr><th></th><th>EVM S-curve</th><th>Monte Carlo S-curve</th></tr>
+              <tr><td>Trục Y</td><td>$ tích lũy</td><td>Probability %</td></tr>
+              <tr><td>Trục X</td><td>Time</td><td>Outcome (cost/duration)</td></tr>
+              <tr><td>Đọc EVM</td><td colspan="2">EV &lt; PV → behind schedule; AC &gt; EV → over budget</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="vac" data-terms="VAC variance at completion BAC EAC EVM">
+            <h3>Variance at Completion (VAC)</h3>
+            <table class="term-table">
+              <tr><td>Công thức</td><td><strong>VAC = BAC − EAC</strong></td></tr>
+              <tr class="tip-row"><td>VAC &gt; 0</td><td>Dự kiến <strong>dưới</strong> budget</td></tr>
+              <tr><td>VAC = 0</td><td>Đúng budget</td></tr>
+              <tr class="warn-row"><td>VAC &lt; 0</td><td>Dự kiến <strong>vượt</strong> budget</td></tr>
+              <tr><td>≠ CV/SV</td><td>VAC = forecast <strong>cuối dự án</strong></td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="cocomo" data-terms="COCOMO constructive cost model parametric KLOC software">
+            <h3>COCOMO</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Constructive Cost Model — ước lượng effort/cost phần mềm từ KLOC</td></tr>
+              <tr><td>3 loại</td><td>Organic, Semi-detached, Embedded</td></tr>
+              <tr class="tip-row"><td>Mẹo đề</td><td>Software + lines of code + parametric → COCOMO</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="toc" data-terms="TOC theory of constraints bottleneck critical chain goldratt">
+            <h3>Theory of Constraints (TOC)</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Hệ thống chỉ mạnh bằng <strong>bottleneck</strong></td></tr>
+              <tr><td>5 bước</td><td>Identify → Exploit → Subordinate → Elevate → Repeat</td></tr>
+              <tr><td>Critical Chain</td><td>TOC + project/feeding/resource buffer</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="punch-list" data-terms="punch list closeout acceptance construction">
+            <h3>Punch List</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Danh sách việc nhỏ còn sót trước nghiệm thu/bàn giao</td></tr>
+              <tr><td>PMP</td><td>Punch list = 0 → final acceptance</td></tr>
+            </table>
+          </article>
+        </section>
+
+        <!-- 8. Tools -->
+        <section id="sec-tools">
+          <h2>8. Kỹ thuật &amp; Công cụ</h2>
+
+          <article class="term-card" id="delphi" data-terms="delphi wideband delphi anonymous consensus estimate">
+            <h3>Delphi · Wideband Delphi</h3>
+            <table class="data">
+              <tr><th></th><th>Classic Delphi</th><th>Wideband Delphi</th></tr>
+              <tr><td>Tương tác</td><td>Ẩn danh, im lặng, qua facilitator</td><td><strong>Thảo luận/debate</strong> giữa các vòng</td></tr>
+              <tr><td>Keyword</td><td>anonymous, iterative, consensus</td><td>debate estimates, facilitated rounds</td></tr>
+              <tr><td>Dùng cho</td><td>Estimate, risks, forecast</td><td>Software estimation (Boehm)</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="starbursting" data-terms="starbursting 5W1H who what when where why how">
+            <h3>Starbursting</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Brainstorm <strong>câu hỏi</strong> theo Who/What/Where/When/Why/How</td></tr>
+              <tr><td>Giai đoạn 1</td><td>Chỉ hỏi — chưa trả lời</td></tr>
+              <tr><td>PMP</td><td>Collect requirements, define scope</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="branch-bound" data-terms="branch and bound optimization prune">
+            <h3>Branch and Bound</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Thuật toán tối ưu: phân nhánh + cận → cắt nhánh không khả thi</td></tr>
+              <tr><td>PMP</td><td>Schedule/resource/cost optimization</td></tr>
+              <tr><td>≠</td><td>Brainstorming, elicitation</td></tr>
+            </table>
+          </article>
+        </section>
+
+        <!-- 9. Governance -->
+        <section id="sec-governance">
+          <h2>9. Governance &amp; Quality</h2>
+
+          <article class="term-card" id="governance" data-terms="governance bureaucracy traceability change control">
+            <h3>Governance</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Cơ chế quyết định, kiểm soát, trách nhiệm, traceability</td></tr>
+              <tr class="tip-row"><td>Mindset</td><td>Governance <strong>≠</strong> bureaucracy — lightweight practices</td></tr>
+              <tr><td>PMP</td><td>Change control, decision log, compliance, accountability</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="hazardous" data-terms="hazardous hazard safety risk register">
+            <h3>Hazardous</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Nguy hiểm, có hại — hazardous conditions/materials</td></tr>
+              <tr><td>PMP</td><td>Ghi risk register; plan risk responses</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="vigilant" data-terms="vigilant external environment monitor adapt">
+            <h3>Vigilant</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Cảnh giác, theo dõi chủ động, sẵn sàng adapt</td></tr>
+              <tr class="tip-row"><td>PMP</td><td>Monitor <strong>external environment</strong> (market volatility)</td></tr>
+              <tr><td>Đối lập</td><td>Complacent (chủ quan)</td></tr>
+            </table>
+          </article>
+        </section>
+
+        <!-- 10. Metrics -->
+        <section id="sec-metrics">
+          <h2>10. Metrics, Bias &amp; Phân tích</h2>
+
+          <article class="term-card" id="vanity-metric" data-terms="vanity metric page views impressions actionable">
+            <h3>Vanity Metric</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Chỉ số đẹp báo cáo nhưng <strong>không actionable</strong></td></tr>
+              <tr class="warn-row"><td>Ví dụ ✗</td><td>Page views, social impressions</td></tr>
+              <tr class="tip-row"><td>Ví dụ ✓</td><td>Time to insight, qualified recruit rate, NPS</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="confirmation-bias" data-terms="confirmation bias preexisting view metrics pitfall">
+            <h3>Confirmation Bias</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Chỉ tin thông tin <strong>ủng hộ</strong> quan điểm sẵn có</td></tr>
+              <tr><td>PMP</td><td>Pitfall of metrics (PMBOK 8)</td></tr>
+              <tr class="tip-row"><td>Chống bias</td><td>Holistic view, seek disconfirming evidence</td></tr>
+            </table>
+          </article>
+
+          <article class="term-card" id="causation" data-terms="causation correlation root cause">
+            <h3>Causation</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Quan hệ nhân quả — X <strong>gây ra</strong> Y</td></tr>
+              <tr class="warn-row"><td>≠ Correlation</td><td>Cùng biến đổi ≠ có nhân quả</td></tr>
+              <tr><td>PMP</td><td>Root cause analysis — đừng kết luận vội từ metrics</td></tr>
+            </table>
+          </article>
+        </section>
+
+        <!-- 11. Business -->
+        <section id="sec-business">
+          <h2>11. Business Environment &amp; Sustainability</h2>
+
+          <article class="term-card" id="triple-bottom-line" data-terms="triple bottom line people planet profit ESG sustainability">
+            <h3>Triple Bottom Line (TBL)</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td>Đo thành công: <strong>People, Planet, Profit</strong></td></tr>
+              <tr><td>PMP</td><td>Business Environment, ESG, beyond cost/schedule</td></tr>
+            </table>
+            <div class="card info" style="margin-top:0.75rem;margin-bottom:0">
+              <strong>3P:</strong> Profit (kinh tế) · People (xã hội) · Planet (môi trường)
+            </div>
+          </article>
+        </section>
+
+        <!-- 12. Compare -->
+        <section id="sec-compare">
+          <h2>12. Bảng so sánh nhanh</h2>
+
+          <h3 style="font-size:1rem;margin:1rem 0 0.5rem">Change Models</h3>
+          <table class="data">
+            <tr><th>Model</th><th>Trọng tâm</th></tr>
+            <tr><td>Bridges</td><td>Transition: Ending → Neutral zone → New beginning</td></tr>
+            <tr><td>ADKAR</td><td>Individual: Awareness → Desire → Knowledge → Ability → Reinforcement</td></tr>
+            <tr><td>Kotter</td><td>Organisational: Urgency → Coalition → Vision → Wins → Anchor</td></tr>
+            <tr><td>Satir</td><td>Emotional: Status quo → Resistance → Chaos → Integration</td></tr>
+            <tr><td>PMI OCM</td><td>Readiness, impact, communicate, educate leaders, monitor</td></tr>
+          </table>
+
+          <h3 style="font-size:1rem;margin:1rem 0 0.5rem">Elicitation &amp; Estimation</h3>
+          <table class="data">
+            <tr><th>Kỹ thuật</th><th>Đặc điểm</th></tr>
+            <tr><td>Delphi</td><td>Ẩn danh, nhiều vòng, consensus</td></tr>
+            <tr><td>Wideband Delphi</td><td>Delphi + thảo luận/debate</td></tr>
+            <tr><td>Starbursting</td><td>5W1H, questions first</td></tr>
+            <tr><td>COCOMO</td><td>Parametric, software, KLOC</td></tr>
+            <tr><td>Branch and bound</td><td>Optimization, prune branches</td></tr>
+          </table>
+
+          <h3 style="font-size:1rem;margin:1rem 0 0.5rem">Stakeholder Models</h3>
+          <table class="data">
+            <tr><th>Model</th><th>Tiêu chí</th></tr>
+            <tr><td>Salience</td><td>Power, Legitimacy, Urgency</td></tr>
+            <tr><td>Power/Interest Grid</td><td>Authority × Interest</td></tr>
+            <tr><td>RACI</td><td>R, A, C, I (vai trò công việc)</td></tr>
+          </table>
+
+          <h3 style="font-size:1rem;margin:1rem 0 0.5rem">Risk Responses (Threat)</h3>
+          <table class="data">
+            <tr><th>Strategy</th><th>Mục tiêu</th><th>Keyword đề</th></tr>
+            <tr><td>Avoid</td><td>Loại bỏ threat</td><td>Remove scope, change vendor/tech</td></tr>
+            <tr><td>Mitigate</td><td>Giảm P hoặc I</td><td>Training, backup, testing</td></tr>
+            <tr><td>Transfer</td><td>Chuyển impact</td><td>Insurance, fixed-price</td></tr>
+            <tr><td>Accept</td><td>Chấp nhận + reserve</td><td>Contingency, low impact</td></tr>
+          </table>
+
+          <h3 style="font-size:1rem;margin:1rem 0 0.5rem">Leadership Styles</h3>
+          <table class="data">
+            <tr><th>Style</th><th>PMP thường</th></tr>
+            <tr><td>Servant leader</td><td class="tip-row">✓ Agile, empower</td></tr>
+            <tr><td>Transformational</td><td class="tip-row">✓ Vision, inspire</td></tr>
+            <tr><td>Distributed</td><td class="tip-row">✓ Self-organizing</td></tr>
+            <tr><td>Autocratic</td><td class="warn-row">✗ Micromanage</td></tr>
+            <tr><td>Laissez-faire</td><td class="warn-row">✗ Hands-off khi cần PM</td></tr>
+            <tr><td>Transactional</td><td>Management by exception</td></tr>
+          </table>
+
+          <h3 style="font-size:1rem;margin:1rem 0 0.5rem">Types of Power (14)</h3>
+          <table class="data">
+            <tr><th>✓ PMP ưu tiên</th><th>✗ Tránh</th></tr>
+            <tr><td>Expert, Referent, Informational, Persuasive</td><td>Coercive, Guilt-based, Pressure-based, Avoiding</td></tr>
+          </table>
+
+          <h3 style="font-size:1rem;margin:1rem 0 0.5rem">Risk Responses (Opportunity)</h3>
+          <table class="data">
+            <tr><th>Strategy</th><th>Mục tiêu</th></tr>
+            <tr><td>Exploit</td><td>Đảm bảo xảy ra</td></tr>
+            <tr><td>Enhance</td><td>Tăng chance/benefit</td></tr>
+            <tr><td>Share</td><td>Chia lợi partner</td></tr>
+            <tr><td>Accept</td><td>Sẵn sàng nắm</td></tr>
+          </table>
+
+          <h3 style="font-size:1rem;margin:1rem 0 0.5rem">EVM Forecast</h3>
+          <table class="data">
+            <tr><th>Chỉ số</th><th>Công thức</th><th>Ý nghĩa</th></tr>
+            <tr><td>CPI</td><td>EV / AC</td><td>Hiệu quả chi phí hiện tại</td></tr>
+            <tr><td>SPI</td><td>EV / PV</td><td>Hiệu quả tiến độ hiện tại</td></tr>
+            <tr><td>VAC</td><td>BAC − EAC</td><td>Dự báo over/under budget cuối dự án</td></tr>
+            <tr><td>CV</td><td>EV − AC</td><td>Variance chi phí hiện tại</td></tr>
+            <tr><td>SV</td><td>EV − PV</td><td>Variance tiến độ hiện tại</td></tr>
+          </table>
+        </section>
+
+        <!-- 13. Keywords -->
+        <section id="sec-keywords">
+          <h2>13. Keyword → Thuật ngữ (tra đề)</h2>
+          <table class="data keyword-table">
+            <tr><th>Nếu đề có…</th><th>Nghĩ đến…</th></tr>
+            <tr><td>power, legitimacy, urgency</td><td>Salience model</td></tr>
+            <tr><td>anonymous, iterative, consensus</td><td>Delphi</td></tr>
+            <tr><td>debate estimates, facilitated rounds</td><td>Wideband Delphi</td></tr>
+            <tr><td>Who/What/When/Where/Why/How</td><td>Starbursting</td></tr>
+            <tr><td>outside team's authority</td><td>Escalate (không swarm)</td></tr>
+            <tr><td>swarming, blocker in team scope</td><td>Swarm</td></tr>
+            <tr><td>page views, impressions</td><td>Vanity metric</td></tr>
+            <tr><td>preexisting view</td><td>Confirmation bias</td></tr>
+            <tr><td>BAC − EAC</td><td>VAC</td></tr>
+            <tr><td>cumulative PV EV AC</td><td>S-curve (EVM)</td></tr>
+            <tr><td>Monte Carlo, probability</td><td>S-curve (Monte Carlo)</td></tr>
+            <tr><td>People Planet Profit</td><td>Triple bottom line</td></tr>
+            <tr><td>bottleneck, weakest link</td><td>TOC</td></tr>
+            <tr><td>punch list completion</td><td>Closeout</td></tr>
+            <tr><td>stay vigilant, external environment</td><td>Monitor &amp; adapt</td></tr>
+            <tr><td>overworked demoralized</td><td>Engage (Theory Y)</td></tr>
+            <tr><td>relatable memorable lessons</td><td>Storytelling</td></tr>
+            <tr><td>hedging, exchange rate</td><td>Financial risk response</td></tr>
+            <tr><td>insurance, fixed-price contract</td><td>Transfer</td></tr>
+            <tr><td>training, backup, cross-train</td><td>Mitigate</td></tr>
+            <tr><td>remove scope, change vendor</td><td>Avoid</td></tr>
+            <tr><td>contingency reserve, low impact risk</td><td>Accept (active)</td></tr>
+            <tr><td>risk materialized, planned response</td><td>Implement from risk register</td></tr>
+            <tr><td>residual risk, secondary risk</td><td>Sau Mitigate / response</td></tr>
+            <tr><td>Governance ≠ bureaucracy</td><td>Lightweight traceability</td></tr>
+            <tr><td>lines of code, parametric</td><td>COCOMO</td></tr>
+            <tr><td>offset losses, savings offset</td><td>Bù trừ — cẩn thận optimism bias</td></tr>
+            <tr><td>discord among stakeholders</td><td>Conflict → facilitate</td></tr>
+            <tr><td>pilot cohort, first cohort</td><td>Incremental / phased rollout</td></tr>
+            <tr><td>folks on the ground</td><td>Engage people doing the work</td></tr>
+            <tr><td>folk wisdom</td><td>Không data-driven — thường sai</td></tr>
+            <tr><td>acknowledge mistake, apologize</td><td>Humility + Lead accountably</td></tr>
+            <tr><td>servant leader, remove impediment</td><td>Servant leadership</td></tr>
+            <tr><td>autocratic, PM decides alone</td><td>Thường sai</td></tr>
+            <tr><td>hands-off, laissez-faire</td><td>Sai khi cần facilitate</td></tr>
+            <tr><td>inspirational vision</td><td>Transformational</td></tr>
+            <tr><td>democratic team decisions</td><td>Distributed / Democratic</td></tr>
+            <tr><td>management by exception, rewards</td><td>Transactional</td></tr>
+            <tr><td>expert power, SME knowledge</td><td>Expert power ✓</td></tr>
+            <tr><td>withhold information</td><td>Sai — cần Informational</td></tr>
+            <tr><td>punish, threaten, discipline</td><td>Coercive ✗</td></tr>
+            <tr><td>flattery, ingratiating</td><td>Ingratiating ✗</td></tr>
+            <tr><td>refuse to participate</td><td>Avoiding ✗</td></tr>
+            <tr><td>facilitate, persuasive arguments</td><td>Persuasive ✓</td></tr>
+            <tr><td>neutral zone, confusion mid-change</td><td>Bridges Transition</td></tr>
+            <tr><td>ending, letting go, loss of old way</td><td>Bridges — Ending stage</td></tr>
+            <tr><td>readiness for change, assess impact</td><td>Transition Readiness / PMI OCM</td></tr>
+            <tr><td>educate leaders on people impact</td><td>Transition Readiness step 4</td></tr>
+            <tr><td>awareness desire knowledge ability</td><td>ADKAR</td></tr>
+            <tr><td>sense of urgency, guiding coalition</td><td>Kotter 8 Steps</td></tr>
+            <tr><td>resistance, chaos, emotional stages</td><td>Virginia Satir</td></tr>
+            <tr><td>change vs transition</td><td>Change = situation · Transition = people journey</td></tr>
+          </table>
+        </section>
+
+        <footer>
+          Tài liệu glossary từ phiên học từ vựng PMP ·
+          <a href="pmp-glossary-vi.md">Markdown</a> ·
+          <a href="pmp-exam-prep-lecture.html">Bài giảng</a>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const input = document.getElementById('searchInput');
+      const cards = document.querySelectorAll('.term-card');
+      const countEl = document.getElementById('resultCount');
+
+      function normalize(s) {
+        return s.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
+      }
+
+      input.addEventListener('input', function () {
+        const q = normalize(input.value.trim());
+        let visible = 0;
+        cards.forEach(function (card) {
+          const text = normalize(card.textContent + ' ' + (card.dataset.terms || ''));
+          const show = !q || text.includes(q);
+          card.classList.toggle('hidden', !show);
+          if (show) visible++;
+        });
+        countEl.textContent = q ? visible + ' / ' + cards.length : cards.length;
+      });
+    })();
+  </script>
+</body>
+</html>
