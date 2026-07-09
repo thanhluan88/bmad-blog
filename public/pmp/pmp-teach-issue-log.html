@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Project Sponsor (Q8)</title>
+  <title>PMBOK 8 — Issue Log (Q29)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,11 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
-    .role-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; font-size: 0.86rem; }
-    .role-card.sponsor { border-top: 4px solid var(--primary); background: var(--primary-bg); }
-    .role-card h4 { margin: 0 0 0.4rem; font-size: 0.92rem; }
-    .role-card ul { margin: 0; padding-left: 1.1rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -71,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 320px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 400px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -92,11 +87,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Project Sponsor · Q8</div>
+      <div class="brand-sub">Issue Log · Q29</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#sponsor">Vai trò Sponsor</a>
-        <a href="#roles">So sánh vai trò</a>
+        <a href="#issue">Issue vs Risk</a>
+        <a href="#first">FIRST action</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -132,16 +127,16 @@
         <a href="pmp-teach-request-for-quote.html">Q26: Request for Quote</a>
         <a href="pmp-teach-change-log.html">Q27: Change Log</a>
         <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
-        <a href="pmp-teach-issue-log.html">Q29: Issue Log</a>
+        <a href="pmp-teach-issue-log.html" class="series-current">Q29: Issue Log</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-29">Luyện câu 29</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#sponsor">Sponsor</a>
-        <a href="#roles">Vai trò</a>
+        <a href="#issue">Issue/Risk</a>
+        <a href="#first">FIRST</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -150,189 +145,152 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q8 về <strong>Project Sponsor</strong> — người cấp vốn, định hướng chiến lược
-            và gỡ rào cản tổ chức để dự án thành công.
+            Bài học Q29 về <strong>Issue Log</strong> — unauthorized access đã xảy ra
+            (problem occurred) → ghi <strong>issue</strong> trước khi brainstorm hay escalate.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK 8, p.274</span>
-            <span class="badge">Stakeholders</span>
-            <span class="badge">Câu 8 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.123</span>
+            <span class="badge">Manage Project Execution</span>
+            <span class="badge">Câu 29 — Practice</span>
           </div>
         </header>
 
-        <section id="sponsor">
-          <h2>1. Project Sponsor là gì?</h2>
-          <p>
-            <strong>Sponsor</strong> là cá nhân hoặc nhóm cung cấp <strong>resources và support</strong>
-            cho portfolio, program hoặc project, và <strong>chịu trách nhiệm</strong> tạo điều kiện thành công.
-          </p>
-
-          <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK 8)</h4>
-            <p style="margin:0">
-              A sponsor is an individual or a group that provides resources and support for the
-              portfolio, program, or project, and is accountable for enabling success.
-              <em>— PMBOK Guide 8th Ed., p.274, "Sponsor"</em>
-            </p>
-          </div>
-
-          <h3>Hoạt động điển hình của Sponsor</h3>
-          <ul>
-            <li><strong>Secures funding</strong> — đảm bảo nguồn vốn/ngân sách</li>
-            <li><strong>Strategic direction</strong> — căn chỉnh dự án với mục tiêu tổ chức</li>
-            <li><strong>Remove organizational obstacles</strong> — gỡ rào cản, escalation cấp cao</li>
-            <li>Champion dự án với leadership</li>
-          </ul>
-        </section>
-
-        <section id="roles">
-          <h2>2. Sponsor vs PM vs Product Owner vs Customer</h2>
-
-          <div class="role-grid">
-            <div class="role-card sponsor">
-              <h4>Project Sponsor</h4>
-              <ul>
-                <li>Cấp vốn, resources</li>
-                <li>Chiến lược, accountability</li>
-                <li>Gỡ rào cản tổ chức</li>
-              </ul>
-            </div>
-            <div class="role-card">
-              <h4>Project Manager</h4>
-              <ul>
-                <li>Quản lý hàng ngày</li>
-                <li>Planning, executing, team</li>
-                <li>Không phải người “secure funding”</li>
-              </ul>
-            </div>
-            <div class="role-card">
-              <h4>Product Owner</h4>
-              <ul>
-                <li>Vai trò <strong>Agile</strong></li>
-                <li>Backlog, value, stakeholder cho product</li>
-                <li>Không đồng nghĩa Sponsor</li>
-              </ul>
-            </div>
-            <div class="role-card">
-              <h4>Project Customer</h4>
-              <ul>
-                <li>Người dùng/bên nhận kết quả</li>
-                <li>Yêu cầu &amp; acceptance</li>
-                <li>Không cấp vốn tổ chức</li>
-              </ul>
-            </div>
-          </div>
+        <section id="issue">
+          <h2>1. Issue vs Risk — đã xảy ra hay chưa?</h2>
 
           <table>
             <thead>
-              <tr><th>Manh mối trong đề</th><th>Vai trò</th></tr>
+              <tr><th></th><th>Issue</th><th>Risk</th></tr>
             </thead>
             <tbody>
-              <tr><td>Secures funding</td><td><strong>Sponsor</strong></td></tr>
-              <tr><td>Strategic direction</td><td><strong>Sponsor</strong></td></tr>
-              <tr><td>Remove obstacles (organizational)</td><td><strong>Sponsor</strong></td></tr>
-              <tr><td>Manages team day-to-day</td><td>Project Manager</td></tr>
-              <tr><td>Prioritizes backlog (Agile)</td><td>Product Owner</td></tr>
-              <tr><td>Uses the deliverable</td><td>Customer / User</td></tr>
+              <tr>
+                <td><strong>Định nghĩa</strong></td>
+                <td>Problem <em>đã xảy ra</em></td>
+                <td>Uncertain event <em>chưa xảy ra</em></td>
+              </tr>
+              <tr>
+                <td><strong>Artifact</strong></td>
+                <td>Issue Log</td>
+                <td>Risk Register</td>
+              </tr>
+              <tr>
+                <td><strong>Q29</strong></td>
+                <td>✓ Unauthorized access reported</td>
+                <td>✗ “Could cause issues” = future — sau khi log issue</td>
+              </tr>
             </tbody>
           </table>
+
+          <div class="card tip">
+            <h4>Issue Log (PMBOK p.123)</h4>
+            <p style="margin:0">
+              When a problem has already occurred, it is treated as an issue.
+              The issue log is used to document, track, and manage issues before further action is taken.
+            </p>
+          </div>
+        </section>
+
+        <section id="first">
+          <h2>2. “What should the PM do FIRST?”</h2>
+          <p>Thứ tự đúng sau khi phát hiện breach:</p>
+          <ol>
+            <li><strong>Note in issue log</strong> (A) — document &amp; track</li>
+            <li>Assess impact, brainstorm responses (C) — sau khi logged</li>
+            <li>Escalate if needed (D) — khi vượt quyền PM hoặc sau analysis</li>
+            <li>Update risk register nếu có future uncertainty mới — không thay issue log</li>
+          </ol>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 8</h2>
+          <h2>3. Câu hỏi thực hành — Question 29</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q8</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q29</div>
             <div class="q-text">
-              An employee in the organization secures <em>funding</em> for the project, provides
-              <em>strategic direction</em>, and helps <em>remove organizational obstacles</em>
-              to ensure project success.
-              <em>What role is this person performing in the project?</em>
+              A project team at CD Solutions is developing a customer analytics platform.
+              Midway through execution, a security officer reports
+              <em>unauthorized access to sensitive project data</em>. This could cause issues
+              with the deliverables in the future. What should the project manager do <em>first</em>?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Product Owner.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Project Sponsor.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Project Customer.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Project Manager.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Note it in the issue log.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Note it in the risk register.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Brainstorm ways to handle the security breach with the team.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Escalate the breach to senior managers within the organization.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
-          <h3>Tại sao chọn B — Project Sponsor?</h3>
+          <h3>Tại sao chọn A?</h3>
           <ul>
-            <li><strong>Secures funding</strong> — sponsor cung cấp resources/vốn.</li>
-            <li><strong>Strategic direction</strong> — sponsor căn chỉnh với mục tiêu tổ chức.</li>
-            <li><strong>Remove organizational obstacles</strong> — sponsor escalation, champion.</li>
-            <li>Cả ba là pattern kinh điển nhận diện <strong>Sponsor</strong> trong đề PMP.</li>
+            <li>Unauthorized access <em>reports</em> = event đã xảy ra → issue.</li>
+            <li>FIRST = document trong issue log trước action khác.</li>
+            <li>“Could cause issues in future” không đổi bản chất — breach đã occurred.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không FIRST</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Product Owner</strong></td>
-                <td>Vai trò Agile — quản lý backlog, maximize product value. Không “secure funding” cấp tổ chức.</td>
+                <td><strong>B. Risk register</strong></td>
+                <td>Risk = chưa xảy ra; breach đã occurred → issue log.</td>
               </tr>
               <tr>
-                <td><strong>C. Project Customer</strong></td>
-                <td>Khách hàng/người dùng — nhận deliverable, không cấp vốn hay gỡ rào cản tổ chức.</td>
+                <td><strong>C. Brainstorm with team</strong></td>
+                <td>Valid sau khi issue được documented — không phải bước đầu.</td>
               </tr>
               <tr>
-                <td><strong>D. Project Manager</strong></td>
-                <td>PM quản lý dự án hàng ngày — không phải người đảm bảo funding &amp; strategic direction cấp executive.</td>
+                <td><strong>D. Escalate</strong></td>
+                <td>Escalate sau assess/document — PMI: PM xử lý trước khi escalate.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords Sponsor</h4>
+            <h4>Liên hệ Q20 &amp; Q27</h4>
             <p style="margin:0">
-              funding · budget · strategic direction · organizational obstacles ·
-              champion · executive support · accountable for enabling success
+              Q20: Issue Log vs Assumption/Risk. Q27: Change Log. Q29: breach occurred →
+              <strong>Issue Log FIRST</strong>.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Nhận diện vai trò</h2>
+          <h2>5. Drill — Issue hay Risk?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="SP">
-              <span>Approves budget and removes barriers with senior leadership</span>
+            <div class="classify-row" data-answer="ISS">
+              <span>Unauthorized access already reported</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="ISS">Issue Log</button>
+                <button data-pick="RSK">Risk Register</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PM">
-              <span>Develops schedule and manages project team daily</span>
+            <div class="classify-row" data-answer="RSK">
+              <span>Vendor might delay delivery next month</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="ISS">Issue Log</button>
+                <button data-pick="RSK">Risk Register</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PO">
-              <span>Prioritizes product backlog in Scrum</span>
+            <div class="classify-row" data-answer="ISS">
+              <span>Defect found in production release</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="ISS">Issue Log</button>
+                <button data-pick="RSK">Risk Register</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SP">
-              <span>Provides strategic alignment and project funding</span>
+            <div class="classify-row" data-answer="RSK">
+              <span>Key resource may become unavailable</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="ISS">Issue Log</button>
+                <button data-pick="RSK">Risk Register</button>
               </div>
             </div>
           </div>
@@ -342,16 +300,16 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Product Owner (Agile)</h4>
-            <p style="margin:0">Đề nhắc “employee in organization” + funding/strategy → Sponsor, không phải PO. PO = Agile framework.</p>
+            <h4>Bẫy 1: “Could cause issues in future” → Risk register (B)</h4>
+            <p style="margin:0">Future impact từ event đã xảy ra — log issue trước; risk có thể update sau.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Project Manager</h4>
-            <p style="margin:0">PM làm việc với sponsor, nhưng PM không “secure funding” — đó là vai trò sponsor/executive.</p>
+            <h4>Bẫy 2: Security breach → Escalate first (D)</h4>
+            <p style="margin:0">Document issue trước — escalate khi cần sau assess.</p>
           </div>
           <div class="card tip">
-            <h4>PM vs Sponsor — nhớ nhanh</h4>
-            <p style="margin:0"><strong>Sponsor:</strong> WHY, money, strategy, obstacles · <strong>PM:</strong> HOW, plan, execute, deliver</p>
+            <h4>Mnemonic</h4>
+            <p style="margin:0"><strong>Occurred = Issue</strong> · <strong>Might happen = Risk</strong> · <strong>FIRST = Log it</strong></p>
           </div>
         </section>
 
@@ -359,38 +317,47 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Sponsor làm gì?</div>
-            <div class="flashcard-back">Cung cấp resources/support · accountable for enabling success · funding, strategy, gỡ rào cản.</div>
+            <div class="flashcard-front">Problem already occurred → artifact? (p.123)</div>
+            <div class="flashcard-back"><strong>Issue Log</strong> — document, track, manage before further action.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q8 đáp án?</div>
-            <div class="flashcard-back"><strong>B — Project Sponsor.</strong> Funding + strategic direction + remove obstacles.</div>
+            <div class="flashcard-front">Q29 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Note it in the issue log (FIRST).</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">PROJECT SPONSOR — Q8 (PMBOK 8, p.274)
+          <div class="cheat-sheet">ISSUE LOG — Q29 (PMBOK 8, p.22–23 &amp; p.123)
 ─────────────────────────────────────────────────────
-SPONSOR
-  • Provides resources and support
-  • Accountable for ENABLING SUCCESS
-  • Secures FUNDING
-  • STRATEGIC direction
-  • Removes ORGANIZATIONAL obstacles
+RULE: Problem ALREADY OCCURRED = ISSUE (not risk)
+ARTIFACT: Issue log — document, track, manage FIRST
 
-NOT SPONSOR
-  PM  → day-to-day management, planning, team
-  PO  → Agile, backlog, product value
-  Customer → receives deliverable, requirements
+SCENARIO: CD Solutions — unauthorized access REPORTED
+           (breach happened) · could affect deliverables later
+FIRST → A) Note in ISSUE LOG ✓
 
-Q8 ANSWER: B — Project Sponsor
+NOT FIRST:
+  B) Risk register — event already occurred
+  C) Brainstorm — after logging issue
+  D) Escalate — after document/assess
 
-REF: PMBOK Guide 8th Ed., p.274, "Sponsor"</div>
+ISSUE vs RISK:
+  Occurred / reports / happened → Issue Log
+  Might / may / could (uncertain) → Risk Register
+
+VS Q20: Issue log NOT for assumptions/uncertain timelines
+VS Q27: Change log for change requests
+
+Q29 ANSWER: A
+
+REF: PMBOK Guide, 8th Ed., p.123 — Issue Log</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-project-functions.html">Q7</a>
+          · <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
+          · <a href="pmp-teach-change-log.html">Q27: Change Log</a>
+          · <a href="pmp-full-questions.html#q-29">Luyện câu 29</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -399,12 +366,12 @@ REF: PMBOK Guide 8th Ed., p.274, "Sponsor"</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "A";
       const EXPL = {
-        A: "Product Owner là vai trò Agile — backlog/value, không secure funding tổ chức.",
-        B: "Đúng! Funding + strategic direction + remove obstacles = Project Sponsor.",
-        C: "Customer nhận sản phẩm — không cấp vốn hay định hướng chiến lược tổ chức.",
-        D: "PM quản lý thực thi — sponsor mới đảm bảo funding và gỡ rào cản cấp tổ chức."
+        A: "Đúng! Problem đã xảy ra → issue log FIRST — document &amp; track trước action khác (p.123).",
+        B: "Unauthorized access đã reported — occurred event, không phải risk register.",
+        C: "Brainstorm là bước sau — FIRST là ghi issue log.",
+        D: "Escalate sau khi document và assess — không phải FIRST."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -420,7 +387,7 @@ REF: PMBOK Guide 8th Ed., p.274, "Sponsor"</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Project Sponsor.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Note it in the issue log.</strong>" : "");
         });
       });
       let score = 0;
