@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Adaptive Approach (Q15)</title>
+  <title>PMBOK 8 — Schedule Fast Tracking (Q63)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,16 +51,12 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .iter-viz { display: flex; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; flex-wrap: wrap; }
-    .iter-box { padding: 0.5rem 0.75rem; background: var(--ok-bg); border: 1.5px solid var(--ok); border-radius: 8px; font-size: 0.78rem; font-weight: 600; color: #065f46; position: relative; }
-    .iter-box:not(:last-child)::after { content: "↻"; position: absolute; right: -0.65rem; top: 50%; transform: translateY(-50%); color: var(--primary); font-weight: 700; }
-    .po-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; padding: 0.85rem 1rem; background: var(--info-bg); border: 1px solid var(--info); border-radius: var(--radius); font-size: 0.85rem; justify-content: center; }
-    .po-flow strong { color: #1d4ed8; }
-    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
-    @media (max-width: 600px) { .approach-grid { grid-template-columns: 1fr; } }
-    .approach-box { padding: 0.85rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--card); font-size: 0.84rem; }
-    .approach-box strong { display: block; margin-bottom: 0.25rem; color: var(--primary-dark); }
-    .approach-box.ok { border-color: var(--ok); background: var(--ok-bg); }
+    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.82rem; }
+    .flow-box { padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+    .flow-box.highlight { background: var(--primary-bg); border-color: #fde68a; font-weight: 600; }
+    .flow-arrow { color: var(--muted); font-weight: 700; }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 700px) { .compare-grid { grid-template-columns: 1fr; } }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -76,7 +72,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 320px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -98,11 +94,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Adaptive Approach · Q15</div>
+      <div class="brand-sub">Fast Tracking · Q63</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#adaptive">Adaptive</a>
-        <a href="#compare">So sánh Q14</a>
+        <a href="#compression">Schedule Compression</a>
+        <a href="#compare">Crashing vs Fast Track</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -172,16 +168,16 @@
         <a href="pmp-teach-leads-and-lags.html">Q60: Leads &amp; Lags</a>
         <a href="pmp-teach-work-performance-information.html">Q61: Work Perf. Info</a>
         <a href="pmp-teach-branch-and-bound.html">Q62: Branch &amp; Bound</a>
-        <a href="pmp-teach-schedule-fast-tracking.html">Q63: Fast Tracking</a>
+        <a href="pmp-teach-schedule-fast-tracking.html" class="series-current">Q63: Fast Tracking</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-63">Luyện câu 63</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#adaptive">Adaptive</a>
-        <a href="#compare">Compare</a>
+        <a href="#compression">Compression</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -190,192 +186,186 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q15 về <strong>Adaptive Approaches</strong> — agile/change-driven khi
-            requirements volatile; short iterations, feedback, và một người chịu trách nhiệm scope/value.
+            Bài học Q63 về <strong>Schedule Fast Tracking</strong> — Lloyd, hospital construction:
+            completion date sớm hơn nhưng <em>budget cannot be increased</em>; activities có thể
+            overlap dù tăng risk; cần shorten timeline trong constraints.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.63</span>
-            <span class="badge">Development Approach</span>
-            <span class="badge">Câu 15 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.54 &amp; 196–197</span>
+            <span class="badge">Monitor and Control Schedule</span>
+            <span class="badge">Schedule Compression</span>
+            <span class="badge">Câu 63 — Practice</span>
           </div>
         </header>
 
-        <section id="adaptive">
-          <h2>1. Adaptive Approach (PMBOK 8)</h2>
+        <section id="compression">
+          <h2>1. Schedule compression (p.196–197)</h2>
           <p>
-            Adaptive approaches (change-driven / agile) phù hợp khi requirements và technical
-            solution <strong>highly uncertain, volatile, likely to change</strong>.
-            Vision rõ sớm; requirements được elaborate dần theo feedback.
+            <strong>Schedule compression</strong> rút ngắn duration <em>without reducing scope</em>.
+            Hai kỹ thuật chính trong Monitor and Control Schedule (p.54):
           </p>
+          <ul>
+            <li><strong>Crashing</strong> — thêm resources để rút ngắn duration, thường
+              <em>at increased cost</em>.</li>
+            <li><strong>Fast tracking</strong> — overlap activities trước đây planned in sequence,
+              <em>increases risk</em>.</li>
+          </ul>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.63)</h4>
+            <h4>Chọn technique nào?</h4>
             <p style="margin:0">
-              A clear vision is established early, and known requirements are progressively
-              elaborated, changed, or replaced based on stakeholder feedback, the environment,
-              or unexpected events.
+              <strong>No budget increase</strong> → loại crashing. <strong>Could overlap + accepts
+              risk</strong> → fast tracking.
             </p>
           </div>
-
-          <div class="iter-viz" aria-label="Short iterations cycle">
-            <span class="iter-box">Sprint 1</span>
-            <span class="iter-box">Sprint 2</span>
-            <span class="iter-box">Sprint 3</span>
-            <span class="iter-box">Sprint n</span>
-          </div>
-          <p style="font-size:0.85rem;color:var(--muted);text-align:center;margin-top:-0.5rem">
-            Short iterations · deliver features regularly · refine from feedback
-          </p>
-
-          <div class="po-flow">
-            <strong>Product Owner</strong> — one person responsible for approved scope &amp; value to the organization
-          </div>
-
-          <h3>Keywords trong đề thi → Adaptive</h3>
-          <ul>
-            <li>Short iterations / sprints</li>
-            <li>Deliver features regularly</li>
-            <li>Refine based on stakeholder feedback</li>
-            <li>Mobile app, digital products, high uncertainty</li>
-            <li>Product Owner owns scope &amp; value</li>
-          </ul>
         </section>
 
         <section id="compare">
-          <h2>2. Adaptive vs Predictive (Q14 ↔ Q15)</h2>
+          <h2>2. Crashing vs Fast Tracking</h2>
 
-          <div class="approach-grid">
-            <div class="approach-box ok">
-              <strong>Q15 — Adaptive (A) ✓</strong>
-              Iterations, feedback, evolving requirements, Product Owner
+          <div class="compare-grid">
+            <div class="card warn">
+              <h4>Crashing (C) — không phù hợp Q63</h4>
+              <p style="margin:0">Add resources · increased cost. Stem: budget <strong>cannot</strong> increase → rule out.</p>
             </div>
-            <div class="approach-box">
-              <strong>Q14 — Predictive (D)</strong>
-              Phase gates, defined early, strict change control, waterfall
+            <div class="card tip">
+              <h4>Fast tracking (D) ✓</h4>
+              <p style="margin:0">Overlap sequential activities · increases risk. Stem: could overlap, introduces risk → fit.</p>
             </div>
           </div>
 
           <table>
             <thead>
-              <tr><th>Approach</th><th>Khi nào</th><th>Đặc điểm</th></tr>
+              <tr><th>Option</th><th>Technique</th><th>Q63 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Adaptive (A)</strong></td>
-                <td>Uncertain, volatile requirements</td>
-                <td>Iterations, feedback, progressive elaboration</td>
+                <td><strong>A. Re-sequence tasks</strong></td>
+                <td>Change order — not standard compression</td>
+                <td>Không phải PMI-defined compression technique</td>
               </tr>
               <tr>
-                <td><strong>Predictive (B)</strong></td>
-                <td>Scope stable early</td>
-                <td>Upfront planning, phase gates</td>
+                <td><strong>B. Adjust activity estimates</strong></td>
+                <td>Revise estimates</td>
+                <td>Không shorten timeline — chỉ thay đổi estimates</td>
               </tr>
               <tr>
-                <td><strong>Hybrid (C)</strong></td>
-                <td>Mix stable + evolving</td>
-                <td>Not described in Q15 scenario</td>
+                <td><strong>C. Schedule crashing</strong></td>
+                <td>Add resources · higher cost</td>
+                <td>Budget constraint → không dùng</td>
               </tr>
               <tr>
-                <td><strong>Incremental (D)</strong></td>
-                <td>Deliver portions over time</td>
-                <td>May overlap agile but Q15 keywords = full adaptive pattern</td>
+                <td><strong>D. Schedule fast tracking</strong></td>
+                <td>Overlap sequential work · more risk</td>
+                <td><strong>Yes — no budget, overlap OK</strong></td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>Q62 vs Q63 — Fast tracking</h4>
+            <p style="margin:0">
+              Q62: multiple sequencing scenarios cần <em>optimization</em> → branch and bound (fast
+              track sai). Q63: cần <em>compress</em> schedule, no budget, overlap OK → fast
+              tracking đúng.
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 15</h2>
+          <h2>3. Câu hỏi thực hành — Question 63</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q15</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q63</div>
             <div class="q-text">
-              Jason is leading a mobile application project at Blue Peak Digital Solutions.
-              The team works in <em>short iterations</em>, delivering <em>features regularly</em>
-              and refining their approach based on feedback.
-              <em>One person is responsible</em> for the approved scope and its value to the organization.
-              Which development approach is being used?
+              Lloyd is managing a hospital construction project. The completion date has been moved
+              earlier, but the budget cannot be increased. Several activities could overlap, though
+              this introduces some risk. Lloyd needs to shorten the timeline while staying within
+              constraints. Which approach should he apply?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Adaptive approach.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Predictive approach.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Hybrid approach.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Incremental approach.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Re-sequence tasks.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Adjust activity estimates.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Apply schedule crashing.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Use schedule fast tracking.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn A?</h3>
+          <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>Short iterations + regular feature delivery + feedback = agile/adaptive hallmark.</li>
-            <li>One person for scope &amp; value = <strong>Product Owner</strong> role (slide annotation).</li>
-            <li>Mobile app at digital solutions firm = typical adaptive context (volatile requirements).</li>
-            <li>Khớp PMBOK p.63 — change-driven / agile approaches.</li>
+            <li>Shorten timeline without reducing scope → schedule compression.</li>
+            <li>Budget cannot increase → crashing (add cost) ruled out.</li>
+            <li>Activities could overlap, introduces risk → fast tracking signature (p.196–197).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>B. Predictive</strong></td>
-                <td>Waterfall/plan-driven — trái iterations và evolving requirements (Q14 pattern).</td>
+                <td><strong>A. Re-sequence tasks</strong></td>
+                <td>Reordering ≠ compression technique defined in PMBOK.</td>
               </tr>
               <tr>
-                <td><strong>C. Hybrid</strong></td>
-                <td>Scenario mô tả thuần adaptive, không nhắc phần predictive.</td>
+                <td><strong>B. Adjust estimates</strong></td>
+                <td>Changing estimates doesn't compress schedule — need overlap or more resources.</td>
               </tr>
               <tr>
-                <td><strong>D. Incremental</strong></td>
-                <td>Deliver từng phần có thể overlap nhưng đề nhấn iterations + feedback + PO = adaptive (A) đầy đủ hơn.</td>
+                <td><strong>C. Schedule crashing</strong></td>
+                <td>Adds resources at increased cost — violates budget constraint.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Synonyms Adaptive (p.63)</h4>
+            <h4>Instructor note</h4>
             <p style="margin:0">
-              change-driven · agile · progressive elaboration · stakeholder feedback ·
-              volatile requirements · Product Owner
+              Instructor gạch cost ($$$) — crashing tăng chi phí. Stem nhấn overlap + risk → fast
+              tracking. Không giảm scope — compression không cắt scope.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Adaptive hay Predictive?</h2>
+          <h2>5. Drill — Crashing hay Fast tracking?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="ADAPT">
-              <span>Short iterations with regular feature delivery</span>
+            <div class="classify-row" data-answer="FAST">
+              <span>Earlier deadline, no budget increase, activities can overlap with added risk</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="CRASH">Crash</button>
+                <button data-pick="FAST">Fast track</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PRED">
-              <span>Phase gate approvals with strict change control</span>
+            <div class="classify-row" data-answer="CRASH">
+              <span>Must finish sooner; budget available to add crews and overtime</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="CRASH">Crash</button>
+                <button data-pick="FAST">Fast track</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ADAPT">
-              <span>Requirements elaborated based on stakeholder feedback</span>
+            <div class="classify-row" data-answer="FAST">
+              <span>Overlap design and construction phases previously done in sequence</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="CRASH">Crash</button>
+                <button data-pick="FAST">Fast track</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ADAPT">
-              <span>One person owns approved scope and organizational value</span>
+            <div class="classify-row" data-answer="OTHER">
+              <span>Revise duration estimates downward without changing logic or resources</span>
               <div class="classify-btns">
-                <button data-pick="ADAPT">Adaptive</button>
-                <button data-pick="PRED">Predictive</button>
+                <button data-pick="CRASH">Crash</button>
+                <button data-pick="FAST">Fast track</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
           </div>
@@ -385,16 +375,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn D — Incremental vì “deliver features regularly”</h4>
-            <p style="margin:0">Incremental = usable portions over time. Khi có <strong>short iterations + feedback + PO</strong>, PMBOK 8 gọi là <strong>Adaptive</strong> — đáp án đầy đủ hơn.</p>
+            <h4>Bẫy 1: Shorten timeline → Crashing (C)</h4>
+            <p style="margin:0">Crashing là compression — nhưng cần budget. Stem: <em>cannot increase budget</em> → D not C.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Nhầm với Q14 Predictive</h4>
-            <p style="margin:0">Q14 = regulated, defined early. Q15 = mobile app, iterations, feedback — đối lập rõ ràng.</p>
+            <h4>Bẫy 2: Fast tracking luôn đúng khi delay?</h4>
+            <p style="margin:0">Q62 cho thấy fast track sai khi cần optimization scenarios. Context quyết định.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Adjust estimates (B)</h4>
+            <p style="margin:0">Đổi estimate không phải compression — PMI expects crashing or fast tracking.</p>
           </div>
           <div class="card tip">
-            <h4>Pair study Q14 + Q15</h4>
-            <p style="margin:0">Đề thi thường đặt predictive và adaptive cạnh nhau — đọc keywords, không đoán theo ngành.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>No budget · could overlap · introduces risk · shorten without scope cut</strong> → Fast tracking (D).</p>
           </div>
         </section>
 
@@ -402,48 +396,64 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Adaptive approach = gì? (p.63)</div>
-            <div class="flashcard-back">Change-driven/agile — volatile requirements, iterations, feedback, progressive elaboration.</div>
+            <div class="flashcard-front">Fast tracking vs Crashing?</div>
+            <div class="flashcard-back">Fast track = overlap sequential activities, ↑ risk, no extra cost. Crash = add resources, ↑ cost.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q15 đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Adaptive approach (short iterations, features, Product Owner).</div>
+            <div class="flashcard-front">Q63 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Use schedule fast tracking.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ADAPTIVE APPROACH — Q15 (PMBOK 8, p.63)
+          <div class="cheat-sheet">SCHEDULE FAST TRACKING — Q63 (PMBOK 8, p.54 &amp; 196–197)
 ─────────────────────────────────────────────────────
-ALSO CALLED: Change-driven · Agile
+PROCESS: Monitor and Control Schedule (p.54)
+         Schedule compression (p.196–197)
 
-WHEN: Requirements &amp; technical solution UNCERTAIN, VOLATILE, LIKELY TO CHANGE
+SCHEDULE COMPRESSION = shorten duration WITHOUT reducing scope
 
-HOW:
-  Clear vision early
-  Requirements progressively elaborated/changed/replaced
-  Stakeholder feedback · environment · unexpected events
+  CRASHING:
+    - Add resources
+    - INCREASED COST
+    - Use when budget allows
 
-Q15 KEYWORDS → A (Adaptive):
-  Short iterations · features regularly · feedback
-  One person = scope &amp; value → Product Owner
-  Mobile app / digital solutions
+  FAST TRACKING:
+    - Overlap activities planned in SEQUENCE
+    - INCREASES RISK
+    - Use when overlap feasible, budget fixed
 
-Q15 ANSWER: A — Adaptive approach
-
-VS Q14 PREDICTIVE:
-  Q14: phase gates, defined early, strict CC
-  Q15: iterations, feedback, evolving scope
+SCENARIO: Lloyd — hospital construction
+           Completion date MOVED EARLIER
+           Budget CANNOT be increased
+           Activities COULD OVERLAP
+           Introduces some RISK
+           Shorten timeline within constraints
+→ D) SCHEDULE FAST TRACKING ✓
 
 NOT:
-  B Predictive · C Hybrid (not described) · D Incremental alone
+  A) RE-SEQUENCE — not PMI compression technique
+  B) ADJUST ESTIMATES — doesn't compress schedule
+  C) CRASHING — needs budget increase (ruled out)
 
-REF: The Standard for Project Management, p.63
-     "Adaptive Approaches"</div>
+SIGNAL: "budget cannot be increased" → NOT crashing
+        "could overlap" + "introduces risk" → fast tracking
+        "shorten timeline" + "without reducing scope" → compression
+
+Q62 vs Q63:
+  Q62 optimization scenarios → branch &amp; bound (NOT fast track)
+  Q63 compress, no budget → fast tracking
+
+Q63 ANSWER: D
+
+REF: PMBOK Guide, 8th Ed., p.54, p.196–197</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
+          · <a href="pmp-teach-branch-and-bound.html">Q62: Branch &amp; Bound</a>
+          · <a href="pmp-teach-resource-leveling.html">Q58: Resource Leveling</a>
+          · <a href="pmp-full-questions.html#q-63">Luyện câu 63</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -452,12 +462,12 @@ REF: The Standard for Project Management, p.63
 
   <script>
     (function () {
-      const CORRECT = "A";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Đúng! Short iterations, regular features, feedback, PO = Adaptive/change-driven/agile (p.63).",
-        B: "Predictive = waterfall, defined early — trái iterations và evolving requirements.",
-        C: "Hybrid = mix — scenario mô tả thuần adaptive.",
-        D: "Incremental = partial delivery — thiếu full adaptive pattern (iterations + feedback + PO)."
+        A: "Re-sequencing không phải schedule compression technique trong PMBOK.",
+        B: "Adjust estimates không rút ngắn timeline — cần overlap (fast track) hoặc thêm resources (crash).",
+        C: "Crashing thêm resources at increased cost — stem nói budget cannot increase.",
+        D: "Đúng! Fast tracking overlaps sequential activities, increases risk, no extra budget needed (p.54, 196–197)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -473,7 +483,7 @@ REF: The Standard for Project Management, p.63
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Adaptive approach.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Use schedule fast tracking.</strong>" : "");
         });
       });
       let score = 0;
