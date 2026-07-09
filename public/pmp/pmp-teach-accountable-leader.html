@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Organizational Structure</title>
+  <title>PMBOK 8 — Accountable Leader (Q12)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,16 +51,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .authority-bar { margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); }
-    .authority-track { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.35rem; margin-top: 0.75rem; }
-    @media (max-width: 700px) { .authority-track { grid-template-columns: 1fr; } }
-    .auth-cell { text-align: center; padding: 0.65rem 0.4rem; border-radius: 10px; border: 1px solid var(--border); font-size: 0.78rem; }
-    .auth-cell .label { font-weight: 700; display: block; margin-bottom: 0.25rem; }
-    .auth-cell.low { background: #f3f4f6; }
-    .auth-cell.mid { background: #eff6ff; border-color: #bfdbfe; }
-    .auth-cell.high { background: var(--ok-bg); border-color: #a7f3d0; }
-    .auth-cell.highlight { outline: 3px solid var(--primary); font-weight: 600; }
-    .auth-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.75rem; margin-top: 0.5rem; }
+    .conflict-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
+    @media (max-width: 600px) { .conflict-grid { grid-template-columns: 1fr; } }
+    .conflict-mode { padding: 0.85rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--card); font-size: 0.84rem; }
+    .conflict-mode strong { display: block; margin-bottom: 0.25rem; color: var(--primary-dark); }
+    .conflict-mode.ok { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -76,7 +71,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; max-width: 280px; justify-content: flex-end; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 300px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -97,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Organizational Structure</div>
+      <div class="brand-sub">Accountable Leader · Q12</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#structures">5 loại cấu trúc</a>
-        <a href="#authority">Quyền PM</a>
+        <a href="#leader">Accountable Leader</a>
+        <a href="#conflict">Conflict modes</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -113,14 +108,14 @@
         <a href="pmp-teach-tangible-intangible-benefits.html">Q2: Tangible/Intangible</a>
         <a href="pmp-teach-enterprise-environmental-factors.html">Q3: EEF</a>
         <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
-        <a href="pmp-teach-organizational-structure.html" class="series-current">Q5: Org Structure</a>
+        <a href="pmp-teach-organizational-structure.html">Q5: Org Structure</a>
         <a href="pmp-teach-functional-organization.html">Q6: Functional</a>
         <a href="pmp-teach-project-functions.html">Q7: Project Functions</a>
         <a href="pmp-teach-project-sponsor.html">Q8: Project Sponsor</a>
         <a href="pmp-teach-project-management-team.html">Q9: PM Team</a>
         <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
         <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
-        <a href="pmp-teach-accountable-leader.html">Q12: Accountable Leader</a>
+        <a href="pmp-teach-accountable-leader.html" class="series-current">Q12: Accountable Leader</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
       <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
@@ -128,8 +123,8 @@
 
     <div>
       <nav class="mobile-nav">
-        <a href="#structures">Cấu trúc</a>
-        <a href="#authority">Quyền PM</a>
+        <a href="#leader">Leader</a>
+        <a href="#conflict">Conflict</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -138,205 +133,186 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q5 về <strong>cấu trúc tổ chức</strong> — nhận diện loại hình dựa trên
-            <strong>mức quyền của Project Manager</strong> đối với team, ngân sách và quyết định.
+            Bài học Q12 về nguyên tắc <strong>Be an Accountable Leader</strong> — PM chủ động
+            facilitate xung đột, tìm root cause và thỏa thuận giải pháp thay vì ép buộc hoặc bỏ mặc.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.22</span>
-            <span class="badge">Organizational Structures</span>
-            <span class="badge">Resources</span>
-            <span class="badge">Câu 5 — Practice</span>
+            <span class="badge">The Standard for PM, p.48</span>
+            <span class="badge">Conflict Management</span>
+            <span class="badge">Câu 12 — Practice</span>
           </div>
         </header>
 
-        <section id="structures">
-          <h2>1. Năm loại cấu trúc tổ chức</h2>
+        <section id="leader">
+          <h2>1. Be an Accountable Leader</h2>
           <p>
-            PMBOK 8 mô tả ảnh hưởng của cấu trúc tổ chức lên dự án — đặc biệt là
-            <strong>ai ra quyết định</strong>: Functional manager hay Project Manager.
+            Accountable leader không né tránh xung đột ảnh hưởng deliverables — họ
+            <strong>chủ động can thiệp</strong> theo hướng collaborative để giải quyết căn nguyên
+            và giữ team gắn kết, productive.
           </p>
+
+          <div class="card tip">
+            <h4>Định nghĩa chính thức (PMBOK p.48)</h4>
+            <p style="margin:0">
+              A collaborative approach not only resolves the conflict but also removes friction
+              that could undermine quality and productivity, fostering a more cohesive and
+              motivated project team.
+            </p>
+          </div>
+
+          <h3>Scenario SGI megaproject</h3>
+          <ul>
+            <li>Multiple vendors — xung đột shift rotations</li>
+            <li>Tension → productivity giảm → <strong>ảnh hưởng deliverables</strong></li>
+            <li>Rafael (PM) phải hành động — không thể để vendors tự xử lý khi đã escalate</li>
+          </ul>
+        </section>
+
+        <section id="conflict">
+          <h2>2. Conflict modes — map với đáp án</h2>
+
+          <div class="conflict-grid">
+            <div class="conflict-mode">
+              <strong>A — Force / Direct</strong>
+              Ép vendors theo contract — win-lose, có thể làm căng thẳng tăng
+            </div>
+            <div class="conflict-mode">
+              <strong>B — Withdraw / Avoid</strong>
+              Để vendors tự giải quyết — không phù hợp khi đã ảnh hưởng deliverables
+            </div>
+            <div class="conflict-mode ok">
+              <strong>C — Collaborate / Problem solve ✓</strong>
+              Facilitate discussions → root causes → agree on solution
+            </div>
+            <div class="conflict-mode">
+              <strong>D — Delegate</strong>
+              Giao cho team member — PM vẫn accountable, không phải cách PMBOK nhấn mạnh
+            </div>
+          </div>
 
           <table>
             <thead>
-              <tr><th>Cấu trúc</th><th>Quyền PM</th><th>Đặc điểm</th></tr>
+              <tr><th>Đáp án</th><th>Mode</th><th>Đánh giá</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Functional</strong></td>
-                <td>Rất thấp / không</td>
-                <td>Team báo cáo functional manager; PM có thể chỉ là coordinator</td>
+                <td><strong>A. Force contract terms</strong></td>
+                <td>Forcing / Direct</td>
+                <td>✗ Slide ghi “Direct” — không collaborative</td>
               </tr>
               <tr>
-                <td><strong>Weak matrix</strong></td>
-                <td>Thấp</td>
-                <td>Functional manager giữ quyền chính; PM hỗ trợ hạn chế</td>
+                <td><strong>B. Let vendors resolve</strong></td>
+                <td>Withdraw / Avoid</td>
+                <td>✗ Đã ảnh hưởng deliverables — PM phải lead</td>
               </tr>
               <tr>
-                <td><strong>Balanced matrix</strong></td>
-                <td>Trung bình</td>
-                <td>Chia sẻ quyền giữa PM và functional manager</td>
+                <td><strong>C. Facilitate + root causes</strong></td>
+                <td>Collaborate</td>
+                <td>✓ PMBOK p.48 — đáp án đúng</td>
               </tr>
               <tr>
-                <td><strong>Strong matrix</strong></td>
-                <td>Cao</td>
-                <td>PM có quyền lớn; functional manager hỗ trợ</td>
-              </tr>
-              <tr>
-                <td><strong>Project-oriented</strong> (Projectized)</td>
-                <td><strong>Rất cao</strong></td>
-                <td>PM có full authority — team, budget, quyết định</td>
+                <td><strong>D. Assign team member</strong></td>
+                <td>Delegate</td>
+                <td>✗ Không giải quyết conflict mode đúng ngữ cảnh</td>
               </tr>
             </tbody>
           </table>
         </section>
 
-        <section id="authority">
-          <h2>2. Thang quyền Project Manager</h2>
-
-          <div class="authority-bar">
-            <strong style="font-size:0.9rem">PM authority tăng dần từ trái sang phải →</strong>
-            <div class="authority-track">
-              <div class="auth-cell low"><span class="label">Functional</span>PM ≈ 0</div>
-              <div class="auth-cell low"><span class="label">Weak matrix</span>PM thấp</div>
-              <div class="auth-cell mid"><span class="label">Balanced</span>PM ↔ FM</div>
-              <div class="auth-cell high"><span class="label">Strong matrix</span>PM cao</div>
-              <div class="auth-cell high highlight"><span class="label">Project-oriented</span>PM full</div>
-            </div>
-            <div class="auth-arrow">Functional manager quyền cao ←————————→ PM quyền cao</div>
-          </div>
-
-          <div class="card tip">
-            <h4>Định nghĩa Project-oriented (PMBOK)</h4>
-            <p style="margin:0">
-              Project-oriented organizations are those in which the project manager has a
-              <strong>high level of authority and control</strong> over the project, including
-              authority over the project team and resources.
-            </p>
-          </div>
-
-          <div class="card info">
-            <h4>Keywords nhận diện nhanh</h4>
-            <ul style="margin:0">
-              <li><strong>Full authority / control</strong> → Project-oriented hoặc Strong matrix</li>
-              <li><strong>Dedicated project resources</strong> → thường Project-oriented</li>
-              <li><strong>PM controls budget &amp; decisions</strong> → Project-oriented</li>
-              <li><strong>Share authority / balanced</strong> → Balanced matrix</li>
-              <li><strong>Functional manager decides</strong> → Functional / Weak matrix</li>
-            </ul>
-          </div>
-        </section>
-
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 5</h2>
+          <h2>3. Câu hỏi thực hành — Question 12</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q5</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q12</div>
             <div class="q-text">
-              You are the project manager at BuildMax Engineering, working on a large infrastructure project.
-              The organization assigns you as the project manager, provides
-              <em>dedicated project resources</em>, and gives you
-              <em>full authority over the project budget and decision-making</em>.
-              <em>What type of organizational structure are you working in?</em>
+              Rafael is managing a government megaproject at SGI involving multiple vendors.
+              A conflict arises between vendor teams over shift rotations, creating tension and
+              affecting productivity. Now the issue is starting to <em>affect project deliverables</em>.
+              How should Rafael address this situation?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Functional organization.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Weak-matrix organization.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Project-oriented organization.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Balanced-matrix organization.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Force the vendors to follow the agreed contract terms.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Let the vendors resolve the issue on their own.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Facilitate discussions to identify root causes and agree on a solution.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Assign your best team member to manage the conflict.</button>
 
             <div class="feedback" id="quizFeedback"></div>
-          </div>
-
-          <div class="card info">
-            <h4>Dịch tình huống</h4>
-            <p style="margin:0">
-              PM tại BuildMax Engineering, dự án hạ tầng lớn. Tổ chức chỉ định bạn làm PM,
-              cấp <strong>nguồn lực chuyên trách</strong> và trao
-              <strong>toàn quyền ngân sách &amp; ra quyết định</strong>.
-              Đây là cấu trúc tổ chức nào?
-            </p>
           </div>
         </section>
 
         <section id="analysis">
           <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <div class="card tip">
-            <h4>Giải thích chính thức (PMBOK)</h4>
-            <p style="margin:0">
-              Project-oriented organizations — PM có high level of authority and control,
-              including authority over project team and resources.
-              <em>— The Standard for Project Management, p.22, "Influences of Organizational Structures on Projects"</em>
-            </p>
-          </div>
-
           <h3>Tại sao chọn C?</h3>
           <ul>
-            <li><strong>Dedicated project resources</strong> — team làm full-time cho dự án, không loan từ functional dept.</li>
-            <li><strong>Full authority over budget</strong> — PM kiểm soát ngân sách trực tiếp.</li>
-            <li><strong>Full authority over decision-making</strong> — PM ra quyết định, không chia sẻ với functional manager.</li>
-            <li>Cả ba = đặc trưng <strong>Project-oriented / Projectized</strong>.</li>
+            <li>Accountable leader <strong>facilitate</strong> — không né (B) cũng không ép một chiều (A).</li>
+            <li><strong>Root causes</strong> + <strong>agree on solution</strong> = collaborate/problem-solving mode.</li>
+            <li>Giải quyết friction → bảo vệ quality, productivity, team cohesion (p.48).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không phải đáp án tốt nhất</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Functional</strong></td>
-                <td>Functional manager giữ quyền; PM gần như không có authority (PM ✗ trong slide).</td>
+                <td><strong>A. Force contract</strong></td>
+                <td>Forcing/Direct — có thể giải quyết tạm nhưng không collaborative; không phải “Principle in Action” p.48.</td>
               </tr>
               <tr>
-                <td><strong>B. Weak matrix</strong></td>
-                <td>PM có vai trò hạn chế; functional manager vẫn quyết định chính (PM ✗).</td>
+                <td><strong>B. Let vendors resolve</strong></td>
+                <td>Avoid — conflict đã ảnh hưởng deliverables; accountable leader phải can thiệp (✗ slide).</td>
               </tr>
               <tr>
-                <td><strong>D. Balanced matrix</strong></td>
-                <td>Quyền <em>chia sẻ</em> giữa PM và functional manager — không phải “full authority”.</td>
+                <td><strong>D. Assign team member</strong></td>
+                <td>Delegate conflict — PM vẫn accountable; không mô tả facilitate collaborative resolution.</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card warn">
+            <h4>Keywords Accountable Leader (p.48)</h4>
+            <p style="margin:0">
+              collaborative approach · facilitate · root causes · agree on solution ·
+              remove friction · quality · productivity · cohesive team
+            </p>
+          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Chọn cấu trúc tổ chức</h2>
+          <h2>5. Drill — Conflict mode nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="FUNC">
-              <span>Team reports to department heads; PM is part-time coordinator</span>
+            <div class="classify-row" data-answer="COLLAB">
+              <span>Facilitate discussions to find root causes</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak</button>
-                <button data-pick="BAL">Balanced</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="COLLAB">Collaborate</button>
+                <button data-pick="FORCE">Force</button>
+                <button data-pick="AVOID">Avoid</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PROJ">
-              <span>PM has full budget control and dedicated team members</span>
+            <div class="classify-row" data-answer="FORCE">
+              <span>Enforce contract terms without discussion</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak</button>
-                <button data-pick="BAL">Balanced</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="COLLAB">Collaborate</button>
+                <button data-pick="FORCE">Force</button>
+                <button data-pick="AVOID">Avoid</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="BAL">
-              <span>PM and functional managers share decision-making equally</span>
+            <div class="classify-row" data-answer="AVOID">
+              <span>Step back and let parties work it out alone</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak</button>
-                <button data-pick="BAL">Balanced</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="COLLAB">Collaborate</button>
+                <button data-pick="FORCE">Force</button>
+                <button data-pick="AVOID">Avoid</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="WEAK">
-              <span>Functional manager assigns resources; PM tracks schedule only</span>
+            <div class="classify-row" data-answer="COLLAB">
+              <span>Parties agree on a mutually acceptable solution</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak</button>
-                <button data-pick="BAL">Balanced</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="COLLAB">Collaborate</button>
+                <button data-pick="FORCE">Force</button>
+                <button data-pick="AVOID">Avoid</button>
               </div>
             </div>
           </div>
@@ -344,70 +320,69 @@
         </section>
 
         <section id="traps">
-          <h2>6. Bẫy thi thường gặp</h2>
+          <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Matrix” khi thực ra Project-oriented</h4>
-            <p style="margin:0">“Full authority” + “dedicated resources” = Project-oriented, không phải Balanced matrix. Balanced = chia quyền, không full.</p>
+            <h4>Bẫy 1: Chọn A — contract = đúng pháp lý</h4>
+            <p style="margin:0">Contract enforcement là forcing — PMBOK 8 accountable leader ưu tiên <strong>collaborative</strong> resolution khi friction ảnh hưởng team performance.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Strong matrix vs Project-oriented</h4>
-            <p style="margin:0">Strong matrix: PM quyền cao nhưng vẫn trong cấu trúc matrix. Project-oriented: PM <strong>full</strong> authority budget + team + decisions — như Q5.</p>
+            <h4>Bẫy 2: Chọn B — “empower” vendors</h4>
+            <p style="margin:0">Tự giải quyết chỉ phù hợp khi conflict nhỏ, parties có khả năng — đã ảnh hưởng <strong>deliverables</strong> thì PM phải facilitate.</p>
           </div>
-          <div class="card warn">
-            <h4>Mẹo đọc đề</h4>
-            <p style="margin:0">Tìm từ khóa quyền: <em>full authority, dedicated resources, control budget, decision-making</em> → Project-oriented.</p>
+          <div class="card danger">
+            <h4>Bẫy 3: Chọn D — delegate cho “best” member</h4>
+            <p style="margin:0">Giao việc không thay thế PM leadership trong conflict resolution — không khớp p.48.</p>
+          </div>
+          <div class="card tip">
+            <h4>Mẹo thi</h4>
+            <p style="margin:0">Tìm từ khóa: <strong>facilitate</strong>, <strong>root cause</strong>, <strong>agree on solution</strong>, <strong>collaborative</strong> — thường là đáp án PMBOK 8 leadership/conflict.</p>
           </div>
         </section>
 
         <section id="flashcards">
           <h2>7. Flashcard</h2>
-          <p class="flash-hint">Nhấn để lật thẻ</p>
+          <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Project-oriented organization?</div>
-            <div class="flashcard-back">PM có high authority &amp; control — team, resources, budget, quyết định.</div>
+            <div class="flashcard-front">Accountable leader xử lý conflict thế nào? (p.48)</div>
+            <div class="flashcard-back">Collaborative — facilitate discussions, identify root causes, agree on solution.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Balanced matrix khác Project-oriented?</div>
-            <div class="flashcard-back">Balanced = chia quyền PM ↔ FM. Project-oriented = PM full authority.</div>
-          </div></div>
-          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q5 đáp án?</div>
-            <div class="flashcard-back"><strong>C — Project-oriented.</strong> Dedicated resources + full budget &amp; decision authority.</div>
+            <div class="flashcard-front">Q12 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Facilitate discussions to identify root causes and agree on a solution.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ORGANIZATIONAL STRUCTURES — PMBOK 8, p.22
+          <div class="cheat-sheet">ACCOUNTABLE LEADER — Q12 (PMBOK 8, p.48)
 ─────────────────────────────────────────────────────
-PM AUTHORITY (low → high):
-  Functional → Weak matrix → Balanced → Strong matrix → Project-oriented
+PRINCIPLE: Be an Accountable Leader — Principle in Action
+CONFLICT: Vendor teams, shift rotations, affects DELIVERABLES
 
-PROJECT-ORIENTED (Projectized)
-  ✓ PM: HIGH authority &amp; control
-  ✓ Dedicated project resources
-  ✓ Full budget authority
-  ✓ Full decision-making authority
+Q12 ANSWER: C
+  Facilitate → root causes → agree on solution (COLLABORATE)
 
-FUNCTIONAL / WEAK MATRIX
-  ✗ PM little or no authority
-  ✗ Functional manager decides
+CONFLICT MODE MAP:
+  A → Force/Direct (contract enforcement) ✗
+  B → Withdraw/Avoid (let vendors resolve) ✗
+  C → Collaborate/Problem solve ✓
+  D → Delegate to team member ✗
 
-BALANCED MATRIX
-  ↔ PM and FM share authority equally
-  ✗ NOT "full authority"
+WHY C:
+  Resolves conflict + removes friction
+  Protects quality &amp; productivity
+  Fosters cohesive, motivated team
 
-Q5 ANSWER: C — Project-oriented organization
-  BuildMax: dedicated resources + full budget + full decisions
+WHEN PM MUST ACT:
+  Conflict affecting deliverables → don't avoid (B)
 
-REF: The Standard for Project Management, p.22
-     "Influences of Organizational Structures on Projects"</div>
+REF: The Standard for Project Management, p.48
+     "Be an Accountable Leader: Principle in Action"</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-functional-organization.html">Q6: Functional</a>
+          · <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
-          · <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
         </footer>
       </main>
     </div>
@@ -417,10 +392,10 @@ REF: The Standard for Project Management, p.22
     (function () {
       const CORRECT = "C";
       const EXPL = {
-        A: "Functional — functional manager giữ quyền, PM không có full authority.",
-        B: "Weak matrix — PM quyền thấp, không kiểm soát budget/decisions.",
-        C: "Đúng! Dedicated resources + full budget + full decisions = Project-oriented.",
-        D: "Balanced matrix — chia quyền, không phải full authority như trong đề."
+        A: "Force contract = Forcing/Direct — không phải collaborative approach p.48 nhấn mạnh.",
+        B: "Để vendors tự xử lý = Avoid — conflict đã ảnh hưởng deliverables, PM phải facilitate.",
+        C: "Đúng! Facilitate + root causes + agree on solution = accountable leader collaborative approach.",
+        D: "Giao cho team member = delegate — không mô tả PM facilitate collaborative resolution."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -436,7 +411,7 @@ REF: The Standard for Project Management, p.22
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Project-oriented organization.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Facilitate discussions to identify root causes and agree on a solution.</strong>" : "");
         });
       });
       let score = 0;
@@ -468,11 +443,9 @@ REF: The Standard for Project Management, p.22
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
       const observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            navLinks.forEach(function (a) {
-              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-            });
-          }
+          if (e.isIntersecting) navLinks.forEach(function (a) {
+            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+          });
         });
       }, { rootMargin: "-20% 0px -60% 0px" });
       sections.forEach(function (s) { observer.observe(s); });
