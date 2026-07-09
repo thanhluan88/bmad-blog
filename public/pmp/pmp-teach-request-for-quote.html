@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Plan Sourcing Strategy (Q22)</title>
+  <title>PMBOK 8 — Request for Quote (Q26)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .process-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; font-size: 0.8rem; }
-    .flow-step { padding: 0.45rem 0.7rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--border); background: var(--bg); }
-    .flow-step.done { border-color: var(--muted); color: var(--muted); }
-    .flow-step.current { border-color: var(--ok); background: var(--ok-bg); color: #065f46; }
-    .flow-step.next { border-color: var(--info); background: var(--info-bg); color: #1d4ed8; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -72,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 400px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 360px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -93,11 +87,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Plan Sourcing Strategy · Q22</div>
+      <div class="brand-sub">Request for Quote · Q26</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#sourcing">Plan Sourcing Strategy</a>
-        <a href="#sequence">Thứ tự NEXT</a>
+        <a href="#rfx">RFI / RFP / RFQ</a>
+        <a href="#signal">Đọc tín hiệu đề</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -130,16 +124,16 @@
         <a href="pmp-teach-bidder-conference.html">Q23: Bidder Conference</a>
         <a href="pmp-teach-sourcing-strategy-plan.html">Q24: Sourcing Strategy Plan</a>
         <a href="pmp-teach-make-or-buy-analysis.html">Q25: Make-or-Buy Analysis</a>
-        <a href="pmp-teach-request-for-quote.html">Q26: Request for Quote</a>
+        <a href="pmp-teach-request-for-quote.html" class="series-current">Q26: Request for Quote</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-22">Luyện câu 22</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-26">Luyện câu 26</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#sourcing">Sourcing</a>
-        <a href="#sequence">Sequence</a>
+        <a href="#rfx">RFx</a>
+        <a href="#signal">Signal</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -148,177 +142,162 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q22 về <strong>Plan Sourcing Strategy</strong> — trước khi liên hệ vendor,
-            PM cần document sourcing decisions, make-or-buy, contract types và source selection approach.
+            Bài học Q26 về <strong>Request for Quote (RFQ)</strong> — specs rõ ràng,
+            nhiều supplier khác <em>price points</em>; cần chọn document đúng để so sánh giá.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.19–20</span>
-            <span class="badge">Procurement / Planning</span>
-            <span class="badge">Câu 22 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.248</span>
+            <span class="badge">Plan Sourcing Strategy</span>
+            <span class="badge">Câu 26 — Practice</span>
           </div>
         </header>
 
-        <section id="sourcing">
-          <h2>1. Plan Sourcing Strategy</h2>
-          <p>
-            Process này ghi lại <strong>quyết định sourcing</strong> của dự án: cách chọn nguồn,
-            phạm vi công việc outsource (SOW), loại hợp đồng phù hợp — bao gồm
-            <strong>make-or-buy decisions</strong>.
-          </p>
+        <section id="rfx">
+          <h2>1. RFI vs RFP vs RFQ</h2>
 
-          <div class="card tip">
-            <h4>Định nghĩa (PMBOK p.19–20)</h4>
-            <p style="margin:0">
-              The Plan Sourcing Strategy process entails documenting project sourcing decisions,
-              specifying the source selection approach, determining the scope of work for external sourcing,
-              and selecting the appropriate contracts and sources for delivering the work.
-              These include make-or-buy decisions.
-            </p>
-          </div>
-
-          <h3>Procurement sequence — planning trước, vendor sau</h3>
           <table>
             <thead>
-              <tr><th>Bước</th><th>Hành động</th><th>Đã có vendor?</th></tr>
+              <tr><th>Document</th><th>Khi nào dùng?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>1. Plan Sourcing Strategy</strong></td>
-                <td>Make-or-buy, evaluation criteria, contract types, SOW scope</td>
-                <td>Chưa</td>
+                <td><strong>RFI</strong> — Request for Information</td>
+                <td>Thu thập thông tin thị trường / capabilities — chưa sẵn sàng mua</td>
               </tr>
               <tr>
-                <td>2. Issue procurement documents</td>
-                <td>RFP/RFQ, advertise if needed</td>
-                <td>Bắt đầu outreach</td>
+                <td><strong>RFP</strong> — Request for Proposal</td>
+                <td>Solution chưa rõ — seller đề xuất approach + giá</td>
               </tr>
               <tr>
-                <td>3. Evaluate proposals</td>
-                <td>Source selection, chọn supplier</td>
-                <td>Có proposals</td>
+                <td><strong>RFQ</strong> — Request for Quote</td>
+                <td>Specs rõ · solution sẵn có · <strong>price là yếu tố quyết định chính</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card tip">
+            <h4>RFQ (PMBOK p.248)</h4>
+            <p style="margin:0">
+              A request for quote (RFQ) is used when price is the main deciding factor
+              and the proposed solution is readily available.
+            </p>
+          </div>
+        </section>
+
+        <section id="signal">
+          <h2>2. Đọc tín hiệu trong đề</h2>
+
+          <table>
+            <thead>
+              <tr><th>Signal</th><th>→ Document</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><em>Clearly defined specifications</em></td>
+                <td>Không cần RFP (seller propose solution)</td>
               </tr>
               <tr>
-                <td>4. Award contract</td>
-                <td>Negotiate &amp; sign</td>
-                <td>Đã chọn vendor</td>
+                <td><em>Different price points</em> · confusion in selection</td>
+                <td>RFQ — so sánh giá trên cùng specs</td>
+              </tr>
+              <tr>
+                <td>Standard electrical components</td>
+                <td>Commodity / readily available → RFQ</td>
+              </tr>
+              <tr>
+                <td>Vendors misunderstand project (Q23)</td>
+                <td>Bidder conference — không phải case này</td>
               </tr>
             </tbody>
           </table>
         </section>
 
-        <section id="sequence">
-          <h2>2. Thứ tự “What should the PM do NEXT?”</h2>
-
-          <div class="process-flow" aria-label="Procurement planning sequence">
-            <span class="flow-step done">Need identified ✓</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step current">Plan Sourcing Strategy</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">Issue RFP / RFQ</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">Evaluate proposals</span>
-          </div>
-
-          <p>
-            Đề nói team đang <em>defining evaluation criteria, contract types, build vs outsource</em>
-            và <strong>no vendors have been contacted yet</strong> — chưa đến bước phát RFP hay đánh giá proposal.
-          </p>
-        </section>
-
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 22</h2>
+          <h2>3. Câu hỏi thực hành — Question 26</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q22</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q26</div>
             <div class="q-text">
-              A project team at Redwood Industrial Systems is preparing to acquire specialized components.
-              They are defining evaluation criteria, contract types, and deciding whether to
-              <em>build internally or outsource</em> the work. <em>No vendors have been contacted yet.</em>
-              What should the project manager do <em>next</em>?
+              Aiden is managing a facilities upgrade at CM Holdings. The project requires
+              standard electrical components with <em>clearly defined specifications</em>,
+              and multiple suppliers are available at different <em>price points causing confusion
+              and delays</em> in the selection process. What should he do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Issue procurement documents and request proposals from vendors.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Evaluate vendor proposals and select the best supplier.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Develop the sourcing strategy including make-or-buy decisions.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Advertise the opportunity to gather additional vendors.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Conduct a bidder conference.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Issue a Request For Proposal.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Issue a Request For Information.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Issue a Request For Quote.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>Plan Sourcing Strategy = document decisions trước khi ra thị trường.</li>
-            <li>Make-or-buy, evaluation criteria, contract types — đúng nội dung process này.</li>
-            <li>“No vendors contacted” = vẫn ở giai đoạn planning, chưa Conduct Procurements.</li>
+            <li>Specs đã rõ + standard components = solution readily available.</li>
+            <li>Vấn đề là price points khác nhau → RFQ để lấy quote so sánh giá.</li>
+            <li>Giảm confusion/delay bằng structured price comparison.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải NEXT</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Issue procurement documents</strong></td>
-                <td>Sau khi sourcing strategy đã xong — cần strategy trước RFP/RFQ.</td>
+                <td><strong>A. Bidder conference</strong></td>
+                <td>Dùng khi vendors hiểu khác requirements (Q23) — đây specs đã clear.</td>
               </tr>
               <tr>
-                <td><strong>B. Evaluate proposals</strong></td>
-                <td>Chưa có proposals — vendors chưa được contact.</td>
+                <td><strong>B. RFP</strong></td>
+                <td>RFP khi cần seller đề xuất solution/approach — specs đã defined.</td>
               </tr>
               <tr>
-                <td><strong>D. Advertise opportunity</strong></td>
-                <td>Marketing/outreach — sau strategy; không phải bước planning đầu tiên.</td>
+                <td><strong>C. RFI</strong></td>
+                <td>RFI thu thập info — đã có multiple suppliers và cần chọn theo price.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Liên hệ Q18 — Make-or-buy</h4>
-            <p style="margin:0">
-              Q18 loại trừ make-or-buy vì quá sớm (initiating). Q22 make-or-buy là <em>đúng</em> vì
-              đã vào procurement planning với specialized components.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Bước nào trong procurement?</h2>
+          <h2>5. Drill — Chọn RFx nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="PLAN">
-              <span>Document make-or-buy and contract type decisions</span>
+            <div class="classify-row" data-answer="RFQ">
+              <span>Clear specs, commodity item, compare prices</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="ISSUE">Issue docs</button>
-                <button data-pick="EVAL">Evaluate</button>
+                <button data-pick="RFI">RFI</button>
+                <button data-pick="RFP">RFP</button>
+                <button data-pick="RFQ">RFQ</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ISSUE">
-              <span>Send RFP to shortlisted vendors</span>
+            <div class="classify-row" data-answer="RFP">
+              <span>Need seller to propose technical approach</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="ISSUE">Issue docs</button>
-                <button data-pick="EVAL">Evaluate</button>
+                <button data-pick="RFI">RFI</button>
+                <button data-pick="RFP">RFP</button>
+                <button data-pick="RFQ">RFQ</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="EVAL">
-              <span>Score proposals against evaluation criteria</span>
+            <div class="classify-row" data-answer="RFI">
+              <span>Explore market capabilities before sourcing</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="ISSUE">Issue docs</button>
-                <button data-pick="EVAL">Evaluate</button>
+                <button data-pick="RFI">RFI</button>
+                <button data-pick="RFP">RFP</button>
+                <button data-pick="RFQ">RFQ</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PLAN">
-              <span>Define SOW scope for external sourcing</span>
+            <div class="classify-row" data-answer="RFQ">
+              <span>Price is main deciding factor, solution available</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="ISSUE">Issue docs</button>
-                <button data-pick="EVAL">Evaluate</button>
+                <button data-pick="RFI">RFI</button>
+                <button data-pick="RFP">RFP</button>
+                <button data-pick="RFQ">RFQ</button>
               </div>
             </div>
           </div>
@@ -328,16 +307,16 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Acquire components” → Issue RFP ngay (A)</h4>
-            <p style="margin:0">Acquire cần strategy trước — criteria, contract type, make-or-buy phải rõ trước khi contact vendor.</p>
+            <h4>Bẫy 1: Procurement → RFP (B) mặc định</h4>
+            <p style="margin:0">RFP khi solution chưa rõ. Specs clear + standard parts → RFQ.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: “Evaluation criteria” → Evaluate proposals (B)</h4>
-            <p style="margin:0">Đang <em>define</em> criteria (planning), chưa <em>apply</em> criteria lên proposals.</p>
+            <h4>Bẫy 2: “Confusion” → Bidder conference (A)</h4>
+            <p style="margin:0">Confusion về <em>price selection</em>, không phải misunderstanding scope — RFQ fix đúng vấn đề.</p>
           </div>
           <div class="card tip">
-            <h4>Signal trong đề</h4>
-            <p style="margin:0"><strong>“No vendors contacted yet”</strong> = loại A, B, D — chỉ còn planning (C).</p>
+            <h4>Mnemonic</h4>
+            <p style="margin:0"><strong>Clear specs + price decides</strong> → RFQ · <strong>Solution TBD</strong> → RFP · <strong>Market research</strong> → RFI</p>
           </div>
         </section>
 
@@ -345,50 +324,47 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Plan Sourcing Strategy gồm gì? (p.19–20)</div>
-            <div class="flashcard-back">Sourcing decisions · source selection approach · SOW scope · contracts · make-or-buy.</div>
+            <div class="flashcard-front">Khi nào dùng RFQ? (p.248)</div>
+            <div class="flashcard-back">Price = main deciding factor · proposed solution readily available.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q22 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Develop the sourcing strategy including make-or-buy decisions.</div>
+            <div class="flashcard-front">Q26 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Issue a Request For Quote.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">PLAN SOURCING STRATEGY — Q22 (PMBOK 8, p.19–20)
+          <div class="cheat-sheet">REQUEST FOR QUOTE — Q26 (PMBOK 8, p.248)
 ─────────────────────────────────────────────────────
-PROCESS: Plan Sourcing Strategy
-INCLUDES:
-  - Sourcing decisions documented
-  - Source selection approach
-  - Scope of work (SOW) for external sourcing
-  - Appropriate contracts &amp; sources
-  - MAKE-OR-BUY decisions
+RFQ: Price = MAIN deciding factor
+     Solution READILY AVAILABLE (clear specs)
 
-SCENARIO: Redwood — criteria, contract types, build vs outsource
-           NO VENDORS CONTACTED YET
-NEXT → C) Develop SOURCING STRATEGY (make-or-buy) ✓
+RFI → gather market info (early)
+RFP → seller proposes solution (specs unclear)
+RFQ → compare quotes on known specs (price focus)
 
-NOT YET:
-  A) Issue procurement docs / RFP — after strategy
-  B) Evaluate proposals — need proposals first
-  D) Advertise — outreach, after strategy
+SCENARIO: CM Holdings — standard electrical components
+           CLEARLY DEFINED specs
+           multiple suppliers, different PRICE POINTS
+ANSWER → D) Issue REQUEST FOR QUOTE ✓
 
-SEQUENCE:
-  Plan Sourcing Strategy (C) → Issue docs (A) → Evaluate (B)
+NOT:
+  A) Bidder conference — vendors misunderstand scope (Q23)
+  B) RFP — need proposed approach, not commodity buy
+  C) RFI — already have suppliers, need price compare
 
-SIGNAL: "no vendors contacted" = still planning
+SIGNAL: "clearly defined specifications" + "price points"
 
-Q22 ANSWER: C
+Q26 ANSWER: D
 
-REF: PMBOK Guide, 8th Ed., p.19–20 — "Plan Sourcing Strategy"</div>
+REF: PMBOK Guide, 8th Ed., p.20 &amp; p.248 — Request for quote</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
-          · <a href="pmp-teach-project-management-plan.html">Q21: PM Plan</a>
-          · <a href="pmp-full-questions.html#q-22">Luyện câu 22</a>
+          · <a href="pmp-teach-bidder-conference.html">Q23: Bidder Conference</a>
+          · <a href="pmp-teach-make-or-buy-analysis.html">Q25: Make-or-Buy</a>
+          · <a href="pmp-full-questions.html#q-26">Luyện câu 26</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -397,12 +373,12 @@ REF: PMBOK Guide, 8th Ed., p.19–20 — "Plan Sourcing Strategy"</div>
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Issue procurement documents là bước sau — cần sourcing strategy (make-or-buy, criteria) trước.",
-        B: "Chưa có vendor proposals — đề nói no vendors contacted yet.",
-        C: "Đúng! Plan Sourcing Strategy — document decisions, make-or-buy, contracts, SOW (p.19–20).",
-        D: "Advertise là outreach sau strategy — không phải NEXT khi chưa có plan sourcing."
+        A: "Bidder conference khi vendors hiểu khác requirements — specs đã clearly defined.",
+        B: "RFP khi cần seller propose solution — đây là standard components với specs rõ.",
+        C: "RFI thu thập thông tin sớm — đã có suppliers, cần so sánh price.",
+        D: "Đúng! RFQ khi price là yếu tố chính và solution readily available (p.248)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -418,7 +394,7 @@ REF: PMBOK Guide, 8th Ed., p.19–20 — "Plan Sourcing Strategy"</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Develop the sourcing strategy including make-or-buy decisions.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Issue a Request For Quote.</strong>" : "");
         });
       });
       let score = 0;
