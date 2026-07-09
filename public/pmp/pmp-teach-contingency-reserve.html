@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Work Breakdown Structure (Q51)</title>
+  <title>PMBOK 8 — Contingency Reserve (Q68)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,6 +51,8 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .reserve-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 700px) { .reserve-grid { grid-template-columns: 1fr; } }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,7 +68,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 460px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -88,11 +90,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Work Breakdown Structure · Q51</div>
+      <div class="brand-sub">Contingency Reserve · Q68</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#define">Define Scope &amp; WBS</a>
-        <a href="#predictive">Predictive vs Agile</a>
+        <a href="#contingency">Contingency Reserve</a>
+        <a href="#compare">vs Management Reserve</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -150,7 +152,7 @@
         <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
         <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
-        <a href="pmp-teach-work-breakdown-structure.html" class="series-current">Q51: WBS</a>
+        <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
         <a href="pmp-teach-wbs-dictionary.html">Q52: WBS Dictionary</a>
         <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
         <a href="pmp-teach-verified-deliverables.html">Q54: Verified Deliverables</a>
@@ -167,16 +169,16 @@
         <a href="pmp-teach-funding-strategy.html">Q65: Funding Strategy</a>
         <a href="pmp-teach-analogous-estimating.html">Q66: Analogous Est.</a>
         <a href="pmp-teach-failure-costs.html">Q67: Failure Costs</a>
-        <a href="pmp-teach-contingency-reserve.html">Q68: Contingency</a>
+        <a href="pmp-teach-contingency-reserve.html" class="series-current">Q68: Contingency</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-51">Luyện câu 51</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-68">Luyện câu 68</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#define">WBS</a>
-        <a href="#predictive">Predictive</a>
+        <a href="#contingency">Contingency</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -185,106 +187,108 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q51 về <strong>Work Breakdown Structure (WBS)</strong> — RLM product
-            development: organize deliverables, <em>decompose the work</em> into manageable
-            components để support <em>planning and execution</em>.
+            Bài học Q68 về <strong>Contingency Reserve</strong> — Lena tại Arc Span Engineering,
+            bridge construction: <em>potential soil instability</em> có thể cần thêm foundation work;
+            sponsor muốn handle uncertainty mà không inflate budget unnecessarily.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.41–42</span>
-            <span class="badge">Define Scope</span>
-            <span class="badge">Câu 51 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.63 &amp; 266</span>
+            <span class="badge">Estimate Costs</span>
+            <span class="badge">Contingency Reserve</span>
+            <span class="badge">Câu 68 — Practice</span>
           </div>
         </header>
 
-        <section id="define">
-          <h2>1. Define Scope &amp; WBS (PMBOK p.41–42)</h2>
+        <section id="contingency">
+          <h2>1. Contingency reserve (p.266)</h2>
           <p>
-            <strong>Define Scope</strong> develops a detailed or high-level description of the
-            project, product, and value to be delivered. Trong <strong>predictive approaches</strong>,
-            deliverables được structured trong <strong>WBS</strong>.
+            Trong <strong>Estimate Costs</strong> (p.63), <strong>contingency reserves</strong> được
+            dành ra để implement a risk response hoặc respond to risk events nếu chúng xảy ra.
+            Dùng cho <em>identified risks</em> — đã biết uncertainty cụ thể (soil instability).
           </p>
 
           <div class="card tip">
-            <h4>Work Breakdown Structure (WBS)</h4>
+            <h4>Q68 signal: RISK identified</h4>
             <p style="margin:0">
-              Hierarchical decomposition of total project work into manageable components —
-              organizes deliverables, supports planning &amp; execution. Output của Define Scope
-              (predictive).
+              "Potential soil instability <em>may require</em> additional foundation work" = known
+              risk → <strong>contingency reserve</strong>, không phải blanket inflation hay
+              management reserve.
             </p>
+          </div>
+        </section>
+
+        <section id="compare">
+          <h2>2. Contingency vs Management Reserve</h2>
+
+          <div class="reserve-grid">
+            <div class="card tip">
+              <h4>Contingency reserve (C) ✓</h4>
+              <p style="margin:0">Identified risks · risk response · PM typically controls · part of cost baseline for known uncertainties.</p>
+            </div>
+            <div class="card warn">
+              <h4>Management reserve (B)</h4>
+              <p style="margin:0">Unknown unknowns · work within scope but unforeseen · sponsor control · not for identified risks like soil instability.</p>
+            </div>
           </div>
 
           <table>
             <thead>
-              <tr><th>WBS level (concept)</th><th>Content</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Level 1</td><td>Project</td></tr>
-              <tr><td>Level 2</td><td>Major deliverables / phases</td></tr>
-              <tr><td>Level 3+</td><td>Work packages — manageable components</td></tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section id="predictive">
-          <h2>2. Predictive vs adaptive — decompose how?</h2>
-
-          <table>
-            <thead>
-              <tr><th>Approach</th><th>Organize work</th><th>Q51 fit?</th></tr>
+              <tr><th>Option</th><th>Approach</th><th>Q68 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Predictive — WBS</strong></td>
-                <td>Organize deliverables · decompose for planning/execution</td>
-                <td>✓ (A)</td>
+                <td><strong>A. +15% all estimates</strong></td>
+                <td>Blanket padding</td>
+                <td>Inflates budget unnecessarily — sponsor concern</td>
               </tr>
               <tr>
-                <td>Adaptive — user stories</td>
-                <td>Capture requirements iteratively in backlog</td>
-                <td>Agile artifact — không WBS decompose (B)</td>
+                <td><strong>B. Management reserve</strong></td>
+                <td>Unknown unknowns</td>
+                <td>Risk đã identified — không phải unknown unknown</td>
               </tr>
               <tr>
-                <td>Adaptive — product backlog</td>
-                <td>Prioritize features for incremental delivery</td>
-                <td>Delivery prioritization — không organize all deliverables (C)</td>
+                <td><strong>C. Contingency reserve</strong></td>
+                <td>Identified risk response</td>
+                <td><strong>Yes — soil instability risk</strong></td>
               </tr>
               <tr>
-                <td>Validate deliverables</td>
-                <td>Confirm completed work with stakeholders</td>
-                <td>Control/acceptance — sau execution, không decompose (D)</td>
+                <td><strong>D. Update cost baseline</strong></td>
+                <td>Add uncertain work to baseline</td>
+                <td>Work may not occur — premature baseline change</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 51</h2>
+          <h2>3. Câu hỏi thực hành — Question 68</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q51</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q68</div>
             <div class="q-text">
-              Jonah is managing a product development project at RLM. The team needs to clearly
-              <em>organize all deliverables</em> and <em>decompose the work</em> into manageable
-              components to support <em>planning and execution</em>. What should Jonah do next?
+              Lena is estimating costs for a bridge construction project at Arc Span Engineering.
+              During planning, the team identifies potential soil instability that may require
+              additional foundation work. The sponsor is concerned about handling this uncertainty
+              without inflating the overall budget unnecessarily. What should Lena do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Organize deliverables into a work breakdown structure.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Capture requirements as user stories and refine them iteratively.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Prioritize features in a backlog for incremental delivery.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Validate the completed deliverables with stakeholders.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Increase all activity cost estimates by 15% to account for the uncertainty.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Add a management reserve.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Include a contingency reserve.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Update the cost baseline to include the additional foundation work.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <h3>Tại sao chọn A?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>Organize deliverables + decompose work → WBS (Define Scope, predictive).</li>
-            <li>Manageable components for planning &amp; execution → hierarchical WBS decomposition.</li>
-            <li>PMBOK: predictive approaches structure deliverables in WBS (p.41–42).</li>
+            <li>Identified risk (soil instability) with potential impact.</li>
+            <li>Contingency reserve funds risk response if event occurs (p.266).</li>
+            <li>Targeted reserve — không inflate toàn bộ budget như option A.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -294,62 +298,62 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>B. User stories</strong></td>
-                <td>Adaptive/agile elicitation — không organize all deliverables into WBS.</td>
+                <td><strong>A. +15% all estimates</strong></td>
+                <td>Blanket padding — unnecessarily inflates entire budget.</td>
               </tr>
               <tr>
-                <td><strong>C. Product backlog</strong></td>
-                <td>Prioritize incremental delivery — agile, không decompose to planning components.</td>
+                <td><strong>B. Management reserve</strong></td>
+                <td>For unknown unknowns — soil risk is already identified.</td>
               </tr>
               <tr>
-                <td><strong>D. Validate deliverables</strong></td>
-                <td>Acceptance/validation sau khi complete — không phải decompose step.</td>
+                <td><strong>D. Update baseline</strong></td>
+                <td>Foundation work uncertain — không add vào baseline until risk materializes.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q44 vs Q51</h4>
+            <h4>Instructor trap: Reserve → Management (B)</h4>
             <p style="margin:0">
-              Q44: hybrid streams merged → RTM track requirements (before/alongside scope). Q51:
-              organize &amp; decompose deliverables → WBS (Define Scope, predictive).
+              Instructor ghi "RISK" — identified risk → <strong>contingency</strong> (C), không phải
+              management reserve (B).
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — WBS, backlog hay validate?</h2>
+          <h2>5. Drill — Contingency hay Management?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="WBS">
-              <span>Decompose deliverables for planning &amp; execution</span>
+            <div class="classify-row" data-answer="CONT">
+              <span>Identified risk: soil instability may need extra foundation work</span>
               <div class="classify-btns">
-                <button data-pick="WBS">WBS</button>
-                <button data-pick="STORY">Stories</button>
-                <button data-pick="VAL">Validate</button>
+                <button data-pick="CONT">Contingency</button>
+                <button data-pick="MGMT">Management</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="STORY">
-              <span>Iterative requirements in adaptive approach</span>
+            <div class="classify-row" data-answer="MGMT">
+              <span>Unforeseen scope work within project — no specific risk identified yet</span>
               <div class="classify-btns">
-                <button data-pick="WBS">WBS</button>
-                <button data-pick="STORY">Stories</button>
-                <button data-pick="VAL">Validate</button>
+                <button data-pick="CONT">Contingency</button>
+                <button data-pick="MGMT">Management</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="VAL">
-              <span>Confirm completed deliverables with stakeholders</span>
+            <div class="classify-row" data-answer="OTHER">
+              <span>Add 20% to every line item estimate as padding</span>
               <div class="classify-btns">
-                <button data-pick="WBS">WBS</button>
-                <button data-pick="STORY">Stories</button>
-                <button data-pick="VAL">Validate</button>
+                <button data-pick="CONT">Contingency</button>
+                <button data-pick="MGMT">Management</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="WBS">
-              <span>Predictive — structure all deliverables hierarchically</span>
+            <div class="classify-row" data-answer="CONT">
+              <span>Reserve to implement planned risk response for known supplier delay</span>
               <div class="classify-btns">
-                <button data-pick="WBS">WBS</button>
-                <button data-pick="STORY">Stories</button>
-                <button data-pick="VAL">Validate</button>
+                <button data-pick="CONT">Contingency</button>
+                <button data-pick="MGMT">Management</button>
+                <button data-pick="OTHER">Other</button>
               </div>
             </div>
           </div>
@@ -359,20 +363,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Product development → User stories (B)</h4>
-            <p style="margin:0">Product dev không luôn agile — stem nói organize deliverables &amp; decompose → WBS predictive.</p>
+            <h4>Bẫy 1: Uncertainty → Management reserve (B)</h4>
+            <p style="margin:0">Management = unknown unknowns. Stem có <em>identified</em> risk → contingency (C).</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Features → Backlog (C)</h4>
-            <p style="margin:0">Backlog = prioritize delivery — không decompose all deliverables for planning.</p>
+            <h4>Bẫy 2: Foundation work → Update baseline (D)</h4>
+            <p style="margin:0">Work <em>may</em> be required — chưa chắc xảy ra. Reserve, don't baseline uncertain work.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Deliverables → Validate (D)</h4>
-            <p style="margin:0">Validate = sau khi complete — stem hỏi next step để plan/execute, không accept.</p>
+            <h4>Bẫy 3: Uncertainty → Pad all estimates (A)</h4>
+            <p style="margin:0">PMI prefers targeted contingency for identified risks over blanket inflation.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Organize deliverables · decompose work · planning and execution</strong> → WBS (A).</p>
+            <p style="margin:0"><strong>Identified risk · may require · without inflating budget</strong> → Contingency reserve (C).</p>
           </div>
         </section>
 
@@ -380,61 +384,59 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Define Scope + predictive? (p.41–42)</div>
-            <div class="flashcard-back">Structure deliverables in WBS — hierarchical decomposition for planning &amp; execution.</div>
+            <div class="flashcard-front">Contingency reserve?</div>
+            <div class="flashcard-back">Set aside for identified risks — implement risk response or respond if risk events occur (p.266).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q51 đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Organize deliverables into a work breakdown structure.</div>
+            <div class="flashcard-front">Q68 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Include a contingency reserve.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">WORK BREAKDOWN STRUCTURE — Q51 (PMBOK 8, p.41–42)
+          <div class="cheat-sheet">CONTINGENCY RESERVE — Q68 (PMBOK 8, p.63 &amp; 266)
 ─────────────────────────────────────────────────────
-PROCESS: Define Scope
+PROCESS: Estimate Costs (p.63)
+         Contingency reserve (p.266)
 
-OBJECTIVE: Detailed/high-level description of project · product · value
-            Quality management plan
-            PREDICTIVE → deliverables in WBS
+CONTINGENCY RESERVE:
+  - For IDENTIFIED risks
+  - Implement RISK RESPONSE
+  - Respond if risk EVENTS occur
+  - PM typically controls
+  - Targeted — not blanket padding
 
-WBS:
-  - Organize ALL deliverables
-  - DECOMPOSE work into manageable components
-  - Support PLANNING &amp; EXECUTION
-  - Hierarchical structure
+MANAGEMENT RESERVE:
+  - UNKNOWN UNKNOWNS
+  - Unforeseen work within scope
+  - Sponsor control
+  - NOT for identified risks
 
-SCENARIO: RLM — product development
-           ORGANIZE deliverables
-           DECOMPOSE work · manageable components
-           PLANNING and EXECUTION
-→ A) WORK BREAKDOWN STRUCTURE ✓
+SCENARIO: Lena — Arc Span bridge construction
+           IDENTIFIED: potential soil instability
+           MAY REQUIRE additional foundation work
+           Sponsor: handle uncertainty
+           WITHOUT inflating budget unnecessarily
+→ C) CONTINGENCY RESERVE ✓
 
 NOT:
-  B) User stories — adaptive, iterative refine
-  C) Product backlog — agile prioritize delivery
-  D) Validate deliverables — acceptance, too late
+  A) +15% ALL estimates — unnecessary blanket inflation
+  B) MANAGEMENT RESERVE — risk already identified
+  D) UPDATE BASELINE — uncertain work not yet certain
 
-SCOPE FLOW:
-  Plan scope → Elicit reqs → DEFINE SCOPE (WBS) → Baseline → Execute
+TRAP: "reserve" → sounds like management
+      BUT identified RISK → contingency
 
-PREDICTIVE vs ADAPTIVE:
-  Decompose deliverables → WBS (predictive)
-  Iterative requirements → user stories / backlog (adaptive)
+Q68 ANSWER: C
 
-SIGNAL: "organize deliverables" · "decompose the work"
-        "manageable components" · "planning and execution"
-
-Q51 ANSWER: A
-
-REF: PMBOK Guide, 8th Ed., p.41–42</div>
+REF: PMBOK Guide, 8th Ed., p.63, p.266</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-scope-management-plan.html">Q42: Scope Mgmt Plan</a>
-          · <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
-          · <a href="pmp-full-questions.html#q-51">Luyện câu 51</a>
+          · <a href="pmp-teach-failure-costs.html">Q67: Failure Costs</a>
+          · <a href="pmp-teach-analogous-estimating.html">Q66: Analogous Est.</a>
+          · <a href="pmp-full-questions.html#q-68">Luyện câu 68</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -443,12 +445,12 @@ REF: PMBOK Guide, 8th Ed., p.41–42</div>
 
   <script>
     (function () {
-      const CORRECT = "A";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Đúng! Define Scope — predictive approaches structure deliverables in WBS (p.41–42).",
-        B: "User stories = adaptive approach — không organize/decompose deliverables như WBS.",
-        C: "Product backlog prioritizes incremental delivery — agile, không WBS decomposition.",
-        D: "Validate completed deliverables = acceptance — sau execution, không decompose step."
+        A: "Blanket 15% padding inflates toàn bộ budget — sponsor muốn tránh unnecessary inflation.",
+        B: "Management reserve cho unknown unknowns — soil instability là identified risk.",
+        C: "Đúng! Contingency reserve cho identified risks — implement risk response nếu event xảy ra (p.63, 266).",
+        D: "Foundation work chưa chắc xảy ra — không update baseline; dùng contingency reserve."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -464,7 +466,7 @@ REF: PMBOK Guide, 8th Ed., p.41–42</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Organize deliverables into a work breakdown structure.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Include a contingency reserve.</strong>" : "");
         });
       });
       let score = 0;
