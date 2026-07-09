@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Functional Organization (Q6)</title>
+  <title>PMBOK 8 — Development Approach for Schedule Plan (Q56)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .compare-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
-    @media (max-width: 640px) { .compare-pair { grid-template-columns: 1fr; } }
-    .pair-box { border-radius: 12px; padding: 1rem; border: 1px solid var(--border); font-size: 0.88rem; }
-    .pair-box.q5 { background: var(--ok-bg); border-top: 4px solid var(--ok); }
-    .pair-box.q6 { background: #f3f4f6; border-top: 4px solid #6b7280; }
-    .pair-box h4 { margin: 0 0 0.5rem; font-size: 0.92rem; }
+    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.82rem; }
+    .flow-box { padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+    .flow-box.highlight { background: var(--primary-bg); border-color: #fde68a; font-weight: 600; }
+    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -72,7 +70,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; max-width: 300px; justify-content: flex-end; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -94,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Functional Organization · Q6</div>
+      <div class="brand-sub">Development Approach · Q56</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#concepts">Functional org</a>
-        <a href="#q5-vs-q6">Q5 vs Q6</a>
+        <a href="#input">Key Input</a>
+        <a href="#sequence">Inputs vs Later</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -111,7 +109,7 @@
         <a href="pmp-teach-enterprise-environmental-factors.html">Q3: EEF</a>
         <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
         <a href="pmp-teach-organizational-structure.html">Q5: Org Structure</a>
-        <a href="pmp-teach-functional-organization.html" class="series-current">Q6: Functional</a>
+        <a href="pmp-teach-functional-organization.html">Q6: Functional</a>
         <a href="pmp-teach-project-functions.html">Q7: Project Functions</a>
         <a href="pmp-teach-project-sponsor.html">Q8: Project Sponsor</a>
         <a href="pmp-teach-project-management-team.html">Q9: PM Team</a>
@@ -160,16 +158,16 @@
         <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
         <a href="pmp-teach-verified-deliverables.html">Q54: Verified Deliverables</a>
         <a href="pmp-teach-schedule-management-plan.html">Q55: Schedule Mgmt Plan</a>
-        <a href="pmp-teach-development-approach-schedule.html">Q56: Dev Approach Input</a>
+        <a href="pmp-teach-development-approach-schedule.html" class="series-current">Q56: Dev Approach Input</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-56">Luyện câu 56</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#concepts">Functional</a>
-        <a href="#q5-vs-q6">Q5 vs Q6</a>
+        <a href="#input">Input</a>
+        <a href="#sequence">Sequence</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -178,184 +176,177 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q6 về <strong>Functional organization</strong> — dự án/cải tiến làm
-            <em>trong</em> phòng ban hiện có, không có ngân sách bổ sung hay quyền PM riêng.
+            Bài học Q56 về <strong>input to Plan Schedule Management</strong> — OP Security:
+            leadership muốn xem <em>plan for managing the schedule</em>. Trước khi tạo schedule
+            management plan, PM cần biết gì?
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.22</span>
-            <span class="badge">Organizational Structures</span>
-            <span class="badge">Câu 6 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.49 &amp; 139</span>
+            <span class="badge">Plan Schedule Management</span>
+            <span class="badge">Development Approach</span>
+            <span class="badge">Câu 56 — Practice</span>
           </div>
         </header>
 
-        <section id="concepts">
-          <h2>1. Functional Organization</h2>
+        <section id="input">
+          <h2>1. Development approach — key input (p.49)</h2>
           <p>
-            Trong cấu trúc <strong>Functional</strong>, công việc dự án (kể cả cải tiến quy trình)
-            được thực hiện như một phần của <strong>team chức năng hiện có</strong> — sales, IT, HR...
-            Functional manager giữ quyền chính.
+            <strong>Plan Schedule Management</strong> thiết lập policies, procedures, documentation
+            để manage schedule. Trước khi viết plan, PM phải biết
+            <strong>development approach</strong> — predictive/waterfall, adaptive/agile, hay hybrid —
+            vì approach quyết định <em>how</em> schedule sẽ được developed, monitored, và controlled.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK)</h4>
+            <h4>Tại sao development approach?</h4>
             <p style="margin:0">
-              Functional organizations are those in which the project is done as part of an
-              <strong>existing functional team</strong> — there is no designated project coordinator,
-              <strong>additional budget or resources</strong>.
+              Predictive → detailed upfront schedule, baselines, Gantt. Adaptive → iterations,
+              rolling wave, release planning. Hybrid → mix. Schedule mgmt plan phải align với approach
+              đã chọn (Q14–Q16).
             </p>
+          </div>
+        </section>
+
+        <section id="sequence">
+          <h2>2. BEFORE plan — input vs later steps</h2>
+
+          <div class="flow-diagram">
+            <div class="flow-box highlight">Development approach</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box highlight">Schedule mgmt plan</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">Define activities / sequence</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">Estimates &amp; compression</div>
           </div>
 
           <table>
             <thead>
-              <tr><th>Đặc điểm</th><th>Functional</th></tr>
+              <tr><th>Item</th><th>Timing</th><th>Q56</th></tr>
             </thead>
             <tbody>
-              <tr><td>Team</td><td>Đã có sẵn trong phòng ban (existing team)</td></tr>
-              <tr><td>Budget</td><td>Không có ngân sách bổ sung cho “dự án”</td></tr>
-              <tr><td>Authority</td><td>Functional manager quyết định; PM/coordinator không có quyền thêm</td></tr>
-              <tr><td>Loại initiative</td><td>Process improvement, công việc cải tiến trong dept</td></tr>
+              <tr>
+                <td><strong>Development approach (C)</strong></td>
+                <td>Input BEFORE schedule mgmt plan</td>
+                <td><strong>Need to know first</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Sequence of deliverables (A)</strong></td>
+                <td>During define activities / develop schedule</td>
+                <td>After plan — không prerequisite</td>
+              </tr>
+              <tr>
+                <td><strong>Activity estimates (B)</strong></td>
+                <td>Estimate durations — sau activities defined</td>
+                <td>Too detailed for plan creation</td>
+              </tr>
+              <tr>
+                <td><strong>Compression methods (D)</strong></td>
+                <td>Fast-tracking / crashing — schedule optimization</td>
+                <td>Later — khi schedule under pressure</td>
+              </tr>
             </tbody>
           </table>
-        </section>
 
-        <section id="q5-vs-q6">
-          <h2>2. Đối chiếu Q5 vs Q6 — hai cực quyền PM</h2>
-          <p>Đề thi hay đặt cặp câu “full authority” và “no budget/authority” liên tiếp.</p>
-
-          <div class="compare-pair">
-            <div class="pair-box q5">
-              <h4>Q5 — BuildMax (Project-oriented)</h4>
-              <ul style="margin:0;padding-left:1.1rem">
-                <li>Dedicated resources</li>
-                <li><strong>Full</strong> budget authority</li>
-                <li><strong>Full</strong> decision-making</li>
-              </ul>
-              <p style="margin:0.5rem 0 0"><a href="pmp-teach-organizational-structure.html">→ Bài Q5</a></p>
-            </div>
-            <div class="pair-box q6">
-              <h4>Q6 — Prime Manufacturing (Functional)</h4>
-              <ul style="margin:0;padding-left:1.1rem">
-                <li>Team đã trong sales dept</li>
-                <li><strong>No</strong> additional budget</li>
-                <li><strong>No</strong> additional authority</li>
-              </ul>
-            </div>
+          <div class="card info">
+            <h4>Liên hệ Q55</h4>
+            <p style="margin:0">
+              Q55: <em>create</em> schedule management plan (output). Q56: <em>what input</em> needed
+              before creating it → development approach (C).
+            </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 6</h2>
+          <h2>3. Câu hỏi thực hành — Question 56</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q6</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q56</div>
             <div class="q-text">
-              Liam works as a manager in the sales department at Prime Manufacturing and would like
-              to start a <em>process improvement initiative</em>. Any project team members are
-              already within his team, but Liam has <em>no additional budget or authority</em>.
-              <em>What type of organizational structure is Liam working in?</em>
+              You are managing a project team at OP Security, where leaders in the business would
+              like to see your <em>plan for managing the schedule</em>. What do you need to know
+              <em>before creating</em> your schedule management plan?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Project-oriented organization.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Functional organization.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Balanced-matrix organization.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Weak-matrix organization.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. The sequence of project deliverables.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Estimates on project activities from the team.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. The development approach.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Methods to be used for schedule compression.</button>
 
             <div class="feedback" id="quizFeedback"></div>
-          </div>
-
-          <div class="card info">
-            <h4>Dịch tình huống</h4>
-            <p style="margin:0">
-              Liam là manager phòng Sales tại Prime Manufacturing, muốn khởi động
-              <strong>initiative cải tiến quy trình</strong>. Thành viên đã nằm trong team của anh,
-              nhưng <strong>không có ngân sách hay quyền bổ sung</strong>. Cấu trúc tổ chức nào?
-            </p>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <div class="card tip">
-            <h4>Giải thích (PMBOK p.22)</h4>
-            <p style="margin:0">
-              Dự án/cải tiến làm trong <strong>existing functional team</strong> — không có
-              project coordinator riêng, không budget/resources bổ sung → <strong>Functional</strong>.
-            </p>
-          </div>
-
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li><strong>Manager in sales department</strong> — initiative nằm trong chức năng sales.</li>
-            <li><strong>Team members already within his team</strong> — không huy động nguồn lực chuyên trách mới.</li>
-            <li><strong>No additional budget or authority</strong> — đặc trưng functional: không cấp thêm cho “project”.</li>
+            <li>Plan Schedule Management cần biết predictive vs adaptive vs hybrid.</li>
+            <li>Development approach impacts HOW schedule managed throughout project (p.49).</li>
+            <li>Đây là input — chưa cần deliverable sequence hay activity estimates.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không BEFORE plan</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Project-oriented</strong></td>
-                <td>Cần dedicated resources + PM full authority — ngược với “no additional budget/authority”.</td>
+                <td><strong>A. Deliverable sequence</strong></td>
+                <td>Part of developing schedule — sau khi có schedule mgmt plan.</td>
               </tr>
               <tr>
-                <td><strong>C. Balanced matrix</strong></td>
-                <td>Matrix có vai trò PM chia quyền với functional manager — không khớp “no authority”.</td>
+                <td><strong>B. Activity estimates</strong></td>
+                <td>Estimate durations — cần activities defined trước, quá chi tiết cho planning step.</td>
               </tr>
               <tr>
-                <td><strong>D. Weak matrix</strong></td>
-                <td>Weak matrix vẫn có project coordinator/PM (dù quyền thấp). Đề nói không có authority bổ sung và làm trong functional team — Functional thuần hơn.</td>
+                <td><strong>D. Compression methods</strong></td>
+                <td>Fast-track/crash — optimization technique khi schedule at risk, không input ban đầu.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords</h4>
-            <ul style="margin:0">
-              <li><strong>already within his team</strong> → existing functional team</li>
-              <li><strong>no additional budget</strong> → Functional</li>
-              <li><strong>no additional authority</strong> → Functional (PM ✗)</li>
-              <li><strong>process improvement in department</strong> → không phải project hóa toàn tổ chức</li>
-            </ul>
+            <h4>Predictive vs Adaptive impact</h4>
+            <p style="margin:0">
+              <strong>Predictive:</strong> baseline-driven, change control strict.
+              <strong>Adaptive:</strong> iteration-based, rolling forecasts.
+              Plan phải reflect approach — đó là lý do C đúng trước A/B/D.
+            </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Functional hay Matrix?</h2>
+          <h2>5. Drill — Input trước plan hay bước sau?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="FUNC">
-              <span>Improvement done inside dept; no extra budget</span>
+            <div class="classify-row" data-answer="INPUT">
+              <span>Predictive, adaptive, or hybrid for the project</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="INPUT">Before plan</button>
+                <button data-pick="LATER">Later</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PROJ">
-              <span>PM controls budget; dedicated team</span>
+            <div class="classify-row" data-answer="LATER">
+              <span>Order of deliverables and dependencies</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="INPUT">Before plan</button>
+                <button data-pick="LATER">Later</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="WEAK">
-              <span>PM tracks schedule; FM assigns people</span>
+            <div class="classify-row" data-answer="LATER">
+              <span>Team duration estimates per activity</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="INPUT">Before plan</button>
+                <button data-pick="LATER">Later</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FUNC">
-              <span>Dept manager runs initiative with own staff only</span>
+            <div class="classify-row" data-answer="LATER">
+              <span>Fast-tracking or crashing techniques</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="INPUT">Before plan</button>
+                <button data-pick="LATER">Later</button>
               </div>
             </div>
           </div>
@@ -365,12 +356,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Có từ “project/initiative” → chọn Project-oriented</h4>
-            <p style="margin:0">Process improvement vẫn có thể chạy trong functional org. Xem <em>quyền và budget</em>, không chỉ tên initiative.</p>
+            <h4>Bẫy 1: Schedule → Deliverable sequence (A)</h4>
+            <p style="margin:0">Sequence là nội dung develop schedule — plan (HOW to manage) cần approach trước.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Weak matrix vs Functional</h4>
-            <p style="margin:0">Weak matrix: vẫn có vai trò PM/coordinator. Functional thuần: làm trong team hiện có, <strong>no additional authority</strong>, không chỉ định coordinator riêng.</p>
+            <h4>Bẫy 2: Plan → Activity estimates (B)</h4>
+            <p style="margin:0">Estimates từ team — bước estimate durations, không prerequisite cho mgmt plan.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Managing schedule → Compression (D)</h4>
+            <p style="margin:0">Compression = recovery technique — không phải input ban đầu cho Plan Schedule Management.</p>
+          </div>
+          <div class="card tip">
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Before creating schedule management plan · what need to know</strong> → Development approach (C).</p>
           </div>
         </section>
 
@@ -378,44 +377,61 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Functional organization?</div>
-            <div class="flashcard-back">Dự án/cải tiến trong existing functional team — không coordinator riêng, không budget/resources bổ sung.</div>
+            <div class="flashcard-front">Input before schedule mgmt plan?</div>
+            <div class="flashcard-back"><strong>Development approach</strong> — predictive/adaptive/hybrid shapes how schedule is managed.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q6 đáp án?</div>
-            <div class="flashcard-back"><strong>B — Functional.</strong> Team sẵn trong dept + no additional budget/authority.</div>
+            <div class="flashcard-front">Q56 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — The development approach.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">FUNCTIONAL ORGANIZATION — Q6 (PMBOK 8, p.22)
+          <div class="cheat-sheet">DEVELOPMENT APPROACH INPUT — Q56 (PMBOK 8, p.49 &amp; 139)
 ─────────────────────────────────────────────────────
-FUNCTIONAL
-  ✓ Work done in EXISTING functional team
-  ✓ No designated project coordinator
-  ✓ NO additional budget or resources
-  ✓ Functional manager holds authority
+PROCESS: Plan Schedule Management (p.49)
 
-Q6 KEYWORDS
-  "already within his team"
-  "no additional budget or authority"
-  "process improvement" in a department
+BEFORE SCHEDULE MGMT PLAN — NEED:
+  ✓ DEVELOPMENT APPROACH (C)
+    - Predictive / Waterfall
+    - Adaptive / Agile
+    - Hybrid
+  → Impacts HOW schedule developed · monitored · controlled
 
-Q5 vs Q6
-  Q5 full authority + dedicated resources → Project-oriented
-  Q6 no extra budget/authority + existing team → Functional
+NOT BEFORE PLAN:
+  A) Sequence of DELIVERABLES — develop schedule step
+  B) ACTIVITY ESTIMATES — estimate durations (later)
+  D) SCHEDULE COMPRESSION — fast-track/crash (later)
 
-NOT FUNCTIONAL
-  ✗ Full PM budget control (Project-oriented)
-  ✗ Shared PM/FM authority (Balanced matrix)
-  ✗ PM role with limited power (Weak matrix — read carefully)
+SCENARIO: OP Security — leaders want plan for
+           MANAGING THE SCHEDULE
+           What need to know BEFORE creating plan?
+→ C) THE DEVELOPMENT APPROACH ✓
 
-Q6 ANSWER: B — Functional organization</div>
+Q55 vs Q56:
+  Q55 → CREATE schedule mgmt plan (D)
+  Q56 → INPUT before creating plan (C)
+
+APPROACH IMPACT:
+  Predictive: baselines · detailed upfront · strict CC
+  Adaptive: iterations · rolling wave · flexible schedule
+  Hybrid: mix per component
+
+SIGNAL: "before creating your schedule management plan"
+        "plan for managing the schedule"
+        need to KNOW first (input question)
+
+Q56 ANSWER: C
+
+REF: PMBOK Guide, 8th Ed., p.49, p.139</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-organizational-structure.html">Q5: Project-oriented</a>
+          · <a href="pmp-teach-schedule-management-plan.html">Q55: Schedule Mgmt Plan</a>
+          · <a href="pmp-teach-predictive-approach.html">Q14: Predictive</a>
+          · <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive</a>
+          · <a href="pmp-full-questions.html#q-56">Luyện câu 56</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -424,12 +440,12 @@ Q6 ANSWER: B — Functional organization</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Project-oriented cần full authority và dedicated resources — trái với đề.",
-        B: "Đúng! Existing team + no additional budget/authority = Functional organization.",
-        C: "Balanced matrix chia quyền PM/FM — không phải 'no authority'.",
-        D: "Weak matrix vẫn có vai trò PM. Đề mô tả functional thuần hơn."
+        A: "Deliverable sequence được xác định khi develop schedule — sau schedule mgmt plan, không phải input trước.",
+        B: "Activity estimates là bước estimate durations — quá chi tiết, cần sau khi define activities.",
+        C: "Đúng! Development approach (predictive/adaptive/hybrid) là input to Plan Schedule Management (p.49).",
+        D: "Schedule compression (fast-track/crash) là technique sau — không input ban đầu cho mgmt plan."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -445,7 +461,7 @@ Q6 ANSWER: B — Functional organization</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Functional organization.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — The development approach.</strong>" : "");
         });
       });
       let score = 0;
