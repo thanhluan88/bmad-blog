@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Sourcing Strategy Plan (Q24)</title>
+  <title>PMBOK 8 — Monitor &amp; Control Performance (Q35)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .process-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; font-size: 0.8rem; }
-    .flow-step { padding: 0.45rem 0.7rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--border); background: var(--bg); }
-    .flow-step.done { border-color: var(--muted); color: var(--muted); }
-    .flow-step.current { border-color: var(--ok); background: var(--ok-bg); color: #065f46; }
-    .flow-step.next { border-color: var(--info); background: var(--info-bg); color: #1d4ed8; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -87,17 +81,21 @@
     .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
     .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
     .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
+    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.9rem; font-weight: 600; }
+    .flow-box { padding: 0.55rem 1rem; border-radius: 10px; border: 2px solid var(--border); background: var(--card); }
+    .flow-box.highlight { border-color: var(--primary); background: var(--primary-bg); color: var(--primary-dark); }
+    .flow-arrow { color: var(--muted); font-size: 1.2rem; }
   </style>
 </head>
 <body>
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Sourcing Strategy Plan · Q24</div>
+      <div class="brand-sub">Monitor &amp; Control · Q35</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#strategy">Sourcing Strategy Plan</a>
-        <a href="#align">Align conflicting teams</a>
+        <a href="#monitor">Monitor &amp; Control</a>
+        <a href="#data-flow">Data → Info → Report</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -139,16 +137,16 @@
         <a href="pmp-teach-checklists.html">Q32: Checklists</a>
         <a href="pmp-teach-lessons-learned.html">Q33: Lessons Learned</a>
         <a href="pmp-teach-after-action-review.html">Q34: After-Action Review</a>
-        <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
+        <a href="pmp-teach-monitor-control-performance.html" class="series-current">Q35: Monitor &amp; Control</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-24">Luyện câu 24</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-35">Luyện câu 35</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#strategy">Strategy</a>
-        <a href="#align">Align</a>
+        <a href="#monitor">Monitor</a>
+        <a href="#data-flow">Data flow</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -157,171 +155,163 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q24 về <strong>Sourcing Strategy Plan</strong> — khi các team đề xuất
-            cách acquire materials/services <em>conflicting</em>, Irene cần align overall approach
-            (contract types, supplier selection) trước SOW hay bid documents.
+            Bài học Q35 về <strong>Monitor and Control Project Performance</strong> — project
+            off track (cost &amp; schedule), stakeholders muốn update. James nên làm gì
+            <em>first</em>?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.20 &amp; p.141</span>
-            <span class="badge">Plan Sourcing Strategy</span>
-            <span class="badge">Câu 24 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.26–27</span>
+            <span class="badge">Monitor &amp; Control Project Performance</span>
+            <span class="badge">Câu 35 — Practice</span>
           </div>
         </header>
 
-        <section id="strategy">
-          <h2>1. Sourcing Strategy Plan</h2>
+        <section id="monitor">
+          <h2>1. Monitor and Control Project Performance</h2>
           <p>
-            Output của <strong>Plan Sourcing Strategy</strong> — mô tả phần nào insource/outsourced,
-            rationale, selection criteria, và considerations (value, schedule, risk, financial impact).
+            Process theo dõi, review và report overall project progress để đáp ứng performance
+            objectives trong project management plan. Trước khi corrective action hay update plan,
+            PM phải <strong>analyze</strong> raw data thành meaningful information.
           </p>
 
           <div class="card tip">
-            <h4>Nội dung chính (PMBOK p.20, p.141)</h4>
+            <h4>Monitor &amp; Control (PMBOK p.26–27)</h4>
             <p style="margin:0">
-              Plan Sourcing Strategy documents sourcing decisions, defines the source selection approach,
-              and determines work for external sourcing. The sourcing strategy plan describes what will be
-              insourced or outsourced, including rationale, selection criteria, and considerations such as
-              value, schedule, risk, and financial impact.
+              Work performance <strong>data</strong> is compared to create work performance
+              <strong>information</strong>, which is ultimately sent as a <strong>report</strong>
+              to stakeholders.
             </p>
+          </div>
+        </section>
+
+        <section id="data-flow">
+          <h2>2. Data → Info → Report</h2>
+
+          <div class="flow-diagram">
+            <div class="flow-box highlight">Work Performance Data</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box highlight">Analyze → Work Performance Information</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">Report to Stakeholders</div>
           </div>
 
           <table>
             <thead>
-              <tr><th>Artifact</th><th>Khi nào?</th></tr>
+              <tr><th>Artifact</th><th>Ví dụ</th><th>Q35</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Sourcing strategy plan</strong></td>
-                <td>Align approach — contract types, selection methods, insource/outsource</td>
+                <td><strong>Work performance data</strong></td>
+                <td>Raw AC, EV, schedule actuals James đang review</td>
+                <td>Input — đã có</td>
               </tr>
               <tr>
-                <td>Statement of work (SOW)</td>
-                <td>Sau strategy — mô tả chi tiết work cho external sourcing</td>
+                <td><strong>Work performance information</strong></td>
+                <td>Analyzed variances, status vs baseline</td>
+                <td><strong>FIRST step (C)</strong></td>
               </tr>
               <tr>
-                <td>Make-or-buy analysis</td>
-                <td>Một phần của strategy — không thay thế toàn bộ plan</td>
-              </tr>
-              <tr>
-                <td>Project bid documents</td>
-                <td>Sau SOW/strategy — gửi cho vendors</td>
+                <td><strong>Work performance reports</strong></td>
+                <td>Stakeholder update package</td>
+                <td>After analysis</td>
               </tr>
             </tbody>
           </table>
-        </section>
 
-        <section id="align">
-          <h2>2. Conflicting approaches → align trước</h2>
-
-          <div class="process-flow" aria-label="Procurement alignment">
-            <span class="flow-step done">Teams propose conflicting approaches</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step current">Sourcing strategy plan (D)</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">SOW → Bid documents</span>
+          <div class="card info">
+            <h4>Keyword: FIRST</h4>
+            <p style="margin:0">
+              Analyze data → info trước corrective actions (A), plan update (B), hay escalation (D).
+            </p>
           </div>
-
-          <p>
-            Đề nhấn <em>align the overall approach</em> và <em>delays in procurement planning</em> —
-            cần tài liệu tích hợp quyết định sourcing, không nhảy thẳng vào SOW hay bid package.
-          </p>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 24</h2>
+          <h2>3. Câu hỏi thực hành — Question 35</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q24</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q35</div>
             <div class="q-text">
-              Irene is preparing a large infrastructure project at West Core Development.
-              Different teams propose <em>conflicting approaches</em> for acquiring materials and services,
-              causing delays in procurement planning. Irene needs to
-              <em>align the overall approach</em>, including contract types and supplier selection methods.
-              What should she do?
+              James is managing a commercial build at Evercrest Corp. During execution, he reviews
+              cost and schedule data and notices the project is <em>going off track</em>. Stakeholders
+              are starting to notice and want an update on what's going on. What should James do
+              <em>first</em> to respond to this situation?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Develop the statement of work.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Perform a make-or-buy analysis.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Develop the project bid documents.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Develop a sourcing strategy plan.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Implement corrective actions to bring performance back on track.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Update the project management plan to reflect the changes in cost and schedule.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Analyze performance data and turn it into work performance information.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Escalate the issue to the project management team to avoid further delays.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <h3>Tại sao chọn D?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>Conflicting team approaches → cần integrated sourcing strategy plan.</li>
-            <li>Align contract types + supplier selection = Plan Sourcing Strategy output.</li>
-            <li>Giải quyết delay ở planning — trước SOW và bid docs.</li>
+            <li><em>First</em> = analyze raw data into work performance information.</li>
+            <li>Stakeholders want update — cần analyzed info, không phải raw data hay premature action.</li>
+            <li>Monitor &amp; Control Project Performance (p.26–27): Data → Info → Report.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không FIRST</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Statement of work</strong></td>
-                <td>SOW mô tả work detail — cần aligned strategy trước khi viết SOW.</td>
+                <td><strong>A. Corrective actions</strong></td>
+                <td>Sau khi đã analyze variances và hiểu root cause — không nhảy thẳng.</td>
               </tr>
               <tr>
-                <td><strong>B. Make-or-buy analysis</strong></td>
-                <td>Chỉ một phần của strategy — không align toàn bộ contract types &amp; selection methods.</td>
+                <td><strong>B. Update PM plan</strong></td>
+                <td>Plan update qua change control — chưa analyze data trước.</td>
               </tr>
               <tr>
-                <td><strong>C. Bid documents</strong></td>
-                <td>Quá muộn — chưa align approach, chưa có SOW/strategy rõ ràng.</td>
+                <td><strong>D. Escalate</strong></td>
+                <td>Escalation khi cần — PM phải analyze &amp; prepare info trước.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Liên hệ Q22</h4>
-            <p style="margin:0">
-              Q22: chưa contact vendor → develop sourcing strategy. Q24: teams conflict →
-              <strong>sourcing strategy plan</strong> để align. Cùng process, khác scenario.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Bước procurement nào?</h2>
+          <h2>5. Drill — Thứ tự đúng?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="STRAT">
-              <span>Align conflicting acquisition approaches across teams</span>
+            <div class="classify-row" data-answer="INFO">
+              <span>Project off track — stakeholders want status update (FIRST)</span>
               <div class="classify-btns">
-                <button data-pick="STRAT">Strategy plan</button>
-                <button data-pick="SOW">SOW</button>
-                <button data-pick="BID">Bid docs</button>
+                <button data-pick="INFO">Analyze → Info</button>
+                <button data-pick="FIX">Corrective action</button>
+                <button data-pick="ESC">Escalate</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SOW">
-              <span>Detail scope of work for external supplier</span>
+            <div class="classify-row" data-answer="FIX">
+              <span>Variances analyzed — decide recovery actions</span>
               <div class="classify-btns">
-                <button data-pick="STRAT">Strategy plan</button>
-                <button data-pick="SOW">SOW</button>
-                <button data-pick="BID">Bid docs</button>
+                <button data-pick="INFO">Analyze → Info</button>
+                <button data-pick="FIX">Corrective action</button>
+                <button data-pick="ESC">Escalate</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="BID">
-              <span>Issue RFP to prospective sellers</span>
+            <div class="classify-row" data-answer="INFO">
+              <span>Compare cost/schedule data to baseline</span>
               <div class="classify-btns">
-                <button data-pick="STRAT">Strategy plan</button>
-                <button data-pick="SOW">SOW</button>
-                <button data-pick="BID">Bid docs</button>
+                <button data-pick="INFO">Analyze → Info</button>
+                <button data-pick="FIX">Corrective action</button>
+                <button data-pick="ESC">Escalate</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="STRAT">
-              <span>Document insource vs outsource with rationale</span>
+            <div class="classify-row" data-answer="ESC">
+              <span>Issue beyond PM authority after analysis</span>
               <div class="classify-btns">
-                <button data-pick="STRAT">Strategy plan</button>
-                <button data-pick="SOW">SOW</button>
-                <button data-pick="BID">Bid docs</button>
+                <button data-pick="INFO">Analyze → Info</button>
+                <button data-pick="FIX">Corrective action</button>
+                <button data-pick="ESC">Escalate</button>
               </div>
             </div>
           </div>
@@ -331,16 +321,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Acquiring materials” → SOW (A)</h4>
-            <p style="margin:0">SOW cần strategy aligned trước — đề hỏi align overall approach, không detail work.</p>
+            <h4>Bẫy 1: Off track → Corrective actions (A)</h4>
+            <p style="margin:0">Corrective actions sau analysis — đề hỏi <em>first</em> response.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Make-or-buy (B) nghe đúng</h4>
-            <p style="margin:0">Make-or-buy là subset — đề cần contract types + supplier selection methods = full strategy plan.</p>
+            <h4>Bẫy 2: Variance → Update plan (B)</h4>
+            <p style="margin:0">Plan changes qua formal change control — không phải bước đầu khi mới phát hiện variance.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Stakeholders worried → Escalate (D)</h4>
+            <p style="margin:0">PM analyze &amp; report trước — escalation không phải first step.</p>
           </div>
           <div class="card tip">
-            <h4>Signal</h4>
-            <p style="margin:0"><strong>Conflicting approaches + align + procurement planning delay</strong> → Sourcing Strategy Plan (D).</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Performance data + stakeholders want update + FIRST</strong> → Analyze into work performance information (C).</p>
           </div>
         </section>
 
@@ -348,51 +342,53 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Sourcing strategy plan gồm gì? (p.141)</div>
-            <div class="flashcard-back">Insource/outsourced · rationale · selection criteria · value, schedule, risk, financial impact.</div>
+            <div class="flashcard-front">Data → Info → Report?</div>
+            <div class="flashcard-back">Raw work performance DATA → analyzed INFORMATION → stakeholder REPORTS.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q24 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Develop a sourcing strategy plan.</div>
+            <div class="flashcard-front">Q35 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Analyze performance data into work performance information.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">SOURCING STRATEGY PLAN — Q24 (PMBOK 8, p.20 &amp; p.141)
+          <div class="cheat-sheet">MONITOR &amp; CONTROL PERFORMANCE — Q35 (PMBOK 8, p.26–27)
 ─────────────────────────────────────────────────────
-PROCESS: Plan Sourcing Strategy
-OUTPUT: Sourcing strategy plan
-  - Sourcing decisions documented
-  - Source selection approach
-  - Work for external sourcing
-  - Insource vs outsource + rationale
-  - Selection criteria (value, schedule, risk, $)
+PROCESS: Monitor and Control Project Performance
+  - Track · review · report progress vs plan objectives
 
-SCENARIO: West Core — teams CONFLICT on acquisition approach
-           procurement planning DELAYED
-           need ALIGN contract types &amp; supplier selection
-ANSWER → D) Develop a SOURCING STRATEGY PLAN ✓
+FLOW: Data → Info → Report
+  Work Performance DATA (raw)
+    → analyze/compare
+  Work Performance INFORMATION (analyzed)
+    → communicate
+  Work Performance REPORTS (to stakeholders)
 
-NOT:
-  A) SOW — after strategy aligned
-  B) Make-or-buy only — part of strategy, not full align
-  C) Bid documents — after SOW/strategy
+SCENARIO: Evercrest commercial build — execution
+           Cost &amp; schedule OFF TRACK
+           Stakeholders want UPDATE
+           What to do FIRST?
+→ C) Analyze data → WORK PERFORMANCE INFORMATION ✓
 
-SEQUENCE:
-  Strategy plan (D) → SOW (A) → Bid docs (C)
+NOT FIRST:
+  A) Corrective actions — after analysis
+  B) Update PM plan — change control, not initial response
+  D) Escalate — after PM analyzes &amp; determines need
 
-VS Q22: same process, Q24 = align conflicting teams
+SIGNAL: "reviews cost and schedule data"
+        "going off track" · stakeholders want update
+        "FIRST"
 
-Q24 ANSWER: D
+Q35 ANSWER: C
 
-REF: PMBOK Guide, 8th Ed., p.20 &amp; p.141 — Sourcing strategy plan</div>
+REF: PMBOK Guide, 8th Ed., p.26–27</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-plan-sourcing-strategy.html">Q22: Plan Sourcing Strategy</a>
-          · <a href="pmp-teach-bidder-conference.html">Q23: Bidder Conference</a>
-          · <a href="pmp-full-questions.html#q-24">Luyện câu 24</a>
+          · <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
+          · <a href="pmp-teach-project-management-plan.html">Q21: PM Plan</a>
+          · <a href="pmp-full-questions.html#q-35">Luyện câu 35</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -401,12 +397,12 @@ REF: PMBOK Guide, 8th Ed., p.20 &amp; p.141 — Sourcing strategy plan</div>
 
   <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "C";
       const EXPL = {
-        A: "SOW mô tả chi tiết work — cần sourcing strategy aligned trước khi viết SOW.",
-        B: "Make-or-buy chỉ một phần — đề cần align contract types và supplier selection (full plan).",
-        C: "Bid documents quá muộn — chưa align overall procurement approach.",
-        D: "Đúng! Sourcing strategy plan — align decisions, selection approach, insource/outsource (p.20, p.141)."
+        A: "Corrective actions sau khi analyze variances — không phải FIRST step.",
+        B: "Update PM plan qua change control — chưa analyze data thành information.",
+        C: "Đúng! FIRST: analyze work performance data → work performance information (p.26–27).",
+        D: "Escalation sau khi PM analyze — không phải first response."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -422,7 +418,7 @@ REF: PMBOK Guide, 8th Ed., p.20 &amp; p.141 — Sourcing strategy plan</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Develop a sourcing strategy plan.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Analyze performance data and turn it into work performance information.</strong>" : "");
         });
       });
       let score = 0;
