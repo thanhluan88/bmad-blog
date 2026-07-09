@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Initiate Project (Q18)</title>
+  <title>PMBOK 8 — WBS Dictionary (Q52)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .process-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; font-size: 0.8rem; }
-    .flow-step { padding: 0.45rem 0.7rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--border); background: var(--bg); }
-    .flow-step.done { border-color: var(--muted); color: var(--muted); }
-    .flow-step.current { border-color: var(--ok); background: var(--ok-bg); color: #065f46; }
-    .flow-step.next { border-color: var(--info); background: var(--info-bg); color: #1d4ed8; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -72,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 340px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -94,11 +88,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Initiate Project · Q18</div>
+      <div class="brand-sub">WBS Dictionary · Q52</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#initiate">Initiate Project</a>
-        <a href="#sequence">Thứ tự NEXT</a>
+        <a href="#dictionary">WBS Dictionary</a>
+        <a href="#flow">Scope Flow</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -156,16 +150,16 @@
         <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
         <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
-        <a href="pmp-teach-wbs-dictionary.html">Q52: WBS Dictionary</a>
+        <a href="pmp-teach-wbs-dictionary.html" class="series-current">Q52: WBS Dictionary</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-52">Luyện câu 52</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#initiate">Initiate</a>
-        <a href="#sequence">Sequence</a>
+        <a href="#dictionary">Dictionary</a>
+        <a href="#flow">Flow</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -174,179 +168,162 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q18 về <strong>Initiate Project or Phase</strong> — sau business case approved,
-            bước tiếp theo là <strong>project charter</strong> với sponsor trước plan hay kick-off.
+            Bài học Q52 về <strong>WBS Dictionary</strong> — Nate, predictive manufacturing
+            upgrade: đã elicit requirements → project scope; cần thêm chi tiết cho
+            <em>work packages</em> để clarity &amp; alignment.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.17</span>
-            <span class="badge">Project Charter</span>
-            <span class="badge">Câu 18 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.42</span>
+            <span class="badge">Develop Scope Structure</span>
+            <span class="badge">Câu 52 — Practice</span>
           </div>
         </header>
 
-        <section id="initiate">
-          <h2>1. Initiate Project or Phase</h2>
+        <section id="dictionary">
+          <h2>1. WBS Dictionary (Develop Scope Structure, p.42)</h2>
           <p>
-            Process này <strong>chính thức authorize</strong> bắt đầu dự án và cấp PM quyền
-            phân bổ tài nguyên tổ chức — thông qua <strong>project charter</strong> hoặc tài liệu tương đương.
+            WBS decomposes total scope into manageable <strong>work packages</strong>. The
+            <strong>WBS dictionary</strong> adds detailed documentation for each component:
+            description, assumptions, constraints, responsible org, milestones, resources, cost
+            estimates, acceptance criteria.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.17)</h4>
+            <h4>WBS Dictionary vs WBS</h4>
             <p style="margin:0">
-              The Initiate Project or Phase process officially authorizes the start of a project
-              and grants the project manager the authority to allocate organizational resources
-              to project activities by creating a project charter or similar document.
+              WBS = hierarchical structure. Dictionary = <strong>detailed narrative</strong> per
+              work package so team can assign, track, and measure with shared understanding.
             </p>
-          </div>
-
-          <h3>Project Charter — ai approve?</h3>
-          <ul>
-            <li>PM <strong>làm việc với Sponsor</strong> để develop và obtain approval</li>
-            <li>Sponsor signs/approves charter — grants authority to PM</li>
-            <li>Charter ≠ project management plan (plan comes later in planning)</li>
-          </ul>
-        </section>
-
-        <section id="sequence">
-          <h2>2. Thứ tự “What will you do NEXT?”</h2>
-
-          <div class="process-flow" aria-label="Initiation sequence">
-            <span class="flow-step done">Business case approved ✓</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step current">Charter + Sponsor approval</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">Project management plan</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">Kick-off meeting</span>
           </div>
 
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Giai đoạn</th><th>Đúng NEXT?</th></tr>
+              <tr><th>Typical dictionary fields</th><th>Purpose</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td><strong>C. Charter với sponsor</strong></td>
-                <td>Initiating</td>
-                <td>✓ Đúng — ngay sau business case</td>
-              </tr>
-              <tr>
-                <td><strong>A. Develop PM plan</strong></td>
-                <td>Planning</td>
-                <td>✗ Sau charter (slide ✗)</td>
-              </tr>
-              <tr>
-                <td><strong>B. Kick-off meeting</strong></td>
-                <td>Sau plan / execution</td>
-                <td>✗ Quá sớm nếu chưa charter (slide ✗)</td>
-              </tr>
-              <tr>
-                <td><strong>D. Make-or-buy</strong></td>
-                <td>Planning (acquisition)</td>
-                <td>✗ Không phải bước đầu initiating</td>
-              </tr>
+              <tr><td><strong>Description</strong></td><td>What the work package includes</td></tr>
+              <tr><td><strong>Responsible / Resources</strong></td><td>Who does the work</td></tr>
+              <tr><td><strong>Criteria / Cost</strong></td><td>Acceptance criteria, estimates</td></tr>
+              <tr><td>Assumptions, constraints, milestones</td><td>Planning clarity</td></tr>
             </tbody>
           </table>
+        </section>
 
-          <div class="card info">
-            <h4>CHS scenario</h4>
-            <p style="margin:0">
-              Patient records system — business case approved, stakeholders identified, leadership muốn
-              start <em>immediately</em>. Charter vẫn là bước bắt buộc để authorize — không skip dù urgent.
-            </p>
-          </div>
+        <section id="flow">
+          <h2>2. Predictive scope sequence</h2>
+
+          <table>
+            <thead>
+              <tr><th>Step</th><th>Artifact / action</th><th>Question</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Elicit requirements</td><td>Stakeholder needs</td><td>Q43+</td></tr>
+              <tr><td>Define / develop scope</td><td>Project scope statement</td><td>-</td></tr>
+              <tr><td>Create WBS</td><td>Organize &amp; decompose deliverables</td><td>Q51</td></tr>
+              <tr><td><strong>WBS dictionary</strong></td><td><strong>Detail work packages</strong></td><td><strong>Q52</strong></td></tr>
+              <tr><td>Scope baseline</td><td>WBS + dictionary + scope statement</td><td>Q28</td></tr>
+            </tbody>
+          </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 18</h2>
+          <h2>3. Câu hỏi thực hành — Question 52</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q18</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q52</div>
             <div class="q-text">
-              You have been assigned to lead a new patient records system project at CHS.
-              The <em>business case has been approved</em>, and key stakeholders are identified.
-              Senior leadership wants the project to <em>start immediately and without delay</em>.
-              What will you do <em>next</em>?
+              Nate is managing a manufacturing facility upgrade using a predictive approach. Nate
+              has elicited the requirements from project stakeholders and turned them into project
+              scope. Nate wants to add <em>more details to the work packages</em> to ensure clarity
+              and alignment across the team. What will he do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Develop the project management plan to define how the project will be executed.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Perform a kick-off meeting with the project team.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Work with the project sponsor to approve the project charter.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Perform a make-or-buy analysis to determine the resources to be used.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Create a responsibility assignment matrix (RAM) to define roles and responsibilities.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Perform quality control and verify the work packages.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Develop a clear requirements traceability matrix.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Develop a detailed WBS dictionary.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>Initiate Project or Phase = charter authorizes project + PM authority (p.17).</li>
-            <li>Business case approved → NEXT logical step = charter với sponsor.</li>
-            <li>“Start immediately” không có nghĩa skip charter — charter <em>là</em> cách authorize start.</li>
+            <li>Work packages already exist (scope → WBS) → add detail via WBS dictionary.</li>
+            <li>Clarity &amp; alignment → description, criteria, responsible party per package.</li>
+            <li>Develop Scope Structure (p.42) — predictive decomposition + dictionary.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải NEXT</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. PM plan</strong></td>
-                <td>Planning process — sau khi project được authorize bằng charter.</td>
+                <td><strong>A. RAM</strong></td>
+                <td>RACI/RAM maps roles to deliverables — sau khi work defined, không thay dictionary detail.</td>
               </tr>
               <tr>
-                <td><strong>B. Kick-off</strong></td>
-                <td>Thường sau charter và/hoặc plan — team cần charter scope/authority trước.</td>
+                <td><strong>B. Quality control</strong></td>
+                <td>Verify completed work during execution — không define package details in planning.</td>
               </tr>
               <tr>
-                <td><strong>D. Make-or-buy</strong></td>
-                <td>Planning tool for procurement — không phải initiating step đầu tiên.</td>
+                <td><strong>C. RTM</strong></td>
+                <td>Trace requirements to scope (Q44) — không add narrative detail to work packages.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q8 Sponsor</h4>
+            <h4>Liên hệ Q51 vs Q52</h4>
             <p style="margin:0">
-              Sponsor approves charter · grants PM authority · aligns với funding/strategic direction.
+              Q51: organize deliverables into <em>WBS</em>. Q52: <em>more details on work packages</em>
+              → WBS dictionary (D). Đừng nhầm với RTM (requirements) hay RAM (roles only).
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Initiating hay Planning?</h2>
+          <h2>5. Drill — WBS, dictionary, RTM hay RAM?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="INIT">
-              <span>Obtain sponsor approval of project charter</span>
+            <div class="classify-row" data-answer="DICT">
+              <span>Add details to work packages for clarity</span>
               <div class="classify-btns">
-                <button data-pick="INIT">Initiating</button>
-                <button data-pick="PLAN">Planning</button>
+                <button data-pick="WBS">WBS</button>
+                <button data-pick="DICT">Dictionary</button>
+                <button data-pick="RTM">RTM</button>
+                <button data-pick="RAM">RAM</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PLAN">
-              <span>Develop integrated project management plan</span>
+            <div class="classify-row" data-answer="WBS">
+              <span>Decompose deliverables into manageable components</span>
               <div class="classify-btns">
-                <button data-pick="INIT">Initiating</button>
-                <button data-pick="PLAN">Planning</button>
+                <button data-pick="WBS">WBS</button>
+                <button data-pick="DICT">Dictionary</button>
+                <button data-pick="RTM">RTM</button>
+                <button data-pick="RAM">RAM</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PLAN">
-              <span>Perform make-or-buy analysis</span>
+            <div class="classify-row" data-answer="RTM">
+              <span>Link requirements to scope components</span>
               <div class="classify-btns">
-                <button data-pick="INIT">Initiating</button>
-                <button data-pick="PLAN">Planning</button>
+                <button data-pick="WBS">WBS</button>
+                <button data-pick="DICT">Dictionary</button>
+                <button data-pick="RTM">RTM</button>
+                <button data-pick="RAM">RAM</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="INIT">
-              <span>Officially authorize project start</span>
+            <div class="classify-row" data-answer="RAM">
+              <span>Map who is Responsible, Accountable, Consulted, Informed</span>
               <div class="classify-btns">
-                <button data-pick="INIT">Initiating</button>
-                <button data-pick="PLAN">Planning</button>
+                <button data-pick="WBS">WBS</button>
+                <button data-pick="DICT">Dictionary</button>
+                <button data-pick="RTM">RTM</button>
+                <button data-pick="RAM">RAM</button>
               </div>
             </div>
           </div>
@@ -356,16 +333,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Start immediately” → chọn kick-off (B)</h4>
-            <p style="margin:0">Urgency không bỏ qua charter — authorize trước, rồi plan và kick-off nhanh sau đó.</p>
+            <h4>Bẫy 1: Roles → RAM (A)</h4>
+            <p style="margin:0">RAM defines R/A/C/I — stem cần detail ON work packages (description, criteria), không chỉ roles.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Chọn A — PM plan nghe productive</h4>
-            <p style="margin:0">Plan cần charter làm input và PM cần authority từ charter trước khi allocate resources.</p>
+            <h4>Bẫy 2: Work packages → QC verify (B)</h4>
+            <p style="margin:0">Quality control = execution/monitoring — planning step là dictionary, không verify.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Requirements → RTM (C)</h4>
+            <p style="margin:0">RTM traces requirements — Q52 đã có scope; cần dictionary cho work packages.</p>
           </div>
           <div class="card tip">
-            <h4>Mnemonic NEXT</h4>
-            <p style="margin:0">Business case → <strong>Charter</strong> → Plan → Kick-off. Đề hỏi NEXT = bước kế tiếp trong chuỗi.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>More details to work packages · clarity · alignment · predictive</strong> → WBS dictionary (D).</p>
           </div>
         </section>
 
@@ -373,44 +354,59 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Initiate Project or Phase làm gì? (p.17)</div>
-            <div class="flashcard-back">Authorize project start · grant PM authority · project charter với sponsor.</div>
+            <div class="flashcard-front">WBS dictionary? (p.42)</div>
+            <div class="flashcard-back">Detailed docs per WBS component: description, assumptions, responsible, criteria, cost.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q18 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Work with sponsor to approve the project charter.</div>
+            <div class="flashcard-front">Q52 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Develop a detailed WBS dictionary.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">INITIATE PROJECT — Q18 (PMBOK 8, p.17)
+          <div class="cheat-sheet">WBS DICTIONARY — Q52 (PMBOK 8, p.42)
 ─────────────────────────────────────────────────────
-PROCESS: Initiate Project or Phase
-OUTPUT: Project charter (or similar)
-RESULT: Officially authorize start + PM authority to allocate resources
+PROCESS: Develop Scope Structure
 
-AFTER BUSINESS CASE APPROVED → NEXT:
-  C) Work with SPONSOR to approve PROJECT CHARTER ✓
+WBS:
+  - Hierarchical decomposition of TOTAL SCOPE
+  - Work packages: assign · track · measure
 
-SEQUENCE:
-  Business case → Charter (C) → PM Plan (A) → Kick-off (B)
-  Make-or-buy (D) = planning, not first
+WBS DICTIONARY:
+  - DETAILED documentation per WBS element
+  - Description · assumptions · constraints
+  - Responsible org · milestones · resources · cost
+  - Acceptance criteria · shared understanding
 
-Q18 ANSWER: C
+SCENARIO: Nate — predictive manufacturing upgrade
+           Elicited requirements → PROJECT SCOPE
+           ADD MORE DETAILS to WORK PACKAGES
+           Clarity &amp; alignment across team
+→ D) DEVELOP DETAILED WBS DICTIONARY ✓
 
-TRAPS:
-  "Start immediately" ≠ skip charter
-  Kick-off/plan before charter = wrong order
+NOT:
+  A) RAM — roles/responsibilities matrix, not package detail
+  B) QC verify — execution, not planning detail
+  C) RTM — trace requirements, not document work packages
 
-SPONSOR: Approves charter (links Q8)
+SCOPE FLOW:
+  Q51 WBS (decompose) → Q52 DICTIONARY (detail packages)
+  Q44 RTM (requirements trace) — different problem
 
-REF: PMBOK Guide, 8th Ed., p.17 — "Initiate Project or Phase"</div>
+SIGNAL: "more details to work packages"
+        "clarity and alignment" · "work packages"
+        predictive · scope already defined
+
+Q52 ANSWER: D
+
+REF: PMBOK Guide, 8th Ed., p.42</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
-          · <a href="pmp-teach-project-sponsor.html">Q8: Project Sponsor</a>
+          · <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
+          · <a href="pmp-teach-requirements-traceability.html">Q44: Requirements RTM</a>
+          · <a href="pmp-full-questions.html#q-52">Luyện câu 52</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -419,12 +415,12 @@ REF: PMBOK Guide, 8th Ed., p.17 — "Initiate Project or Phase"</div>
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "D";
       const EXPL = {
-        A: "PM plan là Planning — sau khi project được authorize bằng charter.",
-        B: "Kick-off thường sau charter/plan — chưa phải NEXT sau business case approved.",
-        C: "Đúng! Initiate Project or Phase — charter với sponsor authorize project và PM authority (p.17).",
-        D: "Make-or-buy là planning/procurement — không phải initiating step đầu tiên."
+        A: "RAM maps roles (RACI) — không thay thế detailed WBS dictionary cho work packages.",
+        B: "Quality control verifies completed work — planning step là develop dictionary, không QC.",
+        C: "RTM traces requirements to scope — stem cần detail ON work packages (Q51 → Q52).",
+        D: "Đúng! WBS dictionary documents detailed info per work package for clarity & alignment (p.42)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -440,7 +436,7 @@ REF: PMBOK Guide, 8th Ed., p.17 — "Initiate Project or Phase"</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Work with the project sponsor to approve the project charter.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Develop a detailed WBS dictionary.</strong>" : "");
         });
       });
       let score = 0;
