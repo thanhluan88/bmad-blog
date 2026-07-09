@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Hybrid Approach (Q16)</title>
+  <title>PMBOK 8 — Assumption Log (Q20)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,14 +51,12 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .hybrid-split { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.5rem; margin: 1.25rem 0; align-items: stretch; }
-    @media (max-width: 650px) { .hybrid-split { grid-template-columns: 1fr; } .hybrid-plus { display: none; } }
-    .hybrid-part { padding: 1rem; border-radius: var(--radius); font-size: 0.85rem; }
-    .hybrid-part.adapt { background: var(--ok-bg); border: 1.5px solid var(--ok); }
-    .hybrid-part.pred { background: var(--info-bg); border: 1.5px solid var(--info); }
-    .hybrid-part strong { display: block; margin-bottom: 0.35rem; font-size: 0.9rem; }
-    .hybrid-plus { display: flex; align-items: center; font-size: 1.5rem; font-weight: 700; color: var(--primary); }
-    .merge-bar { text-align: center; padding: 0.65rem; margin: 0.5rem 0 1rem; background: var(--primary-bg); border: 1px dashed var(--primary); border-radius: var(--radius); font-size: 0.85rem; font-weight: 600; color: var(--primary-dark); }
+    .log-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
+    @media (max-width: 600px) { .log-grid { grid-template-columns: 1fr; } }
+    .log-box { padding: 0.85rem; border-radius: var(--radius); font-size: 0.84rem; border: 1px solid var(--border); background: var(--card); }
+    .log-box.do { border-color: var(--ok); background: var(--ok-bg); }
+    .log-box.not { border-color: var(--bad); background: var(--bad-bg); }
+    .log-box strong { display: block; margin-bottom: 0.25rem; font-size: 0.9rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -74,7 +72,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 340px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 380px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -95,11 +93,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Hybrid Approach · Q16</div>
+      <div class="brand-sub">Assumption Log · Q20</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#hybrid">Hybrid</a>
-        <a href="#trio">Q14–Q16 trio</a>
+        <a href="#logs">4 loại log/register</a>
+        <a href="#not-trap">Câu hỏi NOT</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -126,7 +124,7 @@
         <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
         <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
         <a href="pmp-teach-business-case.html">Q19: Business Case</a>
-        <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
+        <a href="pmp-teach-assumption-log.html" class="series-current">Q20: Assumption Log</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
       <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
@@ -134,8 +132,8 @@
 
     <div>
       <nav class="mobile-nav">
-        <a href="#hybrid">Hybrid</a>
-        <a href="#trio">Trio</a>
+        <a href="#logs">Logs</a>
+        <a href="#not-trap">NOT</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -144,202 +142,190 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q16 về <strong>Hybrid Approaches</strong> — kết hợp adaptive và predictive
-            khi các deliverable khác nhau cần cách làm việc khác nhau trên cùng một dự án.
+            Bài học Q20 về <strong>Assumption Log</strong> và phân biệt với Risk Register,
+            Basis of Estimates, và Issue Log — đặc biệt câu hỏi <em>NOT</em> trên đề thi.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.65</span>
-            <span class="badge">Development Approach</span>
-            <span class="badge">Câu 16 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.17 &amp; p.114</span>
+            <span class="badge">Initiate / Planning</span>
+            <span class="badge">Câu 20 — Practice</span>
           </div>
         </header>
 
-        <section id="hybrid">
-          <h2>1. Hybrid Approach (PMBOK 8)</h2>
-          <p>
-            Hybrid development approach <strong>combines adaptive and predictive</strong>,
-            incorporating elements from both — ví dụ hai deliverable chính, một adaptive một predictive.
-          </p>
+        <section id="logs">
+          <h2>1. Bốn artifact — ghi gì ở đâu?</h2>
+
+          <div class="log-grid">
+            <div class="log-box do">
+              <strong>A — Assumption Log ✓</strong>
+              Assumptions &amp; constraints · updates · status changes
+            </div>
+            <div class="log-box do">
+              <strong>B — Risk Register ✓</strong>
+              Uncertainties · risks (utility availability, vendor timeline accuracy)
+            </div>
+            <div class="log-box do">
+              <strong>C — Basis of Estimates ✓</strong>
+              How cost/duration estimates derived · supporting detail
+            </div>
+            <div class="log-box not">
+              <strong>D — Issue Log ✗ (NOT)</strong>
+              Impacts that <em>have already occurred</em> — not future uncertainty
+            </div>
+          </div>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.65)</h4>
+            <h4>Assumption Log (PMBOK p.114)</h4>
             <p style="margin:0">
-              A hybrid development approach combines adaptive and predictive approaches,
-              incorporating elements from both. For example, a project may have two main
-              deliverables, where one is developed using an adaptive approach and the other
-              using a predictive approach.
+              Records all project assumptions and constraints throughout the life cycle,
+              including updates and status changes. High-level constraints originate in
+              the business case and flow into the charter; lower-level assumptions are
+              identified during planning and execution.
             </p>
           </div>
-
-          <div class="hybrid-split">
-            <div class="hybrid-part adapt">
-              <strong>Software (Adaptive)</strong>
-              Constantly evolving requirements · iterations · feedback
-            </div>
-            <div class="hybrid-plus">+</div>
-            <div class="hybrid-part pred">
-              <strong>Data center (Predictive)</strong>
-              Upfront planning · formal change control
-            </div>
-          </div>
-          <div class="merge-bar">Brought together in a final Sprint at the end → Hybrid</div>
-
-          <h3>Keywords trong đề thi → Hybrid</h3>
-          <ul>
-            <li><strong>Both</strong> evolving requirements AND upfront planning / change control</li>
-            <li>Two main deliverables / components with different natures</li>
-            <li>Software agile + infrastructure waterfall</li>
-            <li>Integration sprint / final sprint to merge streams</li>
-          </ul>
         </section>
 
-        <section id="trio">
-          <h2>2. Bộ ba Q14 – Q15 – Q16</h2>
+        <section id="not-trap">
+          <h2>2. Câu hỏi “NOT” — đọc kỹ</h2>
+          <p>
+            Đề hỏi <strong>what will he NOT do</strong> — đáp án đúng là hành động
+            Elijah <em>không</em> thực hiện. A, B, C đều đúng việc cần làm → chọn D.
+          </p>
 
           <table>
             <thead>
-              <tr><th>Câu</th><th>Scenario signal</th><th>Đáp án</th></tr>
+              <tr><th>Factor (QGS data center)</th><th>Artifact</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Q14</strong></td>
-                <td>Regulated, phase gates, defined early, strict CC</td>
-                <td>Predictive (D)</td>
+                <td>Utility availability (uncertain)</td>
+                <td>Assumption Log + Risk Register</td>
               </tr>
               <tr>
-                <td><strong>Q15</strong></td>
-                <td>Short iterations, feedback, Product Owner</td>
-                <td>Adaptive (A)</td>
+                <td>Vendor timeline accuracy (uncertain)</td>
+                <td>Assumption Log + Risk Register + Basis of Estimates</td>
               </tr>
               <tr>
-                <td><strong>Q16</strong></td>
-                <td>Software evolving + infra predictive, merged at end</td>
-                <td><strong>Hybrid (B)</strong></td>
+                <td>Initial cost/duration estimates</td>
+                <td>Basis of Estimates (document assumptions behind numbers)</td>
+              </tr>
+              <tr>
+                <td>Problem already impacting project</td>
+                <td><strong>Issue Log only</strong> — chưa xảy ra ở đây</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card info">
-            <h4>West Gate Group scenario</h4>
-            <p style="margin:0">
-              Enterprise platform = <em>một dự án</em> nhưng <em>hai cách phát triển</em>.
-              Chọn Hybrid khi đề mô tả <strong>cả hai</strong> pattern — không chỉ một phía.
-            </p>
-          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 16</h2>
+          <h2>3. Câu hỏi thực hành — Question 20</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q16</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q20</div>
             <div class="q-text">
-              Ethan is working on a project at West Gate Group that will deliver a new enterprise platform.
-              The <em>software component</em> has <em>constantly evolving requirements</em>, while the
-              <em>data center infrastructure</em> is built using <em>upfront planning</em> and a
-              <em>formal change control approach</em>, with the two brought together in a
-              <em>final Sprint at the end</em>.
-              Which development approach should Ethan use?
+              Elijah is initiating a data center expansion project at QGS. Early planning
+              relies on <em>uncertain factors</em> such as utility availability and the
+              accuracy of vendor timelines. As Elijah documents these initial estimates for
+              cost and duration, what will he <em>NOT</em> do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Predictive approach.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Hybrid approach.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Incremental approach.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Adaptive approach.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Add the factors to the Assumption Log.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Add the factors to the Risk Register.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Add the factors to the Basis of Estimates.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Add the factors to the Issue Log.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn D (NOT do)?</h3>
           <ul>
-            <li>Software = adaptive signals (evolving requirements).</li>
-            <li>Data center = predictive signals (upfront planning, formal change control).</li>
-            <li>Cùng một project, hai deliverables — textbook hybrid (p.65).</li>
-            <li>Final Sprint integrates both streams — vẫn là hybrid, không chỉ adaptive.</li>
+            <li><strong>Issue Log</strong> = impacts <em>that have occurred</em> — không phải uncertain factors chưa xảy ra.</li>
+            <li>Utility availability &amp; vendor timelines = assumptions/uncertainties → A, B, C đúng.</li>
+            <li>Slide: A, B, C có ✓ · D bị loại (Issue Log).</li>
           </ul>
 
-          <h3>Loại trừ từng đáp án</h3>
+          <h3>Vì sao A, B, C là việc Elijah SẼ làm</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải</th></tr>
+              <tr><th>Đáp án</th><th>Lý do</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Predictive</strong></td>
-                <td>Bỏ qua phần software evolving — chỉ mô tả một nửa scenario.</td>
+                <td><strong>A. Assumption Log</strong></td>
+                <td>Ghi assumptions/constraints và status — p.114</td>
               </tr>
               <tr>
-                <td><strong>C. Incremental</strong></td>
-                <td>Deliver từng phần — không capture adaptive + predictive combo.</td>
+                <td><strong>B. Risk Register</strong></td>
+                <td>Uncertainties = risks cần theo dõi</td>
               </tr>
               <tr>
-                <td><strong>D. Adaptive</strong></td>
-                <td>Bỏ qua data center upfront planning + formal CC — chỉ một nửa.</td>
+                <td><strong>C. Basis of Estimates</strong></td>
+                <td>Document assumptions behind cost/duration estimates</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Rule of thumb</h4>
+            <h4>Issue vs Risk</h4>
             <p style="margin:0">
-              Một approach keyword → Q14 hoặc Q15 · <strong>Hai approach keywords</strong> trong cùng project → <strong>Hybrid</strong>
+              <strong>Risk</strong> = may happen (uncertainty) · <strong>Issue</strong> = has happened (impact occurred)
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Approach nào?</h2>
+          <h2>5. Drill — Log/Register nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="HYBRID">
-              <span>Software agile + infrastructure waterfall on same project</span>
+            <div class="classify-row" data-answer="ASSUMP">
+              <span>Utility may not be available on schedule (uncertain)</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="ASSUMP">Assumption/Risk</button>
+                <button data-pick="ISSUE">Issue Log</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SINGLE">
-              <span>Phase gates only, all scope defined early</span>
+            <div class="classify-row" data-answer="ISSUE">
+              <span>Vendor missed deadline — project delayed 2 weeks</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="ASSUMP">Assumption/Risk</button>
+                <button data-pick="ISSUE">Issue Log</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SINGLE">
-              <span>Short iterations and Product Owner only</span>
+            <div class="classify-row" data-answer="ASSUMP">
+              <span>Assumption behind duration estimate documented</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="ASSUMP">Basis/Assumption</button>
+                <button data-pick="ISSUE">Issue Log</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="HYBRID">
-              <span>One deliverable adaptive, another predictive</span>
+            <div class="classify-row" data-answer="ISSUE">
+              <span>Impact to project that has already occurred</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="ASSUMP">Assumption/Risk</button>
+                <button data-pick="ISSUE">Issue Log</button>
               </div>
             </div>
           </div>
           <p class="drill-score" id="drillScore">0 / 4 đúng</p>
-          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">“Single” = chỉ predictive hoặc chỉ adaptive</p>
+          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">Uncertain/future → NOT Issue Log</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn D — vì có “Sprint”</h4>
-            <p style="margin:0">Final Sprint là integration point — đề cũng nhấn <strong>upfront planning + formal change control</strong> cho infra → cần Hybrid.</p>
+            <h4>Bẫy 1: Quên đọc NOT</h4>
+            <p style="margin:0">Chọn A vì “đúng” — nhưng đề hỏi NOT → phải chọn D (việc không làm).</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Chọn A — vì enterprise platform “lớn”</h4>
-            <p style="margin:0">Quy mô không quyết định approach — đọc <strong>how each component is developed</strong>.</p>
+            <h4>Bẫy 2: Issue Log cho mọi “vấn đề”</h4>
+            <p style="margin:0">Uncertainty chưa materialize = risk/assumption — issue chỉ khi impact đã xảy ra.</p>
           </div>
           <div class="card tip">
-            <h4>Ôn nhanh Q14–16</h4>
-            <p style="margin:0">Predictive · Adaptive · Hybrid — ba câu liên tiếp trong series, pattern rất hay gặp trên đề PMP.</p>
+            <h4>Liên hệ Q18–Q19</h4>
+            <p style="margin:0">Initiating QGS data center — assumptions từ business case/charter flow xuống planning artifacts.</p>
           </div>
         </section>
 
@@ -347,48 +333,38 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Hybrid approach = gì? (p.65)</div>
-            <div class="flashcard-back">Combines adaptive + predictive — e.g. two deliverables, one of each approach.</div>
+            <div class="flashcard-front">Issue Log ghi gì?</div>
+            <div class="flashcard-back">Impacts to the project that <strong>have occurred</strong> — not uncertainties.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q16 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Hybrid (software evolving + data center predictive).</div>
+            <div class="flashcard-front">Q20 đáp án (NOT)?</div>
+            <div class="flashcard-back"><strong>D</strong> — Will NOT add uncertain factors to Issue Log.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">HYBRID APPROACH — Q16 (PMBOK 8, p.65)
+          <div class="cheat-sheet">ASSUMPTION LOG — Q20 (PMBOK 8, p.17 &amp; p.114)
 ─────────────────────────────────────────────────────
-DEFINITION: Combines ADAPTIVE + PREDICTIVE elements
+UNCERTAIN FACTORS (utility, vendor timelines):
+  DO → A Assumption Log
+  DO → B Risk Register (uncertainties)
+  DO → C Basis of Estimates (support estimates)
+  NOT → D Issue Log ✗
 
-EXAMPLE (p.65):
-  Two main deliverables
-  One → adaptive · Other → predictive
+ISSUE LOG: Impacts that HAVE OCCURRED
+RISK REGISTER: Uncertainties
+ASSUMPTION LOG: Assumptions &amp; constraints + status
 
-Q16 SCENARIO (West Gate):
-  Software → constantly evolving (ADAPTIVE)
-  Data center → upfront planning + formal CC (PREDICTIVE)
-  Final Sprint → integrate both
+Q20: "what will he NOT do?" → D (Issue Log)
 
-Q16 ANSWER: B — Hybrid approach
+NOT TRAP: Read NOT — pick the wrong artifact
 
-DECISION RULE:
-  Only predictive signals → Q14 (D)
-  Only adaptive signals → Q15 (A)
-  BOTH in same project → Q16 (B) Hybrid
-
-NOT:
-  A Predictive (ignores software)
-  D Adaptive (ignores infra)
-  C Incremental (partial delivery, not the combo)
-
-REF: The Standard for Project Management, p.65
-     "Hybrid Approaches"</div>
+REF: PMBOK Guide 8th Ed., p.17 Initiate + p.114 Assumption log</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive Approach</a>
+          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -397,12 +373,12 @@ REF: The Standard for Project Management, p.65
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Predictive chỉ mô tả data center — bỏ qua software evolving requirements.",
-        B: "Đúng! Adaptive (software) + Predictive (infra) trên cùng project = Hybrid (p.65).",
-        C: "Incremental = deliver portions — không capture adaptive + predictive combo.",
-        D: "Adaptive chỉ mô tả software — bỏ qua upfront planning + formal change control của infra."
+        A: "Assumption Log — Elijah SẼ làm (ghi assumptions). Đề hỏi NOT — không chọn A.",
+        B: "Risk Register — Elijah SẼ ghi uncertainties. Đề hỏi NOT — không chọn B.",
+        C: "Basis of Estimates — Elijah SẼ document estimate assumptions. Đề hỏi NOT — không chọn C.",
+        D: "Đúng! Issue Log chỉ cho impacts đã xảy ra — không dùng cho uncertain factors chưa materialize."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -418,7 +394,7 @@ REF: The Standard for Project Management, p.65
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Hybrid approach.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án (NOT): <strong>D — Will NOT add to Issue Log.</strong><br>A, B, C đều là việc Elijah sẽ làm." : "");
         });
       });
       let score = 0;
@@ -430,10 +406,12 @@ REF: The Standard for Project Management, p.65
           btn.addEventListener("click", function () {
             if (done) return;
             done = true;
-            const ok = btn.dataset.pick === ans;
+            const pick = btn.dataset.pick;
+            const ok = (ans === "ASSUMP" && pick === "ASSUMP") || (ans === "ISSUE" && pick === "ISSUE");
             row.querySelectorAll("button").forEach(function (b) {
               b.disabled = true;
-              if (b.dataset.pick === ans) b.classList.add("correct");
+              const bOk = (ans === "ASSUMP" && b.dataset.pick === "ASSUMP") || (ans === "ISSUE" && b.dataset.pick === "ISSUE");
+              if (bOk) b.classList.add("correct");
               else if (b === btn) b.classList.add("wrong-pick");
             });
             if (ok) score++;
