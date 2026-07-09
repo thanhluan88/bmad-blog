@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Schedule Management Plan (Q55)</title>
+  <title>PMBOK 8 — Resource Calendar (Q87)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,10 +50,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.82rem; }
-    .flow-box { padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
-    .flow-box.highlight { background: var(--primary-bg); border-color: #fde68a; font-weight: 600; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
+    .cal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .cal-grid { grid-template-columns: 1fr; } }
+    .cal-cell { text-align: center; padding: 0.65rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .cal-cell strong { display: block; color: var(--primary-dark); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -70,8 +69,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -92,11 +91,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Schedule Mgmt Plan · Q55</div>
+      <div class="brand-sub">Resource Calendar · Q87</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#plan">Plan Schedule Mgmt</a>
-        <a href="#sequence">Plan vs Schedule</a>
+        <a href="#acquire">Acquire Resources</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -158,7 +157,7 @@
         <a href="pmp-teach-wbs-dictionary.html">Q52: WBS Dictionary</a>
         <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
         <a href="pmp-teach-verified-deliverables.html">Q54: Verified Deliverables</a>
-        <a href="pmp-teach-schedule-management-plan.html" class="series-current">Q55: Schedule Mgmt Plan</a>
+        <a href="pmp-teach-schedule-management-plan.html">Q55: Schedule Mgmt Plan</a>
         <a href="pmp-teach-development-approach-schedule.html">Q56: Dev Approach Input</a>
         <a href="pmp-teach-schedule-baseline.html">Q57: Schedule Baseline</a>
         <a href="pmp-teach-resource-leveling.html">Q58: Resource Leveling</a>
@@ -190,15 +189,15 @@
         <a href="pmp-teach-parkinsons-law.html">Q84: Parkinson's Law</a>
         <a href="pmp-teach-genetic-algorithms.html">Q85: Genetic Algorithms</a>
         <a href="pmp-teach-resource-breakdown-structure.html">Q86: RBS</a>
-        <a href="pmp-teach-resource-calendar.html">Q87: Resource Calendar</a>
+        <a href="pmp-teach-resource-calendar.html" class="series-current">Q87: Resource Calendar</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#plan">Plan</a>
-        <a href="#sequence">Sequence</a>
+        <a href="#acquire">Acquire</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -207,185 +206,196 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q55 về <strong>Plan Schedule Management</strong> — Priya vừa takeover fiber
-            network tại HT Solutions; leadership lo về cách <em>schedule decisions</em> được made
-            &amp; controlled, cần <em>guidance</em> cho coordinating schedule activities.
+            Bài học Q87 về <strong>Resource Calendar</strong> — CE Group: hai department leads
+            tranh cãi việc release key specialists; mỗi bên ưu tiên deadline nội bộ, không rõ
+            <em>khi nào resources thực sự join project</em>.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.49 &amp; 139</span>
-            <span class="badge">Plan Schedule Management</span>
-            <span class="badge">Câu 55 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.82–84 &amp; 132</span>
+            <span class="badge">Acquire Resources</span>
+            <span class="badge">Resource Calendar</span>
+            <span class="badge">Câu 87 — Practice</span>
           </div>
         </header>
 
-        <section id="plan">
-          <h2>1. Plan Schedule Management (p.49)</h2>
+        <section id="acquire">
+          <h2>1. Acquire Resources &amp; Resource Calendar (p.82–84, 132)</h2>
           <p>
-            Process thiết lập <strong>policies, procedures, and documentation</strong> để develop,
-            manage, and maintain project schedule. <strong>Schedule management plan</strong> định nghĩa
-            criteria và activities cho developing, monitoring, và controlling schedule — trả lời câu hỏi
-            <em>how</em> schedule sẽ được quản lý.
+            <strong>Acquire Resources</strong> hướng dẫn selection và assignment của resources vào
+            activities. <strong>Resource calendar</strong> (p.132) xác định working days, shifts,
+            business hours, weekends, holidays — khi nào mỗi resource <em>available</em>. Đây là
+            output của Acquire Resources process.
           </p>
 
-          <div class="card tip">
-            <h4>Schedule management plan (p.139)</h4>
-            <p style="margin:0">
-              Provides guidance on how the schedule will be managed — decision-making approach,
-              level of accuracy, reporting formats, change control for schedule, và coordination
-              of schedule activities across the project.
-            </p>
+          <div class="cal-grid">
+            <div class="cal-cell"><strong>Working days</strong>Ngày làm việc</div>
+            <div class="cal-cell"><strong>Shifts / hours</strong>Ca &amp; giờ làm</div>
+            <div class="cal-cell"><strong>Holidays</strong>Ngày nghỉ, weekends</div>
           </div>
-        </section>
 
-        <section id="sequence">
-          <h2>2. Plan trước Schedule &amp; Baseline</h2>
-
-          <div class="flow-diagram">
-            <div class="flow-box highlight">Schedule mgmt plan</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box">Define activities / sequence</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box">Develop project schedule</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box">Schedule baseline</div>
+          <div class="card tip">
+            <h4>Signal trong stem</h4>
+            <p style="margin:0">
+              <strong>Uncertainty around when resources can join</strong> + functional managers
+              competing priorities → dùng <strong>resource calendars</strong> để xác định availability
+              thực tế và <em>negotiate realistic allocation</em> (B).
+            </p>
           </div>
 
           <table>
             <thead>
-              <tr><th>Artifact</th><th>Khi nào</th><th>Q55</th></tr>
+              <tr><th>Artifact</th><th>Mục đích</th><th>Q87?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Schedule management plan (D)</strong></td>
-                <td>Đầu tiên — HOW to manage schedule</td>
-                <td><strong>NEXT</strong> — guidance &amp; control approach</td>
+                <td><strong>Resource calendar</strong></td>
+                <td>When each resource is available</td>
+                <td>✓ Negotiate allocation timing</td>
               </tr>
               <tr>
-                <td><strong>Project schedule (A)</strong></td>
-                <td>Sau plan — durations &amp; sequencing</td>
-                <td>Develop schedule, không phải plan HOW</td>
+                <td><strong>Schedule baseline</strong></td>
+                <td>Approved project schedule</td>
+                <td>✗ Adjust only after knowing availability</td>
               </tr>
               <tr>
-                <td><strong>Schedule baseline (B)</strong></td>
-                <td>Sau schedule approved</td>
-                <td>Measure performance — quá sớm cho guidance concern</td>
+                <td><strong>Stakeholder engagement plan</strong></td>
+                <td>How to engage stakeholders</td>
+                <td>✗ Wrong artifact for resource timing</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q87 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Adjust schedule baseline</strong></td>
+                <td>Reflect limited resource access</td>
+                <td>Premature — chưa biết availability thực (instructor: X)</td>
               </tr>
               <tr>
-                <td><strong>Resource mgmt plan (C)</strong></td>
-                <td>Resource knowledge area</td>
-                <td>Staffing alignment — không trả lời schedule control guidance</td>
+                <td><strong>B. Resource calendars</strong></td>
+                <td>Determine availability, negotiate allocation</td>
+                <td><strong>Yes — Acquire Resources output</strong></td>
+              </tr>
+              <tr>
+                <td><strong>C. Additional budget</strong></td>
+                <td>Hire external to avoid conflict</td>
+                <td>Escalate/cost — chưa negotiate internal (instructor: X)</td>
+              </tr>
+              <tr>
+                <td><strong>D. Stakeholder engagement plan</strong></td>
+                <td>Address functional manager concerns</td>
+                <td>Wrong process — resource availability, not engagement strategy</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Liên hệ Q42 (Scope Mgmt Plan)</h4>
+            <h4>Q86 vs Q87</h4>
             <p style="margin:0">
-              Cùng pattern: leadership cần <em>consistent approach / guidance</em> →
-              <strong>management plan</strong> trước khi build artifact (WBS / project schedule).
+              Q86: types &amp; quantities estimated → <strong>create RBS</strong>. Q87: managers
+              dispute release timing → <strong>resource calendars</strong> + negotiate allocation.
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 55</h2>
+          <h2>3. Câu hỏi thực hành — Question 87</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q55</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q87</div>
             <div class="q-text">
-              Priya has just taken over a nationwide fiber network project at HT Solutions, where
-              leadership expresses their concern about how <em>schedule decisions are being made
-              and controlled</em> throughout the project. They want to provide <em>clear guidance
-              and direction</em> for coordinating schedule activities. What should Priya do next?
+              At CE Group, progress stalls when two department leads argue over the release of key
+              specialists assigned to your project. Each insists their internal deadlines take
+              <em>priority</em>, creating tension and uncertainty around when the resources can
+              actually join your team. What should be the most appropriate action for the project manager?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Develop the project schedule to define activity durations and sequencing.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Establish a schedule baseline to measure performance against planned timelines.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Develop a resource management plan to align staffing with schedule needs.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Create a schedule management plan and baseline this with the team.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Adjust the project schedule baseline to reflect limited resource access.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Review and use resource calendars to determine availability and negotiate a realistic allocation.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Request additional budget to hire external resources and avoid internal conflict.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Revise the stakeholder engagement plan to address functional manager concerns.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn D?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Concern = <em>how decisions made &amp; controlled</em> → schedule management plan.</li>
-            <li>Guidance for coordinating activities → Plan Schedule Management (p.49).</li>
-            <li>Baseline plan <em>with the team</em> = align on approach before building schedule.</li>
+            <li>Acquire Resources (p.82–84) → resource calendar = when available.</li>
+            <li>Functional managers competing → cần data (calendar) trước khi negotiate.</li>
+            <li>Realistic allocation dựa trên actual availability, không đoán.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không NEXT</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Develop project schedule</strong></td>
-                <td>Tạo schedule (durations, sequencing) — không define HOW schedule được managed.</td>
+                <td><strong>A. Schedule baseline</strong></td>
+                <td>Chưa có facts về availability — adjust baseline quá sớm.</td>
               </tr>
               <tr>
-                <td><strong>B. Schedule baseline</strong></td>
-                <td>Baseline để measure performance — sau khi có schedule; không giải quyết decision/control guidance.</td>
+                <td><strong>C. Additional budget</strong></td>
+                <td>Tránh conflict bằng hire external — chưa thử negotiate với calendars.</td>
               </tr>
               <tr>
-                <td><strong>C. Resource management plan</strong></td>
-                <td>Resource area — staffing alignment, không phải schedule governance.</td>
+                <td><strong>D. Engagement plan</strong></td>
+                <td>Functional manager dispute về resource timing ≠ stakeholder engagement strategy.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Plan vs Process (instructor note)</h4>
-            <p style="margin:0">
-              Instructor ghi <em>Process</em> trên A và <em>Plan</em> trên D — stem hỏi guidance
-              &amp; control approach → <strong>Plan</strong> (schedule management plan), không nhảy
-              thẳng develop schedule.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Plan, schedule, baseline hay resource?</h2>
+          <h2>5. Drill — Calendar, Baseline, Budget, hay Engagement?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="PLAN">
-              <span>How schedule decisions will be made and controlled</span>
+            <div class="classify-row" data-answer="CAL">
+              <span>Dept leads dispute when specialists can join — need facts to negotiate</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Mgmt plan</button>
-                <button data-pick="SCHED">Schedule</button>
+                <button data-pick="CAL">Calendar</button>
                 <button data-pick="BASE">Baseline</button>
-                <button data-pick="RES">Resource plan</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="SCHED">
-              <span>Define activity durations and dependencies</span>
-              <div class="classify-btns">
-                <button data-pick="PLAN">Mgmt plan</button>
-                <button data-pick="SCHED">Schedule</button>
-                <button data-pick="BASE">Baseline</button>
-                <button data-pick="RES">Resource plan</button>
+                <button data-pick="BUD">Budget</button>
+                <button data-pick="ENG">Engagement</button>
               </div>
             </div>
             <div class="classify-row" data-answer="BASE">
-              <span>Approved timeline to measure variances against</span>
+              <span>Availability confirmed — rebaseline schedule to reflect actual access</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Mgmt plan</button>
-                <button data-pick="SCHED">Schedule</button>
+                <button data-pick="CAL">Calendar</button>
                 <button data-pick="BASE">Baseline</button>
-                <button data-pick="RES">Resource plan</button>
+                <button data-pick="BUD">Budget</button>
+                <button data-pick="ENG">Engagement</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RES">
-              <span>How human resources are acquired and managed</span>
+            <div class="classify-row" data-answer="BUD">
+              <span>After negotiation fails — sponsor approves external hire as last resort</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Mgmt plan</button>
-                <button data-pick="SCHED">Schedule</button>
+                <button data-pick="CAL">Calendar</button>
                 <button data-pick="BASE">Baseline</button>
-                <button data-pick="RES">Resource plan</button>
+                <button data-pick="BUD">Budget</button>
+                <button data-pick="ENG">Engagement</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="CAL">
+              <span>Identify holidays and shifts affecting crane crew availability</span>
+              <div class="classify-btns">
+                <button data-pick="CAL">Calendar</button>
+                <button data-pick="BASE">Baseline</button>
+                <button data-pick="BUD">Budget</button>
+                <button data-pick="ENG">Engagement</button>
               </div>
             </div>
           </div>
@@ -395,20 +405,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Schedule activities → Develop schedule (A)</h4>
-            <p style="margin:0">Develop schedule = build timeline. Stem cần governance/guidance → management plan (D).</p>
+            <h4>Bẫy 1: Limited access → adjust baseline (A)</h4>
+            <p style="margin:0">Baseline change sau khi có data. Stem = uncertainty → calendar first.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Control → Schedule baseline (B)</h4>
-            <p style="margin:0">Baseline measures performance — không define HOW decisions are made upfront.</p>
+            <h4>Bẫy 2: Conflict → hire external (C)</h4>
+            <p style="margin:0">Avoid conflict bằng budget — chưa negotiate realistic allocation internally.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Coordinating → Resource plan (C)</h4>
-            <p style="margin:0">Resource plan aligns staffing — schedule coordination guidance = schedule mgmt plan.</p>
+            <h4>Bẫy 3: Functional managers → engagement plan (D)</h4>
+            <p style="margin:0">Managers là stakeholders — nhưng vấn đề là resource availability timing, không phải engagement strategy.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>How managed · guidance · direction · decisions &amp; control</strong> → Schedule management plan (D), mirror Q42 scope plan.</p>
+            <p style="margin:0"><strong>When can resources join · competing priorities · negotiate allocation</strong> → Resource calendars (B).</p>
           </div>
         </section>
 
@@ -416,59 +426,64 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Schedule management plan? (p.49)</div>
-            <div class="flashcard-back">Policies &amp; procedures for developing, monitoring, controlling schedule — HOW it will be managed.</div>
+            <div class="flashcard-front">Resource calendar shows?</div>
+            <div class="flashcard-back">Working days, shifts, business hours, weekends, holidays — when each resource is available (p.132, Acquire Resources output).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q55 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Create schedule management plan and baseline with team.</div>
+            <div class="flashcard-front">Q87 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Review and use resource calendars to determine availability and negotiate realistic allocation.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">SCHEDULE MANAGEMENT PLAN — Q55 (PMBOK 8, p.49 &amp; 139)
+          <div class="cheat-sheet">RESOURCE CALENDAR — Q87
+(PMBOK 8, p.82–84 &amp; 132)
 ─────────────────────────────────────────────────────
-PROCESS: Plan Schedule Management (p.49)
+PROCESS: Acquire Resources (p.82–84)
+  • Guides selection &amp; assignment of resources
+  • Key benefit: get right resources to activities
 
-SCHEDULE MANAGEMENT PLAN:
-  - Policies · procedures · documentation
-  - HOW schedule developed · managed · maintained
-  - Criteria for developing · monitoring · controlling
-  - Guidance on coordinating schedule activities
+OUTPUT: Resource Calendar (p.132)
+  • Working days, shifts, business hours
+  • Weekends, holidays
+  • When EACH resource is AVAILABLE
 
-SCENARIO: Priya — HT Solutions fiber network (takeover)
-           Leadership concern: HOW schedule DECISIONS
-           made &amp; CONTROLLED throughout project
-           Clear GUIDANCE &amp; DIRECTION for coordinating
-→ D) CREATE SCHEDULE MANAGEMENT PLAN
-     and baseline with the team ✓
+SCENARIO: CE Group — progress stalls
+           Two dept leads argue over release of specialists
+           Each insists INTERNAL deadlines take priority
+           UNCERTAINTY when resources can JOIN team
+QUESTION: Most appropriate PM action?
+→ B) REVIEW &amp; USE RESOURCE CALENDARS
+     determine availability + negotiate realistic allocation ✓
 
 NOT:
-  A) Develop PROJECT SCHEDULE — durations/sequencing (process)
-  B) SCHEDULE BASELINE — measure performance (after schedule)
-  C) RESOURCE mgmt plan — staffing, wrong knowledge area
+  A) ADJUST SCHEDULE BASELINE — premature; no facts yet
+  C) REQUEST ADDITIONAL BUDGET — avoid conflict; negotiate first
+  D) REVISE ENGAGEMENT PLAN — wrong artifact
 
 SEQUENCE:
-  Schedule mgmt PLAN → define activities → develop schedule
-                    → schedule BASELINE (approved timeline)
+  1. Resource calendars → facts on availability
+  2. Negotiate realistic allocation with managers
+  3. Then adjust schedule/baseline if needed
 
-PARALLEL: Q42 Scope mgmt PLAN — same "guidance/approach" pattern
+Q86 vs Q87:
+  Q86 types/quantities → RBS
+  Q87 when available   → Resource calendar
 
-SIGNAL: "how schedule decisions are being made"
-        "controlled throughout the project"
-        "guidance and direction" · "coordinating"
-        just took over project → establish governance first
+SIGNAL: "when resources can join" + "competing priorities"
+        → Resource calendars + negotiate
 
-Q55 ANSWER: D
+Q87 ANSWER: B
 
-REF: PMBOK Guide, 8th Ed., p.49, p.139</div>
+REF: PMBOK Guide, 8th Ed., p.82–84 Acquire Resources
+      p.132 Resource calendar</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-scope-management-plan.html">Q42: Scope Mgmt Plan</a>
-          · <a href="pmp-teach-change-management-plan.html">Q38: Change Mgmt Plan</a>
-          · <a href="pmp-full-questions.html#q-55">Luyện câu 55</a>
+          · <a href="pmp-teach-resource-breakdown-structure.html">Q86: RBS</a>
+          · <a href="pmp-teach-resource-leveling.html">Q58: Resource Leveling</a>
+          · <a href="pmp-full-questions.html#q-87">Luyện câu 87</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -477,12 +492,12 @@ REF: PMBOK Guide, 8th Ed., p.49, p.139</div>
 
   <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Develop project schedule = build durations & sequencing — không define HOW schedule decisions are controlled.",
-        B: "Schedule baseline measures performance — cần management plan trước để guide decisions.",
-        C: "Resource management plan = staffing — stem hỏi schedule governance, không resource area.",
-        D: "Đúng! Schedule management plan establishes policies & guidance for managing/controlling schedule (p.49, 139)."
+        A: "Adjust baseline cần facts về availability trước — stem mới là uncertainty.",
+        B: "Đúng! Resource calendars xác định khi nào available → negotiate realistic allocation (Acquire Resources, p.132).",
+        C: "Hire external để tránh conflict — chưa thử negotiate với data từ calendars.",
+        D: "Stakeholder engagement plan không address resource availability timing."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -498,7 +513,7 @@ REF: PMBOK Guide, 8th Ed., p.49, p.139</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Create a schedule management plan and baseline this with the team.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Review and use resource calendars to determine availability and negotiate a realistic allocation.</strong>" : "");
         });
       });
       let score = 0;
@@ -526,16 +541,18 @@ REF: PMBOK Guide, 8th Ed., p.49, p.139</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>

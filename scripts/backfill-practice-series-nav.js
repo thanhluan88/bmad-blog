@@ -90,6 +90,7 @@ const SERIES = [
   ["pmp-teach-parkinsons-law.html", "Q84: Parkinson's Law"],
   ["pmp-teach-genetic-algorithms.html", "Q85: Genetic Algorithms"],
   ["pmp-teach-resource-breakdown-structure.html", "Q86: RBS"],
+  ["pmp-teach-resource-calendar.html", "Q87: Resource Calendar"],
 ];
 
 function buildSeriesBlock(currentHref) {
