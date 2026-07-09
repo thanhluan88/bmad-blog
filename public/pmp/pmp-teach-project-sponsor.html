@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Functional Organization (Q6)</title>
+  <title>PMBOK 8 — Project Sponsor (Q8)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .compare-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
-    @media (max-width: 640px) { .compare-pair { grid-template-columns: 1fr; } }
-    .pair-box { border-radius: 12px; padding: 1rem; border: 1px solid var(--border); font-size: 0.88rem; }
-    .pair-box.q5 { background: var(--ok-bg); border-top: 4px solid var(--ok); }
-    .pair-box.q6 { background: #f3f4f6; border-top: 4px solid #6b7280; }
-    .pair-box h4 { margin: 0 0 0.5rem; font-size: 0.92rem; }
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .role-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; font-size: 0.86rem; }
+    .role-card.sponsor { border-top: 4px solid var(--primary); background: var(--primary-bg); }
+    .role-card h4 { margin: 0 0 0.4rem; font-size: 0.92rem; }
+    .role-card ul { margin: 0; padding-left: 1.1rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -72,7 +71,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; max-width: 300px; justify-content: flex-end; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 320px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -93,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Functional Organization · Q6</div>
+      <div class="brand-sub">Project Sponsor · Q8</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#concepts">Functional org</a>
-        <a href="#q5-vs-q6">Q5 vs Q6</a>
+        <a href="#sponsor">Vai trò Sponsor</a>
+        <a href="#roles">So sánh vai trò</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -110,9 +109,9 @@
         <a href="pmp-teach-enterprise-environmental-factors.html">Q3: EEF</a>
         <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
         <a href="pmp-teach-organizational-structure.html">Q5: Org Structure</a>
-        <a href="pmp-teach-functional-organization.html" class="series-current">Q6: Functional</a>
+        <a href="pmp-teach-functional-organization.html">Q6: Functional</a>
         <a href="pmp-teach-project-functions.html">Q7: Project Functions</a>
-        <a href="pmp-teach-project-sponsor.html">Q8: Project Sponsor</a>
+        <a href="pmp-teach-project-sponsor.html" class="series-current">Q8: Project Sponsor</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
       <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
@@ -120,8 +119,8 @@
 
     <div>
       <nav class="mobile-nav">
-        <a href="#concepts">Functional</a>
-        <a href="#q5-vs-q6">Q5 vs Q6</a>
+        <a href="#sponsor">Sponsor</a>
+        <a href="#roles">Vai trò</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -130,117 +129,124 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q6 về <strong>Functional organization</strong> — dự án/cải tiến làm
-            <em>trong</em> phòng ban hiện có, không có ngân sách bổ sung hay quyền PM riêng.
+            Bài học Q8 về <strong>Project Sponsor</strong> — người cấp vốn, định hướng chiến lược
+            và gỡ rào cản tổ chức để dự án thành công.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.22</span>
-            <span class="badge">Organizational Structures</span>
-            <span class="badge">Câu 6 — Practice</span>
+            <span class="badge">PMBOK 8, p.274</span>
+            <span class="badge">Stakeholders</span>
+            <span class="badge">Câu 8 — Practice</span>
           </div>
         </header>
 
-        <section id="concepts">
-          <h2>1. Functional Organization</h2>
+        <section id="sponsor">
+          <h2>1. Project Sponsor là gì?</h2>
           <p>
-            Trong cấu trúc <strong>Functional</strong>, công việc dự án (kể cả cải tiến quy trình)
-            được thực hiện như một phần của <strong>team chức năng hiện có</strong> — sales, IT, HR...
-            Functional manager giữ quyền chính.
+            <strong>Sponsor</strong> là cá nhân hoặc nhóm cung cấp <strong>resources và support</strong>
+            cho portfolio, program hoặc project, và <strong>chịu trách nhiệm</strong> tạo điều kiện thành công.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK)</h4>
+            <h4>Định nghĩa chính thức (PMBOK 8)</h4>
             <p style="margin:0">
-              Functional organizations are those in which the project is done as part of an
-              <strong>existing functional team</strong> — there is no designated project coordinator,
-              <strong>additional budget or resources</strong>.
+              A sponsor is an individual or a group that provides resources and support for the
+              portfolio, program, or project, and is accountable for enabling success.
+              <em>— PMBOK Guide 8th Ed., p.274, "Sponsor"</em>
             </p>
+          </div>
+
+          <h3>Hoạt động điển hình của Sponsor</h3>
+          <ul>
+            <li><strong>Secures funding</strong> — đảm bảo nguồn vốn/ngân sách</li>
+            <li><strong>Strategic direction</strong> — căn chỉnh dự án với mục tiêu tổ chức</li>
+            <li><strong>Remove organizational obstacles</strong> — gỡ rào cản, escalation cấp cao</li>
+            <li>Champion dự án với leadership</li>
+          </ul>
+        </section>
+
+        <section id="roles">
+          <h2>2. Sponsor vs PM vs Product Owner vs Customer</h2>
+
+          <div class="role-grid">
+            <div class="role-card sponsor">
+              <h4>Project Sponsor</h4>
+              <ul>
+                <li>Cấp vốn, resources</li>
+                <li>Chiến lược, accountability</li>
+                <li>Gỡ rào cản tổ chức</li>
+              </ul>
+            </div>
+            <div class="role-card">
+              <h4>Project Manager</h4>
+              <ul>
+                <li>Quản lý hàng ngày</li>
+                <li>Planning, executing, team</li>
+                <li>Không phải người “secure funding”</li>
+              </ul>
+            </div>
+            <div class="role-card">
+              <h4>Product Owner</h4>
+              <ul>
+                <li>Vai trò <strong>Agile</strong></li>
+                <li>Backlog, value, stakeholder cho product</li>
+                <li>Không đồng nghĩa Sponsor</li>
+              </ul>
+            </div>
+            <div class="role-card">
+              <h4>Project Customer</h4>
+              <ul>
+                <li>Người dùng/bên nhận kết quả</li>
+                <li>Yêu cầu &amp; acceptance</li>
+                <li>Không cấp vốn tổ chức</li>
+              </ul>
+            </div>
           </div>
 
           <table>
             <thead>
-              <tr><th>Đặc điểm</th><th>Functional</th></tr>
+              <tr><th>Manh mối trong đề</th><th>Vai trò</th></tr>
             </thead>
             <tbody>
-              <tr><td>Team</td><td>Đã có sẵn trong phòng ban (existing team)</td></tr>
-              <tr><td>Budget</td><td>Không có ngân sách bổ sung cho “dự án”</td></tr>
-              <tr><td>Authority</td><td>Functional manager quyết định; PM/coordinator không có quyền thêm</td></tr>
-              <tr><td>Loại initiative</td><td>Process improvement, công việc cải tiến trong dept</td></tr>
+              <tr><td>Secures funding</td><td><strong>Sponsor</strong></td></tr>
+              <tr><td>Strategic direction</td><td><strong>Sponsor</strong></td></tr>
+              <tr><td>Remove obstacles (organizational)</td><td><strong>Sponsor</strong></td></tr>
+              <tr><td>Manages team day-to-day</td><td>Project Manager</td></tr>
+              <tr><td>Prioritizes backlog (Agile)</td><td>Product Owner</td></tr>
+              <tr><td>Uses the deliverable</td><td>Customer / User</td></tr>
             </tbody>
           </table>
         </section>
 
-        <section id="q5-vs-q6">
-          <h2>2. Đối chiếu Q5 vs Q6 — hai cực quyền PM</h2>
-          <p>Đề thi hay đặt cặp câu “full authority” và “no budget/authority” liên tiếp.</p>
-
-          <div class="compare-pair">
-            <div class="pair-box q5">
-              <h4>Q5 — BuildMax (Project-oriented)</h4>
-              <ul style="margin:0;padding-left:1.1rem">
-                <li>Dedicated resources</li>
-                <li><strong>Full</strong> budget authority</li>
-                <li><strong>Full</strong> decision-making</li>
-              </ul>
-              <p style="margin:0.5rem 0 0"><a href="pmp-teach-organizational-structure.html">→ Bài Q5</a></p>
-            </div>
-            <div class="pair-box q6">
-              <h4>Q6 — Prime Manufacturing (Functional)</h4>
-              <ul style="margin:0;padding-left:1.1rem">
-                <li>Team đã trong sales dept</li>
-                <li><strong>No</strong> additional budget</li>
-                <li><strong>No</strong> additional authority</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 6</h2>
+          <h2>3. Câu hỏi thực hành — Question 8</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q6</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q8</div>
             <div class="q-text">
-              Liam works as a manager in the sales department at Prime Manufacturing and would like
-              to start a <em>process improvement initiative</em>. Any project team members are
-              already within his team, but Liam has <em>no additional budget or authority</em>.
-              <em>What type of organizational structure is Liam working in?</em>
+              An employee in the organization secures <em>funding</em> for the project, provides
+              <em>strategic direction</em>, and helps <em>remove organizational obstacles</em>
+              to ensure project success.
+              <em>What role is this person performing in the project?</em>
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Project-oriented organization.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Functional organization.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Balanced-matrix organization.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Weak-matrix organization.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Product Owner.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Project Sponsor.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Project Customer.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Project Manager.</button>
 
             <div class="feedback" id="quizFeedback"></div>
-          </div>
-
-          <div class="card info">
-            <h4>Dịch tình huống</h4>
-            <p style="margin:0">
-              Liam là manager phòng Sales tại Prime Manufacturing, muốn khởi động
-              <strong>initiative cải tiến quy trình</strong>. Thành viên đã nằm trong team của anh,
-              nhưng <strong>không có ngân sách hay quyền bổ sung</strong>. Cấu trúc tổ chức nào?
-            </p>
           </div>
         </section>
 
         <section id="analysis">
           <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <div class="card tip">
-            <h4>Giải thích (PMBOK p.22)</h4>
-            <p style="margin:0">
-              Dự án/cải tiến làm trong <strong>existing functional team</strong> — không có
-              project coordinator riêng, không budget/resources bổ sung → <strong>Functional</strong>.
-            </p>
-          </div>
-
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn B — Project Sponsor?</h3>
           <ul>
-            <li><strong>Manager in sales department</strong> — initiative nằm trong chức năng sales.</li>
-            <li><strong>Team members already within his team</strong> — không huy động nguồn lực chuyên trách mới.</li>
-            <li><strong>No additional budget or authority</strong> — đặc trưng functional: không cấp thêm cho “project”.</li>
+            <li><strong>Secures funding</strong> — sponsor cung cấp resources/vốn.</li>
+            <li><strong>Strategic direction</strong> — sponsor căn chỉnh với mục tiêu tổ chức.</li>
+            <li><strong>Remove organizational obstacles</strong> — sponsor escalation, champion.</li>
+            <li>Cả ba là pattern kinh điển nhận diện <strong>Sponsor</strong> trong đề PMP.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -250,64 +256,62 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Project-oriented</strong></td>
-                <td>Cần dedicated resources + PM full authority — ngược với “no additional budget/authority”.</td>
+                <td><strong>A. Product Owner</strong></td>
+                <td>Vai trò Agile — quản lý backlog, maximize product value. Không “secure funding” cấp tổ chức.</td>
               </tr>
               <tr>
-                <td><strong>C. Balanced matrix</strong></td>
-                <td>Matrix có vai trò PM chia quyền với functional manager — không khớp “no authority”.</td>
+                <td><strong>C. Project Customer</strong></td>
+                <td>Khách hàng/người dùng — nhận deliverable, không cấp vốn hay gỡ rào cản tổ chức.</td>
               </tr>
               <tr>
-                <td><strong>D. Weak matrix</strong></td>
-                <td>Weak matrix vẫn có project coordinator/PM (dù quyền thấp). Đề nói không có authority bổ sung và làm trong functional team — Functional thuần hơn.</td>
+                <td><strong>D. Project Manager</strong></td>
+                <td>PM quản lý dự án hàng ngày — không phải người đảm bảo funding &amp; strategic direction cấp executive.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords</h4>
-            <ul style="margin:0">
-              <li><strong>already within his team</strong> → existing functional team</li>
-              <li><strong>no additional budget</strong> → Functional</li>
-              <li><strong>no additional authority</strong> → Functional (PM ✗)</li>
-              <li><strong>process improvement in department</strong> → không phải project hóa toàn tổ chức</li>
-            </ul>
+            <h4>Keywords Sponsor</h4>
+            <p style="margin:0">
+              funding · budget · strategic direction · organizational obstacles ·
+              champion · executive support · accountable for enabling success
+            </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Functional hay Matrix?</h2>
+          <h2>5. Drill — Nhận diện vai trò</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="FUNC">
-              <span>Improvement done inside dept; no extra budget</span>
+            <div class="classify-row" data-answer="SP">
+              <span>Approves budget and removes barriers with senior leadership</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="SP">Sponsor</button>
+                <button data-pick="PM">PM</button>
+                <button data-pick="PO">PO</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PROJ">
-              <span>PM controls budget; dedicated team</span>
+            <div class="classify-row" data-answer="PM">
+              <span>Develops schedule and manages project team daily</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="SP">Sponsor</button>
+                <button data-pick="PM">PM</button>
+                <button data-pick="PO">PO</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="WEAK">
-              <span>PM tracks schedule; FM assigns people</span>
+            <div class="classify-row" data-answer="PO">
+              <span>Prioritizes product backlog in Scrum</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="SP">Sponsor</button>
+                <button data-pick="PM">PM</button>
+                <button data-pick="PO">PO</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FUNC">
-              <span>Dept manager runs initiative with own staff only</span>
+            <div class="classify-row" data-answer="SP">
+              <span>Provides strategic alignment and project funding</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="SP">Sponsor</button>
+                <button data-pick="PM">PM</button>
+                <button data-pick="PO">PO</button>
               </div>
             </div>
           </div>
@@ -317,12 +321,16 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Có từ “project/initiative” → chọn Project-oriented</h4>
-            <p style="margin:0">Process improvement vẫn có thể chạy trong functional org. Xem <em>quyền và budget</em>, không chỉ tên initiative.</p>
+            <h4>Bẫy 1: Product Owner (Agile)</h4>
+            <p style="margin:0">Đề nhắc “employee in organization” + funding/strategy → Sponsor, không phải PO. PO = Agile framework.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Weak matrix vs Functional</h4>
-            <p style="margin:0">Weak matrix: vẫn có vai trò PM/coordinator. Functional thuần: làm trong team hiện có, <strong>no additional authority</strong>, không chỉ định coordinator riêng.</p>
+            <h4>Bẫy 2: Project Manager</h4>
+            <p style="margin:0">PM làm việc với sponsor, nhưng PM không “secure funding” — đó là vai trò sponsor/executive.</p>
+          </div>
+          <div class="card tip">
+            <h4>PM vs Sponsor — nhớ nhanh</h4>
+            <p style="margin:0"><strong>Sponsor:</strong> WHY, money, strategy, obstacles · <strong>PM:</strong> HOW, plan, execute, deliver</p>
           </div>
         </section>
 
@@ -330,44 +338,38 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Functional organization?</div>
-            <div class="flashcard-back">Dự án/cải tiến trong existing functional team — không coordinator riêng, không budget/resources bổ sung.</div>
+            <div class="flashcard-front">Sponsor làm gì?</div>
+            <div class="flashcard-back">Cung cấp resources/support · accountable for enabling success · funding, strategy, gỡ rào cản.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q6 đáp án?</div>
-            <div class="flashcard-back"><strong>B — Functional.</strong> Team sẵn trong dept + no additional budget/authority.</div>
+            <div class="flashcard-front">Q8 đáp án?</div>
+            <div class="flashcard-back"><strong>B — Project Sponsor.</strong> Funding + strategic direction + remove obstacles.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">FUNCTIONAL ORGANIZATION — Q6 (PMBOK 8, p.22)
+          <div class="cheat-sheet">PROJECT SPONSOR — Q8 (PMBOK 8, p.274)
 ─────────────────────────────────────────────────────
-FUNCTIONAL
-  ✓ Work done in EXISTING functional team
-  ✓ No designated project coordinator
-  ✓ NO additional budget or resources
-  ✓ Functional manager holds authority
+SPONSOR
+  • Provides resources and support
+  • Accountable for ENABLING SUCCESS
+  • Secures FUNDING
+  • STRATEGIC direction
+  • Removes ORGANIZATIONAL obstacles
 
-Q6 KEYWORDS
-  "already within his team"
-  "no additional budget or authority"
-  "process improvement" in a department
+NOT SPONSOR
+  PM  → day-to-day management, planning, team
+  PO  → Agile, backlog, product value
+  Customer → receives deliverable, requirements
 
-Q5 vs Q6
-  Q5 full authority + dedicated resources → Project-oriented
-  Q6 no extra budget/authority + existing team → Functional
+Q8 ANSWER: B — Project Sponsor
 
-NOT FUNCTIONAL
-  ✗ Full PM budget control (Project-oriented)
-  ✗ Shared PM/FM authority (Balanced matrix)
-  ✗ PM role with limited power (Weak matrix — read carefully)
-
-Q6 ANSWER: B — Functional organization</div>
+REF: PMBOK Guide 8th Ed., p.274, "Sponsor"</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-organizational-structure.html">Q5: Project-oriented</a>
+          · <a href="pmp-teach-project-functions.html">Q7</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -378,10 +380,10 @@ Q6 ANSWER: B — Functional organization</div>
     (function () {
       const CORRECT = "B";
       const EXPL = {
-        A: "Project-oriented cần full authority và dedicated resources — trái với đề.",
-        B: "Đúng! Existing team + no additional budget/authority = Functional organization.",
-        C: "Balanced matrix chia quyền PM/FM — không phải 'no authority'.",
-        D: "Weak matrix vẫn có vai trò PM. Đề mô tả functional thuần hơn."
+        A: "Product Owner là vai trò Agile — backlog/value, không secure funding tổ chức.",
+        B: "Đúng! Funding + strategic direction + remove obstacles = Project Sponsor.",
+        C: "Customer nhận sản phẩm — không cấp vốn hay định hướng chiến lược tổ chức.",
+        D: "PM quản lý thực thi — sponsor mới đảm bảo funding và gỡ rào cản cấp tổ chức."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -397,7 +399,7 @@ Q6 ANSWER: B — Functional organization</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Functional organization.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Project Sponsor.</strong>" : "");
         });
       });
       let score = 0;
