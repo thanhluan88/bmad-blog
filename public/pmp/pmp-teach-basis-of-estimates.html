@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Design Thinking (Q46)</title>
+  <title>PMBOK 8 — Basis of Estimates (Q70)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -66,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 480px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -88,11 +88,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Design Thinking · Q46</div>
+      <div class="brand-sub">Basis of Estimates · Q70</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#design">Design Thinking</a>
-        <a href="#techniques">So sánh techniques</a>
+        <a href="#basis">Basis of Estimates</a>
+        <a href="#compare">Q69 vs Q70</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -145,7 +145,7 @@
         <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
         <a href="pmp-teach-requirements-traceability.html">Q44: Requirements RTM</a>
         <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
-        <a href="pmp-teach-design-thinking.html" class="series-current">Q46: Design Thinking</a>
+        <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
         <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
         <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
         <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
@@ -169,16 +169,16 @@
         <a href="pmp-teach-failure-costs.html">Q67: Failure Costs</a>
         <a href="pmp-teach-contingency-reserve.html">Q68: Contingency</a>
         <a href="pmp-teach-cost-aggregation.html">Q69: Cost Aggregation</a>
-        <a href="pmp-teach-basis-of-estimates.html">Q70: Basis of Est.</a>
+        <a href="pmp-teach-basis-of-estimates.html" class="series-current">Q70: Basis of Est.</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-46">Luyện câu 46</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-70">Luyện câu 70</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#design">Design</a>
-        <a href="#techniques">Techniques</a>
+        <a href="#basis">Basis</a>
+        <a href="#compare">Q69 vs Q70</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -187,107 +187,114 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q46 về <strong>Design Thinking</strong> — wearable device tại Fitness Plus:
-            inconsistent user experiences, root cause unclear, competing ideas — stakeholders muốn
-            giải pháp dựa trên <em>user needs</em> thay vì <em>assumptions</em>.
+            Bài học Q70 về <strong>Basis of Estimates</strong> — Victor tại HEC, solar farm:
+            work package estimates đã xong nhưng senior leaders <em>question accuracy</em>,
+            lo delivery — làm gì next?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.40–41 &amp; p.168</span>
-            <span class="badge">Elicit and Analyze Requirements</span>
-            <span class="badge">Câu 46 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.64 &amp; 115</span>
+            <span class="badge">Develop Budget</span>
+            <span class="badge">Basis of Estimates</span>
+            <span class="badge">Câu 70 — Practice</span>
           </div>
         </header>
 
-        <section id="design">
-          <h2>1. Design thinking (PMBOK p.168)</h2>
+        <section id="basis">
+          <h2>1. Basis of estimates (p.115)</h2>
           <p>
-            Design thinking và prototyping nhấn mạnh <strong>understanding user needs</strong> qua
-            iterative testing và feedback — validate solutions trong điều kiện thực trước khi deploy.
+            <strong>Basis of estimates</strong> là supporting documentation cho cost estimates —
+            assumptions, constraints, level of detail, ranges, và rationale. Là
+            <strong>input</strong> của Develop Budget (p.64) khi stakeholders cần hiểu
+            <em>how and why</em> estimates were derived.
           </p>
 
           <div class="card tip">
-            <h4>Design thinking</h4>
+            <h4>Khi leaders question accuracy</h4>
             <p style="margin:0">
-              Empathize with users · ideate · prototype · test iteratively. Ensures solutions address
-              real user needs — not team assumptions or untested ideas.
+              Không re-estimate (đã done) hay aggregate (Q69) — <strong>show basis of
+              estimates</strong> để justify và build confidence.
             </p>
           </div>
-
-          <table>
-            <thead>
-              <tr><th>Phase (concept)</th><th>Purpose</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Discover / Empathize</td><td>Understand user experiences and pain points</td></tr>
-              <tr><td>Define</td><td>Frame the real problem (root cause clarity)</td></tr>
-              <tr><td>Develop / Ideate</td><td>Generate competing ideas — then test, not assume</td></tr>
-              <tr><td>Deliver / Test</td><td>Prototype &amp; validate with real users before full deployment</td></tr>
-            </tbody>
-          </table>
         </section>
 
-        <section id="techniques">
-          <h2>2. Elicitation techniques — pick the right tool</h2>
+        <section id="compare">
+          <h2>2. Q69 vs Q70 — Aggregation vs Basis</h2>
 
           <table>
             <thead>
-              <tr><th>Technique</th><th>Best for</th><th>Q46 fit?</th></tr>
+              <tr><th>Question</th><th>Stem focus</th><th>Answer</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Design thinking</strong></td>
-                <td>User needs · iterative prototype · validate vs assumptions</td>
-                <td>✓ (C)</td>
+                <td><strong>Q69</strong></td>
+                <td>Need single approved budget · what FIRST?</td>
+                <td>Cost aggregation (A)</td>
               </tr>
               <tr>
-                <td>Affinity diagramming</td>
-                <td>Group/cluster many ideas into themes</td>
-                <td>Organize ideas — không validate user needs</td>
+                <td><strong>Q70</strong></td>
+                <td>Leaders question estimate accuracy</td>
+                <td>Basis of estimates (B)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q70 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Aggregate estimates</strong></td>
+                <td>Roll up to project total (Q69)</td>
+                <td>Không address accuracy concern</td>
               </tr>
               <tr>
-                <td>Kano analysis</td>
-                <td>Prioritize features: must-haves, satisfiers, delighters</td>
-                <td>Feature priority — root cause chưa rõ</td>
+                <td><strong>B. Basis of estimates</strong></td>
+                <td>Show supporting documentation</td>
+                <td><strong>Yes — justify accuracy to leaders</strong></td>
               </tr>
               <tr>
-                <td>Pareto analysis</td>
-                <td>80/20 — focus on vital few causes/problems</td>
-                <td>Quantitative prioritization — cần data, không phải empathize users</td>
+                <td><strong>C. Financial Mgmt Plan</strong></td>
+                <td>How finances managed (Q64)</td>
+                <td>Rules for managing — not estimate support</td>
+              </tr>
+              <tr>
+                <td><strong>D. Develop detailed estimates</strong></td>
+                <td>Re-do estimating</td>
+                <td>Estimates already completed for work packages</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 46</h2>
+          <h2>3. Câu hỏi thực hành — Question 70</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q46</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q70</div>
             <div class="q-text">
-              You are managing a project for a new wearable device at Fitness Plus. Users report
-              <em>inconsistent experiences</em> in the device, but the <em>root cause is unclear</em>.
-              The team has several <em>competing ideas</em> for improvements, and stakeholders want a
-              solution that truly addresses <em>user needs</em> rather than
-              <em>assumptions</em>. What should the project manager do next?
+              Victor is managing a solar farm project at HEC. The team has completed cost estimates
+              for individual work packages, but senior leaders in the organization question their
+              accuracy and are concerned about project delivery. What will Victor do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Use Affinity Diagramming with the team.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Use Kano Analysis with the team.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Use Design Thinking with the team.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Use Pareto Analysis with the team.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Aggregate the estimates.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Show them the basis of estimates.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Show them the Financial Management Plan.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Develop detailed cost estimates with the team.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Unclear root cause + inconsistent experiences → empathize &amp; discover with users.</li>
-            <li>Competing ideas → prototype &amp; test iteratively, không chọn theo assumption.</li>
-            <li>User needs vs assumptions → design thinking + prototyping (p.168).</li>
+            <li>Leaders question accuracy → show how estimates were derived.</li>
+            <li>Basis of estimates = Develop Budget input (p.64, 115).</li>
+            <li>Addresses concern without redoing completed work.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -297,66 +304,66 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Affinity diagramming</strong></td>
-                <td>Groups ideas into clusters — không validate user needs through real testing.</td>
+                <td><strong>A. Aggregate</strong></td>
+                <td>Q69 technique — roll up totals, không justify accuracy to skeptics.</td>
               </tr>
               <tr>
-                <td><strong>B. Kano analysis</strong></td>
-                <td>Classifies features (must/satisfier/delighter) — cần hiểu problem trước, không giải root cause unclear.</td>
+                <td><strong>C. FMP</strong></td>
+                <td>How to manage/control finances — không phải estimate documentation.</td>
               </tr>
               <tr>
-                <td><strong>D. Pareto analysis</strong></td>
-                <td>80/20 prioritization of causes — quantitative, không iterative user-centered validation.</td>
+                <td><strong>D. Develop estimates</strong></td>
+                <td>Stem: estimates <em>completed</em> — không cần re-develop.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q43 vs Q46</h4>
+            <h4>Instructor trap: Develop Budget → Aggregate (A)</h4>
             <p style="margin:0">
-              Q43: gather differing expectations (focus groups, benchmarking). Q46: unclear UX +
-              assumptions → <em>design thinking</em> để empathize, prototype, validate với users.
+              Q69 dùng aggregation khi cần approved budget. Q70: leaders doubt accuracy →
+              <strong>basis of estimates</strong> (B), không aggregate.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Match technique to scenario</h2>
+          <h2>5. Drill — Hành động nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="DT">
-              <span>Validate solution with users before full deployment</span>
+            <div class="classify-row" data-answer="BASIS">
+              <span>Leaders question estimate accuracy; work package estimates done</span>
               <div class="classify-btns">
-                <button data-pick="AFF">Affinity</button>
-                <button data-pick="KANO">Kano</button>
-                <button data-pick="DT">Design</button>
-                <button data-pick="PAR">Pareto</button>
+                <button data-pick="AGG">Aggregate</button>
+                <button data-pick="BASIS">Basis</button>
+                <button data-pick="FMP">FMP</button>
+                <button data-pick="REEST">Re-estimate</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="AFF">
-              <span>Cluster many brainstormed ideas into themes</span>
+            <div class="classify-row" data-answer="AGG">
+              <span>Activity estimates done; need single approved budget first</span>
               <div class="classify-btns">
-                <button data-pick="AFF">Affinity</button>
-                <button data-pick="KANO">Kano</button>
-                <button data-pick="DT">Design</button>
-                <button data-pick="PAR">Pareto</button>
+                <button data-pick="AGG">Aggregate</button>
+                <button data-pick="BASIS">Basis</button>
+                <button data-pick="FMP">FMP</button>
+                <button data-pick="REEST">Re-estimate</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="KANO">
-              <span>Prioritize must-haves vs delighters for features</span>
+            <div class="classify-row" data-answer="FMP">
+              <span>Team asks how financial activities and escalation will be handled</span>
               <div class="classify-btns">
-                <button data-pick="AFF">Affinity</button>
-                <button data-pick="KANO">Kano</button>
-                <button data-pick="DT">Design</button>
-                <button data-pick="PAR">Pareto</button>
+                <button data-pick="AGG">Aggregate</button>
+                <button data-pick="BASIS">Basis</button>
+                <button data-pick="FMP">FMP</button>
+                <button data-pick="REEST">Re-estimate</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PAR">
-              <span>Focus on vital few causes driving 80% of defects</span>
+            <div class="classify-row" data-answer="REEST">
+              <span>Early planning; no estimates yet; need quick ballpark</span>
               <div class="classify-btns">
-                <button data-pick="AFF">Affinity</button>
-                <button data-pick="KANO">Kano</button>
-                <button data-pick="DT">Design</button>
-                <button data-pick="PAR">Pareto</button>
+                <button data-pick="AGG">Aggregate</button>
+                <button data-pick="BASIS">Basis</button>
+                <button data-pick="FMP">FMP</button>
+                <button data-pick="REEST">Re-estimate</button>
               </div>
             </div>
           </div>
@@ -366,20 +373,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Competing ideas → Affinity (A)</h4>
-            <p style="margin:0">Affinity groups ideas — stem cần validate user needs, không chỉ organize competing ideas.</p>
+            <h4>Bẫy 1: Develop Budget → Aggregate (A)</h4>
+            <p style="margin:0">Aggregation khi build budget (Q69). Accuracy concern → basis of estimates (B).</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Wearable/features → Kano (B)</h4>
-            <p style="margin:0">Kano = feature satisfaction categories — không address unclear root cause hay assumptions vs real needs.</p>
+            <h4>Bẫy 2: Accuracy → Re-estimate (D)</h4>
+            <p style="margin:0">Estimates completed — show documentation first, không redo unless basis insufficient.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Root cause → Pareto (D)</h4>
-            <p style="margin:0">Pareto needs quantified frequency data — root cause <em>unclear</em>, cần user-centered discovery first.</p>
+            <h4>Bẫy 3: Cost → FMP (C)</h4>
+            <p style="margin:0">FMP = management rules (Q64) — không justify estimate derivation.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>User needs · assumptions · prototype · iterative testing · validate</strong> → Design thinking (C).</p>
+            <p style="margin:0"><strong>Question accuracy · estimates done · concerned leaders</strong> → Basis of estimates (B).</p>
           </div>
         </section>
 
@@ -387,58 +394,57 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Design thinking? (p.168)</div>
-            <div class="flashcard-back">Understand user needs · iterative testing &amp; feedback · prototype before full deployment.</div>
+            <div class="flashcard-front">Basis of estimates?</div>
+            <div class="flashcard-back">Supporting docs for cost estimates — assumptions, constraints, rationale. Input to Develop Budget (p.115).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q46 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Use Design Thinking with the team.</div>
+            <div class="flashcard-front">Q70 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Show them the basis of estimates.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">DESIGN THINKING — Q46 (PMBOK 8, p.40–41 &amp; p.168)
+          <div class="cheat-sheet">BASIS OF ESTIMATES — Q70 (PMBOK 8, p.64 &amp; 115)
 ─────────────────────────────────────────────────────
-PROCESS: Elicit and Analyze Requirements
+PROCESS: Develop Budget (p.64)
+         Basis of estimates (p.115) — INPUT
 
-DESIGN THINKING (p.168):
-  - Understand USER NEEDS
-  - Iterative testing &amp; feedback
-  - Prototyping — validate in REAL conditions
-  - Before full deployment
+BASIS OF ESTIMATES:
+  - Supporting documentation for cost estimates
+  - Assumptions · constraints · ranges · rationale
+  - HOW and WHY estimates were derived
+  - Show to stakeholders who question accuracy
 
-SCENARIO: Fitness Plus — wearable device
-           INCONSISTENT user experiences
-           ROOT CAUSE unclear
-           COMPETING ideas for improvements
-           USER NEEDS vs ASSUMPTIONS
-→ C) USE DESIGN THINKING ✓
+SCENARIO: Victor — HEC solar farm
+           Cost estimates COMPLETED (work packages)
+           Senior leaders QUESTION ACCURACY
+           Concerned about project DELIVERY
+→ B) SHOW BASIS OF ESTIMATES ✓
 
 NOT:
-  A) Affinity diagramming — cluster ideas, not validate users
-  B) Kano analysis — must/satisfier/delighter feature priority
-  D) Pareto analysis — 80/20 vital few (needs data)
+  A) AGGREGATE — Q69: build approved budget, not justify
+  C) FINANCIAL MGMT PLAN — how to manage (Q64)
+  D) DEVELOP ESTIMATES — already completed
 
-TECHNIQUE MAP:
-  User needs · prototype · validate     → Design thinking
-  Group brainstorm ideas                → Affinity diagram
-  Feature satisfaction categories       → Kano
-  Prioritize causes by frequency        → Pareto
+Q69 vs Q70:
+  Q69 "what FIRST for approved budget?" → AGGREGATE (A)
+  Q70 "leaders question accuracy?" → BASIS OF ESTIMATES (B)
 
-SIGNAL: "user needs" · "rather than assumptions"
-        "inconsistent experiences" · "root cause unclear"
-        "validate" · "iterative" · "prototype"
+SIGNAL: "question their accuracy"
+        "completed cost estimates"
+        "concerned about delivery"
+        → show BASIS, not re-estimate
 
-Q46 ANSWER: C
+Q70 ANSWER: B
 
-REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.168</div>
+REF: PMBOK Guide, 8th Ed., p.64, p.115</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
-          · <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
-          · <a href="pmp-full-questions.html#q-46">Luyện câu 46</a>
+          · <a href="pmp-teach-cost-aggregation.html">Q69: Cost Aggregation</a>
+          · <a href="pmp-teach-financial-management-plan.html">Q64: Financial Mgmt Plan</a>
+          · <a href="pmp-full-questions.html#q-70">Luyện câu 70</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -447,12 +453,12 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.168</div>
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Affinity diagramming groups ideas — không validate user needs through iterative testing.",
-        B: "Kano analysis prioritizes feature types — không address unclear root cause hay assumptions vs real user needs.",
-        C: "Đúng! Design thinking emphasizes user needs via iterative testing, feedback, and prototyping (p.168).",
-        D: "Pareto analysis = 80/20 prioritization — cần quantified data, không phải user-centered discovery khi root cause unclear."
+        A: "Aggregation rolls up estimates (Q69) — không address leaders' accuracy concerns.",
+        B: "Đúng! Basis of estimates documents assumptions & rationale — Develop Budget input để justify estimates (p.64, 115).",
+        C: "Financial management plan mô tả how to manage finances — không phải estimate support docs.",
+        D: "Estimates đã completed cho work packages — không cần develop lại."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -468,7 +474,7 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.168</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Use Design Thinking with the team.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Show them the basis of estimates.</strong>" : "");
         });
       });
       let score = 0;
