@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Embed Quality (Q11)</title>
+  <title>PMBOK 8 — Identify Stakeholders (Q72)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
-      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --primary: #7c3aed; --primary-dark: #5b21b6; --primary-bg: #f5f3ff;
       --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
       --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
       --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
@@ -30,7 +30,7 @@
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
-    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #ddd6fe; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
     .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
     .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 62ch; }
     .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
@@ -51,13 +51,15 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .quality-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.85rem; justify-content: center; }
-    .flow-box { padding: 0.5rem 0.85rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--ok); background: var(--ok-bg); color: #065f46; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
+    .proc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    @media (max-width: 700px) { .proc-grid { grid-template-columns: 1fr; } }
+    .proc-box { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; }
+    .proc-box strong { display: block; font-size: 0.95rem; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .proc-box span { font-size: 0.82rem; color: var(--muted); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
-    .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .quiz-card .q-text em { font-style: normal; background: #ede9fe; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -69,7 +71,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 280px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 360px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -80,7 +82,7 @@
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
     .flashcard-front, .flashcard-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); padding: 1.25rem; display: flex; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border); }
     .flashcard-front { background: var(--card); font-weight: 600; }
-    .flashcard-back { background: var(--primary-bg); border-color: #fde68a; transform: rotateY(180deg); font-size: 0.88rem; }
+    .flashcard-back { background: var(--primary-bg); border-color: #ddd6fe; transform: rotateY(180deg); font-size: 0.88rem; }
     .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
     .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
     .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
@@ -91,11 +93,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Embed Quality · Q11</div>
+      <div class="brand-sub">Identify Stakeholders · Q72</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#embed">Embed Quality</a>
-        <a href="#approaches">Cách tiếp cận QA</a>
+        <a href="#process">Identify Stakeholders</a>
+        <a href="#compare">Identify vs Engage</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -174,16 +176,16 @@
         <a href="pmp-teach-cost-aggregation.html">Q69: Cost Aggregation</a>
         <a href="pmp-teach-basis-of-estimates.html">Q70: Basis of Est.</a>
         <a href="pmp-teach-earned-value-analysis.html">Q71: Earned Value</a>
-        <a href="pmp-teach-identify-stakeholders.html">Q72: Identify Stakeholders</a>
+        <a href="pmp-teach-identify-stakeholders.html" class="series-current">Q72: Identify Stakeholders</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-72">Luyện câu 72</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#embed">Embed</a>
-        <a href="#approaches">QA</a>
+        <a href="#process">Process</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -192,180 +194,175 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q11 về nguyên tắc <strong>Embed Quality Into Processes and Deliverables</strong> —
-            tích hợp chất lượng vào quy trình để đạt ngưỡng chất lượng mục tiêu một cách nhất quán.
+            Bài học Q72 về <strong>Identify Stakeholders</strong> — Kevin tại Transit Flow Logistics,
+            warehouse automation: đang <em>identify stakeholders</em> và analyze interests, influence,
+            potential impact. Câu hỏi hỏi việc Kevin sẽ <strong>không</strong> làm.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.43</span>
-            <span class="badge">Quality Management</span>
-            <span class="badge">Câu 11 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.71</span>
+            <span class="badge">Identify Stakeholders</span>
+            <span class="badge">Stakeholder Register</span>
+            <span class="badge">Câu 72 — Practice</span>
           </div>
         </header>
 
-        <section id="embed">
-          <h2>1. Embed Quality Into Processes</h2>
+        <section id="process">
+          <h2>1. Identify Stakeholders (p.71)</h2>
           <p>
-            PMBOK 8 nhấn mạnh: chất lượng không phải hoạt động tách rời hay chỉ kiểm tra cuối cùng —
-            mà được <strong>nhúng (embed)</strong> vào processes và deliverables ngay từ đầu.
+            Process chọn individuals, groups, organizations có stake trong project. Bao gồm
+            identify stakeholders thường xuyên và analyze + document thông tin về interests,
+            involvement, interdependencies, influence, potential impact on project success.
           </p>
 
+          <ul>
+            <li><strong>Find</strong> — ai bị ảnh hưởng hoặc nghĩ mình bị ảnh hưởng</li>
+            <li><strong>Analyze</strong> — interests, influence, potential impact</li>
+            <li><strong>Document</strong> — stakeholder register</li>
+          </ul>
+
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.43)</h4>
+            <h4>Instructor: Identify ≠ Engage</h4>
             <p style="margin:0">
-              Embed quality into processes and deliverables to maintain a consistent focus on
-              achieving <strong>target quality thresholds</strong>. This emphasis on quality helps
-              ensure outcomes that meet project objectives and align with the needs, requirements,
-              and acceptance criteria set by relevant stakeholders.
+              Identify = <strong>who</strong> + <strong>analyze</strong> + <strong>document</strong>.
+              Develop engagement strategies = <strong>Plan Stakeholder Engagement</strong> — process
+              khác, sau Identify.
             </p>
           </div>
-
-          <div class="quality-flow">
-            <span class="flow-box">Processes</span>
-            <span class="flow-arrow">+</span>
-            <span class="flow-box">Deliverables</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-box">Target quality thresholds</span>
-          </div>
-
-          <h3>Liên hệ Cost of Quality (COQ)</h3>
-          <ul>
-            <li><strong>Prevention</strong> — thiết kế chất lượng vào process (đúng hướng B)</li>
-            <li><strong>Appraisal</strong> — kiểm tra/đo lường (hỗ trợ, không thay thế embed)</li>
-            <li><strong>Internal/External failure</strong> — sửa lỗi sau khi phát hiện (tránh làm trọng tâm — D)</li>
-          </ul>
         </section>
 
-        <section id="approaches">
-          <h2>2. So sánh cách tiếp cận chất lượng</h2>
+        <section id="compare">
+          <h2>2. Identify vs Plan Engagement</h2>
+
+          <div class="proc-grid">
+            <div class="proc-box">
+              <strong>Identify Stakeholders</strong>
+              <span>Find impacted parties · analyze influence/impact · update stakeholder register</span>
+            </div>
+            <div class="proc-box">
+              <strong>Plan Stakeholder Engagement</strong>
+              <span>Develop strategies to engage based on needs, interests, expectations</span>
+            </div>
+          </div>
 
           <table>
             <thead>
-              <tr><th>Cách tiếp cận</th><th>Đánh giá</th><th>Đáp án</th></tr>
+              <tr><th>Option</th><th>Action</th><th>Identify?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Integrated into processes</strong> (B)</td>
-                <td>Build quality in — nhất quán, đạt thresholds</td>
-                <td>✓ PMBOK p.43</td>
+                <td><strong>A. Develop engagement strategies</strong></td>
+                <td>Plan how to engage based on expectations</td>
+                <td><strong>No — Plan Engagement</strong></td>
               </tr>
               <tr>
-                <td><strong>Final inspection only</strong> (A)</td>
-                <td>Inspection cuối — quá muộn, không “consistent”</td>
-                <td>✗</td>
+                <td><strong>B. Find impacted individuals/groups</strong></td>
+                <td>Discover who thinks they're affected</td>
+                <td>Yes — core Identify activity</td>
               </tr>
               <tr>
-                <td><strong>Managed separately</strong> (C)</td>
-                <td>Tách QA khỏi project — trái nguyên tắc embed</td>
-                <td>✗</td>
+                <td><strong>C. Analyze interests, influence, impact</strong></td>
+                <td>Assess stakeholder attributes</td>
+                <td>Yes — explicitly in stem + process</td>
               </tr>
               <tr>
-                <td><strong>Correct defects after</strong> (D)</td>
-                <td>Reactive — failure cost, không phải focus chính</td>
-                <td>✗</td>
+                <td><strong>D. Document in stakeholder register</strong></td>
+                <td>Record stakeholder information</td>
+                <td>Yes — key output of Identify</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Scenario NG Micro Devices</h4>
+            <h4>"NOT" question pattern</h4>
             <p style="margin:0">
-              Functional manager lo deliverables chuyển sang phòng họ không đạt chuẩn và muốn
-              <strong>assurance standards consistently met</strong> — cần quality built-in,
-              không chỉ inspect trước khi bàn giao.
+              Stem mô tả đúng Identify (B, C, D). Chỉ A — develop engagement strategies — thuộc
+              process tiếp theo. Đáp án <strong>A</strong> = thứ Kevin sẽ <em>không</em> làm khi Identify.
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 11</h2>
+          <h2>3. Câu hỏi thực hành — Question 72</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q11</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q72</div>
             <div class="q-text">
-              You are a project manager working on a chip fabrication project at NG Micro Devices.
-              A functional manager raises concerns about the quality of deliverables being passed to
-              their department and wants assurance that standards will be <em>consistently met</em>.
-              How will you manage this on your project?
+              Kevin is managing a warehouse automation project at Transit Flow Logistics. He is
+              currently identifying stakeholders and analyzing their interests, influence, and
+              potential impact on the project. What is something Kevin will <em>not</em> do as he
+              identifies stakeholders in the project?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Quality should be verified through final inspection before delivery.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Quality should be integrated into processes to consistently achieve target quality thresholds.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Quality should be managed separately from project processes to ensure independence.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Quality should focus on correcting defects after they are identified.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Develop strategies to engage stakeholders based on their expectations.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Find the individuals, groups, or organizations that think they're impacted by the project.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Analyze stakeholder interests, influence, and their potential impact.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Document stakeholder information in the stakeholder register.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn A?</h3>
           <ul>
-            <li>Khớp PMBOK p.43: <strong>embed quality into processes</strong> → consistently achieve <strong>target quality thresholds</strong>.</li>
-            <li>“Consistently met” trong câu hỏi = quality không phải one-time inspection.</li>
-            <li>Slide ghi COQ → prevention / build quality in (hướng B).</li>
+            <li>Develop engagement strategies = <strong>Plan Stakeholder Engagement</strong>, không phải Identify.</li>
+            <li>Identify focuses on selection, analysis, documentation — not how to engage yet.</li>
+            <li>PMBOK 8 p.71: Identify = interests, involvement, influence, impact → register.</li>
           </ul>
 
-          <h3>Loại trừ từng đáp án</h3>
+          <h3>B, C, D — Kevin sẽ làm (không phải đáp án)</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải đáp án tốt nhất</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao là Identify activity</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Final inspection</strong></td>
-                <td>Appraisal ở cuối — không đảm bảo quality xuyên suốt process; PMBOK nhấn embed, không chỉ verify trước delivery.</td>
+                <td><strong>B. Find impacted parties</strong></td>
+                <td>Discover stakeholders who believe they have a stake — first step of Identify.</td>
               </tr>
               <tr>
-                <td><strong>C. Managed separately</strong></td>
-                <td>Independence nghe hợp lý nhưng PMBOK 8 yêu cầu tích hợp vào processes — tách rời trái “embed” (✗ trong slide).</td>
+                <td><strong>C. Analyze interests/influence/impact</strong></td>
+                <td>Stem explicitly states Kevin is doing this — core Identify work.</td>
               </tr>
               <tr>
-                <td><strong>D. Correcting defects after</strong></td>
-                <td>Reactive / failure-focused — không phải cách maintain consistent focus on thresholds.</td>
+                <td><strong>D. Document in register</strong></td>
+                <td>Stakeholder register is primary output of Identify Stakeholders.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Keywords Embed Quality (p.43)</h4>
-            <p style="margin:0">
-              embed into processes · deliverables · target quality thresholds ·
-              consistent focus · stakeholder needs · acceptance criteria
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Embed hay không?</h2>
+          <h2>5. Drill — Identify hay Plan Engagement?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="EMBED">
-              <span>Build quality checks into each fabrication step</span>
+            <div class="classify-row" data-answer="ID">
+              <span>Find groups that believe the project affects them</span>
               <div class="classify-btns">
-                <button data-pick="EMBED">Embed</button>
-                <button data-pick="WRONG">Không embed</button>
+                <button data-pick="ID">Identify</button>
+                <button data-pick="ENG">Engage</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="WRONG">
-              <span>Run a separate QA department with no process involvement</span>
+            <div class="classify-row" data-answer="ID">
+              <span>Record influence level and interests in stakeholder register</span>
               <div class="classify-btns">
-                <button data-pick="EMBED">Embed</button>
-                <button data-pick="WRONG">Không embed</button>
+                <button data-pick="ID">Identify</button>
+                <button data-pick="ENG">Engage</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="WRONG">
-              <span>Inspect only at final delivery gate</span>
+            <div class="classify-row" data-answer="ENG">
+              <span>Develop tailored strategies based on stakeholder expectations</span>
               <div class="classify-btns">
-                <button data-pick="EMBED">Embed</button>
-                <button data-pick="WRONG">Không embed</button>
+                <button data-pick="ID">Identify</button>
+                <button data-pick="ENG">Engage</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="EMBED">
-              <span>Define quality thresholds in work processes and deliverables</span>
+            <div class="classify-row" data-answer="ENG">
+              <span>Create engagement approach for resistant stakeholders</span>
               <div class="classify-btns">
-                <button data-pick="EMBED">Embed</button>
-                <button data-pick="WRONG">Không embed</button>
+                <button data-pick="ID">Identify</button>
+                <button data-pick="ENG">Engage</button>
               </div>
             </div>
           </div>
@@ -375,20 +372,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn A — final inspection</h4>
-            <p style="margin:0">Inspection là appraisal (COQ) — hữu ích nhưng không thay thế <strong>integrate into processes</strong> để “consistently” đạt chuẩn.</p>
+            <h4>Bẫy 1: Stakeholder work → chọn engagement (A)</h4>
+            <p style="margin:0">Engagement strategies sound right for any stakeholder question — but Identify comes first; strategies belong to Plan Engagement.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Chọn C — independence</h4>
-            <p style="margin:0">QA độc lập nghe chuyên nghiệp, nhưng PMBOK 8 = embed quality <em>into</em> project processes, không tách rời.</p>
+            <h4>Bẫy 2: Đọc nhầm "NOT"</h4>
+            <p style="margin:0">B, C, D đều đúng Identify activities. Chỉ A là đáp án vì câu hỏi hỏi việc Kevin <strong>không</strong> làm.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Chọn D — fix defects</h4>
-            <p style="margin:0">Sửa lỗi sau phát hiện = failure cost — prevention (B) là hướng PMBOK nhấn mạnh.</p>
+            <h4>Bẫy 3: Analyze = engagement</h4>
+            <p style="margin:0">Analyzing influence/impact (C) is Identify. Engaging based on analysis (A) is a separate planning step.</p>
           </div>
           <div class="card tip">
-            <h4>Mẹo thi</h4>
-            <p style="margin:0">“Consistently met” + “standards” → tìm đáp án có <strong>integrated into processes</strong> và <strong>target quality thresholds</strong>.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Identify stakeholders · analyze influence · stakeholder register</strong> = Identify. <strong>Engagement strategies · expectations</strong> = Plan Engagement.</p>
           </div>
         </section>
 
@@ -396,43 +393,56 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 — quality được quản lý thế nào? (p.43)</div>
-            <div class="flashcard-back">Embed into processes and deliverables — consistently achieve target quality thresholds.</div>
+            <div class="flashcard-front">Identify Stakeholders output?</div>
+            <div class="flashcard-back">Stakeholder register — interests, involvement, influence, potential impact documented.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q11 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Integrated into processes to consistently achieve target quality thresholds.</div>
+            <div class="flashcard-front">Q72 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Develop engagement strategies = Plan Engagement, NOT Identify.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">EMBED QUALITY — Q11 (PMBOK 8, p.43)
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q72 (PMBOK 8, p.71)
 ─────────────────────────────────────────────────────
-PRINCIPLE: Embed quality INTO processes &amp; deliverables
-GOAL: Consistently achieve TARGET QUALITY THRESHOLDS
-ALIGN: Stakeholder needs, requirements, acceptance criteria
+PROCESS: Identify Stakeholders
 
-Q11 ANSWER: B
-  Integrated into processes → consistent thresholds
+INCLUDES:
+  • Select individuals, groups, orgs with stake
+  • Identify stakeholders REGULARLY
+  • ANALYZE: interests, involvement, interdependencies,
+             influence, potential impact
+  • DOCUMENT → stakeholder register
 
-NOT the PMBOK 8 focus:
-  A → final inspection only (too late, not consistent)
-  C → managed separately (opposite of embed) ✗
-  D → correct defects after (reactive / failure cost)
+DOES NOT INCLUDE:
+  • Develop engagement STRATEGIES based on expectations
+    → Plan Stakeholder Engagement (separate process)
 
-COQ MINDSET:
-  Prevention (build in) &gt; Appraisal &gt; Failure costs
+SCENARIO: Kevin — Transit Flow Logistics
+           Warehouse automation project
+           IDENTIFYING stakeholders
+           Analyzing interests, influence, potential impact
+QUESTION: What will Kevin NOT do?
+→ A) DEVELOP ENGAGEMENT STRATEGIES ✓ (NOT part of Identify)
 
-SCENARIO: FM wants assurance standards CONSISTENTLY met
-  → Build quality into chip fabrication processes
+WILL DO (not the answer):
+  B) Find who thinks they're impacted
+  C) Analyze interests, influence, impact
+  D) Document in stakeholder register
 
-REF: The Standard for Project Management, p.43
-     "Embed Quality Into Processes and Deliverables"</div>
+SIGNAL: "identify" + "analyze" + "register" = Identify
+        "engage" + "strategies" + "expectations" = Plan Engagement
+
+Q72 ANSWER: A
+
+REF: PMBOK Guide, 8th Ed., p.71, "Identify Stakeholders"</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
+          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
+          · <a href="pmp-teach-earned-value-analysis.html">Q71: Earned Value</a>
+          · <a href="pmp-full-questions.html#q-72">Luyện câu 72</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -441,12 +451,12 @@ REF: The Standard for Project Management, p.43
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "A";
       const EXPL = {
-        A: "Final inspection là appraisal — không đảm bảo quality nhất quán xuyên suốt process.",
-        B: "Đúng! Embed quality vào processes để consistently đạt target quality thresholds (p.43).",
-        C: "Tách quality khỏi project processes trái nguyên tắc embed — independence không phải đáp án PMBOK.",
-        D: "Sửa defects sau khi phát hiện là reactive — không phải cách maintain consistent quality focus."
+        A: "Đúng! Develop engagement strategies thuộc Plan Stakeholder Engagement — không phải Identify Stakeholders (p.71).",
+        B: "B là Identify activity — Kevin sẽ tìm ai bị ảnh hưởng. Câu hỏi hỏi việc Kevin KHÔNG làm.",
+        C: "C là Identify activity — stem nói Kevin đang analyze interests/influence/impact.",
+        D: "D là Identify activity — stakeholder register là output chính của Identify."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -462,7 +472,7 @@ REF: The Standard for Project Management, p.43
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Integrated into processes to consistently achieve target quality thresholds.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Develop strategies to engage stakeholders.</strong> (Kevin sẽ <em>không</em> làm việc này khi Identify.)" : "");
         });
       });
       let score = 0;
