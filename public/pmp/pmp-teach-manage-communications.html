@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Change Request (Q37)</title>
+  <title>PMBOK 8 — Manage Communications (Q79)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
-      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --primary: #2563eb; --primary-dark: #1d4ed8; --primary-bg: #eff6ff;
       --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
-      --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
+      --info: #0d9488; --info-bg: #f0fdfa; --border: #e5e7eb;
       --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
     }
     * { box-sizing: border-box; }
@@ -30,7 +30,7 @@
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
-    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #bfdbfe; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
     .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
     .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 62ch; }
     .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
@@ -51,10 +51,16 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .push-pull { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    @media (max-width: 700px) { .push-pull { grid-template-columns: 1fr; } }
+    .pp-box { padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; }
+    .pp-box strong { display: block; font-size: 1rem; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .pp-box span { font-size: 0.82rem; color: var(--muted); }
+    .pp-box.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
-    .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .quiz-card .q-text em { font-style: normal; background: #dbeafe; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -66,7 +72,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 280px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -77,7 +83,7 @@
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
     .flashcard-front, .flashcard-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); padding: 1.25rem; display: flex; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border); }
     .flashcard-front { background: var(--card); font-weight: 600; }
-    .flashcard-back { background: var(--primary-bg); border-color: #fde68a; transform: rotateY(180deg); font-size: 0.88rem; }
+    .flashcard-back { background: var(--primary-bg); border-color: #bfdbfe; transform: rotateY(180deg); font-size: 0.88rem; }
     .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
     .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
     .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
@@ -88,11 +94,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Change Request · Q37</div>
+      <div class="brand-sub">Manage Communications · Q79</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#change">Assess &amp; Implement Changes</a>
-        <a href="#baseline">Sau khi có baseline</a>
+        <a href="#pushpull">Push vs Pull</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -136,7 +142,7 @@
         <a href="pmp-teach-after-action-review.html">Q34: After-Action Review</a>
         <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
         <a href="pmp-teach-ishikawa-analysis.html">Q36: Ishikawa Analysis</a>
-        <a href="pmp-teach-change-request.html" class="series-current">Q37: Change Request</a>
+        <a href="pmp-teach-change-request.html">Q37: Change Request</a>
         <a href="pmp-teach-change-management-plan.html">Q38: Change Mgmt Plan</a>
         <a href="pmp-teach-autocratic-decision.html">Q39: Autocratic Decision</a>
         <a href="pmp-teach-close-project.html">Q40: Close Project</a>
@@ -178,16 +184,16 @@
         <a href="pmp-teach-communications-management-plan.html">Q76: Comms Mgmt Plan</a>
         <a href="pmp-teach-communication-styles-assessment.html">Q77: Comms Styles</a>
         <a href="pmp-teach-cultural-awareness.html">Q78: Cultural Awareness</a>
-        <a href="pmp-teach-manage-communications.html">Q79: Manage Comms</a>
+        <a href="pmp-teach-manage-communications.html" class="series-current">Q79: Manage Comms</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-37">Luyện câu 37</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-79">Luyện câu 79</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#change">Change</a>
-        <a href="#baseline">Baseline</a>
+        <a href="#pushpull">Push/Pull</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -196,78 +202,101 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q37 về <strong>Formal Change Request</strong> — sau khi baselines approved,
-            stakeholder đề xuất <em>design change</em> ảnh hưởng cost &amp; schedule; team muốn
-            implement <em>immediately</em>. Leah phải xử lý thế nào?
+            Bài học Q79 về <strong>Manage Communications</strong> — Helios Energy rollout:
+            stakeholders phàn nàn không được update dù PM đã <em>gửi project report mỗi tuần</em>.
+            Chuyển từ Push sang Pull qua PMIS.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.28–29</span>
-            <span class="badge">Assess and Implement Changes</span>
-            <span class="badge">Câu 37 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.75</span>
+            <span class="badge">Manage Communications</span>
+            <span class="badge">Push vs Pull · PMIS</span>
+            <span class="badge">Câu 79 — Practice</span>
           </div>
         </header>
 
-        <section id="change">
-          <h2>1. Assess and Implement Changes</h2>
+        <section id="pushpull">
+          <h2>1. Push vs Pull (Manage Communications, p.75)</h2>
           <p>
-            Khi project đã có baseline, <strong>mọi thay đổi</strong> phải qua formal change
-            control process — assess impacts trước khi approve và implement.
+            <strong>Manage Communications</strong> ensures timely collection, creation, distribution,
+            and management of project information. Tools include <strong>PMIS</strong>, project
+            reporting, and <strong>push/pull</strong> communication methods.
           </p>
 
+          <div class="push-pull">
+            <div class="pp-box">
+              <strong>Push</strong>
+              <span>Sender distributes info to recipients (email, reports sent weekly)</span>
+            </div>
+            <div class="pp-box pull">
+              <strong>Pull</strong>
+              <span>Recipients access info when needed (PMIS repository, portal)</span>
+            </div>
+          </div>
+
           <div class="card tip">
-            <h4>Change requests (PMBOK p.28–29)</h4>
+            <h4>Instructor: Push failed → try Pull</h4>
             <p style="margin:0">
-              Once the project has a baseline, all changes should go through a formal process to
-              assess and implement changes. Change requests should typically include information on
-              the estimated schedule and cost impacts before they can be approved.
+              Weekly reports = <strong>push</strong> already happening — stakeholders still not
+              updated. Solution: PMIS + <strong>pull</strong> so they access latest info on demand (A).
             </p>
           </div>
         </section>
 
-        <section id="baseline">
-          <h2>2. Sau baseline — không implement ngay</h2>
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
 
           <table>
             <thead>
-              <tr><th>Signal trong đề</th><th>Ý nghĩa</th></tr>
+              <tr><th>Option</th><th>Action</th><th>Q79 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><em>Baselines are approved</em></td>
-                <td>Change control bắt buộc</td>
+                <td><strong>A. PMIS + Pull</strong></td>
+                <td>Central repository, stakeholders pull when needed</td>
+                <td><strong>Yes — switch method after push failed</strong></td>
               </tr>
               <tr>
-                <td><em>Design change</em> impacting cost &amp; schedule</td>
-                <td>Cần impact assessment</td>
+                <td><strong>B. PMIS + Push</strong></td>
+                <td>Same push via different channel</td>
+                <td>Still push — weekly send already not working</td>
               </tr>
               <tr>
-                <td>Team ready to implement <em>immediately</em></td>
-                <td>Bẫy — urgency không bypass formal process</td>
+                <td><strong>C. Stakeholder meeting</strong></td>
+                <td>Ensure everyone informed in session</td>
+                <td>One-time — doesn't fix ongoing info access</td>
               </tr>
               <tr>
-                <td>Correct response</td>
-                <td>Submit change request → assess impacts → approve → implement</td>
+                <td><strong>D. Stakeholder register</strong></td>
+                <td>Update info needs in register</td>
+                <td>Identify artifact — not distribution method</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>Plan vs Manage Communications</h4>
+            <p style="margin:0">
+              Q76: <strong>plan</strong> how to communicate. Q79: <strong>manage</strong> distribution —
+              when push doesn't work, use pull via PMIS.
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 37</h2>
+          <h2>3. Câu hỏi thực hành — Question 79</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q37</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q79</div>
             <div class="q-text">
-              Leah is managing a highway expansion project at Granite Link Infrastructure. After
-              <em>baselines are approved</em>, a stakeholder proposes a <em>design change</em> that
-              may <em>impact cost and schedule</em>. The team is ready to implement it
-              <em>immediately</em> to avoid delays. How should Leah handle this situation?
+              You are managing the Helios Energy rollout project. Several stakeholders complain
+              they are not being updated with the latest project information, despite you sending
+              the project report each week. What will you do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Submit a formal change request and assess its impacts.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Review the benefits and proceed with implementation.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Defer the change until sufficient performance data is available to reassess it.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Update project plans to reflect the proposed change and communicate it to stakeholders.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Add the report to the PMIS and use a Pull approach.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Add the report to the PMIS and use a Push approach.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Arrange a stakeholder meeting to ensure everyone is informed.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Update the stakeholder register with the information they need.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -278,9 +307,9 @@
 
           <h3>Tại sao chọn A?</h3>
           <ul>
-            <li>Post-baseline change → formal change request với impact assessment.</li>
-            <li>Cost &amp; schedule impacts phải documented trước approval.</li>
-            <li>"Immediately" là pressure — không bypass change control.</li>
+            <li>Weekly report = push already tried — stakeholders still not updated.</li>
+            <li>Pull via PMIS lets stakeholders access latest info when they need it.</li>
+            <li>Manage Communications tool: PMIS + pull communication method (p.75).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -290,62 +319,50 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>B. Proceed with implementation</strong></td>
-                <td>Skip formal process — unauthorized change sau baseline.</td>
+                <td><strong>B. PMIS + Push</strong></td>
+                <td>Still pushing — stem says weekly send isn't reaching/updating them effectively.</td>
               </tr>
               <tr>
-                <td><strong>C. Defer until performance data</strong></td>
-                <td>Defer không cần thiết — assess impacts now via change request.</td>
+                <td><strong>C. Meeting</strong></td>
+                <td>Instructor marks X — one-time inform, not sustainable info flow.</td>
               </tr>
               <tr>
-                <td><strong>D. Update plans directly</strong></td>
-                <td>Plan update phải qua approved change — không tự update.</td>
+                <td><strong>D. Register</strong></td>
+                <td>Documents stakeholder info — doesn't solve distribution/access problem.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Liên hệ Q27 Change Log</h4>
-            <p style="margin:0">
-              Q27: track modifications trong change log. Q37: submit formal change request và
-              assess impacts khi có proposed design change sau baseline.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Hành động nào?</h2>
+          <h2>5. Drill — Push hay Pull?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="CR">
-              <span>Design change after baseline — impacts cost/schedule</span>
+            <div class="classify-row" data-answer="PULL">
+              <span>Stakeholders miss weekly emails — post reports to PMIS portal for self-access</span>
               <div class="classify-btns">
-                <button data-pick="CR">Change request</button>
-                <button data-pick="GO">Implement now</button>
-                <button data-pick="UPD">Update plan</button>
+                <button data-pick="PULL">Pull</button>
+                <button data-pick="PUSH">Push</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="GO">
-              <span>Approved change request — ready to execute</span>
+            <div class="classify-row" data-answer="PUSH">
+              <span>Send status report attachment to all stakeholders every Friday</span>
               <div class="classify-btns">
-                <button data-pick="CR">Change request</button>
-                <button data-pick="GO">Implement now</button>
-                <button data-pick="UPD">Update plan</button>
+                <button data-pick="PULL">Pull</button>
+                <button data-pick="PUSH">Push</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="UPD">
-              <span>After CCB approval — update baselines &amp; plans</span>
+            <div class="classify-row" data-answer="PULL">
+              <span>Team retrieves latest risk log from shared project repository</span>
               <div class="classify-btns">
-                <button data-pick="CR">Change request</button>
-                <button data-pick="GO">Implement now</button>
-                <button data-pick="UPD">Update plan</button>
+                <button data-pick="PULL">Pull</button>
+                <button data-pick="PUSH">Push</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="CR">
-              <span>Team wants immediate action — baseline exists</span>
+            <div class="classify-row" data-answer="PUSH">
+              <span>PM broadcasts urgent change notice to distribution list</span>
               <div class="classify-btns">
-                <button data-pick="CR">Change request</button>
-                <button data-pick="GO">Implement now</button>
-                <button data-pick="UPD">Update plan</button>
+                <button data-pick="PULL">Pull</button>
+                <button data-pick="PUSH">Push</button>
               </div>
             </div>
           </div>
@@ -355,20 +372,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Urgency → Implement immediately (B)</h4>
-            <p style="margin:0">"Avoid delays" không bypass change control sau baseline approval.</p>
+            <h4>Bẫy 1: PMIS → assume Push (B)</h4>
+            <p style="margin:0">PMIS works with both — key is pull when push (weekly send) already failed.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Change → Update plans (D)</h4>
-            <p style="margin:0">Update plan là bước sau approval — không phải first response.</p>
+            <h4>Bẫy 2: Not updated → meeting (C)</h4>
+            <p style="margin:0">Meeting informs once — doesn't fix ongoing access to latest project info.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Uncertainty → Defer (C)</h4>
-            <p style="margin:0">Change request chính là cách assess impacts — không cần defer.</p>
+            <h4>Bẫy 3: Stakeholder → register (D)</h4>
+            <p style="margin:0">Register is identify/plan artifact — stem needs distribution method change.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Baseline approved + proposed change + cost/schedule impact</strong> → Formal change request &amp; assess impacts (A).</p>
+            <p style="margin:0"><strong>Already sending reports · still not updated</strong> → PMIS + <strong>pull</strong> approach (A).</p>
           </div>
         </section>
 
@@ -376,55 +393,57 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Sau baseline, change phải làm gì?</div>
-            <div class="flashcard-back">Formal change request · assess schedule &amp; cost impacts · approve trước implement.</div>
+            <div class="flashcard-front">Push vs Pull?</div>
+            <div class="flashcard-back">Push = sender distributes. Pull = recipient accesses when needed (e.g. PMIS portal).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q37 đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Submit formal change request and assess impacts.</div>
+            <div class="flashcard-front">Q79 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Add report to PMIS and use Pull approach.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">CHANGE REQUEST — Q37 (PMBOK 8, p.28–29)
+          <div class="cheat-sheet">MANAGE COMMUNICATIONS — Q79 (PMBOK 8, p.75)
 ─────────────────────────────────────────────────────
-PROCESS: Assess and Implement Changes
+PROCESS: Manage Communications (p.75)
 
-RULE: Once BASELINE exists → ALL changes via formal process
-  1) Submit CHANGE REQUEST
-  2) ASSESS impacts (schedule · cost)
-  3) APPROVE
-  4) Update plans &amp; implement
+PURPOSE: Timely collection, creation, distribution,
+         management of project information
 
-SCENARIO: Granite Link — highway expansion
-           BASELINES APPROVED
-           DESIGN CHANGE proposed
-           Impacts COST &amp; SCHEDULE
-           Team wants IMMEDIATE implementation
-→ A) Submit FORMAL CHANGE REQUEST &amp; assess impacts ✓
+TOOLS: PMIS · Project Reporting
+       Push &amp; Pull communication methods
+
+PUSH: Sender sends to recipients
+      (weekly email report = PUSH — already tried)
+
+PULL: Recipients access when needed
+      (PMIS portal = PULL)
+
+SCENARIO: Helios Energy rollout
+           Stakeholders NOT UPDATED
+           DESPITE weekly project report sent
+           → Push not working for them
+QUESTION: What will you do NEXT?
+→ A) ADD REPORT TO PMIS + USE PULL APPROACH ✓
 
 NOT:
-  B) Proceed with implementation — bypasses change control
-  C) Defer until performance data — assess via change request now
-  D) Update plans directly — after approval only
+  B) PMIS + PUSH — still push; weekly send failed
+  C) STAKEHOLDER MEETING — one-time, not ongoing access
+  D) STAKEHOLDER REGISTER — document, not distribute
 
-SIGNAL: "baselines approved" · "design change"
-        "impact cost and schedule" · "immediately" (trap)
+SIGNAL: "sending report each week" + "not updated"
+        = push failed → try PULL via PMIS
 
-VS Q27: Change log tracks modifications
-VS Q28: Scope baseline at execution
-VS Q37: Formal change request after baseline
+Q79 ANSWER: A
 
-Q37 ANSWER: A
-
-REF: PMBOK Guide, 8th Ed., p.28–29</div>
+REF: PMBOK Guide, 8th Ed., p.75, "Manage Communications"</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-change-log.html">Q27: Change Log</a>
-          · <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
-          · <a href="pmp-full-questions.html#q-37">Luyện câu 37</a>
+          · <a href="pmp-teach-communications-management-plan.html">Q76: Comms Mgmt Plan</a>
+          · <a href="pmp-teach-cultural-awareness.html">Q78: Cultural Awareness</a>
+          · <a href="pmp-full-questions.html#q-79">Luyện câu 79</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -435,10 +454,10 @@ REF: PMBOK Guide, 8th Ed., p.28–29</div>
     (function () {
       const CORRECT = "A";
       const EXPL = {
-        A: "Đúng! Post-baseline change → formal change request với impact assessment (p.28–29).",
-        B: "Proceed without formal process — unauthorized change sau baseline approval.",
-        C: "Defer không cần — change request chính là cách assess impacts.",
-        D: "Update plan trực tiếp — phải qua approved change request trước."
+        A: "Đúng! Weekly send = push failed → PMIS + pull lets stakeholders access latest info on demand (p.75).",
+        B: "PMIS + push vẫn là push — stem nói weekly report đã gửi nhưng stakeholders vẫn không updated.",
+        C: "Meeting inform một lần — không giải quyết ongoing access to latest project information.",
+        D: "Stakeholder register document thông tin — không phải distribution method."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -454,7 +473,7 @@ REF: PMBOK Guide, 8th Ed., p.28–29</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Submit a formal change request and assess its impacts.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Add the report to the PMIS and use a Pull approach.</strong>" : "");
         });
       });
       let score = 0;
