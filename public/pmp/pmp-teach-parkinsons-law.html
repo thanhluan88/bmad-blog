@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Variables Over Time (Q13)</title>
+  <title>PMBOK 8 — Parkinson's Law (Q84)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,13 +50,8 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .curve-chart { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem 0.75rem; margin: 1.25rem 0; }
-    .curve-chart svg { width: 100%; height: auto; max-height: 200px; display: block; }
-    .curve-legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.65rem; font-size: 0.82rem; }
-    .curve-legend span { display: flex; align-items: center; gap: 0.35rem; }
-    .legend-line { width: 24px; height: 3px; border-radius: 2px; }
-    .legend-cost { background: var(--info); }
-    .legend-risk { background: var(--bad); }
+    .law-box { background: var(--card); border: 2px solid var(--ok); border-radius: var(--radius); padding: 1.25rem; margin: 1rem 0; text-align: center; font-size: 1rem; }
+    .law-box strong { color: var(--primary-dark); font-size: 1.1rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -73,8 +67,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 300px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -95,11 +89,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Variables Over Time · Q13</div>
+      <div class="brand-sub">Parkinson's Law · Q84</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#curves">Cost vs Risk curves</a>
-        <a href="#predictive">Predictive lifecycle</a>
+        <a href="#theory">Organizational Theory</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -119,7 +113,7 @@
         <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
         <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
         <a href="pmp-teach-accountable-leader.html">Q12: Accountable Leader</a>
-        <a href="pmp-teach-variables-over-time.html" class="series-current">Q13: Variables Over Time</a>
+        <a href="pmp-teach-variables-over-time.html">Q13: Variables Over Time</a>
         <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
         <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive Approach</a>
         <a href="pmp-teach-hybrid-approach.html">Q16: Hybrid Approach</a>
@@ -190,16 +184,15 @@
         <a href="pmp-teach-monitor-communications.html">Q81: Monitor Comms</a>
         <a href="pmp-teach-team-charter.html">Q82: Team Charter</a>
         <a href="pmp-teach-responsibility-assignment-matrix.html">Q83: RAM</a>
-        <a href="pmp-teach-parkinsons-law.html">Q84: Parkinson's Law</a>
+        <a href="pmp-teach-parkinsons-law.html" class="series-current">Q84: Parkinson's Law</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#curves">Curves</a>
-        <a href="#predictive">Lifecycle</a>
+        <a href="#theory">Theory</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -208,108 +201,117 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q13 về <strong>Impact of Variables Over Time</strong> — cost/staffing và
-            risk/uncertainty thay đổi <em>ngược chiều</em> theo vòng đời dự án predictive.
+            Bài học Q84 về <strong>Parkinson's Law</strong> — Claire tại Iron Peak Consulting:
+            task vài giờ được giao <em>vài tuần</em>, budget căng vì scope phình ra. Cần
+            <em>limit the time available</em> cho tasks.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.59</span>
-            <span class="badge">Project Lifecycle</span>
-            <span class="badge">Câu 13 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.81 &amp; 184</span>
+            <span class="badge">Organizational Theory</span>
+            <span class="badge">Parkinson's Law</span>
+            <span class="badge">Câu 84 — Practice</span>
           </div>
         </header>
 
-        <section id="curves">
-          <h2>1. Hai đường cong quan trọng</h2>
+        <section id="theory">
+          <h2>1. Organizational Theory &amp; Parkinson's Law (p.184)</h2>
           <p>
-            PMBOK 8 mô tả hai biến số chính thay đổi theo thời gian — đây là kiến thức cổ điển
-            nhưng vẫn ra thi dưới dạng scenario với executive/sponsor.
+            <strong>Organizational theory</strong> (p.184) giải thích cách people, teams, và units
+            behave — giúp cải thiện planning efficiency, giảm time/cost/effort. Hỗ trợ flexible
+            leadership theo team maturity.
           </p>
 
-          <div class="curve-chart" aria-label="Cost staffing bell curve and risk decreasing curve">
-            <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-              <line x1="40" y1="130" x2="380" y2="130" stroke="#9ca3af" stroke-width="1.5"/>
-              <line x1="40" y1="20" x2="40" y2="130" stroke="#9ca3af" stroke-width="1.5"/>
-              <text x="210" y="152" text-anchor="middle" fill="#6b7280" font-size="11">Time →</text>
-              <text x="18" y="80" text-anchor="middle" fill="#6b7280" font-size="11" transform="rotate(-90 18 80)">Level</text>
-              <path d="M 50 120 Q 120 115 200 45 Q 280 115 350 120" fill="none" stroke="#2563eb" stroke-width="2.5"/>
-              <text x="200" y="38" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="600">Cost / Staffing</text>
-              <path d="M 50 35 Q 150 55 250 90 Q 320 110 350 118" fill="none" stroke="#dc2626" stroke-width="2.5"/>
-              <text x="75" y="28" fill="#dc2626" font-size="11" font-weight="600">Risk / Uncertainty</text>
-            </svg>
-            <div class="curve-legend">
-              <span><i class="legend-line legend-cost"></i> Cost &amp; staffing: thấp → tăng → giảm mạnh cuối dự án</span>
-              <span><i class="legend-line legend-risk"></i> Risk &amp; uncertainty: cao nhất lúc đầu → giảm dần</span>
-            </div>
+          <div class="law-box">
+            <strong>Parkinson's Law</strong><br>
+            Work expands to fill the time available for its completion.
           </div>
 
           <div class="card tip">
-            <h4>PMBOK p.59 — tóm tắt</h4>
+            <h4>Áp dụng vào stem</h4>
             <p style="margin:0">
-              <strong>Cost &amp; staffing:</strong> low at start → increase as work is carried out →
-              drop rapidly near end.<br>
-              <strong>Risk &amp; uncertainty:</strong> highest at start of project/phase → decrease
-              over time as decisions are made and deliverables accepted.
+              Task vài <strong>hours</strong> nhưng được schedule <strong>weeks</strong> → work (và scope)
+              phình ra để lấp đầy thời gian. Fix: <strong>limit time available</strong> = áp dụng
+              Parkinson's Law awareness (C).
             </p>
           </div>
-        </section>
-
-        <section id="predictive">
-          <h2>2. Predictive project scenario</h2>
-          <p>
-            PetraCore Energy refinery expansion — executive lo <strong>staffing costs tăng</strong> và
-            <strong>risks identified sớm</strong>. PM giải thích: đó là pattern bình thường —
-            risk cao lúc đầu (nhiều unknowns), cost tăng khi execution ramp up.
-          </p>
 
           <table>
             <thead>
-              <tr><th>Giai đoạn</th><th>Cost / Staffing</th><th>Risk / Uncertainty</th></tr>
+              <tr><th>Kỹ thuật</th><th>Mục đích</th><th>Q84?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Start / Planning</strong></td>
-                <td>Thấp</td>
-                <td>Cao nhất</td>
+                <td><strong>Parkinson's Law</strong></td>
+                <td>Limit time → prevent work/scope expansion</td>
+                <td>✓ Hours vs weeks mismatch</td>
               </tr>
               <tr>
-                <td><strong>Execution peak</strong></td>
-                <td>Cao nhất</td>
-                <td>Đang giảm</td>
+                <td><strong>Resource leveling</strong> (Q58)</td>
+                <td>Balance demand vs resource availability</td>
+                <td>✗ Over-allocation — khác time padding</td>
               </tr>
               <tr>
-                <td><strong>Near completion</strong></td>
-                <td>Giảm nhanh</td>
-                <td>Thấp nhất</td>
+                <td><strong>Fast tracking</strong> (Q63)</td>
+                <td>Parallel activities — shorten schedule</td>
+                <td>✗ Compression technique — không fix padding</td>
+              </tr>
+              <tr>
+                <td><strong>Schedule compression</strong></td>
+                <td>Crashing or fast tracking overall schedule</td>
+                <td>✗ Macro schedule — không address per-task padding</td>
               </tr>
             </tbody>
           </table>
+        </section>
 
-          <div class="card info">
-            <h4>Lưu ý thi</h4>
-            <p style="margin:0">
-              Risk giảm dần áp dụng <strong>regardless of project life cycle</strong> (PMBOK p.59).
-              Cost curve mô tả chủ yếu cho <strong>predictive</strong> scenarios — agile có thể khác
-              nhưng đáp án C vẫn là chuẩn cho câu này.
-            </p>
-          </div>
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Concept</th><th>Q84 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Schedule compression</strong></td>
+                <td>Crashing / fast tracking to shorten timeline</td>
+                <td>Schedule-level — không phải limit per-task duration</td>
+              </tr>
+              <tr>
+                <td><strong>B. Resource leveling</strong></td>
+                <td>Adjust start/finish when over-allocated</td>
+                <td>Resource conflict — không phải scope creep từ padding</td>
+              </tr>
+              <tr>
+                <td><strong>C. Parkinson's Law</strong></td>
+                <td>Work expands to fill available time</td>
+                <td><strong>Yes — limit time to curb expansion</strong></td>
+              </tr>
+              <tr>
+                <td><strong>D. Fast tracking</strong></td>
+                <td>Overlap sequential activities</td>
+                <td>Parallel work — không fix generous task durations</td>
+              </tr>
+            </tbody>
+          </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 13</h2>
+          <h2>3. Câu hỏi thực hành — Question 84</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q13</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q84</div>
             <div class="q-text">
-              You are in the planning phase of a refinery expansion project at PetraCore Energy Ltd.
-              An executive manager raises concerns about increasing staffing costs and several
-              identified risks early in the project.
-              What will you tell them about the <em>cost and risk</em> on the project?
+              Claire is leading a reporting workstream at Iron Peak Consulting. She notices that many
+              small tasks that should only take a few hours were given weeks to complete. Now the budget
+              is becoming strained due to unforeseen additional scope in these tasks. Claire knows she
+              needs to <em>limit the time available</em> for the tasks, applying:
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Cost and staffing are highest at the beginning, while risk and uncertainty increase toward project completion.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Cost and staffing gradually decrease throughout the project, while risk and uncertainty remain constant.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Cost and staffing increase as work progresses and drop near completion, while risk and uncertainty decrease over time.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Cost and staffing remain stable throughout the project, while risk and uncertainty fluctuate unpredictably.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Schedule compression.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Resource leveling.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Parkinson's Law.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Fast tracking.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -320,71 +322,70 @@
 
           <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>Khớp PMBOK p.59: cost/staffing tăng khi work progresses, drop near completion.</li>
-            <li>Risk/uncertainty <strong>decrease over time</strong> — cao nhất ở đầu phase.</li>
-            <li>Executive thấy cost tăng + risk sớm — PM giải thích đúng pattern, không panic.</li>
+            <li>Stem nói rõ: <em>limit the time available</em> — đúng antidote của Parkinson's Law.</li>
+            <li>Hours of work + weeks allocated → scope expands to fill time → budget strain.</li>
+            <li>Organizational theory (p.184) trong Plan Resource Management context.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A</strong></td>
-                <td>Đảo ngược cả hai — cost không cao nhất lúc đầu; risk không tăng về cuối.</td>
+                <td><strong>A. Schedule compression</strong></td>
+                <td>Umbrella term (crashing/fast track) — không match "limit time per small task".</td>
               </tr>
               <tr>
-                <td><strong>B</strong></td>
-                <td>Cost giảm dần + risk constant — sai hoàn toàn (✗ slide).</td>
+                <td><strong>B. Resource leveling</strong></td>
+                <td>Resolve over-allocation — Q58 pattern, không phải time-padding problem.</td>
               </tr>
               <tr>
-                <td><strong>D</strong></td>
-                <td>Cost stable + risk unpredictable — không mô tả impact over time p.59.</td>
+                <td><strong>D. Fast tracking</strong></td>
+                <td>Run activities in parallel — không shorten generous individual task estimates.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Mnemonic thi</h4>
-            <p style="margin:0">
-              <strong>Cost</strong> = chuông (bell) · <strong>Risk</strong> = đường xuống dốc (↓ over time)<br>
-              Hai đường <em>ngược chiều</em> — đừng chọn đáp án mô tả cùng hướng cho cả hai.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Đầu dự án hay cuối dự án?</h2>
+          <h2>5. Drill — Parkinson, Leveling, Compression, hay Fast Track?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="START">
-              <span>Risk and uncertainty are highest</span>
+            <div class="classify-row" data-answer="PARK">
+              <span>2-hour tasks scheduled for 3 weeks — scope keeps growing</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu dự án</button>
-                <button data-pick="END">Cuối dự án</button>
+                <button data-pick="PARK">Parkinson</button>
+                <button data-pick="LEVEL">Leveling</button>
+                <button data-pick="COMP">Compression</button>
+                <button data-pick="FAST">Fast track</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="END">
-              <span>Cost and staffing drop rapidly</span>
+            <div class="classify-row" data-answer="LEVEL">
+              <span>One engineer assigned 120% across three activities same week</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu dự án</button>
-                <button data-pick="END">Cuối dự án</button>
+                <button data-pick="PARK">Parkinson</button>
+                <button data-pick="LEVEL">Leveling</button>
+                <button data-pick="COMP">Compression</button>
+                <button data-pick="FAST">Fast track</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="START">
-              <span>Cost and staffing levels are low</span>
+            <div class="classify-row" data-answer="FAST">
+              <span>Start testing while development still running to save calendar time</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu dự án</button>
-                <button data-pick="END">Cuối dự án</button>
+                <button data-pick="PARK">Parkinson</button>
+                <button data-pick="LEVEL">Leveling</button>
+                <button data-pick="COMP">Compression</button>
+                <button data-pick="FAST">Fast track</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="MID">
-              <span>Cost and staffing peak during execution</span>
+            <div class="classify-row" data-answer="PARK">
+              <span>Limit task duration to prevent work expanding into slack time</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu</button>
-                <button data-pick="MID">Giữa</button>
-                <button data-pick="END">Cuối</button>
+                <button data-pick="PARK">Parkinson</button>
+                <button data-pick="LEVEL">Leveling</button>
+                <button data-pick="COMP">Compression</button>
+                <button data-pick="FAST">Fast track</button>
               </div>
             </div>
           </div>
@@ -394,16 +395,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn A — đảo cost và risk</h4>
-            <p style="margin:0">Nhiều thí sinh nhớ “một cái cao đầu, một cái cao cuối” nhưng gán nhầm — cost cao giữa/cuối execution, risk cao đầu.</p>
+            <h4>Bẫy 1: Budget strain → schedule compression (A)</h4>
+            <p style="margin:0">Compression = crashing/fast tracking macro schedule. Stem = per-task time padding → Parkinson's Law.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Executive lo risk sớm → nghĩ risk sẽ tăng</h4>
-            <p style="margin:0">Risks <em>identified</em> sớm là bình thường — uncertainty <strong>giảm</strong> khi quyết định và deliverables được chấp nhận.</p>
+            <h4>Bẫy 2: Resource topic → leveling (B)</h4>
+            <p style="margin:0">Plan Resource Management context — nhưng problem là time allocation, không phải over-allocation.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Shorten schedule → fast tracking (D)</h4>
+            <p style="margin:0">Fast tracking overlaps phases — không limit duration của small tasks.</p>
           </div>
           <div class="card tip">
-            <h4>Liên hệ Q12 leadership</h4>
-            <p style="margin:0">PM accountable leader giải thích pattern cho executive — data-driven, align với Standard p.59.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Hours of work · weeks allocated · scope expands · limit time available</strong> → Parkinson's Law (C).</p>
           </div>
         </section>
 
@@ -411,49 +416,58 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Cost/staffing theo thời gian? (predictive)</div>
-            <div class="flashcard-back">Low start → increase during work → drop rapidly near end.</div>
+            <div class="flashcard-front">Parkinson's Law?</div>
+            <div class="flashcard-back">Work expands to fill the time available for its completion — limit time to improve efficiency (p.184).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Risk/uncertainty theo thời gian?</div>
-            <div class="flashcard-back">Highest at start → decrease as decisions made &amp; deliverables accepted.</div>
-          </div></div>
-          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q13 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Cost/staffing increase then drop; risk/uncertainty decrease over time.</div>
+            <div class="flashcard-front">Q84 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Parkinson's Law.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">VARIABLES OVER TIME — Q13 (PMBOK 8, p.59)
+          <div class="cheat-sheet">PARKINSON'S LAW — Q84
+(PMBOK 8, p.81 &amp; 184)
 ─────────────────────────────────────────────────────
-COST &amp; STAFFING (predictive):
-  Start: LOW
-  Execution: INCREASE (peak mid-project)
-  End: DROP rapidly
+ORGANIZATIONAL THEORY (p.184):
+  • How people, teams, units behave
+  • Improve planning efficiency
+  • Reduce time, cost, effort
+  • Flexible leadership by team maturity
 
-RISK &amp; UNCERTAINTY (any lifecycle):
-  Start/phase start: HIGHEST
-  Over time: DECREASE (decisions + accepted deliverables)
+PARKINSON'S LAW:
+  "Work expands to fill the time available
+   for its completion."
+  → LIMIT time available = countermeasure
 
-Q13 ANSWER: C
-  Cost/staffing ↑ then ↓ near completion
-  Risk/uncertainty ↓ over time
+SCENARIO: Claire — Iron Peak reporting workstream
+           Small tasks = FEW HOURS of work
+           Given WEEKS to complete
+           Budget strained — unforeseen ADDITIONAL SCOPE
+           Need to LIMIT TIME AVAILABLE
+QUESTION: Applying:
+→ C) PARKINSON'S LAW ✓
 
-WRONG PATTERNS:
-  A → cost high at start, risk ↑ at end (inverted)
-  B → cost ↓ throughout, risk constant ✗
-  D → cost stable, risk unpredictable
+NOT:
+  A) SCHEDULE COMPRESSION — macro; crashing/fast track
+  B) RESOURCE LEVELING — over-allocation (Q58)
+  D) FAST TRACKING — parallel activities (Q63)
 
-VISUAL: Cost = bell curve · Risk = downward slope
+SIGNAL: "few hours" + "weeks" + "limit the time available"
+        + scope expansion in padded tasks
+        → PARKINSON'S LAW
 
-REF: The Standard for Project Management, p.59
-     "Impact of Variables Over Time"</div>
+Q84 ANSWER: C
+
+REF: PMBOK Guide, 8th Ed., p.81 Plan Resource Management
+      p.184 Organizational theory</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-accountable-leader.html">Q12: Accountable Leader</a>
+          · <a href="pmp-teach-resource-leveling.html">Q58: Resource Leveling</a>
+          · <a href="pmp-teach-schedule-fast-tracking.html">Q63: Fast Tracking</a>
+          · <a href="pmp-full-questions.html#q-84">Luyện câu 84</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -464,10 +478,10 @@ REF: The Standard for Project Management, p.59
     (function () {
       const CORRECT = "C";
       const EXPL = {
-        A: "Đảo ngược — cost không cao nhất lúc đầu; risk không tăng về cuối dự án.",
-        B: "Cost giảm dần và risk constant — trái PMBOK p.59 (✗ slide).",
-        C: "Đúng! Cost/staffing tăng khi work progresses, drop near end; risk/uncertainty giảm theo thời gian.",
-        D: "Cost stable và risk unpredictable — không mô tả impact of variables over time."
+        A: "Schedule compression (crashing/fast track) là macro schedule technique — không match limit time per small task.",
+        B: "Resource leveling xử lý over-allocation — không phải work expanding into padded duration.",
+        C: "Đúng! Parkinson's Law: work expands to fill available time — limit time để curb scope expansion (p.184).",
+        D: "Fast tracking overlap activities — không shorten generous per-task estimates."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -483,7 +497,7 @@ REF: The Standard for Project Management, p.59
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Cost/staffing increase then drop near completion; risk/uncertainty decrease over time.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Parkinson's Law.</strong>" : "");
         });
       });
       let score = 0;
@@ -511,16 +525,18 @@ REF: The Standard for Project Management, p.59
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>

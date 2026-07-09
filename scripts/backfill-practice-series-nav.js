@@ -87,6 +87,7 @@ const SERIES = [
   ["pmp-teach-monitor-communications.html", "Q81: Monitor Comms"],
   ["pmp-teach-team-charter.html", "Q82: Team Charter"],
   ["pmp-teach-responsibility-assignment-matrix.html", "Q83: RAM"],
+  ["pmp-teach-parkinsons-law.html", "Q84: Parkinson's Law"],
 ];
 
 function buildSeriesBlock(currentHref) {
