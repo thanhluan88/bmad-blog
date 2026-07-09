@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Process Improvement (Q30)</title>
+  <title>PMBOK 8 — Failure Costs / Cost of Quality (Q67)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,6 +51,8 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .coq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 700px) { .coq-grid { grid-template-columns: 1fr; } }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,7 +68,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 460px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -88,11 +90,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Process Improvement · Q30</div>
+      <div class="brand-sub">Failure Costs · Q67</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#quality">Manage Quality Assurance</a>
-        <a href="#rca">Root cause vs symptoms</a>
+        <a href="#coq">Cost of Quality</a>
+        <a href="#compare">So sánh loại chi phí</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -129,7 +131,7 @@
         <a href="pmp-teach-change-log.html">Q27: Change Log</a>
         <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
         <a href="pmp-teach-issue-log.html">Q29: Issue Log</a>
-        <a href="pmp-teach-process-improvement.html" class="series-current">Q30: Process Improvement</a>
+        <a href="pmp-teach-process-improvement.html">Q30: Process Improvement</a>
         <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
         <a href="pmp-teach-checklists.html">Q32: Checklists</a>
         <a href="pmp-teach-lessons-learned.html">Q33: Lessons Learned</a>
@@ -166,16 +168,16 @@
         <a href="pmp-teach-financial-management-plan.html">Q64: Financial Mgmt Plan</a>
         <a href="pmp-teach-funding-strategy.html">Q65: Funding Strategy</a>
         <a href="pmp-teach-analogous-estimating.html">Q66: Analogous Est.</a>
-        <a href="pmp-teach-failure-costs.html">Q67: Failure Costs</a>
+        <a href="pmp-teach-failure-costs.html" class="series-current">Q67: Failure Costs</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-30">Luyện câu 30</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-67">Luyện câu 67</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#quality">QA</a>
-        <a href="#rca">RCA</a>
+        <a href="#coq">COQ</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -184,159 +186,186 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q30 về <strong>Process Analysis &amp; Improvement</strong> — defects lặp lại
-            do <em>inconsistent procedures across shifts</em>; cần xử lý root cause, không chỉ
-            ghi nhận defect hay cập nhật instructions.
+            Bài học Q67 về <strong>Failure Costs</strong> — Jordan tại ADH, consumer electronics:
+            sau release units bị return vì defects, repairs &amp; replacements, ảnh hưởng
+            profitability — loại quality cost nào?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.23 &amp; p.198</span>
-            <span class="badge">Manage Quality Assurance</span>
-            <span class="badge">Câu 30 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.63 &amp; 158–159</span>
+            <span class="badge">Estimate Costs</span>
+            <span class="badge">Cost of Quality</span>
+            <span class="badge">Câu 67 — Practice</span>
           </div>
         </header>
 
-        <section id="quality">
-          <h2>1. Manage Quality Assurance &amp; Process Improvement</h2>
+        <section id="coq">
+          <h2>1. Cost of Quality (p.158–159)</h2>
           <p>
-            Manage Quality Assurance thực hiện các hoạt động có hệ thống từ quality management plan
-            để đảm bảo outputs đáp ứng requirements. Process improvement phân tích và nâng cao
-            processes — giảm waste, tăng consistency và customer satisfaction.
+            Trong <strong>Estimate Costs</strong> (p.63), <strong>cost of quality</strong> phân loại
+            chi phí liên quan đến đạt/không đạt chuẩn quality:
           </p>
 
-          <div class="card tip">
-            <h4>Process improvement (PMBOK p.198)</h4>
-            <p style="margin:0">
-              Process improvement focuses on analyzing and enhancing processes to increase
-              efficiency, quality, and value by identifying improvements, reducing waste, and
-              achieving better performance and customer satisfaction.
-            </p>
+          <div class="coq-grid">
+            <div class="card info">
+              <h4>Cost of Conformance</h4>
+              <ul style="margin:0 0 0 1rem">
+                <li><strong>Prevention</strong> — training, planning, process design</li>
+                <li><strong>Appraisal</strong> — testing, inspection, audits</li>
+              </ul>
+            </div>
+            <div class="card danger">
+              <h4>Cost of Non-conformance = Failure</h4>
+              <ul style="margin:0 0 0 1rem">
+                <li><strong>Internal failure</strong> — rework before delivery</li>
+                <li><strong>External failure</strong> — returns, repairs after customer delivery</li>
+              </ul>
+            </div>
           </div>
 
-          <p>Tools gắn với root cause analysis: <strong>5 Whys</strong>, <strong>Ishikawa</strong> (fishbone).</p>
+          <div class="card tip">
+            <h4>Q67 = External failure → Failure costs (B)</h4>
+            <p style="margin:0">
+              After product <em>release</em>, returns &amp; repairs → external failure, thuộc
+              <strong>failure costs</strong>.
+            </p>
+          </div>
         </section>
 
-        <section id="rca">
-          <h2>2. Root cause vs triệu chứng</h2>
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
 
           <table>
             <thead>
-              <tr><th>Signal trong đề</th><th>Ý nghĩa</th></tr>
+              <tr><th>Option</th><th>Type</th><th>Examples</th><th>Q67?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><em>Repeatedly</em> identify defects</td>
-                <td>Pattern — không phải one-off defect</td>
+                <td><strong>A. Appraisal</strong></td>
+                <td>Conformance</td>
+                <td>Testing, inspection before release</td>
+                <td>Before delivery — not returns</td>
               </tr>
               <tr>
-                <td><em>Inconsistent procedures across shifts</em></td>
-                <td>Process problem — root cause</td>
+                <td><strong>B. Failure</strong></td>
+                <td>Non-conformance</td>
+                <td>Rework, repairs, returns after defects found</td>
+                <td><strong>Yes — post-release returns</strong></td>
               </tr>
               <tr>
-                <td><em>Address underlying cause</em></td>
-                <td>Process analysis &amp; improvement (D)</td>
+                <td><strong>C. Prevention</strong></td>
+                <td>Conformance</td>
+                <td>Training, quality planning upfront</td>
+                <td>Before defects occur</td>
               </tr>
               <tr>
-                <td>Rework and delays</td>
-                <td>Hậu quả — fix process, không chỉ count defects</td>
+                <td><strong>D. Conformance</strong></td>
+                <td>Prevention + Appraisal</td>
+                <td>All "good" quality investment</td>
+                <td>Returns are non-conformance</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>Internal vs External failure</h4>
+            <p style="margin:0">
+              Instructor ghi <strong>Inter</strong> / <strong>Ext</strong> near B. Q67 là
+              <em>external</em> (after release to customer) nhưng đáp án chọn category
+              <strong>failure costs</strong> (B) — bao gồm cả internal và external.
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 30</h2>
+          <h2>3. Câu hỏi thực hành — Question 67</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q30</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q67</div>
             <div class="q-text">
-              Omar is managing a pharmaceutical packaging project at NCL. Quality inspections
-              repeatedly identify defects caused by <em>inconsistent procedures across shifts</em>,
-              leading to rework and delays. Omar wants to <em>address the underlying cause</em>
-              and improve consistency moving forward. What should Omar do <em>next</em>?
+              Jordan is overseeing a consumer electronics project at ADH. After product release,
+              several units are returned due to defects, requiring repairs and replacements. These
+              unexpected expenses are impacting the project's profitability. Jordan wants to
+              categorize these costs within quality-related expenses. Which type of cost is this?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Update the team's work instructions.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Implement check sheets.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Assign a quality lead.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Apply process analysis &amp; improvement.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Appraisal costs.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Failure costs.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Prevention costs.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Conformance costs.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn D?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Underlying cause = inconsistent procedures → analyze &amp; improve process.</li>
-            <li>Manage Quality Assurance + process improvement (p.23, p.198).</li>
-            <li>Repeated defects across shifts = systemic process issue, not just documentation tweak.</li>
+            <li>Products fail to meet quality standards after release.</li>
+            <li>Repairs, replacements, returns = failure costs (p.158–159).</li>
+            <li>External failure — discovered by customer after delivery.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không đúng NEXT</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Update work instructions</strong></td>
-                <td>Có thể là output sau improvement — chưa analyze root cause trước.</td>
+                <td><strong>A. Appraisal</strong></td>
+                <td>Cost to <em>test/inspect</em> — before release. Instructor: "Test" near A.</td>
               </tr>
               <tr>
-                <td><strong>B. Check sheets</strong></td>
-                <td>Tool ghi nhận/count defects — không fix inconsistent procedures.</td>
+                <td><strong>C. Prevention</strong></td>
+                <td>Cost to <em>prevent</em> defects — upfront investment, not post-defect repair.</td>
               </tr>
               <tr>
-                <td><strong>C. Assign quality lead</strong></td>
-                <td>Organizational fix — không address process analysis trực tiếp.</td>
+                <td><strong>D. Conformance</strong></td>
+                <td>Prevention + appraisal — costs to meet standards, not failure aftermath.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Liên hệ Q11 Embed Quality</h4>
-            <p style="margin:0">
-              Q11: embed quality vào processes. Q30: khi processes inconsistent gây defects
-              lặp lại → process analysis &amp; improvement.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Tool/action nào?</h2>
+          <h2>5. Drill — Loại quality cost nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="PROC">
-              <span>Inconsistent procedures causing repeated defects</span>
+            <div class="classify-row" data-answer="FAIL">
+              <span>Customer returns defective units after product release</span>
               <div class="classify-btns">
-                <button data-pick="PROC">Process improvement</button>
-                <button data-pick="CHECK">Check sheet</button>
-                <button data-pick="ROLE">Assign lead</button>
+                <button data-pick="PREV">Prevention</button>
+                <button data-pick="APPR">Appraisal</button>
+                <button data-pick="FAIL">Failure</button>
+                <button data-pick="CONF">Conformance</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="CHECK">
-              <span>Tally defect types during inspection</span>
+            <div class="classify-row" data-answer="APPR">
+              <span>Final inspection and testing before shipment</span>
               <div class="classify-btns">
-                <button data-pick="PROC">Process improvement</button>
-                <button data-pick="CHECK">Check sheet</button>
-                <button data-pick="ROLE">Assign lead</button>
+                <button data-pick="PREV">Prevention</button>
+                <button data-pick="APPR">Appraisal</button>
+                <button data-pick="FAIL">Failure</button>
+                <button data-pick="CONF">Conformance</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PROC">
-              <span>5 Whys / Ishikawa on shift variance</span>
+            <div class="classify-row" data-answer="PREV">
+              <span>Quality training and process improvement workshops</span>
               <div class="classify-btns">
-                <button data-pick="PROC">Process improvement</button>
-                <button data-pick="CHECK">Check sheet</button>
-                <button data-pick="ROLE">Assign lead</button>
+                <button data-pick="PREV">Prevention</button>
+                <button data-pick="APPR">Appraisal</button>
+                <button data-pick="FAIL">Failure</button>
+                <button data-pick="CONF">Conformance</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ROLE">
-              <span>Need dedicated QA ownership long-term</span>
+            <div class="classify-row" data-answer="FAIL">
+              <span>Rework on defective components found before delivery to customer</span>
               <div class="classify-btns">
-                <button data-pick="PROC">Process improvement</button>
-                <button data-pick="CHECK">Check sheet</button>
-                <button data-pick="ROLE">Assign lead</button>
+                <button data-pick="PREV">Prevention</button>
+                <button data-pick="APPR">Appraisal</button>
+                <button data-pick="FAIL">Failure</button>
+                <button data-pick="CONF">Conformance</button>
               </div>
             </div>
           </div>
@@ -346,16 +375,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Defects → Check sheets (B)</h4>
-            <p style="margin:0">Check sheet đếm/record — không analyze và improve inconsistent procedures.</p>
+            <h4>Bẫy 1: Defects → Appraisal (A)</h4>
+            <p style="margin:0">Appraisal = finding defects via test/inspect. Returns/repairs = already failed → failure cost.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Inconsistency → Update instructions (A)</h4>
-            <p style="margin:0">Cập nhật WI là symptom fix — cần process analysis trước để hiểu root cause across shifts.</p>
+            <h4>Bẫy 2: Quality expense → Conformance (D)</h4>
+            <p style="margin:0">Conformance = good-quality investment. Returns = non-conformance = failure.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Prevent future → Prevention (C)</h4>
+            <p style="margin:0">Prevention is proactive. Stem describes costs after defects found post-release.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Underlying cause + repeated process defects</strong> → Process analysis &amp; improvement (D).</p>
+            <p style="margin:0"><strong>Returns · repairs · replacements · after release · defects found</strong> → Failure costs (B).</p>
           </div>
         </section>
 
@@ -363,51 +396,58 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Process improvement làm gì? (p.198)</div>
-            <div class="flashcard-back">Analyze &amp; enhance processes · reduce waste · better performance &amp; satisfaction.</div>
+            <div class="flashcard-front">Failure costs?</div>
+            <div class="flashcard-back">Non-conformance: rework, repairs, returns when products fail standards — internal (before delivery) or external (after customer).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q30 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Apply process analysis &amp; improvement.</div>
+            <div class="flashcard-front">Q67 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Failure costs.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">PROCESS IMPROVEMENT — Q30 (PMBOK 8, p.23 &amp; p.198)
+          <div class="cheat-sheet">FAILURE COSTS — Q67 (PMBOK 8, p.63 &amp; 158–159)
 ─────────────────────────────────────────────────────
-PROCESS: Manage Quality Assurance
-FOCUS: Process analysis &amp; improvement
-  - Analyze/enhance processes
-  - Identify improvements, reduce waste
-  - Better performance &amp; customer satisfaction
+PROCESS: Estimate Costs (p.63)
+         Cost of Quality (p.158–159)
 
-RCA TOOLS: 5 Whys · Ishikawa (fishbone)
+COST OF QUALITY:
+  CONFORMANCE (cost of good quality):
+    PREVENTION — training, planning, process design
+    APPRAISAL  — testing, inspection, audits
 
-SCENARIO: NCL packaging — REPEATED defects
-           INCONSISTENT procedures across SHIFTS
-           address UNDERLYING CAUSE
-NEXT → D) Apply PROCESS ANALYSIS &amp; IMPROVEMENT ✓
+  NON-CONFORMANCE = FAILURE COSTS:
+    INTERNAL FAILURE  — rework before delivery to customer
+    EXTERNAL FAILURE  — returns, repairs, warranty AFTER delivery
+
+SCENARIO: Jordan — ADH consumer electronics
+           AFTER product RELEASE
+           Units RETURNED due to DEFECTS
+           REPAIRS and REPLACEMENTS
+           Impacting PROFITABILITY
+           Categorize quality-related expenses
+→ B) FAILURE COSTS ✓
+   (external failure sub-type)
 
 NOT:
-  A) Update work instructions — after analysis, symptom-level
-  B) Check sheets — count/record defects only
-  C) Assign quality lead — org fix, not process analysis
+  A) APPRAISAL — test/inspect BEFORE release
+  C) PREVENTION — prevent defects upfront
+  D) CONFORMANCE — prevention + appraisal (good quality)
 
-SIGNAL: "underlying cause" + "inconsistent procedures" + "repeatedly"
+TIMING TRAP:
+  Before release + test     → Appraisal
+  After release + returns   → Failure (external)
 
-VS Q11: Embed quality in processes
-VS Q28: Output per scope baseline (execution conformance)
+Q67 ANSWER: B
 
-Q30 ANSWER: D
-
-REF: PMBOK Guide, 8th Ed., p.23 &amp; p.198</div>
+REF: PMBOK Guide, 8th Ed., p.63, p.158–159</div>
         </section>
 
         <footer class="ref-footer">
+          · <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
           · <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
-          · <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
-          · <a href="pmp-full-questions.html#q-30">Luyện câu 30</a>
+          · <a href="pmp-full-questions.html#q-67">Luyện câu 67</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -416,12 +456,12 @@ REF: PMBOK Guide, 8th Ed., p.23 &amp; p.198</div>
 
   <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Update work instructions có thể sau improvement — chưa analyze root cause của shift inconsistency.",
-        B: "Check sheets ghi nhận defects — không fix inconsistent procedures across shifts.",
-        C: "Assign quality lead là organizational — không thay process analysis &amp; improvement.",
-        D: "Đúng! Address underlying cause — process analysis &amp; improvement (Manage QA, p.198)."
+        A: "Appraisal = testing/inspection costs để phát hiện defects — trước release, không phải returns sau delivery.",
+        B: "Đúng! Failure costs = rework, repairs, returns khi product không đạt quality standards — external failure post-release (p.158–159).",
+        C: "Prevention = đầu tư ngăn defects — proactive, không phải chi phí sau khi defects xảy ra.",
+        D: "Conformance = prevention + appraisal — chi phí để đạt chuẩn, không phải hậu quả defects."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -437,7 +477,7 @@ REF: PMBOK Guide, 8th Ed., p.23 &amp; p.198</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Apply process analysis &amp; improvement.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Failure costs.</strong>" : "");
         });
       });
       let score = 0;
