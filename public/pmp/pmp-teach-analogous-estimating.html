@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Business Case (Q19)</title>
+  <title>PMBOK 8 — Analogous Estimating (Q66)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,10 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .cost-benefit { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.9rem; font-weight: 600; flex-wrap: wrap; }
-    .cost-benefit .vs { color: var(--primary); font-size: 1.1rem; }
-    .cost-benefit .cost { color: var(--bad); }
-    .cost-benefit .value { color: var(--ok); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -70,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 360px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 460px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -92,11 +88,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Business Case · Q19</div>
+      <div class="brand-sub">Analogous Estimating · Q66</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#business-case">Business Case</a>
-        <a href="#documents">So sánh tài liệu</a>
+        <a href="#analogous">Analogous Estimating</a>
+        <a href="#compare">So sánh kỹ thuật</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -169,16 +165,16 @@
         <a href="pmp-teach-schedule-fast-tracking.html">Q63: Fast Tracking</a>
         <a href="pmp-teach-financial-management-plan.html">Q64: Financial Mgmt Plan</a>
         <a href="pmp-teach-funding-strategy.html">Q65: Funding Strategy</a>
-        <a href="pmp-teach-analogous-estimating.html">Q66: Analogous Est.</a>
+        <a href="pmp-teach-analogous-estimating.html" class="series-current">Q66: Analogous Est.</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-66">Luyện câu 66</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#business-case">BC</a>
-        <a href="#documents">Docs</a>
+        <a href="#analogous">Analogous</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -187,103 +183,97 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q19 về <strong>Business Case</strong> — khi stakeholders lo
-            <em>cost vs value</em> và dự án còn worthwhile không, review business case
-            (economic feasibility), không phải PM plan hay charter.
+            Bài học Q66 về <strong>Analogous Estimating</strong> — Diego tại HN Manufacturing:
+            early stage, cần <em>quick estimate</em>, limited detailed info, senior member có
+            kinh nghiệm similar project.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.17 &amp; p.116</span>
-            <span class="badge">Cost / Benefit</span>
-            <span class="badge">Câu 19 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.62–63 &amp; 146</span>
+            <span class="badge">Estimate Costs</span>
+            <span class="badge">Analogous Estimating</span>
+            <span class="badge">Câu 66 — Practice</span>
           </div>
         </header>
 
-        <section id="business-case">
-          <h2>1. Business Case</h2>
-
-          <div class="cost-benefit">
-            <span class="cost">Cost ↑ (materials)</span>
-            <span class="vs">vs</span>
-            <span class="value">Delivered Value</span>
-            <span class="vs">→</span>
-            <span>Review <strong>Business Case</strong></span>
-          </div>
+        <section id="analogous">
+          <h2>1. Analogous estimating (p.146)</h2>
+          <p>
+            <strong>Estimate Costs</strong> (p.62–63) phát triển approximation of resource costs
+            cần để complete project work. <strong>Analogous estimating</strong> dùng historical
+            data từ <em>similar projects</em>, áp dụng parameters như duration, budget, size,
+            hoặc complexity làm basis cho estimate.
+          </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.116)</h4>
+            <h4>Signal words</h4>
             <p style="margin:0">
-              A business case is a documented <strong>economic feasibility study</strong> used
-              to establish validity of the benefits to be delivered by a portfolio component,
-              program, or project.
+              Quick estimate · early stage · limited information · similar past project ·
+              historical data → <strong>analogous estimating</strong>.
             </p>
           </div>
-
-          <h3>Khi nào review Business Case?</h3>
-          <ul>
-            <li>Stakeholders hỏi project còn <strong>worthwhile</strong> không</li>
-            <li>Cost tăng đáng kể — cần revalidate benefits vs cost</li>
-            <li>Cost versus delivered <strong>value</strong> — cost/benefit analysis</li>
-            <li>Liên hệ Initiate Project or Phase (p.17) — business case là input initiating</li>
-          </ul>
         </section>
 
-        <section id="documents">
-          <h2>2. So sánh tài liệu — chọn đúng doc</h2>
+        <section id="compare">
+          <h2>2. So sánh các kỹ thuật estimate</h2>
 
           <table>
             <thead>
-              <tr><th>Tài liệu</th><th>Mục đích</th><th>Q19?</th></tr>
+              <tr><th>Technique</th><th>Basis</th><th>When</th><th>Q66?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Business Case (D)</strong></td>
-                <td>Economic feasibility · benefits validity · cost/benefit</td>
-                <td>✓ Đúng</td>
+                <td><strong>Analogous (D)</strong></td>
+                <td>Similar past project</td>
+                <td>Early, quick, limited detail</td>
+                <td><strong>Yes</strong></td>
               </tr>
               <tr>
-                <td><strong>Project Charter (C)</strong></td>
-                <td>Authorize project · high-level scope · PM authority</td>
-                <td>✗ Không trả lời cost vs value feasibility</td>
+                <td><strong>Parametric (A)</strong></td>
+                <td>Statistical rate (cost/unit)</td>
+                <td>Repeatable quantifiable work</td>
+                <td>Needs formula/rate data</td>
               </tr>
               <tr>
-                <td><strong>PM Plan (A)</strong></td>
-                <td>How project executed/monitored/controlled</td>
-                <td>✗ Planning doc — slide ✗</td>
+                <td><strong>Three-point (B)</strong></td>
+                <td>Optimistic / Most likely / Pessimistic</td>
+                <td>Uncertainty range (PERT)</td>
+                <td>Needs O-M-P estimates</td>
               </tr>
               <tr>
-                <td><strong>Financial Management Plan (B)</strong></td>
-                <td>How project finances managed</td>
-                <td>✗ Process/plan — không phải feasibility study</td>
+                <td><strong>Bottom-up (C)</strong></td>
+                <td>Sum of detailed work packages</td>
+                <td>WBS decomposed, detailed info</td>
+                <td>Opposite — needs most detail</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Retail expansion scenario</h4>
+            <h4>Accuracy spectrum</h4>
             <p style="margin:0">
-              Planning begins, material costs rise — senior stakeholders lo cost vs value.
-              PM review <strong>business case</strong> để assess economic feasibility trước khi tiếp tục plan/execute.
+              Analogous (least detail, fastest) → Parametric → Three-point → Bottom-up (most
+              detail, most accurate). Q66 = early + limited info → left end = analogous.
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 19</h2>
+          <h2>3. Câu hỏi thực hành — Question 66</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q19</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q66</div>
             <div class="q-text">
-              You have been hired to manage a retail expansion initiative. As planning begins,
-              the cost of some materials <em>rises significantly</em>. Senior stakeholders raise
-              concerns about the <em>cost versus the delivered value</em> of the project, and
-              whether it will be <em>worthwhile</em>.
-              What will you do next?
+              While planning at HN Manufacturing, Diego, the project manager, is in the early stage
+              of a new project and needs a <em>quick estimate</em> to support initial planning
+              discussions. There is <em>limited detailed information</em> available but a senior team
+              member mentions having worked on a <em>similar project</em> in the past. What should
+              Diego do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Review the Project Management Plan.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Review the Financial Management Plan.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Review the Project Charter.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Review the Business Case.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Use parametric estimating.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Use three-point estimating.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Use bottom-up estimating.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Use analogous estimating.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -294,74 +284,78 @@
 
           <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>Business case = economic feasibility study — validate benefits vs rising costs.</li>
-            <li>Keywords: cost vs value, worthwhile, cost/benefit — map trực tiếp business case.</li>
-            <li>PMBOK p.17 (Initiate) + p.116 (Business Case definition).</li>
+            <li>Similar past project + historical data → analogous estimating (p.146).</li>
+            <li>Early stage, quick estimate, limited detail — hallmark of analogous.</li>
+            <li>Senior member's similar project experience = expert judgment + historical analogy.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải NEXT</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. PM Plan</strong></td>
-                <td>Defines execution — không trả lời “còn worthwhile không” khi cost tăng (✗ slide).</td>
+                <td><strong>A. Parametric</strong></td>
+                <td>Cần statistical rate (e.g. $/unit) — stem không có quantifiable parameter.</td>
               </tr>
               <tr>
-                <td><strong>B. Financial Management Plan</strong></td>
-                <td>Cách quản lý tài chính dự án — không phải feasibility/benefits validation.</td>
+                <td><strong>B. Three-point</strong></td>
+                <td>Cần O/M/P estimates — instructor notes O-M-P diagram near B; không fit limited info.</td>
               </tr>
               <tr>
-                <td><strong>C. Project Charter</strong></td>
-                <td>Authorization document — không chứa economic feasibility analysis như business case.</td>
+                <td><strong>C. Bottom-up</strong></td>
+                <td>Cần detailed WBS work packages — opposite of limited information.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q18 + Q10</h4>
+            <h4>Instructor note</h4>
             <p style="margin:0">
-              Q18: business case approved → charter · Q19: cost rises → re-review business case ·
-              Q10: Focus on Value — benefits và value realization.
+              Instructor vẽ O-M-P gần B (three-point) và diagram parameters gần A (parametric).
+              Stem nhấn <strong>similar project</strong> → analogous (D).
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Tài liệu nào?</h2>
+          <h2>5. Drill — Kỹ thuật estimate nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="BC">
-              <span>Is the project still worthwhile given rising costs?</span>
+            <div class="classify-row" data-answer="ANAL">
+              <span>Early stage, quick estimate, similar past project, limited detail</span>
               <div class="classify-btns">
-                <button data-pick="BC">Business Case</button>
-                <button data-pick="CH">Charter</button>
-                <button data-pick="PM">PM Plan</button>
+                <button data-pick="ANAL">Analogous</button>
+                <button data-pick="PARAM">Parametric</button>
+                <button data-pick="3PT">Three-point</button>
+                <button data-pick="BU">Bottom-up</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="CH">
-              <span>Grant PM authority to allocate resources</span>
+            <div class="classify-row" data-answer="PARAM">
+              <span>Cost per square meter from industry standard rates</span>
               <div class="classify-btns">
-                <button data-pick="BC">Business Case</button>
-                <button data-pick="CH">Charter</button>
-                <button data-pick="PM">PM Plan</button>
+                <button data-pick="ANAL">Analogous</button>
+                <button data-pick="PARAM">Parametric</button>
+                <button data-pick="3PT">Three-point</button>
+                <button data-pick="BU">Bottom-up</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PM">
-              <span>Define how the project will be executed</span>
+            <div class="classify-row" data-answer="3PT">
+              <span>Optimistic, most likely, pessimistic duration for uncertain activity</span>
               <div class="classify-btns">
-                <button data-pick="BC">Business Case</button>
-                <button data-pick="CH">Charter</button>
-                <button data-pick="PM">PM Plan</button>
+                <button data-pick="ANAL">Analogous</button>
+                <button data-pick="PARAM">Parametric</button>
+                <button data-pick="3PT">Three-point</button>
+                <button data-pick="BU">Bottom-up</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="BC">
-              <span>Economic feasibility and benefits validity</span>
+            <div class="classify-row" data-answer="BU">
+              <span>Sum estimates from each WBS work package after decomposition</span>
               <div class="classify-btns">
-                <button data-pick="BC">Business Case</button>
-                <button data-pick="CH">Charter</button>
-                <button data-pick="PM">PM Plan</button>
+                <button data-pick="ANAL">Analogous</button>
+                <button data-pick="PARAM">Parametric</button>
+                <button data-pick="3PT">Three-point</button>
+                <button data-pick="BU">Bottom-up</button>
               </div>
             </div>
           </div>
@@ -371,20 +365,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn C — Charter (sau Q18)</h4>
-            <p style="margin:0">Q18 = charter khi mới start. Q19 = cost vs value concern → <strong>business case</strong>, không phải charter lần nữa.</p>
+            <h4>Bẫy 1: Estimate → Bottom-up (C)</h4>
+            <p style="margin:0">Bottom-up = most accurate nhưng cần most detail. Stem: <em>limited information</em> → analogous.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Chọn A — PM Plan vì “planning begins”</h4>
-            <p style="margin:0">Planning đang diễn ra nhưng câu hỏi là feasibility/worthwhile — business case trước khi tiếp tục plan.</p>
+            <h4>Bẫy 2: Uncertainty → Three-point (B)</h4>
+            <p style="margin:0">Three-point cho uncertainty range — stem không hỏi O/M/P, hỏi similar project history.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Chọn B — Financial plan nghe liên quan cost</h4>
-            <p style="margin:0">Financial management plan = how to manage money — business case = whether benefits justify costs.</p>
+            <h4>Bẫy 3: Numbers → Parametric (A)</h4>
+            <p style="margin:0">Parametric cần statistical relationship — không phải whole-project analogy.</p>
           </div>
           <div class="card tip">
-            <h4>Keyword map</h4>
-            <p style="margin:0">worthwhile · cost vs value · economic feasibility · benefits validity → <strong>Business Case</strong></p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Quick · early · limited info · similar project</strong> → Analogous estimating (D).</p>
           </div>
         </section>
 
@@ -392,43 +386,61 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Business case là gì? (p.116)</div>
-            <div class="flashcard-back">Documented economic feasibility study — establishes validity of benefits.</div>
+            <div class="flashcard-front">Analogous estimating?</div>
+            <div class="flashcard-back">Uses historical data from similar projects (duration, budget, size, complexity) — quick, less accurate, early planning.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q19 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Review the Business Case (cost vs value, worthwhile).</div>
+            <div class="flashcard-front">Q66 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Use analogous estimating.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">BUSINESS CASE — Q19 (PMBOK 8, p.17 &amp; p.116)
+          <div class="cheat-sheet">ANALOGOUS ESTIMATING — Q66 (PMBOK 8, p.62–63 &amp; 146)
 ─────────────────────────────────────────────────────
-DEFINITION: Documented ECONOMIC FEASIBILITY STUDY
-PURPOSE: Establish validity of BENEFITS delivered
+PROCESS: Estimate Costs (p.62–63)
+         Analogous estimating (p.146)
 
-KEYWORDS → D (Business Case):
-  Cost vs delivered value · worthwhile · cost/benefit
-  Material costs rise · revalidate feasibility
+ANALOGOUS ESTIMATING:
+  - Historical data from SIMILAR projects
+  - Parameters: duration, budget, size, complexity
+  - QUICK estimate · LESS accuracy
+  - EARLY planning · LIMITED detail
 
-Q19 ANSWER: D — Review the Business Case
+OTHER TECHNIQUES:
+  PARAMETRIC    — statistical rate ($/unit, hrs/line)
+  THREE-POINT   — Optimistic / Most likely / Pessimistic
+  BOTTOM-UP     — sum WBS packages · MOST detail needed
+
+SCENARIO: Diego — HN Manufacturing
+           EARLY stage new project
+           QUICK estimate for initial planning
+           LIMITED detailed information
+           Senior member — SIMILAR project in past
+→ D) ANALOGOUS ESTIMATING ✓
 
 NOT:
-  A PM Plan → how to execute (✗)
-  B Financial Mgmt Plan → how finances managed
-  C Charter → authorize project, not feasibility study
+  A) PARAMETRIC — needs quantifiable rate/formula
+  B) THREE-POINT — needs O/M/P estimates
+  C) BOTTOM-UP — needs detailed WBS decomposition
 
-VS Q18:
-  Q18: business case approved → NEXT = charter
-  Q19: cost rises, still worthwhile? → review BUSINESS CASE
+SIGNAL: "quick estimate"
+        "limited detailed information"
+        "similar project"
+        "early stage"
 
-REF: PMBOK Guide 8th Ed., p.17 Initiate + p.116 Business Case</div>
+ACCURACY: Analogous (fast, rough) ←→ Bottom-up (slow, precise)
+
+Q66 ANSWER: D
+
+REF: PMBOK Guide, 8th Ed., p.62–63, p.146</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
-          · <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
+          · <a href="pmp-teach-financial-management-plan.html">Q64: Financial Mgmt Plan</a>
+          · <a href="pmp-teach-funding-strategy.html">Q65: Funding Strategy</a>
+          · <a href="pmp-full-questions.html#q-66">Luyện câu 66</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -439,10 +451,10 @@ REF: PMBOK Guide 8th Ed., p.17 Initiate + p.116 Business Case</div>
     (function () {
       const CORRECT = "D";
       const EXPL = {
-        A: "PM Plan định nghĩa execution — không trả lời project còn worthwhile khi cost tăng.",
-        B: "Financial Management Plan = cách quản lý tài chính — không phải economic feasibility study.",
-        C: "Charter authorize project — không phải doc để assess cost vs value feasibility.",
-        D: "Đúng! Business case = economic feasibility study — validate benefits vs rising costs (p.116)."
+        A: "Parametric cần statistical rate (cost/unit) — stem có similar project, không có formula.",
+        B: "Three-point cần O/M/P estimates — limited info, không phải uncertainty range task.",
+        C: "Bottom-up cần detailed WBS — opposite của limited detailed information.",
+        D: "Đúng! Analogous dùng historical data từ similar projects — quick, early planning (p.62–63, 146)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -458,7 +470,7 @@ REF: PMBOK Guide 8th Ed., p.17 Initiate + p.116 Business Case</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Review the Business Case.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Use analogous estimating.</strong>" : "");
         });
       });
       let score = 0;
