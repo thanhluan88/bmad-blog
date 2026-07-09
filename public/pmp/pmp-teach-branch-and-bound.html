@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Functions Associated With Projects (Q7)</title>
+  <title>PMBOK 8 — Branch and Bound (Q62)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,18 +51,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .func-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; margin: 1rem 0; }
-    .func-chip { padding: 0.6rem 0.75rem; background: var(--card); border: 1px solid #bfdbfe; border-radius: 10px; font-size: 0.82rem; }
-    .func-chip.yes { border-color: #a7f3d0; background: var(--ok-bg); }
-    .func-chip.no { border-color: #fecaca; background: var(--bad-bg); }
-    .func-chip strong { display: block; font-size: 0.68rem; color: var(--info); text-transform: uppercase; margin-bottom: 0.2rem; }
-    .func-chip.no strong { color: var(--bad); }
-    .compare-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
-    @media (max-width: 640px) { .compare-pair { grid-template-columns: 1fr; } }
-    .pair-box { border-radius: 12px; padding: 1rem; border: 1px solid var(--border); font-size: 0.88rem; }
-    .pair-box.project { background: var(--info-bg); border-top: 4px solid var(--info); }
-    .pair-box.ops { background: #f3f4f6; border-top: 4px solid #6b7280; }
-    .pair-box h4 { margin: 0 0 0.5rem; font-size: 0.92rem; }
+    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.82rem; }
+    .flow-box { padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+    .flow-box.highlight { background: var(--primary-bg); border-color: #fde68a; font-weight: 600; }
+    .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -78,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; }
-    .classify-btns button { padding: 0.3rem 0.55rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.72rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -100,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Functions Associated With Projects · Q7</div>
+      <div class="brand-sub">Branch &amp; Bound · Q62</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#functions">7 chức năng dự án</a>
-        <a href="#project-vs-ops">Project vs Operations</a>
+        <a href="#bnb">Branch &amp; Bound</a>
+        <a href="#compare">So sánh kỹ thuật</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -173,16 +165,16 @@
         <a href="pmp-teach-rolling-wave-planning.html">Q59: Rolling Wave</a>
         <a href="pmp-teach-leads-and-lags.html">Q60: Leads &amp; Lags</a>
         <a href="pmp-teach-work-performance-information.html">Q61: Work Perf. Info</a>
-        <a href="pmp-teach-branch-and-bound.html">Q62: Branch &amp; Bound</a>
+        <a href="pmp-teach-branch-and-bound.html" class="series-current">Q62: Branch &amp; Bound</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-62">Luyện câu 62</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#functions">Chức năng</a>
-        <a href="#project-vs-ops">vs Operations</a>
+        <a href="#bnb">B&amp;B</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -191,215 +183,209 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q7 về <strong>Functions Associated With Projects</strong> — các hoạt động
-            gắn với dự án (tạm thời) so với <strong>ongoing operational support</strong> (vận hành liên tục).
+            Bài học Q62 về <strong>Branch and Bound</strong> — Aaron tại ZP Logistics: nhiều
+            parallel activities tranh giành limited scheduling options; delays xuất hiện; nhiều
+            sequencing scenarios với trade-offs duration/resource; team không thống nhất path.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.24–28</span>
-            <span class="badge">Governance</span>
-            <span class="badge">Câu 7 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.53–54 &amp; 150</span>
+            <span class="badge">Monitor and Control Schedule</span>
+            <span class="badge">Branch and Bound</span>
+            <span class="badge">Câu 62 — Practice</span>
           </div>
         </header>
 
-        <section id="functions">
-          <h2>1. Chức năng gắn với dự án (PMBOK)</h2>
+        <section id="bnb">
+          <h2>1. Branch and bound (p.150)</h2>
           <p>
-            Theo <em>The Standard for Project Management</em>, các chức năng sau
-            <strong>được gắn với projects</strong> — PM và team thực hiện trong vòng đời dự án:
+            <strong>Monitor and Control Schedule</strong> (p.53–54) theo dõi status, cập nhật
+            schedule, quản lý changes để duy trì realistic schedule. Khi có nhiều sequencing
+            scenarios và cần tìm optimal path, dùng <strong>branch and bound</strong> — kỹ thuật
+            optimization: explore các subproblems, <em>prune</em> nhánh không tối ưu, xác định
+            schedule tối thiểu completion time.
           </p>
 
-          <div class="func-grid">
-            <div class="func-chip yes"><strong>Project</strong>Oversight &amp; coordination</div>
-            <div class="func-chip yes"><strong>Project</strong>Soliciting &amp; managing feedback</div>
-            <div class="func-chip yes"><strong>Project</strong>Facilitating &amp; supporting</div>
-            <div class="func-chip yes"><strong>Project</strong>Performing work</div>
-            <div class="func-chip yes"><strong>Project</strong>Applying expertise (SME)</div>
-            <div class="func-chip yes"><strong>Project</strong>Organizational direction &amp; insight</div>
-            <div class="func-chip yes"><strong>Project</strong>Providing resources</div>
-            <div class="func-chip no"><strong>NOT project</strong>Ongoing operational support</div>
+          <div class="flow-diagram">
+            <div class="flow-box">Root schedule problem</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">Branch scenarios</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box highlight">Prune inferior paths</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box highlight">Optimal sequence</div>
           </div>
 
           <div class="card tip">
-            <h4>Ghi nhớ nhanh</h4>
+            <h4>Signal words</h4>
             <p style="margin:0">
-              Câu hỏi dạng “<strong>NOT associated with projects</strong>” → tìm đáp án thuộc
-              <strong>Operations</strong> (liên tục, sau go-live), không phải chức năng trong dự án.
+              Multiple sequencing scenarios · trade-offs duration &amp; resources · cannot agree on
+              best path · optimization → <strong>branch and bound</strong>.
             </p>
           </div>
         </section>
 
-        <section id="project-vs-ops">
-          <h2>2. Project functions vs Operational support</h2>
+        <section id="compare">
+          <h2>2. So sánh với các đáp án khác</h2>
 
-          <div class="compare-pair">
-            <div class="pair-box project">
-              <h4 style="color:#1d4ed8">Trong dự án (temporary)</h4>
-              <ul style="margin:0;padding-left:1.1rem">
-                <li>Coordination, collaboration khi planning/executing</li>
-                <li>Applying expertise (SME) để deliver</li>
-                <li>Support cho <em>delivered product</em> trong phạm vi dự án</li>
-                <li>Oversight, facilitating team</li>
-              </ul>
-            </div>
-            <div class="pair-box ops">
-              <h4>Operations (ongoing)</h4>
-              <ul style="margin:0;padding-left:1.1rem">
-                <li><strong>Ongoing operational support</strong> — duy trì hệ thống hàng ngày</li>
-                <li>Sau khi dự án close / handover</li>
-                <li>Lặp lại, không có điểm kết thúc dự án</li>
-              </ul>
-            </div>
-          </div>
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Technique</th><th>Q62 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Branch and bound</strong></td>
+                <td>Optimization — explore &amp; prune subproblems</td>
+                <td><strong>Yes — multiple scenarios, need optimal schedule</strong></td>
+              </tr>
+              <tr>
+                <td><strong>B. Fast tracking</strong></td>
+                <td>Compress by overlapping phases</td>
+                <td>Schedule compression — không resolve competing scenarios</td>
+              </tr>
+              <tr>
+                <td><strong>C. Team consensus</strong></td>
+                <td>Re-sequence by agreement</td>
+                <td>Subjective — PMI wants analytical optimization technique</td>
+              </tr>
+              <tr>
+                <td><strong>D. Add buffers</strong></td>
+                <td>Contingency in estimates</td>
+                <td>Risk/contingency — không chọn optimal sequence</td>
+              </tr>
+            </tbody>
+          </table>
 
           <div class="card info">
-            <h4>SME → PM trong đề</h4>
+            <h4>Liên hệ Q58–Q61</h4>
             <p style="margin:0">
-              “Applying expertise” là chức năng <strong>có</strong> gắn với project (chuyên gia đóng góp
-              vào deliverable). Đừng nhầm với operational support — đó là công việc vận hành sau này.
+              Q58 leveling (resource constraint), Q59 rolling wave (progressive detail), Q60
+              leads/lags (dependencies), Q61 work performance info (monitoring). Q62: khi
+              <em>optimization</em> across competing sequences → branch and bound.
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 7</h2>
+          <h2>3. Câu hỏi thực hành — Question 62</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q7</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q62</div>
             <div class="q-text">
-              Sophia is the project manager at Tech Bridge Solutions, leading a system implementation project.
-              During planning, she performs activities such as <em>coordination</em>, <em>collaboration</em>,
-              <em>applying expertise</em>, and <em>providing support for the delivered product</em>.
-              <em>Which function is NOT associated with projects?</em>
+              At ZP Logistics, Aaron is overseeing a complex project with multiple parallel
+              activities competing for limited scheduling options. As delays begin to emerge,
+              different sequencing scenarios are proposed, each with trade-offs in duration and
+              resource use. The team cannot agree on the best path forward. How should he proceed?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Providing oversight and coordination.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Facilitating and supporting.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Applying expertise.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Performing ongoing operational support.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Apply a branch and bound technique.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Focus on compressing the schedule using fast tracking.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Re-sequence activities based on team consensus.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Add buffers to schedule estimates.</button>
 
             <div class="feedback" id="quizFeedback"></div>
-          </div>
-
-          <div class="card info">
-            <h4>Dịch tình huống</h4>
-            <p style="margin:0">
-              Sophia (PM tại Tech Bridge Solutions) triển khai system implementation.
-              Khi planning: phối hợp, cộng tác, áp dụng chuyên môn, hỗ trợ sản phẩm bàn giao.
-              <strong>Chức năng nào KHÔNG gắn với projects?</strong>
-            </p>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
-          <div class="card tip">
-            <h4>Giải thích chính thức (PMBOK p.24–28)</h4>
-            <p>
-              Functions associated with projects include: providing oversight and coordination,
-              soliciting and managing feedback, facilitating and supporting, performing work,
-              applying expertise, providing organizational direction and insight, and providing resources.
-            </p>
-            <p style="margin:0">
-              <strong>Ongoing operational support</strong> thuộc Operations — không nằm trong danh sách chức năng của project.
-            </p>
-          </div>
+          <h3>Tại sao chọn A?</h3>
+          <ul>
+            <li>Multiple competing sequencing scenarios + trade-offs → optimization problem.</li>
+            <li>Branch and bound explores subproblems and prunes inferior paths (p.150).</li>
+            <li>Monitor and Control Schedule context — maintain realistic optimal schedule (p.53–54).</li>
+          </ul>
 
-          <h3>Tại sao D là đáp án “NOT”?</h3>
-          <p>
-            Từ khóa <strong>ongoing</strong> = liên tục, không tạm thời → đặc trưng
-            <strong>Operations</strong>, không phải project function. Dự án có thể hỗ trợ
-            product trong phạm vi bàn giao; “ongoing operational support” là sau close/handover.
-          </p>
-
-          <h3>Các đáp án A, B, C — đều GẮN với project</h3>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Liên hệ PMBOK</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Oversight and coordination</strong></td>
-                <td>Liệt kê trực tiếp trong “Functions Associated With Projects”</td>
+                <td><strong>B. Fast tracking</strong></td>
+                <td>Compression technique — overlap phases; không evaluate competing scenarios systematically.</td>
               </tr>
               <tr>
-                <td><strong>B. Facilitating and supporting</strong></td>
-                <td>Liệt kê trực tiếp — PM servant leader, facilitate team</td>
+                <td><strong>C. Team consensus</strong></td>
+                <td>Agreement ≠ optimal; PMI expects defined analytical technique when optimization needed.</td>
               </tr>
               <tr>
-                <td><strong>C. Applying expertise</strong></td>
-                <td>Liệt kê trực tiếp — SME đóng góp vào dự án (slide: SME → PM)</td>
+                <td><strong>D. Add buffers</strong></td>
+                <td>Buffers add contingency — không resolve which sequence is best among trade-offs.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Đọc kỹ câu hỏi</h4>
+            <h4>Instructor note</h4>
             <p style="margin:0">
-              Đề hỏi <strong>NOT associated</strong> — chọn chức năng <em>không</em> thuộc project.
-              A, B, C đều đúng là project functions → loại. Chỉ D là operational.
+              Instructor đánh dấu B và D là sai — fast tracking và buffers không phải optimization
+              cho multiple sequencing scenarios. Branch = explore paths; bound = prune inferior options.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Project function hay Operations?</h2>
+          <h2>5. Drill — Kỹ thuật nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="PROJ">
-              <span>Managing stakeholder feedback during the project</span>
+            <div class="classify-row" data-answer="BNB">
+              <span>Multiple sequencing scenarios; prune inferior paths for optimal completion time</span>
               <div class="classify-btns">
-                <button data-pick="PROJ">Project</button>
-                <button data-pick="OPS">Operations</button>
+                <button data-pick="BNB">B&amp;B</button>
+                <button data-pick="FAST">Fast track</button>
+                <button data-pick="BUF">Buffers</button>
+                <button data-pick="CONS">Consensus</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OPS">
-              <span>24/7 helpdesk after system go-live</span>
+            <div class="classify-row" data-answer="FAST">
+              <span>Overlap design and build phases to shorten overall duration</span>
               <div class="classify-btns">
-                <button data-pick="PROJ">Project</button>
-                <button data-pick="OPS">Operations</button>
+                <button data-pick="BNB">B&amp;B</button>
+                <button data-pick="FAST">Fast track</button>
+                <button data-pick="BUF">Buffers</button>
+                <button data-pick="CONS">Consensus</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PROJ">
-              <span>Applying SME knowledge to design the solution</span>
+            <div class="classify-row" data-answer="BUF">
+              <span>Add contingency time to estimates for unknown risks</span>
               <div class="classify-btns">
-                <button data-pick="PROJ">Project</button>
-                <button data-pick="OPS">Operations</button>
+                <button data-pick="BNB">B&amp;B</button>
+                <button data-pick="FAST">Fast track</button>
+                <button data-pick="BUF">Buffers</button>
+                <button data-pick="CONS">Consensus</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OPS">
-              <span>Ongoing operational support of production systems</span>
+            <div class="classify-row" data-answer="CONS">
+              <span>Team votes on preferred activity order without formal analysis</span>
               <div class="classify-btns">
-                <button data-pick="PROJ">Project</button>
-                <button data-pick="OPS">Operations</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="PROJ">
-              <span>Providing resources for project delivery</span>
-              <div class="classify-btns">
-                <button data-pick="PROJ">Project</button>
-                <button data-pick="OPS">Operations</button>
+                <button data-pick="BNB">B&amp;B</button>
+                <button data-pick="FAST">Fast track</button>
+                <button data-pick="BUF">Buffers</button>
+                <button data-pick="CONS">Consensus</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Support” trong đề → chọn D vội</h4>
-            <p style="margin:0">
-              “Providing support for delivered product” <em>trong planning</em> vẫn có thể là project function
-              (facilitating/supporting). Chỉ <strong>ongoing operational</strong> support mới là đáp án NOT.
-            </p>
+            <h4>Bẫy 1: Delays → Fast tracking (B)</h4>
+            <p style="margin:0">Delays không tự động = fast track. Stem cần <em>optimal sequence</em> among scenarios → B&amp;B.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Nhầm “NOT” với “IS”</h4>
-            <p style="margin:0">Câu hỏi hỏi chức năng <strong>không</strong> gắn project — đừng chọn A/B/C vì chúng đều đúng là project functions.</p>
+            <h4>Bẫy 2: Team disagreement → Consensus (C)</h4>
+            <p style="margin:0">PMI prefers analytical optimization over subjective agreement when trade-offs are complex.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Loại “Applying expertise”</h4>
-            <p style="margin:0">SME applying expertise là chức năng project chuẩn — đáp án C <strong>không</strong> phải NOT.</p>
+            <h4>Bẫy 3: Uncertainty → Buffers (D)</h4>
+            <p style="margin:0">Buffers manage risk/contingency — không chọn best path among competing sequences.</p>
+          </div>
+          <div class="card tip">
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Multiple scenarios · trade-offs · optimization · cannot agree</strong> → Branch and bound (A).</p>
           </div>
         </section>
 
@@ -407,45 +393,56 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">7 functions associated with projects (nhớ vài cái)?</div>
-            <div class="flashcard-back">Oversight/coordination · Feedback · Facilitating · Performing work · Applying expertise · Direction/insight · Resources.</div>
+            <div class="flashcard-front">Branch and bound?</div>
+            <div class="flashcard-back">Optimization: explore sequencing subproblems, prune inferior paths, find optimal schedule (min completion time).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q7 — NOT associated with projects?</div>
-            <div class="flashcard-back"><strong>D — Ongoing operational support.</strong> Operations, not project.</div>
+            <div class="flashcard-front">Q62 đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Apply a branch and bound technique.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">FUNCTIONS ASSOCIATED WITH PROJECTS (PMBOK 8, p.24-28)
+          <div class="cheat-sheet">BRANCH AND BOUND — Q62 (PMBOK 8, p.53–54 &amp; 150)
 ─────────────────────────────────────────────────────
-ASSOCIATED WITH PROJECTS ✓
-  • Providing oversight and coordination
-  • Soliciting and managing feedback
-  • Facilitating and supporting
-  • Performing work
-  • Applying expertise (SME)
-  • Providing organizational direction and insight
-  • Providing resources
+PROCESS: Monitor and Control Schedule (p.53–54)
+         Branch and bound (p.150)
 
-NOT ASSOCIATED ✗
-  • Performing ONGOING operational support → Operations
+BRANCH AND BOUND:
+  - Solves OPTIMIZATION problems
+  - Explore sequencing subproblems (BRANCH)
+  - PRUNE inferior paths (BOUND)
+  - Identify OPTIMAL schedule (min completion time)
 
-Q7 ANSWER: D
-  A, B, C are all listed project functions
-  "Ongoing" = continuous ops after project ends
+SCENARIO: Aaron — ZP Logistics
+           Parallel activities · limited scheduling options
+           Delays emerging
+           Multiple SEQUENCING SCENARIOS
+           Trade-offs: duration vs resource use
+           Team CANNOT AGREE on best path
+→ A) BRANCH AND BOUND ✓
 
-TRAP: Question asks NOT — pick Operations
-      Don't eliminate "applying expertise" — it's valid for projects
+NOT:
+  B) FAST TRACKING — compress by overlap; not scenario optimization
+  C) TEAM CONSENSUS — subjective; not analytical optimization
+  D) ADD BUFFERS — contingency; doesn't pick optimal sequence
 
-REF: The Standard for Project Management, p.24-28
-     "Functions Associated With Projects"</div>
+SIGNAL: "sequencing scenarios"
+        "trade-offs in duration and resource use"
+        "cannot agree on the best path"
+        "competing for limited scheduling options"
+
+Q62 ANSWER: A
+
+REF: PMBOK Guide, 8th Ed., p.53–54, p.150</div>
         </section>
 
         <footer class="ref-footer">
+          · <a href="pmp-teach-resource-leveling.html">Q58: Resource Leveling</a>
+          · <a href="pmp-teach-work-performance-information.html">Q61: Work Perf. Info</a>
+          · <a href="pmp-full-questions.html#q-62">Luyện câu 62</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
-          · <a href="pmp-teach-functional-organization.html">Q6</a>
         </footer>
       </main>
     </div>
@@ -453,12 +450,12 @@ REF: The Standard for Project Management, p.24-28
 
   <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "A";
       const EXPL = {
-        A: "Oversight and coordination là project function — không phải đáp án NOT.",
-        B: "Facilitating and supporting được liệt kê trong PMBOK — gắn với project.",
-        C: "Applying expertise (SME) là project function — đừng loại C.",
-        D: "Đúng! Ongoing operational support thuộc Operations — KHÔNG gắn với projects."
+        A: "Đúng! Branch and bound explores sequencing scenarios, prunes inferior paths, finds optimal schedule (p.53–54, 150).",
+        B: "Fast tracking compresses by overlapping phases — không optimize among competing sequencing scenarios.",
+        C: "Consensus là subjective — PMI expects analytical optimization khi có complex trade-offs.",
+        D: "Buffers add contingency — không resolve which sequence is optimal among trade-offs."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -474,7 +471,7 @@ REF: The Standard for Project Management, p.24-28
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án NOT: <strong>D — Performing ongoing operational support.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Apply a branch and bound technique.</strong>" : "");
         });
       });
       let score = 0;
