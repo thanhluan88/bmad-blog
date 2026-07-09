@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Hybrid Approach (Q16)</title>
+  <title>PMBOK 8 — Ishikawa Analysis (Q36)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,14 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .hybrid-split { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.5rem; margin: 1.25rem 0; align-items: stretch; }
-    @media (max-width: 650px) { .hybrid-split { grid-template-columns: 1fr; } .hybrid-plus { display: none; } }
-    .hybrid-part { padding: 1rem; border-radius: var(--radius); font-size: 0.85rem; }
-    .hybrid-part.adapt { background: var(--ok-bg); border: 1.5px solid var(--ok); }
-    .hybrid-part.pred { background: var(--info-bg); border: 1.5px solid var(--info); }
-    .hybrid-part strong { display: block; margin-bottom: 0.35rem; font-size: 0.9rem; }
-    .hybrid-plus { display: flex; align-items: center; font-size: 1.5rem; font-weight: 700; color: var(--primary); }
-    .merge-bar { text-align: center; padding: 0.65rem; margin: 0.5rem 0 1rem; background: var(--primary-bg); border: 1px dashed var(--primary); border-radius: var(--radius); font-size: 0.85rem; font-weight: 600; color: var(--primary-dark); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -74,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 340px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -95,11 +87,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Hybrid Approach · Q16</div>
+      <div class="brand-sub">Ishikawa / RCA · Q36</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#hybrid">Hybrid</a>
-        <a href="#trio">Q14–Q16 trio</a>
+        <a href="#ishikawa">Ishikawa Diagram</a>
+        <a href="#recurring">Recurring vs one-off</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -142,16 +134,16 @@
         <a href="pmp-teach-lessons-learned.html">Q33: Lessons Learned</a>
         <a href="pmp-teach-after-action-review.html">Q34: After-Action Review</a>
         <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
-        <a href="pmp-teach-ishikawa-analysis.html">Q36: Ishikawa Analysis</a>
+        <a href="pmp-teach-ishikawa-analysis.html" class="series-current">Q36: Ishikawa Analysis</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-36">Luyện câu 36</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#hybrid">Hybrid</a>
-        <a href="#trio">Trio</a>
+        <a href="#ishikawa">Ishikawa</a>
+        <a href="#recurring">Recurring</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -160,108 +152,80 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q16 về <strong>Hybrid Approaches</strong> — kết hợp adaptive và predictive
-            khi các deliverable khác nhau cần cách làm việc khác nhau trên cùng một dự án.
+            Bài học Q36 về <strong>Ishikawa (Cause &amp; Effect) Analysis</strong> — team
+            <em>repeatedly</em> nộp deliverables trễ cho internal quality checks dù expectations
+            đã rõ; PM muốn <em>prevent further occurrences</em>.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.65</span>
-            <span class="badge">Development Approach</span>
-            <span class="badge">Câu 16 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.27 &amp; p.150</span>
+            <span class="badge">Monitor &amp; Control Project Performance</span>
+            <span class="badge">Câu 36 — Practice</span>
           </div>
         </header>
 
-        <section id="hybrid">
-          <h2>1. Hybrid Approach (PMBOK 8)</h2>
+        <section id="ishikawa">
+          <h2>1. Ishikawa Diagram — Root Cause Analysis</h2>
           <p>
-            Hybrid development approach <strong>combines adaptive and predictive</strong>,
-            incorporating elements from both — ví dụ hai deliverable chính, một adaptive một predictive.
+            Ishikawa diagram (fishbone / cause-and-effect) là RCA tool giúp identify underlying
+            reason cho <strong>recurring issues</strong> — address source để prevent future occurrences.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.65)</h4>
+            <h4>Cause and Effect Diagram (PMBOK p.150)</h4>
             <p style="margin:0">
-              A hybrid development approach combines adaptive and predictive approaches,
-              incorporating elements from both. For example, a project may have two main
-              deliverables, where one is developed using an adaptive approach and the other
-              using a predictive approach.
+              Root cause analysis tool that helps identify the underlying reason for recurring
+              issues, enabling the project manager to address the source of the problem and
+              prevent future occurrences.
             </p>
           </div>
 
-          <div class="hybrid-split">
-            <div class="hybrid-part adapt">
-              <strong>Software (Adaptive)</strong>
-              Constantly evolving requirements · iterations · feedback
-            </div>
-            <div class="hybrid-plus">+</div>
-            <div class="hybrid-part pred">
-              <strong>Data center (Predictive)</strong>
-              Upfront planning · formal change control
-            </div>
-          </div>
-          <div class="merge-bar">Brought together in a final Sprint at the end → Hybrid</div>
-
-          <h3>Keywords trong đề thi → Hybrid</h3>
-          <ul>
-            <li><strong>Both</strong> evolving requirements AND upfront planning / change control</li>
-            <li>Two main deliverables / components with different natures</li>
-            <li>Software agile + infrastructure waterfall</li>
-            <li>Integration sprint / final sprint to merge streams</li>
-          </ul>
+          <p>RCA tools liên quan: <strong>Ishikawa</strong>, <strong>5 Whys</strong> (instructor notes on slide).</p>
         </section>
 
-        <section id="trio">
-          <h2>2. Bộ ba Q14 – Q15 – Q16</h2>
+        <section id="recurring">
+          <h2>2. Recurring pattern vs other responses</h2>
 
           <table>
             <thead>
-              <tr><th>Câu</th><th>Scenario signal</th><th>Đáp án</th></tr>
+              <tr><th>Signal</th><th>Best response</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Q14</strong></td>
-                <td>Regulated, phase gates, defined early, strict CC</td>
-                <td>Predictive (D)</td>
+                <td><em>Repeatedly</em> late submissions</td>
+                <td>RCA — Ishikawa (B)</td>
               </tr>
               <tr>
-                <td><strong>Q15</strong></td>
-                <td>Short iterations, feedback, Product Owner</td>
-                <td>Adaptive (A)</td>
+                <td><em>Prevent further occurrences</em></td>
+                <td>Find root cause, not symptom fix</td>
               </tr>
               <tr>
-                <td><strong>Q16</strong></td>
-                <td>Software evolving + infra predictive, merged at end</td>
-                <td><strong>Hybrid (B)</strong></td>
+                <td>Expectations already defined</td>
+                <td>Not a planning gap — investigate why pattern persists</td>
+              </tr>
+              <tr>
+                <td>Pattern affecting timelines</td>
+                <td>Systemic issue — RCA before change request or audit</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card info">
-            <h4>West Gate Group scenario</h4>
-            <p style="margin:0">
-              Enterprise platform = <em>một dự án</em> nhưng <em>hai cách phát triển</em>.
-              Chọn Hybrid khi đề mô tả <strong>cả hai</strong> pattern — không chỉ một phía.
-            </p>
-          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 16</h2>
+          <h2>3. Câu hỏi thực hành — Question 36</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q16</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q36</div>
             <div class="q-text">
-              Ethan is working on a project at West Gate Group that will deliver a new enterprise platform.
-              The <em>software component</em> has <em>constantly evolving requirements</em>, while the
-              <em>data center infrastructure</em> is built using <em>upfront planning</em> and a
-              <em>formal change control approach</em>, with the two brought together in a
-              <em>final Sprint at the end</em>.
-              Which development approach should Ethan use?
+              A project team is <em>repeatedly submitting deliverables late for internal quality
+              checks</em>, despite clear expectations being defined earlier. This <em>pattern</em>
+              is beginning to affect overall timelines. The project manager wants to
+              <em>prevent further occurrences</em>. What should the project manager do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Predictive approach.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Hybrid approach.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Incremental approach.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Adaptive approach.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Raise a change request for the affected items.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Perform Ishikawa analysis.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Review the quality management plan with the team.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Initiate an internal audit.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -272,90 +236,97 @@
 
           <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Software = adaptive signals (evolving requirements).</li>
-            <li>Data center = predictive signals (upfront planning, formal change control).</li>
-            <li>Cùng một project, hai deliverables — textbook hybrid (p.65).</li>
-            <li>Final Sprint integrates both streams — vẫn là hybrid, không chỉ adaptive.</li>
+            <li><em>Repeatedly</em> + <em>pattern</em> + <em>prevent further occurrences</em> → RCA.</li>
+            <li>Ishikawa identifies underlying cause of recurring late submissions.</li>
+            <li>Monitor &amp; Control + Cause and Effect Diagram (p.27, p.150).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Predictive</strong></td>
-                <td>Bỏ qua phần software evolving — chỉ mô tả một nửa scenario.</td>
+                <td><strong>A. Change request</strong></td>
+                <td>Formal change control — không analyze root cause của recurring pattern.</td>
               </tr>
               <tr>
-                <td><strong>C. Incremental</strong></td>
-                <td>Deliver từng phần — không capture adaptive + predictive combo.</td>
+                <td><strong>C. Review quality plan</strong></td>
+                <td>Expectations đã clear — vấn đề là execution pattern, cần RCA.</td>
               </tr>
               <tr>
-                <td><strong>D. Adaptive</strong></td>
-                <td>Bỏ qua data center upfront planning + formal CC — chỉ một nửa.</td>
+                <td><strong>D. Internal audit</strong></td>
+                <td>Compliance/process review (Q31) — không phải fishbone RCA cho recurring issue.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Rule of thumb</h4>
+            <h4>Liên hệ Q30 Process Improvement</h4>
             <p style="margin:0">
-              Một approach keyword → Q14 hoặc Q15 · <strong>Hai approach keywords</strong> trong cùng project → <strong>Hybrid</strong>
+              Q30: process analysis cho shift inconsistency. Q36: Ishikawa RCA cho
+              <em>recurring</em> late quality-check submissions — cùng family RCA tools.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Approach nào?</h2>
+          <h2>5. Drill — Tool nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="HYBRID">
-              <span>Software agile + infrastructure waterfall on same project</span>
+            <div class="classify-row" data-answer="ISH">
+              <span>Recurring late deliverables — prevent future occurrences</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="ISH">Ishikawa</button>
+                <button data-pick="CHG">Change request</button>
+                <button data-pick="AUD">Audit</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SINGLE">
-              <span>Phase gates only, all scope defined early</span>
+            <div class="classify-row" data-answer="CHG">
+              <span>Approved scope/schedule change needed</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="ISH">Ishikawa</button>
+                <button data-pick="CHG">Change request</button>
+                <button data-pick="AUD">Audit</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SINGLE">
-              <span>Short iterations and Product Owner only</span>
+            <div class="classify-row" data-answer="AUD">
+              <span>Review compliance with organizational standards</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="ISH">Ishikawa</button>
+                <button data-pick="CHG">Change request</button>
+                <button data-pick="AUD">Audit</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="HYBRID">
-              <span>One deliverable adaptive, another predictive</span>
+            <div class="classify-row" data-answer="ISH">
+              <span>Identify underlying cause of a pattern</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="ISH">Ishikawa</button>
+                <button data-pick="CHG">Change request</button>
+                <button data-pick="AUD">Audit</button>
               </div>
             </div>
           </div>
           <p class="drill-score" id="drillScore">0 / 4 đúng</p>
-          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">“Single” = chỉ predictive hoặc chỉ adaptive</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn D — vì có “Sprint”</h4>
-            <p style="margin:0">Final Sprint là integration point — đề cũng nhấn <strong>upfront planning + formal change control</strong> cho infra → cần Hybrid.</p>
+            <h4>Bẫy 1: Timeline impact → Change request (A)</h4>
+            <p style="margin:0">Change request không tìm root cause — đề hỏi prevent recurrence.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Chọn A — vì enterprise platform “lớn”</h4>
-            <p style="margin:0">Quy mô không quyết định approach — đọc <strong>how each component is developed</strong>.</p>
+            <h4>Bẫy 2: Quality issue → Review quality plan (C)</h4>
+            <p style="margin:0">Expectations đã defined — pattern suggests execution/root cause, not missing plan.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Quality checks → Internal audit (D)</h4>
+            <p style="margin:0">Audit = standards compliance (Q31). Recurring late submissions = Ishikawa RCA.</p>
           </div>
           <div class="card tip">
-            <h4>Ôn nhanh Q14–16</h4>
-            <p style="margin:0">Predictive · Adaptive · Hybrid — ba câu liên tiếp trong series, pattern rất hay gặp trên đề PMP.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Repeatedly + pattern + prevent further occurrences</strong> → Ishikawa / RCA (B).</p>
           </div>
         </section>
 
@@ -363,48 +334,54 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Hybrid approach = gì? (p.65)</div>
-            <div class="flashcard-back">Combines adaptive + predictive — e.g. two deliverables, one of each approach.</div>
+            <div class="flashcard-front">Ishikawa diagram? (p.150)</div>
+            <div class="flashcard-back">Cause &amp; effect · fishbone · RCA for recurring issues · prevent future occurrences.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q16 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Hybrid (software evolving + data center predictive).</div>
+            <div class="flashcard-front">Q36 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Perform Ishikawa analysis.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">HYBRID APPROACH — Q16 (PMBOK 8, p.65)
+          <div class="cheat-sheet">ISHIKAWA ANALYSIS — Q36 (PMBOK 8, p.27 &amp; p.150)
 ─────────────────────────────────────────────────────
-DEFINITION: Combines ADAPTIVE + PREDICTIVE elements
+PROCESS: Monitor and Control Project Performance
+TOOL: Ishikawa / Cause &amp; Effect Diagram (RCA)
 
-EXAMPLE (p.65):
-  Two main deliverables
-  One → adaptive · Other → predictive
+ISHIKAWA = root cause analysis
+  - Underlying reason for RECURRING issues
+  - Address SOURCE · prevent future occurrences
+  - Related: 5 Whys
 
-Q16 SCENARIO (West Gate):
-  Software → constantly evolving (ADAPTIVE)
-  Data center → upfront planning + formal CC (PREDICTIVE)
-  Final Sprint → integrate both
-
-Q16 ANSWER: B — Hybrid approach
-
-DECISION RULE:
-  Only predictive signals → Q14 (D)
-  Only adaptive signals → Q15 (A)
-  BOTH in same project → Q16 (B) Hybrid
+SCENARIO: REPEATEDLY late for internal quality checks
+           Expectations ALREADY defined
+           PATTERN affecting timelines
+           PREVENT further occurrences
+→ B) Perform ISHIKAWA analysis ✓
 
 NOT:
-  A Predictive (ignores software)
-  D Adaptive (ignores infra)
-  C Incremental (partial delivery, not the combo)
+  A) Change request — formal change, not RCA
+  C) Review quality plan — plan exists; need root cause
+  D) Internal audit — compliance review (vs Q31), not fishbone RCA
 
-REF: The Standard for Project Management, p.65
-     "Hybrid Approaches"</div>
+SIGNAL: "repeatedly" · "pattern" · "prevent further occurrences"
+        recurring issues
+
+VS Q30: process improvement (shift procedures)
+VS Q31: quality audits (standards gaps)
+VS Q36: Ishikawa RCA (recurring late submissions)
+
+Q36 ANSWER: B
+
+REF: PMBOK Guide, 8th Ed., p.27 &amp; p.150</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive Approach</a>
+          · <a href="pmp-teach-process-improvement.html">Q30: Process Improvement</a>
+          · <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
+          · <a href="pmp-full-questions.html#q-36">Luyện câu 36</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -415,10 +392,10 @@ REF: The Standard for Project Management, p.65
     (function () {
       const CORRECT = "B";
       const EXPL = {
-        A: "Predictive chỉ mô tả data center — bỏ qua software evolving requirements.",
-        B: "Đúng! Adaptive (software) + Predictive (infra) trên cùng project = Hybrid (p.65).",
-        C: "Incremental = deliver portions — không capture adaptive + predictive combo.",
-        D: "Adaptive chỉ mô tả software — bỏ qua upfront planning + formal change control của infra."
+        A: "Change request là formal change control — không analyze root cause của recurring pattern.",
+        B: "Đúng! Ishikawa RCA identifies underlying cause of recurring late submissions (p.150).",
+        C: "Quality plan đã có clear expectations — cần RCA, không chỉ review plan.",
+        D: "Internal audit review compliance — recurring pattern cần Ishikawa root cause analysis."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -434,7 +411,7 @@ REF: The Standard for Project Management, p.65
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Hybrid approach.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Perform Ishikawa analysis.</strong>" : "");
         });
       });
       let score = 0;
