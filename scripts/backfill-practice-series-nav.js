@@ -89,6 +89,7 @@ const SERIES = [
   ["pmp-teach-responsibility-assignment-matrix.html", "Q83: RAM"],
   ["pmp-teach-parkinsons-law.html", "Q84: Parkinson's Law"],
   ["pmp-teach-genetic-algorithms.html", "Q85: Genetic Algorithms"],
+  ["pmp-teach-resource-breakdown-structure.html", "Q86: RBS"],
 ];
 
 function buildSeriesBlock(currentHref) {

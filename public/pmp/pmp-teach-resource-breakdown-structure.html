@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Hybrid Approach (Q16)</title>
+  <title>PMBOK 8 — Resource Breakdown Structure (Q86)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,14 +50,12 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .hybrid-split { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.5rem; margin: 1.25rem 0; align-items: stretch; }
-    @media (max-width: 650px) { .hybrid-split { grid-template-columns: 1fr; } .hybrid-plus { display: none; } }
-    .hybrid-part { padding: 1rem; border-radius: var(--radius); font-size: 0.85rem; }
-    .hybrid-part.adapt { background: var(--ok-bg); border: 1.5px solid var(--ok); }
-    .hybrid-part.pred { background: var(--info-bg); border: 1.5px solid var(--info); }
-    .hybrid-part strong { display: block; margin-bottom: 0.35rem; font-size: 0.9rem; }
-    .hybrid-plus { display: flex; align-items: center; font-size: 1.5rem; font-weight: 700; color: var(--primary); }
-    .merge-bar { text-align: center; padding: 0.65rem; margin: 0.5rem 0 1rem; background: var(--primary-bg); border: 1px dashed var(--primary); border-radius: var(--radius); font-size: 0.85rem; font-weight: 600; color: var(--primary-dark); }
+    .seq-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .seq-flow { grid-template-columns: 1fr 1fr; } }
+    .seq-step { text-align: center; padding: 0.65rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.78rem; }
+    .seq-step strong { display: block; color: var(--primary-dark); margin-bottom: 0.2rem; }
+    .seq-step.active { border-color: var(--ok); background: var(--ok-bg); }
+    .rbs-tree { font-family: Consolas, monospace; font-size: 0.82rem; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin: 1rem 0; line-height: 1.7; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -74,8 +71,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 340px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.62rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -96,11 +93,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Hybrid Approach · Q16</div>
+      <div class="brand-sub">Resource Breakdown Structure · Q86</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#hybrid">Hybrid</a>
-        <a href="#trio">Q14–Q16 trio</a>
+        <a href="#rbs">RBS</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -123,7 +120,7 @@
         <a href="pmp-teach-variables-over-time.html">Q13: Variables Over Time</a>
         <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
         <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive Approach</a>
-        <a href="pmp-teach-hybrid-approach.html" class="series-current">Q16: Hybrid Approach</a>
+        <a href="pmp-teach-hybrid-approach.html">Q16: Hybrid Approach</a>
         <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
         <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
         <a href="pmp-teach-business-case.html">Q19: Business Case</a>
@@ -193,16 +190,15 @@
         <a href="pmp-teach-responsibility-assignment-matrix.html">Q83: RAM</a>
         <a href="pmp-teach-parkinsons-law.html">Q84: Parkinson's Law</a>
         <a href="pmp-teach-genetic-algorithms.html">Q85: Genetic Algorithms</a>
-        <a href="pmp-teach-resource-breakdown-structure.html">Q86: RBS</a>
+        <a href="pmp-teach-resource-breakdown-structure.html" class="series-current">Q86: RBS</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#hybrid">Hybrid</a>
-        <a href="#trio">Trio</a>
+        <a href="#rbs">RBS</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -211,202 +207,208 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q16 về <strong>Hybrid Approaches</strong> — kết hợp adaptive và predictive
-            khi các deliverable khác nhau cần cách làm việc khác nhau trên cùng một dự án.
+            Bài học Q86 về <strong>Resource Breakdown Structure (RBS)</strong> — Northshore Grid
+            substation upgrade: đã define scope, sequence activities, xác định
+            <em>types &amp; quantities</em> của resources cho mỗi work package. Bước tiếp theo?
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.65</span>
-            <span class="badge">Development Approach</span>
-            <span class="badge">Câu 16 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.82 &amp; 132</span>
+            <span class="badge">Estimate Resources</span>
+            <span class="badge">Resource Breakdown Structure</span>
+            <span class="badge">Câu 86 — Practice</span>
           </div>
         </header>
 
-        <section id="hybrid">
-          <h2>1. Hybrid Approach (PMBOK 8)</h2>
+        <section id="rbs">
+          <h2>1. Estimate Resources → RBS (p.82, 132)</h2>
           <p>
-            Hybrid development approach <strong>combines adaptive and predictive</strong>,
-            incorporating elements from both — ví dụ hai deliverable chính, một adaptive một predictive.
+            <strong>Estimate Resources</strong> xác định type, quantity, và characteristics của
+            resources cần thiết — hỗ trợ planning, allocation, và risk management. Output quan trọng:
+            <strong>Resource Breakdown Structure</strong> — hierarchical representation theo
+            category và type (labor, materials, equipment, supplies).
           </p>
 
+          <div class="seq-flow">
+            <div class="seq-step"><strong>1. Scope + WBS</strong>Work packages defined</div>
+            <div class="seq-step"><strong>2. Sequence</strong>Activities ordered</div>
+            <div class="seq-step"><strong>3. Estimate</strong>Types &amp; quantities</div>
+            <div class="seq-step active"><strong>4. Create RBS</strong>Organize by category</div>
+          </div>
+
+          <div class="rbs-tree">Resource Breakdown Structure
+├── Labor
+│   ├── Electricians
+│   └── Engineers
+├── Materials
+│   └── Cable / Switchgear
+├── Equipment
+│   └── Cranes / Test gear
+└── Supplies</div>
+
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.65)</h4>
+            <h4>Signal trong stem</h4>
             <p style="margin:0">
-              A hybrid development approach combines adaptive and predictive approaches,
-              incorporating elements from both. For example, a project may have two main
-              deliverables, where one is developed using an adaptive approach and the other
-              using a predictive approach.
+              Đã <strong>determine types and quantities</strong> → Estimate Resources đang diễn ra.
+              <em>What next?</em> = organize vào <strong>RBS</strong> (D), không update WBS (đã xong)
+              hay nhảy sang RAM/calendar.
             </p>
           </div>
-
-          <div class="hybrid-split">
-            <div class="hybrid-part adapt">
-              <strong>Software (Adaptive)</strong>
-              Constantly evolving requirements · iterations · feedback
-            </div>
-            <div class="hybrid-plus">+</div>
-            <div class="hybrid-part pred">
-              <strong>Data center (Predictive)</strong>
-              Upfront planning · formal change control
-            </div>
-          </div>
-          <div class="merge-bar">Brought together in a final Sprint at the end → Hybrid</div>
-
-          <h3>Keywords trong đề thi → Hybrid</h3>
-          <ul>
-            <li><strong>Both</strong> evolving requirements AND upfront planning / change control</li>
-            <li>Two main deliverables / components with different natures</li>
-            <li>Software agile + infrastructure waterfall</li>
-            <li>Integration sprint / final sprint to merge streams</li>
-          </ul>
         </section>
 
-        <section id="trio">
-          <h2>2. Bộ ba Q14 – Q15 – Q16</h2>
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
 
           <table>
             <thead>
-              <tr><th>Câu</th><th>Scenario signal</th><th>Đáp án</th></tr>
+              <tr><th>Option</th><th>Action</th><th>Q86 fit?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Q14</strong></td>
-                <td>Regulated, phase gates, defined early, strict CC</td>
-                <td>Predictive (D)</td>
+                <td><strong>A. Develop RAM</strong></td>
+                <td>Assign who is R/A/C/I per activity</td>
+                <td>Later / different purpose — role ownership (Q83)</td>
               </tr>
               <tr>
-                <td><strong>Q15</strong></td>
-                <td>Short iterations, feedback, Product Owner</td>
-                <td>Adaptive (A)</td>
+                <td><strong>B. Update WBS</strong></td>
+                <td>Revise work breakdown</td>
+                <td>Already done — scope defined (instructor: X)</td>
               </tr>
               <tr>
-                <td><strong>Q16</strong></td>
-                <td>Software evolving + infra predictive, merged at end</td>
-                <td><strong>Hybrid (B)</strong></td>
+                <td><strong>C. Resource calendar</strong></td>
+                <td>When resources are available</td>
+                <td>Availability timing — after types/quantities organized</td>
+              </tr>
+              <tr>
+                <td><strong>D. Create RBS</strong></td>
+                <td>Hierarchical categories of resources</td>
+                <td><strong>Yes — next after estimating types &amp; quantities</strong></td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>West Gate Group scenario</h4>
+            <h4>RBS vs RAM vs WBS</h4>
             <p style="margin:0">
-              Enterprise platform = <em>một dự án</em> nhưng <em>hai cách phát triển</em>.
-              Chọn Hybrid khi đề mô tả <strong>cả hai</strong> pattern — không chỉ một phía.
+              <strong>WBS</strong> = work packages (deliverables). <strong>RBS</strong> = resource
+              categories/types. <strong>RAM</strong> = who owns which activity. Q86 stem đã xong WBS
+              + estimate → RBS.
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 16</h2>
+          <h2>3. Câu hỏi thực hành — Question 86</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q16</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q86</div>
             <div class="q-text">
-              Ethan is working on a project at West Gate Group that will deliver a new enterprise platform.
-              The <em>software component</em> has <em>constantly evolving requirements</em>, while the
-              <em>data center infrastructure</em> is built using <em>upfront planning</em> and a
-              <em>formal change control approach</em>, with the two brought together in a
-              <em>final Sprint at the end</em>.
-              Which development approach should Ethan use?
+              At Northshore Grid Corporation, you are finalizing planning for a substation upgrade
+              project. After defining scope and sequencing activities, you determine the
+              <em>types and quantities of resources</em> required to deliver each work package.
+              What will you do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Predictive approach.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Hybrid approach.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Incremental approach.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Adaptive approach.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Develop the responsibility assignment matrix (RAM).</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Update the work breakdown structure (WBS).</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Prepare the project resource calendar.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Create a resource breakdown structure.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
 
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>Software = adaptive signals (evolving requirements).</li>
-            <li>Data center = predictive signals (upfront planning, formal change control).</li>
-            <li>Cùng một project, hai deliverables — textbook hybrid (p.65).</li>
-            <li>Final Sprint integrates both streams — vẫn là hybrid, không chỉ adaptive.</li>
+            <li>Estimate Resources (p.82) → output includes organizing resources into RBS (p.132).</li>
+            <li>RBS = hierarchical by category/type: labor, materials, equipment, supplies.</li>
+            <li>Stem đã có types &amp; quantities — bước tiếp theo là structure chúng.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng (NEXT)</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Predictive</strong></td>
-                <td>Bỏ qua phần software evolving — chỉ mô tả một nửa scenario.</td>
+                <td><strong>A. RAM</strong></td>
+                <td>Gán responsibility — khác mục đích; Q83 pattern (role overlap).</td>
               </tr>
               <tr>
-                <td><strong>C. Incremental</strong></td>
-                <td>Deliver từng phần — không capture adaptive + predictive combo.</td>
+                <td><strong>B. Update WBS</strong></td>
+                <td>Scope đã defined — WBS không phải bước tiếp theo (instructor: X).</td>
               </tr>
               <tr>
-                <td><strong>D. Adaptive</strong></td>
-                <td>Bỏ qua data center upfront planning + formal CC — chỉ một nửa.</td>
+                <td><strong>C. Resource calendar</strong></td>
+                <td>Khi nào resource available — sau khi đã categorize types/quantities.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Rule of thumb</h4>
-            <p style="margin:0">
-              Một approach keyword → Q14 hoặc Q15 · <strong>Hai approach keywords</strong> trong cùng project → <strong>Hybrid</strong>
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Approach nào?</h2>
+          <h2>5. Drill — RBS, RAM, WBS, hay Calendar?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="HYBRID">
-              <span>Software agile + infrastructure waterfall on same project</span>
+            <div class="classify-row" data-answer="RBS">
+              <span>Types &amp; quantities estimated — organize labor/materials/equipment hierarchy</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="RBS">RBS</button>
+                <button data-pick="RAM">RAM</button>
+                <button data-pick="WBS">WBS</button>
+                <button data-pick="CAL">Calendar</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SINGLE">
-              <span>Phase gates only, all scope defined early</span>
+            <div class="classify-row" data-answer="RAM">
+              <span>Two people claim the same work package — clarify R/A/C/I</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="RBS">RBS</button>
+                <button data-pick="RAM">RAM</button>
+                <button data-pick="WBS">WBS</button>
+                <button data-pick="CAL">Calendar</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SINGLE">
-              <span>Short iterations and Product Owner only</span>
+            <div class="classify-row" data-answer="WBS">
+              <span>Decompose project scope into work packages for planning</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="RBS">RBS</button>
+                <button data-pick="RAM">RAM</button>
+                <button data-pick="WBS">WBS</button>
+                <button data-pick="CAL">Calendar</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="HYBRID">
-              <span>One deliverable adaptive, another predictive</span>
+            <div class="classify-row" data-answer="CAL">
+              <span>Know which weeks the crane and crew are available</span>
               <div class="classify-btns">
-                <button data-pick="HYBRID">Hybrid</button>
-                <button data-pick="SINGLE">Single</button>
+                <button data-pick="RBS">RBS</button>
+                <button data-pick="RAM">RAM</button>
+                <button data-pick="WBS">WBS</button>
+                <button data-pick="CAL">Calendar</button>
               </div>
             </div>
           </div>
           <p class="drill-score" id="drillScore">0 / 4 đúng</p>
-          <p class="drill-score" style="margin-top:0.25rem;font-size:0.8rem">“Single” = chỉ predictive hoặc chỉ adaptive</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn D — vì có “Sprint”</h4>
-            <p style="margin:0">Final Sprint là integration point — đề cũng nhấn <strong>upfront planning + formal change control</strong> cho infra → cần Hybrid.</p>
+            <h4>Bẫy 1: Work packages → update WBS (B)</h4>
+            <p style="margin:0">Stem đã "defining scope" — WBS xong. Next = resource structure, không revise WBS.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Chọn A — vì enterprise platform “lớn”</h4>
-            <p style="margin:0">Quy mô không quyết định approach — đọc <strong>how each component is developed</strong>.</p>
+            <h4>Bẫy 2: Resources → RAM (A)</h4>
+            <p style="margin:0">RAM = who is responsible. RBS = what categories of resources. Q83 vs Q86.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Resources → calendar (C)</h4>
+            <p style="margin:0">Calendar = availability timing. Stem = types &amp; quantities → organize into RBS first.</p>
           </div>
           <div class="card tip">
-            <h4>Ôn nhanh Q14–16</h4>
-            <p style="margin:0">Predictive · Adaptive · Hybrid — ba câu liên tiếp trong series, pattern rất hay gặp trên đề PMP.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Scope done · sequenced · types &amp; quantities determined · what next?</strong> → Create RBS (D).</p>
           </div>
         </section>
 
@@ -414,48 +416,64 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Hybrid approach = gì? (p.65)</div>
-            <div class="flashcard-back">Combines adaptive + predictive — e.g. two deliverables, one of each approach.</div>
+            <div class="flashcard-front">RBS là gì?</div>
+            <div class="flashcard-back">Hierarchical representation of resources by category and type — labor, materials, equipment, supplies (p.132).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q16 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Hybrid (software evolving + data center predictive).</div>
+            <div class="flashcard-front">Q86 đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Create a resource breakdown structure.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">HYBRID APPROACH — Q16 (PMBOK 8, p.65)
+          <div class="cheat-sheet">RESOURCE BREAKDOWN STRUCTURE — Q86
+(PMBOK 8, p.82 &amp; 132)
 ─────────────────────────────────────────────────────
-DEFINITION: Combines ADAPTIVE + PREDICTIVE elements
+PROCESS: Estimate Resources (p.82)
+  • Identify TYPE, QUANTITY, CHARACTERISTICS
+  • Supports planning, allocation, risk mgmt
+  • Performed once or at predefined points
 
-EXAMPLE (p.65):
-  Two main deliverables
-  One → adaptive · Other → predictive
+ARTIFACT: Resource Breakdown Structure (p.132)
+  • Hierarchical by CATEGORY and TYPE
+  • Labor · Materials · Equipment · Supplies
 
-Q16 SCENARIO (West Gate):
-  Software → constantly evolving (ADAPTIVE)
-  Data center → upfront planning + formal CC (PREDICTIVE)
-  Final Sprint → integrate both
+SEQUENCE:
+  1. Define scope / WBS
+  2. Sequence activities
+  3. Determine types &amp; quantities  ← stem here
+  4. CREATE RBS                    ← NEXT (D)
 
-Q16 ANSWER: B — Hybrid approach
-
-DECISION RULE:
-  Only predictive signals → Q14 (D)
-  Only adaptive signals → Q15 (A)
-  BOTH in same project → Q16 (B) Hybrid
+SCENARIO: Northshore Grid — substation upgrade
+           Scope defined, activities sequenced
+           Types &amp; quantities for each WP determined
+QUESTION: What will you do NEXT?
+→ D) CREATE A RESOURCE BREAKDOWN STRUCTURE ✓
 
 NOT:
-  A Predictive (ignores software)
-  D Adaptive (ignores infra)
-  C Incremental (partial delivery, not the combo)
+  A) DEVELOP RAM — who owns tasks (Q83)
+  B) UPDATE WBS — already done (instructor: X)
+  C) RESOURCE CALENDAR — availability timing
 
-REF: The Standard for Project Management, p.65
-     "Hybrid Approaches"</div>
+RBS vs WBS vs RAM:
+  WBS = work packages (WHAT work)
+  RBS = resource categories (WHAT resources)
+  RAM = responsibility (WHO)
+
+SIGNAL: "types and quantities" + "what next"
+        → RBS
+
+Q86 ANSWER: D
+
+REF: PMBOK Guide, 8th Ed., p.82 Estimate Resources
+      p.132 Resource breakdown structure</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive Approach</a>
+          · <a href="pmp-teach-responsibility-assignment-matrix.html">Q83: RAM</a>
+          · <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
+          · <a href="pmp-full-questions.html#q-86">Luyện câu 86</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -464,12 +482,12 @@ REF: The Standard for Project Management, p.65
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Predictive chỉ mô tả data center — bỏ qua software evolving requirements.",
-        B: "Đúng! Adaptive (software) + Predictive (infra) trên cùng project = Hybrid (p.65).",
-        C: "Incremental = deliver portions — không capture adaptive + predictive combo.",
-        D: "Adaptive chỉ mô tả software — bỏ qua upfront planning + formal change control của infra."
+        A: "RAM gán responsibility (R/A/C/I) — khác mục đích. Sau khi có types/quantities, tạo RBS trước.",
+        B: "WBS đã xong khi define scope — không phải bước tiếp theo (instructor: X).",
+        C: "Resource calendar = khi nào available — sau khi organize types/quantities vào RBS.",
+        D: "Đúng! Estimate Resources → create RBS: hierarchical by category/type (p.82, 132)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -485,7 +503,7 @@ REF: The Standard for Project Management, p.65
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Hybrid approach.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Create a resource breakdown structure.</strong>" : "");
         });
       });
       let score = 0;
@@ -513,16 +531,18 @@ REF: The Standard for Project Management, p.65
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
