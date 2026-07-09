@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Bidder Conference (Q23)</title>
+  <title>PMBOK 8 — Work Performance Information (Q61)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,11 +51,9 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .process-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 1.25rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; font-size: 0.8rem; }
-    .flow-step { padding: 0.45rem 0.7rem; border-radius: 8px; font-weight: 600; border: 1.5px solid var(--border); background: var(--bg); }
-    .flow-step.done { border-color: var(--muted); color: var(--muted); }
-    .flow-step.current { border-color: var(--ok); background: var(--ok-bg); color: #065f46; }
-    .flow-step.next { border-color: var(--info); background: var(--info-bg); color: #1d4ed8; }
+    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.82rem; }
+    .flow-box { padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+    .flow-box.highlight { background: var(--primary-bg); border-color: #fde68a; font-weight: 600; }
     .flow-arrow { color: var(--muted); font-weight: 700; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
@@ -94,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Bidder Conference · Q23</div>
+      <div class="brand-sub">Work Perf. Info · Q61</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#bidder">Bidder Conference</a>
-        <a href="#signal">Đọc tín hiệu đề</a>
+        <a href="#wpi">Work Perf. Info</a>
+        <a href="#data-flow">Data → Info → Report</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -166,16 +164,16 @@
         <a href="pmp-teach-resource-leveling.html">Q58: Resource Leveling</a>
         <a href="pmp-teach-rolling-wave-planning.html">Q59: Rolling Wave</a>
         <a href="pmp-teach-leads-and-lags.html">Q60: Leads &amp; Lags</a>
-        <a href="pmp-teach-work-performance-information.html">Q61: Work Perf. Info</a>
+        <a href="pmp-teach-work-performance-information.html" class="series-current">Q61: Work Perf. Info</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html#q-23">Luyện câu 23</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-61">Luyện câu 61</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#bidder">Bidder</a>
-        <a href="#signal">Signal</a>
+        <a href="#wpi">Info</a>
+        <a href="#data-flow">Flow</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -184,103 +182,115 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q23 về <strong>Bidder Conference</strong> — nhiều vendor quan tâm nhưng
-            hiểu khác nhau về dự án; PM cần đảm bảo mọi seller nhận <em>cùng thông tin</em> công bằng.
+            Bài học Q61 về <strong>Work Performance Information</strong> — Elena, warehouse
+            automation tại SLG: monitor schedule performance, thấy differences cần action,
+            cần <em>basis for interpreting</em> results để ra quyết định.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.265</span>
-            <span class="badge">Procurement</span>
-            <span class="badge">Câu 23 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.53 &amp; 144</span>
+            <span class="badge">Monitor and Control Schedule</span>
+            <span class="badge">Work Performance Information</span>
+            <span class="badge">Câu 61 — Practice</span>
           </div>
         </header>
 
-        <section id="bidder">
-          <h2>1. Bidder Conference (Pre-Bid Meeting)</h2>
+        <section id="wpi">
+          <h2>1. Work performance information (p.144)</h2>
           <p>
-            Hội nghị nhà thầu giúp <strong>tất cả prospective sellers</strong> nhận cùng thông tin
-            và làm rõ yêu cầu — thúc đẩy <strong>fairness</strong> và shared understanding,
-            không cho vendor nào lợi thế đặc biệt.
+            <strong>Monitor and Control Schedule</strong> (p.53) theo dõi status, cập nhật
+            schedule, quản lý changes dựa trên actual/forecasted performance. Để
+            <em>interpret</em> kết quả và quyết định action, PM dùng
+            <strong>work performance information</strong> — analyzed data so với project
+            management plan, project documents, và performance details.
           </p>
 
           <div class="card tip">
-            <h4>Mục đích chính (PMBOK p.265)</h4>
+            <h4>Information vs Data vs Reports</h4>
             <p style="margin:0">
-              A bidder conference ensures all prospective sellers receive the same information
-              and clarifications, promoting fairness and a shared understanding of requirements
-              without giving any vendor an advantage.
+              <strong>Data</strong> = raw. <strong>Information</strong> = analyzed, basis for
+              decisions. <strong>Reports</strong> = packaged communication to stakeholders.
             </p>
           </div>
-
-          <h3>Quy tắc quan trọng</h3>
-          <ul>
-            <li>Trả lời câu hỏi <strong>công khai</strong> — mọi vendor nghe cùng câu trả lời</li>
-            <li>Không trao đổi riêng từng vendor trong conference (tránh unfair advantage)</li>
-            <li>Clarifications quan trọng → cập nhật procurement documents / addendum cho tất cả</li>
-          </ul>
         </section>
 
-        <section id="signal">
-          <h2>2. Đọc tín hiệu trong đề</h2>
+        <section id="data-flow">
+          <h2>2. Data → Information → Report (liên hệ Q35)</h2>
 
-          <div class="process-flow" aria-label="Procurement context Q23">
-            <span class="flow-step done">Outsourcing decided ✓</span>
+          <div class="flow-diagram">
+            <div class="flow-box">Work Performance Data</div>
             <span class="flow-arrow">→</span>
-            <span class="flow-step done">Vendors interested ✓</span>
+            <div class="flow-box highlight">Work Performance Information</div>
             <span class="flow-arrow">→</span>
-            <span class="flow-step current">Different ideas on project</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step next">Bidder conference (A)</span>
+            <div class="flow-box">Work Performance Reports</div>
           </div>
 
           <table>
             <thead>
-              <tr><th>Signal trong đề</th><th>Ý nghĩa</th></tr>
+              <tr><th>Artifact</th><th>Role</th><th>Q61</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td>“Multiple vendors expressed interest”</td>
-                <td>Đã qua giai đoạn advertising — không cần B</td>
+                <td><strong>Work performance data (A)</strong></td>
+                <td>Raw schedule actuals, measurements</td>
+                <td>Input — chưa analyzed để interpret</td>
               </tr>
               <tr>
-                <td>“Different ideas on what the project is about”</td>
-                <td>Thiếu shared understanding → cần clarify cho <em>tất cả</em></td>
+                <td><strong>Work performance information (C)</strong></td>
+                <td>Analyzed vs plan — basis for decisions</td>
+                <td><strong>Use to make decisions</strong></td>
               </tr>
               <tr>
-                <td>Không nói “chưa quyết outsource”</td>
-                <td>Make-or-buy (C) đã xong — xem Q22</td>
+                <td><strong>Work performance reports (B)</strong></td>
+                <td>Stakeholder communication package</td>
+                <td>After analysis — không phải decision basis trong stem</td>
+              </tr>
+              <tr>
+                <td><strong>Schedule basis of estimates (D)</strong></td>
+                <td>Planning documentation for estimates</td>
+                <td>Planning artifact — không monitoring output</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card info">
+            <h4>Q35 vs Q61</h4>
+            <p style="margin:0">
+              Q35: analyze data → info <em>FIRST</em> (overall performance). Q61: dùng
+              <em>work performance information</em> để interpret schedule variances và decide
+              actions — cùng layer (information), context schedule monitoring.
+            </p>
+          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 23</h2>
+          <h2>3. Câu hỏi thực hành — Question 61</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q23</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q61</div>
             <div class="q-text">
-              A project requires outsourcing specialized engineering work. Multiple vendors have
-              expressed their interest in submitting a proposal, but each have
-              <em>different ideas on what the project is about</em>. What should the project manager do?
+              Elena is managing a warehouse automation project at SLG. As she monitors the
+              project, she reviews the schedule performance and sees some differences that may
+              require action, with a <em>basis for interpreting the current results</em>. What will
+              Elena use to make the required decisions?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Conduct a bidder conference.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Use advertising for the proposal.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Perform a make or buy analysis.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Clarify the source selection criteria.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Work performance data.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Work performance reports.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Work performance information.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. The schedule basis of estimates.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <h3>Tại sao chọn A?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>Vendors hiểu khác nhau về scope/requirements → cần session clarify chung.</li>
-            <li>Bidder conference = cùng thông tin, cùng Q&amp;A, fair competition.</li>
-            <li>Đúng giai đoạn: đã có interest, chưa evaluate proposals.</li>
+            <li>Interpret results + decide actions → analyzed work performance information.</li>
+            <li>Compared with PM plan &amp; documents — definition of WPI (p.144).</li>
+            <li>Monitor and Control Schedule context (p.53).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -290,62 +300,66 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>B. Advertising</strong></td>
-                <td>Vendors đã express interest — advertising đã đạt mục tiêu hoặc không giải quyết misunderstanding.</td>
+                <td><strong>A. Work performance data</strong></td>
+                <td>Raw output — cần analyze thành information trước khi interpret/decide.</td>
               </tr>
               <tr>
-                <td><strong>C. Make-or-buy</strong></td>
-                <td>Đề đã “requires outsourcing” — quyết định buy đã có (Q22 planning).</td>
+                <td><strong>B. Work performance reports</strong></td>
+                <td>Communication to stakeholders — không phải analyzed basis PM dùng internally.</td>
               </tr>
               <tr>
-                <td><strong>D. Source selection criteria</strong></td>
-                <td>Criteria (cost, schedule…) dùng khi <em>chấm</em> proposals — không fix “different ideas on project scope”.</td>
+                <td><strong>D. Schedule basis of estimates</strong></td>
+                <td>Planning doc cho estimates — không phải monitoring performance artifact.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q22</h4>
+            <h4>Instructor trap: Reports vs Information</h4>
             <p style="margin:0">
-              Q22: chưa contact vendor → Plan Sourcing Strategy. Q23: vendors đã interested nhưng
-              hiểu lệch → Bidder Conference.
+              Instructor ghi "Reports" gần C nhưng đáp án là <strong>information</strong> —
+              analyzed data for decisions, không phải report package (B).
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Procurement action nào?</h2>
+          <h2>5. Drill — Data, info, report hay planning doc?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="CONF">
-              <span>Vendors misunderstand project scope equally</span>
+            <div class="classify-row" data-answer="INFO">
+              <span>Basis for interpreting variances and deciding actions</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="CONF">Bidder conf.</button>
-                <button data-pick="AD">Advertise</button>
+                <button data-pick="DATA">Data</button>
+                <button data-pick="INFO">Info</button>
+                <button data-pick="RPT">Report</button>
+                <button data-pick="PLAN">Plan doc</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="DATA">
+              <span>Raw SPI value and actual start dates from system</span>
+              <div class="classify-btns">
+                <button data-pick="DATA">Data</button>
+                <button data-pick="INFO">Info</button>
+                <button data-pick="RPT">Report</button>
+                <button data-pick="PLAN">Plan doc</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="RPT">
+              <span>Monthly status package sent to steering committee</span>
+              <div class="classify-btns">
+                <button data-pick="DATA">Data</button>
+                <button data-pick="INFO">Info</button>
+                <button data-pick="RPT">Report</button>
+                <button data-pick="PLAN">Plan doc</button>
               </div>
             </div>
             <div class="classify-row" data-answer="PLAN">
-              <span>No vendors contacted; define make-or-buy</span>
+              <span>Documentation supporting original duration estimates</span>
               <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="CONF">Bidder conf.</button>
-                <button data-pick="AD">Advertise</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="AD">
-              <span>Need more prospective sellers in market</span>
-              <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="CONF">Bidder conf.</button>
-                <button data-pick="AD">Advertise</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="CONF">
-              <span>Ensure all sellers get same clarifications</span>
-              <div class="classify-btns">
-                <button data-pick="PLAN">Plan strategy</button>
-                <button data-pick="CONF">Bidder conf.</button>
-                <button data-pick="AD">Advertise</button>
+                <button data-pick="DATA">Data</button>
+                <button data-pick="INFO">Info</button>
+                <button data-pick="RPT">Report</button>
+                <button data-pick="PLAN">Plan doc</button>
               </div>
             </div>
           </div>
@@ -355,16 +369,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Clarify” → source selection criteria (D)</h4>
-            <p style="margin:0">Criteria = cách chọn winner (cost, quality…), không phải làm rõ scope cho mọi bidder.</p>
+            <h4>Bẫy 1: Monitoring → Work performance data (A)</h4>
+            <p style="margin:0">Data = raw. Stem cần <em>basis for interpreting</em> → analyzed information (C).</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Procurement → make-or-buy (C)</h4>
-            <p style="margin:0">“Requires outsourcing” = buy decision đã có — đừng quay lại planning quá sớm.</p>
+            <h4>Bẫy 2: Performance → Reports (B)</h4>
+            <p style="margin:0">Reports communicate outward — PM decisions dùng information layer trước reports.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Schedule → Basis of estimates (D)</h4>
+            <p style="margin:0">Planning artifact — không phải output của monitor &amp; control schedule.</p>
           </div>
           <div class="card tip">
-            <h4>Pattern nhận diện</h4>
-            <p style="margin:0"><strong>Same info + fairness + vendors confused</strong> → Bidder Conference (A).</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Interpret results · basis for decisions · schedule monitoring</strong> → Work performance information (C).</p>
           </div>
         </section>
 
@@ -372,48 +390,61 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Bidder conference mục đích? (p.265)</div>
-            <div class="flashcard-back">Same information &amp; clarifications for all sellers · fairness · shared understanding.</div>
+            <div class="flashcard-front">Work performance information?</div>
+            <div class="flashcard-back">Analyzed data vs plan &amp; documents — basis to interpret performance and decide.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q23 đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Conduct a bidder conference.</div>
+            <div class="flashcard-front">Q61 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Work performance information.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">BIDDER CONFERENCE — Q23 (PMBOK 8, p.265)
+          <div class="cheat-sheet">WORK PERFORMANCE INFORMATION — Q61 (PMBOK 8, p.53 &amp; 144)
 ─────────────────────────────────────────────────────
-TOOL: Bidder conference (pre-bid meeting)
-PURPOSE:
-  - All prospective sellers get SAME info &amp; clarifications
-  - Fairness — no vendor advantage
-  - Shared understanding of requirements
+PROCESS: Monitor and Control Schedule (p.53)
+         Work performance information (p.144)
 
-SCENARIO: Outsourcing engineering · vendors interested
-           BUT different ideas on what project is about
-ANSWER → A) Conduct a BIDDER CONFERENCE ✓
+DATA → INFORMATION → REPORT:
+  DATA        — raw measurements · actuals
+  INFORMATION — ANALYZED vs plan/docs (decisions)
+  REPORTS     — stakeholder communication package
+
+WORK PERFORMANCE INFORMATION:
+  - Analyzed data compared with PM plan
+  - Project documents · performance details
+  - Basis for INTERPRETING results
+  - Input to REQUIRED DECISIONS
+
+SCENARIO: Elena — SLG warehouse automation
+           MONITOR schedule performance
+           Differences may REQUIRE ACTION
+           BASIS for interpreting current results
+→ C) WORK PERFORMANCE INFORMATION ✓
 
 NOT:
-  B) Advertising — vendors already interested
-  C) Make-or-buy — already outsourcing (buy decided)
-  D) Source selection criteria — for scoring, not scope clarity
+  A) WORK PERFORMANCE DATA — raw, not analyzed
+  B) WORK PERFORMANCE REPORTS — comms output, not decision basis
+  D) SCHEDULE BASIS OF ESTIMATES — planning doc
 
-VS Q22:
-  Q22: no vendors yet → Plan Sourcing Strategy
-  Q23: vendors confused → Bidder Conference
+Q35 vs Q61:
+  Q35 → analyze data INTO info (FIRST step)
+  Q61 → USE info to interpret &amp; decide (schedule)
 
-RULE: Public Q&amp;A · update docs for ALL sellers
+SIGNAL: "basis for interpreting"
+        "make the required decisions"
+        "review schedule performance" · monitoring
 
-Q23 ANSWER: A
+Q61 ANSWER: C
 
-REF: PMBOK Guide, 8th Ed., p.19–20 &amp; p.265 — Bidder Conference</div>
+REF: PMBOK Guide, 8th Ed., p.53, p.144</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-plan-sourcing-strategy.html">Q22: Plan Sourcing Strategy</a>
-          · <a href="pmp-full-questions.html#q-23">Luyện câu 23</a>
+          · <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
+          · <a href="pmp-teach-schedule-baseline.html">Q57: Schedule Baseline</a>
+          · <a href="pmp-full-questions.html#q-61">Luyện câu 61</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -422,12 +453,12 @@ REF: PMBOK Guide, 8th Ed., p.19–20 &amp; p.265 — Bidder Conference</div>
 
   <script>
     (function () {
-      const CORRECT = "A";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Đúng! Bidder conference — cùng thông tin, clarify requirements, fairness cho mọi vendor (p.265).",
-        B: "Vendors đã express interest — advertising không giải quyết misunderstanding về scope.",
-        C: "Đề đã requires outsourcing — make-or-buy đã quyết; xem Q22 cho planning sớm hơn.",
-        D: "Source selection criteria dùng khi đánh giá proposals — không fix vendors hiểu khác về dự án."
+        A: "Work performance data là raw schedule actuals — cần analyze thành information để interpret.",
+        B: "Work performance reports là package gửi stakeholders — không phải analyzed basis cho PM decisions.",
+        C: "Đúng! Work performance information = analyzed data vs plan — basis for interpreting & deciding (p.53, 144).",
+        D: "Schedule basis of estimates là planning documentation — không phải monitoring performance output."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -443,7 +474,7 @@ REF: PMBOK Guide, 8th Ed., p.19–20 &amp; p.265 — Bidder Conference</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Conduct a bidder conference.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Work performance information.</strong>" : "");
         });
       });
       let score = 0;
