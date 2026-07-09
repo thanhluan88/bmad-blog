@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Issue Log (Q29)</title>
+  <title>PMBOK 8 — Genetic Algorithms (Q85)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,6 +50,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .ga-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .ga-flow { grid-template-columns: repeat(2, 1fr); } }
+    .ga-step { text-align: center; padding: 0.65rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .ga-step strong { display: block; color: var(--primary-dark); font-size: 0.95rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,8 +69,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 400px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -88,11 +91,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Issue Log · Q29</div>
+      <div class="brand-sub">Genetic Algorithms · Q85</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#issue">Issue vs Risk</a>
-        <a href="#first">FIRST action</a>
+        <a href="#genetic">Genetic Algorithms</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -128,7 +131,7 @@
         <a href="pmp-teach-request-for-quote.html">Q26: Request for Quote</a>
         <a href="pmp-teach-change-log.html">Q27: Change Log</a>
         <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
-        <a href="pmp-teach-issue-log.html" class="series-current">Q29: Issue Log</a>
+        <a href="pmp-teach-issue-log.html">Q29: Issue Log</a>
         <a href="pmp-teach-process-improvement.html">Q30: Process Improvement</a>
         <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
         <a href="pmp-teach-checklists.html">Q32: Checklists</a>
@@ -184,15 +187,15 @@
         <a href="pmp-teach-team-charter.html">Q82: Team Charter</a>
         <a href="pmp-teach-responsibility-assignment-matrix.html">Q83: RAM</a>
         <a href="pmp-teach-parkinsons-law.html">Q84: Parkinson's Law</a>
-        <a href="pmp-teach-genetic-algorithms.html">Q85: Genetic Algorithms</a>
+        <a href="pmp-teach-genetic-algorithms.html" class="series-current">Q85: Genetic Algorithms</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#issue">Issue/Risk</a>
-        <a href="#first">FIRST</a>
+        <a href="#genetic">GA</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -201,152 +204,203 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q29 về <strong>Issue Log</strong> — unauthorized access đã xảy ra
-            (problem occurred) → ghi <strong>issue</strong> trước khi brainstorm hay escalate.
+            Bài học Q85 về <strong>Genetic Algorithms</strong> — Richard tại NorthWest Communications:
+            telecom rollout toàn quốc, <em>multiple combinations</em> của crews, equipment, timelines —
+            cần tìm allocation hiệu quả nhất.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.123</span>
-            <span class="badge">Manage Project Execution</span>
-            <span class="badge">Câu 29 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.82 &amp; 171</span>
+            <span class="badge">Estimate Resources</span>
+            <span class="badge">Genetic Algorithms</span>
+            <span class="badge">Câu 85 — Practice</span>
           </div>
         </header>
 
-        <section id="issue">
-          <h2>1. Issue vs Risk — đã xảy ra hay chưa?</h2>
+        <section id="genetic">
+          <h2>1. Genetic Algorithms (p.171)</h2>
+          <p>
+            <strong>Genetic algorithms</strong> là kỹ thuật optimization lấy cảm hứng từ natural selection.
+            Chúng <em>iteratively explore solution combinations without bias</em>, dùng cho project
+            scheduling và resource management khi có nhiều biến thể (crews, equipment, timelines).
+          </p>
+
+          <div class="ga-flow">
+            <div class="ga-step"><strong>1. Population</strong>Tạo nhiều tổ hợp ngẫu nhiên</div>
+            <div class="ga-step"><strong>2. Selection</strong>Chọn tổ hợp tốt nhất (fitness)</div>
+            <div class="ga-step"><strong>3. Crossover</strong>Lai ghép tạo thế hệ mới</div>
+            <div class="ga-step"><strong>4. Mutation</strong>Biến đổi nhỏ → explore rộng hơn</div>
+          </div>
+
+          <div class="card tip">
+            <h4>Khi nào dùng GA?</h4>
+            <p style="margin:0">
+              <strong>Multiple combinations</strong> + difficulty identifying most efficient allocation →
+              combinatorial optimization → <strong>genetic algorithms</strong>. Không dựa vào expert bias,
+              không phải top-down hay bottom-up estimate.
+            </p>
+          </div>
 
           <table>
             <thead>
-              <tr><th></th><th>Issue</th><th>Risk</th></tr>
+              <tr><th>Technique</th><th>Mục đích</th><th>Q85?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Định nghĩa</strong></td>
-                <td>Problem <em>đã xảy ra</em></td>
-                <td>Uncertain event <em>chưa xảy ra</em></td>
+                <td><strong>Genetic algorithms</strong></td>
+                <td>Optimization — explore combinations without bias</td>
+                <td>✓ Many combos of crews/equipment/timelines</td>
               </tr>
               <tr>
-                <td><strong>Artifact</strong></td>
-                <td>Issue Log</td>
-                <td>Risk Register</td>
+                <td><strong>Analogous estimating</strong> (Q66)</td>
+                <td>Top-down from similar past project</td>
+                <td>✗ Single estimate — không explore combinations</td>
               </tr>
               <tr>
-                <td><strong>Q29</strong></td>
-                <td>✓ Unauthorized access reported</td>
-                <td>✗ “Could cause issues” = future — sau khi log issue</td>
+                <td><strong>Bottom-up estimating</strong></td>
+                <td>Aggregate detailed work package estimates</td>
+                <td>✗ Calculate total — không optimize allocation</td>
+              </tr>
+              <tr>
+                <td><strong>Expert judgment</strong></td>
+                <td>SME opinions</td>
+                <td>✗ Biased by experience — GA explores without bias</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="compare">
+          <h2>2. So sánh các đáp án</h2>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Concept</th><th>Q85 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Analogous estimating</strong></td>
+                <td>Historical data from similar project</td>
+                <td>Top-down, single figure — no optimization</td>
+              </tr>
+              <tr>
+                <td><strong>B. Genetic algorithms</strong></td>
+                <td>Iterative optimization of combinations</td>
+                <td><strong>Yes — explore crews/equipment/timelines</strong></td>
+              </tr>
+              <tr>
+                <td><strong>C. Bottom-up estimating</strong></td>
+                <td>Aggregate WP-level estimates</td>
+                <td>Detail accuracy — doesn't optimize allocation mix</td>
+              </tr>
+              <tr>
+                <td><strong>D. Expert judgment sessions</strong></td>
+                <td>SME workshops</td>
+                <td>Bias-prone; stem says "without bias" is needed</td>
               </tr>
             </tbody>
           </table>
 
-          <div class="card tip">
-            <h4>Issue Log (PMBOK p.123)</h4>
+          <div class="card info">
+            <h4>GA vs Branch &amp; Bound (Q62)</h4>
             <p style="margin:0">
-              When a problem has already occurred, it is treated as an issue.
-              The issue log is used to document, track, and manage issues before further action is taken.
+              Q62: <strong>branch and bound</strong> = systematic elimination of suboptimal branches.
+              Q85: <strong>genetic algorithms</strong> = evolutionary exploration of all combinations.
+              Both are optimization — GA for large solution spaces with many variables.
             </p>
           </div>
         </section>
 
-        <section id="first">
-          <h2>2. “What should the PM do FIRST?”</h2>
-          <p>Thứ tự đúng sau khi phát hiện breach:</p>
-          <ol>
-            <li><strong>Note in issue log</strong> (A) — document &amp; track</li>
-            <li>Assess impact, brainstorm responses (C) — sau khi logged</li>
-            <li>Escalate if needed (D) — khi vượt quyền PM hoặc sau analysis</li>
-            <li>Update risk register nếu có future uncertainty mới — không thay issue log</li>
-          </ol>
-        </section>
-
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 29</h2>
+          <h2>3. Câu hỏi thực hành — Question 85</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q29</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q85</div>
             <div class="q-text">
-              A project team at CD Solutions is developing a customer analytics platform.
-              Midway through execution, a security officer reports
-              <em>unauthorized access to sensitive project data</em>. This could cause issues
-              with the deliverables in the future. What should the project manager do <em>first</em>?
+              Richard is estimating resource needs for a nationwide telecom rollout at NorthWest
+              Communications. <em>Multiple combinations</em> of crews, equipment, and timelines are
+              possible, creating difficulty in identifying the most efficient allocation. Which
+              technique would best address this situation?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Note it in the issue log.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Note it in the risk register.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Brainstorm ways to handle the security breach with the team.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Escalate the breach to senior managers within the organization.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Analogous estimating.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Genetic algorithms.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Bottom-up estimating.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Conduct expert judgment sessions.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn A?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Unauthorized access <em>reports</em> = event đã xảy ra → issue.</li>
-            <li>FIRST = document trong issue log trước action khác.</li>
-            <li>“Could cause issues in future” không đổi bản chất — breach đã occurred.</li>
+            <li>Multiple combinations of crews, equipment, timelines = large solution space.</li>
+            <li>GA iteratively explores combinations <em>without bias</em> (p.171).</li>
+            <li>Used in scheduling + resource management for conflicts &amp; constraints.</li>
+            <li>Thuộc Estimate Resources process (p.82).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không FIRST</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>B. Risk register</strong></td>
-                <td>Risk = chưa xảy ra; breach đã occurred → issue log.</td>
+                <td><strong>A. Analogous</strong></td>
+                <td>Top-down từ past project — single estimate, không optimize allocation.</td>
               </tr>
               <tr>
-                <td><strong>C. Brainstorm with team</strong></td>
-                <td>Valid sau khi issue được documented — không phải bước đầu.</td>
+                <td><strong>C. Bottom-up</strong></td>
+                <td>Aggregate WP estimates — accuracy tool, không exploration/optimization.</td>
               </tr>
               <tr>
-                <td><strong>D. Escalate</strong></td>
-                <td>Escalate sau assess/document — PMI: PM xử lý trước khi escalate.</td>
+                <td><strong>D. Expert judgment</strong></td>
+                <td>Human bias — GA explores solution space without bias.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Liên hệ Q20 &amp; Q27</h4>
-            <p style="margin:0">
-              Q20: Issue Log vs Assumption/Risk. Q27: Change Log. Q29: breach occurred →
-              <strong>Issue Log FIRST</strong>.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Issue hay Risk?</h2>
+          <h2>5. Drill — GA, Analogous, Bottom-up, hay Expert?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="ISS">
-              <span>Unauthorized access already reported</span>
+            <div class="classify-row" data-answer="GA">
+              <span>Hundreds of crew/equipment combos — find optimal allocation</span>
               <div class="classify-btns">
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="GA">Genetic Alg</button>
+                <button data-pick="ANALOG">Analogous</button>
+                <button data-pick="BU">Bottom-up</button>
+                <button data-pick="EJ">Expert</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RSK">
-              <span>Vendor might delay delivery next month</span>
+            <div class="classify-row" data-answer="ANALOG">
+              <span>Quick estimate using similar past data center project</span>
               <div class="classify-btns">
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="GA">Genetic Alg</button>
+                <button data-pick="ANALOG">Analogous</button>
+                <button data-pick="BU">Bottom-up</button>
+                <button data-pick="EJ">Expert</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ISS">
-              <span>Defect found in production release</span>
+            <div class="classify-row" data-answer="BU">
+              <span>Sum all work package resource estimates for total project need</span>
               <div class="classify-btns">
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="GA">Genetic Alg</button>
+                <button data-pick="ANALOG">Analogous</button>
+                <button data-pick="BU">Bottom-up</button>
+                <button data-pick="EJ">Expert</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RSK">
-              <span>Key resource may become unavailable</span>
+            <div class="classify-row" data-answer="GA">
+              <span>Resolve scheduling conflicts across 50+ resources without human bias</span>
               <div class="classify-btns">
-                <button data-pick="ISS">Issue Log</button>
-                <button data-pick="RSK">Risk Register</button>
+                <button data-pick="GA">Genetic Alg</button>
+                <button data-pick="ANALOG">Analogous</button>
+                <button data-pick="BU">Bottom-up</button>
+                <button data-pick="EJ">Expert</button>
               </div>
             </div>
           </div>
@@ -356,16 +410,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: “Could cause issues in future” → Risk register (B)</h4>
-            <p style="margin:0">Future impact từ event đã xảy ra — log issue trước; risk có thể update sau.</p>
+            <h4>Bẫy 1: Estimating → analogous or bottom-up</h4>
+            <p style="margin:0">Stem says "estimating resource needs" — nhưng key problem là <em>optimization of combinations</em>, không phải estimate magnitude.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Security breach → Escalate first (D)</h4>
-            <p style="margin:0">Document issue trước — escalate khi cần sau assess.</p>
+            <h4>Bẫy 2: Difficulty → expert judgment (D)</h4>
+            <p style="margin:0">Expert judgment = human bias. GA explores without bias — stem khớp GA definition.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Nhầm GA với Branch &amp; Bound (Q62)</h4>
+            <p style="margin:0">B&amp;B = systematic pruning. GA = evolutionary/iterative — dùng khi solution space rất rộng.</p>
           </div>
           <div class="card tip">
-            <h4>Mnemonic</h4>
-            <p style="margin:0"><strong>Occurred = Issue</strong> · <strong>Might happen = Risk</strong> · <strong>FIRST = Log it</strong></p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Multiple combinations · crews/equipment/timelines · most efficient · without bias</strong> → Genetic algorithms (B).</p>
           </div>
         </section>
 
@@ -373,47 +431,65 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Problem already occurred → artifact? (p.123)</div>
-            <div class="flashcard-back"><strong>Issue Log</strong> — document, track, manage before further action.</div>
+            <div class="flashcard-front">Genetic algorithms trong PM?</div>
+            <div class="flashcard-back">Optimization inspired by natural selection — iteratively explore combinations without bias for scheduling &amp; resource allocation (p.171).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q29 đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Note it in the issue log (FIRST).</div>
+            <div class="flashcard-front">Q85 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Genetic algorithms.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ISSUE LOG — Q29 (PMBOK 8, p.22–23 &amp; p.123)
+          <div class="cheat-sheet">GENETIC ALGORITHMS — Q85
+(PMBOK 8, p.82 &amp; 171)
 ─────────────────────────────────────────────────────
-RULE: Problem ALREADY OCCURRED = ISSUE (not risk)
-ARTIFACT: Issue log — document, track, manage FIRST
+PROCESS: Estimate Resources (p.82)
 
-SCENARIO: CD Solutions — unauthorized access REPORTED
-           (breach happened) · could affect deliverables later
-FIRST → A) Note in ISSUE LOG ✓
+TECHNIQUE: Genetic Algorithms (p.171)
+  • Optimization inspired by NATURAL SELECTION
+  • Iteratively explore solution COMBINATIONS
+  • WITHOUT BIAS
+  • Scheduling + resource management
+  • Resolve conflicts, resource constraints
+  • Develop optimal scheduling strategies
 
-NOT FIRST:
-  B) Risk register — event already occurred
-  C) Brainstorm — after logging issue
-  D) Escalate — after document/assess
+HOW GA WORKS:
+  1. Population — random solution combos
+  2. Selection — keep fittest
+  3. Crossover — combine good traits
+  4. Mutation — explore beyond local optima
+  → Repeat until optimal
 
-ISSUE vs RISK:
-  Occurred / reports / happened → Issue Log
-  Might / may / could (uncertain) → Risk Register
+SCENARIO: Richard — NorthWest telecom rollout
+           MULTIPLE COMBINATIONS: crews, equipment, timelines
+           DIFFICULTY identifying MOST EFFICIENT allocation
+QUESTION: Which technique?
+→ B) GENETIC ALGORITHMS ✓
 
-VS Q20: Issue log NOT for assumptions/uncertain timelines
-VS Q27: Change log for change requests
+NOT:
+  A) ANALOGOUS — top-down; single estimate (Q66)
+  C) BOTTOM-UP — aggregate WP estimates; no optimization
+  D) EXPERT JUDGMENT — human bias; GA = without bias
 
-Q29 ANSWER: A
+GA vs BRANCH &amp; BOUND (Q62):
+  B&amp;B = systematic elimination/pruning
+  GA  = evolutionary exploration (large solution space)
 
-REF: PMBOK Guide, 8th Ed., p.123 — Issue Log</div>
+SIGNAL: "multiple combinations" + "most efficient"
+        + "difficulty identifying" → GA
+
+Q85 ANSWER: B
+
+REF: PMBOK Guide, 8th Ed., p.82 Estimate Resources
+      p.171 Genetic algorithms</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
-          · <a href="pmp-teach-change-log.html">Q27: Change Log</a>
-          · <a href="pmp-full-questions.html#q-29">Luyện câu 29</a>
+          · <a href="pmp-teach-branch-and-bound.html">Q62: Branch &amp; Bound</a>
+          · <a href="pmp-teach-analogous-estimating.html">Q66: Analogous Est.</a>
+          · <a href="pmp-full-questions.html#q-85">Luyện câu 85</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -422,12 +498,12 @@ REF: PMBOK Guide, 8th Ed., p.123 — Issue Log</div>
 
   <script>
     (function () {
-      const CORRECT = "A";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Đúng! Problem đã xảy ra → issue log FIRST — document &amp; track trước action khác (p.123).",
-        B: "Unauthorized access đã reported — occurred event, không phải risk register.",
-        C: "Brainstorm là bước sau — FIRST là ghi issue log.",
-        D: "Escalate sau khi document và assess — không phải FIRST."
+        A: "Analogous estimating = top-down từ past project — single estimate, không optimize allocation mix.",
+        B: "Đúng! Genetic algorithms iteratively explore combinations without bias — optimal cho crews/equipment/timelines (p.171).",
+        C: "Bottom-up aggregate WP estimates — accuracy tool, không phải optimization technique.",
+        D: "Expert judgment có human bias — GA explores solution space without bias."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -443,7 +519,7 @@ REF: PMBOK Guide, 8th Ed., p.123 — Issue Log</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Note it in the issue log.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Genetic algorithms.</strong>" : "");
         });
       });
       let score = 0;
@@ -471,16 +547,18 @@ REF: PMBOK Guide, 8th Ed., p.123 — Issue Log</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
