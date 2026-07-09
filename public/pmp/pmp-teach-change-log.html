@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Project Sponsor (Q8)</title>
+  <title>PMBOK 8 — Change Log (Q27)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,11 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
-    .role-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; font-size: 0.86rem; }
-    .role-card.sponsor { border-top: 4px solid var(--primary); background: var(--primary-bg); }
-    .role-card h4 { margin: 0 0 0.4rem; font-size: 0.92rem; }
-    .role-card ul { margin: 0; padding-left: 1.1rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -71,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 320px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 400px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -92,11 +87,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Project Sponsor · Q8</div>
+      <div class="brand-sub">Change Log · Q27</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#sponsor">Vai trò Sponsor</a>
-        <a href="#roles">So sánh vai trò</a>
+        <a href="#changelog">Change Log</a>
+        <a href="#logs">Phân biệt logs</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -130,16 +125,16 @@
         <a href="pmp-teach-sourcing-strategy-plan.html">Q24: Sourcing Strategy Plan</a>
         <a href="pmp-teach-make-or-buy-analysis.html">Q25: Make-or-Buy Analysis</a>
         <a href="pmp-teach-request-for-quote.html">Q26: Request for Quote</a>
-        <a href="pmp-teach-change-log.html">Q27: Change Log</a>
+        <a href="pmp-teach-change-log.html" class="series-current">Q27: Change Log</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-27">Luyện câu 27</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#sponsor">Sponsor</a>
-        <a href="#roles">Vai trò</a>
+        <a href="#changelog">Change Log</a>
+        <a href="#logs">Logs</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -148,110 +143,89 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q8 về <strong>Project Sponsor</strong> — người cấp vốn, định hướng chiến lược
-            và gỡ rào cản tổ chức để dự án thành công.
+            Bài học Q27 về <strong>Change Log</strong> — nhiều modifications được request,
+            team confused về <em>what to implement and in what sequence</em> trong execution.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK 8, p.274</span>
-            <span class="badge">Stakeholders</span>
-            <span class="badge">Câu 8 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.22 &amp; p.116</span>
+            <span class="badge">Manage Project Execution</span>
+            <span class="badge">Câu 27 — Practice</span>
           </div>
         </header>
 
-        <section id="sponsor">
-          <h2>1. Project Sponsor là gì?</h2>
+        <section id="changelog">
+          <h2>1. Change Log</h2>
           <p>
-            <strong>Sponsor</strong> là cá nhân hoặc nhóm cung cấp <strong>resources và support</strong>
-            cho portfolio, program hoặc project, và <strong>chịu trách nhiệm</strong> tạo điều kiện thành công.
+            Change log ghi lại <strong>tất cả change requests đã submit</strong> và
+            <strong>trạng thái</strong> của chúng — disposition của từng request
+            xuyên suốt project lifecycle.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK 8)</h4>
+            <h4>Định nghĩa (PMBOK p.116)</h4>
             <p style="margin:0">
-              A sponsor is an individual or a group that provides resources and support for the
-              portfolio, program, or project, and is accountable for enabling success.
-              <em>— PMBOK Guide 8th Ed., p.274, "Sponsor"</em>
+              A change log records all submitted changes and their status, documenting
+              the disposition of change requests throughout the project.
             </p>
           </div>
 
-          <h3>Hoạt động điển hình của Sponsor</h3>
-          <ul>
-            <li><strong>Secures funding</strong> — đảm bảo nguồn vốn/ngân sách</li>
-            <li><strong>Strategic direction</strong> — căn chỉnh dự án với mục tiêu tổ chức</li>
-            <li><strong>Remove organizational obstacles</strong> — gỡ rào cản, escalation cấp cao</li>
-            <li>Champion dự án với leadership</li>
-          </ul>
+          <div class="card info">
+            <h4>Manage Project Execution (p.22)</h4>
+            <p style="margin:0">
+              Leading and performing work defined in the plan and implementing
+              <strong>approved changes</strong> to meet objectives — deliverables meet scope requirements.
+            </p>
+          </div>
         </section>
 
-        <section id="roles">
-          <h2>2. Sponsor vs PM vs Product Owner vs Customer</h2>
-
-          <div class="role-grid">
-            <div class="role-card sponsor">
-              <h4>Project Sponsor</h4>
-              <ul>
-                <li>Cấp vốn, resources</li>
-                <li>Chiến lược, accountability</li>
-                <li>Gỡ rào cản tổ chức</li>
-              </ul>
-            </div>
-            <div class="role-card">
-              <h4>Project Manager</h4>
-              <ul>
-                <li>Quản lý hàng ngày</li>
-                <li>Planning, executing, team</li>
-                <li>Không phải người “secure funding”</li>
-              </ul>
-            </div>
-            <div class="role-card">
-              <h4>Product Owner</h4>
-              <ul>
-                <li>Vai trò <strong>Agile</strong></li>
-                <li>Backlog, value, stakeholder cho product</li>
-                <li>Không đồng nghĩa Sponsor</li>
-              </ul>
-            </div>
-            <div class="role-card">
-              <h4>Project Customer</h4>
-              <ul>
-                <li>Người dùng/bên nhận kết quả</li>
-                <li>Yêu cầu &amp; acceptance</li>
-                <li>Không cấp vốn tổ chức</li>
-              </ul>
-            </div>
-          </div>
+        <section id="logs">
+          <h2>2. Phân biệt các log/register</h2>
 
           <table>
             <thead>
-              <tr><th>Manh mối trong đề</th><th>Vai trò</th></tr>
+              <tr><th>Artifact</th><th>Ghi gì?</th><th>Q27 fit?</th></tr>
             </thead>
             <tbody>
-              <tr><td>Secures funding</td><td><strong>Sponsor</strong></td></tr>
-              <tr><td>Strategic direction</td><td><strong>Sponsor</strong></td></tr>
-              <tr><td>Remove obstacles (organizational)</td><td><strong>Sponsor</strong></td></tr>
-              <tr><td>Manages team day-to-day</td><td>Project Manager</td></tr>
-              <tr><td>Prioritizes backlog (Agile)</td><td>Product Owner</td></tr>
-              <tr><td>Uses the deliverable</td><td>Customer / User</td></tr>
+              <tr>
+                <td><strong>Change Log</strong></td>
+                <td>Submitted changes + status + disposition + sequence of approved mods</td>
+                <td>✓ Đúng — modifications throughout project</td>
+              </tr>
+              <tr>
+                <td>Scope Statement / Baseline</td>
+                <td>Authorized scope ban đầu — không track history từng change</td>
+                <td>✗ Thiếu status/sequence của modifications</td>
+              </tr>
+              <tr>
+                <td>Issue Log</td>
+                <td>Impacts đã xảy ra cần xử lý</td>
+                <td>✗ Không phải change request tracking</td>
+              </tr>
+              <tr>
+                <td>Risk Register</td>
+                <td>Uncertainties &amp; planned responses</td>
+                <td>✗ Không liên quan modifications confusion</td>
+              </tr>
             </tbody>
           </table>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 8</h2>
+          <h2>3. Câu hỏi thực hành — Question 27</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q8</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q27</div>
             <div class="q-text">
-              An employee in the organization secures <em>funding</em> for the project, provides
-              <em>strategic direction</em>, and helps <em>remove organizational obstacles</em>
-              to ensure project success.
-              <em>What role is this person performing in the project?</em>
+              Rina is executing a warehouse automation project at Grid Line Logistics.
+              Several <em>modifications have been requested throughout the project</em>,
+              and now there is confusion about <em>what should be implemented and in what sequence</em>.
+              What will Rina do <em>next</em>?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Product Owner.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Project Sponsor.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Project Customer.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Project Manager.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Review the Scope Statement.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Review the Change Log.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Review the Issue Log.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Review the Risk Register.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -260,77 +234,76 @@
         <section id="analysis">
           <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn B — Project Sponsor?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li><strong>Secures funding</strong> — sponsor cung cấp resources/vốn.</li>
-            <li><strong>Strategic direction</strong> — sponsor căn chỉnh với mục tiêu tổ chức.</li>
-            <li><strong>Remove organizational obstacles</strong> — sponsor escalation, champion.</li>
-            <li>Cả ba là pattern kinh điển nhận diện <strong>Sponsor</strong> trong đề PMP.</li>
+            <li>“Modifications requested throughout” = change requests cần track.</li>
+            <li>Confusion về implement gì, thứ tự nào → Change Log có status &amp; disposition.</li>
+            <li>Execution phase — implement <em>approved</em> changes per log.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Product Owner</strong></td>
-                <td>Vai trò Agile — quản lý backlog, maximize product value. Không “secure funding” cấp tổ chức.</td>
+                <td><strong>A. Scope Statement</strong></td>
+                <td>Baseline scope ban đầu — không document lịch sử nhiều modifications &amp; sequence.</td>
               </tr>
               <tr>
-                <td><strong>C. Project Customer</strong></td>
-                <td>Khách hàng/người dùng — nhận deliverable, không cấp vốn hay gỡ rào cản tổ chức.</td>
+                <td><strong>C. Issue Log</strong></td>
+                <td>Issues = đã xảy ra — không phải track change requests.</td>
               </tr>
               <tr>
-                <td><strong>D. Project Manager</strong></td>
-                <td>PM quản lý dự án hàng ngày — không phải người đảm bảo funding &amp; strategic direction cấp executive.</td>
+                <td><strong>D. Risk Register</strong></td>
+                <td>Risks = uncertainty — không giải quyết confusion về approved modifications.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords Sponsor</h4>
+            <h4>Liên hệ Q20 Assumption Log</h4>
             <p style="margin:0">
-              funding · budget · strategic direction · organizational obstacles ·
-              champion · executive support · accountable for enabling success
+              Q20 phân biệt assumption/risk/issue logs ở planning. Q27 = execution —
+              <strong>change log</strong> khi nhiều modifications gây confusion.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Nhận diện vai trò</h2>
+          <h2>5. Drill — Log nào?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="SP">
-              <span>Approves budget and removes barriers with senior leadership</span>
+            <div class="classify-row" data-answer="CHG">
+              <span>Track status of submitted change requests</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="CHG">Change Log</button>
+                <button data-pick="ISS">Issue Log</button>
+                <button data-pick="RSK">Risk Register</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PM">
-              <span>Develops schedule and manages project team daily</span>
+            <div class="classify-row" data-answer="ISS">
+              <span>Document problem that has already occurred</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="CHG">Change Log</button>
+                <button data-pick="ISS">Issue Log</button>
+                <button data-pick="RSK">Risk Register</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PO">
-              <span>Prioritizes product backlog in Scrum</span>
+            <div class="classify-row" data-answer="RSK">
+              <span>Uncertain event and planned response</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="CHG">Change Log</button>
+                <button data-pick="ISS">Issue Log</button>
+                <button data-pick="RSK">Risk Register</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="SP">
-              <span>Provides strategic alignment and project funding</span>
+            <div class="classify-row" data-answer="CHG">
+              <span>Confusion about approved mods and sequence</span>
               <div class="classify-btns">
-                <button data-pick="SP">Sponsor</button>
-                <button data-pick="PM">PM</button>
-                <button data-pick="PO">PO</button>
+                <button data-pick="CHG">Change Log</button>
+                <button data-pick="ISS">Issue Log</button>
+                <button data-pick="RSK">Risk Register</button>
               </div>
             </div>
           </div>
@@ -340,16 +313,16 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Product Owner (Agile)</h4>
-            <p style="margin:0">Đề nhắc “employee in organization” + funding/strategy → Sponsor, không phải PO. PO = Agile framework.</p>
+            <h4>Bẫy 1: “What to implement” → Scope Statement (A)</h4>
+            <p style="margin:0">Scope baseline = authorized scope; nhiều modifications cần Change Log để biết approved changes &amp; order.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Project Manager</h4>
-            <p style="margin:0">PM làm việc với sponsor, nhưng PM không “secure funding” — đó là vai trò sponsor/executive.</p>
+            <h4>Bẫy 2: Confusion → Issue Log (C)</h4>
+            <p style="margin:0">Issue = đã materialize — đây là change requests chưa rõ implementation sequence.</p>
           </div>
           <div class="card tip">
-            <h4>PM vs Sponsor — nhớ nhanh</h4>
-            <p style="margin:0"><strong>Sponsor:</strong> WHY, money, strategy, obstacles · <strong>PM:</strong> HOW, plan, execute, deliver</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Modifications + status/sequence confusion</strong> → Change Log (B).</p>
           </div>
         </section>
 
@@ -357,38 +330,48 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Sponsor làm gì?</div>
-            <div class="flashcard-back">Cung cấp resources/support · accountable for enabling success · funding, strategy, gỡ rào cản.</div>
+            <div class="flashcard-front">Change log ghi gì? (p.116)</div>
+            <div class="flashcard-back">All submitted changes + status + disposition throughout project.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q8 đáp án?</div>
-            <div class="flashcard-back"><strong>B — Project Sponsor.</strong> Funding + strategic direction + remove obstacles.</div>
+            <div class="flashcard-front">Q27 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Review the Change Log.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">PROJECT SPONSOR — Q8 (PMBOK 8, p.274)
+          <div class="cheat-sheet">CHANGE LOG — Q27 (PMBOK 8, p.22 &amp; p.116)
 ─────────────────────────────────────────────────────
-SPONSOR
-  • Provides resources and support
-  • Accountable for ENABLING SUCCESS
-  • Secures FUNDING
-  • STRATEGIC direction
-  • Removes ORGANIZATIONAL obstacles
+PROCESS: Manage Project Execution
+ARTIFACT: Change log
+  - All submitted changes
+  - Status &amp; disposition
+  - Track approved mods through lifecycle
 
-NOT SPONSOR
-  PM  → day-to-day management, planning, team
-  PO  → Agile, backlog, product value
-  Customer → receives deliverable, requirements
+SCENARIO: Grid Line — modifications requested throughout
+           confusion: WHAT to implement + SEQUENCE
+NEXT → B) Review the CHANGE LOG ✓
 
-Q8 ANSWER: B — Project Sponsor
+NOT:
+  A) Scope Statement — baseline, not change history
+  C) Issue Log — occurred problems, not CR tracking
+  D) Risk Register — uncertainties, not modifications
 
-REF: PMBOK Guide 8th Ed., p.274, "Sponsor"</div>
+VS Q20:
+  Assumption/Risk/Issue logs at planning
+  Change log at execution for approved changes
+
+SIGNAL: "modifications requested" + "what sequence"
+
+Q27 ANSWER: B
+
+REF: PMBOK Guide, 8th Ed., p.22 &amp; p.116 — Change log</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-project-functions.html">Q7</a>
+          · <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
+          · <a href="pmp-full-questions.html#q-27">Luyện câu 27</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -399,10 +382,10 @@ REF: PMBOK Guide 8th Ed., p.274, "Sponsor"</div>
     (function () {
       const CORRECT = "B";
       const EXPL = {
-        A: "Product Owner là vai trò Agile — backlog/value, không secure funding tổ chức.",
-        B: "Đúng! Funding + strategic direction + remove obstacles = Project Sponsor.",
-        C: "Customer nhận sản phẩm — không cấp vốn hay định hướng chiến lược tổ chức.",
-        D: "PM quản lý thực thi — sponsor mới đảm bảo funding và gỡ rào cản cấp tổ chức."
+        A: "Scope Statement là baseline ban đầu — không track lịch sử modifications &amp; sequence.",
+        B: "Đúng! Change log ghi submitted changes, status, disposition — clarify what approved &amp; order (p.116).",
+        C: "Issue Log cho problems đã xảy ra — không phải change request tracking.",
+        D: "Risk Register cho uncertainties — không liên quan modifications confusion."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -418,7 +401,7 @@ REF: PMBOK Guide 8th Ed., p.274, "Sponsor"</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Project Sponsor.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Review the Change Log.</strong>" : "");
         });
       });
       let score = 0;
