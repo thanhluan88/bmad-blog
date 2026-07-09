@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Functional Organization (Q6)</title>
+  <title>PMBOK 8 — Checklists (Q32)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,12 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .compare-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
-    @media (max-width: 640px) { .compare-pair { grid-template-columns: 1fr; } }
-    .pair-box { border-radius: 12px; padding: 1rem; border: 1px solid var(--border); font-size: 0.88rem; }
-    .pair-box.q5 { background: var(--ok-bg); border-top: 4px solid var(--ok); }
-    .pair-box.q6 { background: #f3f4f6; border-top: 4px solid #6b7280; }
-    .pair-box h4 { margin: 0 0 0.5rem; font-size: 0.92rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -72,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; max-width: 300px; justify-content: flex-end; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -93,11 +87,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Functional Organization · Q6</div>
+      <div class="brand-sub">Checklists · Q32</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#concepts">Functional org</a>
-        <a href="#q5-vs-q6">Q5 vs Q6</a>
+        <a href="#checklists">Checklists</a>
+        <a href="#signals">Đọc tín hiệu đề</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -110,7 +104,7 @@
         <a href="pmp-teach-enterprise-environmental-factors.html">Q3: EEF</a>
         <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
         <a href="pmp-teach-organizational-structure.html">Q5: Org Structure</a>
-        <a href="pmp-teach-functional-organization.html" class="series-current">Q6: Functional</a>
+        <a href="pmp-teach-functional-organization.html">Q6: Functional</a>
         <a href="pmp-teach-project-functions.html">Q7: Project Functions</a>
         <a href="pmp-teach-project-sponsor.html">Q8: Project Sponsor</a>
         <a href="pmp-teach-project-management-team.html">Q9: PM Team</a>
@@ -136,16 +130,16 @@
         <a href="pmp-teach-issue-log.html">Q29: Issue Log</a>
         <a href="pmp-teach-process-improvement.html">Q30: Process Improvement</a>
         <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
-        <a href="pmp-teach-checklists.html">Q32: Checklists</a>
+        <a href="pmp-teach-checklists.html" class="series-current">Q32: Checklists</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-32">Luyện câu 32</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#concepts">Functional</a>
-        <a href="#q5-vs-q6">Q5 vs Q6</a>
+        <a href="#checklists">Checklist</a>
+        <a href="#signals">Signals</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -154,184 +148,165 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q6 về <strong>Functional organization</strong> — dự án/cải tiến làm
-            <em>trong</em> phòng ban hiện có, không có ngân sách bổ sung hay quyền PM riêng.
+            Bài học Q32 về <strong>Checklists</strong> — team miss deadlines vì
+            <em>inconsistent task execution</em>; junior làm thừa, senior báo inefficiency,
+            defects xuất hiện. PM cần align execution mà không escalate hay restructure.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.22</span>
-            <span class="badge">Organizational Structures</span>
-            <span class="badge">Câu 6 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.23–24 &amp; p.151</span>
+            <span class="badge">Manage Quality Assurance</span>
+            <span class="badge">Câu 32 — Practice</span>
           </div>
         </header>
 
-        <section id="concepts">
-          <h2>1. Functional Organization</h2>
+        <section id="checklists">
+          <h2>1. Checklists trong Manage Quality Assurance</h2>
           <p>
-            Trong cấu trúc <strong>Functional</strong>, công việc dự án (kể cả cải tiến quy trình)
-            được thực hiện như một phần của <strong>team chức năng hiện có</strong> — sales, IT, HR...
-            Functional manager giữ quyền chính.
+            Checklist là danh sách items hoặc actions dùng làm reminders — thường phát triển từ
+            historical information và lessons learned từ dự án tương tự. Giúp team thực hiện tasks
+            nhất quán, giảm unnecessary work và defects.
           </p>
 
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK)</h4>
+            <h4>Checklists (PMBOK p.151)</h4>
             <p style="margin:0">
-              Functional organizations are those in which the project is done as part of an
-              <strong>existing functional team</strong> — there is no designated project coordinator,
-              <strong>additional budget or resources</strong>.
+              A checklist is a list of items or actions used as reminders, developed from historical
+              information and lessons learned from similar projects to identify potential risks.
             </p>
           </div>
 
+          <p>
+            <strong>Work with the team</strong> để tạo checklists — collaboration đảm bảo alignment
+            và cải thiện performance mà không cần escalation hoặc major restructuring.
+          </p>
+        </section>
+
+        <section id="signals">
+          <h2>2. Đọc tín hiệu đề</h2>
+
           <table>
             <thead>
-              <tr><th>Đặc điểm</th><th>Functional</th></tr>
+              <tr><th>Signal</th><th>Ý nghĩa</th></tr>
             </thead>
             <tbody>
-              <tr><td>Team</td><td>Đã có sẵn trong phòng ban (existing team)</td></tr>
-              <tr><td>Budget</td><td>Không có ngân sách bổ sung cho “dự án”</td></tr>
-              <tr><td>Authority</td><td>Functional manager quyết định; PM/coordinator không có quyền thêm</td></tr>
-              <tr><td>Loại initiative</td><td>Process improvement, công việc cải tiến trong dept</td></tr>
+              <tr>
+                <td><em>Inconsistent task execution</em></td>
+                <td>Mỗi người làm khác nhau — cần standardize</td>
+              </tr>
+              <tr>
+                <td>Junior: extra, unnecessary work</td>
+                <td>Thiếu clarity về đúng steps cần làm</td>
+              </tr>
+              <tr>
+                <td>Senior: inefficiencies in delivery</td>
+                <td>Process không tối ưu, không aligned</td>
+              </tr>
+              <tr>
+                <td><em>Defects occurring</em></td>
+                <td>Hậu quả của inconsistent execution</td>
+              </tr>
+              <tr>
+                <td><em>Missing deadlines</em></td>
+                <td>Performance gap — cần practical tool, không restructure</td>
+              </tr>
             </tbody>
           </table>
         </section>
 
-        <section id="q5-vs-q6">
-          <h2>2. Đối chiếu Q5 vs Q6 — hai cực quyền PM</h2>
-          <p>Đề thi hay đặt cặp câu “full authority” và “no budget/authority” liên tiếp.</p>
-
-          <div class="compare-pair">
-            <div class="pair-box q5">
-              <h4>Q5 — BuildMax (Project-oriented)</h4>
-              <ul style="margin:0;padding-left:1.1rem">
-                <li>Dedicated resources</li>
-                <li><strong>Full</strong> budget authority</li>
-                <li><strong>Full</strong> decision-making</li>
-              </ul>
-              <p style="margin:0.5rem 0 0"><a href="pmp-teach-organizational-structure.html">→ Bài Q5</a></p>
-            </div>
-            <div class="pair-box q6">
-              <h4>Q6 — Prime Manufacturing (Functional)</h4>
-              <ul style="margin:0;padding-left:1.1rem">
-                <li>Team đã trong sales dept</li>
-                <li><strong>No</strong> additional budget</li>
-                <li><strong>No</strong> additional authority</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 6</h2>
+          <h2>3. Câu hỏi thực hành — Question 32</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q6</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q32</div>
             <div class="q-text">
-              Liam works as a manager in the sales department at Prime Manufacturing and would like
-              to start a <em>process improvement initiative</em>. Any project team members are
-              already within his team, but Liam has <em>no additional budget or authority</em>.
-              <em>What type of organizational structure is Liam working in?</em>
+              A project team is <em>missing deadlines</em> due to <em>inconsistent task execution</em>.
+              Junior members are completing extra, unnecessary work, while senior members report
+              inefficiencies in the way items are delivered, with <em>defects occurring</em> as a result.
+              What should the project manager do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Project-oriented organization.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Functional organization.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Balanced-matrix organization.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Weak-matrix organization.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Ask the team to swarm around the issue and solve it.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Implement a general training program.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Work with the team to create checklists.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Reassign tasks to more experienced team members.</button>
 
             <div class="feedback" id="quizFeedback"></div>
-          </div>
-
-          <div class="card info">
-            <h4>Dịch tình huống</h4>
-            <p style="margin:0">
-              Liam là manager phòng Sales tại Prime Manufacturing, muốn khởi động
-              <strong>initiative cải tiến quy trình</strong>. Thành viên đã nằm trong team của anh,
-              nhưng <strong>không có ngân sách hay quyền bổ sung</strong>. Cấu trúc tổ chức nào?
-            </p>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <div class="card tip">
-            <h4>Giải thích (PMBOK p.22)</h4>
-            <p style="margin:0">
-              Dự án/cải tiến làm trong <strong>existing functional team</strong> — không có
-              project coordinator riêng, không budget/resources bổ sung → <strong>Functional</strong>.
-            </p>
-          </div>
-
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li><strong>Manager in sales department</strong> — initiative nằm trong chức năng sales.</li>
-            <li><strong>Team members already within his team</strong> — không huy động nguồn lực chuyên trách mới.</li>
-            <li><strong>No additional budget or authority</strong> — đặc trưng functional: không cấp thêm cho “project”.</li>
+            <li>Inconsistent execution + unnecessary work + defects → checklist standardizes steps.</li>
+            <li>Collaborate with team — alignment without escalation or restructuring.</li>
+            <li>Checklists từ lessons learned — practical QA tool (p.151, Manage QA p.23–24).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Project-oriented</strong></td>
-                <td>Cần dedicated resources + PM full authority — ngược với “no additional budget/authority”.</td>
+                <td><strong>A. Swarm</strong></td>
+                <td>Agile technique cho blocker cụ thể — không address systemic inconsistent execution.</td>
               </tr>
               <tr>
-                <td><strong>C. Balanced matrix</strong></td>
-                <td>Matrix có vai trò PM chia quyền với functional manager — không khớp “no authority”.</td>
+                <td><strong>B. General training</strong></td>
+                <td>Quá broad — đề cần targeted alignment tool, không generic program.</td>
               </tr>
               <tr>
-                <td><strong>D. Weak matrix</strong></td>
-                <td>Weak matrix vẫn có project coordinator/PM (dù quyền thấp). Đề nói không có authority bổ sung và làm trong functional team — Functional thuần hơn.</td>
+                <td><strong>D. Reassign to experienced</strong></td>
+                <td>Major restructuring / workaround — không fix root cause cho cả team.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Keywords</h4>
-            <ul style="margin:0">
-              <li><strong>already within his team</strong> → existing functional team</li>
-              <li><strong>no additional budget</strong> → Functional</li>
-              <li><strong>no additional authority</strong> → Functional (PM ✗)</li>
-              <li><strong>process improvement in department</strong> → không phải project hóa toàn tổ chức</li>
-            </ul>
+            <h4>Liên hệ Q30 &amp; Q31</h4>
+            <p style="margin:0">
+              Q30: process improvement cho shift inconsistency. Q31: audits cho process gaps.
+              Q32: checklists cho inconsistent <em>task execution</em> at team level — lighter-touch, collaborative fix.
+            </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Functional hay Matrix?</h2>
+          <h2>5. Drill — Tool nào phù hợp?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="FUNC">
-              <span>Improvement done inside dept; no extra budget</span>
+            <div class="classify-row" data-answer="CHK">
+              <span>Inconsistent steps causing defects across junior &amp; senior</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="CHK">Checklist</button>
+                <button data-pick="TRN">General training</button>
+                <button data-pick="SW">Swarm</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PROJ">
-              <span>PM controls budget; dedicated team</span>
+            <div class="classify-row" data-answer="SW">
+              <span>Single urgent blocker needs all hands now</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="CHK">Checklist</button>
+                <button data-pick="TRN">General training</button>
+                <button data-pick="SW">Swarm</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="WEAK">
-              <span>PM tracks schedule; FM assigns people</span>
+            <div class="classify-row" data-answer="TRN">
+              <span>Team lacks fundamental skill in new technology</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="CHK">Checklist</button>
+                <button data-pick="TRN">General training</button>
+                <button data-pick="SW">Swarm</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FUNC">
-              <span>Dept manager runs initiative with own staff only</span>
+            <div class="classify-row" data-answer="CHK">
+              <span>Reminders from lessons learned on similar projects</span>
               <div class="classify-btns">
-                <button data-pick="FUNC">Functional</button>
-                <button data-pick="WEAK">Weak matrix</button>
-                <button data-pick="PROJ">Project</button>
+                <button data-pick="CHK">Checklist</button>
+                <button data-pick="TRN">General training</button>
+                <button data-pick="SW">Swarm</button>
               </div>
             </div>
           </div>
@@ -341,12 +316,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Có từ “project/initiative” → chọn Project-oriented</h4>
-            <p style="margin:0">Process improvement vẫn có thể chạy trong functional org. Xem <em>quyền và budget</em>, không chỉ tên initiative.</p>
+            <h4>Bẫy 1: Problem → Swarm (A)</h4>
+            <p style="margin:0">Swarm giải quyết blocker tức thì — không standardize task execution cho cả team.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Weak matrix vs Functional</h4>
-            <p style="margin:0">Weak matrix: vẫn có vai trò PM/coordinator. Functional thuần: làm trong team hiện có, <strong>no additional authority</strong>, không chỉ định coordinator riêng.</p>
+            <h4>Bẫy 2: Inefficiency → General training (B)</h4>
+            <p style="margin:0">"General" quá rộng — đề hỏi alignment &amp; consistency, checklist cụ thể hơn.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Senior frustrated → Reassign (D)</h4>
+            <p style="margin:0">Workaround, không scalable — không giúp junior stop unnecessary work.</p>
+          </div>
+          <div class="card tip">
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Inconsistent execution + defects + no escalation asked</strong> → Work with team on checklists (C).</p>
           </div>
         </section>
 
@@ -354,44 +337,55 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Functional organization?</div>
-            <div class="flashcard-back">Dự án/cải tiến trong existing functional team — không coordinator riêng, không budget/resources bổ sung.</div>
+            <div class="flashcard-front">Checklist là gì? (p.151)</div>
+            <div class="flashcard-back">List of items/actions as reminders · from historical info &amp; lessons learned.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q6 đáp án?</div>
-            <div class="flashcard-back"><strong>B — Functional.</strong> Team sẵn trong dept + no additional budget/authority.</div>
+            <div class="flashcard-front">Q32 đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Work with the team to create checklists.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">FUNCTIONAL ORGANIZATION — Q6 (PMBOK 8, p.22)
+          <div class="cheat-sheet">CHECKLISTS — Q32 (PMBOK 8, p.23–24 &amp; p.151)
 ─────────────────────────────────────────────────────
-FUNCTIONAL
-  ✓ Work done in EXISTING functional team
-  ✓ No designated project coordinator
-  ✓ NO additional budget or resources
-  ✓ Functional manager holds authority
+PROCESS: Manage Quality Assurance
+TOOL: Checklists
 
-Q6 KEYWORDS
-  "already within his team"
-  "no additional budget or authority"
-  "process improvement" in a department
+CHECKLIST = reminders · items/actions list
+  - From historical info &amp; lessons learned
+  - Identify potential risks · standardize steps
 
-Q5 vs Q6
-  Q5 full authority + dedicated resources → Project-oriented
-  Q6 no extra budget/authority + existing team → Functional
+SCENARIO: Missing deadlines
+           INCONSISTENT task execution
+           Junior: extra UNNECESSARY work
+           Senior: delivery INEFFICIENCIES
+           DEFECTS as result
+→ C) Work with TEAM to create CHECKLISTS ✓
+   (collaboration · alignment · no escalation)
 
-NOT FUNCTIONAL
-  ✗ Full PM budget control (Project-oriented)
-  ✗ Shared PM/FM authority (Balanced matrix)
-  ✗ PM role with limited power (Weak matrix — read carefully)
+NOT:
+  A) Swarm — agile blocker fix, not systemic consistency
+  B) GENERAL training — too broad; need targeted tool
+  D) Reassign to experienced — restructuring workaround
 
-Q6 ANSWER: B — Functional organization</div>
+SIGNAL: "inconsistent task execution" + "unnecessary work"
+        "defects" + improve without major change
+
+VS Q30: process analysis &amp; improvement (shift procedures)
+VS Q31: quality audits (organizational standards gaps)
+VS Q32: checklists (team task execution alignment)
+
+Q32 ANSWER: C
+
+REF: PMBOK Guide, 8th Ed., p.23–24 &amp; p.151</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-organizational-structure.html">Q5: Project-oriented</a>
+          · <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
+          · <a href="pmp-teach-process-improvement.html">Q30: Process Improvement</a>
+          · <a href="pmp-full-questions.html#q-32">Luyện câu 32</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -400,12 +394,12 @@ Q6 ANSWER: B — Functional organization</div>
 
   <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Project-oriented cần full authority và dedicated resources — trái với đề.",
-        B: "Đúng! Existing team + no additional budget/authority = Functional organization.",
-        C: "Balanced matrix chia quyền PM/FM — không phải 'no authority'.",
-        D: "Weak matrix vẫn có vai trò PM. Đề mô tả functional thuần hơn."
+        A: "Swarm giải quyết blocker cụ thể — không standardize inconsistent task execution cho cả team.",
+        B: "General training quá rộng — đề cần targeted alignment tool như checklist.",
+        C: "Đúng! Checklists + collaborate with team — alignment, giảm unnecessary work &amp; defects (p.151).",
+        D: "Reassign là workaround — không fix root cause, không giúp junior members."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -421,7 +415,7 @@ Q6 ANSWER: B — Functional organization</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Functional organization.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Work with the team to create checklists.</strong>" : "");
         });
       });
       let score = 0;
