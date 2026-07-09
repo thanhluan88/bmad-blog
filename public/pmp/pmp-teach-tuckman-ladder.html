@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Request for Quote (Q26)</title>
+  <title>PMBOK 8 — Tuckman Ladder (Q91)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,6 +50,10 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,8 +69,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 360px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -88,11 +91,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Request for Quote · Q26</div>
+      <div class="brand-sub">Tuckman Ladder · Q91</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#rfx">RFI / RFP / RFQ</a>
-        <a href="#signal">Đọc tín hiệu đề</a>
+        <a href="#tuckman">Tuckman Ladder</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -125,7 +128,7 @@
         <a href="pmp-teach-bidder-conference.html">Q23: Bidder Conference</a>
         <a href="pmp-teach-sourcing-strategy-plan.html">Q24: Sourcing Strategy Plan</a>
         <a href="pmp-teach-make-or-buy-analysis.html">Q25: Make-or-Buy Analysis</a>
-        <a href="pmp-teach-request-for-quote.html" class="series-current">Q26: Request for Quote</a>
+        <a href="pmp-teach-request-for-quote.html">Q26: Request for Quote</a>
         <a href="pmp-teach-change-log.html">Q27: Change Log</a>
         <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
         <a href="pmp-teach-issue-log.html">Q29: Issue Log</a>
@@ -190,15 +193,15 @@
         <a href="pmp-teach-servant-leadership.html">Q88: Servant Leadership</a>
         <a href="pmp-teach-retrospective.html">Q89: Retrospective</a>
         <a href="pmp-teach-distributed-management.html">Q90: Distributed Management</a>
-        <a href="pmp-teach-tuckman-ladder.html">Q91: Tuckman Ladder</a>
+        <a href="pmp-teach-tuckman-ladder.html" class="series-current">Q91: Tuckman Ladder</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#rfx">RFx</a>
-        <a href="#signal">Signal</a>
+        <a href="#tuckman">Tuckman</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -207,105 +210,196 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q26 về <strong>Request for Quote (RFQ)</strong> — specs rõ ràng,
-            nhiều supplier khác <em>price points</em>; cần chọn document đúng để so sánh giá.
+            Bài học Q91 về <strong>Tuckman Ladder of Team Development</strong> — Brian tại Zendu Systems
+            (data migration): team vừa hình thành, nhưng giờ <em>thách thức cách làm của nhau</em>,
+            <em>bất đồng làm chậm tiến độ</em>, và <em>ưu tiên thường xuyên bị tranh luận</em>.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.248</span>
-            <span class="badge">Plan Sourcing Strategy</span>
-            <span class="badge">Câu 26 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.85 &amp; 211</span>
+            <span class="badge">Lead the Team</span>
+            <span class="badge">Tuckman Ladder</span>
+            <span class="badge">Câu 91 — Practice</span>
           </div>
         </header>
 
-        <section id="rfx">
-          <h2>1. RFI vs RFP vs RFQ</h2>
+        <section id="tuckman">
+          <h2>1. Lead the Team &amp; Tuckman Ladder (p.85, 211)</h2>
+          <p>
+            <strong>Tuckman Ladder</strong> (p.211) mô tả các giai đoạn phát triển nhóm theo thứ tự:
+            <strong>Forming → Storming → Norming → Performing → Adjourning</strong> (FSNPA).
+            Thuộc <strong>Lead the Team</strong> domain (p.85) — PM nhận diện stage hiện tại để
+            chọn leadership approach phù hợp (facilitate conflict, build trust, empower team).
+          </p>
 
+          <div class="approach-grid">
+            <div class="approach-cell">
+              <strong>Forming</strong>
+              Team mới tập hợp; làm quen tên, vai trò, kỹ năng. Lịch sự, chưa xung đột rõ.
+            </div>
+            <div class="approach-cell">
+              <strong>Storming</strong>
+              Tranh giành vị trí; thách thức cách làm; bất đồng, conflict; tiến độ chậm.
+            </div>
+            <div class="approach-cell">
+              <strong>Norming</strong>
+              Thiết lập ground rules; giải quyết khác biệt; trust tăng; làm việc ổn định hơn.
+            </div>
+            <div class="approach-cell">
+              <strong>Performing</strong>
+              High performance; tự tổ chức; deliver hiệu quả; ít cần can thiệp từ leader.
+            </div>
+          </div>
+
+          <div class="card tip">
+            <h4>Signal trong stem Q91</h4>
+            <p style="margin:0">
+              <strong>Recently came together · challenging each other's approaches · disagreements slow progress · priorities frequently debated</strong>
+              → team đã qua Forming (đang tranh luận/challenge), chưa Norming (chưa có agreement),
+              chưa Performing (chưa high performance) → <strong>Storming (B)</strong>.
+            </p>
+          </div>
+
+          <h3>Bảng FSNPA — Tuckman Ladder đầy đủ</h3>
           <table>
             <thead>
-              <tr><th>Document</th><th>Khi nào dùng?</th></tr>
+              <tr><th>Stage</th><th>Đặc điểm</th><th>PM nên làm gì</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>RFI</strong> — Request for Information</td>
-                <td>Thu thập thông tin thị trường / capabilities — chưa sẵn sàng mua</td>
+                <td><strong>F — Forming</strong></td>
+                <td>Team mới hình thành; làm quen; polite; chưa conflict mạnh</td>
+                <td>Clarify roles, objectives; kickoff; team charter</td>
               </tr>
               <tr>
-                <td><strong>RFP</strong> — Request for Proposal</td>
-                <td>Solution chưa rõ — seller đề xuất approach + giá</td>
+                <td><strong>S — Storming</strong></td>
+                <td>Challenge approaches; conflict; debate priorities; jockey for position</td>
+                <td>Facilitate conflict resolution; coaching; ground rules</td>
               </tr>
               <tr>
-                <td><strong>RFQ</strong> — Request for Quote</td>
-                <td>Specs rõ · solution sẵn có · <strong>price là yếu tố quyết định chính</strong></td>
+                <td><strong>N — Norming</strong></td>
+                <td>Agreements hình thành; trust tăng; collaboration ổn định</td>
+                <td>Reinforce norms; celebrate progress; maintain trust</td>
+              </tr>
+              <tr>
+                <td><strong>P — Performing</strong></td>
+                <td>High performance; self-organize; deliver efficiently</td>
+                <td>Empower; distributed management; remove barriers</td>
+              </tr>
+              <tr>
+                <td><strong>A — Adjourning</strong></td>
+                <td>Project kết thúc; team giải tán; transition/handover</td>
+                <td>Celebrate; lessons learned; knowledge transfer</td>
               </tr>
             </tbody>
           </table>
 
-          <div class="card tip">
-            <h4>RFQ (PMBOK p.248)</h4>
+          <table>
+            <thead>
+              <tr><th>Stage</th><th>Signal keywords</th><th>Q91?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Forming (A)</strong></td>
+                <td>Just met; polite; learning names/roles</td>
+                <td>✗ Đã qua — đang challenge &amp; debate</td>
+              </tr>
+              <tr>
+                <td><strong>Storming (B)</strong></td>
+                <td>Challenge approaches; disagreements; debate priorities</td>
+                <td>✓ Brian's team — conflict, slow progress</td>
+              </tr>
+              <tr>
+                <td><strong>Norming (C)</strong></td>
+                <td>Agreements reached; trust built; working smoothly</td>
+                <td>✗ Chưa có agreement — vẫn tranh luận</td>
+              </tr>
+              <tr>
+                <td><strong>Performing (D)</strong></td>
+                <td>High performance; self-directed; efficient delivery</td>
+                <td>✗ Progress đang chậm — chưa high performance</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="compare">
+          <h2>2. So sánh các đáp án &amp; Q83 RAM vs Identify Stage</h2>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Stage</th><th>Q91 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Forming</strong></td>
+                <td>Team mới tập hợp; polite; làm quen</td>
+                <td>✗ "Recently came together" nhưng đã challenge/debate → đã qua Forming</td>
+              </tr>
+              <tr>
+                <td><strong>B. Storming</strong></td>
+                <td>Conflict; challenge approaches; debate priorities</td>
+                <td><strong>Yes — disagreements slow progress</strong></td>
+              </tr>
+              <tr>
+                <td><strong>C. Norming</strong></td>
+                <td>Agreements; trust; collaboration ổn định</td>
+                <td>✗ Chưa có agreement — priorities vẫn debated</td>
+              </tr>
+              <tr>
+                <td><strong>D. Performing</strong></td>
+                <td>High performance; self-organize; efficient</td>
+                <td>✗ Progress chậm — không phải high performance</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card info">
+            <h4>Q83 RAM vs Q91 Tuckman — Khi nào dùng cái nào?</h4>
             <p style="margin:0">
-              A request for quote (RFQ) is used when price is the main deciding factor
-              and the proposed solution is readily available.
+              <strong>Q83 RAM (đáp án đúng A):</strong> stem hỏi <em>what should PM do next</em> khi
+              <strong>role overlap</strong> — hai người cùng nghĩ mình responsible cho task → workshop
+              <strong>RAM</strong> để gán R/A/C/I. Tuckman (D) là distractor — giải thích dynamics
+              nhưng không fix ai làm gì.<br><br>
+              <strong>Q91 Tuckman (đáp án đúng B):</strong> stem hỏi <em>which stage is the team in</em>
+              — nhận diện giai đoạn phát triển nhóm dựa trên behavior (challenge, conflict, debate).
+              Không hỏi artifact hay action — chỉ classify stage.<br><br>
+              <strong>Rule:</strong> Role confusion / missed deliverable do overlap → <strong>RAM</strong>.
+              Identify team development stage / describe team behavior → <strong>Tuckman</strong>.
             </p>
           </div>
         </section>
 
-        <section id="signal">
-          <h2>2. Đọc tín hiệu trong đề</h2>
-
-          <table>
-            <thead>
-              <tr><th>Signal</th><th>→ Document</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><em>Clearly defined specifications</em></td>
-                <td>Không cần RFP (seller propose solution)</td>
-              </tr>
-              <tr>
-                <td><em>Different price points</em> · confusion in selection</td>
-                <td>RFQ — so sánh giá trên cùng specs</td>
-              </tr>
-              <tr>
-                <td>Standard electrical components</td>
-                <td>Commodity / readily available → RFQ</td>
-              </tr>
-              <tr>
-                <td>Vendors misunderstand project (Q23)</td>
-                <td>Bidder conference — không phải case này</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 26</h2>
+          <h2>3. Câu hỏi thực hành — Question 91</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q26</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q91</div>
             <div class="q-text">
-              Aiden is managing a facilities upgrade at CM Holdings. The project requires
-              standard electrical components with <em>clearly defined specifications</em>,
-              and multiple suppliers are available at different <em>price points causing confusion
-              and delays</em> in the selection process. What should he do?
+              Brian is a project manager at Zendu Systems, leading a data migration project. The team
+              has <em>recently come together</em>. Over the past few weeks, team members have begun
+              <em>challenging each other's approaches</em>, <em>disagreements are slowing progress</em>,
+              and <em>priorities are frequently debated</em>. In which stage of team development is the
+              team currently?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Conduct a bidder conference.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Issue a Request For Proposal.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Issue a Request For Information.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Issue a Request For Quote.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Forming</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Storming</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Norming</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Performing</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn D?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Specs đã rõ + standard components = solution readily available.</li>
-            <li>Vấn đề là price points khác nhau → RFQ để lấy quote so sánh giá.</li>
-            <li>Giảm confusion/delay bằng structured price comparison.</li>
+            <li>Team challenge each other's approaches → personalities và working styles bộc lộ — đặc trưng Storming.</li>
+            <li>Disagreements slowing progress → conflict đang ảnh hưởng delivery, chưa resolve.</li>
+            <li>Priorities frequently debated → chưa có shared agreement (chưa Norming).</li>
+            <li>"Recently came together" = context, nhưng behavior hiện tại = past Forming, đang Storming (p.211).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -315,73 +409,102 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Bidder conference</strong></td>
-                <td>Dùng khi vendors hiểu khác requirements (Q23) — đây specs đã clear.</td>
+                <td><strong>A. Forming</strong></td>
+                <td>Forming = polite, làm quen, chưa conflict mạnh. Team đã challenge &amp; debate → đã qua Forming.</td>
               </tr>
               <tr>
-                <td><strong>B. RFP</strong></td>
-                <td>RFP khi cần seller đề xuất solution/approach — specs đã defined.</td>
+                <td><strong>C. Norming</strong></td>
+                <td>Norming = agreements reached, trust built, working smoothly. Priorities vẫn debated → chưa Norming.</td>
               </tr>
               <tr>
-                <td><strong>C. RFI</strong></td>
-                <td>RFI thu thập info — đã có multiple suppliers và cần chọn theo price.</td>
+                <td><strong>D. Performing</strong></td>
+                <td>Performing = high performance, self-directed, efficient. Progress đang chậm do disagreements → không Performing.</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card warn">
+            <h4>So với Q83 — Tuckman là distractor khi hỏi ACTION</h4>
+            <p style="margin:0">
+              Q83: role overlap → RAM workshop (A), không review Tuckman (D).<br>
+              Q91: identify stage từ behavior → Storming (B). Cùng domain Lead the Team nhưng câu hỏi khác loại.
+            </p>
+          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Chọn RFx nào?</h2>
+          <h2>5. Drill — Forming, Storming, Norming, hay Performing?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="RFQ">
-              <span>Clear specs, commodity item, compare prices</span>
+            <div class="classify-row" data-answer="STORMING">
+              <span>Team challenges approaches; disagreements slow progress; priorities frequently debated (Q91)</span>
               <div class="classify-btns">
-                <button data-pick="RFI">RFI</button>
-                <button data-pick="RFP">RFP</button>
-                <button data-pick="RFQ">RFQ</button>
+                <button data-pick="FORMING">Forming</button>
+                <button data-pick="STORMING">Storming</button>
+                <button data-pick="NORMING">Norming</button>
+                <button data-pick="PERFORMING">Performing</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RFP">
-              <span>Need seller to propose technical approach</span>
+            <div class="classify-row" data-answer="FORMING">
+              <span>Team just formed after kickoff; members polite, learning names, roles, and skills</span>
               <div class="classify-btns">
-                <button data-pick="RFI">RFI</button>
-                <button data-pick="RFP">RFP</button>
-                <button data-pick="RFQ">RFQ</button>
+                <button data-pick="FORMING">Forming</button>
+                <button data-pick="STORMING">Storming</button>
+                <button data-pick="NORMING">Norming</button>
+                <button data-pick="PERFORMING">Performing</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RFI">
-              <span>Explore market capabilities before sourcing</span>
+            <div class="classify-row" data-answer="NORMING">
+              <span>Team established ground rules; resolving differences; growing trust and collaboration</span>
               <div class="classify-btns">
-                <button data-pick="RFI">RFI</button>
-                <button data-pick="RFP">RFP</button>
-                <button data-pick="RFQ">RFQ</button>
+                <button data-pick="FORMING">Forming</button>
+                <button data-pick="STORMING">Storming</button>
+                <button data-pick="NORMING">Norming</button>
+                <button data-pick="PERFORMING">Performing</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RFQ">
-              <span>Price is main deciding factor, solution available</span>
+            <div class="classify-row" data-answer="PERFORMING">
+              <span>High-performing team; self-organizes; delivers efficiently with minimal PM intervention</span>
               <div class="classify-btns">
-                <button data-pick="RFI">RFI</button>
-                <button data-pick="RFP">RFP</button>
-                <button data-pick="RFQ">RFQ</button>
+                <button data-pick="FORMING">Forming</button>
+                <button data-pick="STORMING">Storming</button>
+                <button data-pick="NORMING">Norming</button>
+                <button data-pick="PERFORMING">Performing</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="STORMING">
+              <span>Members jockey for position; personalities clash; conflicts over methods and priorities</span>
+              <div class="classify-btns">
+                <button data-pick="FORMING">Forming</button>
+                <button data-pick="STORMING">Storming</button>
+                <button data-pick="NORMING">Norming</button>
+                <button data-pick="PERFORMING">Performing</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Procurement → RFP (B) mặc định</h4>
-            <p style="margin:0">RFP khi solution chưa rõ. Specs clear + standard parts → RFQ.</p>
+            <h4>Bẫy 1: "Recently came together" → Forming (A)</h4>
+            <p style="margin:0">"Recently" chỉ là context — behavior hiện tại (challenge, debate, conflict) cho thấy team đã qua Forming, đang Storming.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: “Confusion” → Bidder conference (A)</h4>
-            <p style="margin:0">Confusion về <em>price selection</em>, không phải misunderstanding scope — RFQ fix đúng vấn đề.</p>
+            <h4>Bẫy 2: Conflict + new team → RAM/Tuckman nhầm (Q83 vs Q91)</h4>
+            <p style="margin:0">Q83 hỏi action với role overlap → RAM. Q91 hỏi identify stage → Tuckman. Đọc kỹ stem: "what should PM do" vs "which stage".</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Team đang làm việc → Norming (C)</h4>
+            <p style="margin:0">Norming cần agreements và trust ổn định. "Priorities frequently debated" = chưa agreement → chưa Norming.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: Team active → Performing (D)</h4>
+            <p style="margin:0">Performing = high performance, efficient delivery. "Disagreements slowing progress" = opposite of Performing.</p>
           </div>
           <div class="card tip">
-            <h4>Mnemonic</h4>
-            <p style="margin:0"><strong>Clear specs + price decides</strong> → RFQ · <strong>Solution TBD</strong> → RFP · <strong>Market research</strong> → RFI</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Challenge approaches · disagreements · debate priorities · slow progress</strong> → Storming (B).</p>
           </div>
         </section>
 
@@ -389,47 +512,66 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Khi nào dùng RFQ? (p.248)</div>
-            <div class="flashcard-back">Price = main deciding factor · proposed solution readily available.</div>
+            <div class="flashcard-front">FSNPA — thứ tự Tuckman Ladder?</div>
+            <div class="flashcard-back">Forming → Storming → Norming → Performing → Adjourning. Nhớ: FSNPA.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q26 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Issue a Request For Quote.</div>
+            <div class="flashcard-front">Q91 đáp án?</div>
+            <div class="flashcard-back"><strong>B — Storming</strong>. Challenge approaches, disagreements, debate priorities.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q83 RAM vs Q91 Tuckman?</div>
+            <div class="flashcard-back">Q83: role overlap → RAM (action). Q91: identify stage → Tuckman. Tuckman (D) là distractor ở Q83.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">REQUEST FOR QUOTE — Q26 (PMBOK 8, p.248)
+          <div class="cheat-sheet">TUCKMAN LADDER — Q91
+(PMBOK 8, p.85 &amp; 211)
 ─────────────────────────────────────────────────────
-RFQ: Price = MAIN deciding factor
-     Solution READILY AVAILABLE (clear specs)
+DOMAIN: Lead the Team (p.85)
+MODEL: Tuckman Ladder (p.211) — FSNPA
 
-RFI → gather market info (early)
-RFP → seller proposes solution (specs unclear)
-RFQ → compare quotes on known specs (price focus)
+FSNPA ORDER:
+  F = FORMING    — team mới; polite; làm quen
+  S = STORMING   — conflict; challenge; debate
+  N = NORMING    — agreements; trust; collaborate
+  P = PERFORMING — high performance; self-organize
+  A = ADJOURNING — project end; disband; handover
 
-SCENARIO: CM Holdings — standard electrical components
-           CLEARLY DEFINED specs
-           multiple suppliers, different PRICE POINTS
-ANSWER → D) Issue REQUEST FOR QUOTE ✓
+SCENARIO: Brian @ Zendu Systems (data migration)
+          Team RECENTLY CAME TOGETHER
+          CHALLENGING each other's approaches
+          DISAGREEMENTS slowing progress
+          PRIORITIES frequently DEBATED
+STAGE → B) STORMING ✓
 
 NOT:
-  A) Bidder conference — vendors misunderstand scope (Q23)
-  B) RFP — need proposed approach, not commodity buy
-  C) RFI — already have suppliers, need price compare
+  A) FORMING    — đã qua; đang challenge/debate
+  C) NORMING    — chưa agreement; vẫn tranh luận
+  D) PERFORMING — progress chậm; chưa high performance
 
-SIGNAL: "clearly defined specifications" + "price points"
+SIGNAL KEYWORDS:
+  Forming:    just met, polite, kickoff, learn roles
+  Storming:   challenge, conflict, debate, jockey, slow
+  Norming:    agreement, ground rules, trust, resolve
+  Performing: high performance, self-organize, efficient
+  Adjourning: project end, handover, lessons learned
 
-Q26 ANSWER: D
+Q83 vs Q91:
+  Q83: role overlap → RAM workshop (Tuckman = distractor)
+  Q91: identify stage → Storming (behavior-based)
 
-REF: PMBOK Guide, 8th Ed., p.20 &amp; p.248 — Request for quote</div>
+Q91 ANSWER: B — Storming
+
+REF: PMBOK Guide, 8th Ed., p.85 Lead the Team
+      p.211 Tuckman Ladder of Team Development</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-bidder-conference.html">Q23: Bidder Conference</a>
-          · <a href="pmp-teach-make-or-buy-analysis.html">Q25: Make-or-Buy</a>
-          · <a href="pmp-full-questions.html#q-26">Luyện câu 26</a>
+          · <a href="pmp-teach-responsibility-assignment-matrix.html">Q83: RAM</a>
+          · <a href="pmp-teach-distributed-management.html">Q90: Distributed Management</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -438,12 +580,12 @@ REF: PMBOK Guide, 8th Ed., p.20 &amp; p.248 — Request for quote</div>
 
   <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Bidder conference khi vendors hiểu khác requirements — specs đã clearly defined.",
-        B: "RFP khi cần seller propose solution — đây là standard components với specs rõ.",
-        C: "RFI thu thập thông tin sớm — đã có suppliers, cần so sánh price.",
-        D: "Đúng! RFQ khi price là yếu tố chính và solution readily available (p.248)."
+        A: "Forming = team mới tập hợp, polite, làm quen. Team đã challenge &amp; debate → đã qua Forming.",
+        B: "Đúng! Storming = challenge approaches, conflict, debate priorities (p.211, Lead the Team). Disagreements slowing progress.",
+        C: "Norming = agreements reached, trust built. Priorities vẫn frequently debated → chưa Norming.",
+        D: "Performing = high performance, efficient delivery. Progress đang chậm do disagreements → không Performing."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -459,7 +601,7 @@ REF: PMBOK Guide, 8th Ed., p.20 &amp; p.248 — Request for quote</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Issue a Request For Quote.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Storming</strong>" : "");
         });
       });
       let score = 0;
@@ -487,16 +629,18 @@ REF: PMBOK Guide, 8th Ed., p.20 &amp; p.248 — Request for quote</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>

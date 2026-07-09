@@ -94,6 +94,7 @@ const SERIES = [
   ["pmp-teach-servant-leadership.html", "Q88: Servant Leadership"],
   ["pmp-teach-retrospective.html", "Q89: Retrospective"],
   ["pmp-teach-distributed-management.html", "Q90: Distributed Management"],
+  ["pmp-teach-tuckman-ladder.html", "Q91: Tuckman Ladder"],
 ];
 
 function buildSeriesBlock(currentHref) {
