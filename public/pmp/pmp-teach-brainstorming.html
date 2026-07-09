@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Variables Over Time (Q13)</title>
+  <title>PMBOK 8 — Brainstorming (Q48)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -51,13 +51,6 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .curve-chart { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem 0.75rem; margin: 1.25rem 0; }
-    .curve-chart svg { width: 100%; height: auto; max-height: 200px; display: block; }
-    .curve-legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.65rem; font-size: 0.82rem; }
-    .curve-legend span { display: flex; align-items: center; gap: 0.35rem; }
-    .legend-line { width: 24px; height: 3px; border-radius: 2px; }
-    .legend-cost { background: var(--info); }
-    .legend-risk { background: var(--bad); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -73,7 +66,7 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 300px; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
     .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
@@ -95,11 +88,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Variables Over Time · Q13</div>
+      <div class="brand-sub">Brainstorming · Q48</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#curves">Cost vs Risk curves</a>
-        <a href="#predictive">Predictive lifecycle</a>
+        <a href="#brainstorming">Brainstorming</a>
+        <a href="#techniques">Technique Compare</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -154,7 +147,7 @@
         <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
         <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
         <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
-        <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
+        <a href="pmp-teach-brainstorming.html" class="series-current">Q48: Brainstorming</a>
         <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
         <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
@@ -169,13 +162,13 @@
         <a href="pmp-teach-leads-and-lags.html">Q60: Leads &amp; Lags</a>
       </nav>
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+      <a class="back-link secondary" href="pmp-full-questions.html#q-48">Luyện câu 48</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
-        <a href="#curves">Curves</a>
-        <a href="#predictive">Lifecycle</a>
+        <a href="#brainstorming">Brainstorm</a>
+        <a href="#techniques">Compare</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -184,183 +177,164 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q13 về <strong>Impact of Variables Over Time</strong> — cost/staffing và
-            risk/uncertainty thay đổi <em>ngược chiều</em> theo vòng đời dự án predictive.
+            Bài học Q48 về <strong>Brainstorming</strong> — Jane, BLS customer portal: team
+            collaborate tốt nhưng chỉ có <em>handful of ideas</em>; sponsor muốn
+            <em>speed things up</em> khi gather requirements.
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.59</span>
-            <span class="badge">Project Lifecycle</span>
-            <span class="badge">Câu 13 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.41 &amp; 149</span>
+            <span class="badge">Elicit and Analyze Requirements</span>
+            <span class="badge">Brainstorming</span>
+            <span class="badge">Câu 48 — Practice</span>
           </div>
         </header>
 
-        <section id="curves">
-          <h2>1. Hai đường cong quan trọng</h2>
+        <section id="brainstorming">
+          <h2>1. Brainstorming (p.149)</h2>
           <p>
-            PMBOK 8 mô tả hai biến số chính thay đổi theo thời gian — đây là kiến thức cổ điển
-            nhưng vẫn ra thi dưới dạng scenario với executive/sponsor.
+            Kỹ thuật group để <strong>generate ideas quickly</strong>, thường do facilitator dẫn.
+            Bao gồm idea generation và analysis — gather data, solutions, ideas từ stakeholders,
+            SMEs, và team members trong Elicit and Analyze Requirements (p.41).
           </p>
 
-          <div class="curve-chart" aria-label="Cost staffing bell curve and risk decreasing curve">
-            <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-              <line x1="40" y1="130" x2="380" y2="130" stroke="#9ca3af" stroke-width="1.5"/>
-              <line x1="40" y1="20" x2="40" y2="130" stroke="#9ca3af" stroke-width="1.5"/>
-              <text x="210" y="152" text-anchor="middle" fill="#6b7280" font-size="11">Time →</text>
-              <text x="18" y="80" text-anchor="middle" fill="#6b7280" font-size="11" transform="rotate(-90 18 80)">Level</text>
-              <path d="M 50 120 Q 120 115 200 45 Q 280 115 350 120" fill="none" stroke="#2563eb" stroke-width="2.5"/>
-              <text x="200" y="38" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="600">Cost / Staffing</text>
-              <path d="M 50 35 Q 150 55 250 90 Q 320 110 350 118" fill="none" stroke="#dc2626" stroke-width="2.5"/>
-              <text x="75" y="28" fill="#dc2626" font-size="11" font-weight="600">Risk / Uncertainty</text>
-            </svg>
-            <div class="curve-legend">
-              <span><i class="legend-line legend-cost"></i> Cost &amp; staffing: thấp → tăng → giảm mạnh cuối dự án</span>
-              <span><i class="legend-line legend-risk"></i> Risk &amp; uncertainty: cao nhất lúc đầu → giảm dần</span>
-            </div>
-          </div>
-
           <div class="card tip">
-            <h4>PMBOK p.59 — tóm tắt</h4>
+            <h4>Khi nào dùng brainstorming?</h4>
             <p style="margin:0">
-              <strong>Cost &amp; staffing:</strong> low at start → increase as work is carried out →
-              drop rapidly near end.<br>
-              <strong>Risk &amp; uncertainty:</strong> highest at start of project/phase → decrease
-              over time as decisions are made and deliverables accepted.
+              Cần <em>more ideas fast</em> — team đang work well together, chỉ thiếu volume
+              of ideas. Open, rapid ideation session.
             </p>
           </div>
         </section>
 
-        <section id="predictive">
-          <h2>2. Predictive project scenario</h2>
-          <p>
-            PetraCore Energy refinery expansion — executive lo <strong>staffing costs tăng</strong> và
-            <strong>risks identified sớm</strong>. PM giải thích: đó là pattern bình thường —
-            risk cao lúc đầu (nhiều unknowns), cost tăng khi execution ramp up.
-          </p>
+        <section id="techniques">
+          <h2>2. Brainstorming vs các kỹ thuật khác</h2>
 
           <table>
             <thead>
-              <tr><th>Giai đoạn</th><th>Cost / Staffing</th><th>Risk / Uncertainty</th></tr>
+              <tr><th>Technique</th><th>Best for</th><th>Q48</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Start / Planning</strong></td>
-                <td>Thấp</td>
-                <td>Cao nhất</td>
+                <td><strong>Brainstorming (B)</strong></td>
+                <td>Generate many ideas quickly in group</td>
+                <td><strong>Handful of ideas + speed up</strong></td>
               </tr>
               <tr>
-                <td><strong>Execution peak</strong></td>
-                <td>Cao nhất</td>
-                <td>Đang giảm</td>
+                <td><strong>Affinity diagram (A)</strong></td>
+                <td>Organize/group ideas after generation</td>
+                <td>After brainstorm — không tạo ideas nhanh</td>
               </tr>
               <tr>
-                <td><strong>Near completion</strong></td>
-                <td>Giảm nhanh</td>
-                <td>Thấp nhất</td>
+                <td><strong>Interviews (C)</strong></td>
+                <td>Deep 1-on-1 input, sensitive topics</td>
+                <td>Slower — sequential, không speed up group ideation</td>
+              </tr>
+              <tr>
+                <td><strong>NGT (D)</strong></td>
+                <td>Equal participation when loud voices dominate</td>
+                <td>Q47 problem — team already works well together</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Lưu ý thi</h4>
+            <h4>Liên hệ Q47 vs Q48</h4>
             <p style="margin:0">
-              Risk giảm dần áp dụng <strong>regardless of project life cycle</strong> (PMBOK p.59).
-              Cost curve mô tả chủ yếu cho <strong>predictive</strong> scenarios — agile có thể khác
-              nhưng đáp án C vẫn là chuẩn cho câu này.
+              Q47: loud voices dominate → <strong>NGT</strong> (structured, equal). Q48: few ideas,
+              need speed → <strong>brainstorming</strong> (rapid group ideation).
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 13</h2>
+          <h2>3. Câu hỏi thực hành — Question 48</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q13</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q48</div>
             <div class="q-text">
-              You are in the planning phase of a refinery expansion project at PetraCore Energy Ltd.
-              An executive manager raises concerns about increasing staffing costs and several
-              identified risks early in the project.
-              What will you tell them about the <em>cost and risk</em> on the project?
+              Jane is gathering requirements for a customer portal at BLS. The team are working
+              well together but have only generated a <em>handful of ideas</em> so far. The Project
+              Sponsor would like to <em>speed things up</em>. What should Jane do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Cost and staffing are highest at the beginning, while risk and uncertainty increase toward project completion.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Cost and staffing gradually decrease throughout the project, while risk and uncertainty remain constant.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Cost and staffing increase as work progresses and drop near completion, while risk and uncertainty decrease over time.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Cost and staffing remain stable throughout the project, while risk and uncertainty fluctuate unpredictably.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Use an affinity diagram.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Use brainstorming.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Conduct interviews with senior users.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Use the nominal group technique.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Khớp PMBOK p.59: cost/staffing tăng khi work progresses, drop near completion.</li>
-            <li>Risk/uncertainty <strong>decrease over time</strong> — cao nhất ở đầu phase.</li>
-            <li>Executive thấy cost tăng + risk sớm — PM giải thích đúng pattern, không panic.</li>
+            <li>Need more ideas + sponsor wants speed → facilitated group brainstorming.</li>
+            <li>Team collaborates well — good fit for open ideation session.</li>
+            <li>Elicit and Analyze Requirements — brainstorming (p.41, 149).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao sai</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A</strong></td>
-                <td>Đảo ngược cả hai — cost không cao nhất lúc đầu; risk không tăng về cuối.</td>
+                <td><strong>A. Affinity diagram</strong></td>
+                <td>Sort/group existing ideas — không generate volume quickly.</td>
               </tr>
               <tr>
-                <td><strong>B</strong></td>
-                <td>Cost giảm dần + risk constant — sai hoàn toàn (✗ slide).</td>
+                <td><strong>C. Interviews</strong></td>
+                <td>1-on-1 sequential — slower than group brainstorm for rapid ideation.</td>
               </tr>
               <tr>
-                <td><strong>D</strong></td>
-                <td>Cost stable + risk unpredictable — không mô tả impact over time p.59.</td>
+                <td><strong>D. NGT</strong></td>
+                <td>Structured equal participation — Q47 when dominance is problem, not few ideas.</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="card warn">
-            <h4>Mnemonic thi</h4>
-            <p style="margin:0">
-              <strong>Cost</strong> = chuông (bell) · <strong>Risk</strong> = đường xuống dốc (↓ over time)<br>
-              Hai đường <em>ngược chiều</em> — đừng chọn đáp án mô tả cùng hướng cho cả hai.
-            </p>
-          </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Đầu dự án hay cuối dự án?</h2>
+          <h2>5. Drill — Brainstorm, affinity, interview hay NGT?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="START">
-              <span>Risk and uncertainty are highest</span>
+            <div class="classify-row" data-answer="BRAIN">
+              <span>Few ideas — sponsor wants to speed up ideation</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu dự án</button>
-                <button data-pick="END">Cuối dự án</button>
+                <button data-pick="BRAIN">Brainstorm</button>
+                <button data-pick="AFF">Affinity</button>
+                <button data-pick="INTV">Interview</button>
+                <button data-pick="NGT">NGT</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="END">
-              <span>Cost and staffing drop rapidly</span>
+            <div class="classify-row" data-answer="AFF">
+              <span>Many sticky notes — group into categories</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu dự án</button>
-                <button data-pick="END">Cuối dự án</button>
+                <button data-pick="BRAIN">Brainstorm</button>
+                <button data-pick="AFF">Affinity</button>
+                <button data-pick="INTV">Interview</button>
+                <button data-pick="NGT">NGT</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="START">
-              <span>Cost and staffing levels are low</span>
+            <div class="classify-row" data-answer="NGT">
+              <span>Loud voices dominate — need equal participation</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu dự án</button>
-                <button data-pick="END">Cuối dự án</button>
+                <button data-pick="BRAIN">Brainstorm</button>
+                <button data-pick="AFF">Affinity</button>
+                <button data-pick="INTV">Interview</button>
+                <button data-pick="NGT">NGT</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="MID">
-              <span>Cost and staffing peak during execution</span>
+            <div class="classify-row" data-answer="INTV">
+              <span>Sensitive confidential input from one executive</span>
               <div class="classify-btns">
-                <button data-pick="START">Đầu</button>
-                <button data-pick="MID">Giữa</button>
-                <button data-pick="END">Cuối</button>
+                <button data-pick="BRAIN">Brainstorm</button>
+                <button data-pick="AFF">Affinity</button>
+                <button data-pick="INTV">Interview</button>
+                <button data-pick="NGT">NGT</button>
               </div>
             </div>
           </div>
@@ -370,16 +344,20 @@
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Chọn A — đảo cost và risk</h4>
-            <p style="margin:0">Nhiều thí sinh nhớ “một cái cao đầu, một cái cao cuối” nhưng gán nhầm — cost cao giữa/cuối execution, risk cao đầu.</p>
+            <h4>Bẫy 1: Ideas → Affinity diagram (A)</h4>
+            <p style="margin:0">Affinity organizes ideas — stem cần generate MORE ideas fast, không sort.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Executive lo risk sớm → nghĩ risk sẽ tăng</h4>
-            <p style="margin:0">Risks <em>identified</em> sớm là bình thường — uncertainty <strong>giảm</strong> khi quyết định và deliverables được chấp nhận.</p>
+            <h4>Bẫy 2: Users → Interviews (C)</h4>
+            <p style="margin:0">Interviews chậm hơn group brainstorm — sponsor wants speed.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Group technique → NGT (D)</h4>
+            <p style="margin:0">NGT = Q47 dominance problem. Q48: team works well, chỉ cần more ideas.</p>
           </div>
           <div class="card tip">
-            <h4>Liên hệ Q12 leadership</h4>
-            <p style="margin:0">PM accountable leader giải thích pattern cho executive — data-driven, align với Standard p.59.</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>Handful of ideas · speed things up · team working well</strong> → Brainstorming (B).</p>
           </div>
         </section>
 
@@ -387,49 +365,59 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Cost/staffing theo thời gian? (predictive)</div>
-            <div class="flashcard-back">Low start → increase during work → drop rapidly near end.</div>
+            <div class="flashcard-front">Brainstorming? (p.149)</div>
+            <div class="flashcard-back">Group technique to generate ideas quickly — facilitator-led ideation &amp; analysis.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Risk/uncertainty theo thời gian?</div>
-            <div class="flashcard-back">Highest at start → decrease as decisions made &amp; deliverables accepted.</div>
-          </div></div>
-          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q13 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Cost/staffing increase then drop; risk/uncertainty decrease over time.</div>
+            <div class="flashcard-front">Q48 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Use brainstorming.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">VARIABLES OVER TIME — Q13 (PMBOK 8, p.59)
+          <div class="cheat-sheet">BRAINSTORMING — Q48 (PMBOK 8, p.41 &amp; 149)
 ─────────────────────────────────────────────────────
-COST &amp; STAFFING (predictive):
-  Start: LOW
-  Execution: INCREASE (peak mid-project)
-  End: DROP rapidly
+PROCESS: Elicit and Analyze Requirements (p.41)
+         Brainstorming (p.149)
 
-RISK &amp; UNCERTAINTY (any lifecycle):
-  Start/phase start: HIGHEST
-  Over time: DECREASE (decisions + accepted deliverables)
+BRAINSTORMING:
+  - GROUP setting · generate ideas QUICKLY
+  - Facilitator-led
+  - Idea generation + analysis
+  - Gather from stakeholders · SMEs · team
 
-Q13 ANSWER: C
-  Cost/staffing ↑ then ↓ near completion
-  Risk/uncertainty ↓ over time
+SCENARIO: Jane — BLS customer portal
+           Team WORKING WELL TOGETHER
+           Only HANDFUL OF IDEAS
+           Sponsor: SPEED THINGS UP
+→ B) USE BRAINSTORMING ✓
 
-WRONG PATTERNS:
-  A → cost high at start, risk ↑ at end (inverted)
-  B → cost ↓ throughout, risk constant ✗
-  D → cost stable, risk unpredictable
+NOT:
+  A) AFFINITY DIAGRAM — organize/group ideas (after gen)
+  C) INTERVIEWS — 1-on-1, slower, not rapid group ideation
+  D) NOMINAL GROUP — Q47: loud voices dominate (different)
 
-VISUAL: Cost = bell curve · Risk = downward slope
+Q47 vs Q48:
+  Q47 dominance / unequal → NGT (D)
+  Q48 few ideas / speed up → BRAINSTORM (B)
 
-REF: The Standard for Project Management, p.59
-     "Impact of Variables Over Time"</div>
+FLOW:
+  Brainstorm (generate) → Affinity (organize) → analyze
+
+SIGNAL: "handful of ideas"
+        "speed things up" · "generate ideas quickly"
+        team collaborates well · elicit requirements
+
+Q48 ANSWER: B
+
+REF: PMBOK Guide, 8th Ed., p.41, p.149</div>
         </section>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-accountable-leader.html">Q12: Accountable Leader</a>
+          · <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
+          · <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
+          · <a href="pmp-full-questions.html#q-48">Luyện câu 48</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -438,12 +426,12 @@ REF: The Standard for Project Management, p.59
 
   <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Đảo ngược — cost không cao nhất lúc đầu; risk không tăng về cuối dự án.",
-        B: "Cost giảm dần và risk constant — trái PMBOK p.59 (✗ slide).",
-        C: "Đúng! Cost/staffing tăng khi work progresses, drop near end; risk/uncertainty giảm theo thời gian.",
-        D: "Cost stable và risk unpredictable — không mô tả impact of variables over time."
+        A: "Affinity diagram groups/sorts ideas — không generate nhiều ideas nhanh như brainstorming.",
+        B: "Đúng! Brainstorming generates ideas quickly in group settings — speed up ideation (p.41, 149).",
+        C: "Interviews are 1-on-1 and slower — sponsor wants speed, team already collaborates well.",
+        D: "NGT fixes dominance/unequal participation (Q47) — không phải few ideas + speed problem."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -459,7 +447,7 @@ REF: The Standard for Project Management, p.59
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Cost/staffing increase then drop near completion; risk/uncertainty decrease over time.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Use brainstorming.</strong>" : "");
         });
       });
       let score = 0;
