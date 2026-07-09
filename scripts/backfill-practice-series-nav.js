@@ -85,6 +85,7 @@ const SERIES = [
   ["pmp-teach-manage-communications.html", "Q79: Manage Comms"],
   ["pmp-teach-monitor-stakeholder-engagement.html", "Q80: Monitor Engagement"],
   ["pmp-teach-monitor-communications.html", "Q81: Monitor Comms"],
+  ["pmp-teach-team-charter.html", "Q82: Team Charter"],
 ];
 
 function buildSeriesBlock(currentHref) {
