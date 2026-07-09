@@ -9,6 +9,9 @@ export const PMP_EXAM_LATEST_HTML_PATH = "/pmp/pmp-exam-latest.html";
 export const PMP_MINDSET_SLUG = "pmp-mindset";
 export const PMP_MINDSET_HTML_PATH = "/pmp/pmp-mindset-teach.html";
 
+export const PMP_EXAM_PREP_HTML_PATH = "/pmp/pmp-exam-prep-lecture.html";
+export const PMP_EXAM_PREP_TITLE = "Bài giảng PMP — PMBOK 8";
+
 export const PMP_QUIZ_SLUGS = [PMP_QUIZ_SLUG, PMP_EXAM_LATEST_SLUG] as const;
 export type PmpQuizSlug = (typeof PMP_QUIZ_SLUGS)[number];
 
@@ -29,6 +32,7 @@ export const PMP_QUIZ_OPTIONS = [
 
 export function shouldShowPostInSidebar(slug: string): boolean {
   if (slug === PMP_HUB_SLUG) return false;
+  if (slug === PMP_MINDSET_SLUG) return false;
   return !(PMP_QUIZ_SLUGS as readonly string[]).includes(slug);
 }
 

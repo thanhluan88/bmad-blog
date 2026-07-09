@@ -37,7 +37,10 @@ export default async function PublicPostPage({ params }: Props) {
   });
 
   const fallback = getPmpPostFallback(slug);
-  const post = dbPost ?? fallback;
+  const post =
+    dbPost && fallback
+      ? { ...dbPost, title: fallback.title, contentMd: fallback.contentMd }
+      : dbPost ?? fallback;
 
   if (!post) {
     notFound();

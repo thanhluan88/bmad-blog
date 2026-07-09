@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useBlogMenu } from "@/components/MenuInteractionProvider";
 import { formatUpdatedAt } from "@/lib/format";
-import { PMP_HUB_SLUG } from "@/lib/pmp-quiz";
+import { PMP_EXAM_PREP_HTML_PATH, PMP_EXAM_PREP_TITLE, PMP_HUB_SLUG } from "@/lib/pmp-quiz";
 import { PMP_HUB_POST_TITLE } from "@/lib/seed-pmp-post";
 
 type Post = {
@@ -73,6 +73,15 @@ export function SidebarMenu({ posts }: Props) {
                   className="block rounded-xl bg-accent px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-hover"
                 >
                   {PMP_HUB_POST_TITLE}
+                </Link>
+              </li>
+              <li className="mt-2">
+                <Link
+                  href={PMP_EXAM_PREP_HTML_PATH}
+                  onClick={closeOnNavigate}
+                  className="block rounded-lg border border-accent/30 bg-accent/10 px-3 py-2.5 text-sm font-medium text-foreground/90 transition-colors hover:bg-accent/15"
+                >
+                  {PMP_EXAM_PREP_TITLE}
                 </Link>
               </li>
             </ul>
