@@ -163,6 +163,13 @@
     .adkar-word { font-size: 0.72rem; font-weight: 700; color: var(--biz); }
     .adkar-desc { font-size: 0.7rem; color: var(--muted); margin-top: 0.3rem; }
 
+    /* Change Model Cards */
+    .cm-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1.1rem; margin-bottom: 0.75rem; }
+    .cm-title { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.45rem; }
+    .cm-badge { font-size: 0.68rem; font-weight: 700; padding: 0.15rem 0.55rem; border-radius: 20px; background: var(--biz-bg); color: var(--biz); border: 1px solid var(--biz-border); white-space: nowrap; }
+    .cm-title h4 { font-size: 0.9rem; font-weight: 700; margin: 0; }
+    .cm-trap { font-size: 0.79rem; color: #92400e; background: var(--process-bg); border: 1px solid var(--process-border); border-radius: 8px; padding: 0.5rem 0.75rem; margin-top: 0.5rem; }
+
     /* Quiz */
     #quiz-section { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
     .quiz-q { margin-bottom: 1.2rem; }
@@ -1161,24 +1168,157 @@
     <!-- Change Models -->
     <section id="change-models">
       <h3>Organisational Change Models</h3>
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem">5 mô hình quản lý thay đổi tổ chức phổ biến trong PMP. Câu hỏi thi thường hỏi: <em>"PM nên làm gì TIẾP THEO khi team đang ở giai đoạn X của mô hình Y?"</em></p>
 
-      <div class="adkar">
-        <div class="adkar-step"><div class="adkar-letter">A</div><div class="adkar-word">Awareness</div><div class="adkar-desc">Announce the change; explain the Why; give time to ask questions</div></div>
-        <div class="adkar-step"><div class="adkar-letter">D</div><div class="adkar-word">Desire</div><div class="adkar-desc">Identify champions; monitor reactions; address resistance</div></div>
-        <div class="adkar-step"><div class="adkar-letter">K</div><div class="adkar-word">Knowledge</div><div class="adkar-desc">Provide training; offer resources (flowcharts, processes); address skill gaps</div></div>
-        <div class="adkar-step"><div class="adkar-letter">A</div><div class="adkar-word">Ability</div><div class="adkar-desc">Practice runs; monitor; set reasonable goals; adjust processes</div></div>
-        <div class="adkar-step"><div class="adkar-letter">R</div><div class="adkar-word">Reinforcement</div><div class="adkar-desc">Monitor; positive feedback and rewards; ensure new norm sticks</div></div>
+      <!-- PMI -->
+      <div class="cm-card">
+        <div class="cm-title"><span class="cm-badge">PMI</span><h4>PMI Managing Change in Organisations</h4></div>
+        <div class="flow" style="margin-bottom:0.5rem">
+          <span class="flow-step" style="background:var(--biz-bg);color:var(--biz);border-color:var(--biz-border)">Formulate</span><span class="flow-arrow">→</span>
+          <span class="flow-step" style="background:var(--biz-bg);color:var(--biz);border-color:var(--biz-border)">Plan</span><span class="flow-arrow">→</span>
+          <span class="flow-step" style="background:var(--biz-bg);color:var(--biz);border-color:var(--biz-border)">Implement</span><span class="flow-arrow">→</span>
+          <span class="flow-step" style="background:var(--biz-bg);color:var(--biz);border-color:var(--biz-border)">Manage Transition</span><span class="flow-arrow">→</span>
+          <span class="flow-step" style="background:var(--biz-bg);color:var(--biz);border-color:var(--biz-border)">Sustain</span>
+        </div>
+        <div style="font-size:0.82rem;line-height:1.6">
+          <strong>(1) Formulate</strong> — xác định lý do &amp; mục tiêu thay đổi, phân tích tác động &amp; rủi ro.<br>
+          <strong>(2) Plan</strong> — lập kế hoạch chi tiết, xác định stakeholders, resources, timeline.<br>
+          <strong>(3) Implement</strong> — triển khai thay đổi, communicate, đào tạo người dùng.<br>
+          <strong>(4) Manage Transition</strong> — monitor tiến độ, điều chỉnh, hỗ trợ team vượt qua giai đoạn chuyển tiếp.<br>
+          <strong>(5) Sustain</strong> — đảm bảo thay đổi bền vững, đo lường outcomes, lessons learned.
+        </div>
       </div>
 
+      <!-- ADKAR -->
+      <div class="cm-card">
+        <div class="cm-title"><span class="cm-badge">ADKAR</span><h4>ADKAR Model — Jeffrey Hiatt (Prosci)</h4></div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem">Tập trung vào thay đổi ở cấp độ <strong>CÁ NHÂN</strong>. Mỗi chữ = điều kiện cần ĐẠT ĐƯỢC trước khi sang bước tiếp — nếu bỏ qua bước nào, thay đổi sẽ thất bại.</p>
+        <div class="adkar">
+          <div class="adkar-step">
+            <div class="adkar-letter">A</div>
+            <div class="adkar-word">Awareness</div>
+            <div class="adkar-desc">Thông báo sớm, giải thích WHY, cho thời gian đặt câu hỏi</div>
+          </div>
+          <div class="adkar-step">
+            <div class="adkar-letter">D</div>
+            <div class="adkar-word">Desire</div>
+            <div class="adkar-desc">Tạo mong muốn tham gia, tìm change champions, xử lý resistance</div>
+          </div>
+          <div class="adkar-step">
+            <div class="adkar-letter">K</div>
+            <div class="adkar-word">Knowledge</div>
+            <div class="adkar-desc">Đào tạo kỹ năng mới, cung cấp tài liệu, quy trình, flowchart</div>
+          </div>
+          <div class="adkar-step">
+            <div class="adkar-letter">A</div>
+            <div class="adkar-word">Ability</div>
+            <div class="adkar-desc">Tạo cơ hội thực hành, practice runs, set reasonable goals</div>
+          </div>
+          <div class="adkar-step">
+            <div class="adkar-letter">R</div>
+            <div class="adkar-word">Reinforcement</div>
+            <div class="adkar-desc">Khen thưởng, feedback tích cực, monitor để đảm bảo thay đổi bền vững</div>
+          </div>
+        </div>
+        <div class="cm-trap">⚠ Bẫy thi: Team đã biết quy trình mới (có Knowledge) nhưng vẫn làm sai → vấn đề là <strong>Ability</strong>, không phải Knowledge. PM cần tạo môi trường để thực hành, không phải đào tạo thêm lý thuyết.</div>
+      </div>
+
+      <!-- Kotter -->
+      <div class="cm-card">
+        <div class="cm-title"><span class="cm-badge">Kotter</span><h4>Kotter's 8-Step Change Model — John Kotter</h4></div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.6rem">Tập trung vào thay đổi cấp độ <strong>TỔ CHỨC</strong>. 8 bước chia 3 nhóm — phải theo đúng thứ tự, bỏ qua bước nào sẽ làm thay đổi thất bại.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;font-size:0.79rem">
+          <div style="background:#eff6ff;border:1px solid var(--biz-border);border-radius:8px;padding:0.6rem">
+            <div style="font-size:0.69rem;font-weight:700;color:var(--biz);margin-bottom:0.35rem;text-transform:uppercase">Tạo môi trường</div>
+            <div style="margin-bottom:0.2rem"><span style="font-weight:700;color:var(--biz)">1.</span> Create Urgency — tạo cảm giác cấp bách, "burning platform"</div>
+            <div style="margin-bottom:0.2rem"><span style="font-weight:700;color:var(--biz)">2.</span> Build Coalition — lập liên minh đủ quyền lực</div>
+            <div><span style="font-weight:700;color:var(--biz)">3.</span> Form Vision — hình thành vision &amp; strategy rõ ràng</div>
+          </div>
+          <div style="background:var(--process-bg);border:1px solid var(--process-border);border-radius:8px;padding:0.6rem">
+            <div style="font-size:0.69rem;font-weight:700;color:var(--process);margin-bottom:0.35rem;text-transform:uppercase">Thực hiện</div>
+            <div style="margin-bottom:0.2rem"><span style="font-weight:700;color:var(--process)">4.</span> Communicate Vision — truyền thông liên tục, mọi kênh</div>
+            <div style="margin-bottom:0.2rem"><span style="font-weight:700;color:var(--process)">5.</span> Remove Obstacles — xóa rào cản, empower hành động</div>
+            <div><span style="font-weight:700;color:var(--process)">6.</span> Short-term Wins — chiến thắng nhỏ sớm, celebrate</div>
+          </div>
+          <div style="background:var(--people-bg);border:1px solid var(--people-border);border-radius:8px;padding:0.6rem">
+            <div style="font-size:0.69rem;font-weight:700;color:var(--people);margin-bottom:0.35rem;text-transform:uppercase">Củng cố</div>
+            <div style="margin-bottom:0.2rem"><span style="font-weight:700;color:var(--people)">7.</span> Build on Change — tiếp tục cải tiến từ momentum</div>
+            <div><span style="font-weight:700;color:var(--people)">8.</span> Anchor in Culture — embed vào văn hóa tổ chức, values</div>
+          </div>
+        </div>
+        <div class="cm-trap">⚠ Bẫy thi: Nếu team "chưa thấy sự cần thiết" hoặc "chưa tin tưởng leadership" → đang thiếu bước <strong>1 (Urgency)</strong> hoặc <strong>2 (Coalition)</strong>. Không thể bỏ qua để nhảy sang Vision.</div>
+      </div>
+
+      <!-- Virginia Satir -->
+      <div class="cm-card">
+        <div class="cm-title"><span class="cm-badge">Satir</span><h4>Virginia Satir Change Model</h4></div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem">Mô tả <strong>hành trình cảm xúc &amp; hiệu suất</strong> của con người khi đối mặt với thay đổi. Hiệu suất GIẢM trước khi tăng — đây là <em>bình thường và cần thiết</em>.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:0.5rem;align-items:flex-start">
+          <div style="text-align:center;min-width:75px">
+            <div style="background:var(--people-bg);border:1px solid var(--people-border);border-radius:6px;padding:0.3rem 0.4rem;font-size:0.72rem;font-weight:700;color:var(--people)">Late Status Quo</div>
+            <div style="font-size:0.67rem;color:var(--muted);margin-top:0.2rem">Quen thuộc, ổn định nhưng chưa tối ưu</div>
+          </div>
+          <span style="color:var(--muted);font-size:1rem;padding-top:0.3rem">→</span>
+          <div style="text-align:center;min-width:75px">
+            <div style="background:#fef9c3;border:1px solid #fde68a;border-radius:6px;padding:0.3rem 0.4rem;font-size:0.72rem;font-weight:700;color:#854d0e">Foreign Element</div>
+            <div style="font-size:0.67rem;color:var(--muted);margin-top:0.2rem">Tác nhân thay đổi xuất hiện từ bên ngoài</div>
+          </div>
+          <span style="color:var(--muted);font-size:1rem;padding-top:0.3rem">→</span>
+          <div style="text-align:center;min-width:65px">
+            <div style="background:var(--bad-bg);border:1px solid #fecaca;border-radius:6px;padding:0.3rem 0.4rem;font-size:0.72rem;font-weight:700;color:var(--bad)">Chaos</div>
+            <div style="font-size:0.67rem;color:var(--muted);margin-top:0.2rem">Hiệu suất giảm, confusion, resistance mạnh nhất</div>
+          </div>
+          <span style="color:var(--muted);font-size:1rem;padding-top:0.3rem">→</span>
+          <div style="text-align:center;min-width:80px">
+            <div style="background:var(--biz-bg);border:1px solid var(--biz-border);border-radius:6px;padding:0.3rem 0.4rem;font-size:0.72rem;font-weight:700;color:var(--biz)">Transforming Idea</div>
+            <div style="font-size:0.67rem;color:var(--muted);margin-top:0.2rem">Tìm ra insight / giải pháp đột phá</div>
+          </div>
+          <span style="color:var(--muted);font-size:1rem;padding-top:0.3rem">→</span>
+          <div style="text-align:center;min-width:80px">
+            <div style="background:var(--biz-bg);border:1px solid var(--biz-border);border-radius:6px;padding:0.3rem 0.4rem;font-size:0.72rem;font-weight:700;color:var(--biz)">Practice &amp; Integration</div>
+            <div style="font-size:0.67rem;color:var(--muted);margin-top:0.2rem">Thực hành, áp dụng dần</div>
+          </div>
+          <span style="color:var(--muted);font-size:1rem;padding-top:0.3rem">→</span>
+          <div style="text-align:center;min-width:75px">
+            <div style="background:var(--people-bg);border:1px solid var(--people-border);border-radius:6px;padding:0.3rem 0.4rem;font-size:0.72rem;font-weight:700;color:var(--people)">New Status Quo</div>
+            <div style="font-size:0.67rem;color:var(--muted);margin-top:0.2rem">Trạng thái mới, hiệu quả hơn trước</div>
+          </div>
+        </div>
+        <div class="cm-trap">⚠ Bẫy thi: Khi team đang ở giai đoạn <strong>Chaos</strong> (hiệu suất giảm, mọi người muốn quay lại cũ), PM nên <em>tiếp tục support &amp; guide</em> — KHÔNG rút lui về status quo cũ. Chaos là giai đoạn bình thường và cần thiết.</div>
+      </div>
+
+      <!-- Bridges -->
+      <div class="cm-card">
+        <div class="cm-title"><span class="cm-badge">Bridges</span><h4>Bridges Transition Model — William Bridges</h4></div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem">Khác với Kotter (change = sự kiện bên ngoài), Bridges tập trung vào <strong>TRANSITION</strong> — quá trình tâm lý bên trong của từng người khi trải qua thay đổi.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-bottom:0.5rem;font-size:0.8rem">
+          <div style="background:var(--bad-bg);border:1px solid #fecaca;border-radius:8px;padding:0.6rem">
+            <div style="font-size:0.7rem;font-weight:700;color:var(--bad);margin-bottom:0.25rem">1. ENDING</div>
+            <div><strong>Buông bỏ cái cũ.</strong> Resistance cao nhất ở đây. PM cần acknowledge loss, giải thích why — không thể bỏ qua.</div>
+          </div>
+          <div style="background:var(--process-bg);border:1px solid var(--process-border);border-radius:8px;padding:0.6rem">
+            <div style="font-size:0.7rem;font-weight:700;color:var(--process);margin-bottom:0.25rem">2. NEUTRAL ZONE</div>
+            <div><strong>Vùng trung gian.</strong> Cái cũ đã qua, cái mới chưa ổn định. Confused nhưng là giai đoạn <em>sáng tạo nhất</em> — nên experiment.</div>
+          </div>
+          <div style="background:var(--people-bg);border:1px solid var(--people-border);border-radius:8px;padding:0.6rem">
+            <div style="font-size:0.7rem;font-weight:700;color:var(--people);margin-bottom:0.25rem">3. NEW BEGINNING</div>
+            <div><strong>Khởi đầu mới.</strong> Commitment &amp; energy cho cách mới. PM celebrate early adopters, reinforce.</div>
+          </div>
+        </div>
+        <div style="font-size:0.8rem;margin-bottom:0.4rem"><strong>Readiness Process:</strong> Communicate → Understand impact → Check readiness → Educate leaders → Monitor → Help people contribute</div>
+        <div class="cm-trap">⚠ Bẫy thi: <strong>Neutral Zone</strong> = productivity thấp nhất nhưng là lúc <em>innovation cao nhất</em>. PM nên dùng giai đoạn này để brainstorm &amp; thử nghiệm — không phải thúc đẩy nhanh sang New Beginning.</div>
+      </div>
+
+      <!-- Summary table -->
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th class="th-biz">Model</th><th class="th-biz">Author</th><th class="th-biz">Key Idea</th></tr></thead>
+          <thead><tr><th class="th-biz">Model</th><th class="th-biz">Tác giả</th><th class="th-biz">Trọng tâm &amp; Ghi nhớ nhanh</th></tr></thead>
           <tbody>
-            <tr><td><strong>PMI Managing Change in Organisations</strong></td><td>PMI</td><td>Structured PM approach to organisational change; aligns with PMBOK domains</td></tr>
-            <tr><td><strong>ADKAR</strong></td><td>Jeffrey Hiatt (Prosci)</td><td>Individual-level change: Awareness → Desire → Knowledge → Ability → Reinforcement</td></tr>
-            <tr><td><strong>Kotter's 8 Steps to Change</strong></td><td>John Kotter</td><td>1.Create urgency 2.Coalition 3.Vision 4.Communicate 5.Remove obstacles 6.Short-term wins 7.Build on change 8.Anchor in culture</td></tr>
-            <tr><td><strong>Virginia Satir Change Model</strong></td><td>Virginia Satir</td><td>Late Status Quo → Foreign Element → Chaos → Transforming Idea → Practice &amp; Integration → New Status Quo</td></tr>
-            <tr><td><strong>Bridges Transition Model</strong></td><td>William Bridges</td><td>Ending (letting go) → Neutral Zone → New Beginning. Readiness process: communicate → understand impact → check readiness → educate leaders → monitor → help people contribute</td></tr>
+            <tr><td><strong>PMI Change</strong></td><td>PMI</td><td>5 giai đoạn structured: <strong>Formulate → Plan → Implement → Manage Transition → Sustain</strong></td></tr>
+            <tr><td><strong>ADKAR</strong></td><td>Jeffrey Hiatt (Prosci)</td><td>Thay đổi cấp <strong>cá nhân</strong>. Cần đạt đủ từng chữ theo thứ tự. Knowledge ≠ Ability.</td></tr>
+            <tr><td><strong>Kotter 8 Steps</strong></td><td>John Kotter</td><td>Thay đổi cấp <strong>tổ chức</strong>. Bắt đầu bằng Urgency, kết thúc bằng Anchor in Culture.</td></tr>
+            <tr><td><strong>Virginia Satir</strong></td><td>Virginia Satir</td><td><strong>Chaos là bình thường</strong>. Không rút lui. Đường đi: Status Quo → Foreign Element → Chaos → Insight → New Status Quo.</td></tr>
+            <tr><td><strong>Bridges Transition</strong></td><td>William Bridges</td><td>Tập trung vào <strong>tâm lý</strong>: Ending → Neutral Zone → New Beginning. Neutral Zone = innovation cao nhất.</td></tr>
           </tbody>
         </table>
       </div>
