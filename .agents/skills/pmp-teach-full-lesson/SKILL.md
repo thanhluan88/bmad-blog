@@ -48,14 +48,18 @@ Store in `data/pmp-teach-signals.json`:
 
 **Retry:** thiếu bất kỳ `excludeReasons.{key}` → hỏi lại AI đến khi đủ **tất cả** key sai.
 
-### 3. Signal — ask AI
+### 3. Signal — ask AI (keyword phrases only)
 
 Prompt: [REFERENCE.md](REFERENCE.md#signal-prompt).
 
-- `signalPhrases` — English verbatim from stem (2–5)
-- `signalAnswer` — English (AI exchange)
+- `signalPhrases` — **2–5 short English keyword phrases** verbatim from stem (≤80 chars, ≤12 words each)
+- **Not** full sentences, **not** the entire question, **not** generic `"What should the project manager do"` alone
+- `signalAnswer` — English: how those keyword signals → correct key (PMBOK 8)
 
-**Retry:** `signalPhrases` hoặc `signalAnswer` trống → hỏi lại AI đến khi đủ.
+**Anti-pattern — Q123:** whole stem highlighted as one signal.  
+**Good:** `aligns with its broader goals` · `vision and expectations throughout the project timeline`
+
+**Retry:** phrase quá dài / generic / <2 phrases → hỏi lại AI.
 
 ### 4. Validate before write
 

@@ -182,6 +182,174 @@ function stripHighlights(html) {
   return String(html || "").replace(/<\/?span class="kw-[^"]*">/gi, "");
 }
 
+const SIGNAL_PHRASE_MAX_CHARS = 80;
+const SIGNAL_PHRASE_MAX_WORDS = 12;
+const SIGNAL_PHRASE_MAX_STEM_RATIO = 0.45;
+
+const GENERIC_SIGNAL_PHRASES = [
+  /^what should the project manager do(?:\s+first|\s+next)?\??$/i,
+  /^what should the team do(?:\s+first|\s+next)?\??$/i,
+  /^which (?:of the following )?(?:is|are) (?:the )?(?:best|most appropriate)/i,
+];
+
+function isGenericSignalPhrase(phrase) {
+  const t = String(phrase || "").trim();
+  return GENERIC_SIGNAL_PHRASES.some((re) => re.test(t));
+}
+
+function isValidSignalPhrase(stem, phrase) {
+  const t = String(phrase || "").trim().replace(/\s+/g, " ");
+  if (t.length < 8 || t.length > SIGNAL_PHRASE_MAX_CHARS) return false;
+  if (t.split(/\s+/).length > SIGNAL_PHRASE_MAX_WORDS) return false;
+  const maxRatio = stem.length < 100 ? 0.7 : SIGNAL_PHRASE_MAX_STEM_RATIO;
+  if (stem && t.length > stem.length * maxRatio) return false;
+  if (isGenericSignalPhrase(t)) return false;
+  if (/^(?:A|An|The) \w+/i.test(t) && t.length > 42 && !/\b(?:aligns|vision|retrospective|overtime|well-defined|contract|stakeholder|sponsor|risk|change request|WIP|Kanban|unknown-unknown)\b/i.test(t)) {
+    return false;
+  }
+  if (stem && !stem.toLowerCase().includes(t.toLowerCase())) return false;
+  return true;
+}
+
+/** Keep 2–5 short keyword phrases from stem — not full sentences or entire question. */
+function sanitizeSignalPhrases(stem, phrases) {
+  const out = [];
+  const seen = new Set();
+  for (const raw of phrases || []) {
+    let t = String(raw || "").trim().replace(/\s+/g, " ");
+    if (!stem || !isValidSignalPhrase(stem, t)) continue;
+    const idx = stem.toLowerCase().indexOf(t.toLowerCase());
+    if (idx >= 0) t = stem.slice(idx, idx + t.length);
+    const key = t.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(t);
+    if (out.length >= 5) break;
+  }
+  return out;
+}
+
+const SIGNAL_KEYWORD_RE =
+  /\b(?:align(?:s|ed)?(?: with)?|vision|expectations|sponsor|stakeholder|retrospective|overtime|experience|well-defined|change request|conflict|risk|scope|contract|vendor|procurement|first time|agile|iteration|backlog|budget|quality|delay|training|escalat|concern|issue|without|lacking|unable|discovered|agreed|requested|collaboration|branding|image|recognition|timeline|environmentally|public attention|business objectives|check-in|WIP|Kanban|demotivat|reluctant|SME|mistake|email|virtual|distributed|hybrid|inexperienced|defect|over budget|behind schedule|role change|reporting lines|team dynamics|disengage|productivity|tension|uncertainty|guidance|fluctuat|resource|members?|project manager)\b/i;
+
+function wordChunkAround(text, keywordRe, before = 3, after = 5) {
+  const words = text.split(/\s+/);
+  for (let i = 0; i < words.length; i++) {
+    const window = words.slice(i, Math.min(words.length, i + 4)).join(" ");
+    if (!keywordRe.test(window) && !keywordRe.test(words[i])) continue;
+    const start = Math.max(0, i - before);
+    const end = Math.min(words.length, i + after);
+    return words.slice(start, end).join(" ");
+  }
+  return "";
+}
+
+const INLINE_SIGNAL_PATTERNS = [
+  /\baligns with (?:its |the )?broader goals\b/gi,
+  /\bvision and expectations throughout the project timeline\b/gi,
+  /\borganization['']s image and brand recognition\b/gi,
+  /\benvironmentally conscious branding\b/gi,
+  /\bsignificant public attention\b/gi,
+  /\bwell-defined remaining scope\b/gi,
+  /\bmost appropriate contract type\b/gi,
+  /\breplacement contractors\b/gi,
+  /\bdid not have the required experience when they executed[^.?]{0,55}/gi,
+  /\bIn the iteration retrospective, the team agreed\b/gi,
+  /\bwork overtime to accomplish the goal\b/gi,
+  /\bKanban board and work-in-progress \(WIP\) limits\b/gi,
+  /\breluctant because they think that working on a team is demotivating[^.?]{0,40}/gi,
+  /\bunknown-unknown risk\b/gi,
+  /\brisk classification\b/gi,
+  /\bknown-unknown risk\b/gi,
+];
+
+function extractKeywordSignalPhrases(stem) {
+  const phrases = [];
+  const seen = new Set();
+  const add = (raw) => {
+    let t = String(raw || "").trim().replace(/\s+/g, " ");
+    if (!isValidSignalPhrase(stem, t)) return;
+    const idx = stem.toLowerCase().indexOf(t.toLowerCase());
+    if (idx < 0) return;
+    t = stem.slice(idx, idx + t.length);
+    const key = t.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+    phrases.push(t);
+  };
+
+  for (const p of extractStemSignals(stem)) add(p);
+
+  for (const re of INLINE_SIGNAL_PATTERNS) {
+    const r = new RegExp(re.source, re.flags);
+    let m;
+    while ((m = r.exec(stem)) !== null) add(m[0]);
+  }
+
+  for (const frag of stem.split(/[,;]/)) {
+    const t = frag.replace(/^[\s.?!]+|[\s.?!]+$/g, "").trim();
+    if (!SIGNAL_KEYWORD_RE.test(t)) continue;
+    if (t.length <= SIGNAL_PHRASE_MAX_CHARS) add(t);
+    else {
+      const chunk = wordChunkAround(t, SIGNAL_KEYWORD_RE);
+      if (chunk) add(chunk);
+    }
+  }
+
+  for (const sent of stem.split(/(?<=[.?!])\s+/)) {
+    const clean = sent.replace(/[.?!]$/, "").trim();
+    if (clean.length <= SIGNAL_PHRASE_MAX_CHARS && SIGNAL_KEYWORD_RE.test(clean)) add(clean);
+    else if (clean.length > SIGNAL_PHRASE_MAX_CHARS) {
+      const chunk = wordChunkAround(clean, SIGNAL_KEYWORD_RE);
+      if (chunk) add(chunk);
+    }
+    if (phrases.length >= 5) break;
+  }
+
+  if (phrases.length < 2) {
+    const words = stem.replace(/[.?!]$/, "").split(/\s+/);
+    for (let size = 5; size <= 9 && phrases.length < 3; size++) {
+      for (let i = 0; i <= words.length - size; i++) {
+        const chunk = words.slice(i, i + size).join(" ");
+        if (SIGNAL_KEYWORD_RE.test(chunk)) add(chunk);
+        if (phrases.length >= 5) break;
+      }
+    }
+  }
+
+  if (phrases.length < 2) {
+    for (const sent of stem.split(/(?<=[.?!])\s+/)) {
+      if (/^what should/i.test(sent.trim())) continue;
+      const clean = sent.replace(/[.?!]$/, "").trim();
+      const words = clean.split(/\s+/);
+      for (let size = 5; size <= Math.min(10, words.length); size++) {
+        for (let i = 0; i <= words.length - size; i++) {
+          add(words.slice(i, i + size).join(" "));
+          if (phrases.length >= 2) break;
+        }
+        if (phrases.length >= 2) break;
+      }
+      if (phrases.length >= 2) break;
+    }
+  }
+
+  return sanitizeSignalPhrases(stem, phrases).slice(0, 5);
+}
+
+function validateSignalPhrases(stem, phrases) {
+  const errors = [];
+  const list = Array.isArray(phrases) ? phrases : [];
+  if (list.length < 2) errors.push("need at least 2 signalPhrases");
+  for (const p of list) {
+    if (!isValidSignalPhrase(stem, p)) {
+      errors.push(`signal phrase too long or generic: "${String(p).slice(0, 60)}…"`);
+    }
+  }
+  const sanitized = sanitizeSignalPhrases(stem, list);
+  if (sanitized.length < 2) errors.push("fewer than 2 valid keyword signal phrases after sanitize");
+  return { ok: errors.length === 0, errors, phrases: sanitized };
+}
+
 function extractStemSignals(text) {
   const found = [];
   const t = String(text || "");
@@ -280,6 +448,12 @@ function mdInlineHighlighted(s) {
 }
 
 module.exports = {
+  SIGNAL_PHRASE_MAX_CHARS,
+  SIGNAL_PHRASE_MAX_WORDS,
+  isValidSignalPhrase,
+  sanitizeSignalPhrases,
+  extractKeywordSignalPhrases,
+  validateSignalPhrases,
   extractStemSignals,
   highlightExamCues,
   highlightQuizStem,

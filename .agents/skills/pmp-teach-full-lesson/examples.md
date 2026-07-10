@@ -1,5 +1,34 @@
 # Examples
 
+## Signal — keyword phrases only (not full question)
+
+**Bad — Q123:** entire stem as one `kw-signal` highlight
+
+```json
+{
+  "signalPhrases": [
+    "A major retailer known for its environmentally conscious branding is launching… What should the project manager do?"
+  ]
+}
+```
+
+**Good — Q123 (correct B):**
+
+```json
+{
+  "signalPhrases": [
+    "aligns with its broader goals",
+    "vision and expectations throughout the project timeline",
+    "organization's image and brand recognition"
+  ],
+  "signalAnswer": "Ongoing alignment with organizational vision and brand → regular sponsor check-ins to align business objectives, not newsletters alone or charter rework."
+}
+```
+
+Quiz stem highlights only those short phrases — rest of stem stays unhighlighted.
+
+---
+
 ## Signal — English only (AI exchange)
 
 **Bad — Q9 before fix:** Vietnamese conclusion, no stem highlights

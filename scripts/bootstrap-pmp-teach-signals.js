@@ -18,6 +18,11 @@ const {
   classifyAction,
   inferWrongReason,
 } = require("./lib/pmp-option-reasoning");
+const {
+  extractKeywordSignalPhrases,
+  sanitizeSignalPhrases,
+  validateSignalPhrases,
+} = require("./lib/pmp-teach-keywords");
 
 const QUESTIONS_PATH = path.join(__dirname, "..", "public", "pmp", "pmp-full-questions.json");
 
@@ -37,49 +42,17 @@ function isGenericReasoning(text) {
   return false;
 }
 
-function extractSignalPhrases(stem) {
-  const phrases = [];
-  const seen = new Set();
-  const add = (raw) => {
-    let t = String(raw || "").trim().replace(/\s+/g, " ");
-    if (t.length < 10) return;
-    const idx = stem.toLowerCase().indexOf(t.toLowerCase());
-    if (idx < 0) return;
-    t = stem.slice(idx, idx + t.length);
-    const key = t.toLowerCase();
-    if (seen.has(key)) return;
-    seen.add(key);
-    phrases.push(t);
-  };
-
-  const q = stem.match(/What should[^?]+\?/i);
-  if (q) add(q[0].replace(/\?$/, ""));
-
-  for (const part of stem.split(/(?<=[.?!])\s+/)) {
-    if (part.length < 15) continue;
-    if (
-      /should|because|although|however|during|before|after|first|without|lacking|unable|requested|agreed|identified|discovered|concern|issue|risk|change|stakeholder|team|contract|scope|budget|quality|delay|overtime|retrospective|iteration|sprint|backlog|vendor|sponsor|well-defined/i.test(
-        part,
-      )
-    ) {
-      add(part.replace(/[.?!]$/, ""));
-    }
-    if (phrases.length >= 5) break;
+function resolveSignalPhrases(q, storeEntry, profile) {
+  const stem = q.text || "";
+  const storedValid = validateSignalPhrases(stem, storeEntry?.signalPhrases || []).ok;
+  if (storedValid && storeEntry?.signalPhrases?.length) {
+    return sanitizeSignalPhrases(stem, storeEntry.signalPhrases);
   }
-
-  if (phrases.length < 2) {
-    for (const part of stem
-      .split(/[,;]/)
-      .map((s) => s.trim())
-      .filter((s) => s.length > 20)
-      .sort((a, b) => b.length - a.length)) {
-      add(part);
-      if (phrases.length >= 4) break;
-    }
+  if (profile?.signalPhrases?.length) {
+    const fromProfile = sanitizeSignalPhrases(stem, profile.signalPhrases);
+    if (fromProfile.length >= 2) return fromProfile;
   }
-
-  if (!phrases.length) add(stem.slice(0, Math.min(90, stem.length)).trim());
-  return phrases.slice(0, 5);
+  return extractKeywordSignalPhrases(stem);
 }
 
 function buildSignalAnswer(q, analysis, correctKey) {
@@ -191,22 +164,23 @@ function main() {
 
   for (const q of questions) {
     const analysis = generateTeachAnalysis(q, { preserveOriginal: false });
+    const profile = matchStemProfile(q.text);
+    const existingEntry = store[String(q.id)];
     const existing = validateTeachGrounding(q, analysis);
-    if (existing.ok && store[String(q.id)]) {
-      kept++;
-      continue;
-    }
+    const signalPhrases = resolveSignalPhrases(q, existingEntry, profile);
 
     const correctKey = parseCorrectKeys(q.correct)[0] || q.correct;
     const entry = {
-      signalPhrases: extractSignalPhrases(q.text),
+      signalPhrases,
       signalAnswer: buildSignalAnswer(q, analysis, correctKey),
       whyBullets: buildWhyBulletsEntry(q, analysis, correctKey),
       excludeReasons: buildExcludeReasons(q, analysis),
     };
 
-    store[String(q.id)] = { ...store[String(q.id)], ...entry };
-    added++;
+    const hadValid = existing.ok && existingEntry;
+    store[String(q.id)] = { ...existingEntry, ...entry };
+    if (hadValid && validateSignalPhrases(q.text, existingEntry?.signalPhrases || []).ok) kept++;
+    else added++;
   }
 
   fs.mkdirSync(path.dirname(STORE_PATH), { recursive: true });

@@ -40,21 +40,29 @@ Trả về JSON:
 ## Signal prompt
 
 ```
-From this English stem, list 2–5 verbatim English phrases (signalPhrases) that point to answer {correctKey}.
-Write signalAnswer in English: how those signals → {correctKey} (PMBOK 8).
+From this English stem, list 2–5 SHORT verbatim English keyword phrases (signalPhrases)
+that point to answer {correctKey} — NOT the full question, NOT full sentences.
+
+Rules:
+- Each phrase: 8–80 characters, max 12 words, must appear verbatim in stem
+- Pick scenario cues that discriminate the correct action (sponsor, vision, risk, retrospective, etc.)
+- Do NOT use only generic exam wording like "What should the project manager do"
+- Do NOT return the entire stem as one phrase
+
+Write signalAnswer in English: how those keyword signals → {correctKey} (PMBOK 8).
 
 Stem:
 "{stem}"
 
 Return JSON:
 {
-  "signalPhrases": ["...", "..."],
-  "signalAnswer": "English only — keep original AI wording"
+  "signalPhrases": ["short phrase 1", "short phrase 2"],
+  "signalAnswer": "English only — how keywords → correct action"
 }
 ```
 
-**signalPhrases** = English, verbatim from stem.  
-**signalAnswer** = **English only** — AI exchange wording; drives `signal-conclusion` when profile lacks `groundingConclusion`.
+**signalPhrases** = short **keywords/clauses** from stem (2–5), not whole question.  
+Max **80 chars** and **12 words** per phrase; reject if >45% of stem length.
 
 **signal-conclusion** must stay **English** — never Vietnamese generic rationale (e.g. MVP/business value fallback).
 
@@ -124,7 +132,7 @@ Complete PMBOK 8 sentence(s) — see `formatGuideQuote()`.
 ## Validation
 
 - [ ] Hero **no** full question stem (summary lead + badges only)
-- [ ] Signal card: `signalPhrases` + `signalAnswer` — **never empty**
+- [ ] Signal card: `signalPhrases` (2–5 **short keywords**, ≤80 chars each) + `signalAnswer` — never whole stem
 - [ ] Tại sao chọn: `whyBullets` non-empty — correct key only
 - [ ] Loại trừ: **every** wrong key — e.g. Q611 (correct B) → rows for A, C, D
 - [ ] `validateTeachGrounding()` passes before write

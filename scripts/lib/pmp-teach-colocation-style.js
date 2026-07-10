@@ -8,7 +8,7 @@ const {
   extractStemIssues,
   getPrimaryStemIssue,
 } = require("./pmp-option-reasoning");
-const { extractStemSignals } = require("./pmp-teach-keywords");
+const { extractStemSignals, sanitizeSignalPhrases, validateSignalPhrases } = require("./pmp-teach-keywords");
 const { formatGuideQuote } = require("./pmp-pmbok8-rag-pages");
 const { getStoredTeachGrounding } = require("./pmp-teach-signals-store");
 
@@ -122,20 +122,23 @@ function resolveExcludeReason(q, stemProfile, key, fallback) {
 
 /** AI grounding signals — store → STEM_PROFILE → none (no regex fallback). */
 function resolveTeachSignals(q, stemProfile) {
+  const stem = q.text || "";
   const stored = getStoredTeachGrounding(q.id);
+  let signalAnswer = "";
+  let rawPhrases = [];
+
   if (stored?.signalPhrases?.length || stored?.signalAnswer) {
-    return {
-      signalAnswer: stored.signalAnswer,
-      signalPhrases: stored.signalPhrases,
-    };
+    signalAnswer = stored.signalAnswer;
+    rawPhrases = stored.signalPhrases;
+  } else if (stemProfile?.signalPhrases?.length || stemProfile?.signalAnswer) {
+    signalAnswer = String(stemProfile.signalAnswer || "").trim();
+    rawPhrases = stemProfile.signalPhrases || [];
   }
-  if (stemProfile?.signalPhrases?.length || stemProfile?.signalAnswer) {
-    return {
-      signalAnswer: String(stemProfile.signalAnswer || "").trim(),
-      signalPhrases: (stemProfile.signalPhrases || []).map((p) => String(p).trim()).filter(Boolean),
-    };
-  }
-  return { signalAnswer: "", signalPhrases: [] };
+
+  return {
+    signalAnswer,
+    signalPhrases: sanitizeSignalPhrases(stem, rawPhrases),
+  };
 }
 
 /** PMBOK 8 grounding — structured for readable HTML. */
@@ -303,7 +306,7 @@ function buildConceptIntro(q, analysis, mapping) {
 
 function buildSignalCard(q, analysis) {
   const grounding = composeGrounding(q, analysis);
-  if (!hasTeachSignal(grounding)) return "";
+  if (!hasTeachSignal(grounding, q.text)) return "";
   const correctKey = grounding.correctKey || q.correct;
   const phrasesHtml = grounding.signalPhrases.length
     ? `<p class="signal-phrases-en">${grounding.signalPhrases
@@ -426,19 +429,21 @@ function buildExcludeRows(q, analysis) {
   }));
 }
 
-function hasTeachSignal(grounding) {
-  return Boolean(
-    grounding?.signalAnswer?.trim() &&
-      Array.isArray(grounding?.signalPhrases) &&
-      grounding.signalPhrases.length > 0,
-  );
+function hasTeachSignal(grounding, stem) {
+  if (!grounding?.signalAnswer?.trim()) return false;
+  const check = validateSignalPhrases(stem || "", grounding.signalPhrases);
+  return check.ok && check.phrases.length >= 2;
 }
 
 function validateTeachGrounding(q, analysis) {
   const grounding = composeGrounding(q, analysis);
   const errors = [];
-  if (!hasTeachSignal(grounding)) {
-    errors.push(`Q${q.id}: missing signal (need signalPhrases + signalAnswer)`);
+  if (!grounding.signalAnswer?.trim()) {
+    errors.push(`Q${q.id}: missing signalAnswer`);
+  }
+  const signalCheck = validateSignalPhrases(q.text || "", grounding.signalPhrases);
+  if (!signalCheck.ok) {
+    errors.push(`Q${q.id}: ${signalCheck.errors.join("; ")}`);
   }
   const whyBullets = buildWhyBullets(analysis, q);
   if (!whyBullets.length) {
