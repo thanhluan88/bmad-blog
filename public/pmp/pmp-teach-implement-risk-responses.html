@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Ishikawa Analysis (Q36)</title>
+  <title>PMBOK 8 — Implement Risk Responses (Q100)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,6 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -88,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Ishikawa / RCA · Q36</div>
+      <div class="brand-sub">Implement Risk Responses · Q100</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#ishikawa">Ishikawa Diagram</a>
-        <a href="#recurring">Recurring vs one-off</a>
+        <a href="#implement-risk-responses">Implement Risk Responses</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -135,7 +139,7 @@
         <a href="pmp-teach-lessons-learned.html">Q33: Lessons Learned</a>
         <a href="pmp-teach-after-action-review.html">Q34: After-Action Review</a>
         <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
-        <a href="pmp-teach-ishikawa-analysis.html" class="series-current">Q36: Ishikawa Analysis</a>
+        <a href="pmp-teach-ishikawa-analysis.html">Q36: Ishikawa Analysis</a>
         <a href="pmp-teach-change-request.html">Q37: Change Request</a>
         <a href="pmp-teach-change-management-plan.html">Q38: Change Mgmt Plan</a>
         <a href="pmp-teach-autocratic-decision.html">Q39: Autocratic Decision</a>
@@ -198,21 +202,16 @@
         <a href="pmp-teach-swot-analysis.html">Q97: SWOT Analysis</a>
         <a href="pmp-teach-qualitative-risk-analysis.html">Q98: Qualitative Risk Analysis</a>
         <a href="pmp-teach-mitigate-risk.html">Q99: Mitigate Risk</a>
-        <a href="pmp-teach-implement-risk-responses.html">Q100: Implement Risk Responses</a>
+        <a href="pmp-teach-implement-risk-responses.html" class="series-current">Q100: Implement Risk Responses</a>
       </nav>
 
 
 
 
 
-
-
-
-
-
       <div class="sidebar-pager">
-        <a href="pmp-teach-monitor-control-performance.html" class="sidebar-pager-link">← Q35: Monitor &amp; Control</a>
-        <a href="pmp-teach-change-request.html" class="sidebar-pager-link">Q37: Change Request →</a>
+        <a href="pmp-teach-mitigate-risk.html" class="sidebar-pager-link">← Q99: Mitigate Risk</a>
+        <span class="sidebar-pager-link disabled" aria-hidden="true">— →</span>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
@@ -222,105 +221,197 @@
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp" class="mobile-series-nav">← Blog PMP</a>
-        <a href="pmp-teach-monitor-control-performance.html" class="mobile-series-nav">← Q35: Monitor &amp; Control</a>
-        <a href="pmp-teach-change-request.html" class="mobile-series-nav">Q37: Change Request →</a>
-        <a href="#ishikawa">Ishikawa</a>
-        <a href="#recurring">Recurring</a>
+        <a href="pmp-teach-mitigate-risk.html" class="mobile-series-nav">← Q99: Mitigate Risk</a>
+        <a href="#implement-risk-responses">Implement Risk Responses</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
 
       <main>
-        <header class="hero" id="intro">
+                        <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q36 về <strong>Ishikawa (Cause &amp; Effect) Analysis</strong> — team
-            <em>repeatedly</em> nộp deliverables trễ cho internal quality checks dù expectations
-            đã rõ; PM muốn <em>prevent further occurrences</em>.
+            Bài học Q100 về <strong>Implement Risk Responses</strong> và
+            <strong>Change Request</strong> — Lorna, PM tại Silverline Infrastructure Group,
+            đang thực thi dự án mở rộng đường cao tốc. Một
+            <em>planned response</em> cho rủi ro lớn cần thêm công việc và
+            <em>ảnh hưởng cả timeline lẫn budget</em>. Team đã sẵn sàng triển khai.
+            Lorna nên làm gì tiếp theo?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.27 &amp; p.150</span>
-            <span class="badge">Monitor &amp; Control Project Performance</span>
-            <span class="badge">Câu 36 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.98 &amp; 100</span>
+            <span class="badge">Uncertainty · Change</span>
+            <span class="badge">Implement Risk Responses · Change Request</span>
+            <span class="badge">Câu 100 — Practice</span>
           </div>
         </header>
 
-        <section id="ishikawa">
-          <h2>1. Ishikawa Diagram — Root Cause Analysis</h2>
+                        <section id="implement-risk-responses">
+          <h2>1. Implement Risk Responses &amp; Change Request (p.98, 100, 116)</h2>
           <p>
-            Ishikawa diagram (fishbone / cause-and-effect) là RCA tool giúp identify underlying
-            reason cho <strong>recurring issues</strong> — address source để prevent future occurrences.
+            <strong>Implement Risk Responses</strong> (p.98, 100) đảm bảo các kế hoạch phản ứng rủi ro
+            đã thống nhất được thực thi để giảm threat và tận dụng opportunity.
+            Khi response cần <strong>công việc bổ sung</strong> và
+            <strong>ảnh hưởng schedule/budget</strong> (baseline), PM phải
+            <strong>submit change request</strong> (p.116) — đề xuất chính thức sửa document,
+            deliverable hoặc baseline qua integrated change control.
           </p>
 
+          <div class="approach-grid">
+            <div class="approach-cell pull">
+              <strong>Submit a change request (C — đúng)</strong>
+              Response ảnh hưởng timeline và budget → cần formal change request trước khi
+              điều chỉnh baseline. Team ready to proceed nhưng baseline change phải qua ICC.
+            </div>
+            <div class="approach-cell">
+              <strong>Adjust schedule and budget (A — bẫy)</strong>
+              PM không tự ý điều chỉnh baseline — phải qua change control và approval.
+              "Adjust" trực tiếp bỏ qua quy trình formal.
+            </div>
+            <div class="approach-cell">
+              <strong>Implement the planned response (B — bẫy)</strong>
+              Bẫy phổ biến — response đúng nhưng <em>thứ tự sai</em>. Khi impact baseline,
+              submit change request <strong>trước</strong>, sau đó mới implement sau khi approved.
+            </div>
+            <div class="approach-cell">
+              <strong>Communicate to stakeholders (D — bẫy)</strong>
+              Communication quan trọng nhưng không phải bước tiếp theo khi stem hỏi
+              hành động formal để proceed với work ảnh hưởng baseline.
+            </div>
+          </div>
+
           <div class="card tip">
-            <h4>Cause and Effect Diagram (PMBOK p.150)</h4>
+            <h4>Signal trong stem Q100</h4>
             <p style="margin:0">
-              Root cause analysis tool that helps identify the underlying reason for recurring
-              issues, enabling the project manager to address the source of the problem and
-              prevent future occurrences.
+              <strong>Silverline · executing · planned response · major risk · additional work · impacts timeline AND budget · team ready to proceed</strong>
+              → Implement risk response <em>có impact baseline</em> →
+              <strong>Submit change request (C)</strong> trước khi adjust/implement.
+              Không tự adjust (A), không implement ngay (B), không chỉ communicate (D).
             </p>
           </div>
 
-          <p>RCA tools liên quan: <strong>Ishikawa</strong>, <strong>5 Whys</strong> (instructor notes on slide).</p>
-        </section>
-
-        <section id="recurring">
-          <h2>2. Recurring pattern vs other responses</h2>
-
+          <h3>Implement Response vs Change Control</h3>
           <table>
             <thead>
-              <tr><th>Signal</th><th>Best response</th></tr>
+              <tr><th>Tình huống</th><th>Hành động đúng</th><th>Lý do</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><em>Repeatedly</em> late submissions</td>
-                <td>RCA — Ishikawa (B)</td>
+                <td>Response không đổi baseline</td>
+                <td>Implement response trực tiếp</td>
+                <td>Không cần formal change — trong phạm vi plan hiện tại</td>
               </tr>
               <tr>
-                <td><em>Prevent further occurrences</em></td>
-                <td>Find root cause, not symptom fix</td>
+                <td>Response ảnh hưởng schedule/budget</td>
+                <td><strong>Submit change request</strong></td>
+                <td>Baseline change → integrated change control (p.116)</td>
               </tr>
               <tr>
-                <td>Expectations already defined</td>
-                <td>Not a planning gap — investigate why pattern persists</td>
+                <td>Change request approved</td>
+                <td>Implement response + update baselines</td>
+                <td>Sau approval mới adjust schedule/budget chính thức</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q100?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Adjust the project schedule and budget</strong></td>
+                <td>Tự điều chỉnh baseline — không qua change control</td>
+                <td>✗ PM không được tự adjust — cần change request</td>
               </tr>
               <tr>
-                <td>Pattern affecting timelines</td>
-                <td>Systemic issue — RCA before change request or audit</td>
+                <td><strong>B. Implement the planned response</strong></td>
+                <td>Thực thi response ngay</td>
+                <td>✗ Đúng hành động cuối nhưng sai thứ tự — cần CR khi impact baseline</td>
+              </tr>
+              <tr>
+                <td><strong>C. Submit a change request</strong></td>
+                <td>Đề xuất formal sửa baseline (p.116)</td>
+                <td>✓ Đúng — impacts timeline + budget → change request trước</td>
+              </tr>
+              <tr>
+                <td><strong>D. Communicate the risk to stakeholders</strong></td>
+                <td>Thông báo rủi ro</td>
+                <td>✗ Không phải next step khi ready to proceed với baseline impact</td>
               </tr>
             </tbody>
           </table>
         </section>
 
-        <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 36</h2>
+                <section id="compare">
+          <h2>2. So sánh: Q99 Plan Response vs Q100 Implement (Mitigate → Change Request)</h2>
+
+          <table>
+            <thead>
+              <tr><th>Câu</th><th>Giai đoạn</th><th>Mục đích</th><th>Signal trong stem</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Q99 — Mitigate (A)</strong></td>
+                <td><strong>Plan</strong> response</td>
+                <td>Chọn chiến lược giảm likelihood/impact</td>
+                <td><em>Can be reduced</em> · cannot fully remove · delay deliverable</td>
+              </tr>
+              <tr>
+                <td><strong>Q100 — Change Request (C)</strong></td>
+                <td><strong>Implement</strong> response</td>
+                <td>Formal approval khi response impact baseline</td>
+                <td><em>Planned response</em> · <em>additional work</em> · impacts timeline &amp; budget · ready to proceed</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card info">
+            <h4>Plan vs Implement — Khi nào change request?</h4>
+            <p style="margin:0">
+              <strong>Q99 — Mitigate:</strong> Chọn <em>chiến lược</em> phản ứng khi có thể giảm likelihood/impact.<br><br>
+              <strong>Q100 — Change Request:</strong> Đã có <em>planned response</em>, đang <strong>execute</strong>;
+              response cần work thêm và <strong>ảnh hưởng schedule/budget</strong> →
+              submit change request qua integrated change control (p.116).<br><br>
+              <strong>Implement (bẫy B):</strong> Đúng sau khi CR được approve — không implement trước khi baseline thay đổi.<br><br>
+              <strong>Adjust (bẫy A):</strong> PM không tự adjust baseline — luôn qua change request.<br><br>
+              <strong>Q37 (Change Request):</strong> Cùng concept change request — Q100 áp dụng trong context implement risk response.
+            </p>
+          </div>
+        </section>
+
+                <section id="question">
+          <h2>3. Câu hỏi thực hành — Question 100</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q36</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q100</div>
             <div class="q-text">
-              A project team is <em>repeatedly submitting deliverables late for internal quality
-              checks</em>, despite clear expectations being defined earlier. This <em>pattern</em>
-              is beginning to affect overall timelines. The project manager wants to
-              <em>prevent further occurrences</em>. What should the project manager do?
+              At Silverline Infrastructure Group, Lorna is executing a highway expansion project.
+              A <em>planned response</em> to a <em>major risk</em> requires
+              <em>additional work</em> and impacts both the <em>timeline and budget</em>.
+              The team is <em>ready to proceed</em>.
+              What should Lorna do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Raise a change request for the affected items.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Perform Ishikawa analysis.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Review the quality management plan with the team.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Initiate an internal audit.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Adjust the project schedule and budget</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Implement the planned response to the major risk</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Submit a change request</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Communicate the risk to project stakeholders</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
-        <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+                <section id="analysis">
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li><em>Repeatedly</em> + <em>pattern</em> + <em>prevent further occurrences</em> → RCA.</li>
-            <li>Ishikawa identifies underlying cause of recurring late submissions.</li>
-            <li>Monitor &amp; Control + Cause and Effect Diagram (p.27, p.150).</li>
+            <li>Implement Risk Responses (p.100) khi response <strong>ảnh hưởng baseline</strong> (schedule + budget) → output thường là <strong>change request</strong> (p.116).</li>
+            <li>Change request là đề xuất formal sửa document, deliverable hoặc baseline — phải qua integrated change control.</li>
+            <li>Team ready to proceed — nhưng baseline change cần approval trước khi implement hoặc adjust.</li>
+            <li>Đây là bước trong execute/monitor khi chuyển planned response thành hành động có impact baseline.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -330,170 +421,205 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Change request</strong></td>
-                <td>Formal change control — không analyze root cause của recurring pattern.</td>
+                <td><strong>A. Adjust the project schedule and budget</strong></td>
+                <td>PM <strong>không tự ý</strong> điều chỉnh baseline. Mọi thay đổi schedule/budget phải qua <strong>change request</strong> và approval.</td>
               </tr>
               <tr>
-                <td><strong>C. Review quality plan</strong></td>
-                <td>Expectations đã clear — vấn đề là execution pattern, cần RCA.</td>
+                <td><strong>B. Implement the planned response</strong></td>
+                <td>Bẫy thi kinh điển — implement là mục tiêu cuối nhưng <strong>sai thứ tự</strong>. Khi impact timeline/budget, submit CR <em>trước</em>, implement sau approval.</td>
               </tr>
               <tr>
-                <td><strong>D. Internal audit</strong></td>
-                <td>Compliance/process review (Q31) — không phải fishbone RCA cho recurring issue.</td>
+                <td><strong>D. Communicate the risk to stakeholders</strong></td>
+                <td>Communication không thay thế change control. Stem hỏi next step để proceed với work ảnh hưởng baseline — cần formal CR.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q30 Process Improvement</h4>
+            <h4>Q96 → Q99 → Q100 — Risk Management Flow</h4>
             <p style="margin:0">
-              Q30: process analysis cho shift inconsistency. Q36: Ishikawa RCA cho
-              <em>recurring</em> late quality-check submissions — cùng family RCA tools.
+              Q96: Identify → risk register.<br>
+              Q98: Analyze → qualitative prioritization.<br>
+              Q99: Plan → mitigate strategy.<br>
+              Q100: Implement → <strong>change request</strong> khi response impacts timeline &amp; budget.<br>
+              Sau approval: implement response, update baselines, monitor.
             </p>
           </div>
         </section>
 
-        <section id="drill">
-          <h2>5. Drill — Tool nào?</h2>
+                <section id="drill">
+          <h2>5. Drill — Change Request, Implement, Adjust, hay Communicate?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="ISH">
-              <span>Recurring late deliverables — prevent future occurrences</span>
+            <div class="classify-row" data-answer="CR">
+              <span>Silverline: planned risk response needs extra work, impacts timeline and budget, team ready (Q100)</span>
               <div class="classify-btns">
-                <button data-pick="ISH">Ishikawa</button>
-                <button data-pick="CHG">Change request</button>
-                <button data-pick="AUD">Audit</button>
+                <button data-pick="CR">Change Request</button>
+                <button data-pick="IMPLEMENT">Implement</button>
+                <button data-pick="ADJUST">Adjust</button>
+                <button data-pick="COMMS">Communicate</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="CHG">
-              <span>Approved scope/schedule change needed</span>
+            <div class="classify-row" data-answer="CR">
+              <span>Risk response requires new scope item and cost increase — PM prepares formal baseline modification proposal</span>
               <div class="classify-btns">
-                <button data-pick="ISH">Ishikawa</button>
-                <button data-pick="CHG">Change request</button>
-                <button data-pick="AUD">Audit</button>
+                <button data-pick="CR">Change Request</button>
+                <button data-pick="IMPLEMENT">Implement</button>
+                <button data-pick="ADJUST">Adjust</button>
+                <button data-pick="COMMS">Communicate</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="AUD">
-              <span>Review compliance with organizational standards</span>
+            <div class="classify-row" data-answer="IMPLEMENT">
+              <span>Approved change request: PM executes agreed risk response within updated schedule and budget</span>
               <div class="classify-btns">
-                <button data-pick="ISH">Ishikawa</button>
-                <button data-pick="CHG">Change request</button>
-                <button data-pick="AUD">Audit</button>
+                <button data-pick="CR">Change Request</button>
+                <button data-pick="IMPLEMENT">Implement</button>
+                <button data-pick="ADJUST">Adjust</button>
+                <button data-pick="COMMS">Communicate</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ISH">
-              <span>Identify underlying cause of a pattern</span>
+            <div class="classify-row" data-answer="IMPLEMENT">
+              <span>Minor risk workaround uses existing contingency reserve — no baseline change needed</span>
               <div class="classify-btns">
-                <button data-pick="ISH">Ishikawa</button>
-                <button data-pick="CHG">Change request</button>
-                <button data-pick="AUD">Audit</button>
+                <button data-pick="CR">Change Request</button>
+                <button data-pick="IMPLEMENT">Implement</button>
+                <button data-pick="ADJUST">Adjust</button>
+                <button data-pick="COMMS">Communicate</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="COMMS">
+              <span>New risk identified — PM updates risk register and sends status report to sponsor (no baseline change yet)</span>
+              <div class="classify-btns">
+                <button data-pick="CR">Change Request</button>
+                <button data-pick="IMPLEMENT">Implement</button>
+                <button data-pick="ADJUST">Adjust</button>
+                <button data-pick="COMMS">Communicate</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Timeline impact → Change request (A)</h4>
-            <p style="margin:0">Change request không tìm root cause — đề hỏi prevent recurrence.</p>
+            <h4>Bẫy 1: "Ready to proceed" → Implement (B)</h4>
+            <p style="margin:0">Ready ≠ skip change control. Impact timeline + budget → <strong>change request trước</strong>, implement sau approval.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Quality issue → Review quality plan (C)</h4>
-            <p style="margin:0">Expectations đã defined — pattern suggests execution/root cause, not missing plan.</p>
+            <h4>Bẫy 2: "Impacts budget/schedule" → Adjust (A)</h4>
+            <p style="margin:0">PM không tự adjust baseline. Mọi thay đổi formal → <strong>submit change request</strong>.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Quality checks → Internal audit (D)</h4>
-            <p style="margin:0">Audit = standards compliance (Q31). Recurring late submissions = Ishikawa RCA.</p>
+            <h4>Bẫy 3: Risk context → Communicate (D)</h4>
+            <p style="margin:0">Stakeholder communication quan trọng nhưng stem hỏi formal step để proceed với baseline impact — đó là change request.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: Nhầm Q99 và Q100</h4>
+            <p style="margin:0">Q99: chọn <strong>chiến lược</strong> (mitigate). Q100: đã có planned response, impact baseline → <strong>change request</strong>.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Repeatedly + pattern + prevent further occurrences</strong> → Ishikawa / RCA (B).</p>
+            <p style="margin:0"><strong>Executing · planned response · additional work · impacts timeline AND budget · ready to proceed</strong> → Submit a change request (C).</p>
           </div>
         </section>
 
-        <section id="flashcards">
+                <section id="flashcards">
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Ishikawa diagram? (p.150)</div>
-            <div class="flashcard-back">Cause &amp; effect · fishbone · RCA for recurring issues · prevent future occurrences.</div>
+            <div class="flashcard-front">Implement Risk Response + baseline impact?</div>
+            <div class="flashcard-back"><strong>Submit change request</strong> (p.116) trước khi adjust schedule/budget hoặc implement work ảnh hưởng baseline.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q36 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Perform Ishikawa analysis.</div>
+            <div class="flashcard-front">Q100 đáp án?</div>
+            <div class="flashcard-back"><strong>C — Submit a change request</strong>. Silverline · planned response · impacts timeline &amp; budget · ready to proceed.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Implement (B) vs Change Request (C)?</div>
+            <div class="flashcard-back"><strong>CR first</strong> when baseline changes. <strong>Implement</strong> after approval — or directly if no baseline impact.</div>
           </div></div>
         </section>
 
-        <section id="cheatsheet">
+                <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">ISHIKAWA ANALYSIS — Q36 (PMBOK 8, p.27 &amp; p.150)
+          <div class="cheat-sheet">IMPLEMENT RISK RESPONSES — Q100
+(PMBOK 8, p.98 &amp; 100 Implement Risk Responses · p.116 Change Requests)
 ─────────────────────────────────────────────────────
-PROCESS: Monitor and Control Project Performance
-TOOL: Ishikawa / Cause &amp; Effect Diagram (RCA)
+DOMAIN: Uncertainty + Change
+PROCESS: Implement Risk Responses (p.100)
+TRIGGER: Planned response impacts TIMELINE + BUDGET (baseline)
 
-ISHIKAWA = root cause analysis
-  - Underlying reason for RECURRING issues
-  - Address SOURCE · prevent future occurrences
-  - Related: 5 Whys
+CHANGE REQUEST: Formal proposal to modify
+  document · deliverable · BASELINE
+  → Integrated Change Control (p.116)
+  → BEFORE adjusting schedule/budget or implementing baseline-impacting work
 
-SCENARIO: REPEATEDLY late for internal quality checks
-           Expectations ALREADY defined
-           PATTERN affecting timelines
-           PREVENT further occurrences
-→ B) Perform ISHIKAWA analysis ✓
+IMPLEMENT: Execute agreed risk response plans
+  → AFTER change request approved (if baseline impact)
+  → Directly if NO baseline change (e.g. use contingency)
+
+ADJUST baseline: PM cannot do unilaterally — exam trap (A)
+
+COMMUNICATE: Important but NOT substitute for change control (D)
+
+SCENARIO: Silverline — Lorna PM — EXECUTING highway expansion
+           PLANNED RESPONSE to MAJOR RISK
+           ADDITIONAL WORK required
+           Impacts TIMELINE AND BUDGET
+           Team READY TO PROCEED
+NEXT → C) SUBMIT A CHANGE REQUEST ✓
 
 NOT:
-  A) Change request — formal change, not RCA
-  C) Review quality plan — plan exists; need root cause
-  D) Internal audit — compliance review (vs Q31), not fishbone RCA
+  A) ADJUST schedule/budget — no unilateral baseline change
+  B) IMPLEMENT response — correct end goal, WRONG order
+  D) COMMUNICATE risk — not formal baseline step
 
-SIGNAL: "repeatedly" · "pattern" · "prevent further occurrences"
-        recurring issues
+Q99 vs Q100:
+  Q99: choose strategy → MITIGATE (plan response)
+  Q100: execute planned response + baseline impact → CHANGE REQUEST
 
-VS Q30: process improvement (shift procedures)
-VS Q31: quality audits (standards gaps)
-VS Q36: Ishikawa RCA (recurring late submissions)
+RISK FLOW:
+  Identify → Analyze → Plan (Q99 mitigate) → Implement (Q100 CR if baseline) → Monitor
 
-Q36 ANSWER: B
+SIGNAL KEYWORDS:
+  Change Request: impacts timeline, impacts budget, additional work,
+                  baseline, ready to proceed, planned response, formal
+  Implement now:  no baseline impact, already approved, within reserve
+  Adjust:         exam trap — PM adjusts alone (wrong)
+  Communicate:    inform stakeholders — not next for baseline change
 
-REF: PMBOK Guide, 8th Ed., p.27 &amp; p.150</div>
+Q100 ANSWER: C — Submit a change request
+
+REF: PMBOK Guide, 8th Ed., p.98 &amp; 100 Implement Risk Responses
+      p.116 Change requests</div>
         </section>
-
-
-
-
-
-
-
 
 
 
 
         <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
-          <a class="lesson-pager-btn" href="pmp-teach-monitor-control-performance.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q35: Monitor &amp; Control</span></a>
-          <span class="lesson-pager-pos">Q36 / 100</span>
-          <a class="lesson-pager-btn next" href="pmp-teach-change-request.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q37: Change Request</span></a>
+          <a class="lesson-pager-btn" href="pmp-teach-mitigate-risk.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q99: Mitigate Risk</span></a>
+          <span class="lesson-pager-pos">Q100 / 100</span>
+          <span class="lesson-pager-btn disabled" aria-hidden="true"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">—</span></span>
         </nav>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-process-improvement.html">Q30: Process Improvement</a>
-          · <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
-          · <a href="pmp-full-questions.html#q-36">Luyện câu 36</a>
+          · <a href="pmp-teach-mitigate-risk.html">Q99: Mitigate Risk</a>
+          · <a href="pmp-teach-change-request.html">Q37: Change Request</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
     </div>
   </div>
 
-  <script>
+      <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Change request là formal change control — không analyze root cause của recurring pattern.",
-        B: "Đúng! Ishikawa RCA identifies underlying cause of recurring late submissions (p.150).",
-        C: "Quality plan đã có clear expectations — cần RCA, không chỉ review plan.",
-        D: "Internal audit review compliance — recurring pattern cần Ishikawa root cause analysis."
+        A: "PM không được tự ý adjust schedule/budget — mọi thay đổi baseline phải qua change request và integrated change control.",
+        B: "Implement là mục tiêu cuối nhưng sai thứ tự — khi response impacts timeline và budget, submit change request trước, implement sau approval.",
+        C: "Đúng! Planned response ảnh hưởng timeline và budget → submit change request (p.116) trước khi proceed với work thay đổi baseline.",
+        D: "Communicate stakeholders quan trọng nhưng không thay thế formal change request khi baseline bị ảnh hưởng."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -509,7 +635,7 @@ REF: PMBOK Guide, 8th Ed., p.27 &amp; p.150</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Perform Ishikawa analysis.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Submit a change request</strong>" : "");
         });
       });
       let score = 0;
@@ -537,16 +663,18 @@ REF: PMBOK Guide, 8th Ed., p.27 &amp; p.150</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
