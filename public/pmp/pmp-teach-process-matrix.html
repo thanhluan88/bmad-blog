@@ -110,6 +110,18 @@
     .matrix .proc .domain-label { color: var(--proc); border-right-color: var(--proc-bd); }
     .matrix .proc .process { background: var(--proc-bg); color: #44403c; border: 1px solid var(--proc-bd); }
 
+    /* PMBOK 6 Communications — not a PMBOK 8 domain */
+    .matrix .comm .domain-label { color: #0f766e; border-right-color: #99f6e4; }
+    .matrix .comm .process { background: #f0fdfa; color: #134e4a; border: 1px solid #99f6e4; }
+
+    /* Compare table */
+    .compare-table { border-collapse: collapse; min-width: 700px; width: 100%; font-size: 0.8rem; background: var(--card); }
+    .compare-table th { padding: 0.6rem 0.85rem; text-align: left; font-size: 0.8rem; font-weight: 700; color: #f9fafb; }
+    .compare-table td { padding: 0.55rem 0.85rem; border: 1px solid var(--border); font-size: 0.8rem; vertical-align: top; }
+    .compare-table tr:nth-child(even) td { background: #fafaf9; }
+    .compare-table td.ka { font-weight: 600; }
+    .compare-table td.note { font-size: 0.77rem; color: var(--muted); }
+
     /* Pattern cards */
     .pattern-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1rem 0; }
     .pattern-card { padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--card); }
@@ -147,7 +159,9 @@
       <div class="brand-sub">Process Matrix — Big Picture</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#matrix">Ma trận 40 processes</a>
+        <a href="#matrix">Ma trận PMBOK 8 (7 Domains)</a>
+        <a href="#pmbok6">Ma trận PMBOK 6 (10 KAs)</a>
+        <a href="#compare">So sánh 6 vs 8</a>
         <a href="#patterns">5 Key Patterns</a>
         <a href="#drill">Drill — Định vị process</a>
         <a href="#cheatsheet">Cheat sheet</a>
@@ -162,8 +176,9 @@
         <div class="legend-item"><div class="legend-dot" style="background:var(--sched)"></div>Schedule</div>
         <div class="legend-item"><div class="legend-dot" style="background:var(--fin)"></div>Finance</div>
         <div class="legend-item"><div class="legend-dot" style="background:var(--risk)"></div>Risk</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--qual)"></div>Quality</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--proc)"></div>Procurement</div>
+        <div class="legend-item" style="opacity:0.45;font-style:italic"><div class="legend-dot" style="background:var(--qual)"></div>Quality (PMBOK 6)</div>
+        <div class="legend-item" style="opacity:0.45;font-style:italic"><div class="legend-dot" style="background:var(--proc)"></div>Procurements (PMBOK 6)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#0f766e"></div>Communications (PMBOK 6)</div>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
@@ -173,7 +188,9 @@
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp">← Blog PMP</a>
-        <a href="#matrix">Ma trận</a>
+        <a href="#matrix">PMBOK 8</a>
+        <a href="#pmbok6">PMBOK 6</a>
+        <a href="#compare">So sánh</a>
         <a href="#patterns">Patterns</a>
         <a href="#drill">Drill</a>
         <a href="#cheatsheet">Cheat sheet</a>
@@ -181,18 +198,17 @@
 
       <main>
         <header class="hero" id="intro">
-          <h1>PMBOK 8 — Process Matrix: Big Picture</h1>
+          <h1>PMBOK 6 vs PMBOK 8 — Process Matrix: Big Picture</h1>
           <p class="lead">
-            Bức tranh toàn cảnh: 40+ processes của PMBOK 8 được tổ chức theo
-            <strong>9 Focus Groups / Performance Domains</strong> (hàng) &times;
-            <strong>5 Process Groups</strong> (cột). Hiểu được cấu trúc này là
-            nền tảng để định vị bất kỳ câu hỏi thi PMP nào.
+            So sánh toàn diện: <strong>PMBOK 8</strong> (40 processes, <strong>7 Performance Domains</strong>) và
+            <strong>PMBOK 6</strong> (47 processes, <strong>10 Knowledge Areas</strong>) cùng &times; 5 Process Groups.
+            Hiểu sự thay đổi cấu trúc giúp bạn định vị câu hỏi thi PMP nhanh hơn.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8th Ed</span>
-            <span class="badge">9 Performance Domains</span>
+            <span class="badge">PMBOK Guide 6th &amp; 8th Ed</span>
+            <span class="badge">7 Domains (PMBOK 8)</span>
+            <span class="badge">10 Knowledge Areas (PMBOK 6)</span>
             <span class="badge">5 Process Groups</span>
-            <span class="badge">Big Picture Orientation</span>
           </div>
         </header>
 
@@ -222,8 +238,8 @@
 
         <!-- SECTION 2: THE MATRIX -->
         <section id="matrix">
-          <h2>2. Ma trận 40 Processes</h2>
-          <p>Mỗi ô trong bảng = process thuộc domain đó, xảy ra trong giai đoạn đó. Màu = domain.</p>
+          <h2>2. Ma trận PMBOK 8 — 7 Performance Domains</h2>
+          <p>PMBOK 8 rút gọn còn <strong>7 Performance Domains</strong> (Quality và Procurement được tích hợp vào Governance). Mỗi ô = process thuộc domain đó, xảy ra trong giai đoạn đó. Màu = domain.</p>
 
           <div class="matrix-wrap">
             <table class="matrix">
@@ -346,6 +362,101 @@
                   <td><span class="process"><span class="num">6.</span>Monitor Risks</span></td>
                   <td class="empty">—</td>
                 </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);margin-top:0.5rem;">
+            Nguồn: PMBOK Guide 8th Ed. Slide: "Focus Groups, Performance Domains" × "Process Groups"
+          </p>
+        </section>
+
+        <!-- SECTION 3: PMBOK 6 MATRIX -->
+        <section id="pmbok6">
+          <h2>3. Ma trận PMBOK 6 — 10 Knowledge Areas</h2>
+          <p>PMBOK Guide 6th Edition tổ chức <strong>47 processes</strong> theo <strong>10 Knowledge Areas</strong> × 5 Process Groups. Đây là nền tảng của các kỳ thi PMP trước 2021.</p>
+
+          <div class="matrix-wrap">
+            <table class="matrix">
+              <thead>
+                <tr>
+                  <th class="col-domain">Knowledge Area</th>
+                  <th class="col-init">Initiating</th>
+                  <th class="col-plan">Planning</th>
+                  <th class="col-exec">Executing</th>
+                  <th class="col-mc">Monitoring &amp; Controlling</th>
+                  <th class="col-close">Closing</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- INTEGRATION -->
+                <tr class="gov">
+                  <td class="domain-label">Integration</td>
+                  <td><span class="process"><span class="num">1.</span>Develop Project Charter</span></td>
+                  <td><span class="process"><span class="num">2.</span>Develop Project Mgmt Plan</span></td>
+                  <td>
+                    <span class="process"><span class="num">3.</span>Direct &amp; Manage Project Work</span>
+                    <span class="process"><span class="num">4.</span>Manage Project Knowledge</span>
+                  </td>
+                  <td>
+                    <span class="process"><span class="num">5.</span>Monitor &amp; Control Project Work</span>
+                    <span class="process"><span class="num">6.</span>Perform Integrated Change Control</span>
+                  </td>
+                  <td><span class="process"><span class="num">7.</span>Close Project or Phase</span></td>
+                </tr>
+                <!-- STAKEHOLDERS -->
+                <tr class="sh">
+                  <td class="domain-label">Stakeholders</td>
+                  <td><span class="process"><span class="num">1.</span>Identify Stakeholders</span></td>
+                  <td><span class="process"><span class="num">2.</span>Plan Stakeholder Engagement</span></td>
+                  <td><span class="process"><span class="num">3.</span>Manage Stakeholder Engagement</span></td>
+                  <td><span class="process"><span class="num">4.</span>Monitor Stakeholder Engagement</span></td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- SCOPE -->
+                <tr class="scope">
+                  <td class="domain-label">Scope</td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">1.</span>Plan Scope Management</span>
+                    <span class="process"><span class="num">2.</span>Collect Requirements</span>
+                    <span class="process"><span class="num">3.</span>Define Scope</span>
+                    <span class="process"><span class="num">4.</span>Create WBS</span>
+                  </td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">5.</span>Validate Scope</span>
+                    <span class="process"><span class="num">6.</span>Control Scope</span>
+                  </td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- SCHEDULE -->
+                <tr class="sched">
+                  <td class="domain-label">Schedule</td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">1.</span>Plan Schedule Management</span>
+                    <span class="process"><span class="num">2.</span>Define Activities</span>
+                    <span class="process"><span class="num">3.</span>Sequence Activities</span>
+                    <span class="process"><span class="num">4.</span>Estimate Activity Durations</span>
+                    <span class="process"><span class="num">5.</span>Develop Schedule</span>
+                  </td>
+                  <td class="empty">—</td>
+                  <td><span class="process"><span class="num">6.</span>Control Schedule</span></td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- COST -->
+                <tr class="fin">
+                  <td class="domain-label">Cost</td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">1.</span>Plan Cost Management</span>
+                    <span class="process"><span class="num">2.</span>Estimate Costs</span>
+                    <span class="process"><span class="num">3.</span>Determine Budget</span>
+                  </td>
+                  <td class="empty">—</td>
+                  <td><span class="process"><span class="num">4.</span>Control Costs</span></td>
+                  <td class="empty">—</td>
+                </tr>
                 <!-- QUALITY -->
                 <tr class="qual">
                   <td class="domain-label">Quality</td>
@@ -355,36 +466,161 @@
                   <td><span class="process"><span class="num">3.</span>Control Quality</span></td>
                   <td class="empty">—</td>
                 </tr>
-                <!-- PROCUREMENT -->
+                <!-- RESOURCES -->
+                <tr class="res">
+                  <td class="domain-label">Resources</td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">1.</span>Plan Resource Management</span>
+                    <span class="process"><span class="num">2.</span>Estimate Activity Resources</span>
+                  </td>
+                  <td>
+                    <span class="process"><span class="num">3.</span>Acquire Resources</span>
+                    <span class="process"><span class="num">4.</span>Develop Team</span>
+                    <span class="process"><span class="num">5.</span>Manage Team</span>
+                  </td>
+                  <td><span class="process"><span class="num">6.</span>Control Resources</span></td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- COMMUNICATIONS -->
+                <tr class="comm">
+                  <td class="domain-label">Communications</td>
+                  <td class="empty">—</td>
+                  <td><span class="process"><span class="num">1.</span>Plan Communications Mgmt</span></td>
+                  <td><span class="process"><span class="num">2.</span>Manage Communications</span></td>
+                  <td><span class="process"><span class="num">3.</span>Monitor Communications</span></td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- RISK -->
+                <tr class="risk">
+                  <td class="domain-label">Risk</td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">1.</span>Plan Risk Management</span>
+                    <span class="process"><span class="num">2.</span>Identify Risks</span>
+                    <span class="process"><span class="num">3.</span>Qualitative Risk Analysis</span>
+                    <span class="process"><span class="num">4.</span>Quantitative Risk Analysis</span>
+                    <span class="process"><span class="num">5.</span>Plan Risk Responses</span>
+                  </td>
+                  <td><span class="process"><span class="num">6.</span>Implement Risk Responses</span></td>
+                  <td><span class="process"><span class="num">7.</span>Monitor Risks</span></td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- PROCUREMENTS -->
                 <tr class="proc">
-                  <td class="domain-label">Procurement</td>
+                  <td class="domain-label">Procurements</td>
                   <td class="empty">—</td>
                   <td><span class="process"><span class="num">1.</span>Plan Procurement Management</span></td>
-                  <td>
-                    <span class="process"><span class="num">2.</span>Conduct Procurements</span>
-                    <span class="process"><span class="num">3.</span>Manage Procurements</span>
-                  </td>
-                  <td><span class="process"><span class="num">4.</span>Control Procurements</span></td>
+                  <td><span class="process"><span class="num">2.</span>Conduct Procurements</span></td>
+                  <td><span class="process"><span class="num">3.</span>Control Procurements</span></td>
                   <td class="empty">—</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p style="font-size:0.8rem;color:var(--muted);margin-top:0.5rem;">
-            Nguồn: PMBOK Guide 8th Ed. Slide: "Focus Groups, Performance Domains" × "Process Groups"
+            Nguồn: PMBOK Guide 6th Ed. 47 processes, 10 Knowledge Areas × 5 Process Groups.
           </p>
         </section>
 
-        <!-- SECTION 3: KEY PATTERNS -->
+        <!-- SECTION 4: COMPARISON -->
+        <section id="compare">
+          <h2>4. So sánh PMBOK 6 vs PMBOK 8</h2>
+          <p>PMI không bỏ các processes — họ <strong>tái cấu trúc</strong> theo Performance Domains. Câu hỏi thi PMP vẫn test cả hai tư duy nên bạn cần biết mapping này.</p>
+
+          <div style="overflow-x:auto;margin:1rem 0;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border)">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th style="background:#1e40af">PMBOK 6 — Knowledge Area (10)</th>
+                  <th style="background:#1f2937">PMBOK 8 — Performance Domain (7)</th>
+                  <th style="background:#166534">Thay đổi chính</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="ka" style="color:var(--gov)">Integration Management</td>
+                  <td class="ka" style="color:var(--gov)">Governance</td>
+                  <td class="note">Mở rộng: Governance bao gồm cả Quality Assurance và Plan Sourcing Strategy từ Procurement</td>
+                </tr>
+                <tr>
+                  <td class="ka" style="color:var(--sh)">Stakeholder Management</td>
+                  <td class="ka" style="color:var(--sh)">Stakeholders</td>
+                  <td class="note">Gộp Communications: 3 processes từ Communications Management → Stakeholders domain</td>
+                </tr>
+                <tr>
+                  <td class="ka" style="color:var(--scope)">Scope Management</td>
+                  <td class="ka" style="color:var(--scope)">Scope</td>
+                  <td class="note">Đổi tên nhỏ: "Collect Requirements" → "Elicit &amp; Analyze Requirements"; "Create WBS" → "Develop Scope Structure"</td>
+                </tr>
+                <tr>
+                  <td class="ka" style="color:var(--sched)">Schedule Management</td>
+                  <td class="ka" style="color:var(--sched)">Schedule</td>
+                  <td class="note">Rút gọn: 6 processes → 3 processes. Define/Sequence/Estimate Activities gộp vào "Develop Schedule"</td>
+                </tr>
+                <tr>
+                  <td class="ka" style="color:var(--fin)">Cost Management</td>
+                  <td class="ka" style="color:var(--fin)">Finance</td>
+                  <td class="note">Đổi tên: Cost → Finance. "Determine Budget" → "Develop Budget"; thêm "Plan Financial Management"</td>
+                </tr>
+                <tr>
+                  <td class="ka" style="color:var(--qual)">Quality Management</td>
+                  <td class="ka" style="color:var(--muted)">→ Governance (tích hợp)</td>
+                  <td class="note">Không còn là Performance Domain riêng. "Manage Quality Assurance" → Governance Executing; Control Quality implied trong M&amp;C</td>
+                </tr>
+                <tr>
+                  <td class="ka" style="color:var(--res)">Resource Management</td>
+                  <td class="ka" style="color:var(--res)">Resources</td>
+                  <td class="note">Đổi tên: "Develop Team" + "Manage Team" → "Lead the Team". Tập trung vào leadership thay vì management</td>
+                </tr>
+                <tr>
+                  <td class="ka" style="color:#0f766e">Communications Management</td>
+                  <td class="ka" style="color:var(--muted)">→ Stakeholders (tích hợp)</td>
+                  <td class="note">3 Communications processes sáp nhập vào Stakeholders domain. Communications = phần của stakeholder engagement</td>
+                </tr>
+                <tr>
+                  <td class="ka" style="color:var(--risk)">Risk Management</td>
+                  <td class="ka" style="color:var(--risk)">Risk</td>
+                  <td class="note">Rút gọn: Qualitative + Quantitative Risk Analysis gộp → "Perform Risk Analysis". Số processes giữ nguyên</td>
+                </tr>
+                <tr>
+                  <td class="ka" style="color:var(--proc)">Procurement Management</td>
+                  <td class="ka" style="color:var(--muted)">→ Governance (tích hợp)</td>
+                  <td class="note">Không còn là Performance Domain riêng. "Plan Sourcing Strategy" → Governance Planning; execution vào Governance Executing</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card warn">
+            <h4>3 Knowledge Areas bị "xóa" khỏi PMBOK 8</h4>
+            <p style="margin:0">
+              <strong>Quality, Communications, và Procurement</strong> không còn là Performance Domains riêng trong PMBOK 8.
+              Nhưng các activities vẫn tồn tại — chúng được <em>tích hợp vào</em> Governance (Quality Assurance, Sourcing) và
+              Stakeholders (Communications) domains. Câu hỏi thi vẫn test knowledge về quality control, contracts, và communications planning.
+            </p>
+          </div>
+
+          <div class="card info">
+            <h4>3 điểm thay đổi cốt lõi từ PMBOK 6 → PMBOK 8</h4>
+            <ul style="margin:0.5rem 0 0;padding-left:1.2rem">
+              <li><strong>Outcomes over Outputs:</strong> PMBOK 8 tập trung vào <em>value delivered</em> thay vì deliverables. Governance domain hỏi "dự án có đang deliver value không?" thay vì "bạn đã tạo ra document gì?"</li>
+              <li><strong>Integration thành Foundation:</strong> PMBOK 6's Integration Management (trái tim của framework) mở rộng thành Governance — bao gồm cả quality assurance và sourcing strategy.</li>
+              <li><strong>People-centric shift:</strong> Resources domain nhấn mạnh "Lead the Team" (leadership) thay vì "Develop/Manage Team" (management). Phản ánh tư duy agile/servant-leader của PMP hiện đại.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- SECTION 5: KEY PATTERNS (PMBOK 8) -->
         <section id="patterns">
-          <h2>3. 5 Key Patterns — Nhìn là nhớ</h2>
-          <p>Thay vì học thuộc từng process, hãy học 5 pattern cấu trúc này. Chúng sẽ giúp bạn suy luận ra vị trí của bất kỳ process nào trong vài giây.</p>
+          <h2>5. 5 Key Patterns — Nhìn là nhớ</h2>
+          <p>Thay vì học thuộc từng process, hãy học 5 pattern cấu trúc này (áp dụng cho PMBOK 8 — 7 domains). Chúng giúp bạn suy luận ra vị trí của bất kỳ process nào trong vài giây.</p>
 
           <div class="pattern-grid">
             <div class="pattern-card">
               <div class="icon">📐</div>
               <strong>Planning là phase đông nhất</strong>
-              <p>7/9 domains đều có processes ở Planning. Scope và Risk đặc biệt planning-heavy (4 processes mỗi domain). Chỉ Governance mới có từ Initiating đến Closing.</p>
+              <p>Cả 7/7 domains đều có processes ở Planning. Scope và Risk đặc biệt planning-heavy (4 processes mỗi domain). Chỉ Governance mới có từ Initiating đến Closing.</p>
             </div>
             <div class="pattern-card">
               <div class="icon">🏛️</div>
@@ -412,9 +648,9 @@
             <h4>Quy tắc vàng: "M&amp;C mirrors Executing"</h4>
             <p style="margin:0">
               Mỗi domain có Executing processes thì thường có M&amp;C counterpart:
-              Stakeholders (Manage → Monitor), Resources (Develop/Manage Team → Monitor &amp; Control),
-              Risk (Implement → Monitor), Quality (Manage → Control), Procurement (Conduct/Manage → Control).
-              Nếu câu hỏi hỏi về <em>tracking/reviewing</em> → M&amp;C. <em>Doing/executing</em> → Executing.
+              Stakeholders (Manage → Monitor Engagement &amp; Communications), Resources (Acquire/Lead → Monitor &amp; Control Resourcing),
+              Risk (Implement → Monitor Risks), Governance (Manage Execution → Monitor &amp; Control Performance).
+              Nếu câu hỏi hỏi về <em>tracking/reviewing</em> → M&amp;C. <em>Doing/implementing</em> → Executing.
             </p>
           </div>
 
@@ -434,7 +670,7 @@
 
         <!-- SECTION 4: DRILL -->
         <section id="drill">
-          <h2>4. Drill — Định vị process</h2>
+          <h2>6. Drill — Định vị process</h2>
           <p>Đọc mô tả tình huống → chọn đúng cả Domain + Process Group. Không cần nhớ tên process chính xác — chỉ cần định vị được.</p>
 
           <div class="drill-wrap" id="drillWrap">
@@ -560,12 +796,13 @@
 
         <!-- SECTION 5: CHEATSHEET -->
         <section id="cheatsheet">
-          <h2>5. Cheat sheet — Pattern summary</h2>
+          <h2>7. Cheat sheet — Pattern summary</h2>
           <div class="cheat-sheet">PMBOK 8 — PROCESS MATRIX BIG PICTURE
 ─────────────────────────────────────────────────────
-STRUCTURE: 9 Domains × 5 Process Groups
+STRUCTURE: 7 Domains × 5 Process Groups (PMBOK 8)
+           10 KAs × 5 Process Groups   (PMBOK 6)
 
-ONLY domain spanning full lifecycle:
+ONLY domain spanning full lifecycle (PMBOK 8):
   GOVERNANCE   Init → Plan → Exec → M&amp;C → CLOSE
 
 Domains with Initiating processes:
@@ -585,8 +822,9 @@ RISK: most front-loaded (4 of 6 processes in Planning)
 STAKEHOLDERS: widest Executing spread
   Exec: Manage Stakeholder Engagement + Manage Communications
 
-RESOURCES: 3 Executing processes (most in Executing)
-  Exec: Acquire Resources, Develop Team, Manage Team
+RESOURCES (PMBOK 8): 2 Executing processes
+  Exec: Acquire Resources, Lead the Team
+  [PMBOK 6 had 3: Acquire + Develop Team + Manage Team]
 
 ─────────────────────────────────────────────────────
 KEY RULES:
@@ -596,25 +834,34 @@ KEY RULES:
   "project just started"        → Initiating (Governance or Stakeholders)
   "project wrapping up"         → Closing (Governance only)
 
-PLANNING HEADCOUNT BY DOMAIN:
+PMBOK 8 PLANNING HEADCOUNT BY DOMAIN:
   Risk        ████████ 4 processes
   Scope       ████████ 4 processes
+  Finance     ██████ 3 processes
   Governance  ████   2 processes
   Stakeholders████   2 processes
-  Finance     ██████ 3 processes
   Resources   ████   2 processes
   Schedule    ████   2 processes
-  Quality     ██     1 process
-  Procurement ██     1 process
 
-M&amp;C COUNTERPARTS:
-  Stakeholders: Manage Comms → Monitor Comms
-  Resources:    Manage Team → Monitor &amp; Control Resourcing
+M&amp;C COUNTERPARTS (PMBOK 8):
+  Stakeholders: Manage Engagement/Comms → Monitor both
+  Resources:    Acquire/Lead Team → Monitor &amp; Control Resourcing
   Risk:         Implement Responses → Monitor Risks
-  Quality:      Manage Quality → Control Quality
-  Procurement:  Conduct/Manage → Control Procurements
+  Governance:   Manage Execution → Monitor &amp; Control Performance
 
-REF: PMBOK Guide, 8th Ed.
+PMBOK 6 → PMBOK 8 DOMAIN MAPPING:
+  Integration Management   → Governance
+  Stakeholder Management   → Stakeholders (+ Communications absorbed)
+  Scope Management         → Scope
+  Schedule Management      → Schedule
+  Cost Management          → Finance
+  Quality Management       → (→ Governance, no separate domain)
+  Resource Management      → Resources
+  Communications Management→ (→ Stakeholders, no separate domain)
+  Risk Management          → Risk
+  Procurement Management   → (→ Governance, no separate domain)
+
+REF: PMBOK Guide, 6th &amp; 8th Ed.
      Practice Series: Q lessons for individual processes</div>
         </section>
 
