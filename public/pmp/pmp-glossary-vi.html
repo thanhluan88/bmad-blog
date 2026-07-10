@@ -336,11 +336,12 @@
         <a class="nav-term" href="#s-curve">S-Curve</a>
         <a class="nav-term" href="#vac">VAC</a>
         <a class="nav-term" href="#cocomo">COCOMO</a>
-        <a class="nav-term" href="#toc">TOC</a>
+        <a class="nav-term" href="#toc">Theory of Constraints (TOC)</a>
         <a class="nav-term" href="#punch-list">Punch List</a>
         <a class="nav-term" href="#cost-of-quality">Cost of Quality (CoQ)</a>
         <a class="nav-term" href="#cost-aggregation">Cost Aggregation</a>
         <a class="nav-term" href="#basis-of-estimates">Basis of Estimates</a>
+        <a class="nav-term" href="#funding-limit-reconciliation">Funding limit reconciliation</a>
         <a class="nav-term" href="#reimburse">Reimburse / Cost-reimbursable</a>
         <a class="nav-term" href="#claims">Claims / Claims administration</a>
         <a class="nav-term" href="#delphi">Delphi / Wideband Delphi</a>
@@ -1313,13 +1314,53 @@
             </table>
           </article>
 
-          <article class="term-card" id="toc" data-terms="TOC theory of constraints bottleneck critical chain goldratt">
+          <article class="term-card" id="toc" data-terms="TOC theory of constraints constraint bottleneck weakest link goldratt critical chain drum buffer rope exploit subordinate elevate WIP limit cumulative flow diagram">
             <h3>Theory of Constraints (TOC)</h3>
             <table class="term-table">
-              <tr><td>Nghĩa</td><td>Hệ thống chỉ mạnh bằng <strong>bottleneck</strong></td></tr>
-              <tr><td>5 bước</td><td>Identify → Exploit → Subordinate → Elevate → Repeat</td></tr>
-              <tr><td>Critical Chain</td><td>TOC + project/feeding/resource buffer</td></tr>
+              <tr><td>Nghĩa</td><td><strong>Lý thuyết ràng buộc</strong> (Eliyahu Goldratt) — hiệu suất hệ thống bị giới hạn bởi <strong>constraint / bottleneck</strong> (điểm nghẽn), không phải mọi bước</td></tr>
+              <tr><td>Ẩn dụ</td><td>Chuỗi chỉ mạnh bằng <strong>mắt xích yếu nhất</strong> — tối ưu chỗ khác không tăng throughput nếu bottleneck còn</td></tr>
+              <tr><td>PMBOK</td><td>Schedule optimization · <strong>Critical Chain Method</strong> · quản lý bottleneck trong delivery</td></tr>
+              <tr><td>≠ CPM</td><td>CPM = longest <strong>logical</strong> path · Critical Chain = CPM + <strong>resource constraints</strong> + buffers</td></tr>
+              <tr><td>≠ Resource leveling</td><td>Leveling = cân bằng over-allocation · TOC = <strong>focus &amp; elevate constraint</strong></td></tr>
             </table>
+
+            <h4>5 bước Focusing (TOC)</h4>
+            <table class="data">
+              <tr><th>#</th><th>Bước</th><th>Ý</th></tr>
+              <tr class="tip-row"><td>1</td><td><strong>Identify</strong> the constraint</td><td>Tìm bottleneck — bước/tài nguyên giới hạn throughput</td></tr>
+              <tr class="tip-row"><td>2</td><td><strong>Exploit</strong> the constraint</td><td>Tận dụng tối đa capacity hiện có — không để constraint idle</td></tr>
+              <tr class="tip-row"><td>3</td><td><strong>Subordinate</strong> everything else</td><td>Các bước khác <strong>phục vụ</strong> constraint — không overproduce phía trước</td></tr>
+              <tr><td>4</td><td><strong>Elevate</strong> the constraint</td><td>Đầu tư nâng capacity (người, máy, skill) nếu cần</td></tr>
+              <tr><td>5</td><td><strong>Repeat</strong></td><td>Constraint mới xuất hiện → lặp lại chu kỳ</td></tr>
+            </table>
+
+            <h4>Critical Chain (TOC trong dự án)</h4>
+            <table class="term-table">
+              <tr><td>Critical Chain</td><td>Chuỗi công việc quyết định schedule khi có <strong>resource dependency</strong></td></tr>
+              <tr><td>Buffers</td><td><strong>Project buffer</strong> (cuối chain) · <strong>Feeding buffer</strong> (nhánh vào chain) · <strong>Resource buffer</strong></td></tr>
+              <tr><td>Mục tiêu</td><td>Bảo vệ end date — không padding mọi task như CPM truyền thống</td></tr>
+            </table>
+
+            <h4>Bottleneck trên đề PMP — PM làm gì</h4>
+            <table class="data">
+              <tr><th>Stem signal</th><th>Hướng xử lý</th></tr>
+              <tr><td>PM là bottleneck — team chờ approval mọi việc</td><td class="tip-row"><strong>Empower</strong> — distributed management, decide trong boundaries (Q71→D)</td></tr>
+              <tr><td>External expert = bottleneck (code review)</td><td class="tip-row"><strong>Upskill team</strong> — giảm phụ thuộc (Q213→B)</td></tr>
+              <tr><td>CFD: In Progress tăng, Done đứng — WIP</td><td class="tip-row"><strong>Review WIP limits</strong> — fix flow bottleneck (Q456→C)</td></tr>
+              <tr><td>Customs / process bottleneck</td><td>Intervention <strong>proportionate</strong> — workaround hoặc structural fix (Q894→C)</td></tr>
+              <tr><td>Time zone overlap = decision bottleneck</td><td>Async protocols + structured handoff</td></tr>
+            </table>
+
+            <h4>Mẹo đề — bẫy</h4>
+            <table class="term-table">
+              <tr class="tip-row"><td>bottleneck, weakest link, constraint</td><td>TOC mindset — <strong>fix constraint</strong>, không tối ưu mù</td></tr>
+              <tr class="warn-row"><td>Centralize thêm khi PM đã là bottleneck</td><td>✗ — làm nghẽn worse (Q71 A)</td></tr>
+              <tr class="warn-row"><td>Thêm resource / extend sprint khi WIP out of control</td><td>✗ — fix flow/WIP trước (Q456)</td></tr>
+              <tr class="warn-row"><td>Crash/fast-track mọi task</td><td>✗ — focus constraint, không scatter effort</td></tr>
+              <tr class="warn-row"><td>Ignore bottleneck, chỉ thêm meeting</td><td>✗ — address root constraint</td></tr>
+            </table>
+
+            <p class="note">Liên hệ: <a href="#scarce">scarce resources</a> · WIP/Kanban · Parkinson's law (TOC buffers chống padding) · Drum-Buffer-Rope (sản xuất)</p>
           </article>
 
           <article class="term-card" id="punch-list" data-terms="punch list closeout acceptance construction">
@@ -1407,12 +1448,14 @@
             <p class="note">Signal: <em>individual activity estimates + single approved budget + FIRST</em> → <strong>cost aggregation</strong></p>
           </article>
 
-          <article class="term-card" id="basis-of-estimates" data-terms="basis of estimates BOE assumptions confidence accuracy develop budget input Q70 question accuracy leaders">
+          <article class="term-card" id="basis-of-estimates" data-terms="basis of estimates BOE assumptions confidence accuracy develop budget input Q70 question accuracy leaders project documents cost basis schedule basis supporting documentation">
             <h3>Basis of Estimates (BOE)</h3>
             <table class="term-table">
               <tr><td>Nghĩa</td><td><strong>Cơ sở ước lượng</strong> — tài liệu giải thích estimate được tính <strong>như thế nào</strong> và dựa trên gì</td></tr>
+              <tr><td>Loại</td><td><strong>Project document</strong> — supporting documentation (không phải plan, không phải performance report)</td></tr>
               <tr><td>PMBOK 8</td><td>Input của <em>Develop Budget</em> p.64 · <em>Basis of Estimates</em> p.115</td></tr>
               <tr><td>≠ Cost estimate</td><td>Estimate = <strong>con số</strong> · BOE = <strong>lý do &amp; assumption</strong> đằng sau con số</td></tr>
+              <tr><td>Biến thể</td><td><strong>Cost basis of estimates</strong> · <strong>Schedule basis of estimates</strong> — cùng ý, khác domain</td></tr>
             </table>
 
             <h4>BOE thường gồm</h4>
@@ -1442,7 +1485,68 @@
               <tr class="warn-row"><td>D. Develop detailed estimates ✗</td><td>Estimates <strong>đã hoàn thành</strong> — không cần làm lại từ đầu</td></tr>
             </table>
 
-            <p class="note">Signal: <em>question accuracy / doubt estimates / concerned about delivery</em> → <strong>basis of estimates</strong> · <em>need approved budget</em> → cost aggregation</p>
+            <h4>≠ Các tài liệu dễ nhầm</h4>
+            <table class="data">
+              <tr><th>Tài liệu</th><th>Ý</th><th>≠ BOE</th></tr>
+              <tr><td><strong>Financial Management Plan</strong></td><td>Quy tắc quản lý tài chính</td><td>BOE = justify <strong>con số estimate</strong></td></tr>
+              <tr><td><strong>Work performance information</strong></td><td>Output monitoring — actual vs plan</td><td>BOE = <strong>planning</strong> doc, không phải status</td></tr>
+              <tr><td><strong>Assumption log</strong></td><td>Track assumptions dự án</td><td>BOE khi cần <strong>support estimates</strong>; assumption log khi track giả định chung</td></tr>
+            </table>
+
+            <h4>Liên hệ Claims</h4>
+            <table class="term-table">
+              <tr class="tip-row"><td>Dispute cost/scope</td><td>Review BOE + contract — so sánh assumption gốc vs thay đổi thực tế</td></tr>
+              <tr><td>≠ Auto approve claim</td><td>BOE giúp <strong>đánh giá</strong> — không thay change control / claims process</td></tr>
+            </table>
+
+            <p class="note">Slide: <strong>Project documents → Basis of estimates</strong> · Signal: <em>question accuracy</em> → show BOE · <em>need approved budget</em> → cost aggregation (Q69)</p>
+          </article>
+
+          <article class="term-card" id="funding-limit-reconciliation" data-terms="funding limit reconciliation reconcile funding limits cumulative expenditures spending profile determine budget develop budget periodic funding limits commitment of funds level expenditures adjust schedule">
+            <h3>Funding limit reconciliation</h3>
+            <table class="term-table">
+              <tr><td>Nghĩa</td><td><strong>Đối chiếu hạn mức tài trợ</strong> — so sánh <strong>chi tiêu tích lũy theo kế hoạch</strong> với <strong>funding limits</strong> (giới hạn cam kết/chi tiêu theo từng kỳ) và điều chỉnh cho khớp</td></tr>
+              <tr><td><strong>Reconcile</strong></td><td><strong>Đối chiếu &amp; điều chỉnh</strong> để hai bên align — ở đây: planned spend ↔ funding limit</td></tr>
+              <tr><td>PMBOK</td><td>Kỹ thuật <strong>Determine Budget</strong> / <em>Develop Budget</em> — sau cost aggregation, trước/hoàn thiện cost baseline</td></tr>
+              <tr><td>≠ Cost aggregation</td><td>Aggregation = <strong>roll up</strong> estimates · FLR = đảm bảo <strong>profile chi tiêu</strong> không vượt hạn mức từng kỳ</td></tr>
+              <tr><td>≠ <a href="#discrepancies">Discrepancies reconcile</a></td><td>Discrepancy = plan/actual/report không khớp chung · FLR = riêng <strong>funding limits</strong></td></tr>
+            </table>
+
+            <h4>Funding limit là gì?</h4>
+            <table class="term-table">
+              <tr><td>Định nghĩa</td><td>Giới hạn số tiền tổ chức <strong>cam kết hoặc chi tiêu</strong> trong một khoảng thời gian (tháng/quý)</td></tr>
+              <tr><td>Vấn đề</td><td>Project budget tổng OK nhưng <strong>cumulative spend</strong> một kỳ vượt limit → cần điều chỉnh</td></tr>
+              <tr class="tip-row"><td>PM làm</td><td><strong>Shift/level</strong> công việc trên schedule để làm mượt dòng chi (giống leveling nhưng cho <strong>tiền</strong>)</td></tr>
+            </table>
+
+            <h4>Flow Develop Budget (đầy đủ hơn)</h4>
+            <table class="data">
+              <tr><th>Bước</th><th>Kỹ thuật</th></tr>
+              <tr><td>1</td><td>Estimate Costs (activities)</td></tr>
+              <tr class="tip-row"><td>2</td><td><strong>Cost aggregation</strong> — roll up WBS (Q69)</td></tr>
+              <tr class="tip-row"><td>3</td><td><strong>Funding limit reconciliation</strong> — align spend profile với funding limits</td></tr>
+              <tr><td>4</td><td>Cost baseline (approved time-phased budget)</td></tr>
+            </table>
+
+            <h4>Q69 vs Funding limit vs BOE</h4>
+            <table class="data">
+              <tr><th>Signal</th><th>Đáp án</th></tr>
+              <tr><td>Need <strong>single approved budget</strong> · FIRST · estimates ready</td><td><strong>Cost aggregation</strong> (Q69)</td></tr>
+              <tr><td>Leaders <strong>question accuracy</strong> of estimates</td><td><strong>Basis of estimates</strong> (Q70)</td></tr>
+              <tr><td><strong>Funding limits</strong> · expenditure exceeds periodic cap · spending profile</td><td><strong>Funding limit reconciliation</strong></td></tr>
+              <tr><td>Over budget · plan vs actual <strong>discrepancies</strong></td><td><strong>Reconciliation process</strong> — align data/concerns (general)</td></tr>
+            </table>
+
+            <h4>Mẹo đề — bẫy</h4>
+            <table class="term-table">
+              <tr class="tip-row"><td>Planned spend vượt funding limit theo kỳ</td><td>Reconcile — điều chỉnh schedule/phasing chi tiêu</td></tr>
+              <tr class="tip-row"><td>Develop budget · organizational funding constraints</td><td>FLR — không chỉ aggregate rồi baseline ngay</td></tr>
+              <tr class="warn-row"><td>Chỉ submit CR tăng budget</td><td>✗ nếu vấn đề là <strong>timing/phasing</strong> của spend</td></tr>
+              <tr class="warn-row"><td>Nhầm với cost aggregation (Q69)</td><td>✗ — aggregation = roll up; FLR = fit funding limits</td></tr>
+              <tr class="warn-row"><td>Ignore funding limits, finalize baseline</td><td>✗ — baseline phải realistic với khả năng tài trợ</td></tr>
+            </table>
+
+            <p class="note">Slide list: <strong>5. Funding limit reconciliation</strong> · <em>Reconcile</em> = đối chiếu &amp; align · Keyword: <em>funding limits</em>, <em>cumulative expenditures</em>, <em>spending profile</em></p>
           </article>
 
           <article class="term-card" id="reimburse" data-terms="reimburse reimbursement cost-reimbursable cost plus CPFF CPAF CPIF actual costs vendor expense operational expenditures">
@@ -1924,7 +2028,11 @@
             <tr><td>cumulative PV EV AC</td><td>S-curve (EVM)</td></tr>
             <tr><td>Monte Carlo, probability</td><td>S-curve (Monte Carlo)</td></tr>
             <tr><td>People Planet Profit</td><td>Triple bottom line</td></tr>
-            <tr><td>bottleneck, weakest link</td><td>TOC</td></tr>
+            <tr><td>bottleneck, weakest link, constraint</td><td>TOC — identify &amp; fix constraint</td></tr>
+            <tr><td>PM is bottleneck, team waits for approval</td><td>Empower / distributed management</td></tr>
+            <tr><td>WIP growing, Done not increasing, CFD</td><td>Review WIP limits — flow bottleneck</td></tr>
+            <tr><td>external expert bottleneck, code review</td><td>Upskill team — reduce dependency</td></tr>
+            <tr><td>critical chain, project buffer</td><td>TOC schedule method</td></tr>
             <tr><td>punch list completion</td><td>Closeout</td></tr>
             <tr><td>stay vigilant, external environment</td><td>Monitor &amp; adapt</td></tr>
             <tr><td>overworked demoralized</td><td>Engage (Theory Y)</td></tr>
@@ -2029,6 +2137,9 @@
             <tr><td>update baseline for uncertain work</td><td>Sai — chưa chắc xảy ra</td></tr>
             <tr><td>individual activity estimates, single approved budget</td><td>Cost aggregation (Develop Budget)</td></tr>
             <tr><td>roll up WBS, work packages</td><td>Cost aggregation → cost baseline</td></tr>
+            <tr><td>funding limits, cumulative expenditures, spending profile</td><td><strong>Funding limit reconciliation</strong></td></tr>
+            <tr><td>expenditure exceeds periodic funding cap</td><td>Reconcile spend vs limits — adjust schedule/phasing</td></tr>
+            <tr><td>reconciliation process, discrepancies and concerns</td><td>Reconcile plan vs actual / reports (general)</td></tr>
             <tr><td>finalize cost baseline FIRST</td><td>Sai — aggregate trước</td></tr>
             <tr><td>question accuracy of estimates</td><td>Show basis of estimates</td></tr>
             <tr><td>doubt estimates, concerned about delivery</td><td>Basis of Estimates — transparency</td></tr>

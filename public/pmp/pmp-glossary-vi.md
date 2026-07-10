@@ -603,10 +603,24 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 ### Theory of Constraints (TOC)
 | | |
 |---|---|
-| **Nghĩa** | Hệ thống chỉ mạnh bằng **bottleneck** — tối ưu tại constraint |
-| **5 bước** | Identify → Exploit → Subordinate → Elevate → Repeat |
-| **Critical Chain** | TOC áp dụng schedule + project/feeding/resource buffer |
-| **≠ CPM** | CPM = longest path; Critical Chain = + resource constraints |
+| **Nghĩa** | **Lý thuyết ràng buộc** (Goldratt) — throughput bị giới hạn bởi **bottleneck/constraint** |
+| **Ẩn dụ** | Chuỗi mạnh bằng mắt xích yếu nhất — tối ưu chỗ khác không giúp nếu constraint còn |
+| **≠ CPM** | CPM = logical path · Critical Chain = + resource constraints + buffers |
+| **≠ Resource leveling** | Leveling cân allocation · TOC **focus constraint** |
+
+**5 bước:** Identify → **Exploit** → **Subordinate** → **Elevate** → Repeat
+
+**Critical Chain:** Schedule method TOC — project / feeding / resource **buffers** bảo vệ end date
+
+**Bottleneck trên đề:**
+| Signal | PM làm |
+|--------|--------|
+| PM là bottleneck, team chờ approval | Empower — distributed management (Q71→D) |
+| External expert bottleneck | Upskill team (Q213→B) |
+| CFD: WIP tăng, Done đứng | Review **WIP limits** (Q456→C) |
+| Process bottleneck (customs…) | Intervention proportionate (Q894→C) |
+
+**Bẫy ✗:** Centralize thêm khi PM đã bottleneck · Thêm resource thay vì fix WIP · Crash mọi task
 
 ### Punch List
 | | |
@@ -653,10 +667,14 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | | |
 |---|---|
 | **Nghĩa** | **Cơ sở ước lượng** — giải thích estimate tính như thế nào, dựa trên gì |
+| **Loại** | **Project document** — supporting doc (không phải plan / performance report) |
 | **PMBOK 8** | Input *Develop Budget* p.64 · p.115 |
 | **≠ Cost estimate** | Estimate = con số · BOE = assumption & method |
+| **Biến thể** | Cost basis of estimates · Schedule basis of estimates |
 
 **Gồm:** Assumptions · Constraints · Method · Data sources · Range/confidence · Supporting docs
+
+**≠ Nhầm:** FMP (quy tắc tài chính) · Work performance info (monitoring) · Assumption log (track giả định chung)
 
 **Q69 vs Q70:**
 | Câu | Tình huống | Đáp |
@@ -665,6 +683,31 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | Q70 | Estimates xong · leaders question **accuracy** | **Show basis of estimates** ✓ |
 
 **Sai Q70 ✗:** Aggregate (Q69) · Show FMP · Develop estimates lại (đã xong)
+
+**Claims:** Review BOE + contract khi dispute cost — không auto-approve claim
+
+### Funding limit reconciliation
+| | |
+|---|---|
+| **Nghĩa** | **Đối chiếu hạn mức tài trợ** — so planned **cumulative spend** với **funding limits** theo kỳ và điều chỉnh |
+| **Reconcile** | **Đối chiếu & điều chỉnh** để align — planned spend ↔ funding limit |
+| **PMBOK** | Kỹ thuật **Determine Budget** / *Develop Budget* — sau aggregation |
+| **≠ Cost aggregation** | Roll up estimates · FLR = fit **spending profile** vào limits |
+| **≠ Discrepancies** | FLR = riêng funding limits theo kỳ |
+
+**Funding limit:** Giới hạn tiền org cam kết/chi trong một kỳ (tháng/quý)
+
+**Flow:** Estimate → **Cost aggregation** → **Funding limit reconciliation** → Cost baseline
+
+**Q69 vs FLR vs Q70:**
+| Signal | Đáp |
+|--------|-----|
+| Single approved budget · FIRST | Cost aggregation (Q69) |
+| Question estimate accuracy | Basis of estimates (Q70) |
+| Funding limits · spend profile vượt cap | **Funding limit reconciliation** |
+| Over budget · discrepancies | Reconciliation process (general) |
+
+**Bẫy ✗:** Chỉ CR tăng budget khi vấn đề là phasing · Nhầm FLR với aggregation · Ignore limits khi baseline
 
 ### Reimburse / Cost-reimbursable
 | | |
@@ -1021,7 +1064,11 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | cumulative PV EV AC | S-curve (EVM) |
 | Monte Carlo iterations, probability | S-curve (Monte Carlo) |
 | People Planet Profit | Triple bottom line |
-| bottleneck, weakest link | TOC |
+| bottleneck, weakest link, constraint | TOC — fix constraint |
+| PM is bottleneck, waits for approval | Empower / distributed management |
+| WIP growing, Done not increasing | Review WIP limits |
+| external expert bottleneck | Upskill — reduce dependency |
+| critical chain, project buffer | TOC schedule method |
 | punch list completion | Closeout / acceptance |
 | stay vigilant, external environment | Monitor & adapt |
 | overworked demoralized | Engage & acknowledge (Theory Y) |
@@ -1121,6 +1168,9 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | blanket padding all estimates | Sai — contingency cho risk cụ thể |
 | individual activity estimates, approved budget | Cost aggregation |
 | roll up WBS, work packages | Cost aggregation → baseline |
+| funding limits, cumulative expenditures | **Funding limit reconciliation** |
+| expenditure exceeds periodic funding cap | Reconcile spend — adjust schedule/phasing |
+| reconciliation process, discrepancies | Reconcile plan vs actual (general) |
 | finalize baseline FIRST | Sai — aggregate trước |
 | question accuracy of estimates | Basis of Estimates |
 | doubt estimates, show assumptions | Show basis of estimates |
