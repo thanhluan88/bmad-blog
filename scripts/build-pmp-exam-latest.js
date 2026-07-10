@@ -240,8 +240,8 @@ function buildHtml(template, questions) {
     ["PMP Full Questions — Luyện tập trắc nghiệm", "PMP Exam Latest — Luyện tập trắc nghiệm"],
     ["<h1>PMP Full Questions</h1>", "<h1>PMP Exam Latest</h1>"],
     [
-      "Tài liệu luyện tập trắc nghiệm — chọn đáp án rồi nhấn <strong>Kiểm tra</strong> để xem Đáp án đúng và Giải thích.",
-      subtitle,
+      "<p>Bộ gốc — 1123 câu — giải thích theo <strong>PMBOK 8</strong>. Chọn đáp án rồi nhấn <strong>Kiểm tra</strong> để xem phân tích.</p>",
+      `<p>${subtitle}</p>`,
     ],
     ['max="1123"', `max="${questions.length}"`],
     ['"pmp-quiz-highlights-v1"', '"pmp-exam-latest-highlights-v1"'],
@@ -254,6 +254,10 @@ function buildHtml(template, questions) {
   for (const [from, to] of replacements) {
     html = html.split(from).join(to);
   }
+  html = html.replace(
+    /<p>Bộ gốc — \d+ câu[\s\S]*?<\/p>/,
+    `<p>${subtitle}</p>`,
+  );
 
   return html;
 }

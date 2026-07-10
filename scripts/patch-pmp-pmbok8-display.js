@@ -55,6 +55,7 @@ const BLOCK = `${CSS_START}
     }
     .solution-card.mapping { background: #f0f9ff; border-color: #bae6fd; }
     .solution-card.why { background: #f0fdf4; border-color: #bbf7d0; }
+    .solution-card.signal { background: #ecfdf5; border-color: #a7f3d0; }
     .solution-card.reject { background: #fff; border-color: #e5e7eb; }
     .solution-card.refs { background: #fafafa; border-color: #e5e7eb; }
     .solution-card.original { background: #fffbeb; border-color: #fde68a; font-size: 0.92rem; line-height: 1.6; }
@@ -77,6 +78,31 @@ const BLOCK = `${CSS_START}
       color: var(--text);
     }
     .solution-lead strong { color: #047857; }
+    .why-bullets {
+      margin: 0.35rem 0 0;
+      padding-left: 1.15rem;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .why-bullets li { margin: 0.25rem 0; }
+    .signal-phrases {
+      margin: 0 0 0.5rem;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+    .signal-phrases .kw-signal {
+      background: #d1fae5;
+      color: #065f46;
+      padding: 0.08rem 0.22rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .signal-answer {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
     .mapping-grid {
       display: grid;
       grid-template-columns: 5.5rem 1fr;
@@ -173,6 +199,7 @@ const HELPERS = `${JS_START}
       const h = heading.toLowerCase();
       if (h.includes("pmbok 8 mapping")) return "mapping";
       if (h.includes("vì sao") || h.includes("vi sao")) return "why";
+      if (h.includes("signal trong stem")) return "signal";
       if (h.includes("loại trừ") || h.includes("loai tru")) return "reject";
       if (h.includes("tham khảo") || h.includes("tham khao")) return "refs";
       if (h.includes("giải thích gốc") || h.includes("giai thich goc")) return "original";
@@ -210,12 +237,46 @@ const HELPERS = `${JS_START}
     }
 
     function renderWhyBody(lines) {
-      return lines.map(line => {
+      const parts = [];
+      let bullets = [];
+      const flush = () => {
+        if (!bullets.length) return;
+        parts.push(\`<ul class="why-bullets">\${bullets.join("")}</ul>\`);
+        bullets = [];
+      };
+      for (const line of lines) {
         if (/^→/.test(line)) {
-          return \`<div class="solution-lead">\${inlineFormat(line.replace(/^→\\s*/, ""))}</div>\`;
+          flush();
+          parts.push(\`<div class="solution-lead">\${inlineFormat(line.replace(/^→\\s*/, ""))}</div>\`);
+        } else if (/^-\\s+/.test(line)) {
+          bullets.push(\`<li>\${inlineFormat(line.replace(/^-\\s+/, ""))}</li>\`);
+        } else {
+          flush();
+          parts.push(\`<p class="solution-text">\${inlineFormat(line)}</p>\`);
         }
-        return \`<p class="solution-text">\${inlineFormat(line)}</p>\`;
-      }).join("");
+      }
+      flush();
+      return parts.join("");
+    }
+
+    function renderSignalBody(lines) {
+      const cleaned = lines.map(l => l.trim()).filter(Boolean);
+      if (!cleaned.length) return "";
+      let html = "";
+      const phrasesLine = cleaned[0];
+      if (phrasesLine.includes("·")) {
+        const phraseParts = phrasesLine.split("·").map(p => p.trim()).filter(p => p.length > 3);
+        if (phraseParts.length) {
+          html += \`<p class="signal-phrases">\${phraseParts.map(p => \`<span class="kw-signal">\${escapeHtml(p)}</span>\`).join(" · ")}</p>\`;
+        }
+      }
+      const answer = cleaned.length > 1
+        ? cleaned.slice(1).join(" ")
+        : (phrasesLine.includes("·") ? "" : phrasesLine);
+      if (answer) {
+        html += \`<p class="signal-answer">\${inlineFormat(answer)}</p>\`;
+      }
+      return html;
     }
 
     function renderRejectList(lines) {
@@ -270,6 +331,7 @@ const HELPERS = `${JS_START}
         let body = "";
         if (cls === "mapping") body = renderMappingList(section.lines);
         else if (cls === "why") body = renderWhyBody(section.lines);
+        else if (cls === "signal") body = renderSignalBody(section.lines);
         else if (cls === "reject") body = renderRejectList(section.lines);
         else if (cls === "refs") body = renderRefList(section.lines);
         else body = section.lines.map(line => \`<p class="solution-text">\${inlineFormat(line)}</p>\`).join("");
@@ -317,6 +379,29 @@ function patchHighlightFix(html) {
   return html;
 }
 
+function patchTeachQuizSync(html) {
+  html = html.replace(
+    `function teachLessonHref(id) {
+      return "pmp-teach-full-q" + id + ".html";
+    }`,
+    `function teachLessonHref(id) {
+      if (typeof PMP_STATS_QUIZ_ID !== "undefined" && PMP_STATS_QUIZ_ID === "latest") return "";
+      return "pmp-teach-full-q" + id + ".html";
+    }`,
+  );
+  html = html.replace(
+    `function renderTeachLink(id) {
+      return \`<a class="q-teach-link" href="\${teachLessonHref(id)}" target="_blank" rel="noopener">📖 Bài giảng</a>\`;
+    }`,
+    `function renderTeachLink(id) {
+      const href = teachLessonHref(id);
+      if (!href) return "";
+      return \`<a class="q-teach-link" href="\${href}" target="_blank" rel="noopener">📖 Bài giảng</a>\`;
+    }`,
+  );
+  return html;
+}
+
 function patchFile(filePath) {
   if (!fs.existsSync(filePath)) {
     console.warn("Skip (missing):", filePath);
@@ -347,6 +432,7 @@ function patchFile(filePath) {
   }
 
   html = patchHighlightFix(html);
+  html = patchTeachQuizSync(html);
 
   fs.writeFileSync(filePath, html);
   console.log("Patched PMBOK8 display:", path.basename(filePath));
