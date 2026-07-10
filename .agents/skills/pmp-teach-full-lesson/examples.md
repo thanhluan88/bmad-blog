@@ -1,69 +1,62 @@
 # Examples
 
-## Bad — generic engine reasoning
+## Signal — English only (AI exchange)
 
-**Tại sao chọn D?**
-- Hành động này giải quyết trực tiếp vấn đề trong đề.
+**Bad — Q9 before fix:** Vietnamese conclusion, no stem highlights
 
-**Loại trừ A:** đáp án đúng tập trung vào Develop Team.
+> → C: PM ưu tiên theo business value/MVP…
 
-**Fix:** Run grounding prompt; store `whyBullets` + `excludeReasons` with question-specific PMBOK logic.
-
----
-
-## Good — AI grounding (Q3)
-
-**whyBullets:**
-- Đáp án D đúng: virtual team + lo engagement → recurring check-ins (Develop Team).
-- A sai: kickoff một lần không duy trì engagement.
-- B sai: copy plan team cũ — không fit context.
-- C sai: async-only thiếu tương tác đồng bộ.
-
-**excludeReasons:** same reasoning per key (used in Loại trừ table).
-
----
-
-## Signal — AI not regex
-
-**Bad:** regex `/sent to the entire/` auto-tags signal.
-
-**Good — Q1:**
+**Good — Q9:**
 
 ```json
 {
   "signalPhrases": [
-    "mistakenly sent to the entire global project team",
-    "critical feedback regarding a recent incident"
+    "Kanban board and work-in-progress (WIP) limits agreed with stakeholders",
+    "Because we are agile, you can just start my landing page now, and we\u2019ll worry about process later"
   ],
-  "signalAnswer": "Email nhầm audience + feedback nhạy cảm → acknowledge + apologize công khai."
+  "signalAnswer": "Stakeholder cites agility to bypass agreed WIP limits — PM explains agile teams still maintain governance and WIP limits."
 }
 ```
+
+Quiz stem highlights `kw-signal` on those English phrases.
+
+---
+
+## Tại sao chọn — correct only
+
+**Bad** (wrong keys mixed in):
+
+- B đúng: teamwork + CI…
+- **A sai:** khuyên EQ = phán xét…
+- **C/D sai thứ tự:** retrospective…
+
+**Good:**
+
+- B is correct: teamwork + continuous improvement + early feedback loops…
+- PMBOK 8 p. 112: PM assesses team needs and coaches directly.
+
+Wrong-key reasoning → **Loại trừ** table only.
+
+---
+
+## Loại trừ — all wrong keys
+
+**Bad:** table missing option B when A, C, D shown.
+
+**Good — Q2 (correct = B):**
+
+| Đáp án | Tại sao không chọn |
+|--------|-------------------|
+| A | EQ lecture judges attitude — does not explain Agile teamwork value. |
+| C | Retrospective role before SME buy-in. |
+| D | Sponsor escalation too heavy. |
+
+Every wrong key must have a row.
 
 ---
 
 ## Trích dẫn Guide — complete sentences
 
-**Bad:** RAG snippet cut at 360 chars:
+**Bad:** `…Team-building activities can vary from` (cut mid-sentence)
 
-> Team building is conducting activities… and build a collaborative and cooperative working environment. Team-building activities can vary from
-
-**Good:** ends on complete sentence:
-
-> Team building is conducting activities that enhance the team's social relationships and build a collaborative and cooperative working environment.
-
-Store override: `guideQuote` in `pmp-teach-signals.json` when RAG text is incomplete.
-
----
-
-## Flashcard concept — PMBOK 8 citation
-
-**Bad back:** `Develop Team` only — no Guide text.
-
-**Good back:**
-
-> **Develop Team**  
-> Develop Team · Build an empowered culture  
-> *"The Develop Team process focuses on improving competencies, team member interaction, and the overall team environment…"*  
-> PMBOK 8, tr. 205
-
-Source: `pmbokConcept` from grounding JSON or RAG `pageInfo.snippet`.
+**Good:** ends on `.` with full meaning — use `guideQuote` or `formatGuideQuote()`.

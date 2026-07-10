@@ -5,7 +5,7 @@ description: Regenerate or polish Full Bank teach lessons — PMBOK 8 grounding 
 
 # PMP Teach Full Lesson
 
-**Colocation-grade** teach **lesson**: Vietnamese reasoning, PMBOK 8 traceable, **grounding** + **signal** from AI (not engine templates).
+**Colocation-grade** teach **lesson**: PMBOK 8 traceable, **grounding** + **signal** from AI (not engine templates).
 
 ## Inputs
 
@@ -27,49 +27,44 @@ description: Regenerate or polish Full Bank teach lessons — PMBOK 8 grounding 
 
 ### 2. **Grounding** — ask PMBOK 8
 
-Template: [REFERENCE.md](REFERENCE.md#grounding-prompt). AI explains why correct key fits and why each wrong key fails.
+Template: [REFERENCE.md](REFERENCE.md#grounding-prompt).
 
-Store full JSON per question in `data/pmp-teach-signals.json`:
+Store per question in `data/pmp-teach-signals.json`:
 
-- `whyBullets` — bullets for **Tại sao chọn {key}?**
-- `excludeReasons` — map `{ "A": "…", "C": "…" }` for **Loại trừ từng đáp án**
-- `guideQuote` — **Trích dẫn Guide**: 1–3 câu PMBOK 8 **đầy đủ ý**, kết thúc bằng `.` / `!` / `?` (không cắt giữa câu)
-- `pmbokConcept` — excerpt for flashcard concept (same complete-sentence rule)
+- `whyBullets` — **chỉ** lý do đáp án **đúng** (cho *Tại sao chọn {key}?*)
+- `excludeReasons` — map **mọi** đáp án sai `{ "A": "…", "C": "…" }` (cho *Loại trừ từng đáp án*)
+- `guideQuote`, `pmbokConcept` — trích dẫn Guide (câu đầy đủ)
 
-**Completion:** Every wrong key has a non-generic `excludeReasons` entry; `whyBullets` has ≥2 items; `guideQuote` ends on complete sentence(s).
+**Completion:** `whyBullets` không chứa lý do đáp án sai; `excludeReasons` có entry cho **từng** key sai.
 
 ### 3. **Signal** — ask AI (not regex)
 
 Prompt: [REFERENCE.md](REFERENCE.md#signal-prompt).
 
-- `signalAnswer` — Vietnamese: stem cues → correct action
-- `signalPhrases` — **English** substrings copied verbatim from stem (2–5)
+- `signalPhrases` — **English** substrings verbatim from stem (2–5)
+- `signalAnswer` — **English** (giữ nguyên gốc trao đổi với AI): stem cues → correct action
 
-**Rules:** No `STEM_SIGNAL_PATTERNS` / regex for signals. Phrases must appear exactly in the English stem.
+**Rules:** No regex for signals. `signalAnswer` **English only** — không dịch sang Việt trong Signal card.
 
-**Completion:** `signalPhrases` non-empty; each phrase in stem; `signalAnswer` in Vietnamese.
+**Completion:** `signalPhrases` in stem; `signalAnswer` English.
 
 ### 4. Embed into `#analysis`
 
-| Block | Source |
-|-------|--------|
-| Signal card | `signalPhrases` + `signalAnswer` |
-| **Tại sao chọn {key}?** | `whyBullets` from grounding AI |
-| **Trích dẫn Guide** | `guideQuote` or RAG snippet via `formatGuideQuote()` |
-| Loại trừ table | `excludeReasons` from grounding AI only |
-| Quiz `.q-text` | `signalPhrases` highlights |
+| Block | Source | Rule |
+|-------|--------|------|
+| **Signal trong stem** | `signalPhrases` + `signalAnswer` | **English** |
+| **Tại sao chọn {key}?** | `whyBullets` | Chỉ đáp án đúng — **không** giải thích đáp án khác sai |
+| **Trích dẫn Guide** | `guideQuote` / `formatGuideQuote()` | Câu đầy đủ ý |
+| **Loại trừ từng đáp án** | `excludeReasons` | **Đủ** mọi đáp án sai |
+| Quiz `.q-text` | `signalPhrases` highlights | English |
 
-**Omit:** `#drill`, `#traps`, **Grounding PMBOK 8 card** — lý do đã nằm trong Tại sao chọn + Loại trừ.
+**Omit:** `#drill`, `#traps`, Grounding PMBOK 8 card.
 
-**Trích dẫn Guide rule:** Quote must be **complete sentence(s)** with full meaning — never truncate mid-sentence (e.g. bad: *"…can vary from"*). Engine: `formatGuideQuote()` in `pmp-pmbok8-rag-pages.js`.
-
-**Completion:** No generic engine text; Guide quote ends on sentence boundary; Tại sao + Loại trừ trace to stored grounding.
+**Completion:** Tại sao = đúng only; Loại trừ = all wrong keys with reasoning.
 
 ### 5. Flashcard concept
 
-Card 1 back = **PMBOK 8 citation**: process/principle + quoted Guide excerpt (complete sentences) + page ref.
-
-**Completion:** Back shows complete PMBOK 8 sentence(s) with tr. number.
+PMBOK 8 citation: process + quoted excerpt (complete sentences) + tr.
 
 ### 6. Generate
 
@@ -85,10 +80,10 @@ node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 
 | Symptom | Action |
 |---------|--------|
-| Guide quote cuts mid-sentence | Fill `guideQuote` with full sentence(s); or fix RAG + `formatGuideQuote` |
-| Empty Tại sao / Loại trừ | Run grounding prompt; fill `whyBullets` + `excludeReasons` |
-| Generic rejection text | Replace with AI reasoning in store |
-| No stem highlights | Run signal prompt; fill `signalPhrases` |
+| Signal card in Vietnamese | Rewrite `signalAnswer` in English |
+| Wrong keys in Tại sao bullets | Remove; move to `excludeReasons` |
+| Loại trừ thiếu đáp án | Fill every wrong key in `excludeReasons` |
+| Guide quote cuts mid-sentence | Fill `guideQuote` or fix `formatGuideQuote` |
 
 ## Resources
 

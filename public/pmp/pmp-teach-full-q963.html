@@ -50,7 +50,7 @@
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
-    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
@@ -159,7 +159,7 @@
             <h4>Signal trong stem Q963</h4>
             
             
-            <p class="signal-conclusion" style="margin:0">→ <strong>A</strong>: align PMBOK 8.</p>
+            
           </div>
           <h3>Tại sao chọn A,B?</h3>
           <ul></ul>
@@ -173,7 +173,10 @@
             <p style="margin:0.5rem 0 0;font-size:0.82rem;color:var(--muted)">— PMBOK 8, tr. 98 (Implement Risk Responses)</p>
           </div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 98: Implement <span class="kw-pmbok">Risk</span> Responses</p>
           <h3>Loại trừ từng đáp án</h3>
-          <p style="font-size:0.86rem;color:var(--muted);margin:0">Chưa có lý do loại trừ từ grounding — chạy grounding prompt và lưu <code>excludeReasons</code> vào <code>data/pmp-teach-signals.json</code>.</p>
+          <table>
+            <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
+            <tbody><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Forecasting tools, such as S-curve analysis, to track performance.</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.C</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Configuration management procedures for controlling deliverables.</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.D</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>E</strong><br><span style="font-size:0.8rem;color:var(--muted)">Corrective actions to be taken for risks during project execution.</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.E</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr></tbody>
+          </table><p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: C, D, E — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>
         </section>
 
         <section id="flashcards">

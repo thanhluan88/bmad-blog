@@ -50,7 +50,7 @@
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
-    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
@@ -158,10 +158,10 @@
             <h4>Signal trong stem Q539</h4>
             
             
-            <p class="signal-conclusion" style="margin:0">→ <strong>A</strong>: Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
+            
           </div>
           <h3>Tại sao chọn A?</h3>
-          <ul><li>Đáp án A đúng: Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 54: Develop <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Lead accountably</span>.</li><li>B sai: Implements change mà không formal approval.</li></ul>
+          <ul><li>Đáp án A đúng: Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 54: Develop <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Lead accountably</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Perform an impact analysis and submit a formal change request to revise the schedule.</strong></p>
@@ -174,8 +174,8 @@
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Continue with the original schedule and arrange a meeting between the engineerin…</span></td><td>Implements change mà không formal approval.</td></tr></tbody>
-          </table>
+            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Continue with the original schedule and arrange a meeting between the engineerin…</span></td><td>Implements change mà không formal approval.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Submit a request for an increase in the budget to cover the cost of re-baselinin…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.C</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Remind the sponsor that full staffing cannot be in place two weeks early without…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.D</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr></tbody>
+          </table><p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: C, D — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>
         </section>
 
         <section id="flashcards">

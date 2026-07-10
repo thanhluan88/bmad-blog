@@ -50,7 +50,7 @@
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
-    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
@@ -158,10 +158,10 @@
             <h4>Signal trong stem Q676</h4>
             
             
-            <p class="signal-conclusion" style="margin:0">→ <strong>C</strong>: align PMBOK 8.</p>
+            
           </div>
           <h3>Tại sao chọn C?</h3>
-          <ul><li>B sai: Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.</li><li>D sai: Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li></ul>
+          <ul></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Trigger the contract dispute resolution process and engage all parties in a formal review.</strong></p>
@@ -174,8 +174,8 @@
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reject the items and demand an immediate replacement because a refund would only…</span></td><td>Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Send additional proof of the defects to the vendor to point out the repercussion…</span></td><td>Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
-          </table>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Accept delivery now to protect the schedule, even if quality concerns remain unr…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.A</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reject the items and demand an immediate replacement because a refund would only…</span></td><td>Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Send additional proof of the defects to the vendor to point out the repercussion…</span></td><td>Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
+          </table><p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: A — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>
         </section>
 
         <section id="flashcards">

@@ -50,7 +50,7 @@
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
-    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
@@ -158,7 +158,7 @@
             <h4>Signal trong stem Q897</h4>
             
             
-            <p class="signal-conclusion" style="margin:0">→ <strong>C</strong>: PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p>
+            
           </div>
           <h3>Tại sao chọn C?</h3>
           <ul><li>Đáp án C đúng: PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 53: <span class="kw-pmbok">Develop Team</span> + <span class="kw-pmbok">Embed quality</span>.</li></ul>
@@ -172,7 +172,10 @@
             <p style="margin:0.5rem 0 0;font-size:0.82rem;color:var(--muted)">— PMBOK 8, tr. 53 (Performance Domain: Resources, Develop Team)</p>
           </div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
           <h3>Loại trừ từng đáp án</h3>
-          <p style="font-size:0.86rem;color:var(--muted);margin:0">Chưa có lý do loại trừ từ grounding — chạy grounding prompt và lưu <code>excludeReasons</code> vào <code>data/pmp-teach-signals.json</code>.</p>
+          <table>
+            <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Encourage teams to adopt improvements when convenient but avoid changing existin…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.A</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Assign a separate improvement team to work in parallel while core teams continue…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.B</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Capture all improvements in a lessons database for use in future projects instea…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.D</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr></tbody>
+          </table><p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: A, B, D — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>
         </section>
 
         <section id="flashcards">

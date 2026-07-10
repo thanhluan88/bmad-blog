@@ -50,7 +50,7 @@
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
-    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
@@ -158,10 +158,10 @@
             <h4>Signal trong stem Q383</h4>
             
             
-            <p class="signal-conclusion" style="margin:0">→ <strong>A</strong>: Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</p>
+            
           </div>
           <h3>Tại sao chọn A?</h3>
-          <ul><li>Đáp án A đúng: <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 40: Define <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Adopt a holistic view</span>.</li><li>C sai: &quot;Provide existing test scripts and defect tracking procedures to ensure c…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Establish clear testing acceptance criteria and provide comprehensive re…&quot; sát vấn đề chất lượng / defect hơn.</li><li>D sai: Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo chất lượng / kiểm soát quality.</li></ul>
+          <ul><li>Đáp án A đúng: <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 40: Define <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Adopt a holistic view</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Establish clear testing acceptance criteria and provide comprehensive requirements documentation.</strong></p>
@@ -174,8 +174,8 @@
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
-            <tbody><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Provide existing test scripts and defect tracking procedures to ensure consisten…</span></td><td>&quot;Provide existing test scripts and defect tracking procedures to ensure c…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Establish clear testing acceptance criteria and provide comprehensive re…&quot; sát vấn đề chất lượng / defect hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Schedule regular progress reviews and implement quality gates to monitor vendor …</span></td><td>Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo chất lượng / kiểm soát quality.</td></tr></tbody>
-          </table>
+            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Conduct detailed knowledge transfer sessions covering business processes and sta…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.B</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Provide existing test scripts and defect tracking procedures to ensure consisten…</span></td><td>&quot;Provide existing test scripts and defect tracking procedures to ensure c…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Establish clear testing acceptance criteria and provide comprehensive re…&quot; sát vấn đề chất lượng / defect hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Schedule regular progress reviews and implement quality gates to monitor vendor …</span></td><td>Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo chất lượng / kiểm soát quality.</td></tr></tbody>
+          </table><p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: B — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>
         </section>
 
         <section id="flashcards">

@@ -50,7 +50,7 @@
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
-    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
@@ -158,10 +158,10 @@
             <h4>Signal trong stem Q326</h4>
             
             
-            <p class="signal-conclusion" style="margin:0">→ <strong>C</strong>: Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</p>
+            
           </div>
           <h3>Tại sao chọn C?</h3>
-          <ul><li>Đáp án C đúng: <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 104: <span class="kw-pmbok">Manage Stakeholder Engagement</span> + <span class="kw-pmbok">Focus on value</span>.</li><li>B sai: &quot;Immediately train the software developer on automation testing and then …&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Ask the quality assurance engineer to assist the software developer as s…&quot; sát vấn đề chất lượng / defect hơn.</li><li>D sai: &quot;Reschedule the automation testing for when the quality assurance enginee…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Ask the quality assurance engineer to assist the software developer as s…&quot; sát vấn đề chất lượng / defect hơn.</li></ul>
+          <ul><li>Đáp án C đúng: <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 104: <span class="kw-pmbok">Manage Stakeholder Engagement</span> + <span class="kw-pmbok">Focus on value</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Ask the quality assurance engineer to assist the software developer as soon as possible.</strong></p>
@@ -174,8 +174,8 @@
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Immediately train the software developer on automation testing and then proceed …</span></td><td>&quot;Immediately train the software developer on automation testing and then …&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Ask the quality assurance engineer to assist the software developer as s…&quot; sát vấn đề chất lượng / defect hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reschedule the automation testing for when the quality assurance engineer is ava…</span></td><td>&quot;Reschedule the automation testing for when the quality assurance enginee…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Ask the quality assurance engineer to assist the software developer as s…&quot; sát vấn đề chất lượng / defect hơn.</td></tr></tbody>
-          </table>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reassign the automation work to the engineer as soon as the presentation is fini…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.A</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Immediately train the software developer on automation testing and then proceed …</span></td><td>&quot;Immediately train the software developer on automation testing and then …&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Ask the quality assurance engineer to assist the software developer as s…&quot; sát vấn đề chất lượng / defect hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reschedule the automation testing for when the quality assurance engineer is ava…</span></td><td>&quot;Reschedule the automation testing for when the quality assurance enginee…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Ask the quality assurance engineer to assist the software developer as s…&quot; sát vấn đề chất lượng / defect hơn.</td></tr></tbody>
+          </table><p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: A — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>
         </section>
 
         <section id="flashcards">

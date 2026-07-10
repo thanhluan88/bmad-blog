@@ -50,7 +50,7 @@
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
-    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
@@ -158,10 +158,10 @@
             <h4>Signal trong stem Q578</h4>
             
             
-            <p class="signal-conclusion" style="margin:0">→ <strong>C</strong>: align PMBOK 8.</p>
+            
           </div>
           <h3>Tại sao chọn C?</h3>
-          <ul><li>B sai: Tập trung &quot;xác nhận đã hoàn thành (không xử lý mới)&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li><li>D sai: Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li></ul>
+          <ul></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Perform administrative closure of all procurements for the project.</strong></p>
@@ -174,8 +174,8 @@
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Confirm with the team that the work was completed according to the contract.</span></td><td>Tập trung &quot;xác nhận đã hoàn thành (không xử lý mới)&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Verify the invoice against the subcontract with the procurement department.</span></td><td>Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
-          </table>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Evaluate the invoices to determine the scope of work completed.</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.A</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Confirm with the team that the work was completed according to the contract.</span></td><td>Tập trung &quot;xác nhận đã hoàn thành (không xử lý mới)&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Verify the invoice against the subcontract with the procurement department.</span></td><td>Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
+          </table><p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: A — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>
         </section>
 
         <section id="flashcards">

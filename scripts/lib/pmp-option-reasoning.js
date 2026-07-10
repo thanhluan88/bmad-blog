@@ -6,6 +6,7 @@ const ACTION_TYPES = [
   { id: "apologize_accountable", label: "thừa nhận lỗi và giải trình minh bạch", re: /apolog|acknowledge the mistake|take responsibility|admit|transparen/i },
   { id: "listen_support", label: "lắng nghe và hỗ trợ cá nhân", re: /actively listen|listen to the|understand.*concern|support (?:their|the) needs|empath|one-on-one|1-on-1/i },
   { id: "explain_agile_value", label: "giải thích giá trị teamwork/Agile và continuous improvement", re: /explain that teamwork|explain.*(?:benefits?|value).*(?:teamwork|agile|collaboration)|continuous improvement.*early feedback|early feedback.*continuous improvement|benefits of (?:agile|teamwork)|value of (?:agile|iteration|collaboration)/i },
+  { id: "enforce_wip_governance", label: "duy trì WIP limits và agile governance", re: /maintain governance and WIP|WIP limits.*governance|governance and WIP limits|WIP limit/i },
   { id: "recommend_eq", label: "khuyên phát triển EQ / attitude thay vì explain value", re: /emotional intelligence|develop emotional intelligence/i },
   { id: "escalate", label: "leo thang lên cấp trên", re: /escalat|ask the sponsor|inform the sponsor|report to (?:management|senior)|involve (?:senior|executive)|steering committee/i },
   { id: "facilitate_retro", label: "facilitate retrospective / phân tích root cause", re: /\b(?:facilitate|conduct|hold|lead).*(?:retrospective|root cause)|(?:sprint |iteration )?retrospective(?: meeting)?|root cause analysis|process improvement workshop|start.?stop.?continue/i },
@@ -87,6 +88,43 @@ const STEM_PROFILES = [
     preferCorrect: ["update_stakeholder_comms"],
   },
   {
+    id: "kanban_wip_governance",
+    re: /kanban board|work-in-progress \(WIP\) limits|\bWIP limits?\b/i,
+    domains: ["Stakeholders", "Governance"],
+    principles: ["Focus on value", "Lead accountably"],
+    processes: ["Manage Stakeholder Engagement", "Manage Project Execution"],
+    summaryHint:
+      "Stakeholder muốn bỏ qua WIP limits vì agile — PM giải thích vẫn phải giữ governance/WIP đã thống nhất.",
+    whyCorrect:
+      "Agile không có nghĩa bỏ process — PM giải thích team duy trì governance và WIP limits; chỉ bắt đầu landing page khi có capacity hoặc khi ưu tiên thay đổi.",
+    signalPhrases: [
+      "Kanban board and work-in-progress (WIP) limits agreed with stakeholders",
+      "Because we are agile, you can just start my landing page now, and we\u2019ll worry about process later",
+      "\u201cPriority Campaign Landing Page\u201d",
+    ],
+    signalAnswer:
+      "Stakeholder cites agility to bypass agreed WIP limits — PM explains agile teams still maintain governance and WIP limits; start the landing page when capacity is available or priorities change.",
+    groundingConclusion:
+      "→ C: maintain governance and WIP limits — agile does not mean skip agreed process.",
+    lessonBullets: [
+      "Signal: director nói agile = start ngay, process sau — hiểu lầm; WIP limits là governance đã agree với stakeholders.",
+      "C đúng: explain agile teams maintain governance and WIP limits; begin landing page khi có capacity hoặc priorities change.",
+      "PMBOK 8: agile teams empowered trong guardrails rõ — không phá WIP để chiều stakeholder đột ngột.",
+    ],
+    excludeReasonsByKey: {
+      A: "Ignore WIP limits để chiều stakeholder — phá governance đã thống nhất; ghi nhận sau iteration không chấp nhận được.",
+      B: "Đẩy item vào To Do và tránh thảo luận — không address misconception agile và không engage stakeholder đúng cách.",
+      D: "Overtime để giữ WIP trên giấy — không bền vững; không thay cho conversation về governance và capacity.",
+    },
+    rejectByAction: {
+      document_first: "Thêm vào In Progress và ignore WIP — vi phạm governance đã agree.",
+      prioritize_value: "Đổi thứ tự im lặng không giải thích agile ≠ bỏ WIP limits.",
+      ask_team_act: "Overtime song song — không sustainable; không enforce agreed limits.",
+      wait_delay: "Bỏ qua WIP limit tạm thời — stakeholder misconception về agile không được corrected.",
+    },
+    preferCorrect: ["enforce_wip_governance", "ensure_compliance"],
+  },
+  {
     id: "sme_agile_reluctance",
     re: /subject matter expert|\bSME\b.*(?:agile|reluctant|team)|reluctant.*(?:agile|team)|join the agile team|working on a team is demotivat/i,
     domains: ["Resources", "Stakeholders"],
@@ -101,18 +139,21 @@ const STEM_PROFILES = [
       "approximately 30% of the deliverables will follow an agile approach",
     ],
     signalAnswer:
-      "SME tin teamwork làm chậm và giảm chất lượng — đó là misconception về Agile; PM phải explain value (CI + early feedback) trước khi lecture EQ, giao ceremony hay escalate sponsor.",
+      "SME believes teamwork is demotivating and slows them down while wanting the highest-quality output — misconception about Agile; PM should explain continuous improvement and early feedback loops before EQ coaching, ceremonies, or sponsor escalation.",
     groundingConclusion:
-      "→ B: explain Agile value (CI + early feedback) trước lecture EQ / ceremony / escalate — Develop Team, PMBOK 8 tr. 112.",
+      "→ B: explain Agile value (CI + early feedback) before EQ lecture / ceremony / escalation — Develop Team, PMBOK 8 p. 112.",
     conceptBlurb:
-      "Develop Team (PMBOK 8, tr. 112): PM đánh giá nhu cầu team và coach khi member chưa chắc cách làm việc collaborative — xây empowered culture, không lecture attitude hay escalate sớm.",
+      "Develop Team (PMBOK 8, p. 112): PM assesses team needs and coaches when members are unsure how to work collaboratively — build empowered culture, not attitude lectures or early escalation.",
     lessonBullets: [
-      "Signal: SME tin teamwork *làm chậm* và *giảm chất lượng* — hiểu lầm về Agile; PM phải explain value trước mọi ceremony hay escalation.",
-      "B đúng: teamwork + continuous improvement + early feedback loops giúp expert đạt output chất lượng cao hơn làm việc đơn độc — Develop Team + Build an empowered culture.",
-      "PMBOK 8 tr. 112: member chưa chắc cách làm collaborative → PM assess nhu cầu team và coach trực tiếp (servant leadership), không đẩy sang sponsor.",
-      "A sai: khuyên EQ = phán xét thái độ, không trả lời *vì sao* Agile teamwork không compromise quality.",
-      "C/D sai thứ tự: retrospective hoặc sponsor chỉ sau khi SME hiểu value proposition của teamwork Agile.",
+      "Signal: SME thinks teamwork is demotivating and slows them down — Agile misconception; PM explains value before ceremonies or escalation.",
+      "B is correct: teamwork + continuous improvement + early feedback loops help the expert achieve higher-quality output than working alone — Develop Team + Build an empowered culture.",
+      "PMBOK 8 p. 112: when members are unsure how to collaborate, PM assesses team needs and coaches directly (servant leadership), not escalate to sponsor.",
     ],
+    excludeReasonsByKey: {
+      A: "Recommending EQ development judges attitude — does not explain why Agile teamwork does not reduce quality.",
+      C: "Assigning retrospective observer role before SME joins the team — explain CI + early feedback first.",
+      D: "Escalating to sponsor for attitude — too heavy; PM coaches and explains value directly first.",
+    },
     rejectByAction: {
       escalate: "Leo thang sponsor vì attitude — quá nặng; PM coach và explain value trước.",
       meet_discuss: "Nhờ sponsor can thiệp attitude — PM vẫn chịu trách nhiệm develop team trực tiếp.",
@@ -154,7 +195,7 @@ const STEM_PROFILES = [
       "email intended for a specific team member",
     ],
     signalAnswer:
-      "Email nhầm audience + nội dung nhạy cảm → FIRST là accountability trực tiếp với toàn team, không che giấu hay xử lý riêng.",
+      "Mistaken email to the entire global project team with critical feedback — FIRST: acknowledge the mistake and apologize publicly for unintended consequences (Lead accountably).",
     groundingConclusion:
       "→ B: acknowledge + apologize — Lead accountably, Manage Stakeholder Engagement.",
     rejectByAction: {
@@ -265,12 +306,24 @@ const STEM_PROFILES = [
       "concerned about engagement",
     ],
     signalAnswer:
-      "Virtual team + thiếu kinh nghiệm quản lý remote → PM cần cadence check-in/meeting để sustain engagement, không áp plan quá khứ hay giao tiếp một chiều.",
+      "Internationally dispersed virtual team + PM concerned about engagement — recurring check-ins and scheduled meetings sustain connection (Develop Team), not copying a past comms plan or async-only status reports.",
     groundingConclusion:
-      "→ D: recurring check-ins — Develop Team, giữ engagement team virtual.",
+      "→ D: recurring check-ins — Develop Team, sustain virtual team engagement.",
+    lessonBullets: [
+      "Signal: virtual team + engagement concern — PM needs cadence check-ins/meetings, not a one-time kickoff or async-only comms.",
+      "D is correct: recurring check-ins keep internationally dispersed team connected and aligned (Develop Team + Build an empowered culture).",
+      "PMBOK 8: Develop Team focuses on team interaction and environment — ongoing cadence beats one-off kickoff for sustained engagement.",
+    ],
     rejectByAction: {
-      wait_delay: "Chờ collocate — không realistic với distributed team.",
-      direct_command: "Micromanage remote team — giảm autonomy và trust.",
+      wait_delay: "One kickoff meeting does not sustain ongoing engagement for a new virtual team.",
+      document_first: "Copying a past team's communications plan ignores current context and team needs.",
+      communicate_inform: "Async-only status reports lack synchronous interaction needed for a new virtual team.",
+      direct_command: "Micromanage remote team — reduces autonomy and trust.",
+    },
+    excludeReasonsByKey: {
+      A: "One kickoff meeting does not sustain ongoing engagement for a new virtual team.",
+      B: "Copying a past team's communications plan ignores current context and team needs.",
+      C: "Async-only status reports lack synchronous interaction needed for a new virtual team.",
     },
     preferCorrect: ["encourage_collaborate", "coach_develop"],
   },
@@ -731,6 +784,8 @@ const ACTION_RATIONALES = {
     "Kick-off sản phẩm mới — define MVP trước để Focus on value, tránh commit toàn bộ roadmap quá sớm.",
   prioritize_value: () =>
     "PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.",
+  enforce_wip_governance: () =>
+    "Agile teams operate within agreed governance and WIP limits — PM explains limits stay in place; new work starts when capacity allows or priorities change.",
   add_to_register: () =>
     "Ghi nhận risk/issue mới vào register và reevaluate với team — quản trị rủi ro có hệ thống.",
   allow_empower: () =>

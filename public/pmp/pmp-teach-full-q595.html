@@ -50,7 +50,7 @@
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
-    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
@@ -158,10 +158,10 @@
             <h4>Signal trong stem Q595</h4>
             
             
-            <p class="signal-conclusion" style="margin:0">→ <strong>A</strong>: Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</p>
+            
           </div>
           <h3>Tại sao chọn A?</h3>
-          <ul><li>Đáp án A đúng: Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 20: <span class="kw-pmbok">Manage Project Execution</span> + <span class="kw-pmbok">Lead accountably</span>.</li><li>D sai: Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần quản lý vendor / procurement.</li></ul>
+          <ul><li>Đáp án A đúng: Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 20: <span class="kw-pmbok">Manage Project Execution</span> + <span class="kw-pmbok">Lead accountably</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Create a cost-plus contract that reimburses the vendor as scope is uncovered while allowing flexible adjustments throughout execution.</strong></p>
@@ -174,8 +174,8 @@
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
-            <tbody><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Issue a letter of intent to the preferred vendor and negotiate final contract te…</span></td><td>Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần quản lý vendor / procurement.</td></tr></tbody>
-          </table>
+            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Use a firm-fixed-price contract to protect the organization from cost overruns w…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.B</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Apply a time-and-materials contract and set a not-to-exceed limit to balance fle…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.C</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Issue a letter of intent to the preferred vendor and negotiate final contract te…</span></td><td>Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần quản lý vendor / procurement.</td></tr></tbody>
+          </table><p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: B, C — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>
         </section>
 
         <section id="flashcards">

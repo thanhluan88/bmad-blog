@@ -50,7 +50,7 @@
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
-    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
@@ -158,10 +158,10 @@
             <h4>Signal trong stem Q575</h4>
             
             
-            <p class="signal-conclusion" style="margin:0">→ <strong>A</strong>: Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
+            
           </div>
           <h3>Tại sao chọn A?</h3>
-          <ul><li>Đáp án A đúng: Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 98: Monitor Risks + <span class="kw-pmbok">Lead accountably</span>.</li><li>D sai: Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết <span class="kw-pmbok">Risk</span> đã trigger — đáp án đúng cần leo thang lên cấp trên.</li></ul>
+          <ul><li>Đáp án A đúng: Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 98: Monitor Risks + <span class="kw-pmbok">Lead accountably</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Explain its purpose to the steering committee and submit the feature as part of a formal change request to protect the contingency reserve.</strong></p>
@@ -174,8 +174,8 @@
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
-            <tbody><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Meet with the project team and key stakeholders to discuss the new feature and i…</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết <span class="kw-pmbok">Risk</span> đã trigger — đáp án đúng cần leo thang lên cấp trên.</td></tr></tbody>
-          </table>
+            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve the sponsor’s request with assurance from a committee member that the ri…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.B</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reallocate the contingency reserve funds informally to the new feature, and plan…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.C</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Meet with the project team and key stakeholders to discuss the new feature and i…</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết <span class="kw-pmbok">Risk</span> đã trigger — đáp án đúng cần leo thang lên cấp trên.</td></tr></tbody>
+          </table><p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: B, C — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>
         </section>
 
         <section id="flashcards">

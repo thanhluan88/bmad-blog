@@ -70,6 +70,29 @@ function truncateSentence(s, max = 100) {
   return `${t.slice(0, max - 1)}…`;
 }
 
+function isMostlyVietnamese(text) {
+  return /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(String(text || ""));
+}
+
+function isWrongAnswerBullet(text, correctKey) {
+  const t = String(text || "").trim();
+  if (!t) return false;
+  const ck = String(correctKey || "").trim().toUpperCase();
+  if (/^[A-Z](?:,\s*[A-Z])*\s+sai\b/i.test(t)) return true;
+  if (/^[A-Z](?:\/[A-Z])+\s+sai\b/i.test(t)) return true;
+  if (/\b[A-Z](?:\/[A-Z])+\s+sai\b/i.test(t)) return true;
+  if (/^[^:\n]{1,12}\s+sai:/i.test(t) && !new RegExp(`^${ck}\\b`, "i").test(t)) return true;
+  return false;
+}
+
+function filterWhyBulletsForCorrect(bullets, correctKey) {
+  return (bullets || []).filter((b) => {
+    if (!b || isGenericReasoning(b)) return false;
+    if (isWrongAnswerBullet(b, correctKey)) return false;
+    return true;
+  });
+}
+
 function isGenericReasoning(text) {
   const t = String(text || "").toLowerCase();
   if (!t || t.length < 20) return true;
@@ -84,6 +107,8 @@ function resolveExcludeReason(q, stemProfile, key, fallback) {
   const stored = getStoredTeachGrounding(q.id);
   const fromStore = stored?.excludeReasons?.[key];
   if (fromStore && !isGenericReasoning(fromStore)) return fromStore;
+  const fromProfileKey = stemProfile?.excludeReasonsByKey?.[key];
+  if (fromProfileKey && !isGenericReasoning(fromProfileKey)) return fromProfileKey;
   const fromProfile = stemProfile?.rejectByAction;
   if (fromProfile) {
     const opt = (q.options || []).find((o) => o.key === key);
@@ -142,13 +167,21 @@ function composeGrounding(q, analysis) {
 
   const conclusion =
     stemProfile?.groundingConclusion ||
-    (whyCorrect ? `→ ${correctKey}: ${truncateSentence(whyCorrect, 140)}` : `→ ${correctKey}: align PMBOK 8.`);
+    (teachSignals.signalAnswer
+      ? `→ ${correctKey}: ${truncateSentence(teachSignals.signalAnswer, 160)}`
+      : whyCorrect && !isMostlyVietnamese(whyCorrect)
+        ? `→ ${correctKey}: ${truncateSentence(whyCorrect, 140)}`
+        : `→ ${correctKey}: align PMBOK 8.`);
 
   const bullets = [];
   if (stored?.whyBullets?.length) {
-    for (const b of stored.whyBullets) pushUnique(bullets, b);
+    for (const b of filterWhyBulletsForCorrect(stored.whyBullets, correctKey)) {
+      pushUnique(bullets, b);
+    }
   } else if (stemProfile?.lessonBullets?.length) {
-    for (const b of stemProfile.lessonBullets) pushUnique(bullets, b);
+    for (const b of filterWhyBulletsForCorrect(stemProfile.lessonBullets, correctKey)) {
+      pushUnique(bullets, b);
+    }
   } else {
     if (whyCorrect && !isGenericReasoning(whyCorrect)) {
       pushUnique(bullets, `Đáp án ${correctKey} đúng: ${whyCorrect}`);
@@ -159,12 +192,6 @@ function composeGrounding(q, analysis) {
         `PMBOK 8 ${pageRef}: ${process}${principle ? ` + ${principle}` : ""}.`,
       );
     }
-    for (const w of whyWrong) {
-      if (w.reason) pushUnique(bullets, `${w.key} sai: ${w.reason}`);
-    }
-  }
-  if (teachSignals.signalAnswer && !bullets.some((b) => b.includes(teachSignals.signalAnswer.slice(0, 40)))) {
-    pushUnique(bullets, teachSignals.signalAnswer);
   }
 
   if (!whyCorrect && !whyWrong.length && !teachSignals.signalAnswer) {
@@ -283,18 +310,23 @@ function buildSignalCard(q, analysis) {
         .join(" · ")}</p>`
     : "";
   const answerHtml = grounding.signalAnswer
-    ? `<p class="signal-answer-vi">${escapeHtml(grounding.signalAnswer)}</p>`
+    ? `<p class="signal-answer-en">${escapeHtml(grounding.signalAnswer)}</p>`
     : "";
   const rawConclusion = grounding.conclusion || `→ ${correctKey}: align PMBOK 8.`;
-  const conclusionHtml = escapeHtml(rawConclusion).replace(
-    `→ ${escapeHtml(correctKey)}:`,
-    `→ <strong>${escapeHtml(correctKey)}</strong>:`,
-  );
+  const showConclusion =
+    grounding.signalPhrases.length > 0 ||
+    (grounding.signalAnswer && !isMostlyVietnamese(grounding.signalAnswer));
+  const conclusionHtml = showConclusion
+    ? escapeHtml(rawConclusion).replace(
+        `→ ${escapeHtml(correctKey)}:`,
+        `→ <strong>${escapeHtml(correctKey)}</strong>:`,
+      )
+    : "";
   return `<div class="card tip signal-card">
             <h4>Signal trong stem Q${q.id}</h4>
             ${phrasesHtml}
             ${answerHtml}
-            <p class="signal-conclusion" style="margin:0">${conclusionHtml}</p>
+            ${conclusionHtml ? `<p class="signal-conclusion" style="margin:0">${conclusionHtml}</p>` : ""}
           </div>`;
 }
 
@@ -367,12 +399,30 @@ function buildCompareTable(optionAnalysis, q) {
 
 function buildWhyBullets(analysis, q) {
   const grounding = composeGrounding(q, analysis);
-  return (grounding.bullets || []).filter((b) => b && !isGenericReasoning(b)).slice(0, 5);
+  const correctKey = grounding.correctKey || q.correct;
+  return filterWhyBulletsForCorrect(grounding.bullets, correctKey).slice(0, 5);
 }
 
 function buildExcludeRows(q, analysis) {
   const grounding = composeGrounding(q, analysis);
-  return (grounding.whyWrong || []).filter((w) => w.reason && !isGenericReasoning(w.reason));
+  const reasonByKey = new Map();
+  for (const w of grounding.whyWrong || []) {
+    if (w.reason && !isGenericReasoning(w.reason)) reasonByKey.set(w.key, w.reason);
+  }
+  const correctKeys = String(q.correct || "")
+    .split(",")
+    .map((k) => k.trim().toUpperCase())
+    .filter(Boolean);
+  const wrongOpts = (analysis.optionAnalysis || []).filter((o) => !o.isCorrect);
+  const opts =
+    wrongOpts.length > 0
+      ? wrongOpts
+      : (q.options || []).filter((o) => !correctKeys.includes(o.key));
+  return opts.map((o) => ({
+    key: o.key,
+    text: o.text || "",
+    reason: reasonByKey.get(o.key) || "",
+  }));
 }
 
 function buildTrapsSection(optionAnalysis, q) {

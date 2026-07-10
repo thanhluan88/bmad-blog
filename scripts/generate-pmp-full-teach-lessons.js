@@ -171,17 +171,24 @@ function renderAnalysisSection(q, analysis) {
 function renderExcludeTableFromAnalysis(q, analysis) {
   const wrong = buildExcludeRows(q, analysis);
   if (!wrong.length) {
-    return `<p style="font-size:0.86rem;color:var(--muted);margin:0">Chưa có lý do loại trừ từ grounding — chạy grounding prompt và lưu <code>excludeReasons</code> vào <code>data/pmp-teach-signals.json</code>.</p>`;
+    return `<p style="font-size:0.86rem;color:var(--muted);margin:0">Chưa có đáp án sai — kiểm tra câu hỏi.</p>`;
   }
+  const missing = wrong.filter((o) => !o.reason);
+  const rowsHtml = wrong
+    .map((o) => {
+      const reason = o.reason
+        ? mdInline(o.reason)
+        : `<span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.${o.key}</code> trong <code>data/pmp-teach-signals.json</code>.</span>`;
+      return `<tr><td><strong>${o.key}</strong><br><span style="font-size:0.8rem;color:var(--muted)">${highlightOptionText(o.text.slice(0, 80), false)}${o.text.length > 80 ? "…" : ""}</span></td><td>${reason}</td></tr>`;
+    })
+    .join("");
+  const note = missing.length
+    ? `<p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: ${missing.map((o) => o.key).join(", ")} — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>`
+    : "";
   return `<table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
-            <tbody>${wrong
-              .map(
-                (o) =>
-                  `<tr><td><strong>${o.key}</strong><br><span style="font-size:0.8rem;color:var(--muted)">${highlightOptionText(o.text.slice(0, 80), false)}${o.text.length > 80 ? "…" : ""}</span></td><td>${mdInline(o.reason)}</td></tr>`,
-              )
-              .join("")}</tbody>
-          </table>`;
+            <tbody>${rowsHtml}</tbody>
+          </table>${note}`;
 }
 
 function renderOptionsGrid(q) {
@@ -416,7 +423,7 @@ function renderLesson(q, prev, next) {
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
-    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }

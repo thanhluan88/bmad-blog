@@ -50,7 +50,7 @@
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
-    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
@@ -158,10 +158,10 @@
             <h4>Signal trong stem Q698</h4>
             
             
-            <p class="signal-conclusion" style="margin:0">→ <strong>C</strong>: Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</p>
+            
           </div>
           <h3>Tại sao chọn C?</h3>
-          <ul><li>Đáp án C đúng: Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 21: <span class="kw-pmbok">Manage Project Execution</span> + <span class="kw-pmbok">Lead accountably</span>.</li><li>B sai: &quot;Awarded the contract to the incumbent contractor after informal talks to…&quot; cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — &quot;Followed the company’s formal bidding and procurement process procedures…&quot; sát vấn đề vendor / procurement hơn.</li></ul>
+          <ul><li>Đáp án C đúng: Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 21: <span class="kw-pmbok">Manage Project Execution</span> + <span class="kw-pmbok">Lead accountably</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Followed the company’s formal bidding and procurement process procedures strictly.</strong></p>
@@ -174,8 +174,8 @@
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Awarded the contract to the incumbent contractor after informal talks to speed u…</span></td><td>&quot;Awarded the contract to the incumbent contractor after informal talks to…&quot; cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — &quot;Followed the company’s formal bidding and procurement process procedures…&quot; sát vấn đề vendor / procurement hơn.</td></tr></tbody>
-          </table>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Invited all potential bidders to a pre-bid meeting to clarify requirements and e…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.A</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Awarded the contract to the incumbent contractor after informal talks to speed u…</span></td><td>&quot;Awarded the contract to the incumbent contractor after informal talks to…&quot; cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — &quot;Followed the company’s formal bidding and procurement process procedures…&quot; sát vấn đề vendor / procurement hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Provided detailed feedback to all unsuccessful bidders after the contract was aw…</span></td><td><span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.D</code> trong <code>data/pmp-teach-signals.json</code>.</span></td></tr></tbody>
+          </table><p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: A, D — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>
         </section>
 
         <section id="flashcards">

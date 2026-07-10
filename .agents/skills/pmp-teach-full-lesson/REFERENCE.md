@@ -18,153 +18,121 @@ mà không phải
 
 Trả về JSON:
 {
-  "whyCorrect": "lý do PMBOK 8 tại sao {correctKey} đúng (tiếng Việt, cụ thể)",
+  "whyCorrect": "why {correctKey} is correct per PMBOK 8 (Vietnamese or English)",
   "excludeReasons": {
-    "A": "tại sao A sai — suy luận từ PMBOK 8 / tình huống",
+    "A": "why A is wrong — one entry per WRONG key only",
     "B": "…",
     "C": "…"
   },
   "whyBullets": [
-    "Đáp án {correctKey} đúng: …",
-    "A sai: …",
-    "C sai: …"
+    "Why {correctKey} is correct: …",
+    "PMBOK 8 reference / process alignment …"
   ],
-  "pmbokConcept": "trích dẫn ngắn từ PMBOK 8 (tiếng Anh hoặc Việt) — process/principle + nội dung Guide"
+  "pmbokConcept": "short PMBOK 8 excerpt for flashcard",
+  "guideQuote": "complete sentence(s) from Guide for Trích dẫn block"
 }
 ```
 
-**whyBullets** và **excludeReasons** phải là suy luận AI — không dùng template engine (*"Hành động này giải quyết trực tiếp…"*).
+**Separation rule:**
+- `whyBullets` → **correct answer only** — never `"A sai: …"` or wrong-key reasoning
+- `excludeReasons` → **every wrong key** — full reasoning per wrong option
 
 ## Signal prompt
 
-After grounding:
-
 ```
-Từ stem tiếng Anh sau, liệt kê 2–5 cụm tiếng Anh (copy nguyên văn từ stem) là signal dẫn tới đáp án {correctKey}.
-Giải thích bằng tiếng Việt tại sao các signal đó → đáp án {correctKey} (PMBOK 8).
+From this English stem, list 2–5 verbatim English phrases (signalPhrases) that point to answer {correctKey}.
+Write signalAnswer in English: how those signals → {correctKey} (PMBOK 8).
 
 Stem:
 "{stem}"
 
-Trả về JSON:
+Return JSON:
 {
   "signalPhrases": ["...", "..."],
-  "signalAnswer": "..."
+  "signalAnswer": "English only — keep original AI wording"
 }
 ```
 
-**signalPhrases** = English only, verbatim from stem.  
-**signalAnswer** = Vietnamese only.
+**signalPhrases** = English, verbatim from stem.  
+**signalAnswer** = **English only** — AI exchange wording; drives `signal-conclusion` when profile lacks `groundingConclusion`.
+
+**signal-conclusion** must stay **English** — never Vietnamese generic rationale (e.g. MVP/business value fallback).
 
 ## HTML section order
 
 1. `#intro` — hero + badges
 2. `#question` — quiz (`highlightQuizStem` with `signalPhrases`)
 3. `#analysis` — signal card, Tại sao chọn, Guide quote, loại trừ table
-4. `#flashcards` — 3 cards (concept cites PMBOK 8)
-5. `#cheatsheet` — keywords, answer, NOT list
+4. `#flashcards` — 3 cards
+5. `#cheatsheet`
 
-**Omit:** `#drill`, `#traps`, **Grounding PMBOK 8 card** — không render.
+**Omit:** `#drill`, `#traps`, Grounding PMBOK 8 card.
 
 ## HTML contract — Signal card
 
 ```html
 <div class="card tip signal-card">
-  <h4>Signal trong stem Q3</h4>
+  <h4>Signal trong stem Q2</h4>
   <p class="signal-phrases-en">
-    <span class="kw-signal">lack of locally skilled resources</span> · …
+    <span class="kw-signal">reluctant because they think that working on a team is demotivating</span> · …
   </p>
-  <p class="signal-answer-vi">Virtual team + … → recurring check-ins (tiếng Việt).</p>
-  <p class="signal-conclusion">→ <strong>D</strong>: …</p>
+  <p class="signal-answer-en">SME believes teamwork slows them down — PM explains CI + early feedback before ceremonies or escalation.</p>
+  <p class="signal-conclusion">→ <strong>B</strong>: …</p>
 </div>
 ```
 
-Quiz `.q-text` uses same `signalPhrases` for `kw-signal` highlight.
+All signal content **English**. Quiz highlights `signalPhrases` only.
 
-## HTML contract — Tại sao chọn + Loại trừ
+## HTML contract — Tại sao chọn
 
-- **Tại sao chọn {key}?** — `<ul>` từ `whyBullets` (grounding AI)
-- **Loại trừ từng đáp án** — table từ `excludeReasons` (grounding AI), cột *Tại sao không chọn (grounding AI)*
+- `<ul>` from `whyBullets` — **correct key reasoning only**
+- **Bad:** bullets like `A sai: …`, `C/D sai thứ tự: …`
+- Engine: `filterWhyBulletsForCorrect()` strips wrong-key bullets
 
-Không lấy lý do từ `optionAnalysis` template khi chưa có grounding store.
+## HTML contract — Loại trừ từng đáp án
+
+- Table lists **every wrong option** (one row per wrong key)
+- Column *Tại sao không chọn* from `excludeReasons` (AI grounding)
+- **Bad:** missing rows for any wrong key
+- Engine: `buildExcludeRows()` always emits all wrong keys; missing `excludeReasons` shows fill hint
 
 ## HTML contract — Trích dẫn Guide
 
-```html
-<div class="card info">
-  <h4>Trích dẫn Guide</h4>
-  <p style="margin:0">"Team building is conducting activities that enhance the team's social relationships and build a collaborative and cooperative working environment."</p>
-  <p style="margin:0.5rem 0 0;font-size:0.82rem;color:var(--muted)">— PMBOK 8, tr. 205 (Performance Domain: Resources, Develop Team)</p>
-</div>
-```
+Complete PMBOK 8 sentence(s) — see `formatGuideQuote()`.
 
-**Rules:**
-- 1–3 **complete sentences** from PMBOK 8 — each ends with `.`, `!`, or `?`
-- **Never** cut mid-sentence (bad: *"Team-building activities can vary from"*)
-- Prefer `guideQuote` in store when RAG snippet is incomplete
-- Engine: `formatGuideQuote(text)` drops trailing incomplete fragment and caps at sentence boundaries (~520 chars)
-
-## HTML contract — Flashcard concept (card 1)
-
-```html
-<div class="flashcard-back">
-  <strong>Develop Team</strong>
-  <br><span>Develop Team · Build an empowered culture</span>
-  <br><em>"…quoted PMBOK 8 excerpt…"</em>
-  <br>PMBOK 8, tr. 205
-</div>
-```
-
-## Data store
-
-`data/pmp-teach-signals.json`:
+## Data store example
 
 ```json
 {
-  "3": {
-    "signalPhrases": [
-      "lack of locally skilled resources",
-      "work virtually",
-      "concerned about engagement"
-    ],
-    "signalAnswer": "Virtual team + PM lo engagement → cadence check-in, không copy plan cũ.",
-    "whyCorrect": "Team virtual cần recurring check-ins để giữ engagement (Develop Team).",
-    "excludeReasons": {
-      "A": "Kickoff một lần không giải quyết engagement ongoing.",
-      "B": "Copy plan team cũ — không fit context hiện tại.",
-      "C": "Async-only thiếu tương tác cho virtual team mới."
-    },
+  "2": {
+    "signalPhrases": ["reluctant because they think that working on a team is demotivating and slows them down"],
+    "signalAnswer": "SME believes teamwork is demotivating — PM explains continuous improvement and early feedback loops (Develop Team).",
     "whyBullets": [
-      "Đáp án D đúng: recurring check-ins giữ kết nối virtual team.",
-      "A sai: kickoff không đủ cho engagement liên tục.",
-      "B sai: plan cũ không phù hợp context mới.",
-      "C sai: chỉ async — thiếu tương tác đồng bộ."
+      "B is correct: teamwork + CI + early feedback helps expert achieve higher quality than working alone.",
+      "PMBOK 8 p. 112: PM coaches when member unsure how to collaborate — servant leadership."
     ],
-    "pmbokConcept": "Develop Team focuses on improving competencies and team member interaction. (PMBOK 8, tr. 205)",
-    "guideQuote": "Team building is conducting activities that enhance the team's social relationships and build a collaborative and cooperative working environment."
+    "excludeReasons": {
+      "A": "EQ lecture judges attitude — does not explain why Agile teamwork preserves quality.",
+      "C": "Retrospective role too early before SME understands Agile value.",
+      "D": "Sponsor escalation too heavy — PM coaches directly first."
+    }
   }
 }
 ```
 
-Priority: **store** → **STEM_PROFILE** (`lessonBullets`, `rejectByAction`) → empty (agent must fill).
-
 ## Validation
 
-- [ ] **No** `#drill`, `#traps`, or Grounding PMBOK 8 card in output
-- [ ] Tại sao chọn: bullets from `whyBullets`, not generic templates
-- [ ] Loại trừ table: rows from `excludeReasons`, not `optionAnalysis` boilerplate
-- [ ] Trích dẫn Guide: complete sentence(s); no mid-sentence truncation
-- [ ] Flashcard concept: PMBOK 8 excerpt + tr. cited
-- [ ] `signalPhrases` English substrings from stem; quiz highlights match
-- [ ] **dedup**: no 8+ word sentence repeated across analysis blocks
+- [ ] Signal card: `signalAnswer` English; `signal-phrases-en` + `signal-answer-en`
+- [ ] Tại sao chọn: no wrong-key bullets
+- [ ] Loại trừ: row for **each** wrong key with reasoning
+- [ ] Trích dẫn Guide: complete sentence(s)
+- [ ] No `#drill`, `#traps`, Grounding card
 
 ## Engine
 
 | Piece | File |
 |-------|------|
-| `composeGrounding`, cards | `pmp-teach-colocation-style.js` |
+| `filterWhyBulletsForCorrect`, `buildExcludeRows` | `pmp-teach-colocation-style.js` |
+| `excludeReasonsByKey` in profiles | `pmp-option-reasoning.js` |
 | Grounding store | `pmp-teach-signals-store.js` |
-| Quiz highlight | `highlightQuizStem(text, signalPhrases)` in `pmp-teach-keywords.js` |
-| Generic filter | `isGenericReasoning()` in `pmp-teach-colocation-style.js` |
 | Guide quote | `formatGuideQuote()` in `pmp-pmbok8-rag-pages.js` |
-| Profiles | `pmp-option-reasoning.js` |
