@@ -36,6 +36,11 @@ const SERIES_JS = path.join(__dirname, "pmp-full-teach-series.js");
 const args = process.argv.slice(2);
 const force = args.includes("--force");
 const allowIncomplete = args.includes("--allow-incomplete");
+if (allowIncomplete) {
+  console.warn(
+    "WARNING: --allow-incomplete writes partial lessons (missing Signal / Loại trừ). Do not use for publish or push.",
+  );
+}
 const fromArg = args.find((a) => a.startsWith("--from="));
 const toArg = args.find((a) => a.startsWith("--to="));
 const fromId = fromArg ? Number(fromArg.split("=")[1]) : 1;

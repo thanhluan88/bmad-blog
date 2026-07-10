@@ -162,6 +162,43 @@ const STEM_PROFILES = [
     preferCorrect: ["allow_empower", "facilitate_retro"],
   },
   {
+    id: "ffp_well_defined_scope",
+    re: /well-defined remaining scope|most appropriate contract type|replacement contractors|firm-fixed-price contract/i,
+    domains: ["Governance", "Scope"],
+    principles: ["Lead accountably"],
+    processes: ["Manage Project Execution", "Conduct Procurements"],
+    summaryHint:
+      "Scope còn lại rõ ràng — chọn FFP để giao scope đã định với giá cố định; không T&M, cost-plus hay letter of intent.",
+    whyCorrect:
+      "Remaining scope is well-defined — firm-fixed-price holds contractors accountable for clear scope at agreed price (Lead accountably); T&M and cost-plus fit uncertain scope, not this case.",
+    signalPhrases: [
+      "well-defined remaining scope",
+      "most appropriate contract type",
+      "bring in replacement contractors",
+      "What should the project manager do",
+    ],
+    signalAnswer:
+      "Well-defined remaining scope signals fixed-price procurement — PM recommends firm-fixed-price to hold contractors accountable at agreed price, not flexible T&M, cost-plus, or a letter of intent before contract terms are set.",
+    groundingConclusion:
+      "→ B: FFP matches well-defined scope — accountability at agreed price.",
+    lessonBullets: [
+      "Signal: well-defined remaining scope — contract type should lock price for defined deliverables.",
+      "B đúng: firm-fixed-price holds contractors accountable for clearly defined scope at agreed price.",
+      "PMBOK 8: Lead accountably — match contract type to scope clarity.",
+    ],
+    excludeReasonsByKey: {
+      A: "Time-and-materials keeps flexibility for undefined scope — unnecessary cost risk when remaining scope is already well-defined.",
+      C: "Cost-plus reimburses incurred costs — buyer bears cost risk; wrong when scope and deliverables are clear.",
+      D: "Letter of intent before final contract terms lets work start without firm agreement — poor procurement governance.",
+    },
+    rejectByAction: {
+      proceed_continue: "T&M contract retains hour flexibility — does not leverage well-defined scope for fixed-price accountability.",
+      change_control: "Cost-plus shifts cost risk to buyer — inappropriate when scope is already defined.",
+      stakeholder_engagement: "Letter of intent negotiates after work starts — bypasses proper contract selection for defined scope.",
+    },
+    preferCorrect: ["vendor_procurement"],
+  },
+  {
     id: "sme_agile_reluctance",
     re: /subject matter expert|\bSME\b.*(?:agile|reluctant|team)|reluctant.*(?:agile|team)|join the agile team|working on a team is demotivat/i,
     domains: ["Resources", "Stakeholders"],

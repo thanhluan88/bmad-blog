@@ -93,8 +93,9 @@ All signal content **English**. Quiz highlights `signalPhrases` only.
 
 - Table lists **every wrong option** (one row per wrong key)
 - Column *Tại sao không chọn* from `excludeReasons` (AI grounding)
+- **Bad:** only one wrong key shown (e.g. Q611 with only D when correct is B — need A, C, D)
 - **Bad:** missing rows for any wrong key
-- Engine: `buildExcludeRows()` always emits all wrong keys; missing `excludeReasons` shows fill hint
+- Engine: `buildExcludeRows()` + `validateTeachGrounding()` — skip write if any wrong key lacks reason
 
 ## HTML contract — Trích dẫn Guide
 
@@ -124,18 +125,23 @@ Complete PMBOK 8 sentence(s) — see `formatGuideQuote()`.
 
 - [ ] Hero **no** full question stem (summary lead + badges only)
 - [ ] Signal card: `signalPhrases` + `signalAnswer` — **never empty**
-- [ ] Loại trừ: every wrong key — **no** placeholder (*Chưa có lý do grounding…*)
-- [ ] `validateTeachGrounding()` passes before write (unless `--allow-incomplete`)
-- [ ] Tại sao chọn: no wrong-key bullets
+- [ ] Tại sao chọn: `whyBullets` non-empty — correct key only
+- [ ] Loại trừ: **every** wrong key — e.g. Q611 (correct B) → rows for A, C, D
+- [ ] `validateTeachGrounding()` passes before write
 - [ ] Trích dẫn Guide: complete sentence(s)
+
+**Invalid lesson example:** `pmp-teach-full-q611.html` after `--allow-incomplete` — no Signal, empty Tại sao, Loại trừ chỉ D.
 
 ## Generator
 
 ```bash
-node scripts/generate-pmp-full-teach-lessons.js --force --from=614 --to=614
+node scripts/bootstrap-pmp-teach-signals.js
+node scripts/generate-pmp-full-teach-lessons.js --force
 ```
 
-Default skips write when validation fails. `--allow-incomplete` omits empty blocks without placeholders.
+Bootstrap fills `data/pmp-teach-signals.json` so `validateTeachGrounding()` passes for all IDs.  
+Default **skips write** when validation fails.  
+**Do not** use `--allow-incomplete` for publish or full-bank regen.
 
 ## Engine
 

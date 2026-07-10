@@ -438,7 +438,11 @@ function validateTeachGrounding(q, analysis) {
   const grounding = composeGrounding(q, analysis);
   const errors = [];
   if (!hasTeachSignal(grounding)) {
-    errors.push(`Q${q.id}: missing signal (need signalPhrases + signalAnswer in store)`);
+    errors.push(`Q${q.id}: missing signal (need signalPhrases + signalAnswer)`);
+  }
+  const whyBullets = buildWhyBullets(analysis, q);
+  if (!whyBullets.length) {
+    errors.push(`Q${q.id}: missing whyBullets (Tại sao chọn is empty)`);
   }
   const wrong = buildExcludeRows(q, analysis);
   const missing = wrong.filter((o) => !o.reason);
@@ -451,6 +455,7 @@ function validateTeachGrounding(q, analysis) {
     ok: errors.length === 0,
     errors,
     grounding,
+    whyBullets,
     missingExcludeKeys: missing.map((o) => o.key),
   };
 }
@@ -646,6 +651,7 @@ module.exports = {
   buildExcludeRows,
   hasTeachSignal,
   validateTeachGrounding,
+  filterWhyBulletsForCorrect,
   buildDrillHtml,
   buildDrillScript,
   buildFlashcards,

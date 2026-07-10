@@ -55,6 +55,30 @@ Every wrong key must have a row — retry grounding AI until complete.
 
 ---
 
+## Q611 — partial Loại trừ (bad)
+
+Correct = **B**. Wrong keys = **A, C, D**.
+
+**Bad** (after `--allow-incomplete`):
+
+- No Signal card
+- `<ul></ul>` — empty Tại sao chọn
+- Loại trừ table has **only D** (generic engine text slipped through)
+
+**Good:**
+
+| Đáp án | Tại sao không chọn |
+|--------|-------------------|
+| A | T&M keeps flexibility — wrong when scope is well-defined. |
+| C | Cost-plus shifts cost risk to buyer — scope already clear. |
+| D | Letter of intent before contract terms — poor procurement governance. |
+
+Plus Signal card with `well-defined remaining scope` phrases and non-empty Tại sao chọn.
+
+**Fix:** Fill `data/pmp-teach-signals.json` (or STEM_PROFILE) with full `signalPhrases`, `signalAnswer`, `whyBullets`, `excludeReasons` for A/C/D → `--force --from=611 --to=611` **without** `--allow-incomplete`.
+
+---
+
 ## Q614 — empty signal (bad)
 
 ```html

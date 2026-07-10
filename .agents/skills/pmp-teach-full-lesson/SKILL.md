@@ -7,6 +7,20 @@ description: Regenerate or polish Full Bank teach lessons — PMBOK 8 grounding 
 
 **Colocation-grade** teach **lesson**: PMBOK 8 traceable, **grounding** + **signal** from AI (not engine templates).
 
+## Hard rules (never ship incomplete)
+
+A lesson is **invalid** if any of these are missing:
+
+| Block | Requirement |
+|-------|-------------|
+| Signal card | `signalPhrases` + `signalAnswer` (English) |
+| Tại sao chọn | `whyBullets` non-empty — chỉ đáp án **đúng** |
+| Loại trừ | `excludeReasons` for **every** wrong key (e.g. Q611 correct B → need A, C, D) |
+
+**Anti-pattern — Q611 after `--allow-incomplete`:** no Signal card, empty Tại sao chọn, Loại trừ chỉ có D. **Do not commit** lessons like this.
+
+**Never** use `--allow-incomplete` for publish, push, or full-bank regen. That flag is local debug only.
+
 ## Inputs
 
 | Source | Path |
@@ -17,74 +31,83 @@ description: Regenerate or polish Full Bank teach lessons — PMBOK 8 grounding 
 | Sections | `scripts/lib/pmp-teach-colocation-style.js` |
 | Profiles | `scripts/lib/pmp-option-reasoning.js` |
 
-## Workflow
+## Workflow (per question — retry until complete)
 
 ### 1. Load question
 
-`id`, `text`, `options`, `correct`.
+`id`, `text`, `options`, `correct`. List correct key + all option texts.
 
-**Completion:** Correct key + full option texts listed.
-
-### 2. **Grounding** — ask PMBOK 8 (retry until complete)
+### 2. Grounding — ask PMBOK 8
 
 Template: [REFERENCE.md](REFERENCE.md#grounding-prompt).
 
 Store in `data/pmp-teach-signals.json`:
 
-- `whyBullets` — chỉ lý do đáp án **đúng**
-- `excludeReasons` — **mọi** đáp án sai `{ "A": "…", "B": "…" }`
+- `whyBullets` — chỉ lý do đáp án **đúng** (≥1 bullet)
+- `excludeReasons` — **mọi** đáp án sai `{ "A": "…", "C": "…", "D": "…" }`
 
-**Retry rule:** Nếu thiếu bất kỳ `excludeReasons.{key}` nào cho đáp án sai → **hỏi lại AI** cho đến khi đủ. **Không** generate lesson với placeholder.
+**Retry:** thiếu bất kỳ `excludeReasons.{key}` → hỏi lại AI đến khi đủ **tất cả** key sai.
 
-**Completion:** `excludeReasons` có entry cho **từng** key sai; không còn key thiếu.
-
-### 3. **Signal** — ask AI (retry until complete)
+### 3. Signal — ask AI
 
 Prompt: [REFERENCE.md](REFERENCE.md#signal-prompt).
 
 - `signalPhrases` — English verbatim from stem (2–5)
 - `signalAnswer` — English (AI exchange)
 
-**Retry rule:** Nếu `signalPhrases` hoặc `signalAnswer` trống → **hỏi lại AI** cho đến khi có đủ. **Không** render Signal card rỗng.
+**Retry:** `signalPhrases` hoặc `signalAnswer` trống → hỏi lại AI đến khi đủ.
 
-**Completion:** `signalPhrases` non-empty, each in stem; `signalAnswer` English.
+### 4. Validate before write
 
-### 4. Embed into lesson
+`validateTeachGrounding()` must pass:
 
-| Block | Rule |
-|-------|------|
-| Hero `#intro` | **Không** lặp full stem — chỉ `buildHeroLead` + badges (stem chỉ ở `#question` quiz) |
-| Signal card | Bắt buộc có AI signal — không trống |
-| Tại sao chọn | `whyBullets` — chỉ đáp án đúng |
-| Loại trừ | `excludeReasons` đủ mọi đáp án sai — không placeholder |
-| Quiz `.q-text` | `signalPhrases` highlights |
+- signal present
+- `whyBullets` non-empty
+- `excludeReasons` for every wrong key
 
-**Omit:** `#drill`, `#traps`, Grounding card, hero stem duplicate.
+If validation fails → **do not write**; fix store/profile and retry.
 
-### 5. Generate
+### 5. Generate (single question)
 
 ```bash
 node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 ```
 
-Default: **skip write** nếu thiếu signal hoặc `excludeReasons` (`validateTeachGrounding`).  
-Override (dev only): `--allow-incomplete`.
+**Completion:** console shows `1 written, 0 incomplete`.
 
-**Completion:** Generator reports `written` with 0 `incomplete` for the range.
+### 6. Full bank regen
 
-### 6. Validate
+1. Bootstrap grounding store (if empty or incomplete):
+   ```bash
+   node scripts/bootstrap-pmp-teach-signals.js
+   ```
+   Fills `data/pmp-teach-signals.json` for all questions; refine entries with AI over time.
+2. Run `--force` **without** `--allow-incomplete`.
+3. Generator skips incomplete IDs — fix those in store, re-run bootstrap + generate.
+4. Only commit when `1123 written, 0 incomplete`.
 
-[REFERENCE.md](REFERENCE.md#validation)
+### 7. Embed rules
+
+| Block | Rule |
+|-------|------|
+| Hero `#intro` | Không lặp full stem — `buildHeroLead` + badges only |
+| Signal card | Bắt buộc — không trống |
+| Tại sao chọn | `whyBullets` — chỉ đáp án đúng |
+| Loại trừ | Mọi đáp án sai — không placeholder, không thiếu row |
+| Quiz `.q-text` | `signalPhrases` highlights |
+
+**Omit:** `#drill`, `#traps`, Grounding card, hero stem duplicate.
 
 ## Engine vs hand work
 
 | Symptom | Action |
 |---------|--------|
-| Empty Signal card (Q614) | Retry signal prompt; fill store; re-run generate |
-| Missing excludeReasons | Retry grounding prompt until every wrong key filled |
-| Lesson not updated after `--force` | Check console `incomplete` — fill store first |
+| No Signal (Q611) | Run signal prompt; save store; re-generate |
+| Loại trừ thiếu A/C (chỉ có D) | Fill **all** wrong keys in `excludeReasons`; retry grounding |
+| Empty Tại sao chọn | Add `whyBullets` in store or profile |
+| `--force` but file unchanged | Console `incomplete` — validation blocked write |
 
 ## Resources
 
 - Prompts + HTML contract: [REFERENCE.md](REFERENCE.md)
-- Examples: [examples.md](examples.md)
+- Examples (Q611 bad/good): [examples.md](examples.md)

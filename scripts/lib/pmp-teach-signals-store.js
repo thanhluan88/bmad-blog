@@ -53,9 +53,14 @@ function getStoredTeachSignals(questionId) {
   return getStoredTeachGrounding(questionId);
 }
 
+function resetTeachSignalsCache() {
+  cache = null;
+}
+
 module.exports = {
   STORE_PATH,
   loadTeachSignalsStore,
   getStoredTeachGrounding,
   getStoredTeachSignals,
+  resetTeachSignalsCache,
 };
