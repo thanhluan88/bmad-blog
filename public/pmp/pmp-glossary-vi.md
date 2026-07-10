@@ -667,6 +667,8 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | | |
 |---|---|
 | **Nghĩa** | **Cơ sở ước lượng** — giải thích estimate tính như thế nào, dựa trên gì |
+| **Tên PMBOK** | **Basis of estimates** — không phải “basis estimation” |
+| **Alias** | BOE · *basis estimation* (gọi nhầm, cùng nghĩa) |
 | **Loại** | **Project document** — supporting doc (không phải plan / performance report) |
 | **PMBOK 8** | Input *Develop Budget* p.64 · p.115 |
 | **≠ Cost estimate** | Estimate = con số · BOE = assumption & method |
@@ -1173,6 +1175,7 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | reconciliation process, discrepancies | Reconcile plan vs actual (general) |
 | finalize baseline FIRST | Sai — aggregate trước |
 | question accuracy of estimates | Basis of Estimates |
+| basis estimation, basis for estimation | = **Basis of estimates (BOE)** |
 | doubt estimates, show assumptions | Show basis of estimates |
 | show FMP for estimate validation | Sai — BOE not FMP |
 | reserves depleted | Contingency used up |
