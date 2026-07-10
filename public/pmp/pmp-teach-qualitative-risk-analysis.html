@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Cost Aggregation (Q69)</title>
+  <title>PMBOK 8 — Qualitative Risk Analysis (Q98)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,10 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.82rem; }
-    .flow-box { padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
-    .flow-box.highlight { background: var(--primary-bg); border-color: #fde68a; font-weight: 600; }
-    .flow-arrow { color: var(--muted); font-weight: 700; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -70,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 460px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -92,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Cost Aggregation · Q69</div>
+      <div class="brand-sub">Qualitative Risk Analysis · Q98</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#aggregation">Cost Aggregation</a>
-        <a href="#develop">Develop Budget</a>
+        <a href="#qualitative-analysis">Qualitative Analysis</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -172,7 +172,7 @@
         <a href="pmp-teach-analogous-estimating.html">Q66: Analogous Est.</a>
         <a href="pmp-teach-failure-costs.html">Q67: Failure Costs</a>
         <a href="pmp-teach-contingency-reserve.html">Q68: Contingency</a>
-        <a href="pmp-teach-cost-aggregation.html" class="series-current">Q69: Cost Aggregation</a>
+        <a href="pmp-teach-cost-aggregation.html">Q69: Cost Aggregation</a>
         <a href="pmp-teach-basis-of-estimates.html">Q70: Basis of Est.</a>
         <a href="pmp-teach-earned-value-analysis.html">Q71: Earned Value</a>
         <a href="pmp-teach-identify-stakeholders.html">Q72: Identify Stakeholders</a>
@@ -200,18 +200,14 @@
         <a href="pmp-teach-control-charts.html">Q94: Control Charts</a>
         <a href="pmp-teach-identify-risks.html">Q96: Identify Risks</a>
         <a href="pmp-teach-swot-analysis.html">Q97: SWOT Analysis</a>
-        <a href="pmp-teach-qualitative-risk-analysis.html">Q98: Qualitative Risk Analysis</a>
+        <a href="pmp-teach-qualitative-risk-analysis.html" class="series-current">Q98: Qualitative Risk Analysis</a>
       </nav>
 
 
 
-
-
-
-
       <div class="sidebar-pager">
-        <a href="pmp-teach-contingency-reserve.html" class="sidebar-pager-link">← Q68: Contingency</a>
-        <a href="pmp-teach-basis-of-estimates.html" class="sidebar-pager-link">Q70: Basis of Est. →</a>
+        <a href="pmp-teach-swot-analysis.html" class="sidebar-pager-link">← Q97: SWOT Analysis</a>
+        <span class="sidebar-pager-link disabled" aria-hidden="true">— →</span>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
@@ -221,10 +217,9 @@
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp" class="mobile-series-nav">← Blog PMP</a>
-        <a href="pmp-teach-contingency-reserve.html" class="mobile-series-nav">← Q68: Contingency</a>
-        <a href="pmp-teach-basis-of-estimates.html" class="mobile-series-nav">Q70: Basis of Est. →</a>
-        <a href="#aggregation">Aggregation</a>
-        <a href="#develop">Develop Budget</a>
+        <a href="pmp-teach-swot-analysis.html" class="mobile-series-nav">← Q97: SWOT Analysis</a>
+        <a href="#qualitative-analysis">Qualitative Analysis</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -233,208 +228,296 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q69 về <strong>Cost Aggregation</strong> — Marcus tại SBI: activity estimates
-            đã có, cần <em>single approved version</em> của budget để track &amp; measure
-            performance — làm gì <strong>first</strong>?
+            Bài học Q98 về <strong>Perform Risk Analysis</strong> và
+            <strong>Qualitative Risk Analysis</strong> — trong giai đoạn planning tại Venture Innovations,
+            team <em>đã xác định nhiều rủi ro</em> ảnh hưởng chi phí, tiến độ và chất lượng.
+            Ngân sách <em>hạn chế</em>, không thể xử lý tất cả rủi ro cùng lúc.
+            PM nên làm gì tiếp theo?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.64 &amp; 158</span>
-            <span class="badge">Develop Budget</span>
-            <span class="badge">Cost Aggregation</span>
-            <span class="badge">Câu 69 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.96 &amp; 98</span>
+            <span class="badge">Uncertainty</span>
+            <span class="badge">Perform Risk Analysis · Qualitative</span>
+            <span class="badge">Câu 98 — Practice</span>
           </div>
         </header>
 
-        <section id="aggregation">
-          <h2>1. Cost aggregation (p.158)</h2>
+        <section id="qualitative-analysis">
+          <h2>1. Perform Risk Analysis &amp; Qualitative Risk Analysis (p.96, 98)</h2>
           <p>
-            <strong>Cost aggregation</strong> organizes cost estimates theo work packages trong
-            WBS và <em>rolls them up</em> lên control accounts, rồi toàn project. Đây là bước
-            kỹ thuật trong <strong>Develop Budget</strong> (p.64) để tạo authorized cost baseline.
+            <strong>Perform Risk Analysis</strong> (p.96) là quy trình ưu tiên rủi ro riêng lẻ
+            để phân tích thêm hoặc hành động. Bước đầu tiên thường là
+            <strong>Qualitative Risk Analysis</strong> (p.98) — đánh giá
+            <em>xác suất (probability)</em> và <em>tác động (impact)</em> để xếp hạng ưu tiên
+            khi nguồn lực hạn chế.
           </p>
 
-          <div class="flow-diagram">
-            <div class="flow-box">Activity estimates</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box highlight">Cost aggregation</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box">Work packages</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box">Control accounts</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box highlight">Cost baseline</div>
+          <div class="approach-grid">
+            <div class="approach-cell pull">
+              <strong>Qualitative Risk Analysis (C — đúng)</strong>
+              Ưu tiên rủi ro theo probability × impact — phù hợp khi đã identify danh sách rủi ro
+              nhưng ngân sách hạn chế, cần quyết định rủi ro nào xử lý trước.
+            </div>
+            <div class="approach-cell">
+              <strong>Develop Risk Register (A — bẫy)</strong>
+              Risk Register là <em>output của Identify Risks</em> (Q96) — ghi nhận rủi ro đã xác định.
+              Stem Q98: team <em>đã identify</em> rủi ro → bước tiếp theo là analyze, không phải develop register.
+            </div>
+            <div class="approach-cell">
+              <strong>Plan Risk Responses (B — bẫy)</strong>
+              Lập kế hoạch phản ứng rủi ro xảy ra <em>sau khi analyze</em> — cần biết rủi ro nào
+              ưu tiên cao trước khi chọn chiến lược mitigate/transfer/accept.
+            </div>
+            <div class="approach-cell">
+              <strong>Sensitivity Analysis (D — bẫy)</strong>
+              Phân tích độ nhạy thuộc <strong>Quantitative Risk Analysis</strong> — dùng số liệu
+              định lượng (EMV, tornado diagram), không phải bước đầu khi cần ưu tiên nhanh với budget hạn chế.
+            </div>
           </div>
 
           <div class="card tip">
-            <h4>"First" = aggregation before baseline</h4>
+            <h4>Signal trong stem Q98</h4>
             <p style="margin:0">
-              Roll up estimates <strong>first</strong> (A) → then finalize approved cost baseline (C).
-              Baseline là output; aggregation là bước đầu trong Develop Budget.
+              <strong>Planning · Venture Innovations · risks already identified · impacts cost/schedule/quality · limited budget · cannot address all at once</strong>
+              → Team <em>đã có danh sách rủi ro</em>, cần <strong>ưu tiên</strong> trước khi phản ứng.
+              <strong>Perform qualitative risk analysis (C)</strong> khớp signal "limited budget" và "prioritize".
+              Không develop register (A — đã qua identify), không plan responses (B — sau analyze),
+              không sensitivity analysis (D — quantitative).
             </p>
           </div>
-        </section>
 
-        <section id="develop">
-          <h2>2. Develop Budget flow</h2>
-
+          <h3>Qualitative vs Quantitative — Khi nào dùng?</h3>
           <table>
             <thead>
-              <tr><th>Step / Option</th><th>What it is</th><th>Q69 "first"?</th></tr>
+              <tr><th>Loại phân tích</th><th>Mục đích</th><th>Công cụ / Output</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Cost aggregation</strong></td>
-                <td>Roll up activity estimates via WBS</td>
-                <td><strong>Yes — first step with estimates in hand</strong></td>
+                <td><strong>Qualitative (p.98)</strong></td>
+                <td>Ưu tiên nhanh bằng probability × impact; xếp hạng high/medium/low</td>
+                <td>Probability and Impact Matrix, Risk Data Quality Assessment</td>
               </tr>
               <tr>
-                <td><strong>C. Finalize cost baseline</strong></td>
-                <td>Authorized budget for monitoring</td>
-                <td>After aggregation — end result, not first</td>
+                <td><strong>Quantitative</strong></td>
+                <td>Phân tích số học — EMV, Monte Carlo, sensitivity/tornado</td>
+                <td>Sensitivity analysis, Decision tree, Simulation</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q98?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Develop the risk register</strong></td>
+                <td>Output của Identify Risks — ghi rủi ro đã xác định (Q96)</td>
+                <td>✗ Đã identify — bước tiếp theo là analyze, không phải register</td>
               </tr>
               <tr>
-                <td><strong>B. Update FMP</strong></td>
-                <td>Financial management rules (Q64)</td>
-                <td>Earlier planning — not develop budget step</td>
+                <td><strong>B. Plan risk responses</strong></td>
+                <td>Chọn chiến lược xử lý rủi ro ưu tiên cao</td>
+                <td>✗ Sau analyze — chưa biết rủi ro nào ưu tiên</td>
               </tr>
               <tr>
-                <td><strong>D. Review Business Case</strong></td>
-                <td>Initial proposed cost (Q19)</td>
-                <td>Initiation — estimates already exist</td>
+                <td><strong>C. Perform qualitative risk analysis</strong></td>
+                <td>Ưu tiên rủi ro theo probability × impact (p.98)</td>
+                <td>✓ Đúng — limited budget, cần prioritize trước khi respond</td>
+              </tr>
+              <tr>
+                <td><strong>D. Conduct a sensitivity analysis</strong></td>
+                <td>Kỹ thuật quantitative — đo độ nhạy biến số</td>
+                <td>✗ Quantitative, không phải bước ưu tiên đầu tiên trong stem</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="compare">
+          <h2>2. So sánh: Q96 Register vs Q97 SWOT vs Q98 Qualitative (Identify → Analyze → Respond)</h2>
+
+          <table>
+            <thead>
+              <tr><th>Câu</th><th>Giai đoạn</th><th>Mục đích</th><th>Signal trong stem</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Q96 — Risk Register (D)</strong></td>
+                <td><strong>Identify</strong> — output</td>
+                <td>Ghi nhận rủi ro <em>vừa xác định</em> trong workshop</td>
+                <td>Workshop <em>identifies potential events</em> → develop register</td>
+              </tr>
+              <tr>
+                <td><strong>Q97 — SWOT (D)</strong></td>
+                <td><strong>Identify</strong> — technique</td>
+                <td>Kỹ thuật có cấu trúc để <em>bắt đầu</em> identify risks</td>
+                <td>Team <em>new to industry</em> · <em>more structured approach</em></td>
+              </tr>
+              <tr>
+                <td><strong>Q98 — Qualitative (C)</strong></td>
+                <td><strong>Analyze</strong> — qualitative</td>
+                <td>Ưu tiên rủi ro đã identify khi nguồn lực hạn chế</td>
+                <td><em>Risks already identified</em> · <em>limited budget</em> · cannot address all</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Liên hệ Q66–Q68</h4>
+            <h4>Identify → Analyze → Respond — Khi nào chọn cái nào?</h4>
             <p style="margin:0">
-              Q66 Estimate Costs (activity estimates) → Q68 contingency reserve → Q69 Develop Budget
-              (aggregate → cost baseline). Stem: estimates done, need approved budget.
+              <strong>Q96 — Develop Risk Register:</strong> Team <em>vừa identify</em> rủi ro trong workshop.
+              Bước tiếp theo là <strong>document vào register</strong> — output của Identify Risks.<br><br>
+              <strong>Q97 — SWOT Analysis:</strong> Chưa identify rủi ro; cần <strong>kỹ thuật có cấu trúc</strong>
+              để bắt đầu. Team mới ngành → SWOT thay vì brainstorming tự do.<br><br>
+              <strong>Q98 — Qualitative Risk Analysis:</strong> Team <em>đã có danh sách rủi ro</em>;
+              ngân sách hạn chế → cần <strong>ưu tiên</strong> (probability × impact) trước khi plan responses.<br><br>
+              <strong>Thứ tự logic:</strong> Identify (SWOT/register) → <strong>Analyze (qualitative → quantitative)</strong>
+              → Plan Risk Responses → Monitor.<br><br>
+              <strong>Plan Responses (bẫy B):</strong> Sau analyze — khi đã biết rủi ro nào ưu tiên cao.<br><br>
+              <strong>Sensitivity Analysis (bẫy D):</strong> Quantitative — không phải bước ưu tiên đầu
+              khi stem nhấn limited budget và cần rank risks.
             </p>
           </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 69</h2>
+          <h2>3. Câu hỏi thực hành — Question 98</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q69</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q98</div>
             <div class="q-text">
-              Marcus, the project manager at SBI, is working with the team to finalize the project
-              budget. Different cost estimates have already been developed for individual activities,
-              and now Marcus needs a <em>single approved version of the budget</em> to track and
-              measure future performance. What should Marcus do <strong>first</strong>?
+              During planning at Venture Innovations, your team identifies several risks that could impact
+              <em>cost, schedule, and quality</em>. The project has a
+              <em>limited budget</em>, and not all risks can be addressed at the same time.
+              What should you do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Perform cost aggregation.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Update the financial management plan.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Finalize the cost baseline.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Review the Business Case for the initial proposed cost.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Develop the risk register</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Plan risk responses</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Perform qualitative risk analysis</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Conduct a sensitivity analysis</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
 
-          <h3>Tại sao chọn A?</h3>
+          <h3>Tại sao chọn C?</h3>
           <ul>
-            <li>Activity estimates exist → roll up via cost aggregation (p.158).</li>
-            <li>Develop Budget aggregates costs to establish cost baseline (p.64).</li>
-            <li>"First" — aggregation precedes finalizing baseline.</li>
+            <li>Qualitative Risk Analysis (p.98) thuộc <strong>Perform Risk Analysis</strong> (p.96) — ưu tiên rủi ro theo probability × impact.</li>
+            <li>Stem nhấn <em>risks already identified</em> và <em>limited budget</em> → cần xếp hạng ưu tiên trước khi phản ứng.</li>
+            <li>Không thể address all risks at once — qualitative analysis giúp PM quyết định rủi ro nào cần hành động trước.</li>
+            <li>Đây là bước <strong>analyze</strong>, nằm giữa identify và plan responses trong risk management flow.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không đúng (as FIRST)</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>B. Update FMP</strong></td>
-                <td>Plan Financial Management — done earlier, not develop budget technique.</td>
+                <td><strong>A. Develop the risk register</strong></td>
+                <td>Risk Register là <strong>output của Identify Risks</strong> (Q96). Stem nói team <em>đã identify</em> rủi ro — register đã có hoặc đang được cập nhật; bước tiếp theo là analyze.</td>
               </tr>
               <tr>
-                <td><strong>C. Finalize cost baseline</strong></td>
-                <td>Desired output — must aggregate estimates first. Instructor links baseline to end goal.</td>
+                <td><strong>B. Plan risk responses</strong></td>
+                <td>Plan Risk Responses xảy ra <strong>sau analyze</strong>. Chưa ưu tiên rủi ro thì không biết rủi ro nào cần mitigate, transfer hay accept trước.</td>
               </tr>
               <tr>
-                <td><strong>D. Business Case</strong></td>
-                <td>Initiation document — activity estimates already developed; too early step.</td>
+                <td><strong>D. Conduct a sensitivity analysis</strong></td>
+                <td>Sensitivity analysis thuộc <strong>Quantitative Risk Analysis</strong> — phân tích số học độ nhạy biến số. Stem cần ưu tiên nhanh với budget hạn chế → qualitative trước.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Instructor trap: Budget → Cost baseline (C)</h4>
+            <h4>Q96 → Q97 → Q98 — Risk Management Flow</h4>
             <p style="margin:0">
-              Stem nhắm đến cost baseline — nhưng hỏi <strong>first</strong>. Roll up estimates
-              (aggregation) trước khi finalize baseline.
+              Q96: Workshop identify rủi ro → <strong>Develop risk register</strong> (identify output).<br>
+              Q97: Chưa identify · cần structured technique → <strong>SWOT analysis</strong> (identify tool).<br>
+              Q98: Đã identify · limited budget → <strong>Qualitative risk analysis</strong> (analyze/prioritize).<br>
+              Tiếp theo (sau Q98): Plan Risk Responses → Monitor Risks.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Bước nào trong Develop Budget?</h2>
+          <h2>5. Drill — Qualitative, Quantitative, Register, hay Response?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="AGG">
-              <span>Roll up activity estimates through WBS to project total</span>
+            <div class="classify-row" data-answer="QUALITATIVE">
+              <span>Venture Innovations: risks identified, limited budget, cannot address all at once — prioritize by probability × impact (Q98)</span>
               <div class="classify-btns">
-                <button data-pick="AGG">Aggregation</button>
-                <button data-pick="BASE">Baseline</button>
-                <button data-pick="FMP">FMP</button>
-                <button data-pick="BC">Business Case</button>
+                <button data-pick="QUALITATIVE">Qualitative</button>
+                <button data-pick="QUANTITATIVE">Quantitative</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="RESPONSE">Response</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="BASE">
-              <span>Authorized time-phased budget for monitoring &amp; control</span>
+            <div class="classify-row" data-answer="REGISTER">
+              <span>Workshop at Apex Nova: team lists potential negative events; PM records descriptions and categories (Q96)</span>
               <div class="classify-btns">
-                <button data-pick="AGG">Aggregation</button>
-                <button data-pick="BASE">Baseline</button>
-                <button data-pick="FMP">FMP</button>
-                <button data-pick="BC">Business Case</button>
+                <button data-pick="QUALITATIVE">Qualitative</button>
+                <button data-pick="QUANTITATIVE">Quantitative</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="RESPONSE">Response</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FMP">
-              <span>Define how project finances will be managed and controlled</span>
+            <div class="classify-row" data-answer="RESPONSE">
+              <span>After prioritizing top risks, PM selects mitigate, transfer, accept, or escalate strategies for each</span>
               <div class="classify-btns">
-                <button data-pick="AGG">Aggregation</button>
-                <button data-pick="BASE">Baseline</button>
-                <button data-pick="FMP">FMP</button>
-                <button data-pick="BC">Business Case</button>
+                <button data-pick="QUALITATIVE">Qualitative</button>
+                <button data-pick="QUANTITATIVE">Quantitative</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="RESPONSE">Response</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="BC">
-              <span>Document justification and initial proposed investment at initiation</span>
+            <div class="classify-row" data-answer="QUANTITATIVE">
+              <span>PM runs Monte Carlo simulation and tornado diagram to calculate EMV and schedule contingency reserve</span>
               <div class="classify-btns">
-                <button data-pick="AGG">Aggregation</button>
-                <button data-pick="BASE">Baseline</button>
-                <button data-pick="FMP">FMP</button>
-                <button data-pick="BC">Business Case</button>
+                <button data-pick="QUALITATIVE">Qualitative</button>
+                <button data-pick="QUANTITATIVE">Quantitative</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="RESPONSE">Response</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="QUALITATIVE">
+              <span>PM uses probability and impact matrix to rank risks as high, medium, or low before allocating response budget</span>
+              <div class="classify-btns">
+                <button data-pick="QUALITATIVE">Qualitative</button>
+                <button data-pick="QUANTITATIVE">Quantitative</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="RESPONSE">Response</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Approved budget → Baseline (C)</h4>
-            <p style="margin:0">Baseline là mục tiêu — nhưng <em>first</em> phải aggregate estimates (A).</p>
+            <h4>Bẫy 1: "Risks identified" → Develop risk register (A)</h4>
+            <p style="margin:0">Register là output của <strong>Identify Risks</strong> (Q96). Khi stem nói <em>đã identify</em> và hỏi bước tiếp theo → thường là <strong>analyze</strong>, không phải develop register lần nữa.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Budget → Business Case (D)</h4>
-            <p style="margin:0">Business case = initiation. Estimates already at activity level → past that.</p>
+            <h4>Bẫy 2: Mọi câu risk → Plan risk responses (B)</h4>
+            <p style="margin:0">Plan responses cần biết rủi ro nào ưu tiên cao — phải <strong>analyze trước</strong>. Limited budget + cannot address all → qualitative analysis (C).</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Finances → FMP (B)</h4>
-            <p style="margin:0">FMP = how to manage costs (Q64) — not roll-up technique in Develop Budget.</p>
+            <h4>Bẫy 3: "Analysis" → Sensitivity analysis (D)</h4>
+            <p style="margin:0">Sensitivity analysis là <strong>quantitative</strong>. Qualitative dùng probability × impact matrix — nhanh hơn, phù hợp khi cần prioritize với nguồn lực hạn chế.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: Nhầm Q96, Q97 và Q98</h4>
+            <p style="margin:0">Q96: vừa identify → Register. Q97: chưa identify → SWOT. Q98: đã identify + limited budget → Qualitative. Đọc kỹ signal "already identified" vs "needs approach" vs "prioritize".</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Activity estimates done · need single approved budget · FIRST</strong> → Cost aggregation (A).</p>
+            <p style="margin:0"><strong>Risks identified · limited budget · cannot address all · cost/schedule/quality impacts · planning phase</strong> → Perform qualitative risk analysis (C).</p>
           </div>
         </section>
 
@@ -442,75 +525,93 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Cost aggregation?</div>
-            <div class="flashcard-back">Organize estimates by WBS work packages; roll up to control accounts and project — Develop Budget technique (p.158).</div>
+            <div class="flashcard-front">Qualitative Risk Analysis? (p.96, 98)</div>
+            <div class="flashcard-back"><strong>Perform Risk Analysis</strong> — ưu tiên rủi ro theo <strong>probability × impact</strong>. Bước analyze đầu tiên khi cần xếp hạng với nguồn lực hạn chế.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q69 đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Perform cost aggregation.</div>
+            <div class="flashcard-front">Q98 đáp án?</div>
+            <div class="flashcard-back"><strong>C — Perform qualitative risk analysis</strong>. Venture Innovations · đã identify rủi ro · limited budget · cần prioritize trước khi respond.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q96 vs Q97 vs Q98?</div>
+            <div class="flashcard-back">Q96: identify → <strong>Register</strong>. Q97: chưa identify → <strong>SWOT</strong>. Q98: đã identify → <strong>Qualitative Analysis</strong>. Flow: Identify → Analyze → Respond.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">COST AGGREGATION — Q69 (PMBOK 8, p.64 &amp; 158)
+          <div class="cheat-sheet">QUALITATIVE RISK ANALYSIS — Q98
+(PMBOK 8, p.96 Perform Risk Analysis &amp; p.98 Qualitative)
 ─────────────────────────────────────────────────────
-PROCESS: Develop Budget (p.64)
-         Cost aggregation (p.158)
+DOMAIN: Uncertainty
+PROCESS: Perform Risk Analysis (p.96)
+SUB-PROCESS: Qualitative Risk Analysis (p.98)
+KEY: Prioritize by PROBABILITY × IMPACT when budget limited
 
-DEVELOP BUDGET:
-  Aggregates estimated costs → authorized COST BASELINE
-  for monitoring &amp; control
+QUALITATIVE: Rank risks high/medium/low
+  → Probability and Impact Matrix
+  → FIRST analyze step — fast prioritization
+  → Use when LIMITED BUDGET, cannot address all
 
-COST AGGREGATION:
-  - Organize estimates by WORK PACKAGES (WBS)
-  - ROLL UP to control accounts
-  - ROLL UP to entire project
-  - FIRST step when activity estimates exist
+QUANTITATIVE: Numeric analysis (EMV, Monte Carlo)
+  → Sensitivity analysis, Tornado diagram
+  → AFTER qualitative (usually)
+  → NOT first step for quick prioritization
 
-FLOW:
-  Estimate Costs (activities) → COST AGGREGATION → Cost Baseline
+REGISTER: Output of IDENTIFY Risks (Q96)
+  → Document risks AFTER workshop identifies them
+  → NOT next step when risks already identified + need prioritize
 
-SCENARIO: Marcus — SBI
-           Activity estimates ALREADY developed
-           Need SINGLE APPROVED budget version
-           Track &amp; measure future performance
-           What to do FIRST?
-→ A) PERFORM COST AGGREGATION ✓
+RESPONSE: Plan Risk Responses
+  → AFTER analyze — know which risks are top priority
+  → Mitigate · Transfer · Accept · Escalate
 
-NOT (as FIRST):
-  B) UPDATE FMP — Plan Financial Mgmt (Q64), earlier
-  C) FINALIZE COST BASELINE — output AFTER aggregation
-  D) REVIEW BUSINESS CASE — initiation (Q19), too early
+SCENARIO: Venture Innovations — PLANNING
+           RISKS ALREADY IDENTIFIED
+           Impact COST · SCHEDULE · QUALITY
+           LIMITED BUDGET — cannot address ALL at once
+NEXT → C) PERFORM QUALITATIVE RISK ANALYSIS ✓
 
-TRAP: "approved budget" / "cost baseline" sounds like C
-      BUT question asks FIRST → aggregation (A)
+NOT:
+  A) DEVELOP RISK REGISTER — identify output (Q96)
+  B) PLAN RISK RESPONSES — after analyze
+  D) SENSITIVITY ANALYSIS — quantitative, not first prioritize step
 
-Q66–Q69 CHAIN:
-  Q66 estimate · Q68 contingency · Q69 aggregate → baseline
+Q96 vs Q97 vs Q98:
+  Q96: workshop identified → REGISTER (identify output)
+  Q97: need technique to start → SWOT (identify tool)
+  Q98: identified + limited budget → QUALITATIVE (analyze)
 
-Q69 ANSWER: A
+RISK FLOW:
+  Identify → Analyze (Qualitative → Quantitative) → Respond → Monitor
 
-REF: PMBOK Guide, 8th Ed., p.64, p.158</div>
+SIGNAL KEYWORDS:
+  Qualitative:  limited budget, prioritize, probability,
+                impact, rank, cannot address all, already identified
+  Quantitative: EMV, Monte Carlo, sensitivity, tornado,
+                simulation, numeric
+  Register:     workshop listed, develop/document register,
+                just identified (Q96)
+  Response:     after prioritization, mitigate, transfer,
+                accept, strategy
+
+Q98 ANSWER: C — Perform qualitative risk analysis
+
+REF: PMBOK Guide, 8th Ed., p.96 Perform Risk Analysis
+      p.98 Qualitative Risk Analysis</div>
         </section>
 
 
 
-
-
-
-
-
         <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
-          <a class="lesson-pager-btn" href="pmp-teach-contingency-reserve.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q68: Contingency</span></a>
-          <span class="lesson-pager-pos">Q69 / 98</span>
-          <a class="lesson-pager-btn next" href="pmp-teach-basis-of-estimates.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q70: Basis of Est.</span></a>
+          <a class="lesson-pager-btn" href="pmp-teach-swot-analysis.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q97: SWOT Analysis</span></a>
+          <span class="lesson-pager-pos">Q98 / 98</span>
+          <span class="lesson-pager-btn disabled" aria-hidden="true"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">—</span></span>
         </nav>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-analogous-estimating.html">Q66: Analogous Est.</a>
-          · <a href="pmp-teach-contingency-reserve.html">Q68: Contingency</a>
-          · <a href="pmp-full-questions.html#q-69">Luyện câu 69</a>
+          · <a href="pmp-teach-swot-analysis.html">Q97: SWOT Analysis</a>
+          · <a href="pmp-teach-identify-risks.html">Q96: Identify Risks</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -519,12 +620,12 @@ REF: PMBOK Guide, 8th Ed., p.64, p.158</div>
 
   <script>
     (function () {
-      const CORRECT = "A";
+      const CORRECT = "C";
       const EXPL = {
-        A: "Đúng! Cost aggregation rolls up activity estimates qua WBS → control accounts → project (p.64, 158). First step trong Develop Budget.",
-        B: "Financial management plan = how to manage finances (Q64) — không phải roll-up estimates.",
-        C: "Cost baseline là output sau aggregation — stem hỏi FIRST, chưa finalize baseline.",
-        D: "Business case là initiation doc — activity estimates đã có, không review business case now."
+        A: "Develop risk register là output của Identify Risks (Q96). Stem nói team đã identify rủi ro — bước tiếp theo là analyze, không phải develop register.",
+        B: "Plan risk responses xảy ra sau analyze. Chưa ưu tiên rủi ro thì không biết rủi ro nào cần xử lý trước khi ngân sách hạn chế.",
+        C: "Đúng! Qualitative Risk Analysis (p.98) ưu tiên rủi ro theo probability × impact — phù hợp khi đã identify rủi ro nhưng limited budget, không thể address all at once.",
+        D: "Sensitivity analysis thuộc Quantitative Risk Analysis — phân tích số học, không phải bước ưu tiên đầu tiên khi cần rank risks với nguồn lực hạn chế."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -540,7 +641,7 @@ REF: PMBOK Guide, 8th Ed., p.64, p.158</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Perform cost aggregation.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Perform qualitative risk analysis</strong>" : "");
         });
       });
       let score = 0;
@@ -568,16 +669,18 @@ REF: PMBOK Guide, 8th Ed., p.64, p.158</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
