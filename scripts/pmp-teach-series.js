@@ -93,5 +93,7 @@ module.exports.SERIES = [
   ["pmp-teach-tuckman-ladder.html", "Q91: Tuckman Ladder"],
   ["pmp-teach-colocation.html", "Q92: Colocation"],
   ["pmp-teach-communication-methods.html", "Q93: Communication Methods"],
+  ["pmp-teach-control-charts.html", "Q94: Control Charts"],
   ["pmp-teach-identify-risks.html", "Q96: Identify Risks"],
+  ["pmp-teach-swot-analysis.html", "Q97: SWOT Analysis"],
 ];

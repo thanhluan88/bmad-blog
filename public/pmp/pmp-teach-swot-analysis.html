@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Nominal Group Technique (Q47)</title>
+  <title>PMBOK 8 — SWOT Analysis (Q97)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,6 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -88,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Nominal Group Technique · Q47</div>
+      <div class="brand-sub">SWOT Analysis · Q97</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#ngt">Nominal Group</a>
-        <a href="#techniques">So sánh techniques</a>
+        <a href="#swot-analysis">SWOT Analysis</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -146,7 +150,7 @@
         <a href="pmp-teach-requirements-traceability.html">Q44: Requirements RTM</a>
         <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
         <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
-        <a href="pmp-teach-nominal-group-technique.html" class="series-current">Q47: Nominal Group</a>
+        <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
         <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
         <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
@@ -195,17 +199,13 @@
         <a href="pmp-teach-communication-methods.html">Q93: Communication Methods</a>
         <a href="pmp-teach-control-charts.html">Q94: Control Charts</a>
         <a href="pmp-teach-identify-risks.html">Q96: Identify Risks</a>
-        <a href="pmp-teach-swot-analysis.html">Q97: SWOT Analysis</a>
+        <a href="pmp-teach-swot-analysis.html" class="series-current">Q97: SWOT Analysis</a>
       </nav>
 
 
-
-
-
-
       <div class="sidebar-pager">
-        <a href="pmp-teach-design-thinking.html" class="sidebar-pager-link">← Q46: Design Thinking</a>
-        <a href="pmp-teach-brainstorming.html" class="sidebar-pager-link">Q48: Brainstorming →</a>
+        <a href="pmp-teach-identify-risks.html" class="sidebar-pager-link">← Q96: Identify Risks</a>
+        <span class="sidebar-pager-link disabled" aria-hidden="true">— →</span>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
@@ -215,10 +215,9 @@
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp" class="mobile-series-nav">← Blog PMP</a>
-        <a href="pmp-teach-design-thinking.html" class="mobile-series-nav">← Q46: Design Thinking</a>
-        <a href="pmp-teach-brainstorming.html" class="mobile-series-nav">Q48: Brainstorming →</a>
-        <a href="#ngt">NGT</a>
-        <a href="#techniques">Techniques</a>
+        <a href="pmp-teach-identify-risks.html" class="mobile-series-nav">← Q96: Identify Risks</a>
+        <a href="#swot-analysis">SWOT Analysis</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -227,90 +226,180 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q47 về <strong>Nominal Group Technique (NGT)</strong> — VDS: conflicting
-            stakeholder input, khó <em>prioritize features</em>, meetings bị chi phối bởi
-            <em>loudest voices</em>, missed requirements, sắp <em>delivery</em>.
+            Bài học Q97 về <strong>Identify Risks</strong> và kỹ thuật <strong>SWOT Analysis</strong> —
+            Ryan là PM tại HLT, đang lập kế hoạch tối ưu hóa logistics. Anh muốn
+            <em>đi trước các tác động tiềm ẩn</em> trong suốt vòng đời dự án. Team
+            <em>mới vào ngành</em> và cần <em>cách tiếp cận có cấu trúc hơn</em> để xác định rủi ro.
+            Bước tiếp theo đúng là gì?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.40–41 &amp; p.184</span>
-            <span class="badge">Elicit and Analyze Requirements</span>
-            <span class="badge">Câu 47 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.97 &amp; 204</span>
+            <span class="badge">Uncertainty</span>
+            <span class="badge">Identify Risks · SWOT</span>
+            <span class="badge">Câu 97 — Practice</span>
           </div>
         </header>
 
-        <section id="ngt">
-          <h2>1. Nominal group technique (PMBOK p.184)</h2>
+        <section id="swot-analysis">
+          <h2>1. Identify Risks &amp; SWOT Analysis (p.97, 204)</h2>
           <p>
-            NGT là phương pháp <strong>structured group decision-making</strong> — thu thập input
-            systematically, equalize participation, minimize dominance of vocal members.
+            <strong>Identify Risks</strong> (p.97) là quy trình xác định các rủi ro riêng lẻ và
+            tài liệu hóa đặc điểm của chúng. Một trong các <strong>Tools &amp; Techniques</strong>
+            được liệt kê là <strong>SWOT analysis</strong> (p.204) — phân tích
+            <em>Strengths, Weaknesses, Opportunities, Threats</em> để khám phá rủi ro và cơ hội
+            một cách có cấu trúc.
           </p>
 
+          <div class="approach-grid">
+            <div class="approach-cell pull">
+              <strong>SWOT Analysis (D — đúng)</strong>
+              Kỹ thuật có cấu trúc 4 ô — phù hợp khi team mới ngành, cần framework rõ ràng
+              để identify risks trước khi ghi vào register.
+            </div>
+            <div class="approach-cell">
+              <strong>Brainstorming (A — bẫy)</strong>
+              Kỹ thuật identify risks hợp lệ nhưng <em>ít cấu trúc hơn</em> SWOT.
+              Stem nhấn mạnh "more structured approach" → SWOT phù hợp hơn.
+            </div>
+            <div class="approach-cell">
+              <strong>Develop Risk Register (B — bẫy)</strong>
+              Risk Register (p.137) là <em>output/artifact</em> sau khi identify —
+              xem Q96. Chưa identify thì chưa develop register.
+            </div>
+            <div class="approach-cell">
+              <strong>Risk Audit (C — bẫy)</strong>
+              Risk audit thuộc <strong>Monitor Risks</strong> — đánh giá hiệu quả quy trình
+              quản lý rủi ro khi thực thi, không phải kỹ thuật identify ban đầu.
+            </div>
+          </div>
+
           <div class="card tip">
-            <h4>Nominal group technique</h4>
+            <h4>Signal trong stem Q97</h4>
             <p style="margin:0">
-              Gather ideas <strong>silently/individually first</strong>, then share and discuss.
-              Ensures all ideas considered <em>before</em> open discussion — especially effective
-              in large groups handling controversial topics.
+              <strong>Planning logistics optimization · get ahead of impacts · project life cycle · team new to industry · more structured approach</strong>
+              → Ryan cần <em>kỹ thuật identify</em> có cấu trúc, chưa có danh sách rủi ro để ghi register.
+              <strong>SWOT analysis (D)</strong> khớp signal "structured" và context team mới ngành.
+              Không brainstorming (A — kém cấu trúc), không register (B — output sau identify),
+              không audit (C — monitor).
             </p>
           </div>
 
-          <ol>
-            <li>Silent idea generation (everyone writes)</li>
-            <li>Round-robin sharing (no debate yet)</li>
-            <li>Clarify &amp; discuss</li>
-            <li>Vote/rank to prioritize</li>
-          </ol>
-        </section>
-
-        <section id="techniques">
-          <h2>2. Elicitation techniques — when to use which</h2>
-
+          <h3>SWOT — 4 ô phân tích</h3>
           <table>
             <thead>
-              <tr><th>Technique</th><th>Best for</th><th>Q47 fit?</th></tr>
+              <tr><th>Ô SWOT</th><th>Nội dung</th><th>Liên quan Identify Risks</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Nominal group (NGT)</strong></td>
-                <td>Loud voices dominate · equalize participation · prioritize in group</td>
-                <td>✓ (D)</td>
+                <td><strong>Strengths (S)</strong></td>
+                <td>Điểm mạnh nội bộ dự án / tổ chức</td>
+                <td>Cơ sở giảm thiểu rủi ro; đôi khi chuyển thành opportunity</td>
               </tr>
               <tr>
-                <td>Open brainstorming</td>
-                <td>Free-flowing idea generation</td>
-                <td>Worsens loud-voice dominance (A)</td>
+                <td><strong>Weaknesses (W)</strong></td>
+                <td>Điểm yếu nội bộ — team mới ngành là signal Q97</td>
+                <td>Nguồn rủi ro tiềm ẩn cần identify</td>
               </tr>
               <tr>
-                <td>Individual interviews</td>
-                <td>Deep 1-on-1 input, sensitive topics</td>
-                <td>Time pressure + group prioritization needed (B)</td>
+                <td><strong>Opportunities (O)</strong></td>
+                <td>Cơ hội bên ngoài (thị trường, công nghệ)</td>
+                <td>Positive risk / upside risk</td>
               </tr>
               <tr>
-                <td>Focus groups</td>
-                <td>Collect diverse stakeholder perspectives (Q43)</td>
-                <td>Open discussion — vocal members can still dominate (C)</td>
+                <td><strong>Threats (T)</strong></td>
+                <td>Mối đe dọa bên ngoài — tác động suốt project life</td>
+                <td>Rủi ro tiêu cực cần get ahead of</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q97?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Conduct a brainstorming session</strong></td>
+                <td>Kỹ thuật identify — tự do, ít cấu trúc</td>
+                <td>✗ Stem yêu cầu "more structured approach"</td>
+              </tr>
+              <tr>
+                <td><strong>B. Develop the risk register</strong></td>
+                <td>Output sau identify (artifact — Q96)</td>
+                <td>✗ Chưa identify — chưa có gì để ghi</td>
+              </tr>
+              <tr>
+                <td><strong>C. Conduct a risk audit</strong></td>
+                <td>Đánh giá hiệu quả quy trình risk management</td>
+                <td>✗ Monitor Risks — không phải planning/identify</td>
+              </tr>
+              <tr>
+                <td><strong>D. Perform a SWOT analysis</strong></td>
+                <td>Kỹ thuật identify có cấu trúc 4 ô (p.204)</td>
+                <td>✓ Đúng — structured technique cho team mới ngành</td>
               </tr>
             </tbody>
           </table>
         </section>
 
+        <section id="compare">
+          <h2>2. So sánh: Q96 Risk Register vs Q97 SWOT (Artifact vs Technique)</h2>
+
+          <table>
+            <thead>
+              <tr><th>Câu</th><th>Loại</th><th>Mục đích</th><th>Signal trong stem</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Q96 — Risk Register (D)</strong></td>
+                <td><strong>Artifact / Output</strong> (p.137)</td>
+                <td>Ghi nhận rủi ro <em>đã xác định</em> trong workshop</td>
+                <td>Workshop <em>identifies potential events</em> → develop register</td>
+              </tr>
+              <tr>
+                <td><strong>Q97 — SWOT (D)</strong></td>
+                <td><strong>Technique / Tool</strong> (p.204)</td>
+                <td>Phương pháp <em>có cấu trúc</em> để identify risks</td>
+                <td>Team <em>new to industry</em> · <em>more structured approach</em> → SWOT</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card info">
+            <h4>Technique vs Artifact — Khi nào chọn cái nào?</h4>
+            <p style="margin:0">
+              <strong>Q96 — Develop Risk Register (artifact):</strong> Team <em>đã</em> identify rủi ro
+              trong workshop (potential events listed). Bước tiếp theo là <strong>document vào register</strong>
+              — output của Identify Risks.<br><br>
+              <strong>Q97 — SWOT Analysis (technique):</strong> Ryan <em>chưa</em> identify rủi ro;
+              cần <strong>chọn kỹ thuật</strong> phù hợp để bắt đầu. Team mới ngành + cần structured
+              approach → SWOT (4 ô S/W/O/T) thay vì brainstorming tự do.<br><br>
+              <strong>Brainstorming (bẫy A):</strong> Cũng là T&amp;T của Identify Risks, nhưng kém cấu trúc.
+              Khi stem nói "more structured" → SWOT thắng brainstorming.<br><br>
+              <strong>Risk Register (bẫy B):</strong> Là kết quả <em>sau</em> identify — không phải bước
+              đầu khi chưa có danh sách rủi ro. So Q96: đã có list → register; Q97: chưa có → technique.<br><br>
+              <strong>Risk Audit (bẫy C):</strong> Monitor Risks — đánh giá quy trình, không dùng lúc
+              planning ban đầu.
+            </p>
+          </div>
+        </section>
+
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 47</h2>
+          <h2>3. Câu hỏi thực hành — Question 97</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q47</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q97</div>
             <div class="q-text">
-              Stakeholders are providing conflicting input at VDS during requirement discussions,
-              making it difficult to <em>prioritize features</em>. Meetings are being dominated by
-              the highest paid and <em>loudest voices</em> in the room leading to some missed
-              requirements, and time is running out before <em>delivery</em> begins. What should
-              the project manager do?
+              You are Ryan, a project manager at HLT planning a logistics optimization project. You want to
+              <em>get ahead of potential impacts</em> over the project life cycle. Your team is
+              <em>new to the industry</em> and needs a <em>more structured approach</em> to identify risks.
+              What should you do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Facilitate an open brainstorming session.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Conduct individual interviews.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Lead and facilitate a focus group.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Use the nominal group technique.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Conduct a brainstorming session with the team</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Develop the risk register</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Conduct a risk audit</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Perform a SWOT analysis</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -321,10 +410,10 @@
 
           <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>Loudest voices dominate → NGT equalizes participation, minimizes vocal dominance.</li>
-            <li>Conflicting input + prioritize features → structured group decision-making + vote/rank.</li>
-            <li>Missed requirements → all ideas captured silently before open discussion.</li>
-            <li>Controversial/large group → NGT especially effective (p.184).</li>
+            <li>SWOT analysis (p.204) là Tools &amp; Technique của <strong>Identify Risks</strong> (p.97) — framework 4 ô có cấu trúc.</li>
+            <li>Stem nhấn <em>team new to industry</em> và <em>more structured approach</em> → SWOT phù hợp hơn brainstorming tự do.</li>
+            <li>Ryan muốn <em>get ahead of impacts over project life</em> — SWOT khám phá Threats và Weaknesses sớm trong planning.</li>
+            <li>Đây là bước <strong>identify</strong> (chọn technique), chưa phải ghi artifact hay monitor.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -334,89 +423,103 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Open brainstorming</strong></td>
-                <td>Open format — loud voices dominate hơn, không fix problem hiện tại.</td>
+                <td><strong>A. Conduct a brainstorming session</strong></td>
+                <td>Brainstorming là T&amp;T hợp lệ của Identify Risks nhưng <em>ít cấu trúc hơn</em>. Stem yêu cầu "more structured approach" → SWOT đúng hơn.</td>
               </tr>
               <tr>
-                <td><strong>B. Individual interviews</strong></td>
-                <td>Time running out — sequential 1-on-1 chậm; không group prioritization.</td>
+                <td><strong>B. Develop the risk register</strong></td>
+                <td>Risk Register là <strong>output</strong> sau khi identify (xem Q96). Ryan chưa identify rủi ro — chưa có gì để ghi vào register.</td>
               </tr>
               <tr>
-                <td><strong>C. Focus group</strong></td>
-                <td>Facilitated discussion — vẫn có thể bị vocal members dominate (Q43 ≠ Q47).</td>
+                <td><strong>C. Conduct a risk audit</strong></td>
+                <td>Risk audit thuộc <strong>Monitor Risks</strong> — đánh giá hiệu quả quy trình khi thực thi, không phải kỹ thuật identify lúc planning.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q43 vs Q47</h4>
+            <h4>Q96 vs Q97 — Artifact vs Technique</h4>
             <p style="margin:0">
-              Q43: differing expectations → focus groups + benchmarking (gather). Q47: loud voices
-              dominate meetings → <em>nominal group technique</em> (structured, equal participation).
+              Q96: Workshop <em>đã identify</em> rủi ro → <strong>Develop risk register</strong> (artifact).<br>
+              Q97: Chưa identify · cần structured approach → <strong>SWOT analysis</strong> (technique).<br>
+              Thứ tự logic: SWOT (identify) → Risk Register (document) → Analyze → Respond → Monitor (audit).
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Match technique to scenario</h2>
+          <h2>5. Drill — SWOT, Brainstorm, Register, hay Audit?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="NGT">
-              <span>Loudest voices dominate — need equal participation &amp; prioritize</span>
+            <div class="classify-row" data-answer="SWOT">
+              <span>Ryan @ HLT: team new to industry, needs structured approach to identify logistics risks (Q97)</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="SWOT">SWOT</button>
+                <button data-pick="BRAINSTORM">Brainstorm</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="AUDIT">Audit</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FOCUS">
-              <span>Differing stakeholder expectations — collect diverse views</span>
+            <div class="classify-row" data-answer="BRAINSTORM">
+              <span>PM facilitates a free-form session to quickly list as many project risks as possible without a fixed framework</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="SWOT">SWOT</button>
+                <button data-pick="BRAINSTORM">Brainstorm</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="AUDIT">Audit</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="INTV">
-              <span>Sensitive topic — deep 1-on-1 confidential input</span>
+            <div class="classify-row" data-answer="REGISTER">
+              <span>Workshop at Apex Nova: team lists potential negative events; PM records descriptions and categories (Q96)</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="SWOT">SWOT</button>
+                <button data-pick="BRAINSTORM">Brainstorm</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="AUDIT">Audit</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="NGT">
-              <span>Large group, controversial — ideas before debate</span>
+            <div class="classify-row" data-answer="AUDIT">
+              <span>Mid-project: PM reviews whether risk management processes and tools are effective</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="SWOT">SWOT</button>
+                <button data-pick="BRAINSTORM">Brainstorm</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="AUDIT">Audit</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="SWOT">
+              <span>PM analyzes Strengths, Weaknesses, Opportunities, and Threats for project and industry context before listing individual risks</span>
+              <div class="classify-btns">
+                <button data-pick="SWOT">SWOT</button>
+                <button data-pick="BRAINSTORM">Brainstorm</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="AUDIT">Audit</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Need ideas → Brainstorming (A)</h4>
-            <p style="margin:0">Problem là dominance &amp; missed reqs — open brainstorm làm tệ hơn, không structured.</p>
+            <h4>Bẫy 1: Mọi câu identify risks → Brainstorming (A)</h4>
+            <p style="margin:0">Brainstorming là T&amp;T hợp lệ — nhưng khi stem nói <em>more structured approach</em> hoặc team mới ngành, SWOT (D) phù hợp hơn.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Stakeholders → Interviews (B)</h4>
-            <p style="margin:0">Interviews tốn thời gian — stem nói time running out + cần group prioritization.</p>
+            <h4>Bẫy 2: "Identify risks" → Develop risk register (B)</h4>
+            <p style="margin:0">Register là output <em>sau</em> identify (Q96). Q97 chưa có danh sách rủi ro — cần chọn technique trước, không nhảy thẳng sang artifact.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Facilitate → Focus group (C)</h4>
-            <p style="margin:0">Focus group (Q43) gather perspectives — không equalize loud vs quiet voices như NGT.</p>
+            <h4>Bẫy 3: Mọi câu risk → Risk audit (C)</h4>
+            <p style="margin:0">Audit = Monitor Risks — đánh giá <em>quy trình</em>, không phải kỹ thuật identify lúc planning ban đầu.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: Nhầm Q96 và Q97</h4>
+            <p style="margin:0">Q96: đã identify trong workshop → Register. Q97: chưa identify · cần structured technique → SWOT. Đọc kỹ signal "already identified" vs "needs approach".</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Loudest voices · dominate meetings · missed requirements · prioritize features</strong> → Nominal group technique (D).</p>
+            <p style="margin:0"><strong>New team · structured approach · get ahead of impacts · planning phase</strong> → Perform SWOT analysis (D).</p>
           </div>
         </section>
 
@@ -424,69 +527,81 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Nominal group technique? (p.184)</div>
-            <div class="flashcard-back">Structured group decision-making · equalize participation · minimize vocal dominance · ideas before discussion.</div>
+            <div class="flashcard-front">SWOT trong Identify Risks? (p.97, 204)</div>
+            <div class="flashcard-back"><strong>Tools &amp; Technique</strong> — phân tích Strengths, Weaknesses, Opportunities, Threats. Kỹ thuật có cấu trúc để identify risks.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q47 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Use the nominal group technique.</div>
+            <div class="flashcard-front">Q97 đáp án?</div>
+            <div class="flashcard-back"><strong>D — Perform a SWOT analysis</strong>. Ryan @ HLT · team mới ngành · cần structured approach để identify risks.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q96 vs Q97?</div>
+            <div class="flashcard-back">Q96: đã identify → <strong>Risk Register</strong> (artifact). Q97: chưa identify → <strong>SWOT</strong> (technique).</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">NOMINAL GROUP TECHNIQUE — Q47 (PMBOK 8, p.40–41 &amp; p.184)
+          <div class="cheat-sheet">SWOT ANALYSIS — Q97
+(PMBOK 8, p.97 Identify Risks &amp; p.204 SWOT)
 ─────────────────────────────────────────────────────
-PROCESS: Elicit and Analyze Requirements
+DOMAIN: Uncertainty
+PROCESS: Identify Risks (p.97)
+TECHNIQUE: SWOT Analysis (p.204)
+OUTPUT (sau identify): Risk Register (p.137) — xem Q96
 
-NGT (p.184):
-  - Structured GROUP decision-making
-  - Gather input SYSTEMATICALLY
-  - Equalize participation
-  - Minimize dominance of VOCAL members
-  - All ideas BEFORE open discussion
-  - Especially: large groups · controversial topics
+SWOT = Strengths · Weaknesses · Opportunities · Threats
+  → Structured T&amp;T to IDENTIFY risks
+  → Good when team new / needs framework
 
-SCENARIO: VDS — requirement discussions
-           CONFLICTING input · PRIORITIZE features
-           LOUDEST / highest-paid voices DOMINATE
-           MISSED requirements · TIME running out
-→ D) NOMINAL GROUP TECHNIQUE ✓
+BRAINSTORM: Also T&amp;T of Identify Risks
+  → Less structured — lose to SWOT when stem says
+    "more structured approach"
+
+REGISTER: Artifact AFTER risks identified (Q96)
+  → NOT first step when no list yet
+
+AUDIT: Monitor Risks — process effectiveness
+  → NOT planning / identify technique
+
+SCENARIO: Ryan @ HLT — logistics optimization
+           GET AHEAD of impacts over PROJECT LIFE
+           Team NEW TO INDUSTRY
+           Needs MORE STRUCTURED APPROACH
+NEXT → D) PERFORM SWOT ANALYSIS ✓
 
 NOT:
-  A) Open brainstorming — worsens loud-voice dominance
-  B) Individual interviews — slow, not group prioritization
-  C) Focus group — open discussion, vocal can dominate (Q43 ≠ Q47)
+  A) BRAINSTORMING — less structured (stem says structured)
+  B) DEVELOP RISK REGISTER — output after identify (Q96)
+  C) RISK AUDIT — Monitor, not Identify
 
-Q43 vs Q47:
-  Q43 DIFFERING expectations → focus groups + benchmarking
-  Q47 LOUD VOICES dominate   → nominal group technique
+Q96 vs Q97:
+  Q96: workshop identified events → REGISTER (artifact)
+  Q97: need technique to start → SWOT (tool)
 
-SIGNAL: "loudest voices" · "dominated by"
-        "missed requirements" · "prioritize features"
-        "conflicting input" · "controversial"
+SIGNAL KEYWORDS:
+  SWOT:      structured, new team, SWOT, S/W/O/T,
+             get ahead, planning, industry context
+  Brainstorm: free-form, quick list, unstructured
+  Register:   already identified, workshop listed,
+              develop/document register
+  Audit:      process effectiveness, monitor, mid-project
 
-Q47 ANSWER: D
+Q97 ANSWER: D — Perform a SWOT analysis
 
-REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.184</div>
+REF: PMBOK Guide, 8th Ed., p.97 Identify Risks
+      p.204 SWOT Analysis</div>
         </section>
 
 
-
-
-
-
-
         <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
-          <a class="lesson-pager-btn" href="pmp-teach-design-thinking.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q46: Design Thinking</span></a>
-          <span class="lesson-pager-pos">Q47 / 97</span>
-          <a class="lesson-pager-btn next" href="pmp-teach-brainstorming.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q48: Brainstorming</span></a>
+          <a class="lesson-pager-btn" href="pmp-teach-identify-risks.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q96: Identify Risks</span></a>
+          <span class="lesson-pager-pos">Q97 / 97</span>
+          <span class="lesson-pager-btn disabled" aria-hidden="true"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">—</span></span>
         </nav>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
-          · <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
-          · <a href="pmp-full-questions.html#q-47">Luyện câu 47</a>
+          · <a href="pmp-teach-identify-risks.html">Q96: Identify Risks</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -497,10 +612,10 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.184</div>
     (function () {
       const CORRECT = "D";
       const EXPL = {
-        A: "Open brainstorming — loud voices dominate hơn, không fix missed requirements.",
-        B: "Individual interviews — time running out, không group prioritization.",
-        C: "Focus group — open discussion, vocal members vẫn có thể dominate (khác Q43 scenario).",
-        D: "Đúng! NGT equalizes participation, minimizes vocal dominance, structured prioritization (p.184)."
+        A: "Brainstorming là T&amp;T của Identify Risks nhưng ít cấu trúc hơn SWOT. Stem yêu cầu 'more structured approach' — SWOT phù hợp hơn.",
+        B: "Develop risk register là output sau khi identify (Q96). Ryan chưa identify rủi ro — chưa có gì để ghi vào register.",
+        C: "Risk audit thuộc Monitor Risks — đánh giá hiệu quả quy trình quản lý rủi ro, không phải kỹ thuật identify lúc planning.",
+        D: "Đúng! SWOT analysis (p.204) là kỹ thuật có cấu trúc của Identify Risks (p.97) — phù hợp team mới ngành cần framework rõ ràng để identify risks."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -516,7 +631,7 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.184</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Use the nominal group technique.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Perform a SWOT analysis</strong>" : "");
         });
       });
       let score = 0;
@@ -544,16 +659,18 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.184</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>

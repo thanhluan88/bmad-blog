@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Nominal Group Technique (Q47)</title>
+  <title>PMBOK 8 — Control Charts (Q94)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,6 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -88,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Nominal Group Technique · Q47</div>
+      <div class="brand-sub">Control Charts · Q94</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#ngt">Nominal Group</a>
-        <a href="#techniques">So sánh techniques</a>
+        <a href="#concept">Control Charts &amp; Resourcing</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -146,7 +150,7 @@
         <a href="pmp-teach-requirements-traceability.html">Q44: Requirements RTM</a>
         <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
         <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
-        <a href="pmp-teach-nominal-group-technique.html" class="series-current">Q47: Nominal Group</a>
+        <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
         <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
         <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
@@ -193,19 +197,16 @@
         <a href="pmp-teach-tuckman-ladder.html">Q91: Tuckman Ladder</a>
         <a href="pmp-teach-colocation.html">Q92: Colocation</a>
         <a href="pmp-teach-communication-methods.html">Q93: Communication Methods</a>
-        <a href="pmp-teach-control-charts.html">Q94: Control Charts</a>
+        <a href="pmp-teach-control-charts.html" class="series-current">Q94: Control Charts</a>
         <a href="pmp-teach-identify-risks.html">Q96: Identify Risks</a>
         <a href="pmp-teach-swot-analysis.html">Q97: SWOT Analysis</a>
       </nav>
 
 
 
-
-
-
       <div class="sidebar-pager">
-        <a href="pmp-teach-design-thinking.html" class="sidebar-pager-link">← Q46: Design Thinking</a>
-        <a href="pmp-teach-brainstorming.html" class="sidebar-pager-link">Q48: Brainstorming →</a>
+        <a href="pmp-teach-communication-methods.html" class="sidebar-pager-link">← Q93: Communication Methods</a>
+        <a href="pmp-teach-identify-risks.html" class="sidebar-pager-link">Q96: Identify Risks →</a>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
@@ -215,10 +216,10 @@
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp" class="mobile-series-nav">← Blog PMP</a>
-        <a href="pmp-teach-design-thinking.html" class="mobile-series-nav">← Q46: Design Thinking</a>
-        <a href="pmp-teach-brainstorming.html" class="mobile-series-nav">Q48: Brainstorming →</a>
-        <a href="#ngt">NGT</a>
-        <a href="#techniques">Techniques</a>
+        <a href="pmp-teach-communication-methods.html" class="mobile-series-nav">← Q93: Communication Methods</a>
+        <a href="pmp-teach-identify-risks.html" class="mobile-series-nav">Q96: Identify Risks →</a>
+        <a href="#concept">Control Charts</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
@@ -227,90 +228,170 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q47 về <strong>Nominal Group Technique (NGT)</strong> — VDS: conflicting
-            stakeholder input, khó <em>prioritize features</em>, meetings bị chi phối bởi
-            <em>loudest voices</em>, missed requirements, sắp <em>delivery</em>.
+            Bài học Q94 về <strong>Control Charts</strong> — Taylor, project manager tại Summit
+            Build, nghe các ý kiến <em>trái chiều</em> từ team leads trong một
+            <em>nationwide rollout</em>: có người nói một số resource đang
+            <em>underperforming</em> và báo cáo issues/defects, có người khác lại tin performance
+            vẫn ổn. Chưa rõ liệu có cần hành động hay không.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.40–41 &amp; p.184</span>
-            <span class="badge">Elicit and Analyze Requirements</span>
-            <span class="badge">Câu 47 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.87 &amp; 158</span>
+            <span class="badge">Monitor &amp; Control Resourcing</span>
+            <span class="badge">Control Charts</span>
+            <span class="badge">Câu 94 — Practice</span>
           </div>
         </header>
 
-        <section id="ngt">
-          <h2>1. Nominal group technique (PMBOK p.184)</h2>
+        <section id="concept">
+          <h2>1. Control Charts &amp; Monitor and Control Resourcing (p.87, 158)</h2>
           <p>
-            NGT là phương pháp <strong>structured group decision-making</strong> — thu thập input
-            systematically, equalize participation, minimize dominance of vocal members.
+            <strong>Monitor and Control Resourcing</strong> (p.87) đảm bảo các resource — physical
+            hay virtual — được assign đúng như kế hoạch, có mặt đúng thời điểm/địa điểm, và được
+            <em>release</em> khi không còn cần thiết. Khi có tín hiệu về performance không rõ ràng,
+            PM cần dữ liệu khách quan trước khi kết luận có vấn đề thật sự hay không.
+          </p>
+          <p>
+            <strong>Control chart</strong> (p.158) là công cụ xác định một process có đang
+            <em>stable</em> và <em>performing predictably</em> hay không. Dữ liệu được vẽ theo thời
+            gian quanh một <strong>centerline (mean)</strong>, giữa <strong>Upper Control Limit
+            (UCL)</strong> và <strong>Lower Control Limit (LCL)</strong>. Nếu điểm dữ liệu nằm
+            ngoài control limits, hoặc xuất hiện pattern bất thường (VD: 7 điểm liên tiếp cùng một
+            phía centerline — "rule of seven") → có <em>assignable cause</em>, cần điều tra thêm.
+            Nếu dữ liệu nằm trong control limits và không có pattern → chỉ là
+            <em>common-cause (random) variation</em>, process vẫn ổn định.
           </p>
 
           <div class="card tip">
-            <h4>Nominal group technique</h4>
+            <h4>Signal trong stem Q94</h4>
             <p style="margin:0">
-              Gather ideas <strong>silently/individually first</strong>, then share and discuss.
-              Ensures all ideas considered <em>before</em> open discussion — especially effective
-              in large groups handling controversial topics.
+              <strong>Ý kiến trái chiều · một số team lead nói performance kém · một số nói vẫn ổn ·
+              chưa rõ có cần hành động</strong> → chưa có bằng chứng khách quan nào cho thấy có vấn
+              đề thật sự. Cần <strong>control chart (D)</strong> để chuyển các nhận định chủ quan
+              thành dữ liệu xu hướng khách quan, trước khi quyết định có cần hành động gì không.
             </p>
           </div>
 
-          <ol>
-            <li>Silent idea generation (everyone writes)</li>
-            <li>Round-robin sharing (no debate yet)</li>
-            <li>Clarify &amp; discuss</li>
-            <li>Vote/rank to prioritize</li>
-          </ol>
-        </section>
-
-        <section id="techniques">
-          <h2>2. Elicitation techniques — when to use which</h2>
-
+          <h3>Control Chart vs RCA vs Tăng giám sát vs Điều chỉnh lịch — Khi nào dùng gì?</h3>
           <table>
             <thead>
-              <tr><th>Technique</th><th>Best for</th><th>Q47 fit?</th></tr>
+              <tr><th>Tình huống</th><th>Công cụ / hành động</th><th>Lý do</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Nominal group (NGT)</strong></td>
-                <td>Loud voices dominate · equalize participation · prioritize in group</td>
-                <td>✓ (D)</td>
+                <td>Ý kiến trái chiều về resource performance; chưa rõ có vấn đề thật (Q94)</td>
+                <td><strong>Control chart (D)</strong></td>
+                <td>Cung cấp dữ liệu khách quan để xác nhận có variation thật hay chỉ nhiễu (p.158)</td>
               </tr>
               <tr>
-                <td>Open brainstorming</td>
-                <td>Free-flowing idea generation</td>
-                <td>Worsens loud-voice dominance (A)</td>
+                <td>Pattern đã được xác nhận lặp lại (VD: trễ deadline nhiều lần)</td>
+                <td>Root cause analysis</td>
+                <td>Tìm nguyên nhân gốc khi vấn đề đã chắc chắn tồn tại</td>
               </tr>
               <tr>
-                <td>Individual interviews</td>
-                <td>Deep 1-on-1 input, sensitive topics</td>
-                <td>Time pressure + group prioritization needed (B)</td>
+                <td>PM muốn "chắc ăn" bằng cách theo dõi sát hơn, không dùng dữ liệu</td>
+                <td>Tăng giám sát (bẫy)</td>
+                <td>Không giải quyết sự mơ hồ, chỉ thêm overhead và có thể giảm morale</td>
               </tr>
               <tr>
-                <td>Focus groups</td>
-                <td>Collect diverse stakeholder perspectives (Q43)</td>
-                <td>Open discussion — vocal members can still dominate (C)</td>
+                <td>Giả định có inefficiency sắp tới và điều chỉnh lịch trước khi xác nhận</td>
+                <td>Điều chỉnh schedule (bẫy)</td>
+                <td>Hành động dựa trên thông tin chưa được kiểm chứng</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Hành động</th><th>Q94?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Increase supervision</strong></td>
+                <td>Giám sát chặt cả hai team để theo dõi output</td>
+                <td>✗ Phản ứng theo cảm tính, không xác nhận có vấn đề thật</td>
+              </tr>
+              <tr>
+                <td><strong>B. Root cause analysis</strong></td>
+                <td>Điều tra nguyên nhân của "issue"</td>
+                <td>✗ Chưa xác nhận có issue thật — RCA còn quá sớm</td>
+              </tr>
+              <tr>
+                <td><strong>C. Adjust the schedule</strong></td>
+                <td>Điều chỉnh lịch cho inefficiency sắp tới</td>
+                <td>✗ Giả định inefficiency có thật mà chưa kiểm chứng</td>
+              </tr>
+              <tr>
+                <td><strong>D. Use control charts</strong></td>
+                <td>Xem xu hướng performance qua control limits</td>
+                <td>✓ Dữ liệu khách quan trước khi quyết định hành động</td>
               </tr>
             </tbody>
           </table>
         </section>
 
+        <section id="compare">
+          <h2>2. So sánh các đáp án &amp; Q36 Ishikawa vs Q94 Control Charts</h2>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q94 fit?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Increase supervision of both teams</strong></td>
+                <td>Tăng giám sát để theo dõi output sát hơn</td>
+                <td>✗ Không dựa trên dữ liệu, không xác nhận vấn đề</td>
+              </tr>
+              <tr>
+                <td><strong>B. Perform a root cause analysis</strong></td>
+                <td>Điều tra nguyên nhân gốc của issue</td>
+                <td>✗ Còn quá sớm — chưa xác nhận có issue thật sự</td>
+              </tr>
+              <tr>
+                <td><strong>C. Adjust the schedule</strong></td>
+                <td>Điều chỉnh lịch cho inefficiency giả định</td>
+                <td>✗ Hành động trên thông tin chưa kiểm chứng</td>
+              </tr>
+              <tr>
+                <td><strong>D. Use control charts to review performance trends</strong></td>
+                <td>Xem xu hướng dữ liệu qua control limits</td>
+                <td><strong>Yes — xác nhận có vấn đề thật hay chỉ là nhiễu, trước khi hành động</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card info">
+            <h4>Q36 Ishikawa Analysis vs Q94 Control Charts — Khi nào dùng cái nào?</h4>
+            <p style="margin:0">
+              <strong>Q36 Ishikawa Analysis (đáp án B ở Q36):</strong> team <em>repeatedly</em> nộp
+              deliverables trễ dù expectations đã rõ — pattern đã được <strong>xác nhận</strong> lặp
+              lại. Cần tìm nguyên nhân gốc → root cause analysis / Ishikawa.<br><br>
+              <strong>Q94 Control Charts (đáp án D):</strong> Summit Build — team leads đưa ra ý
+              kiến <em>trái chiều</em>, <em>chưa rõ</em> liệu có vấn đề thật hay không. Cần dữ liệu
+              khách quan trước → control chart để xác nhận trend, chưa vội tìm nguyên nhân.<br><br>
+              <strong>Rule:</strong> Vấn đề đã <strong>confirmed</strong> lặp lại → RCA/Ishikawa.
+              Thông tin còn <strong>mâu thuẫn/chưa rõ</strong> có vấn đề → Control chart trước.
+            </p>
+          </div>
+        </section>
+
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 47</h2>
+          <h2>3. Câu hỏi thực hành — Question 94</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q47</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q94</div>
             <div class="q-text">
-              Stakeholders are providing conflicting input at VDS during requirement discussions,
-              making it difficult to <em>prioritize features</em>. Meetings are being dominated by
-              the highest paid and <em>loudest voices</em> in the room leading to some missed
-              requirements, and time is running out before <em>delivery</em> begins. What should
-              the project manager do?
+              Taylor, the project manager at Summit Build, hears different views from team leads
+              during a nationwide rollout. Some say certain resources are <em>not performing
+              well</em>, reporting issues and defects, while others believe <em>performance is
+              fine</em>. This makes it <em>unclear whether any action is needed</em>. What should
+              Taylor do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Facilitate an open brainstorming session.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Conduct individual interviews.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Lead and facilitate a focus group.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Use the nominal group technique.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Increase supervision of both teams to closely track their outputs.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Perform a root cause analysis to investigate the issue.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Adjust the schedule to account for upcoming inefficiencies.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Use control charts to review performance trends.</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -321,10 +402,15 @@
 
           <h3>Tại sao chọn D?</h3>
           <ul>
-            <li>Loudest voices dominate → NGT equalizes participation, minimizes vocal dominance.</li>
-            <li>Conflicting input + prioritize features → structured group decision-making + vote/rank.</li>
-            <li>Missed requirements → all ideas captured silently before open discussion.</li>
-            <li>Controversial/large group → NGT especially effective (p.184).</li>
+            <li>Monitor and Control Resourcing đảm bảo resource sẵn sàng đúng kế hoạch — khi có nghi
+            vấn về performance, cần dữ liệu khách quan để xác nhận (p.87).</li>
+            <li>Control chart cho biết process có <em>stable</em> và <em>predictable</em> hay không
+            dựa trên control limits và xu hướng dữ liệu theo thời gian (p.158).</li>
+            <li>Ý kiến team lead <em>trái chiều</em> — không thể dựa vào cảm tính hay báo cáo rời
+            rạc để kết luận có vấn đề. Control chart biến các quan điểm chủ quan thành bằng chứng
+            khách quan.</li>
+            <li>Chỉ sau khi xác nhận có <em>assignable cause</em> (điểm ngoài control limits hoặc
+            pattern bất thường) mới cần các bước tiếp theo như root cause analysis.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -334,89 +420,104 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Open brainstorming</strong></td>
-                <td>Open format — loud voices dominate hơn, không fix problem hiện tại.</td>
+                <td><strong>A. Increase supervision</strong></td>
+                <td>Giám sát chặt hơn không giải quyết sự mơ hồ về dữ liệu — chỉ thêm overhead, không xác nhận có vấn đề thật.</td>
               </tr>
               <tr>
-                <td><strong>B. Individual interviews</strong></td>
-                <td>Time running out — sequential 1-on-1 chậm; không group prioritization.</td>
+                <td><strong>B. Root cause analysis</strong></td>
+                <td>RCA dùng để tìm nguyên nhân khi vấn đề đã được xác nhận — ở đây còn <em>unclear whether any action is needed</em>, RCA là quá sớm.</td>
               </tr>
               <tr>
-                <td><strong>C. Focus group</strong></td>
-                <td>Facilitated discussion — vẫn có thể bị vocal members dominate (Q43 ≠ Q47).</td>
+                <td><strong>C. Adjust the schedule</strong></td>
+                <td>Điều chỉnh lịch cho "upcoming inefficiencies" giả định trước khi có dữ liệu xác nhận — hành động vội trên thông tin chưa kiểm chứng.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q43 vs Q47</h4>
+            <h4>So với Q36 — Khi nào cần RCA, khi nào cần Control Chart trước</h4>
             <p style="margin:0">
-              Q43: differing expectations → focus groups + benchmarking (gather). Q47: loud voices
-              dominate meetings → <em>nominal group technique</em> (structured, equal participation).
+              Q36: pattern trễ hạn <em>repeatedly</em> đã xác nhận → root cause analysis (B) tìm
+              nguyên nhân.<br>
+              Q94: ý kiến trái chiều, chưa rõ có vấn đề thật → control chart (D) xác nhận trend
+              trước khi quyết định hành động.
             </p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Match technique to scenario</h2>
+          <h2>5. Drill — Control Chart, RCA, Tăng giám sát, hay Điều chỉnh lịch?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="NGT">
-              <span>Loudest voices dominate — need equal participation &amp; prioritize</span>
+            <div class="classify-row" data-answer="CONTROLCHART">
+              <span>Ý kiến trái chiều về resource performance trong nationwide rollout; chưa rõ có vấn đề thật (Q94)</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="CONTROLCHART">Control Chart</button>
+                <button data-pick="RCA">RCA</button>
+                <button data-pick="SUPERVISION">Supervision</button>
+                <button data-pick="SCHEDULE">Schedule</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FOCUS">
-              <span>Differing stakeholder expectations — collect diverse views</span>
+            <div class="classify-row" data-answer="RCA">
+              <span>Team liên tục nộp deliverables trễ dù expectations đã rõ — pattern đã xác nhận lặp lại</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="CONTROLCHART">Control Chart</button>
+                <button data-pick="RCA">RCA</button>
+                <button data-pick="SUPERVISION">Supervision</button>
+                <button data-pick="SCHEDULE">Schedule</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="INTV">
-              <span>Sensitive topic — deep 1-on-1 confidential input</span>
+            <div class="classify-row" data-answer="SUPERVISION">
+              <span>PM quyết định theo dõi sát cả hai team và kiểm tra từng output, mà không xem dữ liệu nào trước</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="CONTROLCHART">Control Chart</button>
+                <button data-pick="RCA">RCA</button>
+                <button data-pick="SUPERVISION">Supervision</button>
+                <button data-pick="SCHEDULE">Schedule</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="NGT">
-              <span>Large group, controversial — ideas before debate</span>
+            <div class="classify-row" data-answer="SCHEDULE">
+              <span>PM dời lịch để "phòng ngừa" inefficiency giả định, trước khi xác nhận nó có tồn tại</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="CONTROLCHART">Control Chart</button>
+                <button data-pick="RCA">RCA</button>
+                <button data-pick="SUPERVISION">Supervision</button>
+                <button data-pick="SCHEDULE">Schedule</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="CONTROLCHART">
+              <span>PM vẽ resource output theo thời gian với UCL/LCL để xem variation là ngẫu nhiên hay xu hướng thật</span>
+              <div class="classify-btns">
+                <button data-pick="CONTROLCHART">Control Chart</button>
+                <button data-pick="RCA">RCA</button>
+                <button data-pick="SUPERVISION">Supervision</button>
+                <button data-pick="SCHEDULE">Schedule</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Need ideas → Brainstorming (A)</h4>
-            <p style="margin:0">Problem là dominance &amp; missed reqs — open brainstorm làm tệ hơn, không structured.</p>
+            <h4>Bẫy 1: "Reporting issues and defects" → Root cause analysis ngay (B)</h4>
+            <p style="margin:0">Có báo cáo issue nhưng ý kiến <em>trái chiều</em> — chưa xác nhận vấn đề thật. RCA chỉ nên dùng sau khi có dữ liệu xác nhận đây là assignable cause, không phải common-cause variation.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Stakeholders → Interviews (B)</h4>
-            <p style="margin:0">Interviews tốn thời gian — stem nói time running out + cần group prioritization.</p>
+            <h4>Bẫy 2: "Unclear whether action is needed" → Tăng giám sát (A)</h4>
+            <p style="margin:0">Giám sát chặt hơn không cung cấp bằng chứng khách quan — chỉ thêm overhead và không giải quyết được sự mơ hồ giữa các ý kiến trái chiều.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Facilitate → Focus group (C)</h4>
-            <p style="margin:0">Focus group (Q43) gather perspectives — không equalize loud vs quiet voices như NGT.</p>
+            <h4>Bẫy 3: "Some resources not performing well" → Điều chỉnh schedule (C)</h4>
+            <p style="margin:0">Điều chỉnh lịch dựa trên anecdote chưa kiểm chứng là hành động vội — cần xác nhận dữ liệu trước khi thay đổi kế hoạch.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: Nghĩ control chart chỉ dùng cho Control Quality</h4>
+            <p style="margin:0">PMBOK 8 (p.158) cũng áp dụng control chart cho Monitor and Control Resourcing — không chỉ giới hạn ở chất lượng defect, mà còn theo dõi xu hướng performance của resource.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Loudest voices · dominate meetings · missed requirements · prioritize features</strong> → Nominal group technique (D).</p>
+            <p style="margin:0"><strong>Ý kiến trái chiều · chưa rõ có vấn đề thật · cần xác nhận trend trước khi hành động</strong> → Use control charts to review performance trends (D).</p>
           </div>
         </section>
 
@@ -424,69 +525,79 @@
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Nominal group technique? (p.184)</div>
-            <div class="flashcard-back">Structured group decision-making · equalize participation · minimize vocal dominance · ideas before discussion.</div>
+            <div class="flashcard-front">Control chart dùng để làm gì? (p.158)</div>
+            <div class="flashcard-back">Xác định một process có <em>stable</em> và <em>predictable</em> hay không, dựa trên UCL/LCL và xu hướng dữ liệu theo thời gian — trước khi kết luận có vấn đề thật sự.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q47 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Use the nominal group technique.</div>
+            <div class="flashcard-front">Q94 đáp án?</div>
+            <div class="flashcard-back"><strong>D — Use control charts to review performance trends.</strong> Ý kiến trái chiều, chưa rõ có vấn đề → cần dữ liệu khách quan trước.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q36 vs Q94?</div>
+            <div class="flashcard-back">Q36: pattern trễ hạn đã confirmed lặp lại → RCA/Ishikawa tìm nguyên nhân. Q94: ý kiến mâu thuẫn, chưa rõ có vấn đề → Control chart xác nhận trend trước.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">NOMINAL GROUP TECHNIQUE — Q47 (PMBOK 8, p.40–41 &amp; p.184)
+          <div class="cheat-sheet">CONTROL CHARTS — Q94
+(PMBOK 8, p.87 &amp; 158)
 ─────────────────────────────────────────────────────
-PROCESS: Elicit and Analyze Requirements
+PROCESS: Monitor and Control Resourcing (p.87)
+TOOL:    Control Charts (p.158)
 
-NGT (p.184):
-  - Structured GROUP decision-making
-  - Gather input SYSTEMATICALLY
-  - Equalize participation
-  - Minimize dominance of VOCAL members
-  - All ideas BEFORE open discussion
-  - Especially: large groups · controversial topics
+CONTROL CHART:
+  UCL ─────────────────────  Upper Control Limit
+       •   •     •
+  MEAN ─ • ── • ─ • ─ • ──  Centerline
+           •       •
+  LCL ─────────────────────  Lower Control Limit
 
-SCENARIO: VDS — requirement discussions
-           CONFLICTING input · PRIORITIZE features
-           LOUDEST / highest-paid voices DOMINATE
-           MISSED requirements · TIME running out
-→ D) NOMINAL GROUP TECHNIQUE ✓
+  Inside limits, no pattern  → common cause (stable)
+  Outside limits / pattern   → assignable cause (investigate)
+  "Rule of seven": 7 pts one side of mean → flag
+
+SCENARIO: Taylor @ Summit Build
+           Nationwide rollout
+           Team leads: CONFLICTING views
+           Some: resources NOT performing, issues/defects
+           Others: performance is FINE
+           UNCLEAR whether action is needed
+NEXT → D) USE CONTROL CHARTS TO REVIEW PERFORMANCE TRENDS ✓
 
 NOT:
-  A) Open brainstorming — worsens loud-voice dominance
-  B) Individual interviews — slow, not group prioritization
-  C) Focus group — open discussion, vocal can dominate (Q43 ≠ Q47)
+  A) INCREASE SUPERVISION — not data-driven
+  B) ROOT CAUSE ANALYSIS — too early, issue not confirmed
+  C) ADJUST SCHEDULE — acting on unverified assumption
 
-Q43 vs Q47:
-  Q43 DIFFERING expectations → focus groups + benchmarking
-  Q47 LOUD VOICES dominate   → nominal group technique
+SIGNAL KEYWORDS:
+  Control chart: conflicting reports, unclear if issue exists,
+                 performance trend, stable vs unstable
+  RCA:           confirmed pattern, repeatedly, recurring
+  Supervision:   trap — no data, just watch closer
+  Schedule:      trap — assumes inefficiency without proof
 
-SIGNAL: "loudest voices" · "dominated by"
-        "missed requirements" · "prioritize features"
-        "conflicting input" · "controversial"
+Q36 vs Q94:
+  Q36: pattern CONFIRMED repeatedly → RCA (B)
+  Q94: reports CONFLICTING, unclear → Control chart (D)
 
-Q47 ANSWER: D
+Q94 ANSWER: D — Use control charts to review performance trends
 
-REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.184</div>
+REF: PMBOK Guide, 8th Ed., p.87 Monitor and Control Resourcing
+      p.158 Control charts</div>
         </section>
 
 
 
-
-
-
-
         <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
-          <a class="lesson-pager-btn" href="pmp-teach-design-thinking.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q46: Design Thinking</span></a>
-          <span class="lesson-pager-pos">Q47 / 97</span>
-          <a class="lesson-pager-btn next" href="pmp-teach-brainstorming.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q48: Brainstorming</span></a>
+          <a class="lesson-pager-btn" href="pmp-teach-communication-methods.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q93: Communication Methods</span></a>
+          <span class="lesson-pager-pos">Q94 / 97</span>
+          <a class="lesson-pager-btn next" href="pmp-teach-identify-risks.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q96: Identify Risks</span></a>
         </nav>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
-          · <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
-          · <a href="pmp-full-questions.html#q-47">Luyện câu 47</a>
+          · <a href="pmp-teach-ishikawa-analysis.html">Q36: Ishikawa Analysis</a>
+          · <a href="pmp-teach-communication-methods.html">Q93: Communication Methods</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -497,10 +608,10 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.184</div>
     (function () {
       const CORRECT = "D";
       const EXPL = {
-        A: "Open brainstorming — loud voices dominate hơn, không fix missed requirements.",
-        B: "Individual interviews — time running out, không group prioritization.",
-        C: "Focus group — open discussion, vocal members vẫn có thể dominate (khác Q43 scenario).",
-        D: "Đúng! NGT equalizes participation, minimizes vocal dominance, structured prioritization (p.184)."
+        A: "Giám sát chặt hơn không cung cấp dữ liệu khách quan — chỉ thêm overhead và không xác nhận có vấn đề thật hay không.",
+        B: "RCA dùng để tìm nguyên nhân khi vấn đề đã được xác nhận — ở đây còn unclear whether action is needed, RCA là quá sớm.",
+        C: "Điều chỉnh lịch cho inefficiency giả định trước khi có dữ liệu xác nhận là hành động vội trên thông tin chưa kiểm chứng.",
+        D: "Đúng! Control chart cho biết process có stable và predictable hay không dựa trên xu hướng dữ liệu và control limits — biến ý kiến trái chiều thành bằng chứng khách quan trước khi hành động (p.158)."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -516,7 +627,7 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.184</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Use the nominal group technique.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Use control charts to review performance trends</strong>" : "");
         });
       });
       let score = 0;
@@ -544,16 +655,18 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.184</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
