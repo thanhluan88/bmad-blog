@@ -90,6 +90,22 @@ node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 3. Generator skips incomplete IDs — fix those in store, re-run bootstrap + generate.
 4. Only commit when `1123 written, 0 incomplete`.
 
+### 6b. Exam Latest (`pmp-exam-latest.html`)
+
+Separate store: `data/pmp-exam-latest-teach-signals.json` (IDs ≠ Full Bank).
+
+```bash
+node scripts/generate-pmp-exam-latest-from-teach.js
+```
+
+1. Bootstrap `pmp-exam-latest-teach-signals.json` (keyword signals, why, exclude)
+2. Write `data/pmp-exam-latest-pmbok8-explanations.json` (teach-style markdown)
+3. Rebuild `public/pmp/pmp-exam-latest.html` via `build-pmp-exam-latest.js`
+
+Requires `public/pmp/pmp-exam-latest-questions.json` (from prior `build-pmp-exam-latest.js`).
+
+**Completion:** `1417 teach-style` explanations, HTML rebuilt.
+
 ### 7. Embed rules
 
 | Block | Rule |

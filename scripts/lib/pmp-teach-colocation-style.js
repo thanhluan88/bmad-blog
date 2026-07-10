@@ -643,6 +643,59 @@ function quizExplMap(optionAnalysis) {
   return expl;
 }
 
+/** Markdown explanation for quiz pages (exam-latest / full) from teach grounding. */
+function buildTeachExplanationMarkdown(q, analysis) {
+  const grounding = composeGrounding(q, analysis);
+  const whyBullets = buildWhyBullets(analysis, q);
+  const excludeRows = buildExcludeRows(q, analysis).filter((r) => r.reason);
+  const p8 = analysis.pmbok8 || {};
+  const pages = analysis.pageInfo?.pages || [];
+  const topic = analysis.pageInfo?.topic || formatFirstItem(p8.processes) || "PMBOK 8";
+
+  const lines = [];
+  lines.push("**PMBOK 8 mapping**");
+  if (p8.domains?.length) lines.push(`- Domain: ${p8.domains.join(", ")}`);
+  if (p8.focusArea) lines.push(`- Focus Area: ${p8.focusArea}`);
+  if (p8.processes?.length) lines.push(`- Process: ${p8.processes.join(", ")}`);
+  if (p8.principles?.length) lines.push(`- Principle: ${p8.principles.join(", ")}`);
+  lines.push("");
+  lines.push("**Vì sao chọn đáp án này**");
+  if (grounding.conclusion) lines.push(grounding.conclusion);
+  for (const b of whyBullets) lines.push(`- ${b}`);
+  if (grounding.signalPhrases?.length || grounding.signalAnswer) {
+    lines.push("");
+    lines.push("**Signal trong stem**");
+    if (grounding.signalPhrases?.length) {
+      lines.push(grounding.signalPhrases.join(" · "));
+    }
+    if (grounding.signalAnswer) lines.push(grounding.signalAnswer);
+  }
+  if (excludeRows.length) {
+    lines.push("");
+    lines.push("**Loại trừ phương án khác**");
+    for (const row of excludeRows) {
+      lines.push(`- **${row.key}:** ${row.reason}`);
+    }
+  }
+  if (pages.length) {
+    lines.push("");
+    lines.push("**Tham khảo**");
+    lines.push(`- PMBOK8, tr. ${pages.join(", ")}: ${topic}`);
+  }
+
+  return {
+    explanation: lines.join("\n"),
+    pmbok8: {
+      domains: p8.domains || [],
+      focusArea: p8.focusArea || "",
+      processes: p8.processes || [],
+      principles: p8.principles || [],
+      pages,
+    },
+    references: pages.length ? [`PMBOK8, tr. ${pages[0]} — ${topic}`] : [],
+  };
+}
+
 module.exports = {
   composeGrounding,
   resolveTeachSignals,
@@ -657,6 +710,7 @@ module.exports = {
   hasTeachSignal,
   validateTeachGrounding,
   filterWhyBulletsForCorrect,
+  buildTeachExplanationMarkdown,
   buildDrillHtml,
   buildDrillScript,
   buildFlashcards,

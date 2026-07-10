@@ -1,30 +1,50 @@
 /**
- * Optional per-question AI grounding (data/pmp-teach-signals.json).
+ * Per-question AI grounding stores (Full Bank + Exam Latest).
  */
 const fs = require("fs");
 const path = require("path");
 
 const STORE_PATH = path.join(__dirname, "..", "..", "data", "pmp-teach-signals.json");
+const EXAM_LATEST_STORE_PATH = path.join(
+  __dirname,
+  "..",
+  "..",
+  "data",
+  "pmp-exam-latest-teach-signals.json",
+);
 
+let activeStorePath = STORE_PATH;
 let cache = null;
+let cachePath = null;
+
+function setActiveTeachSignalsStore(storePath) {
+  if (storePath !== activeStorePath) {
+    activeStorePath = storePath;
+    cache = null;
+    cachePath = null;
+  }
+}
+
+function getActiveTeachSignalsStorePath() {
+  return activeStorePath;
+}
 
 function loadTeachSignalsStore() {
-  if (cache) return cache;
-  if (!fs.existsSync(STORE_PATH)) {
+  if (cache && cachePath === activeStorePath) return cache;
+  cachePath = activeStorePath;
+  if (!fs.existsSync(activeStorePath)) {
     cache = {};
     return cache;
   }
   try {
-    cache = JSON.parse(fs.readFileSync(STORE_PATH, "utf8"));
+    cache = JSON.parse(fs.readFileSync(activeStorePath, "utf8"));
   } catch {
     cache = {};
   }
   return cache;
 }
 
-function getStoredTeachGrounding(questionId) {
-  const store = loadTeachSignalsStore();
-  const entry = store[String(questionId)];
+function parseStoreEntry(entry) {
   if (!entry) return null;
   const excludeReasons = {};
   if (entry.excludeReasons && typeof entry.excludeReasons === "object") {
@@ -48,6 +68,11 @@ function getStoredTeachGrounding(questionId) {
   };
 }
 
+function getStoredTeachGrounding(questionId) {
+  const store = loadTeachSignalsStore();
+  return parseStoreEntry(store[String(questionId)]);
+}
+
 /** @deprecated use getStoredTeachGrounding */
 function getStoredTeachSignals(questionId) {
   return getStoredTeachGrounding(questionId);
@@ -55,10 +80,14 @@ function getStoredTeachSignals(questionId) {
 
 function resetTeachSignalsCache() {
   cache = null;
+  cachePath = null;
 }
 
 module.exports = {
   STORE_PATH,
+  EXAM_LATEST_STORE_PATH,
+  setActiveTeachSignalsStore,
+  getActiveTeachSignalsStorePath,
   loadTeachSignalsStore,
   getStoredTeachGrounding,
   getStoredTeachSignals,
