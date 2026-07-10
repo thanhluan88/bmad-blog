@@ -9,7 +9,8 @@ const {
   getPrimaryStemIssue,
 } = require("./pmp-option-reasoning");
 const { extractStemSignals } = require("./pmp-teach-keywords");
-const { getStoredTeachSignals } = require("./pmp-teach-signals-store");
+const { formatGuideQuote } = require("./pmp-pmbok8-rag-pages");
+const { getStoredTeachGrounding } = require("./pmp-teach-signals-store");
 
 const ACTION_CONTRAST = {
   explain_agile_value: { title: "Explain Agile value", blurb: "CI + early feedback — expert vẫn đạt chất lượng cao trong teamwork." },
@@ -69,10 +70,40 @@ function truncateSentence(s, max = 100) {
   return `${t.slice(0, max - 1)}…`;
 }
 
+function isGenericReasoning(text) {
+  const t = String(text || "").toLowerCase();
+  if (!t || t.length < 20) return true;
+  if (/hành động này giải quyết trực tiếp vấn đề trong đề/.test(t)) return true;
+  if (/đáp án đúng tập trung/.test(t)) return true;
+  if (/align miền .+ \(executing/.test(t) && t.length < 120) return true;
+  if (/không phù hợp .+ — đáp án đúng/.test(t)) return true;
+  return false;
+}
+
+function resolveExcludeReason(q, stemProfile, key, fallback) {
+  const stored = getStoredTeachGrounding(q.id);
+  const fromStore = stored?.excludeReasons?.[key];
+  if (fromStore && !isGenericReasoning(fromStore)) return fromStore;
+  const fromProfile = stemProfile?.rejectByAction;
+  if (fromProfile) {
+    const opt = (q.options || []).find((o) => o.key === key);
+    const action = opt ? classifyAction(opt.text) : null;
+    const profileReason = action && fromProfile[action.id];
+    if (profileReason && !isGenericReasoning(profileReason)) return profileReason;
+  }
+  if (fallback && !isGenericReasoning(fallback)) return fallback;
+  return "";
+}
+
 /** AI grounding signals — store → STEM_PROFILE → none (no regex fallback). */
 function resolveTeachSignals(q, stemProfile) {
-  const stored = getStoredTeachSignals(q.id);
-  if (stored?.signalPhrases?.length || stored?.signalAnswer) return stored;
+  const stored = getStoredTeachGrounding(q.id);
+  if (stored?.signalPhrases?.length || stored?.signalAnswer) {
+    return {
+      signalAnswer: stored.signalAnswer,
+      signalPhrases: stored.signalPhrases,
+    };
+  }
   if (stemProfile?.signalPhrases?.length || stemProfile?.signalAnswer) {
     return {
       signalAnswer: String(stemProfile.signalAnswer || "").trim(),
@@ -98,14 +129,15 @@ function composeGrounding(q, analysis) {
   const pmbokRef = pageRef ? `${pmbokLabel}, ${pageRef}` : pmbokLabel;
   const correctKey = correctOpt?.key || q.correct;
 
+  const stored = getStoredTeachGrounding(q.id);
   const whyCorrect =
+    stored?.whyCorrect ||
     stemProfile?.whyCorrect ||
-    correctOpt?.reason ||
-    "";
+    (correctOpt?.reason && !isGenericReasoning(correctOpt.reason) ? correctOpt.reason : "");
   const whyWrong = wrongOpts.map((o) => ({
     key: o.key,
     text: o.text,
-    reason: o.reason || "",
+    reason: resolveExcludeReason(q, stemProfile, o.key, o.reason),
   }));
 
   const conclusion =
@@ -113,19 +145,26 @@ function composeGrounding(q, analysis) {
     (whyCorrect ? `→ ${correctKey}: ${truncateSentence(whyCorrect, 140)}` : `→ ${correctKey}: align PMBOK 8.`);
 
   const bullets = [];
-  if (teachSignals.signalAnswer) {
-    pushUnique(bullets, teachSignals.signalAnswer);
-  }
-  if (stemProfile?.lessonBullets?.length) {
+  if (stored?.whyBullets?.length) {
+    for (const b of stored.whyBullets) pushUnique(bullets, b);
+  } else if (stemProfile?.lessonBullets?.length) {
     for (const b of stemProfile.lessonBullets) pushUnique(bullets, b);
   } else {
-    if (whyCorrect) pushUnique(bullets, `Đáp án ${correctKey} đúng: ${whyCorrect}`);
-    if (page && process) {
-      pushUnique(bullets, `PMBOK 8 ${pageRef}: ${process}${principle ? ` + ${principle}` : ""}.`);
+    if (whyCorrect && !isGenericReasoning(whyCorrect)) {
+      pushUnique(bullets, `Đáp án ${correctKey} đúng: ${whyCorrect}`);
     }
-    for (const w of whyWrong.slice(0, 3)) {
+    if (page && process && whyCorrect) {
+      pushUnique(
+        bullets,
+        `PMBOK 8 ${pageRef}: ${process}${principle ? ` + ${principle}` : ""}.`,
+      );
+    }
+    for (const w of whyWrong) {
       if (w.reason) pushUnique(bullets, `${w.key} sai: ${w.reason}`);
     }
+  }
+  if (teachSignals.signalAnswer && !bullets.some((b) => b.includes(teachSignals.signalAnswer.slice(0, 40)))) {
+    pushUnique(bullets, teachSignals.signalAnswer);
   }
 
   if (!whyCorrect && !whyWrong.length && !teachSignals.signalAnswer) {
@@ -265,10 +304,11 @@ function buildGroundingCard(q, analysis) {
   const correctLine = g.correctText
     ? `<p class="grounding-opt-text"><strong>${escapeHtml(g.correctKey)}.</strong> ${escapeHtml(g.correctText)}</p>`
     : "";
-  const wrongList = g.whyWrong.length
+  const wrongList = g.whyWrong.filter((w) => w.reason && !isGenericReasoning(w.reason)).length
     ? `<div class="grounding-block">
             <h5>Không chọn</h5>
             <ul class="grounding-wrong">${g.whyWrong
+              .filter((w) => w.reason && !isGenericReasoning(w.reason))
               .map(
                 (w) =>
                   `<li><strong>${escapeHtml(w.key)}.</strong> ${escapeHtml(truncateSentence(w.reason, 220))}</li>`,
@@ -327,32 +367,12 @@ function buildCompareTable(optionAnalysis, q) {
 
 function buildWhyBullets(analysis, q) {
   const grounding = composeGrounding(q, analysis);
-  if (grounding.bullets?.length) {
-    return grounding.bullets;
-  }
+  return (grounding.bullets || []).filter((b) => b && !isGenericReasoning(b)).slice(0, 5);
+}
 
-  const bullets = [];
-  const correctOpt = (analysis.optionAnalysis || []).find((o) => o.isCorrect);
-  const primary = getPrimaryStemIssue(extractStemIssues(q.text), matchStemProfile(q.text));
-
-  if (primary?.label) {
-    pushUnique(bullets, `Bối cảnh: ${primary.label}.`);
-  }
-  if (correctOpt?.reason) {
-    pushUnique(bullets, correctOpt.reason);
-  }
-
-  const mapping = analysis.pmbok8;
-  if (mapping?.principles?.[0] && mapping?.processes?.[0]) {
-    pushUnique(
-      bullets,
-      `${mapping.processes[0]} + ${mapping.principles[0]} — đáp án ${q.correct} align PMBOK 8.`,
-    );
-  }
-  if (analysis.pageInfo?.pages?.length) {
-    pushUnique(bullets, `Tham chiếu PMBOK 8, tr. ${analysis.pageInfo.pages.slice(0, 2).join(", ")}.`);
-  }
-  return bullets.slice(0, 5);
+function buildExcludeRows(q, analysis) {
+  const grounding = composeGrounding(q, analysis);
+  return (grounding.whyWrong || []).filter((w) => w.reason && !isGenericReasoning(w.reason));
 }
 
 function buildTrapsSection(optionAnalysis, q) {
@@ -460,20 +480,29 @@ function buildDrillScript() {
 }
 
 function buildFlashcards(q, analysis, mapping) {
+  const stored = getStoredTeachGrounding(q.id);
   const concept = conceptLabel(mapping, analysis.pageInfo);
-  const correctOpt = (analysis.optionAnalysis || []).find((o) => o.isCorrect);
+  const process = formatFirstItem(mapping.processes || mapping.process);
+  const principle = formatFirstItem(mapping.principles || mapping.principle);
   const pages = analysis.pageInfo?.pages?.slice(0, 2).join(", ") || "";
+  const snippet = formatGuideQuote(stored?.pmbokConcept || analysis.pageInfo?.snippet || "", 220);
+  const excerpt = snippet.replace(/\s+/g, " ");
+  const conceptBack = excerpt
+    ? `<strong>${escapeHtml(concept)}</strong><br><span style="font-size:0.82rem">${escapeHtml(process)}${principle ? ` · ${escapeHtml(principle)}` : ""}</span><br><em style="font-size:0.8rem;color:var(--muted)">"${escapeHtml(excerpt)}"</em>${pages ? `<br>PMBOK 8, tr. ${escapeHtml(pages)}` : ""}`
+    : `<strong>${escapeHtml(concept)}</strong>${process ? `<br>${escapeHtml(process)}` : ""}${pages ? `<br>PMBOK 8, tr. ${escapeHtml(pages)}` : ""}`;
+  const correctOpt = (analysis.optionAnalysis || []).find((o) => o.isCorrect);
+  const grounding = composeGrounding(q, analysis);
   return `<div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q${q.id} — chủ đề / concept?</div>
-            <div class="flashcard-back"><strong>${escapeHtml(concept)}</strong>${pages ? `<br>PMBOK 8, tr. ${escapeHtml(pages)}` : ""}</div>
+            <div class="flashcard-front">Q${q.id} — chủ đề PMBOK 8?</div>
+            <div class="flashcard-back">${conceptBack}</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
             <div class="flashcard-front">Q${q.id} — đáp án?</div>
             <div class="flashcard-back"><strong>${escapeHtml(q.correct)}</strong> — ${escapeHtml((q.correctLabel || correctOpt?.text || "").replace(/^[A-Z]\.\s*/, "").slice(0, 100))}</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Signal stem → hành động?</div>
-            <div class="flashcard-back">${escapeHtml(viSummaryLine(analysis, q).slice(0, 160))}</div>
+            <div class="flashcard-front">Signal → đáp án?</div>
+            <div class="flashcard-back">${escapeHtml((grounding.signalAnswer || viSummaryLine(analysis, q)).slice(0, 200))}</div>
           </div></div>`;
 }
 
@@ -534,7 +563,7 @@ module.exports = {
   buildActionTypeGrid,
   buildCompareTable,
   buildWhyBullets,
-  buildTrapsSection,
+  buildExcludeRows,
   buildDrillHtml,
   buildDrillScript,
   buildFlashcards,

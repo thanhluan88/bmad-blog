@@ -1,27 +1,25 @@
 # Examples
 
-## Bad grounding (Q3 before fix)
+## Bad — generic engine reasoning
 
-One unreadable paragraph:
+**Tại sao chọn D?**
+- Hành động này giải quyết trực tiếp vấn đề trong đề.
 
-> Dựa trên PMBOK 8 (Develop Team + Build an empowered culture, tr. 205): với thiếu hụt nguồn lực / kỹ năng, đáp án đúng là D — Hành động này giải quyết trực tiếp… Không chọn: A (…); B ("Adopt the communications…"); C (…).
+**Loại trừ A:** đáp án đúng tập trung vào Develop Team.
 
-**Fix:** structured `grounding-card` with `Không chọn` as `<ul>`.
+**Fix:** Run grounding prompt; store `whyBullets` + `excludeReasons` with question-specific PMBOK logic.
 
 ---
 
-## Good grounding (Q3 target)
+## Good — AI grounding (Q3)
 
-**PMBOK 8** · Develop Team + Build an empowered culture, tr. 205
+**whyBullets:**
+- Đáp án D đúng: virtual team + lo engagement → recurring check-ins (Develop Team).
+- A sai: kickoff một lần không duy trì engagement.
+- B sai: copy plan team cũ — không fit context.
+- C sai: async-only thiếu tương tác đồng bộ.
 
-**Đáp án đúng — D**  
-D. Conduct recurring check-ins and meetings at scheduled intervals.  
-Team virtual + PM lo engagement → cadence meeting giữ kết nối (Develop Team).
-
-**Không chọn**
-- **A.** Kickoff bắt buộc không giải quyết engagement ongoing
-- **B.** Copy plan team cũ — không fit context hiện tại
-- **C.** Async-only — thiếu tương tác cho virtual team mới
+**excludeReasons:** same reasoning per key (used in Loại trừ table).
 
 ---
 
@@ -29,28 +27,43 @@ Team virtual + PM lo engagement → cadence meeting giữ kết nối (Develop T
 
 **Bad:** regex `/sent to the entire/` auto-tags signal.
 
-**Good — Q1 signal prompt result:**
+**Good — Q1:**
 
 ```json
 {
   "signalPhrases": [
     "mistakenly sent to the entire global project team",
-    "critical feedback regarding a recent incident",
-    "email intended for a specific team member"
+    "critical feedback regarding a recent incident"
   ],
-  "signalAnswer": "Email nhầm audience + feedback nhạy cảm → FIRST là acknowledge + apologize công khai (Lead accountably)."
+  "signalAnswer": "Email nhầm audience + feedback nhạy cảm → acknowledge + apologize công khai."
 }
 ```
 
-Quiz highlights those **English** phrases; signal card shows phrases + Vietnamese answer.
+---
+
+## Trích dẫn Guide — complete sentences
+
+**Bad:** RAG snippet cut at 360 chars:
+
+> Team building is conducting activities… and build a collaborative and cooperative working environment. Team-building activities can vary from
+
+**Good:** ends on complete sentence:
+
+> Team building is conducting activities that enhance the team's social relationships and build a collaborative and cooperative working environment.
+
+Store override: `guideQuote` in `pmp-teach-signals.json` when RAG text is incomplete.
 
 ---
 
-## Q2 signal (handcrafted profile)
+## Flashcard concept — PMBOK 8 citation
 
-**signalPhrases (EN):**
-- `reluctant because they think that working on a team is demotivating and slows them down`
-- `join the agile team`
-- `highest-quality output possible`
+**Bad back:** `Develop Team` only — no Guide text.
 
-**signalAnswer (VI):** SME misconception về Agile → explain CI + early feedback (Develop Team).
+**Good back:**
+
+> **Develop Team**  
+> Develop Team · Build an empowered culture  
+> *"The Develop Team process focuses on improving competencies, team member interaction, and the overall team environment…"*  
+> PMBOK 8, tr. 205
+
+Source: `pmbokConcept` from grounding JSON or RAG `pageInfo.snippet`.

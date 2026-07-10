@@ -5,7 +5,8 @@
 const fs = require("fs");
 const path = require("path");
 const { generateTeachAnalysis } = require("./lib/pmp-pmbok8-generator");
-const { loadCacheFile } = require("./lib/pmp-pmbok8-rag-pages");
+const { loadCacheFile, formatGuideQuote } = require("./lib/pmp-pmbok8-rag-pages");
+const { getStoredTeachGrounding } = require("./lib/pmp-teach-signals-store");
 const {
   highlightExamCues,
   highlightQuizStem,
@@ -15,10 +16,9 @@ const {
 } = require("./lib/pmp-teach-keywords");
 const {
   buildHeroLead,
-  buildGroundingCard,
   buildSignalCard,
   buildWhyBullets,
-  buildTrapsSection,
+  buildExcludeRows,
   buildFlashcards,
   buildCheatSheet,
   highlightStemPhrases,
@@ -134,36 +134,47 @@ function renderOptionsGridFromAnalysis(optionAnalysis) {
     .join("")}</div>`;
 }
 
-function renderPmbok8Insight(pageInfo) {
-  if (!pageInfo?.snippet || pageInfo.snippet.length < 40) return "";
+function guideQuoteText(q, analysis) {
+  const stored = getStoredTeachGrounding(q.id);
+  if (stored?.guideQuote) return formatGuideQuote(stored.guideQuote, 600);
+  const insight = parseSection(analysis.explanation || "", "PMBOK 8 — Cơ sở từ Guide");
+  if (insight) {
+    const quote = insight.split("\n").find((l) => l.startsWith("> ") && !l.startsWith("> —"));
+    if (quote) return formatGuideQuote(quote.replace(/^>\s*/, "").trim());
+  }
+  if (analysis.pageInfo?.snippet) return formatGuideQuote(analysis.pageInfo.snippet);
+  return "";
+}
+
+function renderPmbok8Insight(q, analysis) {
+  const pageInfo = analysis.pageInfo;
+  const excerpt = guideQuoteText(q, analysis);
+  if (!excerpt || excerpt.length < 40) return "";
+  const pages = pageInfo?.pages?.join(", ") || "";
+  const topic = pageInfo?.topic || "";
   return `<div class="card info">
-            <h4>PMBOK 8 — Cơ sở từ Guide (tr. ${escapeHtml(String(pageInfo.pages?.[0] || ""))})</h4>
-            <p style="margin:0;font-style:italic">"${highlightReasoning(pageInfo.snippet)}"</p>
-            <p style="margin:0.5rem 0 0;font-size:0.82rem">${escapeHtml(pageInfo.topic || "")}</p>
+            <h4>Trích dẫn Guide</h4>
+            <p style="margin:0">"${highlightReasoning(excerpt)}"</p>
+            ${pages ? `<p style="margin:0.5rem 0 0;font-size:0.82rem;color:var(--muted)">— PMBOK 8, tr. ${escapeHtml(pages)}${topic ? ` (${escapeHtml(topic)})` : ""}</p>` : ""}
           </div>`;
 }
 
-function renderAnalysisSection(analysis) {
-  const explanation = analysis.explanation || "";
-  const insight = parseSection(explanation, "PMBOK 8 — Cơ sở từ Guide");
-  const refs = parseSection(explanation, "Tham khảo");
-  let html = "";
-  if (insight) {
-    html += `<div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">${mdInline(insight).replace(/\n/g, "<br>")}</p></div>`;
-  } else {
-    html += renderPmbok8Insight(analysis.pageInfo);
-  }
+function renderAnalysisSection(q, analysis) {
+  const refs = parseSection(analysis.explanation || "", "Tham khảo");
+  let html = renderPmbok8Insight(q, analysis);
   if (refs) {
     html += `<p style="font-size:0.86rem;color:var(--muted);margin:0">${mdInline(refs).replace(/\n/g, "<br>")}</p>`;
   }
   return html;
 }
 
-function renderExcludeTableFromAnalysis(optionAnalysis) {
-  const wrong = (optionAnalysis || []).filter((o) => !o.isCorrect && o.reason);
-  if (!wrong.length) return "";
+function renderExcludeTableFromAnalysis(q, analysis) {
+  const wrong = buildExcludeRows(q, analysis);
+  if (!wrong.length) {
+    return `<p style="font-size:0.86rem;color:var(--muted);margin:0">Chưa có lý do loại trừ từ grounding — chạy grounding prompt và lưu <code>excludeReasons</code> vào <code>data/pmp-teach-signals.json</code>.</p>`;
+  }
   return `<table>
-            <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
+            <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
             <tbody>${wrong
               .map(
                 (o) =>
@@ -327,13 +338,8 @@ function quizScript(q, analysis) {
   </script>`;
 }
 
-function sectionNumbers(hasTraps) {
-  let n = 1;
-  const sec = { question: n++, analysis: n++ };
-  if (hasTraps) sec.traps = n++;
-  sec.flashcards = n++;
-  sec.cheatsheet = n++;
-  return sec;
+function sectionNumbers() {
+  return { question: 1, analysis: 2, flashcards: 3, cheatsheet: 4 };
 }
 
 function renderLesson(q, prev, next) {
@@ -353,8 +359,7 @@ function renderLesson(q, prev, next) {
   ].filter(Boolean);
   const whyBullets = buildWhyBullets(analysis, q);
   const grounding = composeGrounding(q, analysis);
-  const trapsHtml = buildTrapsSection(analysis.optionAnalysis, q);
-  const sec = sectionNumbers(!!trapsHtml);
+  const sec = sectionNumbers();
 
   const prevLink = prev ? `<a href="${lessonFile(prev.id)}">← Câu ${prev.id}</a>` : "";
   const nextLink = next ? `<a href="${lessonFile(next.id)}">Câu ${next.id} →</a>` : "";
@@ -410,13 +415,6 @@ function renderLesson(q, prev, next) {
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
-    .grounding-card .grounding-ref { font-size: 0.86rem; color: var(--muted); margin: 0 0 0.5rem; }
-    .grounding-block { margin-top: 0.85rem; }
-    .grounding-block h5 { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--primary-dark); }
-    .grounding-opt-text { font-size: 0.88rem; margin: 0 0 0.35rem; color: var(--muted); }
-    .grounding-why { margin: 0; font-size: 0.92rem; line-height: 1.55; }
-    .grounding-wrong { margin: 0; padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.5; }
-    .grounding-wrong li { margin-bottom: 0.4rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
     .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
@@ -470,7 +468,6 @@ function renderLesson(q, prev, next) {
         <a href="#intro" class="active">Giới thiệu</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
-        ${trapsHtml ? '<a href="#traps">Bẫy thi</a>' : ""}
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full ${questions.length} câu</div>
@@ -488,7 +485,6 @@ function renderLesson(q, prev, next) {
         <a href="pmp-full-questions.html#q-${q.id}">Câu ${q.id}</a>
         <a href="#question">Quiz</a>
         <a href="#analysis">Phân tích</a>
-        ${trapsHtml ? '<a href="#traps">Bẫy</a>' : ""}
         ${prev ? `<a href="${lessonFile(prev.id)}">← ${prev.id}</a>` : ""}
         ${next ? `<a href="${lessonFile(next.id)}">${next.id} →</a>` : ""}
       </nav>
@@ -516,7 +512,6 @@ function renderLesson(q, prev, next) {
 
         <section id="analysis">
           <h2>${sec.analysis}. Phân tích đáp án — Đáp án đúng: ${escapeHtml(q.correct)}</h2>
-          ${buildGroundingCard(q, analysis)}
           ${buildSignalCard(q, analysis)}
           <h3>Tại sao chọn ${escapeHtml(q.correct)}?</h3>
           <ul>${whyBullets.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul>
@@ -524,15 +519,10 @@ function renderLesson(q, prev, next) {
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>${escapeHtml(q.correctLabel || q.correct)}</strong></p>
           </div>
-          ${renderAnalysisSection(analysis)}
+          ${renderAnalysisSection(q, analysis)}
           <h3>Loại trừ từng đáp án</h3>
-          ${renderExcludeTableFromAnalysis(analysis.optionAnalysis)}
+          ${renderExcludeTableFromAnalysis(q, analysis)}
         </section>
-
-        ${trapsHtml ? `<section id="traps">
-          <h2>${sec.traps}. Bẫy thi</h2>
-          ${trapsHtml}
-        </section>` : ""}
 
         <section id="flashcards">
           <h2>${sec.flashcards}. Flashcard</h2>

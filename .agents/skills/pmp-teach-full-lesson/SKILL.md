@@ -5,19 +5,17 @@ description: Regenerate or polish Full Bank teach lessons — PMBOK 8 grounding 
 
 # PMP Teach Full Lesson
 
-**Colocation-grade** teach **lesson**: Vietnamese reasoning, PMBOK 8 traceable, **signal** from AI grounding (not regex).
-
-**Leading words:** **lesson**, **grounding** (structured PMBOK Q&A), **signal** (AI answer + English stem phrases), **dedup**.
+**Colocation-grade** teach **lesson**: Vietnamese reasoning, PMBOK 8 traceable, **grounding** + **signal** from AI (not engine templates).
 
 ## Inputs
 
 | Source | Path |
 |--------|------|
 | Questions | `public/pmp/pmp-full-questions.json` |
-| AI signal overrides | `data/pmp-teach-signals.json` (optional, by `id`) |
+| AI grounding store | `data/pmp-teach-signals.json` (optional, by `id`) |
 | Generator | `scripts/generate-pmp-full-teach-lessons.js` |
 | Sections | `scripts/lib/pmp-teach-colocation-style.js` |
-| Profiles | `scripts/lib/pmp-option-reasoning.js` (`signalPhrases`, `signalAnswer`) |
+| Profiles | `scripts/lib/pmp-option-reasoning.js` |
 
 ## Workflow
 
@@ -29,52 +27,57 @@ description: Regenerate or polish Full Bank teach lessons — PMBOK 8 grounding 
 
 ### 2. **Grounding** — ask PMBOK 8
 
-Template: [REFERENCE.md](REFERENCE.md#grounding-prompt). Answer why correct key fits; why each wrong key fails.
+Template: [REFERENCE.md](REFERENCE.md#grounding-prompt). AI explains why correct key fits and why each wrong key fails.
 
-**Completion:** Grounding covers correct + every wrong key; Guide page cited when possible.
+Store full JSON per question in `data/pmp-teach-signals.json`:
+
+- `whyBullets` — bullets for **Tại sao chọn {key}?**
+- `excludeReasons` — map `{ "A": "…", "C": "…" }` for **Loại trừ từng đáp án**
+- `guideQuote` — **Trích dẫn Guide**: 1–3 câu PMBOK 8 **đầy đủ ý**, kết thúc bằng `.` / `!` / `?` (không cắt giữa câu)
+- `pmbokConcept` — excerpt for flashcard concept (same complete-sentence rule)
+
+**Completion:** Every wrong key has a non-generic `excludeReasons` entry; `whyBullets` has ≥2 items; `guideQuote` ends on complete sentence(s).
 
 ### 3. **Signal** — ask AI (not regex)
 
-Separate prompt: [REFERENCE.md](REFERENCE.md#signal-prompt).
+Prompt: [REFERENCE.md](REFERENCE.md#signal-prompt).
 
-AI returns:
-- `signalAnswer` — Vietnamese: *tại sao* stem cues → correct action
-- `signalPhrases` — **English** substrings copied verbatim from stem (2–5 phrases)
+- `signalAnswer` — Vietnamese: stem cues → correct action
+- `signalPhrases` — **English** substrings copied verbatim from stem (2–5)
 
-**Rules:**
-- Do **not** use `STEM_SIGNAL_PATTERNS` / regex to invent signals.
-- `signalPhrases` must appear exactly in the English stem.
-- Quiz `.q-text` highlights only `signalPhrases` (`kw-signal`) + PMI directive (`kw-cue`).
+**Rules:** No `STEM_SIGNAL_PATTERNS` / regex for signals. Phrases must appear exactly in the English stem.
 
-Store output:
-1. `data/pmp-teach-signals.json` → `{ "2": { "signalAnswer": "...", "signalPhrases": [...] } }`, or
-2. `STEM_PROFILES` in `pmp-option-reasoning.js` for stem classes.
-
-**Completion:** `signalPhrases` non-empty; each phrase found in stem; `signalAnswer` in Vietnamese.
+**Completion:** `signalPhrases` non-empty; each phrase in stem; `signalAnswer` in Vietnamese.
 
 ### 4. Embed into `#analysis`
 
-| Block | Content |
-|-------|---------|
-| **Grounding PMBOK 8** | Structured card — ref, đáp án đúng block, `Không chọn` list (not one paragraph) |
-| **Signal trong stem** | English phrases (`kw-signal`) + Vietnamese `signalAnswer` + `→ {key}` |
-| Why bullets | From grounding, **dedup** |
-| Loại trừ table | Wrong keys only |
-| Quiz `.q-text` | Highlight `signalPhrases` only |
+| Block | Source |
+|-------|--------|
+| Signal card | `signalPhrases` + `signalAnswer` |
+| **Tại sao chọn {key}?** | `whyBullets` from grounding AI |
+| **Trích dẫn Guide** | `guideQuote` or RAG snippet via `formatGuideQuote()` |
+| Loại trừ table | `excludeReasons` from grounding AI only |
+| Quiz `.q-text` | `signalPhrases` highlights |
 
-**Omit:** `#drill` (phân loại hành động PM) — không có trong lesson output.
+**Omit:** `#drill`, `#traps`, **Grounding PMBOK 8 card** — lý do đã nằm trong Tại sao chọn + Loại trừ.
 
-**Completion:** Grounding readable at a glance; signal card shows English + Vietnamese; no wall-of-text `<p>`.
+**Trích dẫn Guide rule:** Quote must be **complete sentence(s)** with full meaning — never truncate mid-sentence (e.g. bad: *"…can vary from"*). Engine: `formatGuideQuote()` in `pmp-pmbok8-rag-pages.js`.
 
-### 5. Generate
+**Completion:** No generic engine text; Guide quote ends on sentence boundary; Tại sao + Loại trừ trace to stored grounding.
+
+### 5. Flashcard concept
+
+Card 1 back = **PMBOK 8 citation**: process/principle + quoted Guide excerpt (complete sentences) + page ref.
+
+**Completion:** Back shows complete PMBOK 8 sentence(s) with tr. number.
+
+### 6. Generate
 
 ```bash
 node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 ```
 
-Bulk: add `signalPhrases`/`signalAnswer` per stem class or batch-fill `pmp-teach-signals.json`, then `--force` range.
-
-### 6. Validate
+### 7. Validate
 
 [REFERENCE.md](REFERENCE.md#validation)
 
@@ -82,10 +85,10 @@ Bulk: add `signalPhrases`/`signalAnswer` per stem class or batch-fill `pmp-teach
 
 | Symptom | Action |
 |---------|--------|
-| Grounding wall of text | Engine already uses structured card — refill `whyCorrect` / rejections |
-| No stem highlights | Missing `signalPhrases` — run step 3 |
-| Generic signal | Replace regex; run AI **signal** prompt |
-| One stem class | Extend `STEM_PROFILES` with `signalPhrases` + `signalAnswer` |
+| Guide quote cuts mid-sentence | Fill `guideQuote` with full sentence(s); or fix RAG + `formatGuideQuote` |
+| Empty Tại sao / Loại trừ | Run grounding prompt; fill `whyBullets` + `excludeReasons` |
+| Generic rejection text | Replace with AI reasoning in store |
+| No stem highlights | Run signal prompt; fill `signalPhrases` |
 
 ## Resources
 

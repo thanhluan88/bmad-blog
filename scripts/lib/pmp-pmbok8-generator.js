@@ -18,7 +18,7 @@ const {
   inferWrongReason,
 } = require("./pmp-option-reasoning");
 const { getChartStemProfile } = require("./pmp-chart-explanations");
-const { lookupPmbokPages, PDF_NAME } = require("./pmp-pmbok8-rag-pages");
+const { lookupPmbokPages, PDF_NAME, formatGuideQuote } = require("./pmp-pmbok8-rag-pages");
 
 function parseCorrectKeys(correct) {
   const s = String(correct || "").trim().toUpperCase();
@@ -185,10 +185,10 @@ function collectMetaForWarmup(questions) {
 
 function appendPmbok8Insight(lines, pageInfo) {
   if (!pageInfo.snippet || pageInfo.snippet.length < 40 || !pageInfo.pages?.length) return;
+  const excerpt = formatGuideQuote(pageInfo.snippet);
+  if (!excerpt) return;
   lines.push("");
   lines.push("**PMBOK 8 — Cơ sở từ Guide**");
-  const excerpt =
-    pageInfo.snippet.length > 360 ? `${pageInfo.snippet.slice(0, 357)}…` : pageInfo.snippet;
   lines.push(`> ${excerpt}`);
   lines.push(`> — PMBOK 8, tr. ${pageInfo.pages.join(", ")} (${pageInfo.topic})`);
 }

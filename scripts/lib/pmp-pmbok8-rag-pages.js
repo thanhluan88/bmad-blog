@@ -170,6 +170,32 @@ function cleanSnippet(snippet) {
     .trim();
 }
 
+/** Quote only complete sentences — never end mid-sentence. */
+function formatGuideQuote(text, maxChars = 520) {
+  const t = cleanSnippet(text);
+  if (!t) return "";
+  if (t.length <= maxChars && /[.!?]["']?\s*$/.test(t)) return t;
+
+  const sentences = t.match(/[^.!?]+[.!?]+(?:\s+|$)/g);
+  if (sentences?.length) {
+    let out = "";
+    for (const raw of sentences) {
+      const s = raw.trim();
+      if (!s) continue;
+      const next = out ? `${out} ${s}` : s;
+      if (next.length > maxChars && out) break;
+      if (next.length > maxChars && !out) return s;
+      out = next;
+    }
+    if (out) return out;
+  }
+
+  const cut = t.slice(0, maxChars);
+  const lastEnd = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("! "), cut.lastIndexOf("? "));
+  if (lastEnd > 80) return cut.slice(0, lastEnd + 1).trim();
+  return cut.replace(/\s+\S*$/, "").trim();
+}
+
 function lookupPmbokPages(q, meta) {
   const { domains, processes } = meta;
   const query = buildRagQuery(q, meta);
@@ -212,6 +238,7 @@ module.exports = {
   pickBestHit,
   topicFromSnippet,
   cleanSnippet,
+  formatGuideQuote,
   loadCacheFile,
   saveCacheFile,
   warmupPageCache,
