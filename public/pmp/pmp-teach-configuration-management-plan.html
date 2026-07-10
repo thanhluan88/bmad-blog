@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Monitor &amp; Control Performance (Q35)</title>
+  <title>PMBOK 8 — Configuration Management Plan (Q103)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,6 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -81,10 +85,6 @@
     .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
     .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
     .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
-    .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; margin: 1rem 0; font-size: 0.9rem; font-weight: 600; }
-    .flow-box { padding: 0.55rem 1rem; border-radius: 10px; border: 2px solid var(--border); background: var(--card); }
-    .flow-box.highlight { border-color: var(--primary); background: var(--primary-bg); color: var(--primary-dark); }
-    .flow-arrow { color: var(--muted); font-size: 1.2rem; }
   </style>
   <link rel="stylesheet" href="pmp-teach-fullscreen.css">
 </head>
@@ -92,11 +92,10 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Monitor &amp; Control · Q35</div>
+      <div class="brand-sub">Configuration Management Plan · Q103</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#monitor">Monitor &amp; Control</a>
-        <a href="#data-flow">Data → Info → Report</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -138,7 +137,7 @@
         <a href="pmp-teach-checklists.html">Q32: Checklists</a>
         <a href="pmp-teach-lessons-learned.html">Q33: Lessons Learned</a>
         <a href="pmp-teach-after-action-review.html">Q34: After-Action Review</a>
-        <a href="pmp-teach-monitor-control-performance.html" class="series-current">Q35: Monitor &amp; Control</a>
+        <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
         <a href="pmp-teach-ishikawa-analysis.html">Q36: Ishikawa Analysis</a>
         <a href="pmp-teach-change-request.html">Q37: Change Request</a>
         <a href="pmp-teach-change-management-plan.html">Q38: Change Mgmt Plan</a>
@@ -206,14 +205,8 @@
         <a href="pmp-teach-implement-risk-responses.html">Q100: Implement Risk Responses</a>
         <a href="pmp-teach-reserve-analysis.html">Q101: Reserve Analysis</a>
         <a href="pmp-teach-benefits-management-plan.html">Q102: Benefits Management Plan</a>
-        <a href="pmp-teach-configuration-management-plan.html">Q103: Configuration Management Plan</a>
+        <a href="pmp-teach-configuration-management-plan.html" class="series-current">Q103: Configuration Management Plan</a>
       </nav>
-
-
-
-
-
-
 
 
 
@@ -224,8 +217,8 @@
 
 
       <div class="sidebar-pager">
-        <a href="pmp-teach-after-action-review.html" class="sidebar-pager-link">← Q34: After-Action Review</a>
-        <a href="pmp-teach-ishikawa-analysis.html" class="sidebar-pager-link">Q36: Ishikawa Analysis →</a>
+        <a href="pmp-teach-benefits-management-plan.html" class="sidebar-pager-link">← Q102: Benefits Management Plan</a>
+        <span class="sidebar-pager-link disabled" aria-hidden="true">— →</span>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
@@ -235,287 +228,414 @@
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp" class="mobile-series-nav">← Blog PMP</a>
-        <a href="pmp-teach-after-action-review.html" class="mobile-series-nav">← Q34: After-Action Review</a>
-        <a href="pmp-teach-ishikawa-analysis.html" class="mobile-series-nav">Q36: Ishikawa Analysis →</a>
-        <a href="#monitor">Monitor</a>
-        <a href="#data-flow">Data flow</a>
+        <a href="pmp-teach-benefits-management-plan.html" class="mobile-series-nav">← Q102: Benefits Management Plan</a>
+        <a href="#configuration-management-plan">Configuration Management Plan</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
 
       <main>
-        <header class="hero" id="intro">
+                                                        <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q35 về <strong>Monitor and Control Project Performance</strong> — project
-            off track (cost &amp; schedule), stakeholders muốn update. James nên làm gì
-            <em>first</em>?
+            Bài học Q103 về <strong>Configuration Management Plan</strong> — Paige quản lý
+            dự án medical device tại Synapse Biotech. Nhiều <em>phiên bản design documents</em>
+            đang được các team khác nhau sử dụng, gây inconsistency và rework.
+            Changes không được track/control rõ ràng. Paige muốn thiết lập
+            <em>kiểm soát versions</em> và xử lý updates đúng cách.
+            Paige nên dùng approach nào?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.26–27</span>
-            <span class="badge">Monitor &amp; Control Project Performance</span>
-            <span class="badge">Câu 35 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.118</span>
+            <span class="badge">Delivery</span>
+            <span class="badge">Configuration Management Plan</span>
+            <span class="badge">Câu 103 — Practice</span>
           </div>
         </header>
 
-        <section id="monitor">
-          <h2>1. Monitor and Control Project Performance</h2>
+                                                        <section id="configuration-management-plan">
+          <h2>1. Configuration Management Plan (p.118)</h2>
           <p>
-            Process theo dõi, review và report overall project progress để đáp ứng performance
-            objectives trong project management plan. Trước khi corrective action hay update plan,
-            PM phải <strong>analyze</strong> raw data thành meaningful information.
+            <strong>Configuration management plan</strong> (p.118) định nghĩa procedures để
+            <strong>track project artifacts</strong> và <strong>control changes</strong>
+            (ví dụ: version control). Plan mô tả items under configuration control,
+            cách identify, record, update, và report changes — đảm bảo product/service/result
+            <em>consistent and functional</em>.
           </p>
 
+          <div class="approach-grid">
+            <div class="approach-cell pull">
+              <strong>Develop configuration management plan (A — đúng)</strong>
+              Multiple document versions · inconsistencies · rework · cần version control
+              và track artifacts → configuration management plan.
+            </div>
+            <div class="approach-cell">
+              <strong>Change management plan (B — bẫy)</strong>
+              Quy trình submit/approve/reject changes (Q38) — không định nghĩa
+              version control procedures cho design documents/artifacts.
+            </div>
+            <div class="approach-cell">
+              <strong>Scope management plan (C — bẫy)</strong>
+              Cách define, validate, control scope — không phải document versioning
+              và configuration of artifacts.
+            </div>
+            <div class="approach-cell">
+              <strong>Change log (D — bẫy)</strong>
+              Ghi nhận changes đã xảy ra (Q27) — output/record, không thiết lập
+              hệ thống version control và configuration procedures.
+            </div>
+          </div>
+
           <div class="card tip">
-            <h4>Monitor &amp; Control (PMBOK p.26–27)</h4>
+            <h4>Signal trong stem Q103</h4>
             <p style="margin:0">
-              Work performance <strong>data</strong> is compared to create work performance
-              <strong>information</strong>, which is ultimately sent as a <strong>report</strong>
-              to stakeholders.
+              <strong>Synapse Biotech · medical device · multiple versions of design documents · inconsistencies · rework · changes not tracked · establish control over versions · proper handling of updates</strong>
+              → <strong>Configuration management plan (A)</strong> — version control + artifact tracking.
+              Không change mgmt plan alone (B), không scope plan (C), không change log (D).
             </p>
           </div>
-        </section>
 
-        <section id="data-flow">
-          <h2>2. Data → Info → Report</h2>
-
-          <div class="flow-diagram">
-            <div class="flow-box highlight">Work Performance Data</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box highlight">Analyze → Work Performance Information</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-box">Report to Stakeholders</div>
-          </div>
-
+          <h3>Configuration vs Change vs Scope</h3>
           <table>
             <thead>
-              <tr><th>Artifact</th><th>Ví dụ</th><th>Q35</th></tr>
+              <tr><th>Plan / Artifact</th><th>Mục đích</th><th>Q103?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Work performance data</strong></td>
-                <td>Raw AC, EV, schedule actuals James đang review</td>
-                <td>Input — đã có</td>
+                <td><strong>Configuration mgmt plan (A)</strong></td>
+                <td>Track artifacts, version control, configuration items</td>
+                <td>✓ Versions · inconsistencies · document control</td>
               </tr>
               <tr>
-                <td><strong>Work performance information</strong></td>
-                <td>Analyzed variances, status vs baseline</td>
-                <td><strong>FIRST step (C)</strong></td>
+                <td><strong>Change management plan (B — Q38)</strong></td>
+                <td>How to manage change requests · ICC process</td>
+                <td>✗ Change approval — không version control artifacts</td>
               </tr>
               <tr>
-                <td><strong>Work performance reports</strong></td>
-                <td>Stakeholder update package</td>
-                <td>After analysis</td>
+                <td><strong>Scope management plan (C)</strong></td>
+                <td>Define, validate, control project scope</td>
+                <td>✗ Scope — không document versioning</td>
+              </tr>
+              <tr>
+                <td><strong>Change log (D — Q27)</strong></td>
+                <td>Record of changes · status tracking</td>
+                <td>✗ Log changes — không establish version control system</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q103?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Develop configuration management plan</strong></td>
+                <td>Procedures track artifacts · version control (p.118)</td>
+                <td>✓ Đúng — multiple versions · establish version control</td>
+              </tr>
+              <tr>
+                <td><strong>B. Create change management plan</strong></td>
+                <td>Process for managing changes (Q38)</td>
+                <td>✗ Change process — không artifact/version control</td>
+              </tr>
+              <tr>
+                <td><strong>C. Update scope management plan</strong></td>
+                <td>Scope definition and control</td>
+                <td>✗ Scope — không design document versions</td>
+              </tr>
+              <tr>
+                <td><strong>D. Create/update change log</strong></td>
+                <td>Log of changes (Q27)</td>
+                <td>✗ Record — không establish configuration control</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+                <section id="compare">
+          <h2>2. So sánh: Q38 Change Plan vs Q103 Configuration Plan (Changes vs Versions)</h2>
+
+          <table>
+            <thead>
+              <tr><th>Câu</th><th>Artifact</th><th>Mục đích</th><th>Signal trong stem</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Q38 — Change Mgmt Plan (B)</strong></td>
+                <td>Change management plan</td>
+                <td>How to submit, review, approve changes</td>
+                <td>Stakeholder resistance · formal change process</td>
+              </tr>
+              <tr>
+                <td><strong>Q103 — Config Plan (A)</strong></td>
+                <td>Configuration management plan</td>
+                <td>Version control · track artifacts · configuration items</td>
+                <td><em>Multiple versions</em> · inconsistencies · <em>version control</em></td>
+              </tr>
+              <tr>
+                <td><strong>Q27 — Change Log (D)</strong></td>
+                <td>Change log</td>
+                <td>Record changes that occurred</td>
+                <td>Document what changed · audit trail</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card info">
-            <h4>Keyword: FIRST</h4>
+            <h4>Version control vs Change control</h4>
             <p style="margin:0">
-              Analyze data → info trước corrective actions (A), plan update (B), hay escalation (D).
+              <strong>Configuration management plan (A):</strong> <em>Which version</em> of design documents
+              is current? Track artifacts, identify configuration items, version control — Q103 signal.<br><br>
+              <strong>Change management plan (B):</strong> <em>How</em> to process change requests through ICC —
+              approve/reject baseline changes (Q38). Complements config plan nhưng không thay thế version control.<br><br>
+              <strong>Change log (D):</strong> Ghi lại changes — sau khi đã có process. Không establish version control.<br><br>
+              <strong>Scope plan (C):</strong> What is in/out of scope — không document versioning.
             </p>
           </div>
         </section>
 
-        <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 35</h2>
+                <section id="question">
+          <h2>3. Câu hỏi thực hành — Question 103</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q35</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q103</div>
             <div class="q-text">
-              James is managing a commercial build at Evercrest Corp. During execution, he reviews
-              cost and schedule data and notices the project is <em>going off track</em>. Stakeholders
-              are starting to notice and want an update on what's going on. What should James do
-              <em>first</em> to respond to this situation?
+              Paige is managing a medical device project at Synapse Biotech.
+              <em>Multiple versions</em> of design documents are being used by different teams,
+              causing <em>inconsistencies and rework</em>. Changes are
+              <em>not clearly tracked or controlled</em>. Paige wants to establish
+              <em>control over versions</em> and ensure proper handling of updates.
+              Which approach should she use?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Implement corrective actions to bring performance back on track.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Update the project management plan to reflect the changes in cost and schedule.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Analyze performance data and turn it into work performance information.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Escalate the issue to the project management team to avoid further delays.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Develop the configuration management plan</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Create the change management plan</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Update the scope management plan</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Create and update the change log</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
-        <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+                <section id="analysis">
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
-          <h3>Tại sao chọn C?</h3>
+          <h3>Tại sao chọn A?</h3>
           <ul>
-            <li><em>First</em> = analyze raw data into work performance information.</li>
-            <li>Stakeholders want update — cần analyzed info, không phải raw data hay premature action.</li>
-            <li>Monitor &amp; Control Project Performance (p.26–27): Data → Info → Report.</li>
+            <li>Configuration management plan (p.118) định nghĩa procedures track artifacts và control changes — version control.</li>
+            <li>Stem: multiple versions, inconsistencies, rework → cần single source of truth cho design documents qua configuration control.</li>
+            <li>Plan describes items under configuration control, how identified/recorded/updated, how changes reported.</li>
+            <li>Medical device context — artifact consistency critical; configuration management ensures product remains consistent and functional.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không FIRST</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Corrective actions</strong></td>
-                <td>Sau khi đã analyze variances và hiểu root cause — không nhảy thẳng.</td>
+                <td><strong>B. Change management plan</strong></td>
+                <td>Q38 — quy trình manage change requests. Không định nghĩa version control cho design documents và configuration items.</td>
               </tr>
               <tr>
-                <td><strong>B. Update PM plan</strong></td>
-                <td>Plan update qua change control — chưa analyze data trước.</td>
+                <td><strong>C. Scope management plan</strong></td>
+                <td>Scope definition/control — không address multiple document versions và artifact tracking.</td>
               </tr>
               <tr>
-                <td><strong>D. Escalate</strong></td>
-                <td>Escalation khi cần — PM phải analyze &amp; prepare info trước.</td>
+                <td><strong>D. Change log</strong></td>
+                <td>Q27 — record changes. Không <em>establish</em> version control system — chỉ log sau khi change xảy ra.</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="card warn">
+            <h4>Q27 Change Log · Q38 Change Plan · Q103 Configuration Plan</h4>
+            <p style="margin:0">
+              Q27: Document changes → <strong>change log</strong>.<br>
+              Q38: Formal change process → <strong>change management plan</strong>.<br>
+              Q103: Version control · artifact tracking → <strong>configuration management plan</strong>.
+            </p>
+          </div>
         </section>
 
-        <section id="drill">
-          <h2>5. Drill — Thứ tự đúng?</h2>
+                <section id="drill">
+          <h2>5. Drill — Configuration, Change Plan, Scope, hay Change Log?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="INFO">
-              <span>Project off track — stakeholders want status update (FIRST)</span>
+            <div class="classify-row" data-answer="CONFIG">
+              <span>Synapse: multiple design doc versions, inconsistencies, need version control (Q103)</span>
               <div class="classify-btns">
-                <button data-pick="INFO">Analyze → Info</button>
-                <button data-pick="FIX">Corrective action</button>
-                <button data-pick="ESC">Escalate</button>
+                <button data-pick="CONFIG">Config Plan</button>
+                <button data-pick="CHANGE">Change Plan</button>
+                <button data-pick="SCOPE">Scope Plan</button>
+                <button data-pick="LOG">Change Log</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FIX">
-              <span>Variances analyzed — decide recovery actions</span>
+            <div class="classify-row" data-answer="CONFIG">
+              <span>PM defines which artifacts are under configuration control and version numbering rules</span>
               <div class="classify-btns">
-                <button data-pick="INFO">Analyze → Info</button>
-                <button data-pick="FIX">Corrective action</button>
-                <button data-pick="ESC">Escalate</button>
+                <button data-pick="CONFIG">Config Plan</button>
+                <button data-pick="CHANGE">Change Plan</button>
+                <button data-pick="SCOPE">Scope Plan</button>
+                <button data-pick="LOG">Change Log</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="INFO">
-              <span>Compare cost/schedule data to baseline</span>
+            <div class="classify-row" data-answer="CHANGE">
+              <span>Stakeholders resist changes — PM needs formal submit/approve process (Q38)</span>
               <div class="classify-btns">
-                <button data-pick="INFO">Analyze → Info</button>
-                <button data-pick="FIX">Corrective action</button>
-                <button data-pick="ESC">Escalate</button>
+                <button data-pick="CONFIG">Config Plan</button>
+                <button data-pick="CHANGE">Change Plan</button>
+                <button data-pick="SCOPE">Scope Plan</button>
+                <button data-pick="LOG">Change Log</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ESC">
-              <span>Issue beyond PM authority after analysis</span>
+            <div class="classify-row" data-answer="LOG">
+              <span>PM records each approved change with date, description, and status (Q27)</span>
               <div class="classify-btns">
-                <button data-pick="INFO">Analyze → Info</button>
-                <button data-pick="FIX">Corrective action</button>
-                <button data-pick="ESC">Escalate</button>
+                <button data-pick="CONFIG">Config Plan</button>
+                <button data-pick="CHANGE">Change Plan</button>
+                <button data-pick="SCOPE">Scope Plan</button>
+                <button data-pick="LOG">Change Log</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="SCOPE">
+              <span>PM updates how scope will be defined, validated, and controlled on the project</span>
+              <div class="classify-btns">
+                <button data-pick="CONFIG">Config Plan</button>
+                <button data-pick="CHANGE">Change Plan</button>
+                <button data-pick="SCOPE">Scope Plan</button>
+                <button data-pick="LOG">Change Log</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
-        <section id="traps">
+                <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Off track → Corrective actions (A)</h4>
-            <p style="margin:0">Corrective actions sau analysis — đề hỏi <em>first</em> response.</p>
+            <h4>Bẫy 1: "Changes not tracked" → Change log (D)</h4>
+            <p style="margin:0">Change log ghi changes — không <em>establish</em> version control. Multiple versions + inconsistencies → <strong>configuration management plan (A)</strong>.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Variance → Update plan (B)</h4>
-            <p style="margin:0">Plan changes qua formal change control — không phải bước đầu khi mới phát hiện variance.</p>
+            <h4>Bẫy 2: "Changes" → Change management plan (B)</h4>
+            <p style="margin:0">Change plan = ICC process. Version control của artifacts = <strong>configuration management</strong>, không phải change plan alone.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Stakeholders worried → Escalate (D)</h4>
-            <p style="margin:0">PM analyze &amp; report trước — escalation không phải first step.</p>
+            <h4>Bẫy 3: Documents → Scope plan (C)</h4>
+            <p style="margin:0">Scope plan không quản lý document versions. Configuration plan track artifacts và version control.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: Nhầm Q38 và Q103</h4>
+            <p style="margin:0">Q38: change resistance → change management plan. Q103: multiple versions · rework → configuration management plan.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Performance data + stakeholders want update + FIRST</strong> → Analyze into work performance information (C).</p>
+            <p style="margin:0"><strong>Multiple versions · design documents · inconsistencies · rework · version control · artifacts tracked · configuration items</strong> → Develop configuration management plan (A).</p>
           </div>
         </section>
 
-        <section id="flashcards">
+                <section id="flashcards">
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Data → Info → Report?</div>
-            <div class="flashcard-back">Raw work performance DATA → analyzed INFORMATION → stakeholder REPORTS.</div>
+            <div class="flashcard-front">Configuration management plan? (p.118)</div>
+            <div class="flashcard-back">Procedures to <strong>track artifacts</strong> and <strong>control changes</strong> (version control). Items under config control · identify · record · update · report.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q35 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Analyze performance data into work performance information.</div>
+            <div class="flashcard-front">Q103 đáp án?</div>
+            <div class="flashcard-back"><strong>A — Develop configuration management plan</strong>. Synapse · multiple doc versions · inconsistencies · version control.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Config vs Change plan?</div>
+            <div class="flashcard-back"><strong>Config:</strong> version control · artifacts. <strong>Change plan:</strong> ICC process · approve changes (Q38).</div>
           </div></div>
         </section>
 
-        <section id="cheatsheet">
+                <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">MONITOR &amp; CONTROL PERFORMANCE — Q35 (PMBOK 8, p.26–27)
+          <div class="cheat-sheet">CONFIGURATION MANAGEMENT PLAN — Q103
+(PMBOK 8, p.118 Configuration management plan)
 ─────────────────────────────────────────────────────
-PROCESS: Monitor and Control Project Performance
-  - Track · review · report progress vs plan objectives
+DOMAIN: Delivery
+ARTIFACT: CONFIGURATION MANAGEMENT PLAN
+KEY: Track artifacts · VERSION CONTROL · config items
 
-FLOW: Data → Info → Report
-  Work Performance DATA (raw)
-    → analyze/compare
-  Work Performance INFORMATION (analyzed)
-    → communicate
-  Work Performance REPORTS (to stakeholders)
+CONFIG PLAN (A):
+  → Procedures track project ARTIFACTS
+  → Control CHANGES (version control)
+  → Items under configuration control
+  → Identify · record · update · report changes
+  → Product consistent and functional
 
-SCENARIO: Evercrest commercial build — execution
-           Cost &amp; schedule OFF TRACK
-           Stakeholders want UPDATE
-           What to do FIRST?
-→ C) Analyze data → WORK PERFORMANCE INFORMATION ✓
+CHANGE MGMT PLAN (B trap — Q38):
+  → Submit · review · approve CHANGES
+  → ICC process — NOT version control alone
 
-NOT FIRST:
-  A) Corrective actions — after analysis
-  B) Update PM plan — change control, not initial response
-  D) Escalate — after PM analyzes &amp; determines need
+SCOPE MGMT PLAN (C trap):
+  → Define · validate · control SCOPE
+  → NOT document versioning
 
-SIGNAL: "reviews cost and schedule data"
-        "going off track" · stakeholders want update
-        "FIRST"
+CHANGE LOG (D trap — Q27):
+  → RECORD of changes
+  → NOT establish version control system
 
-Q35 ANSWER: C
+SCENARIO: Synapse Biotech — Paige PM — medical device
+           MULTIPLE VERSIONS of design documents
+           INCONSISTENCIES · REWORK
+           Changes NOT tracked/controlled
+           Need VERSION CONTROL · proper updates
+NEXT → A) DEVELOP CONFIGURATION MANAGEMENT PLAN ✓
 
-REF: PMBOK Guide, 8th Ed., p.26–27</div>
+NOT:
+  B) CHANGE MANAGEMENT PLAN — ICC process (Q38)
+  C) SCOPE MANAGEMENT PLAN — scope, not versions
+  D) CHANGE LOG — record only (Q27)
+
+Q38 vs Q103:
+  Q38: change resistance → CHANGE MANAGEMENT PLAN
+  Q103: multiple versions → CONFIGURATION MANAGEMENT PLAN
+
+SIGNAL KEYWORDS:
+  Config plan:  multiple versions, version control, design documents,
+                inconsistencies, rework, artifacts, configuration items,
+                track documents, single version
+  Change plan:  change requests, approve, ICC, resistance to change
+  Change log:   record changes, log, document what changed
+  Scope plan:   scope definition, WBS, in/out of scope
+
+Q103 ANSWER: A — Develop the configuration management plan
+
+REF: PMBOK Guide, 8th Ed., p.118 Configuration management plan</div>
         </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
         <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
-          <a class="lesson-pager-btn" href="pmp-teach-after-action-review.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q34: After-Action Review</span></a>
-          <span class="lesson-pager-pos">Q35 / 103</span>
-          <a class="lesson-pager-btn next" href="pmp-teach-ishikawa-analysis.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q36: Ishikawa Analysis</span></a>
+          <a class="lesson-pager-btn" href="pmp-teach-benefits-management-plan.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q102: Benefits Management Plan</span></a>
+          <span class="lesson-pager-pos">Q103 / 103</span>
+          <span class="lesson-pager-btn disabled" aria-hidden="true"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">—</span></span>
         </nav>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
-          · <a href="pmp-teach-project-management-plan.html">Q21: PM Plan</a>
-          · <a href="pmp-full-questions.html#q-35">Luyện câu 35</a>
+          · <a href="pmp-teach-benefits-management-plan.html">Q102: Benefits Management Plan</a>
+          · <a href="pmp-teach-change-management-plan.html">Q38: Change Management Plan</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
     </div>
   </div>
 
-  <script>
+              <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "A";
       const EXPL = {
-        A: "Corrective actions sau khi analyze variances — không phải FIRST step.",
-        B: "Update PM plan qua change control — chưa analyze data thành information.",
-        C: "Đúng! FIRST: analyze work performance data → work performance information (p.26–27).",
-        D: "Escalation sau khi PM analyze — không phải first response."
+        A: "Đúng! Configuration management plan (p.118) định nghĩa procedures track artifacts và version control — khớp multiple versions, inconsistencies, và establish version control.",
+        B: "Change management plan (Q38) quy trình ICC — không định nghĩa version control cho design documents và configuration items.",
+        C: "Scope management plan quản lý scope — không address multiple document versions và artifact tracking.",
+        D: "Change log (Q27) ghi nhận changes — không establish hệ thống version control và configuration procedures."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -531,7 +651,7 @@ REF: PMBOK Guide, 8th Ed., p.26–27</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Analyze performance data and turn it into work performance information.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Develop the configuration management plan</strong>" : "");
         });
       });
       let score = 0;
@@ -559,16 +679,18 @@ REF: PMBOK Guide, 8th Ed., p.26–27</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
