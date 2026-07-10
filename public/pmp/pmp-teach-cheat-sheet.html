@@ -656,21 +656,140 @@
 
     <!-- Contract Types -->
     <section id="contracts">
-      <h3>Contract Types</h3>
+      <h3>Contract Types — Các loại hợp đồng</h3>
+
+      <p style="margin-bottom:0.75rem;">Có <strong>2 nhóm hợp đồng chính</strong> trong PMP, phân biệt theo <em>ai chịu rủi ro chi phí</em>: Seller (nhà thầu) hay Buyer (chủ đầu tư). Hiểu rủi ro = chọn đúng loại hợp đồng trong câu hỏi tình huống.</p>
+
+      <!-- Risk spectrum bar -->
+      <div style="margin:1rem 0 1.25rem;padding:1rem 1.25rem;background:var(--card);border:1px solid var(--border);border-radius:12px;">
+        <div style="font-size:0.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.6rem;">Phổ rủi ro — Risk Spectrum</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.8rem;text-align:center;">
+          <div style="background:var(--process-bg);border:1px solid var(--process-border);border-radius:8px;padding:0.5rem 0.75rem;">
+            <div style="font-weight:700;color:var(--process)">FFP → FPIF → FPEPA</div>
+            <div style="color:var(--muted);font-size:0.75rem;margin-top:0.2rem;">Rủi ro nghiêng về <strong>Seller</strong></div>
+          </div>
+          <div style="background:var(--biz-bg);border:1px solid var(--biz-border);border-radius:8px;padding:0.5rem 0.75rem;">
+            <div style="font-weight:700;color:var(--biz)">CPFF → CPAF → CPIF</div>
+            <div style="color:var(--muted);font-size:0.75rem;margin-top:0.2rem;">Rủi ro nghiêng về <strong>Buyer</strong></div>
+          </div>
+        </div>
+        <div style="margin-top:0.5rem;font-size:0.75rem;color:var(--muted);text-align:center;">← Seller chịu rủi ro nhiều nhất &nbsp;|&nbsp; Buyer chịu rủi ro nhiều nhất →</div>
+      </div>
+
+      <!-- Fixed Price group -->
+      <div style="font-weight:700;color:var(--process);background:var(--process-bg);border:1px solid var(--process-border);border-radius:8px;padding:0.4rem 0.75rem;margin-bottom:0.75rem;font-size:0.85rem;">
+        Nhóm 1: Fixed Price — Giá cố định
+      </div>
+      <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.75rem;">Buyer biết rõ scope từ đầu. Seller chịu rủi ro nếu chi phí vượt giá đã ký. Phù hợp khi requirements rõ ràng, scope ít thay đổi.</p>
+
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th class="th-process">Type</th><th class="th-process">Abbr.</th><th class="th-process">Who bears risk?</th><th class="th-process">Description</th></tr></thead>
+          <thead>
+            <tr>
+              <th class="th-process" style="width:22%">Loại hợp đồng</th>
+              <th class="th-process" style="width:7%">Ký hiệu</th>
+              <th class="th-process" style="width:14%">Ai chịu rủi ro</th>
+              <th class="th-process">Cơ chế hoạt động &amp; Khi nào dùng</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td colspan="4" style="background:var(--process-bg);font-weight:700;color:var(--process)">Fixed Price Contracts</td></tr>
-            <tr><td>Firm Fixed Price</td><td>FFP</td><td>Seller</td><td>Fixed price; seller bears all cost risk</td></tr>
-            <tr><td>Fixed Price Incentive Fee</td><td>FPIF</td><td>Mostly Seller</td><td>Fixed price + bonus if seller meets targets</td></tr>
-            <tr><td>Fixed Price w/ Economic Price Adjustment</td><td>FPEPA</td><td>Mostly Seller</td><td>Adjusts for inflation over long contracts</td></tr>
-            <tr><td colspan="4" style="background:var(--biz-bg);font-weight:700;color:var(--biz)">Cost Plus Contracts</td></tr>
-            <tr><td>Cost Plus Fixed Fee</td><td>CPFF</td><td>Buyer</td><td>Reimburse cost + fixed fee; low seller risk</td></tr>
-            <tr><td>Cost Plus Incentive Fee</td><td>CPIF</td><td>Shared</td><td>Reimburse cost + fee based on performance</td></tr>
-            <tr><td>Cost Plus Award Fee</td><td>CPAF</td><td>Buyer</td><td>Reimburse cost + discretionary award fee</td></tr>
+            <tr>
+              <td><strong>Firm Fixed Price</strong></td>
+              <td><strong>FFP</strong></td>
+              <td style="color:#92400e;font-weight:600">Seller 100%</td>
+              <td>
+                <strong>Cơ chế:</strong> Giá hợp đồng cố định hoàn toàn. Dù chi phí thực tế tăng hay giảm, Buyer chỉ trả đúng giá đã ký.<br>
+                <strong>Dùng khi:</strong> Scope rõ ràng, ít thay đổi. Ví dụ: mua phần mềm có sẵn, xây công trình theo bản vẽ đã duyệt.<br>
+                <strong>Lợi:</strong> Buyer không lo cost overrun. Seller có động lực kiểm soát chi phí.<br>
+                <strong>Hại:</strong> Seller thường quote giá cao để phòng rủi ro. Buyer trả thêm nếu scope không rõ.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Fixed Price Incentive Fee</strong></td>
+              <td><strong>FPIF</strong></td>
+              <td style="color:#92400e;font-weight:600">Chủ yếu Seller</td>
+              <td>
+                <strong>Cơ chế:</strong> Giá cố định + <em>phần thưởng (incentive fee)</em> nếu Seller đạt mục tiêu hiệu suất (ví dụ: giao sớm, tiết kiệm chi phí).<br>
+                <strong>Dùng khi:</strong> Muốn khuyến khích Seller cải thiện hiệu suất. Ví dụ: hợp đồng xây dựng thưởng nếu hoàn thành trước hạn.<br>
+                <strong>Lưu ý:</strong> Có <em>Point of Total Assumption (PTA)</em> — mức chi phí mà Seller phải tự chịu toàn bộ vượt trội.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Fixed Price Economic Price Adjustment</strong></td>
+              <td><strong>FPEPA</strong></td>
+              <td style="color:#92400e;font-weight:600">Chủ yếu Seller</td>
+              <td>
+                <strong>Cơ chế:</strong> Giá cố định nhưng có điều khoản điều chỉnh theo chỉ số lạm phát/giá thị trường theo thời gian.<br>
+                <strong>Dùng khi:</strong> Hợp đồng dài hạn (nhiều năm) — giá nguyên vật liệu hoặc tiền lương có thể biến động lớn. Ví dụ: hợp đồng cung cấp dịch vụ IT 5 năm.
+              </td>
+            </tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- Cost Plus group -->
+      <div style="font-weight:700;color:var(--biz);background:var(--biz-bg);border:1px solid var(--biz-border);border-radius:8px;padding:0.4rem 0.75rem;margin:1.25rem 0 0.75rem;font-size:0.85rem;">
+        Nhóm 2: Cost Plus (Cost Reimbursable) — Hoàn trả chi phí
+      </div>
+      <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.75rem;">Buyer hoàn trả toàn bộ chi phí hợp lệ cho Seller + thêm một khoản phí. Buyer chịu rủi ro nếu chi phí thực tế vượt dự kiến. Phù hợp khi scope chưa rõ hoặc công việc mang tính R&D, sáng tạo.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="th-process" style="width:22%">Loại hợp đồng</th>
+              <th class="th-process" style="width:7%">Ký hiệu</th>
+              <th class="th-process" style="width:14%">Ai chịu rủi ro</th>
+              <th class="th-process">Cơ chế hoạt động &amp; Khi nào dùng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cost Plus Fixed Fee</strong></td>
+              <td><strong>CPFF</strong></td>
+              <td style="color:var(--biz);font-weight:600">Buyer hoàn toàn</td>
+              <td>
+                <strong>Cơ chế:</strong> Buyer hoàn trả toàn bộ chi phí thực tế + một khoản phí cố định (fixed fee) đã thỏa thuận từ đầu, bất kể chi phí thực tế là bao nhiêu.<br>
+                <strong>Dùng khi:</strong> Scope không rõ ràng, khó ước tính trước. Ví dụ: nghiên cứu khoa học, phát triển phần mềm mới hoàn toàn.<br>
+                <strong>Lợi Seller:</strong> Không lo lỗ — được trả đủ chi phí + fee cố định.<br>
+                <strong>Hại:</strong> Seller ít động lực kiểm soát chi phí vì fee không tăng dù tiết kiệm.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Cost Plus Incentive Fee</strong></td>
+              <td><strong>CPIF</strong></td>
+              <td style="color:#1e40af;font-weight:600">Chia sẻ (Shared)</td>
+              <td>
+                <strong>Cơ chế:</strong> Buyer hoàn trả chi phí + phí biến đổi dựa trên hiệu suất (ví dụ: nếu chi phí thực tế thấp hơn target, tiết kiệm được chia theo tỷ lệ đã thỏa thuận giữa Buyer &amp; Seller).<br>
+                <strong>Dùng khi:</strong> Muốn Seller có động lực tiết kiệm nhưng Buyer vẫn chịu phần lớn rủi ro. Ví dụ: dự án quốc phòng, R&D có mục tiêu chi phí rõ.<br>
+                <strong>Đây là loại duy nhất có rủi ro chia sẻ thực sự</strong> giữa cả hai bên.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Cost Plus Award Fee</strong></td>
+              <td><strong>CPAF</strong></td>
+              <td style="color:var(--biz);font-weight:600">Chủ yếu Buyer</td>
+              <td>
+                <strong>Cơ chế:</strong> Buyer hoàn trả chi phí + <em>award fee</em> do Buyer <strong>tự đánh giá</strong> theo tiêu chí chủ quan (chất lượng, sự hài lòng). Seller không kiện được nếu không được award.<br>
+                <strong>Dùng khi:</strong> Buyer muốn giữ quyền kiểm soát tối đa chất lượng. Ví dụ: dịch vụ tư vấn chiến lược, sáng tạo.<br>
+                <strong>Khác CPIF:</strong> CPIF dựa trên công thức đo lường khách quan; CPAF dựa trên nhận xét chủ quan của Buyer.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Exam traps -->
+      <div style="margin-top:1rem;padding:1rem 1.25rem;background:var(--people-bg);border:1px solid var(--people-border);border-radius:12px;">
+        <div style="font-weight:700;color:var(--people);margin-bottom:0.65rem;font-size:0.88rem;">Bẫy thi PMP — Contract Types</div>
+        <ul style="margin:0;padding-left:1.2rem;font-size:0.83rem;line-height:1.65;">
+          <li><strong>Scope rõ, ngắn hạn → FFP</strong> là câu trả lời gần như mặc định. Seller chịu rủi ro.</li>
+          <li><strong>Scope mơ hồ / R&D / chưa biết rõ → Cost Plus</strong>. Buyer chịu rủi ro.</li>
+          <li><strong>Hợp đồng dài năm + lo lạm phát → FPEPA</strong> (không phải FPIF hay CPFF).</li>
+          <li><strong>Muốn thưởng theo công thức đo được → FPIF hoặc CPIF</strong>. Muốn đánh giá chủ quan → CPAF.</li>
+          <li><strong>CPIF là loại duy nhất</strong> chia sẻ rủi ro thực sự giữa Buyer và Seller.</li>
+          <li>Trong tranh chấp hợp đồng: Claims → Negotiate → Arbitration → Litigation (kiện ra tòa là <em>last resort</em>).</li>
+        </ul>
       </div>
     </section>
 
