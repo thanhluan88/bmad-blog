@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 8 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A large product initiative is being managed using a hybrid approach: discovery and prototyping in agile, and deployment in a predictive rollout. Several key stakeholders from the operations department are frustrated because they feel excluded from early agile activities and only see the project during formal phase‑gate reviews. What should the project manager do to improve stakeholder engagement?</p>
+          <p class="lead">A large product initiative is being managed using a hybrid approach: discovery and prototyping in agile, and deployment in a predictive rollout. Several key stakeholders from the operations department are frustrated because they feel excluded from early agile activities and only see the project during formal phase‑gate reviews. <span class="kw-cue">What should the project manager do</span> to improve stakeholder engagement?</p>
           <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Initiating</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q8</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -139,12 +151,12 @@
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">đề xuất/yêu cầu formal không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.</p>
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
-        Update the stakeholder engagement plan to include specific hybrid touchpoints for operations stakeholders.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        Update the <span class="kw-signal">stakeholder engagement plan</span> to include specific hybrid touchpoints for operations stakeholders.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Include phase-gate reviews to provide operations stakeholders with formally documented progress updates.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Assign a business analyst to summarize agile outputs for operations stakeholders after each sprint.
@@ -156,9 +168,9 @@
           <h2>3. Câu hỏi — Full Bank Q8</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 8</div>
-            <div class="q-text">A large product initiative is being managed using a hybrid approach: discovery and prototyping in agile, and deployment in a predictive rollout. Several key stakeholders from the operations department are frustrated because they feel excluded from early agile activities and only see the project during formal phase‑gate reviews. What should the project manager do to improve stakeholder engagement?</div>
+            <div class="q-text">A large product initiative is being managed using a hybrid approach: discovery and prototyping in agile, and deployment in a predictive rollout. Several key stakeholders from the operations department are frustrated because they feel excluded from early agile activities and only see the project during formal phase‑gate reviews. <span class="kw-cue">What should the project manager do</span> to improve stakeholder engagement?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Request that the product owner invite operations stakeholders to daily coordination meetings.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Update the stakeholder engagement plan to include specific hybrid touchpoints for operations stakeholders.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Update the <span class="kw-signal">stakeholder engagement plan</span> to include specific hybrid touchpoints for operations stakeholders.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Include phase-gate reviews to provide operations stakeholders with formally documented progress updates.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Assign a business analyst to summarize agile outputs for operations stakeholders after each sprint.</button>
             <div class="feedback" id="quizFeedback"></div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Update the stakeholder engagement plan to include specific hybrid touchpoints for operations stakeholders.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền Stakeholders).<br><br>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>B</strong> — &quot;Update the stakeholder engagement plan to include specific hybrid touchpoints for operations stakeholders.&quot; — phù hợp vì Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền Stakeholders). Agile/Hybrid: ưu tiên empowered culture, collaboration và continuous improvement.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — PMBOK 8, tr. 71 (Plan Stakeholder Engagement)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: Plan Stakeholder Engagement</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền <span class="kw-pmbok">Stakeholders</span>).<br><br>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>B</strong> — &quot;Update the <span class="kw-signal">stakeholder engagement plan</span> to include specific hybrid touchpoints for operations stakeholders.&quot; — phù hợp vì Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền <span class="kw-pmbok">Stakeholders</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request that the product owner invite operations stakeholders to daily coordinat…</span></td><td>đề xuất/yêu cầu formal không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Include phase-gate reviews to provide operations stakeholders with formally docu…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Assign a business analyst to summarize agile outputs for operations stakeholders…</span></td><td>&quot;Assign a business analyst to summarize agile outputs for operations stakeholders a…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request that the product owner invite operations stakeholders to daily coordinat…</span></td><td>đề xuất/yêu cầu formal không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Include phase-gate reviews to provide operations stakeholders with formally docu…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Assign a business analyst to summarize agile outputs for operations stakeholders…</span></td><td>&quot;Assign a business analyst to summarize agile outputs for operations stakeholders a…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.</td></tr></tbody>
           </table>
         </section>
 

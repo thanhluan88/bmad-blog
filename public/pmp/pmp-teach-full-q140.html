@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 140 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A digital media company has just released a new feature developed by its agile product team. A team member used a workaround to unblock stalled work, and the quality director demands an explanation and corrective actions. The project manager must respond and drive corrective action. What should the project manager do? (Choose 2)</p>
+          <p class="lead">A digital media company has just released a new feature developed by its agile product team. A team member used a workaround to unblock stalled work, and the quality director demands an explanation and corrective actions. The project manager must respond and drive corrective action. <span class="kw-cue">What should the project manager do</span>? (<span class="kw-cue">Choose 2</span>)</p>
           <div class="badges"><span class="badge">Governance, Scope</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q140</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -136,23 +148,23 @@
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Instruct the team member not to make any autonomous technical decisions in the future without written approval from the quality director.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Instruct the team member not to make any autonomous technical decisions in the fut…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung thông báo / truyền đạt thông tin.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Instruct the team member <span class="kw-cue">not</span> to make any autonomous technical decisions in the fut…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung thông báo / truyền đạt thông tin.</p>
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Ask the team member to explain their rationale for the workaround and share lessons learned with the team.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
-        Apologize to the quality director and commit to conducting a full disciplinary review of the team member’s actions.
+        <span class="kw-signal">Apologize</span> to the quality director and commit to conducting a full disciplinary review of the team member’s actions.
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần thông báo / truyền đạt thông tin.</p>
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
-        Work with the team to assess the severity of the failure and decide whether to roll back the release or apply a targeted patch.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <span class="kw-signal">Work with</span> the team to assess the severity of the failure and decide whether to roll back the release or apply a targeted patch.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>E — Sai</strong>
-        Ask the team to postpone addressing the failure until the next iteration and focus on completing the current sprint backlog.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần thông báo / truyền đạt thông tin.</p>
+        Ask the team to <span class="kw-trap">postpone</span> addressing the failure until the next iteration and focus on completing the current sprint backlog.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>)&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần thông báo / truyền đạt thông tin.</p>
       </div></div>
         </section>
 
@@ -160,12 +172,12 @@
           <h2>3. Câu hỏi — Full Bank Q140</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 140 · Chọn nhiều</div>
-            <div class="q-text">A digital media company has just released a new feature developed by its agile product team. A team member used a workaround to unblock stalled work, and the quality director demands an explanation and corrective actions. The project manager must respond and drive corrective action. What should the project manager do? (<em>Choose 2</em>)</div>
+            <div class="q-text">A digital media company has just released a new feature developed by its agile product team. A team member used a workaround to unblock stalled work, and the quality director demands an explanation and corrective actions. The project manager must respond and drive corrective action. <span class="kw-cue">What should the project manager do</span>? (<span class="kw-cue">Choose 2</span>)</div>
             <button class="opt-btn" data-opt="A" type="button">A. Instruct the team member not to make any autonomous technical decisions in the future without written approval from the quality director.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Ask the team member to explain their rationale for the workaround and share lessons learned with the team.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Apologize to the quality director and commit to conducting a full disciplinary review of the team member’s actions.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Work with the team to assess the severity of the failure and decide whether to roll back the release or apply a targeted patch.</button>
-            <button class="opt-btn" data-opt="E" type="button">E. Ask the team to postpone addressing the failure until the next iteration and focus on completing the current sprint backlog.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. <span class="kw-signal">Apologize</span> to the quality director and commit to conducting a full disciplinary review of the team member’s actions.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. <span class="kw-signal">Work with</span> the team to assess the severity of the failure and decide whether to roll back the release or apply a targeted patch.</button>
+            <button class="opt-btn" data-opt="E" type="button">E. Ask the team to <span class="kw-trap">postpone</span> addressing the failure until the next iteration and focus on completing the current sprint backlog.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
@@ -179,10 +191,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B,D</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B, D:</strong> PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Governance + Scope, Focus Area Executing (PMBOK 8).<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>B, D</strong> — &quot;Ask the team member to explain their rationale for the workaround and share lessons learned with the team.&quot; — phù hợp vì PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Governance + Scope, Focus Area Executing (PMBOK 8). Agile/Hybrid: ưu tiên empowered culture, collaboration và continuous improvement.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 9 Section 1 – Introduction Additionally, project governance helps prioritize initiatives and allocate resources to support strategic objectives. For instance, a steering committee in a product launch project may oversee milestones, enforc<br>&gt; — PMBOK 8, tr. 9 (Performance Domain: Governance, Manage Project Execution)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 9: Performance Domain: Governance, Manage Project Execution</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B, D:</strong> PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>B, D</strong> — &quot;Ask the team member to explain their rationale for the workaround and share lessons learned with the team.&quot; — phù hợp vì PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 9 Section 1 – Introduction Additionally, project governance helps prioritize initiatives and allocate resources to support strategic objectives. For instance, a steering committee in a product launch project may oversee milestones, enforc<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 9 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 9: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Instruct the team member not to make any autonomous technical decisions in the f…</span></td><td>&quot;Instruct the team member not to make any autonomous technical decisions in the fut…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung thông báo / truyền đạt thông tin.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Apologize to the quality director and commit to conducting a full disciplinary r…</span></td><td>Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần thông báo / truyền đạt thông tin.</td></tr><tr><td><strong>E</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the team to postpone addressing the failure until the next iteration and foc…</span></td><td>Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần thông báo / truyền đạt thông tin.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Instruct the team member not to make any autonomous technical decisions in the f…</span></td><td>&quot;Instruct the team member <span class="kw-cue">not</span> to make any autonomous technical decisions in the fut…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung thông báo / truyền đạt thông tin.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-signal">Apologize</span> to the quality director and commit to conducting a full disciplinary r…</span></td><td>Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần thông báo / truyền đạt thông tin.</td></tr><tr><td><strong>E</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the team to <span class="kw-trap">postpone</span> addressing the failure until the next iteration and foc…</span></td><td>Tập trung &quot;yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>)&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần thông báo / truyền đạt thông tin.</td></tr></tbody>
           </table>
         </section>
 

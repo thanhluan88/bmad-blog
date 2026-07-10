@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 656 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An internal auditor finds several gaps in the company's adherence to quality processes. The project sponsor argues the gaps are minor and should not delay progress. The quality assurance manager insists that corrective actions must be implemented before continuing. The project management office warns that ignoring these findings could harm compliance certifications. What should the project manager do to ensure compliance?</p>
+          <p class="lead">An internal auditor finds several gaps in the company's adherence to quality processes. The project sponsor argues the gaps are minor and should <span class="kw-cue">not</span> delay progress. The quality assurance manager insists that corrective actions must be implemented before continuing. The project management office warns that ignoring these findings could harm compliance certifications. <span class="kw-cue">What should the project manager do</span> to ensure compliance?</p>
           <div class="badges"><span class="badge">Schedule, Governance</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q656</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -139,7 +151,7 @@
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Overlook minor gaps to keep the schedule intact, even if compliance certification …&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
-        Postpone corrective actions until project closeout to reduce process disruption now, but raise risks later in the project life cycle.
+        <span class="kw-trap">Postpone</span> corrective actions until project closeout to reduce process disruption now, but raise risks later in the project life cycle.
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo tuân thủ / compliance.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
@@ -148,7 +160,7 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Implement corrective actions immediately to ensure adherence to quality standards before resuming project work.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div></div>
         </section>
 
@@ -156,9 +168,9 @@
           <h2>3. Câu hỏi — Full Bank Q656</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 656</div>
-            <div class="q-text">An internal auditor finds several gaps in the company's adherence to quality processes. The project sponsor argues the gaps are minor and should <em>not</em> delay progress. The quality assurance manager insists that corrective actions must be implemented before continuing. The project management office warns that ignoring these findings could harm compliance certifications. What should the project manager do to ensure compliance?</div>
+            <div class="q-text">An internal auditor finds several gaps in the company's adherence to quality processes. The project sponsor argues the gaps are minor and should <span class="kw-cue">not</span> delay progress. The quality assurance manager insists that corrective actions must be implemented before continuing. The project management office warns that ignoring these findings could harm compliance certifications. <span class="kw-cue">What should the project manager do</span> to ensure compliance?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Overlook minor gaps to keep the schedule intact, even if compliance certification may later be compromised.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Postpone corrective actions until project closeout to reduce process disruption now, but raise risks later in the project life cycle.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. <span class="kw-trap">Postpone</span> corrective actions until project closeout to reduce process disruption now, but raise risks later in the project life cycle.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Arrange a meeting with project stakeholders to discuss the specific requirements for compliance certifications related to this project.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Implement corrective actions immediately to ensure adherence to quality standards before resuming project work.</button>
             <div class="feedback" id="quizFeedback"></div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Implement corrective actions immediately to ensure adherence to quality standards before resuming project work.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>D</strong> — &quot;Implement corrective actions immediately to ensure adherence to quality standards before resuming project work.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 46 ⚫ Schedule. An emphasis on quality has implications for the project’s schedule. Examples include ensuring scheduling practices and artifacts are reviewed for completeness and correctness; integrating product quality reviews as schedule<br>&gt; — PMBOK 8, tr. 46 (Performance Domain: Schedule, Develop Schedule)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 46: Performance Domain: Schedule, Develop Schedule</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>D</strong> — &quot;Implement corrective actions immediately to ensure adherence to quality standards before resuming project work.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 46 ⚫ <span class="kw-pmbok">Schedule</span>. An emphasis on quality has implications for the project’s schedule. Examples include ensuring scheduling practices and artifacts are reviewed for completeness and correctness; integrating product quality reviews as schedule<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 46 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 46: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Overlook minor gaps to keep the schedule intact, even if compliance certificatio…</span></td><td>&quot;Overlook minor gaps to keep the schedule intact, even if compliance certification …&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Postpone corrective actions until project closeout to reduce process disruption …</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Arrange a meeting with project stakeholders to discuss the specific requirements…</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo tuân thủ / compliance.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Overlook minor gaps to keep the schedule intact, even if compliance certificatio…</span></td><td>&quot;Overlook minor gaps to keep the schedule intact, even if compliance certification …&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Postpone</span> corrective actions until project closeout to reduce process disruption …</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Arrange a meeting with project stakeholders to discuss the specific requirements…</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo tuân thủ / compliance.</td></tr></tbody>
           </table>
         </section>
 

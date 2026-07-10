@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 1089 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is leading a project that is 70% complete. The development team has been following the project management plan and the scope defined in the project charter. During a product review meeting, a stakeholder raises concerns about adding new features, which were not part of the original project scope but are now urgent for the stakeholder. What should the project manager do next?</p>
+          <p class="lead">A project manager is leading a project that is 70% complete. The development team has been following the project management plan and the scope defined in the project charter. During a product review meeting, a stakeholder raises concerns about adding new features, which were <span class="kw-cue">not</span> part of the original project scope but are now urgent for the stakeholder. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</p>
           <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q1089</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -136,19 +148,19 @@
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Review the requested changes with the team and initiate the formal change control process if needed.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Inform the stakeholder that the requested changes will be implemented in future product updates.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần change control / change request.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần change control / <span class="kw-signal">change request</span>.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Update the project management plan to incorporate the requested changes and inform stakeholders.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Rebaseline/sửa plan quá sớm — NEXT cần change control / change request trước khi thay đổi baseline.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)"><span class="kw-trap">Rebaseline</span>/sửa plan quá sớm — <span class="kw-cue">NEXT</span> cần change control / <span class="kw-signal">change request</span> trước khi thay đổi baseline.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
-        Submit a change request to the change control board and notify the project sponsor about the changes.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Submit a change request to the change control board and notify the proje…&quot; cùng nhóm change control / change request nhưng lệch trọng tâm — &quot;Review the requested changes with the team and initiate the formal chang…&quot; sát stakeholder không hài lòng / kỳ vọng lệch hơn.</p>
+        Submit a <span class="kw-signal">change request</span> to the change control board and notify the project sponsor about the changes.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Submit a <span class="kw-signal">change request</span> to the change control board and notify the proje…&quot; cùng nhóm change control / <span class="kw-signal">change request</span> nhưng lệch trọng tâm — &quot;Review the requested changes with the team and initiate the formal chang…&quot; sát stakeholder không hài lòng / kỳ vọng lệch hơn.</p>
       </div></div>
         </section>
 
@@ -156,11 +168,11 @@
           <h2>3. Câu hỏi — Full Bank Q1089</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1089</div>
-            <div class="q-text">A project manager is leading a project that is 70% complete. The development team has been following the project management plan and the scope defined in the project charter. During a product review meeting, a stakeholder raises concerns about adding new features, which were <em>not</em> part of the original project scope but are now urgent for the stakeholder. What should the project manager do next?</div>
+            <div class="q-text">A project manager is leading a project that is 70% complete. The development team has been following the project management plan and the scope defined in the project charter. During a product review meeting, a stakeholder raises concerns about adding new features, which were <span class="kw-cue">not</span> part of the original project scope but are now urgent for the stakeholder. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Review the requested changes with the team and initiate the formal change control process if needed.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Inform the stakeholder that the requested changes will be implemented in future product updates.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Update the project management plan to incorporate the requested changes and inform stakeholders.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Submit a change request to the change control board and notify the project sponsor about the changes.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Submit a <span class="kw-signal">change request</span> to the change control board and notify the project sponsor about the changes.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Review the requested changes with the team and initiate the formal change control process if needed.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Trong Agile, servant leader trao quyền cho team tự cải thiện quy trình và loại bỏ impediment. PMBOK 8 — Build an empowered culture — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể. Câu hỏi hỏi <strong>NEXT</strong> (bước tiếp theo hợp lý trong chuỗi hành động). NEXT ưu tiên <strong>change control / change request</strong> — sửa baseline/rebaseline chỉ sau khi đã phân tích, thống nhất, hoặc được duyệt qua change control.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — PMBOK 8, tr. 53 (Performance Domain: Resources, Develop Team)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: Resources, Develop Team</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an <span class="kw-signal">empowered</span> culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể. Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> ưu tiên <strong>change control / <span class="kw-signal">change request</span></strong> — sửa baseline/<span class="kw-trap">rebaseline</span> chỉ sau khi đã phân tích, thống nhất, hoặc được duyệt qua change control.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an <span class="kw-signal">Empowered</span> Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Inform the stakeholder that the requested changes will be implemented in future …</span></td><td>Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần change control / change request.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Update the project management plan to incorporate the requested changes and info…</span></td><td>Rebaseline/sửa plan quá sớm — NEXT cần change control / change request trước khi thay đổi baseline.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Submit a change request to the change control board and notify the project spons…</span></td><td>&quot;Submit a change request to the change control board and notify the proje…&quot; cùng nhóm change control / change request nhưng lệch trọng tâm — &quot;Review the requested changes with the team and initiate the formal chang…&quot; sát stakeholder không hài lòng / kỳ vọng lệch hơn.</td></tr></tbody>
+            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Inform the stakeholder that the requested changes will be implemented in future …</span></td><td>Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần change control / <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Update the project management plan to incorporate the requested changes and info…</span></td><td><span class="kw-trap">Rebaseline</span>/sửa plan quá sớm — <span class="kw-cue">NEXT</span> cần change control / <span class="kw-signal">change request</span> trước khi thay đổi baseline.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Submit a <span class="kw-signal">change request</span> to the change control board and notify the project spons…</span></td><td>&quot;Submit a <span class="kw-signal">change request</span> to the change control board and notify the proje…&quot; cùng nhóm change control / <span class="kw-signal">change request</span> nhưng lệch trọng tâm — &quot;Review the requested changes with the team and initiate the formal chang…&quot; sát stakeholder không hài lòng / kỳ vọng lệch hơn.</td></tr></tbody>
           </table>
         </section>
 

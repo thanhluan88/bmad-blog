@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 795 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A company in a highly regulated industry is preparing to launch a new, first-of-its-kind product. To prevent competitors from entering the market first, the CEO asks the project manager to recommend a delivery approach that ensures speed and strategic advantage. Which project delivery approach should the project manager choose?</p>
+          <p class="lead">A company in a highly regulated industry is preparing to launch a new, <span class="kw-cue">first</span>-of-its-kind product. To prevent competitors from entering the market <span class="kw-cue">first</span>, the CEO asks the project manager to recommend a delivery approach that ensures speed and strategic advantage. Which project delivery approach should the project manager choose?</p>
           <div class="badges"><span class="badge">Schedule, Finance</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q795</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -144,11 +156,11 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Adopt a hybrid approach with early iterations for development and predictive tasks scheduled just before rollout.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
-        Include an experienced agile coach on the project team to help accelerate release cycles and improve agile practices.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+        Include an experienced agile <span class="kw-signal">coach</span> on the project team to help accelerate release cycles and improve agile practices.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;<span class="kw-signal">coaching</span> / phát triển năng lực&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
       </div></div>
         </section>
 
@@ -156,11 +168,11 @@
           <h2>3. Câu hỏi — Full Bank Q795</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 795</div>
-            <div class="q-text">A company in a highly regulated industry is preparing to launch a new, <em>first</em>-of-its-kind product. To prevent competitors from entering the market <em>first</em>, the CEO asks the project manager to recommend a delivery approach that ensures speed and strategic advantage. Which project delivery approach should the project manager choose?</div>
+            <div class="q-text">A company in a highly regulated industry is preparing to launch a new, <span class="kw-cue">first</span>-of-its-kind product. To prevent competitors from entering the market <span class="kw-cue">first</span>, the CEO asks the project manager to recommend a delivery approach that ensures speed and strategic advantage. Which project delivery approach should the project manager choose?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Implement a predictive approach based on the company’s prior experience.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Allocate sufficient budget for resources to fast-track the project.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Adopt a hybrid approach with early iterations for development and predictive tasks scheduled just before rollout.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Include an experienced agile coach on the project team to help accelerate release cycles and improve agile practices.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Include an experienced agile <span class="kw-signal">coach</span> on the project team to help accelerate release cycles and improve agile practices.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Adopt a hybrid approach with early iterations for development and predictive tasks scheduled just before rollout.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Finance (Executing, PMBOK 8).<br><br>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>C</strong> — &quot;Adopt a hybrid approach with early iterations for development and predictive tasks scheduled just before rollout.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Finance (Executing, PMBOK 8). Câu hỏi hỏi <strong>FIRST</strong> (bước đầu tiên ngay lúc này). FIRST: chọn hành động xử lý tình huống trực tiếp trước ghi nhận muộn hoặc thay đổi baseline chưa được phân tích.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; unfold. This effort involves initially outlining the broad milestones and key activities of a project and then refining and expanding upon them as more information becomes available or as the project progresses. This approach allows for f<br>&gt; — PMBOK 8, tr. 47 (Performance Domain: Schedule, Develop Schedule)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 47: Performance Domain: Schedule, Develop Schedule</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>C</strong> — &quot;Adopt a hybrid approach with early iterations for development and predictive tasks scheduled just before rollout.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>). Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span>: chọn hành động xử lý tình huống trực tiếp trước ghi nhận muộn hoặc thay đổi baseline chưa được phân tích.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; unfold. This effort involves <span class="kw-cue">initially</span> outlining the broad milestones and key activities of a project and then refining and expanding upon them as more information becomes available or as the project progresses. This approach allows for f<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 47 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 47: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement a predictive approach based on the company’s prior experience.</span></td><td>&quot;Implement a predictive approach based on the company’s prior experience.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Adopt a hybrid approach with early iterations for development and predictive tasks…&quot;.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Allocate sufficient budget for resources to fast-track the project.</span></td><td>Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Include an experienced agile coach on the project team to help accelerate releas…</span></td><td>Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement a predictive approach based on the company’s prior experience.</span></td><td>&quot;Implement a predictive approach based on the company’s prior experience.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Adopt a hybrid approach with early iterations for development and predictive tasks…&quot;.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Allocate sufficient budget for resources to fast-track the project.</span></td><td>Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Include an experienced agile <span class="kw-signal">coach</span> on the project team to help accelerate releas…</span></td><td>Tập trung &quot;<span class="kw-signal">coaching</span> / phát triển năng lực&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 

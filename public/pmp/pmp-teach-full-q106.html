@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -116,6 +122,12 @@
           <h1>Phân tích Câu 106 — Bộ luyện PMBOK 8</h1>
           <p class="lead">During a sprint review, the project team presents a burndown chart to the project sponsor. The team is completing backlog items much faster than planned. The sponsor is pleased, but the product owner is concerned that quality might be compromised. Some team members suggest taking additional work into the sprint to make better use of the available time. What should the product owner do? (Refer to the chart)</p>
           <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q106</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -139,8 +151,8 @@
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Approve adding new backlog items into the current sprint to maximize productivity …&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
-        Escalate the concern to senior management and request authorization to adjust the backlog and sprint commitments.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+        <span class="kw-trap">Escalate</span> the concern to senior management and request authorization to adjust the backlog and sprint commitments.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Lengthen the sprint duration so the team can continue delivering additional backlog items before the next review.
@@ -148,7 +160,7 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Confirm that all completed work satisfies the definition of done (DoD) and maintain the sprint scope until the next sprint planning session.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div></div>
         </section>
 
@@ -158,7 +170,7 @@
             <div class="q-num">pmp-full-questions · Câu 106</div>
             <div class="q-text">During a sprint review, the project team presents a burndown chart to the project sponsor. The team is completing backlog items much faster than planned. The sponsor is pleased, but the product owner is concerned that quality might be compromised. Some team members suggest taking additional work into the sprint to make better use of the available time. What should the product owner do? (Refer to the chart)</div>
             <button class="opt-btn" data-opt="A" type="button">A. Approve adding new backlog items into the current sprint to maximize productivity and demonstrate the team's higher velocity.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Escalate the concern to senior management and request authorization to adjust the backlog and sprint commitments.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. <span class="kw-trap">Escalate</span> the concern to senior management and request authorization to adjust the backlog and sprint commitments.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Lengthen the sprint duration so the team can continue delivering additional backlog items before the next review.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Confirm that all completed work satisfies the definition of done (DoD) and maintain the sprint scope until the next sprint planning session.</button>
             <div class="feedback" id="quizFeedback"></div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Confirm that all completed work satisfies the definition of done (DoD) and maintain the sprint scope until the next sprint planning session.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Vấn đề chất lượng sau delivery — retrospective/root cause và cải tiến hệ thống.<br><br>Trong Agile, servant leader trao quyền cho team tự cải thiện quy trình và loại bỏ impediment. PMBOK 8 — Build an empowered culture — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; and one another. Coupled with an active involvement of stakeholders from inception to completion, these competencies pave the way for success. ⚫ Knowledge of organizational structures. Being aware of the various configurations and relati<br>&gt; — PMBOK 8, tr. 54 (Performance Domain: Resources, Develop Team)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 54: Performance Domain: Resources, Develop Team</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Vấn đề chất lượng sau delivery — <span class="kw-signal">retrospective</span>/<span class="kw-signal">root cause</span> và cải tiến hệ thống.<br><br>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an <span class="kw-signal">empowered</span> culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; and one another. Coupled with an active involvement of stakeholders from inception to completion, these competencies pave the way for success. ⚫ Knowledge of organizational structures. Being aware of the various configurations and relati<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 54 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 54: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve adding new backlog items into the current sprint to maximize productivit…</span></td><td>&quot;Approve adding new backlog items into the current sprint to maximize productivity …&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Escalate the concern to senior management and request authorization to adjust th…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Lengthen the sprint duration so the team can continue delivering additional back…</span></td><td>&quot;Lengthen the sprint duration so the team can continue delivering additional backlo…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve adding new backlog items into the current sprint to maximize productivit…</span></td><td>&quot;Approve adding new backlog items into the current sprint to maximize productivity …&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the concern to senior management and request authorization to adjust th…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Lengthen the sprint duration so the team can continue delivering additional back…</span></td><td>&quot;Lengthen the sprint duration so the team can continue delivering additional backlo…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</td></tr></tbody>
           </table>
         </section>
 

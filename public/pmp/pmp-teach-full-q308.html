@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 308 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">After the project kick-off meeting, a critical resource approaches the project manager to share concerns about their ability to complete assigned tasks due to competing priorities from another high-visibility project. The resource’s role is essential for meeting near-term milestones, and delays could impact the critical path. What should the project manager do?</p>
+          <p class="lead">After the project kick-off meeting, a critical resource approaches the project manager to share concerns about their ability to complete assigned tasks due to competing priorities from another high-visibility project. The resource’s role is essential for meeting near-term milestones, and delays could impact the critical path. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Schedule, Risk</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q308</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -135,12 +147,12 @@
           <h2>2. So sánh đáp án</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
-        Meet with the resource and team to assess workload, adjust priorities, and agree on a feasible plan.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <span class="kw-signal">Meet with</span> the resource and team to assess workload, adjust priorities, and agree on a feasible plan.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
-        Document the availability issue in the risk register and define appropriate mitigation actions.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+        Document the availability issue in the <span class="kw-signal">risk register</span> and define appropriate mitigation actions.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Engage the sponsor to help resolve the resource conflict with higher-level management.
@@ -148,7 +160,7 @@
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Revise the project management plan to reflect possible schedule impacts from reduced availability.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Rebaseline/sửa plan trước khi thảo luận scope với stakeholder/sponsor.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)"><span class="kw-trap">Rebaseline</span>/sửa plan trước khi thảo luận scope với stakeholder/sponsor.</p>
       </div></div>
         </section>
 
@@ -156,9 +168,9 @@
           <h2>3. Câu hỏi — Full Bank Q308</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 308</div>
-            <div class="q-text">After the project kick-off meeting, a critical resource approaches the project manager to share concerns about their ability to complete assigned tasks due to competing priorities from another high-visibility project. The resource’s role is essential for meeting near-term milestones, and delays could impact the critical path. What should the project manager do?</div>
-            <button class="opt-btn" data-opt="A" type="button">A. Meet with the resource and team to assess workload, adjust priorities, and agree on a feasible plan.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Document the availability issue in the risk register and define appropriate mitigation actions.</button>
+            <div class="q-text">After the project kick-off meeting, a critical resource approaches the project manager to share concerns about their ability to complete assigned tasks due to competing priorities from another high-visibility project. The resource’s role is essential for meeting near-term milestones, and delays could impact the critical path. <span class="kw-cue">What should the project manager do</span>?</div>
+            <button class="opt-btn" data-opt="A" type="button">A. <span class="kw-signal">Meet with</span> the resource and team to assess workload, adjust priorities, and agree on a feasible plan.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Document the availability issue in the <span class="kw-signal">risk register</span> and define appropriate mitigation actions.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Engage the sponsor to help resolve the resource conflict with higher-level management.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Revise the project management plan to reflect possible schedule impacts from reduced availability.</button>
             <div class="feedback" id="quizFeedback"></div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Meet with the resource and team to assess workload, adjust priorities, and agree on a feasible plan.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay escalate.<br><br>Bối cảnh: After the project kick-off meeting, a critical resource approaches the project manager to share concerns about their ability to complete assigned tasks due to competing priorities from another high-visibility project. The resource’s role is essential for meeting near-term milestones, and delays could impact the critical path. Đáp án <strong>A</strong> — &quot;Meet with the resource and team to assess workload, adjust priorities, and agree on a feasible plan.&quot; — phù hợp vì PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay escalate.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; remains focused on delivering its key outcomes. ⚫ Schedule. A focus on value helps to ensure that time is managed effectively to help the project to deliver the expected value by—or earlier than—the target date. This effort includes plan<br>&gt; — PMBOK 8, tr. 42 (Performance Domain: Schedule, Develop Schedule)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 42: Performance Domain: Schedule, Develop Schedule</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay <span class="kw-trap">escalate</span>.<br><br>Bối cảnh: After the project kick-off meeting, a critical resource approaches the project manager to share concerns about their ability to complete assigned tasks due to competing priorities from another high-visibility project. The resource’s role is essential for meeting near-term milestones, and delays could impact the critical path. Đáp án <strong>A</strong> — &quot;<span class="kw-signal">Meet with</span> the resource and team to assess workload, adjust priorities, and agree on a feasible plan.&quot; — phù hợp vì PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay <span class="kw-trap">escalate</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; remains focused on delivering its key outcomes. ⚫ <span class="kw-pmbok">Schedule</span>. A <span class="kw-pmbok">focus on value</span> helps to ensure that time is managed effectively to help the project to deliver the expected value by—or earlier than—the target date. This effort includes plan<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 42 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 42: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Document the availability issue in the risk register and define appropriate miti…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Engage the sponsor to help resolve the resource conflict with higher-level manag…</span></td><td>&quot;Engage the sponsor to help resolve the resource conflict with higher-level managem…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung họp / thảo luận trực tiếp.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Revise the project management plan to reflect possible schedule impacts from red…</span></td><td>Rebaseline/sửa plan trước khi thảo luận scope với stakeholder/sponsor.</td></tr></tbody>
+            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Document the availability issue in the <span class="kw-signal">risk register</span> and define appropriate miti…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Engage the sponsor to help resolve the resource conflict with higher-level manag…</span></td><td>&quot;Engage the sponsor to help resolve the resource conflict with higher-level managem…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung họp / thảo luận trực tiếp.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Revise the project management plan to reflect possible schedule impacts from red…</span></td><td><span class="kw-trap">Rebaseline</span>/sửa plan trước khi thảo luận scope với stakeholder/sponsor.</td></tr></tbody>
           </table>
         </section>
 

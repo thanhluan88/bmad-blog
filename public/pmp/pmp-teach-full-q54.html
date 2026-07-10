@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 54 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is overseeing a new scheduling software project, and a disagreement arises during a design review, leading to heated debates and distracting side conversations. The meeting loses focus, and the project manager observes that tension is delaying decisions. What should the project manager do?</p>
+          <p class="lead">A project manager is overseeing a new scheduling software project, and a disagreement arises during a design review, leading to heated debates and distracting side conversations. The meeting loses focus, and the project manager observes that tension is delaying decisions. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q54</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -135,8 +147,8 @@
           <h2>2. So sánh đáp án</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
-        End the meeting early and ask the sponsor to decide which of the two stakeholders is correct.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;End the meeting early and ask the sponsor to decide which of the two stakeholders …&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung chỉ đạo cứng / ra lệnh.</p>
+        End the meeting early and <span class="kw-trap">ask the sponsor</span> to decide which of the two stakeholders is correct.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;End the meeting early and <span class="kw-trap">ask the sponsor</span> to decide which of the two stakeholders …&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung chỉ đạo cứng / ra lệnh.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Allow the debate to continue until one side concedes so the team can move on.
@@ -144,7 +156,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Pause to address the conflict and help both sides identify needs and solutions in a direct conversation.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Have both parties submit written arguments and choose the more detailed proposal.
@@ -156,8 +168,8 @@
           <h2>3. Câu hỏi — Full Bank Q54</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 54</div>
-            <div class="q-text">A project manager is overseeing a new scheduling software project, and a disagreement arises during a design review, leading to heated debates and distracting side conversations. The meeting loses focus, and the project manager observes that tension is delaying decisions. What should the project manager do?</div>
-            <button class="opt-btn" data-opt="A" type="button">A. End the meeting early and ask the sponsor to decide which of the two stakeholders is correct.</button>
+            <div class="q-text">A project manager is overseeing a new scheduling software project, and a disagreement arises during a design review, leading to heated debates and distracting side conversations. The meeting loses focus, and the project manager observes that tension is delaying decisions. <span class="kw-cue">What should the project manager do</span>?</div>
+            <button class="opt-btn" data-opt="A" type="button">A. End the meeting early and <span class="kw-trap">ask the sponsor</span> to decide which of the two stakeholders is correct.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Allow the debate to continue until one side concedes so the team can move on.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Pause to address the conflict and help both sides identify needs and solutions in a direct conversation.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Have both parties submit written arguments and choose the more detailed proposal.</button>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Pause to address the conflict and help both sides identify needs and solutions in a direct conversation.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Xung đột — PM facilitate giải quyết trực tiếp, không ignore hay escalate sớm.<br><br>Trong Agile, servant leader trao quyền cho team tự cải thiện quy trình và loại bỏ impediment. PMBOK 8 — Build an empowered culture — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; to work on a specific deliverable. Incorporating these key members into a project team may present challenges. However, cultivating a team environment that honors diversity and seeks to harness it constructively fosters an atmosphere wher<br>&gt; — PMBOK 8, tr. 54 (Performance Domain: Resources, Develop Team)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 54: Performance Domain: Resources, Develop Team</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Xung đột — PM <span class="kw-signal">facilitate</span> giải quyết trực tiếp, không <span class="kw-trap">ignore</span> hay <span class="kw-trap">escalate</span> sớm.<br><br>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an <span class="kw-signal">empowered</span> culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; to work on a specific deliverable. Incorporating these key members into a project team may present challenges. However, cultivating a team environment that honors diversity and seeks to harness it constructively fosters an atmosphere wher<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 54 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 54: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">End the meeting early and ask the sponsor to decide which of the two stakeholder…</span></td><td>&quot;End the meeting early and ask the sponsor to decide which of the two stakeholders …&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung chỉ đạo cứng / ra lệnh.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Allow the debate to continue until one side concedes so the team can move on.</span></td><td>&quot;Allow the debate to continue until one side concedes so the team can move on.&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung chỉ đạo cứng / ra lệnh.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Have both parties submit written arguments and choose the more detailed proposal…</span></td><td>&quot;Have both parties submit written arguments and choose the more detailed proposal.&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung chỉ đạo cứng / ra lệnh.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">End the meeting early and <span class="kw-trap">ask the sponsor</span> to decide which of the two stakeholder…</span></td><td>&quot;End the meeting early and <span class="kw-trap">ask the sponsor</span> to decide which of the two stakeholders …&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung chỉ đạo cứng / ra lệnh.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Allow the debate to continue until one side concedes so the team can move on.</span></td><td>&quot;Allow the debate to continue until one side concedes so the team can move on.&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung chỉ đạo cứng / ra lệnh.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Have both parties submit written arguments and choose the more detailed proposal…</span></td><td>&quot;Have both parties submit written arguments and choose the more detailed proposal.&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung chỉ đạo cứng / ra lệnh.</td></tr></tbody>
           </table>
         </section>
 

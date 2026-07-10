@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 574 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A company is experiencing delays that will make it very difficult to complete a predictive project within the original timeline. The sponsor wants to find a way to deliver value sooner while maintaining the essential components of the existing project plan. What should the project manager do?</p>
+          <p class="lead">A company is experiencing delays that will make it very difficult to complete a predictive project within the original timeline. The sponsor wants to find a way to deliver value sooner while maintaining the essential components of the existing project plan. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Schedule, Scope</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q574</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -143,8 +155,8 @@
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thay đổi phạm vi.</p>
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
-        Plan a parallel iterative track to develop requirements for a minimum viable product and descope unnecessary predictive tasks.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        Plan a parallel iterative track to develop requirements for a <span class="kw-signal">minimum viable product</span> and descope unnecessary predictive tasks.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Compress the project schedule by fast-tracking all remaining critical path activities to recover the lost time.
@@ -156,10 +168,10 @@
           <h2>3. Câu hỏi — Full Bank Q574</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 574</div>
-            <div class="q-text">A company is experiencing delays that will make it very difficult to complete a predictive project within the original timeline. The sponsor wants to find a way to deliver value sooner while maintaining the essential components of the existing project plan. What should the project manager do?</div>
+            <div class="q-text">A company is experiencing delays that will make it very difficult to complete a predictive project within the original timeline. The sponsor wants to find a way to deliver value sooner while maintaining the essential components of the existing project plan. <span class="kw-cue">What should the project manager do</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Cancel the predictive project and restart using a fully agile approach to accelerate delivery under pandemic constraints.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Request a timeline extension from the sponsor and continue executing the original predictive project plan as approved.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Plan a parallel iterative track to develop requirements for a minimum viable product and descope unnecessary predictive tasks.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Plan a parallel iterative track to develop requirements for a <span class="kw-signal">minimum viable product</span> and descope unnecessary predictive tasks.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Compress the project schedule by fast-tracking all remaining critical path activities to recover the lost time.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -174,7 +186,7 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Plan a parallel iterative track to develop requirements for a minimum viable product and descope unnecessary predictive tasks.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Kick-off sản phẩm mới — define MVP trước để Focus on value, tránh commit toàn bộ roadmap quá sớm.<br><br>Bối cảnh: A company is experiencing delays that will make it very difficult to complete a predictive project within the original timeline. The sponsor wants to find a way to deliver value sooner while maintaining the essential components of the existing project plan. Đáp án <strong>C</strong> — &quot;Plan a parallel iterative track to develop requirements for a minimum viable product and descope unnecessary predictive tasks.&quot; — phù hợp vì Kick-off sản phẩm mới — define MVP trước để Focus on value, tránh commit toàn bộ roadmap quá sớm.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; Revising and maintaining the project schedule to sustain a realistic schedule should continue throughout the project. Schedules can be created and defined at various levels. The project team specifies the rules for the relative granularit<br>&gt; — PMBOK 8, tr. 47 (Performance Domain: Schedule, Develop Schedule)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 47: Performance Domain: Schedule, Develop Schedule</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Kick-off sản phẩm mới — define <span class="kw-signal">MVP</span> trước để <span class="kw-pmbok">Focus on value</span>, tránh commit toàn bộ roadmap quá sớm.<br><br>Bối cảnh: A company is experiencing delays that will make it very difficult to complete a predictive project within the original timeline. The sponsor wants to find a way to deliver value sooner while maintaining the essential components of the existing project plan. Đáp án <strong>C</strong> — &quot;Plan a parallel iterative track to develop requirements for a <span class="kw-signal">minimum viable product</span> and descope unnecessary predictive tasks.&quot; — phù hợp vì Kick-off sản phẩm mới — define <span class="kw-signal">MVP</span> trước để <span class="kw-pmbok">Focus on value</span>, tránh commit toàn bộ roadmap quá sớm.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; Revising and maintaining the project schedule to sustain a realistic schedule should continue throughout the project. Schedules can be created and defined at various levels. The project team specifies the rules for the relative granularit<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 47 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 47: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Cancel the predictive project and restart using a fully agile approach to accele…</span></td><td>&quot;Cancel the predictive project and restart using a fully agile approach to accelera…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thay đổi phạm vi.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request a timeline extension from the sponsor and continue executing the origina…</span></td><td>đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thay đổi phạm vi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Compress the project schedule by fast-tracking all remaining critical path activ…</span></td><td>Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết Compress the project schedule by fast-tracking all remaining critical path activities to recover the lost time. — đáp án đúng cần thay đổi phạm vi.</td></tr></tbody>

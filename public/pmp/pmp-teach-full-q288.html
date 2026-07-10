@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 288 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">The agile team is midway through the current sprint. One team member is working on a user story required to deliver a critical functionality for the sprint goal. During daily coordination meetings, the team member has given vague updates, such as &quot;still progressing,&quot; for several days in a row. No visible progress has been made, and the functionality is now at risk. Other team members are unaware of the exact blockers, and the product owner is becoming concerned about the sprint outcome. What should the project manager do to address this situation and protect sprint goals?</p>
+          <p class="lead">The agile team is midway through the current sprint. One team member is working on a user story required to deliver a critical functionality for the sprint goal. During daily coordination meetings, the team member has given vague updates, such as &quot;still progressing,&quot; for several days in a row. No visible progress has been made, and the functionality is now at risk. Other team members are unaware of the exact blockers, and the product owner is becoming concerned about the sprint outcome. <span class="kw-cue">What should the project manager do</span> to address this situation and protect sprint goals?</p>
           <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q288</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -139,12 +151,12 @@
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Yêu cầu team tự xử lý thay vì PM hỗ trợ member đang gặp khó.</p>
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
-        Meet one-on-one with the team member to understand the issue and agree on a course of action.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        Meet <span class="kw-signal">one-on-one</span> with the team member to understand the issue and agree on a course of action.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
-        Escalate the issue to the product owner and propose replacing the user story with a simpler one.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+        <span class="kw-trap">Escalate</span> the issue to the product owner and propose replacing the user story with a simpler one.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Immediately reassign the story to another team member to avoid missing the sprint commitment.
@@ -156,10 +168,10 @@
           <h2>3. Câu hỏi — Full Bank Q288</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 288</div>
-            <div class="q-text">The agile team is midway through the current sprint. One team member is working on a user story required to deliver a critical functionality for the sprint goal. During daily coordination meetings, the team member has given vague updates, such as &quot;still progressing,&quot; for several days in a row. No visible progress has been made, and the functionality is now at risk. Other team members are unaware of the exact blockers, and the product owner is becoming concerned about the sprint outcome. What should the project manager do to address this situation and protect sprint goals?</div>
+            <div class="q-text">The agile team is midway through the current sprint. One team member is working on a user story required to deliver a critical functionality for the sprint goal. During daily coordination meetings, the team member has given vague updates, such as &quot;still progressing,&quot; for several days in a row. No visible progress has been made, and the functionality is now at risk. Other team members are unaware of the exact blockers, and the product owner is becoming concerned about the sprint outcome. <span class="kw-cue">What should the project manager do</span> to address this situation and protect sprint goals?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Ask the team to collectively support the developer in completing the story before the sprint ends.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Meet one-on-one with the team member to understand the issue and agree on a course of action.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Escalate the issue to the product owner and propose replacing the user story with a simpler one.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Meet <span class="kw-signal">one-on-one</span> with the team member to understand the issue and agree on a course of action.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. <span class="kw-trap">Escalate</span> the issue to the product owner and propose replacing the user story with a simpler one.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Immediately reassign the story to another team member to avoid missing the sprint commitment.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Meet one-on-one with the team member to understand the issue and agree on a course of action.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Member/stakeholder cần được lắng nghe và hỗ trợ cụ thể trước — servant leadership, Build an empowered culture.<br><br>Trong Agile, servant leader trao quyền cho team tự cải thiện quy trình và loại bỏ impediment. PMBOK 8 — Build an empowered culture — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — PMBOK 8, tr. 53 (Performance Domain: Resources, Develop Team)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: Resources, Develop Team</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Member/stakeholder cần được lắng nghe và hỗ trợ cụ thể trước — <span class="kw-signal">servant leadership</span>, <span class="kw-pmbok">Build an <span class="kw-signal">empowered</span> culture</span>.<br><br>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an <span class="kw-signal">empowered</span> culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an <span class="kw-signal">Empowered</span> Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the team to collectively support the developer in completing the story befor…</span></td><td>Yêu cầu team tự xử lý thay vì PM hỗ trợ member đang gặp khó.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Escalate the issue to the product owner and propose replacing the user story wit…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Immediately reassign the story to another team member to avoid missing the sprin…</span></td><td>&quot;Immediately reassign the story to another team member to avoid missing the sprint …&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung lắng nghe và hỗ trợ cá nhân.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the team to collectively support the developer in completing the story befor…</span></td><td>Yêu cầu team tự xử lý thay vì PM hỗ trợ member đang gặp khó.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the issue to the product owner and propose replacing the user story wit…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Immediately reassign the story to another team member to avoid missing the sprin…</span></td><td>&quot;Immediately reassign the story to another team member to avoid missing the sprint …&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung lắng nghe và hỗ trợ cá nhân.</td></tr></tbody>
           </table>
         </section>
 

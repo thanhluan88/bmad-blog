@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 220 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An agile project team is designing a new time management app, but when they present the first iteration to key stakeholders they discover that it is out of sync with the stakeholders' expectations. The product owner needs to identify the disconnect. What should the product manager do?</p>
+          <p class="lead">An agile project team is designing a new time management app, but when they present the <span class="kw-cue">first</span> iteration to key stakeholders they discover that it is out of sync with the stakeholders' expectations. The product owner needs to identify the disconnect. What should the product manager do?</p>
           <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q220</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -136,19 +148,19 @@
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Implement an after-action review to reflect on the actions taken, identify outcomes achieved, and document the lessons learned.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi FIRST — đây không phải bước ưu tiên.)</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi <span class="kw-cue">FIRST</span> — đây không phải bước ưu tiên.)</p>
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
-        Perform a five whys analysis to help the project team move beyond the symptoms of the problem and identify the root cause.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        Perform a five whys analysis to help the project team move beyond the symptoms of the problem and identify the <span class="kw-signal">root cause</span>.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Schedule periods of colocation to foster communication and understanding between the project team and other stakeholders.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần facilitate retrospective / phân tích root cause.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;khuyến khích <span class="kw-signal">collaboration</span> / hợp tác&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Organize a virtual brainstorming session so team members can anonymously share where they think the misunderstanding originated.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Organize a virtual brainstorming session so team members can anonymously share whe…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Organize a virtual brainstorming session so team members can anonymously share whe…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</p>
       </div></div>
         </section>
 
@@ -156,9 +168,9 @@
           <h2>3. Câu hỏi — Full Bank Q220</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 220</div>
-            <div class="q-text">An agile project team is designing a new time management app, but when they present the <em>first</em> iteration to key stakeholders they discover that it is out of sync with the stakeholders' expectations. The product owner needs to identify the disconnect. What should the product manager do?</div>
+            <div class="q-text">An agile project team is designing a new time management app, but when they present the <span class="kw-cue">first</span> iteration to key stakeholders they discover that it is out of sync with the stakeholders' expectations. The product owner needs to identify the disconnect. What should the product manager do?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Implement an after-action review to reflect on the actions taken, identify outcomes achieved, and document the lessons learned.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Perform a five whys analysis to help the project team move beyond the symptoms of the problem and identify the root cause.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Perform a five whys analysis to help the project team move beyond the symptoms of the problem and identify the <span class="kw-signal">root cause</span>.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Schedule periods of colocation to foster communication and understanding between the project team and other stakeholders.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Organize a virtual brainstorming session so team members can anonymously share where they think the misunderstanding originated.</button>
             <div class="feedback" id="quizFeedback"></div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Perform a five whys analysis to help the project team move beyond the symptoms of the problem and identify the root cause.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân.<br><br>Stakeholder engagement (miền Stakeholders) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong>FIRST</strong> (bước đầu tiên ngay lúc này). FIRST ưu tiên <strong>facilitate retrospective / phân tích root cause</strong> — ghi nhận/tài liệu hóa thường đến sau bước xử lý trực tiếp tình huống.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 68 A Guide to the Project Management Body of Knowledge 2.5.1 Key Concepts The following key concepts support effective practices for the Stakeholders performance domain. ⚫ Stakeholder engagement. Stakeholder engagement encompasses the activ<br>&gt; — PMBOK 8, tr. 68 (Performance Domain: Stakeholders, Manage Stakeholder Engagement)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 68: Performance Domain: Stakeholders, Manage Stakeholder Engagement</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân.<br><br>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> ưu tiên <strong><span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span></strong> — ghi nhận/tài liệu hóa thường đến sau bước xử lý trực tiếp tình huống.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 68 A Guide to the Project Management Body of Knowledge 2.5.1 Key Concepts The following key concepts support effective practices for the <span class="kw-pmbok">Stakeholders</span> performance domain. ⚫ Stakeholder engagement. Stakeholder engagement encompasses the activ<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 68 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Manage Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 68: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Manage Stakeholder Engagement</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement an after-action review to reflect on the actions taken, identify outco…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi FIRST — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Schedule periods of colocation to foster communication and understanding between…</span></td><td>Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần facilitate retrospective / phân tích root cause.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Organize a virtual brainstorming session so team members can anonymously share w…</span></td><td>&quot;Organize a virtual brainstorming session so team members can anonymously share whe…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement an after-action review to reflect on the actions taken, identify outco…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi <span class="kw-cue">FIRST</span> — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Schedule periods of colocation to foster communication and understanding between…</span></td><td>Tập trung &quot;khuyến khích <span class="kw-signal">collaboration</span> / hợp tác&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Organize a virtual brainstorming session so team members can anonymously share w…</span></td><td>&quot;Organize a virtual brainstorming session so team members can anonymously share whe…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr></tbody>
           </table>
         </section>
 

@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 910 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A software company has recently established an architectural excellence board to define and oversee standard programming architectures across all products. The project manager notices the backlog still lacks architecture-related work despite leadership discussions. The change has been mentioned in leadership meetings but not reflected in planned work. What should the project manager do?</p>
+          <p class="lead">A software company has recently established an architectural excellence board to define and oversee standard programming architectures across all products. The project manager notices the backlog still lacks architecture-related work despite leadership discussions. The change has been mentioned in leadership meetings but <span class="kw-cue">not</span> reflected in planned work. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Schedule, Finance</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q910</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -140,11 +152,11 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Discuss the new architectural standards with the product owner and team to determine how the change affects the backlog.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
-        Inform the team to ignore the new architectural standards until the current release is finished to avoid disruption.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PMI kỳ vọng PM chủ động và có trách nhiệm (Lead accountably), không bỏ qua vấn đề hay giả định mọi người tự hiểu.</p>
+        Inform the team to <span class="kw-trap">ignore</span> the new architectural standards until the current release is finished to avoid disruption.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PMI kỳ vọng PM chủ động và có trách nhiệm (<span class="kw-pmbok">Lead accountably</span>), không bỏ qua vấn đề hay giả định mọi người tự hiểu.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Ask the architectural excellence board to assign an architect to the team without involving the product owner.
@@ -156,10 +168,10 @@
           <h2>3. Câu hỏi — Full Bank Q910</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 910</div>
-            <div class="q-text">A software company has recently established an architectural excellence board to define and oversee standard programming architectures across all products. The project manager notices the backlog still lacks architecture-related work despite leadership discussions. The change has been mentioned in leadership meetings but <em>not</em> reflected in planned work. What should the project manager do?</div>
+            <div class="q-text">A software company has recently established an architectural excellence board to define and oversee standard programming architectures across all products. The project manager notices the backlog still lacks architecture-related work despite leadership discussions. The change has been mentioned in leadership meetings but <span class="kw-cue">not</span> reflected in planned work. <span class="kw-cue">What should the project manager do</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Pause all current development work until the architectural excellence board directly updates the team’s user stories.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Discuss the new architectural standards with the product owner and team to determine how the change affects the backlog.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Inform the team to ignore the new architectural standards until the current release is finished to avoid disruption.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Inform the team to <span class="kw-trap">ignore</span> the new architectural standards until the current release is finished to avoid disruption.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Ask the architectural excellence board to assign an architect to the team without involving the product owner.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Discuss the new architectural standards with the product owner and team to determine how the change affects the backlog.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay escalate.<br><br>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>B</strong> — &quot;Discuss the new architectural standards with the product owner and team to determine how the change affects the backlog.&quot; — phù hợp vì PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay escalate. Agile/Hybrid: ưu tiên empowered culture, collaboration và continuous improvement.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 46 ⚫ Schedule. An emphasis on quality has implications for the project’s schedule. Examples include ensuring scheduling practices and artifacts are reviewed for completeness and correctness; integrating product quality reviews as schedule<br>&gt; — PMBOK 8, tr. 46 (Performance Domain: Schedule, Develop Schedule)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 46: Performance Domain: Schedule, Develop Schedule</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay <span class="kw-trap">escalate</span>.<br><br>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>B</strong> — &quot;Discuss the new architectural standards with the product owner and team to determine how the change affects the backlog.&quot; — phù hợp vì PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay <span class="kw-trap">escalate</span>. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 46 ⚫ <span class="kw-pmbok">Schedule</span>. An emphasis on quality has implications for the project’s schedule. Examples include ensuring scheduling practices and artifacts are reviewed for completeness and correctness; integrating product quality reviews as schedule<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 46 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 46: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Pause all current development work until the architectural excellence board dire…</span></td><td>&quot;Pause all current development work until the architectural excellence board direct…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung họp / thảo luận trực tiếp.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Inform the team to ignore the new architectural standards until the current rele…</span></td><td>PMI kỳ vọng PM chủ động và có trách nhiệm (Lead accountably), không bỏ qua vấn đề hay giả định mọi người tự hiểu.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the architectural excellence board to assign an architect to the team withou…</span></td><td>yêu cầu bên liên quan/team thực hiện hành động không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung họp / thảo luận trực tiếp.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Pause all current development work until the architectural excellence board dire…</span></td><td>&quot;Pause all current development work until the architectural excellence board direct…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung họp / thảo luận trực tiếp.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Inform the team to <span class="kw-trap">ignore</span> the new architectural standards until the current rele…</span></td><td>PMI kỳ vọng PM chủ động và có trách nhiệm (<span class="kw-pmbok">Lead accountably</span>), không bỏ qua vấn đề hay giả định mọi người tự hiểu.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the architectural excellence board to assign an architect to the team withou…</span></td><td>yêu cầu bên liên quan/team thực hiện hành động không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung họp / thảo luận trực tiếp.</td></tr></tbody>
           </table>
         </section>
 

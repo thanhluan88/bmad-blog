@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 631 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project team is reviewing the cumulative flow diagram (CFD) during a daily coordination meeting. The chart shows that tasks remain stable until Period 7, while the line representing done continues to grow. The sponsor is pleased, but the quality manager warns that work might be rushed, leading to defects. Some team members suggest pulling extra backlog items to use the available capacity. What should the project manager do? (Refer to the chart)</p>
+          <p class="lead">A project team is reviewing the cumulative flow diagram (CFD) during a daily coordination meeting. The chart shows that tasks remain stable until Period 7, while the line representing done continues to grow. The sponsor is pleased, but the quality manager warns that work might be rushed, leading to defects. Some team members suggest pulling extra backlog items to use the available capacity. <span class="kw-cue">What should the project manager do</span>? (Refer to the chart)</p>
           <div class="badges"><span class="badge">Scope, Resources</span><span class="badge">Executing</span><span class="badge">Validate Scope</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q631</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -136,15 +148,15 @@
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Confirm that completed work meets the definition of done and maintain the current sprint scope until the next iteration.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Approve the addition of new backlog items mid-sprint to maximize productivity and maintain the project's momentum.
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Approve the addition of new backlog items mid-sprint to maximize productivity and …&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
-        Escalate the concern to senior management and request authorization to formally adjust backlog commitments.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+        <span class="kw-trap">Escalate</span> the concern to senior management and request authorization to formally adjust backlog commitments.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Restrict progress reporting to only high-level updates to reassure stakeholders and prevent unnecessary concerns.
@@ -156,10 +168,10 @@
           <h2>3. Câu hỏi — Full Bank Q631</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 631</div>
-            <div class="q-text">A project team is reviewing the cumulative flow diagram (CFD) during a daily coordination meeting. The chart shows that tasks remain stable until Period 7, while the line representing done continues to grow. The sponsor is pleased, but the quality manager warns that work might be rushed, leading to defects. Some team members suggest pulling extra backlog items to use the available capacity. What should the project manager do? (Refer to the chart)</div>
+            <div class="q-text">A project team is reviewing the cumulative flow diagram (CFD) during a daily coordination meeting. The chart shows that tasks remain stable until Period 7, while the line representing done continues to grow. The sponsor is pleased, but the quality manager warns that work might be rushed, leading to defects. Some team members suggest pulling extra backlog items to use the available capacity. <span class="kw-cue">What should the project manager do</span>? (Refer to the chart)</div>
             <button class="opt-btn" data-opt="A" type="button">A. Confirm that completed work meets the definition of done and maintain the current sprint scope until the next iteration.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Approve the addition of new backlog items mid-sprint to maximize productivity and maintain the project's momentum.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Escalate the concern to senior management and request authorization to formally adjust backlog commitments.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. <span class="kw-trap">Escalate</span> the concern to senior management and request authorization to formally adjust backlog commitments.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Restrict progress reporting to only high-level updates to reassure stakeholders and prevent unnecessary concerns.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Confirm that completed work meets the definition of done and maintain the current sprint scope until the next iteration.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> CFD: Done tăng nhưng cần xác nhận Definition of Done — không thêm backlog mid-sprint vội.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; and is used as the basis for comparison to actual results. The scope baseline forms part of the performance measurement baseline (PMB), which also includes the schedule baseline and the cost baseline. For adaptive approaches, the baseline<br>&gt; — PMBOK 8, tr. 38 (Performance Domain: Scope, Validate Scope)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 38: Performance Domain: Scope, Validate Scope</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> CFD: Done tăng nhưng cần xác nhận Definition of Done — không thêm backlog mid-sprint vội.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; and is used as the basis for comparison to actual results. The scope baseline forms part of the performance measurement baseline (PMB), which also includes the schedule baseline and the cost baseline. For adaptive approaches, the baseline<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 38 (Performance Domain: <span class="kw-pmbok">Scope</span>, Validate <span class="kw-pmbok">Scope</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 38: Performance Domain: <span class="kw-pmbok">Scope</span>, Validate <span class="kw-pmbok">Scope</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve the addition of new backlog items mid-sprint to maximize productivity an…</span></td><td>&quot;Approve the addition of new backlog items mid-sprint to maximize productivity and …&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Escalate the concern to senior management and request authorization to formally …</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Restrict progress reporting to only high-level updates to reassure stakeholders …</span></td><td>&quot;Restrict progress reporting to only high-level updates to reassure stakeholders an…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</td></tr></tbody>
+            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve the addition of new backlog items mid-sprint to maximize productivity an…</span></td><td>&quot;Approve the addition of new backlog items mid-sprint to maximize productivity and …&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the concern to senior management and request authorization to formally …</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Restrict progress reporting to only high-level updates to reassure stakeholders …</span></td><td>&quot;Restrict progress reporting to only high-level updates to reassure stakeholders an…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</td></tr></tbody>
           </table>
         </section>
 

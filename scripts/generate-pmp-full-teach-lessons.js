@@ -6,6 +6,12 @@ const fs = require("fs");
 const path = require("path");
 const { generateTeachAnalysis } = require("./lib/pmp-pmbok8-generator");
 const { loadCacheFile } = require("./lib/pmp-pmbok8-rag-pages");
+const {
+  highlightExamCues,
+  highlightOptionText,
+  highlightReasoning,
+  mdInlineHighlighted,
+} = require("./lib/pmp-teach-keywords");
 
 const PMP_DIR = path.join(__dirname, "..", "public", "pmp");
 const JSON_PATH = path.join(PMP_DIR, "pmp-full-questions.json");
@@ -37,7 +43,7 @@ function escapeHtml(s) {
 }
 
 function mdInline(s) {
-  return escapeHtml(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  return mdInlineHighlighted(s);
 }
 
 function formatMappingList(val) {
@@ -99,19 +105,6 @@ function correctKeys(q) {
     .filter(Boolean);
 }
 
-function highlightQuestionText(text) {
-  let html = escapeHtml(text || "");
-  const patterns = [
-    /\b(first|FIRST)\b/gi,
-    /\b(Choose\s+\d+)\b/gi,
-    /\b(NOT|except|least|best|most)\b/gi,
-  ];
-  for (const re of patterns) {
-    html = html.replace(re, (m) => `<em>${m}</em>`);
-  }
-  return html;
-}
-
 function renderOptionsGridFromAnalysis(optionAnalysis) {
   if (!optionAnalysis?.length) return "";
   return `<div class="approach-grid">${optionAnalysis
@@ -122,7 +115,7 @@ function renderOptionsGridFromAnalysis(optionAnalysis) {
         : o.reason || "Không phải lựa chọn tốt nhất.";
       return `<div class="approach-cell${ok ? " pull" : ""}">
         <strong>${escapeHtml(o.key)} — ${ok ? "Đúng" : "Sai"}</strong>
-        ${escapeHtml(o.text)}
+        ${highlightOptionText(o.text, ok)}
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">${mdInline(reason)}</p>
       </div>`;
     })
@@ -133,7 +126,7 @@ function renderPmbok8Insight(pageInfo) {
   if (!pageInfo?.snippet || pageInfo.snippet.length < 40) return "";
   return `<div class="card info">
             <h4>PMBOK 8 — Cơ sở từ Guide (tr. ${escapeHtml(String(pageInfo.pages?.[0] || ""))})</h4>
-            <p style="margin:0;font-style:italic">"${escapeHtml(pageInfo.snippet)}"</p>
+            <p style="margin:0;font-style:italic">"${highlightReasoning(pageInfo.snippet)}"</p>
             <p style="margin:0.5rem 0 0;font-size:0.82rem">${escapeHtml(pageInfo.topic || "")}</p>
           </div>`;
 }
@@ -167,7 +160,7 @@ function renderExcludeTableFromAnalysis(optionAnalysis) {
             <tbody>${wrong
               .map(
                 (o) =>
-                  `<tr><td><strong>${o.key}</strong><br><span style="font-size:0.8rem;color:var(--muted)">${escapeHtml(o.text.slice(0, 80))}${o.text.length > 80 ? "…" : ""}</span></td><td>${mdInline(o.reason)}</td></tr>`,
+                  `<tr><td><strong>${o.key}</strong><br><span style="font-size:0.8rem;color:var(--muted)">${highlightOptionText(o.text.slice(0, 80), false)}${o.text.length > 80 ? "…" : ""}</span></td><td>${mdInline(o.reason)}</td></tr>`,
               )
               .join("")}</tbody>
           </table>`;
@@ -192,12 +185,12 @@ function renderMcqQuiz(q) {
   const opts = (q.options || [])
     .map(
       (o) =>
-        `<button class="opt-btn" data-opt="${o.key}" type="button">${escapeHtml(o.key)}. ${escapeHtml(o.text)}</button>`,
+        `<button class="opt-btn" data-opt="${o.key}" type="button">${o.key}. ${highlightOptionText(o.text, correctKeys(q).includes(o.key))}</button>`,
     )
     .join("\n            ");
   return `<div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu ${q.id}${multi ? " · Chọn nhiều" : ""}</div>
-            <div class="q-text">${highlightQuestionText(q.text)}</div>
+            <div class="q-text">${highlightExamCues(q.text)}</div>
             ${opts}
             <div class="feedback" id="quizFeedback"></div>
           </div>`;
@@ -224,7 +217,7 @@ function renderQuizBlock(q) {
   if (q.type === "mcq" && q.options?.length) return renderMcqQuiz(q);
   return `<div class="quiz-card">
             <div class="q-num">pmp-full-questions · Câu ${q.id} · ${escapeHtml(q.type)}</div>
-            <div class="q-text">${highlightQuestionText(q.text)}</div>
+            <div class="q-text">${highlightExamCues(q.text)}</div>
           </div>
           ${renderNonMcqAnswer(q)}`;
 }
@@ -410,6 +403,12 @@ function renderLesson(q, prev, next) {
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -464,8 +463,14 @@ function renderLesson(q, prev, next) {
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu ${q.id} — Bộ luyện PMBOK 8</h1>
-          <p class="lead">${escapeHtml(q.text)}</p>
+          <p class="lead">${highlightExamCues(q.text)}</p>
           <div class="badges">${badges.map((b) => `<span class="badge">${escapeHtml(b)}</span>`).join("")}</div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">

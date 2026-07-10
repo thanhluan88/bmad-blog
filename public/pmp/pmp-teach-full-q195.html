@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 195 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An organization has just completed a complicated project with many setbacks that required creative solutions. The project manager must ensure that the full scope is captured and documented so future teams can use it for reference. What should the project manager do?</p>
+          <p class="lead">An organization has just completed a complicated project with many setbacks that required creative solutions. The project manager must ensure that the full scope is captured and documented so future teams can use it for reference. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Resources, Governance</span><span class="badge">Executing</span><span class="badge">Plan Resources</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q195</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -136,19 +148,19 @@
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Compare all manuals and documentation with existing information and update everything that has changed throughout the project.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
-        Implement a shared ownership approach to knowledge management so team members are empowered to share and codify their findings.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết Implement a shared ownership approach to knowledge management so team members are empowered to share and codify their findings. — đáp án đúng cần facilitate retrospective / phân tích root cause.</p>
+        Implement a shared ownership approach to knowledge management so team members are <span class="kw-signal">empowered</span> to share and codify their findings.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết Implement a shared ownership approach to knowledge management so team members are <span class="kw-signal">empowered</span> to share and codify their findings. — đáp án đúng cần <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</p>
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
-        Organize a retrospective to consolidate documentation and lessons learned from the personal experience of project team members.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        Organize a <span class="kw-signal">retrospective</span> to consolidate documentation and lessons learned from the personal experience of project team members.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Schedule the transfer of documentation and knowledge to the operations team for implementation into the information management system.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
       </div></div>
         </section>
 
@@ -156,10 +168,10 @@
           <h2>3. Câu hỏi — Full Bank Q195</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 195</div>
-            <div class="q-text">An organization has just completed a complicated project with many setbacks that required creative solutions. The project manager must ensure that the full scope is captured and documented so future teams can use it for reference. What should the project manager do?</div>
+            <div class="q-text">An organization has just completed a complicated project with many setbacks that required creative solutions. The project manager must ensure that the full scope is captured and documented so future teams can use it for reference. <span class="kw-cue">What should the project manager do</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Compare all manuals and documentation with existing information and update everything that has changed throughout the project.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Implement a shared ownership approach to knowledge management so team members are empowered to share and codify their findings.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Organize a retrospective to consolidate documentation and lessons learned from the personal experience of project team members.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Implement a shared ownership approach to knowledge management so team members are <span class="kw-signal">empowered</span> to share and codify their findings.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Organize a <span class="kw-signal">retrospective</span> to consolidate documentation and lessons learned from the personal experience of project team members.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Schedule the transfer of documentation and knowledge to the operations team for implementation into the information management system.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Organize a retrospective to consolidate documentation and lessons learned from the personal experience of project team members.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân.<br><br>Bối cảnh: An organization has just completed a complicated project with many setbacks that required creative solutions. The project manager must ensure that the full scope is captured and documented so future teams can use it for reference. Đáp án <strong>C</strong> — &quot;Organize a retrospective to consolidate documentation and lessons learned from the personal experience of project team members.&quot; — phù hợp vì Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 195 Section 5 – Tools and Techniques these meetings, fostering a collaborative environment where everyone can contribute their insights and suggestions. The outcomes of retrospectives are actionable, with specific actions identified and o<br>&gt; — PMBOK 8, tr. 195 (Performance Domain: Resources, Plan Resources)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 195: Performance Domain: Resources, Plan Resources</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân.<br><br>Bối cảnh: An organization has just completed a complicated project with many setbacks that required creative solutions. The project manager must ensure that the full scope is captured and documented so future teams can use it for reference. Đáp án <strong>C</strong> — &quot;Organize a <span class="kw-signal">retrospective</span> to consolidate documentation and lessons learned from the personal experience of project team members.&quot; — phù hợp vì Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 195 Section 5 – Tools and Techniques these meetings, fostering a <span class="kw-signal">collaborative</span> environment where everyone can contribute their insights and suggestions. The outcomes of retrospectives are actionable, with specific actions identified and o<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 195 (Performance Domain: <span class="kw-pmbok">Resources</span>, Plan <span class="kw-pmbok">Resources</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 195: Performance Domain: <span class="kw-pmbok">Resources</span>, Plan <span class="kw-pmbok">Resources</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Compare all manuals and documentation with existing information and update every…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement a shared ownership approach to knowledge management so team members ar…</span></td><td>Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết Implement a shared ownership approach to knowledge management so team members are empowered to share and codify their findings. — đáp án đúng cần facilitate retrospective / phân tích root cause.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Schedule the transfer of documentation and knowledge to the operations team for …</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Compare all manuals and documentation with existing information and update every…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement a shared ownership approach to knowledge management so team members ar…</span></td><td>Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết Implement a shared ownership approach to knowledge management so team members are <span class="kw-signal">empowered</span> to share and codify their findings. — đáp án đúng cần <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Schedule the transfer of documentation and knowledge to the operations team for …</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr></tbody>
           </table>
         </section>
 

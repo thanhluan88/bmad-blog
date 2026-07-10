@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 934 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A large engineering firm is planning a project that will be subject to strict government regulations. The work will take place in an environmentally sensitive area and relies on a labor force that is susceptible to strikes. The project manager is aware that these and other uncertainties could threaten the project’s success. Which two actions should the project manager adopt? (Choose 2)</p>
+          <p class="lead">A large engineering firm is planning a project that will be subject to strict government regulations. The work will take place in an environmentally sensitive area and relies on a labor force that is susceptible to strikes. The project manager is aware that these and other uncertainties could threaten the project’s success. Which two actions should the project manager adopt? (<span class="kw-cue">Choose 2</span>)</p>
           <div class="badges"><span class="badge">Risk</span><span class="badge">Executing</span><span class="badge">Identify Risks</span><span class="badge">Integrate sustainability</span><span class="badge">Full Bank Q934</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -135,7 +147,7 @@
           <h2>2. So sánh đáp án</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
-        Develop a requirements traceability matrix to ensure compliance with regulations.
+        Develop a <span class="kw-signal">requirements traceability matrix</span> to ensure compliance with regulations.
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;tham chiếu artifact / kế hoạch đã có&quot; không giải quyết đạo đức / tuân thủ — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
@@ -144,15 +156,15 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Engage key stakeholders to identify potential risks and document their concerns.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
-        Conduct a structured risk identification process and record risks in the risk register.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        Conduct a structured risk identification process and record risks in the <span class="kw-signal">risk register</span>.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>E — Sai</strong>
-        Escalate labor-related risks to senior management for review and resolution before the project begins.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+        <span class="kw-trap">Escalate</span> labor-related risks to senior management for review and resolution before the project begins.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</p>
       </div></div>
         </section>
 
@@ -160,12 +172,12 @@
           <h2>3. Câu hỏi — Full Bank Q934</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 934 · Chọn nhiều</div>
-            <div class="q-text">A large engineering firm is planning a project that will be subject to strict government regulations. The work will take place in an environmentally sensitive area and relies on a labor force that is susceptible to strikes. The project manager is aware that these and other uncertainties could threaten the project’s success. Which two actions should the project manager adopt? (<em>Choose 2</em>)</div>
-            <button class="opt-btn" data-opt="A" type="button">A. Develop a requirements traceability matrix to ensure compliance with regulations.</button>
+            <div class="q-text">A large engineering firm is planning a project that will be subject to strict government regulations. The work will take place in an environmentally sensitive area and relies on a labor force that is susceptible to strikes. The project manager is aware that these and other uncertainties could threaten the project’s success. Which two actions should the project manager adopt? (<span class="kw-cue">Choose 2</span>)</div>
+            <button class="opt-btn" data-opt="A" type="button">A. Develop a <span class="kw-signal">requirements traceability matrix</span> to ensure compliance with regulations.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Perform a program evaluation and review technique (PERT) analysis to estimate the project schedule.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Engage key stakeholders to identify potential risks and document their concerns.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Conduct a structured risk identification process and record risks in the risk register.</button>
-            <button class="opt-btn" data-opt="E" type="button">E. Escalate labor-related risks to senior management for review and resolution before the project begins.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Conduct a structured risk identification process and record risks in the <span class="kw-signal">risk register</span>.</button>
+            <button class="opt-btn" data-opt="E" type="button">E. <span class="kw-trap">Escalate</span> labor-related risks to senior management for review and resolution before the project begins.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
@@ -179,10 +191,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C,D</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C, D:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.<br><br>Bối cảnh: đạo đức / tuân thủ. Đáp án <strong>C, D</strong> — &quot;Engage key stakeholders to identify potential risks and document their concerns.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 96 A Guide to the Project Management Body of Knowledge 2.7.2.2 Identify Risks Identify Risks includes recognizing both negative and positive risks. The process of risk identification focuses on distinguishing genuine risks from nonrisks, s<br>&gt; — PMBOK 8, tr. 96 (Identify Risks Identify)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 96: Identify Risks Identify</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C, D:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.<br><br>Bối cảnh: đạo đức / tuân thủ. Đáp án <strong>C, D</strong> — &quot;Engage key stakeholders to identify potential risks and document their concerns.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 96 A Guide to the Project Management Body of Knowledge 2.7.2.2 <span class="kw-pmbok">Identify Risks</span> <span class="kw-pmbok">Identify Risks</span> includes recognizing both negative and positive risks. The process of risk identification focuses on distinguishing genuine risks from nonrisks, s<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 96 (<span class="kw-pmbok">Identify Risks</span> Identify)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 96: <span class="kw-pmbok">Identify Risks</span> Identify</p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Develop a requirements traceability matrix to ensure compliance with regulations…</span></td><td>Tập trung &quot;tham chiếu artifact / kế hoạch đã có&quot; không giải quyết đạo đức / tuân thủ — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Perform a program evaluation and review technique (PERT) analysis to estimate th…</span></td><td>&quot;Perform a program evaluation and review technique (PERT) analysis to estimate the …&quot; không phù hợp đạo đức / tuân thủ — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>E</strong><br><span style="font-size:0.8rem;color:var(--muted)">Escalate labor-related risks to senior management for review and resolution befo…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Develop a <span class="kw-signal">requirements traceability matrix</span> to ensure compliance with regulations…</span></td><td>Tập trung &quot;tham chiếu artifact / kế hoạch đã có&quot; không giải quyết đạo đức / tuân thủ — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Perform a program evaluation and review technique (PERT) analysis to estimate th…</span></td><td>&quot;Perform a program evaluation and review technique (PERT) analysis to estimate the …&quot; không phù hợp đạo đức / tuân thủ — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>E</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> labor-related risks to senior management for review and resolution befo…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr></tbody>
           </table>
         </section>
 

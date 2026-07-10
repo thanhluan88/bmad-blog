@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 231 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">During charter development, a stakeholder was initially categorized in the stakeholder register as “keep informed” due to limited influence. Over the last two sprints, the stakeholder has attended design sessions and strongly advocated for specific features. The stakeholder's growing involvement indicates rising influence and interest. The project manager needs to ensure this stakeholder’s expectations remain aligned with the project's priorities and constraints. What should the project manager do first?</p>
+          <p class="lead">During charter development, a stakeholder was <span class="kw-cue">initially</span> categorized in the stakeholder register as “keep informed” due to limited influence. Over the last two sprints, the stakeholder has attended design sessions and strongly advocated for specific features. The stakeholder's growing involvement indicates rising influence and interest. The project manager needs to ensure this stakeholder’s expectations remain aligned with the project's priorities and constraints. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">first</span></span>?</p>
           <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q231</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -135,15 +147,15 @@
           <h2>2. So sánh đáp án</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
-        Escalate the stakeholder’s unexpected engagement to the sponsor.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+        <span class="kw-trap">Escalate</span> the stakeholder’s unexpected engagement to the sponsor.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</p>
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Re-categorize the stakeholder to adjust the engagement strategy.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
-        Use the issue log to assign and track this situation to resolution.
+        Use the <span class="kw-signal">issue log</span> to assign and track this situation to resolution.
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;tham chiếu artifact / kế hoạch đã có&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
@@ -156,10 +168,10 @@
           <h2>3. Câu hỏi — Full Bank Q231</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 231</div>
-            <div class="q-text">During charter development, a stakeholder was initially categorized in the stakeholder register as “keep informed” due to limited influence. Over the last two sprints, the stakeholder has attended design sessions and strongly advocated for specific features. The stakeholder's growing involvement indicates rising influence and interest. The project manager needs to ensure this stakeholder’s expectations remain aligned with the project's priorities and constraints. What should the project manager do <em>first</em>?</div>
-            <button class="opt-btn" data-opt="A" type="button">A. Escalate the stakeholder’s unexpected engagement to the sponsor.</button>
+            <div class="q-text">During charter development, a stakeholder was <span class="kw-cue">initially</span> categorized in the stakeholder register as “keep informed” due to limited influence. Over the last two sprints, the stakeholder has attended design sessions and strongly advocated for specific features. The stakeholder's growing involvement indicates rising influence and interest. The project manager needs to ensure this stakeholder’s expectations remain aligned with the project's priorities and constraints. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">first</span></span>?</div>
+            <button class="opt-btn" data-opt="A" type="button">A. <span class="kw-trap">Escalate</span> the stakeholder’s unexpected engagement to the sponsor.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Re-categorize the stakeholder to adjust the engagement strategy.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Use the issue log to assign and track this situation to resolution.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Use the <span class="kw-signal">issue log</span> to assign and track this situation to resolution.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Limit the stakeholder’s involvement to avoid further distractions.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Re-categorize the stakeholder to adjust the engagement strategy.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Scope (Executing, PMBOK 8).<br><br>Stakeholder engagement (miền Stakeholders) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong>FIRST</strong> (bước đầu tiên ngay lúc này). FIRST: chọn hành động xử lý tình huống trực tiếp trước ghi nhận muộn hoặc thay đổi baseline chưa được phân tích.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — PMBOK 8, tr. 71 (Plan Stakeholder Engagement)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: Plan Stakeholder Engagement</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Scope</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span>: chọn hành động xử lý tình huống trực tiếp trước ghi nhận muộn hoặc thay đổi baseline chưa được phân tích.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Escalate the stakeholder’s unexpected engagement to the sponsor.</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Use the issue log to assign and track this situation to resolution.</span></td><td>Tập trung &quot;tham chiếu artifact / kế hoạch đã có&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Limit the stakeholder’s involvement to avoid further distractions.</span></td><td>&quot;Limit the stakeholder’s involvement to avoid further distractions.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;Re-categorize the stakeholder to adjust the engagement strategy.&quot;.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the stakeholder’s unexpected engagement to the sponsor.</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Use the <span class="kw-signal">issue log</span> to assign and track this situation to resolution.</span></td><td>Tập trung &quot;tham chiếu artifact / kế hoạch đã có&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Limit the stakeholder’s involvement to avoid further distractions.</span></td><td>&quot;Limit the stakeholder’s involvement to avoid further distractions.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;Re-categorize the stakeholder to adjust the engagement strategy.&quot;.</td></tr></tbody>
           </table>
         </section>
 

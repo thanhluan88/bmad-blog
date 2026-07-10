@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 614 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An agile project is midway through its ten iteration cycles. During the last iteration, the team had to work overtime to accomplish the goal. In the iteration retrospective, the team agreed that they took more time than planned because they did not have the required experience when they executed the assigned tasks for the first time. What should the project manager do?</p>
+          <p class="lead">An agile project is midway through its ten iteration cycles. During the last iteration, the team had to work overtime to accomplish the goal. In the iteration retrospective, the team agreed that they took more time than planned because they did <span class="kw-cue">not</span> have the required experience when they executed the assigned tasks for the <span class="kw-cue">first</span> time. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Resources, Scope</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q614</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -136,19 +148,19 @@
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Request that the project sponsor provide additional team training so that the team can meet the goals without requiring extra effort.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation).</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;<span class="kw-signal">coaching</span> / phát triển năng lực&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
-        Ask the sponsor to approve a change request for additional time in future iterations so the team doesn't need to work overtime.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;change control / change request&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation).</p>
+        <span class="kw-trap">Ask the sponsor</span> to approve a <span class="kw-signal">change request</span> for additional time in future iterations so the team doesn't need to work overtime.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>).</p>
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Ask the team to reevaluate their effort estimates during the iteration planning session, using experience and new knowledge gained from the last iteration.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Request that the product owner reprioritize the product backlog items so that the team gains the required experience before revisiting critical items.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation).</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>).</p>
       </div></div>
         </section>
 
@@ -156,9 +168,9 @@
           <h2>3. Câu hỏi — Full Bank Q614</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 614</div>
-            <div class="q-text">An agile project is midway through its ten iteration cycles. During the last iteration, the team had to work overtime to accomplish the goal. In the iteration retrospective, the team agreed that they took more time than planned because they did <em>not</em> have the required experience when they executed the assigned tasks for the <em>first</em> time. What should the project manager do?</div>
+            <div class="q-text">An agile project is midway through its ten iteration cycles. During the last iteration, the team had to work overtime to accomplish the goal. In the iteration retrospective, the team agreed that they took more time than planned because they did <span class="kw-cue">not</span> have the required experience when they executed the assigned tasks for the <span class="kw-cue">first</span> time. <span class="kw-cue">What should the project manager do</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Request that the project sponsor provide additional team training so that the team can meet the goals without requiring extra effort.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Ask the sponsor to approve a change request for additional time in future iterations so the team doesn't need to work overtime.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. <span class="kw-trap">Ask the sponsor</span> to approve a <span class="kw-signal">change request</span> for additional time in future iterations so the team doesn't need to work overtime.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Ask the team to reevaluate their effort estimates during the iteration planning session, using experience and new knowledge gained from the last iteration.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Request that the product owner reprioritize the product backlog items so that the team gains the required experience before revisiting critical items.</button>
             <div class="feedback" id="quizFeedback"></div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Ask the team to reevaluate their effort estimates during the iteration planning session, using experience and new knowledge gained from the last iteration.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Sau release bị phàn nàn về bug/chất lượng, team Agile cần retrospective để phân tích root cause và cải thiện quy trình — không thuê ngoài, không incentive lệch, không đánh giá skill cá nhân.<br><br>PMBOK 8 (Embed quality + Build empowered culture) khuyến khích continuous improvement. PM facilitate retrospective để team tự phân tích nguyên nhân gốc và đề xuất giải pháp bền vững. Câu hỏi hỏi <strong>FIRST</strong> (bước đầu tiên ngay lúc này). FIRST chọn hành động <strong>yêu cầu team hành động (chưa rõ facilitation)</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, rebaseline, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; includes identifying all necessary skills and resources, creating a detailed resource management plan, and ensuring resource availability throughout the project. ◾ In an adaptive development approach, projects with high variability benefit<br>&gt; — PMBOK 8, tr. 88 (Performance Domain: Resources, Develop Team)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 88: Performance Domain: Resources, Develop Team</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Sau release bị phàn nàn về bug/chất lượng, team Agile cần <span class="kw-signal">retrospective</span> để phân tích <span class="kw-signal">root cause</span> và cải thiện quy trình — không thuê ngoài, không incentive lệch, không đánh giá skill cá nhân.<br><br><span class="kw-pmbok">PMBOK 8</span> (<span class="kw-pmbok">Embed quality</span> + Build <span class="kw-signal">empowered</span> culture) khuyến khích <span class="kw-signal">continuous improvement</span>. PM <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> để team tự phân tích nguyên nhân gốc và đề xuất giải pháp bền vững. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>)</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; includes identifying all necessary skills and resources, creating a detailed resource management plan, and ensuring resource availability throughout the project. ◾ In an adaptive development approach, projects with high variability benefit<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 88 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 88: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request that the project sponsor provide additional team training so that the te…</span></td><td>Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation).</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the sponsor to approve a change request for additional time in future iterat…</span></td><td>Tập trung &quot;change control / change request&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation).</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request that the product owner reprioritize the product backlog items so that th…</span></td><td>Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation).</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request that the project sponsor provide additional team training so that the te…</span></td><td>Tập trung &quot;<span class="kw-signal">coaching</span> / phát triển năng lực&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>).</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Ask the sponsor</span> to approve a <span class="kw-signal">change request</span> for additional time in future iterat…</span></td><td>Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>).</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request that the product owner reprioritize the product backlog items so that th…</span></td><td>Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>).</td></tr></tbody>
           </table>
         </section>
 

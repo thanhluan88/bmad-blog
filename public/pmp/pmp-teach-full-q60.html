@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 60 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">At the first stakeholder workshop, some stakeholders actively participated, but a key stakeholder was disengaged and left early. After the meeting, the disengaged stakeholder emailed the project manager, saying they saw no value in attending further sessions. What should the project manager do next?</p>
+          <p class="lead">At the <span class="kw-cue">first</span> stakeholder workshop, some stakeholders actively participated, but a key stakeholder was disengaged and left early. After the meeting, the disengaged stakeholder emailed the project manager, saying they saw no value in attending further sessions. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</p>
           <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q60</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -135,16 +147,16 @@
           <h2>2. So sánh đáp án</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
-        Meet with the disengaged stakeholder to understand their perspectives and show how the project fits their priorities.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <span class="kw-signal">Meet with</span> the disengaged stakeholder to understand their perspectives and show how the project fits their priorities.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
-        Ask the sponsor to send a directive requiring mandatory attendance at all workshops.
+        <span class="kw-trap">Ask the sponsor</span> to send a directive requiring mandatory attendance at all workshops.
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">yêu cầu bên liên quan/team thực hiện hành động không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Remove the disengaged stakeholder from the future meeting attendance list and work only with active contributors.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Remove the disengaged stakeholder from the future meeting attendance lis…&quot; cùng nhóm engagement stakeholder / làm rõ kỳ vọng nhưng lệch trọng tâm — &quot;Meet with the disengaged stakeholder to understand their perspectives an…&quot; sát vấn đề trong đề bài hơn.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Remove the disengaged stakeholder from the future meeting attendance lis…&quot; cùng nhóm engagement stakeholder / làm rõ kỳ vọng nhưng lệch trọng tâm — &quot;<span class="kw-signal">Meet with</span> the disengaged stakeholder to understand their perspectives an…&quot; sát vấn đề trong đề bài hơn.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Record meetings for stakeholders and request written feedback rather than live input.
@@ -156,9 +168,9 @@
           <h2>3. Câu hỏi — Full Bank Q60</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 60</div>
-            <div class="q-text">At the <em>first</em> stakeholder workshop, some stakeholders actively participated, but a key stakeholder was disengaged and left early. After the meeting, the disengaged stakeholder emailed the project manager, saying they saw no value in attending further sessions. What should the project manager do next?</div>
-            <button class="opt-btn" data-opt="A" type="button">A. Meet with the disengaged stakeholder to understand their perspectives and show how the project fits their priorities.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Ask the sponsor to send a directive requiring mandatory attendance at all workshops.</button>
+            <div class="q-text">At the <span class="kw-cue">first</span> stakeholder workshop, some stakeholders actively participated, but a key stakeholder was disengaged and left early. After the meeting, the disengaged stakeholder emailed the project manager, saying they saw no value in attending further sessions. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</div>
+            <button class="opt-btn" data-opt="A" type="button">A. <span class="kw-signal">Meet with</span> the disengaged stakeholder to understand their perspectives and show how the project fits their priorities.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. <span class="kw-trap">Ask the sponsor</span> to send a directive requiring mandatory attendance at all workshops.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Remove the disengaged stakeholder from the future meeting attendance list and work only with active contributors.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Record meetings for stakeholders and request written feedback rather than live input.</button>
             <div class="feedback" id="quizFeedback"></div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Meet with the disengaged stakeholder to understand their perspectives and show how the project fits their priorities.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.<br><br>Bối cảnh: At the first stakeholder workshop, some stakeholders actively participated, but a key stakeholder was disengaged and left early. After the meeting, the disengaged stakeholder emailed the project manager, saying they saw no value in attending further sessions. Đáp án <strong>A</strong> — &quot;Meet with the disengaged stakeholder to understand their perspectives and show how the project fits their priorities.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý. Câu hỏi hỏi <strong>FIRST</strong> (bước đầu tiên ngay lúc này). FIRST chọn hành động <strong>engagement stakeholder / làm rõ kỳ vọng</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, rebaseline, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; perspective. Effective stakeholder engagement helps align the project’s outputs with the desired outcomes and enhances stakeholder satisfaction. ⚫ Resources. Keeping a project’s value proposition at the center of attention can help info<br>&gt; — PMBOK 8, tr. 42 (Performance Domain: Stakeholders, Identify Stakeholders)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 42: Performance Domain: Stakeholders, Identify Stakeholders</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.<br><br>Bối cảnh: At the <span class="kw-cue">first</span> stakeholder workshop, some stakeholders actively participated, but a key stakeholder was disengaged and left early. After the meeting, the disengaged stakeholder emailed the project manager, saying they saw no value in attending further sessions. Đáp án <strong>A</strong> — &quot;<span class="kw-signal">Meet with</span> the disengaged stakeholder to understand their perspectives and show how the project fits their priorities.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>engagement stakeholder / làm rõ kỳ vọng</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; perspective. Effective stakeholder engagement helps align the project’s outputs with the desired outcomes and enhances stakeholder satisfaction. ⚫ <span class="kw-pmbok">Resources</span>. Keeping a project’s value proposition at the center of attention can help info<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 42 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 42: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the sponsor to send a directive requiring mandatory attendance at all worksh…</span></td><td>yêu cầu bên liên quan/team thực hiện hành động không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Remove the disengaged stakeholder from the future meeting attendance list and wo…</span></td><td>&quot;Remove the disengaged stakeholder from the future meeting attendance lis…&quot; cùng nhóm engagement stakeholder / làm rõ kỳ vọng nhưng lệch trọng tâm — &quot;Meet with the disengaged stakeholder to understand their perspectives an…&quot; sát vấn đề trong đề bài hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Record meetings for stakeholders and request written feedback rather than live i…</span></td><td>&quot;Record meetings for stakeholders and request written feedback rather than live input.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
+            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Ask the sponsor</span> to send a directive requiring mandatory attendance at all worksh…</span></td><td>yêu cầu bên liên quan/team thực hiện hành động không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Remove the disengaged stakeholder from the future meeting attendance list and wo…</span></td><td>&quot;Remove the disengaged stakeholder from the future meeting attendance lis…&quot; cùng nhóm engagement stakeholder / làm rõ kỳ vọng nhưng lệch trọng tâm — &quot;<span class="kw-signal">Meet with</span> the disengaged stakeholder to understand their perspectives an…&quot; sát vấn đề trong đề bài hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Record meetings for stakeholders and request written feedback rather than live i…</span></td><td>&quot;Record meetings for stakeholders and request written feedback rather than live input.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
           </table>
         </section>
 

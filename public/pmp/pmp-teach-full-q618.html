@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 618 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">The per-story cost in an agile project has risen by more than 250% over the past three sprints. The project manager needs to identify which role is most directly responsible for addressing this cost escalation by managing the value and priority of work being delivered. What should the project manager do?</p>
+          <p class="lead">The per-story cost in an agile project has risen by more than 250% over the past three sprints. The project manager needs to identify which role is <span class="kw-cue">most</span> directly responsible for addressing this cost escalation by managing the value and priority of work being delivered. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Finance, Stakeholders</span><span class="badge">Executing</span><span class="badge">Estimate Costs</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q618</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -136,19 +148,19 @@
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Engage the project sponsor to review the cost trend and authorize additional budget to sustain the current delivery pace.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Engage the project sponsor to review the cost trend and authorize additional budge…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Engage the project sponsor to review the cost trend and authorize additional budge…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</p>
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Involve the product owner, who is responsible for prioritizing the backlog and maximizing the value delivered per story.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
-        Consult the finance team to conduct a variance analysis and identify the specific cost drivers behind the per story cost increase.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Consult the finance team to conduct a variance analysis and identify the specific …&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</p>
+        <span class="kw-signal">Consult the</span> finance team to conduct a variance analysis and identify the specific cost drivers behind the per story cost increase.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;<span class="kw-signal">Consult the</span> finance team to conduct a variance analysis and identify the specific …&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Direct the development team to reduce story complexity and limit acceptance criteria to control per story delivery costs.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần ưu tiên theo giá trị / MVP.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</p>
       </div></div>
         </section>
 
@@ -156,10 +168,10 @@
           <h2>3. Câu hỏi — Full Bank Q618</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 618</div>
-            <div class="q-text">The per-story cost in an agile project has risen by more than 250% over the past three sprints. The project manager needs to identify which role is <em>most</em> directly responsible for addressing this cost escalation by managing the value and priority of work being delivered. What should the project manager do?</div>
+            <div class="q-text">The per-story cost in an agile project has risen by more than 250% over the past three sprints. The project manager needs to identify which role is <span class="kw-cue">most</span> directly responsible for addressing this cost escalation by managing the value and priority of work being delivered. <span class="kw-cue">What should the project manager do</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Engage the project sponsor to review the cost trend and authorize additional budget to sustain the current delivery pace.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Involve the product owner, who is responsible for prioritizing the backlog and maximizing the value delivered per story.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Consult the finance team to conduct a variance analysis and identify the specific cost drivers behind the per story cost increase.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. <span class="kw-signal">Consult the</span> finance team to conduct a variance analysis and identify the specific cost drivers behind the per story cost increase.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Direct the development team to reduce story complexity and limit acceptance criteria to control per story delivery costs.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Involve the product owner, who is responsible for prioritizing the backlog and maximizing the value delivered per story.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.<br><br>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>B</strong> — &quot;Involve the product owner, who is responsible for prioritizing the backlog and maximizing the value delivered per story.&quot; — phù hợp vì PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc. Agile/Hybrid: ưu tiên empowered culture, collaboration và continuous improvement.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; service, or result and obligates the buyer to pay for it. control. The process of comparing actual performance with planned performance, analyzing variances, assessing trends to effect process improvements, evaluating possible alternatives<br>&gt; — PMBOK 8, tr. 266 (comparing actual performance with planned performance, analyzing varia)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 266: comparing actual performance with planned performance, analyzing varia</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.<br><br>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>B</strong> — &quot;Involve the product owner, who is responsible for prioritizing the backlog and maximizing the value delivered per story.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; service, or result and obligates the buyer to pay for it. control. The process of comparing actual performance with planned performance, analyzing variances, assessing trends to effect process improvements, evaluating possible alternatives<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 266 (comparing actual performance with planned performance, analyzing varia)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 266: comparing actual performance with planned performance, analyzing varia</p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Engage the project sponsor to review the cost trend and authorize additional bud…</span></td><td>&quot;Engage the project sponsor to review the cost trend and authorize additional budge…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Consult the finance team to conduct a variance analysis and identify the specifi…</span></td><td>&quot;Consult the finance team to conduct a variance analysis and identify the specific …&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Direct the development team to reduce story complexity and limit acceptance crit…</span></td><td>Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần ưu tiên theo giá trị / MVP.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Engage the project sponsor to review the cost trend and authorize additional bud…</span></td><td>&quot;Engage the project sponsor to review the cost trend and authorize additional budge…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-signal">Consult the</span> finance team to conduct a variance analysis and identify the specifi…</span></td><td>&quot;<span class="kw-signal">Consult the</span> finance team to conduct a variance analysis and identify the specific …&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Direct the development team to reduce story complexity and limit acceptance crit…</span></td><td>Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr></tbody>
           </table>
         </section>
 

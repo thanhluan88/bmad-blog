@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 495 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is leading a network monitoring upgrade that was originally scheduled to deliver key business results in 16 weeks. The sponsor now demands delivery in 12 weeks, and the specialized network engineer is committed full-time elsewhere. The sponsor insists the 12-week date must hold. What should the project manager do?</p>
+          <p class="lead">A project manager is leading a network monitoring upgrade that was originally scheduled to deliver key business results in 16 weeks. The sponsor now demands delivery in 12 weeks, and the specialized network engineer is committed full-time elsewhere. The sponsor insists the 12-week date must hold. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Schedule, Stakeholders</span><span class="badge">Monitoring &amp; Controlling</span><span class="badge">Develop Schedule</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q495</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -136,7 +148,7 @@
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Explain that the project won't be completed in 12 weeks without the specialist, and request additional resources.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Agree to deliver within the 12-week timeline and have the specialist work overtime on both projects.
@@ -148,7 +160,7 @@
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Cut low-priority scope from the plan, maintain staffing and 12-week timeline, without stakeholder consultation.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Cut low-priority scope from the plan, maintain staffing and 12-week timeline, without stakeholder consultation. — đáp án đúng cần bổ sung nguồn lực / hire.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết Cut low-priority scope from the plan, maintain staffing and 12-week timeline, without stakeholder consultation. — đáp án đúng cần bổ sung nguồn lực / hire.</p>
       </div></div>
         </section>
 
@@ -156,7 +168,7 @@
           <h2>3. Câu hỏi — Full Bank Q495</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 495</div>
-            <div class="q-text">A project manager is leading a network monitoring upgrade that was originally scheduled to deliver key business results in 16 weeks. The sponsor now demands delivery in 12 weeks, and the specialized network engineer is committed full-time elsewhere. The sponsor insists the 12-week date must hold. What should the project manager do?</div>
+            <div class="q-text">A project manager is leading a network monitoring upgrade that was originally scheduled to deliver key business results in 16 weeks. The sponsor now demands delivery in 12 weeks, and the specialized network engineer is committed full-time elsewhere. The sponsor insists the 12-week date must hold. <span class="kw-cue">What should the project manager do</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Explain that the project won't be completed in 12 weeks without the specialist, and request additional resources.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Agree to deliver within the 12-week timeline and have the specialist work overtime on both projects.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Shorten the planned testing activities to fit the remaining time and keep the current staffing assignments.</button>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Explain that the project won't be completed in 12 weeks without the specialist, and request additional resources.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM bổ sung nguồn lực / hire để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Schedule + Stakeholders, Focus Area Monitoring &amp; Controlling (PMBOK 8).<br><br>Bối cảnh: A project manager is leading a network monitoring upgrade that was originally scheduled to deliver key business results in 16 weeks. The sponsor now demands delivery in 12 weeks, and the specialized network engineer is committed full-time elsewhere. The sponsor insists the 12-week date must hold. Đáp án <strong>A</strong> — &quot;Explain that the project won't be completed in 12 weeks without the specialist, and request additional resources.&quot; — phù hợp vì PM bổ sung nguồn lực / hire để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Schedule + Stakeholders, Focus Area Monitoring &amp; Controlling (PMBOK 8).</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: Performance Domain: Schedule, Develop Schedule</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM bổ sung nguồn lực / hire để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Stakeholders</span>, Focus Area Monitoring &amp; Controlling (<span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: A project manager is leading a network monitoring upgrade that was originally scheduled to deliver key business results in 16 weeks. The sponsor now demands delivery in 12 weeks, and the specialized network engineer is committed full-time elsewhere. The sponsor insists the 12-week date must hold. Đáp án <strong>A</strong> — &quot;Explain that the project won't be completed in 12 weeks without the specialist, and request additional resources.&quot; — phù hợp vì PM bổ sung nguồn lực / hire để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Stakeholders</span>, Focus Area Monitoring &amp; Controlling (<span class="kw-pmbok">PMBOK 8</span>).</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Agree to deliver within the 12-week timeline and have the specialist work overti…</span></td><td>&quot;Agree to deliver within the 12-week timeline and have the specialist work overtime…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung bổ sung nguồn lực / hire.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Shorten the planned testing activities to fit the remaining time and keep the cu…</span></td><td>Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết Shorten the planned testing activities to fit the remaining time and keep the current staffing assignments. — đáp án đúng cần bổ sung nguồn lực / hire.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Cut low-priority scope from the plan, maintain staffing and 12-week timeline, wi…</span></td><td>Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Cut low-priority scope from the plan, maintain staffing and 12-week timeline, without stakeholder consultation. — đáp án đúng cần bổ sung nguồn lực / hire.</td></tr></tbody>
+            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Agree to deliver within the 12-week timeline and have the specialist work overti…</span></td><td>&quot;Agree to deliver within the 12-week timeline and have the specialist work overtime…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung bổ sung nguồn lực / hire.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Shorten the planned testing activities to fit the remaining time and keep the cu…</span></td><td>Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết Shorten the planned testing activities to fit the remaining time and keep the current staffing assignments. — đáp án đúng cần bổ sung nguồn lực / hire.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Cut low-priority scope from the plan, maintain staffing and 12-week timeline, wi…</span></td><td>Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết Cut low-priority scope from the plan, maintain staffing and 12-week timeline, without stakeholder consultation. — đáp án đúng cần bổ sung nguồn lực / hire.</td></tr></tbody>
           </table>
         </section>
 

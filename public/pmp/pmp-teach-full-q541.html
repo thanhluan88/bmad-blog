@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -116,6 +122,12 @@
           <h1>Phân tích Câu 541 — Bộ luyện PMBOK 8</h1>
           <p class="lead">A project manager develops a project management plan and schedule based on an agreed-upon project life cycle of 16 months. Due to changing business requirements, the project sponsor requests that the project be completed within 9 months. How should the project manager respond to this proposed change?</p>
           <div class="badges"><span class="badge">Schedule, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q541</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -140,15 +152,15 @@
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Decline the request and inform the sponsor that the approved 16-month schedule cannot be revised without a formal change control board decision.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;change control / change request&quot; không giải quyết Decline the request and inform the sponsor that the approved 16-month schedule cannot be revised without a formal change control board decision. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết Decline the request and inform the sponsor that the approved 16-month schedule cannot be revised without a formal change control board decision. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Perform an impact evaluation of the proposed schedule change with the project team before responding to the sponsor.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
-        Escalate the sponsor's request to the PMO and request a feasibility review before committing to any timeline adjustment.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+        <span class="kw-trap">Escalate</span> the sponsor's request to the PMO and request a feasibility review before committing to any timeline adjustment.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</p>
       </div></div>
         </section>
 
@@ -160,7 +172,7 @@
             <button class="opt-btn" data-opt="A" type="button">A. Accept the sponsor's request and immediately compress the schedule by fast-tracking all critical path activities.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Decline the request and inform the sponsor that the approved 16-month schedule cannot be revised without a formal change control board decision.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Perform an impact evaluation of the proposed schedule change with the project team before responding to the sponsor.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Escalate the sponsor's request to the PMO and request a feasibility review before committing to any timeline adjustment.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. <span class="kw-trap">Escalate</span> the sponsor's request to the PMO and request a feasibility review before committing to any timeline adjustment.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Perform an impact evaluation of the proposed schedule change with the project team before responding to the sponsor.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Stakeholders (Executing, PMBOK 8).<br><br>Bối cảnh: A project manager develops a project management plan and schedule based on an agreed-upon project life cycle of 16 months. Due to changing business requirements, the project sponsor requests that the project be completed within 9 months. Đáp án <strong>C</strong> — &quot;Perform an impact evaluation of the proposed schedule change with the project team before responding to the sponsor.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Stakeholders (Executing, PMBOK 8).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 54 A Guide to the Project Management Body of Knowledge When using a predictive approach, any change to the schedule baseline or agreed-upon schedule can only be approved through the Assess and Implement Changes process by applying integrat<br>&gt; — PMBOK 8, tr. 54 (Performance Domain: Schedule, Develop Schedule)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 54: Performance Domain: Schedule, Develop Schedule</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: A project manager develops a project management plan and schedule based on an agreed-upon project life cycle of 16 months. Due to changing business requirements, the project sponsor requests that the project be completed within 9 months. Đáp án <strong>C</strong> — &quot;Perform an impact evaluation of the proposed schedule change with the project team before responding to the sponsor.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 54 A Guide to the Project Management Body of Knowledge When using a predictive approach, any change to the schedule baseline or agreed-upon schedule can only be approved through the Assess and Implement Changes process by applying integrat<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 54 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 54: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Accept the sponsor's request and immediately compress the schedule by fast-track…</span></td><td>Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết Accept the sponsor's request and immediately compress the schedule by fast-tracking all critical path activities. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Decline the request and inform the sponsor that the approved 16-month schedule c…</span></td><td>Tập trung &quot;change control / change request&quot; không giải quyết Decline the request and inform the sponsor that the approved 16-month schedule cannot be revised without a formal change control board decision. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Escalate the sponsor's request to the PMO and request a feasibility review befor…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Accept the sponsor's request and immediately compress the schedule by fast-track…</span></td><td>Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết Accept the sponsor's request and immediately compress the schedule by fast-tracking all critical path activities. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Decline the request and inform the sponsor that the approved 16-month schedule c…</span></td><td>Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết Decline the request and inform the sponsor that the approved 16-month schedule cannot be revised without a formal change control board decision. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the sponsor's request to the PMO and request a feasibility review befor…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr></tbody>
           </table>
         </section>
 

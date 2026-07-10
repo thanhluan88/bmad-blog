@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 819 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An agile project team has not completed critical tasks within the current iteration, marking the third consecutive sprint with incomplete deliverables. During a stakeholder meeting, the project sponsor mandates a final completion date to meet regulatory compliance requirements, stating that missing this deadline could result in significant financial penalties and potential license suspension. The team maintains that they need more time for quality assurance, while the product owner supports the sponsor's concerns about the timeline. What should the project manager do?</p>
+          <p class="lead">An agile project team has <span class="kw-cue">not</span> completed critical tasks within the current iteration, marking the third consecutive sprint with incomplete deliverables. During a stakeholder meeting, the project sponsor mandates a final completion date to meet regulatory compliance requirements, stating that missing this deadline could result in significant financial penalties and potential license suspension. The team maintains that they need more time for quality assurance, while the product owner supports the sponsor's concerns about the timeline. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q819</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -135,20 +147,20 @@
           <h2>2. So sánh đáp án</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
-        Facilitate a negotiation between the sponsor and the project team to team to obtain approval for extra time dedicated to quality assurance.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / MVP.</p>
+        <span class="kw-signal">Facilitate</span> a negotiation between the sponsor and the project team to team to obtain approval for extra time dedicated to quality assurance.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Support team autonomy in sprint management while escalating regulatory risks to senior management.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</p>
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
-        Work with the product owner to reprioritize the backlog and identify the minimum viable deliverables that fulfill compliance requirements.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <span class="kw-signal">Work with</span> the product owner to reprioritize the backlog and identify the minimum viable deliverables that fulfill compliance requirements.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Implement additional oversight and daily check-ins to help the team meet the sponsor's deadline.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Implement additional oversight and daily check-ins to help the team meet the spons…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Implement additional oversight and daily check-ins to help the team meet the spons…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</p>
       </div></div>
         </section>
 
@@ -156,10 +168,10 @@
           <h2>3. Câu hỏi — Full Bank Q819</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 819</div>
-            <div class="q-text">An agile project team has <em>not</em> completed critical tasks within the current iteration, marking the third consecutive sprint with incomplete deliverables. During a stakeholder meeting, the project sponsor mandates a final completion date to meet regulatory compliance requirements, stating that missing this deadline could result in significant financial penalties and potential license suspension. The team maintains that they need more time for quality assurance, while the product owner supports the sponsor's concerns about the timeline. What should the project manager do?</div>
-            <button class="opt-btn" data-opt="A" type="button">A. Facilitate a negotiation between the sponsor and the project team to team to obtain approval for extra time dedicated to quality assurance.</button>
+            <div class="q-text">An agile project team has <span class="kw-cue">not</span> completed critical tasks within the current iteration, marking the third consecutive sprint with incomplete deliverables. During a stakeholder meeting, the project sponsor mandates a final completion date to meet regulatory compliance requirements, stating that missing this deadline could result in significant financial penalties and potential license suspension. The team maintains that they need more time for quality assurance, while the product owner supports the sponsor's concerns about the timeline. <span class="kw-cue">What should the project manager do</span>?</div>
+            <button class="opt-btn" data-opt="A" type="button">A. <span class="kw-signal">Facilitate</span> a negotiation between the sponsor and the project team to team to obtain approval for extra time dedicated to quality assurance.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Support team autonomy in sprint management while escalating regulatory risks to senior management.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Work with the product owner to reprioritize the backlog and identify the minimum viable deliverables that fulfill compliance requirements.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. <span class="kw-signal">Work with</span> the product owner to reprioritize the backlog and identify the minimum viable deliverables that fulfill compliance requirements.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Implement additional oversight and daily check-ins to help the team meet the sponsor's deadline.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Work with the product owner to reprioritize the backlog and identify the minimum viable deliverables that fulfill compliance requirements.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Trong Agile, servant leader trao quyền cho team tự cải thiện quy trình và loại bỏ impediment. PMBOK 8 — Build an empowered culture — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; project and product management. The product owner should ensure that the development team is focused on delivering valuable features by maintaining and prioritizing the product backlog. The business analyst should gather and document requ<br>&gt; — PMBOK 8, tr. 24 (Performance Domain: Resources, Develop Team)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 24: Performance Domain: Resources, Develop Team</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an <span class="kw-signal">empowered</span> culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; project and product management. The product owner should ensure that the development team is focused on delivering valuable features by maintaining and prioritizing the product backlog. The business analyst should gather and document requ<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 24 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 24: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Facilitate a negotiation between the sponsor and the project team to team to obt…</span></td><td>Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / MVP.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Support team autonomy in sprint management while escalating regulatory risks to …</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement additional oversight and daily check-ins to help the team meet the spo…</span></td><td>&quot;Implement additional oversight and daily check-ins to help the team meet the spons…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-signal">Facilitate</span> a negotiation between the sponsor and the project team to team to obt…</span></td><td>Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Support team autonomy in sprint management while escalating regulatory risks to …</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement additional oversight and daily check-ins to help the team meet the spo…</span></td><td>&quot;Implement additional oversight and daily check-ins to help the team meet the spons…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr></tbody>
           </table>
         </section>
 

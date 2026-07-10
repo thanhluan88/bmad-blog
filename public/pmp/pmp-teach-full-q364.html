@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -116,6 +122,12 @@
           <h1>Phân tích Câu 364 — Bộ luyện PMBOK 8</h1>
           <p class="lead">A project manager is leading a complex infrastructure project that is vital for the company's growth. During the project's initial stages, the project manager identifies a highly influential stakeholder who is resistant to the project. This stakeholder's support is crucial for the project's success, but they have expressed concerns and reservations. How should the project manager handle this situation?</p>
           <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q364</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -135,11 +147,11 @@
           <h2>2. So sánh đáp án</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
-        Develop a stakeholder engagement plan that includes strategies to address the concerns of the resistant stakeholder.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        Develop a <span class="kw-signal">stakeholder engagement plan</span> that includes strategies to address the concerns of the resistant stakeholder.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
-        Exclude the resistant stakeholder from the project to prevent potential disruptions and maintain project focus.
+        <span class="kw-trap">Exclude</span> the resistant stakeholder from the project to prevent potential disruptions and maintain project focus.
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Thay đổi phạm vi cần quy trình change control và thống nhất stakeholder — không phải phản ứng mặc định khi gặp trở ngại.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
@@ -157,8 +169,8 @@
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 364</div>
             <div class="q-text">A project manager is leading a complex infrastructure project that is vital for the company's growth. During the project's initial stages, the project manager identifies a highly influential stakeholder who is resistant to the project. This stakeholder's support is crucial for the project's success, but they have expressed concerns and reservations. How should the project manager handle this situation?</div>
-            <button class="opt-btn" data-opt="A" type="button">A. Develop a stakeholder engagement plan that includes strategies to address the concerns of the resistant stakeholder.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Exclude the resistant stakeholder from the project to prevent potential disruptions and maintain project focus.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Develop a <span class="kw-signal">stakeholder engagement plan</span> that includes strategies to address the concerns of the resistant stakeholder.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. <span class="kw-trap">Exclude</span> the resistant stakeholder from the project to prevent potential disruptions and maintain project focus.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Assign the task of managing the resistant stakeholder to a team member and focus on engaging other stakeholders.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Seek senior management's intervention to convince the resistant stakeholder of the project's importance.</button>
             <div class="feedback" id="quizFeedback"></div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Develop a stakeholder engagement plan that includes strategies to address the concerns of the resistant stakeholder.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>A</strong> — &quot;Develop a stakeholder engagement plan that includes strategies to address the concerns of the resistant stakeholder.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — PMBOK 8, tr. 71 (Plan Stakeholder Engagement)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: Plan Stakeholder Engagement</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>A</strong> — &quot;Develop a <span class="kw-signal">stakeholder engagement plan</span> that includes strategies to address the concerns of the resistant stakeholder.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Exclude the resistant stakeholder from the project to prevent potential disrupti…</span></td><td>Thay đổi phạm vi cần quy trình change control và thống nhất stakeholder — không phải phản ứng mặc định khi gặp trở ngại.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Assign the task of managing the resistant stakeholder to a team member and focus…</span></td><td>&quot;Assign the task of managing the resistant stakeholder to a team member and focus o…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Seek senior management's intervention to convince the resistant stakeholder of t…</span></td><td>&quot;Seek senior management's intervention to convince the resistant stakeholder of the…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
+            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Exclude</span> the resistant stakeholder from the project to prevent potential disrupti…</span></td><td>Thay đổi phạm vi cần quy trình change control và thống nhất stakeholder — không phải phản ứng mặc định khi gặp trở ngại.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Assign the task of managing the resistant stakeholder to a team member and focus…</span></td><td>&quot;Assign the task of managing the resistant stakeholder to a team member and focus o…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Seek senior management's intervention to convince the resistant stakeholder of t…</span></td><td>&quot;Seek senior management's intervention to convince the resistant stakeholder of the…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
           </table>
         </section>
 

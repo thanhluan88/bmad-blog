@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 902 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">At a global technology company, a project manager is executing a project to improve internal product support processes. Retrospectives identify useful improvements, but lessons learned are only captured at project closure. Mid-project insights rarely influence ongoing work. The sponsor wants continuous improvement to be visible while the project is still in flight. What should the project manager do?</p>
+          <p class="lead">At a global technology company, a project manager is executing a project to improve internal product support processes. Retrospectives identify useful improvements, but lessons learned are only captured at project closure. Mid-project insights rarely influence ongoing work. The sponsor wants continuous improvement to be visible while the project is still in flight. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Resources, Scope</span><span class="badge">Closing</span><span class="badge">Develop Team</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q902</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -136,11 +148,11 @@
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Continue capturing lessons learned for a final report at closure without altering current processes.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
-        Designate a team member to maintain a lessons learned log, but postpone any changes until the next project.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+        Designate a team member to maintain a lessons learned log, but <span class="kw-trap">postpone</span> any changes until the next project.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Share improvement ideas informally and leave it to individuals to decide whether to adjust their work.
@@ -148,7 +160,7 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Apply lessons learned during execution by incorporating agreed improvements into current ways of working.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div></div>
         </section>
 
@@ -156,9 +168,9 @@
           <h2>3. Câu hỏi — Full Bank Q902</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 902</div>
-            <div class="q-text">At a global technology company, a project manager is executing a project to improve internal product support processes. Retrospectives identify useful improvements, but lessons learned are only captured at project closure. Mid-project insights rarely influence ongoing work. The sponsor wants continuous improvement to be visible while the project is still in flight. What should the project manager do?</div>
+            <div class="q-text">At a global technology company, a project manager is executing a project to improve internal product support processes. Retrospectives identify useful improvements, but lessons learned are only captured at project closure. Mid-project insights rarely influence ongoing work. The sponsor wants continuous improvement to be visible while the project is still in flight. <span class="kw-cue">What should the project manager do</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Continue capturing lessons learned for a final report at closure without altering current processes.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Designate a team member to maintain a lessons learned log, but postpone any changes until the next project.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Designate a team member to maintain a lessons learned log, but <span class="kw-trap">postpone</span> any changes until the next project.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Share improvement ideas informally and leave it to individuals to decide whether to adjust their work.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Apply lessons learned during execution by incorporating agreed improvements into current ways of working.</button>
             <div class="feedback" id="quizFeedback"></div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Apply lessons learned during execution by incorporating agreed improvements into current ways of working.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Vấn đề chất lượng sau delivery — retrospective/root cause và cải tiến hệ thống.<br><br>Bối cảnh: Vấn đề chất lượng sau delivery. Đáp án <strong>D</strong> — &quot;Apply lessons learned during execution by incorporating agreed improvements into current ways of working.&quot; — phù hợp vì Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned. Agile/Hybrid: ưu tiên empowered culture, collaboration và continuous improvement.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — PMBOK 8, tr. 53 (Performance Domain: Resources, Develop Team)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: Resources, Develop Team</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Vấn đề chất lượng sau delivery — <span class="kw-signal">retrospective</span>/<span class="kw-signal">root cause</span> và cải tiến hệ thống.<br><br>Bối cảnh: Vấn đề chất lượng sau delivery. Đáp án <strong>D</strong> — &quot;Apply lessons learned during execution by incorporating agreed improvements into current ways of working.&quot; — phù hợp vì Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an <span class="kw-signal">Empowered</span> Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Continue capturing lessons learned for a final report at closure without alterin…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Designate a team member to maintain a lessons learned log, but postpone any chan…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Share improvement ideas informally and leave it to individuals to decide whether…</span></td><td>&quot;Share improvement ideas informally and leave it to individuals to decide whether t…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ghi nhận / tài liệu hóa.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Continue capturing lessons learned for a final report at closure without alterin…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Designate a team member to maintain a lessons learned log, but <span class="kw-trap">postpone</span> any chan…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Share improvement ideas informally and leave it to individuals to decide whether…</span></td><td>&quot;Share improvement ideas informally and leave it to individuals to decide whether t…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ghi nhận / tài liệu hóa.</td></tr></tbody>
           </table>
         </section>
 

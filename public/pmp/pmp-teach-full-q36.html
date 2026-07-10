@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 36 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">The security officer states that going live without the patch is unacceptable due to the security vulnerability. How should the project manager best incorporate this constraint into decision‑making?</p>
+          <p class="lead">The security officer states that going live without the patch is unacceptable due to the security vulnerability. How should the project manager <span class="kw-cue">best</span> incorporate this constraint into decision‑making?</p>
           <div class="badges"><span class="badge">Scope, Schedule</span><span class="badge">Executing</span><span class="badge">Define Scope</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q36</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -136,19 +148,19 @@
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Document the security officer’s concerns, but proceed with whichever option the implementation partner prefers.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi BEST — đây không phải bước ưu tiên.)</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi <span class="kw-cue">BEST</span> — đây không phải bước ưu tiên.)</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Ask the security officer to formally accept the risk of going live without the patch.
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">yêu cầu bên liên quan/team thực hiện hành động không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thay đổi phạm vi.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
-        Delay any decision until the patch is released and final technical details are known.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Delay any decision until the patch is released and final technical details are known. — đáp án đúng cần thay đổi phạm vi.</p>
+        <span class="kw-trap">Delay</span> any decision until the patch is released and final technical details are known.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết <span class="kw-trap">Delay</span> any decision until the patch is released and final technical details are known. — đáp án đúng cần thay đổi phạm vi.</p>
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Treat the security officer’s position as a requirement and exclude any option that involves going live without the patch.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div></div>
         </section>
 
@@ -156,10 +168,10 @@
           <h2>3. Câu hỏi — Full Bank Q36</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 36</div>
-            <div class="q-text">The security officer states that going live without the patch is unacceptable due to the security vulnerability. How should the project manager <em>best</em> incorporate this constraint into decision‑making?</div>
+            <div class="q-text">The security officer states that going live without the patch is unacceptable due to the security vulnerability. How should the project manager <span class="kw-cue">best</span> incorporate this constraint into decision‑making?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Document the security officer’s concerns, but proceed with whichever option the implementation partner prefers.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Ask the security officer to formally accept the risk of going live without the patch.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Delay any decision until the patch is released and final technical details are known.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. <span class="kw-trap">Delay</span> any decision until the patch is released and final technical details are known.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Treat the security officer’s position as a requirement and exclude any option that involves going live without the patch.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Treat the security officer’s position as a requirement and exclude any option that involves going live without the patch.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> PM thay đổi phạm vi để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Scope + Schedule, Focus Area Executing (PMBOK 8).<br><br>Bối cảnh: The security officer states that going live without the patch is unacceptable due to the security vulnerability. Đáp án <strong>D</strong> — &quot;Treat the security officer’s position as a requirement and exclude any option that involves going live without the patch.&quot; — phù hợp vì PM thay đổi phạm vi để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Scope + Schedule, Focus Area Executing (PMBOK 8).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 48 3.6.2 Principle in Action To provide an example of the Be an Accountable Leader principle, consider a government megaproject that involves multiple vendors. In the project, a conflict arises among the vendor teams over previously arran<br>&gt; — PMBOK 8, tr. 48 (Performance Domain: Scope, Define Scope)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 48: Performance Domain: Scope, Define Scope</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> PM thay đổi phạm vi để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Schedule</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: The security officer states that going live without the patch is unacceptable due to the security vulnerability. Đáp án <strong>D</strong> — &quot;Treat the security officer’s position as a requirement and <span class="kw-trap">exclude</span> any option that involves going live without the patch.&quot; — phù hợp vì PM thay đổi phạm vi để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Schedule</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 48 3.6.2 Principle in Action To provide an example of the Be an Accountable Leader principle, consider a government megaproject that involves multiple vendors. In the project, a conflict arises among the vendor teams over previously arran<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 48 (Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 48: Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Document the security officer’s concerns, but proceed with whichever option the …</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi BEST — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the security officer to formally accept the risk of going live without the p…</span></td><td>yêu cầu bên liên quan/team thực hiện hành động không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thay đổi phạm vi.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Delay any decision until the patch is released and final technical details are k…</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Delay any decision until the patch is released and final technical details are known. — đáp án đúng cần thay đổi phạm vi.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Document the security officer’s concerns, but proceed with whichever option the …</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi <span class="kw-cue">BEST</span> — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the security officer to formally accept the risk of going live without the p…</span></td><td>yêu cầu bên liên quan/team thực hiện hành động không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thay đổi phạm vi.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Delay</span> any decision until the patch is released and final technical details are k…</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết <span class="kw-trap">Delay</span> any decision until the patch is released and final technical details are known. — đáp án đúng cần thay đổi phạm vi.</td></tr></tbody>
           </table>
         </section>
 

@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 987 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A government IT project experiences repeated approval delays due to unclear escalation paths. Similar issues were reported in other projects, yet the improvement framework was not updated. The project manager must ensure this recurring challenge is resolved. What should the project manager do?</p>
+          <p class="lead">A government IT project experiences repeated approval delays due to unclear escalation paths. Similar issues were reported in other projects, yet the improvement framework was <span class="kw-cue">not</span> updated. The project manager must ensure this recurring challenge is resolved. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Governance, Schedule</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q987</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -135,16 +147,16 @@
           <h2>2. So sánh đáp án</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
-        Record escalation delays in the project closure report so the teams can review the issues at the end of the project.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+        Record <span class="kw-trap">escalation</span> delays in the project closure report so the teams can review the issues at the end of the project.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
-        Escalate the approval issue to the project sponsor for immediate intervention and oversight of activities.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+        <span class="kw-trap">Escalate</span> the approval issue to the project sponsor for immediate intervention and oversight of activities.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</p>
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Request a change to the standard escalation procedures for governance review in the quality management plan.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Add more approval checkpoints to the schedule to provide additional oversight during execution of the project.
@@ -156,9 +168,9 @@
           <h2>3. Câu hỏi — Full Bank Q987</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 987</div>
-            <div class="q-text">A government IT project experiences repeated approval delays due to unclear escalation paths. Similar issues were reported in other projects, yet the improvement framework was <em>not</em> updated. The project manager must ensure this recurring challenge is resolved. What should the project manager do?</div>
-            <button class="opt-btn" data-opt="A" type="button">A. Record escalation delays in the project closure report so the teams can review the issues at the end of the project.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Escalate the approval issue to the project sponsor for immediate intervention and oversight of activities.</button>
+            <div class="q-text">A government IT project experiences repeated approval delays due to unclear escalation paths. Similar issues were reported in other projects, yet the improvement framework was <span class="kw-cue">not</span> updated. The project manager must ensure this recurring challenge is resolved. <span class="kw-cue">What should the project manager do</span>?</div>
+            <button class="opt-btn" data-opt="A" type="button">A. Record <span class="kw-trap">escalation</span> delays in the project closure report so the teams can review the issues at the end of the project.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. <span class="kw-trap">Escalate</span> the approval issue to the project sponsor for immediate intervention and oversight of activities.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Request a change to the standard escalation procedures for governance review in the quality management plan.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Add more approval checkpoints to the schedule to provide additional oversight during execution of the project.</button>
             <div class="feedback" id="quizFeedback"></div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Request a change to the standard escalation procedures for governance review in the quality management plan.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.<br><br>Bối cảnh: mức độ uncertainty cao. Đáp án <strong>C</strong> — &quot;Request a change to the standard escalation procedures for governance review in the quality management plan.&quot; — phù hợp vì Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 9 Section 1 – Introduction Additionally, project governance helps prioritize initiatives and allocate resources to support strategic objectives. For instance, a steering committee in a product launch project may oversee milestones, enforc<br>&gt; — PMBOK 8, tr. 9 (Performance Domain: Governance, Manage Project Execution)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 9: Performance Domain: Governance, Manage Project Execution</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.<br><br>Bối cảnh: mức độ uncertainty cao. Đáp án <strong>C</strong> — &quot;Request a change to the standard <span class="kw-trap">escalation</span> procedures for governance review in the quality management plan.&quot; — phù hợp vì <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 9 Section 1 – Introduction Additionally, project governance helps prioritize initiatives and allocate resources to support strategic objectives. For instance, a steering committee in a product launch project may oversee milestones, enforc<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 9 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 9: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Record escalation delays in the project closure report so the teams can review t…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Escalate the approval issue to the project sponsor for immediate intervention an…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Add more approval checkpoints to the schedule to provide additional oversight du…</span></td><td>&quot;Add more approval checkpoints to the schedule to provide additional oversight duri…&quot; không phù hợp mức độ uncertainty cao — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Record <span class="kw-trap">escalation</span> delays in the project closure report so the teams can review t…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the approval issue to the project sponsor for immediate intervention an…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Add more approval checkpoints to the schedule to provide additional oversight du…</span></td><td>&quot;Add more approval checkpoints to the schedule to provide additional oversight duri…&quot; không phù hợp mức độ uncertainty cao — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.</td></tr></tbody>
           </table>
         </section>
 

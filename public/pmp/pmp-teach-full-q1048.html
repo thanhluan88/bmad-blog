@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 1048 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">During a portfolio review, leadership notes that multiple projects are struggling with inconsistent stakeholder feedback loops. The current improvement framework does not include a formal mechanism to capture and act on stakeholder input. How should the project manager address this gap?</p>
+          <p class="lead">During a portfolio review, leadership notes that multiple projects are struggling with inconsistent stakeholder feedback loops. The current improvement framework does <span class="kw-cue">not</span> include a formal mechanism to capture and act on stakeholder input. How should the project manager address this gap?</p>
           <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q1048</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -135,16 +147,16 @@
           <h2>2. So sánh đáp án</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
-        Request a change to the stakeholder engagement plan to include structured review checkpoints.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        Request a change to the <span class="kw-signal">stakeholder engagement plan</span> to include structured review checkpoints.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Assign the project management office (PMO) to monitor stakeholder satisfaction across projects.
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Assign the project management office (PMO) to monitor stakeholder satisfaction acr…&quot; không phù hợp thành viên quá tải hoặc bất mãn — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
-        Record the stakeholder communication issue in the risk register as a potential threat to satisfaction.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi risk khi chưa hiểu root cause và chưa hỗ trợ member — sai thứ tự.</p>
+        Record the stakeholder communication issue in the <span class="kw-signal">risk register</span> as a potential threat to satisfaction.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi risk khi chưa hiểu <span class="kw-signal">root cause</span> và chưa hỗ trợ member — sai thứ tự.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Add additional stakeholder meetings into the current project schedule to improve communication.
@@ -156,10 +168,10 @@
           <h2>3. Câu hỏi — Full Bank Q1048</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1048</div>
-            <div class="q-text">During a portfolio review, leadership notes that multiple projects are struggling with inconsistent stakeholder feedback loops. The current improvement framework does <em>not</em> include a formal mechanism to capture and act on stakeholder input. How should the project manager address this gap?</div>
-            <button class="opt-btn" data-opt="A" type="button">A. Request a change to the stakeholder engagement plan to include structured review checkpoints.</button>
+            <div class="q-text">During a portfolio review, leadership notes that multiple projects are struggling with inconsistent stakeholder feedback loops. The current improvement framework does <span class="kw-cue">not</span> include a formal mechanism to capture and act on stakeholder input. How should the project manager address this gap?</div>
+            <button class="opt-btn" data-opt="A" type="button">A. Request a change to the <span class="kw-signal">stakeholder engagement plan</span> to include structured review checkpoints.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Assign the project management office (PMO) to monitor stakeholder satisfaction across projects.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Record the stakeholder communication issue in the risk register as a potential threat to satisfaction.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Record the stakeholder communication issue in the <span class="kw-signal">risk register</span> as a potential threat to satisfaction.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Add additional stakeholder meetings into the current project schedule to improve communication.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Request a change to the stakeholder engagement plan to include structured review checkpoints.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Thành viên quá tải/bất mãn — PM lắng nghe, hỗ trợ cụ thể trước; không đẩy trách nhiệm hay team building chung chung.<br><br>Bối cảnh: thành viên quá tải hoặc bất mãn. Đáp án <strong>A</strong> — &quot;Request a change to the stakeholder engagement plan to include structured review checkpoints.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý. Agile/Hybrid: ưu tiên empowered culture, collaboration và continuous improvement.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — PMBOK 8, tr. 53 (Performance Domain: Resources, Develop Team)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: Resources, Develop Team</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Thành viên quá tải/bất mãn — PM lắng nghe, hỗ trợ cụ thể trước; không đẩy trách nhiệm hay team building chung chung.<br><br>Bối cảnh: thành viên quá tải hoặc bất mãn. Đáp án <strong>A</strong> — &quot;Request a change to the <span class="kw-signal">stakeholder engagement plan</span> to include structured review checkpoints.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an <span class="kw-signal">Empowered</span> Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Assign the project management office (PMO) to monitor stakeholder satisfaction a…</span></td><td>&quot;Assign the project management office (PMO) to monitor stakeholder satisfaction acr…&quot; không phù hợp thành viên quá tải hoặc bất mãn — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Record the stakeholder communication issue in the risk register as a potential t…</span></td><td>Ghi risk khi chưa hiểu root cause và chưa hỗ trợ member — sai thứ tự.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Add additional stakeholder meetings into the current project schedule to improve…</span></td><td>&quot;Add additional stakeholder meetings into the current project schedule to improve c…&quot; không phù hợp thành viên quá tải hoặc bất mãn — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
+            <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Assign the project management office (PMO) to monitor stakeholder satisfaction a…</span></td><td>&quot;Assign the project management office (PMO) to monitor stakeholder satisfaction acr…&quot; không phù hợp thành viên quá tải hoặc bất mãn — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Record the stakeholder communication issue in the <span class="kw-signal">risk register</span> as a potential t…</span></td><td>Ghi risk khi chưa hiểu <span class="kw-signal">root cause</span> và chưa hỗ trợ member — sai thứ tự.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Add additional stakeholder meetings into the current project schedule to improve…</span></td><td>&quot;Add additional stakeholder meetings into the current project schedule to improve c…&quot; không phù hợp thành viên quá tải hoặc bất mãn — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
           </table>
         </section>
 

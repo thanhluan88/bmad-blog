@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 1024 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An internet provider is modernizing its billing system. Amid growing global concerns about AI-driven decision accuracy and privacy, new regulations are emerging that may affect how billing features are designed and deployed. After consulting with compliance leads, the project manager is concerned that the team may be unable to respond quickly to future scope changes. What should the project manager do?</p>
+          <p class="lead">An internet provider is modernizing its billing system. Amid growing global concerns about AI-driven decision accuracy and privacy, new regulations are emerging that may affect how billing features are designed and deployed. After consulting with compliance leads, the project manager is concerned that the team may be unable to respond quickly to future scope changes. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Governance, Scope</span><span class="badge">Executing</span><span class="badge">Perform Integrated Change Control</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q1024</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -135,16 +147,16 @@
           <h2>2. So sánh đáp án</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
-        Collaborate closely with the compliance team to explore backlog updates.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Collaborate closely with the compliance team to explore backlog updates.&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</p>
+        <span class="kw-signal">Collaborate</span> closely with the compliance team to explore backlog updates.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;<span class="kw-signal">Collaborate</span> closely with the compliance team to explore backlog updates.&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</p>
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Set up a tracking system to monitor regulatory changes for backlog alignment.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Report the concern to the product owner for business value clarification.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần đảm bảo tuân thủ / compliance.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần đảm bảo tuân thủ / compliance.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Adjust the delivery schedule to accommodate anticipated regulatory features.
@@ -156,8 +168,8 @@
           <h2>3. Câu hỏi — Full Bank Q1024</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1024</div>
-            <div class="q-text">An internet provider is modernizing its billing system. Amid growing global concerns about AI-driven decision accuracy and privacy, new regulations are emerging that may affect how billing features are designed and deployed. After consulting with compliance leads, the project manager is concerned that the team may be unable to respond quickly to future scope changes. What should the project manager do?</div>
-            <button class="opt-btn" data-opt="A" type="button">A. Collaborate closely with the compliance team to explore backlog updates.</button>
+            <div class="q-text">An internet provider is modernizing its billing system. Amid growing global concerns about AI-driven decision accuracy and privacy, new regulations are emerging that may affect how billing features are designed and deployed. After consulting with compliance leads, the project manager is concerned that the team may be unable to respond quickly to future scope changes. <span class="kw-cue">What should the project manager do</span>?</div>
+            <button class="opt-btn" data-opt="A" type="button">A. <span class="kw-signal">Collaborate</span> closely with the compliance team to explore backlog updates.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Set up a tracking system to monitor regulatory changes for backlog alignment.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Report the concern to the product owner for business value clarification.</button>
             <button class="opt-btn" data-opt="D" type="button">D. Adjust the delivery schedule to accommodate anticipated regulatory features.</button>
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Set up a tracking system to monitor regulatory changes for backlog alignment.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.<br><br>Bối cảnh: yêu cầu thay đổi phạm vi/kế hoạch. Đáp án <strong>B</strong> — &quot;Set up a tracking system to monitor regulatory changes for backlog alignment.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; changes, taking into consideration the impact on the Scope, Schedule, Finance, Stakeholders, Resources, and Risk performance domains. Projects employing an adaptive approach use a backlog to manage scope, showing the rate of accomplishin<br>&gt; — PMBOK 8, tr. 46 (Performance Domain: Governance, Perform Integrated Change Control)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 46: Performance Domain: Governance, Perform Integrated Change Control</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.<br><br>Bối cảnh: yêu cầu thay đổi phạm vi/kế hoạch. Đáp án <strong>B</strong> — &quot;Set up a tracking system to monitor regulatory changes for backlog alignment.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; changes, taking into consideration the impact on the <span class="kw-pmbok">Scope</span>, <span class="kw-pmbok">Schedule</span>, <span class="kw-pmbok">Finance</span>, <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Resources</span>, and <span class="kw-pmbok">Risk</span> performance domains. Projects employing an adaptive approach use a backlog to manage scope, showing the rate of accomplishin<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 46 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Perform <span class="kw-signal">Integrated Change Control</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 46: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Perform <span class="kw-signal">Integrated Change Control</span></span></p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Collaborate closely with the compliance team to explore backlog updates.</span></td><td>&quot;Collaborate closely with the compliance team to explore backlog updates.&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Report the concern to the product owner for business value clarification.</span></td><td>Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Adjust the delivery schedule to accommodate anticipated regulatory features.</span></td><td>&quot;Adjust the delivery schedule to accommodate anticipated regulatory featu…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch trọng tâm — &quot;Set up a tracking system to monitor regulatory changes for backlog align…&quot; sát yêu cầu thay đổi phạm vi/kế hoạch hơn.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-signal">Collaborate</span> closely with the compliance team to explore backlog updates.</span></td><td>&quot;<span class="kw-signal">Collaborate</span> closely with the compliance team to explore backlog updates.&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Report the concern to the product owner for business value clarification.</span></td><td>Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Adjust the delivery schedule to accommodate anticipated regulatory features.</span></td><td>&quot;Adjust the delivery schedule to accommodate anticipated regulatory featu…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch trọng tâm — &quot;Set up a tracking system to monitor regulatory changes for backlog align…&quot; sát yêu cầu thay đổi phạm vi/kế hoạch hơn.</td></tr></tbody>
           </table>
         </section>
 

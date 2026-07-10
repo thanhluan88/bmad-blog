@@ -60,6 +60,12 @@
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-trap { background: #fef2f2; color: #991b1b; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 500; }
+    .kw-pmbok { background: #fffbeb; color: #b45309; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.78rem; color: var(--muted); margin: 0.75rem 0 0; }
+    .kw-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
     .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
     .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
@@ -114,8 +120,14 @@
       <main>
         <header class="hero" id="intro">
           <h1>Phân tích Câu 661 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A major integration in a project with multiple dependencies is delayed by one month. The project sponsor insists that the project team work overtime to catch up. The client argues that the integration must be tested thoroughly. The project management office emphasizes that dependency risks were identified earlier but not mitigated. What should the project manager do?</p>
+          <p class="lead">A major integration in a project with multiple dependencies is delayed by one month. The project sponsor insists that the project team work overtime to catch up. The client argues that the integration must be tested thoroughly. The project management office emphasizes that dependency risks were identified earlier but <span class="kw-cue">not</span> mitigated. <span class="kw-cue">What should the project manager do</span>?</p>
           <div class="badges"><span class="badge">Risk, Resources</span><span class="badge">Executing</span><span class="badge">Monitor Risks</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q661</span></div>
+          <p class="kw-legend">
+            <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
+            <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
+            <span><span class="kw-trap">trap</span> bẫy PMI</span>
+            <span><span class="kw-pmbok">PMBOK</span> thuật ngữ Guide</span>
+          </p>
         </header>
 
         <section id="mapping">
@@ -139,16 +151,16 @@
         <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;Approve overtime to satisfy sponsor pressure and incentivize the team to reduce th…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thừa nhận lỗi và giải trình minh bạch.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
-        Continue work despite the dependency delay and work with the team to ensure alignment later in the project.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Trì hoãn acknowledge — stakeholder mất tin tưởng.</p>
+        Continue work despite the dependency <span class="kw-trap">delay</span> and <span class="kw-signal">work with</span> the team to ensure alignment later in the project.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Trì hoãn <span class="kw-signal">acknowledge</span> — stakeholder mất tin tưởng.</p>
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Revise the schedule formally with stakeholder agreement and transparently integrate the impact of the dependency.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
-        Work with the client to compress testing by applying fast-tracking and crashing techniques to reduce testing time.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Sửa baseline tùy tiện trước khi consult risk register.</p>
+        <span class="kw-signal">Work with</span> the client to compress testing by applying fast-tracking and crashing techniques to reduce testing time.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Sửa baseline tùy tiện trước khi consult <span class="kw-signal">risk register</span>.</p>
       </div></div>
         </section>
 
@@ -156,11 +168,11 @@
           <h2>3. Câu hỏi — Full Bank Q661</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 661</div>
-            <div class="q-text">A major integration in a project with multiple dependencies is delayed by one month. The project sponsor insists that the project team work overtime to catch up. The client argues that the integration must be tested thoroughly. The project management office emphasizes that dependency risks were identified earlier but <em>not</em> mitigated. What should the project manager do?</div>
+            <div class="q-text">A major integration in a project with multiple dependencies is delayed by one month. The project sponsor insists that the project team work overtime to catch up. The client argues that the integration must be tested thoroughly. The project management office emphasizes that dependency risks were identified earlier but <span class="kw-cue">not</span> mitigated. <span class="kw-cue">What should the project manager do</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Approve overtime to satisfy sponsor pressure and incentivize the team to reduce the possibility of quality slippage.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Continue work despite the dependency delay and work with the team to ensure alignment later in the project.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Continue work despite the dependency <span class="kw-trap">delay</span> and <span class="kw-signal">work with</span> the team to ensure alignment later in the project.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Revise the schedule formally with stakeholder agreement and transparently integrate the impact of the dependency.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Work with the client to compress testing by applying fast-tracking and crashing techniques to reduce testing time.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. <span class="kw-signal">Work with</span> the client to compress testing by applying fast-tracking and crashing techniques to reduce testing time.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
@@ -174,10 +186,10 @@
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Revise the schedule formally with stakeholder agreement and transparently integrate the impact of the dependency.</strong></p>
           </div>
-          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Risk đã trigger — thực thi planned response từ risk register trước khi đổi plan hay ghi log.<br><br>Bối cảnh: Risk đã trigger. Đáp án <strong>C</strong> — &quot;Revise the schedule formally with stakeholder agreement and transparently integrate the impact of the dependency.&quot; — phù hợp vì PM thừa nhận lỗi và xin lỗi minh bạch — Lead accountably, giữ tin tưởng stakeholder.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; team to quickly identify and address emerging risks, ensuring flexibility and responsiveness. Additionally, regular risk review meetings are held with stakeholders at the end of each iteration to incorporate their feedback and adjust risk<br>&gt; — PMBOK 8, tr. 101 (Performance Domain: Risk, Monitor Risks)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 101: Performance Domain: Risk, Monitor Risks</p>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> <span class="kw-pmbok">Risk</span> đã trigger — thực thi planned response từ <span class="kw-signal">risk register</span> trước khi đổi plan hay ghi log.<br><br>Bối cảnh: <span class="kw-pmbok">Risk</span> đã trigger. Đáp án <strong>C</strong> — &quot;<span class="kw-trap">Revise the schedule</span> formally with stakeholder agreement and transparently integrate the impact of the dependency.&quot; — phù hợp vì PM thừa nhận lỗi và xin lỗi minh bạch — <span class="kw-pmbok">Lead accountably</span>, giữ tin tưởng stakeholder.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; team to quickly identify and address emerging risks, ensuring flexibility and responsiveness. Additionally, regular risk review meetings are held with stakeholders at the end of each iteration to incorporate their feedback and adjust risk<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 101 (Performance Domain: <span class="kw-pmbok">Risk</span>, Monitor Risks)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 101: Performance Domain: <span class="kw-pmbok">Risk</span>, Monitor Risks</p>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
-            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve overtime to satisfy sponsor pressure and incentivize the team to reduce …</span></td><td>&quot;Approve overtime to satisfy sponsor pressure and incentivize the team to reduce th…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thừa nhận lỗi và giải trình minh bạch.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Continue work despite the dependency delay and work with the team to ensure alig…</span></td><td>Trì hoãn acknowledge — stakeholder mất tin tưởng.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Work with the client to compress testing by applying fast-tracking and crashing …</span></td><td>Sửa baseline tùy tiện trước khi consult risk register.</td></tr></tbody>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve overtime to satisfy sponsor pressure and incentivize the team to reduce …</span></td><td>&quot;Approve overtime to satisfy sponsor pressure and incentivize the team to reduce th…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thừa nhận lỗi và giải trình minh bạch.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Continue work despite the dependency <span class="kw-trap">delay</span> and <span class="kw-signal">work with</span> the team to ensure alig…</span></td><td>Trì hoãn <span class="kw-signal">acknowledge</span> — stakeholder mất tin tưởng.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-signal">Work with</span> the client to compress testing by applying fast-tracking and crashing …</span></td><td>Sửa baseline tùy tiện trước khi consult <span class="kw-signal">risk register</span>.</td></tr></tbody>
           </table>
         </section>
 
