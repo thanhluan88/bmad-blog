@@ -14,6 +14,7 @@ const {
   buildContextualSummary,
   buildContextualWhy,
   buildPriorityExplanation,
+  buildSpecificCorrectRationale,
   inferWrongReason,
 } = require("./pmp-option-reasoning");
 const { getChartStemProfile } = require("./pmp-chart-explanations");
@@ -193,6 +194,11 @@ function appendPmbok8Insight(lines, pageInfo) {
 }
 
 function buildOptionAnalysis(q, correctKeys, priorityCue, agile) {
+  const meta = extractQuestionMeta(q);
+  const stemProfile = getChartStemProfile(q) || matchStemProfile(q.text);
+  const stemIssues = extractStemIssues(q.text);
+  const correctOpt = (q.options || []).find((o) => correctKeys.includes(o.key));
+  const correctType = correctOpt ? classifyAction(correctOpt.text) : null;
   const opts =
     q.type === "dropdown"
       ? (q.dropdownOptions || []).map((text, i) => ({
@@ -203,7 +209,15 @@ function buildOptionAnalysis(q, correctKeys, priorityCue, agile) {
   return opts.map((opt) => {
     const isCorrect = correctKeys.includes(opt.key);
     const reason = isCorrect
-      ? null
+      ? buildSpecificCorrectRationale(
+          q,
+          correctKeys,
+          correctType,
+          stemIssues,
+          stemProfile,
+          meta.domains,
+          meta.focusArea,
+        )
       : rejectWrongOption(opt, q, correctKeys, priorityCue, agile);
     return { key: opt.key, text: opt.text, isCorrect, reason };
   });

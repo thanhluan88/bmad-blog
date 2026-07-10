@@ -269,7 +269,7 @@ function quizScript(q, analysis) {
   const expl = {};
   for (const o of analysis.optionAnalysis || []) {
     expl[o.key] = o.isCorrect
-      ? "Đúng theo PMBOK 8 và phân tích tình huống."
+      ? o.reason || "Đúng theo PMBOK 8 và phân tích tình huống."
       : o.reason || "Không phải lựa chọn tốt nhất trong tình huống này.";
   }
   const correctLabel = JSON.stringify(q.correctLabel || q.correct);

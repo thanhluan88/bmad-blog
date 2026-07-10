@@ -5,7 +5,10 @@ const { getChartStemProfile, getChartOptionRejection } = require("./pmp-chart-ex
 const ACTION_TYPES = [
   { id: "apologize_accountable", label: "thừa nhận lỗi và giải trình minh bạch", re: /apolog|acknowledge the mistake|take responsibility|admit|transparen/i },
   { id: "listen_support", label: "lắng nghe và hỗ trợ cá nhân", re: /actively listen|listen to the|understand.*concern|support (?:their|the) needs|empath|one-on-one|1-on-1/i },
-  { id: "facilitate_retro", label: "facilitate retrospective / phân tích root cause", re: /retrospective|root cause|continuous improvement|process improvement|start.?stop.?continue/i },
+  { id: "explain_agile_value", label: "giải thích giá trị teamwork/Agile và continuous improvement", re: /explain that teamwork|explain.*(?:benefits?|value).*(?:teamwork|agile|collaboration)|continuous improvement.*early feedback|early feedback.*continuous improvement|benefits of (?:agile|teamwork)|value of (?:agile|iteration|collaboration)/i },
+  { id: "recommend_eq", label: "khuyên phát triển EQ / attitude thay vì explain value", re: /emotional intelligence|develop emotional intelligence/i },
+  { id: "escalate", label: "leo thang lên cấp trên", re: /escalat|ask the sponsor|inform the sponsor|report to (?:management|senior)|involve (?:senior|executive)|steering committee/i },
+  { id: "facilitate_retro", label: "facilitate retrospective / phân tích root cause", re: /\b(?:facilitate|conduct|hold|lead).*(?:retrospective|root cause)|(?:sprint |iteration )?retrospective(?: meeting)?|root cause analysis|process improvement workshop|start.?stop.?continue/i },
   { id: "set_expectations", label: "set expectations / thống nhất kỳ vọng và yêu cầu", re: /set expectations|agree on the requirements|manage expectations|establish expectations|clarify expectations|align expectations/i },
   { id: "micromanage_control", label: "micromanage / giám sát cứng", re: /micromanag|under the supervision of the project manager|deploy.*staff under|command and control/i },
   { id: "add_to_register", label: "bổ sung register và reevaluate", re: /add.*(?:to )?(?:the )?(?:risk|issue) register|update.*register.*reevaluat|reevaluate.*register|enter.*(?:risk|issue) register/i },
@@ -27,14 +30,12 @@ const ACTION_TYPES = [
   { id: "encourage_collaborate", label: "khuyến khích collaboration / hợp tác", re: /encourage the team|promote collaboration|foster|build trust|collaborate with/i },
   { id: "team_building", label: "team building / hoạt động nhóm", re: /team.?building|team building|social activit|group activit|offsite|icebreaker/i },
   { id: "coach_develop", label: "coaching / phát triển năng lực", re: /coach|mentor|training|develop.*skill|capability|competenc|onboard/i },
-  { id: "explain_agile_value", label: "giải thích giá trị teamwork/Agile và continuous improvement", re: /explain that teamwork|continuous improvement|early feedback|benefits of (?:agile|teamwork)|value of (?:agile|iteration|collaboration)/i },
   { id: "prioritize_value", label: "ưu tiên theo giá trị / MVP", re: /priorit|mvp|value delivery|business value|backlog.*prior|highest value|focus on value/i },
   { id: "quality_embed", label: "đảm bảo chất lượng / kiểm soát quality", re: /\bquality (?:plan|control|assurance|management|standard|issue|gate)\b|\bdefect\b|\binspection\b|\btesting\b|acceptance criteria|verification|validation|control chart/i },
   { id: "vendor_procurement", label: "quản lý vendor / procurement", re: /\b(?:vendor|supplier|procurement|subcontract)\b|(?:sow|rfp)\b|award.*contract/i },
   { id: "add_resources", label: "bổ sung nguồn lực / hire", re: /hire|add.*resource|get additional|onboard.*resource|staff up|external consult|consultancy|outsource/i },
   { id: "shift_responsibility", label: "đẩy trách nhiệm cho người khác tự xử lý", re: /unavoidable|find a solution|figure out|deal with it|their responsibility|ask the team member to find|ask them to resolve|tell them to/i },
   { id: "ask_team_act", label: "yêu cầu team hành động (chưa rõ facilitation)", re: /ask the (?:project )?team|ask team members|request the team|tell the team to|direct the team/i },
-  { id: "escalate", label: "leo thang lên cấp trên", re: /escalat|inform the sponsor|report to (?:management|senior)|involve (?:senior|executive)|steering committee/i },
   { id: "document_first", label: "ghi nhận / tài liệu hóa", re: /document|lessons learned|write.*report|record in|update the log|capture.*decision/i },
   { id: "direct_command", label: "chỉ đạo cứng / ra lệnh", re: /\bdirect(?:ed|ing)?\b|\bcommand\b|\bmandate\b|\brequire them to\b|\border the/i },
   { id: "wait_delay", label: "chờ / trì hoãn", re: /wait until|wait for|delay|postpone|hold off|defer until|do nothing|take no action|ignore/i },
@@ -47,7 +48,8 @@ const ACTION_TYPES = [
 ];
 
 const STEM_ISSUES = [
-  { id: "member_struggle", re: /overwhelmed|struggling|not happy|unhappy|having difficulty|difficulty delivering|burned out|demotivat|underperform|complexity of the tasks|not able to complete assigned/i, label: "thành viên quá tải hoặc bất mãn" },
+  { id: "sme_reluctance", re: /subject matter expert|\bSME\b|reluctant|reluctance|join the agile team|encourage them to join|working on a team is demotivat/i, label: "SME chưa buy-in Agile teamwork" },
+  { id: "member_struggle", re: /overwhelmed|struggling with|having difficulty delivering|burned out|underperform(?:ing)?|complexity of the tasks|missing task deadlines|not able to complete assigned/i, label: "thành viên quá tải hoặc bất mãn" },
   { id: "schedule_delay", re: /schedule.*(?:delay|overrun|slip)|behind schedule|late|deadline|critical path.*delay|project is late/i, label: "trễ tiến độ / áp lực schedule" },
   { id: "cost_issue", re: /over budget|cost overrun|budget.*exceed|financial|funding|cpi|overrun cost/i, label: "vấn đề chi phí / ngân sách" },
   { id: "quality_issue", re: /defect|bug|quality|poor quality|rework|failed inspection|does not meet.*standard/i, label: "vấn đề chất lượng / defect" },
@@ -95,7 +97,9 @@ const STEM_PROFILES = [
     rejectByAction: {
       escalate: "Leo thang sponsor vì attitude — quá nặng; PM coach và explain value trước.",
       meet_discuss: "Nhờ sponsor can thiệp attitude — PM vẫn chịu trách nhiệm develop team trực tiếp.",
-      evaluate_individual: "Chỉ focus EQ/integrating — thiếu explain agile value proposition cho SME.",
+      recommend_eq: "Khuyên phát triển EQ mang tính phán xét — không giải thích vì sao teamwork Agile không làm giảm chất lượng.",
+      evaluate_individual: "Chỉ focus EQ/attitude — thiếu explain agile value proposition cho SME.",
+      facilitate_retro: "Giao vai retrospective/ceremony khi SME chưa join team — cần explain CI + early feedback trước.",
       team_building: "Team building chung không address concern cụ thể của SME về agile collaboration.",
     },
     preferCorrect: ["explain_agile_value", "coach_develop", "facilitate_retro"],
@@ -316,6 +320,14 @@ const CONTRAST_MATRIX = {
     shift_responsibility: "Đẩy member tự học thay vì PM coach/support.",
     direct_command: "Chỉ đạo thay vì develop capability.",
   },
+  explain_agile_value: {
+    recommend_eq: "Khuyên EQ/attitude thay vì explain lợi ích teamwork, CI và early feedback.",
+    facilitate_retro: "Giao vai ceremony/retro khi member chưa buy-in — cần explain value trước.",
+    escalate: "Leo thang sponsor — PM vẫn phải coach và explain value trực tiếp.",
+    meet_discuss: "Nhờ sponsor fix attitude — không thay cho PM develop team.",
+    evaluate_individual: "Focus đánh giá cá nhân thay vì address misconception về Agile teamwork.",
+    team_building: "Hoạt động nhóm chung không giải thích CI/feedback loops cho SME.",
+  },
   allow_empower: {
     direct_command: "Micromanage thay vì trao quyền team tự quyết.",
     shift_responsibility: "PM không remove impediment mà đẩy trách nhiệm.",
@@ -346,6 +358,18 @@ const CONTRAST_MATRIX = {
     consult_artifact: "Consult scope plan chung — RTM/traceability matrix cụ thể hơn để phân tích gap requirement.",
   },
 };
+
+function getPrimaryStemIssue(stemIssues, stemProfile) {
+  if (stemProfile?.id === "sme_agile_reluctance") {
+    return (
+      stemIssues.find((i) => i.id === "sme_reluctance") || {
+        id: "sme_reluctance",
+        label: "SME chưa buy-in Agile teamwork",
+      }
+    );
+  }
+  return stemIssues[0] || null;
+}
 
 function classifyAction(text) {
   const t = String(text || "");
@@ -383,18 +407,27 @@ function contrastRejection(wrongType, correctType, stemProfile, stemIssues, wron
   if (correctType && CONTRAST_MATRIX[correctType.id]?.[wrongType.id]) {
     return CONTRAST_MATRIX[correctType.id][wrongType.id];
   }
-  const issueLabel = stemIssues[0]?.label || describeStemSituation({ text: wrongText }, stemIssues, stemProfile);
+  const issueLabel = getPrimaryStemIssue(stemIssues, stemProfile)?.label || describeStemSituation({ text: wrongText }, stemIssues, stemProfile);
   const correctLabel = correctType?.label || "xử lý trực tiếp trọng tâm câu hỏi";
   return `Tập trung "${wrongType.label}" không giải quyết ${issueLabel} — đáp án đúng cần ${correctLabel}.`;
 }
 
-function differentiateSameGroupRejection(opt, correctOpt, actionType, q, stemIssues) {
+function differentiateSameGroupRejection(opt, correctOpt, actionType, q, stemIssues, stemProfile) {
   const wrong = opt.text.replace(/\s+/g, " ").trim();
   const correct = correctOpt.text.replace(/\s+/g, " ").trim();
   const wl = wrong.toLowerCase();
   const cl = correct.toLowerCase();
-  const issue = stemIssues[0]?.label || "vấn đề trong đề bài";
+  const issue = getPrimaryStemIssue(stemIssues, stemProfile)?.label || "vấn đề trong đề bài";
 
+  if (/emotional intelligence/i.test(wl)) {
+    return "Khuyên phát triển EQ mang tính phán xét — PM cần explain agile value (CI + early feedback), không lecture attitude.";
+  }
+  if (/(?:conduct|lead).*(?:retrospective|retro)|objective observer/i.test(wl) && /explain that teamwork|continuous improvement/i.test(cl)) {
+    return "SME chưa tham gia team — giao retrospective/observer quá sớm; trước hết explain lợi ích teamwork và feedback loops.";
+  }
+  if (stemProfile?.id === "sme_agile_reluctance" && /retrospective|retro/i.test(wl)) {
+    return "Giao vai ceremony khi SME chưa buy-in — cần explain value (đáp án đúng) trước khi assign retrospective.";
+  }
   if (/micromanage|under the supervision of the project manager|deploy.*staff under/i.test(wl)) {
     return "Micromanage/supervise cứng contractor hoặc team — PMI khuyến khích set expectations và collaboration.";
   }
@@ -613,11 +646,14 @@ function normalizeText(text) {
 }
 
 function describeStemSituation(q, stemIssues, stemProfile) {
-  if (stemProfile?.whyCorrect) {
-    const label = stemIssues[0]?.label || stemProfile.summaryHint?.split("—")[0]?.trim();
-    if (label) return label;
+  const primary = getPrimaryStemIssue(stemIssues, stemProfile);
+  if (stemProfile?.summaryHint && primary?.id === "sme_reluctance") {
+    return stemProfile.summaryHint.split("—")[0].trim();
   }
-  if (stemIssues[0]) return stemIssues[0].label;
+  if (stemProfile?.whyCorrect && primary) {
+    return primary.label;
+  }
+  if (primary) return primary.label;
   if (stemProfile?.summaryHint) return stemProfile.summaryHint.split("—")[0].trim();
 
   const stem = normalizeText(q.text);
@@ -780,7 +816,7 @@ function inferWrongReason(opt, q, correctKeys, patternRejectFn, priorityCue) {
   const stemIssues = extractStemIssues(q.text);
 
   if (wrongType && correctType && wrongType.id === correctType.id) {
-    return differentiateSameGroupRejection(opt, correctOpt, wrongType, q, stemIssues);
+    return differentiateSameGroupRejection(opt, correctOpt, wrongType, q, stemIssues, stemProfile);
   }
 
   if (wrongType) {
@@ -788,7 +824,7 @@ function inferWrongReason(opt, q, correctKeys, patternRejectFn, priorityCue) {
   }
 
   const t = opt.text.toLowerCase();
-  const issue = stemIssues[0]?.label || "vấn đề trong đề bài";
+  const issue = getPrimaryStemIssue(stemIssues, stemProfile)?.label || "vấn đề trong đề bài";
   const correctIntent = describeOptionIntent(correctOpt.text);
   const wrongIntent = describeOptionIntent(opt.text);
 
@@ -824,9 +860,11 @@ module.exports = {
   classifyAction,
   matchStemProfile,
   extractStemIssues,
+  getPrimaryStemIssue,
   buildContextualSummary,
   buildContextualWhy,
   buildPriorityExplanation,
+  buildSpecificCorrectRationale,
   inferWrongReason,
   STEM_PROFILES,
 };

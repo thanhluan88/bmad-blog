@@ -49,6 +49,13 @@ function buildRagQuery(q, meta) {
     correctText.replace(/\s+/g, " ").slice(0, 100),
   ].filter(Boolean);
 
+  if (/subject matter expert|\bsme\b|reluctant.*(?:agile|team)|join the agile team|empower(?:ed|ment)? culture/i.test(blob)) {
+    parts.unshift("Build empowered culture", "coaching", "continuous improvement", "early feedback", "Develop Team");
+  }
+  if (/actively listen|emotional intelligence|one-on-one/i.test(blob)) {
+    parts.unshift("active listening", "emotional intelligence", "coach");
+  }
+
   const words = [...new Set(parts.join(" ").split(/\s+/).filter((w) => w.length > 2))];
   return words.slice(0, 18).join(" ");
 }

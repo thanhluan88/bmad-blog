@@ -123,17 +123,30 @@ function highlightOptionText(text, isCorrect) {
     html = applyPatterns(html, PMI_SIGNAL_PATTERNS, "kw-signal");
   } else {
     html = applyPatterns(html, TRAP_PATTERNS, "kw-trap");
-    html = applyPatterns(html, PMI_SIGNAL_PATTERNS, "kw-signal");
   }
   return html;
+}
+
+function applyPatternsOutsideSpans(html, patterns, cls) {
+  const parts = html.split(/(<span class="kw-[^"]*">[\s\S]*?<\/span>)/gi);
+  return parts
+    .map((part, i) => {
+      if (i % 2 === 1) return part;
+      let out = part;
+      for (const re of patterns) {
+        out = out.replace(re, (m) => `<span class="${cls}">${m}</span>`);
+      }
+      return out;
+    })
+    .join("");
 }
 
 function highlightReasoning(text) {
   let html = stripHighlights(escapeHtml(text));
   html = applyPatterns(html, EXAM_CUE_PATTERNS, "kw-cue");
   html = applyPatterns(html, PMBOK8_TERM_PATTERNS, "kw-pmbok");
-  html = applyPatterns(html, PMI_SIGNAL_PATTERNS, "kw-signal");
-  html = applyPatterns(html, TRAP_PATTERNS, "kw-trap");
+  html = applyPatternsOutsideSpans(html, PMI_SIGNAL_PATTERNS, "kw-signal");
+  html = applyPatternsOutsideSpans(html, TRAP_PATTERNS, "kw-trap");
   return html;
 }
 
