@@ -154,6 +154,15 @@ function warmupPageCache(queries, options = {}) {
   return { warmed: missing.length, total: unique.length };
 }
 
+function cleanSnippet(snippet) {
+  return String(snippet || "")
+    .replace(/\s+/g, " ")
+    .replace(/Licensed To:[\s\S]*$/i, "")
+    .replace(/This copy is a PMI Member benefit[\s\S]*$/i, "")
+    .replace(/Figure \d+-\d+\.[\s\S]*$/i, "")
+    .trim();
+}
+
 function lookupPmbokPages(q, meta) {
   const { domains, processes } = meta;
   const query = buildRagQuery(q, meta);
@@ -161,9 +170,10 @@ function lookupPmbokPages(q, meta) {
   const hit = pageCache.get(query);
   const best = pickBestHit(hit?.hits);
   const page = Number(best?.printed_page ?? best?.page);
+  const snippet = cleanSnippet(best?.snippet);
 
   if (!Number.isInteger(page) || page < 1 || page > 401) {
-    return { pages: [], topic: topicFallback, pdfRef: null, query, fromRag: false };
+    return { pages: [], topic: topicFallback, pdfRef: null, query, fromRag: false, snippet: "" };
   }
 
   const topic = topicFromSnippet(best.snippet, topicFallback);
@@ -173,6 +183,7 @@ function lookupPmbokPages(q, meta) {
     pdfRef: `${PDF_NAME}, tr. ${page} — ${topic}`,
     query,
     fromRag: true,
+    snippet,
   };
 }
 
@@ -193,6 +204,7 @@ module.exports = {
   isLowValueSnippet,
   pickBestHit,
   topicFromSnippet,
+  cleanSnippet,
   loadCacheFile,
   saveCacheFile,
   warmupPageCache,

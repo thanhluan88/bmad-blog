@@ -14,7 +14,7 @@ function main() {
   const queries = collectMetaForWarmup(questions);
   const warm = warmupPageCache(queries);
   console.log(`RAG page cache: ${warm.total} unique queries, warmed ${warm.warmed}`);
-  const out = generateBatch(questions, { preserveOriginal: true });
+  const out = generateBatch(questions, { preserveOriginal: false });
   const withPages = Object.values(out).filter((e) => e.pmbok8?.pages?.length).length;
   fs.writeFileSync(OUT_PATH, JSON.stringify(out, null, 2));
   fs.writeFileSync(JSON_CACHE, JSON.stringify(questions, null, 0));

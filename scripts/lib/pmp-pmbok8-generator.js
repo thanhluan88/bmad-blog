@@ -182,6 +182,47 @@ function collectMetaForWarmup(questions) {
   return questions.map((q) => buildRagQuery(q, extractQuestionMeta(q)));
 }
 
+function appendPmbok8Insight(lines, pageInfo) {
+  if (!pageInfo.snippet || pageInfo.snippet.length < 40 || !pageInfo.pages?.length) return;
+  lines.push("");
+  lines.push("**PMBOK 8 — Cơ sở từ Guide**");
+  const excerpt =
+    pageInfo.snippet.length > 360 ? `${pageInfo.snippet.slice(0, 357)}…` : pageInfo.snippet;
+  lines.push(`> ${excerpt}`);
+  lines.push(`> — PMBOK 8, tr. ${pageInfo.pages.join(", ")} (${pageInfo.topic})`);
+}
+
+function buildOptionAnalysis(q, correctKeys, priorityCue, agile) {
+  const opts =
+    q.type === "dropdown"
+      ? (q.dropdownOptions || []).map((text, i) => ({
+          key: String.fromCharCode(65 + i),
+          text,
+        }))
+      : q.options || [];
+  return opts.map((opt) => {
+    const isCorrect = correctKeys.includes(opt.key);
+    const reason = isCorrect
+      ? null
+      : rejectWrongOption(opt, q, correctKeys, priorityCue, agile);
+    return { key: opt.key, text: opt.text, isCorrect, reason };
+  });
+}
+
+function generateTeachAnalysis(q, options = {}) {
+  const generated = generateForQuestion(q, options);
+  const meta = extractQuestionMeta(q);
+  const pageInfo = lookupPmbokPages(q, meta);
+  const correctKeys = parseCorrectKeys(q.correct);
+  const priorityCue = detectPriorityCue(q.text);
+  const agile = isAgileContext(q.text);
+  return {
+    ...generated,
+    optionAnalysis: buildOptionAnalysis(q, correctKeys, priorityCue, agile),
+    pageInfo,
+  };
+}
+
 function appendReferences(lines, pageInfo) {
   const { pages, topic, pdfRef } = pageInfo;
   lines.push("");
@@ -232,6 +273,7 @@ function buildDragDropExplanation(q, domains, focusArea, processes, principles, 
   } else {
     lines.push(`Ghép đúng theo framework chuẩn (Scrum/PMBOK/team development) — đáp án: ${q.correct}.`);
   }
+  appendPmbok8Insight(lines, pageInfo);
   const refs = appendReferences(lines, pageInfo);
   return {
     explanation: lines.join("\n"),
@@ -269,6 +311,7 @@ function buildMcqExplanation(q, options = {}) {
   }
   lines.push("");
   lines.push(buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue, agile, stemProfile));
+  appendPmbok8Insight(lines, pageInfo);
   lines.push("");
   lines.push("**Loại trừ phương án khác**");
 
@@ -327,6 +370,7 @@ function generateBatch(questions, options = {}) {
 module.exports = {
   generateForQuestion,
   generateBatch,
+  generateTeachAnalysis,
   parseCorrectKeys,
   extractQuestionMeta,
   collectMetaForWarmup,

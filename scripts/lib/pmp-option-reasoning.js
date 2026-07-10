@@ -27,6 +27,7 @@ const ACTION_TYPES = [
   { id: "encourage_collaborate", label: "khuyến khích collaboration / hợp tác", re: /encourage the team|promote collaboration|foster|build trust|collaborate with/i },
   { id: "team_building", label: "team building / hoạt động nhóm", re: /team.?building|team building|social activit|group activit|offsite|icebreaker/i },
   { id: "coach_develop", label: "coaching / phát triển năng lực", re: /coach|mentor|training|develop.*skill|capability|competenc|onboard/i },
+  { id: "explain_agile_value", label: "giải thích giá trị teamwork/Agile và continuous improvement", re: /explain that teamwork|continuous improvement|early feedback|benefits of (?:agile|teamwork)|value of (?:agile|iteration|collaboration)/i },
   { id: "prioritize_value", label: "ưu tiên theo giá trị / MVP", re: /priorit|mvp|value delivery|business value|backlog.*prior|highest value|focus on value/i },
   { id: "quality_embed", label: "đảm bảo chất lượng / kiểm soát quality", re: /\bquality (?:plan|control|assurance|management|standard|issue|gate)\b|\bdefect\b|\binspection\b|\btesting\b|acceptance criteria|verification|validation|control chart/i },
   { id: "vendor_procurement", label: "quản lý vendor / procurement", re: /\b(?:vendor|supplier|procurement|subcontract)\b|(?:sow|rfp)\b|award.*contract/i },
@@ -84,8 +85,24 @@ const STEM_PROFILES = [
     preferCorrect: ["update_stakeholder_comms"],
   },
   {
+    id: "sme_agile_reluctance",
+    re: /subject matter expert|\bSME\b.*(?:agile|reluctant|team)|reluctant.*(?:agile|team)|join the agile team|working on a team is demotivat/i,
+    domains: ["Resources", "Stakeholders"],
+    principles: ["Build an empowered culture"],
+    processes: ["Develop Team", "Manage Team"],
+    summaryHint: "SME ngại tham gia Agile team — PM giải thích lợi ích teamwork, continuous improvement và feedback sớm; không leo thang sponsor hay chỉ nhắc EQ.",
+    whyCorrect: "Expert lo ngại teamwork làm chậm/chất lượng giảm — PM coaching: giải thích Agile delivery cần collaboration, continuous improvement và early feedback loops giúp đạt chất lượng cao hơn, không phải làm việc đơn độc (Build an empowered culture, Develop Team).",
+    rejectByAction: {
+      escalate: "Leo thang sponsor vì attitude — quá nặng; PM coach và explain value trước.",
+      meet_discuss: "Nhờ sponsor can thiệp attitude — PM vẫn chịu trách nhiệm develop team trực tiếp.",
+      evaluate_individual: "Chỉ focus EQ/integrating — thiếu explain agile value proposition cho SME.",
+      team_building: "Team building chung không address concern cụ thể của SME về agile collaboration.",
+    },
+    preferCorrect: ["explain_agile_value", "coach_develop", "facilitate_retro"],
+  },
+  {
     id: "member_struggle",
-    re: /overwhelmed|struggling|not happy|unhappy|having difficulty|difficulty delivering|burned out|demotivat|underperform|complexity of the tasks/i,
+    re: /overwhelmed|struggling with|not happy with|having difficulty delivering|burned out|underperform(?:ing)?|complexity of the tasks|missing task deadlines/i,
     domains: ["Resources", "Stakeholders"],
     principles: ["Build an empowered culture", "Lead accountably"],
     processes: ["Develop Team", "Manage Team"],
@@ -642,6 +659,8 @@ const ACTION_RATIONALES = {
     "PM trao quyền team tự quyết trong phạm vi phù hợp — Build an empowered culture.",
   coach_develop: () =>
     "PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.",
+  explain_agile_value: () =>
+    "PM giải thích giá trị teamwork/Agile: continuous improvement và early feedback loops giúp expert đạt chất lượng cao trong môi trường collaborative — Build an empowered culture.",
   evaluate_individual: () =>
     "Đánh giá skill gap/root cause trước khi thay thế — hiểu nguyên nhân trước khi hành động.",
   ensure_compliance: () =>
@@ -676,6 +695,9 @@ function buildRationaleFromOptionText(optText, stem, domains, focusArea, correct
   }
   if (/facilitate|workshop|brainstorm/i.test(t)) {
     return "PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.";
+  }
+  if (/continuous improvement|early feedback|teamwork fosters|explain that teamwork/i.test(t)) {
+    return "PM coaching: giải thích collaboration trong Agile mang lại feedback sớm và cải tiến liên tục — expert thấy teamwork không compromise chất lượng (Build an empowered culture).";
   }
   if (/evaluate the impact|assess the impact|analyze the impact/i.test(t)) {
     return "Trước khi đồng ý thay đổi, PM đánh giá impact lên scope/schedule/cost/risk — không quyết định mù quáng.";

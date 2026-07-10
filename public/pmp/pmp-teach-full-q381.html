@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMBOK 8 — Câu 381: A project’s planned value (PV) is (Full Bank)</title>
+  <style>
+    :root {
+      --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
+      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
+      --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; width: 100%; min-height: 100dvh; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: 100dvh; width: 100%; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } .mobile-nav { display: flex !important; } }
+    .sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--card); border-right: 1px solid var(--border); padding: 1.25rem 1rem 2rem; }
+    .sidebar .brand { font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .sidebar .brand-sub { font-size: 0.78rem; color: var(--muted); margin: 0.2rem 0 1rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+    .sidebar nav a { display: block; padding: 0.45rem 0.65rem; color: var(--muted); text-decoration: none; border-radius: 8px; font-size: 0.86rem; margin-bottom: 1px; }
+    .sidebar nav a:hover, .sidebar nav a.active { background: var(--primary-bg); color: var(--primary-dark); }
+    .sidebar nav a.active { font-weight: 600; border-left: 3px solid var(--primary); }
+    .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
+    .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
+    .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
+    .sidebar .back-link.secondary { margin-top: 0.5rem; background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); }
+    .sidebar .back-link.secondary:hover { background: var(--primary-bg); }
+    .lesson-pager { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.75rem 0; }
+    .lesson-pager a { flex: 1; min-width: 7rem; text-align: center; padding: 0.45rem 0.6rem; border-radius: 8px; border: 1px solid var(--border); text-decoration: none; font-size: 0.82rem; color: var(--primary-dark); background: var(--bg); }
+    .lesson-pager a:hover { background: var(--primary-bg); }
+    .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
+    .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
+    main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
+    .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 72ch; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 99px; background: #fff; border: 1px solid var(--border); color: var(--primary-dark); font-weight: 500; }
+    section { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
+    section > h2 { font-size: 1.3rem; margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); color: var(--primary-dark); }
+    section p { margin: 0 0 0.75rem; }
+    section ul { margin: 0 0 1rem 1.2rem; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
+    .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
+    .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
+    th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
+    tr:last-child td { border-bottom: none; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
+    .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+    .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
+    .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
+    .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
+    .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
+    .opt-btn.wrong { border-color: var(--bad); background: var(--bad-bg); color: #991b1b; opacity: 0.85; }
+    .opt-btn:disabled { cursor: default; }
+    .feedback { display: none; margin-top: 1rem; padding: 1rem; border-radius: 10px; font-size: 0.9rem; }
+    .feedback.show { display: block; }
+    .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
+    .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
+    .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
+    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+    .flashcard-front, .flashcard-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); padding: 1rem; display: flex; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border); font-size: 0.88rem; }
+    .flashcard-front { background: var(--card); font-weight: 600; }
+    .flashcard-back { background: var(--primary-bg); border-color: #fde68a; transform: rotateY(180deg); }
+    .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
+    .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
+    .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
+  </style>
+  <link rel="stylesheet" href="pmp-teach-fullscreen.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">PMBOK 8 Teach</div>
+      <div class="brand-sub">Full Bank · Câu 381</div>
+      <nav id="sideNav">
+        <a href="#intro" class="active">Giới thiệu</a>
+        <a href="#mapping">PMBOK 8</a>
+        <a href="#compare">So sánh đáp án</a>
+        <a href="#question">Câu hỏi</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#flashcards">Flashcard</a>
+        <a href="#cheatsheet">Cheat sheet</a>
+        <div class="nav-series">Bộ luyện Full 1123 câu</div>
+        <a href="pmp-teach-full-q381.html" class="series-current">Câu 381</a>
+        <a href="pmp-teach-full-series-index.html">→ Index Full Bank</a>
+        <a href="pmp-full-questions.html#q-381">→ Luyện câu 381</a>
+        <div class="lesson-pager"><a href="pmp-teach-full-q380.html">← Câu 380</a><a href="pmp-teach-full-q382.html">Câu 382 →</a></div>
+      </nav>
+      <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
+      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1123 câu</a>
+    </aside>
+    <div>
+      <nav class="mobile-nav">
+        <a href="pmp-teach-full-series-index.html">Index</a>
+        <a href="pmp-full-questions.html#q-381">Câu 381</a>
+        <a href="#question">Quiz</a>
+        <a href="pmp-teach-full-q380.html">← 380</a>
+        <a href="pmp-teach-full-q382.html">382 →</a>
+      </nav>
+      <main>
+        <header class="hero" id="intro">
+          <h1>Phân tích Câu 381 — Bộ luyện PMBOK 8</h1>
+          <p class="lead">A project’s planned value (PV) is 500,000 USD, and its earned value (EV) is 450,000 USD. What is the schedule performance index (SPI), and what does it indicate?</p>
+          <div class="badges"><span class="badge">Finance, Schedule</span><span class="badge">Executing</span><span class="badge">Estimate Costs</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q381</span></div>
+        </header>
+
+        <section id="mapping">
+          <h2>1. PMBOK 8 mapping</h2>
+          <div class="card info">
+            <h4>Framework</h4>
+            <p style="margin:0">
+              <strong>Domain:</strong> Finance, Schedule<br>
+              <strong>Focus Area:</strong> Executing<br>
+              <strong>Process:</strong> Estimate Costs, Determine Budget, Control Costs<br>
+              <strong>Principle:</strong> Focus on value
+            </p>
+          </div>
+        </section>
+
+        <section id="compare">
+          <h2>2. So sánh đáp án</h2>
+          <div class="approach-grid"><div class="approach-cell">
+        <strong>A — Sai</strong>
+        SPI = 1.11; the project is ahead of schedule.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;SPI = 1.11; the project is ahead of schedule.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;SPI = 0.90; the project is behind schedule.&quot;.</p>
+      </div><div class="approach-cell pull">
+        <strong>B — Đúng</strong>
+        SPI = 0.90; the project is behind schedule.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo PMBOK 8 và logic tình huống.</p>
+      </div><div class="approach-cell">
+        <strong>C — Sai</strong>
+        SPI = 0.90; the project is ahead of schedule.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;SPI = 0.90; the project is ahead of schedule.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;SPI = 0.90; the project is behind schedule.&quot;.</p>
+      </div><div class="approach-cell">
+        <strong>D — Sai</strong>
+        SPI = 1.11; the project is behind schedule.
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">&quot;SPI = 1.11; the project is behind schedule.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;SPI = 0.90; the project is behind schedule.&quot;.</p>
+      </div></div>
+        </section>
+
+        <section id="question">
+          <h2>3. Câu hỏi — Full Bank Q381</h2>
+          <div class="quiz-card" id="mainQuiz">
+            <div class="q-num">pmp-full-questions · Câu 381</div>
+            <div class="q-text">A project’s planned value (PV) is 500,000 USD, and its earned value (EV) is 450,000 USD. What is the schedule performance index (SPI), and what does it indicate?</div>
+            <button class="opt-btn" data-opt="A" type="button">A. SPI = 1.11; the project is ahead of schedule.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. SPI = 0.90; the project is behind schedule.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. SPI = 0.90; the project is ahead of schedule.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. SPI = 1.11; the project is behind schedule.</button>
+            <div class="feedback" id="quizFeedback"></div>
+          </div>
+          <p style="font-size:0.86rem;color:var(--muted)">
+            <a href="pmp-full-questions.html#q-381">→ Mở câu 381 trong bộ luyện đầy đủ</a>
+          </p>
+        </section>
+
+        <section id="analysis">
+          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <div class="card tip">
+            <h4>Đáp án</h4>
+            <p style="margin:0"><strong>B. SPI = 0.90; the project is behind schedule.</strong></p>
+          </div>
+          <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance + Schedule (Executing, PMBOK 8).<br><br>Bối cảnh: A project’s planned value (PV) is 500,000 USD, and its earned value (EV) is 450,000 USD. Đáp án <strong>B</strong> — &quot;SPI = 0.90; the project is behind schedule.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance + Schedule (Executing, PMBOK 8).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; This process is performed once up front or at predefined points in the project (see Figure 2-27). 2.4.2.2 Estimate Costs Estimate Costs is the process of developing an approximation of the cost of resources needed to complete project work.<br>&gt; — PMBOK 8, tr. 62 (developing an approximation of the cost of resources needed to complet)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 62: developing an approximation of the cost of resources needed to complet</p>
+          <table>
+            <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
+            <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">SPI = 1.11; the project is ahead of schedule.</span></td><td>&quot;SPI = 1.11; the project is ahead of schedule.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;SPI = 0.90; the project is behind schedule.&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">SPI = 0.90; the project is ahead of schedule.</span></td><td>&quot;SPI = 0.90; the project is ahead of schedule.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;SPI = 0.90; the project is behind schedule.&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">SPI = 1.11; the project is behind schedule.</span></td><td>&quot;SPI = 1.11; the project is behind schedule.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;SPI = 0.90; the project is behind schedule.&quot;.</td></tr></tbody>
+          </table>
+        </section>
+
+        <section id="flashcards">
+          <h2>5. Flashcard</h2>
+          <p class="flash-hint">Nhấn để lật</p>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Full Bank Q381 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — SPI = 0.90; the project is behind schedule.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">PMBOK 8 principle / process?</div>
+            <div class="flashcard-back"><strong>Focus on value</strong><br>Estimate Costs</div>
+          </div></div>
+        </section>
+
+        <section id="cheatsheet">
+          <h2>6. Cheat sheet</h2>
+          <div class="cheat-sheet">FULL BANK Q381
+────────────────────────
+A project’s planned value (PV) is 500,000 USD, and its earned value (EV) is 450,000 USD. What is the schedule performance index (SPI), and what does it indicate?
+
+ANSWER: B
+B. SPI = 0.90; the project is behind schedule.
+
+PMBOK 8:
+  Domain: Finance, Schedule
+  Process: Estimate Costs, Determine Budget, Control Costs
+  Principle: Focus on value</div>
+        </section>
+
+        <footer class="ref-footer">
+          <a href="pmp-teach-full-q380.html">← Câu 380</a> · <a href="pmp-teach-full-q382.html">Câu 382 →</a> ·
+          <a href="pmp-full-questions.html#q-381">Luyện câu 381</a> ·
+          <a href="pmp-teach-full-series-index.html">Index Full Bank</a> ·
+          <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
+        </footer>
+      </main>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const CORRECT = "B";
+      const EXPL = {"A":"\"SPI = 1.11; the project is ahead of schedule.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"SPI = 0.90; the project is behind schedule.\".","B":"Đúng theo PMBOK 8 và phân tích tình huống.","C":"\"SPI = 0.90; the project is ahead of schedule.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"SPI = 0.90; the project is behind schedule.\".","D":"\"SPI = 1.11; the project is behind schedule.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"SPI = 0.90; the project is behind schedule.\"."};
+      let answered = false;
+      document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (answered) return;
+          answered = true;
+          const c = btn.dataset.opt;
+          document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (b) {
+            b.disabled = true;
+            if (b.dataset.opt === CORRECT) b.classList.add("correct");
+            else if (b === btn) b.classList.add("wrong");
+          });
+          const fb = document.getElementById("quizFeedback");
+          fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
+          fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") +
+            (EXPL[c] || "") + (c !== CORRECT ? "<br><br>Đáp án: <strong>" + "B. SPI = 0.90; the project is behind schedule." + "</strong>" : "");
+        });
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      document.querySelectorAll(".flashcard").forEach(function (card) {
+        function flip() { card.classList.toggle("flipped"); }
+        card.addEventListener("click", flip);
+        card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      const sections = document.querySelectorAll("main section[id], main header[id]");
+      const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
+        });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
+    })();
+  </script>
+</body>
+</html>
