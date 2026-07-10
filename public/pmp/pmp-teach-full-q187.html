@@ -49,6 +49,16 @@
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .grounding-card .grounding-ref { font-size: 0.86rem; color: var(--muted); margin: 0 0 0.5rem; }
+    .grounding-block { margin-top: 0.85rem; }
+    .grounding-block h5 { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--primary-dark); }
+    .grounding-opt-text { font-size: 0.88rem; margin: 0 0 0.35rem; color: var(--muted); }
+    .grounding-why { margin: 0; font-size: 0.92rem; line-height: 1.55; }
+    .grounding-wrong { margin: 0; padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.5; }
+    .grounding-wrong li { margin-bottom: 0.4rem; }
+    .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
+    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
@@ -78,15 +88,6 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
-    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
-    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
-    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
-    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
-    .classify-btns button:disabled { cursor: default; }
-    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -108,7 +109,6 @@
         <a href="#intro" class="active">Giới thiệu</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
@@ -127,7 +127,6 @@
         <a href="pmp-full-questions.html#q-187">Câu 187</a>
         <a href="#question">Quiz</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q186.html">← 186</a>
         <a href="pmp-teach-full-q188.html">188 →</a>
@@ -150,7 +149,7 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q187</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 187</div>
-            <div class="q-text">A construction company is executing a major infrastructure project that requires close <span class="kw-signal">collaboration</span> with government agencies, local communities, and environmental groups. Necessary approvals and permits have been delayed, threatening project timelines. The sponsor confirms that the agencies are <span class="kw-cue">not</span> backlogged and asks the project manager to address the situation. <span class="kw-cue">What should the project manager do</span>?</div>
+            <div class="q-text">A construction company is executing a major infrastructure project that requires close collaboration with government agencies, local communities, and environmental groups. Necessary approvals and permits have been delayed, threatening project timelines. The sponsor confirms that the agencies are <span class="kw-cue">not</span> backlogged and asks the project manager to address the situation. <span class="kw-cue">What should the project manager do</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. <span class="kw-signal">Facilitate</span> structured engagement sessions with the government agencies to identify concerns and rebuild <span class="kw-signal">collaboration</span>.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Ask senior management to approach government leaders informally to determine the reasons behind delayed approvals.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Reallocate additional stakeholder engagement resources to government agencies to increase communication and visibility.</button>
@@ -164,16 +163,27 @@
 
         <section id="analysis">
           <h2>2. Phân tích đáp án — Đáp án đúng: A</h2>
-          <div class="card info">
+          <div class="card info grounding-card">
             <h4>Grounding PMBOK 8</h4>
-            <p style="margin:0">Dựa trên PMBOK 8 (Develop Team + Build an empowered culture, tr. 53): với ngữ cảnh Agile/Scrum, đáp án đúng là A — PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture. Không chọn: B (Tập trung &quot;chờ / trì hoãn&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp …); C (Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết ng…); D (Tập trung &quot;change control / change request&quot; không giải quyết ngữ cảnh A…).</p>
+            <p class="grounding-ref"><span class="kw-pmbok">PMBOK 8</span> · Develop Team + Build an empowered culture, tr. 53</p>
+            <div class="grounding-block">
+              <h5>Đáp án đúng — A</h5>
+              <p class="grounding-opt-text"><strong>A.</strong> Facilitate structured engagement sessions with the government agencies to identify concerns and rebuild collaboration.</p>
+              <p class="grounding-why">PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p>
+            </div>
+            <div class="grounding-block">
+            <h5>Không chọn</h5>
+            <ul class="grounding-wrong"><li><strong>B.</strong> Tập trung &quot;chờ / trì hoãn&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li><li><strong>C.</strong> Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li><li><strong>D.</strong> Tập trung &quot;change control / change request&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li></ul>
           </div>
-          <div class="card tip">
+          </div>
+          <div class="card tip signal-card">
             <h4>Signal trong stem Q187</h4>
-            <p style="margin:0">ngữ cảnh Agile/Scrum<br><br>→ <strong>A</strong>: PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p>
+            
+            
+            <p class="signal-conclusion" style="margin:0">→ <strong>A</strong>: PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p>
           </div>
           <h3>Tại sao chọn A?</h3>
-          <ul><li>Signal: ngữ cảnh Agile/Scrum.</li><li>Đáp án A đúng: PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 53: <span class="kw-pmbok">Develop Team</span> + <span class="kw-pmbok">Build an empowered culture</span>.</li><li>B sai: Tập trung &quot;chờ / trì hoãn&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li><li>C sai: Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li></ul>
+          <ul><li>Đáp án A đúng: PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 53: <span class="kw-pmbok">Develop Team</span> + <span class="kw-pmbok">Build an empowered culture</span>.</li><li>B sai: Tập trung &quot;chờ / trì hoãn&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li><li>C sai: Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li><li>D sai: Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Facilitate structured engagement sessions with the government agencies to identify concerns and rebuild collaboration.</strong></p>
@@ -186,26 +196,8 @@
           </table>
         </section>
 
-        <section id="drill">
-          <h2>3. Drill — phân loại hành động PM</h2>
-          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
-              <span>A construction company is executing a major infrastructure project that requires close collaboration… (Q187)</span>
-              <div class="classify-btns"><button data-pick="CORRECT" type="button">Explain value</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="stakeholder_engagement" type="button">engagement sta</button><button data-pick="change_control" type="button">change control</button></div>
-            </div><div class="classify-row" data-answer="wait_delay">
-              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q187</span>
-              <div class="classify-btns"><button data-pick="CORRECT" type="button">Explain value</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="stakeholder_engagement" type="button">engagement sta</button><button data-pick="change_control" type="button">change control</button></div>
-            </div><div class="classify-row" data-answer="stakeholder_engagement">
-              <span>Tình huống cần &quot;engagement stakeholder / làm rõ kỳ vọng&quot; — không phải trọng tâm Q187</span>
-              <div class="classify-btns"><button data-pick="CORRECT" type="button">Explain value</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="stakeholder_engagement" type="button">engagement sta</button><button data-pick="change_control" type="button">change control</button></div>
-            </div><div class="classify-row" data-answer="change_control">
-              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q187</span>
-              <div class="classify-btns"><button data-pick="CORRECT" type="button">Explain value</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="stakeholder_engagement" type="button">engagement sta</button><button data-pick="change_control" type="button">change control</button></div>
-            </div></div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
-        </section>
-
         <section id="traps">
-          <h2>4. Bẫy thi</h2>
+          <h2>3. Bẫy thi</h2>
           <div class="card danger">
             <h4>Bẫy 1: Bẫy B (B)</h4>
             <p style="margin:0">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
@@ -222,7 +214,7 @@
         </section>
 
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>4. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
             <div class="flashcard-front">Q187 — chủ đề / concept?</div>
@@ -239,7 +231,7 @@
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
+          <h2>5. Cheat sheet</h2>
           <div class="cheat-sheet">DEVELOP TEAM — Q187
 (PMBOK 8, tr. 53)
 ─────────────────────────────────────────────────────
@@ -301,29 +293,6 @@ Q187 ANSWER: A</div>
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
-      });
-      
-      let score = 0;
-      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
-      const total = drillRows.length;
-      drillRows.forEach(function (row) {
-        const ans = row.dataset.answer;
-        let done = false;
-        row.querySelectorAll("button").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            if (done) return;
-            done = true;
-            const ok = btn.dataset.pick === ans;
-            row.querySelectorAll("button").forEach(function (b) {
-              b.disabled = true;
-              if (b.dataset.pick === ans) b.classList.add("correct");
-              else if (b === btn) b.classList.add("wrong-pick");
-            });
-            if (ok) score++;
-            const el = document.getElementById("drillScore");
-            if (el) el.textContent = score + " / " + total + " đúng";
-          });
-        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

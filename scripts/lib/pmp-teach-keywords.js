@@ -213,19 +213,19 @@ function highlightExamCues(text) {
   return applyPatterns(html, EXAM_CUE_PATTERNS, "kw-cue");
 }
 
-/** Quiz stem: scenario signals (kw-signal) + exam directive (kw-cue). */
-function highlightQuizStem(text) {
+/** Quiz stem: AI signal phrases (English, kw-signal) + exam directive (kw-cue). */
+function highlightQuizStem(text, signalPhrases) {
   const raw = String(text || "");
   let html = escapeHtml(raw);
-  const signals = extractStemSignals(raw).sort((a, b) => b.length - a.length);
-  for (const sig of signals) {
+  const phrases = (signalPhrases || []).filter((p) => p && p.length > 3);
+  const sorted = [...phrases].sort((a, b) => b.length - a.length);
+  for (const sig of sorted) {
     const esc = escapeHtml(sig);
     if (html.includes(esc)) {
       html = replacePhraseOutsideSpans(html, esc, "kw-signal");
     }
   }
   html = applyPatternsOutsideSpans(html, EXAM_CUE_PATTERNS, "kw-cue");
-  html = applyPatternsOutsideSpans(html, PMI_SIGNAL_PATTERNS, "kw-signal");
   return html;
 }
 

@@ -94,8 +94,14 @@ const STEM_PROFILES = [
     processes: ["Develop Team", "Manage Team"],
     summaryHint: "SME ngại tham gia Agile team — PM giải thích lợi ích teamwork, continuous improvement và feedback sớm; không leo thang sponsor hay chỉ nhắc EQ.",
     whyCorrect: "Expert lo ngại teamwork làm chậm/chất lượng giảm — PM coaching: giải thích Agile delivery cần collaboration, continuous improvement và early feedback loops giúp đạt chất lượng cao hơn, không phải làm việc đơn độc (Build an empowered culture, Develop Team).",
-    groundingIntro:
-      "Dựa trên PMBOK 8 (Develop Team, tr. 112): SME ngại join agile team vì lo teamwork làm chậm và giảm chất lượng. Đáp án đúng phải giải thích vì sao collaboration + continuous improvement + early feedback giúp expert đạt chất lượng cao hơn làm việc đơn độc — không khuyên EQ (A), không giao retrospective khi chưa buy-in (C), không nhờ sponsor sửa thái độ (D).",
+    signalPhrases: [
+      "reluctant because they think that working on a team is demotivating and slows them down",
+      "join the agile team",
+      "highest-quality output possible",
+      "approximately 30% of the deliverables will follow an agile approach",
+    ],
+    signalAnswer:
+      "SME tin teamwork làm chậm và giảm chất lượng — đó là misconception về Agile; PM phải explain value (CI + early feedback) trước khi lecture EQ, giao ceremony hay escalate sponsor.",
     groundingConclusion:
       "→ B: explain Agile value (CI + early feedback) trước lecture EQ / ceremony / escalate — Develop Team, PMBOK 8 tr. 112.",
     conceptBlurb:
@@ -140,6 +146,17 @@ const STEM_PROFILES = [
     principles: ["Lead accountably"],
     processes: ["Manage Stakeholder Engagement"],
     summaryHint: "Lỗi truyền thông — PM thừa nhận, xin lỗi minh bạch và khắc phục hậu quả (Lead accountably).",
+    whyCorrect:
+      "Email gửi nhầm toàn team kèm critical feedback — PM acknowledge mistake và apologize công khai (Lead accountably), không ignore, không bắt xóa mail, không chỉ xin lỗi riêng người nhận.",
+    signalPhrases: [
+      "mistakenly sent to the entire global project team",
+      "critical feedback regarding a recent incident",
+      "email intended for a specific team member",
+    ],
+    signalAnswer:
+      "Email nhầm audience + nội dung nhạy cảm → FIRST là accountability trực tiếp với toàn team, không che giấu hay xử lý riêng.",
+    groundingConclusion:
+      "→ B: acknowledge + apologize — Lead accountably, Manage Stakeholder Engagement.",
     rejectByAction: {
       ignore: "Bỏ qua lỗi email/truyền thông — vi phạm accountability và làm mất tin tưởng.",
       wait_delay: "Chờ đợi thay vì thừa nhận lỗi — stakeholder cần phản hồi kịp thời.",
@@ -239,6 +256,18 @@ const STEM_PROFILES = [
     principles: ["Build an empowered culture"],
     processes: ["Develop Team", "Plan Resources"],
     summaryHint: "Team phân tán — cải thiện collaboration tools/process, không chỉ họp face-to-face.",
+    whyCorrect:
+      "Team virtual + PM lo engagement → recurring check-ins/meetings theo lịch giữ kết nối và đồng bộ (Develop Team), không copy plan cũ, không chỉ async, không chỉ kickoff bắt buộc.",
+    signalPhrases: [
+      "lack of locally skilled resources",
+      "internationally dispersed project team",
+      "work virtually",
+      "concerned about engagement",
+    ],
+    signalAnswer:
+      "Virtual team + thiếu kinh nghiệm quản lý remote → PM cần cadence check-in/meeting để sustain engagement, không áp plan quá khứ hay giao tiếp một chiều.",
+    groundingConclusion:
+      "→ D: recurring check-ins — Develop Team, giữ engagement team virtual.",
     rejectByAction: {
       wait_delay: "Chờ collocate — không realistic với distributed team.",
       direct_command: "Micromanage remote team — giảm autonomy và trust.",

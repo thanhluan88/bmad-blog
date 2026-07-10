@@ -49,6 +49,16 @@
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .grounding-card .grounding-ref { font-size: 0.86rem; color: var(--muted); margin: 0 0 0.5rem; }
+    .grounding-block { margin-top: 0.85rem; }
+    .grounding-block h5 { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--primary-dark); }
+    .grounding-opt-text { font-size: 0.88rem; margin: 0 0 0.35rem; color: var(--muted); }
+    .grounding-why { margin: 0; font-size: 0.92rem; line-height: 1.55; }
+    .grounding-wrong { margin: 0; padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.5; }
+    .grounding-wrong li { margin-bottom: 0.4rem; }
+    .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
+    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
@@ -78,15 +88,6 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
-    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
-    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
-    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
-    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
-    .classify-btns button:disabled { cursor: default; }
-    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -108,7 +109,6 @@
         <a href="#intro" class="active">Giới thiệu</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
@@ -127,7 +127,6 @@
         <a href="pmp-full-questions.html#q-830">Câu 830</a>
         <a href="#question">Quiz</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q829.html">← 829</a>
         <a href="pmp-teach-full-q831.html">831 →</a>
@@ -136,7 +135,7 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed · Q830</h1>
           <p class="lead">Bài học Q830 về <strong>Identify Risks</strong> (PMBOK 8, tr. 48) — mức độ uncertainty cao</p>
-          <p class="lead" style="margin-top:0.75rem">Regional governance inconsistencies are creating uncertainty about <em>escalation responsibilities</em>, with some teams acting quickly and others delaying until risks increase. Senior leadership requests recommendations for consistent escalation without excessive centralization. What should the project manager do?</p>
+          <p class="lead" style="margin-top:0.75rem">Regional governance inconsistencies are creating uncertainty about escalation responsibilities, with some teams acting quickly and others delaying until risks increase. Senior leadership requests recommendations for consistent escalation without excessive centralization. What should the project manager do?</p>
           <div class="badges"><span class="badge">PMBOK 8, tr. 48</span><span class="badge">Risk, Governance</span><span class="badge">Identify Risks</span><span class="badge">Full Bank Q830</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
@@ -150,7 +149,7 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q830</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 830</div>
-            <div class="q-text">Regional governance inconsistencies are creating uncertainty about <span class="kw-signal">escalation responsibilities</span>, with some teams acting quickly and others delaying until risks increase. Senior leadership requests recommendations for consistent escalation without excessive centralization. <span class="kw-cue">What should the project manager do</span>?</div>
+            <div class="q-text">Regional governance inconsistencies are creating uncertainty about escalation responsibilities, with some teams acting quickly and others delaying until risks increase. Senior leadership requests recommendations for consistent escalation without excessive centralization. <span class="kw-cue">What should the project manager do</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Establish a unified governance model with defined decision authority, escalation points, and boundaries for regional customization.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Require all regions to <span class="kw-trap">escalate</span> cross-project decisions to senior leadership until governance maturity improves.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Maintain regional governance frameworks, resolving inconsistencies through informal coordination when specific issues emerge.</button>
@@ -164,16 +163,27 @@
 
         <section id="analysis">
           <h2>2. Phân tích đáp án — Đáp án đúng: A</h2>
-          <div class="card info">
+          <div class="card info grounding-card">
             <h4>Grounding PMBOK 8</h4>
-            <p style="margin:0">Dựa trên PMBOK 8 (Identify Risks + Lead accountably, tr. 48): với mức độ uncertainty cao, đáp án đúng là A — Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi. Không chọn: B (Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn…); C (Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết mức độ uncer…); D (Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết mức độ uncer…).</p>
+            <p class="grounding-ref"><span class="kw-pmbok">PMBOK 8</span> · Identify Risks + Lead accountably, tr. 48</p>
+            <div class="grounding-block">
+              <h5>Đáp án đúng — A</h5>
+              <p class="grounding-opt-text"><strong>A.</strong> Establish a unified governance model with defined decision authority, escalation points, and boundaries for regional customization.</p>
+              <p class="grounding-why">Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</p>
+            </div>
+            <div class="grounding-block">
+            <h5>Không chọn</h5>
+            <ul class="grounding-wrong"><li><strong>B.</strong> Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</li><li><strong>C.</strong> Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần leo thang lên cấp trên.</li><li><strong>D.</strong> Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần leo thang lên cấp trên.</li></ul>
           </div>
-          <div class="card tip">
+          </div>
+          <div class="card tip signal-card">
             <h4>Signal trong stem Q830</h4>
-            <p style="margin:0"><strong>escalation responsibilities</strong><br><br>→ <strong>A</strong>: Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</p>
+            
+            
+            <p class="signal-conclusion" style="margin:0">→ <strong>A</strong>: Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</p>
           </div>
           <h3>Tại sao chọn A?</h3>
-          <ul><li>Signal: mức độ uncertainty cao.</li><li>Đáp án A đúng: Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 48: <span class="kw-pmbok">Identify Risks</span> + <span class="kw-pmbok">Lead accountably</span>.</li><li>B sai: Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</li><li>C sai: Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần leo thang lên cấp trên.</li></ul>
+          <ul><li>Đáp án A đúng: Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 48: <span class="kw-pmbok">Identify Risks</span> + <span class="kw-pmbok">Lead accountably</span>.</li><li>B sai: Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</li><li>C sai: Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần leo thang lên cấp trên.</li><li>D sai: Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần leo thang lên cấp trên.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Establish a unified governance model with defined decision authority, escalation points, and boundaries for regional customization.</strong></p>
@@ -186,23 +196,8 @@
           </table>
         </section>
 
-        <section id="drill">
-          <h2>3. Drill — phân loại hành động PM</h2>
-          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="escalate">
-              <span>Regional governance inconsistencies are creating uncertainty about escalation responsibilities, with… (Q830)</span>
-              <div class="classify-btns"><button data-pick="escalate" type="button">Escalate sponsor</button><button data-pick="escalate" type="button">Escalate sponsor</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân t</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div><div class="classify-row" data-answer="escalate">
-              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q830</span>
-              <div class="classify-btns"><button data-pick="escalate" type="button">Escalate sponsor</button><button data-pick="escalate" type="button">Escalate sponsor</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân t</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div><div class="classify-row" data-answer="ensure_compliance">
-              <span>Tình huống cần &quot;đảm bảo tuân thủ / compliance&quot; — không phải trọng tâm Q830</span>
-              <div class="classify-btns"><button data-pick="escalate" type="button">Escalate sponsor</button><button data-pick="escalate" type="button">Escalate sponsor</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân t</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div></div>
-          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
-        </section>
-
         <section id="traps">
-          <h2>4. Bẫy thi</h2>
+          <h2>3. Bẫy thi</h2>
           <div class="card danger">
             <h4>Bẫy 1: Escalate sponsor trap (B)</h4>
             <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
@@ -219,7 +214,7 @@
         </section>
 
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>4. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
             <div class="flashcard-front">Q830 — chủ đề / concept?</div>
@@ -236,7 +231,7 @@
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
+          <h2>5. Cheat sheet</h2>
           <div class="cheat-sheet">IDENTIFY RISKS — Q830
 (PMBOK 8, tr. 48)
 ─────────────────────────────────────────────────────
@@ -298,29 +293,6 @@ Q830 ANSWER: A</div>
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
-      });
-      
-      let score = 0;
-      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
-      const total = drillRows.length;
-      drillRows.forEach(function (row) {
-        const ans = row.dataset.answer;
-        let done = false;
-        row.querySelectorAll("button").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            if (done) return;
-            done = true;
-            const ok = btn.dataset.pick === ans;
-            row.querySelectorAll("button").forEach(function (b) {
-              b.disabled = true;
-              if (b.dataset.pick === ans) b.classList.add("correct");
-              else if (b === btn) b.classList.add("wrong-pick");
-            });
-            if (ok) score++;
-            const el = document.getElementById("drillScore");
-            if (el) el.textContent = score + " / " + total + " đúng";
-          });
-        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

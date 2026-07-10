@@ -19,11 +19,10 @@ const {
   buildSignalCard,
   buildWhyBullets,
   buildTrapsSection,
-  buildDrillHtml,
-  buildDrillScript,
   buildFlashcards,
   buildCheatSheet,
   highlightStemPhrases,
+  composeGrounding,
   quizExplMap,
   conceptLabel,
 } = require("./lib/pmp-teach-colocation-style");
@@ -188,7 +187,7 @@ function renderOptionsGrid(q) {
     .join("")}</div>`;
 }
 
-function renderMcqQuiz(q) {
+function renderMcqQuiz(q, signalPhrases) {
   const multi = isMultiSelect(q);
   const opts = (q.options || [])
     .map(
@@ -198,7 +197,7 @@ function renderMcqQuiz(q) {
     .join("\n            ");
   return `<div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu ${q.id}${multi ? " · Chọn nhiều" : ""}</div>
-            <div class="q-text">${highlightQuizStem(q.text)}</div>
+            <div class="q-text">${highlightQuizStem(q.text, signalPhrases)}</div>
             ${opts}
             <div class="feedback" id="quizFeedback"></div>
           </div>`;
@@ -221,11 +220,11 @@ function renderNonMcqAnswer(q) {
   return "";
 }
 
-function renderQuizBlock(q) {
-  if (q.type === "mcq" && q.options?.length) return renderMcqQuiz(q);
+function renderQuizBlock(q, signalPhrases) {
+  if (q.type === "mcq" && q.options?.length) return renderMcqQuiz(q, signalPhrases);
   return `<div class="quiz-card">
             <div class="q-num">pmp-full-questions · Câu ${q.id} · ${escapeHtml(q.type)}</div>
-            <div class="q-text">${highlightQuizStem(q.text)}</div>
+            <div class="q-text">${highlightQuizStem(q.text, signalPhrases)}</div>
           </div>
           ${renderNonMcqAnswer(q)}`;
 }
@@ -328,10 +327,9 @@ function quizScript(q, analysis) {
   </script>`;
 }
 
-function sectionNumbers(hasDrill, hasTraps) {
+function sectionNumbers(hasTraps) {
   let n = 1;
   const sec = { question: n++, analysis: n++ };
-  if (hasDrill) sec.drill = n++;
   if (hasTraps) sec.traps = n++;
   sec.flashcards = n++;
   sec.cheatsheet = n++;
@@ -354,9 +352,9 @@ function renderLesson(q, prev, next) {
     `Full Bank Q${q.id}`,
   ].filter(Boolean);
   const whyBullets = buildWhyBullets(analysis, q);
-  const drillHtml = buildDrillHtml(analysis.optionAnalysis, q);
+  const grounding = composeGrounding(q, analysis);
   const trapsHtml = buildTrapsSection(analysis.optionAnalysis, q);
-  const sec = sectionNumbers(!!drillHtml, !!trapsHtml);
+  const sec = sectionNumbers(!!trapsHtml);
 
   const prevLink = prev ? `<a href="${lessonFile(prev.id)}">← Câu ${prev.id}</a>` : "";
   const nextLink = next ? `<a href="${lessonFile(next.id)}">Câu ${next.id} →</a>` : "";
@@ -412,6 +410,16 @@ function renderLesson(q, prev, next) {
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .grounding-card .grounding-ref { font-size: 0.86rem; color: var(--muted); margin: 0 0 0.5rem; }
+    .grounding-block { margin-top: 0.85rem; }
+    .grounding-block h5 { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--primary-dark); }
+    .grounding-opt-text { font-size: 0.88rem; margin: 0 0 0.35rem; color: var(--muted); }
+    .grounding-why { margin: 0; font-size: 0.92rem; line-height: 1.55; }
+    .grounding-wrong { margin: 0; padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.5; }
+    .grounding-wrong li { margin-bottom: 0.4rem; }
+    .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
+    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
@@ -441,15 +449,6 @@ function renderLesson(q, prev, next) {
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
-    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
-    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
-    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
-    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
-    .classify-btns button:disabled { cursor: default; }
-    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -471,7 +470,6 @@ function renderLesson(q, prev, next) {
         <a href="#intro" class="active">Giới thiệu</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
-        ${drillHtml ? '<a href="#drill">Drill</a>' : ""}
         ${trapsHtml ? '<a href="#traps">Bẫy thi</a>' : ""}
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
@@ -490,7 +488,6 @@ function renderLesson(q, prev, next) {
         <a href="pmp-full-questions.html#q-${q.id}">Câu ${q.id}</a>
         <a href="#question">Quiz</a>
         <a href="#analysis">Phân tích</a>
-        ${drillHtml ? '<a href="#drill">Drill</a>' : ""}
         ${trapsHtml ? '<a href="#traps">Bẫy</a>' : ""}
         ${prev ? `<a href="${lessonFile(prev.id)}">← ${prev.id}</a>` : ""}
         ${next ? `<a href="${lessonFile(next.id)}">${next.id} →</a>` : ""}
@@ -499,7 +496,7 @@ function renderLesson(q, prev, next) {
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed · Q${q.id}</h1>
           <p class="lead">${buildHeroLead(q, analysis, mapping)}</p>
-          <p class="lead" style="margin-top:0.75rem">${highlightStemPhrases(q.text)}</p>
+          <p class="lead" style="margin-top:0.75rem">${highlightStemPhrases(q.text, grounding.signalPhrases)}</p>
           <div class="badges">${badges.map((b) => `<span class="badge">${escapeHtml(b)}</span>`).join("")}</div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
@@ -511,7 +508,7 @@ function renderLesson(q, prev, next) {
 
         <section id="question">
           <h2>${sec.question}. Câu hỏi thực hành — Full Bank Q${q.id}</h2>
-          ${renderQuizBlock(q)}
+          ${renderQuizBlock(q, grounding.signalPhrases)}
           <p style="font-size:0.86rem;color:var(--muted)">
             <a href="pmp-full-questions.html#q-${q.id}">→ Mở câu ${q.id} trong bộ luyện đầy đủ</a>
           </p>
@@ -531,11 +528,6 @@ function renderLesson(q, prev, next) {
           <h3>Loại trừ từng đáp án</h3>
           ${renderExcludeTableFromAnalysis(analysis.optionAnalysis)}
         </section>
-
-        ${drillHtml ? `<section id="drill">
-          <h2>${sec.drill}. Drill — phân loại hành động PM</h2>
-          ${drillHtml}
-        </section>` : ""}
 
         ${trapsHtml ? `<section id="traps">
           <h2>${sec.traps}. Bẫy thi</h2>
@@ -570,7 +562,6 @@ function renderLesson(q, prev, next) {
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      ${drillHtml ? buildDrillScript() : ""}
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
       const obs = new IntersectionObserver(function (entries) {

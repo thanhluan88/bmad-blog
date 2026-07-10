@@ -49,6 +49,16 @@
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .grounding-card .grounding-ref { font-size: 0.86rem; color: var(--muted); margin: 0 0 0.5rem; }
+    .grounding-block { margin-top: 0.85rem; }
+    .grounding-block h5 { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--primary-dark); }
+    .grounding-opt-text { font-size: 0.88rem; margin: 0 0 0.35rem; color: var(--muted); }
+    .grounding-why { margin: 0; font-size: 0.92rem; line-height: 1.55; }
+    .grounding-wrong { margin: 0; padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.5; }
+    .grounding-wrong li { margin-bottom: 0.4rem; }
+    .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
+    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
@@ -78,15 +88,6 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
-    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
-    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
-    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
-    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
-    .classify-btns button:disabled { cursor: default; }
-    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -109,7 +110,6 @@
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
         
-        
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -128,7 +128,6 @@
         <a href="#question">Quiz</a>
         <a href="#analysis">Phân tích</a>
         
-        
         <a href="pmp-teach-full-q821.html">← 821</a>
         <a href="pmp-teach-full-q823.html">823 →</a>
       </nav>
@@ -136,7 +135,7 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed · Q822</h1>
           <p class="lead">Bài học Q822 về <strong>Estimate Costs</strong> (PMBOK 8, tr. 62) — Phân tích tình huống và chọn đáp án B theo PMBOK 8.</p>
-          <p class="lead" style="margin-top:0.75rem">A project has a budgeted cost of $120,000. According to the schedule, <em>15% of the project should have been completed after one month</em>. After a month, only 12% of the project has actually been completed What is the scheduled performance index (SPI)?</p>
+          <p class="lead" style="margin-top:0.75rem">A project has a budgeted cost of $120,000. According to the schedule, 15% of the project should have been completed after one month. After a month, only 12% of the project has actually been completed What is the scheduled performance index (SPI)?</p>
           <div class="badges"><span class="badge">PMBOK 8, tr. 62</span><span class="badge">Finance</span><span class="badge">Estimate Costs</span><span class="badge">Full Bank Q822</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
@@ -150,7 +149,7 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q822</h2>
           <div class="quiz-card">
             <div class="q-num">pmp-full-questions · Câu 822 · dropdown</div>
-            <div class="q-text">A project has a budgeted cost of $120,000. According to the schedule, <span class="kw-signal">15% of the project should have been completed after one month</span>. After a month, only 12% of the project has actually been completed What is the scheduled performance index (SPI)?</div>
+            <div class="q-text">A project has a budgeted cost of $120,000. According to the schedule, 15% of the project should have been completed after one month. After a month, only 12% of the project has actually been completed What is the scheduled performance index (SPI)?</div>
           </div>
           <div class="card info">
             <h4>Dropdown — Đáp án đúng</h4>
@@ -163,16 +162,27 @@
 
         <section id="analysis">
           <h2>2. Phân tích đáp án — Đáp án đúng: B</h2>
-          <div class="card info">
+          <div class="card info grounding-card">
             <h4>Grounding PMBOK 8</h4>
-            <p style="margin:0">Dựa trên PMBOK 8 (Estimate Costs + Lead accountably, tr. 62): với tình huống trong stem, đáp án đúng là B — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance (Executing, PMBOK 8). Không chọn: A (); C (); D ().</p>
+            <p class="grounding-ref"><span class="kw-pmbok">PMBOK 8</span> · Estimate Costs + Lead accountably, tr. 62</p>
+            <div class="grounding-block">
+              <h5>Đáp án đúng — B</h5>
+              <p class="grounding-opt-text"><strong>B.</strong> 0.8</p>
+              <p class="grounding-why">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance (Executing, PMBOK 8).</p>
+            </div>
+            <div class="grounding-block">
+            <h5>Không chọn</h5>
+            <ul class="grounding-wrong"><li><strong>A.</strong> </li><li><strong>C.</strong> </li><li><strong>D.</strong> </li></ul>
           </div>
-          <div class="card tip">
+          </div>
+          <div class="card tip signal-card">
             <h4>Signal trong stem Q822</h4>
-            <p style="margin:0"><strong>15% of the project should have been completed after one month</strong><br><br>→ <strong>B</strong>: Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance (Executing, PMBOK 8).</p>
+            
+            
+            <p class="signal-conclusion" style="margin:0">→ <strong>B</strong>: Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance (Executing, PMBOK 8).</p>
           </div>
           <h3>Tại sao chọn B?</h3>
-          <ul><li>Signal: tình huống trong stem.</li><li>Đáp án B đúng: Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 62: Estimate Costs + <span class="kw-pmbok">Lead accountably</span>.</li></ul>
+          <ul><li>Đáp án B đúng: Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 62: Estimate Costs + <span class="kw-pmbok">Lead accountably</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. 0.8</strong></p>
@@ -181,8 +191,6 @@
           <h3>Loại trừ từng đáp án</h3>
           
         </section>
-
-        
 
         
 
@@ -245,7 +253,6 @@ Q822 ANSWER: B</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
       const obs = new IntersectionObserver(function (entries) {

@@ -49,6 +49,16 @@
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .grounding-card .grounding-ref { font-size: 0.86rem; color: var(--muted); margin: 0 0 0.5rem; }
+    .grounding-block { margin-top: 0.85rem; }
+    .grounding-block h5 { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--primary-dark); }
+    .grounding-opt-text { font-size: 0.88rem; margin: 0 0 0.35rem; color: var(--muted); }
+    .grounding-why { margin: 0; font-size: 0.92rem; line-height: 1.55; }
+    .grounding-wrong { margin: 0; padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.5; }
+    .grounding-wrong li { margin-bottom: 0.4rem; }
+    .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
+    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
@@ -78,15 +88,6 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
-    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
-    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
-    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
-    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
-    .classify-btns button:disabled { cursor: default; }
-    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -108,7 +109,6 @@
         <a href="#intro" class="active">Giới thiệu</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
@@ -127,7 +127,6 @@
         <a href="pmp-full-questions.html#q-785">Câu 785</a>
         <a href="#question">Quiz</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q784.html">← 784</a>
         <a href="pmp-teach-full-q786.html">786 →</a>
@@ -136,7 +135,7 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed · Q785</h1>
           <p class="lead">Bài học Q785 về <strong>Develop Team</strong> (PMBOK 8, tr. 53) — Stakeholder không hài lòng</p>
-          <p class="lead" style="margin-top:0.75rem">A project manager is overseeing the delivery of a new enterprise software system. During a <em>stakeholder review session</em>, a key stakeholder reports that a critical component of the product is “not user-friendly” and may negatively affect adoption by end users. The component passed all functional and performance tests, but usability was not explicitly included in the original acceptance criteria. The stakeholder insists that this issue must be addressed before the next release, but making changes now could impact schedule and budget baselines. How should the project manager address the concern?</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is overseeing the delivery of a new enterprise software system. During a stakeholder review session, a key stakeholder reports that a critical component of the product is “not user-friendly” and may negatively affect adoption by end users. The component passed all functional and performance tests, but usability was not explicitly included in the original acceptance criteria. The stakeholder insists that this issue must be addressed before the next release, but making changes now could impact schedule and budget baselines. How should the project manager address the concern?</p>
           <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Resources, Stakeholders</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q785</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
@@ -150,7 +149,7 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q785</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 785</div>
-            <div class="q-text">A project manager is overseeing the delivery of a new enterprise software system. During a <span class="kw-signal">stakeholder review session</span>, a key stakeholder reports that a critical component of the product is “<span class="kw-cue">not</span> user-friendly” and may negatively affect adoption by end users. The component passed all functional and performance tests, but usability was <span class="kw-cue">not</span> explicitly included in the original acceptance criteria. The stakeholder insists that this issue must be addressed before the <span class="kw-cue">next</span> release, but making changes now could impact schedule and budget baselines. How should the project manager address the concern?</div>
+            <div class="q-text">A project manager is overseeing the delivery of a new enterprise software system. During a stakeholder review session, a key stakeholder reports that a critical component of the product is “<span class="kw-cue">not</span> user-friendly” and may negatively affect adoption by end users. The component passed all functional and performance tests, but usability was <span class="kw-cue">not</span> explicitly included in the original acceptance criteria. The stakeholder insists that this issue must be addressed before the <span class="kw-cue">next</span> release, but making changes now could impact schedule and budget baselines. How should the project manager address the concern?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Verify that the component meets the agreed-upon design and performance standards, and proceed to the next steps.</button>
             <button class="opt-btn" data-opt="B" type="button">B. <span class="kw-signal">Collaborate</span> with the stakeholder to clarify the issue, verify a solution, and update acceptance criteria if necessary.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Bring in a user experience (UX) specialist to assess usability issues and recommend practical solutions.</button>
@@ -164,16 +163,27 @@
 
         <section id="analysis">
           <h2>2. Phân tích đáp án — Đáp án đúng: B</h2>
-          <div class="card info">
+          <div class="card info grounding-card">
             <h4>Grounding PMBOK 8</h4>
-            <p style="margin:0">Dựa trên PMBOK 8 (Develop Team + Build an empowered culture, tr. 53): với stakeholder không hài lòng / kỳ vọng lệch, đáp án đúng là B — PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều. Không chọn: A (Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder …); C (&quot;Bring in a user experience (UX) specialist to assess usability issues …); D (Tập trung &quot;change control / change request&quot; không giải quyết stakeholde…).</p>
+            <p class="grounding-ref"><span class="kw-pmbok">PMBOK 8</span> · Develop Team + Build an empowered culture, tr. 53</p>
+            <div class="grounding-block">
+              <h5>Đáp án đúng — B</h5>
+              <p class="grounding-opt-text"><strong>B.</strong> Collaborate with the stakeholder to clarify the issue, verify a solution, and update acceptance criteria if necessary.</p>
+              <p class="grounding-why">PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.</p>
+            </div>
+            <div class="grounding-block">
+            <h5>Không chọn</h5>
+            <ul class="grounding-wrong"><li><strong>A.</strong> Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / collaborate.</li><li><strong>C.</strong> &quot;Bring in a user experience (UX) specialist to assess usability issues and recommen…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung cùng phát triển giải pháp / collaborate.</li><li><strong>D.</strong> Tập trung &quot;change control / change request&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / collaborate.</li></ul>
           </div>
-          <div class="card tip">
+          </div>
+          <div class="card tip signal-card">
             <h4>Signal trong stem Q785</h4>
-            <p style="margin:0"><strong>stakeholder review session</strong><br><br>→ <strong>B</strong>: PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.</p>
+            
+            
+            <p class="signal-conclusion" style="margin:0">→ <strong>B</strong>: PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.</p>
           </div>
           <h3>Tại sao chọn B?</h3>
-          <ul><li>Signal: stakeholder không hài lòng / kỳ vọng lệch.</li><li>Đáp án B đúng: PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 53: <span class="kw-pmbok">Develop Team</span> + <span class="kw-pmbok">Build an empowered culture</span>.</li><li>A sai: Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / <span class="kw-signal">collaborate</span>.</li><li>C sai: &quot;Bring in a user experience (UX) specialist to assess usability issues and recommen…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung cùng phát triển giải pháp / <span class="kw-signal">collaborate</span>.</li></ul>
+          <ul><li>Đáp án B đúng: PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 53: <span class="kw-pmbok">Develop Team</span> + <span class="kw-pmbok">Build an empowered culture</span>.</li><li>A sai: Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / <span class="kw-signal">collaborate</span>.</li><li>C sai: &quot;Bring in a user experience (UX) specialist to assess usability issues and recommen…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung cùng phát triển giải pháp / <span class="kw-signal">collaborate</span>.</li><li>D sai: Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / <span class="kw-signal">collaborate</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Collaborate with the stakeholder to clarify the issue, verify a solution, and update acceptance criteria if necessary.</strong></p>
@@ -186,23 +196,8 @@
           </table>
         </section>
 
-        <section id="drill">
-          <h2>3. Drill — phân loại hành động PM</h2>
-          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="develop_solution">
-              <span>A project manager is overseeing the delivery of a new enterprise software system. During a stakehold… (Q785)</span>
-              <div class="classify-btns"><button data-pick="develop_solution" type="button">Explain value</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân t</button><button data-pick="change_control" type="button">change control</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div><div class="classify-row" data-answer="ensure_compliance">
-              <span>Tình huống cần &quot;đảm bảo tuân thủ / compliance&quot; — không phải trọng tâm Q785</span>
-              <div class="classify-btns"><button data-pick="develop_solution" type="button">Explain value</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân t</button><button data-pick="change_control" type="button">change control</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div><div class="classify-row" data-answer="change_control">
-              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q785</span>
-              <div class="classify-btns"><button data-pick="develop_solution" type="button">Explain value</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân t</button><button data-pick="change_control" type="button">change control</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div></div>
-          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
-        </section>
-
         <section id="traps">
-          <h2>4. Bẫy thi</h2>
+          <h2>3. Bẫy thi</h2>
           <div class="card danger">
             <h4>Bẫy 1: Bẫy A (A)</h4>
             <p style="margin:0">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / collaborate.</p>
@@ -219,7 +214,7 @@
         </section>
 
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>4. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
             <div class="flashcard-front">Q785 — chủ đề / concept?</div>
@@ -236,7 +231,7 @@
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
+          <h2>5. Cheat sheet</h2>
           <div class="cheat-sheet">DEVELOP TEAM — Q785
 (PMBOK 8, tr. 53)
 ─────────────────────────────────────────────────────
@@ -298,29 +293,6 @@ Q785 ANSWER: B</div>
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
-      });
-      
-      let score = 0;
-      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
-      const total = drillRows.length;
-      drillRows.forEach(function (row) {
-        const ans = row.dataset.answer;
-        let done = false;
-        row.querySelectorAll("button").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            if (done) return;
-            done = true;
-            const ok = btn.dataset.pick === ans;
-            row.querySelectorAll("button").forEach(function (b) {
-              b.disabled = true;
-              if (b.dataset.pick === ans) b.classList.add("correct");
-              else if (b === btn) b.classList.add("wrong-pick");
-            });
-            if (ok) score++;
-            const el = document.getElementById("drillScore");
-            if (el) el.textContent = score + " / " + total + " đúng";
-          });
-        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

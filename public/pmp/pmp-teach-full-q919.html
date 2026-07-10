@@ -49,6 +49,16 @@
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .grounding-card .grounding-ref { font-size: 0.86rem; color: var(--muted); margin: 0 0 0.5rem; }
+    .grounding-block { margin-top: 0.85rem; }
+    .grounding-block h5 { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--primary-dark); }
+    .grounding-opt-text { font-size: 0.88rem; margin: 0 0 0.35rem; color: var(--muted); }
+    .grounding-why { margin: 0; font-size: 0.92rem; line-height: 1.55; }
+    .grounding-wrong { margin: 0; padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.5; }
+    .grounding-wrong li { margin-bottom: 0.4rem; }
+    .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
+    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
@@ -78,15 +88,6 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
-    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
-    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
-    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
-    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
-    .classify-btns button:disabled { cursor: default; }
-    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -108,7 +109,6 @@
         <a href="#intro" class="active">Giới thiệu</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
@@ -127,7 +127,6 @@
         <a href="pmp-full-questions.html#q-919">Câu 919</a>
         <a href="#question">Quiz</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q918.html">← 918</a>
         <a href="pmp-teach-full-q920.html">920 →</a>
@@ -164,16 +163,27 @@
 
         <section id="analysis">
           <h2>2. Phân tích đáp án — Đáp án đúng: C</h2>
-          <div class="card info">
+          <div class="card info grounding-card">
             <h4>Grounding PMBOK 8</h4>
-            <p style="margin:0">Dựa trên PMBOK 8 (Develop Team + Build an empowered culture, tr. 53): với trễ tiến độ / áp lực schedule, đáp án đúng là C — PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc. Không chọn: A (Trong môi trường Agile/Hybrid, PMBOK 8 khuyến khích Build an empowered …); B (Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết trễ…); D (Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; không giải qu…).</p>
+            <p class="grounding-ref"><span class="kw-pmbok">PMBOK 8</span> · Develop Team + Build an empowered culture, tr. 53</p>
+            <div class="grounding-block">
+              <h5>Đáp án đúng — C</h5>
+              <p class="grounding-opt-text"><strong>C.</strong> Work with the product owner to prioritize whether and when any change or rework should occur in upcoming iterations.</p>
+              <p class="grounding-why">PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
+            </div>
+            <div class="grounding-block">
+            <h5>Không chọn</h5>
+            <ul class="grounding-wrong"><li><strong>A.</strong> Trong môi trường Agile/Hybrid, PMBOK 8 khuyến khích Build an empowered culture — PM định hướng và loại bỏ impediment, không micromanage giải pháp.</li><li><strong>B.</strong> Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / MVP.</li><li><strong>D.</strong> Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / MVP.</li></ul>
           </div>
-          <div class="card tip">
+          </div>
+          <div class="card tip signal-card">
             <h4>Signal trong stem Q919</h4>
-            <p style="margin:0">trễ tiến độ / áp lực schedule<br><br>→ <strong>C</strong>: PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
+            
+            
+            <p class="signal-conclusion" style="margin:0">→ <strong>C</strong>: PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
           </div>
           <h3>Tại sao chọn C?</h3>
-          <ul><li>Signal: trễ tiến độ / áp lực schedule.</li><li>Đáp án C đúng: PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 53: <span class="kw-pmbok">Develop Team</span> + <span class="kw-pmbok">Build an empowered culture</span>.</li><li>A sai: Trong môi trường Agile/Hybrid, <span class="kw-pmbok">PMBOK 8</span> khuyến khích <span class="kw-pmbok">Build an empowered culture</span> — PM định hướng và loại bỏ <span class="kw-signal">impediment</span>, không micromanage giải pháp.</li><li>B sai: Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</li></ul>
+          <ul><li>Đáp án C đúng: PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 53: <span class="kw-pmbok">Develop Team</span> + <span class="kw-pmbok">Build an empowered culture</span>.</li><li>A sai: Trong môi trường Agile/Hybrid, <span class="kw-pmbok">PMBOK 8</span> khuyến khích <span class="kw-pmbok">Build an empowered culture</span> — PM định hướng và loại bỏ <span class="kw-signal">impediment</span>, không micromanage giải pháp.</li><li>B sai: Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</li><li>D sai: Tập trung &quot;yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>)&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Work with the product owner to prioritize whether and when any change or rework should occur in upcoming iterations.</strong></p>
@@ -186,23 +196,8 @@
           </table>
         </section>
 
-        <section id="drill">
-          <h2>3. Drill — phân loại hành động PM</h2>
-          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="prioritize_value">
-              <span>A hybrid development team is working on a new financial reporting application and recently changed a… (Q919)</span>
-              <div class="classify-btns"><button data-pick="prioritize_value" type="button">Explain value</button><button data-pick="ask_team_act" type="button">yêu cầu team h</button><button data-pick="quality_embed" type="button">đảm bảo chất l</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div><div class="classify-row" data-answer="ask_team_act">
-              <span>Tình huống cần &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; — không phải trọng tâm Q919</span>
-              <div class="classify-btns"><button data-pick="prioritize_value" type="button">Explain value</button><button data-pick="ask_team_act" type="button">yêu cầu team h</button><button data-pick="quality_embed" type="button">đảm bảo chất l</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div><div class="classify-row" data-answer="quality_embed">
-              <span>Tình huống cần &quot;đảm bảo chất lượng / kiểm soát quality&quot; — không phải trọng tâm Q919</span>
-              <div class="classify-btns"><button data-pick="prioritize_value" type="button">Explain value</button><button data-pick="ask_team_act" type="button">yêu cầu team h</button><button data-pick="quality_embed" type="button">đảm bảo chất l</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div></div>
-          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
-        </section>
-
         <section id="traps">
-          <h2>4. Bẫy thi</h2>
+          <h2>3. Bẫy thi</h2>
           <div class="card danger">
             <h4>Bẫy 1: Bẫy A (A)</h4>
             <p style="margin:0">Trong môi trường Agile/Hybrid, PMBOK 8 khuyến khích Build an empowered culture — PM định hướng và loại bỏ impediment, không micromanage giải pháp.</p>
@@ -219,7 +214,7 @@
         </section>
 
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>4. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
             <div class="flashcard-front">Q919 — chủ đề / concept?</div>
@@ -236,7 +231,7 @@
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
+          <h2>5. Cheat sheet</h2>
           <div class="cheat-sheet">DEVELOP TEAM — Q919
 (PMBOK 8, tr. 53)
 ─────────────────────────────────────────────────────
@@ -298,29 +293,6 @@ Q919 ANSWER: C</div>
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
-      });
-      
-      let score = 0;
-      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
-      const total = drillRows.length;
-      drillRows.forEach(function (row) {
-        const ans = row.dataset.answer;
-        let done = false;
-        row.querySelectorAll("button").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            if (done) return;
-            done = true;
-            const ok = btn.dataset.pick === ans;
-            row.querySelectorAll("button").forEach(function (b) {
-              b.disabled = true;
-              if (b.dataset.pick === ans) b.classList.add("correct");
-              else if (b === btn) b.classList.add("wrong-pick");
-            });
-            if (ok) score++;
-            const el = document.getElementById("drillScore");
-            if (el) el.textContent = score + " / " + total + " đúng";
-          });
-        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

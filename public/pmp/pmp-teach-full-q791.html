@@ -49,6 +49,16 @@
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .grounding-card .grounding-ref { font-size: 0.86rem; color: var(--muted); margin: 0 0 0.5rem; }
+    .grounding-block { margin-top: 0.85rem; }
+    .grounding-block h5 { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--primary-dark); }
+    .grounding-opt-text { font-size: 0.88rem; margin: 0 0 0.35rem; color: var(--muted); }
+    .grounding-why { margin: 0; font-size: 0.92rem; line-height: 1.55; }
+    .grounding-wrong { margin: 0; padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.5; }
+    .grounding-wrong li { margin-bottom: 0.4rem; }
+    .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
+    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
@@ -78,15 +88,6 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
-    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
-    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
-    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
-    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
-    .classify-btns button:disabled { cursor: default; }
-    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -108,7 +109,6 @@
         <a href="#intro" class="active">Giới thiệu</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
@@ -127,7 +127,6 @@
         <a href="pmp-full-questions.html#q-791">Câu 791</a>
         <a href="#question">Quiz</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q790.html">← 790</a>
         <a href="pmp-teach-full-q792.html">792 →</a>
@@ -136,7 +135,7 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed · Q791</h1>
           <p class="lead">Bài học Q791 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 84) — Phân tích tình huống và chọn đáp án B theo PMBOK 8.</p>
-          <p class="lead" style="margin-top:0.75rem">A project manager is in the initiation phase of a new project and is preparing to develop a project team charter. The project team consists of members from <em>different departments</em> within the organization, and collaboration is vital for project success. What should the project manager do to create an effective project team charter?</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is in the initiation phase of a new project and is preparing to develop a project team charter. The project team consists of members from different departments within the organization, and collaboration is vital for project success. What should the project manager do to create an effective project team charter?</p>
           <div class="badges"><span class="badge">PMBOK 8, tr. 84</span><span class="badge">Governance, Schedule</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q791</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
@@ -150,7 +149,7 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q791</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 791</div>
-            <div class="q-text">A project manager is in the initiation phase of a new project and is preparing to develop a project team charter. The project team consists of members from <span class="kw-signal">different departments</span> within the organization, and <span class="kw-signal">collaboration</span> is vital for project success. <span class="kw-cue">What should the project manager do</span> to create an effective project team charter?</div>
+            <div class="q-text">A project manager is in the initiation phase of a new project and is preparing to develop a project team charter. The project team consists of members from different departments within the organization, and collaboration is vital for project success. <span class="kw-cue">What should the project manager do</span> to create an effective project team charter?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Create the project team charter independently, outlining their expectations and goals for the team.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Hold a kickoff meeting with the team to collaboratively define the team's purpose, roles, responsibilities, and goals.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Delegate the task of drafting the charter to a senior team member with experience in project management.</button>
@@ -164,16 +163,27 @@
 
         <section id="analysis">
           <h2>2. Phân tích đáp án — Đáp án đúng: B</h2>
-          <div class="card info">
+          <div class="card info grounding-card">
             <h4>Grounding PMBOK 8</h4>
-            <p style="margin:0">Dựa trên PMBOK 8 (Manage Project Execution + Lead accountably, tr. 84): với tình huống trong stem, đáp án đúng là B — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Initiating, PMBOK 8). Không chọn: A (&quot;Create the project team charter independently, outlining their expecta…); C (&quot;Delegate the task of drafting the charter to a senior team member with…); D (Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết Share a t…).</p>
+            <p class="grounding-ref"><span class="kw-pmbok">PMBOK 8</span> · Manage Project Execution + Lead accountably, tr. 84</p>
+            <div class="grounding-block">
+              <h5>Đáp án đúng — B</h5>
+              <p class="grounding-opt-text"><strong>B.</strong> Hold a kickoff meeting with the team to collaboratively define the team's purpose, roles, responsibilities, and goals.</p>
+              <p class="grounding-why">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Initiating, PMBOK 8).</p>
+            </div>
+            <div class="grounding-block">
+            <h5>Không chọn</h5>
+            <ul class="grounding-wrong"><li><strong>A.</strong> &quot;Create the project team charter independently, outlining their expectations and go…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Hold a kickoff meeting with the team to collaboratively define the team's …</li><li><strong>C.</strong> &quot;Delegate the task of drafting the charter to a senior team member with experience …&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Hold a kickoff meeting with the team to collaboratively define the team's …</li><li><strong>D.</strong> Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết Share a template of a generic project team charter with the team and invite them to modify it as needed to fit the project. — đáp án đúng cần xử lý trực tiếp…</li></ul>
           </div>
-          <div class="card tip">
+          </div>
+          <div class="card tip signal-card">
             <h4>Signal trong stem Q791</h4>
-            <p style="margin:0"><strong>different departments</strong><br><br>→ <strong>B</strong>: Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Initiating, PMBOK 8).</p>
+            
+            
+            <p class="signal-conclusion" style="margin:0">→ <strong>B</strong>: Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Initiating, PMBOK 8).</p>
           </div>
           <h3>Tại sao chọn B?</h3>
-          <ul><li>Signal: tình huống trong stem.</li><li>Đáp án B đúng: Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 84: <span class="kw-pmbok">Manage Project Execution</span> + <span class="kw-pmbok">Lead accountably</span>.</li><li>A sai: &quot;Create the project team charter independently, outlining their expectations and go…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Hold a kickoff meeting with the team to collaboratively define the team's purpose,…&quot;.</li><li>C sai: &quot;Delegate the task of drafting the charter to a senior team member with experience …&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Hold a kickoff meeting with the team to collaboratively define the team's purpose,…&quot;.</li></ul>
+          <ul><li>Đáp án B đúng: Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 84: <span class="kw-pmbok">Manage Project Execution</span> + <span class="kw-pmbok">Lead accountably</span>.</li><li>A sai: &quot;Create the project team charter independently, outlining their expectations and go…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Hold a kickoff meeting with the team to collaboratively define the team's purpose,…&quot;.</li><li>C sai: &quot;Delegate the task of drafting the charter to a senior team member with experience …&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Hold a kickoff meeting with the team to collaboratively define the team's purpose,…&quot;.</li><li>D sai: Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết Share a template of a generic project team charter with the team and invite them to modify it as needed to fit the project. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Hold a kickoff meeting with the team to collaboratively define the team's purpose, roles, responsibilities, and goals.</strong></p>
@@ -186,20 +196,8 @@
           </table>
         </section>
 
-        <section id="drill">
-          <h2>3. Drill — phân loại hành động PM</h2>
-          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
-              <span>A project manager is in the initiation phase of a new project and is preparing to develop a project … (Q791)</span>
-              <div class="classify-btns"><button data-pick="CORRECT" type="button">Explain value</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div><div class="classify-row" data-answer="communicate_inform">
-              <span>Tình huống cần &quot;thông báo / truyền đạt thông tin&quot; — không phải trọng tâm Q791</span>
-              <div class="classify-btns"><button data-pick="CORRECT" type="button">Explain value</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div></div>
-          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
-        </section>
-
         <section id="traps">
-          <h2>4. Bẫy thi</h2>
+          <h2>3. Bẫy thi</h2>
           <div class="card danger">
             <h4>Bẫy 1: Bẫy A (A)</h4>
             <p style="margin:0">&quot;Create the project team charter independently, outlining their expectations and go…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Hold a kickoff meeting with the team to collaboratively define the team's purpose,…&quot;.</p>
@@ -216,7 +214,7 @@
         </section>
 
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>4. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
             <div class="flashcard-front">Q791 — chủ đề / concept?</div>
@@ -233,7 +231,7 @@
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
+          <h2>5. Cheat sheet</h2>
           <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q791
 (PMBOK 8, tr. 84)
 ─────────────────────────────────────────────────────
@@ -295,29 +293,6 @@ Q791 ANSWER: B</div>
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
-      });
-      
-      let score = 0;
-      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
-      const total = drillRows.length;
-      drillRows.forEach(function (row) {
-        const ans = row.dataset.answer;
-        let done = false;
-        row.querySelectorAll("button").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            if (done) return;
-            done = true;
-            const ok = btn.dataset.pick === ans;
-            row.querySelectorAll("button").forEach(function (b) {
-              b.disabled = true;
-              if (b.dataset.pick === ans) b.classList.add("correct");
-              else if (b === btn) b.classList.add("wrong-pick");
-            });
-            if (ok) score++;
-            const el = document.getElementById("drillScore");
-            if (el) el.textContent = score + " / " + total + " đúng";
-          });
-        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

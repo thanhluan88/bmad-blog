@@ -1,106 +1,93 @@
 ---
 name: pmp-teach-full-lesson
-description: Regenerate or polish a Full Bank PMP teach lesson (pmp-teach-full-q{N}.html) — PMBOK 8 grounding explains why the correct key fits the stem and why each wrong key fails; embed that into #analysis. Use when the user asks to regenerate, fix, or research a full bank teach lesson, mentions pmp-teach-full-q, colocation-style teach content, PMBOK 8 lesson quality, or grounding answer explanations.
+description: Regenerate or polish Full Bank teach lessons — PMBOK 8 grounding (structured HTML), AI-derived signal phrases in English highlighted in quiz stem. Use when user asks pmp-teach-full-q, grounding, signal highlight, colocation-style teach, or PMBOK 8 lesson quality.
 ---
 
 # PMP Teach Full Lesson
 
-Produce a **colocation-grade** teach **lesson**: one HTML file per Full Bank question, Vietnamese prose, every explanation traceable to PMBOK 8 — not ExamTopics copy-paste.
+**Colocation-grade** teach **lesson**: Vietnamese reasoning, PMBOK 8 traceable, **signal** from AI grounding (not regex).
 
-**Leading words:** **lesson** (output), **grounding** (PMBOK 8 Q&A before writing), **dedup** (one meaning → one section), **signal** (stem cues → correct action).
+**Leading words:** **lesson**, **grounding** (structured PMBOK Q&A), **signal** (AI answer + English stem phrases), **dedup**.
 
 ## Inputs
 
 | Source | Path |
 |--------|------|
-| Question + options | `public/pmp/pmp-full-questions.json` (by `id`) |
-| Quality bar | `public/pmp/pmp-teach-colocation.html` |
+| Questions | `public/pmp/pmp-full-questions.json` |
+| AI signal overrides | `data/pmp-teach-signals.json` (optional, by `id`) |
 | Generator | `scripts/generate-pmp-full-teach-lessons.js` |
-| Colocation sections | `scripts/lib/pmp-teach-colocation-style.js` |
-| PMBOK reasoning | `scripts/lib/pmp-pmbok8-generator.js`, `pmp-option-reasoning.js` |
-| RAG | `data/pmp-pmbok8-page-cache.json` via `pmp-pmbok8-rag-pages.js` |
+| Sections | `scripts/lib/pmp-teach-colocation-style.js` |
+| Profiles | `scripts/lib/pmp-option-reasoning.js` (`signalPhrases`, `signalAnswer`) |
 
 ## Workflow
 
-### 1. Load the question
+### 1. Load question
 
-Read `id`, `text`, `options`, `correct` from `pmp-full-questions.json`. Note the correct key and its full option text.
+`id`, `text`, `options`, `correct`.
 
-**Completion:** Correct key and all wrong keys listed with option text — no need to open the legacy `explanation` field yet.
+**Completion:** Correct key + full option texts listed.
 
-### 2. Map PMBOK 8 from the stem
+### 2. **Grounding** — ask PMBOK 8
 
-Infer domain, process, principle from stem **signal** (not keyword accidents). Cross-check RAG snippet supports the mapping.
+Template: [REFERENCE.md](REFERENCE.md#grounding-prompt). Answer why correct key fits; why each wrong key fails.
 
-**Completion:** Domain, process, principle, and PDF page(s) stated in one line each, justified by stem + RAG.
+**Completion:** Grounding covers correct + every wrong key; Guide page cited when possible.
 
-### 3. **Grounding** — ask PMBOK 8 before writing
+### 3. **Signal** — ask AI (not regex)
 
-Before any lesson prose, answer this **grounding** question using PMBOK 8 Guide (+ RAG snippet for the question). Template in [REFERENCE.md](REFERENCE.md#grounding-prompt).
+Separate prompt: [REFERENCE.md](REFERENCE.md#signal-prompt).
 
-For each question:
-- State why the **correct** option fits the stem.
-- State why **each wrong** option does not — one distinct PMI reason per key.
+AI returns:
+- `signalAnswer` — Vietnamese: *tại sao* stem cues → correct action
+- `signalPhrases` — **English** substrings copied verbatim from stem (2–5 phrases)
 
-Do not answer from exam tricks alone; cite process/principle and Guide page when available.
+**Rules:**
+- Do **not** use `STEM_SIGNAL_PATTERNS` / regex to invent signals.
+- `signalPhrases` must appear exactly in the English stem.
+- Quiz `.q-text` highlights only `signalPhrases` (`kw-signal`) + PMI directive (`kw-cue`).
 
-**Completion:** Grounding covers correct key + every wrong key; each wrong key has a different rejection; at least one Guide page or process name cited.
+Store output:
+1. `data/pmp-teach-signals.json` → `{ "2": { "signalAnswer": "...", "signalPhrases": [...] } }`, or
+2. `STEM_PROFILES` in `pmp-option-reasoning.js` for stem classes.
 
-### 4. Embed **grounding** into `#analysis`
+**Completion:** `signalPhrases` non-empty; each phrase found in stem; `signalAnswer` in Vietnamese.
 
-Map the grounding answer into the lesson — **dedup** across subsections:
+### 4. Embed into `#analysis`
 
-| `#analysis` block | From grounding |
-|-------------------|----------------|
-| Signal card | Stem **signal** → hướng đáp án đúng |
-| `Tại sao chọn {key}?` bullets | Why correct (3–5 distinct points) |
-| Trích dẫn Guide | RAG snippet + `PMBOK 8, tr. N` |
-| Loại trừ table | Wrong keys only — one rejection each |
-| Quiz `EXPL` | Correct: **Đúng!** + one concrete reason; wrong: one trap sentence |
+| Block | Content |
+|-------|---------|
+| **Grounding PMBOK 8** | Structured card — ref, đáp án đúng block, `Không chọn` list (not one paragraph) |
+| **Signal trong stem** | English phrases (`kw-signal`) + Vietnamese `signalAnswer` + `→ {key}` |
+| Why bullets | From grounding, **dedup** |
+| Loại trừ table | Wrong keys only |
+| Quiz `.q-text` | Highlight `signalPhrases` only |
 
-Hero, quiz stem highlights, traps, flashcards, cheat sheet derive from the same grounding — do not contradict it.
+**Omit:** `#drill` (phân loại hành động PM) — không có trong lesson output.
 
-**Completion:** `#analysis` reads as the grounding answer in Vietnamese; no sentence of 8+ words repeated across analysis subsections.
+**Completion:** Grounding readable at a glance; signal card shows English + Vietnamese; no wall-of-text `<p>`.
 
-### 5. Section contract (**dedup**)
-
-| Section | Owns | Must not repeat |
-|---------|------|-----------------|
-| Hero lead | Vietnamese scenario + `<em>` **signal** | Full rejections |
-| Quiz `.q-text` | `kw-signal` cues + `kw-cue` PMI directive | Analysis bullets |
-| `#analysis` | Full **grounding** prose | — |
-| Traps / cheat sheet | Short pattern names | Loại trừ table rows |
-
-**Omit** `#concept` and `#compare` — trùng `#analysis`.
-
-Banned patterns: [examples.md](examples.md) Q1120 anti-patterns.
-
-### 6. Generate or patch
+### 5. Generate
 
 ```bash
-node scripts/generate-pmp-full-pmbok8-explanations.js   # if reasoning engine changed
-node scripts/build-pmp-full-questions.js
 node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 ```
 
-Bulk: fix engine (`pmp-option-reasoning.js`, `pmp-teach-colocation-style.js`) when the same grounding defect hits many ids, then `--force` range.
+Bulk: add `signalPhrases`/`signalAnswer` per stem class or batch-fill `pmp-teach-signals.json`, then `--force` range.
 
-**Completion:** `public/pmp/pmp-teach-full-q{id}.html` exists; grounding visible in `#analysis`.
+### 6. Validate
 
-### 7. Validate
+[REFERENCE.md](REFERENCE.md#validation)
 
-Checklist: [REFERENCE.md](REFERENCE.md#validation). Spot-check: hero → quiz → analysis tells one coherent **grounding** story.
-
-## When to fix engine vs lesson
+## Engine vs hand work
 
 | Symptom | Action |
 |---------|--------|
-| One lesson weak grounding | Hand-polish `#analysis` or extend `STEM_PROFILES` / `lessonBullets` for that stem |
-| Same generic rejection on many lessons | `pmp-option-reasoning.js` — `CONTRAST_MATRIX`, `rejectByAction` |
-| Quiz stem thiếu cue highlight | `STEM_SIGNAL_PATTERNS` in `pmp-teach-keywords.js` |
-| RAG page irrelevant | `buildRagQuery` in `pmp-pmbok8-rag-pages.js` |
+| Grounding wall of text | Engine already uses structured card — refill `whyCorrect` / rejections |
+| No stem highlights | Missing `signalPhrases` — run step 3 |
+| Generic signal | Replace regex; run AI **signal** prompt |
+| One stem class | Extend `STEM_PROFILES` with `signalPhrases` + `signalAnswer` |
 
-## Additional resources
+## Resources
 
-- Grounding prompt template + Q2 model: [REFERENCE.md](REFERENCE.md)
-- Good vs bad excerpts: [examples.md](examples.md)
+- Prompts + HTML contract: [REFERENCE.md](REFERENCE.md)
+- Examples: [examples.md](examples.md)

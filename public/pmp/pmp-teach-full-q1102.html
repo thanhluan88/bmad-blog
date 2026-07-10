@@ -49,6 +49,16 @@
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .grounding-card .grounding-ref { font-size: 0.86rem; color: var(--muted); margin: 0 0 0.5rem; }
+    .grounding-block { margin-top: 0.85rem; }
+    .grounding-block h5 { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--primary-dark); }
+    .grounding-opt-text { font-size: 0.88rem; margin: 0 0 0.35rem; color: var(--muted); }
+    .grounding-why { margin: 0; font-size: 0.92rem; line-height: 1.55; }
+    .grounding-wrong { margin: 0; padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.5; }
+    .grounding-wrong li { margin-bottom: 0.4rem; }
+    .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
+    .signal-card .signal-answer-vi { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
+    .signal-card .signal-conclusion { font-size: 0.9rem; }
     section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
@@ -78,15 +88,6 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
-    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
-    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
-    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
-    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
-    .classify-btns button:disabled { cursor: default; }
-    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -108,7 +109,6 @@
         <a href="#intro" class="active">Giới thiệu</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
@@ -127,7 +127,6 @@
         <a href="pmp-full-questions.html#q-1102">Câu 1102</a>
         <a href="#question">Quiz</a>
         <a href="#analysis">Phân tích</a>
-        <a href="#drill">Drill</a>
         <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1101.html">← 1101</a>
         <a href="pmp-teach-full-q1103.html">1103 →</a>
@@ -136,7 +135,7 @@
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed · Q1102</h1>
           <p class="lead">Bài học Q1102 về <strong>Develop Team</strong> (PMBOK 8, tr. 53) — Vấn đề chất lượng sau delivery</p>
-          <p class="lead" style="margin-top:0.75rem">A project manager is currently overseeing a hybrid project that has specific scope and quality requirements. However, due to recent changes in a competitor's product, there is a growing concern that the project's <em>deliverables</em> may become obsolete by the time the project is complete. What should the project manager do to address the potential obsolescence of deliverables?</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is currently overseeing a hybrid project that has specific scope and quality requirements. However, due to recent changes in a competitor's product, there is a growing concern that the project's deliverables may become obsolete by the time the project is complete. What should the project manager do to address the potential obsolescence of deliverables?</p>
           <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Resources, Scope</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q1102</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
@@ -150,7 +149,7 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q1102</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1102</div>
-            <div class="q-text">A project manager is currently overseeing a hybrid project that has specific scope and quality requirements. However, due to recent changes in a competitor's product, there is a growing concern that the project's <span class="kw-signal">deliverables</span> may become obsolete by the time the project is complete. <span class="kw-cue">What should the project manager do</span> to address the potential obsolescence of <span class="kw-signal">deliverables</span>?</div>
+            <div class="q-text">A project manager is currently overseeing a hybrid project that has specific scope and quality requirements. However, due to recent changes in a competitor's product, there is a growing concern that the project's deliverables may become obsolete by the time the project is complete. <span class="kw-cue">What should the project manager do</span> to address the potential obsolescence of deliverables?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Perform a comprehensive business impact analysis and explore options for using alternative materials or resources.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Assess the impact of the competitor's product changes and seek approval from the change control board (CCB) to address them.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Continue with the project as planned, adhering to the existing project schedule and avoiding any changes to scope or quality.</button>
@@ -164,16 +163,27 @@
 
         <section id="analysis">
           <h2>2. Phân tích đáp án — Đáp án đúng: B</h2>
-          <div class="card info">
+          <div class="card info grounding-card">
             <h4>Grounding PMBOK 8</h4>
-            <p style="margin:0">Dựa trên PMBOK 8 (Develop Team + Embed quality, tr. 53): với vấn đề chất lượng / defect, đáp án đúng là B — Trước khi đồng ý thay đổi, PM đánh giá impact lên scope/schedule/cost/risk — không quyết định mù quáng. Không chọn: A (&quot;Perform a comprehensive business impact analysis and explore options f…); C (Implements change mà không formal approval.); D (&quot;Terminate the current project and initiate a new project that better a…).</p>
+            <p class="grounding-ref"><span class="kw-pmbok">PMBOK 8</span> · Develop Team + Embed quality, tr. 53</p>
+            <div class="grounding-block">
+              <h5>Đáp án đúng — B</h5>
+              <p class="grounding-opt-text"><strong>B.</strong> Assess the impact of the competitor's product changes and seek approval from the change control board (CCB) to address them.</p>
+              <p class="grounding-why">Trước khi đồng ý thay đổi, PM đánh giá impact lên scope/schedule/cost/risk — không quyết định mù quáng.</p>
+            </div>
+            <div class="grounding-block">
+            <h5>Không chọn</h5>
+            <ul class="grounding-wrong"><li><strong>A.</strong> &quot;Perform a comprehensive business impact analysis and explore options for using alt…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request.</li><li><strong>C.</strong> Implements change mà không formal approval.</li><li><strong>D.</strong> &quot;Terminate the current project and initiate a new project that better aligns with t…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request.</li></ul>
           </div>
-          <div class="card tip">
+          </div>
+          <div class="card tip signal-card">
             <h4>Signal trong stem Q1102</h4>
-            <p style="margin:0"><strong>deliverables</strong><br><br>→ <strong>B</strong>: Trước khi đồng ý thay đổi, PM đánh giá impact lên scope/schedule/cost/risk — không quyết định mù quáng.</p>
+            
+            
+            <p class="signal-conclusion" style="margin:0">→ <strong>B</strong>: Trước khi đồng ý thay đổi, PM đánh giá impact lên scope/schedule/cost/risk — không quyết định mù quáng.</p>
           </div>
           <h3>Tại sao chọn B?</h3>
-          <ul><li>Signal: vấn đề chất lượng / defect.</li><li>Đáp án B đúng: Trước khi đồng ý thay đổi, PM đánh giá impact lên scope/schedule/cost/risk — không quyết định mù quáng.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 53: <span class="kw-pmbok">Develop Team</span> + <span class="kw-pmbok">Embed quality</span>.</li><li>A sai: &quot;Perform a comprehensive business impact analysis and explore options for using alt…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</li><li>C sai: Implements change mà không formal approval.</li></ul>
+          <ul><li>Đáp án B đúng: Trước khi đồng ý thay đổi, PM đánh giá impact lên scope/schedule/cost/risk — không quyết định mù quáng.</li><li><span class="kw-pmbok">PMBOK 8</span> tr. 53: <span class="kw-pmbok">Develop Team</span> + <span class="kw-pmbok">Embed quality</span>.</li><li>A sai: &quot;Perform a comprehensive business impact analysis and explore options for using alt…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</li><li>C sai: Implements change mà không formal approval.</li><li>D sai: &quot;Terminate the current project and initiate a new project that better aligns with t…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Assess the impact of the competitor's product changes and seek approval from the change control board (CCB) to address them.</strong></p>
@@ -186,20 +196,8 @@
           </table>
         </section>
 
-        <section id="drill">
-          <h2>3. Drill — phân loại hành động PM</h2>
-          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="change_control">
-              <span>A project manager is currently overseeing a hybrid project that has specific scope and quality requi… (Q1102)</span>
-              <div class="classify-btns"><button data-pick="change_control" type="button">Explain value</button><button data-pick="proceed_continue" type="button">tiếp tục theo </button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div><div class="classify-row" data-answer="proceed_continue">
-              <span>Tình huống cần &quot;tiếp tục theo kế hoạch hiện tại&quot; — không phải trọng tâm Q1102</span>
-              <div class="classify-btns"><button data-pick="change_control" type="button">Explain value</button><button data-pick="proceed_continue" type="button">tiếp tục theo </button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
-            </div></div>
-          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
-        </section>
-
         <section id="traps">
-          <h2>4. Bẫy thi</h2>
+          <h2>3. Bẫy thi</h2>
           <div class="card danger">
             <h4>Bẫy 1: Bẫy A (A)</h4>
             <p style="margin:0">&quot;Perform a comprehensive business impact analysis and explore options for using alt…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request.</p>
@@ -216,7 +214,7 @@
         </section>
 
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>4. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
             <div class="flashcard-front">Q1102 — chủ đề / concept?</div>
@@ -233,7 +231,7 @@
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
+          <h2>5. Cheat sheet</h2>
           <div class="cheat-sheet">DEVELOP TEAM — Q1102
 (PMBOK 8, tr. 53)
 ─────────────────────────────────────────────────────
@@ -295,29 +293,6 @@ Q1102 ANSWER: B</div>
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
-      });
-      
-      let score = 0;
-      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
-      const total = drillRows.length;
-      drillRows.forEach(function (row) {
-        const ans = row.dataset.answer;
-        let done = false;
-        row.querySelectorAll("button").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            if (done) return;
-            done = true;
-            const ok = btn.dataset.pick === ans;
-            row.querySelectorAll("button").forEach(function (b) {
-              b.disabled = true;
-              if (b.dataset.pick === ans) b.classList.add("correct");
-              else if (b === btn) b.classList.add("wrong-pick");
-            });
-            if (ok) score++;
-            const el = document.getElementById("drillScore");
-            if (el) el.textContent = score + " / " + total + " đúng";
-          });
-        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
