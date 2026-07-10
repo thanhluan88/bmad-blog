@@ -1,13 +1,13 @@
 ---
 name: pmp-teach-full-lesson
-description: Regenerate or polish a Full Bank PMP teach lesson (pmp-teach-full-q{N}.html) to colocation-grade quality — deduped sections, plain Vietnamese reasoning, PMBOK 8 grounded in the Guide PDF. Use when the user asks to regenerate, fix, or research a full bank teach lesson, mentions pmp-teach-full-q, colocation-style teach content, or PMBOK 8 lesson quality.
+description: Regenerate or polish a Full Bank PMP teach lesson (pmp-teach-full-q{N}.html) — PMBOK 8 grounding explains why the correct key fits the stem and why each wrong key fails; embed that into #analysis. Use when the user asks to regenerate, fix, or research a full bank teach lesson, mentions pmp-teach-full-q, colocation-style teach content, PMBOK 8 lesson quality, or grounding answer explanations.
 ---
 
 # PMP Teach Full Lesson
 
-Produce a **colocation-grade** teach **lesson**: one self-contained HTML file per Full Bank question, readable in Vietnamese, grounded in PMBOK 8 (not ExamTopics copy-paste).
+Produce a **colocation-grade** teach **lesson**: one HTML file per Full Bank question, Vietnamese prose, every explanation traceable to PMBOK 8 — not ExamTopics copy-paste.
 
-**Leading words:** **lesson** (output artifact), **dedup** (one meaning → one section), **signal** (stem cues → correct action), **colocation-grade** (quality bar = `public/pmp/pmp-teach-colocation.html`).
+**Leading words:** **lesson** (output), **grounding** (PMBOK 8 Q&A before writing), **dedup** (one meaning → one section), **signal** (stem cues → correct action).
 
 ## Inputs
 
@@ -20,110 +20,87 @@ Produce a **colocation-grade** teach **lesson**: one self-contained HTML file pe
 | PMBOK reasoning | `scripts/lib/pmp-pmbok8-generator.js`, `pmp-option-reasoning.js` |
 | RAG | `data/pmp-pmbok8-page-cache.json` via `pmp-pmbok8-rag-pages.js` |
 
-Q1 is handcrafted: `public/pmp/pmp-teach-full-q1-misdirected-email.html` — do not overwrite unless explicitly asked.
-
 ## Workflow
 
-### 1. Research the question
+### 1. Load the question
 
-Load the question by id from `pmp-full-questions.json`. Read the auto **lesson** if it exists (`public/pmp/pmp-teach-full-q{id}.html`).
+Read `id`, `text`, `options`, `correct` from `pmp-full-questions.json`. Note the correct key and its full option text.
 
-**Completion:** You can state stem **signal**, correct key, and why each wrong option fails in one sentence each — without opening the JSON explanation field.
+**Completion:** Correct key and all wrong keys listed with option text — no need to open the legacy `explanation` field yet.
 
 ### 2. Map PMBOK 8 from the stem
 
-Map from what the question tests, not from keyword accidents.
+Infer domain, process, principle from stem **signal** (not keyword accidents). Cross-check RAG snippet supports the mapping.
 
-| Stem focus | Domain / process (typical) |
-|------------|----------------------------|
-| Resource planning, generalists vs specialists, team composition | **Resources** — Plan Resources, Develop Team |
-| Scope / requirements / WBS | **Scope** — Define Scope, Validate Scope |
-| Stakeholder attitude, communication error | **Stakeholders** — Manage Stakeholder Engagement |
-| Agile teamwork, SME reluctance | **Resources** — Develop Team; principle **Build an empowered culture** |
+**Completion:** Domain, process, principle, and PDF page(s) stated in one line each, justified by stem + RAG.
 
-Cross-check RAG snippet: page content must support the mapping. If mapping conflicts with stem (e.g. Q1120 labeled Define Scope but stem asks **agile resource planning**), fix mapping before writing prose.
+### 3. **Grounding** — ask PMBOK 8 before writing
 
-**Completion:** Domain, process, principle, and PDF page(s) are justified by stem + RAG excerpt in one line each.
+Before any lesson prose, answer this **grounding** question using PMBOK 8 Guide (+ RAG snippet for the question). Template in [REFERENCE.md](REFERENCE.md#grounding-prompt).
 
-### 3. **Dedup** — section contract
+For each question:
+- State why the **correct** option fits the stem.
+- State why **each wrong** option does not — one distinct PMI reason per key.
 
-Each section owns one job. Never repeat the same sentence across sections.
+Do not answer from exam tricks alone; cite process/principle and Guide page when available.
+
+**Completion:** Grounding covers correct key + every wrong key; each wrong key has a different rejection; at least one Guide page or process name cited.
+
+### 4. Embed **grounding** into `#analysis`
+
+Map the grounding answer into the lesson — **dedup** across subsections:
+
+| `#analysis` block | From grounding |
+|-------------------|----------------|
+| Signal card | Stem **signal** → hướng đáp án đúng |
+| `Tại sao chọn {key}?` bullets | Why correct (3–5 distinct points) |
+| Trích dẫn Guide | RAG snippet + `PMBOK 8, tr. N` |
+| Loại trừ table | Wrong keys only — one rejection each |
+| Quiz `EXPL` | Correct: **Đúng!** + one concrete reason; wrong: one trap sentence |
+
+Hero, quiz stem highlights, traps, flashcards, cheat sheet derive from the same grounding — do not contradict it.
+
+**Completion:** `#analysis` reads as the grounding answer in Vietnamese; no sentence of 8+ words repeated across analysis subsections.
+
+### 5. Section contract (**dedup**)
 
 | Section | Owns | Must not repeat |
 |---------|------|-----------------|
-| Hero lead | Vietnamese scenario summary + `<em>` stem **signal** | Full option text, rejection reasons |
-| **Quiz stem** (`.q-text`) | `kw-signal` trên cue tình huống + `kw-cue` trên câu hỏi PMI | Phân tích bullets, loại trừ table |
-| Signal card (trong Phân tích) | Stem keywords → hướng đáp án đúng | Loại trừ table, bullets |
-| Analysis bullets | 3–5 distinct *why* points (no copy-paste) | Guide quote body |
-| Loại trừ table | Wrong keys only; specific rejection each | Trap cards verbatim |
-| Traps | PMI trap pattern name + one-line why | Table rows |
-| Cheat sheet | Keywords, answer, NOT list (short) | Long prose |
+| Hero lead | Vietnamese scenario + `<em>` **signal** | Full rejections |
+| Quiz `.q-text` | `kw-signal` cues + `kw-cue` PMI directive | Analysis bullets |
+| `#analysis` | Full **grounding** prose | — |
+| Traps / cheat sheet | Short pattern names | Loại trừ table rows |
 
-**Không dùng** section `#concept` (Develop Team / concept grid / compare table) hay `#compare` (option grid) — trùng nội dung với Phân tích.
+**Omit** `#concept` and `#compare` — trùng `#analysis`.
 
-Banned patterns (see [examples.md](examples.md) Q1120):
-- Generic fallback: *"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền…"*
-- Wrong-option template repeating full correct option text in every rejection
-- Same bullet repeated in `<ul>`, tip card, and analysis card
+Banned patterns: [examples.md](examples.md) Q1120 anti-patterns.
 
-**Completion:** No two sections share a sentence of 8+ words; each wrong option has a *different* rejection rationale.
-
-### 3b. **Quiz stem keywords** (`#question .q-text`)
-
-Highlight cues that *drive* the correct answer — not decoration.
-
-| Class | Meaning | Examples |
-|-------|---------|----------|
-| `kw-cue` | PMI exam directive | *what should the project manager do (first/next)* |
-| `kw-signal` | Scenario constraint / misconception / artifact | *SME reluctant*, *join the agile team*, *30% agile*, *highest-quality output* |
-
-Rules:
-- Target **≥3** `kw-signal` spans per stem when the scenario has enough cues (use `highlightQuizStem` in `pmp-teach-keywords.js`).
-- Longest phrase first (e.g. full *reluctant because…* clause before *reluctant* alone).
-- Options: `kw-signal` on correct option action words; `kw-trap` on wrong-option trap verbs — stem itself stays signal/cue only.
-- Missing highlights for a **class** of stems → extend `STEM_SIGNAL_PATTERNS` in `pmp-teach-keywords.js`, not hand-edit 1,000 HTML files.
-
-**Completion:** Reader can skim `.q-text` and name the PMI action type before reading options.
-
-### 4. Write plain Vietnamese reasoning
-
-- Explain **why** the correct action fits the **signal**, then name PMBOK process/principle.
-- Wrong options: contrast with correct (*"chỉ thuê specialist ngắn hạn — Agile cần T-shaped generalists + specialists"*, not *"không phù hợp ngữ cảnh Agile"* alone).
-- Quiz `EXPL`: correct starts with **Đúng!** + one concrete reason; wrong = one trap-focused sentence.
-
-**Completion:** A Vietnamese reader can paraphrase the answer without reading English options.
-
-### 5. Generate or patch
-
-**Single lesson** (e.g. Q1120): run engine, then hand-fix prose to satisfy **dedup** and mapping.
+### 6. Generate or patch
 
 ```bash
 node scripts/generate-pmp-full-pmbok8-explanations.js   # if reasoning engine changed
 node scripts/build-pmp-full-questions.js
-node scripts/generate-pmp-full-teach-lessons.js --force --from=1120 --to=1120
+node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 ```
 
-**Bulk:** fix `pmp-option-reasoning.js` / `pmp-teach-colocation-style.js` first when the same defect appears on many ids, then `--force` full range.
+Bulk: fix engine (`pmp-option-reasoning.js`, `pmp-teach-colocation-style.js`) when the same grounding defect hits many ids, then `--force` range.
 
-**Completion:** Target `public/pmp/pmp-teach-full-q{id}.html` exists and passes validation below.
+**Completion:** `public/pmp/pmp-teach-full-q{id}.html` exists; grounding visible in `#analysis`.
 
-### 6. Validate
+### 7. Validate
 
-Run the checklist in [REFERENCE.md](REFERENCE.md#validation). Spot-check in browser: hero → quiz → analysis — no déjà vu.
+Checklist: [REFERENCE.md](REFERENCE.md#validation). Spot-check: hero → quiz → analysis tells one coherent **grounding** story.
 
-**Completion:** Every checklist item checked; Q1120-style duplicates absent.
-
-## When to fix the engine vs the lesson
+## When to fix engine vs lesson
 
 | Symptom | Action |
 |---------|--------|
-| One lesson weak | Hand-polish HTML or re-run single-id generator after editing colocation-style helpers |
-| Same generic rejection on many lessons | Extend `pmp-option-reasoning.js` stem profiles / `CONTRAST_MATRIX` |
-| Quiz stem chỉ highlight câu hỏi PMI, thiếu cue tình huống | Extend `STEM_SIGNAL_PATTERNS` in `pmp-teach-keywords.js`; use `highlightQuizStem` in generator |
-| Wrong domain on a class of stems | Fix `pmp-pmbok8-generator.js` `scoreDomains` or add `STEM_PROFILES` |
-| RAG page irrelevant | Tune `buildRagQuery` in `pmp-pmbok8-rag-pages.js` |
+| One lesson weak grounding | Hand-polish `#analysis` or extend `STEM_PROFILES` / `lessonBullets` for that stem |
+| Same generic rejection on many lessons | `pmp-option-reasoning.js` — `CONTRAST_MATRIX`, `rejectByAction` |
+| Quiz stem thiếu cue highlight | `STEM_SIGNAL_PATTERNS` in `pmp-teach-keywords.js` |
+| RAG page irrelevant | `buildRagQuery` in `pmp-pmbok8-rag-pages.js` |
 
 ## Additional resources
 
-- Section templates and validation checklist: [REFERENCE.md](REFERENCE.md)
-- Good vs bad lesson excerpts: [examples.md](examples.md)
+- Grounding prompt template + Q2 model: [REFERENCE.md](REFERENCE.md)
+- Good vs bad excerpts: [examples.md](examples.md)
