@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 862</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-862">Câu 862</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q861.html">← 861</a>
         <a href="pmp-teach-full-q863.html">863 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 862 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">Ongoing regulatory updates and stakeholder input are resulting in multiple change requests that impact delivery timelines, risks, and resource allocation. Senior leadership is concerned about maintaining control without hindering progress and seeks advice on managing the situation. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Scope, Governance</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q862</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q862</h1>
+          <p class="lead">Bài học Q862 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 38) — Stakeholder không hài lòng</p>
+          <p class="lead" style="margin-top:0.75rem">Ongoing regulatory updates and stakeholder input are resulting in multiple <em>change request</em>s that impact delivery timelines, risks, and resource allocation. Senior leadership is concerned about maintaining control without hindering progress and seeks advice on managing the situation. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 38</span><span class="badge">Scope, Governance</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q862</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Scope, Governance<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Project Execution, Control Scope<br>
-              <strong>Principle:</strong> Focus on value, Adopt a holistic view
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Scope, Governance</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 38): allowing for an interdisciplinary approach that fosters more innovative and effective solutions. 3.3.1 Project Impact Applying a holistic view to project management results in a more integrated and cohesive approach to achieving project go</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>change control</strong>
+              change control / change request
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Temporarily defer change decisions until delivery commitment
+            </div><div class="approach-cell pull">
+              <strong>C</strong>
+              Consolidate proposed changes and assess their cumulative imp
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q862</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>change request</strong><br><br>→ <strong>C</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Scope + Governance (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q862 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Review each change request independently and approve th…</strong></td>
+                <td>change control / change request</td>
+                <td>✗ Tập trung &quot;change control / change request&quot; không giải quyết stakeholder không hài lòng / …</td>
+              </tr><tr>
+                <td><strong>B. Temporarily defer change decisions until delivery commi…</strong></td>
+                <td>Temporarily defer change decisions until delivery commitments are clea</td>
+                <td>✗ &quot;Temporarily defer change decisions until delivery commitments are clearly at risk.&quot; không…</td>
+              </tr><tr>
+                <td><strong>C. Consolidate proposed changes and assess their cumulativ…</strong></td>
+                <td>Consolidate proposed changes and assess their cumulative impact before</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Escalate all change requests to senior leadership to de…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q862</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Review each change request independently and approve those with limited individual impact.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Consolidate proposed changes and assess their cumulative impact before presenting options.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         <span class="kw-trap">Escalate</span> all change requests to senior leadership to decide on priority and timing.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q862</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q862</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 862</div>
             <div class="q-text">Ongoing regulatory updates and stakeholder input are resulting in multiple change requests that impact delivery timelines, risks, and resource allocation. Senior leadership is concerned about maintaining control without hindering progress and seeks advice on managing the situation. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>C:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.</li><li>Với dự án uncertainty cao, giảm <span class="kw-signal">change request</span> bằng iteration/incremental delivery (<span class="kw-pmbok">Focus on value</span>) hiệu quả hơn siết governance cứng. <span class="kw-pmbok">PMBOK 8</span> hỗ trợ adaptive approach.</li><li>Stem signal: stakeholder không hài lòng / kỳ vọng lệch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: yêu cầu thay đổi phạm vi/kế hoạch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Consolidate proposed changes and assess their cumulative impact before presenting options.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Với dự án uncertainty cao, giảm <span class="kw-signal">change request</span> bằng iteration/incremental delivery (<span class="kw-pmbok">Focus on value</span>) hiệu quả hơn siết governance cứng. <span class="kw-pmbok">PMBOK 8</span> hỗ trợ adaptive approach.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; allowing for an interdisciplinary approach that fosters more innovative and effective solutions. 3.3.1 Project Impact Applying a holistic view to project management results in a more integrated and cohesive approach to achieving project go<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 38 (Performance Domain: <span class="kw-pmbok">Scope</span>, <span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 38: Performance Domain: <span class="kw-pmbok">Scope</span>, <span class="kw-pmbok">Manage Project Execution</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Review each change request independently and approve those with limited individu…</span></td><td>Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Temporarily defer change decisions until delivery commitments are clearly at ris…</span></td><td>&quot;Temporarily defer change decisions until delivery commitments are clearly at risk.&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Consolidate proposed changes and assess their cumulative impact before presenting …&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> all change requests to senior leadership to decide on priority and timi…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>Ongoing regulatory updates and stakeholder input are resulting in multiple change requests that impa… (Q862)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="change_control" type="button">change contr</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="change_control">
+              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q862</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="change_control" type="button">change contr</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q862</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="change_control" type="button">change contr</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Review each change request independently and approve…" → A</h4>
+            <p style="margin:0">Tập trung &quot;change control / change request&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Temporarily defer change decisions until delivery co…" → B</h4>
+            <p style="margin:0">&quot;Temporarily defer change decisions until delivery commitments are clearly at risk.&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Consolidate proposed changes and assess their cumulative impact before presenting …&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Escalate all change requests to senior leadership to…" → D</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · change request</strong> → <strong>C</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Scope + Governance (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q862 — đáp án?</div>
+            <div class="flashcard-front">Q862 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 38</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q862 — đáp án?</div>
             <div class="flashcard-back"><strong>C</strong> — Consolidate proposed changes and assess their cumulative impact before presenting options.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Stakeholder không hài lòng</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q862
-────────────────────────
-Ongoing regulatory updates and stakeholder input are resulting in multiple change requests that impact delivery timelines, risks, and resource allocation. Senior leadership is concerned about maintain…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q862
+(PMBOK 8, tr. 38)
+─────────────────────────────────────────────────────
+DOMAIN: Scope, Governance
+PROCESS: Manage Project Execution, Control Scope
+PRINCIPLE: Focus on value, Adopt a holistic view
 
-ANSWER: C
-C. Consolidate proposed changes and assess their cumulative impact before presenting options.
+SCENARIO:
+Ongoing regulatory updates and stakeholder input are resulting in multiple change requests that impact delivery timelines, risks, and resource allocation. Senior leadership is concerned about maintaining control without …
 
-PMBOK 8:
-  Domain: Scope, Governance
-  Process: Manage Project Execution, Control Scope
-  Principle: Focus on value, Adopt a holistic view</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | change request
+
+ANSWER → C) Consolidate proposed changes and assess their cumulative impact before presenting options.
+
+NOT:
+  A) Review each change request independently and appro… — Tập trung &quot;change control / change request&quot; không giải quyết
+  B) Temporarily defer change decisions until delivery … — &quot;Temporarily defer change decisions until delivery commitmen
+  D) Escalate all change requests to senior leadership … — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+
+Q862 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"Tập trung \"change control / change request\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","B":"\"Temporarily defer change decisions until delivery commitments are clearly at risk.\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung \"Consolidate proposed changes and assess their cumulative impact before presenting …\".","C":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Scope + Governance (Executing, PMBOK 8).","D":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên."};
+      const EXPL = {"A":"Tập trung \"change control / change request\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","B":"\"Temporarily defer change decisions until delivery commitments are clearly at risk.\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung \"Consolidate proposed changes and assess their cumulative impact before presenting …\".","C":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Scope + Governance (Executing, PMBOK 8).","D":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 167</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Schedule</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-167">Câu 167</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q166.html">← 166</a>
         <a href="pmp-teach-full-q168.html">168 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 167 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">During the execution of a complex software development project, the project manager learns that delivery of a critical module will be delayed by two weeks due to unforeseen technical issues with a key supplier. This delay threatens the project’s critical path and risks missing the promised delivery deadline to the client. The team indicates that alternative solutions require additional analysis and testing time. Meanwhile, senior management is pressuring the project manager to strictly adhere to the original schedule. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">first</span></span>?</p>
-          <div class="badges"><span class="badge">Schedule, Risk</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q167</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q167</h1>
+          <p class="lead">Bài học Q167 về <strong>Develop Schedule</strong> (PMBOK 8, tr. 58) — trễ tiến độ / áp lực schedule</p>
+          <p class="lead" style="margin-top:0.75rem">During the execution of a complex software development project, the project manager learns that delivery of a critical module will be delayed by two weeks due to unforeseen technical issues with a key supplier. This delay threatens the project’s critical path and risks missing the promised delivery deadline to the client. The team indicates that alternative solutions require additional analysis and testing time. Meanwhile, senior management is pressuring the project manager to strictly adhere to the original schedule. <em>What should the project manager do first</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 58</span><span class="badge">Schedule, Risk</span><span class="badge">Develop Schedule</span><span class="badge">Full Bank Q167</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Schedule, Risk<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Schedule, Control Schedule, Identify Risks<br>
-              <strong>Principle:</strong> Embed quality
-            </p>
+        <section id="concept">
+          <h2>1. Develop Schedule</h2>
+          <p><strong>Develop Schedule</strong> thuộc miền <strong>Schedule, Risk</strong> — process <strong>Develop Schedule</strong>, principle <strong>Embed quality</strong>. PMBOK 8 (tr. 58): project is planned in a holistic manner with no gaps or areas of misalignment. Schedule documentation is complete. Ensure that the schedule documentation includes all essential ele- ments, such as task dependencies, durations, resource al</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>sửa kế hoạch</strong>
+              sửa kế hoạch / baseline / schedule
+            </div><div class="approach-cell pull">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div><div class="approach-cell">
+              <strong>họp</strong>
+              họp / thảo luận trực tiếp
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Facilitate a focused problem-solving session with the projec
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q167</h4>
+            <p style="margin:0"><strong>What should the project manager do first</strong><br><br>→ <strong>B</strong> phù hợp vì PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Schedule + Risk, Focus Area Executing (PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q167 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Immediately update the project management plan and sche…</strong></td>
+                <td>sửa kế hoạch / baseline / schedule</td>
+                <td>✗ Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết trễ tiến độ / áp lực sched…</td>
+              </tr><tr>
+                <td><strong>B. Conduct a thorough impact analysis of the delay on the …</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Schedule a meeting to report the supplier issue and pot…</strong></td>
+                <td>họp / thảo luận trực tiếp</td>
+                <td>✗ Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp…</td>
+              </tr><tr>
+                <td><strong>D. Facilitate a focused problem-solving session with the p…</strong></td>
+                <td>Facilitate a focused problem-solving session with the project team to </td>
+                <td>✗ &quot;Facilitate a focused problem-solving session with the project team to explore miti…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q167</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Immediately update the project management plan and schedule to account for the supplier’s <span class="kw-trap">delay</span>.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Conduct a thorough impact analysis of the delay on the critical path, resources, and delivery commitments.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Risk</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Schedule a meeting to report the supplier issue and potential effects to senior management immediately.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q167</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q167</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 167</div>
             <div class="q-text">During the execution of a complex software development project, the project manager learns that delivery of a critical module will be delayed by two weeks due to unforeseen technical issues with a key supplier. This delay threatens the project’s critical path and risks missing the promised delivery deadline to the client. The team indicates that alternative solutions require additional analysis and testing time. Meanwhile, senior management is pressuring the project manager to strictly adhere to the original schedule. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">first</span></span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Risk</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Risk</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>B</strong> — &quot;Conduct a thorough impact analysis of the <span class="kw-trap">delay</span> on the critical path, resources, and delivery commitments.&quot; — phù hợp vì PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Risk</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>). Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> ưu tiên <strong>chờ / trì hoãn</strong> — sửa baseline/<span class="kw-trap">rebaseline</span> chỉ sau khi đã phân tích, thống nhất, hoặc được duyệt qua change control.</li><li>Stem signal: trễ tiến độ / áp lực schedule — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: vấn đề vendor / procurement — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Conduct a thorough impact analysis of the delay on the critical path, resources, and delivery commitments.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Risk</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>B</strong> — &quot;Conduct a thorough impact analysis of the <span class="kw-trap">delay</span> on the critical path, resources, and delivery commitments.&quot; — phù hợp vì PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Risk</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>). Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> ưu tiên <strong>chờ / trì hoãn</strong> — sửa baseline/<span class="kw-trap">rebaseline</span> chỉ sau khi đã phân tích, thống nhất, hoặc được duyệt qua change control.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; project is planned in a holistic manner with no gaps or areas of misalignment. <span class="kw-pmbok">Schedule</span> documentation is complete. Ensure that the schedule documentation includes all essential ele- ments, such as task dependencies, durations, resource al<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 58 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 58: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Immediately update the project management plan and schedule to account for the s…</span></td><td>Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần chờ / trì hoãn.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Schedule a meeting to report the supplier issue and potential effects to senior …</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần chờ / trì hoãn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Facilitate a focused problem-solving session with the project team to explore mi…</span></td><td>&quot;<span class="kw-signal">Facilitate</span> a focused problem-solving session with the project team to explore miti…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung chờ / trì hoãn.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="wait_delay">
+              <span>During the execution of a complex software development project, the project manager learns that deli… (Q167)</span>
+              <div class="classify-btns"><button data-pick="wait_delay" type="button">chờ</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="revise_plan">
+              <span>Tình huống cần &quot;sửa kế hoạch / baseline / schedule&quot; — không phải trọng tâm Q167</span>
+              <div class="classify-btns"><button data-pick="wait_delay" type="button">chờ</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="meet_discuss">
+              <span>Tình huống cần &quot;họp / thảo luận trực tiếp&quot; — không phải trọng tâm Q167</span>
+              <div class="classify-btns"><button data-pick="wait_delay" type="button">chờ</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Immediately update the project management plan and s…" → A</h4>
+            <p style="margin:0">Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần chờ / trì hoãn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Schedule a meeting to report the supplier issue and …" → C</h4>
+            <p style="margin:0">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần chờ / trì hoãn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Facilitate a focused problem-solving session with th…" → D</h4>
+            <p style="margin:0">&quot;Facilitate a focused problem-solving session with the project team to explore miti…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung chờ / trì hoãn.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do first</strong> → <strong>B</strong> — PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Schedule + Risk, Focus Area Executing (PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q167 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Conduct a thorough impact analysis of the delay on the critical path, resources, and delivery commitments.</div>
+            <div class="flashcard-front">Q167 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Schedule</strong><br>PMBOK 8, tr. 58</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Embed quality</strong><br>Develop Schedule</div>
+            <div class="flashcard-front">Q167 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Conduct a thorough impact analysis of the delay on the critical path, resources, and delivery commit</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">trễ tiến độ / áp lực schedule</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q167
-────────────────────────
-During the execution of a complex software development project, the project manager learns that delivery of a critical module will be delayed by two weeks due to unforeseen technical issues with a key…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP SCHEDULE — Q167
+(PMBOK 8, tr. 58)
+─────────────────────────────────────────────────────
+DOMAIN: Schedule, Risk
+PROCESS: Develop Schedule, Control Schedule, Identify Risks
+PRINCIPLE: Embed quality
 
-ANSWER: B
-B. Conduct a thorough impact analysis of the delay on the critical path, resources, and delivery commitments.
+SCENARIO:
+During the execution of a complex software development project, the project manager learns that delivery of a critical module will be delayed by two weeks due to unforeseen technical issues with a key supplier. This dela…
 
-PMBOK 8:
-  Domain: Schedule, Risk
-  Process: Develop Schedule, Control Schedule, Identify Risks
-  Principle: Embed quality</div>
+SIGNAL KEYWORDS:
+  What should the project manager do first
+
+ANSWER → B) Conduct a thorough impact analysis of the delay on the critical path, resources, and delivery commitments.
+
+NOT:
+  A) Immediately update the project management plan and… — Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải qu
+  C) Schedule a meeting to report the supplier issue an… — Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết trễ t
+  D) Facilitate a focused problem-solving session with … — &quot;Facilitate a focused problem-solving session with the proje
+
+Q167 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Tập trung \"sửa kế hoạch / baseline / schedule\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần chờ / trì hoãn.","B":"PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Schedule + Risk, Focus Area Executing (PMBOK 8).","C":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần chờ / trì hoãn.","D":"\"Facilitate a focused problem-solving session with the project team to explore miti…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung chờ / trì hoãn."};
+      const EXPL = {"A":"Tập trung \"sửa kế hoạch / baseline / schedule\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần chờ / trì hoãn.","B":"Đúng! PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Schedule + Risk, Focus Area Executing (PMBOK 8).","C":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần chờ / trì hoãn.","D":"\"Facilitate a focused problem-solving session with the project team to explore miti…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung chờ / trì hoãn."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1050</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1050">Câu 1050</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1049.html">← 1049</a>
         <a href="pmp-teach-full-q1051.html">1051 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1050 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project team piloted a new dashboard for tracking earned value metrics that improved visibility and decision‑making. The dashboard was created within the project but is <span class="kw-cue">not</span> yet part of the organization’s standard toolset. The project manager must ensure this innovation is captured for future use. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Monitoring &amp; Controlling</span><span class="badge">Identify Stakeholders</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q1050</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1050</h1>
+          <p class="lead">Bài học Q1050 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 42) — mức độ uncertainty cao</p>
+          <p class="lead" style="margin-top:0.75rem">A project team piloted a new dashboard for tracking earned value metrics that improved visibility and decision‑making. The dashboard was created within the project but is not yet part of the organization’s standard toolset. The project manager must ensure this innovation is captured for future use. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 42</span><span class="badge">Stakeholders</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q1050</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Monitoring &amp; Controlling<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Focus on value, Embed quality
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 42): elaborating on elements such as scope descriptions, milestones, responsible parties, resource needs, and acceptance criteria. This detailed documentation enhances clarity and alignment across the team. In agile projects, the WBS correspond</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Include the dashboard in the final project report to provide
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Convert the pilot dashboard into a reusable template and add
+            </div><div class="approach-cell">
+              <strong>thông báo</strong>
+              thông báo / truyền đạt thông tin
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Ask the project sponsor to approve the dashboard for organiz
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1050</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>B</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring &amp; Controlling, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1050 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Include the dashboard in the final project report to pr…</strong></td>
+                <td>Include the dashboard in the final project report to provide awareness</td>
+                <td>✗ &quot;Include the dashboard in the final project report to provide awareness for project…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Convert the pilot dashboard into a reusable template an…</strong></td>
+                <td>Convert the pilot dashboard into a reusable template and add it to the</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Share the dashboard informally with other project manag…</strong></td>
+                <td>thông báo / truyền đạt thông tin</td>
+                <td>✗ Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết mức độ uncertainty cao — đáp…</td>
+              </tr><tr>
+                <td><strong>D. Ask the project sponsor to approve the dashboard for or…</strong></td>
+                <td>Ask the project sponsor to approve the dashboard for organizational us</td>
+                <td>✗ Yêu cầu team tự xử lý — PM vẫn chịu trách nhiệm facilitate; đáp án đúng: &quot;Convert the pilo…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1050</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Include the dashboard in the final project report to provide awareness for project stakeholders.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Convert the pilot dashboard into a reusable template and add it to the organizational repository.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Share the dashboard informally with other project managers across the organization.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1050</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1050</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1050</div>
             <div class="q-text">A project team piloted a new dashboard for tracking earned value metrics that improved visibility and decision‑making. The dashboard was created within the project but is <span class="kw-cue">not</span> yet part of the organization’s standard toolset. The project manager must ensure this innovation is captured for future use. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: mức độ uncertainty cao. Đáp án <strong>B</strong> — &quot;Convert the pilot dashboard into a reusable template and add it to the organizational repository.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: mức độ uncertainty cao — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Convert the pilot dashboard into a reusable template and add it to the organizational repository.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: mức độ uncertainty cao. Đáp án <strong>B</strong> — &quot;Convert the pilot dashboard into a reusable template and add it to the organizational repository.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; elaborating on elements such as scope descriptions, milestones, responsible parties, resource needs, and acceptance criteria. This detailed documentation enhances clarity and alignment across the team. In agile projects, the WBS correspond<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 42 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 42: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Include the dashboard in the final project report to provide awareness for proje…</span></td><td>&quot;Include the dashboard in the final project report to provide awareness for project…&quot; không phù hợp mức độ uncertainty cao — đáp án đúng tập trung &quot;Convert the pilot dashboard into a reusable template and add it to the organizatio…&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Share the dashboard informally with other project managers across the organizati…</span></td><td>Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the project sponsor to approve the dashboard for organizational use in futur…</span></td><td>Yêu cầu team tự xử lý — PM vẫn chịu trách nhiệm <span class="kw-signal">facilitate</span>; đáp án đúng: &quot;Convert the pilot dashboard into a reusable template and add it to the organizatio…&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A project team piloted a new dashboard for tracking earned value metrics that improved visibility an… (Q1050)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="communicate_inform">
+              <span>Tình huống cần &quot;thông báo / truyền đạt thông tin&quot; — không phải trọng tâm Q1050</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Include the dashboard in the final project report to…" → A</h4>
+            <p style="margin:0">&quot;Include the dashboard in the final project report to provide awareness for project…&quot; không phù hợp mức độ uncertainty cao — đáp án đúng tập trung &quot;Convert the pilot dashboard into a reusable template and add it to the organizatio…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Share the dashboard informally with other project ma…" → C</h4>
+            <p style="margin:0">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Ask the project sponsor to approve the dashboard for…" → D</h4>
+            <p style="margin:0">Yêu cầu team tự xử lý — PM vẫn chịu trách nhiệm facilitate; đáp án đúng: &quot;Convert the pilot dashboard into a reusable template and add it to the organizatio…&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>B</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring &amp; Controlling, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1050 — đáp án?</div>
+            <div class="flashcard-front">Q1050 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 42</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q1050 — đáp án?</div>
             <div class="flashcard-back"><strong>B</strong> — Convert the pilot dashboard into a reusable template and add it to the organizational repository.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">mức độ uncertainty cao</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1050
-────────────────────────
-A project team piloted a new dashboard for tracking earned value metrics that improved visibility and decision‑making. The dashboard was created within the project but is not yet part of the organizat…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q1050
+(PMBOK 8, tr. 42)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Focus on value, Embed quality
 
-ANSWER: B
-B. Convert the pilot dashboard into a reusable template and add it to the organizational repository.
+SCENARIO:
+A project team piloted a new dashboard for tracking earned value metrics that improved visibility and decision‑making. The dashboard was created within the project but is not yet part of the organization’s standard tools…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Focus on value, Embed quality</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → B) Convert the pilot dashboard into a reusable template and add it to the organizational repository.
+
+NOT:
+  A) Include the dashboard in the final project report … — &quot;Include the dashboard in the final project report to provid
+  C) Share the dashboard informally with other project … — Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyế
+  D) Ask the project sponsor to approve the dashboard f… — Yêu cầu team tự xử lý — PM vẫn chịu trách nhiệm facilitate; 
+
+Q1050 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Include the dashboard in the final project report to provide awareness for project…\" không phù hợp mức độ uncertainty cao — đáp án đúng tập trung \"Convert the pilot dashboard into a reusable template and add it to the organizatio…\".","B":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring & Controlling, PMBOK 8).","C":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết mức độ uncertainty cao — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Yêu cầu team tự xử lý — PM vẫn chịu trách nhiệm facilitate; đáp án đúng: \"Convert the pilot dashboard into a reusable template and add it to the organizatio…\"."};
+      const EXPL = {"A":"\"Include the dashboard in the final project report to provide awareness for project…\" không phù hợp mức độ uncertainty cao — đáp án đúng tập trung \"Convert the pilot dashboard into a reusable template and add it to the organizatio…\".","B":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring & Controlling, PMBOK 8).","C":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết mức độ uncertainty cao — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Yêu cầu team tự xử lý — PM vẫn chịu trách nhiệm facilitate; đáp án đúng: \"Convert the pilot dashboard into a reusable template and add it to the organizatio…\"."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

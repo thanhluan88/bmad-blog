@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 855</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-855">Câu 855</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q854.html">← 854</a>
         <a href="pmp-teach-full-q856.html">856 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 855 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A software company is delivering a cloud-based HR system for a client. The client’s HR director requests adding a custom data field late in the build phase, claiming it is necessary and expecting minimal impact. The technical lead indicates the change could affect integrations and require additional testing. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Governance, Scope</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Adopt a holistic view</span><span class="badge">Full Bank Q855</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q855</h1>
+          <p class="lead">Bài học Q855 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 111) — trễ tiến độ / áp lực schedule</p>
+          <p class="lead" style="margin-top:0.75rem">A software company is delivering a cloud-based HR system for a client. The client’s HR director requests adding a custom data field late in the build phase, claiming it is necessary and expecting minimal impact. The technical lead indicates the change could affect integrations and require additional testing. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 111</span><span class="badge">Governance, Scope</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q855</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Project Execution, Perform Integrated Change Control, Close Project or Phase<br>
-              <strong>Principle:</strong> Adopt a holistic view, Embed quality
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Governance, Scope</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Adopt a holistic view</strong>. PMBOK 8 (tr. 111): 111 Section 3 – Tailoring OwnershipProactive Value-Driven Embed Quality Into Processes and Deliverables Adopt a Holistic View Be an Accountable Leader Build an Empowered Culture Mindset Focus on Value Integrate Sustainability Within All Pro</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>sửa kế hoạch</strong>
+              sửa kế hoạch / baseline / schedule
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Reject the change immediately to protect the baseline scope 
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Tell the technical lead to implement the change only if it d
+            </div><div class="approach-cell pull">
+              <strong>change control</strong>
+              change control / change request
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q855</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q855 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Approve the change informally to keep the client satisf…</strong></td>
+                <td>sửa kế hoạch / baseline / schedule</td>
+                <td>✗ Sửa plan trước khi submit/đánh giá change request.</td>
+              </tr><tr>
+                <td><strong>B. Reject the change immediately to protect the baseline s…</strong></td>
+                <td>Reject the change immediately to protect the baseline scope and avoid </td>
+                <td>✗ &quot;Reject the change immediately to protect the baseline scope and avoid further clie…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Tell the technical lead to implement the change only if…</strong></td>
+                <td>Tell the technical lead to implement the change only if it doesn't aff</td>
+                <td>✗ &quot;Tell the technical lead to implement the change only if it doesn't affect the sche…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Use the change control process to evaluate impacts, sha…</strong></td>
+                <td>change control / change request</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q855</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Approve the change informally to keep the client satisfied, and update the schedule as needed.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Use the change control process to evaluate impacts, share options with the client, and get formal approval.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q855</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q855</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 855</div>
             <div class="q-text">A software company is delivering a cloud-based HR system for a client. The client’s HR director requests adding a custom data field late in the build phase, claiming it is necessary and expecting minimal impact. The technical lead indicates the change could affect integrations and require additional testing. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>→ <strong>D:</strong> Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>D</strong> — &quot;Use the change control process to evaluate impacts, share options with the client, and get formal approval.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>Stem signal: trễ tiến độ / áp lực schedule — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Manage Project Execution</span> — align với đáp án D.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Use the change control process to evaluate impacts, share options with the client, and get formal approval.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.<br><br>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>D</strong> — &quot;Use the change control process to evaluate impacts, share options with the client, and get formal approval.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 111 Section 3 – Tailoring OwnershipProactive Value-Driven <span class="kw-pmbok">Embed Quality</span> Into Processes and Deliverables <span class="kw-pmbok">Adopt a Holistic View</span> Be an Accountable Leader <span class="kw-pmbok">Build an Empowered Culture</span> Mindset <span class="kw-pmbok">Focus on Value</span> <span class="kw-pmbok">Integrate Sustainability</span> Within All Pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 111 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 111: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve the change informally to keep the client satisfied, and update the sched…</span></td><td>Sửa plan trước khi submit/đánh giá <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reject the change immediately to protect the baseline scope and avoid further cl…</span></td><td>&quot;Reject the change immediately to protect the baseline scope and avoid further clie…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Tell the technical lead to implement the change only if it doesn't affect the sc…</span></td><td>&quot;Tell the technical lead to implement the change only if it doesn't affect the sche…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="change_control">
+              <span>A software company is delivering a cloud-based HR system for a client. The client’s HR director requ… (Q855)</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="revise_plan">
+              <span>Tình huống cần &quot;sửa kế hoạch / baseline / schedule&quot; — không phải trọng tâm Q855</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Approve the change informally to keep the client sat…" → A</h4>
+            <p style="margin:0">Sửa plan trước khi submit/đánh giá change request.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Reject the change immediately to protect the baselin…" → B</h4>
+            <p style="margin:0">&quot;Reject the change immediately to protect the baseline scope and avoid further clie…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung change control / change request.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Tell the technical lead to implement the change only…" → C</h4>
+            <p style="margin:0">&quot;Tell the technical lead to implement the change only if it doesn't affect the sche…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung change control / change request.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q855 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Use the change control process to evaluate impacts, share options with the client, and get formal approval.</div>
+            <div class="flashcard-front">Q855 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 111</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Adopt a holistic view</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Q855 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Use the change control process to evaluate impacts, share options with the client, and get formal ap</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">trễ tiến độ / áp lực schedule</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q855
-────────────────────────
-A software company is delivering a cloud-based HR system for a client. The client’s HR director requests adding a custom data field late in the build phase, claiming it is necessary and expecting mini…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q855
+(PMBOK 8, tr. 111)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Scope
+PROCESS: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
+PRINCIPLE: Adopt a holistic view, Embed quality
 
-ANSWER: D
-D. Use the change control process to evaluate impacts, share options with the client, and get formal approval.
+SCENARIO:
+A software company is delivering a cloud-based HR system for a client. The client’s HR director requests adding a custom data field late in the build phase, claiming it is necessary and expecting minimal impact. The tech…
 
-PMBOK 8:
-  Domain: Governance, Scope
-  Process: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
-  Principle: Adopt a holistic view, Embed quality</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Use the change control process to evaluate impacts, share options with the client, and get formal approval.
+
+NOT:
+  A) Approve the change informally to keep the client s… — Sửa plan trước khi submit/đánh giá change request.
+  B) Reject the change immediately to protect the basel… — &quot;Reject the change immediately to protect the baseline scope
+  C) Tell the technical lead to implement the change on… — &quot;Tell the technical lead to implement the change only if it 
+
+Q855 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"Sửa plan trước khi submit/đánh giá change request.","B":"\"Reject the change immediately to protect the baseline scope and avoid further clie…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung change control / change request.","C":"\"Tell the technical lead to implement the change only if it doesn't affect the sche…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung change control / change request.","D":"Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement."};
+      const EXPL = {"A":"Sửa plan trước khi submit/đánh giá change request.","B":"\"Reject the change immediately to protect the baseline scope and avoid further clie…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung change control / change request.","C":"\"Tell the technical lead to implement the change only if it doesn't affect the sche…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung change control / change request.","D":"Đúng! Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 984</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Risks</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-984">Câu 984</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q983.html">← 983</a>
         <a href="pmp-teach-full-q985.html">985 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 984 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An IT integration team experienced a major failure after a third-party software update caused unexpected system behavior. The failure has impacted several downstream integrations, and the team needs to determine the correct response to manage both the impact and the underlying cause. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Risk, Schedule</span><span class="badge">Executing</span><span class="badge">Identify Risks</span><span class="badge">Adopt a holistic view</span><span class="badge">Full Bank Q984</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q984</h1>
+          <p class="lead">Bài học Q984 về <strong>Identify Risks</strong> (PMBOK 8, tr. 98) — Phân tích tình huống và chọn đáp án C theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">An IT integration team experienced a major failure after a third-party software update caused unexpected system behavior. The failure has impacted several downstream integrations, and the team needs to determine the correct response to manage both the impact and the underlying cause. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 98</span><span class="badge">Risk, Schedule</span><span class="badge">Identify Risks</span><span class="badge">Full Bank Q984</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Risk, Schedule<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Risks, Perform Risk Analysis, Plan Risk Responses<br>
-              <strong>Principle:</strong> Adopt a holistic view
-            </p>
+        <section id="concept">
+          <h2>1. Identify Risks</h2>
+          <p><strong>Identify Risks</strong> thuộc miền <strong>Risk, Schedule</strong> — process <strong>Identify Risks</strong>, principle <strong>Adopt a holistic view</strong>. PMBOK 8 (tr. 98): 98 A Guide to the Project Management Body of Knowledge 2.7.2.5 Implement Risk Responses Implement Risk Responses is the process of implementing sufficient risk response plans. The key benefit of this process is that it ensures that agreed-</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Revert the system to the last stable configuration and sched
+            </div><div class="approach-cell pull">
+              <strong>facilitate retrospective</strong>
+              facilitate retrospective / phân tích root cause
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Convene an emergency team meeting to triage the failure, ass
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q984</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>C</strong> phù hợp vì Risk đã identify — PM consult risk register và thực thi planned response thay vì phản ứng ngẫu nhiên.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q984 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Escalate the software failure to the project sponsor an…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>B. Revert the system to the last stable configuration and …</strong></td>
+                <td>Revert the system to the last stable configuration and schedule a post</td>
+                <td>✗ &quot;Revert the system to the last stable configuration and schedule a post-mortem revi…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Conduct an impact analysis and consult the risk registe…</strong></td>
+                <td>facilitate retrospective / phân tích root cause</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Convene an emergency team meeting to triage the failure…</strong></td>
+                <td>Convene an emergency team meeting to triage the failure, assign correc</td>
+                <td>✗ &quot;Convene an emergency team meeting to triage the failure, assign corrective action …&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q984</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         <span class="kw-trap">Escalate</span> the software failure to the project sponsor and vendor immediately given the severity of the integration impact.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Conduct an impact analysis and <span class="kw-signal">consult the</span> <span class="kw-signal">risk register</span> for the response plan, and log the defect in the <span class="kw-signal">impediment</span> log while performing <span class="kw-signal">root cause</span> analysis.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)"><span class="kw-pmbok">Risk</span> đã identify — PM consult <span class="kw-signal">risk register</span> và thực thi planned response thay vì phản ứng ngẫu nhiên.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Convene an emergency team meeting to triage the failure, assign corrective action owners, and establish a recovery timeline.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q984</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q984</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 984</div>
             <div class="q-text">An IT integration team experienced a major failure after a third-party software update caused unexpected system behavior. The failure has impacted several downstream integrations, and the team needs to determine the correct response to manage both the impact and the underlying cause. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li><span class="kw-pmbok">Risk</span> đã identify — PM consult <span class="kw-signal">risk register</span> và thực thi planned response thay vì phản ứng ngẫu nhiên.</li><li>→ <strong>C:</strong> <span class="kw-pmbok">Risk</span> đã identify — PM consult <span class="kw-signal">risk register</span> và thực thi planned response thay vì phản ứng ngẫu nhiên.</li><li>Bối cảnh: An IT integration team experienced a major failure after a third-party software update caused unexpected system behavior. The failure has impacted several downstream integrations, and the team needs to determine the correct response to manage both the impact and the underlying cause. Đáp án <strong>C</strong> — &quot;Conduct an impact analysis and <span class="kw-signal">consult the</span> <span class="kw-signal">risk register</span> for the response plan, and log the defect in the <span class="kw-signal">impediment</span> log while performing <span class="kw-signal">root cause</span> analysis.&quot; — phù hợp vì <span class="kw-pmbok">Risk</span> đã identify — PM consult <span class="kw-signal">risk register</span> và thực thi planned response thay vì phản ứng ngẫu nhiên.</li><li>Process <span class="kw-pmbok">Identify Risks</span> — align với đáp án C.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 98.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Conduct an impact analysis and consult the risk register for the response plan, and log the defect in the impediment log while performing root cause analysis.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> <span class="kw-pmbok">Risk</span> đã identify — PM consult <span class="kw-signal">risk register</span> và thực thi planned response thay vì phản ứng ngẫu nhiên.<br><br>Bối cảnh: An IT integration team experienced a major failure after a third-party software update caused unexpected system behavior. The failure has impacted several downstream integrations, and the team needs to determine the correct response to manage both the impact and the underlying cause. Đáp án <strong>C</strong> — &quot;Conduct an impact analysis and <span class="kw-signal">consult the</span> <span class="kw-signal">risk register</span> for the response plan, and log the defect in the <span class="kw-signal">impediment</span> log while performing <span class="kw-signal">root cause</span> analysis.&quot; — phù hợp vì <span class="kw-pmbok">Risk</span> đã identify — PM consult <span class="kw-signal">risk register</span> và thực thi planned response thay vì phản ứng ngẫu nhiên.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 98 A Guide to the Project Management Body of Knowledge 2.7.2.5 Implement <span class="kw-pmbok">Risk</span> Responses Implement <span class="kw-pmbok">Risk</span> Responses is the process of implementing sufficient risk response plans. The key benefit of this process is that it ensures that agreed-<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 98 (Implement <span class="kw-pmbok">Risk</span> Responses)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 98: Implement <span class="kw-pmbok">Risk</span> Responses</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the software failure to the project sponsor and vendor immediately give…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Revert the system to the last stable configuration and schedule a post-mortem re…</span></td><td>&quot;Revert the system to the last stable configuration and schedule a post-mortem revi…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Convene an emergency team meeting to triage the failure, assign corrective actio…</span></td><td>&quot;Convene an emergency team meeting to triage the failure, assign corrective action …&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="facilitate_retro">
+              <span>An IT integration team experienced a major failure after a third-party software update caused unexpe… (Q984)</span>
+              <div class="classify-btns"><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q984</span>
+              <div class="classify-btns"><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Escalate the software failure to the project sponsor…" → A</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Revert the system to the last stable configuration a…" → B</h4>
+            <p style="margin:0">&quot;Revert the system to the last stable configuration and schedule a post-mortem revi…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung facilitate retrospective / phân tích root cause.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Convene an emergency team meeting to triage the fail…" → D</h4>
+            <p style="margin:0">&quot;Convene an emergency team meeting to triage the failure, assign corrective action …&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung facilitate retrospective / phân tích root cause.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>C</strong> — Risk đã identify — PM consult risk register và thực thi planned response thay vì phản ứng ngẫu nhiên.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q984 — đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Conduct an impact analysis and consult the risk register for the response plan, and log the defect in the impediment log while performing root cause analysis.</div>
+            <div class="flashcard-front">Q984 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Risks</strong><br>PMBOK 8, tr. 98</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Adopt a holistic view</strong><br>Identify Risks</div>
+            <div class="flashcard-front">Q984 — đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Conduct an impact analysis and consult the risk register for the response plan, and log the defect i</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án C theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q984
-────────────────────────
-An IT integration team experienced a major failure after a third-party software update caused unexpected system behavior. The failure has impacted several downstream integrations, and the team needs t…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY RISKS — Q984
+(PMBOK 8, tr. 98)
+─────────────────────────────────────────────────────
+DOMAIN: Risk, Schedule
+PROCESS: Identify Risks, Perform Risk Analysis, Plan Risk Responses
+PRINCIPLE: Adopt a holistic view
 
-ANSWER: C
-C. Conduct an impact analysis and consult the risk register for the response plan, and log the defect in the impediment log while performing root cause analysis.
+SCENARIO:
+An IT integration team experienced a major failure after a third-party software update caused unexpected system behavior. The failure has impacted several downstream integrations, and the team needs to determine the corr…
 
-PMBOK 8:
-  Domain: Risk, Schedule
-  Process: Identify Risks, Perform Risk Analysis, Plan Risk Responses
-  Principle: Adopt a holistic view</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → C) Conduct an impact analysis and consult the risk register for the response plan, and log the defect in the impediment log while performing root cause analysis.
+
+NOT:
+  A) Escalate the software failure to the project spons… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  B) Revert the system to the last stable configuration… — &quot;Revert the system to the last stable configuration and sche
+  D) Convene an emergency team meeting to triage the fa… — &quot;Convene an emergency team meeting to triage the failure, as
+
+Q984 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"\"Revert the system to the last stable configuration and schedule a post-mortem revi…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","C":"Risk đã identify — PM consult risk register và thực thi planned response thay vì phản ứng ngẫu nhiên.","D":"\"Convene an emergency team meeting to triage the failure, assign corrective action …\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung facilitate retrospective / phân tích root cause."};
+      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"\"Revert the system to the last stable configuration and schedule a post-mortem revi…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","C":"Đúng! Risk đã identify — PM consult risk register và thực thi planned response thay vì phản ứng ngẫu nhiên.","D":"\"Convene an emergency team meeting to triage the failure, assign corrective action …\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung facilitate retrospective / phân tích root cause."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

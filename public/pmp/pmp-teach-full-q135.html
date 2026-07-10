@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 135</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-135">Câu 135</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q134.html">← 134</a>
         <a href="pmp-teach-full-q136.html">136 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 135 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A large company is planning to create a new product line. A project team has been selected to manage development, and the key project planning documents are being written. What should the project team prioritize?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q135</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q135</h1>
+          <p class="lead">Bài học Q135 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 24) — Phân tích tình huống và chọn đáp án C theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A large company is planning to create a new product line. A project team has been selected to manage development, and the key project planning documents are being written. What should the project team prioritize?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 24</span><span class="badge">Stakeholders</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q135</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 24): project and product management. The product owner should ensure that the development team is focused on delivering valuable features by maintaining and prioritizing the product backlog. The business analyst should gather and document requ</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Working with the project manager to draft a project roadmap 
+            </div><div class="approach-cell">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div><div class="approach-cell pull">
+              <strong>C</strong>
+              Requesting that the product manager produce a product vision
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Asking the sponsor to develop a project timeline and obtain 
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q135</h4>
+            <p style="margin:0">Đọc kỹ stem và xác định vấn đề trọng tâm.<br><br>→ <strong>C</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q135 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Working with the project manager to draft a project roa…</strong></td>
+                <td>Working with the project manager to draft a project roadmap and an ini</td>
+                <td>✗ &quot;Working with the project manager to draft a project roadmap and an initial release…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Determining which features should be included in the ne…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td>✗ Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Determining which features should …</td>
+              </tr><tr>
+                <td><strong>C. Requesting that the product manager produce a product v…</strong></td>
+                <td>Requesting that the product manager produce a product vision plan and </td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Asking the sponsor to develop a project timeline and ob…</strong></td>
+                <td>Asking the sponsor to develop a project timeline and obtain approval f</td>
+                <td>✗ &quot;Asking the sponsor to develop a project timeline and obtain approval from all stak…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q135</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Working with the project manager to draft a project roadmap and an initial release plan.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Requesting that the product manager produce a product vision plan and establish a strategy for review.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Asking the sponsor to develop a project timeline and obtain approval from all stakeholders.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q135</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q135</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 135</div>
             <div class="q-text">A large company is planning to create a new product line. A project team has been selected to manage development, and the key project planning documents are being written. What should the project team prioritize?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: A large company is planning to create a new product line. A project team has been selected to manage development, and the key project planning documents are being written. Đáp án <strong>C</strong> — &quot;Requesting that the product manager produce a product vision plan and establish a strategy for review.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án C.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 24.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Requesting that the product manager produce a product vision plan and establish a strategy for review.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: A large company is planning to create a new product line. A project team has been selected to manage development, and the key project planning documents are being written. Đáp án <strong>C</strong> — &quot;Requesting that the product manager produce a product vision plan and establish a strategy for review.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; project and product management. The product owner should ensure that the development team is focused on delivering valuable features by maintaining and prioritizing the product backlog. The business analyst should gather and document requ<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 24 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 24: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Working with the project manager to draft a project roadmap and an initial relea…</span></td><td>&quot;Working with the project manager to draft a project roadmap and an initial release…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đề xuất/yêu cầu formal.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Determining which features should be included in the new product line and priori…</span></td><td>Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết Determining which features should be included in the new product line and prioritizing those to be developed <span class="kw-cue">first</span>. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Asking the sponsor to develop a project timeline and obtain approval from all st…</span></td><td>&quot;Asking the sponsor to develop a project timeline and obtain approval from all stak…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đề xuất/yêu cầu formal.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A large company is planning to create a new product line. A project team has been selected to manage… (Q135)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="prioritize_value">
+              <span>Tình huống cần &quot;ưu tiên theo giá trị / MVP&quot; — không phải trọng tâm Q135</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Working with the project manager to draft a project …" → A</h4>
+            <p style="margin:0">&quot;Working with the project manager to draft a project roadmap and an initial release…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đề xuất/yêu cầu formal.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Determining which features should be included in the…" → B</h4>
+            <p style="margin:0">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Determining which features should be included in the new product line and prioritizing those to be developed first. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Asking the sponsor to develop a project timeline and…" → D</h4>
+            <p style="margin:0">&quot;Asking the sponsor to develop a project timeline and obtain approval from all stak…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đề xuất/yêu cầu formal.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>C</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q135 — đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Requesting that the product manager produce a product vision plan and establish a strategy for review.</div>
+            <div class="flashcard-front">Q135 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 24</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q135 — đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Requesting that the product manager produce a product vision plan and establish a strategy for revie</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án C theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q135
-────────────────────────
-A large company is planning to create a new product line. A project team has been selected to manage development, and the key project planning documents are being written. What should the project team…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q135
+(PMBOK 8, tr. 24)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Focus on value
 
-ANSWER: C
-C. Requesting that the product manager produce a product vision plan and establish a strategy for review.
+SCENARIO:
+A large company is planning to create a new product line. A project team has been selected to manage development, and the key project planning documents are being written. What should the project team prioritize?
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → C) Requesting that the product manager produce a product vision plan and establish a strategy for review.
+
+NOT:
+  A) Working with the project manager to draft a projec… — &quot;Working with the project manager to draft a project roadmap
+  B) Determining which features should be included in t… — Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Dete
+  D) Asking the sponsor to develop a project timeline a… — &quot;Asking the sponsor to develop a project timeline and obtain
+
+Q135 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"\"Working with the project manager to draft a project roadmap and an initial release…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đề xuất/yêu cầu formal.","B":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết Determining which features should be included in the new product line and prioritizing those to be developed first. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","C":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Executing, PMBOK 8).","D":"\"Asking the sponsor to develop a project timeline and obtain approval from all stak…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đề xuất/yêu cầu formal."};
+      const EXPL = {"A":"\"Working with the project manager to draft a project roadmap and an initial release…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đề xuất/yêu cầu formal.","B":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết Determining which features should be included in the new product line and prioritizing those to be developed first. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","C":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Executing, PMBOK 8).","D":"\"Asking the sponsor to develop a project timeline and obtain approval from all stak…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đề xuất/yêu cầu formal."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

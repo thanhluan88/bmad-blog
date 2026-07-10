@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 886</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-886">Câu 886</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q885.html">← 885</a>
         <a href="pmp-teach-full-q887.html">887 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 886 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">At a technology services company, a project manager is overseeing a client-facing platform upgrade. Stakeholders assume some change requests are already approved, while others are unsure what is still under review. Confusion grows about what is actually in scope, creating risk of misaligned work. The sponsor asks how misunderstandings about change status will be prevented going forward. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Governance</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q886</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q886</h1>
+          <p class="lead">Bài học Q886 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 71) — Có yêu cầu thay đổi</p>
+          <p class="lead" style="margin-top:0.75rem">At a technology services company, a project manager is overseeing a client-facing platform upgrade. Stakeholders assume some <em>change request</em>s are already approved, while others are unsure what is still under review. Confusion grows about what is actually in scope, creating risk of misaligned work. The sponsor asks how <em>misunderstandings about change status will be prevented going forward</em>. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 71</span><span class="badge">Stakeholders, Governance</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q886</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,48 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Governance<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably, Adopt a holistic view
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders, Governance</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 71): 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Ask stakeholders to check the configuration management syste
+            </div><div class="approach-cell">
+              <strong>change control</strong>
+              change control / change request
+            </div><div class="approach-cell pull">
+              <strong>thông báo</strong>
+              thông báo / truyền đạt thông tin
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q886</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>misunderstandings about change status will be prevented going forward</strong> · <strong>change request</strong><br><br>→ <strong>C</strong> phù hợp vì PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Governance, Focus Area Executing (PMB…</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q886 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Ask stakeholders to check the configuration management …</strong></td>
+                <td>Ask stakeholders to check the configuration management system themselv</td>
+                <td>✗ &quot;Ask stakeholders to check the configuration management system themselves if they w…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Limit visibility of change requests to the core project…</strong></td>
+                <td>change control / change request</td>
+                <td>✗ Tập trung &quot;change control / change request&quot; không giải quyết yêu cầu thay đổi phạm vi/kế h…</td>
+              </tr><tr>
+                <td><strong>C. Communicate the status of proposed changes clearly and …</strong></td>
+                <td>thông báo / truyền đạt thông tin</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Discourage submission of new change requests to reduce …</strong></td>
+                <td>change control / change request</td>
+                <td>✗ Tập trung &quot;change control / change request&quot; không giải quyết yêu cầu thay đổi phạm vi/kế h…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q886</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Ask stakeholders to check the configuration management system themselves if they want to know a status change.
@@ -156,7 +201,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Communicate the status of proposed changes clearly and consistently to stakeholders throughout the change process.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Governance</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Discourage submission of new change requests to reduce the volume of items causing confusion.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q886</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q886</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 886</div>
             <div class="q-text">At a technology services company, a project manager is overseeing a client-facing platform upgrade. Stakeholders assume some change requests are already approved, while others are unsure what is still under review. Confusion grows about what is actually in scope, creating risk of misaligned work. The sponsor asks how misunderstandings about change status will be prevented going forward. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +226,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Governance</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>C:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.</li><li>Khi stakeholder chưa quen Agile, PM cần giáo dục và đồng thuận giải pháp phù hợp (transparency + <span class="kw-signal">collaboration</span>). Miền <span class="kw-pmbok">Stakeholders</span> — quản lý kỳ vọng và alignment.</li><li>Stem signal: yêu cầu thay đổi phạm vi/kế hoạch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Manage Stakeholder Engagement</span> — align với đáp án C.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Communicate the status of proposed changes clearly and consistently to stakeholders throughout the change process.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.<br><br>Khi stakeholder chưa quen Agile, PM cần giáo dục và đồng thuận giải pháp phù hợp (transparency + <span class="kw-signal">collaboration</span>). Miền <span class="kw-pmbok">Stakeholders</span> — quản lý kỳ vọng và alignment.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask stakeholders to check the configuration management system themselves if they…</span></td><td>&quot;Ask stakeholders to check the configuration management system themselves if they w…&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung thông báo / truyền đạt thông tin.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Limit visibility of change requests to the core project team until final decisio…</span></td><td>Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần thông báo / truyền đạt thông tin.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Discourage submission of new change requests to reduce the volume of items causi…</span></td><td>Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần thông báo / truyền đạt thông tin.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="communicate_inform">
+              <span>At a technology services company, a project manager is overseeing a client-facing platform upgrade. … (Q886)</span>
+              <div class="classify-btns"><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="change_control" type="button">change contr</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="change_control">
+              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q886</span>
+              <div class="classify-btns"><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="change_control" type="button">change contr</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Ask stakeholders to check the configuration manageme…" → A</h4>
+            <p style="margin:0">&quot;Ask stakeholders to check the configuration management system themselves if they w…&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung thông báo / truyền đạt thông tin.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Limit visibility of change requests to the core proj…" → B</h4>
+            <p style="margin:0">Tập trung &quot;change control / change request&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần thông báo / truyền đạt thông tin.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Discourage submission of new change requests to redu…" → D</h4>
+            <p style="margin:0">Tập trung &quot;change control / change request&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần thông báo / truyền đạt thông tin.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · misunderstandings about change status will be prevented going forward · change request</strong> → <strong>C</strong> — PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Governance, Focus Area Executing (PMB…</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q886 — đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Communicate the status of proposed changes clearly and consistently to stakeholders throughout the change process.</div>
+            <div class="flashcard-front">Q886 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 71</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Q886 — đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Communicate the status of proposed changes clearly and consistently to stakeholders throughout the c</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Có yêu cầu thay đổi</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q886
-────────────────────────
-At a technology services company, a project manager is overseeing a client-facing platform upgrade. Stakeholders assume some change requests are already approved, while others are unsure what is still…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q886
+(PMBOK 8, tr. 71)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Governance
+PROCESS: Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably, Adopt a holistic view
 
-ANSWER: C
-C. Communicate the status of proposed changes clearly and consistently to stakeholders throughout the change process.
+SCENARIO:
+At a technology services company, a project manager is overseeing a client-facing platform upgrade. Stakeholders assume some change requests are already approved, while others are unsure what is still under review. Confu…
 
-PMBOK 8:
-  Domain: Stakeholders, Governance
-  Process: Manage Stakeholder Engagement
-  Principle: Lead accountably, Adopt a holistic view</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | misunderstandings about change status will be prevented going forward | change request
+
+ANSWER → C) Communicate the status of proposed changes clearly and consistently to stakeholders throughout the change process.
+
+NOT:
+  A) Ask stakeholders to check the configuration manage… — &quot;Ask stakeholders to check the configuration management syst
+  B) Limit visibility of change requests to the core pr… — Tập trung &quot;change control / change request&quot; không giải quyết
+  D) Discourage submission of new change requests to re… — Tập trung &quot;change control / change request&quot; không giải quyết
+
+Q886 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"\"Ask stakeholders to check the configuration management system themselves if they w…\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung thông báo / truyền đạt thông tin.","B":"Tập trung \"change control / change request\" không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần thông báo / truyền đạt thông tin.","C":"PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Governance, Focus Area Executing (PMBOK 8).","D":"Tập trung \"change control / change request\" không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần thông báo / truyền đạt thông tin."};
+      const EXPL = {"A":"\"Ask stakeholders to check the configuration management system themselves if they w…\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung thông báo / truyền đạt thông tin.","B":"Tập trung \"change control / change request\" không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần thông báo / truyền đạt thông tin.","C":"Đúng! PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Governance, Focus Area Executing (PMBOK 8).","D":"Tập trung \"change control / change request\" không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần thông báo / truyền đạt thông tin."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

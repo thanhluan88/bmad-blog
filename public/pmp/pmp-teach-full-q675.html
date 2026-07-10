@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 675</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Team</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-675">Câu 675</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q674.html">← 674</a>
         <a href="pmp-teach-full-q676.html">676 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 675 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">The project manager is responsible for a major project that involves working with many vendors. A key project concern is ensuring the quality and timely delivery of products and services procured from vendors. <span class="kw-cue">What should the project manager do</span> to ensure the delivery stays on schedule?</p>
-          <div class="badges"><span class="badge">Resources, Scope</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q675</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q675</h1>
+          <p class="lead">Bài học Q675 về <strong>Develop Team</strong> (PMBOK 8, tr. 259) — Vấn đề chất lượng sau delivery</p>
+          <p class="lead" style="margin-top:0.75rem">The project manager is responsible for a major project that involves working with many vendors. A key project concern is ensuring the quality and timely delivery of products and services procured from vendors. <em>What should the project manager do</em> to ensure the delivery stays on schedule?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 259</span><span class="badge">Resources, Scope</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q675</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,45 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Team, Validate Scope<br>
-              <strong>Principle:</strong> Embed quality, Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Develop Team</h2>
+          <p><strong>Develop Team</strong> thuộc miền <strong>Resources, Scope</strong> — process <strong>Develop Team</strong>, principle <strong>Embed quality</strong>. PMBOK 8 (tr. 259): performance domain. 3.4 Focus on Value 3.11 Embrace Adaptability and Resiliency 3.12 Enable Change to Achieve the Envisioned Future State 3.8 Build Quality Into Processes and Deliverables Refined Principle: Embed Quality Into Processe</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>ghi nhận</strong>
+              ghi nhận / cập nhật risk register
+            </div><div class="approach-cell pull">
+              <strong>quản lý vendor</strong>
+              quản lý vendor / procurement
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q675</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>B</strong> phù hợp vì Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q675 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Raise an item in the risk register to capture potential…</strong></td>
+                <td>ghi nhận / cập nhật risk register</td>
+                <td>✗ Tập trung &quot;ghi nhận / cập nhật risk register&quot; không giải quyết vấn đề chất lượng / defect …</td>
+              </tr><tr>
+                <td><strong>B. Conduct regular procurement performance reviews with al…</strong></td>
+                <td>quản lý vendor / procurement</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Delegate the management of the procurement process and …</strong></td>
+                <td>quản lý vendor / procurement</td>
+                <td>✗ &quot;Delegate the management of the procurement process and vendor management…&quot; cùng nhóm quản…</td>
+              </tr><tr>
+                <td><strong>D. Review the vendor management plan with all selected ven…</strong></td>
+                <td>quản lý vendor / procurement</td>
+                <td>✗ &quot;Review the vendor management plan with all selected vendors before the c…&quot; cùng nhóm quản…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q675</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Raise an item in the risk register to capture potential impacts related to delays in the procurement of products and services, mitigating the risk of suboptimal quality.
@@ -152,7 +194,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Conduct regular procurement performance reviews with all vendors to ensure that products and services are delivered on time and in accordance with the contract.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Delegate the management of the procurement process and vendor management to the procurement department because they have the tools to deal with a large number of vendors.
@@ -165,7 +207,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q675</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q675</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 675</div>
             <div class="q-text">The project manager is responsible for a major project that involves working with many vendors. A key project concern is ensuring the quality and timely delivery of products and services procured from vendors. <span class="kw-cue">What should the project manager do</span> to ensure the delivery stays on schedule?</div>
@@ -181,44 +223,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</li><li>→ <strong>B:</strong> Vấn đề chất lượng sau delivery — <span class="kw-signal">retrospective</span>/<span class="kw-signal">root cause</span> và cải tiến hệ thống.</li><li>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>B</strong> — &quot;Conduct regular procurement performance reviews with all vendors to ensure that products and services are delivered on time and in accordance with the contract.&quot; — phù hợp vì Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: vấn đề vendor / procurement — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Conduct regular procurement performance reviews with all vendors to ensure that products and services are delivered on time and in accordance with the contract.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Vấn đề chất lượng sau delivery — <span class="kw-signal">retrospective</span>/<span class="kw-signal">root cause</span> và cải tiến hệ thống.<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>B</strong> — &quot;Conduct regular procurement performance reviews with all vendors to ensure that products and services are delivered on time and in accordance with the contract.&quot; — phù hợp vì Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; performance domain. 3.4 <span class="kw-pmbok">Focus on Value</span> 3.11 Embrace Adaptability and Resiliency 3.12 Enable Change to Achieve the Envisioned Future State 3.8 Build Quality Into Processes and Deliverables Refined Principle: <span class="kw-pmbok">Embed Quality</span> Into Processe<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 259 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 259: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Raise an item in the risk register to capture potential impacts related to <span class="kw-trap">delay</span>…</span></td><td>Tập trung &quot;ghi nhận / cập nhật <span class="kw-signal">risk register</span>&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần quản lý vendor / procurement.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Delegate the management of the procurement process and vendor management to the …</span></td><td>&quot;Delegate the management of the procurement process and vendor management…&quot; cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — &quot;Conduct regular procurement performance reviews with all vendors to ensu…&quot; sát vấn đề chất lượng / defect hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Review the vendor management plan with all selected vendors before the contract …</span></td><td>&quot;Review the vendor management plan with all selected vendors before the c…&quot; cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — &quot;Conduct regular procurement performance reviews with all vendors to ensu…&quot; sát vấn đề chất lượng / defect hơn.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="vendor_procurement">
+              <span>The project manager is responsible for a major project that involves working with many vendors. A ke… (Q675)</span>
+              <div class="classify-btns"><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="risk_register">
+              <span>Tình huống cần &quot;ghi nhận / cập nhật risk register&quot; — không phải trọng tâm Q675</span>
+              <div class="classify-btns"><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="vendor_procurement">
+              <span>Tình huống cần &quot;quản lý vendor / procurement&quot; — không phải trọng tâm Q675</span>
+              <div class="classify-btns"><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Raise an item in the risk register to capture potent…" → A</h4>
+            <p style="margin:0">Tập trung &quot;ghi nhận / cập nhật risk register&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần quản lý vendor / procurement.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Delegate the management of the procurement process a…" → C</h4>
+            <p style="margin:0">&quot;Delegate the management of the procurement process and vendor management…&quot; cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — &quot;Conduct regular procurement performance reviews with all vendors to ensu…&quot; sát vấn đề chất lượng / defect hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Review the vendor management plan with all selected …" → D</h4>
+            <p style="margin:0">&quot;Review the vendor management plan with all selected vendors before the c…&quot; cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — &quot;Conduct regular procurement performance reviews with all vendors to ensu…&quot; sát vấn đề chất lượng / defect hơn.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>B</strong> — Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q675 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Conduct regular procurement performance reviews with all vendors to ensure that products and services are delivered on time and in accordance with the contract.</div>
+            <div class="flashcard-front">Q675 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Team</strong><br>PMBOK 8, tr. 259</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Embed quality</strong><br>Develop Team</div>
+            <div class="flashcard-front">Q675 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Conduct regular procurement performance reviews with all vendors to ensure that products and service</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Vấn đề chất lượng sau delivery</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q675
-────────────────────────
-The project manager is responsible for a major project that involves working with many vendors. A key project concern is ensuring the quality and timely delivery of products and services procured from…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP TEAM — Q675
+(PMBOK 8, tr. 259)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Scope
+PROCESS: Develop Team, Validate Scope
+PRINCIPLE: Embed quality, Build an empowered culture
 
-ANSWER: B
-B. Conduct regular procurement performance reviews with all vendors to ensure that products and services are delivered on time and in accordance with the contract.
+SCENARIO:
+The project manager is responsible for a major project that involves working with many vendors. A key project concern is ensuring the quality and timely delivery of products and services procured from vendors. What shoul…
 
-PMBOK 8:
-  Domain: Resources, Scope
-  Process: Develop Team, Validate Scope
-  Principle: Embed quality, Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → B) Conduct regular procurement performance reviews with all vendors to ensure that products and services are delivered on time and in accordance with the contract.
+
+NOT:
+  A) Raise an item in the risk register to capture pote… — Tập trung &quot;ghi nhận / cập nhật risk register&quot; không giải quy
+  C) Delegate the management of the procurement process… — &quot;Delegate the management of the procurement process and vend
+  D) Review the vendor management plan with all selecte… — &quot;Review the vendor management plan with all selected vendors
+
+Q675 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Tập trung \"ghi nhận / cập nhật risk register\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần quản lý vendor / procurement.","B":"Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.","C":"\"Delegate the management of the procurement process and vendor management…\" cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — \"Conduct regular procurement performance reviews with all vendors to ensu…\" sát vấn đề chất lượng / defect hơn.","D":"\"Review the vendor management plan with all selected vendors before the c…\" cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — \"Conduct regular procurement performance reviews with all vendors to ensu…\" sát vấn đề chất lượng / defect hơn."};
+      const EXPL = {"A":"Tập trung \"ghi nhận / cập nhật risk register\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần quản lý vendor / procurement.","B":"Đúng! Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.","C":"\"Delegate the management of the procurement process and vendor management…\" cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — \"Conduct regular procurement performance reviews with all vendors to ensu…\" sát vấn đề chất lượng / defect hơn.","D":"\"Review the vendor management plan with all selected vendors before the c…\" cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — \"Conduct regular procurement performance reviews with all vendors to ensu…\" sát vấn đề chất lượng / defect hơn."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

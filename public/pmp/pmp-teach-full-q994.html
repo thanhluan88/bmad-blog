@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 994</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-994">Câu 994</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q993.html">← 993</a>
         <a href="pmp-teach-full-q995.html">995 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 994 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">Stakeholders request that the project manager create a risk management plan. Some of them want corrective actions included, while others expect it to describe the process for managing risks. The project manager must reconcile these expectations and finalize the plan. What should the project manager include in the risk management plan?</p>
-          <div class="badges"><span class="badge">Stakeholders, Risk</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q994</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q994</h1>
+          <p class="lead">Bài học Q994 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 102) — Phân tích tình huống và chọn đáp án D theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem"><em>Stakeholders request that the project manager create a risk m</em>anagement plan. Some of them want corrective actions included, while others expect it to describe the process for managing risks. The project manager must reconcile these expectations and finalize the plan. What should the project manager include in the risk management plan?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 102</span><span class="badge">Stakeholders, Risk</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q994</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Risk<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Risk</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 102): 102 A Guide to the Project Management Body of Knowledge requires integrating scope management, schedule planning, financial considerations, stakeholder engagement, and communication to help ensure tailored and comprehensive risk response</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Predefined corrective and preventive actions for risks durin
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Forecasting methods, such as earned value, are used to asses
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Configuration management procedures to control deliverable c
+            </div><div class="approach-cell pull">
+              <strong>D</strong>
+              Methodology for identifying, analyzing, responding to, and m
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q994</h4>
+            <p style="margin:0"><strong>Stakeholders request that the project manager create a risk m</strong><br><br>→ <strong>D</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Risk (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q994 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Predefined corrective and preventive actions for risks …</strong></td>
+                <td>Predefined corrective and preventive actions for risks during executio</td>
+                <td>✗ &quot;Predefined corrective and preventive actions for risks during execution.&quot; không phù hợp v…</td>
+              </tr><tr>
+                <td><strong>B. Forecasting methods, such as earned value, are used to …</strong></td>
+                <td>Forecasting methods, such as earned value, are used to assess risk imp</td>
+                <td>✗ &quot;Forecasting methods, such as earned value, are used to assess risk impact.&quot; không phù hợp…</td>
+              </tr><tr>
+                <td><strong>C. Configuration management procedures to control delivera…</strong></td>
+                <td>Configuration management procedures to control deliverable changes fro</td>
+                <td>✗ &quot;Configuration management procedures to control deliverable changes from risks.&quot; không phù…</td>
+              </tr><tr>
+                <td><strong>D. Methodology for identifying, analyzing, responding to, …</strong></td>
+                <td>Methodology for identifying, analyzing, responding to, and monitoring </td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q994</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Predefined corrective and preventive actions for risks during execution.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Methodology for identifying, analyzing, responding to, and monitoring project risks.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q994</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q994</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 994</div>
             <div class="q-text">Stakeholders request that the project manager create a risk management plan. Some of them want corrective actions included, while others expect it to describe the process for managing risks. The project manager must reconcile these expectations and finalize the plan. What should the project manager include in the risk management plan?</div>
@@ -181,44 +229,84 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>D:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: <span class="kw-pmbok">Stakeholders</span> request that the project manager create a risk management plan. Some of them want corrective actions included, while others expect it to describe the process for managing risks. The project manager must reconcile these expectations and finalize the plan. Đáp án <strong>D</strong> — &quot;Methodology for identifying, analyzing, responding to, and monitoring project risks.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án D.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 102.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Methodology for identifying, analyzing, responding to, and monitoring project risks.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: <span class="kw-pmbok">Stakeholders</span> request that the project manager create a risk management plan. Some of them want corrective actions included, while others expect it to describe the process for managing risks. The project manager must reconcile these expectations and finalize the plan. Đáp án <strong>D</strong> — &quot;Methodology for identifying, analyzing, responding to, and monitoring project risks.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 102 A Guide to the Project Management Body of Knowledge requires integrating scope management, schedule planning, financial considerations, stakeholder engagement, and communication to help ensure tailored and comprehensive risk response<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 102 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 102: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Predefined corrective and preventive actions for risks during execution.</span></td><td>&quot;Predefined corrective and preventive actions for risks during execution.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Methodology for identifying, analyzing, responding to, and monitoring project risks.&quot;.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Forecasting methods, such as earned value, are used to assess risk impact.</span></td><td>&quot;Forecasting methods, such as earned value, are used to assess risk impact.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Methodology for identifying, analyzing, responding to, and monitoring project risks.&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Configuration management procedures to control deliverable changes from risks.</span></td><td>&quot;Configuration management procedures to control deliverable changes from risks.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Methodology for identifying, analyzing, responding to, and monitoring project risks.&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>Stakeholders request that the project manager create a risk management plan. Some of them want corre… (Q994)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="DUMMY1" type="button">Opt 1</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 1 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Predefined corrective and preventive actions for ris…" → A</h4>
+            <p style="margin:0">&quot;Predefined corrective and preventive actions for risks during execution.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Methodology for identifying, analyzing, responding to, and monitoring project risks.&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Forecasting methods, such as earned value, are used …" → B</h4>
+            <p style="margin:0">&quot;Forecasting methods, such as earned value, are used to assess risk impact.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Methodology for identifying, analyzing, responding to, and monitoring project risks.&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Configuration management procedures to control deliv…" → C</h4>
+            <p style="margin:0">&quot;Configuration management procedures to control deliverable changes from risks.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Methodology for identifying, analyzing, responding to, and monitoring project risks.&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>Stakeholders request that the project manager create a risk m</strong> → <strong>D</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Risk (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q994 — đáp án?</div>
+            <div class="flashcard-front">Q994 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 102</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q994 — đáp án?</div>
             <div class="flashcard-back"><strong>D</strong> — Methodology for identifying, analyzing, responding to, and monitoring project risks.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án D theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q994
-────────────────────────
-Stakeholders request that the project manager create a risk management plan. Some of them want corrective actions included, while others expect it to describe the process for managing risks. The proje…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q994
+(PMBOK 8, tr. 102)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Risk
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: D
-D. Methodology for identifying, analyzing, responding to, and monitoring project risks.
+SCENARIO:
+Stakeholders request that the project manager create a risk management plan. Some of them want corrective actions included, while others expect it to describe the process for managing risks. The project manager must reco…
 
-PMBOK 8:
-  Domain: Stakeholders, Risk
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  Stakeholders request that the project manager create a risk m
+
+ANSWER → D) Methodology for identifying, analyzing, responding to, and monitoring project risks.
+
+NOT:
+  A) Predefined corrective and preventive actions for r… — &quot;Predefined corrective and preventive actions for risks duri
+  B) Forecasting methods, such as earned value, are use… — &quot;Forecasting methods, such as earned value, are used to asse
+  C) Configuration management procedures to control del… — &quot;Configuration management procedures to control deliverable 
+
+Q994 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Predefined corrective and preventive actions for risks during execution.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Methodology for identifying, analyzing, responding to, and monitoring project risks.\".","B":"\"Forecasting methods, such as earned value, are used to assess risk impact.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Methodology for identifying, analyzing, responding to, and monitoring project risks.\".","C":"\"Configuration management procedures to control deliverable changes from risks.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Methodology for identifying, analyzing, responding to, and monitoring project risks.\".","D":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Risk (Executing, PMBOK 8)."};
+      const EXPL = {"A":"\"Predefined corrective and preventive actions for risks during execution.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Methodology for identifying, analyzing, responding to, and monitoring project risks.\".","B":"\"Forecasting methods, such as earned value, are used to assess risk impact.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Methodology for identifying, analyzing, responding to, and monitoring project risks.\".","C":"\"Configuration management procedures to control deliverable changes from risks.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Methodology for identifying, analyzing, responding to, and monitoring project risks.\".","D":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Risk (Executing, PMBOK 8)."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

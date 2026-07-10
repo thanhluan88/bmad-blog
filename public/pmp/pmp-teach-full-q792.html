@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 792</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-792">Câu 792</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q791.html">← 791</a>
         <a href="pmp-teach-full-q793.html">793 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 792 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager has been tasked with managing an existing, complex project. Some goals have already been delivered by the previous project manager. While reviewing the project management plan, the project manager realizes that one of the key deliverables is missing from the project goal. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q792</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q792</h1>
+          <p class="lead">Bài học Q792 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 132) — Phân tích tình huống và chọn đáp án B theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager has been tasked with managing an existing, complex project. Some goals have already been delivered by the previous project manager. While reviewing the project management plan, the project manager realizes that one of the key deliverables is missing from the project goal. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 132</span><span class="badge">Stakeholders, Scope</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q792</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement, Validate Scope<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders, Scope</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 132): 132 A Guide to the Project Management Body of Knowledge used in the requirements traceability matrix may include a unique identifier, a textual description of the requirement, the rationale for inclusion, the owner, source, priority, versi</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell pull">
+              <strong>tham chiếu artifact</strong>
+              tham chiếu artifact / kế hoạch đã có
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Confirm the list of deliverables and re-baseline the plan to
+            </div><div class="approach-cell">
+              <strong>bổ sung nguồn lực</strong>
+              bổ sung nguồn lực / hire
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q792</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>B</strong> phù hợp vì RTM giúp truy vết requirement cụ thể và phân tích gap — chính xác hơn thảo luận chung chung.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q792 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Escalate the issue to the project sponsor to ensure ali…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>B. Review the requirements traceability matrix to verify i…</strong></td>
+                <td>tham chiếu artifact / kế hoạch đã có</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Confirm the list of deliverables and re-baseline the pl…</strong></td>
+                <td>Confirm the list of deliverables and re-baseline the plan to capture t</td>
+                <td>✗ &quot;Confirm the list of deliverables and re-baseline the plan to capture the updated s…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Use contingency funds to acquire additional resources a…</strong></td>
+                <td>bổ sung nguồn lực / hire</td>
+                <td>✗ Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết Use contingency funds to acquire add…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q792</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         <span class="kw-trap">Escalate</span> the issue to the project sponsor to ensure alignment on deliverables and next steps.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Review the <span class="kw-signal">requirements traceability matrix</span> to verify if the deliverable was ever officially approved.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">RTM giúp truy vết requirement cụ thể và phân tích gap — chính xác hơn thảo luận chung chung.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Confirm the list of deliverables and re-baseline the plan to capture the updated scope and expectations.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q792</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q792</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 792</div>
             <div class="q-text">A project manager has been tasked with managing an existing, complex project. Some goals have already been delivered by the previous project manager. While reviewing the project management plan, the project manager realizes that one of the key deliverables is missing from the project goal. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>RTM giúp truy vết requirement cụ thể và phân tích gap — chính xác hơn thảo luận chung chung.</li><li>→ <strong>B:</strong> RTM giúp truy vết requirement cụ thể và phân tích gap — chính xác hơn thảo luận chung chung.</li><li>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony.</li><li>Process <span class="kw-pmbok">Manage Stakeholder Engagement</span> — align với đáp án B.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 132.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Review the requirements traceability matrix to verify if the deliverable was ever officially approved.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> RTM giúp truy vết requirement cụ thể và phân tích gap — chính xác hơn thảo luận chung chung.<br><br>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 132 A Guide to the Project Management Body of Knowledge used in the <span class="kw-signal">requirements traceability matrix</span> may include a unique identifier, a textual description of the requirement, the rationale for inclusion, the owner, source, priority, versi<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 132 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Manage Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 132: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Manage Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the issue to the project sponsor to ensure alignment on deliverables an…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Confirm the list of deliverables and re-baseline the plan to capture the updated…</span></td><td>&quot;Confirm the list of deliverables and re-baseline the plan to capture the updated s…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Use contingency funds to acquire additional resources and address the missing de…</span></td><td>Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết Use contingency funds to acquire additional resources and address the missing deliverables. — đáp án đúng cần tham chiếu artifact / kế hoạch đã có.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="consult_artifact">
+              <span>A project manager has been tasked with managing an existing, complex project. Some goals have alread… (Q792)</span>
+              <div class="classify-btns"><button data-pick="consult_artifact" type="button">tham chiếu a</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="add_resources" type="button">bổ sung nguồ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q792</span>
+              <div class="classify-btns"><button data-pick="consult_artifact" type="button">tham chiếu a</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="add_resources" type="button">bổ sung nguồ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="add_resources">
+              <span>Tình huống cần &quot;bổ sung nguồn lực / hire&quot; — không phải trọng tâm Q792</span>
+              <div class="classify-btns"><button data-pick="consult_artifact" type="button">tham chiếu a</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="add_resources" type="button">bổ sung nguồ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Escalate the issue to the project sponsor to ensure …" → A</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Confirm the list of deliverables and re-baseline the…" → C</h4>
+            <p style="margin:0">&quot;Confirm the list of deliverables and re-baseline the plan to capture the updated s…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Use contingency funds to acquire additional resource…" → D</h4>
+            <p style="margin:0">Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết Use contingency funds to acquire additional resources and address the missing deliverables. — đáp án đúng cần tham chiếu artifact / kế hoạch đã có.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>B</strong> — RTM giúp truy vết requirement cụ thể và phân tích gap — chính xác hơn thảo luận chung chung.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q792 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Review the requirements traceability matrix to verify if the deliverable was ever officially approved.</div>
+            <div class="flashcard-front">Q792 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 132</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Q792 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Review the requirements traceability matrix to verify if the deliverable was ever officially approve</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án B theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q792
-────────────────────────
-A project manager has been tasked with managing an existing, complex project. Some goals have already been delivered by the previous project manager. While reviewing the project management plan, the p…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q792
+(PMBOK 8, tr. 132)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Scope
+PROCESS: Manage Stakeholder Engagement, Validate Scope
+PRINCIPLE: Focus on value
 
-ANSWER: B
-B. Review the requirements traceability matrix to verify if the deliverable was ever officially approved.
+SCENARIO:
+A project manager has been tasked with managing an existing, complex project. Some goals have already been delivered by the previous project manager. While reviewing the project management plan, the project manager reali…
 
-PMBOK 8:
-  Domain: Stakeholders, Scope
-  Process: Manage Stakeholder Engagement, Validate Scope
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → B) Review the requirements traceability matrix to verify if the deliverable was ever officially approved.
+
+NOT:
+  A) Escalate the issue to the project sponsor to ensur… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  C) Confirm the list of deliverables and re-baseline t… — &quot;Confirm the list of deliverables and re-baseline the plan t
+  D) Use contingency funds to acquire additional resour… — Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết Use co
+
+Q792 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"RTM giúp truy vết requirement cụ thể và phân tích gap — chính xác hơn thảo luận chung chung.","C":"\"Confirm the list of deliverables and re-baseline the plan to capture the updated s…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có.","D":"Tập trung \"bổ sung nguồn lực / hire\" không giải quyết Use contingency funds to acquire additional resources and address the missing deliverables. — đáp án đúng cần tham chiếu artifact / kế hoạch đã có."};
+      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Đúng! RTM giúp truy vết requirement cụ thể và phân tích gap — chính xác hơn thảo luận chung chung.","C":"\"Confirm the list of deliverables and re-baseline the plan to capture the updated s…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có.","D":"Tập trung \"bổ sung nguồn lực / hire\" không giải quyết Use contingency funds to acquire additional resources and address the missing deliverables. — đáp án đúng cần tham chiếu artifact / kế hoạch đã có."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

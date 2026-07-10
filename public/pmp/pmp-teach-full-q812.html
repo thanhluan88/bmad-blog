@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 812</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-812">Câu 812</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q811.html">← 811</a>
         <a href="pmp-teach-full-q813.html">813 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 812 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is overseeing the implementation of a newly developed in-house software system intended to improve business processes. After deployment, adoption across the organization remains below 50%, <span class="kw-cue">primarily</span> due to misalignment with existing core processes. Which three actions should the project manager have taken earlier to better ensure project benefits were realized? (<span class="kw-cue">Choose 3</span>)</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Adopt a holistic view</span><span class="badge">Full Bank Q812</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q812</h1>
+          <p class="lead">Bài học Q812 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 38) — Phân tích tình huống và chọn đáp án A,B,C theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is overseeing the implementation of a newly developed in-house software system intended to improve business processes. After deployment, adoption across the organization remains below 50%, primarily due to misalignment with existing core processes. Which three actions should the project manager have taken earlier to better ensure project benefits were realized? (Choose 3)</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 38</span><span class="badge">Stakeholders</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q812</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,33 +148,70 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Adopt a holistic view, Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Adopt a holistic view</strong>. PMBOK 8 (tr. 38): allowing for an interdisciplinary approach that fosters more innovative and effective solutions. 3.3.1 Project Impact Applying a holistic view to project management results in a more integrated and cohesive approach to achieving project go</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>A</strong>
+              Conducted a needs assessment during the design phase to alig
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Piloted the software in a representative core business unit 
+            </div><div class="approach-cell pull">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Requested the marketing team to gather customer feedback abo
+            </div><div class="approach-cell">
+              <strong>coaching</strong>
+              coaching / phát triển năng lực
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q812</h4>
+            <p style="margin:0">Đọc kỹ stem và xác định vấn đề trọng tâm.<br><br>→ <strong>A</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q812 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Conducted a needs assessment during the design phase to…</strong></td>
+                <td>Conducted a needs assessment during the design phase to align the solu</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Piloted the software in a representative core business …</strong></td>
+                <td>Piloted the software in a representative core business unit and used f</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Engaged key stakeholders throughout the project to ensu…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Requested the marketing team to gather customer feedbac…</strong></td>
+                <td>Requested the marketing team to gather customer feedback about the sol</td>
+                <td>✗ đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Conducte…</td>
+              </tr><tr>
+                <td><strong>E. Developed a change management plan including communicat…</strong></td>
+                <td>coaching / phát triển năng lực</td>
+                <td>✗ Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết Developed a change management …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q812</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Conducted a needs assessment during the design phase to align the solution with actual business requirements.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Piloted the software in a representative core business unit and used feedback to refine the solution.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Engaged key stakeholders throughout the project to ensure buy-in and alignment with business needs.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Requested the marketing team to gather customer feedback about the solution post-launch.
@@ -169,7 +224,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q812</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q812</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 812 · Chọn nhiều</div>
             <div class="q-text">A project manager is overseeing the implementation of a newly developed in-house software system intended to improve business processes. After deployment, adoption across the organization remains below 50%, <span class="kw-cue">primarily</span> due to misalignment with existing core processes. Which three actions should the project manager have taken earlier to better ensure project benefits were realized? (<span class="kw-cue">Choose 3</span>)</div>
@@ -186,44 +241,83 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A,B,C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A,B,C</h2>
+          <h3>Tại sao chọn A,B,C?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A, B, C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: A project manager is overseeing the implementation of a newly developed in-house software system intended to improve business processes. After deployment, adoption across the organization remains below 50%, <span class="kw-cue">primarily</span> due to misalignment with existing core processes. Đáp án <strong>A, B, C</strong> — &quot;Conducted a needs assessment during the design phase to align the solution with actual business requirements.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án A,B,C.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 38.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A,B,C</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A, B, C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: A project manager is overseeing the implementation of a newly developed in-house software system intended to improve business processes. After deployment, adoption across the organization remains below 50%, <span class="kw-cue">primarily</span> due to misalignment with existing core processes. Đáp án <strong>A, B, C</strong> — &quot;Conducted a needs assessment during the design phase to align the solution with actual business requirements.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; allowing for an interdisciplinary approach that fosters more innovative and effective solutions. 3.3.1 Project Impact Applying a holistic view to project management results in a more integrated and cohesive approach to achieving project go<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 38 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 38: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Requested the marketing team to gather customer feedback about the solution post…</span></td><td>đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Conducted a needs assessment during the design phase to align the solution with ac…&quot;.</td></tr><tr><td><strong>E</strong><br><span style="font-size:0.8rem;color:var(--muted)">Developed a change management plan including communication and training componen…</span></td><td>Tập trung &quot;<span class="kw-signal">coaching</span> / phát triển năng lực&quot; không giải quyết Developed a change management plan including communication and training components. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A project manager is overseeing the implementation of a newly developed in-house software system int… (Q812)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="coach_develop">
+              <span>Tình huống cần &quot;coaching / phát triển năng lực&quot; — không phải trọng tâm Q812</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Requested the marketing team to gather customer feed…" → D</h4>
+            <p style="margin:0">đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Conducted a needs assessment during the design phase to align the solution with ac…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Developed a change management plan including communi…" → E</h4>
+            <p style="margin:0">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết Developed a change management plan including communication and training components. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>A</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q812 — đáp án?</div>
-            <div class="flashcard-back"><strong>A,B,C</strong> — B,C</div>
+            <div class="flashcard-front">Q812 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 38</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Adopt a holistic view</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q812 — đáp án?</div>
+            <div class="flashcard-back"><strong>A,B,C</strong> — A,B,C</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án A,B,C theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q812
-────────────────────────
-A project manager is overseeing the implementation of a newly developed in-house software system intended to improve business processes. After deployment, adoption across the organization remains belo…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q812
+(PMBOK 8, tr. 38)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Adopt a holistic view, Focus on value
 
-ANSWER: A,B,C
-A,B,C
+SCENARIO:
+A project manager is overseeing the implementation of a newly developed in-house software system intended to improve business processes. After deployment, adoption across the organization remains below 50%, primarily due…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Adopt a holistic view, Focus on value</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → A,B,C) A,B,C
+
+NOT:
+  D) Requested the marketing team to gather customer fe… — đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đ
+  E) Developed a change management plan including commu… — Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết 
+
+Q812 ANSWER: A,B,C</div>
         </section>
 
         <footer class="ref-footer">
@@ -266,6 +360,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

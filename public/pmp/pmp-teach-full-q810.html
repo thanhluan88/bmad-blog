@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 810</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-810">Câu 810</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q809.html">← 809</a>
         <a href="pmp-teach-full-q811.html">811 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 810 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager has just taken over a 5-year project that is at the midpoint. At the steering committee meeting, the CEO asked whether the project was still on track to meet its business case goal and achieve a 40% increase in production. The project manager responded that, since they had only worked on the project for one month, they did <span class="kw-cue">not</span> know the current status of the project. What should the project manager have done to avoid this situation?</p>
-          <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Initiating</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q810</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q810</h1>
+          <p class="lead">Bài học Q810 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 38) — Phân tích tình huống và chọn đáp án C theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager has just taken over a 5-year project that is at the midpoint. At the steering committee meeting, the CEO asked whether the project was still on track to meet its business case goal and achieve a <em>40% increase in production</em>. The project manager responded that, since they had only worked on the project for one month, they did not know the current status of the project. What should the project manager have done to avoid this situation?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 38</span><span class="badge">Stakeholders, Scope</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q810</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Scope<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Scope</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 38): 38 helps ensure that all project aspects are considered and aligned. The Embed Quality Into Processes and Deliverables and Focus on Value principles are primarily addressed within the Governance, Scope, Risk, Schedule, Finance, and Stakeh</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>ghi nhận</strong>
+              ghi nhận / tài liệu hóa
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Conducted stakeholder interviews with key team members to va
+            </div><div class="approach-cell pull">
+              <strong>tham chiếu artifact</strong>
+              tham chiếu artifact / kế hoạch đã có
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Analyzed project schedules and deliverables to assess progre
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q810</h4>
+            <p style="margin:0"><strong>40% increase in production</strong><br><br>→ <strong>C</strong> phù hợp vì PM tra artifact/plan đã có (tài liệu dự án) để quyết định có căn cứ, không phản ứng tùy hứng.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q810 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Reviewed comprehensive project documentation including …</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>B. Conducted stakeholder interviews with key team members …</strong></td>
+                <td>Conducted stakeholder interviews with key team members to validate cur</td>
+                <td>✗ &quot;Conducted stakeholder interviews with key team members to validate current progress.&quot; khô…</td>
+              </tr><tr>
+                <td><strong>C. Met with the project sponsor to review business case al…</strong></td>
+                <td>tham chiếu artifact / kế hoạch đã có</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Analyzed project schedules and deliverables to assess p…</strong></td>
+                <td>Analyzed project schedules and deliverables to assess progress against</td>
+                <td>✗ &quot;Analyzed project schedules and deliverables to assess progress against original ba…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q810</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Reviewed comprehensive project documentation including status reports and performance metrics.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Met with the project sponsor to review business case alignment and the status of deliverables.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM tra artifact/plan đã có (tài liệu dự án) để quyết định có căn cứ, không phản ứng tùy hứng.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Analyzed project schedules and deliverables to assess progress against original baselines.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q810</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q810</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 810</div>
             <div class="q-text">A project manager has just taken over a 5-year project that is at the midpoint. At the steering committee meeting, the CEO asked whether the project was still on track to meet its business case goal and achieve a 40% increase in production. The project manager responded that, since they had only worked on the project for one month, they did <span class="kw-cue">not</span> know the current status of the project. What should the project manager have done to avoid this situation?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>PM tra artifact/plan đã có (tài liệu dự án) để quyết định có căn cứ, không phản ứng tùy hứng.</li><li>→ <strong>C:</strong> PM tra artifact/plan đã có (tài liệu dự án) để quyết định có căn cứ, không phản ứng tùy hứng.</li><li>Bối cảnh: A project manager has just taken over a 5-year project that is at the midpoint. At the steering committee meeting, the CEO asked whether the project was still on track to meet its business case goal and achieve a 40% increase in production. The project manager responded that, since they had only worked on the project for one month, they did <span class="kw-cue">not</span> know the current status of the project. Đáp án <strong>C</strong> — &quot;Met with the project sponsor to review business case alignment and the status of deliverables.&quot; — phù hợp vì PM tra artifact/plan đã có (tài liệu dự án) để quyết định có căn cứ, không phản ứng tùy hứng.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án C.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 38.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Met with the project sponsor to review business case alignment and the status of deliverables.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> PM tra artifact/plan đã có (tài liệu dự án) để quyết định có căn cứ, không phản ứng tùy hứng.<br><br>Bối cảnh: A project manager has just taken over a 5-year project that is at the midpoint. At the steering committee meeting, the CEO asked whether the project was still on track to meet its business case goal and achieve a 40% increase in production. The project manager responded that, since they had only worked on the project for one month, they did <span class="kw-cue">not</span> know the current status of the project. Đáp án <strong>C</strong> — &quot;Met with the project sponsor to review business case alignment and the status of deliverables.&quot; — phù hợp vì PM tra artifact/plan đã có (tài liệu dự án) để quyết định có căn cứ, không phản ứng tùy hứng.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 38 helps ensure that all project aspects are considered and aligned. The <span class="kw-pmbok">Embed Quality</span> Into Processes and Deliverables and <span class="kw-pmbok">Focus on Value</span> principles are <span class="kw-cue">primarily</span> addressed within the <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Scope</span>, <span class="kw-pmbok">Risk</span>, <span class="kw-pmbok">Schedule</span>, <span class="kw-pmbok">Finance</span>, and Stakeh<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 38 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 38: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reviewed comprehensive project documentation including status reports and perfor…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Conducted stakeholder interviews with key team members to validate current progr…</span></td><td>&quot;Conducted stakeholder interviews with key team members to validate current progress.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Analyzed project schedules and deliverables to assess progress against original …</span></td><td>&quot;Analyzed project schedules and deliverables to assess progress against original ba…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="consult_artifact">
+              <span>A project manager has just taken over a 5-year project that is at the midpoint. At the steering comm… (Q810)</span>
+              <div class="classify-btns"><button data-pick="consult_artifact" type="button">tham chiếu a</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="document_first">
+              <span>Tình huống cần &quot;ghi nhận / tài liệu hóa&quot; — không phải trọng tâm Q810</span>
+              <div class="classify-btns"><button data-pick="consult_artifact" type="button">tham chiếu a</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Reviewed comprehensive project documentation includi…" → A</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Conducted stakeholder interviews with key team membe…" → B</h4>
+            <p style="margin:0">&quot;Conducted stakeholder interviews with key team members to validate current progress.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Analyzed project schedules and deliverables to asses…" → D</h4>
+            <p style="margin:0">&quot;Analyzed project schedules and deliverables to assess progress against original ba…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>40% increase in production</strong> → <strong>C</strong> — PM tra artifact/plan đã có (tài liệu dự án) để quyết định có căn cứ, không phản ứng tùy hứng.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q810 — đáp án?</div>
+            <div class="flashcard-front">Q810 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 38</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q810 — đáp án?</div>
             <div class="flashcard-back"><strong>C</strong> — Met with the project sponsor to review business case alignment and the status of deliverables.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án C theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q810
-────────────────────────
-A project manager has just taken over a 5-year project that is at the midpoint. At the steering committee meeting, the CEO asked whether the project was still on track to meet its business case goal a…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q810
+(PMBOK 8, tr. 38)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Scope
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: C
-C. Met with the project sponsor to review business case alignment and the status of deliverables.
+SCENARIO:
+A project manager has just taken over a 5-year project that is at the midpoint. At the steering committee meeting, the CEO asked whether the project was still on track to meet its business case goal and achieve a 40% inc…
 
-PMBOK 8:
-  Domain: Stakeholders, Scope
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  40% increase in production
+
+ANSWER → C) Met with the project sponsor to review business case alignment and the status of deliverables.
+
+NOT:
+  A) Reviewed comprehensive project documentation inclu… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+  B) Conducted stakeholder interviews with key team mem… — &quot;Conducted stakeholder interviews with key team members to v
+  D) Analyzed project schedules and deliverables to ass… — &quot;Analyzed project schedules and deliverables to assess progr
+
+Q810 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","B":"\"Conducted stakeholder interviews with key team members to validate current progress.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có.","C":"PM tra artifact/plan đã có (tài liệu dự án) để quyết định có căn cứ, không phản ứng tùy hứng.","D":"\"Analyzed project schedules and deliverables to assess progress against original ba…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có."};
+      const EXPL = {"A":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","B":"\"Conducted stakeholder interviews with key team members to validate current progress.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có.","C":"Đúng! PM tra artifact/plan đã có (tài liệu dự án) để quyết định có căn cứ, không phản ứng tùy hứng.","D":"\"Analyzed project schedules and deliverables to assess progress against original ba…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung tham chiếu artifact / kế hoạch đã có."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

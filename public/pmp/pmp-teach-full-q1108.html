@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1108</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Risks</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1108">Câu 1108</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1107.html">← 1107</a>
         <a href="pmp-teach-full-q1109.html">1109 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1108 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An agile team has established a comprehensive risk register during project initiation. The team has completed three sprints of development and is encountering evolving technical challenges and shifting market conditions. <span class="kw-cue">What should the project manager do</span> to ensure effective ongoing risk management?</p>
-          <div class="badges"><span class="badge">Risk, Stakeholders</span><span class="badge">Initiating</span><span class="badge">Identify Risks</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q1108</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1108</h1>
+          <p class="lead">Bài học Q1108 về <strong>Identify Risks</strong> (PMBOK 8, tr. 101) — ngữ cảnh Agile/Scrum</p>
+          <p class="lead" style="margin-top:0.75rem">An agile team has established a comprehensive <em>risk register</em> during project initiation. The team has completed three sprints of development and is encountering evolving technical challenges and shifting market conditions. <em>What should the project manager do</em> to ensure effective ongoing risk management?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 101</span><span class="badge">Risk, Stakeholders</span><span class="badge">Identify Risks</span><span class="badge">Full Bank Q1108</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Risk, Stakeholders<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Identify Risks, Perform Risk Analysis, Plan Risk Responses<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Risks</h2>
+          <p><strong>Identify Risks</strong> thuộc miền <strong>Risk, Stakeholders</strong> — process <strong>Identify Risks</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 101): team to quickly identify and address emerging risks, ensuring flexibility and responsiveness. Additionally, regular risk review meetings are held with stakeholders at the end of each iteration to incorporate their feedback and adjust risk</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>facilitate retrospective</strong>
+              facilitate retrospective / phân tích root cause
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Schedule regular risk review meetings with the team and stak
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Use an automated risk monitoring software with scheduled ale
+            </div><div class="approach-cell">
+              <strong>Agile ceremony</strong>
+              Agile ceremony / iteration event
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1108</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>risk register</strong><br><br>→ <strong>B</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk + Stakeholders (Initiating, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1108 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Integrate risk assessment into sprint planning and retr…</strong></td>
+                <td>facilitate retrospective / phân tích root cause</td>
+                <td>✗ Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết ngữ cảnh Agil…</td>
+              </tr><tr>
+                <td><strong>B. Schedule regular risk review meetings with the team and…</strong></td>
+                <td>Schedule regular risk review meetings with the team and stakeholders t</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Use an automated risk monitoring software with schedule…</strong></td>
+                <td>Use an automated risk monitoring software with scheduled alerts and st</td>
+                <td>✗ &quot;Use an automated risk monitoring software with scheduled alerts and stakeholder no…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Embed risk identification discussions into daily coordi…</strong></td>
+                <td>Agile ceremony / iteration event</td>
+                <td>✗ Tập trung &quot;Agile ceremony / iteration event&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp á…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1108</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Integrate risk assessment into sprint planning and retrospective ceremonies for continuous evaluation.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Schedule regular risk review meetings with the team and stakeholders to reevaluate impact and likelihood.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Stakeholders</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Use an automated risk monitoring software with scheduled alerts and stakeholder notifications.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1108</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1108</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1108</div>
             <div class="q-text">An agile team has established a comprehensive risk register during project initiation. The team has completed three sprints of development and is encountering evolving technical challenges and shifting market conditions. <span class="kw-cue">What should the project manager do</span> to ensure effective ongoing risk management?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Stakeholders</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Stakeholders</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>B</strong> — &quot;<span class="kw-pmbok">Schedule</span> regular risk review meetings with the team and stakeholders to reevaluate impact and likelihood.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Stakeholders</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify Risks</span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Schedule regular risk review meetings with the team and stakeholders to reevaluate impact and likelihood.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Stakeholders</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>B</strong> — &quot;<span class="kw-pmbok">Schedule</span> regular risk review meetings with the team and stakeholders to reevaluate impact and likelihood.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Stakeholders</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; team to quickly identify and address emerging risks, ensuring flexibility and responsiveness. Additionally, regular risk review meetings are held with stakeholders at the end of each iteration to incorporate their feedback and adjust risk<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 101 (Performance Domain: <span class="kw-pmbok">Risk</span>, <span class="kw-pmbok">Identify Risks</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 101: Performance Domain: <span class="kw-pmbok">Risk</span>, <span class="kw-pmbok">Identify Risks</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Integrate risk assessment into sprint planning and retrospective ceremonies for …</span></td><td>Tập trung &quot;<span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Use an automated risk monitoring software with scheduled alerts and stakeholder …</span></td><td>&quot;Use an automated risk monitoring software with scheduled alerts and stakeholder no…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;<span class="kw-pmbok">Schedule</span> regular risk review meetings with the team and stakeholders to reevaluate…&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Embed risk identification discussions into daily coordination meetings and itera…</span></td><td>Tập trung &quot;Agile ceremony / iteration event&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>An agile team has established a comprehensive risk register during project initiation. The team has … (Q1108)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="agile_ceremony" type="button">Agile ceremo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="facilitate_retro">
+              <span>Tình huống cần &quot;facilitate retrospective / phân tích root cause&quot; — không phải trọng tâm Q1108</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="agile_ceremony" type="button">Agile ceremo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="agile_ceremony">
+              <span>Tình huống cần &quot;Agile ceremony / iteration event&quot; — không phải trọng tâm Q1108</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="agile_ceremony" type="button">Agile ceremo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Integrate risk assessment into sprint planning and r…" → A</h4>
+            <p style="margin:0">Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Use an automated risk monitoring software with sched…" → C</h4>
+            <p style="margin:0">&quot;Use an automated risk monitoring software with scheduled alerts and stakeholder no…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;Schedule regular risk review meetings with the team and stakeholders to reevaluate…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Embed risk identification discussions into daily coo…" → D</h4>
+            <p style="margin:0">Tập trung &quot;Agile ceremony / iteration event&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · risk register</strong> → <strong>B</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk + Stakeholders (Initiating, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1108 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Schedule regular risk review meetings with the team and stakeholders to reevaluate impact and likelihood.</div>
+            <div class="flashcard-front">Q1108 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Risks</strong><br>PMBOK 8, tr. 101</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Risks</div>
+            <div class="flashcard-front">Q1108 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Schedule regular risk review meetings with the team and stakeholders to reevaluate impact and likeli</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">ngữ cảnh Agile/Scrum</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1108
-────────────────────────
-An agile team has established a comprehensive risk register during project initiation. The team has completed three sprints of development and is encountering evolving technical challenges and shiftin…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY RISKS — Q1108
+(PMBOK 8, tr. 101)
+─────────────────────────────────────────────────────
+DOMAIN: Risk, Stakeholders
+PROCESS: Identify Risks, Perform Risk Analysis, Plan Risk Responses
+PRINCIPLE: Lead accountably
 
-ANSWER: B
-B. Schedule regular risk review meetings with the team and stakeholders to reevaluate impact and likelihood.
+SCENARIO:
+An agile team has established a comprehensive risk register during project initiation. The team has completed three sprints of development and is encountering evolving technical challenges and shifting market conditions.…
 
-PMBOK 8:
-  Domain: Risk, Stakeholders
-  Process: Identify Risks, Perform Risk Analysis, Plan Risk Responses
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | risk register
+
+ANSWER → B) Schedule regular risk review meetings with the team and stakeholders to reevaluate impact and likelihood.
+
+NOT:
+  A) Integrate risk assessment into sprint planning and… — Tập trung &quot;facilitate retrospective / phân tích root cause&quot; 
+  C) Use an automated risk monitoring software with sch… — &quot;Use an automated risk monitoring software with scheduled al
+  D) Embed risk identification discussions into daily c… — Tập trung &quot;Agile ceremony / iteration event&quot; không giải quyế
+
+Q1108 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Tập trung \"facilitate retrospective / phân tích root cause\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","B":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk + Stakeholders (Initiating, PMBOK 8).","C":"\"Use an automated risk monitoring software with scheduled alerts and stakeholder no…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung \"Schedule regular risk review meetings with the team and stakeholders to reevaluate…\".","D":"Tập trung \"Agile ceremony / iteration event\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
+      const EXPL = {"A":"Tập trung \"facilitate retrospective / phân tích root cause\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","B":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk + Stakeholders (Initiating, PMBOK 8).","C":"\"Use an automated risk monitoring software with scheduled alerts and stakeholder no…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung \"Schedule regular risk review meetings with the team and stakeholders to reevaluate…\".","D":"Tập trung \"Agile ceremony / iteration event\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

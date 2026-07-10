@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 219</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Team</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-219">Câu 219</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q218.html">← 218</a>
         <a href="pmp-teach-full-q220.html">220 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 219 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project selection committee is reviewing three candidate projects using the weighted scoring model shown in the table. Among the evaluated projects, Project 2 ranks the highest. During the meeting, a key stakeholder advocates for selecting Project 1, noting that political support will help secure resources and approvals more efficiently. Several team members prefer Project 3 because its benefits are distributed more evenly across multiple criteria. Weighted Scoring Model Criteria Weight Project 1 Project 2 Project 3 Supports key business objectives 60 90 90 50 Uses standard technology 20 25 90 50 Can be completed within project timeframe 10 20 20 50 Provides positive NPV 10 50 70 50 What should the project manager recommend? (Refer to the table)</p>
-          <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q219</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q219</h1>
+          <p class="lead">Bài học Q219 về <strong>Develop Team</strong> (PMBOK 8, tr. 53) — Team phân tán</p>
+          <p class="lead" style="margin-top:0.75rem">A project selection committee is reviewing three candidate projects using the weighted scoring model shown in the table. Among the evaluated projects, Project 2 ranks the highest. During the meeting, a key <em>stakeholder advocates for selecting Project 1</em>, noting that political support will help secure resources and approvals more efficiently. Several team members prefer Project 3 because its benefits are distributed more evenly across multiple criteria. Weighted Scoring Model Criteria Weight Project 1 Project 2 Project 3 Supports key business objectives 60 90 90 50 Uses standard technology 20 25 90 50 Can be completed within project timeframe 10 20 20 50 Provides positive NPV 10 50 70 50 What should the project manager recommend? (Refer to the table)</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Resources, Stakeholders</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q219</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Team, Plan Resources<br>
-              <strong>Principle:</strong> Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Develop Team</h2>
+          <p><strong>Develop Team</strong> thuộc miền <strong>Resources, Stakeholders</strong> — process <strong>Develop Team</strong>, principle <strong>Build an empowered culture</strong>. PMBOK 8 (tr. 53): 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Support Project 1 because key stakeholder sponsorship is key
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Support Project 2 because it achieved the highest overall sc
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Support Project 3 because it balances benefits across multip
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q219</h4>
+            <p style="margin:0"><strong>stakeholder advocates for selecting Project 1</strong><br><br>→ <strong>B</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q219 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Support Project 1 because key stakeholder sponsorship i…</strong></td>
+                <td>Support Project 1 because key stakeholder sponsorship is key to projec</td>
+                <td>✗ &quot;Support Project 1 because key stakeholder sponsorship is key to project success.&quot; không p…</td>
+              </tr><tr>
+                <td><strong>B. Support Project 2 because it achieved the highest overa…</strong></td>
+                <td>Support Project 2 because it achieved the highest overall score.</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Support Project 3 because it balances benefits across m…</strong></td>
+                <td>Support Project 3 because it balances benefits across multiple categor</td>
+                <td>✗ &quot;Support Project 3 because it balances benefits across multiple categories.&quot; không phù hợp…</td>
+              </tr><tr>
+                <td><strong>D. Request that the steering committee adjust the weightin…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết team phân tán / virtual — đáp án đúng …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q219</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Support Project 1 because key stakeholder sponsorship is key to project success.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Support Project 2 because it achieved the highest overall score.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Support Project 3 because it balances benefits across multiple categories.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q219</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q219</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 219</div>
             <div class="q-text">A project selection committee is reviewing three candidate projects using the weighted scoring model shown in the table. Among the evaluated projects, Project 2 ranks the highest. During the meeting, a key stakeholder advocates for selecting Project 1, noting that political support will help secure resources and approvals more efficiently. Several team members prefer Project 3 because its benefits are distributed more evenly across multiple criteria. Weighted Scoring Model Criteria Weight Project 1 Project 2 Project 3 Supports key business objectives 60 90 90 50 Uses standard technology 20 25 90 50 Can be completed within project timeframe 10 20 20 50 Provides positive NPV 10 50 70 50 What should the project manager recommend? (Refer to the table)</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> Team phân tán — cải thiện <span class="kw-signal">collaboration</span> tools/process, không chỉ họp face-to-face.</li><li>Bối cảnh: team phân tán / virtual. Đáp án <strong>B</strong> — &quot;Support Project 2 because it achieved the highest overall score.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: team phân tán / virtual — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Develop Team</span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Support Project 2 because it achieved the highest overall score.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Team phân tán — cải thiện <span class="kw-signal">collaboration</span> tools/process, không chỉ họp face-to-face.<br><br>Bối cảnh: team phân tán / virtual. Đáp án <strong>B</strong> — &quot;Support Project 2 because it achieved the highest overall score.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an Empowered Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Support Project 1 because key stakeholder sponsorship is key to project success.</span></td><td>&quot;Support Project 1 because key stakeholder sponsorship is key to project success.&quot; không phù hợp team phân tán / virtual — đáp án đúng tập trung &quot;Support Project 2 because it achieved the highest overall score.&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Support Project 3 because it balances benefits across multiple categories.</span></td><td>&quot;Support Project 3 because it balances benefits across multiple categories.&quot; không phù hợp team phân tán / virtual — đáp án đúng tập trung &quot;Support Project 2 because it achieved the highest overall score.&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request that the steering committee adjust the weighting before making a final d…</span></td><td>Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết team phân tán / virtual — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A project selection committee is reviewing three candidate projects using the weighted scoring model… (Q219)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q219</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Support Project 1 because key stakeholder sponsorshi…" → A</h4>
+            <p style="margin:0">&quot;Support Project 1 because key stakeholder sponsorship is key to project success.&quot; không phù hợp team phân tán / virtual — đáp án đúng tập trung &quot;Support Project 2 because it achieved the highest overall score.&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Support Project 3 because it balances benefits acros…" → C</h4>
+            <p style="margin:0">&quot;Support Project 3 because it balances benefits across multiple categories.&quot; không phù hợp team phân tán / virtual — đáp án đúng tập trung &quot;Support Project 2 because it achieved the highest overall score.&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Request that the steering committee adjust the weigh…" → D</h4>
+            <p style="margin:0">Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết team phân tán / virtual — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>stakeholder advocates for selecting Project 1</strong> → <strong>B</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q219 — đáp án?</div>
+            <div class="flashcard-front">Q219 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Team</strong><br>PMBOK 8, tr. 53</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q219 — đáp án?</div>
             <div class="flashcard-back"><strong>B</strong> — Support Project 2 because it achieved the highest overall score.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Build an empowered culture</strong><br>Develop Team</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Team phân tán</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q219
-────────────────────────
-A project selection committee is reviewing three candidate projects using the weighted scoring model shown in the table. Among the evaluated projects, Project 2 ranks the highest. During the meeting, …
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP TEAM — Q219
+(PMBOK 8, tr. 53)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Stakeholders
+PROCESS: Develop Team, Plan Resources
+PRINCIPLE: Build an empowered culture
 
-ANSWER: B
-B. Support Project 2 because it achieved the highest overall score.
+SCENARIO:
+A project selection committee is reviewing three candidate projects using the weighted scoring model shown in the table. Among the evaluated projects, Project 2 ranks the highest. During the meeting, a key stakeholder ad…
 
-PMBOK 8:
-  Domain: Resources, Stakeholders
-  Process: Develop Team, Plan Resources
-  Principle: Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  stakeholder advocates for selecting Project 1
+
+ANSWER → B) Support Project 2 because it achieved the highest overall score.
+
+NOT:
+  A) Support Project 1 because key stakeholder sponsors… — &quot;Support Project 1 because key stakeholder sponsorship is ke
+  C) Support Project 3 because it balances benefits acr… — &quot;Support Project 3 because it balances benefits across multi
+  D) Request that the steering committee adjust the wei… — Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết team phâ
+
+Q219 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Support Project 1 because key stakeholder sponsorship is key to project success.\" không phù hợp team phân tán / virtual — đáp án đúng tập trung \"Support Project 2 because it achieved the highest overall score.\".","B":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8).","C":"\"Support Project 3 because it balances benefits across multiple categories.\" không phù hợp team phân tán / virtual — đáp án đúng tập trung \"Support Project 2 because it achieved the highest overall score.\".","D":"Tập trung \"leo thang lên cấp trên\" không giải quyết team phân tán / virtual — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
+      const EXPL = {"A":"\"Support Project 1 because key stakeholder sponsorship is key to project success.\" không phù hợp team phân tán / virtual — đáp án đúng tập trung \"Support Project 2 because it achieved the highest overall score.\".","B":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8).","C":"\"Support Project 3 because it balances benefits across multiple categories.\" không phù hợp team phân tán / virtual — đáp án đúng tập trung \"Support Project 2 because it achieved the highest overall score.\".","D":"Tập trung \"leo thang lên cấp trên\" không giải quyết team phân tán / virtual — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

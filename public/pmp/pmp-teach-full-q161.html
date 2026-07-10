@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 161</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-161">Câu 161</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q160.html">← 160</a>
         <a href="pmp-teach-full-q162.html">162 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 161 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">During the sprint review, the scrum master for a software project showed the following simplified burndown chart to the team: Based on this chart, what is the <span class="kw-cue">most</span> appropriate action for the scrum master to take with the team?</p>
-          <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q161</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q161</h1>
+          <p class="lead">Bài học Q161 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 200) — ngữ cảnh Agile/Scrum</p>
+          <p class="lead" style="margin-top:0.75rem">During the sprint review, the scrum master for a software project showed the following simplified burndown chart to the team: Based on this chart, what is the most appropriate action for the scrum master to take with the team?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 200</span><span class="badge">Stakeholders, Scope</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q161</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement, Validate Scope<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders, Scope</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 200): engaged in ensuring that the project is a success. In Figure 5-23, C represents the current engagement level of each stakeholder and D indicates the level that the project team has assessed as essential to ensure project success (desired).</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>họp</strong>
+              họp / thảo luận trực tiếp
+            </div><div class="approach-cell pull">
+              <strong>facilitate retrospective</strong>
+              facilitate retrospective / phân tích root cause
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Extend the sprint by a few days so the team can finish the r
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q161</h4>
+            <p style="margin:0">ngữ cảnh Agile/Scrum<br><br>→ <strong>B</strong> phù hợp vì PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q161 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Instruct the team to commit to fewer story points next …</strong></td>
+                <td>họp / thảo luận trực tiếp</td>
+                <td>✗ Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng …</td>
+              </tr><tr>
+                <td><strong>B. Facilitate a retrospective focusing on why work was com…</strong></td>
+                <td>facilitate retrospective / phân tích root cause</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Escalate to the sponsor that the team’s velocity is una…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>D. Extend the sprint by a few days so the team can finish …</strong></td>
+                <td>Extend the sprint by a few days so the team can finish the remaining 2</td>
+                <td>✗ &quot;Extend the sprint by a few days so the team can finish the remaining 25 story poin…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q161</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Instruct the team to commit to fewer story points next sprint and not discuss the chart further to avoid discouraging them.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         <span class="kw-signal">Facilitate</span> a <span class="kw-signal">retrospective</span> focusing on why work was completed late and how to improve slicing, estimation, and daily coordination.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         <span class="kw-trap">Escalate</span> to the sponsor that the team’s velocity is unacceptable and request to replace underperforming team members.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q161</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q161</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 161</div>
             <div class="q-text">During the sprint review, the scrum master for a software project showed the following simplified burndown chart to the team: Based on this chart, what is the <span class="kw-cue">most</span> appropriate action for the scrum master to take with the team?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>→ <strong>B:</strong> PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Manage Stakeholder Engagement</span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Facilitate a retrospective focusing on why work was completed late and how to improve slicing, estimation, and daily coordination.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.<br><br>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; engaged in ensuring that the project is a success. In Figure 5-23, C represents the current engagement level of each stakeholder and D indicates the level that the project team has assessed as essential to ensure project success (desired).<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 200 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Manage Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 200: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Manage Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Instruct the team to commit to fewer story points next sprint and not discuss th…</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> to the sponsor that the team’s velocity is unacceptable and request to …</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Extend the sprint by a few days so the team can finish the remaining 25 story po…</span></td><td>&quot;Extend the sprint by a few days so the team can finish the remaining 25 story poin…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="facilitate_retro">
+              <span>During the sprint review, the scrum master for a software project showed the following simplified bu… (Q161)</span>
+              <div class="classify-btns"><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="meet_discuss">
+              <span>Tình huống cần &quot;họp / thảo luận trực tiếp&quot; — không phải trọng tâm Q161</span>
+              <div class="classify-btns"><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q161</span>
+              <div class="classify-btns"><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Instruct the team to commit to fewer story points ne…" → A</h4>
+            <p style="margin:0">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần facilitate retrospective / phân tích root cause.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Escalate to the sponsor that the team’s velocity is …" → C</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Extend the sprint by a few days so the team can fini…" → D</h4>
+            <p style="margin:0">&quot;Extend the sprint by a few days so the team can finish the remaining 25 story poin…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>B</strong> — PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q161 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Facilitate a retrospective focusing on why work was completed late and how to improve slicing, estimation, and daily coordination.</div>
+            <div class="flashcard-front">Q161 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 200</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Q161 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Facilitate a retrospective focusing on why work was completed late and how to improve slicing, estim</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">ngữ cảnh Agile/Scrum</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q161
-────────────────────────
-During the sprint review, the scrum master for a software project showed the following simplified burndown chart to the team: Based on this chart, what is the most appropriate action for the scrum mas…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q161
+(PMBOK 8, tr. 200)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Scope
+PROCESS: Manage Stakeholder Engagement, Validate Scope
+PRINCIPLE: Focus on value
 
-ANSWER: B
-B. Facilitate a retrospective focusing on why work was completed late and how to improve slicing, estimation, and daily coordination.
+SCENARIO:
+During the sprint review, the scrum master for a software project showed the following simplified burndown chart to the team: Based on this chart, what is the most appropriate action for the scrum master to take with the…
 
-PMBOK 8:
-  Domain: Stakeholders, Scope
-  Process: Manage Stakeholder Engagement, Validate Scope
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → B) Facilitate a retrospective focusing on why work was completed late and how to improve slicing, estimation, and daily coordination.
+
+NOT:
+  A) Instruct the team to commit to fewer story points … — Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết ngữ c
+  C) Escalate to the sponsor that the team’s velocity i… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  D) Extend the sprint by a few days so the team can fi… — &quot;Extend the sprint by a few days so the team can finish the 
+
+Q161 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần facilitate retrospective / phân tích root cause.","B":"PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.","C":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","D":"\"Extend the sprint by a few days so the team can finish the remaining 25 story poin…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause."};
+      const EXPL = {"A":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần facilitate retrospective / phân tích root cause.","B":"Đúng! PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.","C":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","D":"\"Extend the sprint by a few days so the team can finish the remaining 25 story poin…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

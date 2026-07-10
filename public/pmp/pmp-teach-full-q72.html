@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 72</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-72">Câu 72</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q71.html">← 71</a>
         <a href="pmp-teach-full-q73.html">73 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 72 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager updating a reporting system faces disagreement among regional managers about which metrics to include, due to differing regulatory requirements and previous assurances. Conflicting preferences are leading to confusion over project deliverables and halting the meeting. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Resources</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q72</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q72</h1>
+          <p class="lead">Bài học Q72 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 9) — Xung đột</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager updating a reporting system faces disagreement among regional managers about which metrics to include, due to differing regulatory requirements and previous assurances. Conflicting preferences are leading to confusion over project deliverables and halting the meeting. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 9</span><span class="badge">Stakeholders, Resources</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q72</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably, Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Resources</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 9): contribute to the organization’s strategic objectives and are executed successfully. 1.3.2.1 Project Initiation Organizational leaders authorize projects in response to organizational strategic-objective realization and stakeholder needs.</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Allow each region to maintain its own metrics to avoid confl
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div><div class="approach-cell pull">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q72</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q72 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Allow each region to maintain its own metrics to avoid …</strong></td>
+                <td>Allow each region to maintain its own metrics to avoid conflict and ke</td>
+                <td>✗ &quot;Allow each region to maintain its own metrics to avoid conflict and keep the proje…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Ask the sponsor to choose one region’s approach and req…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Escalate trước khi facilitate — PM nên thử giải quyết ở cấp team trước.</td>
+              </tr><tr>
+                <td><strong>C. Postpone the metrics discussion until the technical pla…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.</td>
+              </tr><tr>
+                <td><strong>D. Lead a meeting to confirm project goals and limits, the…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q72</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Allow each region to maintain its own metrics to avoid conflict and keep the project moving.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Lead a meeting to confirm project goals and limits, then help select practical, prioritized metrics.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q72</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q72</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 72</div>
             <div class="q-text">A project manager updating a reporting system faces disagreement among regional managers about which metrics to include, due to differing regulatory requirements and previous assurances. Conflicting preferences are leading to confusion over project deliverables and halting the meeting. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>→ <strong>D:</strong> Xung đột — PM <span class="kw-signal">facilitate</span> giải quyết trực tiếp, không <span class="kw-trap">ignore</span> hay <span class="kw-trap">escalate</span> sớm.</li><li>Bối cảnh: xung đột trong team hoặc stakeholder. Đáp án <strong>D</strong> — &quot;Lead a meeting to confirm project goals and limits, then help select practical, prioritized metrics.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>Stem signal: xung đột trong team hoặc stakeholder — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án D.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Lead a meeting to confirm project goals and limits, then help select practical, prioritized metrics.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Xung đột — PM <span class="kw-signal">facilitate</span> giải quyết trực tiếp, không <span class="kw-trap">ignore</span> hay <span class="kw-trap">escalate</span> sớm.<br><br>Bối cảnh: xung đột trong team hoặc stakeholder. Đáp án <strong>D</strong> — &quot;Lead a meeting to confirm project goals and limits, then help select practical, prioritized metrics.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; contribute to the organization’s strategic objectives and are executed successfully. 1.3.2.1 Project Initiation Organizational leaders authorize projects in response to organizational strategic-objective realization and stakeholder needs.<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 9 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 9: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Allow each region to maintain its own metrics to avoid conflict and keep the pro…</span></td><td>&quot;Allow each region to maintain its own metrics to avoid conflict and keep the proje…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Ask the sponsor</span> to choose one region’s approach and require all others to adopt …</span></td><td><span class="kw-trap">Escalate</span> trước khi <span class="kw-signal">facilitate</span> — PM nên thử giải quyết ở cấp team trước.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Postpone</span> the metrics discussion until the technical platform is fully configured…</span></td><td>Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="prioritize_value">
+              <span>A project manager updating a reporting system faces disagreement among regional managers about which… (Q72)</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q72</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q72</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Allow each region to maintain its own metrics to avo…" → A</h4>
+            <p style="margin:0">&quot;Allow each region to maintain its own metrics to avoid conflict and keep the proje…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Ask the sponsor to choose one region’s approach and …" → B</h4>
+            <p style="margin:0">Escalate trước khi facilitate — PM nên thử giải quyết ở cấp team trước.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Postpone the metrics discussion until the technical …" → C</h4>
+            <p style="margin:0">Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q72 — đáp án?</div>
+            <div class="flashcard-front">Q72 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 9</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q72 — đáp án?</div>
             <div class="flashcard-back"><strong>D</strong> — Lead a meeting to confirm project goals and limits, then help select practical, prioritized metrics.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Xung đột</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q72
-────────────────────────
-A project manager updating a reporting system faces disagreement among regional managers about which metrics to include, due to differing regulatory requirements and previous assurances. Conflicting p…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q72
+(PMBOK 8, tr. 9)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Resources
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably, Build an empowered culture
 
-ANSWER: D
-D. Lead a meeting to confirm project goals and limits, then help select practical, prioritized metrics.
+SCENARIO:
+A project manager updating a reporting system faces disagreement among regional managers about which metrics to include, due to differing regulatory requirements and previous assurances. Conflicting preferences are leadi…
 
-PMBOK 8:
-  Domain: Stakeholders, Resources
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably, Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Lead a meeting to confirm project goals and limits, then help select practical, prioritized metrics.
+
+NOT:
+  A) Allow each region to maintain its own metrics to a… — &quot;Allow each region to maintain its own metrics to avoid conf
+  B) Ask the sponsor to choose one region’s approach an… — Escalate trước khi facilitate — PM nên thử giải quyết ở cấp 
+  C) Postpone the metrics discussion until the technica… — Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.
+
+Q72 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Allow each region to maintain its own metrics to avoid conflict and keep the proje…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung ưu tiên theo giá trị / MVP.","B":"Escalate trước khi facilitate — PM nên thử giải quyết ở cấp team trước.","C":"Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.","D":"PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc."};
+      const EXPL = {"A":"\"Allow each region to maintain its own metrics to avoid conflict and keep the proje…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung ưu tiên theo giá trị / MVP.","B":"Escalate trước khi facilitate — PM nên thử giải quyết ở cấp team trước.","C":"Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.","D":"Đúng! PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 315</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Plan Resources</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-315">Câu 315</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q314.html">← 314</a>
         <a href="pmp-teach-full-q316.html">316 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 315 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project team is preparing to roll out a new enterprise software across multiple departments. The project manager arranged for all team members to complete a standard video-based training module before the pilot phase. Despite full attendance, several team members report confusion and errors during the <span class="kw-cue">first</span> deployment attempt. The project manager is concerned about delays and quality issues if this continues. What should the project manager have done earlier to ensure that training was effective?</p>
-          <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Plan Resources</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q315</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q315</h1>
+          <p class="lead">Bài học Q315 về <strong>Plan Resources</strong> (PMBOK 8, tr. 27) — vấn đề chất lượng / defect</p>
+          <p class="lead" style="margin-top:0.75rem">A project team is preparing to roll out a new enterprise software across multiple departments. The project manager arranged for all team members to complete a standard video-based training module before the pilot phase. Despite full attendance, several team members report confusion and errors during the first deployment attempt. The project manager is concerned about delays and quality issues if this continues. What should the project manager have done earlier to ensure that training was effective?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 27</span><span class="badge">Resources, Stakeholders</span><span class="badge">Plan Resources</span><span class="badge">Full Bank Q315</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,52 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Plan Resources, Acquire Resources, Develop Team<br>
-              <strong>Principle:</strong> Embed quality
-            </p>
+        <section id="concept">
+          <h2>1. Plan Resources</h2>
+          <p><strong>Plan Resources</strong> thuộc miền <strong>Resources, Stakeholders</strong> — process <strong>Plan Resources</strong>, principle <strong>Embed quality</strong>. PMBOK 8 (tr. 27): Project Performance process is thus supported by robust measurement techniques that drive process improvements and increase the likelihood of project success. Measurement requires time and effort that could be allocated to other productive</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>coaching</strong>
+              coaching / phát triển năng lực
+            </div><div class="approach-cell">
+              <strong>ghi nhận</strong>
+              ghi nhận / tài liệu hóa
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q315</h4>
+            <p style="margin:0">vấn đề chất lượng / defect<br><br>→ <strong>A</strong> phù hợp vì PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q315 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Follow up the training with practical exercises and mea…</strong></td>
+                <td>coaching / phát triển năng lực</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Request department managers to verify that all employee…</strong></td>
+                <td>coaching / phát triển năng lực</td>
+                <td>✗ &quot;Request department managers to verify that all employees completed the t…&quot; cùng nhóm coac…</td>
+              </tr><tr>
+                <td><strong>C. Provide each team member with access to the software us…</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>D. Ask the sponsor to invest in a longer, instructor-led t…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết vấn đề chất lượng / defect — đáp án đú…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q315</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Follow up the training with practical exercises and measured performance results.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Request department managers to verify that all employees completed the training.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q315</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q315</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 315</div>
             <div class="q-text">A project team is preparing to roll out a new enterprise software across multiple departments. The project manager arranged for all team members to complete a standard video-based training module before the pilot phase. Despite full attendance, several team members report confusion and errors during the <span class="kw-cue">first</span> deployment attempt. The project manager is concerned about delays and quality issues if this continues. What should the project manager have done earlier to ensure that training was effective?</div>
@@ -181,44 +226,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</li><li>→ <strong>A:</strong> PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</li><li>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>A</strong> — &quot;Follow up the training with practical exercises and measured performance results.&quot; — phù hợp vì PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> ưu tiên <strong><span class="kw-signal">coaching</span> / phát triển năng lực</strong> — ghi nhận/tài liệu hóa thường đến sau bước xử lý trực tiếp tình huống.</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Plan <span class="kw-pmbok">Resources</span> — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Follow up the training with practical exercises and measured performance results.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>A</strong> — &quot;Follow up the training with practical exercises and measured performance results.&quot; — phù hợp vì PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> ưu tiên <strong><span class="kw-signal">coaching</span> / phát triển năng lực</strong> — ghi nhận/tài liệu hóa thường đến sau bước xử lý trực tiếp tình huống.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; Project Performance process is thus supported by robust measurement techniques that drive process improvements and increase the likelihood of project success. Measurement requires time and effort that could be allocated to other productive<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 27 (Performance Domain: <span class="kw-pmbok">Resources</span>, Plan <span class="kw-pmbok">Resources</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 27: Performance Domain: <span class="kw-pmbok">Resources</span>, Plan <span class="kw-pmbok">Resources</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request department managers to verify that all employees completed the training.</span></td><td>&quot;Request department managers to verify that all employees completed the t…&quot; cùng nhóm <span class="kw-signal">coaching</span> / phát triển năng lực nhưng lệch trọng tâm — &quot;Follow up the training with practical exercises and measured performance…&quot; sát vấn đề chất lượng / defect hơn.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Provide each team member with access to the software user manual and FAQ documen…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi <span class="kw-cue">FIRST</span> — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Ask the sponsor</span> to invest in a longer, instructor-led training course instead of…</span></td><td>Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="coach_develop">
+              <span>A project team is preparing to roll out a new enterprise software across multiple departments. The p… (Q315)</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button></div>
+            </div><div class="classify-row" data-answer="coach_develop">
+              <span>Tình huống cần &quot;coaching / phát triển năng lực&quot; — không phải trọng tâm Q315</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button></div>
+            </div><div class="classify-row" data-answer="document_first">
+              <span>Tình huống cần &quot;ghi nhận / tài liệu hóa&quot; — không phải trọng tâm Q315</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q315</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Request department managers to verify that all emplo…" → B</h4>
+            <p style="margin:0">&quot;Request department managers to verify that all employees completed the t…&quot; cùng nhóm coaching / phát triển năng lực nhưng lệch trọng tâm — &quot;Follow up the training with practical exercises and measured performance…&quot; sát vấn đề chất lượng / defect hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Provide each team member with access to the software…" → C</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi FIRST — đây không phải bước ưu tiên.)</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Ask the sponsor to invest in a longer, instructor-le…" → D</h4>
+            <p style="margin:0">Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần coaching / phát triển năng lực.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>A</strong> — PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q315 — đáp án?</div>
+            <div class="flashcard-front">Q315 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Plan Resources</strong><br>PMBOK 8, tr. 27</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q315 — đáp án?</div>
             <div class="flashcard-back"><strong>A</strong> — Follow up the training with practical exercises and measured performance results.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Embed quality</strong><br>Plan Resources</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chất lượng / defect</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q315
-────────────────────────
-A project team is preparing to roll out a new enterprise software across multiple departments. The project manager arranged for all team members to complete a standard video-based training module befo…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">PLAN RESOURCES — Q315
+(PMBOK 8, tr. 27)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Stakeholders
+PROCESS: Plan Resources, Acquire Resources, Develop Team
+PRINCIPLE: Embed quality
 
-ANSWER: A
-A. Follow up the training with practical exercises and measured performance results.
+SCENARIO:
+A project team is preparing to roll out a new enterprise software across multiple departments. The project manager arranged for all team members to complete a standard video-based training module before the pilot phase. …
 
-PMBOK 8:
-  Domain: Resources, Stakeholders
-  Process: Plan Resources, Acquire Resources, Develop Team
-  Principle: Embed quality</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → A) Follow up the training with practical exercises and measured performance results.
+
+NOT:
+  B) Request department managers to verify that all emp… — &quot;Request department managers to verify that all employees co
+  C) Provide each team member with access to the softwa… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+  D) Ask the sponsor to invest in a longer, instructor-… — Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết vấn đề c
+
+Q315 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.","B":"\"Request department managers to verify that all employees completed the t…\" cùng nhóm coaching / phát triển năng lực nhưng lệch trọng tâm — \"Follow up the training with practical exercises and measured performance…\" sát vấn đề chất lượng / defect hơn.","C":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi FIRST — đây không phải bước ưu tiên.)","D":"Tập trung \"leo thang lên cấp trên\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần coaching / phát triển năng lực."};
+      const EXPL = {"A":"Đúng! PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.","B":"\"Request department managers to verify that all employees completed the t…\" cùng nhóm coaching / phát triển năng lực nhưng lệch trọng tâm — \"Follow up the training with practical exercises and measured performance…\" sát vấn đề chất lượng / defect hơn.","C":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi FIRST — đây không phải bước ưu tiên.)","D":"Tập trung \"leo thang lên cấp trên\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần coaching / phát triển năng lực."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

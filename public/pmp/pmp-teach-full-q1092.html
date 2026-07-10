@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1092</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Define Scope</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1092">Câu 1092</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1091.html">← 1091</a>
         <a href="pmp-teach-full-q1093.html">1093 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1092 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A new product is nearing completion and is scheduled for deployment in several countries. Country A requested a modification to the product to better support its sustainability initiatives, and the project manager for the deployment in Country A approved the change. When the new version of the product was received in Country B, it failed quality and acceptance testing because it did <span class="kw-cue">not</span> meet Country B's government regulations. What should have been done to avoid this situation?</p>
-          <div class="badges"><span class="badge">Scope, Governance</span><span class="badge">Initiating</span><span class="badge">Define Scope</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q1092</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1092</h1>
+          <p class="lead">Bài học Q1092 về <strong>Define Scope</strong> (PMBOK 8, tr. 52) — vấn đề chất lượng / defect</p>
+          <p class="lead" style="margin-top:0.75rem">A new product is nearing completion and is scheduled for deployment in several countries. Country A requested a modification to the product to better support its sustainability initiatives, and the project manager for the deployment in Country A approved the change. When the new version of the product was received in Country B, it failed quality and acceptance testing because it did not meet Country B's government regulations. What should have been done to avoid this situation?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 52</span><span class="badge">Scope, Governance</span><span class="badge">Define Scope</span><span class="badge">Full Bank Q1092</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,48 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Scope, Governance<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Define Scope, Validate Scope, Control Scope<br>
-              <strong>Principle:</strong> Embed quality, Integrate sustainability
-            </p>
+        <section id="concept">
+          <h2>1. Define Scope</h2>
+          <p><strong>Define Scope</strong> thuộc miền <strong>Scope, Governance</strong> — process <strong>Define Scope</strong>, principle <strong>Embed quality</strong>. PMBOK 8 (tr. 52): and less confusion. This approach includes integrating sustainability goals into governance practices to ensure long-term environmental and social benefits. ⚫ Scope. Open-channel communication proactively calibrates to a project’s evolvin</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>change control</strong>
+              change control / change request
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Require all relevant countries to align their regulations to
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Require that countries requesting changes fund impact assess
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1092</h4>
+            <p style="margin:0">vấn đề chất lượng / defect<br><br>→ <strong>C</strong> phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1092 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Prevent authorization of change requests during multi-c…</strong></td>
+                <td>change control / change request</td>
+                <td>✗ &quot;Prevent authorization of change requests during multi-country deployment…&quot; cùng nhóm chan…</td>
+              </tr><tr>
+                <td><strong>B. Require all relevant countries to align their regulatio…</strong></td>
+                <td>Require all relevant countries to align their regulations to a common </td>
+                <td>✗ &quot;Require all relevant countries to align their regulations to a common baseline.&quot; không ph…</td>
+              </tr><tr>
+                <td><strong>C. Analyze change requests at a global level before implem…</strong></td>
+                <td>change control / change request</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Require that countries requesting changes fund impact a…</strong></td>
+                <td>Require that countries requesting changes fund impact assessments for </td>
+                <td>✗ &quot;Require that countries requesting changes fund impact assessments for all countries.&quot; khô…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1092</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Prevent authorization of change requests during multi-country deployments.
@@ -156,7 +201,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Analyze change requests at a global level before implementing them across countries.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Require that countries requesting changes fund impact assessments for all countries.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1092</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1092</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1092</div>
             <div class="q-text">A new product is nearing completion and is scheduled for deployment in several countries. Country A requested a modification to the product to better support its sustainability initiatives, and the project manager for the deployment in Country A approved the change. When the new version of the product was received in Country B, it failed quality and acceptance testing because it did <span class="kw-cue">not</span> meet Country B's government regulations. What should have been done to avoid this situation?</div>
@@ -181,44 +226,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>→ <strong>C:</strong> Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>C</strong> — &quot;Analyze change requests at a global level before implementing them across countries.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: đạo đức / tuân thủ — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Analyze change requests at a global level before implementing them across countries.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>C</strong> — &quot;Analyze change requests at a global level before implementing them across countries.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; and less confusion. This approach includes integrating sustainability goals into governance practices to ensure long-term environmental and social benefits. ⚫ <span class="kw-pmbok">Scope</span>. Open-channel communication proactively calibrates to a project’s evolvin<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 52 (Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 52: Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Prevent authorization of change requests during multi-country deployments.</span></td><td>&quot;Prevent authorization of change requests during multi-country deployment…&quot; cùng nhóm change control / <span class="kw-signal">change request</span> nhưng lệch trọng tâm — &quot;Analyze change requests at a global level before implementing them acros…&quot; sát vấn đề chất lượng / defect hơn.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Require all relevant countries to align their regulations to a common baseline.</span></td><td>&quot;Require all relevant countries to align their regulations to a common baseline.&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Require that countries requesting changes fund impact assessments for all countr…</span></td><td>&quot;Require that countries requesting changes fund impact assessments for all countries.&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="change_control">
+              <span>A new product is nearing completion and is scheduled for deployment in several countries. Country A … (Q1092)</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="change_control" type="button">change contr</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="change_control">
+              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q1092</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="change_control" type="button">change contr</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Prevent authorization of change requests during mult…" → A</h4>
+            <p style="margin:0">&quot;Prevent authorization of change requests during multi-country deployment…&quot; cùng nhóm change control / change request nhưng lệch trọng tâm — &quot;Analyze change requests at a global level before implementing them acros…&quot; sát vấn đề chất lượng / defect hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Require all relevant countries to align their regula…" → B</h4>
+            <p style="margin:0">&quot;Require all relevant countries to align their regulations to a common baseline.&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Require that countries requesting changes fund impac…" → D</h4>
+            <p style="margin:0">&quot;Require that countries requesting changes fund impact assessments for all countries.&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>C</strong> — Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1092 — đáp án?</div>
+            <div class="flashcard-front">Q1092 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Define Scope</strong><br>PMBOK 8, tr. 52</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q1092 — đáp án?</div>
             <div class="flashcard-back"><strong>C</strong> — Analyze change requests at a global level before implementing them across countries.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Embed quality</strong><br>Define Scope</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chất lượng / defect</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1092
-────────────────────────
-A new product is nearing completion and is scheduled for deployment in several countries. Country A requested a modification to the product to better support its sustainability initiatives, and the pr…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEFINE SCOPE — Q1092
+(PMBOK 8, tr. 52)
+─────────────────────────────────────────────────────
+DOMAIN: Scope, Governance
+PROCESS: Define Scope, Validate Scope, Control Scope
+PRINCIPLE: Embed quality, Integrate sustainability
 
-ANSWER: C
-C. Analyze change requests at a global level before implementing them across countries.
+SCENARIO:
+A new product is nearing completion and is scheduled for deployment in several countries. Country A requested a modification to the product to better support its sustainability initiatives, and the project manager for th…
 
-PMBOK 8:
-  Domain: Scope, Governance
-  Process: Define Scope, Validate Scope, Control Scope
-  Principle: Embed quality, Integrate sustainability</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → C) Analyze change requests at a global level before implementing them across countries.
+
+NOT:
+  A) Prevent authorization of change requests during mu… — &quot;Prevent authorization of change requests during multi-count
+  B) Require all relevant countries to align their regu… — &quot;Require all relevant countries to align their regulations t
+  D) Require that countries requesting changes fund imp… — &quot;Require that countries requesting changes fund impact asses
+
+Q1092 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"\"Prevent authorization of change requests during multi-country deployment…\" cùng nhóm change control / change request nhưng lệch trọng tâm — \"Analyze change requests at a global level before implementing them acros…\" sát vấn đề chất lượng / defect hơn.","B":"\"Require all relevant countries to align their regulations to a common baseline.\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request.","C":"Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.","D":"\"Require that countries requesting changes fund impact assessments for all countries.\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request."};
+      const EXPL = {"A":"\"Prevent authorization of change requests during multi-country deployment…\" cùng nhóm change control / change request nhưng lệch trọng tâm — \"Analyze change requests at a global level before implementing them acros…\" sát vấn đề chất lượng / defect hơn.","B":"\"Require all relevant countries to align their regulations to a common baseline.\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request.","C":"Đúng! Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.","D":"\"Require that countries requesting changes fund impact assessments for all countries.\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

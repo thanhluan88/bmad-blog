@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 832</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-832">Câu 832</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q831.html">← 831</a>
         <a href="pmp-teach-full-q833.html">833 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 832 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">As the transformation continues, competitors launch rapid digital offerings, customer demands increase for transparency and sustainability, and regulatory guidance may impact compliance. Some leaders call for swift changes to scope and priorities, while others caution against frequent shifts that disrupt execution. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Governance, Schedule</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q832</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q832</h1>
+          <p class="lead">Bài học Q832 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 41) — đạo đức / tuân thủ</p>
+          <p class="lead" style="margin-top:0.75rem">As the transformation continues, competitors launch rapid digital offerings, customer demands increase for transparency and sustainability, and regulatory guidance may impact compliance. Some leaders call for swift changes to scope and priorities, while others caution against frequent shifts that disrupt execution. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 41</span><span class="badge">Governance, Schedule</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q832</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,49 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Schedule<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Project Execution, Perform Integrated Change Control, Close Project or Phase<br>
-              <strong>Principle:</strong> Focus on value, Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Governance, Schedule</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 41): operational activities, making it challenging to isolate. When a project is part of a program, evaluating value at the program level is necessary to properly direct the project. The project value provides key data for portfolio management</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q832</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>A</strong> phù hợp vì PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q832 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Regularly evaluate external changes, prioritize their i…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Quickly adjust scope and priorities to stay competitive…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td>✗ &quot;Quickly adjust scope and priorities to stay competitive, acknowledging s…&quot; cùng nhóm ưu t…</td>
+              </tr><tr>
+                <td><strong>C. Recognize external changes but delay scope and priority…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td>✗ &quot;Recognize external changes but delay scope and priority changes until th…&quot; cùng nhóm ưu t…</td>
+              </tr><tr>
+                <td><strong>D. Escalate external change signals to executive leadershi…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q832</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Regularly evaluate external changes, prioritize their impact on strategy and backlog, and adjust through current governance processes.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Quickly adjust scope and priorities to stay competitive, acknowledging short-term disruption as necessary for flexibility.
@@ -165,7 +207,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q832</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q832</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 832</div>
             <div class="q-text">As the transformation continues, competitors launch rapid digital offerings, customer demands increase for transparency and sustainability, and regulatory guidance may impact compliance. Some leaders call for swift changes to scope and priorities, while others caution against frequent shifts that disrupt execution. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +223,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>→ <strong>A:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>Bối cảnh: đạo đức / tuân thủ. Đáp án <strong>A</strong> — &quot;Regularly evaluate external changes, prioritize their impact on strategy and backlog, and adjust through current governance processes.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>Stem signal: đạo đức / tuân thủ — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Manage Project Execution</span> — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Regularly evaluate external changes, prioritize their impact on strategy and backlog, and adjust through current governance processes.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.<br><br>Bối cảnh: đạo đức / tuân thủ. Đáp án <strong>A</strong> — &quot;Regularly evaluate external changes, prioritize their impact on strategy and backlog, and adjust through current governance processes.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; operational activities, making it challenging to isolate. When a project is part of a program, evaluating value at the program level is necessary to properly direct the project. The project value provides key data for portfolio management<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 41 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 41: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Quickly adjust scope and priorities to stay competitive, acknowledging short-ter…</span></td><td>&quot;Quickly adjust scope and priorities to stay competitive, acknowledging s…&quot; cùng nhóm ưu tiên theo giá trị / <span class="kw-signal">MVP</span> nhưng lệch trọng tâm — &quot;Regularly evaluate external changes, prioritize their impact on strategy…&quot; sát đạo đức / tuân thủ hơn.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Recognize external changes but <span class="kw-trap">delay</span> scope and priority changes until this phase…</span></td><td>&quot;Recognize external changes but <span class="kw-trap">delay</span> scope and priority changes until th…&quot; cùng nhóm ưu tiên theo giá trị / <span class="kw-signal">MVP</span> nhưng lệch trọng tâm — &quot;Regularly evaluate external changes, prioritize their impact on strategy…&quot; sát đạo đức / tuân thủ hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> external change signals to executive leadership and await clear instruc…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="prioritize_value">
+              <span>As the transformation continues, competitors launch rapid digital offerings, customer demands increa… (Q832)</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="prioritize_value">
+              <span>Tình huống cần &quot;ưu tiên theo giá trị / MVP&quot; — không phải trọng tâm Q832</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q832</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Quickly adjust scope and priorities to stay competit…" → B</h4>
+            <p style="margin:0">&quot;Quickly adjust scope and priorities to stay competitive, acknowledging s…&quot; cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — &quot;Regularly evaluate external changes, prioritize their impact on strategy…&quot; sát đạo đức / tuân thủ hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Recognize external changes but delay scope and prior…" → C</h4>
+            <p style="margin:0">&quot;Recognize external changes but delay scope and priority changes until th…&quot; cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — &quot;Regularly evaluate external changes, prioritize their impact on strategy…&quot; sát đạo đức / tuân thủ hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Escalate external change signals to executive leader…" → D</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>A</strong> — PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q832 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Regularly evaluate external changes, prioritize their impact on strategy and backlog, and adjust through current governance processes.</div>
+            <div class="flashcard-front">Q832 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 41</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Q832 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Regularly evaluate external changes, prioritize their impact on strategy and backlog, and adjust thr</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">đạo đức / tuân thủ</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q832
-────────────────────────
-As the transformation continues, competitors launch rapid digital offerings, customer demands increase for transparency and sustainability, and regulatory guidance may impact compliance. Some leaders …
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q832
+(PMBOK 8, tr. 41)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Schedule
+PROCESS: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
+PRINCIPLE: Focus on value, Lead accountably
 
-ANSWER: A
-A. Regularly evaluate external changes, prioritize their impact on strategy and backlog, and adjust through current governance processes.
+SCENARIO:
+As the transformation continues, competitors launch rapid digital offerings, customer demands increase for transparency and sustainability, and regulatory guidance may impact compliance. Some leaders call for swift chang…
 
-PMBOK 8:
-  Domain: Governance, Schedule
-  Process: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
-  Principle: Focus on value, Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → A) Regularly evaluate external changes, prioritize their impact on strategy and backlog, and adjust through current governance processes.
+
+NOT:
+  B) Quickly adjust scope and priorities to stay compet… — &quot;Quickly adjust scope and priorities to stay competitive, ac
+  C) Recognize external changes but delay scope and pri… — &quot;Recognize external changes but delay scope and priority cha
+  D) Escalate external change signals to executive lead… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+
+Q832 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","B":"\"Quickly adjust scope and priorities to stay competitive, acknowledging s…\" cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — \"Regularly evaluate external changes, prioritize their impact on strategy…\" sát đạo đức / tuân thủ hơn.","C":"\"Recognize external changes but delay scope and priority changes until th…\" cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — \"Regularly evaluate external changes, prioritize their impact on strategy…\" sát đạo đức / tuân thủ hơn.","D":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên."};
+      const EXPL = {"A":"Đúng! PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","B":"\"Quickly adjust scope and priorities to stay competitive, acknowledging s…\" cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — \"Regularly evaluate external changes, prioritize their impact on strategy…\" sát đạo đức / tuân thủ hơn.","C":"\"Recognize external changes but delay scope and priority changes until th…\" cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — \"Regularly evaluate external changes, prioritize their impact on strategy…\" sát đạo đức / tuân thủ hơn.","D":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 974</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Perform Integrated Chang</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-974">Câu 974</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q973.html">← 973</a>
         <a href="pmp-teach-full-q975.html">975 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 974 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A customer reviewed a product and requested additional features that were <span class="kw-cue">not</span> in the requirements documentation. The work-in-progress (WIP) limits have already been optimized for the teams working on different work components. How should the project manager begin to resolve the customer requirements?</p>
-          <div class="badges"><span class="badge">Governance, Scope</span><span class="badge">Executing</span><span class="badge">Perform Integrated Change Control</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q974</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q974</h1>
+          <p class="lead">Bài học Q974 về <strong>Perform Integrated Change Control</strong> (PMBOK 8, tr. 151) — Có yêu cầu thay đổi</p>
+          <p class="lead" style="margin-top:0.75rem">A customer reviewed a product and requested additional features that were not in the requirements documentation. The work-in-progress (WIP) limits have already been optimized for the teams working on different work components. How should the project manager begin to resolve the customer requirements?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 151</span><span class="badge">Governance, Scope</span><span class="badge">Perform Integrated Change Control</span><span class="badge">Full Bank Q974</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Perform Integrated Change Control<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Perform Integrated Change Control</h2>
+          <p><strong>Perform Integrated Change Control</strong> thuộc miền <strong>Governance, Scope</strong> — process <strong>Perform Integrated Change Control</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 151): the needs of project stakeholders, considering organizational and environmental constraints. Configuration management activities supported by these change control tools include identifying configuration items, recording and reporting their</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Build the product according to the previously agreed custome
+            </div><div class="approach-cell pull">
+              <strong>họp</strong>
+              họp / thảo luận trực tiếp
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Breakdown work on additional features with existing componen
+            </div><div class="approach-cell">
+              <strong>đảm bảo chất lượng</strong>
+              đảm bảo chất lượng / kiểm soát quality
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q974</h4>
+            <p style="margin:0">yêu cầu thay đổi phạm vi/kế hoạch<br><br>→ <strong>B</strong> phù hợp vì PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay escalate.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q974 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Build the product according to the previously agreed cu…</strong></td>
+                <td>Build the product according to the previously agreed customer requirem</td>
+                <td>✗ &quot;Build the product according to the previously agreed customer requirements.&quot; không phù hợ…</td>
+              </tr><tr>
+                <td><strong>B. Discuss the feasibility and impact of the new features …</strong></td>
+                <td>họp / thảo luận trực tiếp</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Breakdown work on additional features with existing com…</strong></td>
+                <td>Breakdown work on additional features with existing component teams.</td>
+                <td>✗ &quot;Breakdown work on additional features with existing component teams.&quot; không phù hợp yêu c…</td>
+              </tr><tr>
+                <td><strong>D. Release increments of the additional features for custo…</strong></td>
+                <td>đảm bảo chất lượng / kiểm soát quality</td>
+                <td>✗ Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết yêu cầu thay đổi phạm …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q974</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Build the product according to the previously agreed customer requirements.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Discuss the feasibility and impact of the new features with the product owner.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay <span class="kw-trap">escalate</span>.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Breakdown work on additional features with existing component teams.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q974</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q974</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 974</div>
             <div class="q-text">A customer reviewed a product and requested additional features that were <span class="kw-cue">not</span> in the requirements documentation. The work-in-progress (WIP) limits have already been optimized for the teams working on different work components. How should the project manager begin to resolve the customer requirements?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay <span class="kw-trap">escalate</span>.</li><li>→ <strong>B:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.</li><li>Bối cảnh: yêu cầu thay đổi phạm vi/kế hoạch. Đáp án <strong>B</strong> — &quot;Discuss the feasibility and impact of the new features with the product owner.&quot; — phù hợp vì PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay <span class="kw-trap">escalate</span>. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: yêu cầu thay đổi phạm vi/kế hoạch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Perform Integrated Change Control</span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Discuss the feasibility and impact of the new features with the product owner.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.<br><br>Bối cảnh: yêu cầu thay đổi phạm vi/kế hoạch. Đáp án <strong>B</strong> — &quot;Discuss the feasibility and impact of the new features with the product owner.&quot; — phù hợp vì PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay <span class="kw-trap">escalate</span>. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; the needs of project stakeholders, considering organizational and environmental constraints. Configuration management activities supported by these change control tools include identifying configuration items, recording and reporting their<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 151 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Perform Integrated Change Control</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 151: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Perform Integrated Change Control</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Build the product according to the previously agreed customer requirements.</span></td><td>&quot;Build the product according to the previously agreed customer requirements.&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung họp / thảo luận trực tiếp.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Breakdown work on additional features with existing component teams.</span></td><td>&quot;Breakdown work on additional features with existing component teams.&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung họp / thảo luận trực tiếp.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Release increments of the additional features for customer validation.</span></td><td>Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần họp / thảo luận trực tiếp.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="meet_discuss">
+              <span>A customer reviewed a product and requested additional features that were not in the requirements do… (Q974)</span>
+              <div class="classify-btns"><button data-pick="meet_discuss" type="button">họp</button><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="quality_embed">
+              <span>Tình huống cần &quot;đảm bảo chất lượng / kiểm soát quality&quot; — không phải trọng tâm Q974</span>
+              <div class="classify-btns"><button data-pick="meet_discuss" type="button">họp</button><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Build the product according to the previously agreed…" → A</h4>
+            <p style="margin:0">&quot;Build the product according to the previously agreed customer requirements.&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung họp / thảo luận trực tiếp.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Breakdown work on additional features with existing …" → C</h4>
+            <p style="margin:0">&quot;Breakdown work on additional features with existing component teams.&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung họp / thảo luận trực tiếp.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Release increments of the additional features for cu…" → D</h4>
+            <p style="margin:0">Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần họp / thảo luận trực tiếp.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>B</strong> — PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay escalate.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q974 — đáp án?</div>
+            <div class="flashcard-front">Q974 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Perform Integrated Change Control</strong><br>PMBOK 8, tr. 151</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q974 — đáp án?</div>
             <div class="flashcard-back"><strong>B</strong> — Discuss the feasibility and impact of the new features with the product owner.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Perform Integrated Change Control</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Có yêu cầu thay đổi</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q974
-────────────────────────
-A customer reviewed a product and requested additional features that were not in the requirements documentation. The work-in-progress (WIP) limits have already been optimized for the teams working on …
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">PERFORM INTEGRATED CHANGE CONTROL — Q974
+(PMBOK 8, tr. 151)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Scope
+PROCESS: Perform Integrated Change Control
+PRINCIPLE: Focus on value
 
-ANSWER: B
-B. Discuss the feasibility and impact of the new features with the product owner.
+SCENARIO:
+A customer reviewed a product and requested additional features that were not in the requirements documentation. The work-in-progress (WIP) limits have already been optimized for the teams working on different work compo…
 
-PMBOK 8:
-  Domain: Governance, Scope
-  Process: Perform Integrated Change Control
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → B) Discuss the feasibility and impact of the new features with the product owner.
+
+NOT:
+  A) Build the product according to the previously agre… — &quot;Build the product according to the previously agreed custom
+  C) Breakdown work on additional features with existin… — &quot;Breakdown work on additional features with existing compone
+  D) Release increments of the additional features for … — Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giả
+
+Q974 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Build the product according to the previously agreed customer requirements.\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung họp / thảo luận trực tiếp.","B":"PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay escalate.","C":"\"Breakdown work on additional features with existing component teams.\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung họp / thảo luận trực tiếp.","D":"Tập trung \"đảm bảo chất lượng / kiểm soát quality\" không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần họp / thảo luận trực tiếp."};
+      const EXPL = {"A":"\"Build the product according to the previously agreed customer requirements.\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung họp / thảo luận trực tiếp.","B":"Đúng! PM trao đổi trực tiếp để hiểu vấn đề và cùng tìm hướng xử lý — trước khi sửa baseline hay escalate.","C":"\"Breakdown work on additional features with existing component teams.\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung họp / thảo luận trực tiếp.","D":"Tập trung \"đảm bảo chất lượng / kiểm soát quality\" không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần họp / thảo luận trực tiếp."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 261</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-261">Câu 261</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q260.html">← 260</a>
         <a href="pmp-teach-full-q262.html">262 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 261 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is working on a high-visibility initiative with multiple sponsors and stakeholders. One of the key sponsors required a monthly progress report and appointed a liaison to coordinate updates. Weeks into the project, the liaison begins requesting detailed weekly reports. The project manager complies, assuming the sponsor is kept informed. However, during a steering committee meeting, the sponsor criticizes the lack of monthly updates and claims they are unaware of project progress. <span class="kw-cue">What should the project manager do</span> to address this situation and avoid similar issues in the future?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Initiating</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q261</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q261</h1>
+          <p class="lead">Bài học Q261 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 48) — thiếu hụt nguồn lực / kỹ năng</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is working on a high-visibility initiative with multiple sponsors and <em>stakeholders</em>. One of the key sponsors required a monthly progress report and appointed a liaison to coordinate updates. Weeks into the project, the liaison begins requesting detailed weekly reports. The project manager complies, assuming the sponsor is kept informed. However, during a steering committee meeting, the sponsor criticizes the lack of monthly updates and claims they are unaware of project progress. <em>What should the project manager do</em> to address this situation and avoid similar issues in the future?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 48</span><span class="badge">Stakeholders</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q261</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 48): project team, senior management, and other stakeholders. Accountable leadership should ensure that those discussions include the appropriate parties and that there is alignment on schedule activities and artifacts. ⚫ Finance. Every proje</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>thông báo</strong>
+              thông báo / truyền đạt thông tin
+            </div><div class="approach-cell pull">
+              <strong>set expectations</strong>
+              set expectations / thống nhất kỳ vọng và yêu cầu
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Request that all future reporting be formalized and routed t
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q261</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholders</strong><br><br>→ <strong>B</strong> phù hợp vì PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q261 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Send a detailed summary of the weekly reports directly …</strong></td>
+                <td>thông báo / truyền đạt thông tin</td>
+                <td>✗ Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết thiếu hụt nguồn lực / kỹ năn…</td>
+              </tr><tr>
+                <td><strong>B. Facilitate a joint discussion with the sponsor and the …</strong></td>
+                <td>set expectations / thống nhất kỳ vọng và yêu cầu</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Escalate the issue to the PMO to resolve the reporting …</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>D. Request that all future reporting be formalized and rou…</strong></td>
+                <td>Request that all future reporting be formalized and routed through a s</td>
+                <td>✗ đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q261</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Send a detailed summary of the weekly reports directly to the sponsor and continue regular reporting to the liaison.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         <span class="kw-signal">Facilitate</span> a joint discussion with the sponsor and the liaison to clarify expectations and reporting needs.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         <span class="kw-trap">Escalate</span> the issue to the PMO to resolve the reporting conflict between the sponsor and the liaison.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q261</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q261</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 261</div>
             <div class="q-text">A project manager is working on a high-visibility initiative with multiple sponsors and stakeholders. One of the key sponsors required a monthly progress report and appointed a liaison to coordinate updates. Weeks into the project, the liaison begins requesting detailed weekly reports. The project manager complies, assuming the sponsor is kept informed. However, during a steering committee meeting, the sponsor criticizes the lack of monthly updates and claims they are unaware of project progress. <span class="kw-cue">What should the project manager do</span> to address this situation and avoid similar issues in the future?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>→ <strong>B:</strong> PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>Bối cảnh: thiếu hụt nguồn lực / kỹ năng. Đáp án <strong>B</strong> — &quot;<span class="kw-signal">Facilitate</span> a joint discussion with the sponsor and the liaison to clarify expectations and reporting needs.&quot; — phù hợp vì PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>Stem signal: thiếu hụt nguồn lực / kỹ năng — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Facilitate a joint discussion with the sponsor and the liaison to clarify expectations and reporting needs.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.<br><br>Bối cảnh: thiếu hụt nguồn lực / kỹ năng. Đáp án <strong>B</strong> — &quot;<span class="kw-signal">Facilitate</span> a joint discussion with the sponsor and the liaison to clarify expectations and reporting needs.&quot; — phù hợp vì PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; project team, senior management, and other stakeholders. Accountable leadership should ensure that those discussions include the appropriate parties and that there is alignment on schedule activities and artifacts. ⚫ <span class="kw-pmbok">Finance</span>. Every proje<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 48 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 48: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Send a detailed summary of the weekly reports directly to the sponsor and contin…</span></td><td>Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết thiếu hụt nguồn lực / kỹ năng — đáp án đúng cần <span class="kw-signal">set expectations</span> / thống nhất kỳ vọng và yêu cầu.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the issue to the PMO to resolve the reporting conflict between the spon…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request that all future reporting be formalized and routed through a shared comm…</span></td><td>đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung <span class="kw-signal">set expectations</span> / thống nhất kỳ vọng và yêu cầu.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="set_expectations">
+              <span>A project manager is working on a high-visibility initiative with multiple sponsors and stakeholders… (Q261)</span>
+              <div class="classify-btns"><button data-pick="set_expectations" type="button">set expectat</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="communicate_inform">
+              <span>Tình huống cần &quot;thông báo / truyền đạt thông tin&quot; — không phải trọng tâm Q261</span>
+              <div class="classify-btns"><button data-pick="set_expectations" type="button">set expectat</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q261</span>
+              <div class="classify-btns"><button data-pick="set_expectations" type="button">set expectat</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Send a detailed summary of the weekly reports direct…" → A</h4>
+            <p style="margin:0">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết thiếu hụt nguồn lực / kỹ năng — đáp án đúng cần set expectations / thống nhất kỳ vọng và yêu cầu.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Escalate the issue to the PMO to resolve the reporti…" → C</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Request that all future reporting be formalized and …" → D</h4>
+            <p style="margin:0">đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung set expectations / thống nhất kỳ vọng và yêu cầu.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholders</strong> → <strong>B</strong> — PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q261 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Facilitate a joint discussion with the sponsor and the liaison to clarify expectations and reporting needs.</div>
+            <div class="flashcard-front">Q261 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 48</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q261 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Facilitate a joint discussion with the sponsor and the liaison to clarify expectations and reporting</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">thiếu hụt nguồn lực / kỹ năng</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q261
-────────────────────────
-A project manager is working on a high-visibility initiative with multiple sponsors and stakeholders. One of the key sponsors required a monthly progress report and appointed a liaison to coordinate u…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q261
+(PMBOK 8, tr. 48)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: B
-B. Facilitate a joint discussion with the sponsor and the liaison to clarify expectations and reporting needs.
+SCENARIO:
+A project manager is working on a high-visibility initiative with multiple sponsors and stakeholders. One of the key sponsors required a monthly progress report and appointed a liaison to coordinate updates. Weeks into t…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholders
+
+ANSWER → B) Facilitate a joint discussion with the sponsor and the liaison to clarify expectations and reporting needs.
+
+NOT:
+  A) Send a detailed summary of the weekly reports dire… — Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyế
+  C) Escalate the issue to the PMO to resolve the repor… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  D) Request that all future reporting be formalized an… — đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / k
+
+Q261 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết thiếu hụt nguồn lực / kỹ năng — đáp án đúng cần set expectations / thống nhất kỳ vọng và yêu cầu.","B":"PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.","C":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","D":"đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung set expectations / thống nhất kỳ vọng và yêu cầu."};
+      const EXPL = {"A":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết thiếu hụt nguồn lực / kỹ năng — đáp án đúng cần set expectations / thống nhất kỳ vọng và yêu cầu.","B":"Đúng! PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.","C":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","D":"đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung set expectations / thống nhất kỳ vọng và yêu cầu."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 918</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-918">Câu 918</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q917.html">← 917</a>
         <a href="pmp-teach-full-q919.html">919 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 918 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is assigned to lead a process improvement initiative for a company that has operated successfully for more than a decade. The sponsor emphasizes reducing customer wait times, increasing customer value, and accelerating performance improvement across the organization. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">first</span></span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Resources</span><span class="badge">Initiating</span><span class="badge">Identify Stakeholders</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q918</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q918</h1>
+          <p class="lead">Bài học Q918 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 42) — Phân tích tình huống và chọn đáp án D theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is assigned to lead a process improvement initiative for a company that has operated successfully for more than a decade. The sponsor emphasizes reducing customer wait times, increasing customer value, and accelerating performance improvement across the organization. <em>What should the project manager do first</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 42</span><span class="badge">Stakeholders, Resources</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q918</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Resources<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Resources</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 42): remains focused on delivering its key outcomes. ⚫ Schedule. A focus on value helps to ensure that time is managed effectively to help the project to deliver the expected value by—or earlier than—the target date. This effort includes plan</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Implement a platform for real-time customer interaction and 
+            </div><div class="approach-cell">
+              <strong>coaching</strong>
+              coaching / phát triển năng lực
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Develop and implement new software to reduce wait times and 
+            </div><div class="approach-cell pull">
+              <strong>đảm bảo tuân thủ</strong>
+              đảm bảo tuân thủ / compliance
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q918</h4>
+            <p style="margin:0"><strong>What should the project manager do first</strong><br><br>→ <strong>D</strong> phù hợp vì PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q918 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Implement a platform for real-time customer interaction…</strong></td>
+                <td>Implement a platform for real-time customer interaction and capturing </td>
+                <td>✗ &quot;Implement a platform for real-time customer interaction and capturing customer fee…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Facilitate workshops to identify knowledge gaps and pro…</strong></td>
+                <td>coaching / phát triển năng lực</td>
+                <td>✗ Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết Facilitate workshops to identi…</td>
+              </tr><tr>
+                <td><strong>C. Develop and implement new software to reduce wait times…</strong></td>
+                <td>Develop and implement new software to reduce wait times and expedite c</td>
+                <td>✗ Thiếu hành động chủ động — PM phải xử lý vấn đề trong đề bài, không bỏ qua/trì hoãn.</td>
+              </tr><tr>
+                <td><strong>D. Schedule a process audit to set baselines and identify …</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q918</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Implement a platform for real-time customer interaction and capturing customer feedback.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Schedule a process audit to set baselines and identify opportunities for improvement.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q918</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q918</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 918</div>
             <div class="q-text">A project manager is assigned to lead a process improvement initiative for a company that has operated successfully for more than a decade. The sponsor emphasizes reducing customer wait times, increasing customer value, and accelerating performance improvement across the organization. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">first</span></span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>→ <strong>D:</strong> PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>Bối cảnh: A project manager is assigned to lead a process improvement initiative for a company that has operated successfully for more than a decade. The sponsor emphasizes reducing customer wait times, increasing customer value, and accelerating performance improvement across the organization. Đáp án <strong>D</strong> — &quot;<span class="kw-pmbok">Schedule</span> a process audit to set baselines and identify opportunities for improvement.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>đảm bảo tuân thủ / compliance</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án D.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 42.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Schedule a process audit to set baselines and identify opportunities for improvement.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.<br><br>Bối cảnh: A project manager is assigned to lead a process improvement initiative for a company that has operated successfully for more than a decade. The sponsor emphasizes reducing customer wait times, increasing customer value, and accelerating performance improvement across the organization. Đáp án <strong>D</strong> — &quot;<span class="kw-pmbok">Schedule</span> a process audit to set baselines and identify opportunities for improvement.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>đảm bảo tuân thủ / compliance</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; remains focused on delivering its key outcomes. ⚫ <span class="kw-pmbok">Schedule</span>. A <span class="kw-pmbok">focus on value</span> helps to ensure that time is managed effectively to help the project to deliver the expected value by—or earlier than—the target date. This effort includes plan<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 42 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 42: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement a platform for real-time customer interaction and capturing customer f…</span></td><td>&quot;Implement a platform for real-time customer interaction and capturing customer fee…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Facilitate workshops to identify knowledge gaps and provide employee training.</span></td><td>Tập trung &quot;<span class="kw-signal">coaching</span> / phát triển năng lực&quot; không giải quyết <span class="kw-signal">Facilitate</span> workshops to identify knowledge gaps and provide employee training. — đáp án đúng cần đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Develop and implement new software to reduce wait times and expedite customer se…</span></td><td>Thiếu hành động chủ động — PM phải xử lý vấn đề trong đề bài, không bỏ qua/trì hoãn.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="ensure_compliance">
+              <span>A project manager is assigned to lead a process improvement initiative for a company that has operat… (Q918)</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="coach_develop">
+              <span>Tình huống cần &quot;coaching / phát triển năng lực&quot; — không phải trọng tâm Q918</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Implement a platform for real-time customer interact…" → A</h4>
+            <p style="margin:0">&quot;Implement a platform for real-time customer interaction and capturing customer fee…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Facilitate workshops to identify knowledge gaps and …" → B</h4>
+            <p style="margin:0">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết Facilitate workshops to identify knowledge gaps and provide employee training. — đáp án đúng cần đảm bảo tuân thủ / compliance.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Develop and implement new software to reduce wait ti…" → C</h4>
+            <p style="margin:0">Thiếu hành động chủ động — PM phải xử lý vấn đề trong đề bài, không bỏ qua/trì hoãn.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do first</strong> → <strong>D</strong> — PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q918 — đáp án?</div>
+            <div class="flashcard-front">Q918 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 42</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q918 — đáp án?</div>
             <div class="flashcard-back"><strong>D</strong> — Schedule a process audit to set baselines and identify opportunities for improvement.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án D theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q918
-────────────────────────
-A project manager is assigned to lead a process improvement initiative for a company that has operated successfully for more than a decade. The sponsor emphasizes reducing customer wait times, increas…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q918
+(PMBOK 8, tr. 42)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Resources
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Focus on value
 
-ANSWER: D
-D. Schedule a process audit to set baselines and identify opportunities for improvement.
+SCENARIO:
+A project manager is assigned to lead a process improvement initiative for a company that has operated successfully for more than a decade. The sponsor emphasizes reducing customer wait times, increasing customer value, …
 
-PMBOK 8:
-  Domain: Stakeholders, Resources
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do first
+
+ANSWER → D) Schedule a process audit to set baselines and identify opportunities for improvement.
+
+NOT:
+  A) Implement a platform for real-time customer intera… — &quot;Implement a platform for real-time customer interaction and
+  B) Facilitate workshops to identify knowledge gaps an… — Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết 
+  C) Develop and implement new software to reduce wait … — Thiếu hành động chủ động — PM phải xử lý vấn đề trong đề bài
+
+Q918 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Implement a platform for real-time customer interaction and capturing customer fee…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance.","B":"Tập trung \"coaching / phát triển năng lực\" không giải quyết Facilitate workshops to identify knowledge gaps and provide employee training. — đáp án đúng cần đảm bảo tuân thủ / compliance.","C":"Thiếu hành động chủ động — PM phải xử lý vấn đề trong đề bài, không bỏ qua/trì hoãn.","D":"PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably."};
+      const EXPL = {"A":"\"Implement a platform for real-time customer interaction and capturing customer fee…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance.","B":"Tập trung \"coaching / phát triển năng lực\" không giải quyết Facilitate workshops to identify knowledge gaps and provide employee training. — đáp án đúng cần đảm bảo tuân thủ / compliance.","C":"Thiếu hành động chủ động — PM phải xử lý vấn đề trong đề bài, không bỏ qua/trì hoãn.","D":"Đúng! PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

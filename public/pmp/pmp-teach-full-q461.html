@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 461</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-461">Câu 461</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q460.html">← 460</a>
         <a href="pmp-teach-full-q462.html">462 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 461 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is delivering a customer analytics platform in phases. Stakeholders identify a higher-value feature that could be delivered earlier with limited resequencing. Sales wants the feature sooner, while technical impacts must be considered. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q461</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q461</h1>
+          <p class="lead">Bài học Q461 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 42) — Phân tích tình huống và chọn đáp án B theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is delivering a customer analytics platform in phases. <em>Stakeholders identify a higher-value feature that could be de</em>livered earlier with limited resequencing. Sales wants the feature sooner, while technical impacts must be considered. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 42</span><span class="badge">Stakeholders, Scope</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q461</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Scope</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 42): perspective. Effective stakeholder engagement helps align the project’s outputs with the desired outcomes and enhances stakeholder satisfaction. ⚫ Resources. Keeping a project’s value proposition at the center of attention can help info</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Maintain the existing sequence to avoid re-planning effort, 
+            </div><div class="approach-cell pull">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div><div class="approach-cell">
+              <strong>yêu cầu team hành động (chưa rõ facilitation)</strong>
+              yêu cầu team hành động (chưa rõ facilitation)
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q461</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>Stakeholders identify a higher-value feature that could be de</strong><br><br>→ <strong>B</strong> phù hợp vì PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q461 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Maintain the existing sequence to avoid re-planning eff…</strong></td>
+                <td>Maintain the existing sequence to avoid re-planning effort, noting tha</td>
+                <td>✗ &quot;Maintain the existing sequence to avoid re-planning effort, noting that all featur…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Work with stakeholders to reprioritize planned work so …</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Delay the high-value feature until a future project to …</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Delay the high-value feature until a future pr…</td>
+              </tr><tr>
+                <td><strong>D. Ask the team to work overtime to deliver the high-value…</strong></td>
+                <td>yêu cầu team hành động (chưa rõ facilitation)</td>
+                <td>✗ Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; không giải quyết Ask the team to…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q461</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Maintain the existing sequence to avoid re-planning effort, noting that all features will eventually be delivered.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         <span class="kw-signal">Work with</span> stakeholders to reprioritize planned work so that the higher-value feature is delivered earlier.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         <span class="kw-trap">Delay</span> the high-value feature until a future project to avoid changing the current plan midstream.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q461</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q461</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 461</div>
             <div class="q-text">A project manager is delivering a customer analytics platform in phases. Stakeholders identify a higher-value feature that could be delivered earlier with limited resequencing. Sales wants the feature sooner, while technical impacts must be considered. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>→ <strong>B:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>Bối cảnh: A project manager is delivering a customer analytics platform in phases. <span class="kw-pmbok">Stakeholders</span> identify a higher-value feature that could be delivered earlier with limited resequencing. Sales wants the feature sooner, while technical impacts must be considered. Đáp án <strong>B</strong> — &quot;<span class="kw-signal">Work with</span> stakeholders to reprioritize planned work so that the higher-value feature is delivered earlier.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án B.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 42.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Work with stakeholders to reprioritize planned work so that the higher-value feature is delivered earlier.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.<br><br>Bối cảnh: A project manager is delivering a customer analytics platform in phases. <span class="kw-pmbok">Stakeholders</span> identify a higher-value feature that could be delivered earlier with limited resequencing. Sales wants the feature sooner, while technical impacts must be considered. Đáp án <strong>B</strong> — &quot;<span class="kw-signal">Work with</span> stakeholders to reprioritize planned work so that the higher-value feature is delivered earlier.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; perspective. Effective stakeholder engagement helps align the project’s outputs with the desired outcomes and enhances stakeholder satisfaction. ⚫ <span class="kw-pmbok">Resources</span>. Keeping a project’s value proposition at the center of attention can help info<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 42 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 42: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Maintain the existing sequence to avoid re-planning effort, noting that all feat…</span></td><td>&quot;Maintain the existing sequence to avoid re-planning effort, noting that all featur…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Delay</span> the high-value feature until a future project to avoid changing the curren…</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết <span class="kw-trap">Delay</span> the high-value feature until a future project to avoid changing the current plan midstream. — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the team to work overtime to deliver the high-value feature earlier and keep…</span></td><td>Tập trung &quot;yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>)&quot; không giải quyết Ask the team to work overtime to deliver the high-value feature earlier and keep all near-term items in place. — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="prioritize_value">
+              <span>A project manager is delivering a customer analytics platform in phases. Stakeholders identify a hig… (Q461)</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="ask_team_act" type="button">yêu cầu team</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q461</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="ask_team_act" type="button">yêu cầu team</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="ask_team_act">
+              <span>Tình huống cần &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; — không phải trọng tâm Q461</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="ask_team_act" type="button">yêu cầu team</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Maintain the existing sequence to avoid re-planning …" → A</h4>
+            <p style="margin:0">&quot;Maintain the existing sequence to avoid re-planning effort, noting that all featur…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Delay the high-value feature until a future project …" → C</h4>
+            <p style="margin:0">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Delay the high-value feature until a future project to avoid changing the current plan midstream. — đáp án đúng cần ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Ask the team to work overtime to deliver the high-va…" → D</h4>
+            <p style="margin:0">Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; không giải quyết Ask the team to work overtime to deliver the high-value feature earlier and keep all near-term items in place. — đáp án đúng cần ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · Stakeholders identify a higher-value feature that could be de</strong> → <strong>B</strong> — PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q461 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Work with stakeholders to reprioritize planned work so that the higher-value feature is delivered earlier.</div>
+            <div class="flashcard-front">Q461 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 42</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q461 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Work with stakeholders to reprioritize planned work so that the higher-value feature is delivered ea</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án B theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q461
-────────────────────────
-A project manager is delivering a customer analytics platform in phases. Stakeholders identify a higher-value feature that could be delivered earlier with limited resequencing. Sales wants the feature…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q461
+(PMBOK 8, tr. 42)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Scope
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Focus on value
 
-ANSWER: B
-B. Work with stakeholders to reprioritize planned work so that the higher-value feature is delivered earlier.
+SCENARIO:
+A project manager is delivering a customer analytics platform in phases. Stakeholders identify a higher-value feature that could be delivered earlier with limited resequencing. Sales wants the feature sooner, while techn…
 
-PMBOK 8:
-  Domain: Stakeholders, Scope
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | Stakeholders identify a higher-value feature that could be de
+
+ANSWER → B) Work with stakeholders to reprioritize planned work so that the higher-value feature is delivered earlier.
+
+NOT:
+  A) Maintain the existing sequence to avoid re-plannin… — &quot;Maintain the existing sequence to avoid re-planning effort,
+  C) Delay the high-value feature until a future projec… — Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Delay the high-v
+  D) Ask the team to work overtime to deliver the high-… — Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; kh
+
+Q461 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Maintain the existing sequence to avoid re-planning effort, noting that all featur…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / MVP.","B":"PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","C":"Tập trung \"chờ / trì hoãn\" không giải quyết Delay the high-value feature until a future project to avoid changing the current plan midstream. — đáp án đúng cần ưu tiên theo giá trị / MVP.","D":"Tập trung \"yêu cầu team hành động (chưa rõ facilitation)\" không giải quyết Ask the team to work overtime to deliver the high-value feature earlier and keep all near-term items in place. — đáp án đúng cần ưu tiên theo giá trị / MVP."};
+      const EXPL = {"A":"\"Maintain the existing sequence to avoid re-planning effort, noting that all featur…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / MVP.","B":"Đúng! PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","C":"Tập trung \"chờ / trì hoãn\" không giải quyết Delay the high-value feature until a future project to avoid changing the current plan midstream. — đáp án đúng cần ưu tiên theo giá trị / MVP.","D":"Tập trung \"yêu cầu team hành động (chưa rõ facilitation)\" không giải quyết Ask the team to work overtime to deliver the high-value feature earlier and keep all near-term items in place. — đáp án đúng cần ưu tiên theo giá trị / MVP."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

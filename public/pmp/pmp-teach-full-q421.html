@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 421</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-421">Câu 421</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q420.html">← 420</a>
         <a href="pmp-teach-full-q422.html">422 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 421 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A critical subsystem must be developed as part of a project. Two technical alternatives have been identified, but it is unclear whether either will meet performance requirements. If the selected approach fails, the project will be at risk. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Resources</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Adopt a holistic view</span><span class="badge">Full Bank Q421</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q421</h1>
+          <p class="lead">Bài học Q421 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 40) — mức độ uncertainty cao</p>
+          <p class="lead" style="margin-top:0.75rem">A critical subsystem must be developed as part of a project. Two technical alternatives have been identified, but it is unclear whether either will meet performance requirements. If the selected approach fails, the project will be at risk. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 40</span><span class="badge">Stakeholders, Resources</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q421</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Adopt a holistic view
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Resources</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Adopt a holistic view</strong>. PMBOK 8 (tr. 40): ⚫ Resources. Having a holistic mindset also emphasizes understanding how all project components are intended to integrate in order to maximize the project’s value proposition. This view makes it easier to drive the flow of completed work</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>yêu cầu team hành động (chưa rõ facilitation)</strong>
+              yêu cầu team hành động (chưa rõ facilitation)
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Log the performance concern as an issue and assign it to a t
+            </div><div class="approach-cell">
+              <strong>tiếp tục theo kế hoạch hiện tại</strong>
+              tiếp tục theo kế hoạch hiện tại
+            </div><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q421</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>A</strong> phù hợp vì PM yêu cầu team hành động (chưa rõ facilitation) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Ex…</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q421 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Ask the team to evaluate both alternatives through anal…</strong></td>
+                <td>yêu cầu team hành động (chưa rõ facilitation)</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Log the performance concern as an issue and assign it t…</strong></td>
+                <td>Log the performance concern as an issue and assign it to a team member</td>
+                <td>✗ &quot;Log the performance concern as an issue and assign it to a team member for monitor…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Proceed with the more promising alternative and add man…</strong></td>
+                <td>tiếp tục theo kế hoạch hiện tại</td>
+                <td>✗ Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết mức độ uncertainty cao — đáp …</td>
+              </tr><tr>
+                <td><strong>D. Inform stakeholders about the risk and wait for their g…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ Tập trung &quot;chờ / trì hoãn&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần yêu c…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q421</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Ask the team to evaluate both alternatives through analysis or prototyping to determine feasibility.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Log the performance concern as an issue and assign it to a team member for monitoring.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q421</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q421</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 421</div>
             <div class="q-text">A critical subsystem must be developed as part of a project. Two technical alternatives have been identified, but it is unclear whether either will meet performance requirements. If the selected approach fails, the project will be at risk. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> PM yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: mức độ uncertainty cao. Đáp án <strong>A</strong> — &quot;Ask the team to evaluate both alternatives through analysis or prototyping to determine feasibility.&quot; — phù hợp vì PM yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: mức độ uncertainty cao — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Ask the team to evaluate both alternatives through analysis or prototyping to determine feasibility.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: mức độ uncertainty cao. Đáp án <strong>A</strong> — &quot;Ask the team to evaluate both alternatives through analysis or prototyping to determine feasibility.&quot; — phù hợp vì PM yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; ⚫ <span class="kw-pmbok">Resources</span>. Having a holistic mindset also emphasizes understanding how all project components are intended to integrate in order to maximize the project’s value proposition. This view makes it easier to drive the flow of completed work<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 40 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 40: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Log the performance concern as an issue and assign it to a team member for monit…</span></td><td>&quot;Log the performance concern as an issue and assign it to a team member for monitor…&quot; không phù hợp mức độ uncertainty cao — đáp án đúng tập trung yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>).</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Proceed with the more promising alternative and add management reserve for poten…</span></td><td>Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>).</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Inform stakeholders about the risk and wait for their guidance on how to proceed…</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>).</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="ask_team_act">
+              <span>A critical subsystem must be developed as part of a project. Two technical alternatives have been id… (Q421)</span>
+              <div class="classify-btns"><button data-pick="ask_team_act" type="button">yêu cầu team</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="proceed_continue">
+              <span>Tình huống cần &quot;tiếp tục theo kế hoạch hiện tại&quot; — không phải trọng tâm Q421</span>
+              <div class="classify-btns"><button data-pick="ask_team_act" type="button">yêu cầu team</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q421</span>
+              <div class="classify-btns"><button data-pick="ask_team_act" type="button">yêu cầu team</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Log the performance concern as an issue and assign i…" → B</h4>
+            <p style="margin:0">&quot;Log the performance concern as an issue and assign it to a team member for monitor…&quot; không phù hợp mức độ uncertainty cao — đáp án đúng tập trung yêu cầu team hành động (chưa rõ facilitation).</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Proceed with the more promising alternative and add …" → C</h4>
+            <p style="margin:0">Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation).</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Inform stakeholders about the risk and wait for thei…" → D</h4>
+            <p style="margin:0">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation).</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>A</strong> — PM yêu cầu team hành động (chưa rõ facilitation) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Ex…</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q421 — đáp án?</div>
+            <div class="flashcard-front">Q421 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 40</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q421 — đáp án?</div>
             <div class="flashcard-back"><strong>A</strong> — Ask the team to evaluate both alternatives through analysis or prototyping to determine feasibility.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Adopt a holistic view</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">mức độ uncertainty cao</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q421
-────────────────────────
-A critical subsystem must be developed as part of a project. Two technical alternatives have been identified, but it is unclear whether either will meet performance requirements. If the selected appro…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q421
+(PMBOK 8, tr. 40)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Resources
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Adopt a holistic view
 
-ANSWER: A
-A. Ask the team to evaluate both alternatives through analysis or prototyping to determine feasibility.
+SCENARIO:
+A critical subsystem must be developed as part of a project. Two technical alternatives have been identified, but it is unclear whether either will meet performance requirements. If the selected approach fails, the proje…
 
-PMBOK 8:
-  Domain: Stakeholders, Resources
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Adopt a holistic view</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → A) Ask the team to evaluate both alternatives through analysis or prototyping to determine feasibility.
+
+NOT:
+  B) Log the performance concern as an issue and assign… — &quot;Log the performance concern as an issue and assign it to a 
+  C) Proceed with the more promising alternative and ad… — Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết
+  D) Inform stakeholders about the risk and wait for th… — Tập trung &quot;chờ / trì hoãn&quot; không giải quyết mức độ uncertain
+
+Q421 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM yêu cầu team hành động (chưa rõ facilitation) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Executing (PMBOK 8).","B":"\"Log the performance concern as an issue and assign it to a team member for monitor…\" không phù hợp mức độ uncertainty cao — đáp án đúng tập trung yêu cầu team hành động (chưa rõ facilitation).","C":"Tập trung \"tiếp tục theo kế hoạch hiện tại\" không giải quyết mức độ uncertainty cao — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation).","D":"Tập trung \"chờ / trì hoãn\" không giải quyết mức độ uncertainty cao — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation)."};
+      const EXPL = {"A":"Đúng! PM yêu cầu team hành động (chưa rõ facilitation) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Executing (PMBOK 8).","B":"\"Log the performance concern as an issue and assign it to a team member for monitor…\" không phù hợp mức độ uncertainty cao — đáp án đúng tập trung yêu cầu team hành động (chưa rõ facilitation).","C":"Tập trung \"tiếp tục theo kế hoạch hiện tại\" không giải quyết mức độ uncertainty cao — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation).","D":"Tập trung \"chờ / trì hoãn\" không giải quyết mức độ uncertainty cao — đáp án đúng cần yêu cầu team hành động (chưa rõ facilitation)."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

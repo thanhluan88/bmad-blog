@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 80</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-80">Câu 80</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q79.html">← 79</a>
         <a href="pmp-teach-full-q81.html">81 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 80 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">During execution of a regulatory reporting project, a project manager notices that formal communications such as status reports and decision logs are sent on schedule and acknowledged by recipients. Despite regular updates, misunderstandings about decisions surface after actions are taken. Stakeholders say they receive information but feel unheard. The project manager realizes one-way communication is insufficient. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Monitoring &amp; Controlling</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q80</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q80</h1>
+          <p class="lead">Bài học Q80 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 48) — Phân tích tình huống và chọn đáp án B theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">During execution of a regulatory reporting project, a project manager notices that formal communications such as status reports and decision logs are sent on schedule and acknowledged by recipients. Despite regular updates, <em>misunderstandings about decisions surface after actions are taken</em>. <em>Stakeholders say they receive information but feel unheard</em>. The project manager realizes one-way communication is insufficient. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 48</span><span class="badge">Stakeholders</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q80</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Monitoring &amp; Controlling<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 48): project team, senior management, and other stakeholders. Accountable leadership should ensure that those discussions include the appropriate parties and that there is alignment on schedule activities and artifacts. ⚫ Finance. Every proje</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Increase the length and level of detail in written status re
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Create structured opportunities for stakeholders to provide 
+            </div><div class="approach-cell">
+              <strong>tiếp tục theo kế hoạch hiện tại</strong>
+              tiếp tục theo kế hoạch hiện tại
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Rely on individual stakeholders to request clarification if 
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q80</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>misunderstandings about decisions surface after actions are taken</strong> · <strong>Stakeholders say they receive information but feel unheard</strong><br><br>→ <strong>B</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring &amp; Controlling, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q80 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Increase the length and level of detail in written stat…</strong></td>
+                <td>Increase the length and level of detail in written status reports to r</td>
+                <td>✗ &quot;Increase the length and level of detail in written status reports to reduce the ch…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Create structured opportunities for stakeholders to pro…</strong></td>
+                <td>Create structured opportunities for stakeholders to provide feedback o</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Maintain the current communication approach but add mor…</strong></td>
+                <td>tiếp tục theo kế hoạch hiện tại</td>
+                <td>✗ Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết Maintain the current communic…</td>
+              </tr><tr>
+                <td><strong>D. Rely on individual stakeholders to request clarificatio…</strong></td>
+                <td>Rely on individual stakeholders to request clarification if they feel </td>
+                <td>✗ &quot;Rely on individual stakeholders to request clarification if they feel their perspe…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q80</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Increase the length and level of detail in written status reports to reduce the chance of misunderstanding.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Create structured opportunities for stakeholders to provide feedback on decisions and communications.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Maintain the current communication approach but add more recipients to widen visibility.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q80</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q80</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 80</div>
             <div class="q-text">During execution of a regulatory reporting project, a project manager notices that formal communications such as status reports and decision logs are sent on schedule and acknowledged by recipients. Despite regular updates, misunderstandings about decisions surface after actions are taken. Stakeholders say they receive information but feel unheard. The project manager realizes one-way communication is insufficient. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: During execution of a regulatory reporting project, a project manager notices that formal communications such as status reports and decision logs are sent on schedule and acknowledged by recipients. Despite regular updates, misunderstandings about decisions surface after actions are taken. <span class="kw-pmbok">Stakeholders</span> say they receive information but feel unheard. The project manager realizes one-way communication is insufficient. Đáp án <strong>B</strong> — &quot;Create structured opportunities for stakeholders to provide feedback on decisions and communications.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án B.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 48.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Create structured opportunities for stakeholders to provide feedback on decisions and communications.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: During execution of a regulatory reporting project, a project manager notices that formal communications such as status reports and decision logs are sent on schedule and acknowledged by recipients. Despite regular updates, misunderstandings about decisions surface after actions are taken. <span class="kw-pmbok">Stakeholders</span> say they receive information but feel unheard. The project manager realizes one-way communication is insufficient. Đáp án <strong>B</strong> — &quot;Create structured opportunities for stakeholders to provide feedback on decisions and communications.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; project team, senior management, and other stakeholders. Accountable leadership should ensure that those discussions include the appropriate parties and that there is alignment on schedule activities and artifacts. ⚫ <span class="kw-pmbok">Finance</span>. Every proje<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 48 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 48: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Increase the length and level of detail in written status reports to reduce the …</span></td><td>&quot;Increase the length and level of detail in written status reports to reduce the ch…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Create structured opportunities for stakeholders to provide feedback on decisions …&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Maintain the current communication approach but add more recipients to widen vis…</span></td><td>Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết Maintain the current communication approach but add more recipients to widen visibility. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Rely on individual stakeholders to request clarification if they feel their pers…</span></td><td>&quot;Rely on individual stakeholders to request clarification if they feel their perspe…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Create structured opportunities for stakeholders to provide feedback on decisions …&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>During execution of a regulatory reporting project, a project manager notices that formal communicat… (Q80)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="proceed_continue">
+              <span>Tình huống cần &quot;tiếp tục theo kế hoạch hiện tại&quot; — không phải trọng tâm Q80</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Increase the length and level of detail in written s…" → A</h4>
+            <p style="margin:0">&quot;Increase the length and level of detail in written status reports to reduce the ch…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Create structured opportunities for stakeholders to provide feedback on decisions …&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Maintain the current communication approach but add …" → C</h4>
+            <p style="margin:0">Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết Maintain the current communication approach but add more recipients to widen visibility. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Rely on individual stakeholders to request clarifica…" → D</h4>
+            <p style="margin:0">&quot;Rely on individual stakeholders to request clarification if they feel their perspe…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Create structured opportunities for stakeholders to provide feedback on decisions …&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · misunderstandings about decisions surface after actions are taken · Stakeholders say they receive information but feel unheard</strong> → <strong>B</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring &amp; Controlling, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q80 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Create structured opportunities for stakeholders to provide feedback on decisions and communications.</div>
+            <div class="flashcard-front">Q80 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 48</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q80 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Create structured opportunities for stakeholders to provide feedback on decisions and communications</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án B theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q80
-────────────────────────
-During execution of a regulatory reporting project, a project manager notices that formal communications such as status reports and decision logs are sent on schedule and acknowledged by recipients. D…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q80
+(PMBOK 8, tr. 48)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: B
-B. Create structured opportunities for stakeholders to provide feedback on decisions and communications.
+SCENARIO:
+During execution of a regulatory reporting project, a project manager notices that formal communications such as status reports and decision logs are sent on schedule and acknowledged by recipients. Despite regular updat…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | misunderstandings about decisions surface after actions are taken | Stakeholders say they receive information but feel unheard
+
+ANSWER → B) Create structured opportunities for stakeholders to provide feedback on decisions and communications.
+
+NOT:
+  A) Increase the length and level of detail in written… — &quot;Increase the length and level of detail in written status r
+  C) Maintain the current communication approach but ad… — Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết
+  D) Rely on individual stakeholders to request clarifi… — &quot;Rely on individual stakeholders to request clarification if
+
+Q80 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Increase the length and level of detail in written status reports to reduce the ch…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Create structured opportunities for stakeholders to provide feedback on decisions …\".","B":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring & Controlling, PMBOK 8).","C":"Tập trung \"tiếp tục theo kế hoạch hiện tại\" không giải quyết Maintain the current communication approach but add more recipients to widen visibility. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"\"Rely on individual stakeholders to request clarification if they feel their perspe…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Create structured opportunities for stakeholders to provide feedback on decisions …\"."};
+      const EXPL = {"A":"\"Increase the length and level of detail in written status reports to reduce the ch…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Create structured opportunities for stakeholders to provide feedback on decisions …\".","B":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring & Controlling, PMBOK 8).","C":"Tập trung \"tiếp tục theo kế hoạch hiện tại\" không giải quyết Maintain the current communication approach but add more recipients to widen visibility. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"\"Rely on individual stakeholders to request clarification if they feel their perspe…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Create structured opportunities for stakeholders to provide feedback on decisions …\"."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

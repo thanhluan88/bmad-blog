@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 863</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Risks</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-863">Câu 863</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q862.html">← 862</a>
         <a href="pmp-teach-full-q864.html">864 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 863 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">The analysis shows a 75% probability of meeting the original go‑live date with added resources and fast‑tracking. <span class="kw-cue">What should the project manager do</span> to manage remaining uncertainty and stakeholder expectations?</p>
-          <div class="badges"><span class="badge">Risk, Stakeholders</span><span class="badge">Monitoring &amp; Controlling</span><span class="badge">Identify Risks</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q863</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q863</h1>
+          <p class="lead">Bài học Q863 về <strong>Identify Risks</strong> (PMBOK 8, tr. 92) — mức độ uncertainty cao</p>
+          <p class="lead" style="margin-top:0.75rem">The analysis shows a <em>75% probability of meeting the original go‑live date</em> with added resources and fast‑tracking. <em>What should the project manager do</em> to manage remaining uncertainty and <em>stakeholder expectations?</em></p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 92</span><span class="badge">Risk, Stakeholders</span><span class="badge">Identify Risks</span><span class="badge">Full Bank Q863</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,48 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Risk, Stakeholders<br>
-              <strong>Focus Area:</strong> Monitoring &amp; Controlling<br>
-              <strong>Process:</strong> Identify Risks, Perform Risk Analysis, Plan Risk Responses<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Risks</h2>
+          <p><strong>Identify Risks</strong> thuộc miền <strong>Risk, Stakeholders</strong> — process <strong>Identify Risks</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 92): coupled with adaptive and flexible response mechanisms in case they occur. 2.7.1 Key Concepts The following key concepts support the effective practices for the Risk performance domain: ⚫ Risk. A risk is an uncertain event or condition tha</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Commit to the sponsor that the original date will be met bec
+            </div><div class="approach-cell pull">
+              <strong>đảm bảo chất lượng</strong>
+              đảm bảo chất lượng / kiểm soát quality
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Present only the 75% probability of meeting the original go‑
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q863</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>75% probability of meeting the original go‑live date</strong> · <strong>stakeholder expectations?</strong><br><br>→ <strong>B</strong> phù hợp vì Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q863 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Commit to the sponsor that the original date will be me…</strong></td>
+                <td>Commit to the sponsor that the original date will be met because the p</td>
+                <td>✗ &quot;Commit to the sponsor that the original date will be met because the probability i…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Explain the forecast's probabilistic nature, outline re…</strong></td>
+                <td>đảm bảo chất lượng / kiểm soát quality</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Remove all contingency from the schedule to maximize ef…</strong></td>
+                <td>đảm bảo chất lượng / kiểm soát quality</td>
+                <td>✗ &quot;Remove all contingency from the schedule to maximize effort on testing a…&quot; cùng nhóm đảm …</td>
+              </tr><tr>
+                <td><strong>D. Present only the 75% probability of meeting the origina…</strong></td>
+                <td>Present only the 75% probability of meeting the original go‑live date </td>
+                <td>✗ &quot;Present only the 75% probability of meeting the original go‑live date figure to av…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q863</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Commit to the sponsor that the original date will be met because the probability is high.
@@ -152,7 +197,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Explain the forecast's probabilistic nature, outline residual risks, and specify the contingency plan for unexpected defect levels.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)"><span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Remove all contingency from the schedule to maximize effort on testing activities.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q863</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q863</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 863</div>
             <div class="q-text">The analysis shows a 75% probability of meeting the original go‑live date with added resources and fast‑tracking. <span class="kw-cue">What should the project manager do</span> to manage remaining uncertainty and stakeholder expectations?</div>
@@ -181,44 +226,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li><span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</li><li>→ <strong>B:</strong> <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</li><li>Bối cảnh: mức độ uncertainty cao. Đáp án <strong>B</strong> — &quot;Explain the forecast's probabilistic nature, outline residual risks, and specify the contingency plan for unexpected defect levels.&quot; — phù hợp vì <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</li><li>Stem signal: mức độ uncertainty cao — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify Risks</span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Explain the forecast's probabilistic nature, outline residual risks, and specify the contingency plan for unexpected defect levels.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.<br><br>Bối cảnh: mức độ uncertainty cao. Đáp án <strong>B</strong> — &quot;Explain the forecast's probabilistic nature, outline residual risks, and specify the contingency plan for unexpected defect levels.&quot; — phù hợp vì <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; coupled with adaptive and flexible response mechanisms in case they occur. 2.7.1 Key Concepts The following key concepts support the effective practices for the <span class="kw-pmbok">Risk</span> performance domain: ⚫ <span class="kw-pmbok">Risk</span>. A risk is an uncertain event or condition tha<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 92 (Performance Domain: <span class="kw-pmbok">Risk</span>, <span class="kw-pmbok">Identify Risks</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 92: Performance Domain: <span class="kw-pmbok">Risk</span>, <span class="kw-pmbok">Identify Risks</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Commit to the sponsor that the original date will be met because the probability…</span></td><td>&quot;Commit to the sponsor that the original date will be met because the probability i…&quot; không phù hợp mức độ uncertainty cao — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Remove all contingency from the schedule to maximize effort on testing activitie…</span></td><td>&quot;Remove all contingency from the schedule to maximize effort on testing a…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Explain the forecast's probabilistic nature, outline residual risks, and…&quot; sát mức độ uncertainty cao hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Present only the 75% probability of meeting the original go‑live date figure to …</span></td><td>&quot;Present only the 75% probability of meeting the original go‑live date figure to av…&quot; không phù hợp mức độ uncertainty cao — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="quality_embed">
+              <span>The analysis shows a 75% probability of meeting the original go‑live date with added resources and f… (Q863)</span>
+              <div class="classify-btns"><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="quality_embed">
+              <span>Tình huống cần &quot;đảm bảo chất lượng / kiểm soát quality&quot; — không phải trọng tâm Q863</span>
+              <div class="classify-btns"><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Commit to the sponsor that the original date will be…" → A</h4>
+            <p style="margin:0">&quot;Commit to the sponsor that the original date will be met because the probability i…&quot; không phù hợp mức độ uncertainty cao — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Remove all contingency from the schedule to maximize…" → C</h4>
+            <p style="margin:0">&quot;Remove all contingency from the schedule to maximize effort on testing a…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Explain the forecast's probabilistic nature, outline residual risks, and…&quot; sát mức độ uncertainty cao hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Present only the 75% probability of meeting the orig…" → D</h4>
+            <p style="margin:0">&quot;Present only the 75% probability of meeting the original go‑live date figure to av…&quot; không phù hợp mức độ uncertainty cao — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · 75% probability of meeting the original go‑live date · stakeholder expectations?</strong> → <strong>B</strong> — Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q863 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Explain the forecast's probabilistic nature, outline residual risks, and specify the contingency plan for unexpected defect levels.</div>
+            <div class="flashcard-front">Q863 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Risks</strong><br>PMBOK 8, tr. 92</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Risks</div>
+            <div class="flashcard-front">Q863 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Explain the forecast's probabilistic nature, outline residual risks, and specify the contingency pla</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">mức độ uncertainty cao</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q863
-────────────────────────
-The analysis shows a 75% probability of meeting the original go‑live date with added resources and fast‑tracking. What should the project manager do to manage remaining uncertainty and stakeholder exp…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY RISKS — Q863
+(PMBOK 8, tr. 92)
+─────────────────────────────────────────────────────
+DOMAIN: Risk, Stakeholders
+PROCESS: Identify Risks, Perform Risk Analysis, Plan Risk Responses
+PRINCIPLE: Lead accountably
 
-ANSWER: B
-B. Explain the forecast's probabilistic nature, outline residual risks, and specify the contingency plan for unexpected defect levels.
+SCENARIO:
+The analysis shows a 75% probability of meeting the original go‑live date with added resources and fast‑tracking. What should the project manager do to manage remaining uncertainty and stakeholder expectations?
 
-PMBOK 8:
-  Domain: Risk, Stakeholders
-  Process: Identify Risks, Perform Risk Analysis, Plan Risk Responses
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | 75% probability of meeting the original go‑live date | stakeholder expectations?
+
+ANSWER → B) Explain the forecast's probabilistic nature, outline residual risks, and specify the contingency plan for unexpected defect levels.
+
+NOT:
+  A) Commit to the sponsor that the original date will … — &quot;Commit to the sponsor that the original date will be met be
+  C) Remove all contingency from the schedule to maximi… — &quot;Remove all contingency from the schedule to maximize effort
+  D) Present only the 75% probability of meeting the or… — &quot;Present only the 75% probability of meeting the original go
+
+Q863 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Commit to the sponsor that the original date will be met because the probability i…\" không phù hợp mức độ uncertainty cao — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.","B":"Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.","C":"\"Remove all contingency from the schedule to maximize effort on testing a…\" cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — \"Explain the forecast's probabilistic nature, outline residual risks, and…\" sát mức độ uncertainty cao hơn.","D":"\"Present only the 75% probability of meeting the original go‑live date figure to av…\" không phù hợp mức độ uncertainty cao — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality."};
+      const EXPL = {"A":"\"Commit to the sponsor that the original date will be met because the probability i…\" không phù hợp mức độ uncertainty cao — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.","B":"Đúng! Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.","C":"\"Remove all contingency from the schedule to maximize effort on testing a…\" cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — \"Explain the forecast's probabilistic nature, outline residual risks, and…\" sát mức độ uncertainty cao hơn.","D":"\"Present only the 75% probability of meeting the original go‑live date figure to av…\" không phù hợp mức độ uncertainty cao — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

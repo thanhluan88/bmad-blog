@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 536</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Acquire Resources</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-536">Câu 536</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q535.html">← 535</a>
         <a href="pmp-teach-full-q537.html">537 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 536 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">During the planning stage of a project in a matrix organization, a project manager identifies the number and types of team members required to complete the work. Due to an ongoing change management initiative, functional managers report that the planned resources and personnel are <span class="kw-cue">not</span> available for the project. Which two steps should the project manager take <span class="kw-cue">next</span>? (<span class="kw-cue">Choose 2</span>)</p>
-          <div class="badges"><span class="badge">Resources, Risk</span><span class="badge">Initiating</span><span class="badge">Acquire Resources</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q536</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q536</h1>
+          <p class="lead">Bài học Q536 về <strong>Acquire Resources</strong> (PMBOK 8, tr. 20) — Resource không sẵn sàng</p>
+          <p class="lead" style="margin-top:0.75rem">During the planning stage of a project in a matrix organization, a project manager identifies the number and types of team members required to complete the work. Due to an ongoing change management initiative, functional managers report that the planned resources and personnel are not available for the project. Which two steps should the project manager take next? (Choose 2)</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 20</span><span class="badge">Resources, Risk</span><span class="badge">Acquire Resources</span><span class="badge">Full Bank Q536</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,62 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Risk<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Acquire Resources, Monitor Risks<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Acquire Resources</h2>
+          <p><strong>Acquire Resources</strong> thuộc miền <strong>Resources, Risk</strong> — process <strong>Acquire Resources</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 20): 20 A Guide to the Project Management Body of Knowledge This process establishes a clear framework for acquiring project deliverables, either from within the organization or from external sources, defining what to acquire, how to acquire it</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>A</strong>
+              Investigate options for procuring or otherwise obtaining the
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell pull">
+              <strong>C</strong>
+              Reevaluate the project objectives, review the planned activi
+            </div><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div><div class="approach-cell">
+              <strong>change control</strong>
+              change control / change request
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q536</h4>
+            <p style="margin:0">Đọc kỹ stem và xác định vấn đề trọng tâm.<br><br>→ <strong>A</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Risk (Initiating, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q536 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Investigate options for procuring or otherwise obtainin…</strong></td>
+                <td>Investigate options for procuring or otherwise obtaining the required </td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Escalate the resource unavailability to the project spo…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>C. Reevaluate the project objectives, review the planned a…</strong></td>
+                <td>Reevaluate the project objectives, review the planned activities, and </td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Cancel the project planning activities and wait for the…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Resource không sẵn sàng — đáp án đúng cần xử l…</td>
+              </tr><tr>
+                <td><strong>E. Submit a formal resource conflict report to the PMO and…</strong></td>
+                <td>change control / change request</td>
+                <td>✗ Tập trung &quot;change control / change request&quot; không giải quyết Resource không sẵn sàng — đáp…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q536</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Investigate options for procuring or otherwise obtaining the required team members and resources from alternative sources.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Risk</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         <span class="kw-trap">Escalate</span> the resource unavailability to the project sponsor and request a <span class="kw-trap">delay</span> to the project start date until resources become available.
@@ -156,7 +211,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Reevaluate the project objectives, review the planned activities, and recalculate the team member and resource needs based on current availability.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Risk</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Cancel the project planning activities and wait for the change management initiative to conclude before resuming resource planning.
@@ -169,7 +224,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q536</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q536</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 536 · Chọn nhiều</div>
             <div class="q-text">During the planning stage of a project in a matrix organization, a project manager identifies the number and types of team members required to complete the work. Due to an ongoing change management initiative, functional managers report that the planned resources and personnel are <span class="kw-cue">not</span> available for the project. Which two steps should the project manager take <span class="kw-cue">next</span>? (<span class="kw-cue">Choose 2</span>)</div>
@@ -186,44 +241,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A,C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A,C</h2>
+          <h3>Tại sao chọn A,C?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Risk</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A, C:</strong> Resource không sẵn sàng — xem <span class="kw-signal">risk register</span> / response plan hoặc reallocate có kiểm soát.</li><li>Bối cảnh: Resource không sẵn sàng. Đáp án <strong>A, C</strong> — &quot;Investigate options for procuring or otherwise obtaining the required team members and resources from alternative sources.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Risk</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>). Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span>: chọn hành động xử lý tình huống trực tiếp trước ghi nhận muộn hoặc thay đổi baseline chưa được phân tích.</li><li>Process Acquire <span class="kw-pmbok">Resources</span> — align với đáp án A,C.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 20.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A,C</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A, C:</strong> Resource không sẵn sàng — xem <span class="kw-signal">risk register</span> / response plan hoặc reallocate có kiểm soát.<br><br>Bối cảnh: Resource không sẵn sàng. Đáp án <strong>A, C</strong> — &quot;Investigate options for procuring or otherwise obtaining the required team members and resources from alternative sources.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Risk</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>). Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span>: chọn hành động xử lý tình huống trực tiếp trước ghi nhận muộn hoặc thay đổi baseline chưa được phân tích.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 20 A Guide to the Project Management Body of Knowledge This process establishes a clear framework for acquiring project deliverables, either from within the organization or from external sources, defining what to acquire, how to acquire it<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 20 (Performance Domain: <span class="kw-pmbok">Resources</span>, Acquire <span class="kw-pmbok">Resources</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 20: Performance Domain: <span class="kw-pmbok">Resources</span>, Acquire <span class="kw-pmbok">Resources</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the resource unavailability to the project sponsor and request a <span class="kw-trap">delay</span> …</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Cancel the project planning activities and wait for the change management initia…</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Resource không sẵn sàng — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>E</strong><br><span style="font-size:0.8rem;color:var(--muted)">Submit a formal resource conflict report to the PMO and request arbitration betw…</span></td><td>Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết Resource không sẵn sàng — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>During the planning stage of a project in a matrix organization, a project manager identifies the nu… (Q536)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="change_control" type="button">change contr</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q536</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="change_control" type="button">change contr</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q536</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="change_control" type="button">change contr</button></div>
+            </div><div class="classify-row" data-answer="change_control">
+              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q536</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="change_control" type="button">change contr</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Escalate the resource unavailability to the project …" → B</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Cancel the project planning activities and wait for …" → D</h4>
+            <p style="margin:0">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Resource không sẵn sàng — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Submit a formal resource conflict report to the PMO …" → E</h4>
+            <p style="margin:0">Tập trung &quot;change control / change request&quot; không giải quyết Resource không sẵn sàng — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>A</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Risk (Initiating, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q536 — đáp án?</div>
-            <div class="flashcard-back"><strong>A,C</strong> — C</div>
+            <div class="flashcard-front">Q536 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Acquire Resources</strong><br>PMBOK 8, tr. 20</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Acquire Resources</div>
+            <div class="flashcard-front">Q536 — đáp án?</div>
+            <div class="flashcard-back"><strong>A,C</strong> — A,C</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Resource không sẵn sàng</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q536
-────────────────────────
-During the planning stage of a project in a matrix organization, a project manager identifies the number and types of team members required to complete the work. Due to an ongoing change management in…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">ACQUIRE RESOURCES — Q536
+(PMBOK 8, tr. 20)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Risk
+PROCESS: Acquire Resources, Monitor Risks
+PRINCIPLE: Lead accountably
 
-ANSWER: A,C
-A,C
+SCENARIO:
+During the planning stage of a project in a matrix organization, a project manager identifies the number and types of team members required to complete the work. Due to an ongoing change management initiative, functional…
 
-PMBOK 8:
-  Domain: Resources, Risk
-  Process: Acquire Resources, Monitor Risks
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → A,C) A,C
+
+NOT:
+  B) Escalate the resource unavailability to the projec… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  D) Cancel the project planning activities and wait fo… — Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Resource không s
+  E) Submit a formal resource conflict report to the PM… — Tập trung &quot;change control / change request&quot; không giải quyết
+
+Q536 ANSWER: A,C</div>
         </section>
 
         <footer class="ref-footer">
@@ -266,6 +370,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

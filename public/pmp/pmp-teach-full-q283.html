@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 283</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-283">Câu 283</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q282.html">← 282</a>
         <a href="pmp-teach-full-q284.html">284 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 283 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project is halfway complete with good schedule performance, but the customer has identified several minor issues requiring clarification. Direct communication between the customer and development team would resolve these quickly, but team members express concerns about engaging the customer directly. Some worry about technical explanations, others about scope creep from informal discussions, and a few lack confidence in customer-facing communication. The project manager wants to enable direct engagement while maintaining project control. What should be the primary approach?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Monitoring &amp; Controlling</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q283</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q283</h1>
+          <p class="lead">Bài học Q283 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 72) — Stakeholder không hài lòng</p>
+          <p class="lead" style="margin-top:0.75rem">A project is halfway complete with good schedule performance, but the customer has identified several minor issues requiring clarification. Direct communication between the customer and development team would resolve these quickly, but team members express concerns about engaging the customer directly. Some worry about technical explanations, others about <em>scope creep</em> from informal discussions, and a few lack confidence in customer-facing communication. The project manager wants to enable direct engagement while maintaining project control. What should be the primary approach?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 72</span><span class="badge">Stakeholders</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q283</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Monitoring &amp; Controlling<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 72): communication processes and plans for the project (see Figure 2-35). 2.5.2.4 Manage Stakeholder Engagement Manage Stakeholder Engagement is the process of communicating and working with stakeholders, which includes collaborating with spons</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>coaching</strong>
+              coaching / phát triển năng lực
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Create structured communication templates and approve all cu
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Pair less confident team members with experienced customer-f
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Establish clear boundaries for technical discussions and tra
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q283</h4>
+            <p style="margin:0"><strong>scope creep</strong><br><br>→ <strong>A</strong> phù hợp vì PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q283 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Assess team communication styles and provide coaching w…</strong></td>
+                <td>coaching / phát triển năng lực</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Create structured communication templates and approve a…</strong></td>
+                <td>Create structured communication templates and approve all customer int</td>
+                <td>✗ &quot;Create structured communication templates and approve all customer interactions th…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Pair less confident team members with experienced custo…</strong></td>
+                <td>Pair less confident team members with experienced customer-facing coll</td>
+                <td>✗ &quot;Pair less confident team members with experienced customer-facing colleagues durin…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Establish clear boundaries for technical discussions an…</strong></td>
+                <td>Establish clear boundaries for technical discussions and train the tea</td>
+                <td>✗ &quot;Establish clear boundaries for technical discussions and train the team on scope m…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q283</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Assess team communication styles and provide <span class="kw-signal">coaching</span> while establishing customer engagement protocols.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Create structured communication templates and approve all customer interactions through the project manager.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q283</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q283</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 283</div>
             <div class="q-text">A project is halfway complete with good schedule performance, but the customer has identified several minor issues requiring clarification. Direct communication between the customer and development team would resolve these quickly, but team members express concerns about engaging the customer directly. Some worry about technical explanations, others about scope creep from informal discussions, and a few lack confidence in customer-facing communication. The project manager wants to enable direct engagement while maintaining project control. What should be the primary approach?</div>
@@ -181,44 +229,84 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</li><li>→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.</li><li>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>A</strong> — &quot;Assess team communication styles and provide <span class="kw-signal">coaching</span> while establishing customer engagement protocols.&quot; — phù hợp vì PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</li><li>Stem signal: stakeholder không hài lòng / kỳ vọng lệch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Manage Stakeholder Engagement</span> — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Assess team communication styles and provide coaching while establishing customer engagement protocols.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>A</strong> — &quot;Assess team communication styles and provide <span class="kw-signal">coaching</span> while establishing customer engagement protocols.&quot; — phù hợp vì PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; communication processes and plans for the project (see Figure 2-35). 2.5.2.4 <span class="kw-pmbok">Manage Stakeholder Engagement</span> <span class="kw-pmbok">Manage Stakeholder Engagement</span> is the process of communicating and working with stakeholders, which includes collaborating with spons<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 72 (<span class="kw-pmbok">Manage Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 72: <span class="kw-pmbok">Manage Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Create structured communication templates and approve all customer interactions …</span></td><td>&quot;Create structured communication templates and approve all customer interactions th…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Pair less confident team members with experienced customer-facing colleagues dur…</span></td><td>&quot;Pair less confident team members with experienced customer-facing colleagues durin…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Establish clear boundaries for technical discussions and train the team on scope…</span></td><td>&quot;Establish clear boundaries for technical discussions and train the team on scope m…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="coach_develop">
+              <span>A project is halfway complete with good schedule performance, but the customer has identified severa… (Q283)</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="DUMMY1" type="button">Opt 1</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 1 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Create structured communication templates and approv…" → B</h4>
+            <p style="margin:0">&quot;Create structured communication templates and approve all customer interactions th…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung coaching / phát triển năng lực.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Pair less confident team members with experienced cu…" → C</h4>
+            <p style="margin:0">&quot;Pair less confident team members with experienced customer-facing colleagues durin…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung coaching / phát triển năng lực.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Establish clear boundaries for technical discussions…" → D</h4>
+            <p style="margin:0">&quot;Establish clear boundaries for technical discussions and train the team on scope m…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung coaching / phát triển năng lực.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>scope creep</strong> → <strong>A</strong> — PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q283 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Assess team communication styles and provide coaching while establishing customer engagement protocols.</div>
+            <div class="flashcard-front">Q283 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 72</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Q283 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Assess team communication styles and provide coaching while establishing customer engagement protoco</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Stakeholder không hài lòng</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q283
-────────────────────────
-A project is halfway complete with good schedule performance, but the customer has identified several minor issues requiring clarification. Direct communication between the customer and development te…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q283
+(PMBOK 8, tr. 72)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Manage Stakeholder Engagement
+PRINCIPLE: Focus on value
 
-ANSWER: A
-A. Assess team communication styles and provide coaching while establishing customer engagement protocols.
+SCENARIO:
+A project is halfway complete with good schedule performance, but the customer has identified several minor issues requiring clarification. Direct communication between the customer and development team would resolve the…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Manage Stakeholder Engagement
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  scope creep
+
+ANSWER → A) Assess team communication styles and provide coaching while establishing customer engagement protocols.
+
+NOT:
+  B) Create structured communication templates and appr… — &quot;Create structured communication templates and approve all c
+  C) Pair less confident team members with experienced … — &quot;Pair less confident team members with experienced customer-
+  D) Establish clear boundaries for technical discussio… — &quot;Establish clear boundaries for technical discussions and tr
+
+Q283 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.","B":"\"Create structured communication templates and approve all customer interactions th…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung coaching / phát triển năng lực.","C":"\"Pair less confident team members with experienced customer-facing colleagues durin…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung coaching / phát triển năng lực.","D":"\"Establish clear boundaries for technical discussions and train the team on scope m…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung coaching / phát triển năng lực."};
+      const EXPL = {"A":"Đúng! PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.","B":"\"Create structured communication templates and approve all customer interactions th…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung coaching / phát triển năng lực.","C":"\"Pair less confident team members with experienced customer-facing colleagues durin…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung coaching / phát triển năng lực.","D":"\"Establish clear boundaries for technical discussions and train the team on scope m…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung coaching / phát triển năng lực."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

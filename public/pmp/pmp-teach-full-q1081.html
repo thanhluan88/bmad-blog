@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1081</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Schedule</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1081">Câu 1081</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1080.html">← 1080</a>
         <a href="pmp-teach-full-q1082.html">1082 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1081 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">At the initial meeting for a road construction project, the project manager emphasized the importance of following all rules during project execution and stakeholder interactions. However, as the project progresses, some team members begin arriving late to meetings and disregarding other established ground rules. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span> to protect the project's outcomes and schedule?</p>
-          <div class="badges"><span class="badge">Schedule, Governance</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q1081</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1081</h1>
+          <p class="lead">Bài học Q1081 về <strong>Develop Schedule</strong> (PMBOK 8, tr. 84) — trễ tiến độ / áp lực schedule</p>
+          <p class="lead" style="margin-top:0.75rem">At the initial meeting for a road construction project, the project manager emphasized the importance of following all rules during project execution and <em>stakeholder interactions</em>. However, as the project progresses, some team members begin arriving late to meetings and disregarding other established ground rules. <em>What should the project manager do next</em> to protect the project's outcomes and schedule?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 84</span><span class="badge">Schedule, Governance</span><span class="badge">Develop Schedule</span><span class="badge">Full Bank Q1081</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Schedule, Governance<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Schedule, Control Schedule, Manage Project Execution<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Develop Schedule</h2>
+          <p><strong>Develop Schedule</strong> thuộc miền <strong>Schedule, Governance</strong> — process <strong>Develop Schedule</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 84): the process of consensus building may include working with the project team to develop a project team charter and a set of operating guidelines or project team norms. ⚫ Guidance. Guidance should be directed to the overall project team to</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>A</strong>
+              Speak directly with the team members who have not followed t
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Consider reassigning team members who repeatedly violate est
+            </div><div class="approach-cell">
+              <strong>khuyến khích bằng incentive</strong>
+              khuyến khích bằng incentive/thưởng
+            </div><div class="approach-cell">
+              <strong>trao quyền</strong>
+              trao quyền / để team tự quyết
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1081</h4>
+            <p style="margin:0"><strong>What should the project manager do next</strong> · <strong>stakeholder interactions</strong><br><br>→ <strong>A</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Governance (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1081 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Speak directly with the team members who have not follo…</strong></td>
+                <td>Speak directly with the team members who have not followed the ground </td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Consider reassigning team members who repeatedly violat…</strong></td>
+                <td>Consider reassigning team members who repeatedly violate established g</td>
+                <td>✗ &quot;Consider reassigning team members who repeatedly violate established ground rules.&quot; không…</td>
+              </tr><tr>
+                <td><strong>C. Recognize and reward team members who consistently adhe…</strong></td>
+                <td>khuyến khích bằng incentive/thưởng</td>
+                <td>✗ Tập trung &quot;khuyến khích bằng incentive/thưởng&quot; không giải quyết trễ tiến độ / áp lực sched…</td>
+              </tr><tr>
+                <td><strong>D. Allow the team to identify and address any team members…</strong></td>
+                <td>trao quyền / để team tự quyết</td>
+                <td>✗ Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết trễ tiến độ / áp lực schedule —…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1081</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Speak directly with the team members who have not followed the ground rules to address the issue.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Consider reassigning team members who repeatedly violate established ground rules.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1081</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1081</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1081</div>
             <div class="q-text">At the initial meeting for a road construction project, the project manager emphasized the importance of following all rules during project execution and stakeholder interactions. However, as the project progresses, some team members begin arriving late to meetings and disregarding other established ground rules. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span> to protect the project's outcomes and schedule?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>A</strong> — &quot;Speak directly with the team members who have <span class="kw-cue">not</span> followed the ground rules to address the issue.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>). Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span>: chọn hành động xử lý tình huống trực tiếp trước ghi nhận muộn hoặc thay đổi baseline chưa được phân tích.</li><li>Stem signal: trễ tiến độ / áp lực schedule — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Develop <span class="kw-pmbok">Schedule</span> — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Speak directly with the team members who have not followed the ground rules to address the issue.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>A</strong> — &quot;Speak directly with the team members who have <span class="kw-cue">not</span> followed the ground rules to address the issue.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>). Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span>: chọn hành động xử lý tình huống trực tiếp trước ghi nhận muộn hoặc thay đổi baseline chưa được phân tích.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; the process of <span class="kw-signal">consensus</span> building may include working with the project team to develop a project team charter and a set of operating guidelines or project team norms. ⚫ Guidance. Guidance should be directed to the overall project team to<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 84 (<span class="kw-signal">consensus</span> building may include working with the project team to develo)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 84: <span class="kw-signal">consensus</span> building may include working with the project team to develo</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Consider reassigning team members who repeatedly violate established ground rule…</span></td><td>&quot;Consider reassigning team members who repeatedly violate established ground rules.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Speak directly with the team members who have <span class="kw-cue">not</span> followed the ground rules to add…&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Recognize and reward team members who consistently adhere to the established gro…</span></td><td>Tập trung &quot;khuyến khích bằng incentive/thưởng&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Allow the team to identify and address any team members who violate the ground r…</span></td><td>Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>At the initial meeting for a road construction project, the project manager emphasized the importanc… (Q1081)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="incentive_reward" type="button">khuyến khích</button><button data-pick="allow_empower" type="button">trao quyền</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="incentive_reward">
+              <span>Tình huống cần &quot;khuyến khích bằng incentive/thưởng&quot; — không phải trọng tâm Q1081</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="incentive_reward" type="button">khuyến khích</button><button data-pick="allow_empower" type="button">trao quyền</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="allow_empower">
+              <span>Tình huống cần &quot;trao quyền / để team tự quyết&quot; — không phải trọng tâm Q1081</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="incentive_reward" type="button">khuyến khích</button><button data-pick="allow_empower" type="button">trao quyền</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Consider reassigning team members who repeatedly vio…" → B</h4>
+            <p style="margin:0">&quot;Consider reassigning team members who repeatedly violate established ground rules.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Speak directly with the team members who have not followed the ground rules to add…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Recognize and reward team members who consistently a…" → C</h4>
+            <p style="margin:0">Tập trung &quot;khuyến khích bằng incentive/thưởng&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Allow the team to identify and address any team memb…" → D</h4>
+            <p style="margin:0">Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do next · stakeholder interactions</strong> → <strong>A</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Governance (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1081 — đáp án?</div>
+            <div class="flashcard-front">Q1081 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Schedule</strong><br>PMBOK 8, tr. 84</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q1081 — đáp án?</div>
             <div class="flashcard-back"><strong>A</strong> — Speak directly with the team members who have not followed the ground rules to address the issue.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Develop Schedule</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">trễ tiến độ / áp lực schedule</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1081
-────────────────────────
-At the initial meeting for a road construction project, the project manager emphasized the importance of following all rules during project execution and stakeholder interactions. However, as the proj…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP SCHEDULE — Q1081
+(PMBOK 8, tr. 84)
+─────────────────────────────────────────────────────
+DOMAIN: Schedule, Governance
+PROCESS: Develop Schedule, Control Schedule, Manage Project Execution
+PRINCIPLE: Lead accountably
 
-ANSWER: A
-A. Speak directly with the team members who have not followed the ground rules to address the issue.
+SCENARIO:
+At the initial meeting for a road construction project, the project manager emphasized the importance of following all rules during project execution and stakeholder interactions. However, as the project progresses, some…
 
-PMBOK 8:
-  Domain: Schedule, Governance
-  Process: Develop Schedule, Control Schedule, Manage Project Execution
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do next | stakeholder interactions
+
+ANSWER → A) Speak directly with the team members who have not followed the ground rules to address the issue.
+
+NOT:
+  B) Consider reassigning team members who repeatedly v… — &quot;Consider reassigning team members who repeatedly violate es
+  C) Recognize and reward team members who consistently… — Tập trung &quot;khuyến khích bằng incentive/thưởng&quot; không giải qu
+  D) Allow the team to identify and address any team me… — Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết t
+
+Q1081 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Governance (Executing, PMBOK 8).","B":"\"Consider reassigning team members who repeatedly violate established ground rules.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Speak directly with the team members who have not followed the ground rules to add…\".","C":"Tập trung \"khuyến khích bằng incentive/thưởng\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Tập trung \"trao quyền / để team tự quyết\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
+      const EXPL = {"A":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Governance (Executing, PMBOK 8).","B":"\"Consider reassigning team members who repeatedly violate established ground rules.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Speak directly with the team members who have not followed the ground rules to add…\".","C":"Tập trung \"khuyến khích bằng incentive/thưởng\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Tập trung \"trao quyền / để team tự quyết\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

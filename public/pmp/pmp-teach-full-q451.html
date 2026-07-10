@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 451</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Schedule</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-451">Câu 451</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q450.html">← 450</a>
         <a href="pmp-teach-full-q452.html">452 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 451 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A commercial building project is underway, and the project manager is reviewing the construction timeline with stakeholders. The following activities are listed on the schedule: Pouring foundation 10 days Framing completed 0 days Installing electrical wiring 15 days What statement correctly distinguishes milestones from tasks?</p>
-          <div class="badges"><span class="badge">Schedule, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q451</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q451</h1>
+          <p class="lead">Bài học Q451 về <strong>Develop Schedule</strong> (PMBOK 8, tr. 54) — Phân tích tình huống và chọn đáp án A theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A commercial building project is underway, and the project manager is reviewing the construction timeline with <em>stakeholders</em>. The following activities are listed on the schedule: Pouring foundation 10 days Framing completed 0 days Installing electrical wiring 15 days What statement correctly distinguishes milestones from tasks?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 54</span><span class="badge">Schedule, Stakeholders</span><span class="badge">Develop Schedule</span><span class="badge">Full Bank Q451</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Schedule, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Schedule, Control Schedule, Identify Stakeholders<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Develop Schedule</h2>
+          <p><strong>Develop Schedule</strong> thuộc miền <strong>Schedule, Stakeholders</strong> — process <strong>Develop Schedule</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 54): delivered and accepted against the estimates of work completed for the elapsed time cycle;</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>A</strong>
+              Completing the framing is a milestone that signifies the end
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Pouring the foundation is a milestone because it is the firs
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Installing the electrical wiring is a milestone because it i
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              All three items listed above are milestones because they are
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q451</h4>
+            <p style="margin:0"><strong>stakeholders</strong><br><br>→ <strong>A</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Stakeholders (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q451 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Completing the framing is a milestone that signifies th…</strong></td>
+                <td>Completing the framing is a milestone that signifies the end of a phas</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Pouring the foundation is a milestone because it is the…</strong></td>
+                <td>Pouring the foundation is a milestone because it is the first construc</td>
+                <td>✗ &quot;Pouring the foundation is a milestone because it is the first construction activit…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Installing the electrical wiring is a milestone because…</strong></td>
+                <td>Installing the electrical wiring is a milestone because it is a critic</td>
+                <td>✗ &quot;Installing the electrical wiring is a milestone because it is a critical component…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. All three items listed above are milestones because the…</strong></td>
+                <td>All three items listed above are milestones because they are necessary</td>
+                <td>✗ &quot;All three items listed above are milestones because they are necessary for the pro…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q451</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Completing the framing is a milestone that signifies the end of a phase and allows new work to begin.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Pouring the foundation is a milestone because it is the first construction activity on the schedule.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q451</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q451</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 451</div>
             <div class="q-text">A commercial building project is underway, and the project manager is reviewing the construction timeline with stakeholders. The following activities are listed on the schedule: Pouring foundation 10 days Framing completed 0 days Installing electrical wiring 15 days What statement correctly distinguishes milestones from tasks?</div>
@@ -181,44 +229,84 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: A commercial building project is underway, and the project manager is reviewing the construction timeline with stakeholders. The following activities are listed on the schedule: Pouring foundation 10 days Framing completed 0 days Installing electrical wiring 15 days What statement correctly distinguishes milestones from tasks. Đáp án <strong>A</strong> — &quot;Completing the framing is a milestone that signifies the end of a phase and allows new work to begin.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Process Develop <span class="kw-pmbok">Schedule</span> — align với đáp án A.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 54.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Completing the framing is a milestone that signifies the end of a phase and allows new work to begin.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: A commercial building project is underway, and the project manager is reviewing the construction timeline with stakeholders. The following activities are listed on the schedule: Pouring foundation 10 days Framing completed 0 days Installing electrical wiring 15 days What statement correctly distinguishes milestones from tasks. Đáp án <strong>A</strong> — &quot;Completing the framing is a milestone that signifies the end of a phase and allows new work to begin.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; delivered and accepted against the estimates of work completed for the elapsed time cycle;<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 54 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 54: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Pouring the foundation is a milestone because it is the first construction activ…</span></td><td>&quot;Pouring the foundation is a milestone because it is the <span class="kw-cue">first</span> construction activit…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Completing the framing is a milestone that signifies the end of a phase and allows…&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Installing the electrical wiring is a milestone because it is a critical compone…</span></td><td>&quot;Installing the electrical wiring is a milestone because it is a critical component…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Completing the framing is a milestone that signifies the end of a phase and allows…&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">All three items listed above are milestones because they are necessary for the p…</span></td><td>&quot;All three items listed above are milestones because they are necessary for the pro…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Completing the framing is a milestone that signifies the end of a phase and allows…&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A commercial building project is underway, and the project manager is reviewing the construction tim… (Q451)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="DUMMY1" type="button">Opt 1</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 1 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Pouring the foundation is a milestone because it is …" → B</h4>
+            <p style="margin:0">&quot;Pouring the foundation is a milestone because it is the first construction activit…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Completing the framing is a milestone that signifies the end of a phase and allows…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Installing the electrical wiring is a milestone beca…" → C</h4>
+            <p style="margin:0">&quot;Installing the electrical wiring is a milestone because it is a critical component…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Completing the framing is a milestone that signifies the end of a phase and allows…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "All three items listed above are milestones because …" → D</h4>
+            <p style="margin:0">&quot;All three items listed above are milestones because they are necessary for the pro…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Completing the framing is a milestone that signifies the end of a phase and allows…&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>stakeholders</strong> → <strong>A</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Stakeholders (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q451 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Completing the framing is a milestone that signifies the end of a phase and allows new work to begin.</div>
+            <div class="flashcard-front">Q451 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Schedule</strong><br>PMBOK 8, tr. 54</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Develop Schedule</div>
+            <div class="flashcard-front">Q451 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Completing the framing is a milestone that signifies the end of a phase and allows new work to begin</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án A theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q451
-────────────────────────
-A commercial building project is underway, and the project manager is reviewing the construction timeline with stakeholders. The following activities are listed on the schedule: Pouring foundation 10 …
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP SCHEDULE — Q451
+(PMBOK 8, tr. 54)
+─────────────────────────────────────────────────────
+DOMAIN: Schedule, Stakeholders
+PROCESS: Develop Schedule, Control Schedule, Identify Stakeholders
+PRINCIPLE: Lead accountably
 
-ANSWER: A
-A. Completing the framing is a milestone that signifies the end of a phase and allows new work to begin.
+SCENARIO:
+A commercial building project is underway, and the project manager is reviewing the construction timeline with stakeholders. The following activities are listed on the schedule: Pouring foundation 10 days Framing complet…
 
-PMBOK 8:
-  Domain: Schedule, Stakeholders
-  Process: Develop Schedule, Control Schedule, Identify Stakeholders
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  stakeholders
+
+ANSWER → A) Completing the framing is a milestone that signifies the end of a phase and allows new work to begin.
+
+NOT:
+  B) Pouring the foundation is a milestone because it i… — &quot;Pouring the foundation is a milestone because it is the fir
+  C) Installing the electrical wiring is a milestone be… — &quot;Installing the electrical wiring is a milestone because it 
+  D) All three items listed above are milestones becaus… — &quot;All three items listed above are milestones because they ar
+
+Q451 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Stakeholders (Executing, PMBOK 8).","B":"\"Pouring the foundation is a milestone because it is the first construction activit…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Completing the framing is a milestone that signifies the end of a phase and allows…\".","C":"\"Installing the electrical wiring is a milestone because it is a critical component…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Completing the framing is a milestone that signifies the end of a phase and allows…\".","D":"\"All three items listed above are milestones because they are necessary for the pro…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Completing the framing is a milestone that signifies the end of a phase and allows…\"."};
+      const EXPL = {"A":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Stakeholders (Executing, PMBOK 8).","B":"\"Pouring the foundation is a milestone because it is the first construction activit…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Completing the framing is a milestone that signifies the end of a phase and allows…\".","C":"\"Installing the electrical wiring is a milestone because it is a critical component…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Completing the framing is a milestone that signifies the end of a phase and allows…\".","D":"\"All three items listed above are milestones because they are necessary for the pro…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Completing the framing is a milestone that signifies the end of a phase and allows…\"."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

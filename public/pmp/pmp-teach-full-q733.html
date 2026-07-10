@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 733</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Estimate Costs</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-733">Câu 733</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q732.html">← 732</a>
         <a href="pmp-teach-full-q734.html">734 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 733 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is finishing a project in a complex environment where the initial scope, timeline, and resources have evolved over time. The sponsor is requesting insights on the realization of benefits and the overall value delivered by the project. The project manager needs to calculate the value of the project outcomes, considering both the planned benefits and any additional value that may have emerged throughout the project life cycle. The project manager also needs to consider any challenges faced during execution, such as budget deviations, changes in scope, and varying stakeholder expectations. How should the project manager calculate the value of the project outcomes?</p>
-          <div class="badges"><span class="badge">Finance, Stakeholders</span><span class="badge">Monitoring &amp; Controlling</span><span class="badge">Estimate Costs</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q733</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q733</h1>
+          <p class="lead">Bài học Q733 về <strong>Estimate Costs</strong> (PMBOK 8, tr. 49) — trễ tiến độ / áp lực schedule</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is finishing a project in a complex environment where the initial scope, timeline, and resources have evolved over time. The sponsor is requesting insights on the realization of benefits and the overall value delivered by the project. The project manager needs to calculate the value of the project outcomes, considering both the planned benefits and any additional value that may have emerged throughout the project life cycle. The project manager also needs to consider any challenges faced during execution, such as budget deviations, changes in scope, and varying <em>stakeholder expectations</em>. How should the project manager calculate the value of the project outcomes?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 49</span><span class="badge">Finance, Stakeholders</span><span class="badge">Estimate Costs</span><span class="badge">Full Bank Q733</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Finance, Stakeholders<br>
-              <strong>Focus Area:</strong> Monitoring &amp; Controlling<br>
-              <strong>Process:</strong> Estimate Costs, Determine Budget, Control Costs<br>
-              <strong>Principle:</strong> Focus on value, Integrate sustainability
-            </p>
+        <section id="concept">
+          <h2>1. Estimate Costs</h2>
+          <p><strong>Estimate Costs</strong> thuộc miền <strong>Finance, Stakeholders</strong> — process <strong>Estimate Costs</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 49): planet, society, and value while performing project-related activities. Sustainability encompasses addressing en vironmental, social, and economic impacts, considering the well-being of people globally, the effective and wise use of natu</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>A</strong>
+              Evaluate both qualitative and quantitative project benefits,
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Calculate the tangible benefits and divide them by the total
+            </div><div class="approach-cell">
+              <strong>facilitate retrospective</strong>
+              facilitate retrospective / phân tích root cause
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Compare the actual project outcomes with the initial budget 
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q733</h4>
+            <p style="margin:0"><strong>stakeholder expectations</strong><br><br>→ <strong>A</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance + Stakeholders (Monitoring &amp; Controlling, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q733 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Evaluate both qualitative and quantitative project bene…</strong></td>
+                <td>Evaluate both qualitative and quantitative project benefits, consideri</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Calculate the tangible benefits and divide them by the …</strong></td>
+                <td>Calculate the tangible benefits and divide them by the total project e</td>
+                <td>✗ &quot;Calculate the tangible benefits and divide them by the total project expenses to m…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Perform a retrospective financial analysis to assess wh…</strong></td>
+                <td>facilitate retrospective / phân tích root cause</td>
+                <td>✗ Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết trễ tiến độ /…</td>
+              </tr><tr>
+                <td><strong>D. Compare the actual project outcomes with the initial bu…</strong></td>
+                <td>Compare the actual project outcomes with the initial budget to evaluat</td>
+                <td>✗ &quot;Compare the actual project outcomes with the initial budget to evaluate the projec…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q733</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Evaluate both qualitative and quantitative project benefits, considering their alignment with the project's strategic goals.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Calculate the tangible benefits and divide them by the total project expenses to measure the project's return on investment (ROI).
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q733</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q733</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 733</div>
             <div class="q-text">A project manager is finishing a project in a complex environment where the initial scope, timeline, and resources have evolved over time. The sponsor is requesting insights on the realization of benefits and the overall value delivered by the project. The project manager needs to calculate the value of the project outcomes, considering both the planned benefits and any additional value that may have emerged throughout the project life cycle. The project manager also needs to consider any challenges faced during execution, such as budget deviations, changes in scope, and varying stakeholder expectations. How should the project manager calculate the value of the project outcomes?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>A</strong> — &quot;Evaluate both qualitative and quantitative project benefits, considering their alignment with the project's strategic goals.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: trễ tiến độ / áp lực schedule — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Estimate Costs — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Evaluate both qualitative and quantitative project benefits, considering their alignment with the project's strategic goals.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>A</strong> — &quot;Evaluate both qualitative and quantitative project benefits, considering their alignment with the project's strategic goals.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; planet, society, and value while performing project-related activities. Sustainability encompasses addressing en vironmental, social, and economic impacts, considering the well-being of people globally, the effective and wise use of natu<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 49 (Performance Domain: <span class="kw-pmbok">Finance</span>, Estimate Costs)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 49: Performance Domain: <span class="kw-pmbok">Finance</span>, Estimate Costs</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Calculate the tangible benefits and divide them by the total project expenses to…</span></td><td>&quot;Calculate the tangible benefits and divide them by the total project expenses to m…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Evaluate both qualitative and quantitative project benefits, considering their ali…&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Perform a retrospective financial analysis to assess whether the expected financ…</span></td><td>Tập trung &quot;<span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Compare the actual project outcomes with the initial budget to evaluate the proj…</span></td><td>&quot;Compare the actual project outcomes with the initial budget to evaluate the projec…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Evaluate both qualitative and quantitative project benefits, considering their ali…&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A project manager is finishing a project in a complex environment where the initial scope, timeline,… (Q733)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="facilitate_retro">
+              <span>Tình huống cần &quot;facilitate retrospective / phân tích root cause&quot; — không phải trọng tâm Q733</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Calculate the tangible benefits and divide them by t…" → B</h4>
+            <p style="margin:0">&quot;Calculate the tangible benefits and divide them by the total project expenses to m…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Evaluate both qualitative and quantitative project benefits, considering their ali…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Perform a retrospective financial analysis to assess…" → C</h4>
+            <p style="margin:0">Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Compare the actual project outcomes with the initial…" → D</h4>
+            <p style="margin:0">&quot;Compare the actual project outcomes with the initial budget to evaluate the projec…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Evaluate both qualitative and quantitative project benefits, considering their ali…&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>stakeholder expectations</strong> → <strong>A</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance + Stakeholders (Monitoring &amp; Controlling, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q733 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Evaluate both qualitative and quantitative project benefits, considering their alignment with the project's strategic goals.</div>
+            <div class="flashcard-front">Q733 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Estimate Costs</strong><br>PMBOK 8, tr. 49</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Estimate Costs</div>
+            <div class="flashcard-front">Q733 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Evaluate both qualitative and quantitative project benefits, considering their alignment with the pr</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">trễ tiến độ / áp lực schedule</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q733
-────────────────────────
-A project manager is finishing a project in a complex environment where the initial scope, timeline, and resources have evolved over time. The sponsor is requesting insights on the realization of bene…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">ESTIMATE COSTS — Q733
+(PMBOK 8, tr. 49)
+─────────────────────────────────────────────────────
+DOMAIN: Finance, Stakeholders
+PROCESS: Estimate Costs, Determine Budget, Control Costs
+PRINCIPLE: Focus on value, Integrate sustainability
 
-ANSWER: A
-A. Evaluate both qualitative and quantitative project benefits, considering their alignment with the project's strategic goals.
+SCENARIO:
+A project manager is finishing a project in a complex environment where the initial scope, timeline, and resources have evolved over time. The sponsor is requesting insights on the realization of benefits and the overall…
 
-PMBOK 8:
-  Domain: Finance, Stakeholders
-  Process: Estimate Costs, Determine Budget, Control Costs
-  Principle: Focus on value, Integrate sustainability</div>
+SIGNAL KEYWORDS:
+  stakeholder expectations
+
+ANSWER → A) Evaluate both qualitative and quantitative project benefits, considering their alignment with the project's strategic goals.
+
+NOT:
+  B) Calculate the tangible benefits and divide them by… — &quot;Calculate the tangible benefits and divide them by the tota
+  C) Perform a retrospective financial analysis to asse… — Tập trung &quot;facilitate retrospective / phân tích root cause&quot; 
+  D) Compare the actual project outcomes with the initi… — &quot;Compare the actual project outcomes with the initial budget
+
+Q733 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance + Stakeholders (Monitoring & Controlling, PMBOK 8).","B":"\"Calculate the tangible benefits and divide them by the total project expenses to m…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Evaluate both qualitative and quantitative project benefits, considering their ali…\".","C":"Tập trung \"facilitate retrospective / phân tích root cause\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"\"Compare the actual project outcomes with the initial budget to evaluate the projec…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Evaluate both qualitative and quantitative project benefits, considering their ali…\"."};
+      const EXPL = {"A":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance + Stakeholders (Monitoring & Controlling, PMBOK 8).","B":"\"Calculate the tangible benefits and divide them by the total project expenses to m…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Evaluate both qualitative and quantitative project benefits, considering their ali…\".","C":"Tập trung \"facilitate retrospective / phân tích root cause\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"\"Compare the actual project outcomes with the initial budget to evaluate the projec…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Evaluate both qualitative and quantitative project benefits, considering their ali…\"."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

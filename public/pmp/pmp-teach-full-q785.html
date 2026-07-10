@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 785</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Team</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-785">Câu 785</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q784.html">← 784</a>
         <a href="pmp-teach-full-q786.html">786 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 785 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is overseeing the delivery of a new enterprise software system. During a stakeholder review session, a key stakeholder reports that a critical component of the product is “<span class="kw-cue">not</span> user-friendly” and may negatively affect adoption by end users. The component passed all functional and performance tests, but usability was <span class="kw-cue">not</span> explicitly included in the original acceptance criteria. The stakeholder insists that this issue must be addressed before the <span class="kw-cue">next</span> release, but making changes now could impact schedule and budget baselines. How should the project manager address the concern?</p>
-          <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q785</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q785</h1>
+          <p class="lead">Bài học Q785 về <strong>Develop Team</strong> (PMBOK 8, tr. 53) — Stakeholder không hài lòng</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is overseeing the delivery of a new enterprise software system. During a <em>stakeholder review session</em>, a key stakeholder reports that a critical component of the product is “not user-friendly” and may negatively affect adoption by end users. The component passed all functional and performance tests, but usability was not explicitly included in the original acceptance criteria. The stakeholder insists that this issue must be addressed before the next release, but making changes now could impact schedule and budget baselines. How should the project manager address the concern?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Resources, Stakeholders</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q785</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Team, Manage Team<br>
-              <strong>Principle:</strong> Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Develop Team</h2>
+          <p><strong>Develop Team</strong> thuộc miền <strong>Resources, Stakeholders</strong> — process <strong>Develop Team</strong>, principle <strong>Build an empowered culture</strong>. PMBOK 8 (tr. 53): 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>đảm bảo tuân thủ</strong>
+              đảm bảo tuân thủ / compliance
+            </div><div class="approach-cell pull">
+              <strong>cùng phát triển giải pháp</strong>
+              cùng phát triển giải pháp / collaborate
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Bring in a user experience (UX) specialist to assess usabili
+            </div><div class="approach-cell">
+              <strong>change control</strong>
+              change control / change request
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q785</h4>
+            <p style="margin:0"><strong>stakeholder review session</strong><br><br>→ <strong>B</strong> phù hợp vì PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q785 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Verify that the component meets the agreed-upon design …</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td>✗ Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder không hài lòng / kỳ…</td>
+              </tr><tr>
+                <td><strong>B. Collaborate with the stakeholder to clarify the issue, …</strong></td>
+                <td>cùng phát triển giải pháp / collaborate</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Bring in a user experience (UX) specialist to assess us…</strong></td>
+                <td>Bring in a user experience (UX) specialist to assess usability issues </td>
+                <td>✗ &quot;Bring in a user experience (UX) specialist to assess usability issues and recommen…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Submit a formal change request to evaluate usability is…</strong></td>
+                <td>change control / change request</td>
+                <td>✗ Tập trung &quot;change control / change request&quot; không giải quyết stakeholder không hài lòng / …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q785</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Verify that the component meets the agreed-upon design and performance standards, and proceed to the next steps.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         <span class="kw-signal">Collaborate</span> with the stakeholder to clarify the issue, verify a solution, and update acceptance criteria if necessary.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Bring in a user experience (UX) specialist to assess usability issues and recommend practical solutions.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q785</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q785</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 785</div>
             <div class="q-text">A project manager is overseeing the delivery of a new enterprise software system. During a stakeholder review session, a key stakeholder reports that a critical component of the product is “<span class="kw-cue">not</span> user-friendly” and may negatively affect adoption by end users. The component passed all functional and performance tests, but usability was <span class="kw-cue">not</span> explicitly included in the original acceptance criteria. The stakeholder insists that this issue must be addressed before the <span class="kw-cue">next</span> release, but making changes now could impact schedule and budget baselines. How should the project manager address the concern?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.</li><li>→ <strong>B:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.</li><li>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an empowered culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể. Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong>cùng phát triển giải pháp / <span class="kw-signal">collaborate</span></strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Stem signal: stakeholder không hài lòng / kỳ vọng lệch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Develop Team</span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Collaborate with the stakeholder to clarify the issue, verify a solution, and update acceptance criteria if necessary.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an empowered culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể. Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong>cùng phát triển giải pháp / <span class="kw-signal">collaborate</span></strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an Empowered Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Verify that the component meets the agreed-upon design and performance standards…</span></td><td>Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / <span class="kw-signal">collaborate</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Bring in a user experience (UX) specialist to assess usability issues and recomm…</span></td><td>&quot;Bring in a user experience (UX) specialist to assess usability issues and recommen…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung cùng phát triển giải pháp / <span class="kw-signal">collaborate</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Submit a formal change request to evaluate usability issues and assess schedule …</span></td><td>Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / <span class="kw-signal">collaborate</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="develop_solution">
+              <span>A project manager is overseeing the delivery of a new enterprise software system. During a stakehold… (Q785)</span>
+              <div class="classify-btns"><button data-pick="develop_solution" type="button">cùng phát tr</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="change_control" type="button">change contr</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="ensure_compliance">
+              <span>Tình huống cần &quot;đảm bảo tuân thủ / compliance&quot; — không phải trọng tâm Q785</span>
+              <div class="classify-btns"><button data-pick="develop_solution" type="button">cùng phát tr</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="change_control" type="button">change contr</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="change_control">
+              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q785</span>
+              <div class="classify-btns"><button data-pick="develop_solution" type="button">cùng phát tr</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="change_control" type="button">change contr</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Verify that the component meets the agreed-upon desi…" → A</h4>
+            <p style="margin:0">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / collaborate.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Bring in a user experience (UX) specialist to assess…" → C</h4>
+            <p style="margin:0">&quot;Bring in a user experience (UX) specialist to assess usability issues and recommen…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung cùng phát triển giải pháp / collaborate.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Submit a formal change request to evaluate usability…" → D</h4>
+            <p style="margin:0">Tập trung &quot;change control / change request&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / collaborate.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>stakeholder review session</strong> → <strong>B</strong> — PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q785 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Collaborate with the stakeholder to clarify the issue, verify a solution, and update acceptance criteria if necessary.</div>
+            <div class="flashcard-front">Q785 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Team</strong><br>PMBOK 8, tr. 53</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Build an empowered culture</strong><br>Develop Team</div>
+            <div class="flashcard-front">Q785 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Collaborate with the stakeholder to clarify the issue, verify a solution, and update acceptance crit</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Stakeholder không hài lòng</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q785
-────────────────────────
-A project manager is overseeing the delivery of a new enterprise software system. During a stakeholder review session, a key stakeholder reports that a critical component of the product is “not user-f…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP TEAM — Q785
+(PMBOK 8, tr. 53)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Stakeholders
+PROCESS: Develop Team, Manage Team
+PRINCIPLE: Build an empowered culture
 
-ANSWER: B
-B. Collaborate with the stakeholder to clarify the issue, verify a solution, and update acceptance criteria if necessary.
+SCENARIO:
+A project manager is overseeing the delivery of a new enterprise software system. During a stakeholder review session, a key stakeholder reports that a critical component of the product is “not user-friendly” and may neg…
 
-PMBOK 8:
-  Domain: Resources, Stakeholders
-  Process: Develop Team, Manage Team
-  Principle: Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  stakeholder review session
+
+ANSWER → B) Collaborate with the stakeholder to clarify the issue, verify a solution, and update acceptance criteria if necessary.
+
+NOT:
+  A) Verify that the component meets the agreed-upon de… — Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết s
+  C) Bring in a user experience (UX) specialist to asse… — &quot;Bring in a user experience (UX) specialist to assess usabil
+  D) Submit a formal change request to evaluate usabili… — Tập trung &quot;change control / change request&quot; không giải quyết
+
+Q785 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / collaborate.","B":"PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.","C":"\"Bring in a user experience (UX) specialist to assess usability issues and recommen…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung cùng phát triển giải pháp / collaborate.","D":"Tập trung \"change control / change request\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / collaborate."};
+      const EXPL = {"A":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / collaborate.","B":"Đúng! PM làm việc trực tiếp với người liên quan để phát triển giải pháp, không chỉ thông báo một chiều.","C":"\"Bring in a user experience (UX) specialist to assess usability issues and recommen…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung cùng phát triển giải pháp / collaborate.","D":"Tập trung \"change control / change request\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần cùng phát triển giải pháp / collaborate."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

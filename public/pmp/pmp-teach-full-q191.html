@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 191</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Define Scope</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-191">Câu 191</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q190.html">← 190</a>
         <a href="pmp-teach-full-q192.html">192 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 191 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">Although a project is performing on time, within scope and budget, the project manager learns that the project sponsor is unhappy with its progress. What should the project manager have done to avoid this situation?</p>
-          <div class="badges"><span class="badge">Scope, Stakeholders</span><span class="badge">Executing</span><span class="badge">Define Scope</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q191</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q191</h1>
+          <p class="lead">Bài học Q191 về <strong>Define Scope</strong> (PMBOK 8, tr. 42) — stakeholder không hài lòng / kỳ vọng lệch</p>
+          <p class="lead" style="margin-top:0.75rem">Although a project is performing on time, within scope and budget, the project manager learns that the project sponsor is unhappy with its progress. What should the project manager have done to avoid this situation?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 42</span><span class="badge">Scope, Stakeholders</span><span class="badge">Define Scope</span><span class="badge">Full Bank Q191</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Scope, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Define Scope, Validate Scope, Control Scope<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Define Scope</h2>
+          <p><strong>Define Scope</strong> thuộc miền <strong>Scope, Stakeholders</strong> — process <strong>Define Scope</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 42): This process controls how requests for changes to the detailed project scope statement will be processed while also ensuring the deliverables meet the specified quality requirements and that the scope and quality are aligned to the scope</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Conducted frequent reviews and assessments to identify and a
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Aligned project objectives with the project sponsor's expect
+            </div><div class="approach-cell pull">
+              <strong>C</strong>
+              Communicated regularly with the project sponsor to provide u
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Implemented strict control measures to ensure that project m
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q191</h4>
+            <p style="margin:0">stakeholder không hài lòng / kỳ vọng lệch<br><br>→ <strong>C</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Scope + Stakeholders (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q191 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Conducted frequent reviews and assessments to identify …</strong></td>
+                <td>Conducted frequent reviews and assessments to identify and address any</td>
+                <td>✗ &quot;Conducted frequent reviews and assessments to identify and address any potential r…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Aligned project objectives with the project sponsor's e…</strong></td>
+                <td>Aligned project objectives with the project sponsor's expectations and</td>
+                <td>✗ &quot;Aligned project objectives with the project sponsor's expectations and requirements.&quot; khô…</td>
+              </tr><tr>
+                <td><strong>C. Communicated regularly with the project sponsor to prov…</strong></td>
+                <td>Communicated regularly with the project sponsor to provide updates and</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Implemented strict control measures to ensure that proj…</strong></td>
+                <td>Implemented strict control measures to ensure that project milestones </td>
+                <td>✗ &quot;Implemented strict control measures to ensure that project milestones and delivera…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q191</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Conducted frequent reviews and assessments to identify and address any potential risks.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Communicated regularly with the project sponsor to provide updates and address any concerns.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Implemented strict control measures to ensure that project milestones and deliverables are met.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q191</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q191</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 191</div>
             <div class="q-text">Although a project is performing on time, within scope and budget, the project manager learns that the project sponsor is unhappy with its progress. What should the project manager have done to avoid this situation?</div>
@@ -181,44 +229,84 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>C</strong> — &quot;Communicated regularly with the project sponsor to provide updates and address any concerns.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: stakeholder không hài lòng / kỳ vọng lệch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Define <span class="kw-pmbok">Scope</span> — align với đáp án C.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Communicated regularly with the project sponsor to provide updates and address any concerns.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>C</strong> — &quot;Communicated regularly with the project sponsor to provide updates and address any concerns.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; This process controls how requests for changes to the detailed project scope statement will be processed while also ensuring the deliverables meet the specified quality requirements and that the scope and quality are aligned to the scope<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 42 (Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 42: Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Conducted frequent reviews and assessments to identify and address any potential…</span></td><td>&quot;Conducted frequent reviews and assessments to identify and address any potential r…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Communicated regularly with the project sponsor to provide updates and address any…&quot;.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Aligned project objectives with the project sponsor's expectations and requireme…</span></td><td>&quot;Aligned project objectives with the project sponsor's expectations and requirements.&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Communicated regularly with the project sponsor to provide updates and address any…&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implemented strict control measures to ensure that project milestones and delive…</span></td><td>&quot;Implemented strict control measures to ensure that project milestones and delivera…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Communicated regularly with the project sponsor to provide updates and address any…&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>Although a project is performing on time, within scope and budget, the project manager learns that t… (Q191)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="DUMMY1" type="button">Opt 1</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 1 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Conducted frequent reviews and assessments to identi…" → A</h4>
+            <p style="margin:0">&quot;Conducted frequent reviews and assessments to identify and address any potential r…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Communicated regularly with the project sponsor to provide updates and address any…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Aligned project objectives with the project sponsor'…" → B</h4>
+            <p style="margin:0">&quot;Aligned project objectives with the project sponsor's expectations and requirements.&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Communicated regularly with the project sponsor to provide updates and address any…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Implemented strict control measures to ensure that p…" → D</h4>
+            <p style="margin:0">&quot;Implemented strict control measures to ensure that project milestones and delivera…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Communicated regularly with the project sponsor to provide updates and address any…&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>C</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Scope + Stakeholders (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q191 — đáp án?</div>
+            <div class="flashcard-front">Q191 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Define Scope</strong><br>PMBOK 8, tr. 42</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q191 — đáp án?</div>
             <div class="flashcard-back"><strong>C</strong> — Communicated regularly with the project sponsor to provide updates and address any concerns.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Define Scope</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">stakeholder không hài lòng / kỳ vọng lệch</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q191
-────────────────────────
-Although a project is performing on time, within scope and budget, the project manager learns that the project sponsor is unhappy with its progress. What should the project manager have done to avoid …
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEFINE SCOPE — Q191
+(PMBOK 8, tr. 42)
+─────────────────────────────────────────────────────
+DOMAIN: Scope, Stakeholders
+PROCESS: Define Scope, Validate Scope, Control Scope
+PRINCIPLE: Lead accountably
 
-ANSWER: C
-C. Communicated regularly with the project sponsor to provide updates and address any concerns.
+SCENARIO:
+Although a project is performing on time, within scope and budget, the project manager learns that the project sponsor is unhappy with its progress. What should the project manager have done to avoid this situation?
 
-PMBOK 8:
-  Domain: Scope, Stakeholders
-  Process: Define Scope, Validate Scope, Control Scope
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → C) Communicated regularly with the project sponsor to provide updates and address any concerns.
+
+NOT:
+  A) Conducted frequent reviews and assessments to iden… — &quot;Conducted frequent reviews and assessments to identify and 
+  B) Aligned project objectives with the project sponso… — &quot;Aligned project objectives with the project sponsor's expec
+  D) Implemented strict control measures to ensure that… — &quot;Implemented strict control measures to ensure that project 
+
+Q191 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"\"Conducted frequent reviews and assessments to identify and address any potential r…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung \"Communicated regularly with the project sponsor to provide updates and address any…\".","B":"\"Aligned project objectives with the project sponsor's expectations and requirements.\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung \"Communicated regularly with the project sponsor to provide updates and address any…\".","C":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Scope + Stakeholders (Executing, PMBOK 8).","D":"\"Implemented strict control measures to ensure that project milestones and delivera…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung \"Communicated regularly with the project sponsor to provide updates and address any…\"."};
+      const EXPL = {"A":"\"Conducted frequent reviews and assessments to identify and address any potential r…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung \"Communicated regularly with the project sponsor to provide updates and address any…\".","B":"\"Aligned project objectives with the project sponsor's expectations and requirements.\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung \"Communicated regularly with the project sponsor to provide updates and address any…\".","C":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Scope + Stakeholders (Executing, PMBOK 8).","D":"\"Implemented strict control measures to ensure that project milestones and delivera…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung \"Communicated regularly with the project sponsor to provide updates and address any…\"."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

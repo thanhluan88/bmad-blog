@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 611</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-611">Câu 611</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q610.html">← 610</a>
         <a href="pmp-teach-full-q612.html">612 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 611 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">Several project team members leave a project before it ends. To complete the current work package, the project manager needs to bring in replacement contractors and wants to select the <span class="kw-cue">most</span> appropriate contract type given the well-defined remaining scope. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Governance, Scope</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q611</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q611</h1>
+          <p class="lead">Bài học Q611 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 48) — vấn đề vendor / procurement</p>
+          <p class="lead" style="margin-top:0.75rem">Several project team members leave a project before it ends. To complete the current work package, the project manager needs to bring in replacement contractors and wants to select the most appropriate contract type given the well-defined remaining scope. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 48</span><span class="badge">Governance, Scope</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q611</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Project Execution, Perform Integrated Change Control, Close Project or Phase<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Governance, Scope</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 48): 3.6.3 Connected Performance Domains The principle of Be an Accountable Leader supports many project management performance domains and can enhance the effectiveness of the project manager when well applied, such as with the following: ⚫</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Use a time-and-materials contract to retain flexibility in t
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Recommend a firm-fixed-price contract to hold contractors ac
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Apply a cost-plus contract to reimburse contractors for all 
+            </div><div class="approach-cell">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q611</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>B</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Scope (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q611 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Use a time-and-materials contract to retain flexibility…</strong></td>
+                <td>Use a time-and-materials contract to retain flexibility in the number </td>
+                <td>✗ &quot;Use a time-and-materials contract to retain flexibility in the number of hours and…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Recommend a firm-fixed-price contract to hold contracto…</strong></td>
+                <td>Recommend a firm-fixed-price contract to hold contractors accountable </td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Apply a cost-plus contract to reimburse contractors for…</strong></td>
+                <td>Apply a cost-plus contract to reimburse contractors for all incurred c</td>
+                <td>✗ &quot;Apply a cost-plus contract to reimburse contractors for all incurred costs while r…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Issue a letter of intent to contractors and negotiate f…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td>✗ Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết vấn đề vendor / procu…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q611</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Use a time-and-materials contract to retain flexibility in the number of hours and resources needed to complete the work package.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Recommend a firm-fixed-price contract to hold contractors accountable for a clearly defined scope at an agreed price.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Apply a cost-plus contract to reimburse contractors for all incurred costs while retaining flexibility on the final deliverable.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q611</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q611</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 611</div>
             <div class="q-text">Several project team members leave a project before it ends. To complete the current work package, the project manager needs to bring in replacement contractors and wants to select the <span class="kw-cue">most</span> appropriate contract type given the well-defined remaining scope. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: vấn đề vendor / procurement. Đáp án <strong>B</strong> — &quot;Recommend a firm-fixed-price contract to hold contractors accountable for a clearly defined scope at an agreed price.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: vấn đề vendor / procurement — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Manage Project Execution</span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Recommend a firm-fixed-price contract to hold contractors accountable for a clearly defined scope at an agreed price.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: vấn đề vendor / procurement. Đáp án <strong>B</strong> — &quot;Recommend a firm-fixed-price contract to hold contractors accountable for a clearly defined scope at an agreed price.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.6.3 Connected Performance Domains The principle of Be an Accountable Leader supports many project management performance domains and can enhance the effectiveness of the project manager when well applied, such as with the following: ⚫<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 48 (Be an Accountable Leader)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 48: Be an Accountable Leader</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Use a time-and-materials contract to retain flexibility in the number of hours a…</span></td><td>&quot;Use a time-and-materials contract to retain flexibility in the number of hours and…&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung &quot;Recommend a firm-fixed-price contract to hold contractors accountable for a clearl…&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Apply a cost-plus contract to reimburse contractors for all incurred costs while…</span></td><td>&quot;Apply a cost-plus contract to reimburse contractors for all incurred costs while r…&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung &quot;Recommend a firm-fixed-price contract to hold contractors accountable for a clearl…&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Issue a letter of intent to contractors and negotiate final contract terms after…</span></td><td>Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>Several project team members leave a project before it ends. To complete the current work package, t… (Q611)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>Tình huống cần &quot;engagement stakeholder / làm rõ kỳ vọng&quot; — không phải trọng tâm Q611</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Use a time-and-materials contract to retain flexibil…" → A</h4>
+            <p style="margin:0">&quot;Use a time-and-materials contract to retain flexibility in the number of hours and…&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung &quot;Recommend a firm-fixed-price contract to hold contractors accountable for a clearl…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Apply a cost-plus contract to reimburse contractors …" → C</h4>
+            <p style="margin:0">&quot;Apply a cost-plus contract to reimburse contractors for all incurred costs while r…&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung &quot;Recommend a firm-fixed-price contract to hold contractors accountable for a clearl…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Issue a letter of intent to contractors and negotiat…" → D</h4>
+            <p style="margin:0">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>B</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Scope (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q611 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Recommend a firm-fixed-price contract to hold contractors accountable for a clearly defined scope at an agreed price.</div>
+            <div class="flashcard-front">Q611 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 48</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Q611 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Recommend a firm-fixed-price contract to hold contractors accountable for a clearly defined scope at</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề vendor / procurement</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q611
-────────────────────────
-Several project team members leave a project before it ends. To complete the current work package, the project manager needs to bring in replacement contractors and wants to select the most appropriat…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q611
+(PMBOK 8, tr. 48)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Scope
+PROCESS: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
+PRINCIPLE: Lead accountably
 
-ANSWER: B
-B. Recommend a firm-fixed-price contract to hold contractors accountable for a clearly defined scope at an agreed price.
+SCENARIO:
+Several project team members leave a project before it ends. To complete the current work package, the project manager needs to bring in replacement contractors and wants to select the most appropriate contract type give…
 
-PMBOK 8:
-  Domain: Governance, Scope
-  Process: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → B) Recommend a firm-fixed-price contract to hold contractors accountable for a clearly defined scope at an agreed price.
+
+NOT:
+  A) Use a time-and-materials contract to retain flexib… — &quot;Use a time-and-materials contract to retain flexibility in 
+  C) Apply a cost-plus contract to reimburse contractor… — &quot;Apply a cost-plus contract to reimburse contractors for all
+  D) Issue a letter of intent to contractors and negoti… — Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không gi
+
+Q611 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Use a time-and-materials contract to retain flexibility in the number of hours and…\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung \"Recommend a firm-fixed-price contract to hold contractors accountable for a clearl…\".","B":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Scope (Executing, PMBOK 8).","C":"\"Apply a cost-plus contract to reimburse contractors for all incurred costs while r…\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung \"Recommend a firm-fixed-price contract to hold contractors accountable for a clearl…\".","D":"Tập trung \"engagement stakeholder / làm rõ kỳ vọng\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
+      const EXPL = {"A":"\"Use a time-and-materials contract to retain flexibility in the number of hours and…\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung \"Recommend a firm-fixed-price contract to hold contractors accountable for a clearl…\".","B":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Scope (Executing, PMBOK 8).","C":"\"Apply a cost-plus contract to reimburse contractors for all incurred costs while r…\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung \"Recommend a firm-fixed-price contract to hold contractors accountable for a clearl…\".","D":"Tập trung \"engagement stakeholder / làm rõ kỳ vọng\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

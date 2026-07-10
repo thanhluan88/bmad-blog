@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1037</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Define Scope</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        
+        
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1037">Câu 1037</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        
+        
         <a href="pmp-teach-full-q1036.html">← 1036</a>
         <a href="pmp-teach-full-q1038.html">1038 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1037 — Bộ luyện PMBOK 8</h1>
-          <p class="lead"><span class="kw-cue">Drag and drop</span> the term below to the correct definition: You can drop only one draggable choice into a target container. A broader term describing systems that can reason, learn, and act autonomously. A subset of deep learning that applies large language models (LLMs) to create systems capable of generating new data, such as text, speech, audio, pictures, and videos. A subfield of AI that uses data to train neural network models, which can predict outputs based on previous inputs. A more advanced ML type that relies on multilayered neural networks to extract features and make decisions. Often requires large data sets and significant computational resources. Machine learning (ML) Deep learning (DL) Generative AI (GenAI) Artificial intelligence (AI)</p>
-          <div class="badges"><span class="badge">Scope, Resources</span><span class="badge">Executing</span><span class="badge">Define Scope</span><span class="badge">Adopt a holistic view</span><span class="badge">Full Bank Q1037</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1037</h1>
+          <p class="lead">Bài học Q1037 về <strong>Define Scope</strong> (PMBOK 8, tr. 40) — Phân tích tình huống và chọn đáp án D,C,A,B theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">Drag and drop the term below to the correct definition: You can drop only one draggable choice into a target container. A broader term describing systems that can reason, learn, and act autonomously. A subset of deep learning that applies large language models (LLMs) to create systems capable of generating new data, such as text, speech, audio, pictures, and videos. A subfield of AI that uses data to train neural network models, which can predict outputs based on previous inputs. A more advanced ML type that relies on multilayered neural networks to extract features and make decisions. Often requires large data sets and significant computational resources. Machine learning (ML) Deep learning (DL) Generative AI (GenAI) Artificial intelligence (AI)</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 40</span><span class="badge">Scope, Resources</span><span class="badge">Define Scope</span><span class="badge">Full Bank Q1037</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,26 +148,25 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Scope, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Define Scope, Validate Scope, Control Scope<br>
-              <strong>Principle:</strong> Adopt a holistic view
-            </p>
+        <section id="concept">
+          <h2>1. Define Scope</h2>
+          <p><strong>Define Scope</strong> thuộc miền <strong>Scope, Resources</strong> — process <strong>Define Scope</strong>, principle <strong>Adopt a holistic view</strong>. PMBOK 8 (tr. 40): 40 ⚫ Scope. The principle of Adopt a Holistic View helps foster alignment of all project activities with the overall project scope, preventing scope creep and misalignment by considering the entire project ecosystem. Also, by promoting cl</p>
+          
+          <div class="card tip">
+            <h4>Signal trong stem Q1037</h4>
+            <p style="margin:0">Đọc kỹ stem và xác định vấn đề trọng tâm.<br><br>→ Đáp án đúng: <strong>D,C,A,B</strong></p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1037</h2>
           
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1037</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1037</h2>
           <div class="quiz-card">
             <div class="q-num">pmp-full-questions · Câu 1037 · drag_drop</div>
             <div class="q-text"><span class="kw-cue">Drag and drop</span> the term below to the correct definition: You can drop only one draggable choice into a target container. A broader term describing systems that can reason, learn, and act autonomously. A subset of deep learning that applies large language models (LLMs) to create systems capable of generating new data, such as text, speech, audio, pictures, and videos. A subfield of AI that uses data to train neural network models, which can predict outputs based on previous inputs. A more advanced ML type that relies on multilayered neural networks to extract features and make decisions. Often requires large data sets and significant computational resources. Machine learning (ML) Deep learning (DL) Generative AI (GenAI) Artificial intelligence (AI)</div>
@@ -165,41 +182,60 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D,C,A,B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D,C,A,B</h2>
+          <h3>Tại sao chọn D,C,A,B?</h3>
+          <ul><li>Process Define <span class="kw-pmbok">Scope</span> — align với đáp án D,C,A,B.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 40.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D,C,A,B</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">Ghép đúng theo framework chuẩn (Scrum/PMBOK/team development) — đáp án: D,C,A,B.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 40 ⚫ <span class="kw-pmbok">Scope</span>. The principle of <span class="kw-pmbok">Adopt a Holistic View</span> helps foster alignment of all project activities with the overall project scope, preventing scope creep and misalignment by considering the entire project ecosystem. Also, by promoting cl<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 40 (<span class="kw-pmbok">Adopt a Holistic View</span> helps foster alignment of al)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 40: <span class="kw-pmbok">Adopt a Holistic View</span> helps foster alignment of al</p>
+          <h3>Loại trừ từng đáp án</h3>
           
         </section>
+
+        
+
+        
 
         <section id="flashcards">
           <h2>5. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1037 — đáp án?</div>
-            <div class="flashcard-back"><strong>D,C,A,B</strong> — C,A,B</div>
+            <div class="flashcard-front">Q1037 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Define Scope</strong><br>PMBOK 8, tr. 40</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Adopt a holistic view</strong><br>Define Scope</div>
+            <div class="flashcard-front">Q1037 — đáp án?</div>
+            <div class="flashcard-back"><strong>D,C,A,B</strong> — D,C,A,B</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án D,C,A,B theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1037
-────────────────────────
-Drag and drop the term below to the correct definition: You can drop only one draggable choice into a target container. A broader term describing systems that can reason, learn, and act autonomously. …
+          <div class="cheat-sheet">DEFINE SCOPE — Q1037
+(PMBOK 8, tr. 40)
+─────────────────────────────────────────────────────
+DOMAIN: Scope, Resources
+PROCESS: Define Scope, Validate Scope, Control Scope
+PRINCIPLE: Adopt a holistic view
 
-ANSWER: D,C,A,B
-D,C,A,B
+SCENARIO:
+Drag and drop the term below to the correct definition: You can drop only one draggable choice into a target container. A broader term describing systems that can reason, learn, and act autonomously. A subset of deep lea…
 
-PMBOK 8:
-  Domain: Scope, Resources
-  Process: Define Scope, Validate Scope, Control Scope
-  Principle: Adopt a holistic view</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → D,C,A,B) D,C,A,B
+
+NOT:
+  (xem bảng loại trừ)
+
+Q1037 ANSWER: D,C,A,B</div>
         </section>
 
         <footer class="ref-footer">
@@ -219,6 +255,7 @@ PMBOK 8:
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
+      
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
       const obs = new IntersectionObserver(function (entries) {

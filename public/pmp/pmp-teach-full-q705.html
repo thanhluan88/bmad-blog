@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 705</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Acquire Resources</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-705">Câu 705</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q704.html">← 704</a>
         <a href="pmp-teach-full-q706.html">706 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 705 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is assigned to a new project launched in a new country. A month into the project, they realize it is customary to take a week off to celebrate an upcoming holiday. This holiday was <span class="kw-cue">not</span> accounted for in the project schedule, but HR confirms that resources will be unavailable that week. The project manager is concerned that ignoring the holiday could potentially breach labor laws. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Resources, Risk</span><span class="badge">Initiating</span><span class="badge">Acquire Resources</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q705</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q705</h1>
+          <p class="lead">Bài học Q705 về <strong>Acquire Resources</strong> (PMBOK 8, tr. 174) — Resource không sẵn sàng</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is assigned to a new project launched in a new country. A month into the project, they realize it is customary to take a week off to celebrate an upcoming holiday. This holiday was not accounted for in the project schedule, but HR confirms that resources will be unavailable that week. The project manager is concerned that ignoring the holiday could potentially breach labor laws. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 174</span><span class="badge">Resources, Risk</span><span class="badge">Acquire Resources</span><span class="badge">Full Bank Q705</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Risk<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Acquire Resources, Monitor Risks<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Acquire Resources</h2>
+          <p><strong>Acquire Resources</strong> thuộc miền <strong>Resources, Risk</strong> — process <strong>Acquire Resources</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 174): areas, these terms have narrow and specific meanings. Inspections also are used to verify defect repairs. Integrated change control. Integrated change control helps ensure that changes to the project are managed in a coordinated and contro</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Recruit new resources who do not celebrate the holiday to wo
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Request contingency funds to offer overtime pay to resources
+            </div><div class="approach-cell">
+              <strong>bổ sung nguồn lực</strong>
+              bổ sung nguồn lực / hire
+            </div><div class="approach-cell pull">
+              <strong>change control</strong>
+              change control / change request
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q705</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q705 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Recruit new resources who do not celebrate the holiday …</strong></td>
+                <td>Recruit new resources who do not celebrate the holiday to work to main</td>
+                <td>✗ &quot;Recruit new resources who do not celebrate the holiday to work to maintain the ori…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Request contingency funds to offer overtime pay to reso…</strong></td>
+                <td>Request contingency funds to offer overtime pay to resources willing t</td>
+                <td>✗ đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung…</td>
+              </tr><tr>
+                <td><strong>C. Hire a cultural expert to prepare a feasibility study o…</strong></td>
+                <td>bổ sung nguồn lực / hire</td>
+                <td>✗ Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết thiếu hụt nguồn lực / kỹ năng — đáp …</td>
+              </tr><tr>
+                <td><strong>D. Perform an integrated change control and impact analysi…</strong></td>
+                <td>change control / change request</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q705</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Recruit new resources who do not celebrate the holiday to work to maintain the original schedule.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Perform an <span class="kw-signal">integrated change control</span> and impact analysis to determine a way forward.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q705</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q705</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 705</div>
             <div class="q-text">A project manager is assigned to a new project launched in a new country. A month into the project, they realize it is customary to take a week off to celebrate an upcoming holiday. This holiday was <span class="kw-cue">not</span> accounted for in the project schedule, but HR confirms that resources will be unavailable that week. The project manager is concerned that ignoring the holiday could potentially breach labor laws. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>→ <strong>D:</strong> Resource không sẵn sàng — xem <span class="kw-signal">risk register</span> / response plan hoặc reallocate có kiểm soát.</li><li>Bối cảnh: thiếu hụt nguồn lực / kỹ năng. Đáp án <strong>D</strong> — &quot;Perform an <span class="kw-signal">integrated change control</span> and impact analysis to determine a way forward.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>Stem signal: thiếu hụt nguồn lực / kỹ năng — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Acquire <span class="kw-pmbok">Resources</span> — align với đáp án D.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Perform an integrated change control and impact analysis to determine a way forward.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Resource không sẵn sàng — xem <span class="kw-signal">risk register</span> / response plan hoặc reallocate có kiểm soát.<br><br>Bối cảnh: thiếu hụt nguồn lực / kỹ năng. Đáp án <strong>D</strong> — &quot;Perform an <span class="kw-signal">integrated change control</span> and impact analysis to determine a way forward.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; areas, these terms have narrow and specific meanings. Inspections also are used to verify defect repairs. <span class="kw-signal">Integrated change control</span>. <span class="kw-signal">Integrated change control</span> helps ensure that changes to the project are managed in a coordinated and contro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 174 (Performance Domain: <span class="kw-pmbok">Resources</span>, Acquire <span class="kw-pmbok">Resources</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 174: Performance Domain: <span class="kw-pmbok">Resources</span>, Acquire <span class="kw-pmbok">Resources</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Recruit new resources who do not celebrate the holiday to work to maintain the o…</span></td><td>&quot;Recruit new resources who do <span class="kw-cue">not</span> celebrate the holiday to work to maintain the ori…&quot; không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request contingency funds to offer overtime pay to resources willing to work dur…</span></td><td>đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Hire a cultural expert to prepare a feasibility study of the ramifications of ig…</span></td><td>Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết thiếu hụt nguồn lực / kỹ năng — đáp án đúng cần change control / <span class="kw-signal">change request</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="change_control">
+              <span>A project manager is assigned to a new project launched in a new country. A month into the project, … (Q705)</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="add_resources" type="button">bổ sung nguồ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="add_resources">
+              <span>Tình huống cần &quot;bổ sung nguồn lực / hire&quot; — không phải trọng tâm Q705</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="add_resources" type="button">bổ sung nguồ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Recruit new resources who do not celebrate the holid…" → A</h4>
+            <p style="margin:0">&quot;Recruit new resources who do not celebrate the holiday to work to maintain the ori…&quot; không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung change control / change request.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Request contingency funds to offer overtime pay to r…" → B</h4>
+            <p style="margin:0">đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung change control / change request.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Hire a cultural expert to prepare a feasibility stud…" → C</h4>
+            <p style="margin:0">Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết thiếu hụt nguồn lực / kỹ năng — đáp án đúng cần change control / change request.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q705 — đáp án?</div>
+            <div class="flashcard-front">Q705 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Acquire Resources</strong><br>PMBOK 8, tr. 174</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q705 — đáp án?</div>
             <div class="flashcard-back"><strong>D</strong> — Perform an integrated change control and impact analysis to determine a way forward.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Acquire Resources</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Resource không sẵn sàng</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q705
-────────────────────────
-A project manager is assigned to a new project launched in a new country. A month into the project, they realize it is customary to take a week off to celebrate an upcoming holiday. This holiday was n…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">ACQUIRE RESOURCES — Q705
+(PMBOK 8, tr. 174)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Risk
+PROCESS: Acquire Resources, Monitor Risks
+PRINCIPLE: Lead accountably
 
-ANSWER: D
-D. Perform an integrated change control and impact analysis to determine a way forward.
+SCENARIO:
+A project manager is assigned to a new project launched in a new country. A month into the project, they realize it is customary to take a week off to celebrate an upcoming holiday. This holiday was not accounted for in …
 
-PMBOK 8:
-  Domain: Resources, Risk
-  Process: Acquire Resources, Monitor Risks
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Perform an integrated change control and impact analysis to determine a way forward.
+
+NOT:
+  A) Recruit new resources who do not celebrate the hol… — &quot;Recruit new resources who do not celebrate the holiday to w
+  B) Request contingency funds to offer overtime pay to… — đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / k
+  C) Hire a cultural expert to prepare a feasibility st… — Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết thiếu 
+
+Q705 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Recruit new resources who do not celebrate the holiday to work to maintain the ori…\" không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung change control / change request.","B":"đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung change control / change request.","C":"Tập trung \"bổ sung nguồn lực / hire\" không giải quyết thiếu hụt nguồn lực / kỹ năng — đáp án đúng cần change control / change request.","D":"Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement."};
+      const EXPL = {"A":"\"Recruit new resources who do not celebrate the holiday to work to maintain the ori…\" không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung change control / change request.","B":"đề xuất/yêu cầu formal không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung change control / change request.","C":"Tập trung \"bổ sung nguồn lực / hire\" không giải quyết thiếu hụt nguồn lực / kỹ năng — đáp án đúng cần change control / change request.","D":"Đúng! Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

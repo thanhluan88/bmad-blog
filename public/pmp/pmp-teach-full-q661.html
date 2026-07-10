@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 661</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Monitor Risks</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-661">Câu 661</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q660.html">← 660</a>
         <a href="pmp-teach-full-q662.html">662 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 661 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A major integration in a project with multiple dependencies is delayed by one month. The project sponsor insists that the project team work overtime to catch up. The client argues that the integration must be tested thoroughly. The project management office emphasizes that dependency risks were identified earlier but <span class="kw-cue">not</span> mitigated. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Risk, Resources</span><span class="badge">Executing</span><span class="badge">Monitor Risks</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q661</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q661</h1>
+          <p class="lead">Bài học Q661 về <strong>Monitor Risks</strong> (PMBOK 8, tr. 101) — Risk đã trigger</p>
+          <p class="lead" style="margin-top:0.75rem">A major integration in a project with multiple dependencies is delayed by one month. The project sponsor insists that the project team work overtime to catch up. The client argues that the integration must be tested thoroughly. The project management office emphasizes that dependency risks were identified earlier but not mitigated. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 101</span><span class="badge">Risk, Resources</span><span class="badge">Monitor Risks</span><span class="badge">Full Bank Q661</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Risk, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Monitor Risks, Implement Risk Responses<br>
-              <strong>Principle:</strong> Lead accountably, Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Monitor Risks</h2>
+          <p><strong>Monitor Risks</strong> thuộc miền <strong>Risk, Resources</strong> — process <strong>Monitor Risks</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 101): team to quickly identify and address emerging risks, ensuring flexibility and responsiveness. Additionally, regular risk review meetings are held with stakeholders at the end of each iteration to incorporate their feedback and adjust risk</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Approve overtime to satisfy sponsor pressure and incentivize
+            </div><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div><div class="approach-cell pull">
+              <strong>thừa nhận lỗi và giải trình minh bạch</strong>
+              thừa nhận lỗi và giải trình minh bạch
+            </div><div class="approach-cell">
+              <strong>sửa kế hoạch</strong>
+              sửa kế hoạch / baseline / schedule
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q661</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>C</strong> phù hợp vì PM thừa nhận lỗi và xin lỗi minh bạch — Lead accountably, giữ tin tưởng stakeholder.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q661 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Approve overtime to satisfy sponsor pressure and incent…</strong></td>
+                <td>Approve overtime to satisfy sponsor pressure and incentivize the team </td>
+                <td>✗ &quot;Approve overtime to satisfy sponsor pressure and incentivize the team to reduce th…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Continue work despite the dependency delay and work wit…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ Trì hoãn acknowledge — stakeholder mất tin tưởng.</td>
+              </tr><tr>
+                <td><strong>C. Revise the schedule formally with stakeholder agreement…</strong></td>
+                <td>thừa nhận lỗi và giải trình minh bạch</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Work with the client to compress testing by applying fa…</strong></td>
+                <td>sửa kế hoạch / baseline / schedule</td>
+                <td>✗ Sửa baseline tùy tiện trước khi consult risk register.</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q661</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Approve overtime to satisfy sponsor pressure and incentivize the team to reduce the possibility of quality slippage.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Revise the schedule formally with stakeholder agreement and transparently integrate the impact of the dependency.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM thừa nhận lỗi và xin lỗi minh bạch — <span class="kw-pmbok">Lead accountably</span>, giữ tin tưởng stakeholder.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Work with the client to compress testing by applying fast-tracking and crashing techniques to reduce testing time.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q661</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q661</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 661</div>
             <div class="q-text">A major integration in a project with multiple dependencies is delayed by one month. The project sponsor insists that the project team work overtime to catch up. The client argues that the integration must be tested thoroughly. The project management office emphasizes that dependency risks were identified earlier but <span class="kw-cue">not</span> mitigated. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>PM thừa nhận lỗi và xin lỗi minh bạch — <span class="kw-pmbok">Lead accountably</span>, giữ tin tưởng stakeholder.</li><li>→ <strong>C:</strong> <span class="kw-pmbok">Risk</span> đã trigger — thực thi planned response từ <span class="kw-signal">risk register</span> trước khi đổi plan hay ghi log.</li><li>Bối cảnh: <span class="kw-pmbok">Risk</span> đã trigger. Đáp án <strong>C</strong> — &quot;<span class="kw-trap">Revise the schedule</span> formally with stakeholder agreement and transparently integrate the impact of the dependency.&quot; — phù hợp vì PM thừa nhận lỗi và xin lỗi minh bạch — <span class="kw-pmbok">Lead accountably</span>, giữ tin tưởng stakeholder.</li><li>Process Monitor Risks — align với đáp án C.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 101.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Revise the schedule formally with stakeholder agreement and transparently integrate the impact of the dependency.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> <span class="kw-pmbok">Risk</span> đã trigger — thực thi planned response từ <span class="kw-signal">risk register</span> trước khi đổi plan hay ghi log.<br><br>Bối cảnh: <span class="kw-pmbok">Risk</span> đã trigger. Đáp án <strong>C</strong> — &quot;<span class="kw-trap">Revise the schedule</span> formally with stakeholder agreement and transparently integrate the impact of the dependency.&quot; — phù hợp vì PM thừa nhận lỗi và xin lỗi minh bạch — <span class="kw-pmbok">Lead accountably</span>, giữ tin tưởng stakeholder.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; team to quickly identify and address emerging risks, ensuring flexibility and responsiveness. Additionally, regular risk review meetings are held with stakeholders at the end of each iteration to incorporate their feedback and adjust risk<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 101 (Performance Domain: <span class="kw-pmbok">Risk</span>, Monitor Risks)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 101: Performance Domain: <span class="kw-pmbok">Risk</span>, Monitor Risks</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve overtime to satisfy sponsor pressure and incentivize the team to reduce …</span></td><td>&quot;Approve overtime to satisfy sponsor pressure and incentivize the team to reduce th…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thừa nhận lỗi và giải trình minh bạch.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Continue work despite the dependency <span class="kw-trap">delay</span> and work with the team to ensure alig…</span></td><td>Trì hoãn <span class="kw-signal">acknowledge</span> — stakeholder mất tin tưởng.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Work with the client to compress testing by applying fast-tracking and crashing …</span></td><td>Sửa baseline tùy tiện trước khi consult <span class="kw-signal">risk register</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="apologize_accountable">
+              <span>A major integration in a project with multiple dependencies is delayed by one month. The project spo… (Q661)</span>
+              <div class="classify-btns"><button data-pick="apologize_accountable" type="button">thừa nhận lỗ</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q661</span>
+              <div class="classify-btns"><button data-pick="apologize_accountable" type="button">thừa nhận lỗ</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="revise_plan">
+              <span>Tình huống cần &quot;sửa kế hoạch / baseline / schedule&quot; — không phải trọng tâm Q661</span>
+              <div class="classify-btns"><button data-pick="apologize_accountable" type="button">thừa nhận lỗ</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Approve overtime to satisfy sponsor pressure and inc…" → A</h4>
+            <p style="margin:0">&quot;Approve overtime to satisfy sponsor pressure and incentivize the team to reduce th…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thừa nhận lỗi và giải trình minh bạch.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Continue work despite the dependency delay and work …" → B</h4>
+            <p style="margin:0">Trì hoãn acknowledge — stakeholder mất tin tưởng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Work with the client to compress testing by applying…" → D</h4>
+            <p style="margin:0">Sửa baseline tùy tiện trước khi consult risk register.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>C</strong> — PM thừa nhận lỗi và xin lỗi minh bạch — Lead accountably, giữ tin tưởng stakeholder.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q661 — đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Revise the schedule formally with stakeholder agreement and transparently integrate the impact of the dependency.</div>
+            <div class="flashcard-front">Q661 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Monitor Risks</strong><br>PMBOK 8, tr. 101</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Monitor Risks</div>
+            <div class="flashcard-front">Q661 — đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Revise the schedule formally with stakeholder agreement and transparently integrate the impact of th</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Risk đã trigger</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q661
-────────────────────────
-A major integration in a project with multiple dependencies is delayed by one month. The project sponsor insists that the project team work overtime to catch up. The client argues that the integration…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MONITOR RISKS — Q661
+(PMBOK 8, tr. 101)
+─────────────────────────────────────────────────────
+DOMAIN: Risk, Resources
+PROCESS: Monitor Risks, Implement Risk Responses
+PRINCIPLE: Lead accountably, Focus on value
 
-ANSWER: C
-C. Revise the schedule formally with stakeholder agreement and transparently integrate the impact of the dependency.
+SCENARIO:
+A major integration in a project with multiple dependencies is delayed by one month. The project sponsor insists that the project team work overtime to catch up. The client argues that the integration must be tested thor…
 
-PMBOK 8:
-  Domain: Risk, Resources
-  Process: Monitor Risks, Implement Risk Responses
-  Principle: Lead accountably, Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → C) Revise the schedule formally with stakeholder agreement and transparently integrate the impact of the dependency.
+
+NOT:
+  A) Approve overtime to satisfy sponsor pressure and i… — &quot;Approve overtime to satisfy sponsor pressure and incentiviz
+  B) Continue work despite the dependency delay and wor… — Trì hoãn acknowledge — stakeholder mất tin tưởng.
+  D) Work with the client to compress testing by applyi… — Sửa baseline tùy tiện trước khi consult risk register.
+
+Q661 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"\"Approve overtime to satisfy sponsor pressure and incentivize the team to reduce th…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thừa nhận lỗi và giải trình minh bạch.","B":"Trì hoãn acknowledge — stakeholder mất tin tưởng.","C":"PM thừa nhận lỗi và xin lỗi minh bạch — Lead accountably, giữ tin tưởng stakeholder.","D":"Sửa baseline tùy tiện trước khi consult risk register."};
+      const EXPL = {"A":"\"Approve overtime to satisfy sponsor pressure and incentivize the team to reduce th…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung thừa nhận lỗi và giải trình minh bạch.","B":"Trì hoãn acknowledge — stakeholder mất tin tưởng.","C":"Đúng! PM thừa nhận lỗi và xin lỗi minh bạch — Lead accountably, giữ tin tưởng stakeholder.","D":"Sửa baseline tùy tiện trước khi consult risk register."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

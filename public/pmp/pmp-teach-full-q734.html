@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 734</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-734">Câu 734</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q733.html">← 733</a>
         <a href="pmp-teach-full-q735.html">735 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 734 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A complex technology project is in the execution phase. New technologies are being added to the backlog in response to evolving customer requirements. These changes will have a significant impact on the project’s deliverables, potentially affecting timelines, scope, and resource allocation. The project manager faces the challenge of balancing the new customer needs with the existing project constraints, including scope, budget, and available resources. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q734</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q734</h1>
+          <p class="lead">Bài học Q734 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 71) — thiếu hụt nguồn lực / kỹ năng</p>
+          <p class="lead" style="margin-top:0.75rem">A complex technology project is in the execution phase. New technologies are being added to the backlog in response to evolving customer requirements. These changes will have a significant impact on the project’s deliverables, potentially affecting timelines, scope, and resource allocation. The project manager faces the challenge of balancing the new customer needs with the existing project constraints, including scope, budget, and available resources. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 71</span><span class="badge">Stakeholders, Scope</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q734</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement, Validate Scope<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders, Scope</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 71): 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Replan the sprints and releases to meet customer expectation
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Manage customer expectations based on business needs, consid
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Accept the new requirements and plan a new release schedule 
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Push the project team to accept the new challenge, aiming to
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q734</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>B</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Scope (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q734 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Replan the sprints and releases to meet customer expect…</strong></td>
+                <td>Replan the sprints and releases to meet customer expectations, adjusti</td>
+                <td>✗ &quot;Replan the sprints and releases to meet customer expectations, adjusting timelines…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Manage customer expectations based on business needs, c…</strong></td>
+                <td>Manage customer expectations based on business needs, considering budg</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Accept the new requirements and plan a new release sche…</strong></td>
+                <td>Accept the new requirements and plan a new release schedule without co</td>
+                <td>✗ &quot;Accept the new requirements and plan a new release schedule without considering re…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Push the project team to accept the new challenge, aimi…</strong></td>
+                <td>Push the project team to accept the new challenge, aiming to meet evol</td>
+                <td>✗ &quot;Push the project team to accept the new challenge, aiming to meet evolving custome…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q734</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Replan the sprints and releases to meet customer expectations, adjusting timelines and resources as needed.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Manage customer expectations based on business needs, considering budget, timeline, and resource constraints.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Scope</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Accept the new requirements and plan a new release schedule without considering resource or timeline limits.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q734</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q734</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 734</div>
             <div class="q-text">A complex technology project is in the execution phase. New technologies are being added to the backlog in response to evolving customer requirements. These changes will have a significant impact on the project’s deliverables, potentially affecting timelines, scope, and resource allocation. The project manager faces the challenge of balancing the new customer needs with the existing project constraints, including scope, budget, and available resources. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,84 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Scope</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Scope</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony.</li><li>Stem signal: thiếu hụt nguồn lực / kỹ năng — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Manage customer expectations based on business needs, considering budget, timeline, and resource constraints.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Scope</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Replan the sprints and releases to meet customer expectations, adjusting timelin…</span></td><td>&quot;Replan the sprints and releases to meet customer expectations, adjusting timelines…&quot; không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung &quot;Manage customer expectations based on business needs, considering budget, timeline…&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Accept the new requirements and plan a new release schedule without considering …</span></td><td>&quot;Accept the new requirements and plan a new release schedule without considering re…&quot; không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung &quot;Manage customer expectations based on business needs, considering budget, timeline…&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Push the project team to accept the new challenge, aiming to meet evolving custo…</span></td><td>&quot;Push the project team to accept the new challenge, aiming to meet evolving custome…&quot; không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung &quot;Manage customer expectations based on business needs, considering budget, timeline…&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A complex technology project is in the execution phase. New technologies are being added to the back… (Q734)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="DUMMY1" type="button">Opt 1</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 1 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Replan the sprints and releases to meet customer exp…" → A</h4>
+            <p style="margin:0">&quot;Replan the sprints and releases to meet customer expectations, adjusting timelines…&quot; không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung &quot;Manage customer expectations based on business needs, considering budget, timeline…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Accept the new requirements and plan a new release s…" → C</h4>
+            <p style="margin:0">&quot;Accept the new requirements and plan a new release schedule without considering re…&quot; không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung &quot;Manage customer expectations based on business needs, considering budget, timeline…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Push the project team to accept the new challenge, a…" → D</h4>
+            <p style="margin:0">&quot;Push the project team to accept the new challenge, aiming to meet evolving custome…&quot; không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung &quot;Manage customer expectations based on business needs, considering budget, timeline…&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>B</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Scope (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q734 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Manage customer expectations based on business needs, considering budget, timeline, and resource constraints.</div>
+            <div class="flashcard-front">Q734 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 71</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Q734 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Manage customer expectations based on business needs, considering budget, timeline, and resource con</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">thiếu hụt nguồn lực / kỹ năng</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q734
-────────────────────────
-A complex technology project is in the execution phase. New technologies are being added to the backlog in response to evolving customer requirements. These changes will have a significant impact on t…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q734
+(PMBOK 8, tr. 71)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Scope
+PROCESS: Manage Stakeholder Engagement, Validate Scope
+PRINCIPLE: Focus on value
 
-ANSWER: B
-B. Manage customer expectations based on business needs, considering budget, timeline, and resource constraints.
+SCENARIO:
+A complex technology project is in the execution phase. New technologies are being added to the backlog in response to evolving customer requirements. These changes will have a significant impact on the project’s deliver…
 
-PMBOK 8:
-  Domain: Stakeholders, Scope
-  Process: Manage Stakeholder Engagement, Validate Scope
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → B) Manage customer expectations based on business needs, considering budget, timeline, and resource constraints.
+
+NOT:
+  A) Replan the sprints and releases to meet customer e… — &quot;Replan the sprints and releases to meet customer expectatio
+  C) Accept the new requirements and plan a new release… — &quot;Accept the new requirements and plan a new release schedule
+  D) Push the project team to accept the new challenge,… — &quot;Push the project team to accept the new challenge, aiming t
+
+Q734 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Replan the sprints and releases to meet customer expectations, adjusting timelines…\" không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung \"Manage customer expectations based on business needs, considering budget, timeline…\".","B":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Scope (Executing, PMBOK 8).","C":"\"Accept the new requirements and plan a new release schedule without considering re…\" không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung \"Manage customer expectations based on business needs, considering budget, timeline…\".","D":"\"Push the project team to accept the new challenge, aiming to meet evolving custome…\" không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung \"Manage customer expectations based on business needs, considering budget, timeline…\"."};
+      const EXPL = {"A":"\"Replan the sprints and releases to meet customer expectations, adjusting timelines…\" không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung \"Manage customer expectations based on business needs, considering budget, timeline…\".","B":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Scope (Executing, PMBOK 8).","C":"\"Accept the new requirements and plan a new release schedule without considering re…\" không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung \"Manage customer expectations based on business needs, considering budget, timeline…\".","D":"\"Push the project team to accept the new challenge, aiming to meet evolving custome…\" không phù hợp thiếu hụt nguồn lực / kỹ năng — đáp án đúng tập trung \"Manage customer expectations based on business needs, considering budget, timeline…\"."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

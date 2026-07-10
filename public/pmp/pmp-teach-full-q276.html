@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 276</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-276">Câu 276</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q275.html">← 275</a>
         <a href="pmp-teach-full-q277.html">277 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 276 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project is 10 business days from go-live, with operations set to assume long-term ownership. Governance reports “green” status, and the stakeholder engagement plan is current. Operations leaders informally voice concerns about support, ownership, and downstream effects, yet report no governance issues. Meanwhile, the sponsor has set the date. The project manager fears late resistance that could delay cutover or add last-minute conditions. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q276</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q276</h1>
+          <p class="lead">Bài học Q276 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 71) — Stakeholder không hài lòng</p>
+          <p class="lead" style="margin-top:0.75rem">A project is 10 business days from go-live, with operations set to assume long-term ownership. Governance reports “green” status, and the <em>stakeholder engagement plan is current</em>. Operations leaders informally voice concerns about support, ownership, and downstream effects, yet report no governance issues. Meanwhile, the sponsor has set the date. The project manager fears late resistance that could delay cutover or add last-minute conditions. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 71</span><span class="badge">Stakeholders</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q276</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 71): 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell">
+              <strong>đảm bảo tuân thủ</strong>
+              đảm bảo tuân thủ / compliance
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Incorporate support activities without changing plans.
+            </div><div class="approach-cell pull">
+              <strong>D</strong>
+              Hold a focused session with operations leaders to agree on o
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q276</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholder engagement plan is current</strong><br><br>→ <strong>D</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q276 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Escalate the operations leaders’ concerns to the sponso…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>B. Reaffirm readiness and invite concerns in governance.</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td>✗ Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết trễ tiến độ / áp lực schedule —…</td>
+              </tr><tr>
+                <td><strong>C. Incorporate support activities without changing plans.</strong></td>
+                <td>Incorporate support activities without changing plans.</td>
+                <td>✗ &quot;Incorporate support activities without changing plans.&quot; không phù hợp trễ tiến độ / áp lự…</td>
+              </tr><tr>
+                <td><strong>D. Hold a focused session with operations leaders to agree…</strong></td>
+                <td>Hold a focused session with operations leaders to agree on ownership a</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q276</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         <span class="kw-trap">Escalate</span> the operations leaders’ concerns to the sponsor and request a postponement.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Hold a focused session with operations leaders to agree on ownership and acceptance.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q276</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q276</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 276</div>
             <div class="q-text">A project is 10 business days from go-live, with operations set to assume long-term ownership. Governance reports “green” status, and the stakeholder engagement plan is current. Operations leaders informally voice concerns about support, ownership, and downstream effects, yet report no governance issues. Meanwhile, the sponsor has set the date. The project manager fears late resistance that could delay cutover or add last-minute conditions. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>D:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.</li><li>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>D</strong> — &quot;Hold a focused session with operations leaders to agree on ownership and acceptance.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: trễ tiến độ / áp lực schedule — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: stakeholder không hài lòng / kỳ vọng lệch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Hold a focused session with operations leaders to agree on ownership and acceptance.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>D</strong> — &quot;Hold a focused session with operations leaders to agree on ownership and acceptance.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the operations leaders’ concerns to the sponsor and request a postponem…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reaffirm readiness and invite concerns in governance.</span></td><td>Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Incorporate support activities without changing plans.</span></td><td>&quot;Incorporate support activities without changing plans.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Hold a focused session with operations leaders to agree on ownership and acceptance.&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A project is 10 business days from go-live, with operations set to assume long-term ownership. Gover… (Q276)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q276</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="ensure_compliance">
+              <span>Tình huống cần &quot;đảm bảo tuân thủ / compliance&quot; — không phải trọng tâm Q276</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Escalate the operations leaders’ concerns to the spo…" → A</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Reaffirm readiness and invite concerns in governance." → B</h4>
+            <p style="margin:0">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Incorporate support activities without changing plans." → C</h4>
+            <p style="margin:0">&quot;Incorporate support activities without changing plans.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Hold a focused session with operations leaders to agree on ownership and acceptance.&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholder engagement plan is current</strong> → <strong>D</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q276 — đáp án?</div>
+            <div class="flashcard-front">Q276 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 71</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q276 — đáp án?</div>
             <div class="flashcard-back"><strong>D</strong> — Hold a focused session with operations leaders to agree on ownership and acceptance.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Stakeholder không hài lòng</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q276
-────────────────────────
-A project is 10 business days from go-live, with operations set to assume long-term ownership. Governance reports “green” status, and the stakeholder engagement plan is current. Operations leaders inf…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q276
+(PMBOK 8, tr. 71)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Manage Stakeholder Engagement
+PRINCIPLE: Focus on value
 
-ANSWER: D
-D. Hold a focused session with operations leaders to agree on ownership and acceptance.
+SCENARIO:
+A project is 10 business days from go-live, with operations set to assume long-term ownership. Governance reports “green” status, and the stakeholder engagement plan is current. Operations leaders informally voice concer…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Manage Stakeholder Engagement
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholder engagement plan is current
+
+ANSWER → D) Hold a focused session with operations leaders to agree on ownership and acceptance.
+
+NOT:
+  A) Escalate the operations leaders’ concerns to the s… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  B) Reaffirm readiness and invite concerns in governan… — Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết t
+  C) Incorporate support activities without changing pl… — &quot;Incorporate support activities without changing plans.&quot; khô
+
+Q276 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","C":"\"Incorporate support activities without changing plans.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Hold a focused session with operations leaders to agree on ownership and acceptance.\".","D":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Executing, PMBOK 8)."};
+      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","C":"\"Incorporate support activities without changing plans.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Hold a focused session with operations leaders to agree on ownership and acceptance.\".","D":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Executing, PMBOK 8)."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

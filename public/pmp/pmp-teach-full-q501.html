@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 501</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-501">Câu 501</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q500.html">← 500</a>
         <a href="pmp-teach-full-q502.html">502 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 501 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager at a mining company has been assigned the <span class="kw-cue">first</span> engineering project since the company implemented a comprehensive new environmental policy. While integrating the required sustainability measures into the project management plan, the project manager becomes concerned that internal and external stakeholders may view these mandatory requirements as constraints that will slow progress. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Governance, Scope</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Integrate sustainability</span><span class="badge">Full Bank Q501</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q501</h1>
+          <p class="lead">Bài học Q501 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 52) — Phân tích tình huống và chọn đáp án A theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager at a mining company has been assigned the first engineering project since the company implemented a comprehensive new environmental policy. While integrating the required sustainability measures into the project management plan, the project manager becomes concerned that internal and external <em>stakeholders may view these mandatory requirements as constra</em>ints that will slow progress. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 52</span><span class="badge">Governance, Scope</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q501</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Project Execution, Perform Integrated Change Control, Close Project or Phase<br>
-              <strong>Principle:</strong> Integrate sustainability
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Governance, Scope</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Integrate sustainability</strong>. PMBOK 8 (tr. 52): and sustainable practices. Embedding societal and environmental values into project management strengthens the Governance, Scope, and Stakeholders performance domains by fostering accountability, aligning scope with organizational goals a</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>đảm bảo tuân thủ</strong>
+              đảm bảo tuân thủ / compliance
+            </div><div class="approach-cell">
+              <strong>trao quyền</strong>
+              trao quyền / để team tự quyết
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Educate the stakeholders about sustainability to ensure all 
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Create opportunities for innovation by encouraging the team 
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q501</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholders may view these mandatory requirements as constra</strong><br><br>→ <strong>A</strong> phù hợp vì PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q501 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Offset the cost of sustainability practices with the pr…</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Provide tools that will enable the team to measure and …</strong></td>
+                <td>trao quyền / để team tự quyết</td>
+                <td>✗ Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết Provide tools that will enable …</td>
+              </tr><tr>
+                <td><strong>C. Educate the stakeholders about sustainability to ensure…</strong></td>
+                <td>Educate the stakeholders about sustainability to ensure all parties ar</td>
+                <td>✗ &quot;Educate the stakeholders about sustainability to ensure all parties are aligned wi…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Create opportunities for innovation by encouraging the …</strong></td>
+                <td>Create opportunities for innovation by encouraging the team to develop</td>
+                <td>✗ &quot;Create opportunities for innovation by encouraging the team to develop resource-ef…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q501</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Offset the cost of sustainability practices with the projected cost of failing regulatory compliance.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Provide tools that will enable the team to measure and manage the sustainability of their work.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q501</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q501</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 501</div>
             <div class="q-text">A project manager at a mining company has been assigned the <span class="kw-cue">first</span> engineering project since the company implemented a comprehensive new environmental policy. While integrating the required sustainability measures into the project management plan, the project manager becomes concerned that internal and external stakeholders may view these mandatory requirements as constraints that will slow progress. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>→ <strong>A:</strong> PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>Bối cảnh: A project manager at a mining company has been assigned the <span class="kw-cue">first</span> engineering project since the company implemented a comprehensive new environmental policy. While integrating the required sustainability measures into the project management plan, the project manager becomes concerned that internal and external stakeholders may view these mandatory requirements as constraints that will slow progress. Đáp án <strong>A</strong> — &quot;Offset the cost of sustainability practices with the projected cost of failing regulatory compliance.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>đảm bảo tuân thủ / compliance</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Process <span class="kw-pmbok">Manage Project Execution</span> — align với đáp án A.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 52.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Offset the cost of sustainability practices with the projected cost of failing regulatory compliance.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.<br><br>Bối cảnh: A project manager at a mining company has been assigned the <span class="kw-cue">first</span> engineering project since the company implemented a comprehensive new environmental policy. While integrating the required sustainability measures into the project management plan, the project manager becomes concerned that internal and external stakeholders may view these mandatory requirements as constraints that will slow progress. Đáp án <strong>A</strong> — &quot;Offset the cost of sustainability practices with the projected cost of failing regulatory compliance.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>đảm bảo tuân thủ / compliance</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; and sustainable practices. Embedding societal and environmental values into project management strengthens the <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Scope</span>, and <span class="kw-pmbok">Stakeholders</span> performance domains by fostering accountability, aligning scope with organizational goals a<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 52 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 52: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Provide tools that will enable the team to measure and manage the sustainability…</span></td><td>Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết Provide tools that will enable the team to measure and manage the sustainability of their work. — đáp án đúng cần đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Educate the stakeholders about sustainability to ensure all parties are aligned …</span></td><td>&quot;Educate the stakeholders about sustainability to ensure all parties are aligned wi…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Create opportunities for innovation by encouraging the team to develop resource-…</span></td><td>&quot;Create opportunities for innovation by encouraging the team to develop resource-ef…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="ensure_compliance">
+              <span>A project manager at a mining company has been assigned the first engineering project since the comp… (Q501)</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="allow_empower" type="button">trao quyền</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="allow_empower">
+              <span>Tình huống cần &quot;trao quyền / để team tự quyết&quot; — không phải trọng tâm Q501</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="allow_empower" type="button">trao quyền</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Provide tools that will enable the team to measure a…" → B</h4>
+            <p style="margin:0">Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết Provide tools that will enable the team to measure and manage the sustainability of their work. — đáp án đúng cần đảm bảo tuân thủ / compliance.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Educate the stakeholders about sustainability to ens…" → C</h4>
+            <p style="margin:0">&quot;Educate the stakeholders about sustainability to ensure all parties are aligned wi…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Create opportunities for innovation by encouraging t…" → D</h4>
+            <p style="margin:0">&quot;Create opportunities for innovation by encouraging the team to develop resource-ef…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholders may view these mandatory requirements as constra</strong> → <strong>A</strong> — PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q501 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Offset the cost of sustainability practices with the projected cost of failing regulatory compliance.</div>
+            <div class="flashcard-front">Q501 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 52</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Integrate sustainability</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Q501 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Offset the cost of sustainability practices with the projected cost of failing regulatory compliance</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án A theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q501
-────────────────────────
-A project manager at a mining company has been assigned the first engineering project since the company implemented a comprehensive new environmental policy. While integrating the required sustainabil…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q501
+(PMBOK 8, tr. 52)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Scope
+PROCESS: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
+PRINCIPLE: Integrate sustainability
 
-ANSWER: A
-A. Offset the cost of sustainability practices with the projected cost of failing regulatory compliance.
+SCENARIO:
+A project manager at a mining company has been assigned the first engineering project since the company implemented a comprehensive new environmental policy. While integrating the required sustainability measures into th…
 
-PMBOK 8:
-  Domain: Governance, Scope
-  Process: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
-  Principle: Integrate sustainability</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholders may view these mandatory requirements as constra
+
+ANSWER → A) Offset the cost of sustainability practices with the projected cost of failing regulatory compliance.
+
+NOT:
+  B) Provide tools that will enable the team to measure… — Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết P
+  C) Educate the stakeholders about sustainability to e… — &quot;Educate the stakeholders about sustainability to ensure all
+  D) Create opportunities for innovation by encouraging… — &quot;Create opportunities for innovation by encouraging the team
+
+Q501 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.","B":"Tập trung \"trao quyền / để team tự quyết\" không giải quyết Provide tools that will enable the team to measure and manage the sustainability of their work. — đáp án đúng cần đảm bảo tuân thủ / compliance.","C":"\"Educate the stakeholders about sustainability to ensure all parties are aligned wi…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance.","D":"\"Create opportunities for innovation by encouraging the team to develop resource-ef…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance."};
+      const EXPL = {"A":"Đúng! PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.","B":"Tập trung \"trao quyền / để team tự quyết\" không giải quyết Provide tools that will enable the team to measure and manage the sustainability of their work. — đáp án đúng cần đảm bảo tuân thủ / compliance.","C":"\"Educate the stakeholders about sustainability to ensure all parties are aligned wi…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance.","D":"\"Create opportunities for innovation by encouraging the team to develop resource-ef…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung đảm bảo tuân thủ / compliance."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

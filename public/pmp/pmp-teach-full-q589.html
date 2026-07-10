@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 589</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-589">Câu 589</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q588.html">← 588</a>
         <a href="pmp-teach-full-q590.html">590 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 589 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager implemented an approved change to manage a risk in a project. The change was successful, and the project is nearing closure. The project manager wants to ensure that the knowledge gained is preserved for future projects. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Governance, Risk</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q589</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q589</h1>
+          <p class="lead">Bài học Q589 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 48) — Phân tích tình huống và chọn đáp án D theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager implemented an approved change to manage a risk in a project. The change was successful, and the project is nearing closure. The project manager wants to ensure that the knowledge gained is preserved for future projects. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 48</span><span class="badge">Governance, Risk</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q589</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Risk<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Project Execution, Perform Integrated Change Control, Close Project or Phase<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Governance, Risk</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 48): 3.6.3 Connected Performance Domains The principle of Be an Accountable Leader supports many project management performance domains and can enhance the effectiveness of the project manager when well applied, such as with the following: ⚫</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>change control</strong>
+              change control / change request
+            </div><div class="approach-cell">
+              <strong>facilitate retrospective</strong>
+              facilitate retrospective / phân tích root cause
+            </div><div class="approach-cell">
+              <strong>bổ sung register và reevaluate</strong>
+              bổ sung register và reevaluate
+            </div><div class="approach-cell pull">
+              <strong>ghi nhận</strong>
+              ghi nhận / tài liệu hóa
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q589</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q589 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Archive the change request documentation so that future…</strong></td>
+                <td>change control / change request</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>B. Conduct a team retrospective to discuss the risk respon…</strong></td>
+                <td>facilitate retrospective / phân tích root cause</td>
+                <td>✗ Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết Conduct a tea…</td>
+              </tr><tr>
+                <td><strong>C. Add a note to the risk register indicating that the ris…</strong></td>
+                <td>bổ sung register và reevaluate</td>
+                <td>✗ Tập trung &quot;bổ sung register và reevaluate&quot; không giải quyết Add a note to the risk registe…</td>
+              </tr><tr>
+                <td><strong>D. Update the lessons learned register with details about …</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q589</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Archive the change request documentation so that future project managers can reference the approved change if needed.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Update the lessons learned register with details about the risk, the implemented change, and the outcome.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q589</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q589</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 589</div>
             <div class="q-text">A project manager implemented an approved change to manage a risk in a project. The change was successful, and the project is nearing closure. The project manager wants to ensure that the knowledge gained is preserved for future projects. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</li><li>→ <strong>D:</strong> Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</li><li>Bối cảnh: A project manager implemented an approved change to manage a risk in a project. The change was successful, and the project is nearing closure. The project manager wants to ensure that the knowledge gained is preserved for future projects. Đáp án <strong>D</strong> — &quot;Update the lessons learned register with details about the risk, the implemented change, and the outcome.&quot; — phù hợp vì Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</li><li>Process <span class="kw-pmbok">Manage Project Execution</span> — align với đáp án D.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 48.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Update the lessons learned register with details about the risk, the implemented change, and the outcome.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.<br><br>Bối cảnh: A project manager implemented an approved change to manage a risk in a project. The change was successful, and the project is nearing closure. The project manager wants to ensure that the knowledge gained is preserved for future projects. Đáp án <strong>D</strong> — &quot;Update the lessons learned register with details about the risk, the implemented change, and the outcome.&quot; — phù hợp vì Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.6.3 Connected Performance Domains The principle of Be an Accountable Leader supports many project management performance domains and can enhance the effectiveness of the project manager when well applied, such as with the following: ⚫<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 48 (Be an Accountable Leader)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 48: Be an Accountable Leader</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Archive the change request documentation so that future project managers can ref…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Conduct a team retrospective to discuss the risk response and share findings wit…</span></td><td>Tập trung &quot;<span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>&quot; không giải quyết Conduct a team <span class="kw-signal">retrospective</span> to discuss the risk response and share findings with the broader project management community. — đáp án đúng cần ghi nhận / tài liệu hóa.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Add a note to the risk register indicating that the risk was resolved through an…</span></td><td>Tập trung &quot;bổ sung register và reevaluate&quot; không giải quyết Add a note to the <span class="kw-signal">risk register</span> indicating that the risk was resolved through an approved change and is now closed. — đáp án đúng cần ghi nhận / tài liệu hóa.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="document_first">
+              <span>A project manager implemented an approved change to manage a risk in a project. The change was succe… (Q589)</span>
+              <div class="classify-btns"><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="change_control" type="button">change contr</button><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="add_to_register" type="button">bổ sung regi</button></div>
+            </div><div class="classify-row" data-answer="change_control">
+              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q589</span>
+              <div class="classify-btns"><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="change_control" type="button">change contr</button><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="add_to_register" type="button">bổ sung regi</button></div>
+            </div><div class="classify-row" data-answer="facilitate_retro">
+              <span>Tình huống cần &quot;facilitate retrospective / phân tích root cause&quot; — không phải trọng tâm Q589</span>
+              <div class="classify-btns"><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="change_control" type="button">change contr</button><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="add_to_register" type="button">bổ sung regi</button></div>
+            </div><div class="classify-row" data-answer="add_to_register">
+              <span>Tình huống cần &quot;bổ sung register và reevaluate&quot; — không phải trọng tâm Q589</span>
+              <div class="classify-btns"><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="change_control" type="button">change contr</button><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="add_to_register" type="button">bổ sung regi</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Archive the change request documentation so that fut…" → A</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Conduct a team retrospective to discuss the risk res…" → B</h4>
+            <p style="margin:0">Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết Conduct a team retrospective to discuss the risk response and share findings with the broader project management community. — đáp án đúng cần ghi nhận / tài liệu hóa.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Add a note to the risk register indicating that the …" → C</h4>
+            <p style="margin:0">Tập trung &quot;bổ sung register và reevaluate&quot; không giải quyết Add a note to the risk register indicating that the risk was resolved through an approved change and is now closed. — đáp án đúng cần ghi nhận / tài liệu hóa.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q589 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Update the lessons learned register with details about the risk, the implemented change, and the outcome.</div>
+            <div class="flashcard-front">Q589 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 48</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Q589 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Update the lessons learned register with details about the risk, the implemented change, and the out</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án D theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q589
-────────────────────────
-A project manager implemented an approved change to manage a risk in a project. The change was successful, and the project is nearing closure. The project manager wants to ensure that the knowledge ga…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q589
+(PMBOK 8, tr. 48)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Risk
+PROCESS: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
+PRINCIPLE: Lead accountably
 
-ANSWER: D
-D. Update the lessons learned register with details about the risk, the implemented change, and the outcome.
+SCENARIO:
+A project manager implemented an approved change to manage a risk in a project. The change was successful, and the project is nearing closure. The project manager wants to ensure that the knowledge gained is preserved fo…
 
-PMBOK 8:
-  Domain: Governance, Risk
-  Process: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Update the lessons learned register with details about the risk, the implemented change, and the outcome.
+
+NOT:
+  A) Archive the change request documentation so that f… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+  B) Conduct a team retrospective to discuss the risk r… — Tập trung &quot;facilitate retrospective / phân tích root cause&quot; 
+  C) Add a note to the risk register indicating that th… — Tập trung &quot;bổ sung register và reevaluate&quot; không giải quyết 
+
+Q589 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +330,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","B":"Tập trung \"facilitate retrospective / phân tích root cause\" không giải quyết Conduct a team retrospective to discuss the risk response and share findings with the broader project management community. — đáp án đúng cần ghi nhận / tài liệu hóa.","C":"Tập trung \"bổ sung register và reevaluate\" không giải quyết Add a note to the risk register indicating that the risk was resolved through an approved change and is now closed. — đáp án đúng cần ghi nhận / tài liệu hóa.","D":"Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned."};
+      const EXPL = {"A":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","B":"Tập trung \"facilitate retrospective / phân tích root cause\" không giải quyết Conduct a team retrospective to discuss the risk response and share findings with the broader project management community. — đáp án đúng cần ghi nhận / tài liệu hóa.","C":"Tập trung \"bổ sung register và reevaluate\" không giải quyết Add a note to the risk register indicating that the risk was resolved through an approved change and is now closed. — đáp án đúng cần ghi nhận / tài liệu hóa.","D":"Đúng! Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +356,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

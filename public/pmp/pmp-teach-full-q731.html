@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 731</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Team</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-731">Câu 731</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q730.html">← 730</a>
         <a href="pmp-teach-full-q732.html">732 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 731 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">On an agile project, a team member raises concerns about health and safety issues related to the project deliverable. How should the project manager handle health and safety issues on projects?</p>
-          <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q731</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q731</h1>
+          <p class="lead">Bài học Q731 về <strong>Develop Team</strong> (PMBOK 8, tr. 53) — trễ tiến độ / áp lực schedule</p>
+          <p class="lead" style="margin-top:0.75rem">On an agile project, a team member raises concerns about health and safety issues related to the project deliverable. How should the project manager handle health and safety issues on projects?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Resources, Stakeholders</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q731</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Team, Manage Team<br>
-              <strong>Principle:</strong> Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Develop Team</h2>
+          <p><strong>Develop Team</strong> thuộc miền <strong>Resources, Stakeholders</strong> — process <strong>Develop Team</strong>, principle <strong>Build an empowered culture</strong>. PMBOK 8 (tr. 53): 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>ghi nhận</strong>
+              ghi nhận / tài liệu hóa
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Refer the team member to the health and safety department.
+            </div><div class="approach-cell">
+              <strong>đảm bảo tuân thủ</strong>
+              đảm bảo tuân thủ / compliance
+            </div><div class="approach-cell pull">
+              <strong>D</strong>
+              Ensure that all health and safety requirements are included 
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q731</h4>
+            <p style="margin:0">trễ tiến độ / áp lực schedule<br><br>→ <strong>D</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q731 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Provide the customer with adequate documentation on hea…</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>B. Refer the team member to the health and safety departme…</strong></td>
+                <td>Refer the team member to the health and safety department.</td>
+                <td>✗ &quot;Refer the team member to the health and safety department.&quot; không phù hợp trễ tiến độ / á…</td>
+              </tr><tr>
+                <td><strong>C. Design a health and safety policy for the organization.</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td>✗ Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết trễ tiến độ / áp lực schedule —…</td>
+              </tr><tr>
+                <td><strong>D. Ensure that all health and safety requirements are incl…</strong></td>
+                <td>Ensure that all health and safety requirements are included in the def</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q731</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Provide the customer with adequate documentation on health and safety information.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Ensure that all health and safety requirements are included in the definition of done (DoD).
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q731</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q731</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 731</div>
             <div class="q-text">On an agile project, a team member raises concerns about health and safety issues related to the project deliverable. How should the project manager handle health and safety issues on projects?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>D:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an empowered culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</li><li>Stem signal: trễ tiến độ / áp lực schedule — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Ensure that all health and safety requirements are included in the definition of done (DoD).</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an empowered culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an Empowered Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Provide the customer with adequate documentation on health and safety informatio…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Refer the team member to the health and safety department.</span></td><td>&quot;Refer the team member to the health and safety department.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung đảm bảo điều kiện/tuân thủ.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Design a health and safety policy for the organization.</span></td><td>Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>On an agile project, a team member raises concerns about health and safety issues related to the pro… (Q731)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="document_first">
+              <span>Tình huống cần &quot;ghi nhận / tài liệu hóa&quot; — không phải trọng tâm Q731</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="ensure_compliance">
+              <span>Tình huống cần &quot;đảm bảo tuân thủ / compliance&quot; — không phải trọng tâm Q731</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Provide the customer with adequate documentation on …" → A</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Refer the team member to the health and safety depar…" → B</h4>
+            <p style="margin:0">&quot;Refer the team member to the health and safety department.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung đảm bảo điều kiện/tuân thủ.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Design a health and safety policy for the organization." → C</h4>
+            <p style="margin:0">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>D</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q731 — đáp án?</div>
+            <div class="flashcard-front">Q731 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Team</strong><br>PMBOK 8, tr. 53</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q731 — đáp án?</div>
             <div class="flashcard-back"><strong>D</strong> — Ensure that all health and safety requirements are included in the definition of done (DoD).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Build an empowered culture</strong><br>Develop Team</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">trễ tiến độ / áp lực schedule</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q731
-────────────────────────
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP TEAM — Q731
+(PMBOK 8, tr. 53)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Stakeholders
+PROCESS: Develop Team, Manage Team
+PRINCIPLE: Build an empowered culture
+
+SCENARIO:
 On an agile project, a team member raises concerns about health and safety issues related to the project deliverable. How should the project manager handle health and safety issues on projects?
 
-ANSWER: D
-D. Ensure that all health and safety requirements are included in the definition of done (DoD).
+SIGNAL KEYWORDS:
+  —
 
-PMBOK 8:
-  Domain: Resources, Stakeholders
-  Process: Develop Team, Manage Team
-  Principle: Build an empowered culture</div>
+ANSWER → D) Ensure that all health and safety requirements are included in the definition of done (DoD).
+
+NOT:
+  A) Provide the customer with adequate documentation o… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+  B) Refer the team member to the health and safety dep… — &quot;Refer the team member to the health and safety department.&quot;
+  C) Design a health and safety policy for the organiza… — Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết t
+
+Q731 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","B":"\"Refer the team member to the health and safety department.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung đảm bảo điều kiện/tuân thủ.","C":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8)."};
+      const EXPL = {"A":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","B":"\"Refer the team member to the health and safety department.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung đảm bảo điều kiện/tuân thủ.","C":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8)."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

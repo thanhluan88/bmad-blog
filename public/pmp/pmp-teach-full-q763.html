@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 763</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-763">Câu 763</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q762.html">← 762</a>
         <a href="pmp-teach-full-q764.html">764 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 763 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A major event planned for tens of thousands of people is fast approaching. The project manager discovers financial reports that show a primary vendor is close to bankruptcy. The sponsor urges reducing reliance on this vendor. The client fears delays, but the procurement manager recommends activating the contingency plan. No alternative supplier is formally contracted. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Risk</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q763</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q763</h1>
+          <p class="lead">Bài học Q763 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 246) — vấn đề chi phí / ngân sách</p>
+          <p class="lead" style="margin-top:0.75rem">A major event planned for tens of thousands of people is fast approaching. The project manager discovers financial reports that show a primary vendor is close to bankruptcy. The sponsor urges reducing reliance on this vendor. The client fears delays, but the procurement manager recommends activating the contingency plan. No alternative supplier is formally contracted. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 246</span><span class="badge">Stakeholders, Risk</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q763</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,45 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Risk<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Risk</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 246): then planning for the same. During this phase, project managers or members of the purchasing department should involve key stakeholders early in the planning stage to ensure alignment on procurement objectives and constraints and document</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>quản lý vendor</strong>
+              quản lý vendor / procurement
+            </div><div class="approach-cell">
+              <strong>họp</strong>
+              họp / thảo luận trực tiếp
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q763</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>C</strong> phù hợp vì Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q763 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Continue with the vendor and hope financial stability i…</strong></td>
+                <td>quản lý vendor / procurement</td>
+                <td>✗ &quot;Continue with the vendor and hope financial stability improves before de…&quot; cùng nhóm quản…</td>
+              </tr><tr>
+                <td><strong>B. Reduce project scope immediately to decrease dependency…</strong></td>
+                <td>quản lý vendor / procurement</td>
+                <td>✗ &quot;Reduce project scope immediately to decrease dependency and explore opti…&quot; cùng nhóm quản…</td>
+              </tr><tr>
+                <td><strong>C. Initiate contingency planning with the procurement mana…</strong></td>
+                <td>quản lý vendor / procurement</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Meet with the vendor to learn if the information discov…</strong></td>
+                <td>họp / thảo luận trực tiếp</td>
+                <td>✗ Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết vấn đề chi phí / ngân sách — đáp án…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q763</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Continue with the vendor and hope financial stability improves before deliveries are impacted.
@@ -156,7 +198,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Initiate contingency planning with the procurement manager and explore alternative supplier options.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Meet with the vendor to learn if the information discovered is correct and discuss options to mitigate bankruptcy.
@@ -165,7 +207,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q763</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q763</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 763</div>
             <div class="q-text">A major event planned for tens of thousands of people is fast approaching. The project manager discovers financial reports that show a primary vendor is close to bankruptcy. The sponsor urges reducing reliance on this vendor. The client fears delays, but the procurement manager recommends activating the contingency plan. No alternative supplier is formally contracted. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +223,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</li><li>→ <strong>C:</strong> Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</li><li>Bối cảnh: vấn đề chi phí / ngân sách. Đáp án <strong>C</strong> — &quot;Initiate contingency planning with the procurement manager and explore alternative supplier options.&quot; — phù hợp vì Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</li><li>Stem signal: vấn đề chi phí / ngân sách — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: vấn đề vendor / procurement — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Initiate contingency planning with the procurement manager and explore alternative supplier options.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.<br><br>Bối cảnh: vấn đề chi phí / ngân sách. Đáp án <strong>C</strong> — &quot;Initiate contingency planning with the procurement manager and explore alternative supplier options.&quot; — phù hợp vì Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; then planning for the same. During this phase, project managers or members of the purchasing department should involve key stakeholders early in the planning stage to ensure alignment on procurement objectives and constraints and document<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 246 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 246: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Continue with the vendor and hope financial stability improves before deliveries…</span></td><td>&quot;Continue with the vendor and hope financial stability improves before de…&quot; cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — &quot;Initiate contingency planning with the procurement manager and explore a…&quot; sát vấn đề chi phí / ngân sách hơn.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reduce project scope immediately to decrease dependency and explore options to r…</span></td><td>&quot;Reduce project scope immediately to decrease dependency and explore opti…&quot; cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — &quot;Initiate contingency planning with the procurement manager and explore a…&quot; sát vấn đề chi phí / ngân sách hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Meet with the vendor to learn if the information discovered is correct and discu…</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết vấn đề chi phí / ngân sách — đáp án đúng cần quản lý vendor / procurement.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="vendor_procurement">
+              <span>A major event planned for tens of thousands of people is fast approaching. The project manager disco… (Q763)</span>
+              <div class="classify-btns"><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="vendor_procurement">
+              <span>Tình huống cần &quot;quản lý vendor / procurement&quot; — không phải trọng tâm Q763</span>
+              <div class="classify-btns"><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="meet_discuss">
+              <span>Tình huống cần &quot;họp / thảo luận trực tiếp&quot; — không phải trọng tâm Q763</span>
+              <div class="classify-btns"><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Continue with the vendor and hope financial stabilit…" → A</h4>
+            <p style="margin:0">&quot;Continue with the vendor and hope financial stability improves before de…&quot; cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — &quot;Initiate contingency planning with the procurement manager and explore a…&quot; sát vấn đề chi phí / ngân sách hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Reduce project scope immediately to decrease depende…" → B</h4>
+            <p style="margin:0">&quot;Reduce project scope immediately to decrease dependency and explore opti…&quot; cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — &quot;Initiate contingency planning with the procurement manager and explore a…&quot; sát vấn đề chi phí / ngân sách hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Meet with the vendor to learn if the information dis…" → D</h4>
+            <p style="margin:0">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết vấn đề chi phí / ngân sách — đáp án đúng cần quản lý vendor / procurement.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>C</strong> — Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q763 — đáp án?</div>
+            <div class="flashcard-front">Q763 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 246</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q763 — đáp án?</div>
             <div class="flashcard-back"><strong>C</strong> — Initiate contingency planning with the procurement manager and explore alternative supplier options.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chi phí / ngân sách</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q763
-────────────────────────
-A major event planned for tens of thousands of people is fast approaching. The project manager discovers financial reports that show a primary vendor is close to bankruptcy. The sponsor urges reducing…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q763
+(PMBOK 8, tr. 246)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Risk
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: C
-C. Initiate contingency planning with the procurement manager and explore alternative supplier options.
+SCENARIO:
+A major event planned for tens of thousands of people is fast approaching. The project manager discovers financial reports that show a primary vendor is close to bankruptcy. The sponsor urges reducing reliance on this ve…
 
-PMBOK 8:
-  Domain: Stakeholders, Risk
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → C) Initiate contingency planning with the procurement manager and explore alternative supplier options.
+
+NOT:
+  A) Continue with the vendor and hope financial stabil… — &quot;Continue with the vendor and hope financial stability impro
+  B) Reduce project scope immediately to decrease depen… — &quot;Reduce project scope immediately to decrease dependency and
+  D) Meet with the vendor to learn if the information d… — Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết vấn đ
+
+Q763 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"\"Continue with the vendor and hope financial stability improves before de…\" cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — \"Initiate contingency planning with the procurement manager and explore a…\" sát vấn đề chi phí / ngân sách hơn.","B":"\"Reduce project scope immediately to decrease dependency and explore opti…\" cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — \"Initiate contingency planning with the procurement manager and explore a…\" sát vấn đề chi phí / ngân sách hơn.","C":"Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.","D":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết vấn đề chi phí / ngân sách — đáp án đúng cần quản lý vendor / procurement."};
+      const EXPL = {"A":"\"Continue with the vendor and hope financial stability improves before de…\" cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — \"Initiate contingency planning with the procurement manager and explore a…\" sát vấn đề chi phí / ngân sách hơn.","B":"\"Reduce project scope immediately to decrease dependency and explore opti…\" cùng nhóm quản lý vendor / procurement nhưng lệch trọng tâm — \"Initiate contingency planning with the procurement manager and explore a…\" sát vấn đề chi phí / ngân sách hơn.","C":"Đúng! Quản lý vendor theo hợp đồng/procurement process — không bypass quy trình mua sắm.","D":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết vấn đề chi phí / ngân sách — đáp án đúng cần quản lý vendor / procurement."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 913</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-913">Câu 913</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q912.html">← 912</a>
         <a href="pmp-teach-full-q914.html">914 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 913 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is meeting with key stakeholders to initiate a lender‑financed manufacturing project. Functional managers argue that issues should be resolved within departments <span class="kw-cue">first</span>. The project manager needs to define clear thresholds and escalation paths. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Governance</span><span class="badge">Initiating</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q913</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q913</h1>
+          <p class="lead">Bài học Q913 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 48) — stakeholder không hài lòng / kỳ vọng lệch</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is meeting with key <em>stakeholders to initiate a lender‑financed manufacturing proj</em>ect. Functional managers argue that issues should be resolved within departments first. The project manager needs to define clear thresholds and <em>escalation paths</em>. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 48</span><span class="badge">Stakeholders, Governance</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q913</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,42 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Governance<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Governance</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 48): 3.6.3 Connected Performance Domains The principle of Be an Accountable Leader supports many project management performance domains and can enhance the effectiveness of the project manager when well applied, such as with the following: ⚫</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q913</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholders to initiate a lender‑financed manufacturing proj</strong> · <strong>escalation paths</strong><br><br>→ <strong>C</strong> phù hợp vì Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q913 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Request that each department set its own escalation rul…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>B. Escalate financial issues to the sponsor and other issu…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>C. Create tailored escalation thresholds and timeframes in…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Develop a stakeholder engagement assessment matrix to c…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q913</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Request that each department set its own <span class="kw-trap">escalation</span> rules to promote buy-in and efficiency.
@@ -156,7 +195,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Create tailored escalation thresholds and timeframes in the governance framework.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Develop a stakeholder engagement assessment matrix to clarify thresholds and <span class="kw-trap">escalation</span> paths.
@@ -165,7 +204,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q913</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q913</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 913</div>
             <div class="q-text">A project manager is meeting with key stakeholders to initiate a lender‑financed manufacturing project. Functional managers argue that issues should be resolved within departments <span class="kw-cue">first</span>. The project manager needs to define clear thresholds and escalation paths. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +220,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</li><li>→ <strong>C:</strong> Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</li><li>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>C</strong> — &quot;Create tailored <span class="kw-trap">escalation</span> thresholds and timeframes in the governance framework.&quot; — phù hợp vì Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>leo thang lên cấp trên</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Stem signal: stakeholder không hài lòng / kỳ vọng lệch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án C.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Create tailored escalation thresholds and timeframes in the governance framework.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.<br><br>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>C</strong> — &quot;Create tailored <span class="kw-trap">escalation</span> thresholds and timeframes in the governance framework.&quot; — phù hợp vì Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>leo thang lên cấp trên</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.6.3 Connected Performance Domains The principle of Be an Accountable Leader supports many project management performance domains and can enhance the effectiveness of the project manager when well applied, such as with the following: ⚫<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 48 (Be an Accountable Leader)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 48: Be an Accountable Leader</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request that each department set its own <span class="kw-trap">escalation</span> rules to promote buy-in and …</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> financial issues to the sponsor and other issues to the functional mana…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Develop a stakeholder engagement assessment matrix to clarify thresholds and esc…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="escalate">
+              <span>A project manager is meeting with key stakeholders to initiate a lender‑financed manufacturing proje… (Q913)</span>
+              <div class="classify-btns"><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q913</span>
+              <div class="classify-btns"><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Request that each department set its own escalation …" → A</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Escalate financial issues to the sponsor and other i…" → B</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Develop a stakeholder engagement assessment matrix t…" → D</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholders to initiate a lender‑financed manufacturing proj · escalation paths</strong> → <strong>C</strong> — Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q913 — đáp án?</div>
+            <div class="flashcard-front">Q913 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 48</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q913 — đáp án?</div>
             <div class="flashcard-back"><strong>C</strong> — Create tailored escalation thresholds and timeframes in the governance framework.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">stakeholder không hài lòng / kỳ vọng lệch</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q913
-────────────────────────
-A project manager is meeting with key stakeholders to initiate a lender‑financed manufacturing project. Functional managers argue that issues should be resolved within departments first. The project m…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q913
+(PMBOK 8, tr. 48)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Governance
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: C
-C. Create tailored escalation thresholds and timeframes in the governance framework.
+SCENARIO:
+A project manager is meeting with key stakeholders to initiate a lender‑financed manufacturing project. Functional managers argue that issues should be resolved within departments first. The project manager needs to defi…
 
-PMBOK 8:
-  Domain: Stakeholders, Governance
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholders to initiate a lender‑financed manufacturing proj | escalation paths
+
+ANSWER → C) Create tailored escalation thresholds and timeframes in the governance framework.
+
+NOT:
+  A) Request that each department set its own escalatio… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  B) Escalate financial issues to the sponsor and other… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  D) Develop a stakeholder engagement assessment matrix… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+
+Q913 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +315,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","C":"Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.","D":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên."};
+      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","C":"Đúng! Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.","D":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +341,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

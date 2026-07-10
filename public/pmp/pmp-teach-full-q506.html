@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 506</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-506">Câu 506</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q505.html">← 505</a>
         <a href="pmp-teach-full-q507.html">507 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 506 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A pharmaceutical project team has gathered quality requirements from stakeholders. These include regulatory standards, patient safety expectations, and internal performance benchmarks. The project manager needs to ensure that these requirements, along with overall project expectations, are met systematically. <span class="kw-cue">What should the project manager do</span> in this scenario?</p>
-          <div class="badges"><span class="badge">Governance, Scope</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Adopt a holistic view</span><span class="badge">Full Bank Q506</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q506</h1>
+          <p class="lead">Bài học Q506 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 111) — vấn đề chất lượng / defect</p>
+          <p class="lead" style="margin-top:0.75rem">A pharmaceutical project team has gathered quality requirements from <em>stakeholders</em>. These include regulatory standards, patient safety expectations, and internal performance benchmarks. The project manager needs to ensure that these requirements, along with overall project expectations, are met systematically. <em>What should the project manager do</em> in this scenario?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 111</span><span class="badge">Governance, Scope</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q506</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,45 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Project Execution, Perform Integrated Change Control, Close Project or Phase<br>
-              <strong>Principle:</strong> Adopt a holistic view, Embed quality
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Governance, Scope</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Adopt a holistic view</strong>. PMBOK 8 (tr. 111): 111 Section 3 – Tailoring OwnershipProactive Value-Driven Embed Quality Into Processes and Deliverables Adopt a Holistic View Be an Accountable Leader Build an Empowered Culture Mindset Focus on Value Integrate Sustainability Within All Pro</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>đảm bảo tuân thủ</strong>
+              đảm bảo tuân thủ / compliance
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q506</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholders</strong><br><br>→ <strong>B</strong> phù hợp vì PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q506 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Begin conducting quality inspections and statistical sa…</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td>✗ &quot;Begin conducting quality inspections and statistical sampling of the sel…&quot; cùng nhóm đảm …</td>
+              </tr><tr>
+                <td><strong>B. Define quality standards and select appropriate quality…</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Perform a quality audit to confirm that the team’s proc…</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td>✗ &quot;Perform a quality audit to confirm that the team’s processes already ali…&quot; cùng nhóm đảm …</td>
+              </tr><tr>
+                <td><strong>D. Escalate unresolved differences in quality standards an…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q506</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Begin conducting quality inspections and statistical sampling of the selected deliverables to verify compliance with the identified quality standards.
@@ -152,7 +194,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Define quality standards and select appropriate quality tools and techniques for assurance and control, for integration into the project management plan.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Perform a quality audit to confirm that the team’s processes already align with the organizational quality standards and regulatory expectations.
@@ -165,7 +207,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q506</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q506</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 506</div>
             <div class="q-text">A pharmaceutical project team has gathered quality requirements from stakeholders. These include regulatory standards, patient safety expectations, and internal performance benchmarks. The project manager needs to ensure that these requirements, along with overall project expectations, are met systematically. <span class="kw-cue">What should the project manager do</span> in this scenario?</div>
@@ -181,44 +223,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>→ <strong>B:</strong> PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>B</strong> — &quot;Define quality standards and select appropriate quality tools and techniques for assurance and control, for integration into the project management plan.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Manage Project Execution</span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Define quality standards and select appropriate quality tools and techniques for assurance and control, for integration into the project management plan.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>B</strong> — &quot;Define quality standards and select appropriate quality tools and techniques for assurance and control, for integration into the project management plan.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 111 Section 3 – Tailoring OwnershipProactive Value-Driven <span class="kw-pmbok">Embed Quality</span> Into Processes and Deliverables <span class="kw-pmbok">Adopt a Holistic View</span> Be an Accountable Leader <span class="kw-pmbok">Build an Empowered Culture</span> Mindset <span class="kw-pmbok">Focus on Value</span> <span class="kw-pmbok">Integrate Sustainability</span> Within All Pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 111 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 111: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Begin conducting quality inspections and statistical sampling of the selected de…</span></td><td>&quot;Begin conducting quality inspections and statistical sampling of the sel…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch trọng tâm — &quot;Define quality standards and select appropriate quality tools and techni…&quot; sát vấn đề chất lượng / defect hơn.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Perform a quality audit to confirm that the team’s processes already align with …</span></td><td>&quot;Perform a quality audit to confirm that the team’s processes already ali…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch trọng tâm — &quot;Define quality standards and select appropriate quality tools and techni…&quot; sát vấn đề chất lượng / defect hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> unresolved differences in quality standards and expectations to the spo…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="ensure_compliance">
+              <span>A pharmaceutical project team has gathered quality requirements from stakeholders. These include reg… (Q506)</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="ensure_compliance">
+              <span>Tình huống cần &quot;đảm bảo tuân thủ / compliance&quot; — không phải trọng tâm Q506</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q506</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Begin conducting quality inspections and statistical…" → A</h4>
+            <p style="margin:0">&quot;Begin conducting quality inspections and statistical sampling of the sel…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch trọng tâm — &quot;Define quality standards and select appropriate quality tools and techni…&quot; sát vấn đề chất lượng / defect hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Perform a quality audit to confirm that the team’s p…" → C</h4>
+            <p style="margin:0">&quot;Perform a quality audit to confirm that the team’s processes already ali…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch trọng tâm — &quot;Define quality standards and select appropriate quality tools and techni…&quot; sát vấn đề chất lượng / defect hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Escalate unresolved differences in quality standards…" → D</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholders</strong> → <strong>B</strong> — PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q506 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Define quality standards and select appropriate quality tools and techniques for assurance and control, for integration into the project management plan.</div>
+            <div class="flashcard-front">Q506 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 111</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Adopt a holistic view</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Q506 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Define quality standards and select appropriate quality tools and techniques for assurance and contr</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chất lượng / defect</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q506
-────────────────────────
-A pharmaceutical project team has gathered quality requirements from stakeholders. These include regulatory standards, patient safety expectations, and internal performance benchmarks. The project man…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q506
+(PMBOK 8, tr. 111)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Scope
+PROCESS: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
+PRINCIPLE: Adopt a holistic view, Embed quality
 
-ANSWER: B
-B. Define quality standards and select appropriate quality tools and techniques for assurance and control, for integration into the project management plan.
+SCENARIO:
+A pharmaceutical project team has gathered quality requirements from stakeholders. These include regulatory standards, patient safety expectations, and internal performance benchmarks. The project manager needs to ensure…
 
-PMBOK 8:
-  Domain: Governance, Scope
-  Process: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
-  Principle: Adopt a holistic view, Embed quality</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholders
+
+ANSWER → B) Define quality standards and select appropriate quality tools and techniques for assurance and control, for integration into the project management plan.
+
+NOT:
+  A) Begin conducting quality inspections and statistic… — &quot;Begin conducting quality inspections and statistical sampli
+  C) Perform a quality audit to confirm that the team’s… — &quot;Perform a quality audit to confirm that the team’s processe
+  D) Escalate unresolved differences in quality standar… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+
+Q506 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Begin conducting quality inspections and statistical sampling of the sel…\" cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch trọng tâm — \"Define quality standards and select appropriate quality tools and techni…\" sát vấn đề chất lượng / defect hơn.","B":"PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.","C":"\"Perform a quality audit to confirm that the team’s processes already ali…\" cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch trọng tâm — \"Define quality standards and select appropriate quality tools and techni…\" sát vấn đề chất lượng / defect hơn.","D":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)"};
+      const EXPL = {"A":"\"Begin conducting quality inspections and statistical sampling of the sel…\" cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch trọng tâm — \"Define quality standards and select appropriate quality tools and techni…\" sát vấn đề chất lượng / defect hơn.","B":"Đúng! PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.","C":"\"Perform a quality audit to confirm that the team’s processes already ali…\" cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch trọng tâm — \"Define quality standards and select appropriate quality tools and techni…\" sát vấn đề chất lượng / defect hơn.","D":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)"};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 978</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Perform Integrated Chang</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-978">Câu 978</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q977.html">← 977</a>
         <a href="pmp-teach-full-q979.html">979 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 978 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager joined a project team in the execution stage of a project. Upon reviewing recent activity, the project manager discovers that several scope changes have been implemented without following the formal change control process. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Governance, Scope</span><span class="badge">Monitoring &amp; Controlling</span><span class="badge">Perform Integrated Change Control</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q978</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q978</h1>
+          <p class="lead">Bài học Q978 về <strong>Perform Integrated Change Control</strong> (PMBOK 8, tr. 151) — Có yêu cầu thay đổi</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager joined a project team in the execution stage of a project. Upon reviewing recent activity, the project manager discovers that several scope changes have been implemented without following the formal change control process. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 151</span><span class="badge">Governance, Scope</span><span class="badge">Perform Integrated Change Control</span><span class="badge">Full Bank Q978</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Scope<br>
-              <strong>Focus Area:</strong> Monitoring &amp; Controlling<br>
-              <strong>Process:</strong> Perform Integrated Change Control<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Perform Integrated Change Control</h2>
+          <p><strong>Perform Integrated Change Control</strong> thuộc miền <strong>Governance, Scope</strong> — process <strong>Perform Integrated Change Control</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 151): the needs of project stakeholders, considering organizational and environmental constraints. Configuration management activities supported by these change control tools include identifying configuration items, recording and reporting their</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Reverse all scope changes immediately and restore the projec
+            </div><div class="approach-cell">
+              <strong>tham chiếu artifact</strong>
+              tham chiếu artifact / kế hoạch đã có
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell pull">
+              <strong>change control</strong>
+              change control / change request
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q978</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q978 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Reverse all scope changes immediately and restore the p…</strong></td>
+                <td>Reverse all scope changes immediately and restore the project to its o</td>
+                <td>✗ &quot;Reverse all scope changes immediately and restore the project to its original appr…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Document the scope changes in the issue log and schedul…</strong></td>
+                <td>tham chiếu artifact / kế hoạch đã có</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>C. Escalate the scope changes to the project sponsor and r…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>D. Help ensure all future scope changes are submitted and …</strong></td>
+                <td>change control / change request</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q978</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Reverse all scope changes immediately and restore the project to its original approved baseline.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Help ensure all future scope changes are submitted and processed through the formal change control process going forward.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q978</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q978</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 978</div>
             <div class="q-text">A project manager joined a project team in the execution stage of a project. Upon reviewing recent activity, the project manager discovers that several scope changes have been implemented without following the formal change control process. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>→ <strong>D:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.</li><li>Bối cảnh: yêu cầu thay đổi phạm vi/kế hoạch. Đáp án <strong>D</strong> — &quot;Help ensure all future scope changes are submitted and processed through the formal change control process going forward.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: yêu cầu thay đổi phạm vi/kế hoạch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Perform Integrated Change Control</span> — align với đáp án D.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Help ensure all future scope changes are submitted and processed through the formal change control process going forward.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.<br><br>Bối cảnh: yêu cầu thay đổi phạm vi/kế hoạch. Đáp án <strong>D</strong> — &quot;Help ensure all future scope changes are submitted and processed through the formal change control process going forward.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; the needs of project stakeholders, considering organizational and environmental constraints. Configuration management activities supported by these change control tools include identifying configuration items, recording and reporting their<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 151 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Perform Integrated Change Control</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 151: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Perform Integrated Change Control</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reverse all scope changes immediately and restore the project to its original ap…</span></td><td>&quot;Reverse all scope changes immediately and restore the project to its original appr…&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Document the scope changes in the issue log and schedule a corrective action mee…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the scope changes to the project sponsor and request formal approval or…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="change_control">
+              <span>A project manager joined a project team in the execution stage of a project. Upon reviewing recent a… (Q978)</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="consult_artifact" type="button">tham chiếu a</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="consult_artifact">
+              <span>Tình huống cần &quot;tham chiếu artifact / kế hoạch đã có&quot; — không phải trọng tâm Q978</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="consult_artifact" type="button">tham chiếu a</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q978</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="consult_artifact" type="button">tham chiếu a</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Reverse all scope changes immediately and restore th…" → A</h4>
+            <p style="margin:0">&quot;Reverse all scope changes immediately and restore the project to its original appr…&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung change control / change request.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Document the scope changes in the issue log and sche…" → B</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Escalate the scope changes to the project sponsor an…" → C</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q978 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Help ensure all future scope changes are submitted and processed through the formal change control process going forward.</div>
+            <div class="flashcard-front">Q978 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Perform Integrated Change Control</strong><br>PMBOK 8, tr. 151</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Perform Integrated Change Control</div>
+            <div class="flashcard-front">Q978 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Help ensure all future scope changes are submitted and processed through the formal change control p</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Có yêu cầu thay đổi</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q978
-────────────────────────
-A project manager joined a project team in the execution stage of a project. Upon reviewing recent activity, the project manager discovers that several scope changes have been implemented without foll…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">PERFORM INTEGRATED CHANGE CONTROL — Q978
+(PMBOK 8, tr. 151)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Scope
+PROCESS: Perform Integrated Change Control
+PRINCIPLE: Focus on value
 
-ANSWER: D
-D. Help ensure all future scope changes are submitted and processed through the formal change control process going forward.
+SCENARIO:
+A project manager joined a project team in the execution stage of a project. Upon reviewing recent activity, the project manager discovers that several scope changes have been implemented without following the formal cha…
 
-PMBOK 8:
-  Domain: Governance, Scope
-  Process: Perform Integrated Change Control
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Help ensure all future scope changes are submitted and processed through the formal change control process going forward.
+
+NOT:
+  A) Reverse all scope changes immediately and restore … — &quot;Reverse all scope changes immediately and restore the proje
+  B) Document the scope changes in the issue log and sc… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+  C) Escalate the scope changes to the project sponsor … — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+
+Q978 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Reverse all scope changes immediately and restore the project to its original appr…\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung change control / change request.","B":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","C":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","D":"Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement."};
+      const EXPL = {"A":"\"Reverse all scope changes immediately and restore the project to its original appr…\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung change control / change request.","B":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","C":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","D":"Đúng! Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

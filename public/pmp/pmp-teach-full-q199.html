@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 199</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-199">Câu 199</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q198.html">← 198</a>
         <a href="pmp-teach-full-q200.html">200 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 199 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">During a high-visibility project, a key stakeholder strongly resists alignment with the project vision and creates significant pressure on the delivery team. The project manager anticipates that the same key stakeholder might hold unrealistic expectations again. The project manager needs to reduce resistance and align perspectives proactively to ensure the project vision is shared by all stakeholders. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Resources</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q199</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q199</h1>
+          <p class="lead">Bài học Q199 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 71) — Phân tích tình huống và chọn đáp án D theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">During a high-visibility project, a key <em>stakeholder strongly resists alignment with the project visio</em>n and creates significant pressure on the delivery team. The project manager anticipates that the same key stakeholder might hold unrealistic expectations again. The project manager needs to reduce resistance and align perspectives proactively to ensure the project vision is shared by all stakeholders. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 71</span><span class="badge">Stakeholders, Resources</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q199</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement, Develop Team<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders, Resources</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 71): 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Conduct an in-depth private session to explain the project p
+            </div><div class="approach-cell">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div><div class="approach-cell">
+              <strong>ghi nhận</strong>
+              ghi nhận / tài liệu hóa
+            </div><div class="approach-cell pull">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q199</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholder strongly resists alignment with the project visio</strong><br><br>→ <strong>D</strong> phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q199 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Conduct an in-depth private session to explain the proj…</strong></td>
+                <td>Conduct an in-depth private session to explain the project plan, benef</td>
+                <td>✗ &quot;Conduct an in-depth private session to explain the project plan, benefits, and str…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Offer a customized stakeholder workshop to reinforce pr…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td>✗ Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Offer a customized stakeholder wor…</td>
+              </tr><tr>
+                <td><strong>C. Facilitate structured lessons learned discussions focus…</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>D. Engage the stakeholder early in collaborative decision-…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q199</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Conduct an in-depth private session to explain the project plan, benefits, and strategic rationale.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Engage the stakeholder early in <span class="kw-signal">collaborative</span> decision-making to build ownership and commitment.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q199</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q199</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 199</div>
             <div class="q-text">During a high-visibility project, a key stakeholder strongly resists alignment with the project vision and creates significant pressure on the delivery team. The project manager anticipates that the same key stakeholder might hold unrealistic expectations again. The project manager needs to reduce resistance and align perspectives proactively to ensure the project vision is shared by all stakeholders. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>→ <strong>D:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>PM/leader phải communicate project vision và sprint goals rõ ràng để team alignment. Miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span> — shared understanding là nền tảng delivery hiệu quả.</li><li>Process <span class="kw-pmbok">Manage Stakeholder Engagement</span> — align với đáp án D.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 71.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Engage the stakeholder early in collaborative decision-making to build ownership and commitment.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.<br><br>PM/leader phải communicate project vision và sprint goals rõ ràng để team alignment. Miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span> — shared understanding là nền tảng delivery hiệu quả.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Conduct an in-depth private session to explain the project plan, benefits, and s…</span></td><td>&quot;Conduct an in-depth private session to explain the project plan, benefits, and str…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Offer a customized stakeholder workshop to reinforce project objectives, value d…</span></td><td>Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết Offer a customized stakeholder workshop to reinforce project objectives, value delivery, and shared accountability. — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Facilitate structured lessons learned discussions focused on past conflicts to p…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>During a high-visibility project, a key stakeholder strongly resists alignment with the project visi… (Q199)</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="prioritize_value">
+              <span>Tình huống cần &quot;ưu tiên theo giá trị / MVP&quot; — không phải trọng tâm Q199</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="document_first">
+              <span>Tình huống cần &quot;ghi nhận / tài liệu hóa&quot; — không phải trọng tâm Q199</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Conduct an in-depth private session to explain the p…" → A</h4>
+            <p style="margin:0">&quot;Conduct an in-depth private session to explain the project plan, benefits, and str…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Offer a customized stakeholder workshop to reinforce…" → B</h4>
+            <p style="margin:0">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Offer a customized stakeholder workshop to reinforce project objectives, value delivery, and shared accountability. — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Facilitate structured lessons learned discussions fo…" → C</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholder strongly resists alignment with the project visio</strong> → <strong>D</strong> — PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q199 — đáp án?</div>
+            <div class="flashcard-front">Q199 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 71</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q199 — đáp án?</div>
             <div class="flashcard-back"><strong>D</strong> — Engage the stakeholder early in collaborative decision-making to build ownership and commitment.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án D theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q199
-────────────────────────
-During a high-visibility project, a key stakeholder strongly resists alignment with the project vision and creates significant pressure on the delivery team. The project manager anticipates that the s…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q199
+(PMBOK 8, tr. 71)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Resources
+PROCESS: Manage Stakeholder Engagement, Develop Team
+PRINCIPLE: Focus on value
 
-ANSWER: D
-D. Engage the stakeholder early in collaborative decision-making to build ownership and commitment.
+SCENARIO:
+During a high-visibility project, a key stakeholder strongly resists alignment with the project vision and creates significant pressure on the delivery team. The project manager anticipates that the same key stakeholder …
 
-PMBOK 8:
-  Domain: Stakeholders, Resources
-  Process: Manage Stakeholder Engagement, Develop Team
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholder strongly resists alignment with the project visio
+
+ANSWER → D) Engage the stakeholder early in collaborative decision-making to build ownership and commitment.
+
+NOT:
+  A) Conduct an in-depth private session to explain the… — &quot;Conduct an in-depth private session to explain the project 
+  B) Offer a customized stakeholder workshop to reinfor… — Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Offe
+  C) Facilitate structured lessons learned discussions … — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+
+Q199 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Conduct an in-depth private session to explain the project plan, benefits, and str…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","B":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết Offer a customized stakeholder workshop to reinforce project objectives, value delivery, and shared accountability. — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","C":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","D":"PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý."};
+      const EXPL = {"A":"\"Conduct an in-depth private session to explain the project plan, benefits, and str…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","B":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết Offer a customized stakeholder workshop to reinforce project objectives, value delivery, and shared accountability. — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","C":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","D":"Đúng! PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

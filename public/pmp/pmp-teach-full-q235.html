@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 235</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Team</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-235">Câu 235</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q234.html">← 234</a>
         <a href="pmp-teach-full-q236.html">236 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 235 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">In a project environment where the team tailors its approach based on context, a project team, distributed across three different countries, is having a difficult time arranging meetings. The team members are also unclear about the project requirements and are having trouble getting their questions answered. <span class="kw-cue">What should the project manager do</span> to increase project success?</p>
-          <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q235</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q235</h1>
+          <p class="lead">Bài học Q235 về <strong>Develop Team</strong> (PMBOK 8, tr. 202) — Team phân tán</p>
+          <p class="lead" style="margin-top:0.75rem">In a project environment where the team tailors its approach based on context, a project team, <em>distributed across three different countries</em>, is having a difficult time arranging meetings. The team members are also unclear about the project requirements and are having trouble getting their questions answered. <em>What should the project manager do</em> to increase project success?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 202</span><span class="badge">Resources, Stakeholders</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q235</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Team, Plan Resources<br>
-              <strong>Principle:</strong> Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Develop Team</h2>
+          <p><strong>Develop Team</strong> thuộc miền <strong>Resources, Stakeholders</strong> — process <strong>Develop Team</strong>, principle <strong>Build an empowered culture</strong>. PMBOK 8 (tr. 202): 202 A Guide to the Project Management Body of Knowledge Effective storytelling enhances communication within the team and across the organization. Storytelling makes complex information more understandable and relatable, which can lead to</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Work independently until it is necessary to integrate the wo
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Review the communications management plan and increase infor
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Increase the frequency of team meetings to discuss any quest
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Bring questions to the functional managers to resolve issues
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q235</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>distributed across three different countries</strong><br><br>→ <strong>B</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q235 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Work independently until it is necessary to integrate t…</strong></td>
+                <td>Work independently until it is necessary to integrate the work.</td>
+                <td>✗ &quot;Work independently until it is necessary to integrate the work.&quot; không phù hợp team phân …</td>
+              </tr><tr>
+                <td><strong>B. Review the communications management plan and increase …</strong></td>
+                <td>Review the communications management plan and increase information sha</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Increase the frequency of team meetings to discuss any …</strong></td>
+                <td>Increase the frequency of team meetings to discuss any questions.</td>
+                <td>✗ &quot;Increase the frequency of team meetings to discuss any questions.&quot; không phù hợp team phâ…</td>
+              </tr><tr>
+                <td><strong>D. Bring questions to the functional managers to resolve i…</strong></td>
+                <td>Bring questions to the functional managers to resolve issues across th</td>
+                <td>✗ &quot;Bring questions to the functional managers to resolve issues across the team.&quot; không phù …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q235</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Work independently until it is necessary to integrate the work.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Review the <span class="kw-signal">communications management plan</span> and increase information sharing.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Increase the frequency of team meetings to discuss any questions.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q235</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q235</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 235</div>
             <div class="q-text">In a project environment where the team tailors its approach based on context, a project team, distributed across three different countries, is having a difficult time arranging meetings. The team members are also unclear about the project requirements and are having trouble getting their questions answered. <span class="kw-cue">What should the project manager do</span> to increase project success?</div>
@@ -181,44 +229,84 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> Team phân tán — cải thiện <span class="kw-signal">collaboration</span> tools/process, không chỉ họp face-to-face.</li><li>Bối cảnh: team phân tán / virtual. Đáp án <strong>B</strong> — &quot;Review the <span class="kw-signal">communications management plan</span> and increase information sharing.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: team phân tán / virtual — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: mức độ uncertainty cao — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Review the communications management plan and increase information sharing.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Team phân tán — cải thiện <span class="kw-signal">collaboration</span> tools/process, không chỉ họp face-to-face.<br><br>Bối cảnh: team phân tán / virtual. Đáp án <strong>B</strong> — &quot;Review the <span class="kw-signal">communications management plan</span> and increase information sharing.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Stakeholders</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 202 A Guide to the Project Management Body of Knowledge Effective storytelling enhances communication within the team and across the organization. Storytelling makes complex information more understandable and relatable, which can lead to<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 202 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 202: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Work independently until it is necessary to integrate the work.</span></td><td>&quot;Work independently until it is necessary to integrate the work.&quot; không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Increase the frequency of team meetings to discuss any questions.</span></td><td>&quot;Increase the frequency of team meetings to discuss any questions.&quot; không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Bring questions to the functional managers to resolve issues across the team.</span></td><td>&quot;Bring questions to the functional managers to resolve issues across the team.&quot; không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>In a project environment where the team tailors its approach based on context, a project team, distr… (Q235)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="DUMMY1" type="button">Opt 1</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 1 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Work independently until it is necessary to integrat…" → A</h4>
+            <p style="margin:0">&quot;Work independently until it is necessary to integrate the work.&quot; không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Increase the frequency of team meetings to discuss a…" → C</h4>
+            <p style="margin:0">&quot;Increase the frequency of team meetings to discuss any questions.&quot; không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Bring questions to the functional managers to resolv…" → D</h4>
+            <p style="margin:0">&quot;Bring questions to the functional managers to resolve issues across the team.&quot; không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · distributed across three different countries</strong> → <strong>B</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q235 — đáp án?</div>
+            <div class="flashcard-front">Q235 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Team</strong><br>PMBOK 8, tr. 202</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q235 — đáp án?</div>
             <div class="flashcard-back"><strong>B</strong> — Review the communications management plan and increase information sharing.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Build an empowered culture</strong><br>Develop Team</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Team phân tán</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q235
-────────────────────────
-In a project environment where the team tailors its approach based on context, a project team, distributed across three different countries, is having a difficult time arranging meetings. The team mem…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP TEAM — Q235
+(PMBOK 8, tr. 202)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Stakeholders
+PROCESS: Develop Team, Plan Resources
+PRINCIPLE: Build an empowered culture
 
-ANSWER: B
-B. Review the communications management plan and increase information sharing.
+SCENARIO:
+In a project environment where the team tailors its approach based on context, a project team, distributed across three different countries, is having a difficult time arranging meetings. The team members are also unclea…
 
-PMBOK 8:
-  Domain: Resources, Stakeholders
-  Process: Develop Team, Plan Resources
-  Principle: Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | distributed across three different countries
+
+ANSWER → B) Review the communications management plan and increase information sharing.
+
+NOT:
+  A) Work independently until it is necessary to integr… — &quot;Work independently until it is necessary to integrate the w
+  C) Increase the frequency of team meetings to discuss… — &quot;Increase the frequency of team meetings to discuss any ques
+  D) Bring questions to the functional managers to reso… — &quot;Bring questions to the functional managers to resolve issue
+
+Q235 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Work independently until it is necessary to integrate the work.\" không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch.","B":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8).","C":"\"Increase the frequency of team meetings to discuss any questions.\" không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch.","D":"\"Bring questions to the functional managers to resolve issues across the team.\" không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch."};
+      const EXPL = {"A":"\"Work independently until it is necessary to integrate the work.\" không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch.","B":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Resources + Stakeholders (Executing, PMBOK 8).","C":"\"Increase the frequency of team meetings to discuss any questions.\" không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch.","D":"\"Bring questions to the functional managers to resolve issues across the team.\" không phù hợp team phân tán / virtual — đáp án đúng tập trung rà soát tài liệu/kế hoạch."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

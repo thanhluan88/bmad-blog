@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 585</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-585">Câu 585</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q584.html">← 584</a>
         <a href="pmp-teach-full-q586.html">586 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 585 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project team completes the assigned development work on a project and the customer's designated point of contact verbally states they are satisfied with the output. Shortly after, the same customer contacts the project manager requesting additional modifications <span class="kw-cue">not</span> included in the original scope. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q585</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q585</h1>
+          <p class="lead">Bài học Q585 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 265) — Phân tích tình huống và chọn đáp án D theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A project team completes the assigned development work on a project and the customer's designated point of contact verbally states they are satisfied with the output. Shortly after, the same customer contacts the project manager requesting additional modifications not included in the original scope. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 265</span><span class="badge">Stakeholders</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q585</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 265): baseline. The approved version of a work product that can be changed using formal change control procedures and is used as the basis for comparison to actual results. benefit. A gain or asset realized by the organization and other stakehol</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Accommodate the additional modifications to maintain a posit
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Review the original scope statement with the customer to cla
+            </div><div class="approach-cell pull">
+              <strong>change control</strong>
+              change control / change request
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q585</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q585 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Accommodate the additional modifications to maintain a …</strong></td>
+                <td>Accommodate the additional modifications to maintain a positive custom</td>
+                <td>✗ &quot;Accommodate the additional modifications to maintain a positive customer relations…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Escalate the request to the project sponsor to determin…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>C. Review the original scope statement with the customer t…</strong></td>
+                <td>Review the original scope statement with the customer to clarify what </td>
+                <td>✗ rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung change…</td>
+              </tr><tr>
+                <td><strong>D. Notify the customer that any further work beyond the ag…</strong></td>
+                <td>change control / change request</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q585</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Accommodate the additional modifications to maintain a positive customer relationship and ensure final satisfaction.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Notify the customer that any further work beyond the agreed scope will be treated as a new <span class="kw-signal">change request</span>.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q585</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q585</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 585</div>
             <div class="q-text">A project team completes the assigned development work on a project and the customer's designated point of contact verbally states they are satisfied with the output. Shortly after, the same customer contacts the project manager requesting additional modifications <span class="kw-cue">not</span> included in the original scope. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>→ <strong>D:</strong> Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>Bối cảnh: A project team completes the assigned development work on a project and the customer's designated point of contact verbally states they are satisfied with the output. Shortly after, the same customer contacts the project manager requesting additional modifications <span class="kw-cue">not</span> included in the original scope. Đáp án <strong>D</strong> — &quot;Notify the customer that any further work beyond the agreed scope will be treated as a new <span class="kw-signal">change request</span>.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án D.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 265.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Notify the customer that any further work beyond the agreed scope will be treated as a new change request.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.<br><br>Bối cảnh: A project team completes the assigned development work on a project and the customer's designated point of contact verbally states they are satisfied with the output. Shortly after, the same customer contacts the project manager requesting additional modifications <span class="kw-cue">not</span> included in the original scope. Đáp án <strong>D</strong> — &quot;Notify the customer that any further work beyond the agreed scope will be treated as a new <span class="kw-signal">change request</span>.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; baseline. The approved version of a work product that can be changed using formal change control procedures and is used as the basis for comparison to actual results. benefit. A gain or asset realized by the organization and other stakehol<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 265 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 265: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Accommodate the additional modifications to maintain a positive customer relatio…</span></td><td>&quot;Accommodate the additional modifications to maintain a positive customer relations…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the request to the project sponsor to determine whether the project sco…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Review the original scope statement with the customer to clarify what was agreed…</span></td><td>rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="change_control">
+              <span>A project team completes the assigned development work on a project and the customer's designated po… (Q585)</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q585</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Accommodate the additional modifications to maintain…" → A</h4>
+            <p style="margin:0">&quot;Accommodate the additional modifications to maintain a positive customer relations…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung change control / change request.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Escalate the request to the project sponsor to deter…" → B</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Review the original scope statement with the custome…" → C</h4>
+            <p style="margin:0">rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung change control / change request.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q585 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Notify the customer that any further work beyond the agreed scope will be treated as a new change request.</div>
+            <div class="flashcard-front">Q585 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 265</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q585 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Notify the customer that any further work beyond the agreed scope will be treated as a new change re</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án D theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q585
-────────────────────────
-A project team completes the assigned development work on a project and the customer's designated point of contact verbally states they are satisfied with the output. Shortly after, the same customer …
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q585
+(PMBOK 8, tr. 265)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: D
-D. Notify the customer that any further work beyond the agreed scope will be treated as a new change request.
+SCENARIO:
+A project team completes the assigned development work on a project and the customer's designated point of contact verbally states they are satisfied with the output. Shortly after, the same customer contacts the project…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Notify the customer that any further work beyond the agreed scope will be treated as a new change request.
+
+NOT:
+  A) Accommodate the additional modifications to mainta… — &quot;Accommodate the additional modifications to maintain a posi
+  B) Escalate the request to the project sponsor to det… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  C) Review the original scope statement with the custo… — rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài 
+
+Q585 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Accommodate the additional modifications to maintain a positive customer relations…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung change control / change request.","B":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","C":"rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung change control / change request.","D":"Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement."};
+      const EXPL = {"A":"\"Accommodate the additional modifications to maintain a positive customer relations…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung change control / change request.","B":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","C":"rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung change control / change request.","D":"Đúng! Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

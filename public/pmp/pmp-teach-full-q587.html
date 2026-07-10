@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 587</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Estimate Costs</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-587">Câu 587</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q586.html">← 586</a>
         <a href="pmp-teach-full-q588.html">588 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 587 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project team is responsible for managing the construction of a new office building. The job will require using a contractor for a specialized part of the construction. The project's scope is clear, so the contractor should be able to provide an accurate estimate. What type of contract is suitable for this project?</p>
-          <div class="badges"><span class="badge">Finance, Governance</span><span class="badge">Executing</span><span class="badge">Estimate Costs</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q587</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q587</h1>
+          <p class="lead">Bài học Q587 về <strong>Estimate Costs</strong> (PMBOK 8, tr. 62) — vấn đề vendor / procurement</p>
+          <p class="lead" style="margin-top:0.75rem">A project team is responsible for managing the construction of a new office building. The job will require using a contractor for a specialized part of the construction. The project's scope is clear, so the contractor should be able to provide an accurate estimate. What type of contract is suitable for this project?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 62</span><span class="badge">Finance, Governance</span><span class="badge">Estimate Costs</span><span class="badge">Full Bank Q587</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Finance, Governance<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Estimate Costs, Determine Budget, Control Costs<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Estimate Costs</h2>
+          <p><strong>Estimate Costs</strong> thuộc miền <strong>Finance, Governance</strong> — process <strong>Estimate Costs</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 62): This process is performed once up front or at predefined points in the project (see Figure 2-27). 2.4.2.2 Estimate Costs Estimate Costs is the process of developing an approximation of the cost of resources needed to complete project work.</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>A</strong>
+              A fixed-price contract
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              A cost-reimbursable contract
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              A time and materials (T&amp;M) contract
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              A target-cost contract
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q587</h4>
+            <p style="margin:0">vấn đề vendor / procurement<br><br>→ <strong>A</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance + Governance (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q587 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. A fixed-price contract</strong></td>
+                <td>A fixed-price contract</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. A cost-reimbursable contract</strong></td>
+                <td>A cost-reimbursable contract</td>
+                <td>✗ &quot;A cost-reimbursable contract&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập…</td>
+              </tr><tr>
+                <td><strong>C. A time and materials (T&amp;M) contract</strong></td>
+                <td>A time and materials (T&amp;M) contract</td>
+                <td>✗ &quot;A time and materials (T&amp;M) contract&quot; không phù hợp vấn đề vendor / procurement — đáp án đ…</td>
+              </tr><tr>
+                <td><strong>D. A target-cost contract</strong></td>
+                <td>A target-cost contract</td>
+                <td>✗ &quot;A target-cost contract&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q587</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         A fixed-price contract
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         A cost-reimbursable contract
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q587</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q587</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 587</div>
             <div class="q-text">A project team is responsible for managing the construction of a new office building. The job will require using a contractor for a specialized part of the construction. The project's scope is clear, so the contractor should be able to provide an accurate estimate. What type of contract is suitable for this project?</div>
@@ -181,44 +229,84 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: vấn đề vendor / procurement. Đáp án <strong>A</strong> — &quot;A fixed-price contract&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: vấn đề vendor / procurement — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Estimate Costs — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. A fixed-price contract</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: vấn đề vendor / procurement. Đáp án <strong>A</strong> — &quot;A fixed-price contract&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Finance</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; This process is performed once up front or at predefined points in the project (see Figure 2-27). 2.4.2.2 Estimate Costs Estimate Costs is the process of developing an approximation of the cost of resources needed to complete project work.<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 62 (developing an approximation of the cost of resources needed to complet)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 62: developing an approximation of the cost of resources needed to complet</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">A cost-reimbursable contract</span></td><td>&quot;A cost-reimbursable contract&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung &quot;A fixed-price contract&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">A time and materials (T&amp;M) contract</span></td><td>&quot;A time and materials (T&amp;M) contract&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung &quot;A fixed-price contract&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">A target-cost contract</span></td><td>&quot;A target-cost contract&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung &quot;A fixed-price contract&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A project team is responsible for managing the construction of a new office building. The job will r… (Q587)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="DUMMY1" type="button">Opt 1</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 1 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "A cost-reimbursable contract" → B</h4>
+            <p style="margin:0">&quot;A cost-reimbursable contract&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung &quot;A fixed-price contract&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "A time and materials (T&amp;M) contract" → C</h4>
+            <p style="margin:0">&quot;A time and materials (T&amp;M) contract&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung &quot;A fixed-price contract&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "A target-cost contract" → D</h4>
+            <p style="margin:0">&quot;A target-cost contract&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung &quot;A fixed-price contract&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>A</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance + Governance (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q587 — đáp án?</div>
+            <div class="flashcard-front">Q587 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Estimate Costs</strong><br>PMBOK 8, tr. 62</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q587 — đáp án?</div>
             <div class="flashcard-back"><strong>A</strong> — A fixed-price contract</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Estimate Costs</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề vendor / procurement</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q587
-────────────────────────
-A project team is responsible for managing the construction of a new office building. The job will require using a contractor for a specialized part of the construction. The project's scope is clear, …
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">ESTIMATE COSTS — Q587
+(PMBOK 8, tr. 62)
+─────────────────────────────────────────────────────
+DOMAIN: Finance, Governance
+PROCESS: Estimate Costs, Determine Budget, Control Costs
+PRINCIPLE: Lead accountably
 
-ANSWER: A
-A. A fixed-price contract
+SCENARIO:
+A project team is responsible for managing the construction of a new office building. The job will require using a contractor for a specialized part of the construction. The project's scope is clear, so the contractor sh…
 
-PMBOK 8:
-  Domain: Finance, Governance
-  Process: Estimate Costs, Determine Budget, Control Costs
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → A) A fixed-price contract
+
+NOT:
+  B) A cost-reimbursable contract… — &quot;A cost-reimbursable contract&quot; không phù hợp vấn đề vendor /
+  C) A time and materials (T&amp;M) contract… — &quot;A time and materials (T&amp;M) contract&quot; không phù hợp vấn đề v
+  D) A target-cost contract… — &quot;A target-cost contract&quot; không phù hợp vấn đề vendor / procu
+
+Q587 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance + Governance (Executing, PMBOK 8).","B":"\"A cost-reimbursable contract\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung \"A fixed-price contract\".","C":"\"A time and materials (T&M) contract\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung \"A fixed-price contract\".","D":"\"A target-cost contract\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung \"A fixed-price contract\"."};
+      const EXPL = {"A":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Finance + Governance (Executing, PMBOK 8).","B":"\"A cost-reimbursable contract\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung \"A fixed-price contract\".","C":"\"A time and materials (T&M) contract\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung \"A fixed-price contract\".","D":"\"A target-cost contract\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung \"A fixed-price contract\"."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

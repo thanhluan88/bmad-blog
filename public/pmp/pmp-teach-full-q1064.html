@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1064</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Team</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1064">Câu 1064</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1063.html">← 1063</a>
         <a href="pmp-teach-full-q1065.html">1065 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1064 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A financial services company is funding a project to develop a new software application. During planning, the project manager defines escalation thresholds to ensure performance stays within acceptable limits. Stakeholders are worried about high defect rates, missed milestones, and compliance risks if the thresholds are poorly defined. The project manager needs to ensure that governance structures include clear measures so issues are detected and escalated early. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Resources, Scope</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q1064</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1064</h1>
+          <p class="lead">Bài học Q1064 về <strong>Develop Team</strong> (PMBOK 8, tr. 53) — trễ tiến độ / áp lực schedule</p>
+          <p class="lead" style="margin-top:0.75rem">A financial services company is funding a project to develop a new software application. During planning, the project manager defines <em>escalation thresholds to ensure performance sta</em>ys within acceptable limits. <em>Stakeholders are worried about high defect rates</em>, missed milestones, and compliance risks if the thresholds are poorly defined. The project manager needs to ensure that governance structures include clear measures so issues are detected and escalated early. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Resources, Scope</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q1064</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Team, Manage Team, Validate Scope<br>
-              <strong>Principle:</strong> Embed quality, Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Develop Team</h2>
+          <p><strong>Develop Team</strong> thuộc miền <strong>Resources, Scope</strong> — process <strong>Develop Team</strong>, principle <strong>Embed quality</strong>. PMBOK 8 (tr. 53): 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>đảm bảo tuân thủ</strong>
+              đảm bảo tuân thủ / compliance
+            </div><div class="approach-cell pull">
+              <strong>khuyến khích collaboration</strong>
+              khuyến khích collaboration / hợp tác
+            </div><div class="approach-cell">
+              <strong>change control</strong>
+              change control / change request
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Adopt agile methods emphasizing adaptability to adjust easil
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1064</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>Stakeholders are worried about high defect rates</strong> · <strong>escalation thresholds to ensure performance sta</strong><br><br>→ <strong>B</strong> phù hợp vì PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Resources + Scope, Focus Area Executing (PMBOK 8…</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1064 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Define fixed thresholds that remain unchanged throughou…</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td>✗ Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết trễ tiến độ / áp lực schedule —…</td>
+              </tr><tr>
+                <td><strong>B. Collaborate with key stakeholders to establish measurab…</strong></td>
+                <td>khuyến khích collaboration / hợp tác</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Create a formal change request proactively to modify ba…</strong></td>
+                <td>change control / change request</td>
+                <td>✗ Tập trung &quot;change control / change request&quot; không giải quyết trễ tiến độ / áp lực schedule…</td>
+              </tr><tr>
+                <td><strong>D. Adopt agile methods emphasizing adaptability to adjust …</strong></td>
+                <td>Adopt agile methods emphasizing adaptability to adjust easily when thr</td>
+                <td>✗ &quot;Adopt agile methods emphasizing adaptability to adjust easily when thresholds are …&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1064</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Define fixed thresholds that remain unchanged throughout the project life cycle to enforce consistent quality standards.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         <span class="kw-signal">Collaborate</span> with key stakeholders to establish measurable key performance indicators (KPIs) and acceptable defect rates.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Create a formal change request proactively to modify baseline limits after performance issues are identified.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1064</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1064</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1064</div>
             <div class="q-text">A financial services company is funding a project to develop a new software application. During planning, the project manager defines escalation thresholds to ensure performance stays within acceptable limits. Stakeholders are worried about high defect rates, missed milestones, and compliance risks if the thresholds are poorly defined. The project manager needs to ensure that governance structures include clear measures so issues are detected and escalated early. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Resources</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> Sau release bị phàn nàn về bug/chất lượng, team Agile cần <span class="kw-signal">retrospective</span> để phân tích <span class="kw-signal">root cause</span> và cải thiện quy trình — không thuê ngoài, không incentive lệch, không đánh giá skill cá nhân.</li><li><span class="kw-pmbok">PMBOK 8</span> (<span class="kw-pmbok">Embed quality</span> + Build <span class="kw-signal">empowered</span> culture) khuyến khích <span class="kw-signal">continuous improvement</span>. PM <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> để team tự phân tích nguyên nhân gốc và đề xuất giải pháp bền vững.</li><li>Stem signal: trễ tiến độ / áp lực schedule — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: vấn đề chi phí / ngân sách — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Collaborate with key stakeholders to establish measurable key performance indicators (KPIs) and acceptable defect rates.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Sau release bị phàn nàn về bug/chất lượng, team Agile cần <span class="kw-signal">retrospective</span> để phân tích <span class="kw-signal">root cause</span> và cải thiện quy trình — không thuê ngoài, không incentive lệch, không đánh giá skill cá nhân.<br><br><span class="kw-pmbok">PMBOK 8</span> (<span class="kw-pmbok">Embed quality</span> + Build <span class="kw-signal">empowered</span> culture) khuyến khích <span class="kw-signal">continuous improvement</span>. PM <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> để team tự phân tích nguyên nhân gốc và đề xuất giải pháp bền vững.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an Empowered Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Define fixed thresholds that remain unchanged throughout the project life cycle …</span></td><td>Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần khuyến khích <span class="kw-signal">collaboration</span> / hợp tác.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Create a formal change request proactively to modify baseline limits after perfo…</span></td><td>Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần khuyến khích <span class="kw-signal">collaboration</span> / hợp tác.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Adopt agile methods emphasizing adaptability to adjust easily when thresholds ar…</span></td><td>&quot;Adopt agile methods emphasizing adaptability to adjust easily when thresholds are …&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung khuyến khích <span class="kw-signal">collaboration</span> / hợp tác.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="encourage_collaborate">
+              <span>A financial services company is funding a project to develop a new software application. During plan… (Q1064)</span>
+              <div class="classify-btns"><button data-pick="encourage_collaborate" type="button">khuyến khích</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="change_control" type="button">change contr</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="ensure_compliance">
+              <span>Tình huống cần &quot;đảm bảo tuân thủ / compliance&quot; — không phải trọng tâm Q1064</span>
+              <div class="classify-btns"><button data-pick="encourage_collaborate" type="button">khuyến khích</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="change_control" type="button">change contr</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="change_control">
+              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q1064</span>
+              <div class="classify-btns"><button data-pick="encourage_collaborate" type="button">khuyến khích</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="change_control" type="button">change contr</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Define fixed thresholds that remain unchanged throug…" → A</h4>
+            <p style="margin:0">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần khuyến khích collaboration / hợp tác.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Create a formal change request proactively to modify…" → C</h4>
+            <p style="margin:0">Tập trung &quot;change control / change request&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần khuyến khích collaboration / hợp tác.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Adopt agile methods emphasizing adaptability to adju…" → D</h4>
+            <p style="margin:0">&quot;Adopt agile methods emphasizing adaptability to adjust easily when thresholds are …&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung khuyến khích collaboration / hợp tác.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · Stakeholders are worried about high defect rates · escalation thresholds to ensure performance sta</strong> → <strong>B</strong> — PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Resources + Scope, Focus Area Executing (PMBOK 8…</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1064 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Collaborate with key stakeholders to establish measurable key performance indicators (KPIs) and acceptable defect rates.</div>
+            <div class="flashcard-front">Q1064 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Team</strong><br>PMBOK 8, tr. 53</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Embed quality</strong><br>Develop Team</div>
+            <div class="flashcard-front">Q1064 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Collaborate with key stakeholders to establish measurable key performance indicators (KPIs) and acce</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">trễ tiến độ / áp lực schedule</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1064
-────────────────────────
-A financial services company is funding a project to develop a new software application. During planning, the project manager defines escalation thresholds to ensure performance stays within acceptabl…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP TEAM — Q1064
+(PMBOK 8, tr. 53)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Scope
+PROCESS: Develop Team, Manage Team, Validate Scope
+PRINCIPLE: Embed quality, Build an empowered culture
 
-ANSWER: B
-B. Collaborate with key stakeholders to establish measurable key performance indicators (KPIs) and acceptable defect rates.
+SCENARIO:
+A financial services company is funding a project to develop a new software application. During planning, the project manager defines escalation thresholds to ensure performance stays within acceptable limits. Stakeholde…
 
-PMBOK 8:
-  Domain: Resources, Scope
-  Process: Develop Team, Manage Team, Validate Scope
-  Principle: Embed quality, Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | Stakeholders are worried about high defect rates | escalation thresholds to ensure performance sta
+
+ANSWER → B) Collaborate with key stakeholders to establish measurable key performance indicators (KPIs) and acceptable defect rates.
+
+NOT:
+  A) Define fixed thresholds that remain unchanged thro… — Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết t
+  C) Create a formal change request proactively to modi… — Tập trung &quot;change control / change request&quot; không giải quyết
+  D) Adopt agile methods emphasizing adaptability to ad… — &quot;Adopt agile methods emphasizing adaptability to adjust easi
+
+Q1064 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần khuyến khích collaboration / hợp tác.","B":"PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Resources + Scope, Focus Area Executing (PMBOK 8).","C":"Tập trung \"change control / change request\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần khuyến khích collaboration / hợp tác.","D":"\"Adopt agile methods emphasizing adaptability to adjust easily when thresholds are …\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung khuyến khích collaboration / hợp tác."};
+      const EXPL = {"A":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần khuyến khích collaboration / hợp tác.","B":"Đúng! PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Resources + Scope, Focus Area Executing (PMBOK 8).","C":"Tập trung \"change control / change request\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần khuyến khích collaboration / hợp tác.","D":"\"Adopt agile methods emphasizing adaptability to adjust easily when thresholds are …\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung khuyến khích collaboration / hợp tác."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

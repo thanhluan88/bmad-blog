@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 877</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Team</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-877">Câu 877</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q876.html">← 876</a>
         <a href="pmp-teach-full-q878.html">878 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 877 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">During the second week of the current iteration in a hybrid project, the project manager notices inconsistent progress across different user stories. During the daily coordination meeting, some team members admitted that they prioritized work based on technical difficulty, while others focused on tasks they personally preferred. The product owner expresses concern that the <span class="kw-cue">most</span> critical deliverables might <span class="kw-cue">not</span> be completed by the end of the sprint. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q877</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q877</h1>
+          <p class="lead">Bài học Q877 về <strong>Develop Team</strong> (PMBOK 8, tr. 24) — ngữ cảnh Agile/Scrum</p>
+          <p class="lead" style="margin-top:0.75rem">During the second week of the current iteration in a hybrid project, the project manager notices inconsistent progress across different user stories. During the daily coordination meeting, some team members admitted that they prioritized work based on technical difficulty, while others focused on tasks they personally preferred. The product owner expresses concern that the most critical deliverables might not be completed by the end of the sprint. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 24</span><span class="badge">Resources, Stakeholders</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q877</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,49 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Team, Manage Team<br>
-              <strong>Principle:</strong> Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Develop Team</h2>
+          <p><strong>Develop Team</strong> thuộc miền <strong>Resources, Stakeholders</strong> — process <strong>Develop Team</strong>, principle <strong>Build an empowered culture</strong>. PMBOK 8 (tr. 24): project and product management. The product owner should ensure that the development team is focused on delivering valuable features by maintaining and prioritizing the product backlog. The business analyst should gather and document requ</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q877</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>A</strong> phù hợp vì PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q877 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Organize a mid-sprint backlog refinement session with t…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Immediately escalate the issue to the project sponsor a…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>C. Continue work as planned and request that the team conf…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td>✗ &quot;Continue work as planned and request that the team confirm priorities du…&quot; cùng nhóm ưu t…</td>
+              </tr><tr>
+                <td><strong>D. Assign the missing high-priority tasks to the most skil…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td>✗ &quot;Assign the missing high-priority tasks to the most skilled team members …&quot; cùng nhóm ưu t…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q877</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Organize a mid-sprint backlog refinement session with the product owner and team to reprioritize work based on value.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Immediately <span class="kw-trap">escalate</span> the issue to the project sponsor and request that they review and confirm the agreed-upon priorities.
@@ -165,7 +207,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q877</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q877</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 877</div>
             <div class="q-text">During the second week of the current iteration in a hybrid project, the project manager notices inconsistent progress across different user stories. During the daily coordination meeting, some team members admitted that they prioritized work based on technical difficulty, while others focused on tasks they personally preferred. The product owner expresses concern that the <span class="kw-cue">most</span> critical deliverables might <span class="kw-cue">not</span> be completed by the end of the sprint. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +223,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>→ <strong>A:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an empowered culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Develop Team</span> — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Organize a mid-sprint backlog refinement session with the product owner and team to reprioritize work based on value.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.<br><br>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an empowered culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; project and product management. The product owner should ensure that the development team is focused on delivering valuable features by maintaining and prioritizing the product backlog. The business analyst should gather and document requ<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 24 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 24: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Immediately <span class="kw-trap">escalate</span> the issue to the project sponsor and request that they revi…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Continue work as planned and request that the team confirm priorities during the…</span></td><td>&quot;Continue work as planned and request that the team confirm priorities du…&quot; cùng nhóm ưu tiên theo giá trị / <span class="kw-signal">MVP</span> nhưng lệch trọng tâm — &quot;Organize a mid-sprint backlog refinement session with the product owner …&quot; sát ngữ cảnh Agile/Scrum hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Assign the missing high-priority tasks to the most skilled team members to ensur…</span></td><td>&quot;Assign the missing high-priority tasks to the <span class="kw-cue">most</span> skilled team members …&quot; cùng nhóm ưu tiên theo giá trị / <span class="kw-signal">MVP</span> nhưng lệch trọng tâm — &quot;Organize a mid-sprint backlog refinement session with the product owner …&quot; sát ngữ cảnh Agile/Scrum hơn.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="prioritize_value">
+              <span>During the second week of the current iteration in a hybrid project, the project manager notices inc… (Q877)</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q877</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="prioritize_value">
+              <span>Tình huống cần &quot;ưu tiên theo giá trị / MVP&quot; — không phải trọng tâm Q877</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Immediately escalate the issue to the project sponso…" → B</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Continue work as planned and request that the team c…" → C</h4>
+            <p style="margin:0">&quot;Continue work as planned and request that the team confirm priorities du…&quot; cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — &quot;Organize a mid-sprint backlog refinement session with the product owner …&quot; sát ngữ cảnh Agile/Scrum hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Assign the missing high-priority tasks to the most s…" → D</h4>
+            <p style="margin:0">&quot;Assign the missing high-priority tasks to the most skilled team members …&quot; cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — &quot;Organize a mid-sprint backlog refinement session with the product owner …&quot; sát ngữ cảnh Agile/Scrum hơn.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>A</strong> — PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q877 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Organize a mid-sprint backlog refinement session with the product owner and team to reprioritize work based on value.</div>
+            <div class="flashcard-front">Q877 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Team</strong><br>PMBOK 8, tr. 24</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Build an empowered culture</strong><br>Develop Team</div>
+            <div class="flashcard-front">Q877 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Organize a mid-sprint backlog refinement session with the product owner and team to reprioritize wor</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">ngữ cảnh Agile/Scrum</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q877
-────────────────────────
-During the second week of the current iteration in a hybrid project, the project manager notices inconsistent progress across different user stories. During the daily coordination meeting, some team m…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP TEAM — Q877
+(PMBOK 8, tr. 24)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Stakeholders
+PROCESS: Develop Team, Manage Team
+PRINCIPLE: Build an empowered culture
 
-ANSWER: A
-A. Organize a mid-sprint backlog refinement session with the product owner and team to reprioritize work based on value.
+SCENARIO:
+During the second week of the current iteration in a hybrid project, the project manager notices inconsistent progress across different user stories. During the daily coordination meeting, some team members admitted that…
 
-PMBOK 8:
-  Domain: Resources, Stakeholders
-  Process: Develop Team, Manage Team
-  Principle: Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → A) Organize a mid-sprint backlog refinement session with the product owner and team to reprioritize work based on value.
+
+NOT:
+  B) Immediately escalate the issue to the project spon… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  C) Continue work as planned and request that the team… — &quot;Continue work as planned and request that the team confirm 
+  D) Assign the missing high-priority tasks to the most… — &quot;Assign the missing high-priority tasks to the most skilled 
+
+Q877 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","B":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","C":"\"Continue work as planned and request that the team confirm priorities du…\" cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — \"Organize a mid-sprint backlog refinement session with the product owner …\" sát ngữ cảnh Agile/Scrum hơn.","D":"\"Assign the missing high-priority tasks to the most skilled team members …\" cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — \"Organize a mid-sprint backlog refinement session with the product owner …\" sát ngữ cảnh Agile/Scrum hơn."};
+      const EXPL = {"A":"Đúng! PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","B":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","C":"\"Continue work as planned and request that the team confirm priorities du…\" cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — \"Organize a mid-sprint backlog refinement session with the product owner …\" sát ngữ cảnh Agile/Scrum hơn.","D":"\"Assign the missing high-priority tasks to the most skilled team members …\" cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng tâm — \"Organize a mid-sprint backlog refinement session with the product owner …\" sát ngữ cảnh Agile/Scrum hơn."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

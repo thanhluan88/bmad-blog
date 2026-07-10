@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1032</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Monitor Risks</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1032">Câu 1032</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1031.html">← 1031</a>
         <a href="pmp-teach-full-q1033.html">1033 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1032 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A medium-sized city has obtained funding for a new water system. City officials warn that water laws might change in the upcoming legislative session. Customers are already dissatisfied due to recent droughts and are likely to resist changes to the new water system. The project manager working on the new water system needs to prepare for both regulatory and stakeholder risks. <span class="kw-cue">What should the project manager do</span>? (<span class="kw-cue">Choose 2</span>)</p>
-          <div class="badges"><span class="badge">Risk, Resources</span><span class="badge">Monitoring &amp; Controlling</span><span class="badge">Monitor Risks</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q1032</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1032</h1>
+          <p class="lead">Bài học Q1032 về <strong>Monitor Risks</strong> (PMBOK 8, tr. 137) — vấn đề chi phí / ngân sách</p>
+          <p class="lead" style="margin-top:0.75rem">A medium-sized city has obtained funding for a new water system. City officials warn that water laws might change in the upcoming legislative session. Customers are already dissatisfied due to recent droughts and are likely to resist changes to the new water system. The project manager working on the new water system needs to prepare for both regulatory and <em>stakeholder risks</em>. <em>What should the project manager do</em>? (Choose 2)</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 137</span><span class="badge">Risk, Resources</span><span class="badge">Monitor Risks</span><span class="badge">Full Bank Q1032</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,59 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Risk, Resources<br>
-              <strong>Focus Area:</strong> Monitoring &amp; Controlling<br>
-              <strong>Process:</strong> Monitor Risks, Implement Risk Responses<br>
-              <strong>Principle:</strong> Lead accountably, Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Monitor Risks</h2>
+          <p><strong>Monitor Risks</strong> thuộc miền <strong>Risk, Resources</strong> — process <strong>Monitor Risks</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 137): register. Identified risks are described in as much detail as required to ensure unambiguous understanding. A structured risk statement may be used to distinguish risks from their cause(s) and their effect(s). ⚫ Potential risk owners. Wh</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>ghi nhận</strong>
+              ghi nhận / cập nhật risk register
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell">
+              <strong>thông báo</strong>
+              thông báo / truyền đạt thông tin
+            </div><div class="approach-cell pull">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1032</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholder risks</strong><br><br>→ <strong>A</strong> phù hợp vì PM ghi nhận / cập nhật risk register để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Risk + Resources, Focus Area Monitoring &amp; Controlli…</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1032 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Conduct a structured risk assessment and update the ris…</strong></td>
+                <td>ghi nhận / cập nhật risk register</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Schedule town hall meetings with customers and document…</strong></td>
+                <td>ghi nhận / cập nhật risk register</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>C. Escalate stakeholder concerns to city officials so they…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>D. Communicate with legal environmental experts to ensure …</strong></td>
+                <td>thông báo / truyền đạt thông tin</td>
+                <td>✗ Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết vấn đề chi phí / ngân sách —…</td>
+              </tr><tr>
+                <td><strong>E. Enforce the stakeholder engagement plan to address grou…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1032</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Conduct a structured risk assessment and update the <span class="kw-signal">risk register</span> with potential regulatory impacts.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM ghi nhận / cập nhật <span class="kw-signal">risk register</span> để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Resources</span>, Focus Area Monitoring &amp; Controlling (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Schedule town hall meetings with customers and document their concerns in the risk register.
@@ -164,12 +216,12 @@
       </div><div class="approach-cell pull">
         <strong>E — Đúng</strong>
         Enforce the <span class="kw-signal">stakeholder engagement plan</span> to address groups with high influence and interest.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM ghi nhận / cập nhật <span class="kw-signal">risk register</span> để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Resources</span>, Focus Area Monitoring &amp; Controlling (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1032</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1032</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1032 · Chọn nhiều</div>
             <div class="q-text">A medium-sized city has obtained funding for a new water system. City officials warn that water laws might change in the upcoming legislative session. Customers are already dissatisfied due to recent droughts and are likely to resist changes to the new water system. The project manager working on the new water system needs to prepare for both regulatory and stakeholder risks. <span class="kw-cue">What should the project manager do</span>? (<span class="kw-cue">Choose 2</span>)</div>
@@ -186,44 +238,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A,E</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A,E</h2>
+          <h3>Tại sao chọn A,E?</h3>
+          <ul><li>PM ghi nhận / cập nhật <span class="kw-signal">risk register</span> để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Resources</span>, Focus Area Monitoring &amp; Controlling (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A, E:</strong> PM ghi nhận / cập nhật <span class="kw-signal">risk register</span> để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Resources</span>, Focus Area Monitoring &amp; Controlling (<span class="kw-pmbok">PMBOK 8</span>).</li><li>Rủi ro đã được identify và lập response plan trong <span class="kw-signal">risk register</span>. Theo miền <span class="kw-pmbok">Risk</span> (<span class="kw-pmbok">PMBOK 8</span>), khi rủi ro materialize, PM phải triển khai planned response đã chuẩn bị — đây là hành động có hệ thống, không phải phản ứng ngẫu nhiên.</li><li>Stem signal: vấn đề chi phí / ngân sách — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Monitor Risks — align với đáp án A,E.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A,E</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A, E:</strong> PM ghi nhận / cập nhật <span class="kw-signal">risk register</span> để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Resources</span>, Focus Area Monitoring &amp; Controlling (<span class="kw-pmbok">PMBOK 8</span>).<br><br>Rủi ro đã được identify và lập response plan trong <span class="kw-signal">risk register</span>. Theo miền <span class="kw-pmbok">Risk</span> (<span class="kw-pmbok">PMBOK 8</span>), khi rủi ro materialize, PM phải triển khai planned response đã chuẩn bị — đây là hành động có hệ thống, không phải phản ứng ngẫu nhiên.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; register. Identified risks are described in as much detail as required to ensure unambiguous understanding. A structured risk statement may be used to distinguish risks from their cause(s) and their effect(s). ⚫ Potential risk owners. Wh<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 137 (Performance Domain: <span class="kw-pmbok">Risk</span>, Monitor Risks)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 137: Performance Domain: <span class="kw-pmbok">Risk</span>, Monitor Risks</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Schedule town hall meetings with customers and document their concerns in the ri…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> stakeholder concerns to city officials so they can address them directl…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Communicate with legal environmental experts to ensure compliance with upcoming …</span></td><td>Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết vấn đề chi phí / ngân sách — đáp án đúng cần ghi nhận / cập nhật <span class="kw-signal">risk register</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="risk_register">
+              <span>A medium-sized city has obtained funding for a new water system. City officials warn that water laws… (Q1032)</span>
+              <div class="classify-btns"><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="communicate_inform" type="button">thông báo</button></div>
+            </div><div class="classify-row" data-answer="risk_register">
+              <span>Tình huống cần &quot;ghi nhận / cập nhật risk register&quot; — không phải trọng tâm Q1032</span>
+              <div class="classify-btns"><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="communicate_inform" type="button">thông báo</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q1032</span>
+              <div class="classify-btns"><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="communicate_inform" type="button">thông báo</button></div>
+            </div><div class="classify-row" data-answer="communicate_inform">
+              <span>Tình huống cần &quot;thông báo / truyền đạt thông tin&quot; — không phải trọng tâm Q1032</span>
+              <div class="classify-btns"><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="communicate_inform" type="button">thông báo</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Schedule town hall meetings with customers and docum…" → B</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Escalate stakeholder concerns to city officials so t…" → C</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Communicate with legal environmental experts to ensu…" → D</h4>
+            <p style="margin:0">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết vấn đề chi phí / ngân sách — đáp án đúng cần ghi nhận / cập nhật risk register.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholder risks</strong> → <strong>A</strong> — PM ghi nhận / cập nhật risk register để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Risk + Resources, Focus Area Monitoring &amp; Controlli…</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1032 — đáp án?</div>
-            <div class="flashcard-back"><strong>A,E</strong> — E</div>
+            <div class="flashcard-front">Q1032 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Monitor Risks</strong><br>PMBOK 8, tr. 137</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Monitor Risks</div>
+            <div class="flashcard-front">Q1032 — đáp án?</div>
+            <div class="flashcard-back"><strong>A,E</strong> — A,E</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chi phí / ngân sách</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1032
-────────────────────────
-A medium-sized city has obtained funding for a new water system. City officials warn that water laws might change in the upcoming legislative session. Customers are already dissatisfied due to recent …
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MONITOR RISKS — Q1032
+(PMBOK 8, tr. 137)
+─────────────────────────────────────────────────────
+DOMAIN: Risk, Resources
+PROCESS: Monitor Risks, Implement Risk Responses
+PRINCIPLE: Lead accountably, Focus on value
 
-ANSWER: A,E
-A,E
+SCENARIO:
+A medium-sized city has obtained funding for a new water system. City officials warn that water laws might change in the upcoming legislative session. Customers are already dissatisfied due to recent droughts and are lik…
 
-PMBOK 8:
-  Domain: Risk, Resources
-  Process: Monitor Risks, Implement Risk Responses
-  Principle: Lead accountably, Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholder risks
+
+ANSWER → A,E) A,E
+
+NOT:
+  B) Schedule town hall meetings with customers and doc… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+  C) Escalate stakeholder concerns to city officials so… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  D) Communicate with legal environmental experts to en… — Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyế
+
+Q1032 ANSWER: A,E</div>
         </section>
 
         <footer class="ref-footer">
@@ -266,6 +367,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

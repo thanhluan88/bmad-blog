@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1052</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1052">Câu 1052</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1051.html">← 1051</a>
         <a href="pmp-teach-full-q1053.html">1053 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1052 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is tracking a project’s progress toward meeting the organization’s strategic goals and business objectives. The key performance indicators (KPIs) show that the project is <span class="kw-cue">not</span> meeting its milestones on time, and there is a higher-than-expected rate of resource allocation issues. The assessment shows that the current resource management process needs refinement to optimize resource utilization. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Monitoring &amp; Controlling</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q1052</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1052</h1>
+          <p class="lead">Bài học Q1052 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 71) — Stakeholder không hài lòng</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is tracking a project’s progress toward meeting the organization’s strategic goals and business objectives. The key performance indicators (KPIs) show that the project is not meeting its milestones on time, and there is a higher-than-expected rate of resource allocation issues. The assessment shows that the current resource management process needs refinement to optimize resource utilization. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 71</span><span class="badge">Stakeholders</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q1052</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Monitoring &amp; Controlling<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 71): 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Update methodologies as necessary to improve organizational 
+            </div><div class="approach-cell">
+              <strong>khuyến khích collaboration</strong>
+              khuyến khích collaboration / hợp tác
+            </div><div class="approach-cell">
+              <strong>thừa nhận lỗi và giải trình minh bạch</strong>
+              thừa nhận lỗi và giải trình minh bạch
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1052</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>A</strong> phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1052 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Tailor stakeholder engagement strategies to match their…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Update methodologies as necessary to improve organizati…</strong></td>
+                <td>Update methodologies as necessary to improve organizational practices </td>
+                <td>✗ &quot;Update methodologies as necessary to improve organizational practices and ensure t…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Foster collaboration and trust to boost teamwork and st…</strong></td>
+                <td>khuyến khích collaboration / hợp tác</td>
+                <td>✗ Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải quyết Stakeholder không hài lò…</td>
+              </tr><tr>
+                <td><strong>D. Establish open and transparent communication so team me…</strong></td>
+                <td>thừa nhận lỗi và giải trình minh bạch</td>
+                <td>✗ Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết Stakeholder không hài l…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1052</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Tailor stakeholder engagement strategies to match their expertise related to resource management.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Update methodologies as necessary to improve organizational practices and ensure they remain relevant.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1052</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1052</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1052</div>
             <div class="q-text">A project manager is tracking a project’s progress toward meeting the organization’s strategic goals and business objectives. The key performance indicators (KPIs) show that the project is <span class="kw-cue">not</span> meeting its milestones on time, and there is a higher-than-expected rate of resource allocation issues. The assessment shows that the current resource management process needs refinement to optimize resource utilization. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.</li><li>Bối cảnh: Stakeholder không hài lòng. Đáp án <strong>A</strong> — &quot;Tailor stakeholder engagement strategies to match their expertise related to resource management.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>Process <span class="kw-pmbok">Manage Stakeholder Engagement</span> — align với đáp án A.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 71.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Tailor stakeholder engagement strategies to match their expertise related to resource management.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Bối cảnh: Stakeholder không hài lòng. Đáp án <strong>A</strong> — &quot;Tailor stakeholder engagement strategies to match their expertise related to resource management.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Update methodologies as necessary to improve organizational practices and ensure…</span></td><td>&quot;Update methodologies as necessary to improve organizational practices and ensure t…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Foster collaboration and trust to boost teamwork and strengthen accountability a…</span></td><td>Tập trung &quot;khuyến khích <span class="kw-signal">collaboration</span> / hợp tác&quot; không giải quyết Stakeholder không hài lòng — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Establish open and transparent communication so team members are informed about …</span></td><td>Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết Stakeholder không hài lòng — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>A project manager is tracking a project’s progress toward meeting the organization’s strategic goals… (Q1052)</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="encourage_collaborate" type="button">khuyến khích</button><button data-pick="apologize_accountable" type="button">thừa nhận lỗ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="encourage_collaborate">
+              <span>Tình huống cần &quot;khuyến khích collaboration / hợp tác&quot; — không phải trọng tâm Q1052</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="encourage_collaborate" type="button">khuyến khích</button><button data-pick="apologize_accountable" type="button">thừa nhận lỗ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="apologize_accountable">
+              <span>Tình huống cần &quot;thừa nhận lỗi và giải trình minh bạch&quot; — không phải trọng tâm Q1052</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="encourage_collaborate" type="button">khuyến khích</button><button data-pick="apologize_accountable" type="button">thừa nhận lỗ</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Update methodologies as necessary to improve organiz…" → B</h4>
+            <p style="margin:0">&quot;Update methodologies as necessary to improve organizational practices and ensure t…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Foster collaboration and trust to boost teamwork and…" → C</h4>
+            <p style="margin:0">Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải quyết Stakeholder không hài lòng — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Establish open and transparent communication so team…" → D</h4>
+            <p style="margin:0">Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết Stakeholder không hài lòng — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>A</strong> — PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1052 — đáp án?</div>
+            <div class="flashcard-front">Q1052 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 71</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q1052 — đáp án?</div>
             <div class="flashcard-back"><strong>A</strong> — Tailor stakeholder engagement strategies to match their expertise related to resource management.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Stakeholder không hài lòng</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1052
-────────────────────────
-A project manager is tracking a project’s progress toward meeting the organization’s strategic goals and business objectives. The key performance indicators (KPIs) show that the project is not meeting…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q1052
+(PMBOK 8, tr. 71)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Manage Stakeholder Engagement
+PRINCIPLE: Focus on value
 
-ANSWER: A
-A. Tailor stakeholder engagement strategies to match their expertise related to resource management.
+SCENARIO:
+A project manager is tracking a project’s progress toward meeting the organization’s strategic goals and business objectives. The key performance indicators (KPIs) show that the project is not meeting its milestones on t…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Manage Stakeholder Engagement
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → A) Tailor stakeholder engagement strategies to match their expertise related to resource management.
+
+NOT:
+  B) Update methodologies as necessary to improve organ… — &quot;Update methodologies as necessary to improve organizational
+  C) Foster collaboration and trust to boost teamwork a… — Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải 
+  D) Establish open and transparent communication so te… — Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải
+
+Q1052 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.","B":"\"Update methodologies as necessary to improve organizational practices and ensure t…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","C":"Tập trung \"khuyến khích collaboration / hợp tác\" không giải quyết Stakeholder không hài lòng — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","D":"Tập trung \"thừa nhận lỗi và giải trình minh bạch\" không giải quyết Stakeholder không hài lòng — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng."};
+      const EXPL = {"A":"Đúng! PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.","B":"\"Update methodologies as necessary to improve organizational practices and ensure t…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","C":"Tập trung \"khuyến khích collaboration / hợp tác\" không giải quyết Stakeholder không hài lòng — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","D":"Tập trung \"thừa nhận lỗi và giải trình minh bạch\" không giải quyết Stakeholder không hài lòng — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 447</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Team</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-447">Câu 447</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q446.html">← 446</a>
         <a href="pmp-teach-full-q448.html">448 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 447 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A product owner wants to add several low-priority visual effects to a new dashboard project to impress a potential investor during a demo. The team warns these changes will delay delivery of a critical reporting feature that customers already requested. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q447</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q447</h1>
+          <p class="lead">Bài học Q447 về <strong>Develop Team</strong> (PMBOK 8, tr. 53) — Có yêu cầu thay đổi</p>
+          <p class="lead" style="margin-top:0.75rem">A product owner wants to add several low-priority visual effects to a new dashboard project to impress a potential investor during a demo. The team warns these changes will delay delivery of a critical reporting feature that customers already requested. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Resources, Stakeholders</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q447</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Team, Manage Team<br>
-              <strong>Principle:</strong> Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Develop Team</h2>
+          <p><strong>Develop Team</strong> thuộc miền <strong>Resources, Stakeholders</strong> — process <strong>Develop Team</strong>, principle <strong>Build an empowered culture</strong>. PMBOK 8 (tr. 53): 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Approve the visual effects to support the investor meeting.
+            </div><div class="approach-cell pull">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div><div class="approach-cell">
+              <strong>yêu cầu team hành động (chưa rõ facilitation)</strong>
+              yêu cầu team hành động (chưa rõ facilitation)
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Defer the implementation of additional visual effects featur
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q447</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>B</strong> phù hợp vì PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q447 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Approve the visual effects to support the investor meet…</strong></td>
+                <td>Approve the visual effects to support the investor meeting.</td>
+                <td>✗ &quot;Approve the visual effects to support the investor meeting.&quot; không phù hợp ngữ cảnh Agile…</td>
+              </tr><tr>
+                <td><strong>B. Work with the product owner to prioritize features base…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Ask the team to work overtime to deliver both sets of f…</strong></td>
+                <td>yêu cầu team hành động (chưa rõ facilitation)</td>
+                <td>✗ Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; không giải quyết ngữ cảnh Agile/…</td>
+              </tr><tr>
+                <td><strong>D. Defer the implementation of additional visual effects f…</strong></td>
+                <td>Defer the implementation of additional visual effects features to the </td>
+                <td>✗ &quot;Defer the implementation of additional visual effects features to the subsequent r…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q447</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Approve the visual effects to support the investor meeting.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         <span class="kw-signal">Work with</span> the product owner to prioritize features based on customer value and delivery impact.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Ask the team to work overtime to deliver both sets of features.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q447</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q447</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 447</div>
             <div class="q-text">A product owner wants to add several low-priority visual effects to a new dashboard project to impress a potential investor during a demo. The team warns these changes will delay delivery of a critical reporting feature that customers already requested. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>→ <strong>B:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.</li><li>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an empowered culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Develop Team</span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Work with the product owner to prioritize features based on customer value and delivery impact.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.<br><br>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an empowered culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an Empowered Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve the visual effects to support the investor meeting.</span></td><td>&quot;Approve the visual effects to support the investor meeting.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the team to work overtime to deliver both sets of features.</span></td><td>Tập trung &quot;yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>)&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Defer the implementation of additional visual effects features to the subsequent…</span></td><td>&quot;Defer the implementation of additional visual effects features to the subsequent r…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="prioritize_value">
+              <span>A product owner wants to add several low-priority visual effects to a new dashboard project to impre… (Q447)</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="ask_team_act" type="button">yêu cầu team</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="ask_team_act">
+              <span>Tình huống cần &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; — không phải trọng tâm Q447</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="ask_team_act" type="button">yêu cầu team</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Approve the visual effects to support the investor m…" → A</h4>
+            <p style="margin:0">&quot;Approve the visual effects to support the investor meeting.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Ask the team to work overtime to deliver both sets o…" → C</h4>
+            <p style="margin:0">Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Defer the implementation of additional visual effect…" → D</h4>
+            <p style="margin:0">&quot;Defer the implementation of additional visual effects features to the subsequent r…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>B</strong> — PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q447 — đáp án?</div>
+            <div class="flashcard-front">Q447 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Team</strong><br>PMBOK 8, tr. 53</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q447 — đáp án?</div>
             <div class="flashcard-back"><strong>B</strong> — Work with the product owner to prioritize features based on customer value and delivery impact.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Build an empowered culture</strong><br>Develop Team</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Có yêu cầu thay đổi</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q447
-────────────────────────
-A product owner wants to add several low-priority visual effects to a new dashboard project to impress a potential investor during a demo. The team warns these changes will delay delivery of a critica…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP TEAM — Q447
+(PMBOK 8, tr. 53)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Stakeholders
+PROCESS: Develop Team, Manage Team
+PRINCIPLE: Build an empowered culture
 
-ANSWER: B
-B. Work with the product owner to prioritize features based on customer value and delivery impact.
+SCENARIO:
+A product owner wants to add several low-priority visual effects to a new dashboard project to impress a potential investor during a demo. The team warns these changes will delay delivery of a critical reporting feature …
 
-PMBOK 8:
-  Domain: Resources, Stakeholders
-  Process: Develop Team, Manage Team
-  Principle: Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → B) Work with the product owner to prioritize features based on customer value and delivery impact.
+
+NOT:
+  A) Approve the visual effects to support the investor… — &quot;Approve the visual effects to support the investor meeting.
+  C) Ask the team to work overtime to deliver both sets… — Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; kh
+  D) Defer the implementation of additional visual effe… — &quot;Defer the implementation of additional visual effects featu
+
+Q447 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Approve the visual effects to support the investor meeting.\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / MVP.","B":"PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","C":"Tập trung \"yêu cầu team hành động (chưa rõ facilitation)\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần ưu tiên theo giá trị / MVP.","D":"\"Defer the implementation of additional visual effects features to the subsequent r…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / MVP."};
+      const EXPL = {"A":"\"Approve the visual effects to support the investor meeting.\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / MVP.","B":"Đúng! PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","C":"Tập trung \"yêu cầu team hành động (chưa rõ facilitation)\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần ưu tiên theo giá trị / MVP.","D":"\"Defer the implementation of additional visual effects features to the subsequent r…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ưu tiên theo giá trị / MVP."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 762</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-762">Câu 762</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q761.html">← 761</a>
         <a href="pmp-teach-full-q763.html">763 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 762 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A vendor submits a final invoice at project closure. The client refuses to pay the invoice, citing unresolved defects. The sponsor insists on immediate payment to close accounts, but the procurement team warns that compliance requires the verification of all deliverables. The vendor threatens arbitration if payment is delayed any further. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Governance, Schedule</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q762</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q762</h1>
+          <p class="lead">Bài học Q762 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 43) — vấn đề chất lượng / defect</p>
+          <p class="lead" style="margin-top:0.75rem">A vendor submits a final invoice at project closure. The client refuses to pay the invoice, citing unresolved defects. The sponsor insists on immediate payment to close accounts, but the procurement team warns that compliance requires the verification of all deliverables. The vendor threatens arbitration if payment is delayed any further. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 43</span><span class="badge">Governance, Schedule</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q762</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Schedule<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Project Execution, Perform Integrated Change Control, Close Project or Phase<br>
-              <strong>Principle:</strong> Embed quality
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Governance, Schedule</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Embed quality</strong>. PMBOK 8 (tr. 43): including but not limited to the following: ⚫ Performance. Do the deliverables or processes function as intended by the project team and other stakeholders? ⚫ Conformity. Are the deliverables and processes aligned with specifications and</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>A</strong>
+              Withhold payment until deliverables are formally verified ag
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Approve the invoice to maintain sponsor support and plan to 
+            </div><div class="approach-cell">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div><div class="approach-cell">
+              <strong>họp</strong>
+              họp / thảo luận trực tiếp
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q762</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>A</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q762 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Withhold payment until deliverables are formally verifi…</strong></td>
+                <td>Withhold payment until deliverables are formally verified against all </td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Approve the invoice to maintain sponsor support and pla…</strong></td>
+                <td>Approve the invoice to maintain sponsor support and plan to inspect fo</td>
+                <td>✗ &quot;Approve the invoice to maintain sponsor support and plan to inspect for potential …&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Negotiate directly with the client to accept the curren…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td>✗ Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết vấn đề chất lượng / d…</td>
+              </tr><tr>
+                <td><strong>D. Meet with the client and the vendor to examine the deli…</strong></td>
+                <td>họp / thảo luận trực tiếp</td>
+                <td>✗ Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết vấn đề chất lượng / defect — đáp án…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q762</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Withhold payment until deliverables are formally verified against all contractual obligations.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Approve the invoice to maintain sponsor support and plan to inspect for potential defects later.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q762</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q762</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 762</div>
             <div class="q-text">A vendor submits a final invoice at project closure. The client refuses to pay the invoice, citing unresolved defects. The sponsor insists on immediate payment to close accounts, but the procurement team warns that compliance requires the verification of all deliverables. The vendor threatens arbitration if payment is delayed any further. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>A</strong> — &quot;Withhold payment until deliverables are formally verified against all contractual obligations.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: vấn đề vendor / procurement — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Withhold payment until deliverables are formally verified against all contractual obligations.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>A</strong> — &quot;Withhold payment until deliverables are formally verified against all contractual obligations.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; including but <span class="kw-cue">not</span> limited to the following: ⚫ Performance. Do the deliverables or processes function as intended by the project team and other stakeholders? ⚫ Conformity. Are the deliverables and processes aligned with specifications and<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 43 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 43: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve the invoice to maintain sponsor support and plan to inspect for potentia…</span></td><td>&quot;Approve the invoice to maintain sponsor support and plan to inspect for potential …&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung &quot;Withhold payment until deliverables are formally verified against all contractual …&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Negotiate directly with the client to accept the current deliverables as suffici…</span></td><td>Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Meet with the client and the vendor to examine the deliverables for defects befo…</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A vendor submits a final invoice at project closure. The client refuses to pay the invoice, citing u… (Q762)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>Tình huống cần &quot;engagement stakeholder / làm rõ kỳ vọng&quot; — không phải trọng tâm Q762</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="meet_discuss">
+              <span>Tình huống cần &quot;họp / thảo luận trực tiếp&quot; — không phải trọng tâm Q762</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Approve the invoice to maintain sponsor support and …" → B</h4>
+            <p style="margin:0">&quot;Approve the invoice to maintain sponsor support and plan to inspect for potential …&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung &quot;Withhold payment until deliverables are formally verified against all contractual …&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Negotiate directly with the client to accept the cur…" → C</h4>
+            <p style="margin:0">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Meet with the client and the vendor to examine the d…" → D</h4>
+            <p style="margin:0">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>A</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q762 — đáp án?</div>
+            <div class="flashcard-front">Q762 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 43</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q762 — đáp án?</div>
             <div class="flashcard-back"><strong>A</strong> — Withhold payment until deliverables are formally verified against all contractual obligations.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Embed quality</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chất lượng / defect</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q762
-────────────────────────
-A vendor submits a final invoice at project closure. The client refuses to pay the invoice, citing unresolved defects. The sponsor insists on immediate payment to close accounts, but the procurement t…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q762
+(PMBOK 8, tr. 43)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Schedule
+PROCESS: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
+PRINCIPLE: Embed quality
 
-ANSWER: A
-A. Withhold payment until deliverables are formally verified against all contractual obligations.
+SCENARIO:
+A vendor submits a final invoice at project closure. The client refuses to pay the invoice, citing unresolved defects. The sponsor insists on immediate payment to close accounts, but the procurement team warns that compl…
 
-PMBOK 8:
-  Domain: Governance, Schedule
-  Process: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
-  Principle: Embed quality</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → A) Withhold payment until deliverables are formally verified against all contractual obligations.
+
+NOT:
+  B) Approve the invoice to maintain sponsor support an… — &quot;Approve the invoice to maintain sponsor support and plan to
+  C) Negotiate directly with the client to accept the c… — Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không gi
+  D) Meet with the client and the vendor to examine the… — Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết vấn đ
+
+Q762 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Executing, PMBOK 8).","B":"\"Approve the invoice to maintain sponsor support and plan to inspect for potential …\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung \"Withhold payment until deliverables are formally verified against all contractual …\".","C":"Tập trung \"engagement stakeholder / làm rõ kỳ vọng\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
+      const EXPL = {"A":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Executing, PMBOK 8).","B":"\"Approve the invoice to maintain sponsor support and plan to inspect for potential …\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung \"Withhold payment until deliverables are formally verified against all contractual …\".","C":"Tập trung \"engagement stakeholder / làm rõ kỳ vọng\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

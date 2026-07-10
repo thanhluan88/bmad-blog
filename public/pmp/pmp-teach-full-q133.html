@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 133</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-133">Câu 133</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q132.html">← 132</a>
         <a href="pmp-teach-full-q134.html">134 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 133 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A popular app is entering its <span class="kw-cue">next</span> iteration. Due to staffing changes, the project team is mostly made up of new team members who were <span class="kw-cue">not</span> involved in developing the app's previous version. The project team must effectively leverage information and lessons learned from past projects. What should the project team do?</p>
-          <div class="badges"><span class="badge">Stakeholders, Governance</span><span class="badge">Closing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q133</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q133</h1>
+          <p class="lead">Bài học Q133 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 286) — team mới hình thành</p>
+          <p class="lead" style="margin-top:0.75rem">A popular app is entering its next iteration. Due to staffing changes, the project team is mostly made up of new team members who were not involved in developing the app's previous version. The project team must effectively leverage information and lessons learned from past projects. What should the project team do?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 286</span><span class="badge">Stakeholders, Governance</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q133</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Governance<br>
-              <strong>Focus Area:</strong> Closing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Governance</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 286): 286 A Guide to the Project Management Body of Knowledge in Identify Stakeholders process, 71 in Implement Risk Responses process, 100 in Initiate Project or Phase process, 17 in Integrate and Align Project Plans process, 19 in Lead the Team</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Recreate the current version of the app to gain hands-on exp
+            </div><div class="approach-cell pull">
+              <strong>facilitate retrospective</strong>
+              facilitate retrospective / phân tích root cause
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Organize a meeting with the previous development team to all
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Compare the previous versions of the app to identify the cha
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q133</h4>
+            <p style="margin:0">team mới hình thành<br><br>→ <strong>B</strong> phù hợp vì Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q133 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Recreate the current version of the app to gain hands-o…</strong></td>
+                <td>Recreate the current version of the app to gain hands-on experience an</td>
+                <td>✗ &quot;Recreate the current version of the app to gain hands-on experience and understand…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Review the organization’s information management system…</strong></td>
+                <td>facilitate retrospective / phân tích root cause</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Organize a meeting with the previous development team t…</strong></td>
+                <td>Organize a meeting with the previous development team to allow them to</td>
+                <td>✗ &quot;Organize a meeting with the previous development team to allow them to speak face-…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Compare the previous versions of the app to identify th…</strong></td>
+                <td>Compare the previous versions of the app to identify the changes made </td>
+                <td>✗ &quot;Compare the previous versions of the app to identify the changes made in each iter…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q133</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Recreate the current version of the app to gain hands-on experience and understand its strengths and weaknesses in real time.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Review the organization’s information management system to assess processes, manuals, retrospectives, and other documentation.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Organize a meeting with the previous development team to allow them to speak face-to-face and gain insights from past experiences.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q133</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q133</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 133</div>
             <div class="q-text">A popular app is entering its <span class="kw-cue">next</span> iteration. Due to staffing changes, the project team is mostly made up of new team members who were <span class="kw-cue">not</span> involved in developing the app's previous version. The project team must effectively leverage information and lessons learned from past projects. What should the project team do?</div>
@@ -181,44 +229,84 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân.</li><li>→ <strong>B:</strong> Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân.</li><li>Bối cảnh: team mới hình thành. Đáp án <strong>B</strong> — &quot;Review the organization’s information management system to assess processes, manuals, retrospectives, and other documentation.&quot; — phù hợp vì Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân. Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong><span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span></strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Stem signal: team mới hình thành — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Review the organization’s information management system to assess processes, manuals, retrospectives, and other documentation.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân.<br><br>Bối cảnh: team mới hình thành. Đáp án <strong>B</strong> — &quot;Review the organization’s information management system to assess processes, manuals, retrospectives, and other documentation.&quot; — phù hợp vì Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân. Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong><span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span></strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 286 A Guide to the Project Management Body of Knowledge in <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> process, 71 in Implement <span class="kw-pmbok">Risk</span> Responses process, 100 in Initiate Project or Phase process, 17 in Integrate and Align Project Plans process, 19 in Lead the Team<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 286 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 286: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Recreate the current version of the app to gain hands-on experience and understa…</span></td><td>&quot;Recreate the current version of the app to gain hands-on experience and understand…&quot; không phù hợp team mới hình thành — đáp án đúng tập trung <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Organize a meeting with the previous development team to allow them to speak fac…</span></td><td>&quot;Organize a meeting with the previous development team to allow them to speak face-…&quot; không phù hợp team mới hình thành — đáp án đúng tập trung <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Compare the previous versions of the app to identify the changes made in each it…</span></td><td>&quot;Compare the previous versions of the app to identify the changes made in each iter…&quot; không phù hợp team mới hình thành — đáp án đúng tập trung <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="facilitate_retro">
+              <span>A popular app is entering its next iteration. Due to staffing changes, the project team is mostly ma… (Q133)</span>
+              <div class="classify-btns"><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="DUMMY1" type="button">Opt 1</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 1 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Recreate the current version of the app to gain hand…" → A</h4>
+            <p style="margin:0">&quot;Recreate the current version of the app to gain hands-on experience and understand…&quot; không phù hợp team mới hình thành — đáp án đúng tập trung facilitate retrospective / phân tích root cause.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Organize a meeting with the previous development tea…" → C</h4>
+            <p style="margin:0">&quot;Organize a meeting with the previous development team to allow them to speak face-…&quot; không phù hợp team mới hình thành — đáp án đúng tập trung facilitate retrospective / phân tích root cause.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Compare the previous versions of the app to identify…" → D</h4>
+            <p style="margin:0">&quot;Compare the previous versions of the app to identify the changes made in each iter…&quot; không phù hợp team mới hình thành — đáp án đúng tập trung facilitate retrospective / phân tích root cause.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>B</strong> — Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q133 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Review the organization’s information management system to assess processes, manuals, retrospectives, and other documentation.</div>
+            <div class="flashcard-front">Q133 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 286</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q133 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Review the organization’s information management system to assess processes, manuals, retrospectives</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">team mới hình thành</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q133
-────────────────────────
-A popular app is entering its next iteration. Due to staffing changes, the project team is mostly made up of new team members who were not involved in developing the app's previous version. The projec…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q133
+(PMBOK 8, tr. 286)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Governance
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: B
-B. Review the organization’s information management system to assess processes, manuals, retrospectives, and other documentation.
+SCENARIO:
+A popular app is entering its next iteration. Due to staffing changes, the project team is mostly made up of new team members who were not involved in developing the app's previous version. The project team must effectiv…
 
-PMBOK 8:
-  Domain: Stakeholders, Governance
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → B) Review the organization’s information management system to assess processes, manuals, retrospectives, and other documentation.
+
+NOT:
+  A) Recreate the current version of the app to gain ha… — &quot;Recreate the current version of the app to gain hands-on ex
+  C) Organize a meeting with the previous development t… — &quot;Organize a meeting with the previous development team to al
+  D) Compare the previous versions of the app to identi… — &quot;Compare the previous versions of the app to identify the ch
+
+Q133 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Recreate the current version of the app to gain hands-on experience and understand…\" không phù hợp team mới hình thành — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","B":"Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân.","C":"\"Organize a meeting with the previous development team to allow them to speak face-…\" không phù hợp team mới hình thành — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","D":"\"Compare the previous versions of the app to identify the changes made in each iter…\" không phù hợp team mới hình thành — đáp án đúng tập trung facilitate retrospective / phân tích root cause."};
+      const EXPL = {"A":"\"Recreate the current version of the app to gain hands-on experience and understand…\" không phù hợp team mới hình thành — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","B":"Đúng! Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân.","C":"\"Organize a meeting with the previous development team to allow them to speak face-…\" không phù hợp team mới hình thành — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","D":"\"Compare the previous versions of the app to identify the changes made in each iter…\" không phù hợp team mới hình thành — đáp án đúng tập trung facilitate retrospective / phân tích root cause."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

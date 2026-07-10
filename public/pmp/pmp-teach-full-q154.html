@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 154</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-154">Câu 154</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q153.html">← 153</a>
         <a href="pmp-teach-full-q155.html">155 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 154 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A software product team is conducting an iteration review with several key stakeholders to demonstrate a newly implemented user story. Stakeholders say it does <span class="kw-cue">not</span> meet expectations, and the team looks for direction as tension rises. The project manager needs to respond quickly and constructively. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">first</span></span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q154</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q154</h1>
+          <p class="lead">Bài học Q154 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 70) — Xung đột</p>
+          <p class="lead" style="margin-top:0.75rem">A software product team is conducting an iteration review with several key <em>stakeholders to demonstrate a newly implemented user story</em>. Stakeholders say it does not meet expectations, and the team looks for direction as tension rises. The project manager needs to respond quickly and constructively. <em>What should the project manager do first</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 70</span><span class="badge">Stakeholders, Scope</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q154</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement, Validate Scope<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders, Scope</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 70): stakeholders, both inside and outside the team. ⚫ Manage Stakeholder Engagement. The process of communicating and working with stakeholders to meet their needs and expectations, address issues, and foster appropriate stakeholder involveme</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Instruct the team to immediately revise the user story imple
+            </div><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Defend the team’s work by explaining how the implementation 
+            </div><div class="approach-cell pull">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q154</h4>
+            <p style="margin:0"><strong>What should the project manager do first</strong> · <strong>stakeholders to demonstrate a newly implemented user story</strong><br><br>→ <strong>D</strong> phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q154 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Instruct the team to immediately revise the user story …</strong></td>
+                <td>Instruct the team to immediately revise the user story implementation </td>
+                <td>✗ &quot;Instruct the team to immediately revise the user story implementation to match the…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Remind stakeholders that changes must wait for the next…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.</td>
+              </tr><tr>
+                <td><strong>C. Defend the team’s work by explaining how the implementa…</strong></td>
+                <td>Defend the team’s work by explaining how the implementation follows th</td>
+                <td>✗ &quot;Defend the team’s work by explaining how the implementation follows the original r…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Ask the stakeholders to explain their specific concerns…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q154</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Instruct the team to immediately revise the user story implementation to match the stakeholders’ feedback.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Ask the stakeholders to explain their specific concerns and clarify what is not meeting their expectations.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q154</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q154</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 154</div>
             <div class="q-text">A software product team is conducting an iteration review with several key stakeholders to demonstrate a newly implemented user story. Stakeholders say it does <span class="kw-cue">not</span> meet expectations, and the team looks for direction as tension rises. The project manager needs to respond quickly and constructively. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">first</span></span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>→ <strong>D:</strong> Xung đột — PM <span class="kw-signal">facilitate</span> giải quyết trực tiếp, không <span class="kw-trap">ignore</span> hay <span class="kw-trap">escalate</span> sớm.</li><li>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>engagement stakeholder / làm rõ kỳ vọng</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Stem signal: xung đột trong team hoặc stakeholder — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Ask the stakeholders to explain their specific concerns and clarify what is not meeting their expectations.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Xung đột — PM <span class="kw-signal">facilitate</span> giải quyết trực tiếp, không <span class="kw-trap">ignore</span> hay <span class="kw-trap">escalate</span> sớm.<br><br>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>engagement stakeholder / làm rõ kỳ vọng</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; stakeholders, both inside and outside the team. ⚫ <span class="kw-pmbok">Manage Stakeholder Engagement</span>. The process of communicating and working with stakeholders to meet their needs and expectations, address issues, and foster appropriate stakeholder involveme<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 70 (communicating and working with stakeholders to meet their needs and ex)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 70: communicating and working with stakeholders to meet their needs and ex</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Instruct the team to immediately revise the user story implementation to match t…</span></td><td>&quot;Instruct the team to immediately revise the user story implementation to match the…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Remind stakeholders that changes must wait for the next release and move on to t…</span></td><td>Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Defend the team’s work by explaining how the implementation follows the original…</span></td><td>&quot;Defend the team’s work by explaining how the implementation follows the original r…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>A software product team is conducting an iteration review with several key stakeholders to demonstra… (Q154)</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q154</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Instruct the team to immediately revise the user sto…" → A</h4>
+            <p style="margin:0">&quot;Instruct the team to immediately revise the user story implementation to match the…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Remind stakeholders that changes must wait for the n…" → B</h4>
+            <p style="margin:0">Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Defend the team’s work by explaining how the impleme…" → C</h4>
+            <p style="margin:0">&quot;Defend the team’s work by explaining how the implementation follows the original r…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do first · stakeholders to demonstrate a newly implemented user story</strong> → <strong>D</strong> — PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q154 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Ask the stakeholders to explain their specific concerns and clarify what is not meeting their expectations.</div>
+            <div class="flashcard-front">Q154 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 70</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Q154 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Ask the stakeholders to explain their specific concerns and clarify what is not meeting their expect</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Xung đột</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q154
-────────────────────────
-A software product team is conducting an iteration review with several key stakeholders to demonstrate a newly implemented user story. Stakeholders say it does not meet expectations, and the team look…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q154
+(PMBOK 8, tr. 70)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Scope
+PROCESS: Manage Stakeholder Engagement, Validate Scope
+PRINCIPLE: Focus on value
 
-ANSWER: D
-D. Ask the stakeholders to explain their specific concerns and clarify what is not meeting their expectations.
+SCENARIO:
+A software product team is conducting an iteration review with several key stakeholders to demonstrate a newly implemented user story. Stakeholders say it does not meet expectations, and the team looks for direction as t…
 
-PMBOK 8:
-  Domain: Stakeholders, Scope
-  Process: Manage Stakeholder Engagement, Validate Scope
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do first | stakeholders to demonstrate a newly implemented user story
+
+ANSWER → D) Ask the stakeholders to explain their specific concerns and clarify what is not meeting their expectations.
+
+NOT:
+  A) Instruct the team to immediately revise the user s… — &quot;Instruct the team to immediately revise the user story impl
+  B) Remind stakeholders that changes must wait for the… — Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.
+  C) Defend the team’s work by explaining how the imple… — &quot;Defend the team’s work by explaining how the implementation
+
+Q154 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Instruct the team to immediately revise the user story implementation to match the…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","B":"Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.","C":"\"Defend the team’s work by explaining how the implementation follows the original r…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","D":"PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý."};
+      const EXPL = {"A":"\"Instruct the team to immediately revise the user story implementation to match the…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","B":"Bỏ qua/trì hoãn xung đột — vấn đề sẽ leo thang.","C":"\"Defend the team’s work by explaining how the implementation follows the original r…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","D":"Đúng! PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

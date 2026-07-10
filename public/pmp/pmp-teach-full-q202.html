@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 202</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-202">Câu 202</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q201.html">← 201</a>
         <a href="pmp-teach-full-q203.html">203 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 202 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager has created the stakeholder list for a complex multi-phase project and is deciding how to distribute information effectively to the customer and other key stakeholders. The project involves diverse stakeholder groups with varying information needs and communication preferences. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q202</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q202</h1>
+          <p class="lead">Bài học Q202 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 68) — Phân tích tình huống và chọn đáp án C theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager has created the <em>stakeholder list for a complex multi-phase project and is dec</em>iding how to distribute information effectively to the customer and other key stakeholders. The project involves diverse stakeholder groups with varying information needs and communication preferences. <em>What should the project manager do next</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 68</span><span class="badge">Stakeholders</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q202</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 68): 68 A Guide to the Project Management Body of Knowledge 2.5.1 Key Concepts The following key concepts support effective practices for the Stakeholders performance domain. ⚫ Stakeholder engagement. Stakeholder engagement encompasses the activ</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Schedule regular face-to-face meetings with all stakeholders
+            </div><div class="approach-cell">
+              <strong>thừa nhận lỗi và giải trình minh bạch</strong>
+              thừa nhận lỗi và giải trình minh bạch
+            </div><div class="approach-cell pull">
+              <strong>phân tích stakeholder và cập nhật kế hoạch truyền thông</strong>
+              phân tích stakeholder và cập nhật kế hoạch truyền thông
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Review historical communication practices from projects and 
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q202</h4>
+            <p style="margin:0"><strong>What should the project manager do next</strong> · <strong>stakeholder list for a complex multi-phase project and is dec</strong><br><br>→ <strong>C</strong> phù hợp vì Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc…</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q202 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Schedule regular face-to-face meetings with all stakeho…</strong></td>
+                <td>Schedule regular face-to-face meetings with all stakeholders to ensure</td>
+                <td>✗ &quot;Schedule regular face-to-face meetings with all stakeholders to ensure consistent …&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Establish standardized update distributions to all stak…</strong></td>
+                <td>thừa nhận lỗi và giải trình minh bạch</td>
+                <td>✗ Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết Establish standardized …</td>
+              </tr><tr>
+                <td><strong>C. Perform stakeholder analysis and develop a communicatio…</strong></td>
+                <td>phân tích stakeholder và cập nhật kế hoạch truyền thông</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Review historical communication practices from projects…</strong></td>
+                <td>Review historical communication practices from projects and adapt meth</td>
+                <td>✗ &quot;Review historical communication practices from projects and adapt methods for stak…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q202</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Schedule regular face-to-face meetings with all stakeholders to ensure consistent communication and feedback.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Perform <span class="kw-signal">stakeholder analysis</span> and develop a <span class="kw-signal">communications management plan</span> based on identified needs.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền <span class="kw-pmbok">Stakeholders</span>).</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Review historical communication practices from projects and adapt methods for stakeholder requirements.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q202</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q202</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 202</div>
             <div class="q-text">A project manager has created the stakeholder list for a complex multi-phase project and is deciding how to distribute information effectively to the customer and other key stakeholders. The project involves diverse stakeholder groups with varying information needs and communication preferences. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền <span class="kw-pmbok">Stakeholders</span>).</li><li>→ <strong>C:</strong> Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền <span class="kw-pmbok">Stakeholders</span>).</li><li>Bối cảnh: A project manager has created the stakeholder list for a complex multi-phase project and is deciding how to distribute information effectively to the customer and other key stakeholders. The project involves diverse stakeholder groups with varying information needs and communication preferences. Đáp án <strong>C</strong> — &quot;Perform <span class="kw-signal">stakeholder analysis</span> and develop a <span class="kw-signal">communications management plan</span> based on identified needs.&quot; — phù hợp vì Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền <span class="kw-pmbok">Stakeholders</span>). Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong>phân tích stakeholder và cập nhật kế hoạch truyền thông</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án C.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 68.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Perform stakeholder analysis and develop a communications management plan based on identified needs.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền <span class="kw-pmbok">Stakeholders</span>).<br><br>Bối cảnh: A project manager has created the stakeholder list for a complex multi-phase project and is deciding how to distribute information effectively to the customer and other key stakeholders. The project involves diverse stakeholder groups with varying information needs and communication preferences. Đáp án <strong>C</strong> — &quot;Perform <span class="kw-signal">stakeholder analysis</span> and develop a <span class="kw-signal">communications management plan</span> based on identified needs.&quot; — phù hợp vì Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền <span class="kw-pmbok">Stakeholders</span>). Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong>phân tích stakeholder và cập nhật kế hoạch truyền thông</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 68 A Guide to the Project Management Body of Knowledge 2.5.1 Key Concepts The following key concepts support effective practices for the <span class="kw-pmbok">Stakeholders</span> performance domain. ⚫ Stakeholder engagement. Stakeholder engagement encompasses the activ<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 68 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 68: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Schedule regular face-to-face meetings with all stakeholders to ensure consisten…</span></td><td>&quot;<span class="kw-pmbok">Schedule</span> regular face-to-face meetings with all stakeholders to ensure consistent …&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Establish standardized update distributions to all stakeholders including the cu…</span></td><td>Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết Establish standardized update distributions to all stakeholders including the customer to maintain transparency. — đáp án đúng cần phân tích stakeholder và cập nhật kế hoạch truyền thông.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Review historical communication practices from projects and adapt methods for st…</span></td><td>&quot;Review historical communication practices from projects and adapt methods for stak…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="update_stakeholder_comms">
+              <span>A project manager has created the stakeholder list for a complex multi-phase project and is deciding… (Q202)</span>
+              <div class="classify-btns"><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="apologize_accountable" type="button">thừa nhận lỗ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="apologize_accountable">
+              <span>Tình huống cần &quot;thừa nhận lỗi và giải trình minh bạch&quot; — không phải trọng tâm Q202</span>
+              <div class="classify-btns"><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="apologize_accountable" type="button">thừa nhận lỗ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Schedule regular face-to-face meetings with all stak…" → A</h4>
+            <p style="margin:0">&quot;Schedule regular face-to-face meetings with all stakeholders to ensure consistent …&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Establish standardized update distributions to all s…" → B</h4>
+            <p style="margin:0">Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết Establish standardized update distributions to all stakeholders including the customer to maintain transparency. — đáp án đúng cần phân tích stakeholder và cập nhật kế hoạch truyền thông.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Review historical communication practices from proje…" → D</h4>
+            <p style="margin:0">&quot;Review historical communication practices from projects and adapt methods for stak…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do next · stakeholder list for a complex multi-phase project and is dec</strong> → <strong>C</strong> — Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc…</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q202 — đáp án?</div>
+            <div class="flashcard-front">Q202 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 68</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q202 — đáp án?</div>
             <div class="flashcard-back"><strong>C</strong> — Perform stakeholder analysis and develop a communications management plan based on identified needs.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án C theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q202
-────────────────────────
-A project manager has created the stakeholder list for a complex multi-phase project and is deciding how to distribute information effectively to the customer and other key stakeholders. The project i…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q202
+(PMBOK 8, tr. 68)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: C
-C. Perform stakeholder analysis and develop a communications management plan based on identified needs.
+SCENARIO:
+A project manager has created the stakeholder list for a complex multi-phase project and is deciding how to distribute information effectively to the customer and other key stakeholders. The project involves diverse stak…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do next | stakeholder list for a complex multi-phase project and is dec
+
+ANSWER → C) Perform stakeholder analysis and develop a communications management plan based on identified needs.
+
+NOT:
+  A) Schedule regular face-to-face meetings with all st… — &quot;Schedule regular face-to-face meetings with all stakeholder
+  B) Establish standardized update distributions to all… — Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải
+  D) Review historical communication practices from pro… — &quot;Review historical communication practices from projects and
+
+Q202 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"\"Schedule regular face-to-face meetings with all stakeholders to ensure consistent …\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.","B":"Tập trung \"thừa nhận lỗi và giải trình minh bạch\" không giải quyết Establish standardized update distributions to all stakeholders including the customer to maintain transparency. — đáp án đúng cần phân tích stakeholder và cập nhật kế hoạch truyền thông.","C":"Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền Stakeholders).","D":"\"Review historical communication practices from projects and adapt methods for stak…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông."};
+      const EXPL = {"A":"\"Schedule regular face-to-face meetings with all stakeholders to ensure consistent …\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.","B":"Tập trung \"thừa nhận lỗi và giải trình minh bạch\" không giải quyết Establish standardized update distributions to all stakeholders including the customer to maintain transparency. — đáp án đúng cần phân tích stakeholder và cập nhật kế hoạch truyền thông.","C":"Đúng! Stakeholder mới/thay đổi bối cảnh — PM phân tích stakeholder, xác định nhu cầu thông tin và cập nhật communications plan thay vì thêm ad hoc hay từ chối vì plan cũ chưa liệt kê (miền Stakeholders).","D":"\"Review historical communication practices from projects and adapt methods for stak…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

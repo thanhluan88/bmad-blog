@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 426</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Monitor Risks</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-426">Câu 426</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q425.html">← 425</a>
         <a href="pmp-teach-full-q427.html">427 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 426 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A hybrid infrastructure and software project is underway. Physical construction is managed predictively, while software configuration uses agile. The project manager notices that risks identified by the agile team are <span class="kw-cue">not</span> being captured in the enterprise risk register, and some physical construction risks are <span class="kw-cue">not</span> being communicated to the agile team. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Risk, Resources</span><span class="badge">Monitoring &amp; Controlling</span><span class="badge">Monitor Risks</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q426</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q426</h1>
+          <p class="lead">Bài học Q426 về <strong>Monitor Risks</strong> (PMBOK 8, tr. 101) — Risk đã trigger</p>
+          <p class="lead" style="margin-top:0.75rem">A hybrid infrastructure and software project is underway. Physical construction is managed predictively, while software configuration uses agile. The project manager notices that risks identified by the agile team are not being captured in the enterprise <em>risk register</em>, and some physical construction risks are not being communicated to the agile team. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 101</span><span class="badge">Risk, Resources</span><span class="badge">Monitor Risks</span><span class="badge">Full Bank Q426</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,52 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Risk, Resources<br>
-              <strong>Focus Area:</strong> Monitoring &amp; Controlling<br>
-              <strong>Process:</strong> Monitor Risks, Implement Risk Responses<br>
-              <strong>Principle:</strong> Lead accountably, Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Monitor Risks</h2>
+          <p><strong>Monitor Risks</strong> thuộc miền <strong>Risk, Resources</strong> — process <strong>Monitor Risks</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 101): team to quickly identify and address emerging risks, ensuring flexibility and responsiveness. Additionally, regular risk review meetings are held with stakeholders at the end of each iteration to incorporate their feedback and adjust risk</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>ghi nhận</strong>
+              ghi nhận / cập nhật risk register
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Assign risk management duties to the construction manager, a
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q426</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>risk register</strong><br><br>→ <strong>A</strong> phù hợp vì PM ghi nhận / cập nhật risk register để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Risk + Resources, Focus Area Monitoring &amp; Controlli…</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q426 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Develop a unified risk register and establish a cadence…</strong></td>
+                <td>ghi nhận / cập nhật risk register</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Maintain separate risk registers and rely on the PMO to…</strong></td>
+                <td>ghi nhận / cập nhật risk register</td>
+                <td>✗ &quot;Maintain separate risk registers and rely on the PMO to consolidate them…&quot; cùng nhóm ghi …</td>
+              </tr><tr>
+                <td><strong>C. Require the agile team to manage its risks within the s…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>D. Assign risk management duties to the construction manag…</strong></td>
+                <td>Assign risk management duties to the construction manager, as the infr</td>
+                <td>✗ &quot;Assign risk management duties to the construction manager, as the infrastructure c…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q426</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Develop a unified <span class="kw-signal">risk register</span> and establish a cadence for regular risk reviews with both agile and predictive teams.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM ghi nhận / cập nhật <span class="kw-signal">risk register</span> để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Resources</span>, Focus Area Monitoring &amp; Controlling (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Maintain separate risk registers and rely on the PMO to consolidate them at the end of the project.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q426</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q426</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 426</div>
             <div class="q-text">A hybrid infrastructure and software project is underway. Physical construction is managed predictively, while software configuration uses agile. The project manager notices that risks identified by the agile team are <span class="kw-cue">not</span> being captured in the enterprise risk register, and some physical construction risks are <span class="kw-cue">not</span> being communicated to the agile team. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +226,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM ghi nhận / cập nhật <span class="kw-signal">risk register</span> để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Resources</span>, Focus Area Monitoring &amp; Controlling (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> <span class="kw-pmbok">Risk</span> đã trigger — thực thi planned response từ <span class="kw-signal">risk register</span> trước khi đổi plan hay ghi log.</li><li>Rủi ro đã được identify và lập response plan trong <span class="kw-signal">risk register</span>. Theo miền <span class="kw-pmbok">Risk</span> (<span class="kw-pmbok">PMBOK 8</span>), khi rủi ro materialize, PM phải triển khai planned response đã chuẩn bị — đây là hành động có hệ thống, không phải phản ứng ngẫu nhiên.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Monitor Risks — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Develop a unified risk register and establish a cadence for regular risk reviews with both agile and predictive teams.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> <span class="kw-pmbok">Risk</span> đã trigger — thực thi planned response từ <span class="kw-signal">risk register</span> trước khi đổi plan hay ghi log.<br><br>Rủi ro đã được identify và lập response plan trong <span class="kw-signal">risk register</span>. Theo miền <span class="kw-pmbok">Risk</span> (<span class="kw-pmbok">PMBOK 8</span>), khi rủi ro materialize, PM phải triển khai planned response đã chuẩn bị — đây là hành động có hệ thống, không phải phản ứng ngẫu nhiên.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; team to quickly identify and address emerging risks, ensuring flexibility and responsiveness. Additionally, regular risk review meetings are held with stakeholders at the end of each iteration to incorporate their feedback and adjust risk<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 101 (Performance Domain: <span class="kw-pmbok">Risk</span>, Monitor Risks)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 101: Performance Domain: <span class="kw-pmbok">Risk</span>, Monitor Risks</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Maintain separate risk registers and rely on the PMO to consolidate them at the …</span></td><td>&quot;Maintain separate risk registers and rely on the PMO to consolidate them…&quot; cùng nhóm ghi nhận / cập nhật <span class="kw-signal">risk register</span> nhưng lệch trọng tâm — &quot;Develop a unified <span class="kw-signal">risk register</span> and establish a cadence for regular risk…&quot; sát ngữ cảnh Agile/Scrum hơn.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Require the agile team to manage its risks within the sprint backlog and avoid e…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Assign risk management duties to the construction manager, as the infrastructure…</span></td><td>&quot;Assign risk management duties to the construction manager, as the infrastructure c…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ghi nhận / cập nhật <span class="kw-signal">risk register</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="risk_register">
+              <span>A hybrid infrastructure and software project is underway. Physical construction is managed predictiv… (Q426)</span>
+              <div class="classify-btns"><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="risk_register">
+              <span>Tình huống cần &quot;ghi nhận / cập nhật risk register&quot; — không phải trọng tâm Q426</span>
+              <div class="classify-btns"><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q426</span>
+              <div class="classify-btns"><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="risk_register" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Maintain separate risk registers and rely on the PMO…" → B</h4>
+            <p style="margin:0">&quot;Maintain separate risk registers and rely on the PMO to consolidate them…&quot; cùng nhóm ghi nhận / cập nhật risk register nhưng lệch trọng tâm — &quot;Develop a unified risk register and establish a cadence for regular risk…&quot; sát ngữ cảnh Agile/Scrum hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Require the agile team to manage its risks within th…" → C</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Assign risk management duties to the construction ma…" → D</h4>
+            <p style="margin:0">&quot;Assign risk management duties to the construction manager, as the infrastructure c…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ghi nhận / cập nhật risk register.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · risk register</strong> → <strong>A</strong> — PM ghi nhận / cập nhật risk register để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Risk + Resources, Focus Area Monitoring &amp; Controlli…</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q426 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Develop a unified risk register and establish a cadence for regular risk reviews with both agile and predictive teams.</div>
+            <div class="flashcard-front">Q426 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Monitor Risks</strong><br>PMBOK 8, tr. 101</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Monitor Risks</div>
+            <div class="flashcard-front">Q426 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Develop a unified risk register and establish a cadence for regular risk reviews with both agile and</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Risk đã trigger</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q426
-────────────────────────
-A hybrid infrastructure and software project is underway. Physical construction is managed predictively, while software configuration uses agile. The project manager notices that risks identified by t…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MONITOR RISKS — Q426
+(PMBOK 8, tr. 101)
+─────────────────────────────────────────────────────
+DOMAIN: Risk, Resources
+PROCESS: Monitor Risks, Implement Risk Responses
+PRINCIPLE: Lead accountably, Focus on value
 
-ANSWER: A
-A. Develop a unified risk register and establish a cadence for regular risk reviews with both agile and predictive teams.
+SCENARIO:
+A hybrid infrastructure and software project is underway. Physical construction is managed predictively, while software configuration uses agile. The project manager notices that risks identified by the agile team are no…
 
-PMBOK 8:
-  Domain: Risk, Resources
-  Process: Monitor Risks, Implement Risk Responses
-  Principle: Lead accountably, Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | risk register
+
+ANSWER → A) Develop a unified risk register and establish a cadence for regular risk reviews with both agile and predictive teams.
+
+NOT:
+  B) Maintain separate risk registers and rely on the P… — &quot;Maintain separate risk registers and rely on the PMO to con
+  C) Require the agile team to manage its risks within … — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  D) Assign risk management duties to the construction … — &quot;Assign risk management duties to the construction manager, 
+
+Q426 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM ghi nhận / cập nhật risk register để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Risk + Resources, Focus Area Monitoring & Controlling (PMBOK 8).","B":"\"Maintain separate risk registers and rely on the PMO to consolidate them…\" cùng nhóm ghi nhận / cập nhật risk register nhưng lệch trọng tâm — \"Develop a unified risk register and establish a cadence for regular risk…\" sát ngữ cảnh Agile/Scrum hơn.","C":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","D":"\"Assign risk management duties to the construction manager, as the infrastructure c…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ghi nhận / cập nhật risk register."};
+      const EXPL = {"A":"Đúng! PM ghi nhận / cập nhật risk register để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Risk + Resources, Focus Area Monitoring & Controlling (PMBOK 8).","B":"\"Maintain separate risk registers and rely on the PMO to consolidate them…\" cùng nhóm ghi nhận / cập nhật risk register nhưng lệch trọng tâm — \"Develop a unified risk register and establish a cadence for regular risk…\" sát ngữ cảnh Agile/Scrum hơn.","C":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","D":"\"Assign risk management duties to the construction manager, as the infrastructure c…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung ghi nhận / cập nhật risk register."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

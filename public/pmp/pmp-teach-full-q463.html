@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 463</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Schedule</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-463">Câu 463</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q462.html">← 462</a>
         <a href="pmp-teach-full-q464.html">464 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 463 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A manufacturing firm is launching a new inventory system. Two key specialists, also working on warehouse automation, are missing handoffs and causing testing delays. The functional manager says no extra staff can be assigned. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Schedule, Resources</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Adopt a holistic view</span><span class="badge">Full Bank Q463</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q463</h1>
+          <p class="lead">Bài học Q463 về <strong>Develop Schedule</strong> (PMBOK 8, tr. 58) — Phân tích tình huống và chọn đáp án B theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A manufacturing firm is launching a new inventory system. Two key specialists, also working on warehouse automation, are missing handoffs and causing testing delays. The functional manager says no extra staff can be assigned. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 58</span><span class="badge">Schedule, Resources</span><span class="badge">Develop Schedule</span><span class="badge">Full Bank Q463</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Schedule, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Schedule, Control Schedule, Plan Resources<br>
-              <strong>Principle:</strong> Adopt a holistic view, Embed quality
-            </p>
+        <section id="concept">
+          <h2>1. Develop Schedule</h2>
+          <p><strong>Develop Schedule</strong> thuộc miền <strong>Schedule, Resources</strong> — process <strong>Develop Schedule</strong>, principle <strong>Adopt a holistic view</strong>. PMBOK 8 (tr. 58): project is planned in a holistic manner with no gaps or areas of misalignment. Schedule documentation is complete. Ensure that the schedule documentation includes all essential ele- ments, such as task dependencies, durations, resource al</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell pull">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Replace the specialists with less-experienced team members w
+            </div><div class="approach-cell">
+              <strong>đảm bảo chất lượng</strong>
+              đảm bảo chất lượng / kiểm soát quality
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q463</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>B</strong> phù hợp vì PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q463 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Escalate to the sponsor and demand full-time resources …</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>B. Work with the functional manager to prioritize tasks an…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Replace the specialists with less-experienced team memb…</strong></td>
+                <td>Replace the specialists with less-experienced team members who are ful</td>
+                <td>✗ &quot;Replace the specialists with less-experienced team members who are fully available.&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Ask the specialists to work overtime until testing is b…</strong></td>
+                <td>đảm bảo chất lượng / kiểm soát quality</td>
+                <td>✗ Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết Ask the specialists to…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q463</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         <span class="kw-trap">Escalate</span> to the sponsor and demand full-time resources for the project.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         <span class="kw-signal">Work with</span> the functional manager to prioritize tasks and adjust the project schedule.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Replace the specialists with less-experienced team members who are fully available.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q463</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q463</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 463</div>
             <div class="q-text">A manufacturing firm is launching a new inventory system. Two key specialists, also working on warehouse automation, are missing handoffs and causing testing delays. The functional manager says no extra staff can be assigned. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>→ <strong>B:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>Bối cảnh: A manufacturing firm is launching a new inventory system. Two key specialists, also working on warehouse automation, are missing handoffs and causing testing delays. The functional manager says no extra staff can be assigned. Đáp án <strong>B</strong> — &quot;<span class="kw-signal">Work with</span> the functional manager to prioritize tasks and adjust the project schedule.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>Process Develop <span class="kw-pmbok">Schedule</span> — align với đáp án B.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 58.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Work with the functional manager to prioritize tasks and adjust the project schedule.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.<br><br>Bối cảnh: A manufacturing firm is launching a new inventory system. Two key specialists, also working on warehouse automation, are missing handoffs and causing testing delays. The functional manager says no extra staff can be assigned. Đáp án <strong>B</strong> — &quot;<span class="kw-signal">Work with</span> the functional manager to prioritize tasks and adjust the project schedule.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; project is planned in a holistic manner with no gaps or areas of misalignment. <span class="kw-pmbok">Schedule</span> documentation is complete. Ensure that the schedule documentation includes all essential ele- ments, such as task dependencies, durations, resource al<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 58 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 58: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> to the sponsor and demand full-time resources for the project.</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Replace the specialists with less-experienced team members who are fully availab…</span></td><td>&quot;Replace the specialists with less-experienced team members who are fully available.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the specialists to work overtime until testing is back on track.</span></td><td>Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết Ask the specialists to work overtime until testing is back on track. — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="prioritize_value">
+              <span>A manufacturing firm is launching a new inventory system. Two key specialists, also working on wareh… (Q463)</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q463</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="quality_embed">
+              <span>Tình huống cần &quot;đảm bảo chất lượng / kiểm soát quality&quot; — không phải trọng tâm Q463</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Escalate to the sponsor and demand full-time resourc…" → A</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Replace the specialists with less-experienced team m…" → C</h4>
+            <p style="margin:0">&quot;Replace the specialists with less-experienced team members who are fully available.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Ask the specialists to work overtime until testing i…" → D</h4>
+            <p style="margin:0">Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết Ask the specialists to work overtime until testing is back on track. — đáp án đúng cần ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>B</strong> — PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q463 — đáp án?</div>
+            <div class="flashcard-front">Q463 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Schedule</strong><br>PMBOK 8, tr. 58</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q463 — đáp án?</div>
             <div class="flashcard-back"><strong>B</strong> — Work with the functional manager to prioritize tasks and adjust the project schedule.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Adopt a holistic view</strong><br>Develop Schedule</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án B theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q463
-────────────────────────
-A manufacturing firm is launching a new inventory system. Two key specialists, also working on warehouse automation, are missing handoffs and causing testing delays. The functional manager says no ext…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP SCHEDULE — Q463
+(PMBOK 8, tr. 58)
+─────────────────────────────────────────────────────
+DOMAIN: Schedule, Resources
+PROCESS: Develop Schedule, Control Schedule, Plan Resources
+PRINCIPLE: Adopt a holistic view, Embed quality
 
-ANSWER: B
-B. Work with the functional manager to prioritize tasks and adjust the project schedule.
+SCENARIO:
+A manufacturing firm is launching a new inventory system. Two key specialists, also working on warehouse automation, are missing handoffs and causing testing delays. The functional manager says no extra staff can be assi…
 
-PMBOK 8:
-  Domain: Schedule, Resources
-  Process: Develop Schedule, Control Schedule, Plan Resources
-  Principle: Adopt a holistic view, Embed quality</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → B) Work with the functional manager to prioritize tasks and adjust the project schedule.
+
+NOT:
+  A) Escalate to the sponsor and demand full-time resou… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  C) Replace the specialists with less-experienced team… — &quot;Replace the specialists with less-experienced team members 
+  D) Ask the specialists to work overtime until testing… — Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giả
+
+Q463 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","C":"\"Replace the specialists with less-experienced team members who are fully available.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / MVP.","D":"Tập trung \"đảm bảo chất lượng / kiểm soát quality\" không giải quyết Ask the specialists to work overtime until testing is back on track. — đáp án đúng cần ưu tiên theo giá trị / MVP."};
+      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Đúng! PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","C":"\"Replace the specialists with less-experienced team members who are fully available.\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / MVP.","D":"Tập trung \"đảm bảo chất lượng / kiểm soát quality\" không giải quyết Ask the specialists to work overtime until testing is back on track. — đáp án đúng cần ưu tiên theo giá trị / MVP."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

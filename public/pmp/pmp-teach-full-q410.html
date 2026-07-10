@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 410</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Schedule</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-410">Câu 410</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q409.html">← 409</a>
         <a href="pmp-teach-full-q411.html">411 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 410 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">At a consumer goods manufacturer, a project manager is overseeing installation of a new packaging line. Project forecasts show peak demand for mechanical engineers overlapping with a major product launch. Current plans assume full availability during this period. The project manager recognizes the risk of delays or burnout if the overlap is <span class="kw-cue">not</span> addressed. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Schedule, Finance</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q410</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q410</h1>
+          <p class="lead">Bài học Q410 về <strong>Develop Schedule</strong> (PMBOK 8, tr. 49) — Phân tích tình huống và chọn đáp án D theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">At a consumer goods manufacturer, a project manager is overseeing installation of a new packaging line. Project forecasts show peak demand for mechanical engineers overlapping with a major product launch. Current plans assume full availability during this period. The project manager recognizes the risk of delays or burnout if the overlap is not addressed. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 49</span><span class="badge">Schedule, Finance</span><span class="badge">Develop Schedule</span><span class="badge">Full Bank Q410</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Schedule, Finance<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Schedule, Control Schedule, Estimate Costs<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Develop Schedule</h2>
+          <p><strong>Develop Schedule</strong> thuộc miền <strong>Schedule, Finance</strong> — process <strong>Develop Schedule</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 49): the review and revision of duration estimates, resource estimates, and schedule reserves to establish an approved project schedule that can serve as a baseline to track progress (see Figure 2-22). • Project charter • Project management p</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Shift all project work away from the peak period without con
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Request that the project team work overtime during the peak 
+            </div><div class="approach-cell">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div><div class="approach-cell pull">
+              <strong>D</strong>
+              Review the forecasted demand peak with leaders and agree on 
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q410</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Finance (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q410 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Shift all project work away from the peak period withou…</strong></td>
+                <td>Shift all project work away from the peak period without consulting op</td>
+                <td>✗ &quot;Shift all project work away from the peak period without consulting operations abo…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Request that the project team work overtime during the …</strong></td>
+                <td>Request that the project team work overtime during the peak and keep t</td>
+                <td>✗ đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đáp án đúng tập trung rà soát t…</td>
+              </tr><tr>
+                <td><strong>C. Ask operations to deprioritize their launch activities …</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td>✗ Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Ask operations to deprioritize the…</td>
+              </tr><tr>
+                <td><strong>D. Review the forecasted demand peak with leaders and agre…</strong></td>
+                <td>Review the forecasted demand peak with leaders and agree on temporary </td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q410</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Shift all project work away from the peak period without consulting operations about feasibility.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Review the forecasted demand peak with leaders and agree on temporary adjustments.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q410</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q410</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 410</div>
             <div class="q-text">At a consumer goods manufacturer, a project manager is overseeing installation of a new packaging line. Project forecasts show peak demand for mechanical engineers overlapping with a major product launch. Current plans assume full availability during this period. The project manager recognizes the risk of delays or burnout if the overlap is <span class="kw-cue">not</span> addressed. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>D:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: At a consumer goods manufacturer, a project manager is overseeing installation of a new packaging line. Project forecasts show peak demand for mechanical engineers overlapping with a major product launch. Current plans <span class="kw-trap">assume</span> full availability during this period. The project manager recognizes the risk of delays or burnout if the overlap is <span class="kw-cue">not</span> addressed. Đáp án <strong>D</strong> — &quot;Review the forecasted demand peak with leaders and agree on temporary adjustments.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Process Develop <span class="kw-pmbok">Schedule</span> — align với đáp án D.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 49.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Review the forecasted demand peak with leaders and agree on temporary adjustments.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: At a consumer goods manufacturer, a project manager is overseeing installation of a new packaging line. Project forecasts show peak demand for mechanical engineers overlapping with a major product launch. Current plans <span class="kw-trap">assume</span> full availability during this period. The project manager recognizes the risk of delays or burnout if the overlap is <span class="kw-cue">not</span> addressed. Đáp án <strong>D</strong> — &quot;Review the forecasted demand peak with leaders and agree on temporary adjustments.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; the review and revision of duration estimates, resource estimates, and schedule reserves to establish an approved project schedule that can serve as a baseline to track progress (see Figure 2-22). • <span class="kw-signal">Project charter</span> • Project management p<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 49 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 49: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Shift all project work away from the peak period without consulting operations a…</span></td><td>&quot;Shift all project work away from the peak period without consulting operations abo…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung rà soát tài liệu/kế hoạch.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request that the project team work overtime during the peak and keep the origina…</span></td><td>đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đáp án đúng tập trung rà soát tài liệu/kế hoạch.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask operations to deprioritize their launch activities to preserve the project s…</span></td><td>Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết Ask operations to deprioritize their launch activities to preserve the project schedule. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>At a consumer goods manufacturer, a project manager is overseeing installation of a new packaging li… (Q410)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="prioritize_value">
+              <span>Tình huống cần &quot;ưu tiên theo giá trị / MVP&quot; — không phải trọng tâm Q410</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Shift all project work away from the peak period wit…" → A</h4>
+            <p style="margin:0">&quot;Shift all project work away from the peak period without consulting operations abo…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung rà soát tài liệu/kế hoạch.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Request that the project team work overtime during t…" → B</h4>
+            <p style="margin:0">đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đáp án đúng tập trung rà soát tài liệu/kế hoạch.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Ask operations to deprioritize their launch activiti…" → C</h4>
+            <p style="margin:0">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Ask operations to deprioritize their launch activities to preserve the project schedule. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Finance (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q410 — đáp án?</div>
+            <div class="flashcard-front">Q410 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Schedule</strong><br>PMBOK 8, tr. 49</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q410 — đáp án?</div>
             <div class="flashcard-back"><strong>D</strong> — Review the forecasted demand peak with leaders and agree on temporary adjustments.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Develop Schedule</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án D theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q410
-────────────────────────
-At a consumer goods manufacturer, a project manager is overseeing installation of a new packaging line. Project forecasts show peak demand for mechanical engineers overlapping with a major product lau…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP SCHEDULE — Q410
+(PMBOK 8, tr. 49)
+─────────────────────────────────────────────────────
+DOMAIN: Schedule, Finance
+PROCESS: Develop Schedule, Control Schedule, Estimate Costs
+PRINCIPLE: Lead accountably
 
-ANSWER: D
-D. Review the forecasted demand peak with leaders and agree on temporary adjustments.
+SCENARIO:
+At a consumer goods manufacturer, a project manager is overseeing installation of a new packaging line. Project forecasts show peak demand for mechanical engineers overlapping with a major product launch. Current plans a…
 
-PMBOK 8:
-  Domain: Schedule, Finance
-  Process: Develop Schedule, Control Schedule, Estimate Costs
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Review the forecasted demand peak with leaders and agree on temporary adjustments.
+
+NOT:
+  A) Shift all project work away from the peak period w… — &quot;Shift all project work away from the peak period without co
+  B) Request that the project team work overtime during… — đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đ
+  C) Ask operations to deprioritize their launch activi… — Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Ask 
+
+Q410 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Shift all project work away from the peak period without consulting operations abo…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung rà soát tài liệu/kế hoạch.","B":"đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đáp án đúng tập trung rà soát tài liệu/kế hoạch.","C":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết Ask operations to deprioritize their launch activities to preserve the project schedule. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Finance (Executing, PMBOK 8)."};
+      const EXPL = {"A":"\"Shift all project work away from the peak period without consulting operations abo…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung rà soát tài liệu/kế hoạch.","B":"đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đáp án đúng tập trung rà soát tài liệu/kế hoạch.","C":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết Ask operations to deprioritize their launch activities to preserve the project schedule. — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Finance (Executing, PMBOK 8)."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

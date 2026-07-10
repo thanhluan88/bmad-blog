@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 559</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-559">Câu 559</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q558.html">← 558</a>
         <a href="pmp-teach-full-q560.html">560 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 559 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">Project team members have been assigned to a project in the planning phase. Vendors and external partners involved in the project have varying levels of awareness about project timelines, roles, and closure expectations. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Schedule</span><span class="badge">Planning</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q559</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q559</h1>
+          <p class="lead">Bài học Q559 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 104) — vấn đề vendor / procurement</p>
+          <p class="lead" style="margin-top:0.75rem">Project team members have been assigned to a project in the planning phase. Vendors and external partners involved in the project have varying levels of awareness about project timelines, roles, and closure expectations. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 104</span><span class="badge">Stakeholders, Schedule</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q559</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,48 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Schedule<br>
-              <strong>Focus Area:</strong> Planning<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Schedule</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 104): 104 A Guide to the Project Management Body of Knowledge ⚫ Creating high-quality deliverables and outcomes, ⚫ Ensuring compliance with regulatory standards and sustainability considerations, ⚫ Satisfying diverse stakeholder expectations, and</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>quản lý vendor</strong>
+              quản lý vendor / procurement
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Rely on the communications management plan to properly infor
+            </div><div class="approach-cell">
+              <strong>thông báo</strong>
+              thông báo / truyền đạt thông tin
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q559</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>B</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Schedule (Planning, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q559 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Schedule individual meetings with each vendor and partn…</strong></td>
+                <td>quản lý vendor / procurement</td>
+                <td>✗ Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đá…</td>
+              </tr><tr>
+                <td><strong>B. Rely on the communications management plan to properly …</strong></td>
+                <td>Rely on the communications management plan to properly inform all stak</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Send a single project-wide email blast summarizing time…</strong></td>
+                <td>thông báo / truyền đạt thông tin</td>
+                <td>✗ Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết vấn đề vendor / procurement …</td>
+              </tr><tr>
+                <td><strong>D. Assign a team member as a dedicated liaison to manage a…</strong></td>
+                <td>quản lý vendor / procurement</td>
+                <td>✗ Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đá…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q559</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Schedule individual meetings with each vendor and partner to manually communicate project timelines and closure expectations.
@@ -152,7 +197,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Rely on the <span class="kw-signal">communications management plan</span> to properly inform all stakeholders, including vendors and external partners.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Schedule</span> (Planning, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Send a single project-wide email blast summarizing timelines and roles to ensure all parties receive the same information.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q559</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q559</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 559</div>
             <div class="q-text">Project team members have been assigned to a project in the planning phase. Vendors and external partners involved in the project have varying levels of awareness about project timelines, roles, and closure expectations. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +226,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Schedule</span> (Planning, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Schedule</span> (Planning, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: vấn đề vendor / procurement. Đáp án <strong>B</strong> — &quot;Rely on the <span class="kw-signal">communications management plan</span> to properly inform all stakeholders, including vendors and external partners.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Schedule</span> (Planning, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: vấn đề vendor / procurement — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Rely on the communications management plan to properly inform all stakeholders, including vendors and external partners.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Schedule</span> (Planning, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: vấn đề vendor / procurement. Đáp án <strong>B</strong> — &quot;Rely on the <span class="kw-signal">communications management plan</span> to properly inform all stakeholders, including vendors and external partners.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Schedule</span> (Planning, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 104 A Guide to the Project Management Body of Knowledge ⚫ Creating high-quality deliverables and outcomes, ⚫ Ensuring compliance with regulatory standards and sustainability considerations, ⚫ Satisfying diverse stakeholder expectations, and<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 104 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 104: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Schedule individual meetings with each vendor and partner to manually communicat…</span></td><td>Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Send a single project-wide email blast summarizing timelines and roles to ensure…</span></td><td>Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Assign a team member as a dedicated liaison to manage all vendor and partner com…</span></td><td>Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>Project team members have been assigned to a project in the planning phase. Vendors and external par… (Q559)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="vendor_procurement">
+              <span>Tình huống cần &quot;quản lý vendor / procurement&quot; — không phải trọng tâm Q559</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="communicate_inform">
+              <span>Tình huống cần &quot;thông báo / truyền đạt thông tin&quot; — không phải trọng tâm Q559</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Schedule individual meetings with each vendor and pa…" → A</h4>
+            <p style="margin:0">Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Send a single project-wide email blast summarizing t…" → C</h4>
+            <p style="margin:0">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Assign a team member as a dedicated liaison to manag…" → D</h4>
+            <p style="margin:0">Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>B</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Schedule (Planning, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q559 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Rely on the communications management plan to properly inform all stakeholders, including vendors and external partners.</div>
+            <div class="flashcard-front">Q559 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 104</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q559 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Rely on the communications management plan to properly inform all stakeholders, including vendors an</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề vendor / procurement</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q559
-────────────────────────
-Project team members have been assigned to a project in the planning phase. Vendors and external partners involved in the project have varying levels of awareness about project timelines, roles, and c…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q559
+(PMBOK 8, tr. 104)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Schedule
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: B
-B. Rely on the communications management plan to properly inform all stakeholders, including vendors and external partners.
+SCENARIO:
+Project team members have been assigned to a project in the planning phase. Vendors and external partners involved in the project have varying levels of awareness about project timelines, roles, and closure expectations.…
 
-PMBOK 8:
-  Domain: Stakeholders, Schedule
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → B) Rely on the communications management plan to properly inform all stakeholders, including vendors and external partners.
+
+NOT:
+  A) Schedule individual meetings with each vendor and … — Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấ
+  C) Send a single project-wide email blast summarizing… — Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyế
+  D) Assign a team member as a dedicated liaison to man… — Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấ
+
+Q559 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Tập trung \"quản lý vendor / procurement\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","B":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Schedule (Planning, PMBOK 8).","C":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Tập trung \"quản lý vendor / procurement\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
+      const EXPL = {"A":"Tập trung \"quản lý vendor / procurement\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","B":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Schedule (Planning, PMBOK 8).","C":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","D":"Tập trung \"quản lý vendor / procurement\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

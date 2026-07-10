@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 857</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Define Scope</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-857">Câu 857</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q856.html">← 856</a>
         <a href="pmp-teach-full-q858.html">858 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 857 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A hospital reduced average discharge time by 20% through a streamlined process. Nurses noted that weekend discharges remain slow due to limited pharmacy staff. The quality committee wants to expand the process, and the project manager sees further improvement opportunities. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Scope, Schedule</span><span class="badge">Executing</span><span class="badge">Define Scope</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q857</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q857</h1>
+          <p class="lead">Bài học Q857 về <strong>Define Scope</strong> (PMBOK 8, tr. 169) — vấn đề chất lượng / defect</p>
+          <p class="lead" style="margin-top:0.75rem">A hospital reduced average discharge time by <em>20% through a streamlined process</em>. Nurses noted that weekend discharges remain slow due to limited pharmacy staff. The quality committee wants to expand the process, and the project manager sees further improvement opportunities. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 169</span><span class="badge">Scope, Schedule</span><span class="badge">Define Scope</span><span class="badge">Full Bank Q857</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,48 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Scope, Schedule<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Define Scope, Validate Scope, Control Scope<br>
-              <strong>Principle:</strong> Embed quality
-            </p>
+        <section id="concept">
+          <h2>1. Define Scope</h2>
+          <p><strong>Define Scope</strong> thuộc miền <strong>Scope, Schedule</strong> — process <strong>Define Scope</strong>, principle <strong>Embed quality</strong>. PMBOK 8 (tr. 169): 169 Section 5 – Tools and Techniques ⚫ Quality reports, test reports, performance reports, and variance analysis; ⚫ Regulatory documentation such as laws, codes, or ordinances, etc.; ⚫ Requests for proposal; and ⚫ Use cases. Earned value (E</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Close the project since its original goal has been met, and 
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Propose a new project focused solely on weekend processes wi
+            </div><div class="approach-cell pull">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q857</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>20% through a streamlined process</strong><br><br>→ <strong>C</strong> phù hợp vì PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Scope + Schedule, Focus Area Executing (PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q857 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Close the project since its original goal has been met,…</strong></td>
+                <td>Close the project since its original goal has been met, and assign any</td>
+                <td>✗ &quot;Close the project since its original goal has been met, and assign any future enha…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Propose a new project focused solely on weekend process…</strong></td>
+                <td>Propose a new project focused solely on weekend processes without revi</td>
+                <td>✗ &quot;Propose a new project focused solely on weekend processes without reviewing the cu…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Record weekend discharge delays as improvement opportun…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Request that the quality committee approve current resu…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ &quot;Request that the quality committee approve current results and postpone …&quot; cùng nhóm chờ …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q857</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Close the project since its original goal has been met, and assign any future enhancements to the operations team.
@@ -156,7 +201,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Record weekend discharge delays as improvement opportunities, test changes, and update procedures based on results.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Schedule</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Request that the quality committee approve current results and <span class="kw-trap">postpone</span> improvement talks until next year’s planning.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q857</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q857</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 857</div>
             <div class="q-text">A hospital reduced average discharge time by 20% through a streamlined process. Nurses noted that weekend discharges remain slow due to limited pharmacy staff. The quality committee wants to expand the process, and the project manager sees further improvement opportunities. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +226,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Schedule</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>C:</strong> PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Schedule</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>C</strong> — &quot;Record weekend discharge delays as improvement opportunities, test changes, and update procedures based on results.&quot; — phù hợp vì PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Schedule</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Define <span class="kw-pmbok">Scope</span> — align với đáp án C.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Record weekend discharge delays as improvement opportunities, test changes, and update procedures based on results.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Schedule</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>C</strong> — &quot;Record weekend discharge delays as improvement opportunities, test changes, and update procedures based on results.&quot; — phù hợp vì PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Scope</span> + <span class="kw-pmbok">Schedule</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 169 Section 5 – Tools and Techniques ⚫ Quality reports, test reports, performance reports, and variance analysis; ⚫ Regulatory documentation such as laws, codes, or ordinances, etc.; ⚫ Requests for proposal; and ⚫ Use cases. Earned value (E<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 169 (Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 169: Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Close the project since its original goal has been met, and assign any future en…</span></td><td>&quot;Close the project since its original goal has been met, and assign any future enha…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung chờ / trì hoãn.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Propose a new project focused solely on weekend processes without reviewing the …</span></td><td>&quot;Propose a new project focused solely on weekend processes without reviewing the cu…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung chờ / trì hoãn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request that the quality committee approve current results and <span class="kw-trap">postpone</span> improvem…</span></td><td>&quot;Request that the quality committee approve current results and <span class="kw-trap">postpone</span> …&quot; cùng nhóm chờ / trì hoãn nhưng lệch trọng tâm — &quot;Record weekend discharge delays as improvement opportunities, test chang…&quot; sát vấn đề chất lượng / defect hơn.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="wait_delay">
+              <span>A hospital reduced average discharge time by 20% through a streamlined process. Nurses noted that we… (Q857)</span>
+              <div class="classify-btns"><button data-pick="wait_delay" type="button">chờ</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q857</span>
+              <div class="classify-btns"><button data-pick="wait_delay" type="button">chờ</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Close the project since its original goal has been m…" → A</h4>
+            <p style="margin:0">&quot;Close the project since its original goal has been met, and assign any future enha…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung chờ / trì hoãn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Propose a new project focused solely on weekend proc…" → B</h4>
+            <p style="margin:0">&quot;Propose a new project focused solely on weekend processes without reviewing the cu…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung chờ / trì hoãn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Request that the quality committee approve current r…" → D</h4>
+            <p style="margin:0">&quot;Request that the quality committee approve current results and postpone …&quot; cùng nhóm chờ / trì hoãn nhưng lệch trọng tâm — &quot;Record weekend discharge delays as improvement opportunities, test chang…&quot; sát vấn đề chất lượng / defect hơn.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · 20% through a streamlined process</strong> → <strong>C</strong> — PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Scope + Schedule, Focus Area Executing (PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q857 — đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Record weekend discharge delays as improvement opportunities, test changes, and update procedures based on results.</div>
+            <div class="flashcard-front">Q857 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Define Scope</strong><br>PMBOK 8, tr. 169</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Embed quality</strong><br>Define Scope</div>
+            <div class="flashcard-front">Q857 — đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Record weekend discharge delays as improvement opportunities, test changes, and update procedures ba</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chất lượng / defect</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q857
-────────────────────────
-A hospital reduced average discharge time by 20% through a streamlined process. Nurses noted that weekend discharges remain slow due to limited pharmacy staff. The quality committee wants to expand th…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEFINE SCOPE — Q857
+(PMBOK 8, tr. 169)
+─────────────────────────────────────────────────────
+DOMAIN: Scope, Schedule
+PROCESS: Define Scope, Validate Scope, Control Scope
+PRINCIPLE: Embed quality
 
-ANSWER: C
-C. Record weekend discharge delays as improvement opportunities, test changes, and update procedures based on results.
+SCENARIO:
+A hospital reduced average discharge time by 20% through a streamlined process. Nurses noted that weekend discharges remain slow due to limited pharmacy staff. The quality committee wants to expand the process, and the p…
 
-PMBOK 8:
-  Domain: Scope, Schedule
-  Process: Define Scope, Validate Scope, Control Scope
-  Principle: Embed quality</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | 20% through a streamlined process
+
+ANSWER → C) Record weekend discharge delays as improvement opportunities, test changes, and update procedures based on results.
+
+NOT:
+  A) Close the project since its original goal has been… — &quot;Close the project since its original goal has been met, and
+  B) Propose a new project focused solely on weekend pr… — &quot;Propose a new project focused solely on weekend processes w
+  D) Request that the quality committee approve current… — &quot;Request that the quality committee approve current results 
+
+Q857 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"\"Close the project since its original goal has been met, and assign any future enha…\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung chờ / trì hoãn.","B":"\"Propose a new project focused solely on weekend processes without reviewing the cu…\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung chờ / trì hoãn.","C":"PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Scope + Schedule, Focus Area Executing (PMBOK 8).","D":"\"Request that the quality committee approve current results and postpone …\" cùng nhóm chờ / trì hoãn nhưng lệch trọng tâm — \"Record weekend discharge delays as improvement opportunities, test chang…\" sát vấn đề chất lượng / defect hơn."};
+      const EXPL = {"A":"\"Close the project since its original goal has been met, and assign any future enha…\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung chờ / trì hoãn.","B":"\"Propose a new project focused solely on weekend processes without reviewing the cu…\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung chờ / trì hoãn.","C":"Đúng! PM chờ / trì hoãn để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Scope + Schedule, Focus Area Executing (PMBOK 8).","D":"\"Request that the quality committee approve current results and postpone …\" cùng nhóm chờ / trì hoãn nhưng lệch trọng tâm — \"Record weekend discharge delays as improvement opportunities, test chang…\" sát vấn đề chất lượng / defect hơn."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

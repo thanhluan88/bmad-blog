@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1072</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Schedule</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1072">Câu 1072</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1071.html">← 1071</a>
         <a href="pmp-teach-full-q1073.html">1073 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1072 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager overseeing a construction project discovers that a required government permit has <span class="kw-cue">not</span> yet been secured. Obtaining the permit will delay the project by 21 days and incur a cost of US$40,000. However, proceeding without the permit would result in a fine of US$1,900 per day. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</p>
-          <div class="badges"><span class="badge">Schedule, Finance</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q1072</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1072</h1>
+          <p class="lead">Bài học Q1072 về <strong>Develop Schedule</strong> (PMBOK 8, tr. 49) — Phân tích tình huống và chọn đáp án A theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager overseeing a construction project discovers that a required government permit has not yet been secured. Obtaining the permit will delay the project by 21 days and incur a cost of US$40,000. However, proceeding without the permit would result in a fine of US$1,900 per day. <em>What should the project manager do next</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 49</span><span class="badge">Schedule, Finance</span><span class="badge">Develop Schedule</span><span class="badge">Full Bank Q1072</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Schedule, Finance<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Schedule, Control Schedule, Estimate Costs<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Develop Schedule</h2>
+          <p><strong>Develop Schedule</strong> thuộc miền <strong>Schedule, Finance</strong> — process <strong>Develop Schedule</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 49): the review and revision of duration estimates, resource estimates, and schedule reserves to establish an approved project schedule that can serve as a baseline to track progress (see Figure 2-22). • Project charter • Project management p</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>sửa kế hoạch</strong>
+              sửa kế hoạch / baseline / schedule
+            </div><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div><div class="approach-cell">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div><div class="approach-cell">
+              <strong>tiếp tục theo kế hoạch hiện tại</strong>
+              tiếp tục theo kế hoạch hiện tại
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1072</h4>
+            <p style="margin:0"><strong>What should the project manager do next</strong><br><br>→ <strong>A</strong> phù hợp vì PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Schedule + Finance, Focus Area Executing (PMBOK 8)…</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1072 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Apply for the permit, accept the 21-day delay and US$40…</strong></td>
+                <td>sửa kế hoạch / baseline / schedule</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Continue without the permit to avoid delay and continue…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Continue without the permit to avoid delay and…</td>
+              </tr><tr>
+                <td><strong>C. Attempt to negotiate with local authorities while pausi…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td>✗ Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết Attempt to negotiate …</td>
+              </tr><tr>
+                <td><strong>D. Proceed with the work as scheduled and include the dail…</strong></td>
+                <td>tiếp tục theo kế hoạch hiện tại</td>
+                <td>✗ Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết Proceed with the work as sche…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1072</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Apply for the permit, accept the 21-day delay and US$40,000 cost, and update the schedule and cost baselines.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Continue without the permit to avoid <span class="kw-trap">delay</span> and continue project execution as planned.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1072</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1072</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1072</div>
             <div class="q-text">A project manager overseeing a construction project discovers that a required government permit has <span class="kw-cue">not</span> yet been secured. Obtaining the permit will delay the project by 21 days and incur a cost of US$40,000. However, proceeding without the permit would result in a fine of US$1,900 per day. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</div>
@@ -181,44 +229,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: A project manager overseeing a construction project discovers that a required government permit has <span class="kw-cue">not</span> yet been secured. Obtaining the permit will <span class="kw-trap">delay</span> the project by 21 days and incur a cost of US$40,000. However, proceeding without the permit would result in a fine of US$1,900 per day. Đáp án <strong>A</strong> — &quot;Apply for the permit, accept the 21-day <span class="kw-trap">delay</span> and US$40,000 cost, and update the schedule and cost baselines.&quot; — phù hợp vì PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>). Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong>sửa kế hoạch / baseline / schedule</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Process Develop <span class="kw-pmbok">Schedule</span> — align với đáp án A.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 49.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Apply for the permit, accept the 21-day delay and US$40,000 cost, and update the schedule and cost baselines.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: A project manager overseeing a construction project discovers that a required government permit has <span class="kw-cue">not</span> yet been secured. Obtaining the permit will <span class="kw-trap">delay</span> the project by 21 days and incur a cost of US$40,000. However, proceeding without the permit would result in a fine of US$1,900 per day. Đáp án <strong>A</strong> — &quot;Apply for the permit, accept the 21-day <span class="kw-trap">delay</span> and US$40,000 cost, and update the schedule and cost baselines.&quot; — phù hợp vì PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Finance</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>). Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong>sửa kế hoạch / baseline / schedule</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; the review and revision of duration estimates, resource estimates, and schedule reserves to establish an approved project schedule that can serve as a baseline to track progress (see Figure 2-22). • <span class="kw-signal">Project charter</span> • Project management p<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 49 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 49: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Continue without the permit to avoid <span class="kw-trap">delay</span> and continue project execution as pla…</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Continue without the permit to avoid <span class="kw-trap">delay</span> and continue project execution as planned. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Attempt to negotiate with local authorities while pausing construction activity …</span></td><td>Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết Attempt to negotiate with local authorities while pausing construction activity until a resolution is reached. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Proceed with the work as scheduled and include the daily fine in the project bud…</span></td><td>Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết Proceed with the work as scheduled and include the daily fine in the project budget. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="revise_plan">
+              <span>A project manager overseeing a construction project discovers that a required government permit has … (Q1072)</span>
+              <div class="classify-btns"><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="proceed_continue" type="button">tiếp tục the</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q1072</span>
+              <div class="classify-btns"><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="proceed_continue" type="button">tiếp tục the</button></div>
+            </div><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>Tình huống cần &quot;engagement stakeholder / làm rõ kỳ vọng&quot; — không phải trọng tâm Q1072</span>
+              <div class="classify-btns"><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="proceed_continue" type="button">tiếp tục the</button></div>
+            </div><div class="classify-row" data-answer="proceed_continue">
+              <span>Tình huống cần &quot;tiếp tục theo kế hoạch hiện tại&quot; — không phải trọng tâm Q1072</span>
+              <div class="classify-btns"><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="proceed_continue" type="button">tiếp tục the</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Continue without the permit to avoid delay and conti…" → B</h4>
+            <p style="margin:0">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Continue without the permit to avoid delay and continue project execution as planned. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Attempt to negotiate with local authorities while pa…" → C</h4>
+            <p style="margin:0">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết Attempt to negotiate with local authorities while pausing construction activity until a resolution is reached. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Proceed with the work as scheduled and include the d…" → D</h4>
+            <p style="margin:0">Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết Proceed with the work as scheduled and include the daily fine in the project budget. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do next</strong> → <strong>A</strong> — PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Schedule + Finance, Focus Area Executing (PMBOK 8)…</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1072 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Apply for the permit, accept the 21-day delay and US$40,000 cost, and update the schedule and cost baselines.</div>
+            <div class="flashcard-front">Q1072 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Schedule</strong><br>PMBOK 8, tr. 49</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Develop Schedule</div>
+            <div class="flashcard-front">Q1072 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Apply for the permit, accept the 21-day delay and US$40,000 cost, and update the schedule and cost b</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án A theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1072
-────────────────────────
-A project manager overseeing a construction project discovers that a required government permit has not yet been secured. Obtaining the permit will delay the project by 21 days and incur a cost of US$…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP SCHEDULE — Q1072
+(PMBOK 8, tr. 49)
+─────────────────────────────────────────────────────
+DOMAIN: Schedule, Finance
+PROCESS: Develop Schedule, Control Schedule, Estimate Costs
+PRINCIPLE: Lead accountably
 
-ANSWER: A
-A. Apply for the permit, accept the 21-day delay and US$40,000 cost, and update the schedule and cost baselines.
+SCENARIO:
+A project manager overseeing a construction project discovers that a required government permit has not yet been secured. Obtaining the permit will delay the project by 21 days and incur a cost of US$40,000. However, pro…
 
-PMBOK 8:
-  Domain: Schedule, Finance
-  Process: Develop Schedule, Control Schedule, Estimate Costs
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do next
+
+ANSWER → A) Apply for the permit, accept the 21-day delay and US$40,000 cost, and update the schedule and cost baselines.
+
+NOT:
+  B) Continue without the permit to avoid delay and con… — Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Continue without
+  C) Attempt to negotiate with local authorities while … — Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không gi
+  D) Proceed with the work as scheduled and include the… — Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết
+
+Q1072 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +330,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Schedule + Finance, Focus Area Executing (PMBOK 8).","B":"Tập trung \"chờ / trì hoãn\" không giải quyết Continue without the permit to avoid delay and continue project execution as planned. — đáp án đúng cần sửa kế hoạch / baseline / schedule.","C":"Tập trung \"engagement stakeholder / làm rõ kỳ vọng\" không giải quyết Attempt to negotiate with local authorities while pausing construction activity until a resolution is reached. — đáp án đúng cần sửa kế hoạch / baseline / schedule.","D":"Tập trung \"tiếp tục theo kế hoạch hiện tại\" không giải quyết Proceed with the work as scheduled and include the daily fine in the project budget. — đáp án đúng cần sửa kế hoạch / baseline / schedule."};
+      const EXPL = {"A":"Đúng! PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Schedule + Finance, Focus Area Executing (PMBOK 8).","B":"Tập trung \"chờ / trì hoãn\" không giải quyết Continue without the permit to avoid delay and continue project execution as planned. — đáp án đúng cần sửa kế hoạch / baseline / schedule.","C":"Tập trung \"engagement stakeholder / làm rõ kỳ vọng\" không giải quyết Attempt to negotiate with local authorities while pausing construction activity until a resolution is reached. — đáp án đúng cần sửa kế hoạch / baseline / schedule.","D":"Tập trung \"tiếp tục theo kế hoạch hiện tại\" không giải quyết Proceed with the work as scheduled and include the daily fine in the project budget. — đáp án đúng cần sửa kế hoạch / baseline / schedule."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +356,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

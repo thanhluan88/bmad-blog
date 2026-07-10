@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 185</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-185">Câu 185</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q184.html">← 184</a>
         <a href="pmp-teach-full-q186.html">186 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 185 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A nongovernmental organization (NGO) has assembled a project team to design the newest iteration of its yearly marketing campaign. The project manager needs to access the information from previous campaigns and lessons learned to guide the current project team’s efforts. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Governance, Scope</span><span class="badge">Closing</span><span class="badge">Manage Project Execution</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q185</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q185</h1>
+          <p class="lead">Bài học Q185 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 21) — ngữ cảnh Agile/Scrum</p>
+          <p class="lead" style="margin-top:0.75rem">A nongovernmental organization (NGO) has assembled a project team to design the newest iteration of its yearly marketing campaign. The project manager needs to access the information from previous campaigns and lessons learned to guide the current project team’s efforts. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 21</span><span class="badge">Governance, Scope</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q185</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Scope<br>
-              <strong>Focus Area:</strong> Closing<br>
-              <strong>Process:</strong> Manage Project Execution, Perform Integrated Change Control, Close Project or Phase<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Governance, Scope</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 21): 2.1.6.4 Manage Project Execution The Manage Project Execution process involves leading and performing the work defined in the project management plan and implementing approved changes to meet the project’s objectives. The primary benefit</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>ghi nhận</strong>
+              ghi nhận / tài liệu hóa
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Compare the project plans from past projects to determine th
+            </div><div class="approach-cell pull">
+              <strong>C</strong>
+              Examine the organizational process assets (OPAs) to find rel
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Analyze the work performance data from previous projects to 
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q185</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>C</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Scope (Closing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q185 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Analyze the work breakdown structure (WBS) dictionary f…</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>B. Compare the project plans from past projects to determi…</strong></td>
+                <td>Compare the project plans from past projects to determine the approach</td>
+                <td>✗ &quot;Compare the project plans from past projects to determine the approach each projec…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Examine the organizational process assets (OPAs) to fin…</strong></td>
+                <td>Examine the organizational process assets (OPAs) to find relevant hist</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Analyze the work performance data from previous project…</strong></td>
+                <td>Analyze the work performance data from previous projects to study the </td>
+                <td>✗ &quot;Analyze the work performance data from previous projects to study the raw observat…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q185</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Analyze the work breakdown structure (WBS) dictionary from past projects to find detailed information from each component’s documentation.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Examine the organizational process assets (OPAs) to find relevant history from all of the organization’s previous projects and past work carried out.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Closing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Analyze the work performance data from previous projects to study the raw observations and measurements identified during each activity.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q185</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q185</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 185</div>
             <div class="q-text">A nongovernmental organization (NGO) has assembled a project team to design the newest iteration of its yearly marketing campaign. The project manager needs to access the information from previous campaigns and lessons learned to guide the current project team’s efforts. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Closing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Closing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>C</strong> — &quot;Examine the organizational process assets (OPAs) to find relevant history from all of the organization’s previous projects and past work carried out.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Closing, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Manage Project Execution</span> — align với đáp án C.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Examine the organizational process assets (OPAs) to find relevant history from all of the organization’s previous projects and past work carried out.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Closing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>C</strong> — &quot;Examine the organizational process assets (OPAs) to find relevant history from all of the organization’s previous projects and past work carried out.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span> (Closing, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.1.6.4 <span class="kw-pmbok">Manage Project Execution</span> The <span class="kw-pmbok">Manage Project Execution</span> process involves leading and performing the work defined in the project management plan and implementing approved changes to meet the project’s objectives. The primary benefit<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 21 (<span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 21: <span class="kw-pmbok">Manage Project Execution</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Analyze the work breakdown structure (WBS) dictionary from past projects to find…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Compare the project plans from past projects to determine the approach each proj…</span></td><td>&quot;Compare the project plans from past projects to determine the approach each projec…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;Examine the organizational process assets (OPAs) to find relevant history from all…&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Analyze the work performance data from previous projects to study the raw observ…</span></td><td>&quot;Analyze the work performance data from previous projects to study the raw observat…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;Examine the organizational process assets (OPAs) to find relevant history from all…&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A nongovernmental organization (NGO) has assembled a project team to design the newest iteration of … (Q185)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="document_first">
+              <span>Tình huống cần &quot;ghi nhận / tài liệu hóa&quot; — không phải trọng tâm Q185</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Analyze the work breakdown structure (WBS) dictionar…" → A</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Compare the project plans from past projects to dete…" → B</h4>
+            <p style="margin:0">&quot;Compare the project plans from past projects to determine the approach each projec…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;Examine the organizational process assets (OPAs) to find relevant history from all…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Analyze the work performance data from previous proj…" → D</h4>
+            <p style="margin:0">&quot;Analyze the work performance data from previous projects to study the raw observat…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;Examine the organizational process assets (OPAs) to find relevant history from all…&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>C</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Scope (Closing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q185 — đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Examine the organizational process assets (OPAs) to find relevant history from all of the organization’s previous projects and past work carried out.</div>
+            <div class="flashcard-front">Q185 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 21</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Q185 — đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Examine the organizational process assets (OPAs) to find relevant history from all of the organizati</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">ngữ cảnh Agile/Scrum</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q185
-────────────────────────
-A nongovernmental organization (NGO) has assembled a project team to design the newest iteration of its yearly marketing campaign. The project manager needs to access the information from previous cam…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q185
+(PMBOK 8, tr. 21)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Scope
+PROCESS: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
+PRINCIPLE: Lead accountably
 
-ANSWER: C
-C. Examine the organizational process assets (OPAs) to find relevant history from all of the organization’s previous projects and past work carried out.
+SCENARIO:
+A nongovernmental organization (NGO) has assembled a project team to design the newest iteration of its yearly marketing campaign. The project manager needs to access the information from previous campaigns and lessons l…
 
-PMBOK 8:
-  Domain: Governance, Scope
-  Process: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → C) Examine the organizational process assets (OPAs) to find relevant history from all of the organization’s previous projects and past work carried out.
+
+NOT:
+  A) Analyze the work breakdown structure (WBS) diction… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+  B) Compare the project plans from past projects to de… — &quot;Compare the project plans from past projects to determine t
+  D) Analyze the work performance data from previous pr… — &quot;Analyze the work performance data from previous projects to
+
+Q185 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","B":"\"Compare the project plans from past projects to determine the approach each projec…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung \"Examine the organizational process assets (OPAs) to find relevant history from all…\".","C":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Scope (Closing, PMBOK 8).","D":"\"Analyze the work performance data from previous projects to study the raw observat…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung \"Examine the organizational process assets (OPAs) to find relevant history from all…\"."};
+      const EXPL = {"A":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","B":"\"Compare the project plans from past projects to determine the approach each projec…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung \"Examine the organizational process assets (OPAs) to find relevant history from all…\".","C":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Scope (Closing, PMBOK 8).","D":"\"Analyze the work performance data from previous projects to study the raw observat…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung \"Examine the organizational process assets (OPAs) to find relevant history from all…\"."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

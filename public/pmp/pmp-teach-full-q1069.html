@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1069</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Schedule</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1069">Câu 1069</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1068.html">← 1068</a>
         <a href="pmp-teach-full-q1070.html">1070 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1069 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A manufacturing project is dependent on a fluid supply chain. The schedule was disrupted by sudden supply chain issues, which the project sponsor warns can impact the critical path. The project manager needs to resolve the delay quickly to avoid penalties for missed milestones. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Schedule, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q1069</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1069</h1>
+          <p class="lead">Bài học Q1069 về <strong>Develop Schedule</strong> (PMBOK 8, tr. 42) — trễ tiến độ / áp lực schedule</p>
+          <p class="lead" style="margin-top:0.75rem">A manufacturing project is dependent on a fluid supply chain. The schedule was disrupted by sudden supply chain issues, which the project sponsor warns can impact the critical path. The project manager needs to resolve the delay quickly to avoid penalties for missed milestones. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 42</span><span class="badge">Schedule, Stakeholders</span><span class="badge">Develop Schedule</span><span class="badge">Full Bank Q1069</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Schedule, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Schedule, Control Schedule, Identify Stakeholders<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Develop Schedule</h2>
+          <p><strong>Develop Schedule</strong> thuộc miền <strong>Schedule, Stakeholders</strong> — process <strong>Develop Schedule</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 42): remains focused on delivering its key outcomes. ⚫ Schedule. A focus on value helps to ensure that time is managed effectively to help the project to deliver the expected value by—or earlier than—the target date. This effort includes plan</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div><div class="approach-cell">
+              <strong>thông báo</strong>
+              thông báo / truyền đạt thông tin
+            </div><div class="approach-cell pull">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Deliver the product in increments as work items are complete
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1069</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>C</strong> phù hợp vì PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1069 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Postpone all tasks affected by this issue until the sup…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ Tập trung &quot;chờ / trì hoãn&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cầ…</td>
+              </tr><tr>
+                <td><strong>B. Notify stakeholders of the delay in anticipation of imp…</strong></td>
+                <td>thông báo / truyền đạt thông tin</td>
+                <td>✗ Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết trễ tiến độ / áp lực schedul…</td>
+              </tr><tr>
+                <td><strong>C. Reassess the business value of the affected items and r…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Deliver the product in increments as work items are com…</strong></td>
+                <td>Deliver the product in increments as work items are completed to conti</td>
+                <td>✗ &quot;Deliver the product in increments as work items are completed to continue workflows.&quot; khô…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1069</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         <span class="kw-trap">Postpone</span> all tasks affected by this issue until the supplies are available again.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Reassess the business value of the affected items and reprioritize them accordingly.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Deliver the product in increments as work items are completed to continue workflows.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1069</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1069</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1069</div>
             <div class="q-text">A manufacturing project is dependent on a fluid supply chain. The schedule was disrupted by sudden supply chain issues, which the project sponsor warns can impact the critical path. The project manager needs to resolve the delay quickly to avoid penalties for missed milestones. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>→ <strong>C:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>C</strong> — &quot;Reassess the business value of the affected items and reprioritize them accordingly.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>Stem signal: trễ tiến độ / áp lực schedule — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Develop <span class="kw-pmbok">Schedule</span> — align với đáp án C.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Reassess the business value of the affected items and reprioritize them accordingly.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.<br><br>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>C</strong> — &quot;Reassess the business value of the affected items and reprioritize them accordingly.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; remains focused on delivering its key outcomes. ⚫ <span class="kw-pmbok">Schedule</span>. A <span class="kw-pmbok">focus on value</span> helps to ensure that time is managed effectively to help the project to deliver the expected value by—or earlier than—the target date. This effort includes plan<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 42 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 42: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Postpone</span> all tasks affected by this issue until the supplies are available again…</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Notify stakeholders of the <span class="kw-trap">delay</span> in anticipation of impacts on dependencies.</span></td><td>Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Deliver the product in increments as work items are completed to continue workfl…</span></td><td>&quot;Deliver the product in increments as work items are completed to continue workflows.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="prioritize_value">
+              <span>A manufacturing project is dependent on a fluid supply chain. The schedule was disrupted by sudden s… (Q1069)</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q1069</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="communicate_inform">
+              <span>Tình huống cần &quot;thông báo / truyền đạt thông tin&quot; — không phải trọng tâm Q1069</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Postpone all tasks affected by this issue until the …" → A</h4>
+            <p style="margin:0">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Notify stakeholders of the delay in anticipation of …" → B</h4>
+            <p style="margin:0">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Deliver the product in increments as work items are …" → D</h4>
+            <p style="margin:0">&quot;Deliver the product in increments as work items are completed to continue workflows.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>C</strong> — PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1069 — đáp án?</div>
+            <div class="flashcard-front">Q1069 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Schedule</strong><br>PMBOK 8, tr. 42</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q1069 — đáp án?</div>
             <div class="flashcard-back"><strong>C</strong> — Reassess the business value of the affected items and reprioritize them accordingly.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Develop Schedule</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">trễ tiến độ / áp lực schedule</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1069
-────────────────────────
-A manufacturing project is dependent on a fluid supply chain. The schedule was disrupted by sudden supply chain issues, which the project sponsor warns can impact the critical path. The project manage…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP SCHEDULE — Q1069
+(PMBOK 8, tr. 42)
+─────────────────────────────────────────────────────
+DOMAIN: Schedule, Stakeholders
+PROCESS: Develop Schedule, Control Schedule, Identify Stakeholders
+PRINCIPLE: Lead accountably
 
-ANSWER: C
-C. Reassess the business value of the affected items and reprioritize them accordingly.
+SCENARIO:
+A manufacturing project is dependent on a fluid supply chain. The schedule was disrupted by sudden supply chain issues, which the project sponsor warns can impact the critical path. The project manager needs to resolve t…
 
-PMBOK 8:
-  Domain: Schedule, Stakeholders
-  Process: Develop Schedule, Control Schedule, Identify Stakeholders
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → C) Reassess the business value of the affected items and reprioritize them accordingly.
+
+NOT:
+  A) Postpone all tasks affected by this issue until th… — Tập trung &quot;chờ / trì hoãn&quot; không giải quyết trễ tiến độ / áp
+  B) Notify stakeholders of the delay in anticipation o… — Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyế
+  D) Deliver the product in increments as work items ar… — &quot;Deliver the product in increments as work items are complet
+
+Q1069 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"Tập trung \"chờ / trì hoãn\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / MVP.","B":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / MVP.","C":"PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","D":"\"Deliver the product in increments as work items are completed to continue workflows.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung ưu tiên theo giá trị / MVP."};
+      const EXPL = {"A":"Tập trung \"chờ / trì hoãn\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / MVP.","B":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo giá trị / MVP.","C":"Đúng! PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","D":"\"Deliver the product in increments as work items are completed to continue workflows.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung ưu tiên theo giá trị / MVP."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

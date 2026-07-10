@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 71</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-71">Câu 71</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q70.html">← 70</a>
         <a href="pmp-teach-full-q72.html">72 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 71 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">In a product development project, the team comprises skilled specialists who consistently seek the project manager’s approval before making routine technical and process decisions. This behavior creates delays and turns the project manager into a bottleneck. Team members appear hesitant to exercise judgment within their expertise. The project manager sees that ownership and autonomy are limited. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Resources</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q71</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q71</h1>
+          <p class="lead">Bài học Q71 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 86) — Phân tích tình huống và chọn đáp án D theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">In a product development project, the team comprises skilled specialists who consistently seek the project manager’s approval before making routine technical and process decisions. This behavior creates delays and turns the project manager into a bottleneck. Team members appear hesitant to exercise judgment within their expertise. The project manager sees that ownership and autonomy are limited. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 86</span><span class="badge">Stakeholders, Resources</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q71</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Resources</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 86): ⚫ Empowerment, delegation, and autonomy. Project team members who feel empowered to make decisions about the way they work and about specific details in the deliverables being produced—even under limited range—perform better and have a hi</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Centralize more decisions with the project manager to ensure
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Ask functional managers to replace team members who seem hes
+            </div><div class="approach-cell">
+              <strong>ghi nhận</strong>
+              ghi nhận / tài liệu hóa
+            </div><div class="approach-cell pull">
+              <strong>khuyến khích collaboration</strong>
+              khuyến khích collaboration / hợp tác
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q71</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Executing (…</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q71 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Centralize more decisions with the project manager to e…</strong></td>
+                <td>Centralize more decisions with the project manager to ensure consisten</td>
+                <td>✗ &quot;Centralize more decisions with the project manager to ensure consistency and reduc…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Ask functional managers to replace team members who see…</strong></td>
+                <td>Ask functional managers to replace team members who seem hesitant to m</td>
+                <td>✗ &quot;Ask functional managers to replace team members who seem hesitant to make decision…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Reduce documentation of expectations so the team develo…</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>D. Encourage the team to make decisions within agreed boun…</strong></td>
+                <td>khuyến khích collaboration / hợp tác</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q71</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Centralize more decisions with the project manager to ensure consistency and reduce the risk of errors.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Encourage the team to make decisions within agreed boundaries and offer support when they encounter exceptions or risks.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q71</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q71</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 71</div>
             <div class="q-text">In a product development project, the team comprises skilled specialists who consistently seek the project manager’s approval before making routine technical and process decisions. This behavior creates delays and turns the project manager into a bottleneck. Team members appear hesitant to exercise judgment within their expertise. The project manager sees that ownership and autonomy are limited. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>D:</strong> PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: In a product development project, the team comprises skilled specialists who consistently seek the project manager’s approval before making routine technical and process decisions. This behavior creates delays and turns the project manager into a bottleneck. Team members appear hesitant to exercise judgment within their expertise. The project manager sees that ownership and autonomy are limited. Đáp án <strong>D</strong> — &quot;Encourage the team to make decisions within agreed boundaries and offer support when they encounter exceptions or risks.&quot; — phù hợp vì PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án D.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 86.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Encourage the team to make decisions within agreed boundaries and offer support when they encounter exceptions or risks.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: In a product development project, the team comprises skilled specialists who consistently seek the project manager’s approval before making routine technical and process decisions. This behavior creates delays and turns the project manager into a bottleneck. Team members appear hesitant to exercise judgment within their expertise. The project manager sees that ownership and autonomy are limited. Đáp án <strong>D</strong> — &quot;Encourage the team to make decisions within agreed boundaries and offer support when they encounter exceptions or risks.&quot; — phù hợp vì PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; ⚫ <span class="kw-signal">Empowerment</span>, delegation, and autonomy. Project team members who feel <span class="kw-signal">empowered</span> to make decisions about the way they work and about specific details in the deliverables being produced—even under limited range—perform better and have a hi<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 86 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 86: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Centralize more decisions with the project manager to ensure consistency and red…</span></td><td>&quot;Centralize more decisions with the project manager to ensure consistency and reduc…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung khuyến khích <span class="kw-signal">collaboration</span> / hợp tác.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask functional managers to replace team members who seem hesitant to make decisi…</span></td><td>&quot;Ask functional managers to replace team members who seem hesitant to make decision…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung khuyến khích <span class="kw-signal">collaboration</span> / hợp tác.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reduce documentation of expectations so the team develops its own informal decis…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="encourage_collaborate">
+              <span>In a product development project, the team comprises skilled specialists who consistently seek the p… (Q71)</span>
+              <div class="classify-btns"><button data-pick="encourage_collaborate" type="button">khuyến khích</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="document_first">
+              <span>Tình huống cần &quot;ghi nhận / tài liệu hóa&quot; — không phải trọng tâm Q71</span>
+              <div class="classify-btns"><button data-pick="encourage_collaborate" type="button">khuyến khích</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Centralize more decisions with the project manager t…" → A</h4>
+            <p style="margin:0">&quot;Centralize more decisions with the project manager to ensure consistency and reduc…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung khuyến khích collaboration / hợp tác.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Ask functional managers to replace team members who …" → B</h4>
+            <p style="margin:0">&quot;Ask functional managers to replace team members who seem hesitant to make decision…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung khuyến khích collaboration / hợp tác.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Reduce documentation of expectations so the team dev…" → C</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Executing (…</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q71 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Encourage the team to make decisions within agreed boundaries and offer support when they encounter exceptions or risks.</div>
+            <div class="flashcard-front">Q71 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 86</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q71 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Encourage the team to make decisions within agreed boundaries and offer support when they encounter </div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án D theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q71
-────────────────────────
-In a product development project, the team comprises skilled specialists who consistently seek the project manager’s approval before making routine technical and process decisions. This behavior creat…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q71
+(PMBOK 8, tr. 86)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Resources
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: D
-D. Encourage the team to make decisions within agreed boundaries and offer support when they encounter exceptions or risks.
+SCENARIO:
+In a product development project, the team comprises skilled specialists who consistently seek the project manager’s approval before making routine technical and process decisions. This behavior creates delays and turns …
 
-PMBOK 8:
-  Domain: Stakeholders, Resources
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Encourage the team to make decisions within agreed boundaries and offer support when they encounter exceptions or risks.
+
+NOT:
+  A) Centralize more decisions with the project manager… — &quot;Centralize more decisions with the project manager to ensur
+  B) Ask functional managers to replace team members wh… — &quot;Ask functional managers to replace team members who seem he
+  C) Reduce documentation of expectations so the team d… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+
+Q71 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Centralize more decisions with the project manager to ensure consistency and reduc…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung khuyến khích collaboration / hợp tác.","B":"\"Ask functional managers to replace team members who seem hesitant to make decision…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung khuyến khích collaboration / hợp tác.","C":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","D":"PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Executing (PMBOK 8)."};
+      const EXPL = {"A":"\"Centralize more decisions with the project manager to ensure consistency and reduc…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung khuyến khích collaboration / hợp tác.","B":"\"Ask functional managers to replace team members who seem hesitant to make decision…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung khuyến khích collaboration / hợp tác.","C":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","D":"Đúng! PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Executing (PMBOK 8)."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 233</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-233">Câu 233</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q232.html">← 232</a>
         <a href="pmp-teach-full-q234.html">234 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 233 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A new product owner has been brought into a sports team organization to create an agile team. Several long-tenured stakeholders have strong opposing views about team direction, priorities, and ways of working, and early meetings have become unproductive due to conflicting opinions. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Resources</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q233</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q233</h1>
+          <p class="lead">Bài học Q233 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 53) — Xung đột</p>
+          <p class="lead" style="margin-top:0.75rem">A new product owner has been brought into a sports team organization to create an agile team. Several long-tenured <em>stakeholders have strong opposing views about team direction</em>, priorities, and ways of working, and early meetings have become unproductive due to conflicting opinions. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Stakeholders, Resources</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q233</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably, Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Resources</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 53): 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell">
+              <strong>lắng nghe và hỗ trợ cá nhân</strong>
+              lắng nghe và hỗ trợ cá nhân
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Establish formal ground rules for team meetings and enforce 
+            </div><div class="approach-cell pull">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q233</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholders have strong opposing views about team direction</strong><br><br>→ <strong>D</strong> phù hợp vì PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q233 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Escalate the stakeholder conflict to the product owner …</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>B. Facilitate separate one-on-one sessions with each stake…</strong></td>
+                <td>lắng nghe và hỗ trợ cá nhân</td>
+                <td>✗ Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết xung đột trong team hoặc stakehol…</td>
+              </tr><tr>
+                <td><strong>C. Establish formal ground rules for team meetings and enf…</strong></td>
+                <td>Establish formal ground rules for team meetings and enforce them consi</td>
+                <td>✗ &quot;Establish formal ground rules for team meetings and enforce them consistently to p…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Meet with the stakeholders to brainstorm together, allo…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q233</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         <span class="kw-trap">Escalate</span> the stakeholder conflict to the product owner and request that they establish clear team priorities to resolve the disagreements.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         <span class="kw-signal">Meet with</span> the stakeholders to brainstorm together, allow them to provide opinions, and use active listening and conflict management techniques to identify areas of agreement.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q233</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q233</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 233</div>
             <div class="q-text">A new product owner has been brought into a sports team organization to create an agile team. Several long-tenured stakeholders have strong opposing views about team direction, priorities, and ways of working, and early meetings have become unproductive due to conflicting opinions. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>→ <strong>D:</strong> Xung đột — PM <span class="kw-signal">facilitate</span> giải quyết trực tiếp, không <span class="kw-trap">ignore</span> hay <span class="kw-trap">escalate</span> sớm.</li><li>Bối cảnh: xung đột trong team hoặc stakeholder. Đáp án <strong>D</strong> — &quot;<span class="kw-signal">Meet with</span> the stakeholders to brainstorm together, allow them to provide opinions, and use active listening and conflict management techniques to identify areas of agreement.&quot; — phù hợp vì PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: xung đột trong team hoặc stakeholder — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Meet with the stakeholders to brainstorm together, allow them to provide opinions, and use active listening and conflict management techniques to identify areas of agreement.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Xung đột — PM <span class="kw-signal">facilitate</span> giải quyết trực tiếp, không <span class="kw-trap">ignore</span> hay <span class="kw-trap">escalate</span> sớm.<br><br>Bối cảnh: xung đột trong team hoặc stakeholder. Đáp án <strong>D</strong> — &quot;<span class="kw-signal">Meet with</span> the stakeholders to brainstorm together, allow them to provide opinions, and use active listening and conflict management techniques to identify areas of agreement.&quot; — phù hợp vì PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an Empowered Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the stakeholder conflict to the product owner and request that they est…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Facilitate separate one-on-one sessions with each stakeholder to understand thei…</span></td><td>Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết xung đột trong team hoặc stakeholder — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Establish formal ground rules for team meetings and enforce them consistently to…</span></td><td>&quot;Establish formal ground rules for team meetings and enforce them consistently to p…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>A new product owner has been brought into a sports team organization to create an agile team. Severa… (Q233)</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="listen_support" type="button">lắng nghe và</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q233</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="listen_support" type="button">lắng nghe và</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="listen_support">
+              <span>Tình huống cần &quot;lắng nghe và hỗ trợ cá nhân&quot; — không phải trọng tâm Q233</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="listen_support" type="button">lắng nghe và</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Escalate the stakeholder conflict to the product own…" → A</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Facilitate separate one-on-one sessions with each st…" → B</h4>
+            <p style="margin:0">Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết xung đột trong team hoặc stakeholder — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Establish formal ground rules for team meetings and …" → C</h4>
+            <p style="margin:0">&quot;Establish formal ground rules for team meetings and enforce them consistently to p…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholders have strong opposing views about team direction</strong> → <strong>D</strong> — PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q233 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Meet with the stakeholders to brainstorm together, allow them to provide opinions, and use active listening and conflict management techniques to identify areas of agreement.</div>
+            <div class="flashcard-front">Q233 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 53</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q233 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Meet with the stakeholders to brainstorm together, allow them to provide opinions, and use active li</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Xung đột</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q233
-────────────────────────
-A new product owner has been brought into a sports team organization to create an agile team. Several long-tenured stakeholders have strong opposing views about team direction, priorities, and ways of…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q233
+(PMBOK 8, tr. 53)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Resources
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably, Build an empowered culture
 
-ANSWER: D
-D. Meet with the stakeholders to brainstorm together, allow them to provide opinions, and use active listening and conflict management techniques to identify areas of agreement.
+SCENARIO:
+A new product owner has been brought into a sports team organization to create an agile team. Several long-tenured stakeholders have strong opposing views about team direction, priorities, and ways of working, and early …
 
-PMBOK 8:
-  Domain: Stakeholders, Resources
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably, Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholders have strong opposing views about team direction
+
+ANSWER → D) Meet with the stakeholders to brainstorm together, allow them to provide opinions, and use active listening and conflict management techniques to identify areas of agreement.
+
+NOT:
+  A) Escalate the stakeholder conflict to the product o… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  B) Facilitate separate one-on-one sessions with each … — Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết xun
+  C) Establish formal ground rules for team meetings an… — &quot;Establish formal ground rules for team meetings and enforce
+
+Q233 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Tập trung \"lắng nghe và hỗ trợ cá nhân\" không giải quyết xung đột trong team hoặc stakeholder — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","C":"\"Establish formal ground rules for team meetings and enforce them consistently to p…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","D":"PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture."};
+      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Tập trung \"lắng nghe và hỗ trợ cá nhân\" không giải quyết xung đột trong team hoặc stakeholder — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","C":"\"Establish formal ground rules for team meetings and enforce them consistently to p…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","D":"Đúng! PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

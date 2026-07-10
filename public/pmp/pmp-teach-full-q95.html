@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 95</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Plan Resources</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-95">Câu 95</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q94.html">← 94</a>
         <a href="pmp-teach-full-q96.html">96 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 95 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">In the final phase of a long-running initiative, a project team decides to adopt selected agile practices to improve responsiveness. Some members are new to agile and are unsure how to apply key practices. The project manager sees an inconsistent understanding of agile across the team. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Initiating</span><span class="badge">Plan Resources</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q95</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q95</h1>
+          <p class="lead">Bài học Q95 về <strong>Plan Resources</strong> (PMBOK 8, tr. 76) — ngữ cảnh Agile/Scrum</p>
+          <p class="lead" style="margin-top:0.75rem">In the final phase of a long-running initiative, a project team decides to adopt selected agile practices to improve responsiveness. Some members are new to agile and are unsure how to apply key practices. The project manager sees an inconsistent understanding of agile across the team. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 76</span><span class="badge">Resources, Stakeholders</span><span class="badge">Plan Resources</span><span class="badge">Full Bank Q95</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Stakeholders<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Plan Resources, Acquire Resources, Develop Team<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Plan Resources</h2>
+          <p><strong>Plan Resources</strong> thuộc miền <strong>Resources, Stakeholders</strong> — process <strong>Plan Resources</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 76): 76 A Guide to the Project Management Body of Knowledge 2.5.3.1 Examples The following are three examples of how these considerations might be applied: ⚫ Example 1. Agile projects require continuous feedback on features and user stories to</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Assign only the team members with prior agile experience to 
+            </div><div class="approach-cell">
+              <strong>thông báo</strong>
+              thông báo / truyền đạt thông tin
+            </div><div class="approach-cell">
+              <strong>tiếp tục theo kế hoạch hiện tại</strong>
+              tiếp tục theo kế hoạch hiện tại
+            </div><div class="approach-cell pull">
+              <strong>coaching</strong>
+              coaching / phát triển năng lực
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q95</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q95 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Assign only the team members with prior agile experienc…</strong></td>
+                <td>Assign only the team members with prior agile experience to the remain</td>
+                <td>✗ &quot;Assign only the team members with prior agile experience to the remaining work and…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Ask experienced team members to share agile tips inform…</strong></td>
+                <td>thông báo / truyền đạt thông tin</td>
+                <td>✗ Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp á…</td>
+              </tr><tr>
+                <td><strong>C. Continue with the original plan without agile practices…</strong></td>
+                <td>tiếp tục theo kế hoạch hiện tại</td>
+                <td>✗ Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án…</td>
+              </tr><tr>
+                <td><strong>D. Identify agile knowledge gaps and organize training so …</strong></td>
+                <td>coaching / phát triển năng lực</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q95</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Assign only the team members with prior agile experience to the remaining work and keep others on support tasks.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Identify agile knowledge gaps and organize training so all team members understand how to apply chosen practices.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q95</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q95</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 95</div>
             <div class="q-text">In the final phase of a long-running initiative, a project team decides to adopt selected agile practices to improve responsiveness. Some members are new to agile and are unsure how to apply key practices. The project manager sees an inconsistent understanding of agile across the team. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</li><li>→ <strong>D:</strong> PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</li><li>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>D</strong> — &quot;Identify agile knowledge gaps and organize training so all team members understand how to apply chosen practices.&quot; — phù hợp vì PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Plan <span class="kw-pmbok">Resources</span> — align với đáp án D.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Identify agile knowledge gaps and organize training so all team members understand how to apply chosen practices.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.<br><br>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>D</strong> — &quot;Identify agile knowledge gaps and organize training so all team members understand how to apply chosen practices.&quot; — phù hợp vì PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 76 A Guide to the Project Management Body of Knowledge 2.5.3.1 Examples The following are three examples of how these considerations might be applied: ⚫ Example 1. Agile projects require continuous feedback on features and user stories to<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 76 (Performance Domain: <span class="kw-pmbok">Resources</span>, Plan <span class="kw-pmbok">Resources</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 76: Performance Domain: <span class="kw-pmbok">Resources</span>, Plan <span class="kw-pmbok">Resources</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Assign only the team members with prior agile experience to the remaining work a…</span></td><td>&quot;Assign only the team members with prior agile experience to the remaining work and…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask experienced team members to share agile tips informally during meetings with…</span></td><td>Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Continue with the original plan without agile practices to avoid confusing team …</span></td><td>Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="coach_develop">
+              <span>In the final phase of a long-running initiative, a project team decides to adopt selected agile prac… (Q95)</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="communicate_inform">
+              <span>Tình huống cần &quot;thông báo / truyền đạt thông tin&quot; — không phải trọng tâm Q95</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="proceed_continue">
+              <span>Tình huống cần &quot;tiếp tục theo kế hoạch hiện tại&quot; — không phải trọng tâm Q95</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Assign only the team members with prior agile experi…" → A</h4>
+            <p style="margin:0">&quot;Assign only the team members with prior agile experience to the remaining work and…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung coaching / phát triển năng lực.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Ask experienced team members to share agile tips inf…" → B</h4>
+            <p style="margin:0">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần coaching / phát triển năng lực.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Continue with the original plan without agile practi…" → C</h4>
+            <p style="margin:0">Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần coaching / phát triển năng lực.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q95 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Identify agile knowledge gaps and organize training so all team members understand how to apply chosen practices.</div>
+            <div class="flashcard-front">Q95 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Plan Resources</strong><br>PMBOK 8, tr. 76</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Plan Resources</div>
+            <div class="flashcard-front">Q95 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Identify agile knowledge gaps and organize training so all team members understand how to apply chos</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">ngữ cảnh Agile/Scrum</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q95
-────────────────────────
-In the final phase of a long-running initiative, a project team decides to adopt selected agile practices to improve responsiveness. Some members are new to agile and are unsure how to apply key pract…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">PLAN RESOURCES — Q95
+(PMBOK 8, tr. 76)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Stakeholders
+PROCESS: Plan Resources, Acquire Resources, Develop Team
+PRINCIPLE: Lead accountably
 
-ANSWER: D
-D. Identify agile knowledge gaps and organize training so all team members understand how to apply chosen practices.
+SCENARIO:
+In the final phase of a long-running initiative, a project team decides to adopt selected agile practices to improve responsiveness. Some members are new to agile and are unsure how to apply key practices. The project ma…
 
-PMBOK 8:
-  Domain: Resources, Stakeholders
-  Process: Plan Resources, Acquire Resources, Develop Team
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Identify agile knowledge gaps and organize training so all team members understand how to apply chosen practices.
+
+NOT:
+  A) Assign only the team members with prior agile expe… — &quot;Assign only the team members with prior agile experience to
+  B) Ask experienced team members to share agile tips i… — Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyế
+  C) Continue with the original plan without agile prac… — Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết
+
+Q95 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Assign only the team members with prior agile experience to the remaining work and…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung coaching / phát triển năng lực.","B":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần coaching / phát triển năng lực.","C":"Tập trung \"tiếp tục theo kế hoạch hiện tại\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần coaching / phát triển năng lực.","D":"PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững."};
+      const EXPL = {"A":"\"Assign only the team members with prior agile experience to the remaining work and…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung coaching / phát triển năng lực.","B":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần coaching / phát triển năng lực.","C":"Tập trung \"tiếp tục theo kế hoạch hiện tại\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần coaching / phát triển năng lực.","D":"Đúng! PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

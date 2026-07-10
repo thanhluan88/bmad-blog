@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 303</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-303">Câu 303</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q302.html">← 302</a>
         <a href="pmp-teach-full-q304.html">304 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 303 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is leading a team of software engineers developing a mobile app for a retail client. While the team consistently meets sprint deadlines, recent customer feedback has revealed an increase in usability issues and post-release defects. The project manager suspects the decline in quality is due to skill gaps within the team. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q303</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q303</h1>
+          <p class="lead">Bài học Q303 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 68) — trễ tiến độ / áp lực schedule</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is leading a team of software engineers developing a mobile app for a retail client. While the team consistently meets sprint deadlines, recent customer feedback has revealed an increase in usability issues and post-release defects. The project manager suspects the decline in quality is due to skill gaps within the team. <em>What should the project manager do next</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 68</span><span class="badge">Stakeholders, Scope</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q303</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement, Validate Scope<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders, Scope</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 68): 68 A Guide to the Project Management Body of Knowledge 2.5.1 Key Concepts The following key concepts support effective practices for the Stakeholders performance domain. ⚫ Stakeholder engagement. Stakeholder engagement encompasses the activ</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Recruit an experienced senior team member to the team to off
+            </div><div class="approach-cell">
+              <strong>bổ sung nguồn lực</strong>
+              bổ sung nguồn lực / hire
+            </div><div class="approach-cell pull">
+              <strong>coaching</strong>
+              coaching / phát triển năng lực
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Implement a stricter performance evaluation system to hold t
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q303</h4>
+            <p style="margin:0"><strong>What should the project manager do next</strong><br><br>→ <strong>C</strong> phù hợp vì PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q303 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Recruit an experienced senior team member to the team t…</strong></td>
+                <td>Recruit an experienced senior team member to the team to offset perfor</td>
+                <td>✗ &quot;Recruit an experienced senior team member to the team to offset performance issues.&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Hire new team members with more experience to compensat…</strong></td>
+                <td>bổ sung nguồn lực / hire</td>
+                <td>✗ Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp …</td>
+              </tr><tr>
+                <td><strong>C. Conduct a skills gap analysis to identify specific trai…</strong></td>
+                <td>coaching / phát triển năng lực</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Implement a stricter performance evaluation system to h…</strong></td>
+                <td>Implement a stricter performance evaluation system to hold team member</td>
+                <td>✗ &quot;Implement a stricter performance evaluation system to hold team members accountable.&quot; khô…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q303</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Recruit an experienced senior team member to the team to offset performance issues.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Conduct a skills gap analysis to identify specific training needs and provide targeted training.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Implement a stricter performance evaluation system to hold team members accountable.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q303</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q303</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 303</div>
             <div class="q-text">A project manager is leading a team of software engineers developing a mobile app for a retail client. While the team consistently meets sprint deadlines, recent customer feedback has revealed an increase in usability issues and post-release defects. The project manager suspects the decline in quality is due to skill gaps within the team. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</li><li>→ <strong>C:</strong> PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</li><li>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong><span class="kw-signal">coaching</span> / phát triển năng lực</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Stem signal: trễ tiến độ / áp lực schedule — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Conduct a skills gap analysis to identify specific training needs and provide targeted training.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.<br><br>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong><span class="kw-signal">coaching</span> / phát triển năng lực</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 68 A Guide to the Project Management Body of Knowledge 2.5.1 Key Concepts The following key concepts support effective practices for the <span class="kw-pmbok">Stakeholders</span> performance domain. ⚫ Stakeholder engagement. Stakeholder engagement encompasses the activ<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 68 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Manage Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 68: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Manage Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Recruit an experienced senior team member to the team to offset performance issu…</span></td><td>&quot;Recruit an experienced senior team member to the team to offset performance issues.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Hire new team members with more experience to compensate for the performance dec…</span></td><td>Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement a stricter performance evaluation system to hold team members accounta…</span></td><td>&quot;Implement a stricter performance evaluation system to hold team members accountable.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="coach_develop">
+              <span>A project manager is leading a team of software engineers developing a mobile app for a retail clien… (Q303)</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="add_resources" type="button">bổ sung nguồ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="add_resources">
+              <span>Tình huống cần &quot;bổ sung nguồn lực / hire&quot; — không phải trọng tâm Q303</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="add_resources" type="button">bổ sung nguồ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Recruit an experienced senior team member to the tea…" → A</h4>
+            <p style="margin:0">&quot;Recruit an experienced senior team member to the team to offset performance issues.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung coaching / phát triển năng lực.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Hire new team members with more experience to compen…" → B</h4>
+            <p style="margin:0">Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần coaching / phát triển năng lực.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Implement a stricter performance evaluation system t…" → D</h4>
+            <p style="margin:0">&quot;Implement a stricter performance evaluation system to hold team members accountable.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung coaching / phát triển năng lực.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do next</strong> → <strong>C</strong> — PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q303 — đáp án?</div>
+            <div class="flashcard-front">Q303 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 68</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q303 — đáp án?</div>
             <div class="flashcard-back"><strong>C</strong> — Conduct a skills gap analysis to identify specific training needs and provide targeted training.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">trễ tiến độ / áp lực schedule</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q303
-────────────────────────
-A project manager is leading a team of software engineers developing a mobile app for a retail client. While the team consistently meets sprint deadlines, recent customer feedback has revealed an incr…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q303
+(PMBOK 8, tr. 68)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Scope
+PROCESS: Manage Stakeholder Engagement, Validate Scope
+PRINCIPLE: Focus on value
 
-ANSWER: C
-C. Conduct a skills gap analysis to identify specific training needs and provide targeted training.
+SCENARIO:
+A project manager is leading a team of software engineers developing a mobile app for a retail client. While the team consistently meets sprint deadlines, recent customer feedback has revealed an increase in usability is…
 
-PMBOK 8:
-  Domain: Stakeholders, Scope
-  Process: Manage Stakeholder Engagement, Validate Scope
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do next
+
+ANSWER → C) Conduct a skills gap analysis to identify specific training needs and provide targeted training.
+
+NOT:
+  A) Recruit an experienced senior team member to the t… — &quot;Recruit an experienced senior team member to the team to of
+  B) Hire new team members with more experience to comp… — Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết trễ ti
+  D) Implement a stricter performance evaluation system… — &quot;Implement a stricter performance evaluation system to hold 
+
+Q303 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"\"Recruit an experienced senior team member to the team to offset performance issues.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung coaching / phát triển năng lực.","B":"Tập trung \"bổ sung nguồn lực / hire\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần coaching / phát triển năng lực.","C":"PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.","D":"\"Implement a stricter performance evaluation system to hold team members accountable.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung coaching / phát triển năng lực."};
+      const EXPL = {"A":"\"Recruit an experienced senior team member to the team to offset performance issues.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung coaching / phát triển năng lực.","B":"Tập trung \"bổ sung nguồn lực / hire\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần coaching / phát triển năng lực.","C":"Đúng! PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.","D":"\"Implement a stricter performance evaluation system to hold team members accountable.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung coaching / phát triển năng lực."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

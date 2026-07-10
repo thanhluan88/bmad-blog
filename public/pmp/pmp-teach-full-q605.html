@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 605</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Schedule</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-605">Câu 605</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q604.html">← 604</a>
         <a href="pmp-teach-full-q606.html">606 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 605 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">During a release planning workshop, the client requests advancing the delivery of a high-value analytics dashboard. The dashboard was scheduled for a later phase because it depends on the infrastructure being at <span class="kw-cue">least</span> partially stable. Developers argue that advancing it introduces integration risks, although business stakeholders insist that early insights are critical to maintaining market advantage. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Schedule, Scope</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q605</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q605</h1>
+          <p class="lead">Bài học Q605 về <strong>Develop Schedule</strong> (PMBOK 8, tr. 42) — trễ tiến độ / áp lực schedule</p>
+          <p class="lead" style="margin-top:0.75rem">During a release planning workshop, the client requests advancing the delivery of a high-value analytics dashboard. The dashboard was scheduled for a later phase because it depends on the infrastructure being at least partially stable. Developers argue that advancing it introduces integration risks, although business <em>stakeholders insist that early insights are critical to maint</em>aining market advantage. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 42</span><span class="badge">Schedule, Scope</span><span class="badge">Develop Schedule</span><span class="badge">Full Bank Q605</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Schedule, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Schedule, Control Schedule, Define Scope<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Develop Schedule</h2>
+          <p><strong>Develop Schedule</strong> thuộc miền <strong>Schedule, Scope</strong> — process <strong>Develop Schedule</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 42): remains focused on delivering its key outcomes. ⚫ Schedule. A focus on value helps to ensure that time is managed effectively to help the project to deliver the expected value by—or earlier than—the target date. This effort includes plan</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Approve early delivery to satisfy business stakeholders and 
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Maintain the original schedule because advancing delivery wo
+            </div><div class="approach-cell pull">
+              <strong>C</strong>
+              Facilitate a trade-off analysis with stakeholders to evaluat
+            </div><div class="approach-cell">
+              <strong>họp</strong>
+              họp / thảo luận trực tiếp
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q605</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholders insist that early insights are critical to maint</strong><br><br>→ <strong>C</strong> phù hợp vì PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q605 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Approve early delivery to satisfy business stakeholders…</strong></td>
+                <td>Approve early delivery to satisfy business stakeholders and secure imm</td>
+                <td>✗ &quot;Approve early delivery to satisfy business stakeholders and secure immediate compe…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Maintain the original schedule because advancing delive…</strong></td>
+                <td>Maintain the original schedule because advancing delivery would disrup</td>
+                <td>✗ &quot;Maintain the original schedule because advancing delivery would disrupt baselines …&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Facilitate a trade-off analysis with stakeholders to ev…</strong></td>
+                <td>Facilitate a trade-off analysis with stakeholders to evaluate deliveri</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Meet with the development team to introduce incremental…</strong></td>
+                <td>họp / thảo luận trực tiếp</td>
+                <td>✗ Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q605</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Approve early delivery to satisfy business stakeholders and secure immediate competitive advantage.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         <span class="kw-signal">Facilitate</span> a trade-off analysis with stakeholders to evaluate delivering early value against integration risks.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Meet with the development team to introduce incremental improvements to avoid major rework in the future.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q605</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q605</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 605</div>
             <div class="q-text">During a release planning workshop, the client requests advancing the delivery of a high-value analytics dashboard. The dashboard was scheduled for a later phase because it depends on the infrastructure being at <span class="kw-cue">least</span> partially stable. Developers argue that advancing it introduces integration risks, although business stakeholders insist that early insights are critical to maintaining market advantage. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>→ <strong>C:</strong> PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>C</strong> — &quot;<span class="kw-signal">Facilitate</span> a trade-off analysis with stakeholders to evaluate delivering early value against integration risks.&quot; — phù hợp vì PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>Stem signal: trễ tiến độ / áp lực schedule — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Develop <span class="kw-pmbok">Schedule</span> — align với đáp án C.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Facilitate a trade-off analysis with stakeholders to evaluate delivering early value against integration risks.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.<br><br>Bối cảnh: trễ tiến độ / áp lực schedule. Đáp án <strong>C</strong> — &quot;<span class="kw-signal">Facilitate</span> a trade-off analysis with stakeholders to evaluate delivering early value against integration risks.&quot; — phù hợp vì PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; remains focused on delivering its key outcomes. ⚫ <span class="kw-pmbok">Schedule</span>. A <span class="kw-pmbok">focus on value</span> helps to ensure that time is managed effectively to help the project to deliver the expected value by—or earlier than—the target date. This effort includes plan<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 42 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 42: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve early delivery to satisfy business stakeholders and secure immediate com…</span></td><td>&quot;Approve early delivery to satisfy business stakeholders and secure immediate compe…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;<span class="kw-signal">Facilitate</span> a trade-off analysis with stakeholders to evaluate delivering early val…&quot;.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Maintain the original schedule because advancing delivery would disrupt baseline…</span></td><td>&quot;Maintain the original schedule because advancing delivery would disrupt baselines …&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;<span class="kw-signal">Facilitate</span> a trade-off analysis with stakeholders to evaluate delivering early val…&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Meet with the development team to introduce incremental improvements to avoid ma…</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>During a release planning workshop, the client requests advancing the delivery of a high-value analy… (Q605)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="meet_discuss">
+              <span>Tình huống cần &quot;họp / thảo luận trực tiếp&quot; — không phải trọng tâm Q605</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Approve early delivery to satisfy business stakehold…" → A</h4>
+            <p style="margin:0">&quot;Approve early delivery to satisfy business stakeholders and secure immediate compe…&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Facilitate a trade-off analysis with stakeholders to evaluate delivering early val…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Maintain the original schedule because advancing del…" → B</h4>
+            <p style="margin:0">&quot;Maintain the original schedule because advancing delivery would disrupt baselines …&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung &quot;Facilitate a trade-off analysis with stakeholders to evaluate delivering early val…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Meet with the development team to introduce incremen…" → D</h4>
+            <p style="margin:0">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholders insist that early insights are critical to maint</strong> → <strong>C</strong> — PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q605 — đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Facilitate a trade-off analysis with stakeholders to evaluate delivering early value against integration risks.</div>
+            <div class="flashcard-front">Q605 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Schedule</strong><br>PMBOK 8, tr. 42</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Develop Schedule</div>
+            <div class="flashcard-front">Q605 — đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Facilitate a trade-off analysis with stakeholders to evaluate delivering early value against integra</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">trễ tiến độ / áp lực schedule</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q605
-────────────────────────
-During a release planning workshop, the client requests advancing the delivery of a high-value analytics dashboard. The dashboard was scheduled for a later phase because it depends on the infrastructu…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP SCHEDULE — Q605
+(PMBOK 8, tr. 42)
+─────────────────────────────────────────────────────
+DOMAIN: Schedule, Scope
+PROCESS: Develop Schedule, Control Schedule, Define Scope
+PRINCIPLE: Focus on value
 
-ANSWER: C
-C. Facilitate a trade-off analysis with stakeholders to evaluate delivering early value against integration risks.
+SCENARIO:
+During a release planning workshop, the client requests advancing the delivery of a high-value analytics dashboard. The dashboard was scheduled for a later phase because it depends on the infrastructure being at least pa…
 
-PMBOK 8:
-  Domain: Schedule, Scope
-  Process: Develop Schedule, Control Schedule, Define Scope
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholders insist that early insights are critical to maint
+
+ANSWER → C) Facilitate a trade-off analysis with stakeholders to evaluate delivering early value against integration risks.
+
+NOT:
+  A) Approve early delivery to satisfy business stakeho… — &quot;Approve early delivery to satisfy business stakeholders and
+  B) Maintain the original schedule because advancing d… — &quot;Maintain the original schedule because advancing delivery w
+  D) Meet with the development team to introduce increm… — Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết trễ t
+
+Q605 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"\"Approve early delivery to satisfy business stakeholders and secure immediate compe…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Facilitate a trade-off analysis with stakeholders to evaluate delivering early val…\".","B":"\"Maintain the original schedule because advancing delivery would disrupt baselines …\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Facilitate a trade-off analysis with stakeholders to evaluate delivering early val…\".","C":"PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.","D":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
+      const EXPL = {"A":"\"Approve early delivery to satisfy business stakeholders and secure immediate compe…\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Facilitate a trade-off analysis with stakeholders to evaluate delivering early val…\".","B":"\"Maintain the original schedule because advancing delivery would disrupt baselines …\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung \"Facilitate a trade-off analysis with stakeholders to evaluate delivering early val…\".","C":"Đúng! PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.","D":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

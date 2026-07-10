@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 174</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-174">Câu 174</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q173.html">← 173</a>
         <a href="pmp-teach-full-q175.html">175 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 174 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is leading an agile project with diverse stakeholders including end users, regulatory bodies, and executive sponsors who have different engagement preferences and availability constraints. Some stakeholders prefer formal reviews at milestone points, while others want continuous involvement. The project involves regulatory compliance requirements that need stakeholder validation at specific intervals, but agile principles emphasize continuous collaboration. How should the project manager optimize stakeholder engagement timing?</p>
-          <div class="badges"><span class="badge">Stakeholders, Schedule</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q174</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q174</h1>
+          <p class="lead">Bài học Q174 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 71) — ngữ cảnh Agile/Scrum</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is leading an agile project with diverse <em>stakeholders including end users</em>, regulatory bodies, and executive sponsors who have different engagement preferences and availability constraints. Some stakeholders prefer formal reviews at milestone points, while others want continuous involvement. The project involves regulatory compliance requirements that need stakeholder validation at specific intervals, but agile principles emphasize continuous collaboration. How should the project manager optimize stakeholder engagement timing?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 71</span><span class="badge">Stakeholders, Schedule</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q174</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,48 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Schedule<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Schedule</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 71): 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div><div class="approach-cell">
+              <strong>Agile ceremony</strong>
+              Agile ceremony / iteration event
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Implement milestone-based engagement aligned with traditiona
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q174</h4>
+            <p style="margin:0"><strong>stakeholders including end users</strong><br><br>→ <strong>B</strong> phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q174 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Establish continuous engagement for all stakeholders th…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td>✗ &quot;Establish continuous engagement for all stakeholders throughout the proj…&quot; cùng nhóm enga…</td>
+              </tr><tr>
+                <td><strong>B. Create differentiated engagement schedules based on sta…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Focus intensive engagement during sprint planning and r…</strong></td>
+                <td>Agile ceremony / iteration event</td>
+                <td>✗ Tập trung &quot;Agile ceremony / iteration event&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp á…</td>
+              </tr><tr>
+                <td><strong>D. Implement milestone-based engagement aligned with tradi…</strong></td>
+                <td>Implement milestone-based engagement aligned with traditional project </td>
+                <td>✗ &quot;Implement milestone-based engagement aligned with traditional project phase gates.&quot; không…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q174</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Establish continuous engagement for all stakeholders throughout the project lifecycle.
@@ -152,7 +197,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Create differentiated engagement schedules based on stakeholder roles and requirements.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Focus intensive engagement during sprint planning and review ceremonies only.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q174</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q174</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 174</div>
             <div class="q-text">A project manager is leading an agile project with diverse stakeholders including end users, regulatory bodies, and executive sponsors who have different engagement preferences and availability constraints. Some stakeholders prefer formal reviews at milestone points, while others want continuous involvement. The project involves regulatory compliance requirements that need stakeholder validation at specific intervals, but agile principles emphasize continuous collaboration. How should the project manager optimize stakeholder engagement timing?</div>
@@ -181,44 +226,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>→ <strong>B:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>B</strong> — &quot;Create differentiated engagement schedules based on stakeholder roles and requirements.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: đạo đức / tuân thủ — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Create differentiated engagement schedules based on stakeholder roles and requirements.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.<br><br>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>B</strong> — &quot;Create differentiated engagement schedules based on stakeholder roles and requirements.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Establish continuous engagement for all stakeholders throughout the project life…</span></td><td>&quot;Establish continuous engagement for all stakeholders throughout the proj…&quot; cùng nhóm engagement stakeholder / làm rõ kỳ vọng nhưng lệch trọng tâm — &quot;Create differentiated engagement schedules based on stakeholder roles an…&quot; sát ngữ cảnh Agile/Scrum hơn.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Focus intensive engagement during sprint planning and review ceremonies only.</span></td><td>Tập trung &quot;Agile ceremony / iteration event&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement milestone-based engagement aligned with traditional project phase gate…</span></td><td>&quot;Implement milestone-based engagement aligned with traditional project phase gates.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>A project manager is leading an agile project with diverse stakeholders including end users, regulat… (Q174)</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="agile_ceremony" type="button">Agile ceremo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>Tình huống cần &quot;engagement stakeholder / làm rõ kỳ vọng&quot; — không phải trọng tâm Q174</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="agile_ceremony" type="button">Agile ceremo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="agile_ceremony">
+              <span>Tình huống cần &quot;Agile ceremony / iteration event&quot; — không phải trọng tâm Q174</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="agile_ceremony" type="button">Agile ceremo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Establish continuous engagement for all stakeholders…" → A</h4>
+            <p style="margin:0">&quot;Establish continuous engagement for all stakeholders throughout the proj…&quot; cùng nhóm engagement stakeholder / làm rõ kỳ vọng nhưng lệch trọng tâm — &quot;Create differentiated engagement schedules based on stakeholder roles an…&quot; sát ngữ cảnh Agile/Scrum hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Focus intensive engagement during sprint planning an…" → C</h4>
+            <p style="margin:0">Tập trung &quot;Agile ceremony / iteration event&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Implement milestone-based engagement aligned with tr…" → D</h4>
+            <p style="margin:0">&quot;Implement milestone-based engagement aligned with traditional project phase gates.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>stakeholders including end users</strong> → <strong>B</strong> — PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q174 — đáp án?</div>
+            <div class="flashcard-front">Q174 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 71</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q174 — đáp án?</div>
             <div class="flashcard-back"><strong>B</strong> — Create differentiated engagement schedules based on stakeholder roles and requirements.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">ngữ cảnh Agile/Scrum</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q174
-────────────────────────
-A project manager is leading an agile project with diverse stakeholders including end users, regulatory bodies, and executive sponsors who have different engagement preferences and availability constr…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q174
+(PMBOK 8, tr. 71)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Schedule
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: B
-B. Create differentiated engagement schedules based on stakeholder roles and requirements.
+SCENARIO:
+A project manager is leading an agile project with diverse stakeholders including end users, regulatory bodies, and executive sponsors who have different engagement preferences and availability constraints. Some stakehol…
 
-PMBOK 8:
-  Domain: Stakeholders, Schedule
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  stakeholders including end users
+
+ANSWER → B) Create differentiated engagement schedules based on stakeholder roles and requirements.
+
+NOT:
+  A) Establish continuous engagement for all stakeholde… — &quot;Establish continuous engagement for all stakeholders throug
+  C) Focus intensive engagement during sprint planning … — Tập trung &quot;Agile ceremony / iteration event&quot; không giải quyế
+  D) Implement milestone-based engagement aligned with … — &quot;Implement milestone-based engagement aligned with tradition
+
+Q174 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Establish continuous engagement for all stakeholders throughout the proj…\" cùng nhóm engagement stakeholder / làm rõ kỳ vọng nhưng lệch trọng tâm — \"Create differentiated engagement schedules based on stakeholder roles an…\" sát ngữ cảnh Agile/Scrum hơn.","B":"PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.","C":"Tập trung \"Agile ceremony / iteration event\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","D":"\"Implement milestone-based engagement aligned with traditional project phase gates.\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng."};
+      const EXPL = {"A":"\"Establish continuous engagement for all stakeholders throughout the proj…\" cùng nhóm engagement stakeholder / làm rõ kỳ vọng nhưng lệch trọng tâm — \"Create differentiated engagement schedules based on stakeholder roles an…\" sát ngữ cảnh Agile/Scrum hơn.","B":"Đúng! PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.","C":"Tập trung \"Agile ceremony / iteration event\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","D":"\"Implement milestone-based engagement aligned with traditional project phase gates.\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

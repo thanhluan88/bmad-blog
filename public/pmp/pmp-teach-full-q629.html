@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 629</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-629">Câu 629</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q628.html">← 628</a>
         <a href="pmp-teach-full-q630.html">630 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 629 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is managing a predictive construction project. The scheduler prepares the following simplified schedule fragment to support impact analysis: ID Activity Predecessor(s) Original Duration (days) Original Finish Notes A Finalize entrance design − 5 Day 5 Includes door and main lobby layout B Structural engineering review A 3 Day 8 Uses finalized entrance design C Electrical and security design A 4 Day 9 Includes cameras and access control D Permitting submission B, C 2 Day 11 Submission to city authorities E Construction of the main entrance D 10 Day 21 Cannot start before permits are approved A key stakeholder requests an additional security checkpoint near the main entrance. The change request would add two days to Activity C, but does <span class="kw-cue">not</span> affect any other durations. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Scope, Governance</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q629</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q629</h1>
+          <p class="lead">Bài học Q629 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 38) — Có yêu cầu thay đổi</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is managing a predictive construction project. The scheduler prepares the following simplified schedule fragment to support impact analysis: ID Activity Predecessor(s) Original Duration (days) Original Finish Notes A Finalize entrance design − 5 Day 5 Includes door and main lobby layout B Structural engineering review A 3 Day 8 Uses finalized entrance design C Electrical and security design A 4 Day 9 Includes cameras and access control D Permitting submission B, C 2 Day 11 Submission to city authorities E Construction of the main entrance D 10 Day 21 Cannot start before permits are approved A key <em>stakeholder requests an additional security checkpoint near t</em>he main entrance. The <em>change request</em> would add two days to Activity C, but does not affect any other durations. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 38</span><span class="badge">Scope, Governance</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q629</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,52 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Scope, Governance<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Project Execution, Control Scope<br>
-              <strong>Principle:</strong> Focus on value, Adopt a holistic view
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Scope, Governance</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 38): allowing for an interdisciplinary approach that fosters more innovative and effective solutions. 3.3.1 Project Impact Applying a holistic view to project management results in a more integrated and cohesive approach to achieving project go</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>change control</strong>
+              change control / change request
+            </div><div class="approach-cell">
+              <strong>thông báo một chiều (inform</strong>
+              thông báo một chiều (inform/notify)
+            </div><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q629</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>change request</strong> · <strong>stakeholder requests an additional security checkpoint near t</strong><br><br>→ <strong>A</strong> phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q629 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Formally submit the change request, update the impact a…</strong></td>
+                <td>change control / change request</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Reject the change request because it will extend Activi…</strong></td>
+                <td>change control / change request</td>
+                <td>✗ &quot;Reject the change request because it will extend Activity C and therefor…&quot; cùng nhóm chan…</td>
+              </tr><tr>
+                <td><strong>C. Notify the stakeholder that the request is approved and…</strong></td>
+                <td>thông báo một chiều (inform/notify)</td>
+                <td>✗ Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết yêu cầu thay đổi phạm vi/…</td>
+              </tr><tr>
+                <td><strong>D. Instruct the project scheduler to re-baseline the sched…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ Tập trung &quot;chờ / trì hoãn&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đún…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q629</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Formally submit the <span class="kw-signal">change request</span>, update the impact analysis to show how the change will affect outcomes, and present everything to the change control board for approval.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Reject the change request because it will extend Activity C and therefore <span class="kw-trap">delay</span> the overall project completion by two days.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q629</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q629</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 629</div>
             <div class="q-text">A project manager is managing a predictive construction project. The scheduler prepares the following simplified schedule fragment to support impact analysis: ID Activity Predecessor(s) Original Duration (days) Original Finish Notes A Finalize entrance design − 5 Day 5 Includes door and main lobby layout B Structural engineering review A 3 Day 8 Uses finalized entrance design C Electrical and security design A 4 Day 9 Includes cameras and access control D Permitting submission B, C 2 Day 11 Submission to city authorities E Construction of the main entrance D 10 Day 21 Cannot start before permits are approved A key stakeholder requests an additional security checkpoint near the main entrance. The change request would add two days to Activity C, but does <span class="kw-cue">not</span> affect any other durations. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +226,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>→ <strong>A:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.</li><li>Với dự án uncertainty cao, giảm <span class="kw-signal">change request</span> bằng iteration/incremental delivery (<span class="kw-pmbok">Focus on value</span>) hiệu quả hơn siết governance cứng. <span class="kw-pmbok">PMBOK 8</span> hỗ trợ adaptive approach.</li><li>Stem signal: yêu cầu thay đổi phạm vi/kế hoạch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Manage Project Execution</span> — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Formally submit the change request, update the impact analysis to show how the change will affect outcomes, and present everything to the change control board for approval.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.<br><br>Với dự án uncertainty cao, giảm <span class="kw-signal">change request</span> bằng iteration/incremental delivery (<span class="kw-pmbok">Focus on value</span>) hiệu quả hơn siết governance cứng. <span class="kw-pmbok">PMBOK 8</span> hỗ trợ adaptive approach.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; allowing for an interdisciplinary approach that fosters more innovative and effective solutions. 3.3.1 Project Impact Applying a holistic view to project management results in a more integrated and cohesive approach to achieving project go<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 38 (Performance Domain: <span class="kw-pmbok">Scope</span>, <span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 38: Performance Domain: <span class="kw-pmbok">Scope</span>, <span class="kw-pmbok">Manage Project Execution</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reject the change request because it will extend Activity C and therefore <span class="kw-trap">delay</span> …</span></td><td>&quot;Reject the <span class="kw-signal">change request</span> because it will extend Activity C and therefor…&quot; cùng nhóm change control / <span class="kw-signal">change request</span> nhưng lệch trọng tâm — &quot;Formally submit the <span class="kw-signal">change request</span>, update the impact analysis to show h…&quot; sát yêu cầu thay đổi phạm vi/kế hoạch hơn.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Notify the stakeholder that the request is approved and will be implemented, as …</span></td><td>Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần change control / <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Instruct the project scheduler to re-baseline the schedule with the new Activity…</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần change control / <span class="kw-signal">change request</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="change_control">
+              <span>A project manager is managing a predictive construction project. The scheduler prepares the followin… (Q629)</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="change_control" type="button">change contr</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="wait_delay" type="button">chờ</button></div>
+            </div><div class="classify-row" data-answer="change_control">
+              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q629</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="change_control" type="button">change contr</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="wait_delay" type="button">chờ</button></div>
+            </div><div class="classify-row" data-answer="inform_one_way">
+              <span>Tình huống cần &quot;thông báo một chiều (inform/notify)&quot; — không phải trọng tâm Q629</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="change_control" type="button">change contr</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="wait_delay" type="button">chờ</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q629</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="change_control" type="button">change contr</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="wait_delay" type="button">chờ</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Reject the change request because it will extend Act…" → B</h4>
+            <p style="margin:0">&quot;Reject the change request because it will extend Activity C and therefor…&quot; cùng nhóm change control / change request nhưng lệch trọng tâm — &quot;Formally submit the change request, update the impact analysis to show h…&quot; sát yêu cầu thay đổi phạm vi/kế hoạch hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Notify the stakeholder that the request is approved …" → C</h4>
+            <p style="margin:0">Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần change control / change request.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Instruct the project scheduler to re-baseline the sc…" → D</h4>
+            <p style="margin:0">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần change control / change request.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · change request · stakeholder requests an additional security checkpoint near t</strong> → <strong>A</strong> — Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q629 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Formally submit the change request, update the impact analysis to show how the change will affect outcomes, and present everything to the change control board for approval.</div>
+            <div class="flashcard-front">Q629 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 38</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Q629 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Formally submit the change request, update the impact analysis to show how the change will affect ou</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Có yêu cầu thay đổi</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q629
-────────────────────────
-A project manager is managing a predictive construction project. The scheduler prepares the following simplified schedule fragment to support impact analysis: ID Activity Predecessor(s) Original Durat…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q629
+(PMBOK 8, tr. 38)
+─────────────────────────────────────────────────────
+DOMAIN: Scope, Governance
+PROCESS: Manage Project Execution, Control Scope
+PRINCIPLE: Focus on value, Adopt a holistic view
 
-ANSWER: A
-A. Formally submit the change request, update the impact analysis to show how the change will affect outcomes, and present everything to the change control board for approval.
+SCENARIO:
+A project manager is managing a predictive construction project. The scheduler prepares the following simplified schedule fragment to support impact analysis: ID Activity Predecessor(s) Original Duration (days) Original …
 
-PMBOK 8:
-  Domain: Scope, Governance
-  Process: Manage Project Execution, Control Scope
-  Principle: Focus on value, Adopt a holistic view</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | change request | stakeholder requests an additional security checkpoint near t
+
+ANSWER → A) Formally submit the change request, update the impact analysis to show how the change will affect outcomes, and present everything to the change control board for approval.
+
+NOT:
+  B) Reject the change request because it will extend A… — &quot;Reject the change request because it will extend Activity C
+  C) Notify the stakeholder that the request is approve… — Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải q
+  D) Instruct the project scheduler to re-baseline the … — Tập trung &quot;chờ / trì hoãn&quot; không giải quyết yêu cầu thay đổi
+
+Q629 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.","B":"\"Reject the change request because it will extend Activity C and therefor…\" cùng nhóm change control / change request nhưng lệch trọng tâm — \"Formally submit the change request, update the impact analysis to show h…\" sát yêu cầu thay đổi phạm vi/kế hoạch hơn.","C":"Tập trung \"thông báo một chiều (inform/notify)\" không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần change control / change request.","D":"Tập trung \"chờ / trì hoãn\" không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần change control / change request."};
+      const EXPL = {"A":"Đúng! Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.","B":"\"Reject the change request because it will extend Activity C and therefor…\" cùng nhóm change control / change request nhưng lệch trọng tâm — \"Formally submit the change request, update the impact analysis to show h…\" sát yêu cầu thay đổi phạm vi/kế hoạch hơn.","C":"Tập trung \"thông báo một chiều (inform/notify)\" không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần change control / change request.","D":"Tập trung \"chờ / trì hoãn\" không giải quyết yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng cần change control / change request."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

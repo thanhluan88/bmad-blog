@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 140</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-140">Câu 140</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q139.html">← 139</a>
         <a href="pmp-teach-full-q141.html">141 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 140 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A digital media company has just released a new feature developed by its agile product team. A team member used a workaround to unblock stalled work, and the quality director demands an explanation and corrective actions. The project manager must respond and drive corrective action. <span class="kw-cue">What should the project manager do</span>? (<span class="kw-cue">Choose 2</span>)</p>
-          <div class="badges"><span class="badge">Governance, Scope</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q140</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q140</h1>
+          <p class="lead">Bài học Q140 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 9) — vấn đề chất lượng / defect</p>
+          <p class="lead" style="margin-top:0.75rem">A digital media company has just released a new feature developed by its agile product team. A team member used a workaround to unblock stalled work, and the quality director demands an explanation and corrective actions. The project manager must respond and drive corrective action. <em>What should the project manager do</em>? (Choose 2)</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 9</span><span class="badge">Governance, Scope</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q140</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,58 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Project Execution, Perform Integrated Change Control, Close Project or Phase<br>
-              <strong>Principle:</strong> Embed quality
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Governance, Scope</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Embed quality</strong>. PMBOK 8 (tr. 9): 9 Section 1 – Introduction Additionally, project governance helps prioritize initiatives and allocate resources to support strategic objectives. For instance, a steering committee in a product launch project may oversee milestones, enforc</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Instruct the team member not to make any autonomous technica
+            </div><div class="approach-cell pull">
+              <strong>thông báo</strong>
+              thông báo / truyền đạt thông tin
+            </div><div class="approach-cell">
+              <strong>thừa nhận lỗi và giải trình minh bạch</strong>
+              thừa nhận lỗi và giải trình minh bạch
+            </div><div class="approach-cell pull">
+              <strong>phối hợp với bên liên quan</strong>
+              phối hợp với bên liên quan
+            </div><div class="approach-cell">
+              <strong>yêu cầu team hành động (chưa rõ facilitation)</strong>
+              yêu cầu team hành động (chưa rõ facilitation)
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q140</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>B</strong> phù hợp vì PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Governance + Scope, Focus Area Executing (PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q140 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Instruct the team member not to make any autonomous tec…</strong></td>
+                <td>Instruct the team member not to make any autonomous technical decision</td>
+                <td>✗ &quot;Instruct the team member not to make any autonomous technical decisions in the fut…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Ask the team member to explain their rationale for the …</strong></td>
+                <td>thông báo / truyền đạt thông tin</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Apologize to the quality director and commit to conduct…</strong></td>
+                <td>thừa nhận lỗi và giải trình minh bạch</td>
+                <td>✗ Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết vấn đề chất lượng / def…</td>
+              </tr><tr>
+                <td><strong>D. Work with the team to assess the severity of the failur…</strong></td>
+                <td>phối hợp với bên liên quan</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>E. Ask the team to postpone addressing the failure until t…</strong></td>
+                <td>yêu cầu team hành động (chưa rõ facilitation)</td>
+                <td>✗ Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; không giải quyết vấn đề chất lượ…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q140</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Instruct the team member not to make any autonomous technical decisions in the future without written approval from the quality director.
@@ -152,7 +207,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Ask the team member to explain their rationale for the workaround and share lessons learned with the team.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Apologize to the quality director and commit to conducting a full disciplinary review of the team member’s actions.
@@ -160,7 +215,7 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         <span class="kw-signal">Work with</span> the team to assess the severity of the failure and decide whether to roll back the release or apply a targeted patch.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>E — Sai</strong>
         Ask the team to <span class="kw-trap">postpone</span> addressing the failure until the next iteration and focus on completing the current sprint backlog.
@@ -169,7 +224,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q140</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q140</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 140 · Chọn nhiều</div>
             <div class="q-text">A digital media company has just released a new feature developed by its agile product team. A team member used a workaround to unblock stalled work, and the quality director demands an explanation and corrective actions. The project manager must respond and drive corrective action. <span class="kw-cue">What should the project manager do</span>? (<span class="kw-cue">Choose 2</span>)</div>
@@ -186,44 +241,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B,D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B,D</h2>
+          <h3>Tại sao chọn B,D?</h3>
+          <ul><li>PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B, D:</strong> PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>B, D</strong> — &quot;Ask the team member to explain their rationale for the workaround and share lessons learned with the team.&quot; — phù hợp vì PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B,D</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B, D:</strong> PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>B, D</strong> — &quot;Ask the team member to explain their rationale for the workaround and share lessons learned with the team.&quot; — phù hợp vì PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 9 Section 1 – Introduction Additionally, project governance helps prioritize initiatives and allocate resources to support strategic objectives. For instance, a steering committee in a product launch project may oversee milestones, enforc<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 9 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 9: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Instruct the team member not to make any autonomous technical decisions in the f…</span></td><td>&quot;Instruct the team member <span class="kw-cue">not</span> to make any autonomous technical decisions in the fut…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung thông báo / truyền đạt thông tin.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Apologize to the quality director and commit to conducting a full disciplinary r…</span></td><td>Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần thông báo / truyền đạt thông tin.</td></tr><tr><td><strong>E</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the team to <span class="kw-trap">postpone</span> addressing the failure until the next iteration and foc…</span></td><td>Tập trung &quot;yêu cầu team hành động (chưa rõ <span class="kw-signal">facilitation</span>)&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần thông báo / truyền đạt thông tin.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="communicate_inform">
+              <span>A digital media company has just released a new feature developed by its agile product team. A team … (Q140)</span>
+              <div class="classify-btns"><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="apologize_accountable" type="button">thừa nhận lỗ</button><button data-pick="ask_team_act" type="button">yêu cầu team</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="apologize_accountable">
+              <span>Tình huống cần &quot;thừa nhận lỗi và giải trình minh bạch&quot; — không phải trọng tâm Q140</span>
+              <div class="classify-btns"><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="apologize_accountable" type="button">thừa nhận lỗ</button><button data-pick="ask_team_act" type="button">yêu cầu team</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="ask_team_act">
+              <span>Tình huống cần &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; — không phải trọng tâm Q140</span>
+              <div class="classify-btns"><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="apologize_accountable" type="button">thừa nhận lỗ</button><button data-pick="ask_team_act" type="button">yêu cầu team</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Instruct the team member not to make any autonomous …" → A</h4>
+            <p style="margin:0">&quot;Instruct the team member not to make any autonomous technical decisions in the fut…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung thông báo / truyền đạt thông tin.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Apologize to the quality director and commit to cond…" → C</h4>
+            <p style="margin:0">Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần thông báo / truyền đạt thông tin.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Ask the team to postpone addressing the failure unti…" → E</h4>
+            <p style="margin:0">Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần thông báo / truyền đạt thông tin.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>B</strong> — PM thông báo / truyền đạt thông tin để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Governance + Scope, Focus Area Executing (PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q140 — đáp án?</div>
-            <div class="flashcard-back"><strong>B,D</strong> — D</div>
+            <div class="flashcard-front">Q140 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 9</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Embed quality</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Q140 — đáp án?</div>
+            <div class="flashcard-back"><strong>B,D</strong> — B,D</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chất lượng / defect</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q140
-────────────────────────
-A digital media company has just released a new feature developed by its agile product team. A team member used a workaround to unblock stalled work, and the quality director demands an explanation an…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q140
+(PMBOK 8, tr. 9)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Scope
+PROCESS: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
+PRINCIPLE: Embed quality
 
-ANSWER: B,D
-B,D
+SCENARIO:
+A digital media company has just released a new feature developed by its agile product team. A team member used a workaround to unblock stalled work, and the quality director demands an explanation and corrective actions…
 
-PMBOK 8:
-  Domain: Governance, Scope
-  Process: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
-  Principle: Embed quality</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → B,D) B,D
+
+NOT:
+  A) Instruct the team member not to make any autonomou… — &quot;Instruct the team member not to make any autonomous technic
+  C) Apologize to the quality director and commit to co… — Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải
+  E) Ask the team to postpone addressing the failure un… — Tập trung &quot;yêu cầu team hành động (chưa rõ facilitation)&quot; kh
+
+Q140 ANSWER: B,D</div>
         </section>
 
         <footer class="ref-footer">
@@ -266,6 +367,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

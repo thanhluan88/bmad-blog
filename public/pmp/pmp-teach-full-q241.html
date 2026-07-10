@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 241</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-241">Câu 241</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q240.html">← 240</a>
         <a href="pmp-teach-full-q242.html">242 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 241 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">Six different companies are involved in a project. The project sponsor is the buyer and one of the supplier companies has a team member who has strong informal influence over several other supplier teams due to past relationships. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q241</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q241</h1>
+          <p class="lead">Bài học Q241 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 71) — vấn đề vendor / procurement</p>
+          <p class="lead" style="margin-top:0.75rem">Six different companies are involved in a project. The project sponsor is the buyer and one of the supplier companies has a team member who has strong informal influence over several other supplier teams due to past relationships. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 71</span><span class="badge">Stakeholders</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q241</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 71): 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Restrict the influential team member's communication access 
+            </div><div class="approach-cell">
+              <strong>quản lý vendor</strong>
+              quản lý vendor / procurement
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Engage the influential team member directly and assign them 
+            </div><div class="approach-cell pull">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q241</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q241 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Restrict the influential team member's communication ac…</strong></td>
+                <td>Restrict the influential team member's communication access to prevent</td>
+                <td>✗ &quot;Restrict the influential team member's communication access to prevent informal ch…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Report the informal influence dynamic to the project sp…</strong></td>
+                <td>quản lý vendor / procurement</td>
+                <td>✗ Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đá…</td>
+              </tr><tr>
+                <td><strong>C. Engage the influential team member directly and assign …</strong></td>
+                <td>Engage the influential team member directly and assign them a formal l</td>
+                <td>✗ &quot;Engage the influential team member directly and assign them a formal liaison role …&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Consider the impact of this stakeholder's informal enga…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q241</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Restrict the influential team member's communication access to prevent informal channels from undermining the formal project structure.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Consider the impact of this stakeholder's informal engagement on the project and incorporate it into the stakeholder engagement strategy.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q241</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q241</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 241</div>
             <div class="q-text">Six different companies are involved in a project. The project sponsor is the buyer and one of the supplier companies has a team member who has strong informal influence over several other supplier teams due to past relationships. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>→ <strong>D:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>Bối cảnh: vấn đề vendor / procurement. Đáp án <strong>D</strong> — &quot;Consider the impact of this stakeholder's informal engagement on the project and incorporate it into the stakeholder engagement strategy.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>Stem signal: vấn đề vendor / procurement — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án D.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Consider the impact of this stakeholder's informal engagement on the project and incorporate it into the stakeholder engagement strategy.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.<br><br>Bối cảnh: vấn đề vendor / procurement. Đáp án <strong>D</strong> — &quot;Consider the impact of this stakeholder's informal engagement on the project and incorporate it into the stakeholder engagement strategy.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Restrict the influential team member's communication access to prevent informal …</span></td><td>&quot;Restrict the influential team member's communication access to prevent informal ch…&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Report the informal influence dynamic to the project sponsor and request formal …</span></td><td>Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Engage the influential team member directly and assign them a formal liaison rol…</span></td><td>&quot;Engage the influential team member directly and assign them a formal liaison role …&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>Six different companies are involved in a project. The project sponsor is the buyer and one of the s… (Q241)</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="vendor_procurement">
+              <span>Tình huống cần &quot;quản lý vendor / procurement&quot; — không phải trọng tâm Q241</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="vendor_procurement" type="button">quản lý vend</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Restrict the influential team member's communication…" → A</h4>
+            <p style="margin:0">&quot;Restrict the influential team member's communication access to prevent informal ch…&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Report the informal influence dynamic to the project…" → B</h4>
+            <p style="margin:0">Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Engage the influential team member directly and assi…" → C</h4>
+            <p style="margin:0">&quot;Engage the influential team member directly and assign them a formal liaison role …&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q241 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Consider the impact of this stakeholder's informal engagement on the project and incorporate it into the stakeholder engagement strategy.</div>
+            <div class="flashcard-front">Q241 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 71</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q241 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Consider the impact of this stakeholder's informal engagement on the project and incorporate it into</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề vendor / procurement</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q241
-────────────────────────
-Six different companies are involved in a project. The project sponsor is the buyer and one of the supplier companies has a team member who has strong informal influence over several other supplier te…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q241
+(PMBOK 8, tr. 71)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: D
-D. Consider the impact of this stakeholder's informal engagement on the project and incorporate it into the stakeholder engagement strategy.
+SCENARIO:
+Six different companies are involved in a project. The project sponsor is the buyer and one of the supplier companies has a team member who has strong informal influence over several other supplier teams due to past rela…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Consider the impact of this stakeholder's informal engagement on the project and incorporate it into the stakeholder engagement strategy.
+
+NOT:
+  A) Restrict the influential team member's communicati… — &quot;Restrict the influential team member's communication access
+  B) Report the informal influence dynamic to the proje… — Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấ
+  C) Engage the influential team member directly and as… — &quot;Engage the influential team member directly and assign them
+
+Q241 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Restrict the influential team member's communication access to prevent informal ch…\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","B":"Tập trung \"quản lý vendor / procurement\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","C":"\"Engage the influential team member directly and assign them a formal liaison role …\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","D":"PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý."};
+      const EXPL = {"A":"\"Restrict the influential team member's communication access to prevent informal ch…\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","B":"Tập trung \"quản lý vendor / procurement\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","C":"\"Engage the influential team member directly and assign them a formal liaison role …\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung engagement stakeholder / làm rõ kỳ vọng.","D":"Đúng! PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

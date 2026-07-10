@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1095</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Monitor Risks</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1095">Câu 1095</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1094.html">← 1094</a>
         <a href="pmp-teach-full-q1096.html">1096 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1095 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A risk was identified at the beginning of an agile project and a mitigation plan was established. The risk event occurs, but the impact is much higher than anticipated and the originally planned response will be ineffective. The project team developed a more effective response, but it is drastically different from the original mitigation plan and must be implemented as soon as possible. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Risk, Resources</span><span class="badge">Executing</span><span class="badge">Monitor Risks</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q1095</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1095</h1>
+          <p class="lead">Bài học Q1095 về <strong>Monitor Risks</strong> (PMBOK 8, tr. 98) — Risk đã trigger</p>
+          <p class="lead" style="margin-top:0.75rem">A risk was identified at the beginning of an agile project and a mitigation plan was established. The risk event occurs, but the impact is much higher than anticipated and the originally planned response will be ineffective. The project team developed a more effective response, but it is drastically different from the original mitigation plan and must be implemented as soon as possible. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 98</span><span class="badge">Risk, Resources</span><span class="badge">Monitor Risks</span><span class="badge">Full Bank Q1095</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Risk, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Monitor Risks, Implement Risk Responses<br>
-              <strong>Principle:</strong> Lead accountably, Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Monitor Risks</h2>
+          <p><strong>Monitor Risks</strong> thuộc miền <strong>Risk, Resources</strong> — process <strong>Monitor Risks</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 98): 98 A Guide to the Project Management Body of Knowledge 2.7.2.5 Implement Risk Responses Implement Risk Responses is the process of implementing sufficient risk response plans. The key benefit of this process is that it ensures that agreed-</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Implement only the initial response as outlined in the risk 
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Update the risk management plan and implement the newly crea
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Defer risk response until the next progress meeting to infor
+            </div><div class="approach-cell">
+              <strong>thông báo một chiều (inform</strong>
+              thông báo một chiều (inform/notify)
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1095</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>B</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk + Resources (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1095 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Implement only the initial response as outlined in the …</strong></td>
+                <td>Implement only the initial response as outlined in the risk management</td>
+                <td>✗ &quot;Implement only the initial response as outlined in the risk management plan.&quot; không phù h…</td>
+              </tr><tr>
+                <td><strong>B. Update the risk management plan and implement the newly…</strong></td>
+                <td>Update the risk management plan and implement the newly created respon</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Defer risk response until the next progress meeting to …</strong></td>
+                <td>Defer risk response until the next progress meeting to inform stakehol</td>
+                <td>✗ &quot;Defer risk response until the next progress meeting to inform stakeholders.&quot; không phù hợ…</td>
+              </tr><tr>
+                <td><strong>D. Implement a contingency response and inform the stakeho…</strong></td>
+                <td>thông báo một chiều (inform/notify)</td>
+                <td>✗ Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết ngữ cảnh Agile/Scrum — đá…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1095</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Implement only the initial response as outlined in the risk management plan.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Update the risk management plan and implement the newly created response.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Resources</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Defer risk response until the next progress meeting to inform stakeholders.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1095</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1095</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1095</div>
             <div class="q-text">A risk was identified at the beginning of an agile project and a mitigation plan was established. The risk event occurs, but the impact is much higher than anticipated and the originally planned response will be ineffective. The project team developed a more effective response, but it is drastically different from the original mitigation plan and must be implemented as soon as possible. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Resources</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> <span class="kw-pmbok">Risk</span> đã trigger — thực thi planned response từ <span class="kw-signal">risk register</span> trước khi đổi plan hay ghi log.</li><li>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>B</strong> — &quot;Update the risk management plan and implement the newly created response.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Resources</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Monitor Risks — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Update the risk management plan and implement the newly created response.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> <span class="kw-pmbok">Risk</span> đã trigger — thực thi planned response từ <span class="kw-signal">risk register</span> trước khi đổi plan hay ghi log.<br><br>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>B</strong> — &quot;Update the risk management plan and implement the newly created response.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> + <span class="kw-pmbok">Resources</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 98 A Guide to the Project Management Body of Knowledge 2.7.2.5 Implement <span class="kw-pmbok">Risk</span> Responses Implement <span class="kw-pmbok">Risk</span> Responses is the process of implementing sufficient risk response plans. The key benefit of this process is that it ensures that agreed-<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 98 (Implement <span class="kw-pmbok">Risk</span> Responses)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 98: Implement <span class="kw-pmbok">Risk</span> Responses</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement only the initial response as outlined in the risk management plan.</span></td><td>&quot;Implement only the initial response as outlined in the risk management plan.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung cập nhật tài liệu/kế hoạch.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Defer risk response until the next progress meeting to inform stakeholders.</span></td><td>&quot;Defer risk response until the <span class="kw-cue">next</span> progress meeting to inform stakeholders.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung cập nhật tài liệu/kế hoạch.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement a contingency response and inform the stakeholders afterward.</span></td><td>Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A risk was identified at the beginning of an agile project and a mitigation plan was established. Th… (Q1095)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="inform_one_way">
+              <span>Tình huống cần &quot;thông báo một chiều (inform/notify)&quot; — không phải trọng tâm Q1095</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Implement only the initial response as outlined in t…" → A</h4>
+            <p style="margin:0">&quot;Implement only the initial response as outlined in the risk management plan.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung cập nhật tài liệu/kế hoạch.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Defer risk response until the next progress meeting …" → C</h4>
+            <p style="margin:0">&quot;Defer risk response until the next progress meeting to inform stakeholders.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung cập nhật tài liệu/kế hoạch.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Implement a contingency response and inform the stak…" → D</h4>
+            <p style="margin:0">Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>B</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk + Resources (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1095 — đáp án?</div>
+            <div class="flashcard-front">Q1095 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Monitor Risks</strong><br>PMBOK 8, tr. 98</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q1095 — đáp án?</div>
             <div class="flashcard-back"><strong>B</strong> — Update the risk management plan and implement the newly created response.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Monitor Risks</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Risk đã trigger</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1095
-────────────────────────
-A risk was identified at the beginning of an agile project and a mitigation plan was established. The risk event occurs, but the impact is much higher than anticipated and the originally planned respo…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MONITOR RISKS — Q1095
+(PMBOK 8, tr. 98)
+─────────────────────────────────────────────────────
+DOMAIN: Risk, Resources
+PROCESS: Monitor Risks, Implement Risk Responses
+PRINCIPLE: Lead accountably, Focus on value
 
-ANSWER: B
-B. Update the risk management plan and implement the newly created response.
+SCENARIO:
+A risk was identified at the beginning of an agile project and a mitigation plan was established. The risk event occurs, but the impact is much higher than anticipated and the originally planned response will be ineffect…
 
-PMBOK 8:
-  Domain: Risk, Resources
-  Process: Monitor Risks, Implement Risk Responses
-  Principle: Lead accountably, Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → B) Update the risk management plan and implement the newly created response.
+
+NOT:
+  A) Implement only the initial response as outlined in… — &quot;Implement only the initial response as outlined in the risk
+  C) Defer risk response until the next progress meetin… — &quot;Defer risk response until the next progress meeting to info
+  D) Implement a contingency response and inform the st… — Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải q
+
+Q1095 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"\"Implement only the initial response as outlined in the risk management plan.\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung cập nhật tài liệu/kế hoạch.","B":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk + Resources (Executing, PMBOK 8).","C":"\"Defer risk response until the next progress meeting to inform stakeholders.\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung cập nhật tài liệu/kế hoạch.","D":"Tập trung \"thông báo một chiều (inform/notify)\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
+      const EXPL = {"A":"\"Implement only the initial response as outlined in the risk management plan.\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung cập nhật tài liệu/kế hoạch.","B":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk + Resources (Executing, PMBOK 8).","C":"\"Defer risk response until the next progress meeting to inform stakeholders.\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung cập nhật tài liệu/kế hoạch.","D":"Tập trung \"thông báo một chiều (inform/notify)\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

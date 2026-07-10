@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 579</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-579">Câu 579</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q578.html">← 578</a>
         <a href="pmp-teach-full-q580.html">580 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 579 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager has completed the following steps: deployed a major IT system, obtained formal customer acceptance, and conducted final performance reviews. Two critical closure activities remain before the project can be formally closed. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Adopt a holistic view</span><span class="badge">Full Bank Q579</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q579</h1>
+          <p class="lead">Bài học Q579 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 4) — Phân tích tình huống và chọn đáp án A theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager has completed the following steps: deployed a major IT system, obtained formal customer acceptance, and conducted final performance reviews. Two critical closure activities remain before the project can be formally closed. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 4</span><span class="badge">Stakeholders</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q579</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,52 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Adopt a holistic view
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Adopt a holistic view</strong>. PMBOK 8 (tr. 4): Mindset and Beha viors Principles Performance Domains Culture Empowered Build an Integrate Sustainability Within All Project Areas Be an Accountable Leader Embed Quality Into Processes and Deliverables Value on FocusViewa Holistic Adopt Pro</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>ghi nhận</strong>
+              ghi nhận / tài liệu hóa
+            </div><div class="approach-cell">
+              <strong>thông báo một chiều (inform</strong>
+              thông báo một chiều (inform/notify)
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Submit a formal project closure report to the sponsor and sc
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q579</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>A</strong> phù hợp vì Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q579 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Transfer the lessons learned register to the lessons le…</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Archive all project documentation to the organizational…</strong></td>
+                <td>thông báo một chiều (inform/notify)</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>C. Conduct a final lessons learned session with the team a…</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>D. Submit a formal project closure report to the sponsor a…</strong></td>
+                <td>Submit a formal project closure report to the sponsor and schedule a p</td>
+                <td>✗ &quot;Submit a formal project closure report to the sponsor and schedule a post-project …&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q579</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Transfer the lessons learned register to the lessons learned repository and confirm that all project contracts are eligible for closure.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Archive all project documentation to the organizational repository and notify team members that the project is officially closed.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q579</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q579</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 579</div>
             <div class="q-text">A project manager has completed the following steps: deployed a major IT system, obtained formal customer acceptance, and conducted final performance reviews. Two critical closure activities remain before the project can be formally closed. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +226,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</li><li>→ <strong>A:</strong> Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</li><li>Bối cảnh: A project manager has completed the following steps: deployed a major IT system, obtained formal customer acceptance, and conducted final performance reviews. Two critical closure activities remain before the project can be formally closed. Đáp án <strong>A</strong> — &quot;Transfer the lessons learned register to the lessons learned repository and confirm that all project contracts are eligible for closure.&quot; — phù hợp vì Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án A.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 4.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Transfer the lessons learned register to the lessons learned repository and confirm that all project contracts are eligible for closure.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.<br><br>Bối cảnh: A project manager has completed the following steps: deployed a major IT system, obtained formal customer acceptance, and conducted final performance reviews. Two critical closure activities remain before the project can be formally closed. Đáp án <strong>A</strong> — &quot;Transfer the lessons learned register to the lessons learned repository and confirm that all project contracts are eligible for closure.&quot; — phù hợp vì Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; Mindset and Beha viors Principles Performance Domains Culture <span class="kw-signal">Empowered</span> Build an <span class="kw-pmbok">Integrate Sustainability</span> Within All Project Areas Be an Accountable Leader <span class="kw-pmbok">Embed Quality</span> Into Processes and Deliverables Value on FocusViewa Holistic Adopt Pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 4 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 4: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Archive all project documentation to the organizational repository and notify te…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Conduct a final lessons learned session with the team and distribute the finding…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Submit a formal project closure report to the sponsor and schedule a post-projec…</span></td><td>&quot;Submit a formal project closure report to the sponsor and schedule a post-project …&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ghi nhận / tài liệu hóa.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="document_first">
+              <span>A project manager has completed the following steps: deployed a major IT system, obtained formal cus… (Q579)</span>
+              <div class="classify-btns"><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="inform_one_way">
+              <span>Tình huống cần &quot;thông báo một chiều (inform/notify)&quot; — không phải trọng tâm Q579</span>
+              <div class="classify-btns"><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="document_first">
+              <span>Tình huống cần &quot;ghi nhận / tài liệu hóa&quot; — không phải trọng tâm Q579</span>
+              <div class="classify-btns"><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Archive all project documentation to the organizatio…" → B</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Conduct a final lessons learned session with the tea…" → C</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Submit a formal project closure report to the sponso…" → D</h4>
+            <p style="margin:0">&quot;Submit a formal project closure report to the sponsor and schedule a post-project …&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ghi nhận / tài liệu hóa.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>A</strong> — Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q579 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Transfer the lessons learned register to the lessons learned repository and confirm that all project contracts are eligible for closure.</div>
+            <div class="flashcard-front">Q579 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 4</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Adopt a holistic view</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q579 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Transfer the lessons learned register to the lessons learned repository and confirm that all project</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án A theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q579
-────────────────────────
-A project manager has completed the following steps: deployed a major IT system, obtained formal customer acceptance, and conducted final performance reviews. Two critical closure activities remain be…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q579
+(PMBOK 8, tr. 4)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Adopt a holistic view
 
-ANSWER: A
-A. Transfer the lessons learned register to the lessons learned repository and confirm that all project contracts are eligible for closure.
+SCENARIO:
+A project manager has completed the following steps: deployed a major IT system, obtained formal customer acceptance, and conducted final performance reviews. Two critical closure activities remain before the project can…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Adopt a holistic view</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → A) Transfer the lessons learned register to the lessons learned repository and confirm that all project contracts are eligible for closure.
+
+NOT:
+  B) Archive all project documentation to the organizat… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+  C) Conduct a final lessons learned session with the t… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+  D) Submit a formal project closure report to the spon… — &quot;Submit a formal project closure report to the sponsor and s
+
+Q579 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.","B":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","C":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","D":"\"Submit a formal project closure report to the sponsor and schedule a post-project …\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ghi nhận / tài liệu hóa."};
+      const EXPL = {"A":"Đúng! Ghi nhận/tài liệu hóa quyết định và kết quả — hỗ trợ traceability và lessons learned.","B":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","C":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","D":"\"Submit a formal project closure report to the sponsor and schedule a post-project …\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ghi nhận / tài liệu hóa."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

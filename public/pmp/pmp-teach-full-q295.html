@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 295</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Schedule</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-295">Câu 295</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q294.html">← 294</a>
         <a href="pmp-teach-full-q296.html">296 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 295 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project team relies on an AI tool to recommend delivery options, optimizing cost and schedule using historical data. However, new suppliers and changing regulations pose risks the AI may underestimate, according to experienced team members. Senior stakeholders are seeking a prompt recommendation based on the AI's input. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Schedule, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q295</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q295</h1>
+          <p class="lead">Bài học Q295 về <strong>Develop Schedule</strong> (PMBOK 8, tr. 101) — vấn đề vendor / procurement</p>
+          <p class="lead" style="margin-top:0.75rem">A project team relies on an AI tool to recommend delivery options, optimizing cost and schedule using historical data. However, new suppliers and changing regulations pose risks the AI may underestimate, according to experienced team members. Senior <em>stakeholders are seeking a prompt recommendation based on the</em> AI's input. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 101</span><span class="badge">Schedule, Stakeholders</span><span class="badge">Develop Schedule</span><span class="badge">Full Bank Q295</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Schedule, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Schedule, Control Schedule, Identify Stakeholders<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Develop Schedule</h2>
+          <p><strong>Develop Schedule</strong> thuộc miền <strong>Schedule, Stakeholders</strong> — process <strong>Develop Schedule</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 101): team to quickly identify and address emerging risks, ensuring flexibility and responsiveness. Additionally, regular risk review meetings are held with stakeholders at the end of each iteration to incorporate their feedback and adjust risk</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>đảm bảo tuân thủ</strong>
+              đảm bảo tuân thủ / compliance
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Accept the AI recommendation as is, citing its proven reliab
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Reject the use of the AI tool and rely solely on expert judg
+            </div><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q295</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholders are seeking a prompt recommendation based on the</strong><br><br>→ <strong>A</strong> phù hợp vì PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q295 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Incorporate expert feedback on integration and regulato…</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Accept the AI recommendation as is, citing its proven r…</strong></td>
+                <td>Accept the AI recommendation as is, citing its proven reliability to m</td>
+                <td>✗ &quot;Accept the AI recommendation as is, citing its proven reliability to meet stakehol…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Reject the use of the AI tool and rely solely on expert…</strong></td>
+                <td>Reject the use of the AI tool and rely solely on expert judgment for t</td>
+                <td>✗ &quot;Reject the use of the AI tool and rely solely on expert judgment for the delivery …&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Delay any recommendation until more regulatory guidance…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ Tập trung &quot;chờ / trì hoãn&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q295</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Incorporate expert feedback on integration and regulatory risks before delivering the AI-based recommendation.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Accept the AI recommendation as is, citing its proven reliability to meet stakeholder expectations.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q295</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q295</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 295</div>
             <div class="q-text">A project team relies on an AI tool to recommend delivery options, optimizing cost and schedule using historical data. However, new suppliers and changing regulations pose risks the AI may underestimate, according to experienced team members. Senior stakeholders are seeking a prompt recommendation based on the AI's input. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>→ <strong>A:</strong> PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>Bối cảnh: vấn đề vendor / procurement. Đáp án <strong>A</strong> — &quot;Incorporate expert feedback on integration and regulatory risks before delivering the AI-based recommendation.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>Stem signal: vấn đề vendor / procurement — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: đạo đức / tuân thủ — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Incorporate expert feedback on integration and regulatory risks before delivering the AI-based recommendation.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.<br><br>Bối cảnh: vấn đề vendor / procurement. Đáp án <strong>A</strong> — &quot;Incorporate expert feedback on integration and regulatory risks before delivering the AI-based recommendation.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; team to quickly identify and address emerging risks, ensuring flexibility and responsiveness. Additionally, regular risk review meetings are held with stakeholders at the end of each iteration to incorporate their feedback and adjust risk<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 101 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 101: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Accept the AI recommendation as is, citing its proven reliability to meet stakeh…</span></td><td>&quot;Accept the AI recommendation as is, citing its proven reliability to meet stakehol…&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Reject the use of the AI tool and rely solely on expert judgment for the deliver…</span></td><td>&quot;Reject the use of the AI tool and rely solely on expert judgment for the delivery …&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Delay</span> any recommendation until more regulatory guidance is received, even if dea…</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần đảm bảo tuân thủ / compliance.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="ensure_compliance">
+              <span>A project team relies on an AI tool to recommend delivery options, optimizing cost and schedule usin… (Q295)</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q295</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Accept the AI recommendation as is, citing its prove…" → B</h4>
+            <p style="margin:0">&quot;Accept the AI recommendation as is, citing its proven reliability to meet stakehol…&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Reject the use of the AI tool and rely solely on exp…" → C</h4>
+            <p style="margin:0">&quot;Reject the use of the AI tool and rely solely on expert judgment for the delivery …&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung đảm bảo tuân thủ / compliance.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Delay any recommendation until more regulatory guida…" → D</h4>
+            <p style="margin:0">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần đảm bảo tuân thủ / compliance.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholders are seeking a prompt recommendation based on the</strong> → <strong>A</strong> — PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q295 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Incorporate expert feedback on integration and regulatory risks before delivering the AI-based recommendation.</div>
+            <div class="flashcard-front">Q295 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Schedule</strong><br>PMBOK 8, tr. 101</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Develop Schedule</div>
+            <div class="flashcard-front">Q295 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Incorporate expert feedback on integration and regulatory risks before delivering the AI-based recom</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề vendor / procurement</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q295
-────────────────────────
-A project team relies on an AI tool to recommend delivery options, optimizing cost and schedule using historical data. However, new suppliers and changing regulations pose risks the AI may underestima…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP SCHEDULE — Q295
+(PMBOK 8, tr. 101)
+─────────────────────────────────────────────────────
+DOMAIN: Schedule, Stakeholders
+PROCESS: Develop Schedule, Control Schedule, Identify Stakeholders
+PRINCIPLE: Lead accountably
 
-ANSWER: A
-A. Incorporate expert feedback on integration and regulatory risks before delivering the AI-based recommendation.
+SCENARIO:
+A project team relies on an AI tool to recommend delivery options, optimizing cost and schedule using historical data. However, new suppliers and changing regulations pose risks the AI may underestimate, according to exp…
 
-PMBOK 8:
-  Domain: Schedule, Stakeholders
-  Process: Develop Schedule, Control Schedule, Identify Stakeholders
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholders are seeking a prompt recommendation based on the
+
+ANSWER → A) Incorporate expert feedback on integration and regulatory risks before delivering the AI-based recommendation.
+
+NOT:
+  B) Accept the AI recommendation as is, citing its pro… — &quot;Accept the AI recommendation as is, citing its proven relia
+  C) Reject the use of the AI tool and rely solely on e… — &quot;Reject the use of the AI tool and rely solely on expert jud
+  D) Delay any recommendation until more regulatory gui… — Tập trung &quot;chờ / trì hoãn&quot; không giải quyết vấn đề vendor / 
+
+Q295 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.","B":"\"Accept the AI recommendation as is, citing its proven reliability to meet stakehol…\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung đảm bảo tuân thủ / compliance.","C":"\"Reject the use of the AI tool and rely solely on expert judgment for the delivery …\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung đảm bảo tuân thủ / compliance.","D":"Tập trung \"chờ / trì hoãn\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần đảm bảo tuân thủ / compliance."};
+      const EXPL = {"A":"Đúng! PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.","B":"\"Accept the AI recommendation as is, citing its proven reliability to meet stakehol…\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung đảm bảo tuân thủ / compliance.","C":"\"Reject the use of the AI tool and rely solely on expert judgment for the delivery …\" không phù hợp vấn đề vendor / procurement — đáp án đúng tập trung đảm bảo tuân thủ / compliance.","D":"Tập trung \"chờ / trì hoãn\" không giải quyết vấn đề vendor / procurement — đáp án đúng cần đảm bảo tuân thủ / compliance."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

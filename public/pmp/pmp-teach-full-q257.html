@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 257</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-257">Câu 257</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q256.html">← 256</a>
         <a href="pmp-teach-full-q258.html">258 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 257 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">Midway through a critical project phase, a senior team member privately tells the project manager they are struggling to work effectively with a newly assigned team member. The senior team member feels the new member’s approach is slowing progress and causing misunderstandings. They ask the project manager for advice on how to handle the situation without damaging team morale. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Resources</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q257</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q257</h1>
+          <p class="lead">Bài học Q257 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 84) — Phân tích tình huống và chọn đáp án C theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">Midway through a critical project phase, a senior team member privately tells the project manager they are struggling to work effectively with a <em>newly assigned</em> team member. The senior team member feels the new member’s approach is slowing progress and causing misunderstandings. They ask the project manager for advice on how to handle the situation without damaging team morale. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 84</span><span class="badge">Stakeholders, Resources</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q257</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Resources</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 84): manages conflict, and resolves issues among team members (see Figure 2-44). The Lead the Team process involves both management and leadership activities as follows: ⚫ Management activities. Management activities focus on the means of meeti</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Review the new member’s performance and the responsibility a
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Encourage the senior member to discuss concerns directly wit
+            </div><div class="approach-cell pull">
+              <strong>coaching</strong>
+              coaching / phát triển năng lực
+            </div><div class="approach-cell">
+              <strong>họp</strong>
+              họp / thảo luận trực tiếp
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q257</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>newly assigned</strong><br><br>→ <strong>C</strong> phù hợp vì PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q257 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Review the new member’s performance and the responsibil…</strong></td>
+                <td>Review the new member’s performance and the responsibility assignment </td>
+                <td>✗ rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung coachi…</td>
+              </tr><tr>
+                <td><strong>B. Encourage the senior member to discuss concerns directl…</strong></td>
+                <td>Encourage the senior member to discuss concerns directly with the new </td>
+                <td>✗ &quot;Encourage the senior member to discuss concerns directly with the new member durin…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Coach the senior member on applying conflict resolution…</strong></td>
+                <td>coaching / phát triển năng lực</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Meet with the new member to discuss the concerns and ag…</strong></td>
+                <td>họp / thảo luận trực tiếp</td>
+                <td>✗ Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Meet with the new member to discuss…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q257</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Review the new member’s performance and the responsibility assignment matrix to clarify roles and issues.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         <span class="kw-signal">Coach</span> the senior member on applying conflict resolution techniques to address the situation.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Meet with the new member to discuss the concerns and agree on steps to improve collaboration.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q257</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q257</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 257</div>
             <div class="q-text">Midway through a critical project phase, a senior team member privately tells the project manager they are struggling to work effectively with a newly assigned team member. The senior team member feels the new member’s approach is slowing progress and causing misunderstandings. They ask the project manager for advice on how to handle the situation without damaging team morale. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</li><li>→ <strong>C:</strong> PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</li><li>Bối cảnh: Midway through a critical project phase, a senior team member privately tells the project manager they are struggling to work effectively with a newly assigned team member. The senior team member feels the new member’s approach is slowing progress and causing misunderstandings. They ask the project manager for advice on how to handle the situation without damaging team morale. Đáp án <strong>C</strong> — &quot;<span class="kw-signal">Coach</span> the senior member on applying conflict resolution techniques to address the situation.&quot; — phù hợp vì PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án C.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 84.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Coach the senior member on applying conflict resolution techniques to address the situation.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.<br><br>Bối cảnh: Midway through a critical project phase, a senior team member privately tells the project manager they are struggling to work effectively with a newly assigned team member. The senior team member feels the new member’s approach is slowing progress and causing misunderstandings. They ask the project manager for advice on how to handle the situation without damaging team morale. Đáp án <strong>C</strong> — &quot;<span class="kw-signal">Coach</span> the senior member on applying conflict resolution techniques to address the situation.&quot; — phù hợp vì PM <span class="kw-signal">coach</span>/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; manages conflict, and resolves issues among team members (see Figure 2-44). The Lead the Team process involves both management and leadership activities as follows: ⚫ Management activities. Management activities focus on the means of meeti<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 84 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 84: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Review the new member’s performance and the responsibility assignment matrix to …</span></td><td>rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Encourage the senior member to discuss concerns directly with the new member dur…</span></td><td>&quot;Encourage the senior member to discuss concerns directly with the new member durin…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Meet with the new member to discuss the concerns and agree on steps to improve c…</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết <span class="kw-signal">Meet with</span> the new member to discuss the concerns and agree on steps to improve <span class="kw-signal">collaboration</span>. — đáp án đúng cần <span class="kw-signal">coaching</span> / phát triển năng lực.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="coach_develop">
+              <span>Midway through a critical project phase, a senior team member privately tells the project manager th… (Q257)</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="meet_discuss">
+              <span>Tình huống cần &quot;họp / thảo luận trực tiếp&quot; — không phải trọng tâm Q257</span>
+              <div class="classify-btns"><button data-pick="coach_develop" type="button">coaching</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Review the new member’s performance and the responsi…" → A</h4>
+            <p style="margin:0">rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung coaching / phát triển năng lực.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Encourage the senior member to discuss concerns dire…" → B</h4>
+            <p style="margin:0">&quot;Encourage the senior member to discuss concerns directly with the new member durin…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung coaching / phát triển năng lực.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Meet with the new member to discuss the concerns and…" → D</h4>
+            <p style="margin:0">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Meet with the new member to discuss the concerns and agree on steps to improve collaboration. — đáp án đúng cần coaching / phát triển năng lực.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · newly assigned</strong> → <strong>C</strong> — PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q257 — đáp án?</div>
+            <div class="flashcard-front">Q257 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 84</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q257 — đáp án?</div>
             <div class="flashcard-back"><strong>C</strong> — Coach the senior member on applying conflict resolution techniques to address the situation.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án C theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q257
-────────────────────────
-Midway through a critical project phase, a senior team member privately tells the project manager they are struggling to work effectively with a newly assigned team member. The senior team member feel…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q257
+(PMBOK 8, tr. 84)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Resources
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: C
-C. Coach the senior member on applying conflict resolution techniques to address the situation.
+SCENARIO:
+Midway through a critical project phase, a senior team member privately tells the project manager they are struggling to work effectively with a newly assigned team member. The senior team member feels the new member’s a…
 
-PMBOK 8:
-  Domain: Stakeholders, Resources
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | newly assigned
+
+ANSWER → C) Coach the senior member on applying conflict resolution techniques to address the situation.
+
+NOT:
+  A) Review the new member’s performance and the respon… — rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài 
+  B) Encourage the senior member to discuss concerns di… — &quot;Encourage the senior member to discuss concerns directly wi
+  D) Meet with the new member to discuss the concerns a… — Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Meet 
+
+Q257 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung coaching / phát triển năng lực.","B":"\"Encourage the senior member to discuss concerns directly with the new member durin…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung coaching / phát triển năng lực.","C":"PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.","D":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết Meet with the new member to discuss the concerns and agree on steps to improve collaboration. — đáp án đúng cần coaching / phát triển năng lực."};
+      const EXPL = {"A":"rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung coaching / phát triển năng lực.","B":"\"Encourage the senior member to discuss concerns directly with the new member durin…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung coaching / phát triển năng lực.","C":"Đúng! PM coach/phát triển năng lực thay vì thay thế hoặc đánh giá/punish — phát triển bền vững.","D":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết Meet with the new member to discuss the concerns and agree on steps to improve collaboration. — đáp án đúng cần coaching / phát triển năng lực."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

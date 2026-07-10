@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 851</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Risks</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-851">Câu 851</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q850.html">← 850</a>
         <a href="pmp-teach-full-q852.html">852 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 851 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">As dependencies between legacy systems and new digital components become clearer, several previously identified risks now show increased probability and impact. Regulatory sensitivity amplifies potential consequences, but <span class="kw-cue">not</span> all risks have crossed escalation thresholds. Teams are divided between acting immediately and avoiding unnecessary disruption. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Risk</span><span class="badge">Executing</span><span class="badge">Identify Risks</span><span class="badge">Adopt a holistic view</span><span class="badge">Full Bank Q851</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q851</h1>
+          <p class="lead">Bài học Q851 về <strong>Identify Risks</strong> (PMBOK 8, tr. 92) — Phân tích tình huống và chọn đáp án B theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">As dependencies between legacy systems and new digital components become clearer, several previously identified risks now show increased probability and impact. Regulatory sensitivity amplifies potential consequences, but not all risks have crossed <em>escalation thresholds</em>. Teams are divided between acting immediately and avoiding unnecessary disruption. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 92</span><span class="badge">Risk</span><span class="badge">Identify Risks</span><span class="badge">Full Bank Q851</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Risk<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Risks, Perform Risk Analysis, Plan Risk Responses<br>
-              <strong>Principle:</strong> Adopt a holistic view
-            </p>
+        <section id="concept">
+          <h2>1. Identify Risks</h2>
+          <p><strong>Identify Risks</strong> thuộc miền <strong>Risk</strong> — process <strong>Identify Risks</strong>, principle <strong>Adopt a holistic view</strong>. PMBOK 8 (tr. 92): coupled with adaptive and flexible response mechanisms in case they occur. 2.7.1 Key Concepts The following key concepts support the effective practices for the Risk performance domain: ⚫ Risk. A risk is an uncertain event or condition tha</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Reassess risk exposure, refine response strategies, and act 
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Maintain current monitoring until risks trigger material sch
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Implement broad risk mitigation actions across the project t
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q851</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>escalation thresholds</strong><br><br>→ <strong>B</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q851 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Escalate all risks with increased exposure to senior le…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>B. Reassess risk exposure, refine response strategies, and…</strong></td>
+                <td>Reassess risk exposure, refine response strategies, and act on risks t</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Maintain current monitoring until risks trigger materia…</strong></td>
+                <td>Maintain current monitoring until risks trigger material schedule, cos</td>
+                <td>✗ &quot;Maintain current monitoring until risks trigger material schedule, cost, or compli…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Implement broad risk mitigation actions across the proj…</strong></td>
+                <td>Implement broad risk mitigation actions across the project to reduce r</td>
+                <td>✗ &quot;Implement broad risk mitigation actions across the project to reduce risk exposure…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q851</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         <span class="kw-trap">Escalate</span> all risks with increased exposure to senior leadership to ensure regulatory visibility.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Reassess risk exposure, refine response strategies, and act on risks that exceed defined thresholds.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Maintain current monitoring until risks trigger material schedule, cost, or compliance impacts.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q851</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q851</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 851</div>
             <div class="q-text">As dependencies between legacy systems and new digital components become clearer, several previously identified risks now show increased probability and impact. Regulatory sensitivity amplifies potential consequences, but <span class="kw-cue">not</span> all risks have crossed escalation thresholds. Teams are divided between acting immediately and avoiding unnecessary disruption. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: As dependencies between legacy systems and new digital components become clearer, several previously identified risks now show increased probability and impact. Regulatory sensitivity amplifies potential consequences, but <span class="kw-cue">not</span> all risks have crossed <span class="kw-trap">escalation</span> thresholds. Teams are divided between acting immediately and avoiding unnecessary disruption. Đáp án <strong>B</strong> — &quot;Reassess risk exposure, refine response strategies, and act on risks that exceed defined thresholds.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Process <span class="kw-pmbok">Identify Risks</span> — align với đáp án B.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 92.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Reassess risk exposure, refine response strategies, and act on risks that exceed defined thresholds.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: As dependencies between legacy systems and new digital components become clearer, several previously identified risks now show increased probability and impact. Regulatory sensitivity amplifies potential consequences, but <span class="kw-cue">not</span> all risks have crossed <span class="kw-trap">escalation</span> thresholds. Teams are divided between acting immediately and avoiding unnecessary disruption. Đáp án <strong>B</strong> — &quot;Reassess risk exposure, refine response strategies, and act on risks that exceed defined thresholds.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Risk</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; coupled with adaptive and flexible response mechanisms in case they occur. 2.7.1 Key Concepts The following key concepts support the effective practices for the <span class="kw-pmbok">Risk</span> performance domain: ⚫ <span class="kw-pmbok">Risk</span>. A risk is an uncertain event or condition tha<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 92 (Performance Domain: <span class="kw-pmbok">Risk</span>, <span class="kw-pmbok">Identify Risks</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 92: Performance Domain: <span class="kw-pmbok">Risk</span>, <span class="kw-pmbok">Identify Risks</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> all risks with increased exposure to senior leadership to ensure regula…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Maintain current monitoring until risks trigger material schedule, cost, or comp…</span></td><td>&quot;Maintain current monitoring until risks trigger material schedule, cost, or compli…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Reassess risk exposure, refine response strategies, and act on risks that exceed d…&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement broad risk mitigation actions across the project to reduce risk exposu…</span></td><td>&quot;Implement broad risk mitigation actions across the project to reduce risk exposure…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Reassess risk exposure, refine response strategies, and act on risks that exceed d…&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>As dependencies between legacy systems and new digital components become clearer, several previously… (Q851)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q851</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Escalate all risks with increased exposure to senior…" → A</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Maintain current monitoring until risks trigger mate…" → C</h4>
+            <p style="margin:0">&quot;Maintain current monitoring until risks trigger material schedule, cost, or compli…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Reassess risk exposure, refine response strategies, and act on risks that exceed d…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Implement broad risk mitigation actions across the p…" → D</h4>
+            <p style="margin:0">&quot;Implement broad risk mitigation actions across the project to reduce risk exposure…&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Reassess risk exposure, refine response strategies, and act on risks that exceed d…&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · escalation thresholds</strong> → <strong>B</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q851 — đáp án?</div>
+            <div class="flashcard-front">Q851 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Risks</strong><br>PMBOK 8, tr. 92</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q851 — đáp án?</div>
             <div class="flashcard-back"><strong>B</strong> — Reassess risk exposure, refine response strategies, and act on risks that exceed defined thresholds.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Adopt a holistic view</strong><br>Identify Risks</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án B theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q851
-────────────────────────
-As dependencies between legacy systems and new digital components become clearer, several previously identified risks now show increased probability and impact. Regulatory sensitivity amplifies potent…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY RISKS — Q851
+(PMBOK 8, tr. 92)
+─────────────────────────────────────────────────────
+DOMAIN: Risk
+PROCESS: Identify Risks, Perform Risk Analysis, Plan Risk Responses
+PRINCIPLE: Adopt a holistic view
 
-ANSWER: B
-B. Reassess risk exposure, refine response strategies, and act on risks that exceed defined thresholds.
+SCENARIO:
+As dependencies between legacy systems and new digital components become clearer, several previously identified risks now show increased probability and impact. Regulatory sensitivity amplifies potential consequences, bu…
 
-PMBOK 8:
-  Domain: Risk
-  Process: Identify Risks, Perform Risk Analysis, Plan Risk Responses
-  Principle: Adopt a holistic view</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | escalation thresholds
+
+ANSWER → B) Reassess risk exposure, refine response strategies, and act on risks that exceed defined thresholds.
+
+NOT:
+  A) Escalate all risks with increased exposure to seni… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  C) Maintain current monitoring until risks trigger ma… — &quot;Maintain current monitoring until risks trigger material sc
+  D) Implement broad risk mitigation actions across the… — &quot;Implement broad risk mitigation actions across the project 
+
+Q851 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk (Executing, PMBOK 8).","C":"\"Maintain current monitoring until risks trigger material schedule, cost, or compli…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Reassess risk exposure, refine response strategies, and act on risks that exceed d…\".","D":"\"Implement broad risk mitigation actions across the project to reduce risk exposure…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Reassess risk exposure, refine response strategies, and act on risks that exceed d…\"."};
+      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Risk (Executing, PMBOK 8).","C":"\"Maintain current monitoring until risks trigger material schedule, cost, or compli…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Reassess risk exposure, refine response strategies, and act on risks that exceed d…\".","D":"\"Implement broad risk mitigation actions across the project to reduce risk exposure…\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung \"Reassess risk exposure, refine response strategies, and act on risks that exceed d…\"."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

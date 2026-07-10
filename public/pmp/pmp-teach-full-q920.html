@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 920</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Schedule</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-920">Câu 920</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q919.html">← 919</a>
         <a href="pmp-teach-full-q921.html">921 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 920 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">Before a daily coordination meeting, a scrum master runs some numbers that generate a burndown chart showing that the rate of work completed is slowing down. When the product owner sees the chart, they request that the scrum master identify what is blocking the project's progress. What should the scrum master do in this scenario?</p>
-          <div class="badges"><span class="badge">Schedule, Governance</span><span class="badge">Executing</span><span class="badge">Develop Schedule</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q920</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q920</h1>
+          <p class="lead">Bài học Q920 về <strong>Develop Schedule</strong> (PMBOK 8, tr. 53) — ngữ cảnh Agile/Scrum</p>
+          <p class="lead" style="margin-top:0.75rem">Before a daily coordination meeting, a scrum master runs some numbers that generate a burndown chart showing that the rate of work completed is slowing down. When the product owner sees the chart, they request that the scrum master identify what is blocking the project's progress. What should the scrum master do in this scenario?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Schedule, Governance</span><span class="badge">Develop Schedule</span><span class="badge">Full Bank Q920</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Schedule, Governance<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Schedule, Control Schedule, Manage Project Execution<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Develop Schedule</h2>
+          <p><strong>Develop Schedule</strong> thuộc miền <strong>Schedule, Governance</strong> — process <strong>Develop Schedule</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 53): 53 Section 3 – Project Management Principles ⚫ Schedule. Teams can offer ideas to accelerate, slow down, or stop delivery of key project activities to maximize the available opportunities. Scheduling decisions consider the environmental i</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>A</strong>
+              Encourage project team members to discuss any issues that mi
+            </div><div class="approach-cell">
+              <strong>coaching</strong>
+              coaching / phát triển năng lực
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Explain that the team will monitor progress to ensure that i
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Create a project interdependency profile, map, and timeline 
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q920</h4>
+            <p style="margin:0">ngữ cảnh Agile/Scrum<br><br>→ <strong>A</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Governance (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q920 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Encourage project team members to discuss any issues th…</strong></td>
+                <td>Encourage project team members to discuss any issues that might be slo</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Coach project stakeholders on problem-solving technique…</strong></td>
+                <td>coaching / phát triển năng lực</td>
+                <td>✗ Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án …</td>
+              </tr><tr>
+                <td><strong>C. Explain that the team will monitor progress to ensure t…</strong></td>
+                <td>Explain that the team will monitor progress to ensure that impediments</td>
+                <td>✗ &quot;Explain that the team will monitor progress to ensure that impediments are resolve…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Create a project interdependency profile, map, and time…</strong></td>
+                <td>Create a project interdependency profile, map, and timeline to visuali</td>
+                <td>✗ &quot;Create a project interdependency profile, map, and timeline to visualize and track…&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q920</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Encourage project team members to discuss any issues that might be slowing down project progress.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Coach project stakeholders on problem-solving techniques to help identify the source of the slowdown.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q920</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q920</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 920</div>
             <div class="q-text">Before a daily coordination meeting, a scrum master runs some numbers that generate a burndown chart showing that the rate of work completed is slowing down. When the product owner sees the chart, they request that the scrum master identify what is blocking the project's progress. What should the scrum master do in this scenario?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>A</strong> — &quot;Encourage project team members to discuss any issues that might be slowing down project progress.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Develop <span class="kw-pmbok">Schedule</span> — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Encourage project team members to discuss any issues that might be slowing down project progress.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>A</strong> — &quot;Encourage project team members to discuss any issues that might be slowing down project progress.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Schedule</span> + <span class="kw-pmbok">Governance</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 53 Section 3 – Project Management Principles ⚫ <span class="kw-pmbok">Schedule</span>. Teams can offer ideas to accelerate, slow down, or stop delivery of key project activities to maximize the available opportunities. Scheduling decisions consider the environmental i<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Schedule</span>, Develop <span class="kw-pmbok">Schedule</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Coach project stakeholders on problem-solving techniques to help identify the so…</span></td><td>Tập trung &quot;<span class="kw-signal">coaching</span> / phát triển năng lực&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Explain that the team will monitor progress to ensure that impediments are resol…</span></td><td>&quot;Explain that the team will monitor progress to ensure that impediments are resolve…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;Encourage project team members to discuss any issues that might be slowing down pr…&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Create a project interdependency profile, map, and timeline to visualize and tra…</span></td><td>&quot;Create a project interdependency profile, map, and timeline to visualize and track…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;Encourage project team members to discuss any issues that might be slowing down pr…&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>Before a daily coordination meeting, a scrum master runs some numbers that generate a burndown chart… (Q920)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="coach_develop">
+              <span>Tình huống cần &quot;coaching / phát triển năng lực&quot; — không phải trọng tâm Q920</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Coach project stakeholders on problem-solving techni…" → B</h4>
+            <p style="margin:0">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Explain that the team will monitor progress to ensur…" → C</h4>
+            <p style="margin:0">&quot;Explain that the team will monitor progress to ensure that impediments are resolve…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;Encourage project team members to discuss any issues that might be slowing down pr…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Create a project interdependency profile, map, and t…" → D</h4>
+            <p style="margin:0">&quot;Create a project interdependency profile, map, and timeline to visualize and track…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung &quot;Encourage project team members to discuss any issues that might be slowing down pr…&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>A</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Governance (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q920 — đáp án?</div>
+            <div class="flashcard-front">Q920 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Schedule</strong><br>PMBOK 8, tr. 53</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q920 — đáp án?</div>
             <div class="flashcard-back"><strong>A</strong> — Encourage project team members to discuss any issues that might be slowing down project progress.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Develop Schedule</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">ngữ cảnh Agile/Scrum</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q920
-────────────────────────
-Before a daily coordination meeting, a scrum master runs some numbers that generate a burndown chart showing that the rate of work completed is slowing down. When the product owner sees the chart, the…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP SCHEDULE — Q920
+(PMBOK 8, tr. 53)
+─────────────────────────────────────────────────────
+DOMAIN: Schedule, Governance
+PROCESS: Develop Schedule, Control Schedule, Manage Project Execution
+PRINCIPLE: Lead accountably
 
-ANSWER: A
-A. Encourage project team members to discuss any issues that might be slowing down project progress.
+SCENARIO:
+Before a daily coordination meeting, a scrum master runs some numbers that generate a burndown chart showing that the rate of work completed is slowing down. When the product owner sees the chart, they request that the s…
 
-PMBOK 8:
-  Domain: Schedule, Governance
-  Process: Develop Schedule, Control Schedule, Manage Project Execution
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → A) Encourage project team members to discuss any issues that might be slowing down project progress.
+
+NOT:
+  B) Coach project stakeholders on problem-solving tech… — Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết 
+  C) Explain that the team will monitor progress to ens… — &quot;Explain that the team will monitor progress to ensure that 
+  D) Create a project interdependency profile, map, and… — &quot;Create a project interdependency profile, map, and timeline
+
+Q920 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Governance (Executing, PMBOK 8).","B":"Tập trung \"coaching / phát triển năng lực\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","C":"\"Explain that the team will monitor progress to ensure that impediments are resolve…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung \"Encourage project team members to discuss any issues that might be slowing down pr…\".","D":"\"Create a project interdependency profile, map, and timeline to visualize and track…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung \"Encourage project team members to discuss any issues that might be slowing down pr…\"."};
+      const EXPL = {"A":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Schedule + Governance (Executing, PMBOK 8).","B":"Tập trung \"coaching / phát triển năng lực\" không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","C":"\"Explain that the team will monitor progress to ensure that impediments are resolve…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung \"Encourage project team members to discuss any issues that might be slowing down pr…\".","D":"\"Create a project interdependency profile, map, and timeline to visualize and track…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung \"Encourage project team members to discuss any issues that might be slowing down pr…\"."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

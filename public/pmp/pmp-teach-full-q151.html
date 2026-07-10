@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 151</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-151">Câu 151</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q150.html">← 150</a>
         <a href="pmp-teach-full-q152.html">152 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 151 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A junior project manager asks a senior colleague for help initiating the project closeout phase. During the discussion, the senior project manager notices that some client-requested changes are <span class="kw-cue">not</span> clearly documented, and a few stakeholders have <span class="kw-cue">not</span> confirmed whether the deliverables meet their expectations. The team is eager to finalize the project, but the senior project manager is concerned that premature closure could lead to issues post-implementation. What should the senior project manager do <span class="kw-cue">first</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q151</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q151</h1>
+          <p class="lead">Bài học Q151 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 29) — Stakeholder không hài lòng</p>
+          <p class="lead" style="margin-top:0.75rem">A junior project manager asks a senior colleague for help initiating the project closeout phase. During the discussion, the senior project manager notices that some client-requested changes are not clearly documented, and a few <em>stakeholders have not confirmed whether the deliverables meet</em> their expectations. The team is eager to finalize the project, but the senior project manager is concerned that premature closure could lead to issues post-implementation. What should the senior project manager do first?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 29</span><span class="badge">Stakeholders, Scope</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q151</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement, Validate Scope<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders, Scope</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 29): process to assess and implement those changes. Each documented change request should be approved, deferred, or rejected by a designated person, such as the project sponsor or project manager, as specified in the project management plan or</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>xác nhận đã hoàn thành (không xử lý mới)</strong>
+              xác nhận đã hoàn thành (không xử lý mới)
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Validate that the customer has officially accepted the final
+            </div><div class="approach-cell">
+              <strong>lắng nghe và hỗ trợ cá nhân</strong>
+              lắng nghe và hỗ trợ cá nhân
+            </div><div class="approach-cell">
+              <strong>ghi nhận</strong>
+              ghi nhận / tài liệu hóa
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q151</h4>
+            <p style="margin:0"><strong>stakeholders have not confirmed whether the deliverables meet</strong><br><br>→ <strong>A</strong> phù hợp vì PM xác nhận đã hoàn thành (không xử lý mới) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Scope, Focus Area Executing (…</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q151 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Review the change log and confirm all requested modific…</strong></td>
+                <td>xác nhận đã hoàn thành (không xử lý mới)</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Validate that the customer has officially accepted the …</strong></td>
+                <td>Validate that the customer has officially accepted the final project d</td>
+                <td>✗ &quot;Validate that the customer has officially accepted the final project deliverables …&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Request feedback from remaining stakeholders to underst…</strong></td>
+                <td>lắng nghe và hỗ trợ cá nhân</td>
+                <td>✗ Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết stakeholder không hài lòng / kỳ v…</td>
+              </tr><tr>
+                <td><strong>D. Verify whether the final budget report and lessons lear…</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q151</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Review the change log and confirm all requested modifications were formally approved and implemented.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM xác nhận đã hoàn thành (không xử lý mới) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Validate that the customer has officially accepted the final project deliverables in writing.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q151</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q151</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 151</div>
             <div class="q-text">A junior project manager asks a senior colleague for help initiating the project closeout phase. During the discussion, the senior project manager notices that some client-requested changes are <span class="kw-cue">not</span> clearly documented, and a few stakeholders have <span class="kw-cue">not</span> confirmed whether the deliverables meet their expectations. The team is eager to finalize the project, but the senior project manager is concerned that premature closure could lead to issues post-implementation. What should the senior project manager do <span class="kw-cue">first</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM xác nhận đã hoàn thành (không xử lý mới) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.</li><li>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> ưu tiên <strong>xác nhận đã hoàn thành (không xử lý mới)</strong> — ghi nhận/tài liệu hóa thường đến sau bước xử lý trực tiếp tình huống.</li><li>Stem signal: stakeholder không hài lòng / kỳ vọng lệch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: yêu cầu thay đổi phạm vi/kế hoạch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Review the change log and confirm all requested modifications were formally approved and implemented.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> ưu tiên <strong>xác nhận đã hoàn thành (không xử lý mới)</strong> — ghi nhận/tài liệu hóa thường đến sau bước xử lý trực tiếp tình huống.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; process to assess and implement those changes. Each documented <span class="kw-signal">change request</span> should be approved, deferred, or rejected by a designated person, such as the project sponsor or project manager, as specified in the project management plan or<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 29 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Manage Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 29: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Manage Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Validate that the customer has officially accepted the final project deliverable…</span></td><td>&quot;Validate that the customer has officially accepted the final project deliverables …&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request feedback from remaining stakeholders to understand any concerns before c…</span></td><td>Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xác nhận đã hoàn thành (không xử lý mới).</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Verify whether the final budget report and lessons learned register have been co…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi <span class="kw-cue">FIRST</span> — đây không phải bước ưu tiên.)</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="confirm_completed">
+              <span>A junior project manager asks a senior colleague for help initiating the project closeout phase. Dur… (Q151)</span>
+              <div class="classify-btns"><button data-pick="confirm_completed" type="button">xác nhận đã </button><button data-pick="listen_support" type="button">lắng nghe và</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="listen_support">
+              <span>Tình huống cần &quot;lắng nghe và hỗ trợ cá nhân&quot; — không phải trọng tâm Q151</span>
+              <div class="classify-btns"><button data-pick="confirm_completed" type="button">xác nhận đã </button><button data-pick="listen_support" type="button">lắng nghe và</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="document_first">
+              <span>Tình huống cần &quot;ghi nhận / tài liệu hóa&quot; — không phải trọng tâm Q151</span>
+              <div class="classify-btns"><button data-pick="confirm_completed" type="button">xác nhận đã </button><button data-pick="listen_support" type="button">lắng nghe và</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Validate that the customer has officially accepted t…" → B</h4>
+            <p style="margin:0">&quot;Validate that the customer has officially accepted the final project deliverables …&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Request feedback from remaining stakeholders to unde…" → C</h4>
+            <p style="margin:0">Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xác nhận đã hoàn thành (không xử lý mới).</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Verify whether the final budget report and lessons l…" → D</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi FIRST — đây không phải bước ưu tiên.)</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>stakeholders have not confirmed whether the deliverables meet</strong> → <strong>A</strong> — PM xác nhận đã hoàn thành (không xử lý mới) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Scope, Focus Area Executing (…</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q151 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Review the change log and confirm all requested modifications were formally approved and implemented.</div>
+            <div class="flashcard-front">Q151 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 29</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Q151 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Review the change log and confirm all requested modifications were formally approved and implemented</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Stakeholder không hài lòng</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q151
-────────────────────────
-A junior project manager asks a senior colleague for help initiating the project closeout phase. During the discussion, the senior project manager notices that some client-requested changes are not cl…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q151
+(PMBOK 8, tr. 29)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Scope
+PROCESS: Manage Stakeholder Engagement, Validate Scope
+PRINCIPLE: Focus on value
 
-ANSWER: A
-A. Review the change log and confirm all requested modifications were formally approved and implemented.
+SCENARIO:
+A junior project manager asks a senior colleague for help initiating the project closeout phase. During the discussion, the senior project manager notices that some client-requested changes are not clearly documented, an…
 
-PMBOK 8:
-  Domain: Stakeholders, Scope
-  Process: Manage Stakeholder Engagement, Validate Scope
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  stakeholders have not confirmed whether the deliverables meet
+
+ANSWER → A) Review the change log and confirm all requested modifications were formally approved and implemented.
+
+NOT:
+  B) Validate that the customer has officially accepted… — &quot;Validate that the customer has officially accepted the fina
+  C) Request feedback from remaining stakeholders to un… — Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết sta
+  D) Verify whether the final budget report and lessons… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+
+Q151 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM xác nhận đã hoàn thành (không xử lý mới) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Scope, Focus Area Executing (PMBOK 8).","B":"\"Validate that the customer has officially accepted the final project deliverables …\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).","C":"Tập trung \"lắng nghe và hỗ trợ cá nhân\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xác nhận đã hoàn thành (không xử lý mới).","D":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi FIRST — đây không phải bước ưu tiên.)"};
+      const EXPL = {"A":"Đúng! PM xác nhận đã hoàn thành (không xử lý mới) để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Scope, Focus Area Executing (PMBOK 8).","B":"\"Validate that the customer has officially accepted the final project deliverables …\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung xác nhận đã hoàn thành (không xử lý mới).","C":"Tập trung \"lắng nghe và hỗ trợ cá nhân\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xác nhận đã hoàn thành (không xử lý mới).","D":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi FIRST — đây không phải bước ưu tiên.)"};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

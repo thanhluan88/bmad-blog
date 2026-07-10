@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1061</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Team</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1061">Câu 1061</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1060.html">← 1060</a>
         <a href="pmp-teach-full-q1062.html">1062 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1061 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A company’s software development project was launched before the availability of a new popular networking technology. The project sponsor is encouraging use of the technology, citing anticipated market share. However, the company's design might <span class="kw-cue">not</span> work well with this new technology. The engineers’ consensus is that extensive recoding will be required to retrofit the software and make it compatible. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Resources</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q1061</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1061</h1>
+          <p class="lead">Bài học Q1061 về <strong>Develop Team</strong> (PMBOK 8, tr. 53) — Phân tích tình huống và chọn đáp án A theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A company’s software development project was launched before the availability of a new popular networking technology. The project sponsor is encouraging use of the technology, citing anticipated market share. However, the company's design might not work well with this new technology. The engineers’ consensus is that extensive recoding will be required to retrofit the software and make it compatible. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Stakeholders, Resources</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q1061</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Team, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Develop Team</h2>
+          <p><strong>Develop Team</strong> thuộc miền <strong>Stakeholders, Resources</strong> — process <strong>Develop Team</strong>, principle <strong>Build an empowered culture</strong>. PMBOK 8 (tr. 53): 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>sửa kế hoạch</strong>
+              sửa kế hoạch / baseline / schedule
+            </div><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div><div class="approach-cell">
+              <strong>phối hợp với bên liên quan</strong>
+              phối hợp với bên liên quan
+            </div><div class="approach-cell">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1061</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>A</strong> phù hợp vì PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Executing (PM…</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1061 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Work with the sponsor to assess the value of the new te…</strong></td>
+                <td>sửa kế hoạch / baseline / schedule</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Alert stakeholders to expect an expansion of scope and …</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Alert stakeholders to expect an expansion of s…</td>
+              </tr><tr>
+                <td><strong>C. Work with the project team to determine the maximum cha…</strong></td>
+                <td>phối hợp với bên liên quan</td>
+                <td>✗ Tập trung &quot;phối hợp với bên liên quan&quot; không giải quyết Work with the project team to dete…</td>
+              </tr><tr>
+                <td><strong>D. Use an iterative approach to the development cycle to c…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td>✗ Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Use an iterative approach to the d…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1061</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         <span class="kw-signal">Work with</span> the sponsor to assess the value of the new technology for this software and update the project management plan with the revised strategy.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Alert stakeholders to expect an expansion of scope and delays in the timeline caused by code revisions to accommodate the networking technology.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1061</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1061</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1061</div>
             <div class="q-text">A company’s software development project was launched before the availability of a new popular networking technology. The project sponsor is encouraging use of the technology, citing anticipated market share. However, the company's design might <span class="kw-cue">not</span> work well with this new technology. The engineers’ consensus is that extensive recoding will be required to retrofit the software and make it compatible. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li><span class="kw-signal">Consensus</span> building đạt thống nhất qua thảo luận và lắng nghe — phù hợp team đa dạng. <span class="kw-pmbok">PMBOK 8</span> (<span class="kw-pmbok">Build an empowered culture</span>) ưu tiên tham gia có ý nghĩa hơn bỏ phiếu đa số.</li><li>Process <span class="kw-pmbok">Develop Team</span> — align với đáp án A.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 53.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Work with the sponsor to assess the value of the new technology for this software and update the project management plan with the revised strategy.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).<br><br><span class="kw-signal">Consensus</span> building đạt thống nhất qua thảo luận và lắng nghe — phù hợp team đa dạng. <span class="kw-pmbok">PMBOK 8</span> (<span class="kw-pmbok">Build an empowered culture</span>) ưu tiên tham gia có ý nghĩa hơn bỏ phiếu đa số.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an Empowered Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Develop Team</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Alert stakeholders to expect an expansion of scope and delays in the timeline ca…</span></td><td>Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Alert stakeholders to expect an expansion of scope and delays in the timeline caused by code revisions to accommodate the networking technology. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Work with the project team to determine the maximum change in scope they can rea…</span></td><td>Tập trung &quot;phối hợp với bên liên quan&quot; không giải quyết <span class="kw-signal">Work with</span> the project team to determine the maximum change in scope they can realistically handle based on estimates of the changes involved. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Use an iterative approach to the development cycle to continuously assess and pr…</span></td><td>Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết Use an iterative approach to the development cycle to continuously assess and prioritize the networking-related change requirements as they arise. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="revise_plan">
+              <span>A company’s software development project was launched before the availability of a new popular netwo… (Q1061)</span>
+              <div class="classify-btns"><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="work_with_party" type="button">phối hợp với</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q1061</span>
+              <div class="classify-btns"><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="work_with_party" type="button">phối hợp với</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button></div>
+            </div><div class="classify-row" data-answer="work_with_party">
+              <span>Tình huống cần &quot;phối hợp với bên liên quan&quot; — không phải trọng tâm Q1061</span>
+              <div class="classify-btns"><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="work_with_party" type="button">phối hợp với</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button></div>
+            </div><div class="classify-row" data-answer="prioritize_value">
+              <span>Tình huống cần &quot;ưu tiên theo giá trị / MVP&quot; — không phải trọng tâm Q1061</span>
+              <div class="classify-btns"><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="work_with_party" type="button">phối hợp với</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Alert stakeholders to expect an expansion of scope a…" → B</h4>
+            <p style="margin:0">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Alert stakeholders to expect an expansion of scope and delays in the timeline caused by code revisions to accommodate the networking technology. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Work with the project team to determine the maximum …" → C</h4>
+            <p style="margin:0">Tập trung &quot;phối hợp với bên liên quan&quot; không giải quyết Work with the project team to determine the maximum change in scope they can realistically handle based on estimates of the changes involved. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Use an iterative approach to the development cycle t…" → D</h4>
+            <p style="margin:0">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Use an iterative approach to the development cycle to continuously assess and prioritize the networking-related change requirements as they arise. — đáp án đúng cần sửa kế hoạch / baseline / schedule.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>A</strong> — PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Executing (PM…</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1061 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Work with the sponsor to assess the value of the new technology for this software and update the project management plan with the revised strategy.</div>
+            <div class="flashcard-front">Q1061 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Team</strong><br>PMBOK 8, tr. 53</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Build an empowered culture</strong><br>Develop Team</div>
+            <div class="flashcard-front">Q1061 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Work with the sponsor to assess the value of the new technology for this software and update the pro</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án A theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1061
-────────────────────────
-A company’s software development project was launched before the availability of a new popular networking technology. The project sponsor is encouraging use of the technology, citing anticipated marke…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP TEAM — Q1061
+(PMBOK 8, tr. 53)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Resources
+PROCESS: Develop Team, Manage Stakeholder Engagement
+PRINCIPLE: Build an empowered culture
 
-ANSWER: A
-A. Work with the sponsor to assess the value of the new technology for this software and update the project management plan with the revised strategy.
+SCENARIO:
+A company’s software development project was launched before the availability of a new popular networking technology. The project sponsor is encouraging use of the technology, citing anticipated market share. However, th…
 
-PMBOK 8:
-  Domain: Stakeholders, Resources
-  Process: Develop Team, Manage Stakeholder Engagement
-  Principle: Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → A) Work with the sponsor to assess the value of the new technology for this software and update the project management plan with the revised strategy.
+
+NOT:
+  B) Alert stakeholders to expect an expansion of scope… — Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Alert stakeholde
+  C) Work with the project team to determine the maximu… — Tập trung &quot;phối hợp với bên liên quan&quot; không giải quyết Work
+  D) Use an iterative approach to the development cycle… — Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Use 
+
+Q1061 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +330,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Executing (PMBOK 8).","B":"Tập trung \"chờ / trì hoãn\" không giải quyết Alert stakeholders to expect an expansion of scope and delays in the timeline caused by code revisions to accommodate the networking technology. — đáp án đúng cần sửa kế hoạch / baseline / schedule.","C":"Tập trung \"phối hợp với bên liên quan\" không giải quyết Work with the project team to determine the maximum change in scope they can realistically handle based on estimates of the changes involved. — đáp án đúng cần sửa kế hoạch / baseline / schedule.","D":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết Use an iterative approach to the development cycle to continuously assess and prioritize the networking-related change requirements as they arise. — đáp án đúng cần sửa kế hoạch / baseline / schedule."};
+      const EXPL = {"A":"Đúng! PM sửa kế hoạch / baseline / schedule để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Stakeholders + Resources, Focus Area Executing (PMBOK 8).","B":"Tập trung \"chờ / trì hoãn\" không giải quyết Alert stakeholders to expect an expansion of scope and delays in the timeline caused by code revisions to accommodate the networking technology. — đáp án đúng cần sửa kế hoạch / baseline / schedule.","C":"Tập trung \"phối hợp với bên liên quan\" không giải quyết Work with the project team to determine the maximum change in scope they can realistically handle based on estimates of the changes involved. — đáp án đúng cần sửa kế hoạch / baseline / schedule.","D":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết Use an iterative approach to the development cycle to continuously assess and prioritize the networking-related change requirements as they arise. — đáp án đúng cần sửa kế hoạch / baseline / schedule."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +356,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

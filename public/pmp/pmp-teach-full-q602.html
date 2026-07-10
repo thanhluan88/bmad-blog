@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 602</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-602">Câu 602</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q601.html">← 601</a>
         <a href="pmp-teach-full-q603.html">603 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 602 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A national retail chain has initiated a rebranding project. During an executive review of the project, stakeholders note that milestones are on track and costs are within baseline. The project sponsor warns that low-value features are being released before critical ones. Other stakeholders argue that the schedule was approved and should <span class="kw-cue">not</span> change. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Initiating</span><span class="badge">Identify Stakeholders</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q602</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q602</h1>
+          <p class="lead">Bài học Q602 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 42) — Phân tích tình huống và chọn đáp án B theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">A national retail chain has initiated a rebranding project. During an executive review of the project, <em>stakeholders note that milestones are on track and costs are</em> within baseline. The project sponsor warns that low-value features are being released before critical ones. Other stakeholders argue that the schedule was approved and should not change. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 42</span><span class="badge">Stakeholders, Scope</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q602</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Scope<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Scope</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 42): remains focused on delivering its key outcomes. ⚫ Schedule. A focus on value helps to ensure that time is managed effectively to help the project to deliver the expected value by—or earlier than—the target date. This effort includes plan</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>tiếp tục theo kế hoạch hiện tại</strong>
+              tiếp tục theo kế hoạch hiện tại
+            </div><div class="approach-cell pull">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div><div class="approach-cell">
+              <strong>họp</strong>
+              họp / thảo luận trực tiếp
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Log the concern as an issue but continue delivering the feat
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q602</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholders note that milestones are on track and costs are</strong><br><br>→ <strong>B</strong> phù hợp vì PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q602 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Maintain the current schedule to avoid re-baselining an…</strong></td>
+                <td>tiếp tục theo kế hoạch hiện tại</td>
+                <td>✗ Làm tất cả features — không prioritize theo value.</td>
+              </tr><tr>
+                <td><strong>B. Reassess backlog priorities with stakeholders to focus …</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Facilitate a meeting among all stakeholders to gather t…</strong></td>
+                <td>họp / thảo luận trực tiếp</td>
+                <td>✗ Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Facilitate a meeting among all stak…</td>
+              </tr><tr>
+                <td><strong>D. Log the concern as an issue but continue delivering the…</strong></td>
+                <td>Log the concern as an issue but continue delivering the features accor</td>
+                <td>✗ &quot;Log the concern as an issue but continue delivering the features according to the …&quot; khôn…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q602</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Maintain the current schedule to avoid re-baselining and to mitigate potential stakeholder dissatisfaction.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Reassess backlog priorities with stakeholders to focus on features delivering the highest business value.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Facilitate a meeting among all stakeholders to gather their input and attempt to reach a consensus.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q602</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q602</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 602</div>
             <div class="q-text">A national retail chain has initiated a rebranding project. During an executive review of the project, stakeholders note that milestones are on track and costs are within baseline. The project sponsor warns that low-value features are being released before critical ones. Other stakeholders argue that the schedule was approved and should <span class="kw-cue">not</span> change. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>→ <strong>B:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</li><li>Bối cảnh: A national retail chain has initiated a rebranding project. During an executive review of the project, stakeholders note that milestones are on track and costs are within baseline. The project sponsor warns that low-value features are being released before critical ones. Other stakeholders argue that the schedule was approved and should <span class="kw-cue">not</span> change. Đáp án <strong>B</strong> — &quot;Reassess backlog priorities with stakeholders to focus on features delivering the highest business value.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án B.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 42.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Reassess backlog priorities with stakeholders to focus on features delivering the highest business value.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc.<br><br>Bối cảnh: A national retail chain has initiated a rebranding project. During an executive review of the project, stakeholders note that milestones are on track and costs are within baseline. The project sponsor warns that low-value features are being released before critical ones. Other stakeholders argue that the schedule was approved and should <span class="kw-cue">not</span> change. Đáp án <strong>B</strong> — &quot;Reassess backlog priorities with stakeholders to focus on features delivering the highest business value.&quot; — phù hợp vì PM ưu tiên theo business value/<span class="kw-signal">MVP</span> — deliver giá trị sớm thay vì làm tất cả features cùng lúc. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; remains focused on delivering its key outcomes. ⚫ <span class="kw-pmbok">Schedule</span>. A <span class="kw-pmbok">focus on value</span> helps to ensure that time is managed effectively to help the project to deliver the expected value by—or earlier than—the target date. This effort includes plan<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 42 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 42: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Maintain the current schedule to avoid re-baselining and to mitigate potential s…</span></td><td>Làm tất cả features — không prioritize theo value.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Facilitate a meeting among all stakeholders to gather their input and attempt to…</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết <span class="kw-signal">Facilitate</span> a meeting among all stakeholders to gather their input and attempt to reach a <span class="kw-signal">consensus</span>. — đáp án đúng cần ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Log the concern as an issue but continue delivering the features according to th…</span></td><td>&quot;Log the concern as an issue but continue delivering the features according to the …&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / <span class="kw-signal">MVP</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="prioritize_value">
+              <span>A national retail chain has initiated a rebranding project. During an executive review of the projec… (Q602)</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="proceed_continue">
+              <span>Tình huống cần &quot;tiếp tục theo kế hoạch hiện tại&quot; — không phải trọng tâm Q602</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="meet_discuss">
+              <span>Tình huống cần &quot;họp / thảo luận trực tiếp&quot; — không phải trọng tâm Q602</span>
+              <div class="classify-btns"><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Maintain the current schedule to avoid re-baselining…" → A</h4>
+            <p style="margin:0">Làm tất cả features — không prioritize theo value.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Facilitate a meeting among all stakeholders to gathe…" → C</h4>
+            <p style="margin:0">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Facilitate a meeting among all stakeholders to gather their input and attempt to reach a consensus. — đáp án đúng cần ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Log the concern as an issue but continue delivering …" → D</h4>
+            <p style="margin:0">&quot;Log the concern as an issue but continue delivering the features according to the …&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / MVP.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholders note that milestones are on track and costs are</strong> → <strong>B</strong> — PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q602 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Reassess backlog priorities with stakeholders to focus on features delivering the highest business value.</div>
+            <div class="flashcard-front">Q602 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 42</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q602 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Reassess backlog priorities with stakeholders to focus on features delivering the highest business v</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án B theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q602
-────────────────────────
-A national retail chain has initiated a rebranding project. During an executive review of the project, stakeholders note that milestones are on track and costs are within baseline. The project sponsor…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q602
+(PMBOK 8, tr. 42)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Scope
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Focus on value
 
-ANSWER: B
-B. Reassess backlog priorities with stakeholders to focus on features delivering the highest business value.
+SCENARIO:
+A national retail chain has initiated a rebranding project. During an executive review of the project, stakeholders note that milestones are on track and costs are within baseline. The project sponsor warns that low-valu…
 
-PMBOK 8:
-  Domain: Stakeholders, Scope
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholders note that milestones are on track and costs are
+
+ANSWER → B) Reassess backlog priorities with stakeholders to focus on features delivering the highest business value.
+
+NOT:
+  A) Maintain the current schedule to avoid re-baselini… — Làm tất cả features — không prioritize theo value.
+  C) Facilitate a meeting among all stakeholders to gat… — Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Facil
+  D) Log the concern as an issue but continue deliverin… — &quot;Log the concern as an issue but continue delivering the fea
+
+Q602 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Làm tất cả features — không prioritize theo value.","B":"PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","C":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết Facilitate a meeting among all stakeholders to gather their input and attempt to reach a consensus. — đáp án đúng cần ưu tiên theo giá trị / MVP.","D":"\"Log the concern as an issue but continue delivering the features according to the …\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / MVP."};
+      const EXPL = {"A":"Làm tất cả features — không prioritize theo value.","B":"Đúng! PM ưu tiên theo business value/MVP — deliver giá trị sớm thay vì làm tất cả features cùng lúc.","C":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết Facilitate a meeting among all stakeholders to gather their input and attempt to reach a consensus. — đáp án đúng cần ưu tiên theo giá trị / MVP.","D":"\"Log the concern as an issue but continue delivering the features according to the …\" không phù hợp vấn đề trong đề bài — đáp án đúng tập trung ưu tiên theo giá trị / MVP."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

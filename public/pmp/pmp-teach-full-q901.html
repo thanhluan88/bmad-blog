@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 901</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-901">Câu 901</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q900.html">← 900</a>
         <a href="pmp-teach-full-q902.html">902 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 901 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">At a global consumer goods company, a project manager is initiating a project to implement a new product lifecycle management platform across multiple regions. During kickoff, stakeholders express confusion about approvals, reporting expectations, and escalation paths. The sponsor stresses the need for clear governance before execution begins. The project manager sees a risk of stalled decisions if governance is unclear. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Governance</span><span class="badge">Initiating</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q901</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q901</h1>
+          <p class="lead">Bài học Q901 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 48) — stakeholder không hài lòng / kỳ vọng lệch</p>
+          <p class="lead" style="margin-top:0.75rem">At a global consumer goods company, a project manager is initiating a project to implement a new product lifecycle management platform across multiple regions. During kickoff, <em>stakeholders express confusion about approvals</em>, reporting expectations, and <em>escalation paths</em>. The sponsor stresses the need for clear governance before execution begins. The project manager sees a risk of stalled decisions if governance is unclear. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 48</span><span class="badge">Stakeholders, Governance</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q901</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,48 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Governance<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Governance</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 48): 3.6.3 Connected Performance Domains The principle of Be an Accountable Leader supports many project management performance domains and can enhance the effectiveness of the project manager when well applied, such as with the following: ⚫</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell">
+              <strong>tiếp tục theo kế hoạch hiện tại</strong>
+              tiếp tục theo kế hoạch hiện tại
+            </div><div class="approach-cell">
+              <strong>đảm bảo tuân thủ</strong>
+              đảm bảo tuân thủ / compliance
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q901</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholders express confusion about approvals</strong> · <strong>escalation paths</strong><br><br>→ <strong>C</strong> phù hợp vì Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q901 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Ask each functional director to define their own report…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>B. Rely on the existing organizational hierarchy for decis…</strong></td>
+                <td>tiếp tục theo kế hoạch hiện tại</td>
+                <td>✗ Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết stakeholder không hài lòng / …</td>
+              </tr><tr>
+                <td><strong>C. Define and document a governance framework that clarifi…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Begin detailed scheduling work and adjust governance in…</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td>✗ Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder không hài lòng / kỳ…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q901</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Ask each functional director to define their own reporting preferences and <span class="kw-trap">escalation</span> rules for their teams.
@@ -156,7 +201,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Define and document a governance framework that clarifies decision authority, reporting expectations, and escalation paths.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Begin detailed scheduling work and adjust governance informally as issues arise.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q901</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q901</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 901</div>
             <div class="q-text">At a global consumer goods company, a project manager is initiating a project to implement a new product lifecycle management platform across multiple regions. During kickoff, stakeholders express confusion about approvals, reporting expectations, and escalation paths. The sponsor stresses the need for clear governance before execution begins. The project manager sees a risk of stalled decisions if governance is unclear. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +226,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</li><li>→ <strong>C:</strong> Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</li><li>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>C</strong> — &quot;Define and document a governance framework that clarifies decision authority, reporting expectations, and <span class="kw-trap">escalation</span> paths.&quot; — phù hợp vì Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</li><li>Stem signal: stakeholder không hài lòng / kỳ vọng lệch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: mức độ uncertainty cao — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Define and document a governance framework that clarifies decision authority, reporting expectations, and escalation paths.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.<br><br>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>C</strong> — &quot;Define and document a governance framework that clarifies decision authority, reporting expectations, and <span class="kw-trap">escalation</span> paths.&quot; — phù hợp vì Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.6.3 Connected Performance Domains The principle of Be an Accountable Leader supports many project management performance domains and can enhance the effectiveness of the project manager when well applied, such as with the following: ⚫<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 48 (Be an Accountable Leader)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 48: Be an Accountable Leader</p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask each functional director to define their own reporting preferences and escal…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Rely on the existing organizational hierarchy for decisions and proceed without …</span></td><td>Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần leo thang lên cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Begin detailed scheduling work and adjust governance informally as issues arise.</span></td><td>Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần leo thang lên cấp trên.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="escalate">
+              <span>At a global consumer goods company, a project manager is initiating a project to implement a new pro… (Q901)</span>
+              <div class="classify-btns"><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q901</span>
+              <div class="classify-btns"><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button></div>
+            </div><div class="classify-row" data-answer="proceed_continue">
+              <span>Tình huống cần &quot;tiếp tục theo kế hoạch hiện tại&quot; — không phải trọng tâm Q901</span>
+              <div class="classify-btns"><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button></div>
+            </div><div class="classify-row" data-answer="ensure_compliance">
+              <span>Tình huống cần &quot;đảm bảo tuân thủ / compliance&quot; — không phải trọng tâm Q901</span>
+              <div class="classify-btns"><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="proceed_continue" type="button">tiếp tục the</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Ask each functional director to define their own rep…" → A</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Rely on the existing organizational hierarchy for de…" → B</h4>
+            <p style="margin:0">Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần leo thang lên cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Begin detailed scheduling work and adjust governance…" → D</h4>
+            <p style="margin:0">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần leo thang lên cấp trên.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholders express confusion about approvals · escalation paths</strong> → <strong>C</strong> — Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q901 — đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Define and document a governance framework that clarifies decision authority, reporting expectations, and escalation paths.</div>
+            <div class="flashcard-front">Q901 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 48</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q901 — đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Define and document a governance framework that clarifies decision authority, reporting expectations</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">stakeholder không hài lòng / kỳ vọng lệch</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q901
-────────────────────────
-At a global consumer goods company, a project manager is initiating a project to implement a new product lifecycle management platform across multiple regions. During kickoff, stakeholders express con…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q901
+(PMBOK 8, tr. 48)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Governance
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: C
-C. Define and document a governance framework that clarifies decision authority, reporting expectations, and escalation paths.
+SCENARIO:
+At a global consumer goods company, a project manager is initiating a project to implement a new product lifecycle management platform across multiple regions. During kickoff, stakeholders express confusion about approva…
 
-PMBOK 8:
-  Domain: Stakeholders, Governance
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholders express confusion about approvals | escalation paths
+
+ANSWER → C) Define and document a governance framework that clarifies decision authority, reporting expectations, and escalation paths.
+
+NOT:
+  A) Ask each functional director to define their own r… — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  B) Rely on the existing organizational hierarchy for … — Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết
+  D) Begin detailed scheduling work and adjust governan… — Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết s
+
+Q901 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Tập trung \"tiếp tục theo kế hoạch hiện tại\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần leo thang lên cấp trên.","C":"Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.","D":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần leo thang lên cấp trên."};
+      const EXPL = {"A":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","B":"Tập trung \"tiếp tục theo kế hoạch hiện tại\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần leo thang lên cấp trên.","C":"Đúng! Leo thang khi vấn đề vượt quyền PM hoặc cần quyết định cấp trên — sau khi đã thử xử lý trong phạm vi.","D":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần leo thang lên cấp trên."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

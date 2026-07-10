@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 915</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-915">Câu 915</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q914.html">← 914</a>
         <a href="pmp-teach-full-q916.html">916 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 915 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An adaptive product development project is being initiated after a sudden market change. In a governance planning meeting, the project manager asks for input to help define success metrics. The sponsor wants to ensure continued viability. Several key stakeholders disagree on whether to emphasize customer adoption or cost efficiency. Which metrics should the project manager use?</p>
-          <div class="badges"><span class="badge">Stakeholders, Resources</span><span class="badge">Initiating</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q915</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q915</h1>
+          <p class="lead">Bài học Q915 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 36) — Xung đột</p>
+          <p class="lead" style="margin-top:0.75rem">An adaptive product development project is being initiated after a sudden market change. In a governance planning meeting, the project manager asks for input to help define success metrics. The sponsor wants to ensure continued viability. Several key <em>stakeholders disagree on whether to emphasize customer adopti</em>on or cost efficiency. Which metrics should the project manager use?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 36</span><span class="badge">Stakeholders, Resources</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q915</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Resources<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably, Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Resources</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 36): OwnershipProactive Value-Driven Embed Quality Into Processes and Deliverables Adopt a Holistic View Be an Accountable Leader Build an Empowered Culture Mindset Focus on Value Integrate Sustainability Within All Project Areas</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Download counts, system uptime, and earned value (EV) indica
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Net promoter score (NPS), cost per feature delivered, and sy
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Implement counts, user adoption rate, and earned value (EV) 
+            </div><div class="approach-cell pull">
+              <strong>D</strong>
+              User adoption rate, cost per feature delivered, and return o
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q915</h4>
+            <p style="margin:0"><strong>stakeholders disagree on whether to emphasize customer adopti</strong><br><br>→ <strong>D</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Resources (Initiating, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q915 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Download counts, system uptime, and earned value (EV) i…</strong></td>
+                <td>Download counts, system uptime, and earned value (EV) indicators.</td>
+                <td>✗ &quot;Download counts, system uptime, and earned value (EV) indicators.&quot; không phù hợp xung đột…</td>
+              </tr><tr>
+                <td><strong>B. Net promoter score (NPS), cost per feature delivered, a…</strong></td>
+                <td>Net promoter score (NPS), cost per feature delivered, and system respo</td>
+                <td>✗ &quot;Net promoter score (NPS), cost per feature delivered, and system response time.&quot; không ph…</td>
+              </tr><tr>
+                <td><strong>C. Implement counts, user adoption rate, and earned value …</strong></td>
+                <td>Implement counts, user adoption rate, and earned value (EV) indicators</td>
+                <td>✗ &quot;Implement counts, user adoption rate, and earned value (EV) indicators.&quot; không phù hợp xu…</td>
+              </tr><tr>
+                <td><strong>D. User adoption rate, cost per feature delivered, and ret…</strong></td>
+                <td>User adoption rate, cost per feature delivered, and return on investme</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q915</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Download counts, system uptime, and earned value (EV) indicators.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         User adoption rate, cost per feature delivered, and return on investment (ROI).
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q915</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q915</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 915</div>
             <div class="q-text">An adaptive product development project is being initiated after a sudden market change. In a governance planning meeting, the project manager asks for input to help define success metrics. The sponsor wants to ensure continued viability. Several key stakeholders disagree on whether to emphasize customer adoption or cost efficiency. Which metrics should the project manager use?</div>
@@ -181,44 +229,84 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>D:</strong> Xung đột — PM <span class="kw-signal">facilitate</span> giải quyết trực tiếp, không <span class="kw-trap">ignore</span> hay <span class="kw-trap">escalate</span> sớm.</li><li>Bối cảnh: xung đột trong team hoặc stakeholder. Đáp án <strong>D</strong> — &quot;User adoption rate, cost per feature delivered, and return on investment (ROI).&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: xung đột trong team hoặc stakeholder — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án D.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. User adoption rate, cost per feature delivered, and return on investment (ROI).</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Xung đột — PM <span class="kw-signal">facilitate</span> giải quyết trực tiếp, không <span class="kw-trap">ignore</span> hay <span class="kw-trap">escalate</span> sớm.<br><br>Bối cảnh: xung đột trong team hoặc stakeholder. Đáp án <strong>D</strong> — &quot;User adoption rate, cost per feature delivered, and return on investment (ROI).&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span> (Initiating, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; OwnershipProactive Value-Driven <span class="kw-pmbok">Embed Quality</span> Into Processes and Deliverables <span class="kw-pmbok">Adopt a Holistic View</span> Be an Accountable Leader <span class="kw-pmbok">Build an Empowered Culture</span> Mindset <span class="kw-pmbok">Focus on Value</span> <span class="kw-pmbok">Integrate Sustainability</span> Within All Project Areas<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 36 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 36: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Download counts, system uptime, and earned value (EV) indicators.</span></td><td>&quot;Download counts, system uptime, and earned value (EV) indicators.&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung &quot;User adoption rate, cost per feature delivered, and return on investment (ROI).&quot;.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Net promoter score (NPS), cost per feature delivered, and system response time.</span></td><td>&quot;Net promoter score (NPS), cost per feature delivered, and system response time.&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung &quot;User adoption rate, cost per feature delivered, and return on investment (ROI).&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Implement counts, user adoption rate, and earned value (EV) indicators.</span></td><td>&quot;Implement counts, user adoption rate, and earned value (EV) indicators.&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung &quot;User adoption rate, cost per feature delivered, and return on investment (ROI).&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>An adaptive product development project is being initiated after a sudden market change. In a govern… (Q915)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="DUMMY1" type="button">Opt 1</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 1 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Download counts, system uptime, and earned value (EV…" → A</h4>
+            <p style="margin:0">&quot;Download counts, system uptime, and earned value (EV) indicators.&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung &quot;User adoption rate, cost per feature delivered, and return on investment (ROI).&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Net promoter score (NPS), cost per feature delivered…" → B</h4>
+            <p style="margin:0">&quot;Net promoter score (NPS), cost per feature delivered, and system response time.&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung &quot;User adoption rate, cost per feature delivered, and return on investment (ROI).&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Implement counts, user adoption rate, and earned val…" → C</h4>
+            <p style="margin:0">&quot;Implement counts, user adoption rate, and earned value (EV) indicators.&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung &quot;User adoption rate, cost per feature delivered, and return on investment (ROI).&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>stakeholders disagree on whether to emphasize customer adopti</strong> → <strong>D</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Resources (Initiating, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q915 — đáp án?</div>
+            <div class="flashcard-front">Q915 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 36</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q915 — đáp án?</div>
             <div class="flashcard-back"><strong>D</strong> — User adoption rate, cost per feature delivered, and return on investment (ROI).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Xung đột</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q915
-────────────────────────
-An adaptive product development project is being initiated after a sudden market change. In a governance planning meeting, the project manager asks for input to help define success metrics. The sponso…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q915
+(PMBOK 8, tr. 36)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Resources
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably, Build an empowered culture
 
-ANSWER: D
-D. User adoption rate, cost per feature delivered, and return on investment (ROI).
+SCENARIO:
+An adaptive product development project is being initiated after a sudden market change. In a governance planning meeting, the project manager asks for input to help define success metrics. The sponsor wants to ensure co…
 
-PMBOK 8:
-  Domain: Stakeholders, Resources
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably, Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  stakeholders disagree on whether to emphasize customer adopti
+
+ANSWER → D) User adoption rate, cost per feature delivered, and return on investment (ROI).
+
+NOT:
+  A) Download counts, system uptime, and earned value (… — &quot;Download counts, system uptime, and earned value (EV) indic
+  B) Net promoter score (NPS), cost per feature deliver… — &quot;Net promoter score (NPS), cost per feature delivered, and s
+  C) Implement counts, user adoption rate, and earned v… — &quot;Implement counts, user adoption rate, and earned value (EV)
+
+Q915 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Download counts, system uptime, and earned value (EV) indicators.\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung \"User adoption rate, cost per feature delivered, and return on investment (ROI).\".","B":"\"Net promoter score (NPS), cost per feature delivered, and system response time.\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung \"User adoption rate, cost per feature delivered, and return on investment (ROI).\".","C":"\"Implement counts, user adoption rate, and earned value (EV) indicators.\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung \"User adoption rate, cost per feature delivered, and return on investment (ROI).\".","D":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Resources (Initiating, PMBOK 8)."};
+      const EXPL = {"A":"\"Download counts, system uptime, and earned value (EV) indicators.\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung \"User adoption rate, cost per feature delivered, and return on investment (ROI).\".","B":"\"Net promoter score (NPS), cost per feature delivered, and system response time.\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung \"User adoption rate, cost per feature delivered, and return on investment (ROI).\".","C":"\"Implement counts, user adoption rate, and earned value (EV) indicators.\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung \"User adoption rate, cost per feature delivered, and return on investment (ROI).\".","D":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Resources (Initiating, PMBOK 8)."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 218</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-218">Câu 218</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q217.html">← 217</a>
         <a href="pmp-teach-full-q219.html">219 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 218 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A construction company is building a new office complex. The project sponsor expects the building to be completed with a limited budget and is willing to compromise on certain features to achieve cost savings. The facilities department head expects the building to include high-quality materials and advanced facilities to ensure long-term sustainability and ease of maintenance. The project manager must align stakeholder expectations. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q218</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q218</h1>
+          <p class="lead">Bài học Q218 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 52) — vấn đề chất lượng / defect</p>
+          <p class="lead" style="margin-top:0.75rem">A construction company is building a new office complex. The project sponsor expects the building to be completed with a limited budget and is willing to compromise on certain features to achieve cost savings. The facilities department head expects the building to include high-quality materials and advanced facilities to ensure long-term sustainability and ease of maintenance. The project manager must align <em>stakeholder expectations</em>. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 52</span><span class="badge">Stakeholders, Scope</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q218</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Embed quality, Integrate sustainability
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Scope</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Embed quality</strong>. PMBOK 8 (tr. 52): and sustainable practices. Embedding societal and environmental values into project management strengthens the Governance, Scope, and Stakeholders performance domains by fostering accountability, aligning scope with organizational goals a</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Conduct an impact analysis to see how each stakeholder’s app
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Involve both stakeholders in the decision-making process for
+            </div><div class="approach-cell pull">
+              <strong>họp</strong>
+              họp / thảo luận trực tiếp
+            </div><div class="approach-cell">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q218</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholder expectations</strong><br><br>→ <strong>C</strong> phù hợp vì PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q218 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Conduct an impact analysis to see how each stakeholder’…</strong></td>
+                <td>Conduct an impact analysis to see how each stakeholder’s approach affe</td>
+                <td>✗ &quot;Conduct an impact analysis to see how each stakeholder’s approach affects the budg…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Involve both stakeholders in the decision-making proces…</strong></td>
+                <td>Involve both stakeholders in the decision-making process for each comp</td>
+                <td>✗ &quot;Involve both stakeholders in the decision-making process for each component of the…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Facilitate a meeting between the stakeholders to explor…</strong></td>
+                <td>họp / thảo luận trực tiếp</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Prioritize each stakeholder's interests based on the am…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td>✗ Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết vấn đề chất lượng / defect — đáp á…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q218</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Conduct an impact analysis to see how each stakeholder’s approach affects the budget and schedule.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         <span class="kw-signal">Facilitate</span> a meeting between the stakeholders to explore alternative solutions that satisfy both parties.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Prioritize each stakeholder's interests based on the amount of influence each stakeholder has.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q218</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q218</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 218</div>
             <div class="q-text">A construction company is building a new office complex. The project sponsor expects the building to be completed with a limited budget and is willing to compromise on certain features to achieve cost savings. The facilities department head expects the building to include high-quality materials and advanced facilities to ensure long-term sustainability and ease of maintenance. The project manager must align stakeholder expectations. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>→ <strong>C:</strong> PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>C</strong> — &quot;<span class="kw-signal">Facilitate</span> a meeting between the stakeholders to explore alternative solutions that satisfy both parties.&quot; — phù hợp vì PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án C.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Facilitate a meeting between the stakeholders to explore alternative solutions that satisfy both parties.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>C</strong> — &quot;<span class="kw-signal">Facilitate</span> a meeting between the stakeholders to explore alternative solutions that satisfy both parties.&quot; — phù hợp vì PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; and sustainable practices. Embedding societal and environmental values into project management strengthens the <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Scope</span>, and <span class="kw-pmbok">Stakeholders</span> performance domains by fostering accountability, aligning scope with organizational goals a<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 52 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 52: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Conduct an impact analysis to see how each stakeholder’s approach affects the bu…</span></td><td>&quot;Conduct an impact analysis to see how each stakeholder’s approach affects the budg…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung họp / thảo luận trực tiếp.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Involve both stakeholders in the decision-making process for each component of t…</span></td><td>&quot;Involve both stakeholders in the decision-making process for each component of the…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung họp / thảo luận trực tiếp.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Prioritize each stakeholder's interests based on the amount of influence each st…</span></td><td>Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần họp / thảo luận trực tiếp.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="meet_discuss">
+              <span>A construction company is building a new office complex. The project sponsor expects the building to… (Q218)</span>
+              <div class="classify-btns"><button data-pick="meet_discuss" type="button">họp</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="prioritize_value">
+              <span>Tình huống cần &quot;ưu tiên theo giá trị / MVP&quot; — không phải trọng tâm Q218</span>
+              <div class="classify-btns"><button data-pick="meet_discuss" type="button">họp</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Conduct an impact analysis to see how each stakehold…" → A</h4>
+            <p style="margin:0">&quot;Conduct an impact analysis to see how each stakeholder’s approach affects the budg…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung họp / thảo luận trực tiếp.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Involve both stakeholders in the decision-making pro…" → B</h4>
+            <p style="margin:0">&quot;Involve both stakeholders in the decision-making process for each component of the…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung họp / thảo luận trực tiếp.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Prioritize each stakeholder's interests based on the…" → D</h4>
+            <p style="margin:0">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần họp / thảo luận trực tiếp.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholder expectations</strong> → <strong>C</strong> — PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q218 — đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Facilitate a meeting between the stakeholders to explore alternative solutions that satisfy both parties.</div>
+            <div class="flashcard-front">Q218 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 52</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Embed quality</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q218 — đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Facilitate a meeting between the stakeholders to explore alternative solutions that satisfy both par</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chất lượng / defect</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q218
-────────────────────────
-A construction company is building a new office complex. The project sponsor expects the building to be completed with a limited budget and is willing to compromise on certain features to achieve cost…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q218
+(PMBOK 8, tr. 52)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Scope
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Embed quality, Integrate sustainability
 
-ANSWER: C
-C. Facilitate a meeting between the stakeholders to explore alternative solutions that satisfy both parties.
+SCENARIO:
+A construction company is building a new office complex. The project sponsor expects the building to be completed with a limited budget and is willing to compromise on certain features to achieve cost savings. The facili…
 
-PMBOK 8:
-  Domain: Stakeholders, Scope
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Embed quality, Integrate sustainability</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholder expectations
+
+ANSWER → C) Facilitate a meeting between the stakeholders to explore alternative solutions that satisfy both parties.
+
+NOT:
+  A) Conduct an impact analysis to see how each stakeho… — &quot;Conduct an impact analysis to see how each stakeholder’s ap
+  B) Involve both stakeholders in the decision-making p… — &quot;Involve both stakeholders in the decision-making process fo
+  D) Prioritize each stakeholder's interests based on t… — Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết vấn 
+
+Q218 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"\"Conduct an impact analysis to see how each stakeholder’s approach affects the budg…\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung họp / thảo luận trực tiếp.","B":"\"Involve both stakeholders in the decision-making process for each component of the…\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung họp / thảo luận trực tiếp.","C":"PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.","D":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần họp / thảo luận trực tiếp."};
+      const EXPL = {"A":"\"Conduct an impact analysis to see how each stakeholder’s approach affects the budg…\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung họp / thảo luận trực tiếp.","B":"\"Involve both stakeholders in the decision-making process for each component of the…\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung họp / thảo luận trực tiếp.","C":"Đúng! PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.","D":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần họp / thảo luận trực tiếp."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

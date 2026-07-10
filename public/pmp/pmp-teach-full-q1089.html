@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 1089</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Team</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-1089">Câu 1089</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q1088.html">← 1088</a>
         <a href="pmp-teach-full-q1090.html">1090 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 1089 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project manager is leading a project that is 70% complete. The development team has been following the project management plan and the scope defined in the project charter. During a product review meeting, a stakeholder raises concerns about adding new features, which were <span class="kw-cue">not</span> part of the original project scope but are now urgent for the stakeholder. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</p>
-          <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Executing</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q1089</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q1089</h1>
+          <p class="lead">Bài học Q1089 về <strong>Develop Team</strong> (PMBOK 8, tr. 53) — Stakeholder không hài lòng</p>
+          <p class="lead" style="margin-top:0.75rem">A project manager is leading a project that is <em>70% complete</em>. The development team has been following the project management plan and the scope defined in the project charter. During a product review meeting, a <em>stakeholder raises concerns about adding new features</em>, which were not part of the original project scope but are now urgent for the stakeholder. <em>What should the project manager do next</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Resources, Stakeholders</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q1089</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,52 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Stakeholders<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Develop Team, Manage Team<br>
-              <strong>Principle:</strong> Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Develop Team</h2>
+          <p><strong>Develop Team</strong> thuộc miền <strong>Resources, Stakeholders</strong> — process <strong>Develop Team</strong>, principle <strong>Build an empowered culture</strong>. PMBOK 8 (tr. 53): 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>change control</strong>
+              change control / change request
+            </div><div class="approach-cell">
+              <strong>thông báo một chiều (inform</strong>
+              thông báo một chiều (inform/notify)
+            </div><div class="approach-cell">
+              <strong>sửa kế hoạch</strong>
+              sửa kế hoạch / baseline / schedule
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q1089</h4>
+            <p style="margin:0"><strong>What should the project manager do next</strong> · <strong>70% complete</strong> · <strong>stakeholder raises concerns about adding new features</strong><br><br>→ <strong>A</strong> phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q1089 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Review the requested changes with the team and initiate…</strong></td>
+                <td>change control / change request</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Inform the stakeholder that the requested changes will …</strong></td>
+                <td>thông báo một chiều (inform/notify)</td>
+                <td>✗ Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết stakeholder không hài lòn…</td>
+              </tr><tr>
+                <td><strong>C. Update the project management plan to incorporate the r…</strong></td>
+                <td>sửa kế hoạch / baseline / schedule</td>
+                <td>✗ Rebaseline/sửa plan quá sớm — NEXT cần change control / change request trước khi thay đổi …</td>
+              </tr><tr>
+                <td><strong>D. Submit a change request to the change control board and…</strong></td>
+                <td>change control / change request</td>
+                <td>✗ &quot;Submit a change request to the change control board and notify the proje…&quot; cùng nhóm chan…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q1089</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Review the requested changes with the team and initiate the formal change control process if needed.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Inform the stakeholder that the requested changes will be implemented in future product updates.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q1089</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q1089</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1089</div>
             <div class="q-text">A project manager is leading a project that is 70% complete. The development team has been following the project management plan and the scope defined in the project charter. During a product review meeting, a stakeholder raises concerns about adding new features, which were <span class="kw-cue">not</span> part of the original project scope but are now urgent for the stakeholder. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</div>
@@ -181,44 +226,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.</li><li>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an empowered culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể. Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> ưu tiên <strong>change control / <span class="kw-signal">change request</span></strong> — sửa baseline/<span class="kw-trap">rebaseline</span> chỉ sau khi đã phân tích, thống nhất, hoặc được duyệt qua change control.</li><li>Stem signal: stakeholder không hài lòng / kỳ vọng lệch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Develop Team</span> — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Review the requested changes with the team and initiate the formal change control process if needed.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Stakeholder không hài lòng — engage, làm rõ kỳ vọng và thống nhất hướng xử lý.<br><br>Trong Agile, <span class="kw-signal">servant leader</span> trao quyền cho team tự cải thiện quy trình và loại bỏ <span class="kw-signal">impediment</span>. <span class="kw-pmbok">PMBOK 8</span> — <span class="kw-pmbok">Build an empowered culture</span> — PM tạo điều kiện để team tự giải quyết, không chỉ đạo giải pháp cụ thể. Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> ưu tiên <strong>change control / <span class="kw-signal">change request</span></strong> — sửa baseline/<span class="kw-trap">rebaseline</span> chỉ sau khi đã phân tích, thống nhất, hoặc được duyệt qua change control.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an Empowered Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Inform the stakeholder that the requested changes will be implemented in future …</span></td><td>Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần change control / <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Update the project management plan to incorporate the requested changes and info…</span></td><td><span class="kw-trap">Rebaseline</span>/sửa plan quá sớm — <span class="kw-cue">NEXT</span> cần change control / <span class="kw-signal">change request</span> trước khi thay đổi baseline.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Submit a change request to the change control board and notify the project spons…</span></td><td>&quot;Submit a <span class="kw-signal">change request</span> to the change control board and notify the proje…&quot; cùng nhóm change control / <span class="kw-signal">change request</span> nhưng lệch trọng tâm — &quot;Review the requested changes with the team and initiate the formal chang…&quot; sát stakeholder không hài lòng / kỳ vọng lệch hơn.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="change_control">
+              <span>A project manager is leading a project that is 70% complete. The development team has been following… (Q1089)</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="change_control" type="button">change contr</button></div>
+            </div><div class="classify-row" data-answer="inform_one_way">
+              <span>Tình huống cần &quot;thông báo một chiều (inform/notify)&quot; — không phải trọng tâm Q1089</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="change_control" type="button">change contr</button></div>
+            </div><div class="classify-row" data-answer="revise_plan">
+              <span>Tình huống cần &quot;sửa kế hoạch / baseline / schedule&quot; — không phải trọng tâm Q1089</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="change_control" type="button">change contr</button></div>
+            </div><div class="classify-row" data-answer="change_control">
+              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q1089</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="inform_one_way" type="button">thông báo mộ</button><button data-pick="revise_plan" type="button">sửa kế hoạch</button><button data-pick="change_control" type="button">change contr</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Inform the stakeholder that the requested changes wi…" → B</h4>
+            <p style="margin:0">Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần change control / change request.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Update the project management plan to incorporate th…" → C</h4>
+            <p style="margin:0">Rebaseline/sửa plan quá sớm — NEXT cần change control / change request trước khi thay đổi baseline.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Submit a change request to the change control board …" → D</h4>
+            <p style="margin:0">&quot;Submit a change request to the change control board and notify the proje…&quot; cùng nhóm change control / change request nhưng lệch trọng tâm — &quot;Review the requested changes with the team and initiate the formal chang…&quot; sát stakeholder không hài lòng / kỳ vọng lệch hơn.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do next · 70% complete · stakeholder raises concerns about adding new features</strong> → <strong>A</strong> — Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q1089 — đáp án?</div>
+            <div class="flashcard-front">Q1089 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Team</strong><br>PMBOK 8, tr. 53</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q1089 — đáp án?</div>
             <div class="flashcard-back"><strong>A</strong> — Review the requested changes with the team and initiate the formal change control process if needed.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Build an empowered culture</strong><br>Develop Team</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Stakeholder không hài lòng</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q1089
-────────────────────────
-A project manager is leading a project that is 70% complete. The development team has been following the project management plan and the scope defined in the project charter. During a product review m…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP TEAM — Q1089
+(PMBOK 8, tr. 53)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Stakeholders
+PROCESS: Develop Team, Manage Team
+PRINCIPLE: Build an empowered culture
 
-ANSWER: A
-A. Review the requested changes with the team and initiate the formal change control process if needed.
+SCENARIO:
+A project manager is leading a project that is 70% complete. The development team has been following the project management plan and the scope defined in the project charter. During a product review meeting, a stakeholde…
 
-PMBOK 8:
-  Domain: Resources, Stakeholders
-  Process: Develop Team, Manage Team
-  Principle: Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  What should the project manager do next | 70% complete | stakeholder raises concerns about adding new features
+
+ANSWER → A) Review the requested changes with the team and initiate the formal change control process if needed.
+
+NOT:
+  B) Inform the stakeholder that the requested changes … — Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải q
+  C) Update the project management plan to incorporate … — Rebaseline/sửa plan quá sớm — NEXT cần change control / chan
+  D) Submit a change request to the change control boar… — &quot;Submit a change request to the change control board and not
+
+Q1089 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.","B":"Tập trung \"thông báo một chiều (inform/notify)\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần change control / change request.","C":"Rebaseline/sửa plan quá sớm — NEXT cần change control / change request trước khi thay đổi baseline.","D":"\"Submit a change request to the change control board and notify the proje…\" cùng nhóm change control / change request nhưng lệch trọng tâm — \"Review the requested changes with the team and initiate the formal chang…\" sát stakeholder không hài lòng / kỳ vọng lệch hơn."};
+      const EXPL = {"A":"Đúng! Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.","B":"Tập trung \"thông báo một chiều (inform/notify)\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần change control / change request.","C":"Rebaseline/sửa plan quá sớm — NEXT cần change control / change request trước khi thay đổi baseline.","D":"\"Submit a change request to the change control board and notify the proje…\" cùng nhóm change control / change request nhưng lệch trọng tâm — \"Review the requested changes with the team and initiate the formal chang…\" sát stakeholder không hài lòng / kỳ vọng lệch hơn."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 117</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Project Execution</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-117">Câu 117</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q116.html">← 116</a>
         <a href="pmp-teach-full-q118.html">118 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 117 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A financial services company is running a small yet critical project that supports a major program milestone. A new specialist replaces a key contributor, and an influential stakeholder complains the specialist’s working style is disruptive. The project manager has <span class="kw-cue">not</span> observed the behavior directly. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Governance, Schedule</span><span class="badge">Executing</span><span class="badge">Manage Project Execution</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q117</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q117</h1>
+          <p class="lead">Bài học Q117 về <strong>Manage Project Execution</strong> (PMBOK 8, tr. 84) — vấn đề chi phí / ngân sách</p>
+          <p class="lead" style="margin-top:0.75rem">A financial services company is running a small yet critical project that supports a major program milestone. A new specialist replaces a key contributor, and an influential <em>stakeholder complains the specialist’s working style is disru</em>ptive. The project manager has not observed the behavior directly. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 84</span><span class="badge">Governance, Schedule</span><span class="badge">Manage Project Execution</span><span class="badge">Full Bank Q117</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Schedule<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Project Execution, Perform Integrated Change Control, Close Project or Phase<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Manage Project Execution</h2>
+          <p><strong>Manage Project Execution</strong> thuộc miền <strong>Governance, Schedule</strong> — process <strong>Manage Project Execution</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 84): manages conflict, and resolves issues among team members (see Figure 2-44). The Lead the Team process involves both management and leadership activities as follows: ⚫ Management activities. Management activities focus on the means of meeti</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Ask the stakeholder to formally request the removal of the n
+            </div><div class="approach-cell pull">
+              <strong>B</strong>
+              Meet the new team member to learn their approach and ensure 
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Instruct the new team member to follow the exact methods of 
+            </div><div class="approach-cell">
+              <strong>chờ</strong>
+              chờ / trì hoãn
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q117</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholder complains the specialist’s working style is disru</strong><br><br>→ <strong>B</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q117 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Ask the stakeholder to formally request the removal of …</strong></td>
+                <td>Ask the stakeholder to formally request the removal of the new team me</td>
+                <td>✗ yêu cầu bên liên quan/team thực hiện hành động không phù hợp vấn đề chi phí / ngân sách — …</td>
+              </tr><tr>
+                <td><strong>B. Meet the new team member to learn their approach and en…</strong></td>
+                <td>Meet the new team member to learn their approach and ensure alignment </td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Instruct the new team member to follow the exact method…</strong></td>
+                <td>Instruct the new team member to follow the exact methods of their pred</td>
+                <td>✗ &quot;Instruct the new team member to follow the exact methods of their predecessor with…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Ignore the stakeholder’s comment and wait to see if the…</strong></td>
+                <td>chờ / trì hoãn</td>
+                <td>✗ PMI kỳ vọng PM chủ động và có trách nhiệm (Lead accountably), không bỏ qua vấn đề hay giả …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q117</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Ask the stakeholder to formally request the removal of the new team member from the project.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         Meet the new team member to learn their approach and ensure alignment with project and team goals.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         Instruct the new team member to follow the exact methods of their predecessor without discussion.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q117</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q117</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 117</div>
             <div class="q-text">A financial services company is running a small yet critical project that supports a major program milestone. A new specialist replaces a key contributor, and an influential stakeholder complains the specialist’s working style is disruptive. The project manager has <span class="kw-cue">not</span> observed the behavior directly. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: vấn đề chi phí / ngân sách. Đáp án <strong>B</strong> — &quot;Meet the new team member to learn their approach and ensure alignment with project and team goals.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: vấn đề chi phí / ngân sách — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: stakeholder không hài lòng / kỳ vọng lệch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Meet the new team member to learn their approach and ensure alignment with project and team goals.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: vấn đề chi phí / ngân sách. Đáp án <strong>B</strong> — &quot;Meet the new team member to learn their approach and ensure alignment with project and team goals.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Schedule</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; manages conflict, and resolves issues among team members (see Figure 2-44). The Lead the Team process involves both management and leadership activities as follows: ⚫ Management activities. Management activities focus on the means of meeti<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 84 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 84: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Manage Project Execution</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Ask the stakeholder to formally request the removal of the new team member from …</span></td><td>yêu cầu bên liên quan/team thực hiện hành động không phù hợp vấn đề chi phí / ngân sách — đáp án đúng tập trung &quot;Meet the new team member to learn their approach and ensure alignment with project…&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Instruct the new team member to follow the exact methods of their predecessor wi…</span></td><td>&quot;Instruct the new team member to follow the exact methods of their predecessor with…&quot; không phù hợp vấn đề chi phí / ngân sách — đáp án đúng tập trung &quot;Meet the new team member to learn their approach and ensure alignment with project…&quot;.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Ignore</span> the stakeholder’s comment and wait to see if the issue resolves itself ov…</span></td><td>PMI kỳ vọng PM chủ động và có trách nhiệm (<span class="kw-pmbok">Lead accountably</span>), không bỏ qua vấn đề hay giả định mọi người tự hiểu.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A financial services company is running a small yet critical project that supports a major program m… (Q117)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="wait_delay">
+              <span>Tình huống cần &quot;chờ / trì hoãn&quot; — không phải trọng tâm Q117</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="wait_delay" type="button">chờ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Ask the stakeholder to formally request the removal …" → A</h4>
+            <p style="margin:0">yêu cầu bên liên quan/team thực hiện hành động không phù hợp vấn đề chi phí / ngân sách — đáp án đúng tập trung &quot;Meet the new team member to learn their approach and ensure alignment with project…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Instruct the new team member to follow the exact met…" → C</h4>
+            <p style="margin:0">&quot;Instruct the new team member to follow the exact methods of their predecessor with…&quot; không phù hợp vấn đề chi phí / ngân sách — đáp án đúng tập trung &quot;Meet the new team member to learn their approach and ensure alignment with project…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Ignore the stakeholder’s comment and wait to see if …" → D</h4>
+            <p style="margin:0">PMI kỳ vọng PM chủ động và có trách nhiệm (Lead accountably), không bỏ qua vấn đề hay giả định mọi người tự hiểu.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholder complains the specialist’s working style is disru</strong> → <strong>B</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q117 — đáp án?</div>
+            <div class="flashcard-front">Q117 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Project Execution</strong><br>PMBOK 8, tr. 84</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q117 — đáp án?</div>
             <div class="flashcard-back"><strong>B</strong> — Meet the new team member to learn their approach and ensure alignment with project and team goals.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Manage Project Execution</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chi phí / ngân sách</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q117
-────────────────────────
-A financial services company is running a small yet critical project that supports a major program milestone. A new specialist replaces a key contributor, and an influential stakeholder complains the …
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE PROJECT EXECUTION — Q117
+(PMBOK 8, tr. 84)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Schedule
+PROCESS: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
+PRINCIPLE: Lead accountably
 
-ANSWER: B
-B. Meet the new team member to learn their approach and ensure alignment with project and team goals.
+SCENARIO:
+A financial services company is running a small yet critical project that supports a major program milestone. A new specialist replaces a key contributor, and an influential stakeholder complains the specialist’s working…
 
-PMBOK 8:
-  Domain: Governance, Schedule
-  Process: Manage Project Execution, Perform Integrated Change Control, Close Project or Phase
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholder complains the specialist’s working style is disru
+
+ANSWER → B) Meet the new team member to learn their approach and ensure alignment with project and team goals.
+
+NOT:
+  A) Ask the stakeholder to formally request the remova… — yêu cầu bên liên quan/team thực hiện hành động không phù hợp
+  C) Instruct the new team member to follow the exact m… — &quot;Instruct the new team member to follow the exact methods of
+  D) Ignore the stakeholder’s comment and wait to see i… — PMI kỳ vọng PM chủ động và có trách nhiệm (Lead accountably)
+
+Q117 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"yêu cầu bên liên quan/team thực hiện hành động không phù hợp vấn đề chi phí / ngân sách — đáp án đúng tập trung \"Meet the new team member to learn their approach and ensure alignment with project…\".","B":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Executing, PMBOK 8).","C":"\"Instruct the new team member to follow the exact methods of their predecessor with…\" không phù hợp vấn đề chi phí / ngân sách — đáp án đúng tập trung \"Meet the new team member to learn their approach and ensure alignment with project…\".","D":"PMI kỳ vọng PM chủ động và có trách nhiệm (Lead accountably), không bỏ qua vấn đề hay giả định mọi người tự hiểu."};
+      const EXPL = {"A":"yêu cầu bên liên quan/team thực hiện hành động không phù hợp vấn đề chi phí / ngân sách — đáp án đúng tập trung \"Meet the new team member to learn their approach and ensure alignment with project…\".","B":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Governance + Schedule (Executing, PMBOK 8).","C":"\"Instruct the new team member to follow the exact methods of their predecessor with…\" không phù hợp vấn đề chi phí / ngân sách — đáp án đúng tập trung \"Meet the new team member to learn their approach and ensure alignment with project…\".","D":"PMI kỳ vọng PM chủ động và có trách nhiệm (Lead accountably), không bỏ qua vấn đề hay giả định mọi người tự hiểu."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

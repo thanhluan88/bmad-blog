@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 770</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Define Scope</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-770">Câu 770</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q769.html">← 769</a>
         <a href="pmp-teach-full-q771.html">771 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 770 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A telecommunications company is working on a project that is nearing completion when a federal agency announces a new applicable compliance standard. The quality assurance lead insists that the project must be updated to comply with the new standard. The sponsor warns that resulting cost and schedule impacts would be severe. The client refuses acceptance without regulatory compliance. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</p>
-          <div class="badges"><span class="badge">Scope, Governance</span><span class="badge">Executing</span><span class="badge">Define Scope</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q770</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q770</h1>
+          <p class="lead">Bài học Q770 về <strong>Define Scope</strong> (PMBOK 8, tr. 46) — vấn đề chất lượng / defect</p>
+          <p class="lead" style="margin-top:0.75rem">A telecommunications company is working on a project that is nearing completion when a federal agency announces a new applicable compliance standard. The quality assurance lead insists that the project must be updated to comply with the new standard. The sponsor warns that resulting cost and schedule impacts would be severe. The client refuses acceptance without regulatory compliance. <em>What should the project manager do next</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 46</span><span class="badge">Scope, Governance</span><span class="badge">Define Scope</span><span class="badge">Full Bank Q770</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Scope, Governance<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Define Scope, Validate Scope, Control Scope<br>
-              <strong>Principle:</strong> Embed quality
-            </p>
+        <section id="concept">
+          <h2>1. Define Scope</h2>
+          <p><strong>Define Scope</strong> thuộc miền <strong>Scope, Governance</strong> — process <strong>Define Scope</strong>, principle <strong>Embed quality</strong>. PMBOK 8 (tr. 46): 46 ⚫ Schedule. An emphasis on quality has implications for the project’s schedule. Examples include ensuring scheduling practices and artifacts are reviewed for completeness and correctness; integrating product quality reviews as schedule</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Automate the compliance process to reduce human error and in
+            </div><div class="approach-cell">
+              <strong>coaching</strong>
+              coaching / phát triển năng lực
+            </div><div class="approach-cell">
+              <strong>đảm bảo tuân thủ</strong>
+              đảm bảo tuân thủ / compliance
+            </div><div class="approach-cell pull">
+              <strong>change control</strong>
+              change control / change request
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q770</h4>
+            <p style="margin:0"><strong>What should the project manager do next</strong><br><br>→ <strong>D</strong> phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q770 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Automate the compliance process to reduce human error a…</strong></td>
+                <td>Automate the compliance process to reduce human error and increase eff</td>
+                <td>✗ &quot;Automate the compliance process to reduce human error and increase efficiency in c…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Develop and implement training programs to educate empl…</strong></td>
+                <td>coaching / phát triển năng lực</td>
+                <td>✗ Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết vấn đề chất lượng / defect — đ…</td>
+              </tr><tr>
+                <td><strong>C. Design a temporary workaround and modify practices for …</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td>✗ Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết vấn đề chất lượng / defect — đá…</td>
+              </tr><tr>
+                <td><strong>D. Process the requirement through change control with imp…</strong></td>
+                <td>change control / change request</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q770</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Automate the compliance process to reduce human error and increase efficiency in compliance management.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Process the requirement through change control with impact analysis for cost, schedule, and compliance.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q770</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q770</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 770</div>
             <div class="q-text">A telecommunications company is working on a project that is nearing completion when a federal agency announces a new applicable compliance standard. The quality assurance lead insists that the project must be updated to comply with the new standard. The sponsor warns that resulting cost and schedule impacts would be severe. The client refuses acceptance without regulatory compliance. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">next</span></span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>→ <strong>D:</strong> Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</li><li>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>D</strong> — &quot;Process the requirement through change control with impact analysis for cost, schedule, and compliance.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement. Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong>change control / <span class="kw-signal">change request</span></strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: đạo đức / tuân thủ — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Process the requirement through change control with impact analysis for cost, schedule, and compliance.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>D</strong> — &quot;Process the requirement through change control with impact analysis for cost, schedule, and compliance.&quot; — phù hợp vì Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement. Câu hỏi hỏi <strong><span class="kw-cue">NEXT</span></strong> (bước tiếp theo hợp lý trong chuỗi hành động). <span class="kw-cue">NEXT</span> chọn hành động <strong>change control / <span class="kw-signal">change request</span></strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 46 ⚫ <span class="kw-pmbok">Schedule</span>. An emphasis on quality has implications for the project’s schedule. Examples include ensuring scheduling practices and artifacts are reviewed for completeness and correctness; integrating product quality reviews as schedule<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 46 (Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 46: Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Automate the compliance process to reduce human error and increase efficiency in…</span></td><td>&quot;Automate the compliance process to reduce human error and increase efficiency in c…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Develop and implement training programs to educate employees about compliance re…</span></td><td>Tập trung &quot;<span class="kw-signal">coaching</span> / phát triển năng lực&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần change control / <span class="kw-signal">change request</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Design a temporary workaround and modify practices for the next iteration that c…</span></td><td>Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần change control / <span class="kw-signal">change request</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="change_control">
+              <span>A telecommunications company is working on a project that is nearing completion when a federal agenc… (Q770)</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="coach_develop">
+              <span>Tình huống cần &quot;coaching / phát triển năng lực&quot; — không phải trọng tâm Q770</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="ensure_compliance">
+              <span>Tình huống cần &quot;đảm bảo tuân thủ / compliance&quot; — không phải trọng tâm Q770</span>
+              <div class="classify-btns"><button data-pick="change_control" type="button">change contr</button><button data-pick="coach_develop" type="button">coaching</button><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Automate the compliance process to reduce human erro…" → A</h4>
+            <p style="margin:0">&quot;Automate the compliance process to reduce human error and increase efficiency in c…&quot; không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Develop and implement training programs to educate e…" → B</h4>
+            <p style="margin:0">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần change control / change request.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Design a temporary workaround and modify practices f…" → C</h4>
+            <p style="margin:0">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần change control / change request.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do next</strong> → <strong>D</strong> — Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q770 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Process the requirement through change control with impact analysis for cost, schedule, and compliance.</div>
+            <div class="flashcard-front">Q770 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Define Scope</strong><br>PMBOK 8, tr. 46</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Embed quality</strong><br>Define Scope</div>
+            <div class="flashcard-front">Q770 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Process the requirement through change control with impact analysis for cost, schedule, and complian</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chất lượng / defect</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q770
-────────────────────────
-A telecommunications company is working on a project that is nearing completion when a federal agency announces a new applicable compliance standard. The quality assurance lead insists that the projec…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEFINE SCOPE — Q770
+(PMBOK 8, tr. 46)
+─────────────────────────────────────────────────────
+DOMAIN: Scope, Governance
+PROCESS: Define Scope, Validate Scope, Control Scope
+PRINCIPLE: Embed quality
 
-ANSWER: D
-D. Process the requirement through change control with impact analysis for cost, schedule, and compliance.
+SCENARIO:
+A telecommunications company is working on a project that is nearing completion when a federal agency announces a new applicable compliance standard. The quality assurance lead insists that the project must be updated to…
 
-PMBOK 8:
-  Domain: Scope, Governance
-  Process: Define Scope, Validate Scope, Control Scope
-  Principle: Embed quality</div>
+SIGNAL KEYWORDS:
+  What should the project manager do next
+
+ANSWER → D) Process the requirement through change control with impact analysis for cost, schedule, and compliance.
+
+NOT:
+  A) Automate the compliance process to reduce human er… — &quot;Automate the compliance process to reduce human error and i
+  B) Develop and implement training programs to educate… — Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết 
+  C) Design a temporary workaround and modify practices… — Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết v
+
+Q770 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Automate the compliance process to reduce human error and increase efficiency in c…\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request.","B":"Tập trung \"coaching / phát triển năng lực\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần change control / change request.","C":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần change control / change request.","D":"Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement."};
+      const EXPL = {"A":"\"Automate the compliance process to reduce human error and increase efficiency in c…\" không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung change control / change request.","B":"Tập trung \"coaching / phát triển năng lực\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần change control / change request.","C":"Tập trung \"đảm bảo tuân thủ / compliance\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần change control / change request.","D":"Đúng! Thay đổi scope/plan phải qua change control: đánh giá impact, approval — không tự ý implement."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

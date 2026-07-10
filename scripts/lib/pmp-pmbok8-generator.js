@@ -325,6 +325,16 @@ function buildMcqExplanation(q, options = {}) {
   }
   lines.push("");
   lines.push(buildWhyCorrect(q, correctKeys, scenario, domains, focusArea, priorityCue, agile, stemProfile));
+  const stemSignalLabels = stemIssues.map((i) => i.label).filter(Boolean);
+  if (stemSignalLabels.length || stemProfile?.summaryHint) {
+    lines.push("");
+    lines.push("**Signal trong stem**");
+    lines.push(
+      stemProfile?.summaryHint?.split("—")[0]?.trim() ||
+        stemSignalLabels.join(" · ") ||
+        "Đọc cue FIRST/NEXT và từ khóa stakeholder/risk/change/agile trong đề.",
+    );
+  }
   appendPmbok8Insight(lines, pageInfo);
   lines.push("");
   lines.push("**Loại trừ phương án khác**");

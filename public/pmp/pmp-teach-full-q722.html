@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 722</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Perform Integrated Chang</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-722">Câu 722</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q721.html">← 721</a>
         <a href="pmp-teach-full-q723.html">723 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 722 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An agile project team is midway through delivery of agreed-upon functionality across five sprints. During project execution, the product owner requests two additional features, significantly increasing story points. The sponsor insists the original schedule and budget must be met, and asks the scrum master to address scope pressure without disrupting the current iteration. What should the scrum master do?</p>
-          <div class="badges"><span class="badge">Governance, Scope</span><span class="badge">Executing</span><span class="badge">Perform Integrated Change Control</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q722</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q722</h1>
+          <p class="lead">Bài học Q722 về <strong>Perform Integrated Change Control</strong> (PMBOK 8, tr. 111) — Có yêu cầu thay đổi</p>
+          <p class="lead" style="margin-top:0.75rem">An agile project team is midway through delivery of agreed-upon functionality across five sprints. During project execution, the product owner requests two additional features, significantly increasing story points. The sponsor insists the original schedule and budget must be met, and asks the scrum master to address scope pressure without disrupting the current iteration. What should the scrum master do?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 111</span><span class="badge">Governance, Scope</span><span class="badge">Perform Integrated Change Control</span><span class="badge">Full Bank Q722</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,55 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Governance, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Perform Integrated Change Control<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Perform Integrated Change Control</h2>
+          <p><strong>Perform Integrated Change Control</strong> thuộc miền <strong>Governance, Scope</strong> — process <strong>Perform Integrated Change Control</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 111): 111 Section 3 – Tailoring OwnershipProactive Value-Driven Embed Quality Into Processes and Deliverables Adopt a Holistic View Be an Accountable Leader Build an Empowered Culture Mindset Focus on Value Integrate Sustainability Within All Pro</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>khuyến khích collaboration</strong>
+              khuyến khích collaboration / hợp tác
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Extend the number of planned sprints and update the release 
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Expand the project scope to reflect any backlog changes with
+            </div><div class="approach-cell">
+              <strong>D</strong>
+              Request additional project budget and assign more developmen
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q722</h4>
+            <p style="margin:0">yêu cầu thay đổi phạm vi/kế hoạch<br><br>→ <strong>A</strong> phù hợp vì PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Governance + Scope, Focus Area Executing (PMBOK …</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q722 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Collaborate with the product owner to reprioritize back…</strong></td>
+                <td>khuyến khích collaboration / hợp tác</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Extend the number of planned sprints and update the rel…</strong></td>
+                <td>Extend the number of planned sprints and update the release plan to ac</td>
+                <td>✗ &quot;Extend the number of planned sprints and update the release plan to accommodate th…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Expand the project scope to reflect any backlog changes…</strong></td>
+                <td>Expand the project scope to reflect any backlog changes without revisi</td>
+                <td>✗ &quot;Expand the project scope to reflect any backlog changes without revisiting current…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Request additional project budget and assign more devel…</strong></td>
+                <td>Request additional project budget and assign more development tasks to</td>
+                <td>✗ đề xuất/yêu cầu formal không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập t…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q722</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         <span class="kw-signal">Collaborate</span> with the product owner to reprioritize backlog items, deferring lower-value features for future releases.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Extend the number of planned sprints and update the release plan to accommodate the two requested features.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q722</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q722</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 722</div>
             <div class="q-text">An agile project team is midway through delivery of agreed-upon functionality across five sprints. During project execution, the product owner requests two additional features, significantly increasing story points. The sponsor insists the original schedule and budget must be met, and asks the scrum master to address scope pressure without disrupting the current iteration. What should the scrum master do?</div>
@@ -181,44 +229,84 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>A:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.</li><li>Bối cảnh: yêu cầu thay đổi phạm vi/kế hoạch. Đáp án <strong>A</strong> — &quot;<span class="kw-signal">Collaborate</span> with the product owner to reprioritize backlog items, deferring lower-value features for future releases.&quot; — phù hợp vì PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: yêu cầu thay đổi phạm vi/kế hoạch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Collaborate with the product owner to reprioritize backlog items, deferring lower-value features for future releases.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Có yêu cầu thay đổi — phải qua change control, đánh giá impact trước khi chấp nhận.<br><br>Bối cảnh: yêu cầu thay đổi phạm vi/kế hoạch. Đáp án <strong>A</strong> — &quot;<span class="kw-signal">Collaborate</span> with the product owner to reprioritize backlog items, deferring lower-value features for future releases.&quot; — phù hợp vì PM khuyến khích <span class="kw-signal">collaboration</span> / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền <span class="kw-pmbok">Governance</span> + <span class="kw-pmbok">Scope</span>, Focus Area Executing (<span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 111 Section 3 – Tailoring OwnershipProactive Value-Driven <span class="kw-pmbok">Embed Quality</span> Into Processes and Deliverables <span class="kw-pmbok">Adopt a Holistic View</span> Be an Accountable Leader <span class="kw-pmbok">Build an Empowered Culture</span> Mindset <span class="kw-pmbok">Focus on Value</span> <span class="kw-pmbok">Integrate Sustainability</span> Within All Pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 111 (Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Perform Integrated Change Control</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 111: Performance Domain: <span class="kw-pmbok">Governance</span>, <span class="kw-pmbok">Perform Integrated Change Control</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Extend the number of planned sprints and update the release plan to accommodate …</span></td><td>&quot;Extend the number of planned sprints and update the release plan to accommodate th…&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích <span class="kw-signal">collaboration</span> / hợp tác.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Expand the project scope to reflect any backlog changes without revisiting curre…</span></td><td>&quot;Expand the project scope to reflect any backlog changes without revisiting current…&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích <span class="kw-signal">collaboration</span> / hợp tác.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request additional project budget and assign more development tasks to accelerat…</span></td><td>đề xuất/yêu cầu formal không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích <span class="kw-signal">collaboration</span> / hợp tác.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="encourage_collaborate">
+              <span>An agile project team is midway through delivery of agreed-upon functionality across five sprints. D… (Q722)</span>
+              <div class="classify-btns"><button data-pick="encourage_collaborate" type="button">khuyến khích</button><button data-pick="DUMMY1" type="button">Opt 1</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 1 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Extend the number of planned sprints and update the …" → B</h4>
+            <p style="margin:0">&quot;Extend the number of planned sprints and update the release plan to accommodate th…&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích collaboration / hợp tác.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Expand the project scope to reflect any backlog chan…" → C</h4>
+            <p style="margin:0">&quot;Expand the project scope to reflect any backlog changes without revisiting current…&quot; không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích collaboration / hợp tác.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Request additional project budget and assign more de…" → D</h4>
+            <p style="margin:0">đề xuất/yêu cầu formal không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích collaboration / hợp tác.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>A</strong> — PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Governance + Scope, Focus Area Executing (PMBOK …</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q722 — đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Collaborate with the product owner to reprioritize backlog items, deferring lower-value features for future releases.</div>
+            <div class="flashcard-front">Q722 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Perform Integrated Change Control</strong><br>PMBOK 8, tr. 111</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Perform Integrated Change Control</div>
+            <div class="flashcard-front">Q722 — đáp án?</div>
+            <div class="flashcard-back"><strong>A</strong> — Collaborate with the product owner to reprioritize backlog items, deferring lower-value features for</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Có yêu cầu thay đổi</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q722
-────────────────────────
-An agile project team is midway through delivery of agreed-upon functionality across five sprints. During project execution, the product owner requests two additional features, significantly increasin…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">PERFORM INTEGRATED CHANGE CONTROL — Q722
+(PMBOK 8, tr. 111)
+─────────────────────────────────────────────────────
+DOMAIN: Governance, Scope
+PROCESS: Perform Integrated Change Control
+PRINCIPLE: Focus on value
 
-ANSWER: A
-A. Collaborate with the product owner to reprioritize backlog items, deferring lower-value features for future releases.
+SCENARIO:
+An agile project team is midway through delivery of agreed-upon functionality across five sprints. During project execution, the product owner requests two additional features, significantly increasing story points. The …
 
-PMBOK 8:
-  Domain: Governance, Scope
-  Process: Perform Integrated Change Control
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → A) Collaborate with the product owner to reprioritize backlog items, deferring lower-value features for future releases.
+
+NOT:
+  B) Extend the number of planned sprints and update th… — &quot;Extend the number of planned sprints and update the release
+  C) Expand the project scope to reflect any backlog ch… — &quot;Expand the project scope to reflect any backlog changes wit
+  D) Request additional project budget and assign more … — đề xuất/yêu cầu formal không phù hợp yêu cầu thay đổi phạm v
+
+Q722 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Governance + Scope, Focus Area Executing (PMBOK 8).","B":"\"Extend the number of planned sprints and update the release plan to accommodate th…\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích collaboration / hợp tác.","C":"\"Expand the project scope to reflect any backlog changes without revisiting current…\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích collaboration / hợp tác.","D":"đề xuất/yêu cầu formal không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích collaboration / hợp tác."};
+      const EXPL = {"A":"Đúng! PM khuyến khích collaboration / hợp tác để xử lý trực tiếp trọng tâm câu hỏi — phù hợp miền Governance + Scope, Focus Area Executing (PMBOK 8).","B":"\"Extend the number of planned sprints and update the release plan to accommodate th…\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích collaboration / hợp tác.","C":"\"Expand the project scope to reflect any backlog changes without revisiting current…\" không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích collaboration / hợp tác.","D":"đề xuất/yêu cầu formal không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung khuyến khích collaboration / hợp tác."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

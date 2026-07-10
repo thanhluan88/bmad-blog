@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 956</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-956">Câu 956</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q955.html">← 955</a>
         <a href="pmp-teach-full-q957.html">957 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 956 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An organization is planning a marketing outreach initiative. The project manager is working with the project sponsor, the marketing manager, and the project management office (PMO) to ensure alignment with the organization's goals and to establish appropriate project oversight. <span class="kw-cue">What should the project manager do</span> to achieve this goal?</p>
-          <div class="badges"><span class="badge">Stakeholders, Governance</span><span class="badge">Initiating</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q956</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q956</h1>
+          <p class="lead">Bài học Q956 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 34) — Phân tích tình huống và chọn đáp án C theo PMBOK 8.</p>
+          <p class="lead" style="margin-top:0.75rem">An organization is planning a marketing outreach initiative. The project manager is working with the project sponsor, the marketing manager, and the project management office (PMO) to ensure alignment with the organization's goals and to establish appropriate project oversight. <em>What should the project manager do</em> to achieve this goal?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 34</span><span class="badge">Stakeholders, Governance</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q956</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Governance<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Governance</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 34): decisions regarding project governance with other key leaders, while a project manager with access to a PMO in a large organization may partner with PMO leadership and/or other portfolio, program, and project managers to help ensure that</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>họp</strong>
+              họp / thảo luận trực tiếp
+            </div><div class="approach-cell">
+              <strong>phân tích stakeholder và cập nhật kế hoạch truyền thông</strong>
+              phân tích stakeholder và cập nhật kế hoạch truyền thông
+            </div><div class="approach-cell pull">
+              <strong>đảm bảo tuân thủ</strong>
+              đảm bảo tuân thủ / compliance
+            </div><div class="approach-cell">
+              <strong>ghi nhận</strong>
+              ghi nhận / tài liệu hóa
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q956</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>C</strong> phù hợp vì PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q956 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Meet with the project sponsor, marketing manager, and P…</strong></td>
+                <td>họp / thảo luận trực tiếp</td>
+                <td>✗ Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Meet with the project sponsor, mark…</td>
+              </tr><tr>
+                <td><strong>B. Perform a stakeholder analysis to establish preferred c…</strong></td>
+                <td>phân tích stakeholder và cập nhật kế hoạch truyền thông</td>
+                <td>✗ Tập trung &quot;phân tích stakeholder và cập nhật kế hoạch truyền thông&quot; không giải quyết Perfo…</td>
+              </tr><tr>
+                <td><strong>C. Consult with the PMO for guidance on project governance…</strong></td>
+                <td>đảm bảo tuân thủ / compliance</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Develop a digital project dashboard displaying velocity…</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q956</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Meet with the project sponsor, marketing manager, and PMO to determine risk thresholds and project success measures.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         Consult with the PMO for guidance on project governance, including issue and risk management, to develop the required framework.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Develop a digital project dashboard displaying velocity, impediments, and lessons learned, and provide viewing access to stakeholders.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q956</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q956</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 956</div>
             <div class="q-text">An organization is planning a marketing outreach initiative. The project manager is working with the project sponsor, the marketing manager, and the project management office (PMO) to ensure alignment with the organization's goals and to establish appropriate project oversight. <span class="kw-cue">What should the project manager do</span> to achieve this goal?</div>
@@ -181,44 +229,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>→ <strong>C:</strong> PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>Bối cảnh: An organization is planning a marketing outreach initiative. The project manager is working with the project sponsor, the marketing manager, and the project management office (PMO) to ensure alignment with the organization's goals and to establish appropriate project oversight. Đáp án <strong>C</strong> — &quot;Consult with the PMO for guidance on project governance, including issue and risk management, to develop the required framework.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án C.</li><li>Tham chiếu <span class="kw-pmbok">PMBOK 8</span>, tr. 34.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Consult with the PMO for guidance on project governance, including issue and risk management, to develop the required framework.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.<br><br>Bối cảnh: An organization is planning a marketing outreach initiative. The project manager is working with the project sponsor, the marketing manager, and the project management office (PMO) to ensure alignment with the organization's goals and to establish appropriate project oversight. Đáp án <strong>C</strong> — &quot;Consult with the PMO for guidance on project governance, including issue and risk management, to develop the required framework.&quot; — phù hợp vì PM đảm bảo tuân thủ policy/regulation — <span class="kw-pmbok">Governance</span> và <span class="kw-pmbok">Lead accountably</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; decisions regarding project governance with other key leaders, while a project manager with access to a PMO in a large organization may partner with PMO leadership and/or other portfolio, program, and project managers to help ensure that<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 34 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 34: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Meet with the project sponsor, marketing manager, and PMO to determine risk thre…</span></td><td>Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết <span class="kw-signal">Meet with</span> the project sponsor, marketing manager, and PMO to determine risk thresholds and project success measures. — đáp án đúng cần đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Perform a stakeholder analysis to establish preferred communication modes, engag…</span></td><td>Tập trung &quot;phân tích stakeholder và cập nhật kế hoạch truyền thông&quot; không giải quyết Perform a <span class="kw-signal">stakeholder analysis</span> to establish preferred communication modes, engagement levels, and stakeholder requirements. — đáp án đúng cần đảm bảo tuân thủ / compliance.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Develop a digital project dashboard displaying velocity, impediments, and lesson…</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="ensure_compliance">
+              <span>An organization is planning a marketing outreach initiative. The project manager is working with the… (Q956)</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="document_first" type="button">ghi nhận</button></div>
+            </div><div class="classify-row" data-answer="meet_discuss">
+              <span>Tình huống cần &quot;họp / thảo luận trực tiếp&quot; — không phải trọng tâm Q956</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="document_first" type="button">ghi nhận</button></div>
+            </div><div class="classify-row" data-answer="update_stakeholder_comms">
+              <span>Tình huống cần &quot;phân tích stakeholder và cập nhật kế hoạch truyền thông&quot; — không phải trọng tâm Q956</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="document_first" type="button">ghi nhận</button></div>
+            </div><div class="classify-row" data-answer="document_first">
+              <span>Tình huống cần &quot;ghi nhận / tài liệu hóa&quot; — không phải trọng tâm Q956</span>
+              <div class="classify-btns"><button data-pick="ensure_compliance" type="button">đảm bảo tuân</button><button data-pick="meet_discuss" type="button">họp</button><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="document_first" type="button">ghi nhận</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Meet with the project sponsor, marketing manager, an…" → A</h4>
+            <p style="margin:0">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Meet with the project sponsor, marketing manager, and PMO to determine risk thresholds and project success measures. — đáp án đúng cần đảm bảo tuân thủ / compliance.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Perform a stakeholder analysis to establish preferre…" → B</h4>
+            <p style="margin:0">Tập trung &quot;phân tích stakeholder và cập nhật kế hoạch truyền thông&quot; không giải quyết Perform a stakeholder analysis to establish preferred communication modes, engagement levels, and stakeholder requirements. — đáp án đúng cần đảm bảo tuân thủ / compliance.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Develop a digital project dashboard displaying veloc…" → D</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>C</strong> — PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q956 — đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Consult with the PMO for guidance on project governance, including issue and risk management, to develop the required framework.</div>
+            <div class="flashcard-front">Q956 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 34</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q956 — đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Consult with the PMO for guidance on project governance, including issue and risk management, to dev</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Phân tích tình huống và chọn đáp án C theo PMBOK 8.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q956
-────────────────────────
-An organization is planning a marketing outreach initiative. The project manager is working with the project sponsor, the marketing manager, and the project management office (PMO) to ensure alignment…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q956
+(PMBOK 8, tr. 34)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Governance
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: C
-C. Consult with the PMO for guidance on project governance, including issue and risk management, to develop the required framework.
+SCENARIO:
+An organization is planning a marketing outreach initiative. The project manager is working with the project sponsor, the marketing manager, and the project management office (PMO) to ensure alignment with the organizati…
 
-PMBOK 8:
-  Domain: Stakeholders, Governance
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → C) Consult with the PMO for guidance on project governance, including issue and risk management, to develop the required framework.
+
+NOT:
+  A) Meet with the project sponsor, marketing manager, … — Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Meet 
+  B) Perform a stakeholder analysis to establish prefer… — Tập trung &quot;phân tích stakeholder và cập nhật kế hoạch truyền
+  D) Develop a digital project dashboard displaying vel… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+
+Q956 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +330,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết Meet with the project sponsor, marketing manager, and PMO to determine risk thresholds and project success measures. — đáp án đúng cần đảm bảo tuân thủ / compliance.","B":"Tập trung \"phân tích stakeholder và cập nhật kế hoạch truyền thông\" không giải quyết Perform a stakeholder analysis to establish preferred communication modes, engagement levels, and stakeholder requirements. — đáp án đúng cần đảm bảo tuân thủ / compliance.","C":"PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.","D":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)"};
+      const EXPL = {"A":"Tập trung \"họp / thảo luận trực tiếp\" không giải quyết Meet with the project sponsor, marketing manager, and PMO to determine risk thresholds and project success measures. — đáp án đúng cần đảm bảo tuân thủ / compliance.","B":"Tập trung \"phân tích stakeholder và cập nhật kế hoạch truyền thông\" không giải quyết Perform a stakeholder analysis to establish preferred communication modes, engagement levels, and stakeholder requirements. — đáp án đúng cần đảm bảo tuân thủ / compliance.","C":"Đúng! PM đảm bảo tuân thủ policy/regulation — Governance và Lead accountably.","D":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)"};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +356,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 989</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-989">Câu 989</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q988.html">← 988</a>
         <a href="pmp-teach-full-q990.html">990 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 989 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A project team is using three-point estimates for several activities. The pessimistic values are much higher than expected, which makes the project sponsor nervous about sharing the schedule with senior leadership. The sponsor pressures the project manager to remove the pessimistic values, arguing that they are unrealistic outliers. The risk manager disagrees, explaining that the values reflect genuine uncertainties in vendor performance. Activity Optimistic (days) <span class="kw-cue">Most</span> Likely (days) Pessimistic (days) A 4 8 12 B 5 7 8 C 10 11 14 D 3 6 9 E 4 5 8 <span class="kw-cue">What should the project manager do</span>? (Refer to the table)</p>
-          <div class="badges"><span class="badge">Stakeholders, Resources</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q989</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q989</h1>
+          <p class="lead">Bài học Q989 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 48) — Xung đột</p>
+          <p class="lead" style="margin-top:0.75rem">A project team is using three-point estimates for several activities. The pessimistic values are much higher than expected, which makes the project sponsor nervous about sharing the schedule with senior leadership. The sponsor pressures the project manager to remove the pessimistic values, arguing that they are unrealistic outliers. The risk manager disagrees, explaining that the values reflect genuine uncertainties in vendor performance. Activity Optimistic (days) Most Likely (days) Pessimistic (days) A 4 8 12 B 5 7 8 C 10 11 14 D 3 6 9 E 4 5 8 <em>What should the project manager do</em>? (Refer to the table)</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 48</span><span class="badge">Stakeholders, Resources</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q989</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably, Build an empowered culture
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Resources</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 48): ⚫ Risk. An effective leader can adapt and be flexible to opportunities or threats that a project team may face. Effective leaders demonstrate integrity and accountability to help ensure that risk is managed in a way that protects and enha</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>thay đổi phạm vi</strong>
+              thay đổi phạm vi
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Take the average of the optimistic and most likely estimates
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Present one schedule with pessimistic values and another wit
+            </div><div class="approach-cell pull">
+              <strong>D</strong>
+              Retain the pessimistic values because they highlight risk ex
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q989</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Resources (Executing, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q989 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Exclude pessimistic estimates to shorten the schedule a…</strong></td>
+                <td>thay đổi phạm vi</td>
+                <td>✗ Thay đổi phạm vi cần quy trình change control và thống nhất stakeholder — không phải phản …</td>
+              </tr><tr>
+                <td><strong>B. Take the average of the optimistic and most likely esti…</strong></td>
+                <td>Take the average of the optimistic and most likely estimates to produc</td>
+                <td>✗ &quot;Take the average of the optimistic and most likely estimates to produce a schedule…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Present one schedule with pessimistic values and anothe…</strong></td>
+                <td>Present one schedule with pessimistic values and another without them,</td>
+                <td>✗ &quot;Present one schedule with pessimistic values and another without them, and let sen…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Retain the pessimistic values because they highlight ri…</strong></td>
+                <td>Retain the pessimistic values because they highlight risk exposure and</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q989</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         <span class="kw-trap">Exclude</span> pessimistic estimates to shorten the schedule and make it more acceptable to senior leadership.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Retain the pessimistic values because they highlight risk exposure and are essential for contingency planning.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q989</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q989</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 989</div>
             <div class="q-text">A project team is using three-point estimates for several activities. The pessimistic values are much higher than expected, which makes the project sponsor nervous about sharing the schedule with senior leadership. The sponsor pressures the project manager to remove the pessimistic values, arguing that they are unrealistic outliers. The risk manager disagrees, explaining that the values reflect genuine uncertainties in vendor performance. Activity Optimistic (days) <span class="kw-cue">Most</span> Likely (days) Pessimistic (days) A 4 8 12 B 5 7 8 C 10 11 14 D 3 6 9 E 4 5 8 <span class="kw-cue">What should the project manager do</span>? (Refer to the table)</div>
@@ -181,44 +229,87 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>D:</strong> Xung đột — PM <span class="kw-signal">facilitate</span> giải quyết trực tiếp, không <span class="kw-trap">ignore</span> hay <span class="kw-trap">escalate</span> sớm.</li><li>Bối cảnh: xung đột trong team hoặc stakeholder. Đáp án <strong>D</strong> — &quot;Retain the pessimistic values because they highlight risk exposure and are essential for contingency planning.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Stem signal: xung đột trong team hoặc stakeholder — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: vấn đề vendor / procurement — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Retain the pessimistic values because they highlight risk exposure and are essential for contingency planning.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Xung đột — PM <span class="kw-signal">facilitate</span> giải quyết trực tiếp, không <span class="kw-trap">ignore</span> hay <span class="kw-trap">escalate</span> sớm.<br><br>Bối cảnh: xung đột trong team hoặc stakeholder. Đáp án <strong>D</strong> — &quot;Retain the pessimistic values because they highlight risk exposure and are essential for contingency planning.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> + <span class="kw-pmbok">Resources</span> (Executing, <span class="kw-pmbok">PMBOK 8</span>).</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; ⚫ <span class="kw-pmbok">Risk</span>. An effective leader can adapt and be flexible to opportunities or threats that a project team may face. Effective leaders demonstrate integrity and accountability to help ensure that risk is managed in a way that protects and enha<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 48 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 48: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Exclude</span> pessimistic estimates to shorten the schedule and make it more acceptabl…</span></td><td>Thay đổi phạm vi cần quy trình change control và thống nhất stakeholder — không phải phản ứng mặc định khi gặp trở ngại.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Take the average of the optimistic and most likely estimates to produce a schedu…</span></td><td>&quot;Take the average of the optimistic and <span class="kw-cue">most</span> likely estimates to produce a schedule…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung &quot;Retain the pessimistic values because they highlight risk exposure and are essenti…&quot;.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Present one schedule with pessimistic values and another without them, and let s…</span></td><td>&quot;Present one schedule with pessimistic values and another without them, and let sen…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung &quot;Retain the pessimistic values because they highlight risk exposure and are essenti…&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>A project team is using three-point estimates for several activities. The pessimistic values are muc… (Q989)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="change_scope" type="button">thay đổi phạ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="change_scope">
+              <span>Tình huống cần &quot;thay đổi phạm vi&quot; — không phải trọng tâm Q989</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="change_scope" type="button">thay đổi phạ</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 2 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Exclude pessimistic estimates to shorten the schedul…" → A</h4>
+            <p style="margin:0">Thay đổi phạm vi cần quy trình change control và thống nhất stakeholder — không phải phản ứng mặc định khi gặp trở ngại.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Take the average of the optimistic and most likely e…" → B</h4>
+            <p style="margin:0">&quot;Take the average of the optimistic and most likely estimates to produce a schedule…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung &quot;Retain the pessimistic values because they highlight risk exposure and are essenti…&quot;.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Present one schedule with pessimistic values and ano…" → C</h4>
+            <p style="margin:0">&quot;Present one schedule with pessimistic values and another without them, and let sen…&quot; không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung &quot;Retain the pessimistic values because they highlight risk exposure and are essenti…&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Resources (Executing, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q989 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Retain the pessimistic values because they highlight risk exposure and are essential for contingency planning.</div>
+            <div class="flashcard-front">Q989 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 48</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q989 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Retain the pessimistic values because they highlight risk exposure and are essential for contingency</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Xung đột</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q989
-────────────────────────
-A project team is using three-point estimates for several activities. The pessimistic values are much higher than expected, which makes the project sponsor nervous about sharing the schedule with seni…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q989
+(PMBOK 8, tr. 48)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Resources
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably, Build an empowered culture
 
-ANSWER: D
-D. Retain the pessimistic values because they highlight risk exposure and are essential for contingency planning.
+SCENARIO:
+A project team is using three-point estimates for several activities. The pessimistic values are much higher than expected, which makes the project sponsor nervous about sharing the schedule with senior leadership. The s…
 
-PMBOK 8:
-  Domain: Stakeholders, Resources
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably, Build an empowered culture</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Retain the pessimistic values because they highlight risk exposure and are essential for contingency planning.
+
+NOT:
+  A) Exclude pessimistic estimates to shorten the sched… — Thay đổi phạm vi cần quy trình change control và thống nhất 
+  B) Take the average of the optimistic and most likely… — &quot;Take the average of the optimistic and most likely estimate
+  C) Present one schedule with pessimistic values and a… — &quot;Present one schedule with pessimistic values and another wi
+
+Q989 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"Thay đổi phạm vi cần quy trình change control và thống nhất stakeholder — không phải phản ứng mặc định khi gặp trở ngại.","B":"\"Take the average of the optimistic and most likely estimates to produce a schedule…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung \"Retain the pessimistic values because they highlight risk exposure and are essenti…\".","C":"\"Present one schedule with pessimistic values and another without them, and let sen…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung \"Retain the pessimistic values because they highlight risk exposure and are essenti…\".","D":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Resources (Executing, PMBOK 8)."};
+      const EXPL = {"A":"Thay đổi phạm vi cần quy trình change control và thống nhất stakeholder — không phải phản ứng mặc định khi gặp trở ngại.","B":"\"Take the average of the optimistic and most likely estimates to produce a schedule…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung \"Retain the pessimistic values because they highlight risk exposure and are essenti…\".","C":"\"Present one schedule with pessimistic values and another without them, and let sen…\" không phù hợp xung đột trong team hoặc stakeholder — đáp án đúng tập trung \"Retain the pessimistic values because they highlight risk exposure and are essenti…\".","D":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders + Resources (Executing, PMBOK 8)."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

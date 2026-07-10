@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 311</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Develop Team</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-311">Câu 311</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q310.html">← 310</a>
         <a href="pmp-teach-full-q312.html">312 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 311 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">An experienced project manager is mentoring a new project manager assigned to their <span class="kw-cue">first</span> project. As the new project manager prepares for the project, they are overwhelmed by the number of stakeholders identified by the team. What should the experienced project manager tell the new project manager to do <span class="kw-cue">next</span>?</p>
-          <div class="badges"><span class="badge">Resources, Stakeholders</span><span class="badge">Initiating</span><span class="badge">Develop Team</span><span class="badge">Build an empowered culture</span><span class="badge">Full Bank Q311</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q311</h1>
+          <p class="lead">Bài học Q311 về <strong>Develop Team</strong> (PMBOK 8, tr. 53) — Thành viên quá tải/bất mãn</p>
+          <p class="lead" style="margin-top:0.75rem">An experienced project manager is mentoring a new project manager assigned to their first project. As the new project manager prepares for the project, they are overwhelmed by the number of <em>stakeholders identified by the team</em>. What should the experienced project manager tell the new project manager to do next?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 53</span><span class="badge">Resources, Stakeholders</span><span class="badge">Develop Team</span><span class="badge">Full Bank Q311</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,52 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Resources, Stakeholders<br>
-              <strong>Focus Area:</strong> Initiating<br>
-              <strong>Process:</strong> Develop Team, Manage Team<br>
-              <strong>Principle:</strong> Build an empowered culture, Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Develop Team</h2>
+          <p><strong>Develop Team</strong> thuộc miền <strong>Resources, Stakeholders</strong> — process <strong>Develop Team</strong>, principle <strong>Build an empowered culture</strong>. PMBOK 8 (tr. 53): 3.8 Build an Empowered Culture To develop an empowered project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>phân tích stakeholder và cập nhật kế hoạch truyền thông</strong>
+              phân tích stakeholder và cập nhật kế hoạch truyền thông
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Categorize key stakeholders using a workbook register.
+            </div><div class="approach-cell">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q311</h4>
+            <p style="margin:0"><strong>stakeholders identified by the team</strong><br><br>→ <strong>A</strong> phù hợp vì PM phân tích stakeholder trước khi điều chỉnh engagement/truyền thông — quyết định dựa trên nhu cầu thực tế, không giả định.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q311 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Perform a stakeholder analysis to determine the relativ…</strong></td>
+                <td>phân tích stakeholder và cập nhật kế hoạch truyền thông</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Categorize key stakeholders using a workbook register.</strong></td>
+                <td>Categorize key stakeholders using a workbook register.</td>
+                <td>✗ &quot;Categorize key stakeholders using a workbook register.&quot; không phù hợp thành viên quá tải …</td>
+              </tr><tr>
+                <td><strong>C. Update the communications management plan with stakehol…</strong></td>
+                <td>phân tích stakeholder và cập nhật kế hoạch truyền thông</td>
+                <td>✗ &quot;Update the communications management plan with stakeholder preferences.…&quot; cùng nhóm phân …</td>
+              </tr><tr>
+                <td><strong>D. Prioritize stakeholders based on the stakeholder regist…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td>✗ Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết thành viên quá tải hoặc bất mãn — …</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q311</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Perform a <span class="kw-signal">stakeholder analysis</span> to determine the relative importance.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM phân tích stakeholder trước khi điều chỉnh engagement/truyền thông — quyết định dựa trên nhu cầu thực tế, không giả định.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Categorize key stakeholders using a workbook register.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q311</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q311</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 311</div>
             <div class="q-text">An experienced project manager is mentoring a new project manager assigned to their <span class="kw-cue">first</span> project. As the new project manager prepares for the project, they are overwhelmed by the number of stakeholders identified by the team. What should the experienced project manager tell the new project manager to do <span class="kw-cue">next</span>?</div>
@@ -181,44 +226,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li>PM phân tích stakeholder trước khi điều chỉnh engagement/truyền thông — quyết định dựa trên nhu cầu thực tế, không giả định.</li><li>→ <strong>A:</strong> Thành viên quá tải/bất mãn — PM lắng nghe, hỗ trợ cụ thể trước; không đẩy trách nhiệm hay team building chung chung.</li><li>Bối cảnh: thành viên quá tải hoặc bất mãn. Đáp án <strong>A</strong> — &quot;Perform a <span class="kw-signal">stakeholder analysis</span> to determine the relative importance.&quot; — phù hợp vì PM phân tích stakeholder trước khi điều chỉnh engagement/truyền thông — quyết định dựa trên nhu cầu thực tế, không giả định. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>phân tích stakeholder và cập nhật kế hoạch truyền thông</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Stem signal: thành viên quá tải hoặc bất mãn — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Develop Team</span> — align với đáp án A.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Perform a stakeholder analysis to determine the relative importance.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> Thành viên quá tải/bất mãn — PM lắng nghe, hỗ trợ cụ thể trước; không đẩy trách nhiệm hay team building chung chung.<br><br>Bối cảnh: thành viên quá tải hoặc bất mãn. Đáp án <strong>A</strong> — &quot;Perform a <span class="kw-signal">stakeholder analysis</span> to determine the relative importance.&quot; — phù hợp vì PM phân tích stakeholder trước khi điều chỉnh engagement/truyền thông — quyết định dựa trên nhu cầu thực tế, không giả định. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>phân tích stakeholder và cập nhật kế hoạch truyền thông</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 3.8 <span class="kw-pmbok">Build an Empowered Culture</span> To develop an <span class="kw-signal">empowered</span> project culture, the project environment should promote mutual trust among stakeholders and the project team members. There should be full clarity on individual roles, responsibilitie<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 53 (Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 53: Performance Domain: <span class="kw-pmbok">Resources</span>, <span class="kw-pmbok">Develop Team</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Categorize key stakeholders using a workbook register.</span></td><td>&quot;Categorize key stakeholders using a workbook register.&quot; không phù hợp thành viên quá tải hoặc bất mãn — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Update the communications management plan with stakeholder preferences.</span></td><td>&quot;Update the <span class="kw-signal">communications management plan</span> with stakeholder preferences.…&quot; cùng nhóm phân tích stakeholder và cập nhật kế hoạch truyền thông nhưng lệch trọng tâm — &quot;Perform a <span class="kw-signal">stakeholder analysis</span> to determine the relative importance.…&quot; sát thành viên quá tải hoặc bất mãn hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Prioritize stakeholders based on the stakeholder register.</span></td><td>Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết thành viên quá tải hoặc bất mãn — đáp án đúng cần phân tích stakeholder và cập nhật kế hoạch truyền thông.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="update_stakeholder_comms">
+              <span>An experienced project manager is mentoring a new project manager assigned to their first project. A… (Q311)</span>
+              <div class="classify-btns"><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="update_stakeholder_comms">
+              <span>Tình huống cần &quot;phân tích stakeholder và cập nhật kế hoạch truyền thông&quot; — không phải trọng tâm Q311</span>
+              <div class="classify-btns"><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="prioritize_value">
+              <span>Tình huống cần &quot;ưu tiên theo giá trị / MVP&quot; — không phải trọng tâm Q311</span>
+              <div class="classify-btns"><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="update_stakeholder_comms" type="button">phân tích st</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Categorize key stakeholders using a workbook register." → B</h4>
+            <p style="margin:0">&quot;Categorize key stakeholders using a workbook register.&quot; không phù hợp thành viên quá tải hoặc bất mãn — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Update the communications management plan with stake…" → C</h4>
+            <p style="margin:0">&quot;Update the communications management plan with stakeholder preferences.…&quot; cùng nhóm phân tích stakeholder và cập nhật kế hoạch truyền thông nhưng lệch trọng tâm — &quot;Perform a stakeholder analysis to determine the relative importance.…&quot; sát thành viên quá tải hoặc bất mãn hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Prioritize stakeholders based on the stakeholder reg…" → D</h4>
+            <p style="margin:0">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết thành viên quá tải hoặc bất mãn — đáp án đúng cần phân tích stakeholder và cập nhật kế hoạch truyền thông.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>stakeholders identified by the team</strong> → <strong>A</strong> — PM phân tích stakeholder trước khi điều chỉnh engagement/truyền thông — quyết định dựa trên nhu cầu thực tế, không giả định.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q311 — đáp án?</div>
+            <div class="flashcard-front">Q311 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Develop Team</strong><br>PMBOK 8, tr. 53</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q311 — đáp án?</div>
             <div class="flashcard-back"><strong>A</strong> — Perform a stakeholder analysis to determine the relative importance.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Build an empowered culture</strong><br>Develop Team</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">Thành viên quá tải/bất mãn</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q311
-────────────────────────
-An experienced project manager is mentoring a new project manager assigned to their first project. As the new project manager prepares for the project, they are overwhelmed by the number of stakeholde…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEVELOP TEAM — Q311
+(PMBOK 8, tr. 53)
+─────────────────────────────────────────────────────
+DOMAIN: Resources, Stakeholders
+PROCESS: Develop Team, Manage Team
+PRINCIPLE: Build an empowered culture, Lead accountably
 
-ANSWER: A
-A. Perform a stakeholder analysis to determine the relative importance.
+SCENARIO:
+An experienced project manager is mentoring a new project manager assigned to their first project. As the new project manager prepares for the project, they are overwhelmed by the number of stakeholders identified by the…
 
-PMBOK 8:
-  Domain: Resources, Stakeholders
-  Process: Develop Team, Manage Team
-  Principle: Build an empowered culture, Lead accountably</div>
+SIGNAL KEYWORDS:
+  stakeholders identified by the team
+
+ANSWER → A) Perform a stakeholder analysis to determine the relative importance.
+
+NOT:
+  B) Categorize key stakeholders using a workbook regis… — &quot;Categorize key stakeholders using a workbook register.&quot; khô
+  C) Update the communications management plan with sta… — &quot;Update the communications management plan with stakeholder 
+  D) Prioritize stakeholders based on the stakeholder r… — Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết thàn
+
+Q311 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"PM phân tích stakeholder trước khi điều chỉnh engagement/truyền thông — quyết định dựa trên nhu cầu thực tế, không giả định.","B":"\"Categorize key stakeholders using a workbook register.\" không phù hợp thành viên quá tải hoặc bất mãn — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.","C":"\"Update the communications management plan with stakeholder preferences.…\" cùng nhóm phân tích stakeholder và cập nhật kế hoạch truyền thông nhưng lệch trọng tâm — \"Perform a stakeholder analysis to determine the relative importance.…\" sát thành viên quá tải hoặc bất mãn hơn.","D":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết thành viên quá tải hoặc bất mãn — đáp án đúng cần phân tích stakeholder và cập nhật kế hoạch truyền thông."};
+      const EXPL = {"A":"Đúng! PM phân tích stakeholder trước khi điều chỉnh engagement/truyền thông — quyết định dựa trên nhu cầu thực tế, không giả định.","B":"\"Categorize key stakeholders using a workbook register.\" không phù hợp thành viên quá tải hoặc bất mãn — đáp án đúng tập trung phân tích stakeholder và cập nhật kế hoạch truyền thông.","C":"\"Update the communications management plan with stakeholder preferences.…\" cùng nhóm phân tích stakeholder và cập nhật kế hoạch truyền thông nhưng lệch trọng tâm — \"Perform a stakeholder analysis to determine the relative importance.…\" sát thành viên quá tải hoặc bất mãn hơn.","D":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết thành viên quá tải hoặc bất mãn — đáp án đúng cần phân tích stakeholder và cập nhật kế hoạch truyền thông."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

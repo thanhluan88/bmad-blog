@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 128</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-128">Câu 128</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q127.html">← 127</a>
         <a href="pmp-teach-full-q129.html">129 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 128 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">During a stakeholder review, the project manager presents a performance report to the stakeholders. A key stakeholder demands access to all raw data to ensure full transparency, while another stakeholder complains that reports already contain too much detail. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders</span><span class="badge">Monitoring &amp; Controlling</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q128</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q128</h1>
+          <p class="lead">Bài học Q128 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 143) — stakeholder không hài lòng / kỳ vọng lệch</p>
+          <p class="lead" style="margin-top:0.75rem">During a <em>stakeholder review</em>, the project manager presents a performance report to the stakeholders. A key stakeholder demands access to all raw data to ensure full transparency, while another stakeholder complains that reports already contain too much detail. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 143</span><span class="badge">Stakeholders</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q128</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders<br>
-              <strong>Focus Area:</strong> Monitoring &amp; Controlling<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 143): Examples of work performance data include work completed, key performance indicators (KPIs), technical performance measures, actual start and finish dates of schedule activities, story points completed, deliverables status, schedule progr</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>chỉ đạo cứng</strong>
+              chỉ đạo cứng / ra lệnh
+            </div><div class="approach-cell">
+              <strong>thông báo</strong>
+              thông báo / truyền đạt thông tin
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Allow each stakeholder group to define how data should be co
+            </div><div class="approach-cell pull">
+              <strong>D</strong>
+              Clarify that raw data becomes work performance information, 
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q128</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong> · <strong>stakeholder review</strong><br><br>→ <strong>D</strong> phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring &amp; Controlling, PMBOK 8).</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q128 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Provide all stakeholders with direct access to all raw …</strong></td>
+                <td>chỉ đạo cứng / ra lệnh</td>
+                <td>✗ Tập trung &quot;chỉ đạo cứng / ra lệnh&quot; không giải quyết stakeholder không hài lòng / kỳ vọng l…</td>
+              </tr><tr>
+                <td><strong>B. Share only high-level summaries of the information with…</strong></td>
+                <td>thông báo / truyền đạt thông tin</td>
+                <td>✗ Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết stakeholder không hài lòng /…</td>
+              </tr><tr>
+                <td><strong>C. Allow each stakeholder group to define how data should …</strong></td>
+                <td>Allow each stakeholder group to define how data should be consolidated</td>
+                <td>✗ &quot;Allow each stakeholder group to define how data should be consolidated and provide…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Clarify that raw data becomes work performance informat…</strong></td>
+                <td>Clarify that raw data becomes work performance information, which is t</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q128</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Provide all stakeholders with direct access to all raw data so that they can choose their own level of analysis.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Clarify that raw data becomes work performance information, which is then summarized into performance reports tailored to stakeholder needs.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q128</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q128</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 128</div>
             <div class="q-text">During a stakeholder review, the project manager presents a performance report to the stakeholders. A key stakeholder demands access to all raw data to ensure full transparency, while another stakeholder complains that reports already contain too much detail. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</li><li>→ <strong>D:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).</li><li>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>D</strong> — &quot;Clarify that raw data becomes work performance information, which is then summarized into performance reports tailored to stakeholder needs.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: stakeholder không hài lòng / kỳ vọng lệch — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án D.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Clarify that raw data becomes work performance information, which is then summarized into performance reports tailored to stakeholder needs.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>).<br><br>Bối cảnh: stakeholder không hài lòng / kỳ vọng lệch. Đáp án <strong>D</strong> — &quot;Clarify that raw data becomes work performance information, which is then summarized into performance reports tailored to stakeholder needs.&quot; — phù hợp vì Hành động này giải quyết trực tiếp vấn đề trong đề — align miền <span class="kw-pmbok">Stakeholders</span> (Monitoring &amp; Controlling, <span class="kw-pmbok">PMBOK 8</span>). Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; Examples of work performance data include work completed, key performance indicators (KPIs), technical performance measures, actual start and finish dates of schedule activities, story points completed, deliverables status, schedule progr<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 143 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 143: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Provide all stakeholders with direct access to all raw data so that they can cho…</span></td><td>Tập trung &quot;chỉ đạo cứng / ra lệnh&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Share only high-level summaries of the information with all stakeholders to mini…</span></td><td>Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Allow each stakeholder group to define how data should be consolidated and provi…</span></td><td>&quot;Allow each stakeholder group to define how data should be consolidated and provide…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Clarify that raw data becomes work performance information, which is then summariz…&quot;.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="CORRECT">
+              <span>During a stakeholder review, the project manager presents a performance report to the stakeholders. … (Q128)</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="direct_command" type="button">chỉ đạo cứng</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="direct_command">
+              <span>Tình huống cần &quot;chỉ đạo cứng / ra lệnh&quot; — không phải trọng tâm Q128</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="direct_command" type="button">chỉ đạo cứng</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="communicate_inform">
+              <span>Tình huống cần &quot;thông báo / truyền đạt thông tin&quot; — không phải trọng tâm Q128</span>
+              <div class="classify-btns"><button data-pick="CORRECT" type="button">Đúng</button><button data-pick="direct_command" type="button">chỉ đạo cứng</button><button data-pick="communicate_inform" type="button">thông báo</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Provide all stakeholders with direct access to all r…" → A</h4>
+            <p style="margin:0">Tập trung &quot;chỉ đạo cứng / ra lệnh&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Share only high-level summaries of the information w…" → B</h4>
+            <p style="margin:0">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Allow each stakeholder group to define how data shou…" → C</h4>
+            <p style="margin:0">&quot;Allow each stakeholder group to define how data should be consolidated and provide…&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Clarify that raw data becomes work performance information, which is then summariz…&quot;.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do · stakeholder review</strong> → <strong>D</strong> — Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring &amp; Controlling, PMBOK 8).</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q128 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Clarify that raw data becomes work performance information, which is then summarized into performance reports tailored to stakeholder needs.</div>
+            <div class="flashcard-front">Q128 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 143</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q128 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Clarify that raw data becomes work performance information, which is then summarized into performanc</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">stakeholder không hài lòng / kỳ vọng lệch</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q128
-────────────────────────
-During a stakeholder review, the project manager presents a performance report to the stakeholders. A key stakeholder demands access to all raw data to ensure full transparency, while another stakehol…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q128
+(PMBOK 8, tr. 143)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: D
-D. Clarify that raw data becomes work performance information, which is then summarized into performance reports tailored to stakeholder needs.
+SCENARIO:
+During a stakeholder review, the project manager presents a performance report to the stakeholders. A key stakeholder demands access to all raw data to ensure full transparency, while another stakeholder complains that r…
 
-PMBOK 8:
-  Domain: Stakeholders
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do | stakeholder review
+
+ANSWER → D) Clarify that raw data becomes work performance information, which is then summarized into performance reports tailored to stakeholder needs.
+
+NOT:
+  A) Provide all stakeholders with direct access to all… — Tập trung &quot;chỉ đạo cứng / ra lệnh&quot; không giải quyết stakehol
+  B) Share only high-level summaries of the information… — Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyế
+  C) Allow each stakeholder group to define how data sh… — &quot;Allow each stakeholder group to define how data should be c
+
+Q128 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +327,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"Tập trung \"chỉ đạo cứng / ra lệnh\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","B":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","C":"\"Allow each stakeholder group to define how data should be consolidated and provide…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung \"Clarify that raw data becomes work performance information, which is then summariz…\".","D":"Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring & Controlling, PMBOK 8)."};
+      const EXPL = {"A":"Tập trung \"chỉ đạo cứng / ra lệnh\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","B":"Tập trung \"thông báo / truyền đạt thông tin\" không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.","C":"\"Allow each stakeholder group to define how data should be consolidated and provide…\" không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung \"Clarify that raw data becomes work performance information, which is then summariz…\".","D":"Đúng! Hành động này giải quyết trực tiếp vấn đề trong đề — align miền Stakeholders (Monitoring & Controlling, PMBOK 8)."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +353,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

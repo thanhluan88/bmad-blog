@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 671</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Manage Stakeholder Engag</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-671">Câu 671</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q670.html">← 670</a>
         <a href="pmp-teach-full-q672.html">672 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 671 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">During project closing, the client identifies defects in deliverables that were previously accepted during quality reviews. The defects don't impact core functionality but affect user experience. The project team argues the deliverables meet original specifications, while the client claims the defects violate implied quality expectations. Contract terms are ambiguous about post-acceptance defect responsibility, and both parties want to maintain their business relationship. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">first</span></span> to resolve this situation?</p>
-          <div class="badges"><span class="badge">Stakeholders, Scope</span><span class="badge">Executing</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Focus on value</span><span class="badge">Full Bank Q671</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q671</h1>
+          <p class="lead">Bài học Q671 về <strong>Manage Stakeholder Engagement</strong> (PMBOK 8, tr. 71) — trễ tiến độ / áp lực schedule</p>
+          <p class="lead" style="margin-top:0.75rem">During project closing, the client identifies defects in deliverables that were previously accepted during quality reviews. The defects don't impact core functionality but affect user experience. The project team argues the deliverables meet original specifications, while the client claims the defects violate implied quality expectations. Contract terms are ambiguous about post-acceptance defect responsibility, and both parties want to maintain their business relationship. <em>What should the project manager do first</em> to resolve this situation?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 71</span><span class="badge">Stakeholders, Scope</span><span class="badge">Manage Stakeholder Engagement</span><span class="badge">Full Bank Q671</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,25 +148,52 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Scope<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Manage Stakeholder Engagement, Validate Scope<br>
-              <strong>Principle:</strong> Focus on value
-            </p>
+        <section id="concept">
+          <h2>1. Manage Stakeholder Engagement</h2>
+          <p><strong>Manage Stakeholder Engagement</strong> thuộc miền <strong>Stakeholders, Scope</strong> — process <strong>Manage Stakeholder Engagement</strong>, principle <strong>Focus on value</strong>. PMBOK 8 (tr. 71): 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro</p>
+          <div class="approach-grid"><div class="approach-cell pull">
+              <strong>đảm bảo chất lượng</strong>
+              đảm bảo chất lượng / kiểm soát quality
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Immediately engage legal counsel to review contract terms an
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q671</h4>
+            <p style="margin:0"><strong>What should the project manager do first</strong><br><br>→ <strong>A</strong> phù hợp vì Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q671 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Conduct a joint review of acceptance criteria and quali…</strong></td>
+                <td>đảm bảo chất lượng / kiểm soát quality</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>B. Immediately engage legal counsel to review contract ter…</strong></td>
+                <td>Immediately engage legal counsel to review contract terms and determin</td>
+                <td>✗ &quot;Immediately engage legal counsel to review contract terms and determine liability.&quot; không…</td>
+              </tr><tr>
+                <td><strong>C. Suggest a compromise where the costs of defect resoluti…</strong></td>
+                <td>đảm bảo chất lượng / kiểm soát quality</td>
+                <td>✗ &quot;Suggest a compromise where the costs of defect resolution are divided eq…&quot; cùng nhóm đảm …</td>
+              </tr><tr>
+                <td><strong>D. Document the client's concerns and escalate to senior l…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q671</h2>
           <div class="approach-grid"><div class="approach-cell pull">
         <strong>A — Đúng</strong>
         Conduct a joint review of acceptance criteria and quality standards with stakeholders.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)"><span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</p>
       </div><div class="approach-cell">
         <strong>B — Sai</strong>
         Immediately engage legal counsel to review contract terms and determine liability.
@@ -165,7 +210,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q671</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q671</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 671</div>
             <div class="q-text">During project closing, the client identifies defects in deliverables that were previously accepted during quality reviews. The defects don't impact core functionality but affect user experience. The project team argues the deliverables meet original specifications, while the client claims the defects violate implied quality expectations. Contract terms are ambiguous about post-acceptance defect responsibility, and both parties want to maintain their business relationship. <span class="kw-cue"><span class="kw-cue">What should the project manager do</span> <span class="kw-cue">first</span></span> to resolve this situation?</div>
@@ -181,44 +226,90 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: A</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
+          <h3>Tại sao chọn A?</h3>
+          <ul><li><span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</li><li>→ <strong>A:</strong> <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</li><li>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>đảm bảo chất lượng / kiểm soát quality</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</li><li>Stem signal: trễ tiến độ / áp lực schedule — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>A. Conduct a joint review of acceptance criteria and quality standards with stakeholders.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>A:</strong> <span class="kw-pmbok">Embed quality</span>: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.<br><br>Stakeholder engagement (miền <span class="kw-pmbok">Stakeholders</span>) yêu cầu plan cách review và nhận feedback phù hợp. PM chủ động định nghĩa review approach thay vì để customer tự hiểu hoặc tham gia sai ceremony. Câu hỏi hỏi <strong><span class="kw-cue">FIRST</span></strong> (bước đầu tiên ngay lúc này). <span class="kw-cue">FIRST</span> chọn hành động <strong>đảm bảo chất lượng / kiểm soát quality</strong> vì đây là bước logic tiếp theo trong chuỗi xử lý — trước các bước muộn hơn như ghi log, <span class="kw-trap">rebaseline</span>, hay leo thang.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Immediately engage legal counsel to review contract terms and determine liabilit…</span></td><td>&quot;Immediately engage legal counsel to review contract terms and determine liability.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Suggest a compromise where the costs of defect resolution are divided equally.</span></td><td>&quot;Suggest a compromise where the costs of defect resolution are divided eq…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Conduct a joint review of acceptance criteria and quality standards with…&quot; sát trễ tiến độ / áp lực schedule hơn.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Document the client's concerns and <span class="kw-trap">escalate</span> to senior leadership for resolution.</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi <span class="kw-cue">FIRST</span> — đây không phải bước ưu tiên.)</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="quality_embed">
+              <span>During project closing, the client identifies defects in deliverables that were previously accepted … (Q671)</span>
+              <div class="classify-btns"><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="quality_embed">
+              <span>Tình huống cần &quot;đảm bảo chất lượng / kiểm soát quality&quot; — không phải trọng tâm Q671</span>
+              <div class="classify-btns"><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q671</span>
+              <div class="classify-btns"><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 3 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Immediately engage legal counsel to review contract …" → B</h4>
+            <p style="margin:0">&quot;Immediately engage legal counsel to review contract terms and determine liability.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Suggest a compromise where the costs of defect resol…" → C</h4>
+            <p style="margin:0">&quot;Suggest a compromise where the costs of defect resolution are divided eq…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — &quot;Conduct a joint review of acceptance criteria and quality standards with…&quot; sát trễ tiến độ / áp lực schedule hơn.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Document the client's concerns and escalate to senio…" → D</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi FIRST — đây không phải bước ưu tiên.)</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do first</strong> → <strong>A</strong> — Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q671 — đáp án?</div>
+            <div class="flashcard-front">Q671 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Manage Stakeholder Engagement</strong><br>PMBOK 8, tr. 71</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q671 — đáp án?</div>
             <div class="flashcard-back"><strong>A</strong> — Conduct a joint review of acceptance criteria and quality standards with stakeholders.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Focus on value</strong><br>Manage Stakeholder Engagement</div>
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">trễ tiến độ / áp lực schedule</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q671
-────────────────────────
-During project closing, the client identifies defects in deliverables that were previously accepted during quality reviews. The defects don't impact core functionality but affect user experience. The …
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">MANAGE STAKEHOLDER ENGAGEMENT — Q671
+(PMBOK 8, tr. 71)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Scope
+PROCESS: Manage Stakeholder Engagement, Validate Scope
+PRINCIPLE: Focus on value
 
-ANSWER: A
-A. Conduct a joint review of acceptance criteria and quality standards with stakeholders.
+SCENARIO:
+During project closing, the client identifies defects in deliverables that were previously accepted during quality reviews. The defects don't impact core functionality but affect user experience. The project team argues …
 
-PMBOK 8:
-  Domain: Stakeholders, Scope
-  Process: Manage Stakeholder Engagement, Validate Scope
-  Principle: Focus on value</div>
+SIGNAL KEYWORDS:
+  What should the project manager do first
+
+ANSWER → A) Conduct a joint review of acceptance criteria and quality standards with stakeholders.
+
+NOT:
+  B) Immediately engage legal counsel to review contrac… — &quot;Immediately engage legal counsel to review contract terms a
+  C) Suggest a compromise where the costs of defect res… — &quot;Suggest a compromise where the costs of defect resolution a
+  D) Document the client's concerns and escalate to sen… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+
+Q671 ANSWER: A</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +324,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "A";
-      const EXPL = {"A":"Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.","B":"\"Immediately engage legal counsel to review contract terms and determine liability.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.","C":"\"Suggest a compromise where the costs of defect resolution are divided eq…\" cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — \"Conduct a joint review of acceptance criteria and quality standards with…\" sát trễ tiến độ / áp lực schedule hơn.","D":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi FIRST — đây không phải bước ưu tiên.)"};
+      const EXPL = {"A":"Đúng! Embed quality: kiểm soát/prevent defect sớm, không để quality fail ở cuối pipeline.","B":"\"Immediately engage legal counsel to review contract terms and determine liability.\" không phù hợp trễ tiến độ / áp lực schedule — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.","C":"\"Suggest a compromise where the costs of defect resolution are divided eq…\" cùng nhóm đảm bảo chất lượng / kiểm soát quality nhưng lệch trọng tâm — \"Conduct a joint review of acceptance criteria and quality standards with…\" sát trễ tiến độ / áp lực schedule hơn.","D":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi FIRST — đây không phải bước ưu tiên.)"};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +350,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

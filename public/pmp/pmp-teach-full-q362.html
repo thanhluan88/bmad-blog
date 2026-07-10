@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 362</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-362">Câu 362</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q361.html">← 361</a>
         <a href="pmp-teach-full-q363.html">363 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 362 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">In a hybrid project, the customer does <span class="kw-cue">not</span> fully understand the importance of their ongoing involvement, resulting in excessive and unacceptable levels of rework. What action should the project manager take to resolve this issue?</p>
-          <div class="badges"><span class="badge">Stakeholders, Governance</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q362</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q362</h1>
+          <p class="lead">Bài học Q362 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 71) — vấn đề chất lượng / defect</p>
+          <p class="lead" style="margin-top:0.75rem">In a hybrid project, the customer does not fully understand the importance of their ongoing involvement, resulting in excessive and unacceptable levels of rework. What action should the project manager take to resolve this issue?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 71</span><span class="badge">Stakeholders, Governance</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q362</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Governance<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Governance</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 71): 2.5.2.2 Plan Stakeholder Engagement Plan Stakeholder Engagement is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>change control</strong>
+              change control / change request
+            </div><div class="approach-cell">
+              <strong>ưu tiên theo giá trị</strong>
+              ưu tiên theo giá trị / MVP
+            </div><div class="approach-cell pull">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div><div class="approach-cell">
+              <strong>khuyến khích collaboration</strong>
+              khuyến khích collaboration / hợp tác
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q362</h4>
+            <p style="margin:0">vấn đề chất lượng / defect<br><br>→ <strong>C</strong> phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q362 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Submit a change request to formally secure the necessar…</strong></td>
+                <td>change control / change request</td>
+                <td>✗ Tập trung &quot;change control / change request&quot; không giải quyết vấn đề chất lượng / defect — …</td>
+              </tr><tr>
+                <td><strong>B. Add the customer involvement issue to the backlog for r…</strong></td>
+                <td>ưu tiên theo giá trị / MVP</td>
+                <td>✗ Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết vấn đề chất lượng / defect — đáp á…</td>
+              </tr><tr>
+                <td><strong>C. Meet with the customer to emphasize the critical role t…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>D. Request senior management's support in encouraging the …</strong></td>
+                <td>khuyến khích collaboration / hợp tác</td>
+                <td>✗ Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải quyết vấn đề chất lượng / defe…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q362</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Submit a change request to formally secure the necessary level of customer involvement.
@@ -156,7 +204,7 @@
       </div><div class="approach-cell pull">
         <strong>C — Đúng</strong>
         <span class="kw-signal">Meet with</span> the customer to emphasize the critical role their ongoing engagement plays in the success of the project.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p>
       </div><div class="approach-cell">
         <strong>D — Sai</strong>
         Request senior management's support in encouraging the customer to actively collaborate with the project team.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q362</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q362</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 362</div>
             <div class="q-text">In a hybrid project, the customer does <span class="kw-cue">not</span> fully understand the importance of their ongoing involvement, resulting in excessive and unacceptable levels of rework. What action should the project manager take to resolve this issue?</div>
@@ -181,44 +229,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: C</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
+          <h3>Tại sao chọn C?</h3>
+          <ul><li>PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>→ <strong>C:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>C</strong> — &quot;<span class="kw-signal">Meet with</span> the customer to emphasize the critical role their ongoing engagement plays in the success of the project.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án C.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>C. Meet with the customer to emphasize the critical role their ongoing engagement plays in the success of the project.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>C:</strong> PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>C</strong> — &quot;<span class="kw-signal">Meet with</span> the customer to emphasize the critical role their ongoing engagement plays in the success of the project.&quot; — phù hợp vì PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; 2.5.2.2 <span class="kw-pmbok">Plan Stakeholder Engagement</span> <span class="kw-pmbok">Plan Stakeholder Engagement</span> is the process of developing strategies to engage identified project stakeholders based on their needs, expectations, interests, requirements, and potential impact on the pro<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 71 (<span class="kw-pmbok">Plan Stakeholder Engagement</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 71: <span class="kw-pmbok">Plan Stakeholder Engagement</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Submit a change request to formally secure the necessary level of customer invol…</span></td><td>Tập trung &quot;change control / <span class="kw-signal">change request</span>&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Add the customer involvement issue to the backlog for review and prioritization …</span></td><td>Tập trung &quot;ưu tiên theo giá trị / <span class="kw-signal">MVP</span>&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Request senior management's support in encouraging the customer to actively coll…</span></td><td>Tập trung &quot;khuyến khích <span class="kw-signal">collaboration</span> / hợp tác&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>In a hybrid project, the customer does not fully understand the importance of their ongoing involvem… (Q362)</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="change_control" type="button">change contr</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="encourage_collaborate" type="button">khuyến khích</button></div>
+            </div><div class="classify-row" data-answer="change_control">
+              <span>Tình huống cần &quot;change control / change request&quot; — không phải trọng tâm Q362</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="change_control" type="button">change contr</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="encourage_collaborate" type="button">khuyến khích</button></div>
+            </div><div class="classify-row" data-answer="prioritize_value">
+              <span>Tình huống cần &quot;ưu tiên theo giá trị / MVP&quot; — không phải trọng tâm Q362</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="change_control" type="button">change contr</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="encourage_collaborate" type="button">khuyến khích</button></div>
+            </div><div class="classify-row" data-answer="encourage_collaborate">
+              <span>Tình huống cần &quot;khuyến khích collaboration / hợp tác&quot; — không phải trọng tâm Q362</span>
+              <div class="classify-btns"><button data-pick="stakeholder_engagement" type="button">engagement s</button><button data-pick="change_control" type="button">change contr</button><button data-pick="prioritize_value" type="button">ưu tiên theo</button><button data-pick="encourage_collaborate" type="button">khuyến khích</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Submit a change request to formally secure the neces…" → A</h4>
+            <p style="margin:0">Tập trung &quot;change control / change request&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Add the customer involvement issue to the backlog fo…" → B</h4>
+            <p style="margin:0">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Request senior management's support in encouraging t…" → D</h4>
+            <p style="margin:0">Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>C</strong> — PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q362 — đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Meet with the customer to emphasize the critical role their ongoing engagement plays in the success of the project.</div>
+            <div class="flashcard-front">Q362 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 71</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q362 — đáp án?</div>
+            <div class="flashcard-back"><strong>C</strong> — Meet with the customer to emphasize the critical role their ongoing engagement plays in the success </div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chất lượng / defect</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q362
-────────────────────────
-In a hybrid project, the customer does not fully understand the importance of their ongoing involvement, resulting in excessive and unacceptable levels of rework. What action should the project manage…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q362
+(PMBOK 8, tr. 71)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Governance
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: C
-C. Meet with the customer to emphasize the critical role their ongoing engagement plays in the success of the project.
+SCENARIO:
+In a hybrid project, the customer does not fully understand the importance of their ongoing involvement, resulting in excessive and unacceptable levels of rework. What action should the project manager take to resolve th…
 
-PMBOK 8:
-  Domain: Stakeholders, Governance
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  —
+
+ANSWER → C) Meet with the customer to emphasize the critical role their ongoing engagement plays in the success of the project.
+
+NOT:
+  A) Submit a change request to formally secure the nec… — Tập trung &quot;change control / change request&quot; không giải quyết
+  B) Add the customer involvement issue to the backlog … — Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết vấn 
+  D) Request senior management's support in encouraging… — Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải 
+
+Q362 ANSWER: C</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +330,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "C";
-      const EXPL = {"A":"Tập trung \"change control / change request\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","B":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","C":"PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.","D":"Tập trung \"khuyến khích collaboration / hợp tác\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng."};
+      const EXPL = {"A":"Tập trung \"change control / change request\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","B":"Tập trung \"ưu tiên theo giá trị / MVP\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng.","C":"Đúng! PM chủ động engagement stakeholder: làm rõ kỳ vọng, nhu cầu thông tin và thống nhất hướng xử lý.","D":"Tập trung \"khuyến khích collaboration / hợp tác\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần engagement stakeholder / làm rõ kỳ vọng."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +356,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

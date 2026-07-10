@@ -12,6 +12,22 @@ const {
   highlightReasoning,
   mdInlineHighlighted,
 } = require("./lib/pmp-teach-keywords");
+const {
+  buildHeroLead,
+  buildConceptIntro,
+  buildSignalCard,
+  buildActionTypeGrid,
+  buildCompareTable,
+  buildWhyBullets,
+  buildTrapsSection,
+  buildDrillHtml,
+  buildDrillScript,
+  buildFlashcards,
+  buildCheatSheet,
+  highlightStemPhrases,
+  quizExplMap,
+  conceptLabel,
+} = require("./lib/pmp-teach-colocation-style");
 
 const PMP_DIR = path.join(__dirname, "..", "public", "pmp");
 const JSON_PATH = path.join(PMP_DIR, "pmp-full-questions.json");
@@ -111,7 +127,7 @@ function renderOptionsGridFromAnalysis(optionAnalysis) {
     .map((o) => {
       const ok = o.isCorrect;
       const reason = ok
-        ? "Đáp án đúng theo PMBOK 8 và logic tình huống."
+        ? o.reason || "Đáp án đúng theo PMBOK 8 và logic tình huống."
         : o.reason || "Không phải lựa chọn tốt nhất.";
       return `<div class="approach-cell${ok ? " pull" : ""}">
         <strong>${escapeHtml(o.key)} — ${ok ? "Đúng" : "Sai"}</strong>
@@ -266,12 +282,7 @@ function quizScript(q, analysis) {
   if (q.type !== "mcq" || !q.options?.length) return "";
   const multi = isMultiSelect(q);
   const correct = q.correct;
-  const expl = {};
-  for (const o of analysis.optionAnalysis || []) {
-    expl[o.key] = o.isCorrect
-      ? o.reason || "Đúng theo PMBOK 8 và phân tích tình huống."
-      : o.reason || "Không phải lựa chọn tốt nhất trong tình huống này.";
-  }
+  const expl = quizExplMap(analysis.optionAnalysis || []);
   const correctLabel = JSON.stringify(q.correctLabel || q.correct);
   if (multi) {
     return `<script>
@@ -328,15 +339,21 @@ function quizScript(q, analysis) {
 function renderLesson(q, prev, next) {
   const analysis = generateTeachAnalysis(q, { preserveOriginal: false });
   const mapping = analysis.pmbok8 || parseMapping(analysis.explanation);
+  const concept = conceptLabel(mapping, analysis.pageInfo);
   const title = shortTitle(q);
   const file = lessonFile(q.id);
+  const pagesBadge = analysis.pageInfo?.pages?.length
+    ? `PMBOK 8, tr. ${analysis.pageInfo.pages.slice(0, 2).join(", ")}`
+    : "";
   const badges = [
+    pagesBadge,
     formatMappingList(mapping.domains || mapping.domain),
-    mapping.focusArea || mapping.focus,
-    formatFirstItem(mapping.processes || mapping.process),
-    formatFirstItem(mapping.principles || mapping.principle),
+    concept,
     `Full Bank Q${q.id}`,
   ].filter(Boolean);
+  const whyBullets = buildWhyBullets(analysis, q);
+  const drillHtml = buildDrillHtml(analysis.optionAnalysis, q);
+  const trapsHtml = buildTrapsSection(analysis.optionAnalysis, q);
 
   const prevLink = prev ? `<a href="${lessonFile(prev.id)}">← Câu ${prev.id}</a>` : "";
   const nextLink = next ? `<a href="${lessonFile(next.id)}">Câu ${next.id} →</a>` : "";
@@ -388,8 +405,11 @@ function renderLesson(q, prev, next) {
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -418,6 +438,15 @@ function renderLesson(q, prev, next) {
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -437,10 +466,12 @@ function renderLesson(q, prev, next) {
       <div class="brand-sub">Full Bank · Câu ${q.id}</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">${escapeHtml(concept.slice(0, 24))}</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        ${drillHtml ? '<a href="#drill">Drill</a>' : ""}
+        ${trapsHtml ? '<a href="#traps">Bẫy thi</a>' : ""}
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full ${questions.length} câu</div>
@@ -457,13 +488,17 @@ function renderLesson(q, prev, next) {
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-${q.id}">Câu ${q.id}</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        ${drillHtml ? '<a href="#drill">Drill</a>' : ""}
+        ${trapsHtml ? '<a href="#traps">Bẫy</a>' : ""}
         ${prev ? `<a href="${lessonFile(prev.id)}">← ${prev.id}</a>` : ""}
         ${next ? `<a href="${lessonFile(next.id)}">${next.id} →</a>` : ""}
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu ${q.id} — Bộ luyện PMBOK 8</h1>
-          <p class="lead">${highlightExamCues(q.text)}</p>
+          <h1>Practice Questions — PMBOK 8th Ed · Q${q.id}</h1>
+          <p class="lead">${buildHeroLead(q, analysis, mapping)}</p>
+          <p class="lead" style="margin-top:0.75rem">${highlightStemPhrases(q.text)}</p>
           <div class="badges">${badges.map((b) => `<span class="badge">${escapeHtml(b)}</span>`).join("")}</div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
@@ -473,26 +508,22 @@ function renderLesson(q, prev, next) {
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              ${formatMappingList(mapping.domains || mapping.domain) ? `<strong>Domain:</strong> ${escapeHtml(formatMappingList(mapping.domains || mapping.domain))}<br>` : ""}
-              ${mapping.focusArea || mapping.focus ? `<strong>Focus Area:</strong> ${escapeHtml(mapping.focusArea || mapping.focus)}<br>` : ""}
-              ${formatMappingList(mapping.processes || mapping.process) ? `<strong>Process:</strong> ${escapeHtml(formatMappingList(mapping.processes || mapping.process))}<br>` : ""}
-              ${formatMappingList(mapping.principles || mapping.principle) ? `<strong>Principle:</strong> ${escapeHtml(formatMappingList(mapping.principles || mapping.principle))}` : ""}
-            </p>
-          </div>
+        <section id="concept">
+          <h2>1. ${escapeHtml(concept)}</h2>
+          <p>${buildConceptIntro(q, analysis, mapping)}</p>
+          ${buildActionTypeGrid(analysis.optionAnalysis)}
+          ${buildSignalCard(q, analysis)}
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          ${buildCompareTable(analysis.optionAnalysis, q)}
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q${q.id}</h2>
           ${renderOptionsGridFromAnalysis(analysis.optionAnalysis)}
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q${q.id}</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q${q.id}</h2>
           ${renderQuizBlock(q)}
           <p style="font-size:0.86rem;color:var(--muted)">
             <a href="pmp-full-questions.html#q-${q.id}">→ Mở câu ${q.id} trong bộ luyện đầy đủ</a>
@@ -500,39 +531,37 @@ function renderLesson(q, prev, next) {
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: ${escapeHtml(q.correct)}</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: ${escapeHtml(q.correct)}</h2>
+          <h3>Tại sao chọn ${escapeHtml(q.correct)}?</h3>
+          <ul>${whyBullets.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>${escapeHtml(q.correctLabel || q.correct)}</strong></p>
           </div>
           ${renderAnalysisSection(analysis)}
+          <h3>Loại trừ từng đáp án</h3>
           ${renderExcludeTableFromAnalysis(analysis.optionAnalysis)}
         </section>
 
+        ${drillHtml ? `<section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          ${drillHtml}
+        </section>` : ""}
+
+        ${trapsHtml ? `<section id="traps">
+          <h2>${drillHtml ? "6" : "5"}. Bẫy thi</h2>
+          ${trapsHtml}
+        </section>` : ""}
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>${drillHtml && trapsHtml ? "7" : drillHtml || trapsHtml ? "6" : "5"}. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
-          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q${q.id} — đáp án?</div>
-            <div class="flashcard-back"><strong>${escapeHtml(q.correct)}</strong> — ${escapeHtml((q.correctLabel || "").replace(/^[A-Z],\s*|^[A-Z]\.\s*/, ""))}</div>
-          </div></div>
-          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back">${formatMappingList(mapping.principles || mapping.principle) ? `<strong>${escapeHtml(formatFirstItem(mapping.principles || mapping.principle))}</strong><br>` : ""}${formatFirstItem(mapping.processes || mapping.process) || "Xem phần mapping ở trên."}</div>
-          </div></div>
+          ${buildFlashcards(q, analysis, mapping)}
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q${q.id}
-────────────────────────
-${escapeHtml(q.text).slice(0, 200)}${q.text.length > 200 ? "…" : ""}
-
-ANSWER: ${escapeHtml(q.correct)}
-${escapeHtml(q.correctLabel || q.correct)}
-
-PMBOK 8:
-${formatMappingList(mapping.domains || mapping.domain) ? `  Domain: ${formatMappingList(mapping.domains || mapping.domain)}\n` : ""}${formatMappingList(mapping.processes || mapping.process) ? `  Process: ${formatMappingList(mapping.processes || mapping.process)}\n` : ""}${formatMappingList(mapping.principles || mapping.principle) ? `  Principle: ${formatMappingList(mapping.principles || mapping.principle)}` : ""}</div>
+          <h2>${drillHtml && trapsHtml ? "8" : drillHtml || trapsHtml ? "7" : "6"}. Cheat sheet</h2>
+          <div class="cheat-sheet">${escapeHtml(buildCheatSheet(q, analysis, mapping))}</div>
         </section>
 
         <footer class="ref-footer">
@@ -552,6 +581,7 @@ ${formatMappingList(mapping.domains || mapping.domain) ? `  Domain: ${formatMapp
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
+      ${drillHtml ? buildDrillScript() : ""}
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
       const obs = new IntersectionObserver(function (entries) {

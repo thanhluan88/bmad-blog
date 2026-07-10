@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 248</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Identify Stakeholders</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-248">Câu 248</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q247.html">← 247</a>
         <a href="pmp-teach-full-q249.html">249 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 248 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">The project manager of an agile development has experience with the amount of information that can be lost during the transfer to a new operations team, despite having a well-organized knowledge repository and a hand-over meeting. The project manager needs to ensure that important information is <span class="kw-cue">not</span> overlooked. The project manager wants to supplement these actions with an approach that will support an effective transition at the end of the project. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Stakeholders, Resources</span><span class="badge">Executing</span><span class="badge">Identify Stakeholders</span><span class="badge">Lead accountably</span><span class="badge">Full Bank Q248</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q248</h1>
+          <p class="lead">Bài học Q248 về <strong>Identify Stakeholders</strong> (PMBOK 8, tr. 246) — ngữ cảnh Agile/Scrum</p>
+          <p class="lead" style="margin-top:0.75rem">The project manager of an agile development has experience with the amount of information that can be lost during the transfer to a new operations team, despite having a well-organized knowledge repository and a hand-over meeting. The project manager needs to ensure that important information is not overlooked. The project manager wants to supplement these actions with an approach that will support an effective transition at the end of the project. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 246</span><span class="badge">Stakeholders, Resources</span><span class="badge">Identify Stakeholders</span><span class="badge">Full Bank Q248</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Stakeholders, Resources<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement<br>
-              <strong>Principle:</strong> Lead accountably
-            </p>
+        <section id="concept">
+          <h2>1. Identify Stakeholders</h2>
+          <p><strong>Identify Stakeholders</strong> thuộc miền <strong>Stakeholders, Resources</strong> — process <strong>Identify Stakeholders</strong>, principle <strong>Lead accountably</strong>. PMBOK 8 (tr. 246): then planning for the same. During this phase, project managers or members of the purchasing department should involve key stakeholders early in the planning stage to ensure alignment on procurement objectives and constraints and document</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>A</strong>
+              Select team members with the strongest communications skills
+            </div><div class="approach-cell">
+              <strong>B</strong>
+              Break the process into stages, performing partial transfers 
+            </div><div class="approach-cell">
+              <strong>C</strong>
+              Use storytelling as a way to illustrate real-life decisions 
+            </div><div class="approach-cell pull">
+              <strong>facilitate retrospective</strong>
+              facilitate retrospective / phân tích root cause
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q248</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>D</strong> phù hợp vì Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q248 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Select team members with the strongest communications s…</strong></td>
+                <td>Select team members with the strongest communications skills and have </td>
+                <td>✗ &quot;Select team members with the strongest communications skills and have them form a …&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>B. Break the process into stages, performing partial trans…</strong></td>
+                <td>Break the process into stages, performing partial transfers as phases </td>
+                <td>✗ &quot;Break the process into stages, performing partial transfers as phases of the proje…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>C. Use storytelling as a way to illustrate real-life decis…</strong></td>
+                <td>Use storytelling as a way to illustrate real-life decisions behind the</td>
+                <td>✗ &quot;Use storytelling as a way to illustrate real-life decisions behind the project rec…&quot; khôn…</td>
+              </tr><tr>
+                <td><strong>D. Engage the operations teams early by including them in …</strong></td>
+                <td>facilitate retrospective / phân tích root cause</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q248</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Select team members with the strongest communications skills and have them form a transition team to facilitate the knowledge transfer.
@@ -160,12 +208,12 @@
       </div><div class="approach-cell pull">
         <strong>D — Đúng</strong>
         Engage the operations teams early by including them in project planning, retrospectives, and knowledge-sharing sessions.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân.</p>
       </div></div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q248</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q248</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 248</div>
             <div class="q-text">The project manager of an agile development has experience with the amount of information that can be lost during the transfer to a new operations team, despite having a well-organized knowledge repository and a hand-over meeting. The project manager needs to ensure that important information is <span class="kw-cue">not</span> overlooked. The project manager wants to supplement these actions with an approach that will support an effective transition at the end of the project. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,84 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: D</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+          <h3>Tại sao chọn D?</h3>
+          <ul><li>Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân.</li><li>→ <strong>D:</strong> Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân.</li><li>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>D</strong> — &quot;Engage the operations teams early by including them in project planning, retrospectives, and knowledge-sharing sessions.&quot; — phù hợp vì Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</li><li>Stem signal: ngữ cảnh Agile/Scrum — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span> — align với đáp án D.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>D. Engage the operations teams early by including them in project planning, retrospectives, and knowledge-sharing sessions.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>D:</strong> Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân.<br><br>Bối cảnh: ngữ cảnh Agile/Scrum. Đáp án <strong>D</strong> — &quot;Engage the operations teams early by including them in project planning, retrospectives, and knowledge-sharing sessions.&quot; — phù hợp vì Vấn đề lặp lại/quality — <span class="kw-signal">retrospective</span> phân tích <span class="kw-signal">root cause</span> và cải tiến hệ thống, không blame cá nhân. Agile/Hybrid: ưu tiên <span class="kw-signal">empowered</span> culture, <span class="kw-signal">collaboration</span> và <span class="kw-signal">continuous improvement</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; then planning for the same. During this phase, project managers or members of the purchasing department should involve key stakeholders early in the planning stage to ensure alignment on procurement objectives and constraints and document<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 246 (Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 246: Performance Domain: <span class="kw-pmbok">Stakeholders</span>, <span class="kw-pmbok">Identify <span class="kw-pmbok">Stakeholders</span></span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Select team members with the strongest communications skills and have them form …</span></td><td>&quot;Select team members with the strongest communications skills and have them form a …&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr><tr><td><strong>B</strong><br><span style="font-size:0.8rem;color:var(--muted)">Break the process into stages, performing partial transfers as phases of the pro…</span></td><td>&quot;Break the process into stages, performing partial transfers as phases of the proje…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)">Use storytelling as a way to illustrate real-life decisions behind the project r…</span></td><td>&quot;Use storytelling as a way to illustrate real-life decisions behind the project rec…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung <span class="kw-signal">facilitate</span> <span class="kw-signal">retrospective</span> / phân tích <span class="kw-signal">root cause</span>.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="facilitate_retro">
+              <span>The project manager of an agile development has experience with the amount of information that can b… (Q248)</span>
+              <div class="classify-btns"><button data-pick="facilitate_retro" type="button">facilitate r</button><button data-pick="DUMMY1" type="button">Opt 1</button><button data-pick="DUMMY2" type="button">Opt 2</button><button data-pick="DUMMY3" type="button">Opt 3</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 1 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Select team members with the strongest communication…" → A</h4>
+            <p style="margin:0">&quot;Select team members with the strongest communications skills and have them form a …&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Break the process into stages, performing partial tr…" → B</h4>
+            <p style="margin:0">&quot;Break the process into stages, performing partial transfers as phases of the proje…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Use storytelling as a way to illustrate real-life de…" → C</h4>
+            <p style="margin:0">&quot;Use storytelling as a way to illustrate real-life decisions behind the project rec…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>D</strong> — Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q248 — đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Engage the operations teams early by including them in project planning, retrospectives, and knowledge-sharing sessions.</div>
+            <div class="flashcard-front">Q248 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Identify Stakeholders</strong><br>PMBOK 8, tr. 246</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Lead accountably</strong><br>Identify Stakeholders</div>
+            <div class="flashcard-front">Q248 — đáp án?</div>
+            <div class="flashcard-back"><strong>D</strong> — Engage the operations teams early by including them in project planning, retrospectives, and knowled</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">ngữ cảnh Agile/Scrum</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q248
-────────────────────────
-The project manager of an agile development has experience with the amount of information that can be lost during the transfer to a new operations team, despite having a well-organized knowledge repos…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">IDENTIFY STAKEHOLDERS — Q248
+(PMBOK 8, tr. 246)
+─────────────────────────────────────────────────────
+DOMAIN: Stakeholders, Resources
+PROCESS: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
+PRINCIPLE: Lead accountably
 
-ANSWER: D
-D. Engage the operations teams early by including them in project planning, retrospectives, and knowledge-sharing sessions.
+SCENARIO:
+The project manager of an agile development has experience with the amount of information that can be lost during the transfer to a new operations team, despite having a well-organized knowledge repository and a hand-ove…
 
-PMBOK 8:
-  Domain: Stakeholders, Resources
-  Process: Identify Stakeholders, Plan Stakeholder Engagement, Manage Stakeholder Engagement
-  Principle: Lead accountably</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → D) Engage the operations teams early by including them in project planning, retrospectives, and knowledge-sharing sessions.
+
+NOT:
+  A) Select team members with the strongest communicati… — &quot;Select team members with the strongest communications skill
+  B) Break the process into stages, performing partial … — &quot;Break the process into stages, performing partial transfers
+  C) Use storytelling as a way to illustrate real-life … — &quot;Use storytelling as a way to illustrate real-life decisions
+
+Q248 ANSWER: D</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +321,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "D";
-      const EXPL = {"A":"\"Select team members with the strongest communications skills and have them form a …\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","B":"\"Break the process into stages, performing partial transfers as phases of the proje…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","C":"\"Use storytelling as a way to illustrate real-life decisions behind the project rec…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","D":"Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân."};
+      const EXPL = {"A":"\"Select team members with the strongest communications skills and have them form a …\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","B":"\"Break the process into stages, performing partial transfers as phases of the proje…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","C":"\"Use storytelling as a way to illustrate real-life decisions behind the project rec…\" không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung facilitate retrospective / phân tích root cause.","D":"Đúng! Vấn đề lặp lại/quality — retrospective phân tích root cause và cải tiến hệ thống, không blame cá nhân."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +347,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");

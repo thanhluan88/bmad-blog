@@ -45,8 +45,11 @@
     section ul { margin: 0 0 1rem 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
     .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
     table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
@@ -75,6 +78,15 @@
     .feedback.show { display: block; }
     .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    @media (max-width: 700px) { .classify-row { grid-template-columns: 1fr; } }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
     .flashcard { perspective: 1000px; height: 150px; cursor: pointer; margin-bottom: 0.75rem; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -94,10 +106,12 @@
       <div class="brand-sub">Full Bank · Câu 514</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#mapping">PMBOK 8</a>
+        <a href="#concept">Define Scope</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
         <div class="nav-series">Bộ luyện Full 1123 câu</div>
@@ -114,14 +128,18 @@
         <a href="pmp-teach-full-series-index.html">Index</a>
         <a href="pmp-full-questions.html#q-514">Câu 514</a>
         <a href="#question">Quiz</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy</a>
         <a href="pmp-teach-full-q513.html">← 513</a>
         <a href="pmp-teach-full-q515.html">515 →</a>
       </nav>
       <main>
         <header class="hero" id="intro">
-          <h1>Phân tích Câu 514 — Bộ luyện PMBOK 8</h1>
-          <p class="lead">A large enterprise is developing a product with multiple modules. One module passes internal quality testing, but the client rejects it, citing undocumented business rules. The project sponsor demands immediate rework to protect the contract. The development team maintains that the requirements were delivered per the scope. The project management office warns that rework without formal updates could expose governance gaps. <span class="kw-cue">What should the project manager do</span>?</p>
-          <div class="badges"><span class="badge">Scope, Schedule</span><span class="badge">Executing</span><span class="badge">Define Scope</span><span class="badge">Embed quality</span><span class="badge">Full Bank Q514</span></div>
+          <h1>Practice Questions — PMBOK 8th Ed · Q514</h1>
+          <p class="lead">Bài học Q514 về <strong>Define Scope</strong> (PMBOK 8, tr. 44) — vấn đề chất lượng / defect</p>
+          <p class="lead" style="margin-top:0.75rem">A large enterprise is developing a product with multiple modules. One module passes internal quality testing, but the client rejects it, citing undocumented business rules. The project sponsor demands immediate rework to protect the contract. The development team maintains that the requirements were delivered per the scope. The project management office warns that rework without formal updates could expose governance gaps. <em>What should the project manager do</em>?</p>
+          <div class="badges"><span class="badge">PMBOK 8, tr. 44</span><span class="badge">Scope, Schedule</span><span class="badge">Define Scope</span><span class="badge">Full Bank Q514</span></div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
             <span><span class="kw-signal">signal</span> gợi ý đáp án đúng</span>
@@ -130,21 +148,51 @@
           </p>
         </header>
 
-        <section id="mapping">
-          <h2>1. PMBOK 8 mapping</h2>
-          <div class="card info">
-            <h4>Framework</h4>
-            <p style="margin:0">
-              <strong>Domain:</strong> Scope, Schedule<br>
-              <strong>Focus Area:</strong> Executing<br>
-              <strong>Process:</strong> Define Scope, Validate Scope, Control Scope<br>
-              <strong>Principle:</strong> Embed quality
-            </p>
+        <section id="concept">
+          <h2>1. Define Scope</h2>
+          <p><strong>Define Scope</strong> thuộc miền <strong>Scope, Schedule</strong> — process <strong>Define Scope</strong>, principle <strong>Embed quality</strong>. PMBOK 8 (tr. 44): A specification is an attribute that is necessary to be present in a project deliverable to help meet or exceed a target objective. Quality is linked to the product acceptance criteria, as described in the project charter, statement of wo</p>
+          <div class="approach-grid"><div class="approach-cell">
+              <strong>ghi nhận</strong>
+              ghi nhận / tài liệu hóa
+            </div><div class="approach-cell pull">
+              <strong>đảm bảo chất lượng</strong>
+              đảm bảo chất lượng / kiểm soát quality
+            </div><div class="approach-cell">
+              <strong>leo thang lên cấp trên</strong>
+              leo thang lên cấp trên
+            </div><div class="approach-cell">
+              <strong>engagement stakeholder</strong>
+              engagement stakeholder / làm rõ kỳ vọng
+            </div></div>
+          <div class="card tip">
+            <h4>Signal trong stem Q514</h4>
+            <p style="margin:0"><strong>What should the project manager do</strong><br><br>→ <strong>B</strong> phù hợp vì PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p>
           </div>
+          <h3>So sánh nhanh các hướng xử lý</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Action</th><th>Q514 fit?</th></tr></thead>
+            <tbody><tr>
+                <td><strong>A. Approve rework immediately to keep the client satisfied…</strong></td>
+                <td>ghi nhận / tài liệu hóa</td>
+                <td>✗ Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử l…</td>
+              </tr><tr>
+                <td><strong>B. Facilitate clarification of acceptance criteria with st…</strong></td>
+                <td>đảm bảo chất lượng / kiểm soát quality</td>
+                <td><strong>Yes — đáp án đúng</strong></td>
+              </tr><tr>
+                <td><strong>C. Escalate the dispute to senior project management becau…</strong></td>
+                <td>leo thang lên cấp trên</td>
+                <td>✗ Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi …</td>
+              </tr><tr>
+                <td><strong>D. Recommend that the project sponsor negotiate directly w…</strong></td>
+                <td>engagement stakeholder / làm rõ kỳ vọng</td>
+                <td>✗ Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết vấn đề chất lượng / d…</td>
+              </tr></tbody>
+          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh đáp án</h2>
+          <h2>2. So sánh đáp án — Q514</h2>
           <div class="approach-grid"><div class="approach-cell">
         <strong>A — Sai</strong>
         Approve rework immediately to keep the client satisfied and change the baseline documentation accordingly.
@@ -152,7 +200,7 @@
       </div><div class="approach-cell pull">
         <strong>B — Đúng</strong>
         <span class="kw-signal">Facilitate</span> clarification of acceptance criteria with stakeholders and formally update the project scope documentation.
-        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Đáp án đúng theo <span class="kw-pmbok">PMBOK 8</span> và logic tình huống.</p>
+        <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</p>
       </div><div class="approach-cell">
         <strong>C — Sai</strong>
         <span class="kw-trap">Escalate</span> the dispute to senior project management because they need to take action to avoid financial penalties.
@@ -165,7 +213,7 @@
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi — Full Bank Q514</h2>
+          <h2>3. Câu hỏi thực hành — Full Bank Q514</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 514</div>
             <div class="q-text">A large enterprise is developing a product with multiple modules. One module passes internal quality testing, but the client rejects it, citing undocumented business rules. The project sponsor demands immediate rework to protect the contract. The development team maintains that the requirements were delivered per the scope. The project management office warns that rework without formal updates could expose governance gaps. <span class="kw-cue">What should the project manager do</span>?</div>
@@ -181,44 +229,93 @@
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích — Đáp án đúng: B</h2>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <h3>Tại sao chọn B?</h3>
+          <ul><li>PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>→ <strong>B:</strong> PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>B</strong> — &quot;<span class="kw-signal">Facilitate</span> clarification of acceptance criteria with stakeholders and formally update the project scope documentation.&quot; — phù hợp vì PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</li><li>Stem signal: vấn đề chất lượng / defect — cần hành động PM phù hợp <span class="kw-pmbok">PMBOK 8</span>.</li><li>Process Define <span class="kw-pmbok">Scope</span> — align với đáp án B.</li></ul>
           <div class="card tip">
             <h4>Đáp án</h4>
             <p style="margin:0"><strong>B. Facilitate clarification of acceptance criteria with stakeholders and formally update the project scope documentation.</strong></p>
           </div>
           <div class="card tip"><h4>Phân tích PMBOK 8</h4><p style="margin:0">→ <strong>B:</strong> PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.<br><br>Bối cảnh: vấn đề chất lượng / defect. Đáp án <strong>B</strong> — &quot;<span class="kw-signal">Facilitate</span> clarification of acceptance criteria with stakeholders and formally update the project scope documentation.&quot; — phù hợp vì PM <span class="kw-signal">facilitate</span> thảo luận để team/stakeholder cùng giải quyết — <span class="kw-pmbok">Build an empowered culture</span>.</p></div><div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">&gt; A specification is an attribute that is necessary to be present in a project deliverable to help meet or exceed a target objective. Quality is linked to the product acceptance criteria, as described in the <span class="kw-signal">project charter</span>, statement of wo<br>&gt; — <span class="kw-pmbok">PMBOK 8</span>, tr. 44 (Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span>)</p></div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 44: Performance Domain: <span class="kw-pmbok">Scope</span>, Define <span class="kw-pmbok">Scope</span></p>
+          <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (PMBOK 8 reasoning)</th></tr></thead>
             <tbody><tr><td><strong>A</strong><br><span style="font-size:0.8rem;color:var(--muted)">Approve rework immediately to keep the client satisfied and change the baseline …</span></td><td>Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi <span class="kw-cue">FIRST</span>/<span class="kw-cue">NEXT</span>. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</td></tr><tr><td><strong>C</strong><br><span style="font-size:0.8rem;color:var(--muted)"><span class="kw-trap">Escalate</span> the dispute to senior project management because they need to take acti…</span></td><td>Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ <span class="kw-trap">escalate</span> khi vượt quyền hoặc cần quyết định cấp trên.</td></tr><tr><td><strong>D</strong><br><span style="font-size:0.8rem;color:var(--muted)">Recommend that the project sponsor negotiate directly with the client to prevent…</span></td><td>Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo chất lượng / kiểm soát quality.</td></tr></tbody>
           </table>
         </section>
 
+        <section id="drill">
+          <h2>5. Drill — phân loại hành động PM</h2>
+          <div class="classify-drill" id="classifyDrill"><div class="classify-row" data-answer="quality_embed">
+              <span>A large enterprise is developing a product with multiple modules. One module passes internal quality… (Q514)</span>
+              <div class="classify-btns"><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="stakeholder_engagement" type="button">engagement s</button></div>
+            </div><div class="classify-row" data-answer="document_first">
+              <span>Tình huống cần &quot;ghi nhận / tài liệu hóa&quot; — không phải trọng tâm Q514</span>
+              <div class="classify-btns"><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="stakeholder_engagement" type="button">engagement s</button></div>
+            </div><div class="classify-row" data-answer="escalate">
+              <span>Tình huống cần &quot;leo thang lên cấp trên&quot; — không phải trọng tâm Q514</span>
+              <div class="classify-btns"><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="stakeholder_engagement" type="button">engagement s</button></div>
+            </div><div class="classify-row" data-answer="stakeholder_engagement">
+              <span>Tình huống cần &quot;engagement stakeholder / làm rõ kỳ vọng&quot; — không phải trọng tâm Q514</span>
+              <div class="classify-btns"><button data-pick="quality_embed" type="button">đảm bảo chất</button><button data-pick="document_first" type="button">ghi nhận</button><button data-pick="escalate" type="button">leo thang lê</button><button data-pick="stakeholder_engagement" type="button">engagement s</button></div>
+            </div></div>
+          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger">
+            <h4>Bẫy 1: "Approve rework immediately to keep the client satisf…" → A</h4>
+            <p style="margin:0">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)</p>
+          </div><div class="card danger">
+            <h4>Bẫy 2: "Escalate the dispute to senior project management be…" → C</h4>
+            <p style="margin:0">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</p>
+          </div><div class="card danger">
+            <h4>Bẫy 3: "Recommend that the project sponsor negotiate directl…" → D</h4>
+            <p style="margin:0">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo chất lượng / kiểm soát quality.</p>
+          </div><div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>What should the project manager do</strong> → <strong>B</strong> — PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.</p></div>
+        </section>
+
         <section id="flashcards">
-          <h2>5. Flashcard</h2>
+          <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Full Bank Q514 — đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Facilitate clarification of acceptance criteria with stakeholders and formally update the project scope documentation.</div>
+            <div class="flashcard-front">Q514 — chủ đề / concept?</div>
+            <div class="flashcard-back"><strong>Define Scope</strong><br>PMBOK 8, tr. 44</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">PMBOK 8 principle / process?</div>
-            <div class="flashcard-back"><strong>Embed quality</strong><br>Define Scope</div>
+            <div class="flashcard-front">Q514 — đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Facilitate clarification of acceptance criteria with stakeholders and formally update the project sc</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Signal stem → hành động?</div>
+            <div class="flashcard-back">vấn đề chất lượng / defect</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
-          <h2>6. Cheat sheet</h2>
-          <div class="cheat-sheet">FULL BANK Q514
-────────────────────────
-A large enterprise is developing a product with multiple modules. One module passes internal quality testing, but the client rejects it, citing undocumented business rules. The project sponsor demands…
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">DEFINE SCOPE — Q514
+(PMBOK 8, tr. 44)
+─────────────────────────────────────────────────────
+DOMAIN: Scope, Schedule
+PROCESS: Define Scope, Validate Scope, Control Scope
+PRINCIPLE: Embed quality
 
-ANSWER: B
-B. Facilitate clarification of acceptance criteria with stakeholders and formally update the project scope documentation.
+SCENARIO:
+A large enterprise is developing a product with multiple modules. One module passes internal quality testing, but the client rejects it, citing undocumented business rules. The project sponsor demands immediate rework to…
 
-PMBOK 8:
-  Domain: Scope, Schedule
-  Process: Define Scope, Validate Scope, Control Scope
-  Principle: Embed quality</div>
+SIGNAL KEYWORDS:
+  What should the project manager do
+
+ANSWER → B) Facilitate clarification of acceptance criteria with stakeholders and formally update the project scope documentation.
+
+NOT:
+  A) Approve rework immediately to keep the client sati… — Ghi nhận lessons learned / cập nhật log là quan trọng nhưng 
+  C) Escalate the dispute to senior project management … — Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm v
+  D) Recommend that the project sponsor negotiate direc… — Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không gi
+
+Q514 ANSWER: B</div>
         </section>
 
         <footer class="ref-footer">
@@ -233,7 +330,7 @@ PMBOK 8:
   <script>
     (function () {
       const CORRECT = "B";
-      const EXPL = {"A":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","B":"PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.","C":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","D":"Tập trung \"engagement stakeholder / làm rõ kỳ vọng\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo chất lượng / kiểm soát quality."};
+      const EXPL = {"A":"Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu tiên khi câu hỏi hỏi FIRST/NEXT. (Câu hỏi hỏi ACTION — đây không phải bước ưu tiên.)","B":"Đúng! PM facilitate thảo luận để team/stakeholder cùng giải quyết — Build an empowered culture.","C":"Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.","D":"Tập trung \"engagement stakeholder / làm rõ kỳ vọng\" không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo chất lượng / kiểm soát quality."};
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -259,6 +356,29 @@ PMBOK 8:
         function flip() { card.classList.toggle("flipped"); }
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      
+      let score = 0;
+      const drillRows = document.querySelectorAll("#classifyDrill .classify-row");
+      const total = drillRows.length;
+      drillRows.forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            const el = document.getElementById("drillScore");
+            if (el) el.textContent = score + " / " + total + " đúng";
+          });
+        });
       });
       const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
