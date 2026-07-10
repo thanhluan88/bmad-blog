@@ -643,6 +643,21 @@ function quizExplMap(optionAnalysis) {
   return expl;
 }
 
+function resolveGuideQuote(q, analysis) {
+  const stored = getStoredTeachGrounding(q.id);
+  let excerpt = "";
+  if (stored?.guideQuote) {
+    excerpt = formatGuideQuote(stored.guideQuote, 600);
+  } else if (analysis.pageInfo?.snippet && analysis.pageInfo.snippet.length >= 40) {
+    excerpt = formatGuideQuote(analysis.pageInfo.snippet, 600);
+  }
+  if (!excerpt || excerpt.length < 40) return null;
+  const pages = analysis.pageInfo?.pages || [];
+  if (!pages.length) return null;
+  const topic = analysis.pageInfo?.topic || "";
+  return { excerpt, pages, topic };
+}
+
 /** Markdown explanation for quiz pages (exam-latest / full) from teach grounding. */
 function buildTeachExplanationMarkdown(q, analysis) {
   const grounding = composeGrounding(q, analysis);
@@ -669,6 +684,15 @@ function buildTeachExplanationMarkdown(q, analysis) {
       lines.push(grounding.signalPhrases.join(" · "));
     }
     if (grounding.signalAnswer) lines.push(grounding.signalAnswer);
+  }
+  const guide = resolveGuideQuote(q, analysis);
+  if (guide) {
+    lines.push("");
+    lines.push("**Trích dẫn Guide**");
+    lines.push(`"${guide.excerpt}"`);
+    lines.push(
+      `— PMBOK 8, tr. ${guide.pages.join(", ")}${guide.topic ? ` (${guide.topic})` : ""}`,
+    );
   }
   if (excludeRows.length) {
     lines.push("");

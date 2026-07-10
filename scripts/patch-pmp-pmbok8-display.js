@@ -56,6 +56,7 @@ const BLOCK = `${CSS_START}
     .solution-card.mapping { background: #f0f9ff; border-color: #bae6fd; }
     .solution-card.why { background: #f0fdf4; border-color: #bbf7d0; }
     .solution-card.signal { background: #ecfdf5; border-color: #a7f3d0; }
+    .solution-card.guide { background: #eff6ff; border-color: #bfdbfe; }
     .solution-card.reject { background: #fff; border-color: #e5e7eb; }
     .solution-card.refs { background: #fafafa; border-color: #e5e7eb; }
     .solution-card.original { background: #fffbeb; border-color: #fde68a; font-size: 0.92rem; line-height: 1.6; }
@@ -102,6 +103,18 @@ const BLOCK = `${CSS_START}
       font-size: 0.92rem;
       line-height: 1.55;
       color: var(--text);
+    }
+    .guide-quote {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      font-style: italic;
+      color: var(--text);
+    }
+    .guide-attrib {
+      margin: 0.5rem 0 0;
+      font-size: 0.82rem;
+      color: var(--muted);
     }
     .mapping-grid {
       display: grid;
@@ -200,6 +213,7 @@ const HELPERS = `${JS_START}
       if (h.includes("pmbok 8 mapping")) return "mapping";
       if (h.includes("vì sao") || h.includes("vi sao")) return "why";
       if (h.includes("signal trong stem")) return "signal";
+      if (h.includes("trích dẫn guide") || h.includes("trich dan guide")) return "guide";
       if (h.includes("loại trừ") || h.includes("loai tru")) return "reject";
       if (h.includes("tham khảo") || h.includes("tham khao")) return "refs";
       if (h.includes("giải thích gốc") || h.includes("giai thich goc")) return "original";
@@ -279,6 +293,22 @@ const HELPERS = `${JS_START}
       return html;
     }
 
+    function renderGuideBody(lines) {
+      const cleaned = lines.map(l => l.trim()).filter(Boolean);
+      if (!cleaned.length) return "";
+      const attrib = cleaned.find(l => /^—/.test(l) || (l.startsWith("-") && l.includes("PMBOK")));
+      const quoteLines = cleaned.filter(l => l !== attrib);
+      let quote = quoteLines.join(" ").replace(/^["“]|["”]$/g, "").trim();
+      let html = "";
+      if (quote) {
+        html += \`<p class="guide-quote">"\${inlineFormat(quote)}"</p>\`;
+      }
+      if (attrib) {
+        html += \`<p class="guide-attrib">\${inlineFormat(attrib.replace(/^—\\s*/, "— "))}</p>\`;
+      }
+      return html;
+    }
+
     function renderRejectList(lines) {
       const items = lines
         .map(line => line.trim().replace(/^-\\s+/, ""))
@@ -332,6 +362,7 @@ const HELPERS = `${JS_START}
         if (cls === "mapping") body = renderMappingList(section.lines);
         else if (cls === "why") body = renderWhyBody(section.lines);
         else if (cls === "signal") body = renderSignalBody(section.lines);
+        else if (cls === "guide") body = renderGuideBody(section.lines);
         else if (cls === "reject") body = renderRejectList(section.lines);
         else if (cls === "refs") body = renderRefList(section.lines);
         else body = section.lines.map(line => \`<p class="solution-text">\${inlineFormat(line)}</p>\`).join("");
