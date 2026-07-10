@@ -801,6 +801,26 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 **Mẹo đề ✓:** Immersive simulate trước build → VR · Overlay trên site thật → AR · Tech hỗ trợ clarity — governance vẫn cần  
 **Bẫy ✗:** Chọn vì “cool” · VR thay prototype validate behavior
 
+### Project Canvas
+| | |
+|---|---|
+| **Nghĩa** | **Khung trực quan một trang** — align thông tin cốt lõi dự án nhanh |
+| **PMBOK 8** | Tool & Technique · Governance · p.189 |
+| **Process** | Initiate Project or Phase (G1) · Integrate and Align Project Plans (G2) |
+| **≠ Charter** | Canvas = collaborative alignment · Charter = formal authorization |
+| **≠ BMC** | Business Model Canvas ≠ Project Canvas |
+
+**9 ô — 3 hàng:**
+| Hàng | Ô |
+|------|---|
+| **Strategy** | Purpose · Objectives (SMART) · Stakeholders |
+| **Delivery** | Scope · Schedule · Budget |
+| **Feasibility & Control** | Risks · Financial analysis · Governance |
+
+**Khi dùng:** Initiation workshop · misalignment sớm · trước charter/PMP chi tiết
+
+**Bẫy ✗:** Canvas thay charter · WBS/baseline chi tiết trong canvas · Skip alignment
+
 ---
 
 ## 9. Governance & Quality
@@ -1090,6 +1110,8 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | immersive walkthrough, simulate before build | **Virtual reality (VR)** |
 | overlay model on site, inspect as-built | **Augmented reality (AR)** |
 | emerging technology, leverage technology | Support value — governance vẫn cần |
+| project canvas, alignment session initiation | Single-page align — trước charter |
+| stakeholder misalignment early, kickoff workshop | Facilitate project canvas |
 | context cues, hierarchy, indirect communication | Cultural awareness — adjust engagement |
 | differing communication styles, multi-country | Cultural awareness — read context cues |
 | social cues, read the room | EI · stakeholder engagement |
