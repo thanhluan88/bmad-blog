@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -65,7 +65,7 @@
     /* ITTO Cards */
     .itto-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.75rem; overflow: hidden; box-shadow: 0 1px 3px rgba(15,23,42,0.05); }
     .itto-card-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.85rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-    .process-num { font-size: 0.7rem; color: var(--muted); font-weight: 700; background: var(--bg); padding: 0.1rem 0.35rem; border-radius: 4px; white-space: nowrap; }
+    .process-num { font-size: 0.7rem; color: var(--muted); font-weight: 700; background: var(--bg); padding: 0.1rem 0.35rem; border-radius: 4px; white-space: nowrap; scroll-margin-top: 0.5rem; }
     .process-name { font-size: 0.88rem; font-weight: 700; flex: 1; min-width: 0; }
     .phase-badge { font-size: 0.65rem; padding: 0.18rem 0.5rem; border-radius: 99px; font-weight: 600; white-space: nowrap; color: #fff; }
     .phase-init  { background: #1e40af; }
@@ -183,7 +183,7 @@
         <!-- G1 -->
         <div class="itto-card card-gov">
           <div class="itto-card-header" style="background:var(--gov-bg);">
-            <span class="process-num">G1</span>
+            <span class="process-num" id="p-initiate-project">G1</span>
             <span class="process-name">Initiate Project or Phase</span>
             <span class="phase-badge phase-init">Initiating</span>
           </div>
@@ -221,7 +221,7 @@
         <!-- G2 -->
         <div class="itto-card card-gov">
           <div class="itto-card-header" style="background:var(--gov-bg);">
-            <span class="process-num">G2</span>
+            <span class="process-num" id="p-integrate-align-plans">G2</span>
             <span class="process-name">Integrate and Align Project Plans</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -257,7 +257,7 @@
         <!-- G3 -->
         <div class="itto-card card-gov">
           <div class="itto-card-header" style="background:var(--gov-bg);">
-            <span class="process-num">G3</span>
+            <span class="process-num" id="p-plan-sourcing">G3</span>
             <span class="process-name">Plan Sourcing Strategy</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -296,7 +296,7 @@
         <!-- G4 -->
         <div class="itto-card card-gov">
           <div class="itto-card-header" style="background:var(--gov-bg);">
-            <span class="process-num">G4</span>
+            <span class="process-num" id="p-manage-execution">G4</span>
             <span class="process-name">Manage Project Execution</span>
             <span class="phase-badge phase-exec">Executing</span>
           </div>
@@ -337,7 +337,7 @@
         <!-- G5 -->
         <div class="itto-card card-gov">
           <div class="itto-card-header" style="background:var(--gov-bg);">
-            <span class="process-num">G5</span>
+            <span class="process-num" id="p-manage-quality">G5</span>
             <span class="process-name">Manage Quality Assurance</span>
             <span class="phase-badge phase-exec">Executing</span>
           </div>
@@ -376,7 +376,7 @@
         <!-- G6 -->
         <div class="itto-card card-gov">
           <div class="itto-card-header" style="background:var(--gov-bg);">
-            <span class="process-num">G6</span>
+            <span class="process-num" id="p-manage-knowledge">G6</span>
             <span class="process-name">Manage Project Knowledge</span>
             <span class="phase-badge phase-exec">Executing</span>
           </div>
@@ -418,7 +418,7 @@
         <!-- G7 -->
         <div class="itto-card card-gov">
           <div class="itto-card-header" style="background:var(--gov-bg);">
-            <span class="process-num">G7</span>
+            <span class="process-num" id="p-monitor-performance">G7</span>
             <span class="process-name">Monitor and Control Project Performance</span>
             <span class="phase-badge phase-mc">M&amp;C</span>
           </div>
@@ -461,7 +461,7 @@
         <!-- G8 -->
         <div class="itto-card card-gov">
           <div class="itto-card-header" style="background:var(--gov-bg);">
-            <span class="process-num">G8</span>
+            <span class="process-num" id="p-assess-changes">G8</span>
             <span class="process-name">Assess and Implement Changes</span>
             <span class="phase-badge phase-mc">M&amp;C</span>
           </div>
@@ -503,7 +503,7 @@
         <!-- G9 -->
         <div class="itto-card card-gov">
           <div class="itto-card-header" style="background:var(--gov-bg);">
-            <span class="process-num">G9</span>
+            <span class="process-num" id="p-close-project">G9</span>
             <span class="process-name">Close Project or Phase</span>
             <span class="phase-badge phase-close">Closing</span>
           </div>
@@ -552,7 +552,7 @@
         <!-- SH1 -->
         <div class="itto-card card-sh">
           <div class="itto-card-header" style="background:var(--sh-bg);">
-            <span class="process-num">SH1</span>
+            <span class="process-num" id="p-identify-stakeholders">SH1</span>
             <span class="process-name">Identify Stakeholders</span>
             <span class="phase-badge phase-init">Initiating</span>
           </div>
@@ -594,7 +594,7 @@
         <!-- SH2 -->
         <div class="itto-card card-sh">
           <div class="itto-card-header" style="background:var(--sh-bg);">
-            <span class="process-num">SH2</span>
+            <span class="process-num" id="p-plan-stakeholder">SH2</span>
             <span class="process-name">Plan Stakeholder Engagement</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -633,7 +633,7 @@
         <!-- SH3 -->
         <div class="itto-card card-sh">
           <div class="itto-card-header" style="background:var(--sh-bg);">
-            <span class="process-num">SH3</span>
+            <span class="process-num" id="p-plan-communications">SH3</span>
             <span class="process-name">Plan Communications Management</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -674,7 +674,7 @@
         <!-- SH4 -->
         <div class="itto-card card-sh">
           <div class="itto-card-header" style="background:var(--sh-bg);">
-            <span class="process-num">SH4</span>
+            <span class="process-num" id="p-manage-stakeholder">SH4</span>
             <span class="process-name">Manage Stakeholder Engagement</span>
             <span class="phase-badge phase-exec">Executing</span>
           </div>
@@ -711,7 +711,7 @@
         <!-- SH5 -->
         <div class="itto-card card-sh">
           <div class="itto-card-header" style="background:var(--sh-bg);">
-            <span class="process-num">SH5</span>
+            <span class="process-num" id="p-manage-communications">SH5</span>
             <span class="process-name">Manage Communications</span>
             <span class="phase-badge phase-exec">Executing</span>
           </div>
@@ -752,7 +752,7 @@
         <!-- SH6 -->
         <div class="itto-card card-sh">
           <div class="itto-card-header" style="background:var(--sh-bg);">
-            <span class="process-num">SH6</span>
+            <span class="process-num" id="p-monitor-stakeholder">SH6</span>
             <span class="process-name">Monitor Stakeholder Engagement</span>
             <span class="phase-badge phase-mc">M&amp;C</span>
           </div>
@@ -793,7 +793,7 @@
         <!-- SH7 -->
         <div class="itto-card card-sh">
           <div class="itto-card-header" style="background:var(--sh-bg);">
-            <span class="process-num">SH7</span>
+            <span class="process-num" id="p-monitor-communications">SH7</span>
             <span class="process-name">Monitor Communications</span>
             <span class="phase-badge phase-mc">M&amp;C</span>
           </div>
@@ -842,7 +842,7 @@
         <!-- SC1 -->
         <div class="itto-card card-scope">
           <div class="itto-card-header" style="background:var(--scope-bg);">
-            <span class="process-num">SC1</span>
+            <span class="process-num" id="p-plan-scope">SC1</span>
             <span class="process-name">Plan Scope Management</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -878,7 +878,7 @@
         <!-- SC2 -->
         <div class="itto-card card-scope">
           <div class="itto-card-header" style="background:var(--scope-bg);">
-            <span class="process-num">SC2</span>
+            <span class="process-num" id="p-elicit-requirements">SC2</span>
             <span class="process-name">Elicit and Analyze Requirements</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -919,7 +919,7 @@
         <!-- SC3 -->
         <div class="itto-card card-scope">
           <div class="itto-card-header" style="background:var(--scope-bg);">
-            <span class="process-num">SC3</span>
+            <span class="process-num" id="p-define-scope">SC3</span>
             <span class="process-name">Define Scope</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -959,7 +959,7 @@
         <!-- SC4 -->
         <div class="itto-card card-scope">
           <div class="itto-card-header" style="background:var(--scope-bg);">
-            <span class="process-num">SC4</span>
+            <span class="process-num" id="p-develop-scope-structure">SC4</span>
             <span class="process-name">Develop Scope Structure</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -995,7 +995,7 @@
         <!-- SC5 -->
         <div class="itto-card card-scope">
           <div class="itto-card-header" style="background:var(--scope-bg);">
-            <span class="process-num">SC5</span>
+            <span class="process-num" id="p-monitor-scope">SC5</span>
             <span class="process-name">Monitor and Control Scope</span>
             <span class="phase-badge phase-mc">M&amp;C</span>
           </div>
@@ -1038,7 +1038,7 @@
         <!-- SC6 -->
         <div class="itto-card card-scope">
           <div class="itto-card-header" style="background:var(--scope-bg);">
-            <span class="process-num">SC6</span>
+            <span class="process-num" id="p-validate-scope">SC6</span>
             <span class="process-name">Validate Scope</span>
             <span class="phase-badge phase-mc">M&amp;C</span>
           </div>
@@ -1087,7 +1087,7 @@
         <!-- R1 -->
         <div class="itto-card card-res">
           <div class="itto-card-header" style="background:var(--res-bg);">
-            <span class="process-num">R1</span>
+            <span class="process-num" id="p-plan-resources">R1</span>
             <span class="process-name">Plan Resource Management</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -1129,7 +1129,7 @@
         <!-- R2 -->
         <div class="itto-card card-res">
           <div class="itto-card-header" style="background:var(--res-bg);">
-            <span class="process-num">R2</span>
+            <span class="process-num" id="p-estimate-resources">R2</span>
             <span class="process-name">Estimate Resources</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -1174,7 +1174,7 @@
         <!-- R3 -->
         <div class="itto-card card-res">
           <div class="itto-card-header" style="background:var(--res-bg);">
-            <span class="process-num">R3</span>
+            <span class="process-num" id="p-acquire-resources">R3</span>
             <span class="process-name">Acquire Resources</span>
             <span class="phase-badge phase-exec">Executing</span>
           </div>
@@ -1216,7 +1216,7 @@
         <!-- R4 -->
         <div class="itto-card card-res">
           <div class="itto-card-header" style="background:var(--res-bg);">
-            <span class="process-num">R4</span>
+            <span class="process-num" id="p-lead-team">R4</span>
             <span class="process-name">Lead the Team</span>
             <span class="phase-badge phase-exec">Executing</span>
           </div>
@@ -1263,7 +1263,7 @@
         <!-- R5 -->
         <div class="itto-card card-res">
           <div class="itto-card-header" style="background:var(--res-bg);">
-            <span class="process-num">R5</span>
+            <span class="process-num" id="p-monitor-resourcing">R5</span>
             <span class="process-name">Monitor and Control Resourcing</span>
             <span class="phase-badge phase-mc">M&amp;C</span>
           </div>
@@ -1315,7 +1315,7 @@
         <!-- SCH1 -->
         <div class="itto-card card-sched">
           <div class="itto-card-header" style="background:var(--sched-bg);">
-            <span class="process-num">SCH1</span>
+            <span class="process-num" id="p-plan-schedule">SCH1</span>
             <span class="process-name">Plan Schedule Management</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -1349,7 +1349,7 @@
         <!-- SCH2 -->
         <div class="itto-card card-sched">
           <div class="itto-card-header" style="background:var(--sched-bg);">
-            <span class="process-num">SCH2</span>
+            <span class="process-num" id="p-develop-schedule">SCH2</span>
             <span class="process-name">Develop Schedule</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -1400,7 +1400,7 @@
         <!-- SCH3 -->
         <div class="itto-card card-sched">
           <div class="itto-card-header" style="background:var(--sched-bg);">
-            <span class="process-num">SCH3</span>
+            <span class="process-num" id="p-monitor-schedule">SCH3</span>
             <span class="process-name">Monitor and Control Schedule</span>
             <span class="phase-badge phase-mc">M&amp;C</span>
           </div>
@@ -1453,7 +1453,7 @@
         <!-- F1 -->
         <div class="itto-card card-fin">
           <div class="itto-card-header" style="background:var(--fin-bg);">
-            <span class="process-num">F1</span>
+            <span class="process-num" id="p-plan-finance">F1</span>
             <span class="process-name">Plan Financial Management</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -1489,7 +1489,7 @@
         <!-- F2 -->
         <div class="itto-card card-fin">
           <div class="itto-card-header" style="background:var(--fin-bg);">
-            <span class="process-num">F2</span>
+            <span class="process-num" id="p-estimate-costs">F2</span>
             <span class="process-name">Estimate Costs</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -1532,7 +1532,7 @@
         <!-- F3 -->
         <div class="itto-card card-fin">
           <div class="itto-card-header" style="background:var(--fin-bg);">
-            <span class="process-num">F3</span>
+            <span class="process-num" id="p-develop-budget">F3</span>
             <span class="process-name">Develop Budget</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -1571,7 +1571,7 @@
         <!-- F4 -->
         <div class="itto-card card-fin">
           <div class="itto-card-header" style="background:var(--fin-bg);">
-            <span class="process-num">F4</span>
+            <span class="process-num" id="p-monitor-finances">F4</span>
             <span class="process-name">Monitor and Control Finances</span>
             <span class="phase-badge phase-mc">M&amp;C</span>
           </div>
@@ -1619,7 +1619,7 @@
         <!-- RI1 -->
         <div class="itto-card card-risk">
           <div class="itto-card-header" style="background:var(--risk-bg);">
-            <span class="process-num">RI1</span>
+            <span class="process-num" id="p-plan-risk">RI1</span>
             <span class="process-name">Plan Risk Management</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -1655,7 +1655,7 @@
         <!-- RI2 -->
         <div class="itto-card card-risk">
           <div class="itto-card-header" style="background:var(--risk-bg);">
-            <span class="process-num">RI2</span>
+            <span class="process-num" id="p-identify-risks">RI2</span>
             <span class="process-name">Identify Risks</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -1696,7 +1696,7 @@
         <!-- RI3 -->
         <div class="itto-card card-risk">
           <div class="itto-card-header" style="background:var(--risk-bg);">
-            <span class="process-num">RI3</span>
+            <span class="process-num" id="p-risk-analysis">RI3</span>
             <span class="process-name">Perform Risk Analysis</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -1733,7 +1733,7 @@
         <!-- RI4 -->
         <div class="itto-card card-risk">
           <div class="itto-card-header" style="background:var(--risk-bg);">
-            <span class="process-num">RI4</span>
+            <span class="process-num" id="p-plan-risk-responses">RI4</span>
             <span class="process-name">Plan Risk Responses</span>
             <span class="phase-badge phase-plan">Planning</span>
           </div>
@@ -1775,7 +1775,7 @@
         <!-- RI5 -->
         <div class="itto-card card-risk">
           <div class="itto-card-header" style="background:var(--risk-bg);">
-            <span class="process-num">RI5</span>
+            <span class="process-num" id="p-implement-risk-responses">RI5</span>
             <span class="process-name">Implement Risk Responses</span>
             <span class="phase-badge phase-exec">Executing</span>
           </div>
@@ -1809,7 +1809,7 @@
         <!-- RI6 -->
         <div class="itto-card card-risk">
           <div class="itto-card-header" style="background:var(--risk-bg);">
-            <span class="process-num">RI6</span>
+            <span class="process-num" id="p-monitor-risks">RI6</span>
             <span class="process-name">Monitor Risks</span>
             <span class="phase-badge phase-mc">M&amp;C</span>
           </div>
