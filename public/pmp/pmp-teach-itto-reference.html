@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMBOK 8 — ITTO Reference (40 Processes)</title>
+  <style>
+    :root {
+      --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
+      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
+      --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
+      --gov: #2563eb;    --gov-bg: #eff6ff;    --gov-bd: #bfdbfe;
+      --scope: #059669;  --scope-bg: #ecfdf5;  --scope-bd: #a7f3d0;
+      --sched: #d97706;  --sched-bg: #fffbeb;  --sched-bd: #fde68a;
+      --fin: #ca8a04;    --fin-bg: #fefce8;    --fin-bd: #fef08a;
+      --sh: #7c3aed;     --sh-bg: #f5f3ff;     --sh-bd: #ddd6fe;
+      --res: #0891b2;    --res-bg: #ecfeff;    --res-bd: #a5f3fc;
+      --risk: #dc2626;   --risk-bg: #fef2f2;   --risk-bd: #fecaca;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; width: 100%; min-height: 100dvh; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: 100dvh; width: 100%; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } .mobile-nav { display: flex !important; } }
+
+    /* Sidebar */
+    .sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--card); border-right: 1px solid var(--border); padding: 1.25rem 1rem 2rem; }
+    .sidebar .brand { font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .sidebar .brand-sub { font-size: 0.78rem; color: var(--muted); margin: 0.2rem 0 1rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+    .sidebar nav a { display: block; padding: 0.45rem 0.65rem; color: var(--muted); text-decoration: none; border-radius: 8px; font-size: 0.86rem; margin-bottom: 1px; }
+    .sidebar nav a:hover, .sidebar nav a.active { background: var(--primary-bg); color: var(--primary-dark); }
+    .sidebar nav a.active { font-weight: 600; border-left: 3px solid var(--primary); }
+    .sidebar .nav-group { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
+    .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
+    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
+    .domain-legend { margin-top: 0.4rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.28rem 0.65rem; font-size: 0.8rem; border-radius: 6px; cursor: pointer; transition: background 0.15s; text-decoration: none; color: var(--text); }
+    .legend-item:hover { background: var(--bg); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .legend-count { margin-left: auto; font-size: 0.7rem; color: var(--muted); font-weight: 600; }
+
+    /* Mobile nav */
+    .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
+    .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
+
+    /* Main */
+    main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
+    .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 68ch; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 99px; background: #fff; border: 1px solid var(--border); color: var(--primary-dark); font-weight: 500; }
+    .search-tip { margin-top: 0.85rem; font-size: 0.83rem; color: #1e40af; background: var(--info-bg); border: 1px solid #bfdbfe; border-radius: 8px; padding: 0.5rem 0.85rem; display: inline-block; }
+    .search-tip kbd { background: #fff; border: 1px solid var(--border); border-radius: 4px; padding: 0.1rem 0.35rem; font-family: Consolas, monospace; font-size: 0.8rem; color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+
+    /* Domain sections */
+    .domain-section { margin-bottom: 3rem; scroll-margin-top: 1rem; }
+    .domain-header { display: flex; align-items: center; gap: 0.75rem; margin: 0 0 1.1rem; padding-bottom: 0.55rem; }
+    .domain-header h2 { margin: 0; font-size: 1.2rem; font-weight: 800; }
+    .d-count { font-size: 0.72rem; padding: 0.2rem 0.65rem; border-radius: 99px; font-weight: 700; color: #fff; }
+    .d-desc { font-size: 0.8rem; color: var(--muted); margin: 0 0 1rem; }
+
+    /* ITTO Cards */
+    .itto-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.75rem; overflow: hidden; box-shadow: 0 1px 3px rgba(15,23,42,0.05); }
+    .itto-card-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.85rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .process-num { font-size: 0.7rem; color: var(--muted); font-weight: 700; background: var(--bg); padding: 0.1rem 0.35rem; border-radius: 4px; white-space: nowrap; }
+    .process-name { font-size: 0.88rem; font-weight: 700; flex: 1; min-width: 0; }
+    .phase-badge { font-size: 0.65rem; padding: 0.18rem 0.5rem; border-radius: 99px; font-weight: 600; white-space: nowrap; color: #fff; }
+    .phase-init  { background: #1e40af; }
+    .phase-plan  { background: #166534; }
+    .phase-exec  { background: #92400e; }
+    .phase-mc    { background: #6b21a8; }
+    .phase-close { background: #be123c; }
+
+    .itto-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+    .itto-col { padding: 0.6rem 0.75rem; border-right: 1px solid var(--border); min-width: 0; }
+    .itto-col:last-child { border-right: none; }
+    .itto-col-header { font-size: 0.67rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.38rem; padding-bottom: 0.28rem; border-bottom-width: 1.5px; border-bottom-style: solid; }
+    .itto-items { list-style: none; margin: 0; padding: 0; font-size: 0.74rem; line-height: 1.45; }
+    .itto-items li { margin-bottom: 0.15rem; padding-left: 0.75rem; position: relative; }
+    .itto-items li::before { content: "\00B7"; position: absolute; left: 0.1rem; color: var(--muted); font-weight: 900; font-size: 1rem; line-height: 1.3; }
+    .itto-items .note { font-size: 0.68rem; color: var(--muted); }
+
+    /* Domain left-border accent */
+    .card-gov   { border-left: 3px solid var(--gov); }
+    .card-sh    { border-left: 3px solid var(--sh); }
+    .card-scope { border-left: 3px solid var(--scope); }
+    .card-res   { border-left: 3px solid var(--res); }
+    .card-sched { border-left: 3px solid var(--sched); }
+    .card-fin   { border-left: 3px solid var(--fin); }
+    .card-risk  { border-left: 3px solid var(--risk); }
+
+    @media (max-width: 680px) {
+      .itto-grid { grid-template-columns: 1fr; }
+      .itto-col { border-right: none; border-bottom: 1px solid var(--border); }
+      .itto-col:last-child { border-bottom: none; }
+    }
+
+    .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
+    .ref-footer a { color: var(--primary-dark); }
+  </style>
+  <link rel="stylesheet" href="pmp-teach-fullscreen.css">
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">PMBOK 8 Teach</div>
+    <div class="brand-sub">ITTO Reference — 40 Processes</div>
+    <nav id="sideNav">
+      <a href="#intro" class="active">Giới thiệu</a>
+      <div class="nav-group">7 Performance Domains</div>
+      <a href="#gov">Governance (9)</a>
+      <a href="#sh">Stakeholders (7)</a>
+      <a href="#scope">Scope (6)</a>
+      <a href="#res">Resources (5)</a>
+      <a href="#sched">Schedule (3)</a>
+      <a href="#fin">Finance (4)</a>
+      <a href="#risk">Risk (6)</a>
+    </nav>
+
+    <div class="nav-group">Domain Colors</div>
+    <div class="domain-legend">
+      <a class="legend-item" href="#gov"><div class="legend-dot" style="background:var(--gov)"></div>Governance<span class="legend-count">9</span></a>
+      <a class="legend-item" href="#sh"><div class="legend-dot" style="background:var(--sh)"></div>Stakeholders<span class="legend-count">7</span></a>
+      <a class="legend-item" href="#scope"><div class="legend-dot" style="background:var(--scope)"></div>Scope<span class="legend-count">6</span></a>
+      <a class="legend-item" href="#res"><div class="legend-dot" style="background:var(--res)"></div>Resources<span class="legend-count">5</span></a>
+      <a class="legend-item" href="#sched"><div class="legend-dot" style="background:var(--sched)"></div>Schedule<span class="legend-count">3</span></a>
+      <a class="legend-item" href="#fin"><div class="legend-dot" style="background:var(--fin)"></div>Finance<span class="legend-count">4</span></a>
+      <a class="legend-item" href="#risk"><div class="legend-dot" style="background:var(--risk)"></div>Risk<span class="legend-count">6</span></a>
+    </div>
+
+    <a class="back-link secondary" href="pmp-teach-process-matrix.html">← Process Matrix</a>
+    <a class="back-link" href="pmp-exam-prep-lecture.html">← Bài giảng PMP</a>
+    <a class="back-link secondary" href="/p/pmp">← Blog PMP</a>
+  </aside>
+
+  <div>
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav">
+      <a href="/p/pmp">← Blog</a>
+      <a href="#gov">Governance</a>
+      <a href="#sh">Stakeholders</a>
+      <a href="#scope">Scope</a>
+      <a href="#res">Resources</a>
+      <a href="#sched">Schedule</a>
+      <a href="#fin">Finance</a>
+      <a href="#risk">Risk</a>
+    </nav>
+
+    <main>
+
+      <!-- HERO -->
+      <header class="hero" id="intro">
+        <h1>PMBOK 8 — ITTO Reference: 40 Processes</h1>
+        <p class="lead">
+          Tham chiếu đầy đủ ITTO cho tất cả <strong>40 processes</strong> trong <strong>7 Performance Domains</strong>
+          của PMBOK Guide 8th Edition. Mỗi thẻ hiển thị 3 cột:
+          <em>Đầu vào | Công cụ &amp; Kỹ thuật | Kết quả đầu ra</em>.
+        </p>
+        <div class="badges">
+          <span class="badge">PMBOK Guide 8th Ed</span>
+          <span class="badge">40 Processes</span>
+          <span class="badge">7 Performance Domains</span>
+          <span class="badge">5 Process Groups</span>
+        </div>
+        <div class="search-tip">
+          Dùng <kbd>Ctrl+F</kbd> để tìm kiếm process, tool, hoặc output bất kỳ trên trang này
+        </div>
+      </header>
+
+      <!-- ==================== GOVERNANCE ==================== -->
+      <section class="domain-section" id="gov">
+        <div class="domain-header" style="border-bottom: 3px solid var(--gov);">
+          <h2 style="color:var(--gov);">Governance</h2>
+          <span class="d-count" style="background:var(--gov);">9 processes</span>
+        </div>
+        <p class="d-desc">Span toàn bộ lifecycle: Initiating → Planning → Executing → M&amp;C → Closing. Tích hợp Quality Assurance và Sourcing từ PMBOK 6.</p>
+
+        <!-- G1 -->
+        <div class="itto-card card-gov">
+          <div class="itto-card-header" style="background:var(--gov-bg);">
+            <span class="process-num">G1</span>
+            <span class="process-name">Initiate Project or Phase</span>
+            <span class="phase-badge phase-init">Initiating</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Đầu vào (Inputs)</div>
+              <ul class="itto-items">
+                <li>Business documents <span class="note">(Business case, Benefits mgmt plan)</span></li>
+                <li>Agreements</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data gathering <span class="note">(Brainstorming, Focus groups, Interviews)</span></li>
+                <li>Interpersonal &amp; team skills <span class="note">(Conflict mgmt, Facilitation, Meeting mgmt)</span></li>
+                <li>Meetings</li>
+                <li>Responsibility assignment matrix</li>
+                <li>Project canvas</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Kết quả đầu ra (Outputs)</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Assumption log</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- G2 -->
+        <div class="itto-card card-gov">
+          <div class="itto-card-header" style="background:var(--gov-bg);">
+            <span class="process-num">G2</span>
+            <span class="process-name">Integrate and Align Project Plans</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Outputs from other processes</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data gathering <span class="note">(Brainstorming, Checklists, Focus groups, Interviews)</span></li>
+                <li>Interpersonal &amp; team skills <span class="note">(Conflict mgmt, Facilitation, Meeting mgmt)</span></li>
+                <li>Meetings</li>
+                <li>Project canvas</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Project management plan</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- G3 -->
+        <div class="itto-card card-gov">
+          <div class="itto-card-header" style="background:var(--gov-bg);">
+            <span class="process-num">G3</span>
+            <span class="process-name">Plan Sourcing Strategy</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Project management plan <span class="note">(Scope mgmt plan, Quality mgmt plan, Scope baseline, Schedule mgmt plan, Financial mgmt plan, Resource mgmt plan)</span></li>
+                <li>Project documents <span class="note">(Milestone list, Requirements docs, RTM, Quality metrics, Resource requirements, Project team assignments, Risk register, Stakeholder register)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Market research</li>
+                <li>Make-or-buy analysis</li>
+                <li>Source selection analysis</li>
+                <li>Document analysis</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Sourcing strategy plan</li>
+                <li>Insourcing/outsourcing decisions</li>
+                <li>Source selection criteria</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- G4 -->
+        <div class="itto-card card-gov">
+          <div class="itto-card-header" style="background:var(--gov-bg);">
+            <span class="process-num">G4</span>
+            <span class="process-name">Manage Project Execution</span>
+            <span class="phase-badge phase-exec">Executing</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Any component)</span></li>
+                <li>Project documents <span class="note">(Change log, Lessons learned register, Milestone list, Project communications, Project schedule, RTM, Risk register, Risk report)</span></li>
+                <li>Approved change requests</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>PMIS</li>
+                <li>Meetings <span class="note">(Daily coordination meetings)</span></li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Deliverables</li>
+                <li>Work performance data</li>
+                <li>Issue log</li>
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates <span class="note">(Activity list, Assumption log, Lessons learned register, Requirements docs, Risk register, Stakeholder register)</span></li>
+                <li>OPA updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- G5 -->
+        <div class="itto-card card-gov">
+          <div class="itto-card-header" style="background:var(--gov-bg);">
+            <span class="process-num">G5</span>
+            <span class="process-name">Manage Quality Assurance</span>
+            <span class="phase-badge phase-exec">Executing</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan</li>
+                <li>Project documents <span class="note">(All components)</span></li>
+                <li>OPA <span class="note">(Policies, Procedures, Regulations)</span></li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Audits</li>
+                <li>Checklists</li>
+                <li>Data representation <span class="note">(Affinity diagrams, Cause-and-effect diagrams, Flowcharts)</span></li>
+                <li>Decision-making</li>
+                <li>Problem-solving</li>
+                <li>Process improvement</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Quality reports</li>
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- G6 -->
+        <div class="itto-card card-gov">
+          <div class="itto-card-header" style="background:var(--gov-bg);">
+            <span class="process-num">G6</span>
+            <span class="process-name">Manage Project Knowledge</span>
+            <span class="phase-badge phase-exec">Executing</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(All components)</span></li>
+                <li>Project documents <span class="note">(Lessons learned register, Project team assignments, Resource breakdown structure, Stakeholder register)</span></li>
+                <li>Deliverables</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Knowledge management</li>
+                <li>Information management</li>
+                <li>After-action reviews</li>
+                <li>In-progress postmortems</li>
+                <li>Storytelling</li>
+                <li>Retrospective meetings</li>
+                <li>Interpersonal &amp; team skills <span class="note">(Active listening, Facilitation, Leadership, Networking, Political awareness)</span></li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Lessons learned register</li>
+                <li>Project management plan updates</li>
+                <li>OPA updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- G7 -->
+        <div class="itto-card card-gov">
+          <div class="itto-card-header" style="background:var(--gov-bg);">
+            <span class="process-num">G7</span>
+            <span class="process-name">Monitor and Control Project Performance</span>
+            <span class="phase-badge phase-mc">M&amp;C</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Any component)</span></li>
+                <li>Project documents <span class="note">(Assumption log, Basis of estimates, Cost forecasts, Issue log, Lessons learned register, Milestone list, Quality reports, Risk register, Risk report, Schedule forecasts)</span></li>
+                <li>Work performance information</li>
+                <li>Agreements</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data analysis <span class="note">(Alternative analysis, Cost-benefit analysis, Earned value analysis, Root cause analysis, Trend analysis, Variance analysis)</span></li>
+                <li>Decision-making <span class="note">(Voting)</span></li>
+                <li>Meetings</li>
+                <li>Project dashboards</li>
+                <li>Visual controls</li>
+                <li>Information radiators</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Work performance reports</li>
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates <span class="note">(Cost forecasts, Issue log, Lessons learned register, Risk register, Schedule forecasts)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- G8 -->
+        <div class="itto-card card-gov">
+          <div class="itto-card-header" style="background:var(--gov-bg);">
+            <span class="process-num">G8</span>
+            <span class="process-name">Assess and Implement Changes</span>
+            <span class="phase-badge phase-mc">M&amp;C</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Change mgmt plan, Configuration mgmt plan, Scope baseline, Schedule baseline, Cost baseline)</span></li>
+                <li>Project documents <span class="note">(Basis of estimates, Change log, RTM, Risk report)</span></li>
+                <li>Work performance reports</li>
+                <li>Change requests</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Change control tools</li>
+                <li>Data analysis <span class="note">(Alternative analysis, Cost-benefit analysis)</span></li>
+                <li>Decision-making <span class="note">(Voting, Autocratic decision-making, Multicriteria decision analysis)</span></li>
+                <li>Meetings</li>
+                <li>Integrated change control</li>
+                <li>Backlog management</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Approved change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates <span class="note">(Change log)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- G9 -->
+        <div class="itto-card card-gov">
+          <div class="itto-card-header" style="background:var(--gov-bg);">
+            <span class="process-num">G9</span>
+            <span class="process-name">Close Project or Phase</span>
+            <span class="phase-badge phase-close">Closing</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Project management plan <span class="note">(All components)</span></li>
+                <li>Project documents <span class="note">(Assumption log, Basis of estimates, Change log, Issue log, Lessons learned register, Milestone list, Project communications, QC measurements, Quality reports, Requirements docs, Risk register, Risk report, Accepted deliverables)</span></li>
+                <li>Business documents <span class="note">(Business case, Benefits mgmt plan)</span></li>
+                <li>Agreements</li>
+                <li>Procurement documentation</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data analysis <span class="note">(Document analysis, Regression analysis, Trend analysis, Variance analysis)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--gov);border-bottom-color:var(--gov-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Project document updates <span class="note">(Lessons learned register)</span></li>
+                <li>Final product/service/result transition</li>
+                <li>Final report</li>
+                <li>OPA updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== STAKEHOLDERS ==================== -->
+      <section class="domain-section" id="sh">
+        <div class="domain-header" style="border-bottom: 3px solid var(--sh);">
+          <h2 style="color:var(--sh);">Stakeholders</h2>
+          <span class="d-count" style="background:var(--sh);">7 processes</span>
+        </div>
+        <p class="d-desc">Bao gồm Communications (tích hợp từ PMBOK 6). Active từ Initiating đến M&amp;C — không có process Closing.</p>
+
+        <!-- SH1 -->
+        <div class="itto-card card-sh">
+          <div class="itto-card-header" style="background:var(--sh-bg);">
+            <span class="process-num">SH1</span>
+            <span class="process-name">Identify Stakeholders</span>
+            <span class="phase-badge phase-init">Initiating</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Business case</li>
+                <li>Benefits management plan</li>
+                <li>Project management plan <span class="note">(Communications mgmt plan, Stakeholder engagement plan)</span></li>
+                <li>Project documents <span class="note">(Change log, Issue log, Requirements docs)</span></li>
+                <li>Agreements</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data gathering <span class="note">(Questionnaires &amp; surveys, Brainstorming)</span></li>
+                <li>Data analysis <span class="note">(Stakeholder analysis, Document analysis)</span></li>
+                <li>Data representation <span class="note">(Stakeholder mapping/representation)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Stakeholder register</li>
+                <li>Change requests</li>
+                <li>Project management plan updates <span class="note">(Requirements mgmt plan, Communications mgmt plan, Risk mgmt plan, Stakeholder engagement plan)</span></li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SH2 -->
+        <div class="itto-card card-sh">
+          <div class="itto-card-header" style="background:var(--sh-bg);">
+            <span class="process-num">SH2</span>
+            <span class="process-name">Plan Stakeholder Engagement</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Project management plan <span class="note">(Resource mgmt plan, Communications mgmt plan, Risk mgmt plan)</span></li>
+                <li>Project documents <span class="note">(Assumption log, Change log, Issue log, Project schedule, Risk register, Stakeholder register)</span></li>
+                <li>Agreements</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data gathering <span class="note">(Benchmarking)</span></li>
+                <li>Data analysis <span class="note">(Assumption &amp; constraint analysis, Root cause analysis)</span></li>
+                <li>Decision-making <span class="note">(Prioritization/ranking)</span></li>
+                <li>Data representation <span class="note">(Mind mapping, Stakeholder engagement assessment matrix)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Project management plan updates <span class="note">(Stakeholder engagement plan)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SH3 -->
+        <div class="itto-card card-sh">
+          <div class="itto-card-header" style="background:var(--sh-bg);">
+            <span class="process-num">SH3</span>
+            <span class="process-name">Plan Communications Management</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Project management plan <span class="note">(Resource mgmt plan, Stakeholder engagement plan)</span></li>
+                <li>Project documents <span class="note">(Requirements docs, Stakeholder register)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Communication requirements analysis</li>
+                <li>Communication technology</li>
+                <li>Communication models</li>
+                <li>Communication methods</li>
+                <li>Interpersonal &amp; team skills <span class="note">(Communication styles assessment, Political awareness, Cultural awareness)</span></li>
+                <li>Data representation <span class="note">(Stakeholder engagement assessment matrix)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Project management plan updates <span class="note">(Communications mgmt plan, Stakeholder engagement plan)</span></li>
+                <li>Project document updates <span class="note">(Project schedule, Stakeholder register)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SH4 -->
+        <div class="itto-card card-sh">
+          <div class="itto-card-header" style="background:var(--sh-bg);">
+            <span class="process-num">SH4</span>
+            <span class="process-name">Manage Stakeholder Engagement</span>
+            <span class="phase-badge phase-exec">Executing</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Communications mgmt plan, Risk mgmt plan, Stakeholder engagement plan, Change mgmt plan)</span></li>
+                <li>Project documents <span class="note">(Change log, Issue log, Lessons learned register, Stakeholder register, Risk register, Status report, Project schedule)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Communication skills <span class="note">(Feedback)</span></li>
+                <li>Interpersonal &amp; team skills <span class="note">(Conflict mgmt, Cultural awareness, Negotiation, Observation/conversation, Political awareness, Ground rules)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates <span class="note">(Change log, Issue log, Lessons learned register, Stakeholder register)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SH5 -->
+        <div class="itto-card card-sh">
+          <div class="itto-card-header" style="background:var(--sh-bg);">
+            <span class="process-num">SH5</span>
+            <span class="process-name">Manage Communications</span>
+            <span class="phase-badge phase-exec">Executing</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Resource mgmt plan, Communications mgmt plan, Stakeholder engagement plan)</span></li>
+                <li>Project documents <span class="note">(Change log, Issue log, Lessons learned register, Quality report, Risk report, Stakeholder register)</span></li>
+                <li>Work performance reports</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Communication technology</li>
+                <li>Communication methods</li>
+                <li>Communication skills <span class="note">(Communication competence, Feedback, Nonverbal, Presentations)</span></li>
+                <li>PMIS</li>
+                <li>Project reporting</li>
+                <li>Interpersonal &amp; team skills <span class="note">(Active listening, Conflict mgmt, Cultural awareness, Meeting mgmt, Networking, Political awareness)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Project communications</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SH6 -->
+        <div class="itto-card card-sh">
+          <div class="itto-card-header" style="background:var(--sh-bg);">
+            <span class="process-num">SH6</span>
+            <span class="process-name">Monitor Stakeholder Engagement</span>
+            <span class="phase-badge phase-mc">M&amp;C</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Resource mgmt plan, Communications mgmt plan, Stakeholder engagement plan)</span></li>
+                <li>Project documents <span class="note">(Issue log, Lessons learned register, Project communications, Risk register, Stakeholder register)</span></li>
+                <li>Work performance data</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Data analysis <span class="note">(Alternative analysis, Root cause analysis, Stakeholder analysis)</span></li>
+                <li>Decision-making <span class="note">(Multicriteria decision analysis, Voting)</span></li>
+                <li>Data representation <span class="note">(Stakeholder engagement assessment matrix)</span></li>
+                <li>Communication skills <span class="note">(Feedback, Presentations)</span></li>
+                <li>Interpersonal &amp; team skills <span class="note">(Active listening, Cultural awareness, Leadership, Networking, Political awareness)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Work performance information</li>
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SH7 -->
+        <div class="itto-card card-sh">
+          <div class="itto-card-header" style="background:var(--sh-bg);">
+            <span class="process-num">SH7</span>
+            <span class="process-name">Monitor Communications</span>
+            <span class="phase-badge phase-mc">M&amp;C</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Resource mgmt plan, Communications mgmt plan, Stakeholder engagement plan)</span></li>
+                <li>Project documents <span class="note">(Issue log, Lessons learned register, Project communications)</span></li>
+                <li>Work performance data</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>PMIS</li>
+                <li>Data representation <span class="note">(Stakeholder engagement assessment matrix)</span></li>
+                <li>Interpersonal &amp; team skills <span class="note">(Observation/conversation)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sh);border-bottom-color:var(--sh-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Work performance information</li>
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SCOPE ==================== -->
+      <section class="domain-section" id="scope">
+        <div class="domain-header" style="border-bottom: 3px solid var(--scope);">
+          <h2 style="color:var(--scope);">Scope</h2>
+          <span class="d-count" style="background:var(--scope);">6 processes</span>
+        </div>
+        <p class="d-desc">4 processes ở Planning, 2 ở M&amp;C. Không có Executing hay Closing.</p>
+
+        <!-- SC1 -->
+        <div class="itto-card card-scope">
+          <div class="itto-card-header" style="background:var(--scope-bg);">
+            <span class="process-num">SC1</span>
+            <span class="process-name">Plan Scope Management</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Project management plan</li>
+                <li>Project documents <span class="note">(Requirements docs, Risk register, Stakeholder register)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data gathering <span class="note">(Interviews, Focus groups, Questionnaires &amp; surveys)</span></li>
+                <li>Data analysis</li>
+                <li>Test and inspection planning</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Project management plan updates <span class="note">(Scope mgmt plan, Requirements mgmt plan, Quality mgmt plan)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SC2 -->
+        <div class="itto-card card-scope">
+          <div class="itto-card-header" style="background:var(--scope-bg);">
+            <span class="process-num">SC2</span>
+            <span class="process-name">Elicit and Analyze Requirements</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Agreements</li>
+                <li>Business case</li>
+                <li>Project documents <span class="note">(Assumption log, Lessons learned register, Stakeholder register)</span></li>
+                <li>Project management plan <span class="note">(Requirements mgmt plan, Scope mgmt plan)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Decision-making</li>
+                <li>Data gathering <span class="note">(Benchmarking, Brainstorming, Focus groups, Interviews, Questionnaires &amp; surveys)</span></li>
+                <li>Data analysis <span class="note">(Document analysis)</span></li>
+                <li>Data representation</li>
+                <li>Interpersonal &amp; team skills <span class="note">(Nominal group, Design thinking, Prioritization/ranking)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Requirements documentation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SC3 -->
+        <div class="itto-card card-scope">
+          <div class="itto-card-header" style="background:var(--scope-bg);">
+            <span class="process-num">SC3</span>
+            <span class="process-name">Define Scope</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Assumption log</li>
+                <li>Project management plan</li>
+                <li>Requirements documentation</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Decision-making</li>
+                <li>Data analysis</li>
+                <li>Decomposition</li>
+                <li>Interpersonal &amp; team skills <span class="note">(Facilitation)</span></li>
+                <li>Product analysis</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Project scope statement</li>
+                <li>Requirements documentation <span class="note">(updates)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SC4 -->
+        <div class="itto-card card-scope">
+          <div class="itto-card-header" style="background:var(--scope-bg);">
+            <span class="process-num">SC4</span>
+            <span class="process-name">Develop Scope Structure</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan</li>
+                <li>Project documents <span class="note">(Project scope statement, Requirements docs, Approved changes)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Brainstorming</li>
+                <li>Decomposition</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Scope baseline <span class="note">(WBS, WBS dictionary)</span></li>
+                <li>User stories</li>
+                <li>Product backlog</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SC5 -->
+        <div class="itto-card card-scope">
+          <div class="itto-card-header" style="background:var(--scope-bg);">
+            <span class="process-num">SC5</span>
+            <span class="process-name">Monitor and Control Scope</span>
+            <span class="phase-badge phase-mc">M&amp;C</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Scope mgmt plan, Quality mgmt plan)</span></li>
+                <li>Project documents <span class="note">(Requirements docs, Performance measurement baseline, Quality test &amp; evaluation docs, Quality metrics, Approved change requests, Deliverables)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Data analysis <span class="note">(Variance analysis, Trend analysis, Root cause analysis)</span></li>
+                <li>Performance reviews</li>
+                <li>Audits and inspections</li>
+                <li>Testing/product evaluations</li>
+                <li>Data representations</li>
+                <li>Process automations</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Quality reports</li>
+                <li>Verified deliverables</li>
+                <li>Change requests</li>
+                <li>QC measurements</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+                <li>Work performance information</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SC6 -->
+        <div class="itto-card card-scope">
+          <div class="itto-card-header" style="background:var(--scope-bg);">
+            <span class="process-num">SC6</span>
+            <span class="process-name">Validate Scope</span>
+            <span class="phase-badge phase-mc">M&amp;C</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project documents <span class="note">(Requirements docs, Scope baseline, Quality reports, Work performance data, QC measurements)</span></li>
+                <li>Verified deliverables</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Data gathering</li>
+                <li>Data analysis</li>
+                <li>Inspection</li>
+                <li>Decision-making</li>
+                <li>Customer talks and tests</li>
+                <li>Process analysis</li>
+                <li>Review meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--scope);border-bottom-color:var(--scope-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Accepted deliverables</li>
+                <li>Change requests</li>
+                <li>Project document updates <span class="note">(Quality reports, Work performance information, Requirements docs, Lessons learned updates)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== RESOURCES ==================== -->
+      <section class="domain-section" id="res">
+        <div class="domain-header" style="border-bottom: 3px solid var(--res);">
+          <h2 style="color:var(--res);">Resources</h2>
+          <span class="d-count" style="background:var(--res);">5 processes</span>
+        </div>
+        <p class="d-desc">2 Planning, 2 Executing, 1 M&amp;C. "Lead the Team" tích hợp Develop Team + Manage Team của PMBOK 6.</p>
+
+        <!-- R1 -->
+        <div class="itto-card card-res">
+          <div class="itto-card-header" style="background:var(--res-bg);">
+            <span class="process-num">R1</span>
+            <span class="process-name">Plan Resource Management</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Project management plan <span class="note">(Quality mgmt plan, Scope baseline)</span></li>
+                <li>Project documents <span class="note">(Project schedule, Requirements docs, Risk register, Stakeholder register)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data gathering <span class="note">(Interviews)</span></li>
+                <li>Data analysis <span class="note">(SWOT analysis)</span></li>
+                <li>Data representation <span class="note">(Hierarchical charts, RAM, Text-oriented formats)</span></li>
+                <li>Organizational theory</li>
+                <li>Meetings</li>
+                <li>Green human resource management</li>
+                <li>Resource-based view</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Project management plan updates <span class="note">(Resource mgmt plan)</span></li>
+                <li>Team charter</li>
+                <li>Project document updates <span class="note">(Assumption log, Risk register)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- R2 -->
+        <div class="itto-card card-res">
+          <div class="itto-card-header" style="background:var(--res-bg);">
+            <span class="process-num">R2</span>
+            <span class="process-name">Estimate Resources</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Resource mgmt plan, Schedule mgmt plan, Scope baseline)</span></li>
+                <li>Project documents <span class="note">(Activity attributes, Activity list, Assumption log, Cost estimates, Resource calendars, Risk register)</span></li>
+                <li>Project schedule</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Bottom-up estimating</li>
+                <li>Analogous estimating</li>
+                <li>Parametric estimating</li>
+                <li>Data analysis <span class="note">(Alternative analysis)</span></li>
+                <li>PMIS</li>
+                <li>Meetings</li>
+                <li>Data gathering <span class="note">(Interviews)</span></li>
+                <li>AI / Predictive analytics / VR/AR</li>
+                <li>Branch and bound / Genetic algorithms / COCOMO</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Resource requirements</li>
+                <li>Basis of estimates</li>
+                <li>Resource breakdown structure</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- R3 -->
+        <div class="itto-card card-res">
+          <div class="itto-card-header" style="background:var(--res-bg);">
+            <span class="process-num">R3</span>
+            <span class="process-name">Acquire Resources</span>
+            <span class="phase-badge phase-exec">Executing</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Resource mgmt plan, Procurement mgmt plan, Cost baseline)</span></li>
+                <li>Project documents <span class="note">(Project schedule, Resource calendars, Resource requirements, Stakeholder register)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Decision-making <span class="note">(Multicriteria decision analysis)</span></li>
+                <li>Interpersonal &amp; team skills <span class="note">(Negotiation, Problem-solving)</span></li>
+                <li>Preassignment</li>
+                <li>Virtual teams</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Physical/virtual resource assignments</li>
+                <li>Project team assignments</li>
+                <li>Resource calendars</li>
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+                <li>EEF updates</li>
+                <li>OPA updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- R4 -->
+        <div class="itto-card card-res">
+          <div class="itto-card-header" style="background:var(--res-bg);">
+            <span class="process-num">R4</span>
+            <span class="process-name">Lead the Team</span>
+            <span class="phase-badge phase-exec">Executing</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Resource mgmt plan)</span></li>
+                <li>Project documents <span class="note">(Issue log, Lessons learned register, Project schedule, Resource calendars, Team charter, Work performance reports, Project team assignments)</span></li>
+                <li>Team performance assessments</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Colocation / Virtual teams</li>
+                <li>Communication technology</li>
+                <li>Interpersonal &amp; team skills <span class="note">(Conflict mgmt, Influencing, Motivation, Negotiation, Team building)</span></li>
+                <li>Decision-making / Critical thinking</li>
+                <li>Coaching and mentoring / Training</li>
+                <li>Problem-solving / Six Thinking Hats</li>
+                <li>Retrospectives / Recognition &amp; rewards</li>
+                <li>Individual and team assessments</li>
+                <li>Data analysis <span class="note">(SWOT)</span></li>
+                <li>Emotional intelligence / Leadership</li>
+                <li>Tuckman ladder / Servant leadership</li>
+                <li>PMIS / Virtual collaboration tools</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Team performance assessments</li>
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- R5 -->
+        <div class="itto-card card-res">
+          <div class="itto-card-header" style="background:var(--res-bg);">
+            <span class="process-num">R5</span>
+            <span class="process-name">Monitor and Control Resourcing</span>
+            <span class="phase-badge phase-mc">M&amp;C</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Resource mgmt plan)</span></li>
+                <li>Project documents <span class="note">(Issue log, Lessons learned register, Physical/virtual resource assignments, Project schedule, Resource breakdown structure, Risk register)</span></li>
+                <li>Work performance data</li>
+                <li>Agreements</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Data analysis <span class="note">(Alternative analysis, Cost-benefit analysis, Performance reviews, Trend analysis)</span></li>
+                <li>Problem-solving</li>
+                <li>Interpersonal &amp; team skills <span class="note">(Negotiation, Influencing)</span></li>
+                <li>PMIS</li>
+                <li>Value stream mapping</li>
+                <li>Continuous improvement</li>
+                <li>Theory of constraints</li>
+                <li>Control charts / Branch and bound</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--res);border-bottom-color:var(--res-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Work performance information</li>
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SCHEDULE ==================== -->
+      <section class="domain-section" id="sched">
+        <div class="domain-header" style="border-bottom: 3px solid var(--sched);">
+          <h2 style="color:var(--sched);">Schedule</h2>
+          <span class="d-count" style="background:var(--sched);">3 processes</span>
+        </div>
+        <p class="d-desc">2 Planning, 1 M&amp;C. PMBOK 6 had 6 processes — Define/Sequence/Estimate Activities merged into Develop Schedule.</p>
+
+        <!-- SCH1 -->
+        <div class="itto-card card-sched">
+          <div class="itto-card-header" style="background:var(--sched-bg);">
+            <span class="process-num">SCH1</span>
+            <span class="process-name">Plan Schedule Management</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sched);border-bottom-color:var(--sched-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Project management plan <span class="note">(Scope mgmt plan, Development approach)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sched);border-bottom-color:var(--sched-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data analysis <span class="note">(Alternative analysis)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sched);border-bottom-color:var(--sched-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Project management plan updates <span class="note">(Schedule mgmt plan)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCH2 -->
+        <div class="itto-card card-sched">
+          <div class="itto-card-header" style="background:var(--sched-bg);">
+            <span class="process-num">SCH2</span>
+            <span class="process-name">Develop Schedule</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sched);border-bottom-color:var(--sched-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Project management plan <span class="note">(Scope mgmt plan, Development approach)</span></li>
+                <li>Project documents <span class="note">(Activity attributes, Activity list, Assumption log, Basis of estimates, Duration estimates, Lessons learned register, Milestone list, Project schedule network diagrams, Project team assignments, Resource calendars, Resource requirements, Risk register)</span></li>
+                <li>Agreements</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sched);border-bottom-color:var(--sched-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Decomposition / Rolling wave planning</li>
+                <li>Precedence diagramming method</li>
+                <li>Logical relationship / Leads and lags</li>
+                <li>Dependency determination</li>
+                <li>Estimation techniques / Reserve analysis</li>
+                <li>Data analysis <span class="note">(What-if analysis, Simulation, Alternative analysis)</span></li>
+                <li>Schedule network analysis</li>
+                <li>Schedule compression</li>
+                <li>Critical path method / Critical chain method</li>
+                <li>Resource optimization</li>
+                <li>PMIS / Agile release planning</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sched);border-bottom-color:var(--sched-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Schedule baseline</li>
+                <li>Project schedule</li>
+                <li>Schedule data</li>
+                <li>Project calendars</li>
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCH3 -->
+        <div class="itto-card card-sched">
+          <div class="itto-card-header" style="background:var(--sched-bg);">
+            <span class="process-num">SCH3</span>
+            <span class="process-name">Monitor and Control Schedule</span>
+            <span class="phase-badge phase-mc">M&amp;C</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sched);border-bottom-color:var(--sched-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Schedule mgmt plan, Scope baseline, Performance measurement baseline)</span></li>
+                <li>Product backlog</li>
+                <li>Project documents <span class="note">(Lessons learned register, Project calendars, Project schedule, Resource calendars, Risk register, Schedule data)</span></li>
+                <li>Work performance data</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sched);border-bottom-color:var(--sched-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Data analysis <span class="note">(Earned value analysis, Burnup/burndown chart, Performance reviews, Trend analysis, Variance analysis, What-if scenario analysis, Critical path method, Critical chain method)</span></li>
+                <li>PMIS</li>
+                <li>Resource optimization</li>
+                <li>Leads and lags / Schedule compression</li>
+                <li>Branch and bound / Velocity</li>
+                <li>Daily coordination meetings</li>
+                <li>Sprint reviews / Backlog refinement</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--sched);border-bottom-color:var(--sched-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Work performance information</li>
+                <li>Schedule forecasts</li>
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== FINANCE ==================== -->
+      <section class="domain-section" id="fin">
+        <div class="domain-header" style="border-bottom: 3px solid var(--fin);">
+          <h2 style="color:var(--fin);">Finance</h2>
+          <span class="d-count" style="background:var(--fin);">4 processes</span>
+        </div>
+        <p class="d-desc">3 Planning, 1 M&amp;C. Renamed from "Cost Management" in PMBOK 6. Added "Plan Financial Management".</p>
+
+        <!-- F1 -->
+        <div class="itto-card card-fin">
+          <div class="itto-card-header" style="background:var(--fin-bg);">
+            <span class="process-num">F1</span>
+            <span class="process-name">Plan Financial Management</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Project management plan <span class="note">(Schedule mgmt plan, Risk mgmt plan)</span></li>
+                <li>Project documents</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data analysis <span class="note">(Alternative analysis)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Financial management plan</li>
+                <li>Funding strategy</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- F2 -->
+        <div class="itto-card card-fin">
+          <div class="itto-card-header" style="background:var(--fin-bg);">
+            <span class="process-num">F2</span>
+            <span class="process-name">Estimate Costs</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Quality mgmt plan, Scope baseline)</span></li>
+                <li>Project documents <span class="note">(Lessons learned register, Project schedule, Resource requirements, Risk register)</span></li>
+                <li>Make-or-buy decisions</li>
+                <li>Work package estimation</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Analogous estimating</li>
+                <li>Parametric estimating</li>
+                <li>Bottom-up estimating</li>
+                <li>Multipoint estimating</li>
+                <li>Data analysis <span class="note">(Alternative analysis, Reserve analysis, Cost of quality)</span></li>
+                <li>PMIS</li>
+                <li>Decision-making <span class="note">(Voting)</span></li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Cost estimates</li>
+                <li>Basis of estimates</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- F3 -->
+        <div class="itto-card card-fin">
+          <div class="itto-card-header" style="background:var(--fin-bg);">
+            <span class="process-num">F3</span>
+            <span class="process-name">Develop Budget</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Financial mgmt plan, Resource mgmt plan, Scope baseline)</span></li>
+                <li>Project documents <span class="note">(Basis of estimates, Cost estimates, Project schedule, Risk register)</span></li>
+                <li>Business documents <span class="note">(Business case, Benefits mgmt plan)</span></li>
+                <li>Agreements</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Cost aggregation</li>
+                <li>Data analysis <span class="note">(Reserve analysis, Historical information review, Funding limit reconciliation)</span></li>
+                <li>Financing</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Cost baseline</li>
+                <li>Project funding requirements</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- F4 -->
+        <div class="itto-card card-fin">
+          <div class="itto-card-header" style="background:var(--fin-bg);">
+            <span class="process-num">F4</span>
+            <span class="process-name">Monitor and Control Finances</span>
+            <span class="phase-badge phase-mc">M&amp;C</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Financial mgmt plan, Cost baseline, Performance measurement baseline)</span></li>
+                <li>Project documents <span class="note">(Lessons learned register, Project funding requirements)</span></li>
+                <li>Work performance data</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data analysis <span class="note">(Earned value analysis, Trend analysis, Reserve analysis, TCPI — To-Complete Performance Index)</span></li>
+                <li>PMIS</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--fin);border-bottom-color:var(--fin-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Work performance information</li>
+                <li>Revenue and cost forecasts</li>
+                <li>Change requests</li>
+                <li>Funding proposals</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== RISK ==================== -->
+      <section class="domain-section" id="risk">
+        <div class="domain-header" style="border-bottom: 3px solid var(--risk);">
+          <h2 style="color:var(--risk);">Risk</h2>
+          <span class="d-count" style="background:var(--risk);">6 processes</span>
+        </div>
+        <p class="d-desc">Most front-loaded domain: 4 Planning, 1 Executing, 1 M&amp;C. Qualitative + Quantitative Risk Analysis merged into "Perform Risk Analysis".</p>
+
+        <!-- RI1 -->
+        <div class="itto-card card-risk">
+          <div class="itto-card-header" style="background:var(--risk-bg);">
+            <span class="process-num">RI1</span>
+            <span class="process-name">Plan Risk Management</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project charter</li>
+                <li>Project management plan <span class="note">(All components)</span></li>
+                <li>Project documents <span class="note">(Stakeholder register)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data gathering <span class="note">(Interviews)</span></li>
+                <li>Data analysis <span class="note">(Stakeholder analysis)</span></li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Project management plan updates <span class="note">(Risk mgmt plan)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- RI2 -->
+        <div class="itto-card card-risk">
+          <div class="itto-card-header" style="background:var(--risk-bg);">
+            <span class="process-num">RI2</span>
+            <span class="process-name">Identify Risks</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Requirements mgmt plan, Schedule mgmt plan, Financial mgmt plan, Quality mgmt plan, Resource mgmt plan, Risk mgmt plan, Scope baseline, Schedule baseline, Cost baseline)</span></li>
+                <li>Project documents <span class="note">(Assumption log, Cost estimates, Duration estimates, Issue log, Lessons learned register, Requirements docs, Resource requirements, Stakeholder register)</span></li>
+                <li>Agreements</li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data gathering <span class="note">(Brainstorming, Checklists, Interviews)</span></li>
+                <li>Data analysis <span class="note">(Root cause analysis, Assumption &amp; constraint analysis, SWOT analysis, Document analysis)</span></li>
+                <li>Interpersonal &amp; team skills <span class="note">(Facilitation)</span></li>
+                <li>Prompt lists</li>
+                <li>Meetings</li>
+                <li>AI</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Risk register</li>
+                <li>Risk report</li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- RI3 -->
+        <div class="itto-card card-risk">
+          <div class="itto-card-header" style="background:var(--risk-bg);">
+            <span class="process-num">RI3</span>
+            <span class="process-name">Perform Risk Analysis</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Risk mgmt plan, Scope baseline, Schedule baseline, Cost baseline)</span></li>
+                <li>Project documents <span class="note">(Assumption log, Cost estimates, Duration estimates, Resource requirements, Risk register, Stakeholder register)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data gathering &amp; analysis <span class="note">(Interviews)</span></li>
+                <li>Interpersonal &amp; team skills <span class="note">(Facilitation)</span></li>
+                <li>Risk categorization</li>
+                <li>Data analysis <span class="note">(Risk probability &amp; impact assessment, Simulations, Sensitivity analysis, Decision tree analysis, Influence diagrams)</span></li>
+                <li>Data representation <span class="note">(Probability and impact matrix)</span></li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Project document updates <span class="note">(Assumption log, Issue log, Risk register, Risk report)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- RI4 -->
+        <div class="itto-card card-risk">
+          <div class="itto-card-header" style="background:var(--risk-bg);">
+            <span class="process-num">RI4</span>
+            <span class="process-name">Plan Risk Responses</span>
+            <span class="phase-badge phase-plan">Planning</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Resource mgmt plan, Risk mgmt plan, Cost baseline)</span></li>
+                <li>Project documents <span class="note">(Lessons learned register, Project schedule, Project team assignments, Resource calendars, Risk register, Risk report, Stakeholder register)</span></li>
+                <li>EEF</li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Data gathering <span class="note">(Interviews)</span></li>
+                <li>Interpersonal &amp; team skills <span class="note">(Facilitation)</span></li>
+                <li>Strategies for threats</li>
+                <li>Strategies for opportunities</li>
+                <li>Contingent response strategies</li>
+                <li>Strategies for overall project risk</li>
+                <li>Data analysis <span class="note">(Alternative analysis, Cost-benefit analysis)</span></li>
+                <li>Decision-making <span class="note">(Multicriteria decision analysis)</span></li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Change requests</li>
+                <li>Project management plan updates <span class="note">(all plans and baselines)</span></li>
+                <li>Project document updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- RI5 -->
+        <div class="itto-card card-risk">
+          <div class="itto-card-header" style="background:var(--risk-bg);">
+            <span class="process-num">RI5</span>
+            <span class="process-name">Implement Risk Responses</span>
+            <span class="phase-badge phase-exec">Executing</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Risk mgmt plan)</span></li>
+                <li>Project documents <span class="note">(Lessons learned register, Risk register, Risk report)</span></li>
+                <li>OPA</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Expert judgment</li>
+                <li>Interpersonal &amp; team skills <span class="note">(Influencing)</span></li>
+                <li>PMIS</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Change requests</li>
+                <li>Project document updates <span class="note">(Issue log, Lessons learned register, Project team assignments, Risk register, Risk report)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- RI6 -->
+        <div class="itto-card card-risk">
+          <div class="itto-card-header" style="background:var(--risk-bg);">
+            <span class="process-num">RI6</span>
+            <span class="process-name">Monitor Risks</span>
+            <span class="phase-badge phase-mc">M&amp;C</span>
+          </div>
+          <div class="itto-grid">
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Đầu vào</div>
+              <ul class="itto-items">
+                <li>Project management plan <span class="note">(Risk mgmt plan)</span></li>
+                <li>Project documents <span class="note">(Issue log, Lessons learned register, Risk register, Risk report)</span></li>
+                <li>Work performance data</li>
+                <li>Work performance reports</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Công cụ &amp; Kỹ thuật</div>
+              <ul class="itto-items">
+                <li>Data analysis <span class="note">(Technical performance analysis, Reserve analysis)</span></li>
+                <li>Audits</li>
+                <li>Meetings</li>
+              </ul>
+            </div>
+            <div class="itto-col">
+              <div class="itto-col-header" style="color:var(--risk);border-bottom-color:var(--risk-bd);">Kết quả đầu ra</div>
+              <ul class="itto-items">
+                <li>Work performance information</li>
+                <li>Change requests</li>
+                <li>Project management plan updates</li>
+                <li>Project document updates</li>
+                <li>OPA updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="ref-footer">
+        Nguồn: PMBOK Guide 8th Edition &nbsp;·&nbsp;
+        <a href="pmp-teach-process-matrix.html">Process Matrix</a> &nbsp;·&nbsp;
+        <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a> &nbsp;·&nbsp;
+        <a href="pmp-mindset-teach.html">PMP Mindset</a> &nbsp;·&nbsp;
+        <a href="/p/pmp">Blog PMP</a>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  /* Sidebar active link on scroll */
+  var sections = document.querySelectorAll("section[id], header[id]");
+  var navLinks = document.querySelectorAll("#sideNav a[href^='#']");
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        navLinks.forEach(function (a) {
+          a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+        });
+      }
+    });
+  }, { rootMargin: "-15% 0px -75% 0px" });
+  sections.forEach(function (s) { obs.observe(s); });
+})();
+</script>
+</body>
+</html>
