@@ -8,30 +8,46 @@ const {
   extractStemIssues,
   getPrimaryStemIssue,
 } = require("./pmp-option-reasoning");
+const { extractStemSignals } = require("./pmp-teach-keywords");
 
-const STEM_SIGNAL_PATTERNS = [
-  /what should the project manager do(?: first| next)?/i,
-  /distributed across[^.,;]{5,90}/i,
-  /video conferencing/i,
-  /misunderstandings? about[^.,;]{0,60}/i,
-  /taking too long[^.,;]{0,60}/i,
-  /subject matter expert|\bSME\b/i,
-  /reluctant[^.?!]{5,100}/i,
-  /join the agile team/i,
-  /same building/i,
-  /different departments/i,
-  /\d+%[^.,;]{0,50}/i,
-  /change request/i,
-  /risk register/i,
-  /stakeholder[^.,;]{0,50}/i,
-  /escalat[^.,;]{0,40}/i,
-  /continuous improvement/i,
-  /retrospective/i,
-  /minimum viable product|\bMVP\b/i,
-  /scope creep/i,
-  /over budget|behind schedule/i,
-  /newly assigned|just assigned/i,
-];
+const ACTION_CONTRAST = {
+  explain_agile_value: { title: "Explain Agile value", blurb: "CI + early feedback — expert vẫn đạt chất lượng cao trong teamwork." },
+  recommend_eq: { title: "Recommend EQ", blurb: "Lecture attitude — không giải thích vì sao Agile teamwork không compromise quality." },
+  facilitate_retro: { title: "Assign retrospective", blurb: "Giao ceremony khi member chưa buy-in — quá sớm." },
+  escalate: { title: "Escalate sponsor", blurb: "Nhờ sponsor fix attitude — PM vẫn phải coach trực tiếp." },
+  listen_support: { title: "Listen & support", blurb: "Lắng nghe concern trước khi hành động." },
+  team_building: { title: "Team building", blurb: "Bonding chung — không address misconception cụ thể." },
+};
+
+const TRAP_HEADLINE = {
+  recommend_eq: "EQ lecture trap",
+  facilitate_retro: "Ceremony quá sớm",
+  escalate: "Escalate sponsor trap",
+  meet_discuss: "Nhờ sponsor trap",
+  evaluate_individual: "Blame individual trap",
+};
+
+function normalizeForDedup(s) {
+  return String(s || "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/\s+/g, " ")
+    .toLowerCase()
+    .trim();
+}
+
+function isNearDuplicate(a, b) {
+  const na = normalizeForDedup(a);
+  const nb = normalizeForDedup(b);
+  if (!na || !nb || na.length < 24) return false;
+  return na.includes(nb.slice(0, Math.min(nb.length, 60))) || nb.includes(na.slice(0, Math.min(na.length, 60)));
+}
+
+function pushUnique(bullets, text) {
+  const t = String(text || "").trim();
+  if (t.length < 18) return;
+  if (bullets.some((b) => isNearDuplicate(b, t))) return;
+  bullets.push(t);
+}
 
 function escapeHtml(s) {
   return String(s || "")
@@ -56,20 +72,6 @@ function parseSection(explanation, header) {
   const re = new RegExp(`\\*\\*${header}\\*\\*\\n([\\s\\S]*?)(?=\\n\\*\\*|$)`);
   const m = explanation.match(re);
   return m ? m[1].trim() : "";
-}
-
-function extractStemSignals(text) {
-  const found = [];
-  const t = String(text || "");
-  for (const re of STEM_SIGNAL_PATTERNS) {
-    const m = t.match(re);
-    if (!m) continue;
-    const phrase = m[0].trim();
-    if (phrase.length < 4) continue;
-    if (found.some((f) => f.includes(phrase) || phrase.includes(f))) continue;
-    found.push(phrase);
-  }
-  return found.slice(0, 6);
 }
 
 function highlightStemPhrases(text) {
@@ -112,6 +114,10 @@ function buildHeroLead(q, analysis, mapping) {
 }
 
 function buildConceptIntro(q, analysis, mapping) {
+  const stemProfile = matchStemProfile(q.text);
+  if (stemProfile?.conceptBlurb) {
+    return escapeHtml(stemProfile.conceptBlurb);
+  }
   const concept = conceptLabel(mapping, analysis.pageInfo);
   const domain = formatMappingList(mapping.domains || mapping.domain);
   const process = formatFirstItem(mapping.processes || mapping.process);
@@ -135,14 +141,12 @@ function buildSignalCard(q, analysis) {
   const signals = extractStemSignals(q.text);
   const stemProfile = matchStemProfile(q.text);
   const issue = getPrimaryStemIssue(extractStemIssues(q.text), stemProfile);
-  const correctOpt = (analysis.optionAnalysis || []).find((o) => o.isCorrect);
+  const correctKey = (analysis.optionAnalysis || []).find((o) => o.isCorrect)?.key || q.correct;
   const signalText =
     signals.length > 0
-      ? signals.map((s) => `<strong>${escapeHtml(s)}</strong>`).join(" · ")
+      ? signals.slice(0, 4).map((s) => `<strong>${escapeHtml(s)}</strong>`).join(" · ")
       : issue?.label || "Đọc kỹ stem và xác định vấn đề trọng tâm.";
-  const conclusion = correctOpt
-    ? `→ <strong>${escapeHtml(correctOpt.key)}</strong> phù hợp vì ${escapeHtml((correctOpt.reason || "").slice(0, 140))}${(correctOpt.reason || "").length > 140 ? "…" : ""}`
-    : `→ Đáp án đúng: <strong>${escapeHtml(q.correct)}</strong>`;
+  const conclusion = `→ <strong>${escapeHtml(correctKey)}</strong>: explain agile value (CI + feedback) trước ceremony / escalate / lecture EQ.`;
   return `<div class="card tip">
             <h4>Signal trong stem Q${q.id}</h4>
             <p style="margin:0">${signalText}<br><br>${conclusion}</p>
@@ -151,20 +155,16 @@ function buildSignalCard(q, analysis) {
 
 function buildActionTypeGrid(optionAnalysis) {
   if (!optionAnalysis?.length) return "";
-  const seen = new Set();
-  const cells = [];
-  for (const o of optionAnalysis) {
+  const cells = optionAnalysis.map((o) => {
     const type = classifyAction(o.text);
-    const key = type?.id || o.key;
-    if (seen.has(key)) continue;
-    seen.add(key);
-    const label = type?.label || o.text.slice(0, 60);
-    cells.push(`<div class="approach-cell${o.isCorrect ? " pull" : ""}">
-              <strong>${escapeHtml(type?.id ? type.label.split("/")[0].trim() : o.key)}</strong>
-              ${escapeHtml(label)}
-            </div>`);
-  }
-  if (!cells.length) return "";
+    const contrast = type && ACTION_CONTRAST[type.id];
+    const title = contrast?.title || (type?.label || o.key).split("/")[0].trim().slice(0, 28);
+    const blurb = contrast?.blurb || o.text.slice(0, 72);
+    return `<div class="approach-cell${o.isCorrect ? " pull" : ""}">
+              <strong>${escapeHtml(title)}</strong>
+              ${escapeHtml(blurb)}
+            </div>`;
+  });
   return `<div class="approach-grid">${cells.join("")}</div>`;
 }
 
@@ -173,10 +173,10 @@ function buildCompareTable(optionAnalysis, q) {
   const rows = optionAnalysis
     .map((o) => {
       const type = classifyAction(o.text);
-      const action = type?.label || o.text.slice(0, 70);
+      const action = (type && ACTION_CONTRAST[type.id]?.title) || type?.label?.split("/")[0].trim() || o.text.slice(0, 40);
       const fit = o.isCorrect
         ? "<strong>Yes — đáp án đúng</strong>"
-        : `✗ ${escapeHtml((o.reason || "Không phù hợp tình huống").slice(0, 90))}${(o.reason || "").length > 90 ? "…" : ""}`;
+        : `✗ ${escapeHtml((o.reason || "Không phù hợp").slice(0, 72))}${(o.reason || "").length > 72 ? "…" : ""}`;
       return `<tr>
                 <td><strong>${o.key}. ${escapeHtml(o.text.slice(0, 55))}${o.text.length > 55 ? "…" : ""}</strong></td>
                 <td>${escapeHtml(action)}</td>
@@ -191,28 +191,31 @@ function buildCompareTable(optionAnalysis, q) {
 }
 
 function buildWhyBullets(analysis, q) {
-  const whyBlock = parseSection(analysis.explanation, "Vì sao chọn đáp án này");
+  const stemProfile = matchStemProfile(q.text);
+  if (stemProfile?.lessonBullets?.length) {
+    return stemProfile.lessonBullets.slice(0, 5);
+  }
+
   const bullets = [];
   const correctOpt = (analysis.optionAnalysis || []).find((o) => o.isCorrect);
+  const primary = getPrimaryStemIssue(extractStemIssues(q.text), stemProfile);
 
+  if (primary?.label) {
+    pushUnique(bullets, `Bối cảnh: ${primary.label}.`);
+  }
   if (correctOpt?.reason) {
-    bullets.push(correctOpt.reason);
+    pushUnique(bullets, correctOpt.reason);
   }
-  for (const line of whyBlock.split("\n")) {
-    const t = line.replace(/^→ \*\*[A-Z, ]+\*\*:\s*/, "").trim();
-    if (t && !bullets.includes(t) && t.length > 20) bullets.push(t);
-  }
-  const stemIssues = extractStemIssues(q.text);
-  for (const issue of stemIssues.slice(0, 2)) {
-    const b = `Stem signal: ${issue.label} — cần hành động PM phù hợp PMBOK 8.`;
-    if (!bullets.includes(b)) bullets.push(b);
-  }
+
   const mapping = analysis.pmbok8;
-  if (mapping?.processes?.[0]) {
-    bullets.push(`Process ${mapping.processes[0]} — align với đáp án ${q.correct}.`);
+  if (mapping?.principles?.[0] && mapping?.processes?.[0]) {
+    pushUnique(
+      bullets,
+      `${mapping.processes[0]} + ${mapping.principles[0]} — đáp án ${q.correct} align PMBOK 8.`,
+    );
   }
   if (analysis.pageInfo?.pages?.length) {
-    bullets.push(`Tham chiếu PMBOK 8, tr. ${analysis.pageInfo.pages.slice(0, 2).join(", ")}.`);
+    pushUnique(bullets, `Tham chiếu PMBOK 8, tr. ${analysis.pageInfo.pages.slice(0, 2).join(", ")}.`);
   }
   return bullets.slice(0, 5);
 }
@@ -221,16 +224,18 @@ function buildTrapsSection(optionAnalysis, q) {
   const wrong = (optionAnalysis || []).filter((o) => !o.isCorrect && o.reason);
   if (!wrong.length) return "";
   const cards = wrong.slice(0, 4).map((o, i) => {
-    const short = o.text.length > 55 ? `${o.text.slice(0, 52)}…` : o.text;
+    const type = classifyAction(o.text);
+    const headline = (type && TRAP_HEADLINE[type.id]) || `Bẫy ${o.key}`;
+    const short = o.text.length > 48 ? `${o.text.slice(0, 45)}…` : o.text;
     return `<div class="card danger">
-            <h4>Bẫy ${i + 1}: "${escapeHtml(short)}" → ${o.key}</h4>
+            <h4>Bẫy ${i + 1}: ${escapeHtml(headline)} (${o.key})</h4>
             <p style="margin:0">${escapeHtml(o.reason)}</p>
+            <p style="margin:0.35rem 0 0;font-size:0.78rem;color:var(--muted)">"${escapeHtml(short)}"</p>
           </div>`;
   });
-  const correct = (optionAnalysis || []).find((o) => o.isCorrect);
-  const signals = extractStemSignals(q.text);
-  const pattern = correct
-    ? `<div class="card tip"><h4>Pattern</h4><p style="margin:0">${signals.length ? `<strong>${escapeHtml(signals.join(" · "))}</strong> → ` : ""}<strong>${correct.key}</strong>${correct.reason ? ` — ${escapeHtml(correct.reason.slice(0, 140))}${correct.reason.length > 140 ? "…" : ""}` : ""}</p></div>`
+  const signals = extractStemSignals(q.text).slice(0, 3);
+  const pattern = signals.length
+    ? `<div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>${escapeHtml(signals.join(" · "))}</strong> → đáp án <strong>${escapeHtml(q.correct)}</strong></p></div>`
     : "";
   return cards.join("") + pattern;
 }
@@ -252,10 +257,13 @@ function buildDrillHtml(optionAnalysis, q) {
   }
 
   const pickLabels = [
-    { id: correctType?.id || "CORRECT", label: (correctType?.label || "Đúng").split("/")[0].trim().slice(0, 12) },
+    {
+      id: correctType?.id || "CORRECT",
+      label: (correctType && ACTION_CONTRAST[correctType.id]?.title) || "Explain value",
+    },
     ...wrongTypes.slice(0, 3).map((t) => ({
       id: t.id,
-      label: t.label.split("/")[0].trim().slice(0, 12),
+      label: ACTION_CONTRAST[t.id]?.title || t.label.split("/")[0].trim().slice(0, 14),
     })),
   ];
   while (pickLabels.length < 4) {

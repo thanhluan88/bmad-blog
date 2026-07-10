@@ -8,16 +8,14 @@ const { generateTeachAnalysis } = require("./lib/pmp-pmbok8-generator");
 const { loadCacheFile } = require("./lib/pmp-pmbok8-rag-pages");
 const {
   highlightExamCues,
+  highlightQuizStem,
   highlightOptionText,
   highlightReasoning,
   mdInlineHighlighted,
 } = require("./lib/pmp-teach-keywords");
 const {
   buildHeroLead,
-  buildConceptIntro,
   buildSignalCard,
-  buildActionTypeGrid,
-  buildCompareTable,
   buildWhyBullets,
   buildTrapsSection,
   buildDrillHtml,
@@ -34,7 +32,6 @@ const JSON_PATH = path.join(PMP_DIR, "pmp-full-questions.json");
 const FULL_HTML = path.join(PMP_DIR, "pmp-full-questions.html");
 const INDEX_PATH = path.join(PMP_DIR, "pmp-teach-full-series-index.html");
 const SERIES_JS = path.join(__dirname, "pmp-full-teach-series.js");
-const CUSTOM_Q1 = path.join(PMP_DIR, "pmp-teach-full-q1-misdirected-email.html");
 
 const args = process.argv.slice(2);
 const force = args.includes("--force");
@@ -46,7 +43,6 @@ const toId = toArg ? Number(toArg.split("=")[1]) : Infinity;
 const questions = JSON.parse(fs.readFileSync(JSON_PATH, "utf8"));
 
 function lessonFile(id) {
-  if (id === 1 && fs.existsSync(CUSTOM_Q1)) return "pmp-teach-full-q1-misdirected-email.html";
   return `pmp-teach-full-q${id}.html`;
 }
 
@@ -127,8 +123,8 @@ function renderOptionsGridFromAnalysis(optionAnalysis) {
     .map((o) => {
       const ok = o.isCorrect;
       const reason = ok
-        ? o.reason || "Đáp án đúng theo PMBOK 8 và logic tình huống."
-        : o.reason || "Không phải lựa chọn tốt nhất.";
+        ? "Đáp án đúng — xem phân tích chi tiết bên dưới."
+        : o.reason || "Không phù hợp tình huống.";
       return `<div class="approach-cell${ok ? " pull" : ""}">
         <strong>${escapeHtml(o.key)} — ${ok ? "Đúng" : "Sai"}</strong>
         ${highlightOptionText(o.text, ok)}
@@ -149,14 +145,9 @@ function renderPmbok8Insight(pageInfo) {
 
 function renderAnalysisSection(analysis) {
   const explanation = analysis.explanation || "";
-  const why = parseSection(explanation, "Vì sao chọn đáp án này") || parseSection(explanation, "Vì sao mapping đúng");
   const insight = parseSection(explanation, "PMBOK 8 — Cơ sở từ Guide");
   const refs = parseSection(explanation, "Tham khảo");
-  let html = `<div class="card tip"><h4>Phân tích PMBOK 8</h4>`;
-  if (why) {
-    html += `<p style="margin:0">${mdInline(why).replace(/\n/g, "<br>")}</p>`;
-  }
-  html += `</div>`;
+  let html = "";
   if (insight) {
     html += `<div class="card info"><h4>Trích dẫn Guide</h4><p style="margin:0">${mdInline(insight).replace(/\n/g, "<br>")}</p></div>`;
   } else {
@@ -206,7 +197,7 @@ function renderMcqQuiz(q) {
     .join("\n            ");
   return `<div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu ${q.id}${multi ? " · Chọn nhiều" : ""}</div>
-            <div class="q-text">${highlightExamCues(q.text)}</div>
+            <div class="q-text">${highlightQuizStem(q.text)}</div>
             ${opts}
             <div class="feedback" id="quizFeedback"></div>
           </div>`;
@@ -233,7 +224,7 @@ function renderQuizBlock(q) {
   if (q.type === "mcq" && q.options?.length) return renderMcqQuiz(q);
   return `<div class="quiz-card">
             <div class="q-num">pmp-full-questions · Câu ${q.id} · ${escapeHtml(q.type)}</div>
-            <div class="q-text">${highlightExamCues(q.text)}</div>
+            <div class="q-text">${highlightQuizStem(q.text)}</div>
           </div>
           ${renderNonMcqAnswer(q)}`;
 }
@@ -336,6 +327,16 @@ function quizScript(q, analysis) {
   </script>`;
 }
 
+function sectionNumbers(hasDrill, hasTraps) {
+  let n = 1;
+  const sec = { question: n++, analysis: n++ };
+  if (hasDrill) sec.drill = n++;
+  if (hasTraps) sec.traps = n++;
+  sec.flashcards = n++;
+  sec.cheatsheet = n++;
+  return sec;
+}
+
 function renderLesson(q, prev, next) {
   const analysis = generateTeachAnalysis(q, { preserveOriginal: false });
   const mapping = analysis.pmbok8 || parseMapping(analysis.explanation);
@@ -354,6 +355,7 @@ function renderLesson(q, prev, next) {
   const whyBullets = buildWhyBullets(analysis, q);
   const drillHtml = buildDrillHtml(analysis.optionAnalysis, q);
   const trapsHtml = buildTrapsSection(analysis.optionAnalysis, q);
+  const sec = sectionNumbers(!!drillHtml, !!trapsHtml);
 
   const prevLink = prev ? `<a href="${lessonFile(prev.id)}">← Câu ${prev.id}</a>` : "";
   const nextLink = next ? `<a href="${lessonFile(next.id)}">Câu ${next.id} →</a>` : "";
@@ -466,8 +468,6 @@ function renderLesson(q, prev, next) {
       <div class="brand-sub">Full Bank · Câu ${q.id}</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#concept">${escapeHtml(concept.slice(0, 24))}</a>
-        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
         ${drillHtml ? '<a href="#drill">Drill</a>' : ""}
@@ -508,22 +508,8 @@ function renderLesson(q, prev, next) {
           </p>
         </header>
 
-        <section id="concept">
-          <h2>1. ${escapeHtml(concept)}</h2>
-          <p>${buildConceptIntro(q, analysis, mapping)}</p>
-          ${buildActionTypeGrid(analysis.optionAnalysis)}
-          ${buildSignalCard(q, analysis)}
-          <h3>So sánh nhanh các hướng xử lý</h3>
-          ${buildCompareTable(analysis.optionAnalysis, q)}
-        </section>
-
-        <section id="compare">
-          <h2>2. So sánh đáp án — Q${q.id}</h2>
-          ${renderOptionsGridFromAnalysis(analysis.optionAnalysis)}
-        </section>
-
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Full Bank Q${q.id}</h2>
+          <h2>${sec.question}. Câu hỏi thực hành — Full Bank Q${q.id}</h2>
           ${renderQuizBlock(q)}
           <p style="font-size:0.86rem;color:var(--muted)">
             <a href="pmp-full-questions.html#q-${q.id}">→ Mở câu ${q.id} trong bộ luyện đầy đủ</a>
@@ -531,7 +517,8 @@ function renderLesson(q, prev, next) {
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: ${escapeHtml(q.correct)}</h2>
+          <h2>${sec.analysis}. Phân tích đáp án — Đáp án đúng: ${escapeHtml(q.correct)}</h2>
+          ${buildSignalCard(q, analysis)}
           <h3>Tại sao chọn ${escapeHtml(q.correct)}?</h3>
           <ul>${whyBullets.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul>
           <div class="card tip">
@@ -544,23 +531,23 @@ function renderLesson(q, prev, next) {
         </section>
 
         ${drillHtml ? `<section id="drill">
-          <h2>5. Drill — phân loại hành động PM</h2>
+          <h2>${sec.drill}. Drill — phân loại hành động PM</h2>
           ${drillHtml}
         </section>` : ""}
 
         ${trapsHtml ? `<section id="traps">
-          <h2>${drillHtml ? "6" : "5"}. Bẫy thi</h2>
+          <h2>${sec.traps}. Bẫy thi</h2>
           ${trapsHtml}
         </section>` : ""}
 
         <section id="flashcards">
-          <h2>${drillHtml && trapsHtml ? "7" : drillHtml || trapsHtml ? "6" : "5"}. Flashcard</h2>
+          <h2>${sec.flashcards}. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           ${buildFlashcards(q, analysis, mapping)}
         </section>
 
         <section id="cheatsheet">
-          <h2>${drillHtml && trapsHtml ? "8" : drillHtml || trapsHtml ? "7" : "6"}. Cheat sheet</h2>
+          <h2>${sec.cheatsheet}. Cheat sheet</h2>
           <div class="cheat-sheet">${escapeHtml(buildCheatSheet(q, analysis, mapping))}</div>
         </section>
 
@@ -693,16 +680,13 @@ function patchFullQuestionsHtml() {
     /    const TEACH_LESSONS = \{[\s\S]*?\};\n/,
     "",
   );
-  if (!html.includes("function teachLessonHref")) {
-    html = html.replace(
-      /(    const PER_PAGE = \d+;\n)/,
-      `$1    function teachLessonHref(id) {
-      if (id === 1) return "pmp-teach-full-q1-misdirected-email.html";
+  html = html.replace(
+    /    function teachLessonHref\(id\) \{[\s\S]*?\n    \}\n/,
+    `    function teachLessonHref(id) {
       return "pmp-teach-full-q" + id + ".html";
     }
 `,
-    );
-  }
+  );
   html = html.replace(
     /    function renderTeachLink\(id\) \{[\s\S]*?\n    \}\n/,
     `    function renderTeachLink(id) {
@@ -721,12 +705,8 @@ function main() {
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i];
     if (q.id < fromId || q.id > toId) continue;
-    if (q.id === 1 && fs.existsSync(CUSTOM_Q1)) {
-      skipped++;
-      continue;
-    }
     const outPath = path.join(PMP_DIR, lessonFile(q.id));
-    if (fs.existsSync(outPath) && !force && q.id !== 1) {
+    if (fs.existsSync(outPath) && !force) {
       skipped++;
       continue;
     }

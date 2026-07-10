@@ -6,10 +6,80 @@ const EXAM_CUE_PATTERNS = [
   /\bwhat should the project manager do first\b/gi,
   /\bwhat should the project manager do next\b/gi,
   /\bwhat should the project manager do\b/gi,
+  /\bwhat should the team do first\b/gi,
   /\bwhich (?:of the following )?(?:document|artifact|tool|technique)\b/gi,
+  /\bwhich (?:of the following )?(?:is|are) (?:the )?(?:best|most appropriate)\b/gi,
   /\b(?:choose|select) (?:two|three|2|3|all that apply)\b/gi,
   /\b(?:first|next|best|worst|least|most|primarily|initially|not|except)\b/gi,
   /\bdrag and drop\b/gi,
+];
+
+/** Stem phrases that point toward the correct PMI action (scenario signals). */
+const STEM_SIGNAL_PATTERNS = [
+  /subject matter expert(?:\s*\(SME\))?/i,
+  /\bSME\b/,
+  /join the agile team/i,
+  /agile approach/i,
+  /agile team/i,
+  /adopting agile/i,
+  /reluctant because[^.?]{10,140}/i,
+  /reluctant to/i,
+  /demotivat(?:ing|ed)/i,
+  /slows them down/i,
+  /highest[- ]quality output/i,
+  /overwhelmed/i,
+  /struggling with[^.?]{5,90}/i,
+  /not happy with/i,
+  /having difficulty delivering/i,
+  /burned out/i,
+  /missing (?:task )?deadlines/i,
+  /distributed across[^.,;]{5,90}/i,
+  /video conferencing/i,
+  /misunderstandings? about[^.,;]{0,70}/i,
+  /taking too long[^.,;]{0,70}/i,
+  /same building/i,
+  /different departments/i,
+  /colocation/i,
+  /mistake[^.?]{0,50}(?:email|message)/i,
+  /wrong[^.?]{0,30}(?:email|message)/i,
+  /sent to the entire/i,
+  /miscommunicat/i,
+  /unintended/i,
+  /new (?:project )?sponsor/i,
+  /newly assigned sponsor/i,
+  /new department/i,
+  /new stakeholder/i,
+  /requested to be involved/i,
+  /stakeholder[^.,;]{0,60}(?:concern|unhappy|dissatisf)/i,
+  /customer[^.,;]{0,50}(?:unhappy|complain|concern)/i,
+  /not meeting[^.,;]{0,50}expect/i,
+  /conflict[^.,;]{0,50}/i,
+  /disagree(?:ment)?/i,
+  /argument/i,
+  /tension between/i,
+  /change request/i,
+  /risk register/i,
+  /risk (?:has |)(?:materializ|occurred|happened)/i,
+  /planned risk response/i,
+  /scope creep/i,
+  /over budget|behind schedule/i,
+  /generalists? and specialists?/i,
+  /specialized resources/i,
+  /resource planning/i,
+  /previously specialized/i,
+  /continuous improvement/i,
+  /retrospective/i,
+  /minimum viable product|\bMVP\b/i,
+  /stakeholder[^.,;]{0,50}/i,
+  /escalat[^.,;]{0,40}/i,
+  /\d+%[^.,;]{0,60}/i,
+  /newly assigned|just assigned/i,
+  /fixed period/i,
+  /iterations?/i,
+  /deliverables?/i,
+  /government project/i,
+  /highly skilled/i,
+  /encourage them to join/i,
 ];
 
 const PMI_SIGNAL_PATTERNS = [
@@ -112,9 +182,51 @@ function stripHighlights(html) {
   return String(html || "").replace(/<\/?span class="kw-[^"]*">/gi, "");
 }
 
+function extractStemSignals(text) {
+  const found = [];
+  const t = String(text || "");
+  for (const re of STEM_SIGNAL_PATTERNS) {
+    const m = t.match(re);
+    if (!m) continue;
+    const phrase = m[0].trim();
+    if (phrase.length < 4) continue;
+    if (found.some((f) => f.includes(phrase) || phrase.includes(f))) continue;
+    found.push(phrase);
+  }
+  return found.slice(0, 10);
+}
+
+function replacePhraseOutsideSpans(html, phrase, cls) {
+  if (!phrase || phrase.length < 4) return html;
+  const wrapped = `<span class="${cls}">${phrase}</span>`;
+  const parts = html.split(/(<span class="kw-[^"]*">[\s\S]*?<\/span>)/gi);
+  return parts
+    .map((part, i) => {
+      if (i % 2 === 1) return part;
+      return part.split(phrase).join(wrapped);
+    })
+    .join("");
+}
+
 function highlightExamCues(text) {
   let html = escapeHtml(text);
   return applyPatterns(html, EXAM_CUE_PATTERNS, "kw-cue");
+}
+
+/** Quiz stem: scenario signals (kw-signal) + exam directive (kw-cue). */
+function highlightQuizStem(text) {
+  const raw = String(text || "");
+  let html = escapeHtml(raw);
+  const signals = extractStemSignals(raw).sort((a, b) => b.length - a.length);
+  for (const sig of signals) {
+    const esc = escapeHtml(sig);
+    if (html.includes(esc)) {
+      html = replacePhraseOutsideSpans(html, esc, "kw-signal");
+    }
+  }
+  html = applyPatternsOutsideSpans(html, EXAM_CUE_PATTERNS, "kw-cue");
+  html = applyPatternsOutsideSpans(html, PMI_SIGNAL_PATTERNS, "kw-signal");
+  return html;
 }
 
 function highlightOptionText(text, isCorrect) {
@@ -168,7 +280,9 @@ function mdInlineHighlighted(s) {
 }
 
 module.exports = {
+  extractStemSignals,
   highlightExamCues,
+  highlightQuizStem,
   highlightOptionText,
   highlightReasoning,
   highlightPmbokTerms,
