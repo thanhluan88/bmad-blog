@@ -103,4 +103,7 @@ module.exports.SERIES = [
   ["pmp-teach-reserve-analysis.html", "Q101: Reserve Analysis"],
   ["pmp-teach-benefits-management-plan.html", "Q102: Benefits Management Plan"],
   ["pmp-teach-configuration-management-plan.html", "Q103: Configuration Management Plan"],
+  ["pmp-teach-affinity-diagram.html", "Q104: Affinity Diagram"],
+  ["pmp-teach-organizational-breakdown-structure.html", "Q105: Organizational Breakdown Structure"],
+  ["pmp-teach-precedence-diagramming.html", "Q106: Precedence Diagramming"],
 ];

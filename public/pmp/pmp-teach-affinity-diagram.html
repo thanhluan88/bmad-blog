@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Work Breakdown Structure (Q51)</title>
+  <title>PMBOK 8 — Affinity Diagram (Q104)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,6 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -88,11 +92,10 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Work Breakdown Structure · Q51</div>
+      <div class="brand-sub">Affinity Diagram · Q104</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#define">Define Scope &amp; WBS</a>
-        <a href="#predictive">Predictive vs Agile</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -150,7 +153,7 @@
         <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
         <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
-        <a href="pmp-teach-work-breakdown-structure.html" class="series-current">Q51: WBS</a>
+        <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
         <a href="pmp-teach-wbs-dictionary.html">Q52: WBS Dictionary</a>
         <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
         <a href="pmp-teach-verified-deliverables.html">Q54: Verified Deliverables</a>
@@ -203,7 +206,7 @@
         <a href="pmp-teach-reserve-analysis.html">Q101: Reserve Analysis</a>
         <a href="pmp-teach-benefits-management-plan.html">Q102: Benefits Management Plan</a>
         <a href="pmp-teach-configuration-management-plan.html">Q103: Configuration Management Plan</a>
-        <a href="pmp-teach-affinity-diagram.html">Q104: Affinity Diagram</a>
+        <a href="pmp-teach-affinity-diagram.html" class="series-current">Q104: Affinity Diagram</a>
         <a href="pmp-teach-organizational-breakdown-structure.html">Q105: Organizational Breakdown Structure</a>
         <a href="pmp-teach-precedence-diagramming.html">Q106: Precedence Diagramming</a>
       </nav>
@@ -217,15 +220,9 @@
 
 
 
-
-
-
-
-
-
       <div class="sidebar-pager">
-        <a href="pmp-teach-benchmarking.html" class="sidebar-pager-link">← Q50: Benchmarking</a>
-        <a href="pmp-teach-wbs-dictionary.html" class="sidebar-pager-link">Q52: WBS Dictionary →</a>
+        <a href="pmp-teach-configuration-management-plan.html" class="sidebar-pager-link">← Q103: Configuration Management Plan</a>
+        <a href="pmp-teach-organizational-breakdown-structure.html" class="sidebar-pager-link">Q105: Organizational Breakdown Structure →</a>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
@@ -235,304 +232,183 @@
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp" class="mobile-series-nav">← Blog PMP</a>
-        <a href="pmp-teach-benchmarking.html" class="mobile-series-nav">← Q50: Benchmarking</a>
-        <a href="pmp-teach-wbs-dictionary.html" class="mobile-series-nav">Q52: WBS Dictionary →</a>
-        <a href="#define">WBS</a>
-        <a href="#predictive">Predictive</a>
+        <a href="pmp-teach-configuration-management-plan.html" class="mobile-series-nav">← Q103: Configuration Management Plan</a>
+        <a href="pmp-teach-organizational-breakdown-structure.html" class="mobile-series-nav">Q105: Organizational Breakdown Structure →</a>
+        <a href="#affinity-diagram">Affinity Diagram</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
 
       <main>
-        <header class="hero" id="intro">
-          <h1>Practice Questions — PMBOK 8th Ed</h1>
+                                                                <header class="hero" id="intro">
+          <h1>Practice Questions — PMBOK 8th Ed · Waterfall</h1>
           <p class="lead">
-            Bài học Q51 về <strong>Work Breakdown Structure (WBS)</strong> — RLM product
-            development: organize deliverables, <em>decompose the work</em> into manageable
-            components để support <em>planning and execution</em>.
+            Bài học Q104 về <strong>Affinity Diagram</strong> — Chloe facilitate requirements workshop
+            tại NR Group. Session tạo ra <em>rất nhiều ý tưởng</em> từ nhiều stakeholder,
+            khiến việc <em>nhận diện patterns</em> và tiến lên phía trước trở nên khó.
+            Chloe nên làm gì tiếp theo?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.41–42</span>
-            <span class="badge">Define Scope</span>
-            <span class="badge">Câu 51 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.145</span>
+            <span class="badge">Requirements</span>
+            <span class="badge">Affinity Diagram</span>
+            <span class="badge">Câu 104 — Practice</span>
           </div>
         </header>
 
-        <section id="define">
-          <h2>1. Define Scope &amp; WBS (PMBOK p.41–42)</h2>
+                                                                <section id="affinity-diagram">
+          <h2>1. Affinity Diagram (p.145)</h2>
           <p>
-            <strong>Define Scope</strong> develops a detailed or high-level description of the
-            project, product, and value to be delivered. Trong <strong>predictive approaches</strong>,
-            deliverables được structured trong <strong>WBS</strong>.
+            <strong>Affinity diagram</strong> (p.145) nhóm số lượng lớn ý tưởng thành các
+            <strong>clusters</strong> để review và phân tích. Giúp organize ideas theo themes/patterns
+            sau brainstorming hoặc workshop — cũng có thể nhóm potential causes of defects.
           </p>
-
-          <div class="card tip">
-            <h4>Work Breakdown Structure (WBS)</h4>
-            <p style="margin:0">
-              Hierarchical decomposition of total project work into manageable components —
-              organizes deliverables, supports planning &amp; execution. Output của Define Scope
-              (predictive).
-            </p>
-          </div>
-
-          <table>
-            <thead>
-              <tr><th>WBS level (concept)</th><th>Content</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Level 1</td><td>Project</td></tr>
-              <tr><td>Level 2</td><td>Major deliverables / phases</td></tr>
-              <tr><td>Level 3+</td><td>Work packages — manageable components</td></tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section id="predictive">
-          <h2>2. Predictive vs adaptive — decompose how?</h2>
-
-          <table>
-            <thead>
-              <tr><th>Approach</th><th>Organize work</th><th>Q51 fit?</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Predictive — WBS</strong></td>
-                <td>Organize deliverables · decompose for planning/execution</td>
-                <td>✓ (A)</td>
-              </tr>
-              <tr>
-                <td>Adaptive — user stories</td>
-                <td>Capture requirements iteratively in backlog</td>
-                <td>Agile artifact — không WBS decompose (B)</td>
-              </tr>
-              <tr>
-                <td>Adaptive — product backlog</td>
-                <td>Prioritize features for incremental delivery</td>
-                <td>Delivery prioritization — không organize all deliverables (C)</td>
-              </tr>
-              <tr>
-                <td>Validate deliverables</td>
-                <td>Confirm completed work with stakeholders</td>
-                <td>Control/acceptance — sau execution, không decompose (D)</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 51</h2>
-
-          <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q51</div>
-            <div class="q-text">
-              Jonah is managing a product development project at RLM. The team needs to clearly
-              <em>organize all deliverables</em> and <em>decompose the work</em> into manageable
-              components to support <em>planning and execution</em>. What should Jonah do next?
+          <div class="approach-grid">
+            <div class="approach-cell pull">
+              <strong>Affinity diagram (D — đúng)</strong>
+              Large set of ideas · khó identify patterns → group/classify ideas để thấy themes và move forward.
             </div>
+            <div class="approach-cell">
+              <strong>Brainstorming (A — bẫy)</strong>
+              Generate thêm ideas (Q48) — đã có quá nhiều ideas; cần organize, không generate thêm.
+            </div>
+            <div class="approach-cell">
+              <strong>Interviews (B — bẫy)</strong>
+              Thu thập thông tin 1-1 — không group/classify ideas đã có từ workshop.
+            </div>
+            <div class="approach-cell">
+              <strong>Nominal group technique (C — bẫy)</strong>
+              Brainstorm + vote/prioritize (Q47) — không classify large idea sets into pattern groups.
+            </div>
+          </div>
+          <div class="card tip">
+            <h4>Signal Q104</h4>
+            <p style="margin:0"><strong>Workshop · large set of ideas · multiple stakeholders · difficult to identify patterns · move forward</strong> → <strong>Affinity diagram (D)</strong>.</p>
+          </div>
+          <table>
+            <thead><tr><th>Option</th><th>Tool</th><th>Q104?</th></tr></thead>
+            <tbody>
+              <tr><td><strong>A. Brainstorming</strong></td><td>Generate ideas</td><td>✗ Đã có quá nhiều ideas</td></tr>
+              <tr><td><strong>B. Interviews</strong></td><td>Elicit 1-1</td><td>✗ Collect — không organize workshop output</td></tr>
+              <tr><td><strong>C. Nominal group</strong></td><td>Ideas + silent vote</td><td>✗ Prioritize — không cluster patterns</td></tr>
+              <tr><td><strong>D. Affinity diagram</strong></td><td>Group ideas into clusters (p.145)</td><td>✓ Đúng</td></tr>
+            </tbody>
+          </table>
+        </section>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Organize deliverables into a work breakdown structure.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Capture requirements as user stories and refine them iteratively.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Prioritize features in a backlog for incremental delivery.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Validate the completed deliverables with stakeholders.</button>
+                <section id="compare">
+          <h2>2. So sánh: Q48 Brainstorm vs Q47 NGT vs Q104 Affinity</h2>
+          <table>
+            <thead><tr><th>Câu</th><th>Tool</th><th>Khi nào</th><th>Signal</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Q48 — Brainstorming</strong></td><td>Generate ideas</td><td>Cần nhiều ideas mới</td><td>Need creative ideas · divergent</td></tr>
+              <tr><td><strong>Q47 — Nominal group</strong></td><td>Ideas + rank/vote</td><td>Prioritize sau brainstorm</td><td>Silent ranking · consensus</td></tr>
+              <tr><td><strong>Q104 — Affinity (D)</strong></td><td>Cluster/group ideas</td><td>Organize many ideas · find patterns</td><td><em>Large set</em> · <em>identify patterns</em></td></tr>
+            </tbody>
+          </table>
+        </section>
 
+                <section id="question">
+          <h2>3. Câu hỏi thực hành — Question 104</h2>
+          <div class="quiz-card" id="mainQuiz">
+            <div class="q-num">Practice Questions · Waterfall · Q104</div>
+            <div class="q-text">
+              Chloe is facilitating a requirements workshop at NR Group. The session produces a
+              <em>large set of ideas</em> from multiple stakeholders, making it difficult to
+              <em>identify patterns</em> and move forward. What will Chloe do next?
+            </div>
+            <button class="opt-btn" data-opt="A" type="button">A. Use brainstorming with the team</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Conduct interviews with the team</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Use the nominal group technique</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Use an affinity diagram</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
-        <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
-
-          <h3>Tại sao chọn A?</h3>
+                <section id="analysis">
+          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
           <ul>
-            <li>Organize deliverables + decompose work → WBS (Define Scope, predictive).</li>
-            <li>Manageable components for planning &amp; execution → hierarchical WBS decomposition.</li>
-            <li>PMBOK: predictive approaches structure deliverables in WBS (p.41–42).</li>
+            <li>Affinity diagram groups large numbers of ideas into clusters for review — khớp "identify patterns".</li>
+            <li>Workshop đã produce ideas — bước tiếp theo là organize, không generate (A) hay collect (B).</li>
+            <li>NGT (C) dùng để prioritize/vote — khác mục đích clustering.</li>
           </ul>
-
-          <h3>Loại trừ từng đáp án</h3>
-          <table>
-            <thead>
-              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>B. User stories</strong></td>
-                <td>Adaptive/agile elicitation — không organize all deliverables into WBS.</td>
-              </tr>
-              <tr>
-                <td><strong>C. Product backlog</strong></td>
-                <td>Prioritize incremental delivery — agile, không decompose to planning components.</td>
-              </tr>
-              <tr>
-                <td><strong>D. Validate deliverables</strong></td>
-                <td>Acceptance/validation sau khi complete — không phải decompose step.</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="card warn">
-            <h4>Liên hệ Q44 vs Q51</h4>
-            <p style="margin:0">
-              Q44: hybrid streams merged → RTM track requirements (before/alongside scope). Q51:
-              organize &amp; decompose deliverables → WBS (Define Scope, predictive).
-            </p>
-          </div>
         </section>
 
-        <section id="drill">
-          <h2>5. Drill — WBS, backlog hay validate?</h2>
+                <section id="drill">
+          <h2>5. Drill — Affinity, Brainstorm, NGT, hay Interview?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="WBS">
-              <span>Decompose deliverables for planning &amp; execution</span>
-              <div class="classify-btns">
-                <button data-pick="WBS">WBS</button>
-                <button data-pick="STORY">Stories</button>
-                <button data-pick="VAL">Validate</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="STORY">
-              <span>Iterative requirements in adaptive approach</span>
-              <div class="classify-btns">
-                <button data-pick="WBS">WBS</button>
-                <button data-pick="STORY">Stories</button>
-                <button data-pick="VAL">Validate</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="VAL">
-              <span>Confirm completed deliverables with stakeholders</span>
-              <div class="classify-btns">
-                <button data-pick="WBS">WBS</button>
-                <button data-pick="STORY">Stories</button>
-                <button data-pick="VAL">Validate</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="WBS">
-              <span>Predictive — structure all deliverables hierarchically</span>
-              <div class="classify-btns">
-                <button data-pick="WBS">WBS</button>
-                <button data-pick="STORY">Stories</button>
-                <button data-pick="VAL">Validate</button>
-              </div>
-            </div>
+            <div class="classify-row" data-answer="AFFINITY"><span>NR Group workshop: many ideas, need patterns (Q104)</span>
+              <div class="classify-btns"><button data-pick="AFFINITY">Affinity</button><button data-pick="BRAIN">Brainstorm</button><button data-pick="NGT">NGT</button><button data-pick="INT">Interview</button></div></div>
+            <div class="classify-row" data-answer="AFFINITY"><span>PM sorts sticky notes into themed clusters on the wall</span>
+              <div class="classify-btns"><button data-pick="AFFINITY">Affinity</button><button data-pick="BRAIN">Brainstorm</button><button data-pick="NGT">NGT</button><button data-pick="INT">Interview</button></div></div>
+            <div class="classify-row" data-answer="BRAIN"><span>Team needs fresh creative ideas in a facilitated session (Q48)</span>
+              <div class="classify-btns"><button data-pick="AFFINITY">Affinity</button><button data-pick="BRAIN">Brainstorm</button><button data-pick="NGT">NGT</button><button data-pick="INT">Interview</button></div></div>
+            <div class="classify-row" data-answer="NGT"><span>Silent ranking then vote to prioritize top requirements (Q47)</span>
+              <div class="classify-btns"><button data-pick="AFFINITY">Affinity</button><button data-pick="BRAIN">Brainstorm</button><button data-pick="NGT">NGT</button><button data-pick="INT">Interview</button></div></div>
+            <div class="classify-row" data-answer="INT"><span>PM meets each SME individually to elicit detailed requirements</span>
+              <div class="classify-btns"><button data-pick="AFFINITY">Affinity</button><button data-pick="BRAIN">Brainstorm</button><button data-pick="NGT">NGT</button><button data-pick="INT">Interview</button></div></div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
-        <section id="traps">
+                <section id="traps">
           <h2>6. Bẫy thi</h2>
-          <div class="card danger">
-            <h4>Bẫy 1: Product development → User stories (B)</h4>
-            <p style="margin:0">Product dev không luôn agile — stem nói organize deliverables &amp; decompose → WBS predictive.</p>
-          </div>
-          <div class="card danger">
-            <h4>Bẫy 2: Features → Backlog (C)</h4>
-            <p style="margin:0">Backlog = prioritize delivery — không decompose all deliverables for planning.</p>
-          </div>
-          <div class="card danger">
-            <h4>Bẫy 3: Deliverables → Validate (D)</h4>
-            <p style="margin:0">Validate = sau khi complete — stem hỏi next step để plan/execute, không accept.</p>
-          </div>
-          <div class="card tip">
-            <h4>Pattern</h4>
-            <p style="margin:0"><strong>Organize deliverables · decompose work · planning and execution</strong> → WBS (A).</p>
-          </div>
+          <div class="card danger"><h4>Bẫy 1: Workshop → Brainstorming (A)</h4><p style="margin:0">Đã có large set of ideas — cần <strong>organize</strong> (affinity), không generate thêm.</p></div>
+          <div class="card danger"><h4>Bẫy 2: Group technique → NGT (C)</h4><p style="margin:0">NGT = prioritize. Affinity = <strong>cluster patterns</strong>.</p></div>
+          <div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>Many ideas · identify patterns · move forward</strong> → Affinity diagram (D).</p></div>
         </section>
 
-        <section id="flashcards">
+                <section id="flashcards">
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Define Scope + predictive? (p.41–42)</div>
-            <div class="flashcard-back">Structure deliverables in WBS — hierarchical decomposition for planning &amp; execution.</div>
+            <div class="flashcard-front">Affinity diagram?</div>
+            <div class="flashcard-back">Group <strong>large numbers of ideas</strong> into clusters — identify patterns, review &amp; analyze (p.145).</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q51 đáp án?</div>
-            <div class="flashcard-back"><strong>A</strong> — Organize deliverables into a work breakdown structure.</div>
+            <div class="flashcard-front">Q104 đáp án?</div>
+            <div class="flashcard-back"><strong>D — Affinity diagram</strong>. NR Group · many ideas · identify patterns.</div>
           </div></div>
         </section>
 
-        <section id="cheatsheet">
+                <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">WORK BREAKDOWN STRUCTURE — Q51 (PMBOK 8, p.41–42)
-─────────────────────────────────────────────────────
-PROCESS: Define Scope
+          <div class="cheat-sheet">AFFINITY DIAGRAM — Q104 (p.145)
+─────────────────────────────────────
+SIGNAL: large set of ideas · identify PATTERNS · move forward
+ANSWER: D — Use an affinity diagram
 
-OBJECTIVE: Detailed/high-level description of project · product · value
-            Quality management plan
-            PREDICTIVE → deliverables in WBS
+NOT: A brainstorm (generate) · B interviews (collect) · C NGT (prioritize)
 
-WBS:
-  - Organize ALL deliverables
-  - DECOMPOSE work into manageable components
-  - Support PLANNING &amp; EXECUTION
-  - Hierarchical structure
-
-SCENARIO: RLM — product development
-           ORGANIZE deliverables
-           DECOMPOSE work · manageable components
-           PLANNING and EXECUTION
-→ A) WORK BREAKDOWN STRUCTURE ✓
-
-NOT:
-  B) User stories — adaptive, iterative refine
-  C) Product backlog — agile prioritize delivery
-  D) Validate deliverables — acceptance, too late
-
-SCOPE FLOW:
-  Plan scope → Elicit reqs → DEFINE SCOPE (WBS) → Baseline → Execute
-
-PREDICTIVE vs ADAPTIVE:
-  Decompose deliverables → WBS (predictive)
-  Iterative requirements → user stories / backlog (adaptive)
-
-SIGNAL: "organize deliverables" · "decompose the work"
-        "manageable components" · "planning and execution"
-
-Q51 ANSWER: A
-
-REF: PMBOK Guide, 8th Ed., p.41–42</div>
+Q48 brainstorm → generate | Q47 NGT → rank | Q104 affinity → CLUSTER</div>
         </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
         <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
-          <a class="lesson-pager-btn" href="pmp-teach-benchmarking.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q50: Benchmarking</span></a>
-          <span class="lesson-pager-pos">Q51 / 106</span>
-          <a class="lesson-pager-btn next" href="pmp-teach-wbs-dictionary.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q52: WBS Dictionary</span></a>
+          <a class="lesson-pager-btn" href="pmp-teach-configuration-management-plan.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q103: Configuration Management Plan</span></a>
+          <span class="lesson-pager-pos">Q104 / 106</span>
+          <a class="lesson-pager-btn next" href="pmp-teach-organizational-breakdown-structure.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q105: Organizational Breakdown Structure</span></a>
         </nav>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-scope-management-plan.html">Q42: Scope Mgmt Plan</a>
-          · <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
-          · <a href="pmp-full-questions.html#q-51">Luyện câu 51</a>
+          · <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
+          · <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
     </div>
   </div>
 
-  <script>
+                <script>
     (function () {
-      const CORRECT = "A";
+      const CORRECT = "D";
       const EXPL = {
-        A: "Đúng! Define Scope — predictive approaches structure deliverables in WBS (p.41–42).",
-        B: "User stories = adaptive approach — không organize/decompose deliverables như WBS.",
-        C: "Product backlog prioritizes incremental delivery — agile, không WBS decomposition.",
-        D: "Validate completed deliverables = acceptance — sau execution, không decompose step."
+        A: "Brainstorming generate thêm ideas — workshop đã có quá nhiều. Cần organize bằng affinity diagram.",
+        B: "Interviews thu thập 1-1 — không group/classify ideas từ workshop.",
+        C: "Nominal group technique prioritize/vote — không cluster ideas để tìm patterns.",
+        D: "Đúng! Affinity diagram (p.145) nhóm large set of ideas thành clusters — identify patterns và move forward."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -548,7 +424,7 @@ REF: PMBOK Guide, 8th Ed., p.41–42</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Organize deliverables into a work breakdown structure.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Use an affinity diagram</strong>" : "");
         });
       });
       let score = 0;
@@ -576,16 +452,18 @@ REF: PMBOK Guide, 8th Ed., p.41–42</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
