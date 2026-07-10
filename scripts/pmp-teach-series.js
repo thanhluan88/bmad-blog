@@ -94,6 +94,7 @@ module.exports.SERIES = [
   ["pmp-teach-colocation.html", "Q92: Colocation"],
   ["pmp-teach-communication-methods.html", "Q93: Communication Methods"],
   ["pmp-teach-control-charts.html", "Q94: Control Charts"],
+  ["pmp-teach-plan-risk-management.html", "Q95: Plan Risk Management"],
   ["pmp-teach-identify-risks.html", "Q96: Identify Risks"],
   ["pmp-teach-swot-analysis.html", "Q97: SWOT Analysis"],
   ["pmp-teach-qualitative-risk-analysis.html", "Q98: Qualitative Risk Analysis"],

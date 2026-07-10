@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Predictive Approach (Q14)</title>
+  <title>PMBOK 8 — Plan Risk Management (Q95)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,14 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.25rem 0; }
-    @media (max-width: 600px) { .approach-grid { grid-template-columns: 1fr; } }
-    .approach-box { padding: 0.85rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--card); font-size: 0.84rem; }
-    .approach-box strong { display: block; margin-bottom: 0.25rem; color: var(--primary-dark); }
-    .approach-box.ok { border-color: var(--ok); background: var(--ok-bg); }
-    .waterfall-viz { display: flex; align-items: flex-end; gap: 0.35rem; margin: 1rem 0; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); justify-content: center; flex-wrap: wrap; }
-    .wf-step { padding: 0.45rem 0.65rem; background: var(--info-bg); border: 1px solid var(--info); border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: #1d4ed8; position: relative; }
-    .wf-step:not(:last-child)::after { content: "→"; position: absolute; right: -0.55rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-weight: 700; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -74,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 320px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -96,11 +92,10 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Predictive Approach · Q14</div>
+      <div class="brand-sub">Plan Risk Management · Q95</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#predictive">Predictive</a>
-        <a href="#compare">So sánh approaches</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -121,7 +116,7 @@
         <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
         <a href="pmp-teach-accountable-leader.html">Q12: Accountable Leader</a>
         <a href="pmp-teach-variables-over-time.html">Q13: Variables Over Time</a>
-        <a href="pmp-teach-predictive-approach.html" class="series-current">Q14: Predictive Approach</a>
+        <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
         <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive Approach</a>
         <a href="pmp-teach-hybrid-approach.html">Q16: Hybrid Approach</a>
         <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
@@ -202,7 +197,7 @@
         <a href="pmp-teach-colocation.html">Q92: Colocation</a>
         <a href="pmp-teach-communication-methods.html">Q93: Communication Methods</a>
         <a href="pmp-teach-control-charts.html">Q94: Control Charts</a>
-        <a href="pmp-teach-plan-risk-management.html">Q95: Plan Risk Management</a>
+        <a href="pmp-teach-plan-risk-management.html" class="series-current">Q95: Plan Risk Management</a>
         <a href="pmp-teach-identify-risks.html">Q96: Identify Risks</a>
         <a href="pmp-teach-swot-analysis.html">Q97: SWOT Analysis</a>
         <a href="pmp-teach-qualitative-risk-analysis.html">Q98: Qualitative Risk Analysis</a>
@@ -215,324 +210,441 @@
 
 
 
-
-
-
-
-
-
       <div class="sidebar-pager">
-        <a href="pmp-teach-variables-over-time.html" class="sidebar-pager-link">← Q13: Variables Over Time</a>
-        <a href="pmp-teach-adaptive-approach.html" class="sidebar-pager-link">Q15: Adaptive Approach →</a>
+        <a href="pmp-teach-control-charts.html" class="sidebar-pager-link">← Q94: Control Charts</a>
+        <a href="pmp-teach-identify-risks.html" class="sidebar-pager-link">Q96: Identify Risks →</a>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
       <a class="back-link secondary" href="/p/pmp">← Về blog PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
     </aside>
 
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp" class="mobile-series-nav">← Blog PMP</a>
-        <a href="pmp-teach-variables-over-time.html" class="mobile-series-nav">← Q13: Variables Over Time</a>
-        <a href="pmp-teach-adaptive-approach.html" class="mobile-series-nav">Q15: Adaptive Approach →</a>
-        <a href="#predictive">Predictive</a>
-        <a href="#compare">Compare</a>
+        <a href="pmp-teach-control-charts.html" class="mobile-series-nav">← Q94: Control Charts</a>
+        <a href="pmp-teach-identify-risks.html" class="mobile-series-nav">Q96: Identify Risks →</a>
+        <a href="#plan-risk-management">Plan Risk Management</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
 
       <main>
-        <header class="hero" id="intro">
+                                <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q14 về <strong>Predictive Approaches</strong> — waterfall/plan-driven khi
-            scope ổn định sớm, planning upfront và change control chặt (ví dụ drug development regulated).
+            Bài học Q95 về <strong>Plan Risk Management</strong> — Cameron, PM tại VL Systems,
+            nhận thấy team và stakeholder đang nêu các <em>threat hoặc impact</em> trong tương lai.
+            Chưa có <em>thống nhất</em> về cách rủi ro sẽ được identify, analyze hay monitor.
+            Hoạt động planning bắt đầu <em>chậm lại</em> do uncertainty trong ra quyết định.
+            Cameron nên làm gì tiếp theo?
           </p>
           <div class="badges">
-            <span class="badge">The Standard for PM, p.61</span>
-            <span class="badge">Development Approach</span>
-            <span class="badge">Câu 14 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.95–96 &amp; 134–136</span>
+            <span class="badge">Uncertainty</span>
+            <span class="badge">Plan Risk Management</span>
+            <span class="badge">Câu 95 — Practice</span>
           </div>
         </header>
 
-        <section id="predictive">
-          <h2>1. Predictive Approach (PMBOK 8)</h2>
+                                <section id="plan-risk-management">
+          <h2>1. Plan Risk Management (p.95–96, 134–136)</h2>
           <p>
-            Predictive approach tối ưu khi <strong>scope có thể stabilize sớm</strong>.
-            Còn gọi là waterfall, plan-driven, hoặc traditional approach.
+            <strong>Plan Risk Management</strong> (p.95–96) định nghĩa <em>cách thức</em> thực hiện các hoạt động
+            quản lý rủi ro cho dự án. Quy trình bắt đầu khi dự án được hình thành và
+            <strong>hoàn thành sớm</strong> trong dự án. Output chính là
+            <strong>Risk Management Plan</strong> — thành phần của Project Management Plan,
+            mô tả cách identify, analyze, respond và monitor risks sẽ được cấu trúc và thực hiện.
           </p>
 
+          <div class="approach-grid">
+            <div class="approach-cell pull">
+              <strong>Develop the risk management plan (B — đúng)</strong>
+              Chưa có agreement về identify/analyze/monitor → cần <strong>plan trước</strong>
+              mọi hoạt động rủi ro. Planning chậm do uncertainty → thiết lập framework risk management.
+            </div>
+            <div class="approach-cell">
+              <strong>Brainstorm + Risk Register (A — bẫy)</strong>
+              Identify risks và ghi register là bước <em>sau</em> khi đã có risk management plan
+              định nghĩa cách identify. Không nhảy thẳng sang register khi chưa có agreement về process.
+            </div>
+            <div class="approach-cell">
+              <strong>Qualitative risk analysis (C — bẫy)</strong>
+              Analyze/prioritize risks — bước sau identify. Stem: chưa có cách thức identify/analyze/monitor
+              → cần plan trước, không analyze ngay.
+            </div>
+            <div class="approach-cell">
+              <strong>Plan risk responses (D — bẫy)</strong>
+              Respond là bước cuối trong risk flow — sau identify và analyze.
+              Uncertainty về <em>process</em> → plan risk management, không plan responses.
+            </div>
+          </div>
+
           <div class="card tip">
-            <h4>Định nghĩa chính thức (PMBOK p.61)</h4>
+            <h4>Signal trong stem Q95</h4>
             <p style="margin:0">
-              Scope, schedule, cost, resource needs, quality requirements, and risks can be
-              well defined in the early phases of the project life cycle and are expected to
-              remain relatively stable.
+              <strong>VL Systems · threats/impacts raised · NO agreement on identify/analyze/monitor · planning slowing · uncertainty in decision-making</strong>
+              → Thiếu <strong>framework/plan</strong> cho risk management →
+              <strong>Develop risk management plan (B)</strong>.
+              Không brainstorm register (A), không qualitative (C), không plan responses (D).
             </p>
           </div>
 
-          <div class="waterfall-viz" aria-label="Phase gate waterfall">
-            <span class="wf-step">Plan</span>
-            <span class="wf-step">Design</span>
-            <span class="wf-step">Build</span>
-            <span class="wf-step">Test</span>
-            <span class="wf-step">Deploy</span>
-          </div>
-          <p style="font-size:0.85rem;color:var(--muted);text-align:center;margin-top:-0.5rem">
-            Phase gate approvals · strict change control · extensive upfront planning
-          </p>
-
-          <h3>Keywords trong đề thi → Predictive</h3>
-          <ul>
-            <li>Highly regulated environment (pharma, aerospace)</li>
-            <li>Phase gate approvals</li>
-            <li>Scope/schedule/cost/risks <strong>defined early</strong></li>
-            <li>Strict change control</li>
-            <li>Extensive upfront planning</li>
-          </ul>
-        </section>
-
-        <section id="compare">
-          <h2>2. So sánh development approaches</h2>
-
-          <div class="approach-grid">
-            <div class="approach-box">
-              <strong>A — Adaptive</strong>
-              Agile/iterative — scope evolves, feedback loops, embrace change
-            </div>
-            <div class="approach-box">
-              <strong>B — Hybrid</strong>
-              Kết hợp predictive + adaptive elements
-            </div>
-            <div class="approach-box">
-              <strong>C — Incremental</strong>
-              Deliver usable portions over time — không nhấn upfront planning chặt như predictive
-            </div>
-            <div class="approach-box ok">
-              <strong>D — Predictive ✓</strong>
-              Waterfall/plan-driven — scope stable early, change control strict
-            </div>
-          </div>
-
+          <h3>Risk Management Plan — Nội dung chính</h3>
           <table>
             <thead>
-              <tr><th>Approach</th><th>Khi nào dùng</th><th>Đặc điểm</th></tr>
+              <tr><th>Thành phần</th><th>Mục đích</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Predictive</strong></td>
-                <td>Scope ổn định sớm, regulated</td>
-                <td>Upfront planning, phase gates, strict CC</td>
+                <td><strong>Roles &amp; responsibilities</strong></td>
+                <td>Ai identify, analyze, respond, monitor risks</td>
               </tr>
               <tr>
-                <td><strong>Adaptive</strong></td>
-                <td>High uncertainty, requirements evolve</td>
-                <td>Iterations, frequent feedback</td>
+                <td><strong>Methodology</strong></td>
+                <td>Công cụ/kỹ thuật cho từng hoạt động risk</td>
               </tr>
               <tr>
-                <td><strong>Incremental</strong></td>
-                <td>Deliver value in chunks</td>
-                <td>Partial deliverables, có thể kết hợp agile</td>
+                <td><strong>Timing &amp; frequency</strong></td>
+                <td>Khi nào thực hiện risk activities trong project lifecycle</td>
               </tr>
               <tr>
-                <td><strong>Hybrid</strong></td>
-                <td>Mix of stable + evolving parts</td>
-                <td>Predictive hardware + adaptive software, v.v.</td>
+                <td><strong>Risk categories &amp; definitions</strong></td>
+                <td>Thống nhất ngôn ngữ và cách phân loại rủi ro</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q95?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Brainstorm risks + Risk Register</strong></td>
+                <td>Identify risks — output register</td>
+                <td>✗ Identify step — cần plan định nghĩa cách identify trước</td>
+              </tr>
+              <tr>
+                <td><strong>B. Develop the risk management plan</strong></td>
+                <td>Định nghĩa cách conduct risk management (p.95–96)</td>
+                <td>✓ Đúng — no agreement on process → plan first</td>
+              </tr>
+              <tr>
+                <td><strong>C. Perform qualitative risk analysis</strong></td>
+                <td>Ưu tiên risks đã identify</td>
+                <td>✗ Analyze step — sau identify, cần plan trước</td>
+              </tr>
+              <tr>
+                <td><strong>D. Plan risk responses</strong></td>
+                <td>Chọn chiến lược mitigate/transfer/accept</td>
+                <td>✗ Respond step — quá sớm, chưa có process framework</td>
               </tr>
             </tbody>
           </table>
         </section>
 
-        <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 14</h2>
+                <section id="compare">
+          <h2>2. So sánh: Q95 Plan vs Q96–Q100 (Plan → Identify → Analyze → Respond → Implement)</h2>
+
+          <table>
+            <thead>
+              <tr><th>Câu</th><th>Giai đoạn</th><th>Mục đích</th><th>Signal trong stem</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Q95 — Risk Mgmt Plan (B)</strong></td>
+                <td><strong>Plan</strong> risk management</td>
+                <td>Định nghĩa HOW to conduct risk activities</td>
+                <td><em>No agreement</em> on identify/analyze/monitor · planning slowing · uncertainty</td>
+              </tr>
+              <tr>
+                <td><strong>Q96 — Risk Register (D)</strong></td>
+                <td><strong>Identify</strong> — output</td>
+                <td>Ghi rủi ro vừa xác định trong workshop</td>
+                <td>Workshop <em>identifies potential events</em></td>
+              </tr>
+              <tr>
+                <td><strong>Q98 — Qualitative (C)</strong></td>
+                <td><strong>Analyze</strong></td>
+                <td>Ưu tiên khi budget hạn chế</td>
+                <td><em>Limited budget</em> · cannot address all</td>
+              </tr>
+              <tr>
+                <td><strong>Q99 — Mitigate (A)</strong></td>
+                <td><strong>Respond</strong></td>
+                <td>Chiến lược giảm likelihood/impact</td>
+                <td><em>Can be reduced</em></td>
+              </tr>
+              <tr>
+                <td><strong>Q100 — Change Request (C)</strong></td>
+                <td><strong>Implement</strong></td>
+                <td>CR khi response impact baseline</td>
+                <td><em>Impacts timeline &amp; budget</em></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card info">
+            <h4>Plan trước — Identify/Analyze/Respond sau</h4>
+            <p style="margin:0">
+              <strong>Q95 — Plan Risk Management:</strong> Chưa có thống nhất về <em>cách</em> làm risk management
+              → develop <strong>risk management plan</strong> trước mọi thứ.<br><br>
+              <strong>Q96+:</strong> Sau khi có plan, mới identify (register/SWOT), analyze (qualitative),
+              respond (mitigate), implement (change request).<br><br>
+              <strong>Bẫy A:</strong> Brainstorm + register = identify — đúng sau plan, sai khi chưa có agreement về process.<br><br>
+              <strong>Bẫy C/D:</strong> Analyze và respond đều giả định đã có plan và đã/sắp identify risks.
+            </p>
+          </div>
+        </section>
+
+                <section id="question">
+          <h2>3. Câu hỏi thực hành — Question 95</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q14</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q95</div>
             <div class="q-text">
-              Dr. Mitchell is managing a drug development project at EB Inc. The project operates
-              in a <em>highly regulated environment</em> with <em>phase gate approvals</em>.
-              Scope, schedule, cost, and risks are <em>defined early</em>, and
-              <em>strict change control</em> with <em>extensive upfront planning</em> is required.
-              Which development approach is being used?
+              At VL Systems, Cameron the project manager notices some future threats or impacts
+              being raised by stakeholders within the team. There is
+              <em>no clear agreement</em> on how risks will be
+              <em>identified, analyzed, or monitored</em>, and planning activities are beginning to
+              <em>slow</em> due to the <em>uncertainty in decision-making</em>.
+              What should Cameron do next?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Adaptive approach.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Hybrid approach.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Incremental approach.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Predictive approach.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Brainstorm risks with the project team and add them to the Risk Register</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Develop the risk management plan</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Perform qualitative risk analysis to prioritize risks</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Plan risk responses to reduce the uncertainty</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
-        <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+                <section id="analysis">
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn D?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Drug development + regulated + phase gates = classic predictive/waterfall context.</li>
-            <li>Scope/schedule/cost/risks defined early và expected stable — đúng p.61.</li>
-            <li>Strict change control + extensive upfront planning — không phải adaptive.</li>
-            <li>Slide ghi “Waterfall” bên cạnh Predictive.</li>
+            <li>Plan Risk Management (p.95–96) định nghĩa <strong>cách thức</strong> conduct risk activities — khớp "no agreement on how risks will be identified, analyzed, or monitored".</li>
+            <li>Risk management plan là component của project management plan — thiết lập framework trước khi team identify/analyze.</li>
+            <li>Planning slowing + uncertainty in decision-making → cần <strong>plan</strong> để thống nhất process, không nhảy sang identify hay respond.</li>
+            <li>Process bắt đầu khi project conceived và complete early — Q95 là bước đầu risk management flow.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
           <table>
             <thead>
-              <tr><th>Đáp án</th><th>Tại sao không phải</th></tr>
+              <tr><th>Đáp án</th><th>Tại sao không đúng</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Adaptive</strong></td>
-                <td>Embrace change, iterative — trái “strict change control” và “defined early”.</td>
+                <td><strong>A. Brainstorm + Risk Register</strong></td>
+                <td>Đây là <strong>Identify Risks</strong> (Q96). Chưa có agreement về <em>cách</em> identify → cần risk management plan trước, không brainstorm register ngay.</td>
               </tr>
               <tr>
-                <td><strong>B. Hybrid</strong></td>
-                <td>Mix approaches — scenario mô tả thuần predictive, không nhắc phần adaptive.</td>
+                <td><strong>C. Qualitative risk analysis</strong></td>
+                <td><strong>Analyze</strong> step (Q98) — cần risks đã identify và plan đã có. Stem hỏi về thiếu process agreement, không phải prioritize.</td>
               </tr>
               <tr>
-                <td><strong>C. Incremental</strong></td>
-                <td>Deliver từng phần — không nhấn phase gates + upfront planning extensive như đề.</td>
+                <td><strong>D. Plan risk responses</strong></td>
+                <td><strong>Respond</strong> step (Q99) — sau analyze. Uncertainty về process → plan risk management, không plan responses để "reduce uncertainty".</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Synonyms Predictive (p.61)</h4>
+            <h4>Q95 → Q96 → Q98 → Q99 → Q100 — Full Risk Flow</h4>
             <p style="margin:0">
-              waterfall · plan-driven · traditional · scope stabilized early ·
-              relatively stable baseline
+              Q95: No process agreement → <strong>Risk management plan</strong>.<br>
+              Q96: Workshop identify → <strong>Risk register</strong>.<br>
+              Q98: Limited budget → <strong>Qualitative analysis</strong>.<br>
+              Q99: Can reduce likelihood/impact → <strong>Mitigate</strong>.<br>
+              Q100: Response impacts baseline → <strong>Change request</strong>.
             </p>
           </div>
         </section>
 
-        <section id="drill">
-          <h2>5. Drill — Approach nào?</h2>
+                <section id="drill">
+          <h2>5. Drill — Plan, Identify, Analyze, hay Respond?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="PRED">
-              <span>Phase gates + strict change control + scope defined early</span>
+            <div class="classify-row" data-answer="PLAN">
+              <span>VL Systems: no agreement on how to identify/analyze/monitor risks, planning slowing (Q95)</span>
               <div class="classify-btns">
-                <button data-pick="PRED">Predictive</button>
-                <button data-pick="ADAPT">Adaptive</button>
+                <button data-pick="PLAN">Plan</button>
+                <button data-pick="IDENTIFY">Identify</button>
+                <button data-pick="ANALYZE">Analyze</button>
+                <button data-pick="RESPOND">Respond</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ADAPT">
-              <span>Requirements evolve through frequent iterations</span>
+            <div class="classify-row" data-answer="PLAN">
+              <span>Project start: PM defines risk roles, methodology, timing, and reporting in risk management plan</span>
               <div class="classify-btns">
-                <button data-pick="PRED">Predictive</button>
-                <button data-pick="ADAPT">Adaptive</button>
+                <button data-pick="PLAN">Plan</button>
+                <button data-pick="IDENTIFY">Identify</button>
+                <button data-pick="ANALYZE">Analyze</button>
+                <button data-pick="RESPOND">Respond</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="PRED">
-              <span>Highly regulated pharma with upfront planning</span>
+            <div class="classify-row" data-answer="IDENTIFY">
+              <span>Workshop lists potential threats; PM documents them in risk register (Q96)</span>
               <div class="classify-btns">
-                <button data-pick="PRED">Predictive</button>
-                <button data-pick="ADAPT">Adaptive</button>
+                <button data-pick="PLAN">Plan</button>
+                <button data-pick="IDENTIFY">Identify</button>
+                <button data-pick="ANALYZE">Analyze</button>
+                <button data-pick="RESPOND">Respond</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="ADAPT">
-              <span>Embrace change; deliver value in short cycles</span>
+            <div class="classify-row" data-answer="ANALYZE">
+              <span>Many risks identified, limited budget — rank by probability × impact (Q98)</span>
               <div class="classify-btns">
-                <button data-pick="PRED">Predictive</button>
-                <button data-pick="ADAPT">Adaptive</button>
+                <button data-pick="PLAN">Plan</button>
+                <button data-pick="IDENTIFY">Identify</button>
+                <button data-pick="ANALYZE">Analyze</button>
+                <button data-pick="RESPOND">Respond</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="RESPOND">
+              <span>Risk can be reduced — PM selects mitigate strategy (Q99)</span>
+              <div class="classify-btns">
+                <button data-pick="PLAN">Plan</button>
+                <button data-pick="IDENTIFY">Identify</button>
+                <button data-pick="ANALYZE">Analyze</button>
+                <button data-pick="RESPOND">Respond</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
-        <section id="traps">
+                <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Drug project → chọn Incremental (C)</h4>
-            <p style="margin:0">Pharma có phases nhưng đề nhấn <strong>defined early</strong> + <strong>strict CC</strong> — đó là predictive, không chỉ “deliver từng phần”.</p>
+            <h4>Bẫy 1: "Threats raised" → Brainstorm + Register (A)</h4>
+            <p style="margin:0">Có người nêu rủi ro ≠ đã sẵn sàng identify formally. Chưa có agreement về process → <strong>risk management plan (B)</strong> trước.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Chọn Hybrid vì “phức tạp”</h4>
-            <p style="margin:0">Megaproject phức tạp không tự động = hybrid. Đọc keywords: regulated + phase gates + upfront planning → D.</p>
+            <h4>Bẫy 2: "Uncertainty" → Plan responses (D)</h4>
+            <p style="margin:0">Uncertainty về <em>decision-making process</em> → plan risk <strong>management</strong>, không plan risk <strong>responses</strong>.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 3: Risk question → Qualitative analysis (C)</h4>
+            <p style="margin:0">Qualitative là analyze — cần risks đã identify. Q95 thiếu framework → plan trước.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: Nhầm Q95 và Q96</h4>
+            <p style="margin:0">Q95: no agreement on HOW → <strong>plan</strong>. Q96: workshop identified events → <strong>register</strong>.</p>
           </div>
           <div class="card tip">
-            <h4>Liên hệ Q13</h4>
-            <p style="margin:0">Predictive lifecycle → cost/staffing bell curve và risk giảm dần (Variables Over Time p.59).</p>
+            <h4>Pattern</h4>
+            <p style="margin:0"><strong>No agreement · how to identify/analyze/monitor · planning slowing · uncertainty in decision-making</strong> → Develop the risk management plan (B).</p>
           </div>
         </section>
 
-        <section id="flashcards">
+                <section id="flashcards">
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Predictive approach = gì? (p.61)</div>
-            <div class="flashcard-back">Waterfall/plan-driven — scope stable early, upfront planning, strict change control.</div>
+            <div class="flashcard-front">Plan Risk Management? (p.95–96)</div>
+            <div class="flashcard-back">Định nghĩa <strong>HOW</strong> conduct risk activities. Output: <strong>Risk Management Plan</strong> — component of PM Plan. Complete <strong>early</strong> in project.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q14 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Predictive approach.</div>
+            <div class="flashcard-front">Q95 đáp án?</div>
+            <div class="flashcard-back"><strong>B — Develop the risk management plan</strong>. VL Systems · no agreement on identify/analyze/monitor · planning slowing.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Q95 vs Q96?</div>
+            <div class="flashcard-back">Q95: no process agreement → <strong>Plan</strong>. Q96: workshop identified → <strong>Register</strong> (identify output).</div>
           </div></div>
         </section>
 
-        <section id="cheatsheet">
+                <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">PREDICTIVE APPROACH — Q14 (PMBOK 8, p.61)
+          <div class="cheat-sheet">PLAN RISK MANAGEMENT — Q95
+(PMBOK 8, p.95–96 Plan Risk Management · p.134–136)
 ─────────────────────────────────────────────────────
-WHEN: Scope can be STABILIZED EARLY
-ALSO CALLED: Waterfall · Plan-driven · Traditional
+DOMAIN: Uncertainty
+PROCESS: Plan Risk Management (FIRST risk process)
+OUTPUT: Risk Management Plan (component of PM Plan)
+KEY: Define HOW to identify · analyze · respond · monitor
 
-DEFINED EARLY &amp; STABLE:
-  Scope · Schedule · Cost · Resources · Quality · Risks
+WHEN: Project conceived · complete EARLY
+      Before identify/analyze/respond activities
 
-KEYWORDS → PREDICTIVE (D):
-  Highly regulated · Phase gate approvals
-  Strict change control · Extensive upfront planning
-  Defined early · Expected to remain stable
+PLAN (B): No agreement on risk process
+  → Roles · methodology · timing · categories
+  → Framework before any risk work
 
-Q14 ANSWER: D — Predictive approach
+IDENTIFY (A trap): Brainstorm + Risk Register
+  → AFTER plan defines how to identify (Q96)
+
+ANALYZE (C trap): Qualitative prioritization
+  → AFTER risks identified (Q98)
+
+RESPOND (D trap): Plan risk responses
+  → AFTER analyze (Q99)
+
+SCENARIO: VL Systems — Cameron PM
+           Threats/impacts RAISED by stakeholders
+           NO AGREEMENT on identify · analyze · monitor
+           PLANNING SLOWING — uncertainty in decisions
+NEXT → B) DEVELOP THE RISK MANAGEMENT PLAN ✓
 
 NOT:
-  A Adaptive → change, iterations
-  B Hybrid → mix (not described here)
-  C Incremental → partial delivery focus
+  A) BRAINSTORM + REGISTER — identify, need plan first
+  C) QUALITATIVE ANALYSIS — analyze, too early
+  D) PLAN RISK RESPONSES — respond, too early
 
-SCENARIO: EB Inc drug development — regulated + phase gates
+FULL RISK FLOW (Q95–Q100):
+  Q95 Plan → Q96 Identify → Q98 Analyze → Q99 Respond → Q100 Implement
 
-REF: The Standard for Project Management, p.61
-     "Predictive Approaches"</div>
+SIGNAL KEYWORDS:
+  Plan:     no agreement, how to identify/analyze/monitor,
+            process, framework, planning slowing, uncertainty
+            in decision-making, early, methodology
+  Identify: workshop, brainstorm, list risks, register
+  Analyze:  prioritize, limited budget, probability × impact
+  Respond:  mitigate, transfer, accept, strategy
+
+Q95 ANSWER: B — Develop the risk management plan
+
+REF: PMBOK Guide, 8th Ed., p.95–96 Plan Risk Management
+      p.134–136 Risk Management Plan</div>
         </section>
 
 
 
 
-
-
-
-
-
-
-
-
+                <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
+          <a class="lesson-pager-btn" href="pmp-teach-control-charts.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q94: Control Charts</span></a>
+          <span class="lesson-pager-pos">Q95 / 100</span>
+          <a class="lesson-pager-btn next" href="pmp-teach-identify-risks.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q96: Identify Risks</span></a>
+        </nav>
 
         <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
-          <a class="lesson-pager-btn" href="pmp-teach-variables-over-time.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q13: Variables Over Time</span></a>
-          <span class="lesson-pager-pos">Q14 / 100</span>
-          <a class="lesson-pager-btn next" href="pmp-teach-adaptive-approach.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q15: Adaptive Approach</span></a>
+          <a class="lesson-pager-btn" href="pmp-teach-control-charts.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q94: Control Charts</span></a>
+          <span class="lesson-pager-pos">Q95 / 100</span>
+          <a class="lesson-pager-btn next" href="pmp-teach-identify-risks.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q96: Identify Risks</span></a>
         </nav>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-variables-over-time.html">Q13: Variables Over Time</a>
+          · <a href="pmp-teach-control-charts.html">Q94: Control Charts</a>
+          · <a href="pmp-teach-identify-risks.html">Q96: Identify Risks</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
     </div>
   </div>
 
-  <script>
+        <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Adaptive = iterative, embrace change — trái strict change control và defined early.",
-        B: "Hybrid = mix predictive + adaptive — scenario mô tả thuần predictive.",
-        C: "Incremental = deliver từng phần — không khớp phase gates + extensive upfront planning.",
-        D: "Đúng! Regulated drug dev + phase gates + defined early + strict CC = Predictive (waterfall/plan-driven)."
+        A: "Brainstorm + Risk Register là Identify Risks (Q96). Chưa có agreement về cách identify → cần risk management plan trước.",
+        B: "Đúng! Plan Risk Management (p.95–96) định nghĩa cách conduct risk activities — khớp no agreement on identify/analyze/monitor và planning slowing.",
+        C: "Qualitative analysis là bước Analyze (Q98) — sau identify. Q95 thiếu process framework → plan trước.",
+        D: "Plan risk responses là bước Respond (Q99) — quá sớm. Uncertainty về process → develop risk management plan, không plan responses."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -548,7 +660,7 @@ REF: The Standard for Project Management, p.61
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Predictive approach.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Develop the risk management plan</strong>" : "");
         });
       });
       let score = 0;
@@ -576,16 +688,18 @@ REF: The Standard for Project Management, p.61
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
