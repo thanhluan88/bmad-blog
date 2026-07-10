@@ -4,484 +4,148 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PMP MINDSET — Bài học tương tác</title>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f1419;
-      --surface: #1a2332;
-      --surface2: #243044;
-      --text: #e8edf4;
-      --muted: #8b9cb3;
-      --accent: #e94560;
-      --accent2: #4ade80;
-      --warn: #fbbf24;
-      --info: #60a5fa;
-      --border: #2d3a4f;
-      --shadow: 0 12px 40px rgba(0,0,0,0.35);
-      --radius: 12px;
+      --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
+      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --ok: #059669; --ok-bg: #ecfdf5; --ok-border: #a7f3d0;
+      --bad: #dc2626; --bad-bg: #fef2f2; --bad-border: #fecaca;
+      --info: #2563eb; --info-bg: #eff6ff; --info-border: #bfdbfe;
+      --border: #e5e7eb; --shadow: 0 8px 24px rgba(15,23,42,0.08);
+      --radius: 14px; --sidebar-w: 260px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; width: 100%; }
-    body {
-      font-family: 'Be Vietnam Pro', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      width: 100%;
-      min-height: 100dvh;
-    }
-
-    /* Layout */
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
-      min-height: 100dvh;
-      width: 100%;
-    }
-    @media (max-width: 960px) {
-      .layout { grid-template-columns: 1fr; }
-      .sidebar { display: none; }
-      .mobile-nav { display: flex !important; }
-    }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: 100dvh; width: 100%; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } .mobile-nav { display: flex !important; } }
 
     /* Sidebar */
-    .sidebar {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-      background: var(--surface);
-      border-right: 1px solid var(--border);
-      padding: 1.5rem 1rem;
-    }
-    .sidebar .logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 0.25rem;
-    }
-    .sidebar .sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .sidebar nav a {
-      display: block;
-      padding: 0.55rem 0.75rem;
-      color: var(--muted);
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      margin-bottom: 2px;
-      transition: all 0.15s;
-    }
-    .sidebar nav a:hover,
-    .sidebar nav a.active {
-      background: var(--surface2);
-      color: var(--text);
-    }
-    .sidebar nav a.active { border-left: 3px solid var(--accent); }
-    .progress-box {
-      margin-top: 1.5rem;
-      padding: 1rem;
-      background: var(--surface2);
-      border-radius: var(--radius);
-    }
-    .progress-box label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-    .progress-bar {
-      height: 8px;
-      background: var(--border);
-      border-radius: 99px;
-      overflow: hidden;
-    }
-    .progress-bar span {
-      display: block;
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      width: 0%;
-      transition: width 0.4s ease;
-    }
-    .progress-text {
-      font-size: 0.85rem;
-      margin-top: 0.5rem;
-      color: var(--accent2);
-      font-weight: 600;
-    }
+    .sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--card); border-right: 1px solid var(--border); padding: 1.25rem 1rem 2rem; }
+    .sidebar .brand { font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .sidebar .brand-sub { font-size: 0.78rem; color: var(--muted); margin: 0.2rem 0 1rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+    .sidebar nav a { display: block; padding: 0.45rem 0.65rem; color: var(--muted); text-decoration: none; border-radius: 8px; font-size: 0.86rem; margin-bottom: 1px; }
+    .sidebar nav a:hover, .sidebar nav a.active { background: var(--primary-bg); color: var(--primary-dark); }
+    .sidebar nav a.active { font-weight: 600; border-left: 3px solid var(--primary); }
+    .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
+    .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
+    .back-link:hover { background: var(--primary-dark); }
+    .progress-box { margin-top: 1.25rem; padding: 0.9rem 1rem; background: var(--primary-bg); border: 1px solid #fde68a; border-radius: 10px; }
+    .progress-box label { font-size: 0.78rem; color: var(--primary-dark); font-weight: 600; display: block; margin-bottom: 0.5rem; }
+    .progress-bar { height: 7px; background: #fde68a; border-radius: 99px; overflow: hidden; }
+    .progress-bar span { display: block; height: 100%; background: var(--primary); width: 0%; transition: width 0.4s ease; }
+    .progress-text { font-size: 0.82rem; margin-top: 0.45rem; color: var(--primary-dark); font-weight: 600; }
 
     /* Mobile nav */
-    .mobile-nav {
-      display: none;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 0.75rem 1rem;
-      gap: 0.5rem;
-      overflow-x: auto;
-    }
-    .mobile-nav a {
-      white-space: nowrap;
-      padding: 0.4rem 0.75rem;
-      background: var(--surface2);
-      color: var(--muted);
-      text-decoration: none;
-      border-radius: 99px;
-      font-size: 0.8rem;
-    }
+    .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
+    .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
 
     /* Main */
-    main {
-      padding: 2rem clamp(1.25rem, 3vw, 3rem) 4rem;
-      width: 100%;
-      min-width: 0;
-      max-width: none;
-    }
-    @media (max-width: 600px) { main { padding: 1.25rem; } }
+    main { padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; width: 100%; min-width: 0; max-width: none; }
+    p { margin-bottom: 0.75rem; }
+    ul, ol { margin: 0 0 1rem 1.2rem; }
+    li { margin-bottom: 0.35rem; }
 
-    .hero p,
-    section > p,
-    .card > p:first-of-type {
-      max-width: 72ch;
-    }
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); color: var(--primary-dark); }
+    .hero p { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 62ch; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 99px; background: #fff; border: 1px solid var(--border); color: var(--primary-dark); font-weight: 500; }
 
-    .hero {
-      margin-bottom: 2.5rem;
-      padding: 2rem;
-      background: linear-gradient(135deg, var(--surface) 0%, #1e2d42 100%);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-    }
-    .hero h1 {
-      font-size: 1.85rem;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(90deg, var(--accent), #ff8fa3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero p { color: var(--muted); max-width: 640px; }
-    .badge-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-    .badge {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.65rem;
-      border-radius: 99px;
-      background: var(--surface2);
-      color: var(--info);
-      border: 1px solid var(--border);
-    }
-
-    section {
-      margin-bottom: 3rem;
-      scroll-margin-top: 1rem;
-    }
-    section h2 {
-      font-size: 1.35rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--border);
-    }
-    section h3 {
-      font-size: 1.05rem;
-      color: var(--warn);
-      margin: 1.25rem 0 0.75rem;
-    }
-    p { margin-bottom: 0.75rem; color: var(--text); }
-    ul, ol { margin: 0 0 1rem 1.25rem; }
-    li { margin-bottom: 0.35rem; color: #c5d0de; }
+    /* Sections */
+    section { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
+    section > h2 { font-size: 1.3rem; margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); color: var(--primary-dark); }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; color: var(--text); }
+    section p { margin: 0 0 0.75rem; }
+    section ul, section ol { margin: 0 0 1rem 1.2rem; }
+    section li { margin-bottom: 0.35rem; }
 
     /* Cards */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-    }
-    .card.highlight {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(233,69,96,0.2);
-    }
-    .card.green { border-color: rgba(74,222,128,0.4); }
-    .card.blue { border-color: rgba(96,165,250,0.4); }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
+    .card h3 { margin: 0 0 0.75rem; }
+    .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .card.highlight { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.green { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.blue { border-left: 4px solid var(--info); background: var(--info-bg); }
+    .card.do { border-top: 4px solid var(--ok); border-left: none; background: var(--ok-bg); }
+    .card.dont { border-top: 4px solid var(--bad); border-left: none; background: var(--bad-bg); }
+    .card.do h4 { color: #065f46; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .card.dont h4 { color: #991b1b; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
 
     /* Tables */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
-      font-size: 0.9rem;
-    }
-    th, td {
-      border: 1px solid var(--border);
-      padding: 0.65rem 0.85rem;
-      text-align: left;
-    }
-    th {
-      background: var(--surface2);
-      color: var(--accent);
-      font-weight: 600;
-    }
-    tr:nth-child(even) td { background: rgba(36,48,68,0.4); }
+    table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
+    th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
+    tr:last-child td { border-bottom: none; }
+    code { background: var(--bg); border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.85em; color: var(--primary-dark); }
 
-    /* Flow diagram */
-    .flow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-      margin: 1rem 0;
-    }
-    .flow-step {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      padding: 0.5rem 0.85rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-    .flow-step.emphasis {
-      background: rgba(233,69,96,0.15);
-      border-color: var(--accent);
-      color: #ff8fa3;
-    }
+    /* Flow */
+    .flow { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1rem 0; }
+    .flow-step { background: var(--card); border: 1px solid var(--border); padding: 0.45rem 0.85rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .flow-step.emphasis { background: var(--primary-bg); border-color: #fde68a; color: var(--primary-dark); }
     .flow-arrow { color: var(--muted); font-size: 1.2rem; }
 
-    /* Quiz */
-    .quiz-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      margin-bottom: 1.25rem;
-    }
-    .quiz-card.answered-correct { border-color: var(--accent2); }
-    .quiz-card.answered-wrong { border-color: var(--accent); }
-    .quiz-num {
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-    .quiz-stem {
-      font-weight: 500;
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-    .options { display: flex; flex-direction: column; gap: 0.5rem; }
-    .option {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.65rem;
-      padding: 0.75rem 1rem;
-      background: var(--surface2);
-      border: 2px solid transparent;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.15s;
-      text-align: left;
-      color: var(--text);
-      font-family: inherit;
-      font-size: 0.9rem;
-      width: 100%;
-    }
-    .option:hover:not(:disabled) { border-color: var(--info); }
-    .option:disabled { cursor: default; opacity: 0.85; }
-    .option.correct { border-color: var(--accent2); background: rgba(74,222,128,0.1); }
-    .option.wrong { border-color: var(--accent); background: rgba(233,69,96,0.1); }
-    .option .letter {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-    .explanation {
-      display: none;
-      margin-top: 1rem;
-      padding: 1rem;
-      background: rgba(96,165,250,0.08);
-      border-left: 3px solid var(--info);
-      border-radius: 0 8px 8px 0;
-      font-size: 0.9rem;
-    }
-    .explanation.show { display: block; }
-    .explanation strong { color: var(--info); }
+    /* Compare */
+    .compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .compare { grid-template-columns: 1fr; } }
 
-    /* Flashcards */
-    .flash-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1rem;
-      margin: 1rem 0;
-    }
-    .flash {
-      perspective: 800px;
-      height: 160px;
-      cursor: pointer;
-    }
-    .flash-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.5s;
-      transform-style: preserve-3d;
-    }
-    .flash.flipped .flash-inner { transform: rotateY(180deg); }
-    .flash-front, .flash-back {
-      position: absolute;
-      inset: 0;
-      backface-visibility: hidden;
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-    .flash-front {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      font-weight: 600;
-    }
-    .flash-back {
-      background: rgba(233,69,96,0.12);
-      border: 1px solid var(--accent);
-      transform: rotateY(180deg);
-      color: #ffb3c1;
-    }
-    .flash-hint {
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-align: center;
-      margin-bottom: 0.75rem;
-    }
+    /* Framework grid */
+    .framework-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .fw-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
+    .fw-box h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .fw-box ul { margin: 0; padding-left: 1.1rem; font-size: 0.85rem; }
+    .fw-box.predictive { border-top: 3px solid var(--info); }
+    .fw-box.predictive h4 { color: var(--info); }
+    .fw-box.agile { border-top: 3px solid var(--ok); }
+    .fw-box.agile h4 { color: var(--ok); }
+    .fw-box.hybrid { border-top: 3px solid var(--primary); }
+    .fw-box.hybrid h4 { color: var(--primary-dark); }
 
-    /* Compare boxes */
-    .compare {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      margin: 1rem 0;
-    }
-    @media (max-width: 900px) { .compare { grid-template-columns: 1fr; } }
-    .compare .do { border-top: 3px solid var(--accent2); }
-    .compare .dont { border-top: 3px solid var(--accent); }
-    .compare h4 {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 0.75rem;
-    }
-    .compare .do h4 { color: var(--accent2); }
-    .compare .dont h4 { color: var(--accent); }
-
-    /* Footer */
-    footer {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-
-    .tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      background: var(--surface2);
-      color: var(--warn);
-      margin-right: 0.35rem;
-      vertical-align: middle;
-    }
-    .reset-btn {
-      margin-top: 1rem;
-      padding: 0.6rem 1.2rem;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.85rem;
-    }
-    .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* Part 3 — Framework tabs & traps */
-    .ka-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1rem;
-    }
-    .ka-tab {
-      padding: 0.4rem 0.75rem;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-      color: var(--muted);
-      border-radius: 99px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.8rem;
-      transition: all 0.15s;
-    }
-    .ka-tab.active {
-      background: rgba(233,69,96,0.15);
-      border-color: var(--accent);
-      color: #ffb3c1;
-    }
+    /* KA Tabs */
+    .ka-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .ka-tab { padding: 0.4rem 0.75rem; border: 1px solid var(--border); background: var(--bg); color: var(--muted); border-radius: 99px; cursor: pointer; font-family: inherit; font-size: 0.8rem; transition: all 0.15s; }
+    .ka-tab:hover { border-color: var(--primary); color: var(--primary-dark); background: var(--primary-bg); }
+    .ka-tab.active { background: var(--primary-bg); border-color: #fde68a; color: var(--primary-dark); font-weight: 600; }
     .trap-panel { display: none; }
     .trap-panel.active { display: block; }
-    .trap-item {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 0.75rem;
-    }
-    .trap-item .real { color: var(--accent); font-size: 0.85rem; margin-bottom: 0.35rem; }
-    .trap-item .pmi { color: var(--accent2); font-size: 0.85rem; }
-    .framework-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 0.75rem;
-      margin: 1rem 0;
-    }
-    .fw-box {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem;
-    }
-    .fw-box h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
-    .fw-box.predictive h4 { color: var(--info); }
-    .fw-box.agile h4 { color: var(--accent2); }
-    .fw-box.hybrid h4 { color: var(--warn); }
-    .fw-box ul { margin: 0; padding-left: 1.1rem; font-size: 0.85rem; }
-    .quiz-card .lang-tag {
-      font-size: 0.7rem;
-      color: var(--info);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-left: 0.5rem;
-    }
+    .trap-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; }
+    .trap-item .real { color: var(--bad); font-size: 0.85rem; margin-bottom: 0.35rem; }
+    .trap-item .pmi { color: var(--ok); font-size: 0.85rem; }
+
+    /* Flashcards */
+    .flash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .flash { perspective: 800px; height: 160px; cursor: pointer; }
+    .flash-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
+    .flash.flipped .flash-inner { transform: rotateY(180deg); }
+    .flash-front, .flash-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); padding: 1.25rem; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.9rem; }
+    .flash-front { background: var(--card); border: 1px solid var(--border); font-weight: 600; }
+    .flash-back { background: var(--primary-bg); border: 1px solid #fde68a; transform: rotateY(180deg); color: var(--primary-dark); }
+    .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
+
+    /* Quiz */
+    .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+    .quiz-card.answered-correct { border-color: var(--ok); }
+    .quiz-card.answered-wrong { border-color: var(--bad); }
+    .quiz-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
+    .quiz-stem { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .options { display: flex; flex-direction: column; gap: 0.45rem; }
+    .option { display: flex; align-items: flex-start; gap: 0.65rem; width: 100%; text-align: left; padding: 0.65rem 0.9rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; color: var(--text); transition: all 0.15s; }
+    .option:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
+    .option.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
+    .option.wrong { border-color: var(--bad); background: var(--bad-bg); color: #991b1b; opacity: 0.85; }
+    .option:disabled { cursor: default; }
+    .option .letter { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #e5e7eb; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; color: var(--text); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; border-radius: 10px; font-size: 0.9rem; background: var(--info-bg); border: 1px solid var(--info-border); }
+    .explanation.show { display: block; }
+    .explanation strong { color: var(--info); }
+    .lang-tag { font-size: 0.7rem; color: var(--info); text-transform: uppercase; letter-spacing: 0.04em; margin-left: 0.5rem; font-weight: 400; }
+    .reset-btn { margin-top: 1rem; padding: 0.6rem 1.2rem; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 8px; cursor: pointer; font-family: inherit; font-size: 0.85rem; }
+    .reset-btn:hover { border-color: var(--primary); color: var(--primary-dark); }
+    .tag { display: inline-block; font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 4px; background: var(--primary-bg); color: var(--primary-dark); margin-right: 0.35rem; vertical-align: middle; border: 1px solid #fde68a; }
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
   </style>
+  <link rel="stylesheet" href="pmp-teach-fullscreen.css">
 </head>
 <body>
   <div class="mobile-nav">
@@ -496,8 +160,8 @@
 
   <div class="layout">
     <aside class="sidebar">
-      <div class="logo">PMP MINDSET</div>
-      <div class="sub">Bài học tương tác · PMI Mindset</div>
+      <div class="brand">PMP MINDSET</div>
+      <div class="brand-sub">Bài học tương tác · PMI Mindset</div>
       <nav>
         <a href="#intro" class="active">0. Giới thiệu</a>
         <a href="#mindset">1. Mindset cốt lõi</a>
@@ -507,12 +171,157 @@
         <a href="#quiz">5. Drill 10 câu (EN)</a>
         <a href="#cheatsheet">6. Cheat sheet</a>
       </nav>
-      <a class="quiz-link" href="pmp-exam-prep-lecture.html" style="display:block;margin-top:1.25rem;padding:0.65rem 0.85rem;background:#e94560;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-weight:600;font-size:0.88rem;">← Bài giảng PMP</a>
+      <a class="back-link" href="pmp-exam-prep-lecture.html">← Bài giảng PMP</a>
       <div class="progress-box">
         <label>Tiến độ Drill</label>
         <div class="progress-bar"><span id="progressFill"></span></div>
         <div class="progress-text" id="progressText">0 / 10 câu</div>
       </div>
+      <div class="nav-series">Practice Series</div>
+      <a href="pmp-teach-series-index.html" class="nav-series-index">📚 Nhóm theo chủ đề</a>
+      <details class="nav-series-group">
+        <summary>Q1–10 · Nền tảng PMBOK 8 & Tổ chức</summary>
+        <a href="pmp-teach-project-program-portfolio.html">Q1: Project/Program/Portfolio</a>
+        <a href="pmp-teach-tangible-intangible-benefits.html">Q2: Tangible/Intangible</a>
+        <a href="pmp-teach-enterprise-environmental-factors.html">Q3: EEF</a>
+        <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
+        <a href="pmp-teach-organizational-structure.html">Q5: Org Structure</a>
+        <a href="pmp-teach-functional-organization.html">Q6: Functional</a>
+        <a href="pmp-teach-project-functions.html">Q7: Project Functions</a>
+        <a href="pmp-teach-project-sponsor.html">Q8: Project Sponsor</a>
+        <a href="pmp-teach-project-management-team.html">Q9: PM Team</a>
+        <a href="pmp-teach-focus-on-value.html">Q10: Focus on Value</a>
+      </details>
+      <details class="nav-series-group">
+        <summary>Q11–20 · Nguyên tắc & Khởi tạo</summary>
+        <a href="pmp-teach-embed-quality.html">Q11: Embed Quality</a>
+        <a href="pmp-teach-accountable-leader.html">Q12: Accountable Leader</a>
+        <a href="pmp-teach-variables-over-time.html">Q13: Variables Over Time</a>
+        <a href="pmp-teach-predictive-approach.html">Q14: Predictive Approach</a>
+        <a href="pmp-teach-adaptive-approach.html">Q15: Adaptive Approach</a>
+        <a href="pmp-teach-hybrid-approach.html">Q16: Hybrid Approach</a>
+        <a href="pmp-teach-leading-indicators.html">Q17: Leading Indicators</a>
+        <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
+        <a href="pmp-teach-business-case.html">Q19: Business Case</a>
+        <a href="pmp-teach-assumption-log.html">Q20: Assumption Log</a>
+      </details>
+      <details class="nav-series-group">
+        <summary>Q21–30 · Kế hoạch & Procurement</summary>
+        <a href="pmp-teach-project-management-plan.html">Q21: Project Management Plan</a>
+        <a href="pmp-teach-plan-sourcing-strategy.html">Q22: Plan Sourcing Strategy</a>
+        <a href="pmp-teach-bidder-conference.html">Q23: Bidder Conference</a>
+        <a href="pmp-teach-sourcing-strategy-plan.html">Q24: Sourcing Strategy Plan</a>
+        <a href="pmp-teach-make-or-buy-analysis.html">Q25: Make-or-Buy Analysis</a>
+        <a href="pmp-teach-request-for-quote.html">Q26: Request for Quote</a>
+        <a href="pmp-teach-change-log.html">Q27: Change Log</a>
+        <a href="pmp-teach-scope-baseline-execution.html">Q28: Scope Baseline</a>
+        <a href="pmp-teach-issue-log.html">Q29: Issue Log</a>
+        <a href="pmp-teach-process-improvement.html">Q30: Process Improvement</a>
+      </details>
+      <details class="nav-series-group">
+        <summary>Q31–40 · Quality · M&C · Thay đổi</summary>
+        <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
+        <a href="pmp-teach-checklists.html">Q32: Checklists</a>
+        <a href="pmp-teach-lessons-learned.html">Q33: Lessons Learned</a>
+        <a href="pmp-teach-after-action-review.html">Q34: After-Action Review</a>
+        <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
+        <a href="pmp-teach-ishikawa-analysis.html">Q36: Ishikawa Analysis</a>
+        <a href="pmp-teach-change-request.html">Q37: Change Request</a>
+        <a href="pmp-teach-change-management-plan.html">Q38: Change Mgmt Plan</a>
+        <a href="pmp-teach-autocratic-decision.html">Q39: Autocratic Decision</a>
+        <a href="pmp-teach-close-project.html">Q40: Close Project</a>
+      </details>
+      <details class="nav-series-group">
+        <summary>Q41–50 · Scope & Requirements</summary>
+        <a href="pmp-teach-final-report.html">Q41: Final Report</a>
+        <a href="pmp-teach-scope-management-plan.html">Q42: Scope Mgmt Plan</a>
+        <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
+        <a href="pmp-teach-requirements-traceability.html">Q44: Requirements RTM</a>
+        <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
+        <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
+        <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
+        <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
+        <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
+        <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
+      </details>
+      <details class="nav-series-group">
+        <summary>Q51–60 · WBS · Quality · Schedule</summary>
+        <a href="pmp-teach-work-breakdown-structure.html">Q51: WBS</a>
+        <a href="pmp-teach-wbs-dictionary.html">Q52: WBS Dictionary</a>
+        <a href="pmp-teach-quality-report.html">Q53: Quality Report</a>
+        <a href="pmp-teach-verified-deliverables.html">Q54: Verified Deliverables</a>
+        <a href="pmp-teach-schedule-management-plan.html">Q55: Schedule Mgmt Plan</a>
+        <a href="pmp-teach-development-approach-schedule.html">Q56: Dev Approach Input</a>
+        <a href="pmp-teach-schedule-baseline.html">Q57: Schedule Baseline</a>
+        <a href="pmp-teach-resource-leveling.html">Q58: Resource Leveling</a>
+        <a href="pmp-teach-rolling-wave-planning.html">Q59: Rolling Wave</a>
+        <a href="pmp-teach-leads-and-lags.html">Q60: Leads &amp; Lags</a>
+      </details>
+      <details class="nav-series-group">
+        <summary>Q61–70 · Schedule & Cost</summary>
+        <a href="pmp-teach-work-performance-information.html">Q61: Work Perf. Info</a>
+        <a href="pmp-teach-branch-and-bound.html">Q62: Branch &amp; Bound</a>
+        <a href="pmp-teach-schedule-fast-tracking.html">Q63: Fast Tracking</a>
+        <a href="pmp-teach-financial-management-plan.html">Q64: Financial Mgmt Plan</a>
+        <a href="pmp-teach-funding-strategy.html">Q65: Funding Strategy</a>
+        <a href="pmp-teach-analogous-estimating.html">Q66: Analogous Est.</a>
+        <a href="pmp-teach-failure-costs.html">Q67: Failure Costs</a>
+        <a href="pmp-teach-contingency-reserve.html">Q68: Contingency</a>
+        <a href="pmp-teach-cost-aggregation.html">Q69: Cost Aggregation</a>
+        <a href="pmp-teach-basis-of-estimates.html">Q70: Basis of Est.</a>
+      </details>
+      <details class="nav-series-group">
+        <summary>Q71–80 · EVM & Stakeholders</summary>
+        <a href="pmp-teach-earned-value-analysis.html">Q71: Earned Value</a>
+        <a href="pmp-teach-identify-stakeholders.html">Q72: Identify Stakeholders</a>
+        <a href="pmp-teach-stakeholder-register.html">Q73: Stakeholder Register</a>
+        <a href="pmp-teach-stakeholder-mapping.html">Q74: Stakeholder Mapping</a>
+        <a href="pmp-teach-stakeholder-engagement-matrix.html">Q75: Engagement Matrix</a>
+        <a href="pmp-teach-communications-management-plan.html">Q76: Comms Mgmt Plan</a>
+        <a href="pmp-teach-communication-styles-assessment.html">Q77: Comms Styles</a>
+        <a href="pmp-teach-cultural-awareness.html">Q78: Cultural Awareness</a>
+        <a href="pmp-teach-manage-communications.html">Q79: Manage Comms</a>
+        <a href="pmp-teach-monitor-stakeholder-engagement.html">Q80: Monitor Engagement</a>
+      </details>
+      <details class="nav-series-group">
+        <summary>Q81–90 · Team & Resources</summary>
+        <a href="pmp-teach-monitor-communications.html">Q81: Monitor Comms</a>
+        <a href="pmp-teach-team-charter.html">Q82: Team Charter</a>
+        <a href="pmp-teach-responsibility-assignment-matrix.html">Q83: RAM</a>
+        <a href="pmp-teach-parkinsons-law.html">Q84: Parkinson's Law</a>
+        <a href="pmp-teach-genetic-algorithms.html">Q85: Genetic Algorithms</a>
+        <a href="pmp-teach-resource-breakdown-structure.html">Q86: RBS</a>
+        <a href="pmp-teach-resource-calendar.html">Q87: Resource Calendar</a>
+        <a href="pmp-teach-servant-leadership.html">Q88: Servant Leadership</a>
+        <a href="pmp-teach-retrospective.html">Q89: Retrospective</a>
+        <a href="pmp-teach-distributed-management.html">Q90: Distributed Management</a>
+      </details>
+      <details class="nav-series-group">
+        <summary>Q91–100 · Team · QC · Risk</summary>
+        <a href="pmp-teach-tuckman-ladder.html">Q91: Tuckman Ladder</a>
+        <a href="pmp-teach-colocation.html">Q92: Colocation</a>
+        <a href="pmp-teach-communication-methods.html">Q93: Communication Methods</a>
+        <a href="pmp-teach-control-charts.html">Q94: Control Charts</a>
+        <a href="pmp-teach-plan-risk-management.html">Q95: Plan Risk Management</a>
+        <a href="pmp-teach-identify-risks.html">Q96: Identify Risks</a>
+        <a href="pmp-teach-swot-analysis.html">Q97: SWOT Analysis</a>
+        <a href="pmp-teach-qualitative-risk-analysis.html">Q98: Qualitative Risk Analysis</a>
+        <a href="pmp-teach-mitigate-risk.html">Q99: Mitigate Risk</a>
+        <a href="pmp-teach-implement-risk-responses.html">Q100: Implement Risk Responses</a>
+      </details>
+      <details class="nav-series-group">
+        <summary>Q101–110 · Waterfall Practice</summary>
+        <a href="pmp-teach-reserve-analysis.html">Q101: Reserve Analysis</a>
+        <a href="pmp-teach-benefits-management-plan.html">Q102: Benefits Management Plan</a>
+        <a href="pmp-teach-configuration-management-plan.html">Q103: Configuration Management Plan</a>
+        <a href="pmp-teach-affinity-diagram.html">Q104: Affinity Diagram</a>
+        <a href="pmp-teach-organizational-breakdown-structure.html">Q105: Organizational Breakdown Structure</a>
+        <a href="pmp-teach-precedence-diagramming.html">Q106: Precedence Diagramming</a>
+        <a href="pmp-teach-source-selection-criteria.html">Q107: Source Selection Criteria</a>
+        <a href="pmp-teach-negotiation.html">Q108: Negotiation</a>
+        <a href="pmp-teach-scope-creep.html">Q109: Scope Creep</a>
+        <a href="pmp-teach-return-on-investment.html">Q110: Return on Investment</a>
+      </details>
     </aside>
 
     <main>
@@ -660,7 +469,7 @@
               <tr><td>Monitoring &amp; Controlling</td><td>Monitor, Control, Validate</td></tr>
             </tbody>
           </table>
-          <p class="note" style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">
+          <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">
             Câu hỏi ở Execution → đáp án Planning thường <strong>sai</strong>.
           </p>
         </div>
@@ -669,11 +478,11 @@
           <h3>Đáp án ít có khả năng đúng</h3>
           <p>Từ cực đoan: <code>must, only, all, every, 100%, immediately, bypass, none</code></p>
           <p>Hành vi cực đoan: terminate contract, fire, stop payment, hire consultant giữa dự án, refuse customer, escalate sponsor.</p>
-          <p style="color:var(--accent2);">Đáp án thường đúng: inclusiveness, collaboration, decisiveness, face-to-face, coach.</p>
+          <p style="color:var(--ok);font-weight:500;">Đáp án thường đúng: inclusiveness, collaboration, decisiveness, face-to-face, coach.</p>
         </div>
       </section>
 
-      <!-- Section 3 Part 3 -->
+      <!-- Section 3 -->
       <section id="part3">
         <h2>3. PMI vs Thực tế &amp; Framework — Bẫy đề thi</h2>
         <p>Nhiều câu sai không phải vì thiếu kiến thức ITTO, mà vì bạn chọn theo <strong>thói quen làm việc thực tế</strong> thay vì PMI mindset.</p>
@@ -685,7 +494,7 @@
             <ul>
               <li>Fix nhanh, bỏ qua quy trình để kịp deadline</li>
               <li>Escalate lên sếp / sponsor khi gặp khó</li>
-              <li>Tự quyết thay đổi scope cho “linh hoạt”</li>
+              <li>Tự quyết thay đổi scope cho "linh hoạt"</li>
               <li>Sa thải / thay người khi performance kém</li>
               <li>Email thay vì họp trực tiếp</li>
               <li>Xin thêm budget khi over cost</li>
@@ -705,7 +514,7 @@
         </div>
 
         <h3>Nhận diện Framework — Loại đáp án sai framework</h3>
-        <p>Câu hỏi thường nói rõ context. Xác định framework trước khi chọn — loại ngay đáp án “đúng” nhưng thuộc framework khác.</p>
+        <p>Câu hỏi thường nói rõ context. Xác định framework trước khi chọn — loại ngay đáp án "đúng" nhưng thuộc framework khác.</p>
         <div class="framework-grid">
           <div class="fw-box predictive">
             <h4>Predictive / Waterfall</h4>
