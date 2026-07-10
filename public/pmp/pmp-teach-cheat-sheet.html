@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMP Cheat Sheet — Full Exam Overview</title>
+  <style>
+    :root {
+      --bg: #fafaf8; --card: #ffffff; --border: #e5e7eb;
+      --text: #1f2937; --muted: #6b7280;
+      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --ok: #059669; --ok-bg: #ecfdf5;
+      --bad: #dc2626; --bad-bg: #fef2f2;
+      --info: #2563eb; --info-bg: #eff6ff;
+      --shadow: 0 8px 24px rgba(15,23,42,0.08);
+      --radius: 14px; --sidebar-w: 260px;
+
+      /* Domain colours */
+      --people: #166534; --people-bg: #dcfce7; --people-border: #86efac;
+      --process: #92400e; --process-bg: #fffbeb; --process-border: #fde68a;
+      --biz: #1e40af; --biz-bg: #eff6ff; --biz-border: #bfdbfe;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* Layout */
+    .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: 100dvh; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } .mobile-nav { display: flex !important; } }
+
+    /* Sidebar */
+    .sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--card); border-right: 1px solid var(--border); padding: 1.25rem 1rem 2rem; }
+    .sidebar .brand { font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .sidebar .brand-sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+    .sidebar nav a { display: block; padding: 0.28rem 0.6rem; border-radius: 6px; color: var(--text); text-decoration: none; font-size: 0.82rem; }
+    .sidebar nav a:hover { background: var(--primary-bg); color: var(--primary-dark); }
+    .nav-group { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 1rem 0 0.3rem 0.4rem; }
+
+    /* Mobile nav */
+    .mobile-nav { display: none; overflow-x: auto; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+    .mobile-nav a { white-space: nowrap; padding: 0.3rem 0.8rem; background: var(--primary-bg); color: var(--primary-dark); border-radius: 20px; font-size: 0.78rem; text-decoration: none; font-weight: 600; border: 1px solid #fde68a; }
+
+    /* Main */
+    main { padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #fff, #f0fdf4); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem 2rem; margin-bottom: 2rem; }
+    .hero h1 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
+    .hero .lead { color: var(--muted); font-size: 1rem; margin-bottom: 1.2rem; }
+
+    /* Pie chart CSS-only */
+    .pie-wrap { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+    .pie { width: 120px; height: 120px; border-radius: 50%; background: conic-gradient(#f59e0b 0% 41%, #166534 41% 74%, #2563eb 74% 100%); flex-shrink: 0; }
+    .pie-legend { display: flex; flex-direction: column; gap: 0.4rem; }
+    .pie-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; }
+    .pie-dot { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+
+    /* Badges */
+    .badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
+    .badge-people { background: var(--people-bg); color: var(--people); border: 1px solid var(--people-border); }
+    .badge-process { background: var(--process-bg); color: var(--process); border: 1px solid var(--process-border); }
+    .badge-biz { background: var(--biz-bg); color: var(--biz); border: 1px solid var(--biz-border); }
+
+    /* Section headers */
+    section { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
+    h2 { font-size: 1.25rem; font-weight: 800; padding-bottom: 0.5rem; margin-bottom: 1.2rem; border-bottom: 3px solid; }
+    h2.people { color: var(--people); border-color: var(--people); }
+    h2.process { color: var(--process); border-color: var(--process); }
+    h2.biz { color: var(--biz); border-color: var(--biz); }
+    h3 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin: 1.2rem 0 0.5rem; }
+
+    /* Cards */
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.2rem; margin-bottom: 0.8rem; }
+    .card.people-card { border-left: 4px solid var(--people); }
+    .card.process-card { border-left: 4px solid var(--process); }
+    .card.biz-card { border-left: 4px solid var(--biz); }
+
+    /* Tables */
+    .tbl-wrap { overflow-x: auto; margin-bottom: 0.8rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+    th { background: #f3f4f6; font-weight: 700; padding: 0.45rem 0.75rem; text-align: left; border: 1px solid var(--border); }
+    td { padding: 0.4rem 0.75rem; border: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) td { background: #f9fafb; }
+    .th-people { background: var(--people-bg) !important; color: var(--people); }
+    .th-process { background: var(--process-bg) !important; color: var(--process); }
+    .th-biz { background: var(--biz-bg) !important; color: var(--biz); }
+
+    /* Grid layouts */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 0.8rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 0.8rem; }
+    @media (max-width: 700px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+    /* Mini cards for grids */
+    .mini-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem; }
+    .mini-card .label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 0.2rem; }
+    .mini-card .value { font-size: 0.88rem; }
+
+    /* Flow row */
+    .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.8rem; }
+    .flow-step { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.35rem 0.65rem; font-size: 0.8rem; font-weight: 600; }
+    .flow-arrow { color: var(--muted); font-size: 1rem; }
+
+    /* Tag strip */
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
+    .tag { padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.78rem; font-weight: 600; border: 1px solid; }
+    .tag-green { background: var(--people-bg); color: var(--people); border-color: var(--people-border); }
+    .tag-amber { background: var(--process-bg); color: var(--process); border-color: var(--process-border); }
+    .tag-blue { background: var(--biz-bg); color: var(--biz); border-color: var(--biz-border); }
+    .tag-gray { background: #f3f4f6; color: #374151; border-color: #d1d5db; }
+
+    /* Two-col compare */
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 0.8rem; }
+    .compare-grid .col-head { padding: 0.6rem 0.8rem; font-weight: 700; font-size: 0.85rem; text-align: center; }
+    .compare-grid .row { display: contents; }
+    .compare-grid .cell { padding: 0.35rem 0.75rem; font-size: 0.82rem; border-top: 1px solid var(--border); }
+
+    /* Tuckman timeline */
+    .tuckman { display: flex; gap: 0; margin-bottom: 0.8rem; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .tuckman-stage { flex: 1; padding: 0.6rem 0.5rem; text-align: center; font-size: 0.75rem; }
+    .tuckman-stage .stage-name { font-weight: 700; font-size: 0.82rem; }
+    .tuckman-stage:nth-child(1) { background: #f0fdf4; }
+    .tuckman-stage:nth-child(2) { background: #fef2f2; }
+    .tuckman-stage:nth-child(3) { background: #fffbeb; }
+    .tuckman-stage:nth-child(4) { background: #eff6ff; }
+    .tuckman-stage:nth-child(5) { background: #faf5ff; }
+
+    /* EI Quadrant */
+    .ei-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 2px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 0.8rem; }
+    .ei-cell { padding: 0.8rem; font-size: 0.82rem; }
+    .ei-cell .ei-title { font-weight: 700; margin-bottom: 0.3rem; }
+    .ei-cell:nth-child(1) { background: #fffbeb; border-right: 2px solid var(--border); border-bottom: 2px solid var(--border); }
+    .ei-cell:nth-child(2) { background: #eff6ff; border-bottom: 2px solid var(--border); }
+    .ei-cell:nth-child(3) { background: #f0fdf4; border-right: 2px solid var(--border); }
+    .ei-cell:nth-child(4) { background: #faf5ff; }
+
+    /* Risk color matrix */
+    .risk-cell-vl { background: #dcfce7; }
+    .risk-cell-l  { background: #fef9c3; }
+    .risk-cell-m  { background: #fef3c7; }
+    .risk-cell-h  { background: #fecaca; }
+    .risk-cell-vh { background: #ef4444; color: #fff; font-weight: 700; }
+
+    /* Stacey quadrant */
+    .stacey { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 0.8rem; }
+    .stacey-cell { padding: 0.7rem 0.8rem; font-size: 0.82rem; }
+    .stacey-cell .stacey-name { font-weight: 700; }
+    .stacey-cell:nth-child(1) { background: #fef2f2; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stacey-cell:nth-child(2) { background: #fef9c3; border-bottom: 1px solid var(--border); }
+    .stacey-cell:nth-child(3) { background: #fffbeb; border-right: 1px solid var(--border); }
+    .stacey-cell:nth-child(4) { background: #f0fdf4; }
+
+    /* EVA table highlight */
+    .eva-formula { font-family: monospace; background: #f3f4f6; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.82rem; }
+    .positive { color: #059669; font-weight: 700; }
+    .negative { color: #dc2626; font-weight: 700; }
+
+    /* ADKAR */
+    .adkar { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+    .adkar-step { flex: 1; min-width: 90px; background: var(--biz-bg); border: 1px solid var(--biz-border); border-radius: 10px; padding: 0.7rem 0.5rem; text-align: center; }
+    .adkar-letter { font-size: 1.5rem; font-weight: 800; color: var(--biz); }
+    .adkar-word { font-size: 0.72rem; font-weight: 700; color: var(--biz); }
+    .adkar-desc { font-size: 0.7rem; color: var(--muted); margin-top: 0.3rem; }
+
+    /* Quiz */
+    #quiz-section { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+    .quiz-q { margin-bottom: 1.2rem; }
+    .quiz-q p { font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .quiz-opts { display: flex; flex-direction: column; gap: 0.35rem; }
+    .quiz-opts label { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.4rem 0.6rem; border-radius: 8px; border: 1px solid var(--border); cursor: pointer; font-size: 0.85rem; transition: background 0.15s; }
+    .quiz-opts label:hover { background: var(--primary-bg); }
+    .quiz-opts input { margin-top: 0.2rem; flex-shrink: 0; }
+    #quiz-result { display: none; margin-top: 1.2rem; padding: 1rem 1.2rem; background: var(--ok-bg); border: 1px solid #6ee7b7; border-radius: 10px; font-weight: 700; }
+    #quiz-result.bad { background: var(--bad-bg); border-color: #fca5a5; }
+    .opt-correct { background: var(--ok-bg) !important; border-color: #6ee7b7 !important; }
+    .opt-wrong   { background: var(--bad-bg) !important; border-color: #fca5a5 !important; }
+    #quiz-btn { margin-top: 1rem; padding: 0.6rem 1.4rem; background: var(--primary); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.9rem; }
+    #quiz-btn:hover { background: var(--primary-dark); }
+
+    ul { padding-left: 1.2rem; }
+    li { font-size: 0.85rem; margin-bottom: 0.15rem; }
+    p { font-size: 0.85rem; }
+    strong { color: var(--text); }
+    a.ref-link { color: var(--info); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+<div class="layout">
+
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="brand">PMP Teach Series</div>
+  <div class="brand-sub">Cheat Sheet — Full Exam</div>
+  <nav>
+    <div class="nav-group">Navigation</div>
+    <a href="pmp-exam-prep-lecture.html">← Lecture Hub</a>
+    <a href="pmp-teach-process-matrix.html">Process Matrix</a>
+    <div class="nav-group">People (33%)</div>
+    <a href="#roles">Project Roles</a>
+    <a href="#stakeholders">Stakeholder Tools</a>
+    <a href="#raci">RACI</a>
+    <a href="#charter">Team Charter</a>
+    <a href="#leadership">Leadership vs Mgmt</a>
+    <a href="#styles">Leadership Styles</a>
+    <a href="#power">Types of Power</a>
+    <a href="#meetings">Meeting Management</a>
+    <a href="#motivation">Motivation Theories</a>
+    <a href="#tuckman">Tuckman's Ladder</a>
+    <a href="#problem-solving">Problem Solving</a>
+    <a href="#conflict">Conflict Resolution</a>
+    <a href="#negotiation">Negotiation</a>
+    <a href="#eq">Emotional Intelligence</a>
+    <a href="#comms-pushpull">Push vs Pull</a>
+    <div class="nav-group">Process (41%)</div>
+    <a href="#pred-agile">Predictive vs Agile</a>
+    <a href="#delivery">Delivery Approaches</a>
+    <a href="#process-matrix">PMBOK 8 Matrix</a>
+    <a href="#contracts">Contract Types</a>
+    <a href="#estimating">Estimating Methods</a>
+    <a href="#wbs">WBS Hierarchy</a>
+    <a href="#lead-lag">Lead vs Lag</a>
+    <a href="#compression">Schedule Compression</a>
+    <a href="#reserves">Reserves</a>
+    <a href="#eva">Earned Value (EVA)</a>
+    <a href="#risk-register">Risk Register</a>
+    <a href="#agile-roles">Agile Roles</a>
+    <a href="#agile-ceremonies">Agile Ceremonies</a>
+    <div class="nav-group">Business Env (26%)</div>
+    <a href="#initiation-flow">Initiation Flow</a>
+    <a href="#business-case">Business Case</a>
+    <a href="#project-charter">Project Charter</a>
+    <a href="#financial">Financial Measures</a>
+    <a href="#prioritization">Prioritization</a>
+    <a href="#change-mgmt">Change Management</a>
+    <a href="#swot">SWOT/PESTLE/VUCA</a>
+    <a href="#risk-responses">Risk Responses</a>
+    <a href="#change-models">Change Models</a>
+    <div class="nav-group">Practice</div>
+    <a href="#quiz-section">Quick Drill (10 Qs)</a>
+  </nav>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mobile-nav">
+  <a href="#roles">Roles</a>
+  <a href="#leadership">Leadership</a>
+  <a href="#tuckman">Tuckman</a>
+  <a href="#pred-agile">Pred/Agile</a>
+  <a href="#eva">EVA</a>
+  <a href="#financial">Finance</a>
+  <a href="#change-models">Change</a>
+  <a href="#quiz-section">Quiz</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>PMP Cheat Sheet — Full Exam Overview</h1>
+    <p class="lead">All key frameworks, tables, and models from the PMP exam in one scannable reference.</p>
+    <div class="pie-wrap">
+      <div class="pie"></div>
+      <div class="pie-legend">
+        <div class="pie-item"><div class="pie-dot" style="background:#f59e0b"></div><strong>Process — 41%</strong> (predictive &amp; agile PM)</div>
+        <div class="pie-item"><div class="pie-dot" style="background:#166534"></div><strong>People — 33%</strong> (leadership, teams, communication)</div>
+        <div class="pie-item"><div class="pie-dot" style="background:#2563eb"></div><strong>Business Environment — 26%</strong> (strategy, governance, change)</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-people">People 33%</span>
+      <span class="badge badge-process">Process 41%</span>
+      <span class="badge badge-biz">Business Environment 26%</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 1: PEOPLE                          -->
+  <!-- ══════════════════════════════════════════ -->
+  <section id="people-section">
+    <h2 class="people">People — 33%</h2>
+
+    <!-- Project Roles -->
+    <section id="roles">
+      <h3>Project Roles</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-people">Role</th><th class="th-people">Key Responsibilities</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Project Sponsor</strong></td><td>Initiates project (project charter), provides funding/resources, accepts final deliverables</td></tr>
+            <tr><td><strong>Project Manager</strong></td><td>Manages the project team to deliver value — central role, servant leader in agile</td></tr>
+            <tr><td><strong>Business Analyst</strong></td><td>Elicits customer/stakeholder requirements; ensures solution matches those requirements</td></tr>
+            <tr><td><strong>Project Team</strong></td><td>Performs the work to deliver the value</td></tr>
+            <tr><td><strong>Vendor / Seller</strong></td><td>External supplier delivering goods or services under contract</td></tr>
+            <tr><td><strong>Product Owner (Agile)</strong></td><td>Represents customer, owns &amp; prioritises the Product Backlog</td></tr>
+            <tr><td><strong>Agile PM / Scrum Master</strong></td><td>Facilitates ceremonies, neutral problem-solver, servant leader</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Stakeholder Tools -->
+    <section id="stakeholders">
+      <h3>Stakeholder Tools</h3>
+      <div class="grid-2">
+        <div class="card people-card">
+          <strong>Stakeholder Register</strong>
+          <p style="margin-top:0.3rem">Documents each stakeholder: Name, Role, Responsibility, Classification. Created during Identify Stakeholders; updated throughout.</p>
+        </div>
+        <div class="card people-card">
+          <strong>Stakeholder Mapping — choose any axis pair</strong>
+          <ul style="margin-top:0.3rem">
+            <li>Power / Influence</li>
+            <li>Power / Interest</li>
+            <li>Impact / Influence</li>
+            <li>Power, Urgency, Legitimacy (salience model)</li>
+          </ul>
+          <p style="margin-top:0.3rem;color:var(--muted)">Quadrant labels: <em>Monitor · Keep Informed · Keep Satisfied · Manage Closely</em></p>
+        </div>
+      </div>
+      <div class="card people-card">
+        <strong>Stakeholder Engagement Assessment Matrix</strong>
+        <p>Maps each stakeholder's <em>Current (C)</em> vs <em>Desired (D)</em> engagement level across: Unaware → Resistant → Neutral → Supportive → Leading. PM's job: close the gap.</p>
+      </div>
+    </section>
+
+    <!-- RACI -->
+    <section id="raci">
+      <h3>RACI — Resource Assignment Matrix</h3>
+      <div class="grid-4">
+        <div class="mini-card"><div class="label" style="color:var(--bad)">R — Responsible</div><div class="value">Who <strong>performs</strong> the task</div></div>
+        <div class="mini-card"><div class="label" style="color:var(--people)">A — Accountable</div><div class="value">Who <strong>signs off</strong> (one per task)</div></div>
+        <div class="mini-card"><div class="label" style="color:var(--info)">C — Consulted</div><div class="value">Who provides <strong>expert judgement</strong> (2-way)</div></div>
+        <div class="mini-card"><div class="label" style="color:var(--muted)">I — Informed</div><div class="value">Who is <strong>kept informed</strong> (1-way)</div></div>
+      </div>
+    </section>
+
+    <!-- Team Charter -->
+    <section id="charter">
+      <h3>Team Charter (Agile) vs Project Charter</h3>
+      <div class="compare-grid">
+        <div class="col-head" style="background:var(--people-bg);color:var(--people)">Team Charter</div>
+        <div class="col-head" style="background:var(--biz-bg);color:var(--biz)">Project Charter</div>
+        <div class="cell" style="background:var(--people-bg);color:var(--people)">Team values &amp; agreements</div>
+        <div class="cell" style="background:var(--biz-bg);color:var(--biz)">Project purpose &amp; objectives</div>
+        <div class="cell">Stakeholders we work with</div>
+        <div class="cell">High-level requirements</div>
+        <div class="cell">Team way of working</div>
+        <div class="cell">Summary milestone schedule</div>
+        <div class="cell">Decision &amp; conflict process</div>
+        <div class="cell">Key stakeholder list</div>
+        <div class="cell">Ceremonies &amp; communication</div>
+        <div class="cell">Preapproved financial resources</div>
+        <div class="cell" style="color:var(--people);font-weight:600">Developed by the team</div>
+        <div class="cell" style="color:var(--biz);font-weight:600">Created by/with Sponsor</div>
+      </div>
+    </section>
+
+    <!-- Leadership vs Management -->
+    <section id="leadership">
+      <h3>Leadership vs Management</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-people">Leadership is…</th><th>Management is…</th></tr></thead>
+          <tbody>
+            <tr><td>Guide and influence with <strong>relational power</strong></td><td>Direct using positional power</td></tr>
+            <tr><td>Develop and innovate</td><td>Maintain and administrate</td></tr>
+            <tr><td>Focus on relationships with people</td><td>Focus on systems and structure</td></tr>
+            <tr><td>Inspire trust</td><td>Rely on control</td></tr>
+            <tr><td>Long-term vision</td><td>Near-term goals</td></tr>
+            <tr><td>What and why</td><td>How and when</td></tr>
+            <tr><td>Challenge the status quo</td><td>Accept the status quo</td></tr>
+            <tr><td>Doing the <strong>right things</strong></td><td>Doing things <strong>right</strong></td></tr>
+            <tr><td>Focus on the horizon</td><td>Focus on the bottom line</td></tr>
+            <tr><td>Vision, alignment, motivation, inspiration</td><td>Operational issues and problem solving</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Leadership Styles -->
+    <section id="styles">
+      <h3>Leadership Styles</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-people">Style</th><th class="th-people">Description</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Laissez-faire</strong></td><td>Hands-off; allows team to make own decisions</td></tr>
+            <tr><td><strong>Transactional</strong></td><td>Management by exception; focus on achievements and rewards</td></tr>
+            <tr><td><strong>Servant Leader</strong></td><td>Focuses on others' growth, learning, development, autonomy, and well-being (default in Agile)</td></tr>
+            <tr><td><strong>Transformational</strong></td><td>Inspirational motivation; challenges team to exceed expectations</td></tr>
+            <tr><td><strong>Charismatic</strong></td><td>High energy, self-confident, holds strong convictions</td></tr>
+            <tr><td><strong>Interactional</strong></td><td>Combination of transactional + transformational + charismatic</td></tr>
+            <tr><td><strong>Distributed</strong></td><td>Team makes democratic leadership decisions</td></tr>
+            <tr><td><strong>Autocratic</strong></td><td>One person makes the decisions</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Types of Power -->
+    <section id="power">
+      <h3>Types of Power</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-people">Type</th><th class="th-people">Description</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Positional</strong></td><td>Using your formal position granted in the team</td></tr>
+            <tr><td><strong>Informational</strong></td><td>Using the gathering and distribution of information</td></tr>
+            <tr><td><strong>Referent</strong></td><td>Respect or admiration due to credibility</td></tr>
+            <tr><td><strong>Situational</strong></td><td>Gained due to a unique situation (e.g. a crisis)</td></tr>
+            <tr><td><strong>Personal</strong></td><td>Using charm and attraction</td></tr>
+            <tr><td><strong>Relational</strong></td><td>Using networking and alliances</td></tr>
+            <tr><td><strong>Expert</strong></td><td>Using skill, experience, and information</td></tr>
+            <tr><td><strong>Reward</strong></td><td>Giving praise, monetary or other rewards</td></tr>
+            <tr><td><strong>Coercive</strong></td><td>Invoking discipline or negative consequences</td></tr>
+            <tr><td><strong>Ingratiating</strong></td><td>Using flattery</td></tr>
+            <tr><td><strong>Pressure-based</strong></td><td>Limiting freedom or choices</td></tr>
+            <tr><td><strong>Guilt-based</strong></td><td>Imposing an obligation on others</td></tr>
+            <tr><td><strong>Persuasive</strong></td><td>Providing the right arguments</td></tr>
+            <tr><td><strong>Avoiding</strong></td><td>Refusing to participate</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Meeting Management -->
+    <section id="meetings">
+      <h3>Meeting Management &amp; Facilitation</h3>
+      <div class="card people-card">
+        <strong>Meeting Management includes:</strong>
+        <ul style="margin-top:0.4rem">
+          <li>Preparing and distributing the agenda</li>
+          <li>Ensuring a representative for each key stakeholder group is invited</li>
+          <li>Ensuring meetings start and finish at the published time</li>
+          <li>Staying on topic during the meeting</li>
+          <li>Managing expectations, issues, and conflicts</li>
+          <li>Recording actions and allocating people responsible for their completion</li>
+        </ul>
+      </div>
+      <div class="tags">
+        <span class="tag tag-green">Facilitation</span>
+        <span class="tag tag-green">Focus Groups</span>
+        <span class="tag tag-green">Brainstorming</span>
+        <span class="tag tag-green">Nominal Group Technique</span>
+      </div>
+    </section>
+
+    <!-- Motivation -->
+    <section id="motivation">
+      <h3>Motivation Theories</h3>
+      <div class="grid-3">
+        <div class="card people-card">
+          <strong>Maslow's Hierarchy of Needs</strong>
+          <p style="margin-top:0.3rem;font-size:0.78rem">Bottom → Top (must meet each level before the next):</p>
+          <ol style="font-size:0.78rem;margin-top:0.3rem;padding-left:1rem">
+            <li>Physiological — comfortable workplace</li>
+            <li>Safety — safe employment</li>
+            <li>Love / Belonging — team feels they belong</li>
+            <li>Esteem — confidence, recognition</li>
+            <li>Self-Actualisation — creativity, meaning</li>
+          </ol>
+        </div>
+        <div class="card people-card">
+          <strong>Herzberg's Two-Factor Theory</strong>
+          <p style="margin-top:0.3rem;font-size:0.78rem"><strong>Hygiene factors</strong> (prevent dissatisfaction): salary, job security, working conditions.</p>
+          <p style="margin-top:0.3rem;font-size:0.78rem"><strong>Motivators</strong> (create satisfaction): achievement, recognition, growth, responsibility.</p>
+        </div>
+        <div class="card people-card">
+          <strong>McGregor's Theory X / Y</strong>
+          <p style="margin-top:0.3rem;font-size:0.78rem"><strong>Theory X:</strong> People dislike work; need close supervision, threats.</p>
+          <p style="margin-top:0.3rem;font-size:0.78rem"><strong>Theory Y:</strong> People are self-directed; enjoy work; respond to empowerment.</p>
+          <p style="margin-top:0.3rem;font-size:0.78rem;color:var(--muted)">PMI prefers Theory Y approach.</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card people-card">
+          <strong>Student Syndrome</strong>
+          <p>People apply themselves only at the last possible moment before a deadline.</p>
+        </div>
+        <div class="card people-card">
+          <strong>Parkinson's Law</strong>
+          <p>Work expands to fill the time available for its completion.</p>
+        </div>
+      </div>
+      <div class="card" style="border-left:4px solid var(--people)">
+        <p><strong>Teams are motivated by:</strong> empowering them to participate in decision making and encouraging them to work independently.</p>
+      </div>
+    </section>
+
+    <!-- Tuckman -->
+    <section id="tuckman">
+      <h3>Tuckman's Ladder — Team Development Stages</h3>
+      <div class="tuckman">
+        <div class="tuckman-stage"><div class="stage-name">Forming</div><p>Meet, learn roles; independent &amp; individual</p></div>
+        <div class="tuckman-stage"><div class="stage-name">Storming</div><p>Conflict &amp; competition; PM intervenes</p></div>
+        <div class="tuckman-stage"><div class="stage-name">Norming</div><p>Consensus; team cohesion builds</p></div>
+        <div class="tuckman-stage"><div class="stage-name">Performing</div><p>High output; interdependent</p></div>
+        <div class="tuckman-stage"><div class="stage-name">Adjourning</div><p>Project ends; team disbands</p></div>
+      </div>
+    </section>
+
+    <!-- Problem Solving -->
+    <section id="problem-solving">
+      <h3>Problem Solving — 6-Step Process</h3>
+      <div class="flow">
+        <div class="flow-step">1. Define the problem</div><div class="flow-arrow">→</div>
+        <div class="flow-step">2. Identify root cause</div><div class="flow-arrow">→</div>
+        <div class="flow-step">3. Generate solutions</div><div class="flow-arrow">→</div>
+        <div class="flow-step">4. Choose best solution</div><div class="flow-arrow">→</div>
+        <div class="flow-step">5. Implement solution</div><div class="flow-arrow">→</div>
+        <div class="flow-step">6. Verify effectiveness</div>
+      </div>
+    </section>
+
+    <!-- Conflict Resolution -->
+    <section id="conflict">
+      <h3>Conflict Resolution Techniques</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-people">Technique</th><th class="th-people">Outcome</th><th class="th-people">When to use</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Withdraw / Avoid</strong></td><td>—</td><td>Low-stakes; cool-down period</td></tr>
+            <tr><td><strong>Smooth / Accommodate</strong></td><td class="negative">Lose / Win</td><td>Preserve relationship short-term</td></tr>
+            <tr><td><strong>Compromise / Reconcile</strong></td><td style="color:#92400e;font-weight:700">Lose / Lose</td><td>Both parties give something</td></tr>
+            <tr><td><strong>Force / Direct</strong></td><td class="positive">Win / Lose</td><td>Urgent; PM authority required</td></tr>
+            <tr><td><strong>Collaborate / Problem-solve</strong></td><td class="positive">Win / Win ★</td><td>Best long-term; PMI preferred</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Negotiation -->
+    <section id="negotiation">
+      <h3>Negotiation</h3>
+      <div class="grid-2">
+        <div class="card people-card">
+          <strong>BATNA</strong>
+          <p><em>Best Alternative To a Negotiated Agreement</em> — your walk-away option if no deal is reached. Know it before negotiating.</p>
+        </div>
+        <div class="card people-card">
+          <strong>Key Tactics</strong>
+          <ul style="margin-top:0.3rem">
+            <li>Never Say Yes to the First Offer</li>
+            <li>Bracketing — anchor high/low</li>
+            <li>Higher Authority — "I need to check"</li>
+            <li>Never Split the Difference</li>
+            <li>Pivot to Non-Monetary Terms</li>
+            <li>Deadlines and Time Pressure</li>
+            <li>Position for Acceptance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emotional Intelligence -->
+    <section id="eq">
+      <h3>Emotional Intelligence (EI)</h3>
+      <div class="ei-grid">
+        <div class="ei-cell"><div class="ei-title">Self-Awareness</div><ul><li>How do you affect the team?</li><li>How does the team affect you?</li></ul></div>
+        <div class="ei-cell"><div class="ei-title">Self-Management</div><ul><li>Thinking before you act</li><li>Building trust</li></ul></div>
+        <div class="ei-cell"><div class="ei-title">Social Awareness</div><ul><li>Being empathetic</li><li>Employing active listening</li></ul></div>
+        <div class="ei-cell"><div class="ei-title">Social Skill</div><ul><li>Establishing rapport</li><li>Building effective teams</li><li>Managing attitude</li></ul></div>
+      </div>
+      <p style="color:var(--muted)">EI helps stay calm and productive during difficult circumstances.</p>
+    </section>
+
+    <!-- Push vs Pull -->
+    <section id="comms-pushpull">
+      <h3>Communication: Push vs Pull</h3>
+      <div class="compare-grid">
+        <div class="col-head" style="background:var(--people-bg);color:var(--people)">Pull Communication</div>
+        <div class="col-head" style="background:var(--biz-bg);color:var(--biz)">Push Communication</div>
+        <div class="cell">People can <strong>access content</strong> at their own discretion</div>
+        <div class="cell"><strong>Sent</strong> to people who need to receive the information</div>
+        <div class="cell" style="color:var(--muted)">Intranet, shared drive, wiki, notice board</div>
+        <div class="cell" style="color:var(--muted)">Email, reports, memos, status updates</div>
+      </div>
+      <p style="color:var(--muted)">Tip: Check each person's preferences with a <em>Communications Style Assessment</em>.</p>
+    </section>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 2: PROCESS                         -->
+  <!-- ══════════════════════════════════════════ -->
+  <section id="process-section">
+    <h2 class="process">Process — 41%</h2>
+
+    <!-- Predictive vs Agile -->
+    <section id="pred-agile">
+      <h3>Predictive vs Agile — Iron Triangle &amp; Stacey Matrix</h3>
+      <div class="grid-2">
+        <div class="card process-card">
+          <strong>Predictive (Waterfall)</strong>
+          <ul style="margin-top:0.3rem">
+            <li><strong>Scope</strong> is Fixed; Time &amp; Cost vary</li>
+            <li>Requirements known upfront</li>
+            <li>Sequential phases</li>
+            <li>Low requirements uncertainty</li>
+          </ul>
+        </div>
+        <div class="card process-card">
+          <strong>Agile (Adaptive)</strong>
+          <ul style="margin-top:0.3rem">
+            <li><strong>Time &amp; Cost</strong> Fixed; Scope varies</li>
+            <li>Requirements emerge iteratively</li>
+            <li>Iterative/incremental delivery</li>
+            <li>High requirements uncertainty</li>
+          </ul>
+        </div>
+      </div>
+      <h3>Stacey Matrix (Complexity vs Requirements Uncertainty)</h3>
+      <div class="stacey">
+        <div class="stacey-cell"><div class="stacey-name">Chaos</div><p>Fundamentally Risky — avoid</p></div>
+        <div class="stacey-cell"><div class="stacey-name">Complex</div><p>Adaptive / Agile approaches</p></div>
+        <div class="stacey-cell"><div class="stacey-name">Complicated</div><p>Agile or hybrid works well</p></div>
+        <div class="stacey-cell"><div class="stacey-name">Simple</div><p>Linear / Waterfall approaches</p></div>
+      </div>
+    </section>
+
+    <!-- Delivery approaches -->
+    <section id="delivery">
+      <h3>Delivery Approaches</h3>
+      <div class="grid-3">
+        <div class="card process-card">
+          <strong>Iterative</strong>
+          <p>Analyse → Design → Build, Test → <em>Prototype → Refine</em> → Deliver. Repeats until accepted.</p>
+        </div>
+        <div class="card process-card">
+          <strong>Incremental</strong>
+          <p>Multiple mini-deliveries of full Analyse→Design→Build→Test→Deliver cycles.</p>
+        </div>
+        <div class="card process-card">
+          <strong>Agile</strong>
+          <p>Iterative + Incremental. Requirements Analyse+Design+Build+Test repeated each sprint; frequent value delivery.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Matrix -->
+    <section id="process-matrix">
+      <h3>PMBOK 8 Process / Performance Domain Matrix</h3>
+      <div class="card process-card">
+        <p>9 Performance Domains (Governance, Scope, Schedule, Finance, Stakeholders, Resources, Risk, Quality, Procurement) × 5 Process Groups (Initiating, Planning, Executing, M&amp;C, Closing).</p>
+        <p style="margin-top:0.5rem"><a class="ref-link" href="pmp-teach-process-matrix.html">→ Open full interactive matrix &amp; drill</a></p>
+        <ul style="margin-top:0.5rem">
+          <li><strong>Planning is busiest</strong> — 7/9 domains have Planning processes</li>
+          <li><strong>Governance spans all 5</strong> process groups (only domain)</li>
+          <li><strong>Stakeholders starts earliest</strong> — active from Initiating</li>
+          <li><strong>Risk is most front-loaded</strong> — 4 of 6 processes in Planning</li>
+          <li><strong>Schedule &amp; Finance have no Executing</strong> processes — plan then monitor</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contract Types -->
+    <section id="contracts">
+      <h3>Contract Types</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-process">Type</th><th class="th-process">Abbr.</th><th class="th-process">Who bears risk?</th><th class="th-process">Description</th></tr></thead>
+          <tbody>
+            <tr><td colspan="4" style="background:var(--process-bg);font-weight:700;color:var(--process)">Fixed Price Contracts</td></tr>
+            <tr><td>Firm Fixed Price</td><td>FFP</td><td>Seller</td><td>Fixed price; seller bears all cost risk</td></tr>
+            <tr><td>Fixed Price Incentive Fee</td><td>FPIF</td><td>Mostly Seller</td><td>Fixed price + bonus if seller meets targets</td></tr>
+            <tr><td>Fixed Price w/ Economic Price Adjustment</td><td>FPEPA</td><td>Mostly Seller</td><td>Adjusts for inflation over long contracts</td></tr>
+            <tr><td colspan="4" style="background:var(--biz-bg);font-weight:700;color:var(--biz)">Cost Plus Contracts</td></tr>
+            <tr><td>Cost Plus Fixed Fee</td><td>CPFF</td><td>Buyer</td><td>Reimburse cost + fixed fee; low seller risk</td></tr>
+            <tr><td>Cost Plus Incentive Fee</td><td>CPIF</td><td>Shared</td><td>Reimburse cost + fee based on performance</td></tr>
+            <tr><td>Cost Plus Award Fee</td><td>CPAF</td><td>Buyer</td><td>Reimburse cost + discretionary award fee</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Estimating -->
+    <section id="estimating">
+      <h3>Estimating Methods</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-process">Method</th><th class="th-process">Accuracy</th><th class="th-process">Description</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Analogous</strong></td><td>Lowest</td><td>Uses data from a similar past activity/project; quick but least accurate</td></tr>
+            <tr><td><strong>Parametric</strong></td><td>Medium</td><td>Statistical relationship (e.g. cost per unit × quantity)</td></tr>
+            <tr><td><strong>3-Point (PERT)</strong></td><td>Medium-High</td><td>Optimistic + Pessimistic + Most Likely; reduces uncertainty</td></tr>
+            <tr><td><strong>Bottom-Up</strong></td><td>Highest</td><td>Estimate each work package, then aggregate upward; most accurate, most time-consuming</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- WBS -->
+    <section id="wbs">
+      <h3>WBS Hierarchy</h3>
+      <div class="flow">
+        <div class="flow-step">Scope Statement</div><div class="flow-arrow">→</div>
+        <div class="flow-step">WBS</div><div class="flow-arrow">→</div>
+        <div class="flow-step">WBS Dictionary</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Work Package</div>
+      </div>
+      <div class="card process-card">
+        <p><strong>WBS Dictionary</strong> documents each work package: Unique ID, description, assigned to, % complete, dependencies, resources, cost estimate, acceptance criteria, start/end dates.</p>
+        <p style="margin-top:0.3rem"><strong>100% Rule:</strong> WBS must capture 100% of the scope — nothing more, nothing less.</p>
+      </div>
+    </section>
+
+    <!-- Lead vs Lag -->
+    <section id="lead-lag">
+      <h3>Lead vs Lag Time</h3>
+      <div class="grid-2">
+        <div class="card process-card">
+          <strong>Lead Time</strong>
+          <p>Brings the next activity <strong>forward</strong> (earlier). Used to compress the schedule.</p>
+          <p style="color:var(--muted);font-size:0.78rem">Example: Testing begins 2 days before coding finishes.</p>
+        </div>
+        <div class="card process-card">
+          <strong>Lag Time</strong>
+          <p>Introduces a <strong>delay</strong> before the next activity can start.</p>
+          <p style="color:var(--muted);font-size:0.78rem">Example: Concrete must cure 3 days before framing.</p>
+        </div>
+      </div>
+      <p style="color:var(--muted)">Applied to optimise the schedule (Gantt chart / Critical Path Method).</p>
+    </section>
+
+    <!-- Schedule compression -->
+    <section id="compression">
+      <h3>Schedule Compression</h3>
+      <div class="grid-2">
+        <div class="card process-card">
+          <strong>Crashing</strong>
+          <p>Add resources (overtime, more staff) to critical-path activities. <span class="negative">Increases cost and/or risk.</span></p>
+        </div>
+        <div class="card process-card">
+          <strong>Fast Tracking</strong>
+          <p>Run activities in parallel that were originally sequential. <span class="negative">Increases risk of rework.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reserves -->
+    <section id="reserves">
+      <h3>Contingency vs Management Reserves</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-process">Reserve</th><th class="th-process">For</th><th class="th-process">Who controls?</th><th class="th-process">In baseline?</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Contingency Reserve</strong></td><td>Known-unknowns (identified risks)</td><td>Project Manager</td><td class="positive">Yes — inside Cost Baseline</td></tr>
+            <tr><td><strong>Management Reserve</strong></td><td>Unknown-unknowns (unidentified risks)</td><td>Sponsor / PMO</td><td class="negative">No — above Cost Baseline</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="color:var(--muted)">Cost Baseline = Work Package estimates + Contingency. Budget At Completion (BAC) = Cost Baseline + Management Reserve.</p>
+    </section>
+
+    <!-- EVA -->
+    <section id="eva">
+      <h3>Earned Value Analysis (EVA)</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-process">Term</th><th class="th-process">Abbr.</th><th class="th-process">Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Planned Value</td><td>PV</td><td>Budgeted cost of work <em>scheduled</em> to be done by now</td></tr>
+            <tr><td>Earned Value</td><td>EV</td><td>Budgeted cost of work <em>actually completed</em></td></tr>
+            <tr><td>Actual Cost</td><td>AC</td><td>Actual cost incurred for work completed</td></tr>
+            <tr><td>Budget At Completion</td><td>BAC</td><td>Total approved project budget</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-process">Metric</th><th class="th-process">Formula</th><th class="th-process">Good if…</th></tr></thead>
+          <tbody>
+            <tr><td>Schedule Variance</td><td><span class="eva-formula">SV = EV − PV</span></td><td class="positive">&gt; 0 (ahead)</td></tr>
+            <tr><td>Cost Variance</td><td><span class="eva-formula">CV = EV − AC</span></td><td class="positive">&gt; 0 (under budget)</td></tr>
+            <tr><td>Schedule Performance Index</td><td><span class="eva-formula">SPI = EV / PV</span></td><td class="positive">&gt; 1</td></tr>
+            <tr><td>Cost Performance Index</td><td><span class="eva-formula">CPI = EV / AC</span></td><td class="positive">&gt; 1</td></tr>
+            <tr><td>Estimate At Completion</td><td><span class="eva-formula">EAC = BAC / CPI</span></td><td style="color:var(--muted)">Lower is better</td></tr>
+            <tr><td>Estimate To Complete</td><td><span class="eva-formula">ETC = EAC − AC</span></td><td style="color:var(--muted)">Lower is better</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Risk Register -->
+    <section id="risk-register">
+      <h3>Risk Register &amp; Risk Matrix</h3>
+      <div class="card process-card">
+        <strong>"Something <em>might</em> happen" = Risk &nbsp;|&nbsp; "Has happened" = Issue</strong>
+        <p style="margin-top:0.4rem">Risk Register columns: Unique ID · Description · Cause &amp; Consequences · Risk Owner · Probability · Impact · <strong>Inherent Risk Rating</strong> (before controls) → Controls → Control Owner → <strong>Residual Risk Rating</strong> (after controls).</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th class="th-process" rowspan="2">Probability</th><th colspan="5" style="text-align:center;background:var(--process-bg);color:var(--process)">Impact</th></tr>
+            <tr><th>Very Low</th><th>Low</th><th>Medium</th><th>High</th><th>Very High</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Very High</strong></td><td class="risk-cell-m">Med</td><td class="risk-cell-h">High</td><td class="risk-cell-h">High</td><td class="risk-cell-vh">V.High</td><td class="risk-cell-vh">V.High</td></tr>
+            <tr><td><strong>High</strong></td><td class="risk-cell-l">Low</td><td class="risk-cell-m">Med</td><td class="risk-cell-h">High</td><td class="risk-cell-h">High</td><td class="risk-cell-vh">V.High</td></tr>
+            <tr><td><strong>Medium</strong></td><td class="risk-cell-l">Low</td><td class="risk-cell-l">Low</td><td class="risk-cell-m">Med</td><td class="risk-cell-h">High</td><td class="risk-cell-h">High</td></tr>
+            <tr><td><strong>Low</strong></td><td class="risk-cell-vl">V.Low</td><td class="risk-cell-l">Low</td><td class="risk-cell-l">Low</td><td class="risk-cell-m">Med</td><td class="risk-cell-m">Med</td></tr>
+            <tr><td><strong>Very Low</strong></td><td class="risk-cell-vl">V.Low</td><td class="risk-cell-vl">V.Low</td><td class="risk-cell-l">Low</td><td class="risk-cell-l">Low</td><td class="risk-cell-m">Med</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Agile Roles -->
+    <section id="agile-roles">
+      <h3>Agile Roles</h3>
+      <div class="grid-3">
+        <div class="card process-card">
+          <strong>Product Owner</strong>
+          <ul style="margin-top:0.3rem">
+            <li>Represents the customer</li>
+            <li>Provides/approves features in the Product Backlog</li>
+            <li>Prioritises the Product Backlog</li>
+          </ul>
+        </div>
+        <div class="card process-card">
+          <strong>Agile PM / Scrum Master</strong>
+          <ul style="margin-top:0.3rem">
+            <li>The Agile "Servant Leader"</li>
+            <li>Facilitates the ceremonies</li>
+            <li>Neutral third party for problem solving</li>
+          </ul>
+        </div>
+        <div class="card process-card">
+          <strong>Team</strong>
+          <ul style="margin-top:0.3rem">
+            <li>Often developers, testers, BAs</li>
+            <li>Perform the work &amp; create value</li>
+            <li>Cross-functional and self-organising</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Agile Ceremonies -->
+    <section id="agile-ceremonies">
+      <h3>Agile Ceremonies — 2-Week Sprint Cycle</h3>
+      <div class="flow" style="margin-bottom:1rem">
+        <div class="flow-step">Product Backlog</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Backlog Refinement</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Iteration Planning</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Daily Stand-up</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Iteration Review</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Retrospective</div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-process">Ceremony</th><th class="th-process">Who</th><th class="th-process">Purpose / Key outputs</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Product Backlog</strong></td><td>Product Owner</td><td>Prioritised list of features (user stories, story points). PO creates &amp; owns.</td></tr>
+            <tr><td><strong>Backlog Refinement</strong></td><td>Three Amigos: Customer/PO + Developers + Testers</td><td>Break features into user stories, add acceptance criteria, estimate effort</td></tr>
+            <tr><td><strong>Iteration Planning</strong></td><td>Whole team</td><td>Select highest-priority stories up to team Velocity → Sprint Backlog</td></tr>
+            <tr><td><strong>Daily Stand-up</strong></td><td>Team (around Kanban board)</td><td>Progress update + blockers. 3 questions: done yesterday / today / blockers</td></tr>
+            <tr><td><strong>Iteration Review</strong></td><td>Team + Customer</td><td>Team demonstrates usable increment; customer gives feedback / approves</td></tr>
+            <tr><td><strong>Retrospective</strong></td><td>Team</td><td>What went well? Challenges? Learned? Still puzzles? Update Team Charter/DoR/DoD</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 3: BUSINESS ENVIRONMENT            -->
+  <!-- ══════════════════════════════════════════ -->
+  <section id="biz-section">
+    <h2 class="biz">Business Environment — 26%</h2>
+
+    <!-- Initiation flow -->
+    <section id="initiation-flow">
+      <h3>Project Initiation Flow</h3>
+      <div class="flow">
+        <div class="flow-step">Needs Assessment</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Business Case</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Benefits Management Plan</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Project Charter</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Project Management Plan</div>
+      </div>
+    </section>
+
+    <!-- Business Case -->
+    <section id="business-case">
+      <h3>Business Case Components</h3>
+      <div class="grid-2">
+        <div class="card biz-card">
+          <strong>1. Business Needs</strong>
+          <p>What prompted the need for action? What is the business problem or opportunity? Who are the stakeholders affected?</p>
+        </div>
+        <div class="card biz-card">
+          <strong>2. Analysis of the Situation</strong>
+          <p>Current state, root causes, constraints, assumptions, and stakeholder impact.</p>
+        </div>
+        <div class="card biz-card">
+          <strong>3. Solution Options</strong>
+          <p>Multiple options with high-level benefit, cost, and Required/Desired/Optional classification.</p>
+        </div>
+        <div class="card biz-card">
+          <strong>4. Recommendation</strong>
+          <p>The preferred option with justification. Approved by Project Steering Committee.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Charter -->
+    <section id="project-charter">
+      <h3>Project Charter — Key Contents</h3>
+      <div class="card biz-card">
+        <p>Created by (or with) the Project Sponsor. Formally <strong>authorises the project</strong> with funding and resource use.</p>
+        <ul style="margin-top:0.5rem">
+          <li>Name and authority of the sponsor(s)</li>
+          <li>Assigned Project Manager, responsibility &amp; authority level</li>
+          <li><strong>Project purpose</strong></li>
+          <li><strong>High-level description, boundaries, and key deliverables</strong></li>
+          <li><strong>Measurable project objectives</strong> (success criteria, exit criteria)</li>
+          <li>Project approval requirements (who approves funding &amp; resources)</li>
+          <li><strong>High-level requirements</strong></li>
+          <li>Preapproved financial resources</li>
+          <li><strong>Summary milestone schedule</strong></li>
+          <li>Key stakeholder list</li>
+          <li>Overall project risk</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Financial Measures -->
+    <section id="financial">
+      <h3>Financial Measures of Project Value</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-biz">Metric</th><th class="th-biz">Formula / Key fact</th><th class="th-biz">Pick project with…</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Net Present Value (NPV)</strong></td><td>NPV = Σ [Rt / (1+i)^t] − Initial Investment</td><td class="positive">Higher NPV ↑</td></tr>
+            <tr><td><strong>Internal Rate of Return (IRR)</strong></td><td>Discount rate making NPV = 0</td><td class="positive">Higher IRR ↑ (e.g. 12% > 9%)</td></tr>
+            <tr><td><strong>Return on Investment (ROI)</strong></td><td>(Benefit − Cost) / Cost × 100%</td><td class="positive">Higher ROI ↑</td></tr>
+            <tr><td><strong>Payback Period (PBP)</strong></td><td>Time to recover initial investment</td><td class="negative">Lower PBP ↓</td></tr>
+            <tr><td><strong>Benefit-Cost Ratio (BCR)</strong></td><td>BCR = Total Benefit / Cost (e.g. $5M / $2.5M = 2:1)</td><td class="positive">Higher BCR ↑ (&gt;1 is good)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Prioritization -->
+    <section id="prioritization">
+      <h3>Prioritization Methods</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-biz">Method</th><th class="th-biz">How it works</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Cost / Benefit (BCR)</strong></td><td>Rank features by Benefit-Cost Ratio; highest BCR first</td></tr>
+            <tr><td><strong>MoSCoW</strong></td><td><strong>M</strong>ust have · <strong>S</strong>hould have · <strong>C</strong>ould have · <strong>W</strong>on't have (this release)</td></tr>
+            <tr><td><strong>Multi-Voting</strong></td><td>Monopoly money / Voting with Dots (20% of item count) / 100-point voting</td></tr>
+            <tr><td><strong>Kano Analysis</strong></td><td>Delighters (attractive) · Satisfiers (one-dimensional) · Basic (must-be). Score by lifecycle age.</td></tr>
+            <tr><td><strong>Cost of Delay (CD3)</strong></td><td>CD3 = Expected weekly profit / Duration to deliver. Higher CD3 = do first.</td></tr>
+            <tr><td><strong>Multi-Criteria Chart</strong></td><td>Rate each feature 1–5 on multiple criteria; prioritise highest average total</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Benchmarking -->
+    <section id="benchmarking">
+      <h3>Benchmarking</h3>
+      <div class="card biz-card">
+        <p><strong>Benchmarking</strong> compares our product or process to those of comparable organisations, to identify best practices and generate ideas for improvement.</p>
+        <p style="margin-top:0.3rem;color:var(--muted)">Steps: Document current process → Select orgs to compare → Select process to improve → Collect &amp; compare data → Plan &amp; implement changes → Review &amp; repeat.</p>
+      </div>
+    </section>
+
+    <!-- Change Management -->
+    <section id="change-mgmt">
+      <h3>Change Management Process</h3>
+      <div class="flow" style="flex-wrap:wrap;gap:0.5rem">
+        <div class="flow-step">Stakeholder raises change request → note in Change Log</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Review impact on baselines</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Take to authoriser (CCB / PM / Sponsor)</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Communicate outcome</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Record outcome in Change Log</div>
+      </div>
+      <div class="tags" style="margin-top:0.5rem">
+        <span class="tag tag-blue">Corrective Action</span>
+        <span class="tag tag-blue">Preventative Action</span>
+        <span class="tag tag-blue">Defect Repair</span>
+        <span class="tag tag-blue">Other Changes</span>
+      </div>
+    </section>
+
+    <!-- SWOT / PESTLE / VUCA -->
+    <section id="swot">
+      <h3>SWOT · PESTLE · VUCA</h3>
+      <div class="grid-3">
+        <div class="card biz-card">
+          <strong>SWOT Analysis</strong>
+          <p>Internal: <strong>S</strong>trengths · <strong>W</strong>eaknesses</p>
+          <p>External: <strong>O</strong>pportunities · <strong>T</strong>hreats</p>
+          <p style="color:var(--muted);font-size:0.78rem;margin-top:0.3rem">Use to identify risks and strategic options.</p>
+        </div>
+        <div class="card biz-card">
+          <strong>PESTLE Analysis</strong>
+          <p><strong>P</strong>olitical · <strong>E</strong>conomic · <strong>S</strong>ocial · <strong>T</strong>echnological · <strong>E</strong>nvironmental · <strong>L</strong>egal</p>
+          <p style="color:var(--muted);font-size:0.78rem;margin-top:0.3rem">External environment scan for risks and opportunities.</p>
+        </div>
+        <div class="card biz-card">
+          <strong>VUCA Environment</strong>
+          <p><strong>V</strong>olatility · <strong>U</strong>ncertainty · <strong>C</strong>omplexity · <strong>A</strong>mbiguity</p>
+          <p style="color:var(--muted);font-size:0.78rem;margin-top:0.3rem">Describes conditions where agile/adaptive approaches thrive.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Risk Response Strategies -->
+    <section id="risk-responses">
+      <h3>Risk Response Strategies</h3>
+      <div class="grid-2">
+        <div class="card" style="border-left:4px solid var(--ok)">
+          <strong style="color:var(--ok)">Strategies for Opportunities</strong>
+          <ul style="margin-top:0.4rem">
+            <li><strong>Escalate</strong> — beyond project scope; escalate to program/sponsor</li>
+            <li><strong>Exploit</strong> — ensure the opportunity definitely occurs</li>
+            <li><strong>Share</strong> — partner with another party to capture the opportunity</li>
+            <li><strong>Enhance</strong> — increase probability or impact</li>
+            <li><strong>Accept</strong> — take advantage if it occurs; no proactive action</li>
+          </ul>
+        </div>
+        <div class="card" style="border-left:4px solid var(--bad)">
+          <strong style="color:var(--bad)">Strategies for Threats</strong>
+          <ul style="margin-top:0.4rem">
+            <li><strong>Escalate</strong> — beyond project scope; escalate</li>
+            <li><strong>Avoid</strong> — eliminate the threat entirely</li>
+            <li><strong>Transfer</strong> — shift impact to third party (insurance, contract)</li>
+            <li><strong>Mitigate</strong> — reduce probability or impact</li>
+            <li><strong>Accept</strong> — acknowledge; set contingency reserve</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Change Models -->
+    <section id="change-models">
+      <h3>Organisational Change Models</h3>
+
+      <div class="adkar">
+        <div class="adkar-step"><div class="adkar-letter">A</div><div class="adkar-word">Awareness</div><div class="adkar-desc">Announce the change; explain the Why; give time to ask questions</div></div>
+        <div class="adkar-step"><div class="adkar-letter">D</div><div class="adkar-word">Desire</div><div class="adkar-desc">Identify champions; monitor reactions; address resistance</div></div>
+        <div class="adkar-step"><div class="adkar-letter">K</div><div class="adkar-word">Knowledge</div><div class="adkar-desc">Provide training; offer resources (flowcharts, processes); address skill gaps</div></div>
+        <div class="adkar-step"><div class="adkar-letter">A</div><div class="adkar-word">Ability</div><div class="adkar-desc">Practice runs; monitor; set reasonable goals; adjust processes</div></div>
+        <div class="adkar-step"><div class="adkar-letter">R</div><div class="adkar-word">Reinforcement</div><div class="adkar-desc">Monitor; positive feedback and rewards; ensure new norm sticks</div></div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th class="th-biz">Model</th><th class="th-biz">Author</th><th class="th-biz">Key Idea</th></tr></thead>
+          <tbody>
+            <tr><td><strong>PMI Managing Change in Organisations</strong></td><td>PMI</td><td>Structured PM approach to organisational change; aligns with PMBOK domains</td></tr>
+            <tr><td><strong>ADKAR</strong></td><td>Jeffrey Hiatt (Prosci)</td><td>Individual-level change: Awareness → Desire → Knowledge → Ability → Reinforcement</td></tr>
+            <tr><td><strong>Kotter's 8 Steps to Change</strong></td><td>John Kotter</td><td>1.Create urgency 2.Coalition 3.Vision 4.Communicate 5.Remove obstacles 6.Short-term wins 7.Build on change 8.Anchor in culture</td></tr>
+            <tr><td><strong>Virginia Satir Change Model</strong></td><td>Virginia Satir</td><td>Late Status Quo → Foreign Element → Chaos → Transforming Idea → Practice &amp; Integration → New Status Quo</td></tr>
+            <tr><td><strong>Bridges Transition Model</strong></td><td>William Bridges</td><td>Ending (letting go) → Neutral Zone → New Beginning. Readiness process: communicate → understand impact → check readiness → educate leaders → monitor → help people contribute</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 4: QUICK DRILL                     -->
+  <!-- ══════════════════════════════════════════ -->
+  <section id="quiz-section">
+    <h2 style="font-size:1.25rem;font-weight:800;padding-bottom:0.5rem;margin-bottom:1.2rem;border-bottom:3px solid var(--primary);color:var(--primary)">Quick Drill — 10 Questions</h2>
+    <div id="quiz">
+
+      <div class="quiz-q" id="q1">
+        <p>1. A PM wants the team to make their own decisions with minimal guidance. Which leadership style is this?</p>
+        <div class="quiz-opts">
+          <label><input type="radio" name="q1" value="A"> A. Autocratic</label>
+          <label><input type="radio" name="q1" value="B"> B. Laissez-faire</label>
+          <label><input type="radio" name="q1" value="C"> C. Transactional</label>
+          <label><input type="radio" name="q1" value="D"> D. Servant Leader</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" id="q2">
+        <p>2. In a RACI matrix, who is the single person who signs off on task completion?</p>
+        <div class="quiz-opts">
+          <label><input type="radio" name="q2" value="A"> A. Responsible</label>
+          <label><input type="radio" name="q2" value="B"> B. Consulted</label>
+          <label><input type="radio" name="q2" value="C"> C. Accountable</label>
+          <label><input type="radio" name="q2" value="D"> D. Informed</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" id="q3">
+        <p>3. EV = $80,000 and AC = $100,000. What is the Cost Variance and what does it indicate?</p>
+        <div class="quiz-opts">
+          <label><input type="radio" name="q3" value="A"> A. CV = +$20,000; under budget</label>
+          <label><input type="radio" name="q3" value="B"> B. CV = −$20,000; over budget</label>
+          <label><input type="radio" name="q3" value="C"> C. CV = $180,000; on track</label>
+          <label><input type="radio" name="q3" value="D"> D. CV = $80,000; behind schedule</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" id="q4">
+        <p>4. A feature is rated "C" in MoSCoW prioritisation. What does this mean?</p>
+        <div class="quiz-opts">
+          <label><input type="radio" name="q4" value="A"> A. Critical — must deliver this release</label>
+          <label><input type="radio" name="q4" value="B"> B. Could have — nice to have but not essential</label>
+          <label><input type="radio" name="q4" value="C"> C. Confirmed — stakeholder-approved</label>
+          <label><input type="radio" name="q4" value="D"> D. Cut — will not be delivered</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" id="q5">
+        <p>5. A new team is just meeting and learning each other's roles. They are working more independently. Which Tuckman stage is this?</p>
+        <div class="quiz-opts">
+          <label><input type="radio" name="q5" value="A"> A. Storming</label>
+          <label><input type="radio" name="q5" value="B"> B. Norming</label>
+          <label><input type="radio" name="q5" value="C"> C. Forming</label>
+          <label><input type="radio" name="q5" value="D"> D. Performing</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" id="q6">
+        <p>6. The PM identifies a potential opportunity that could significantly increase project value. Which response strategy should the PM use to ensure the opportunity DEFINITELY occurs?</p>
+        <div class="quiz-opts">
+          <label><input type="radio" name="q6" value="A"> A. Enhance</label>
+          <label><input type="radio" name="q6" value="B"> B. Accept</label>
+          <label><input type="radio" name="q6" value="C"> C. Share</label>
+          <label><input type="radio" name="q6" value="D"> D. Exploit</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" id="q7">
+        <p>7. Project A has BCR = 1.5. Project B has BCR = 2.2. Which should be selected?</p>
+        <div class="quiz-opts">
+          <label><input type="radio" name="q7" value="A"> A. Project A — lower BCR means less risky</label>
+          <label><input type="radio" name="q7" value="B"> B. Project B — higher BCR is better</label>
+          <label><input type="radio" name="q7" value="C"> C. Both are equivalent</label>
+          <label><input type="radio" name="q7" value="D"> D. Project A — sponsor prefers lower cost</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" id="q8">
+        <p>8. Two team members have a serious disagreement. The PM works with both to find a solution that incorporates both viewpoints, leading to consensus. Which conflict technique is this?</p>
+        <div class="quiz-opts">
+          <label><input type="radio" name="q8" value="A"> A. Compromise / Reconcile</label>
+          <label><input type="radio" name="q8" value="B"> B. Force / Direct</label>
+          <label><input type="radio" name="q8" value="C"> C. Smooth / Accommodate</label>
+          <label><input type="radio" name="q8" value="D"> D. Collaborate / Problem-solve</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" id="q9">
+        <p>9. In an Agile sprint, the team gathers around the Kanban board and gives progress updates or reports any blockers. Which ceremony is this?</p>
+        <div class="quiz-opts">
+          <label><input type="radio" name="q9" value="A"> A. Iteration Review</label>
+          <label><input type="radio" name="q9" value="B"> B. Backlog Refinement</label>
+          <label><input type="radio" name="q9" value="C"> C. Daily Stand-up</label>
+          <label><input type="radio" name="q9" value="D"> D. Retrospective</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" id="q10">
+        <p>10. A change model states: "Announce the change well ahead of time, explain the Why, identify change champions." Which model is this from?</p>
+        <div class="quiz-opts">
+          <label><input type="radio" name="q10" value="A"> A. Kotter's 8 Steps</label>
+          <label><input type="radio" name="q10" value="B"> B. Bridges Transition Model</label>
+          <label><input type="radio" name="q10" value="C"> C. ADKAR — Awareness stage</label>
+          <label><input type="radio" name="q10" value="D"> D. Virginia Satir Change Model</label>
+        </div>
+      </div>
+
+      <button id="quiz-btn" onclick="submitQuiz()">Check Answers</button>
+      <div id="quiz-result"></div>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<script>
+const ANSWERS = { q1:'B', q2:'C', q3:'B', q4:'B', q5:'C', q6:'D', q7:'B', q8:'D', q9:'C', q10:'C' };
+
+function submitQuiz() {
+  let score = 0;
+  const feedback = {};
+
+  for (const [q, correct] of Object.entries(ANSWERS)) {
+    const chosen = document.querySelector(`input[name="${q}"]:checked`);
+    const opts = document.querySelectorAll(`#${q} label`);
+    opts.forEach(l => { l.classList.remove('opt-correct','opt-wrong'); });
+
+    if (chosen) {
+      const chosenLabel = chosen.closest('label');
+      if (chosen.value === correct) {
+        score++;
+        chosenLabel.classList.add('opt-correct');
+      } else {
+        chosenLabel.classList.add('opt-wrong');
+        opts.forEach(l => {
+          if (l.querySelector('input').value === correct) l.classList.add('opt-correct');
+        });
+      }
+    } else {
+      opts.forEach(l => {
+        if (l.querySelector('input').value === correct) l.classList.add('opt-correct');
+      });
+    }
+  }
+
+  const result = document.getElementById('quiz-result');
+  result.style.display = 'block';
+  const pct = Math.round(score / 10 * 100);
+  if (score >= 8) {
+    result.className = '';
+    result.innerHTML = `Score: ${score}/10 (${pct}%) — Excellent! You have strong PMP fundamentals.`;
+  } else if (score >= 6) {
+    result.className = '';
+    result.innerHTML = `Score: ${score}/10 (${pct}%) — Good. Review the highlighted answers above.`;
+  } else {
+    result.className = 'bad';
+    result.innerHTML = `Score: ${score}/10 (${pct}%) — Needs work. Review the sections highlighted above.`;
+  }
+  document.getElementById('quiz-btn').textContent = 'Try Again';
+  document.getElementById('quiz-btn').onclick = resetQuiz;
+}
+
+function resetQuiz() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('label').forEach(l => l.classList.remove('opt-correct','opt-wrong'));
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-btn').textContent = 'Check Answers';
+  document.getElementById('quiz-btn').onclick = submitQuiz;
+}
+</script>
+</body>
+</html>

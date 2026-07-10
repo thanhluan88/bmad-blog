@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Retrospective (Q89)</title>
+  <title>PMBOK 8 — Negotiation (Q108)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -50,10 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
-    .retro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 1rem 0; }
-    @media (max-width: 700px) { .retro-grid { grid-template-columns: 1fr; } }
-    .retro-cell { text-align: center; padding: 0.65rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
-    .retro-cell strong { display: block; color: var(--primary-dark); }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -91,10 +92,9 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Retrospective · Q89</div>
+      <div class="brand-sub">Negotiation · Q108</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#retro">Retrospectives</a>
         <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
@@ -191,7 +191,7 @@
         <a href="pmp-teach-resource-breakdown-structure.html">Q86: RBS</a>
         <a href="pmp-teach-resource-calendar.html">Q87: Resource Calendar</a>
         <a href="pmp-teach-servant-leadership.html">Q88: Servant Leadership</a>
-        <a href="pmp-teach-retrospective.html" class="series-current">Q89: Retrospective</a>
+        <a href="pmp-teach-retrospective.html">Q89: Retrospective</a>
         <a href="pmp-teach-distributed-management.html">Q90: Distributed Management</a>
         <a href="pmp-teach-tuckman-ladder.html">Q91: Tuckman Ladder</a>
         <a href="pmp-teach-colocation.html">Q92: Colocation</a>
@@ -210,7 +210,7 @@
         <a href="pmp-teach-organizational-breakdown-structure.html">Q105: Organizational Breakdown Structure</a>
         <a href="pmp-teach-precedence-diagramming.html">Q106: Precedence Diagramming</a>
         <a href="pmp-teach-source-selection-criteria.html">Q107: Source Selection Criteria</a>
-        <a href="pmp-teach-negotiation.html">Q108: Negotiation</a>
+        <a href="pmp-teach-negotiation.html" class="series-current">Q108: Negotiation</a>
         <a href="pmp-teach-scope-creep.html">Q109: Scope Creep</a>
       </nav>
 
@@ -224,13 +224,9 @@
 
 
 
-
-
-
-
       <div class="sidebar-pager">
-        <a href="pmp-teach-servant-leadership.html" class="sidebar-pager-link">← Q88: Servant Leadership</a>
-        <a href="pmp-teach-distributed-management.html" class="sidebar-pager-link">Q90: Distributed Management →</a>
+        <a href="pmp-teach-source-selection-criteria.html" class="sidebar-pager-link">← Q107: Source Selection Criteria</a>
+        <a href="pmp-teach-scope-creep.html" class="sidebar-pager-link">Q109: Scope Creep →</a>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
@@ -240,357 +236,187 @@
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp" class="mobile-series-nav">← Blog PMP</a>
-        <a href="pmp-teach-servant-leadership.html" class="mobile-series-nav">← Q88: Servant Leadership</a>
-        <a href="pmp-teach-distributed-management.html" class="mobile-series-nav">Q90: Distributed Management →</a>
-        <a href="#retro">Retro</a>
+        <a href="pmp-teach-source-selection-criteria.html" class="mobile-series-nav">← Q107: Source Selection Criteria</a>
+        <a href="pmp-teach-scope-creep.html" class="mobile-series-nav">Q109: Scope Creep →</a>
+        <a href="#negotiation">Negotiation</a>
         <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
 
       <main>
-        <header class="hero" id="intro">
-          <h1>Practice Questions — PMBOK 8th Ed</h1>
+                                                                        <header class="hero" id="intro">
+          <h1>Practice Questions — PMBOK 8th Ed · Waterfall</h1>
           <p class="lead">
-            Bài học Q89 về <strong>Retrospectives</strong> — Dylan tại Quantum Leap Systems:
-            nhiều iteration đã hoàn thành nhưng <em>collaboration &amp; workflow issues</em> vẫn
-            tồn tại, và <em>không có deliverable usable</em> nào được bàn giao.
+            Bài học Q108 về <strong>Negotiation</strong> và <strong>Claims Administration</strong> — Sophie quản lý
+            highway construction; contractor claim chi phí phát sinh do site conditions bất ngờ;
+            hai bên muốn giải quyết <em>nhanh</em>, <em>không external parties</em>, không delay.
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.85 &amp; 194</span>
-            <span class="badge">Lead the Team</span>
-            <span class="badge">Retrospective</span>
-            <span class="badge">Câu 89 — Practice</span>
+            <span class="badge">PMBOK 8, p.252-253</span>
+            <span class="badge">Claims Administration</span>
+            <span class="badge">Procurement Disputes</span>
+            <span class="badge">Câu 108 — Practice</span>
           </div>
         </header>
 
-        <section id="retro">
-          <h2>1. Lead the Team &amp; Retrospectives (p.85, 194)</h2>
+                                                                <section id="negotiation">
+          <h2>1. Negotiation — Bước đầu giải quyết tranh chấp</h2>
           <p>
-            <strong>Retrospective</strong> (p.194) là buổi team reflection sau mỗi iteration/sprint
-            để xem xét <em>what went well, what didn't, và what to improve</em> trong cách team
-            làm việc. Thuộc <strong>Lead the Team</strong> domain (p.85) — cải thiện collaboration
-            và workflow liên tục.
+            <strong>Negotiation</strong> là thảo luận trực tiếp giữa các bên để giải quyết dispute
+            <em>không cần third-party intervention</em>. Đây là bước đầu tiên trong procurement dispute resolution.
           </p>
-
-          <div class="retro-grid">
-            <div class="retro-cell"><strong>What went well</strong>Điểm tích cực</div>
-            <div class="retro-cell"><strong>What didn't</strong>Vấn đề workflow</div>
-            <div class="retro-cell"><strong>Improve</strong>Action items tiếp theo</div>
+          <div class="approach-grid">
+            <div class="approach-cell pull">
+              <strong>Initiate negotiation (B — đúng)</strong>
+              Direct discussion · no external parties · resolve quickly — negotiation fits.
+            </div>
+            <div class="approach-cell">
+              <strong>Mediator (A — bẫy)</strong>
+              Third party — stem nói <em>without involving external parties</em>.
+            </div>
+            <div class="approach-cell">
+              <strong>Arbitration (C — bẫy)</strong>
+              Binding third-party decision — external, không phải bước đầu khi muốn direct resolve.
+            </div>
+            <div class="approach-cell">
+              <strong>Issue log only (D — bẫy)</strong>
+              Document quan trọng nhưng không <em>resolve</em> claim — stem cần action giải quyết.
+            </div>
           </div>
-
           <div class="card tip">
-            <h4>Signal trong stem</h4>
+            <h4>Escalation ladder (Claims)</h4>
             <p style="margin:0">
-              <strong>Iterations complete · collaboration/workflow issues · nothing usable delivered</strong>
-              → team cần <strong>retrospective</strong> để reflect và cải thiện process (C),
-              không phải performance assessment (A), daily stand-ups (B), hay Sprint Planning (D).
+              <strong>1. Negotiation</strong> → 2. Mediation → 3. Arbitration → 4. DRB → 5. Litigation<br>
+              Q108: resolve quickly, no external parties → <strong>B — Negotiation</strong>.
             </p>
           </div>
-
-          <table>
-            <thead>
-              <tr><th>Tool</th><th>Mục đích</th><th>Q89?</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Retrospective (C)</strong></td>
-                <td>Reflect on iteration — improve collaboration &amp; workflow</td>
-                <td>✓ Iterations done, process issues persist</td>
-              </tr>
-              <tr>
-                <td><strong>Team performance assessment (A)</strong></td>
-                <td>Evaluate individual performance</td>
-                <td>✗ Blame individuals — không fix workflow</td>
-              </tr>
-              <tr>
-                <td><strong>Daily stand-up (B)</strong></td>
-                <td>Sync daily progress &amp; blockers</td>
-                <td>✗ Coordination — không deep-dive process issues</td>
-              </tr>
-              <tr>
-                <td><strong>Sprint Planning (D)</strong></td>
-                <td>Plan next iteration backlog</td>
-                <td>✗ Forward planning — chưa fix current workflow</td>
-              </tr>
-            </tbody>
-          </table>
         </section>
 
         <section id="compare">
-          <h2>2. So sánh các đáp án &amp; Q34 AAR</h2>
-
+          <h2>2. Dispute Resolution — Thứ tự leo thang</h2>
           <table>
-            <thead>
-              <tr><th>Option</th><th>Action</th><th>Q89 fit?</th></tr>
-            </thead>
+            <thead><tr><th>Step</th><th>Third party?</th><th>When</th></tr></thead>
             <tbody>
-              <tr>
-                <td><strong>A. Team performance assessments</strong></td>
-                <td>Evaluate each member individually</td>
-                <td>Individual focus — không address collaboration issues (instructor: X)</td>
-              </tr>
-              <tr>
-                <td><strong>B. Daily stand-ups</strong></td>
-                <td>Short daily sync meetings</td>
-                <td>Ongoing coordination — không reflect on iteration outcomes (instructor: X)</td>
-              </tr>
-              <tr>
-                <td><strong>C. Retrospective</strong></td>
-                <td>Team reflects on process, identifies improvements</td>
-                <td><strong>Yes — improve collaboration &amp; workflow</strong></td>
-              </tr>
-              <tr>
-                <td><strong>D. Invite users to Sprint Planning</strong></td>
-                <td>Include users in next iteration planning</td>
-                <td>Planning forward — chưa fix why nothing usable delivered (instructor: X)</td>
-              </tr>
+              <tr><td><strong>Negotiation</strong></td><td>No</td><td>First · direct talks</td></tr>
+              <tr><td><strong>Mediation</strong></td><td>Neutral facilitator</td><td>When negotiation stalls</td></tr>
+              <tr><td><strong>Arbitration</strong></td><td>Arbitrator decides</td><td>Binding external decision</td></tr>
+              <tr><td><strong>Litigation</strong></td><td>Court</td><td>Last resort</td></tr>
             </tbody>
           </table>
-
-          <div class="card info">
-            <h4>Q34 AAR vs Q89 Retrospective</h4>
-            <p style="margin:0">
-              <strong>Q34 AAR:</strong> sau <em>major milestone/phase completed</em> — what happened,
-              why, how improve (Manage Project Knowledge, p.145).<br>
-              <strong>Q89 Retrospective:</strong> sau <em>mỗi iteration</em> — cải thiện collaboration
-              &amp; workflow liên tục (Lead the Team, p.194). Cả hai đều reflect, nhưng retro = iterative
-              process improvement; AAR = milestone debrief.
-            </p>
-          </div>
         </section>
 
         <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 89</h2>
-
+          <h2>3. Câu hỏi thực hành — Question 108</h2>
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q89</div>
+            <div class="q-num">Practice Questions · Waterfall · Q108</div>
             <div class="q-text">
-              Dylan is a project manager at Quantum Leap Systems. Several <em>iterations have been
-              completed</em>, but <em>persistent collaboration and workflow issues</em> remain.
-              Despite the team's efforts, <em>nothing usable has been delivered</em>. What should
-              Dylan do next?
+              Sophie is managing a highway construction project at Delta Core Infrastructure.
+              A contractor submits a claim for additional costs due to unexpected site conditions.
+              Both parties want to resolve the issue quickly <em>without involving external parties</em>
+              or delaying progress. What should Sophie do?
             </div>
-
-            <button class="opt-btn" data-opt="A" type="button">A. Conduct team performance assessments with each team member.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Implement daily stand-up meetings to improve team communication.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Conduct a retrospective with the team.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Invite users to participate in the next Sprint Planning session.</button>
-
+            <button class="opt-btn" data-opt="A" type="button">A. Engage a mediator.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Initiate negotiation with the contractor.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Refer the claim to arbitration.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Document the claim and update the issue log.</button>
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
         <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: C</h2>
-
-          <h3>Tại sao chọn C?</h3>
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
           <ul>
-            <li>Iterations complete + workflow issues persist → cần retrospective (p.194).</li>
-            <li>Nothing usable delivered = process/collaboration problem, không chỉ individual performance.</li>
-            <li>Retro: team reflect what went well/didn't → action items cải thiện workflow.</li>
-            <li>Lead the Team domain (p.85) — continuous team performance improvement.</li>
+            <li>Negotiation = direct discussion, không third party — khớp stem.</li>
+            <li>Claims administration: negotiation là bước đầu trước mediation/arbitration.</li>
+            <li>Issue log (D) là document — không thay thế resolve dispute.</li>
           </ul>
-
-          <h3>Loại trừ từng đáp án</h3>
-          <table>
-            <thead>
-              <tr><th>Đáp án</th><th>Tại sao không đúng NEXT</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>A. Performance assessments</strong></td>
-                <td>Đánh giá cá nhân — không fix collaboration/workflow issues của cả team.</td>
-              </tr>
-              <tr>
-                <td><strong>B. Daily stand-ups</strong></td>
-                <td>Short sync hàng ngày — không deep-dive vào why iterations failed to deliver.</td>
-              </tr>
-              <tr>
-                <td><strong>D. Sprint Planning + users</strong></td>
-                <td>Plan iteration tiếp — chưa reflect tại sao iterations trước không usable.</td>
-              </tr>
-            </tbody>
-          </table>
-
           <div class="card warn">
-            <h4>So với Q34 AAR</h4>
-            <p style="margin:0">
-              Q34: phase completed, discrepancies → <strong>AAR</strong> (milestone debrief).
-              Q89: iterations complete, workflow broken → <strong>Retrospective</strong> (iterative
-              process improvement). Đừng nhầm AAR khi đề nói iterations/sprints.
-            </p>
+            <h4>No external parties</h4>
+            <p style="margin:0">Mediator và arbitrator = external → loại A và C ngay.</p>
           </div>
         </section>
 
         <section id="drill">
-          <h2>5. Drill — Retro, Standup, Assess, hay Plan?</h2>
+          <h2>5. Drill — Negotiation?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="RETRO">
-              <span>Iterations complete but collaboration issues — nothing usable delivered</span>
-              <div class="classify-btns">
-                <button data-pick="RETRO">Retro</button>
-                <button data-pick="STANDUP">Standup</button>
-                <button data-pick="ASSESS">Assess</button>
-                <button data-pick="PLAN">Plan</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="STANDUP">
-              <span>Daily 15-min sync — what did you do, what will you do, any blockers</span>
-              <div class="classify-btns">
-                <button data-pick="RETRO">Retro</button>
-                <button data-pick="STANDUP">Standup</button>
-                <button data-pick="ASSESS">Assess</button>
-                <button data-pick="PLAN">Plan</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="ASSESS">
-              <span>End of project — formal evaluation of each member's contributions</span>
-              <div class="classify-btns">
-                <button data-pick="RETRO">Retro</button>
-                <button data-pick="STANDUP">Standup</button>
-                <button data-pick="ASSESS">Assess</button>
-                <button data-pick="PLAN">Plan</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="RETRO">
-              <span>Sprint ended — reflect on process and agree improvement actions</span>
-              <div class="classify-btns">
-                <button data-pick="RETRO">Retro</button>
-                <button data-pick="STANDUP">Standup</button>
-                <button data-pick="ASSESS">Assess</button>
-                <button data-pick="PLAN">Plan</button>
-              </div>
-            </div>
-            <div class="classify-row" data-answer="PLAN">
-              <span>Start of new iteration — select backlog items and define sprint goal</span>
-              <div class="classify-btns">
-                <button data-pick="RETRO">Retro</button>
-                <button data-pick="STANDUP">Standup</button>
-                <button data-pick="ASSESS">Assess</button>
-                <button data-pick="PLAN">Plan</button>
-              </div>
-            </div>
+            <div class="classify-row" data-answer="NEG"><span>Direct talks, no third party, first step</span>
+              <div class="classify-btns"><button data-pick="NEG">Negotiation</button><button data-pick="MED">Mediation</button><button data-pick="ARB">Arbitration</button><button data-pick="LOG">Issue log</button></div></div>
+            <div class="classify-row" data-answer="MED"><span>Neutral facilitator when talks stall</span>
+              <div class="classify-btns"><button data-pick="NEG">Negotiation</button><button data-pick="MED">Mediation</button><button data-pick="ARB">Arbitration</button><button data-pick="LOG">Issue log</button></div></div>
+            <div class="classify-row" data-answer="ARB"><span>Binding decision by arbitrator</span>
+              <div class="classify-btns"><button data-pick="NEG">Negotiation</button><button data-pick="MED">Mediation</button><button data-pick="ARB">Arbitration</button><button data-pick="LOG">Issue log</button></div></div>
+            <div class="classify-row" data-answer="LOG"><span>Record claim — does not resolve dispute</span>
+              <div class="classify-btns"><button data-pick="NEG">Negotiation</button><button data-pick="MED">Mediation</button><button data-pick="ARB">Arbitration</button><button data-pick="LOG">Issue log</button></div></div>
+            <div class="classify-row" data-answer="NEG"><span>Contractor claim — parties want quick resolution</span>
+              <div class="classify-btns"><button data-pick="NEG">Negotiation</button><button data-pick="MED">Mediation</button><button data-pick="ARB">Arbitration</button><button data-pick="LOG">Issue log</button></div></div>
           </div>
           <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
         <section id="traps">
           <h2>6. Bẫy thi</h2>
-          <div class="card danger">
-            <h4>Bẫy 1: No delivery → performance assessment (A)</h4>
-            <p style="margin:0">Blame individuals khi vấn đề là collaboration/workflow — cần retrospective, không assess từng người.</p>
-          </div>
-          <div class="card danger">
-            <h4>Bẫy 2: Communication issues → stand-ups (B)</h4>
-            <p style="margin:0">Stand-up = daily sync. Workflow issues sau iteration cần retro deep-dive, không chỉ thêm meetings.</p>
-          </div>
-          <div class="card danger">
-            <h4>Bẫy 3: Agile context → Sprint Planning (D)</h4>
-            <p style="margin:0">Plan iteration tiếp khi chưa reflect iteration trước — retro trước, planning sau.</p>
-          </div>
-          <div class="card danger">
-            <h4>Bẫy 4: Reflect keyword → AAR (Q34)</h4>
-            <p style="margin:0">AAR = major milestone/phase. Iterations complete = <strong>retrospective</strong>, không phải AAR.</p>
-          </div>
-          <div class="card tip">
-            <h4>Pattern</h4>
-            <p style="margin:0"><strong>Iterations complete · workflow/collaboration issues · nothing usable</strong> → Conduct retrospective (C).</p>
-          </div>
+          <div class="card danger"><h4>Bẫy 1: Issue log thay resolve</h4><p style="margin:0">Document claim (D) cần làm nhưng stem hỏi cách <em>resolve</em> — negotiation trước.</p></div>
+          <div class="card danger"><h4>Bẫy 2: Mediation khi "no external parties"</h4><p style="margin:0">Mediator = third party → loại khi stem cấm external involvement.</p></div>
+          <div class="card tip"><h4>Pattern</h4><p style="margin:0">Procurement dispute + quick + no external → <strong>Negotiation (B)</strong> first.</p></div>
         </section>
 
         <section id="flashcards">
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Retrospective vs AAR?</div>
-            <div class="flashcard-back">Retro: sau mỗi iteration — improve workflow (p.194). AAR: sau major milestone — lessons learned (p.145, Q34).</div>
+            <div class="flashcard-front">Dispute escalation?</div>
+            <div class="flashcard-back"><strong>Negotiation</strong> → Mediation → Arbitration → DRB → Litigation</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q89 đáp án?</div>
-            <div class="flashcard-back"><strong>C</strong> — Conduct a retrospective with the team.</div>
+            <div class="flashcard-front">Q108 đáp án?</div>
+            <div class="flashcard-back"><strong>B — Initiate negotiation</strong>. No external parties, resolve quickly.</div>
           </div></div>
         </section>
 
         <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">RETROSPECTIVE — Q89
-(PMBOK 8, p.85 &amp; 194)
-─────────────────────────────────────────────────────
-DOMAIN: Lead the Team (p.85)
-TOOL: Retrospective (p.194)
-  • After EACH iteration/sprint
-  • What went WELL · what DIDN'T · how to IMPROVE
-  • Focus: collaboration, workflow, process
-  • Output: improvement action items
+          <div class="cheat-sheet">NEGOTIATION / CLAIMS — Q108
+─────────────────────────────────────
+Contractor CLAIM · unexpected site conditions
+Resolve QUICKLY · NO EXTERNAL PARTIES
+→ INITIATE NEGOTIATION (B)
 
-SCENARIO: Dylan @ Quantum Leap Systems
-           Several ITERATIONS completed
-           PERSISTENT collaboration &amp; workflow issues
-           NOTHING USABLE delivered
-NEXT → C) CONDUCT RETROSPECTIVE with the team ✓
+Escalation:
+  1 Negotiation (direct, no 3rd party)
+  2 Mediation (facilitator)
+  3 Arbitration (binding)
+  4 DRB · 5 Litigation
 
-NOT:
-  A) TEAM PERFORMANCE ASSESSMENTS — individual blame
-  B) DAILY STAND-UPS — sync only; no deep reflection
-  D) INVITE USERS TO SPRINT PLANNING — plan ahead; chưa reflect
-
-Q34 AAR vs Q89 RETRO:
-  Q34 AAR: major MILESTONE/phase completed
-           discrepancies expected vs actual
-  Q89 RETRO: ITERATIONS complete
-             workflow/collaboration broken
-             iterative process improvement
-
-SIGNAL: "iterations completed" + "workflow issues"
-        + "nothing usable delivered"
-        → Retrospective (NOT AAR)
-
-Q89 ANSWER: C
-
-REF: PMBOK Guide, 8th Ed., p.85 Lead the Team
-      p.194 Retrospectives</div>
+D issue log = document only, not resolve</div>
         </section>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
         <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
-          <a class="lesson-pager-btn" href="pmp-teach-servant-leadership.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q88: Servant Leadership</span></a>
-          <span class="lesson-pager-pos">Q89 / 109</span>
-          <a class="lesson-pager-btn next" href="pmp-teach-distributed-management.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q90: Distributed Management</span></a>
+          <a class="lesson-pager-btn" href="pmp-teach-source-selection-criteria.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q107: Source Selection Criteria</span></a>
+          <span class="lesson-pager-pos">Q108 / 109</span>
+          <a class="lesson-pager-btn next" href="pmp-teach-scope-creep.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q109: Scope Creep</span></a>
         </nav>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-after-action-review.html">Q34: After-Action Review</a>
-          · <a href="pmp-teach-servant-leadership.html">Q88: Servant Leadership</a>
-          · <a href="pmp-full-questions.html#q-89">Luyện câu 89</a>
+          · <a href="pmp-teach-issue-log.html">Q38: Issue Log</a>
+          · <a href="pmp-teach-change-request.html">Q40: Change Request</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
     </div>
   </div>
 
-  <script>
+                                <script>
     (function () {
-      const CORRECT = "C";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Performance assessment = đánh giá cá nhân — không fix collaboration/workflow issues của cả team.",
-        B: "Daily stand-up = sync ngắn hàng ngày — không deep-dive tại sao iterations không deliver usable output.",
-        C: "Đúng! Retrospective để team reflect và cải thiện collaboration/workflow (p.194, Lead the Team).",
-        D: "Sprint Planning = plan iteration tiếp — chưa reflect tại sao iterations trước thất bại."
+        A: "Mediator là third party — stem nói without external parties.",
+        B: "Đúng! Negotiation = direct discussion, bước đầu claims resolution.",
+        C: "Arbitration = external binding decision — không phải first step ở đây.",
+        D: "Issue log ghi nhận — không resolve claim nhanh như negotiation."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -606,7 +432,7 @@ REF: PMBOK Guide, 8th Ed., p.85 Lead the Team
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>C — Conduct a retrospective with the team.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Initiate negotiation with the contractor</strong>" : "");
         });
       });
       let score = 0;

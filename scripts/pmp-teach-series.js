@@ -106,4 +106,7 @@ module.exports.SERIES = [
   ["pmp-teach-affinity-diagram.html", "Q104: Affinity Diagram"],
   ["pmp-teach-organizational-breakdown-structure.html", "Q105: Organizational Breakdown Structure"],
   ["pmp-teach-precedence-diagramming.html", "Q106: Precedence Diagramming"],
+  ["pmp-teach-source-selection-criteria.html", "Q107: Source Selection Criteria"],
+  ["pmp-teach-negotiation.html", "Q108: Negotiation"],
+  ["pmp-teach-scope-creep.html", "Q109: Scope Creep"],
 ];
