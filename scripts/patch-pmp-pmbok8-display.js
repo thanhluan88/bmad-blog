@@ -469,6 +469,9 @@ function patchFile(filePath) {
   console.log("Patched PMBOK8 display:", path.basename(filePath));
 }
 
+const { patchStemSignalHighlight } = require("./patch-pmp-stem-signal-highlight");
+
 for (const file of FILES) {
   patchFile(file);
+  patchStemSignalHighlight(file);
 }

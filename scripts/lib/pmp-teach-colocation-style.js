@@ -709,6 +709,7 @@ function buildTeachExplanationMarkdown(q, analysis) {
 
   return {
     explanation: lines.join("\n"),
+    signalPhrases: grounding.signalPhrases || [],
     pmbok8: {
       domains: p8.domains || [],
       focusArea: p8.focusArea || "",

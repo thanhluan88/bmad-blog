@@ -311,6 +311,23 @@
     }
     .q-teach-link:hover { background: #fef3c7; }
     .q-text { margin: 0; }
+/* PMP_STEM_SIGNAL_CSS_START */
+    .q-text .kw-signal {
+      background: #ecfdf5;
+      color: #065f46;
+      padding: 0.08rem 0.22rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .q-text .kw-cue {
+      background: #fef9c3;
+      color: #854d0e;
+      padding: 0.1rem 0.25rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .q-text.stem-signals-shown { line-height: 1.65; }
+/* PMP_STEM_SIGNAL_CSS_END */
     .score-table-wrap {
       margin: 0.85rem 0 1rem;
       overflow-x: auto;
@@ -3166,6 +3183,83 @@ const USER_KEY = "pmp-quiz-user-v1";
       }
     }
 
+/* PMP_STEM_SIGNAL_JS_START */
+    const STEM_CUE_PATTERNS = [
+      /\bwhat should the project manager do first\b/gi,
+      /\bwhat should the project manager do next\b/gi,
+      /\bwhat should the project manager do\b/gi,
+      /\bwhat should the team do first\b/gi,
+      /\bwhich (?:of the following )?(?:document|artifact|tool|technique)\b/gi,
+      /\bwhich (?:of the following )?(?:is|are) (?:the )?(?:best|most appropriate)\b/gi,
+      /\b(?:choose|select) (?:two|three|2|3|all that apply)\b/gi,
+      /\b(?:first|next|best|worst|least|most|primarily|initially|not|except)\b/gi,
+    ];
+
+    function parseSignalPhrasesFromExplanation(explanation) {
+      const src = String(explanation || "");
+      const marker = "**Signal trong stem**";
+      const idx = src.indexOf(marker);
+      if (idx < 0) return [];
+      const after = src.slice(idx + marker.length).replace(/^\n+/, "");
+      const firstLine = after.split("\n")[0]?.trim() || "";
+      if (!firstLine.includes("·")) return [];
+      return firstLine.split("·").map(p => p.trim()).filter(p => p.length > 3);
+    }
+
+    function stemReplaceOutsideSpans(html, phrase, cls) {
+      if (!phrase || phrase.length < 4) return html;
+      const wrapped = `<span class="${cls}">${phrase}</span>`;
+      const parts = html.split(/(<span class="kw-[^"]*">[\s\S]*?<\/span>)/gi);
+      return parts
+        .map((part, i) => (i % 2 === 1 ? part : part.split(phrase).join(wrapped)))
+        .join("");
+    }
+
+    function stemApplyCuePatterns(html) {
+      const parts = html.split(/(<span class="kw-[^"]*">[\s\S]*?<\/span>)/gi);
+      return parts
+        .map((part, i) => {
+          if (i % 2 === 1) return part;
+          let out = part;
+          for (const re of STEM_CUE_PATTERNS) {
+            out = out.replace(re, m => `<span class="kw-cue">${m}</span>`);
+          }
+          return out;
+        })
+        .join("");
+    }
+
+    function highlightQuizStemHtml(text, signalPhrases) {
+      const phrases = (signalPhrases || []).filter(p => p && p.length > 3);
+      if (!phrases.length) return escapeHtml(text);
+      let html = escapeHtml(String(text || ""));
+      const sorted = [...phrases].sort((a, b) => b.length - a.length);
+      for (const sig of sorted) {
+        const esc = escapeHtml(sig);
+        if (html.includes(esc)) {
+          html = stemReplaceOutsideSpans(html, esc, "kw-signal");
+        }
+      }
+      return stemApplyCuePatterns(html);
+    }
+
+    function highlightQuestionStemSignals(q) {
+      if (!q || q.type === "drag_drop") return;
+      const phrases = Array.isArray(q.signalPhrases) && q.signalPhrases.length
+        ? q.signalPhrases
+        : parseSignalPhrasesFromExplanation(q.explanation);
+      if (!phrases.length) return;
+      const card = document.getElementById(`q-${q.id}`);
+      if (!card) return;
+      card.querySelectorAll(".q-text").forEach(el => {
+        const raw = el.textContent || "";
+        if (!raw.trim()) return;
+        el.innerHTML = highlightQuizStemHtml(raw, phrases);
+        el.classList.add("stem-signals-shown");
+      });
+    }
+/* PMP_STEM_SIGNAL_JS_END */
+
     function checkQuestion(id, revealOnly=false) {
       if (state.exam && !state.exam.submitted) return;
       stopQuestionTimer(id, true);
@@ -3203,6 +3297,7 @@ if (q.type !== "image_click" && q.type !== "special") {
         result.style.borderColor = "var(--border)";
         result.style.background = "#f8fafc";
       }
+      highlightQuestionStemSignals(q);
       updateStats();
       saveExamState();
     }

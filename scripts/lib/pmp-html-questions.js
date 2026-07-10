@@ -64,6 +64,7 @@ function mergePmbok8IntoQuestions(questions, explanations) {
     return {
       ...q,
       explanation: entry.explanation || q.explanation,
+      signalPhrases: entry.signalPhrases || q.signalPhrases,
       pmbok8: entry.pmbok8 || q.pmbok8,
       references: entry.references || q.references,
     };
