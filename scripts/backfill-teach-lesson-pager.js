@@ -4,6 +4,18 @@ const { SERIES } = require("./pmp-teach-series");
 
 const dir = path.join(__dirname, "../public/pmp");
 
+function parseQNum(label) {
+  const m = /^Q(\d+)/.exec(label);
+  return m ? parseInt(m[1], 10) : null;
+}
+
+function maxQInSeries() {
+  return SERIES.reduce(function (max, entry) {
+    const n = parseQNum(entry[1]);
+    return n && n > max ? n : max;
+  }, 0);
+}
+
 function getNeighbors(currentHref) {
   const idx = SERIES.findIndex(function (entry) {
     return entry[0] === currentHref;
@@ -12,13 +24,15 @@ function getNeighbors(currentHref) {
   return {
     idx: idx,
     total: SERIES.length,
+    current: SERIES[idx],
     prev: idx > 0 ? SERIES[idx - 1] : null,
     next: idx < SERIES.length - 1 ? SERIES[idx + 1] : null,
   };
 }
 
 function buildFooterPager(n) {
-  const pos = "Q" + (n.idx + 1) + " / " + n.total;
+  const qNum = parseQNum(n.current[1]) || n.idx + 1;
+  const pos = "Q" + qNum + " / " + maxQInSeries();
   const prevBtn = n.prev
     ? '<a class="lesson-pager-btn" href="' +
       n.prev[0] +
