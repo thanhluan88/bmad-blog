@@ -251,6 +251,26 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 
 **Bẫy ✗:** Ad hoc negotiation giữa leads · Extend buffer không đổi assumptions · Xin funding trước khi analyze demand · Assert authority vội
 
+### Interdisciplinary · Multidisciplinary
+| | |
+|---|---|
+| **Interdisciplinary** | **Liên ngành** — nhiều discipline **tích hợp & collaborate** |
+| **Multidisciplinary** | **Đa chuyên môn** — trên đề PMP thường ≈ interdisciplinary |
+| **PMBOK 8** | Interdisciplinary approach → holistic, innovative solutions |
+
+**Khác biệt tinh tế:** Multidisciplinary có thể silo · Interdisciplinary = **integrate** perspectives
+
+**Thách thức:** Design conflicts · poor integration · culture/time zones · jargon
+
+**PM làm gì:**
+| Signal | Đáp |
+|--------|-----|
+| Conflicts about design (Q304) | **Facilitate** team discussions → D |
+| Global multidisciplinary + culture (Q331) | **Culturally responsive communication protocol** → C |
+| Interdisciplinary + tight deadline (Q844) | **MVP** → C |
+
+**Bẫy ✗:** Escalate functional managers only · Single default platform/time zone · Chỉ add headcount
+
 ### Cohort
 | | |
 |---|---|
@@ -1106,6 +1126,9 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | discord among stakeholders | Facilitate conflict resolution |
 | scarce resources, resource conflicts | Plan availability · verify with functional managers |
 | shared specialized resources, competing priorities | Identify requirements · không ad hoc negotiation |
+| interdisciplinary team, multidisciplinary project | Facilitate · integrate disciplines |
+| conflicts about design, different disciplines | Facilitate team discussions (Q304) |
+| global multidisciplinary, cultural misunderstandings | Culturally responsive communication protocol |
 | limited resources, too many wish-list items | MVP / prioritize backlog |
 | immersive walkthrough, simulate before build | **Virtual reality (VR)** |
 | overlay model on site, inspect as-built | **Augmented reality (AR)** |
