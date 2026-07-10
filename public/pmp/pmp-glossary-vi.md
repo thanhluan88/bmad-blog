@@ -737,6 +737,25 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | **PMP** | Schedule/resource/cost optimization |
 | **≠ Brainstorming** | Toán học, không phải elicitation |
 
+### Virtual Reality (VR) · Augmented Reality (AR)
+| | |
+|---|---|
+| **VR** | **Thực tế ảo** — môi trường số **immersive** hoàn toàn (headset, simulation) |
+| **AR** | **Thực tế tăng cường** — **phủ digital** lên thế giới thật (overlay on site/product) |
+| **PMBOK 8** | Emerging technologies — leverage để visualize, train, engage, giảm rework |
+
+**So sánh:**
+| | VR | AR |
+|---|----|----|
+| Môi trường | 100% virtual | Real + digital overlay |
+| Keyword | *immersive*, simulate, walkthrough | *overlay*, on-site, inspect vs model |
+| Ví dụ | Safety training, design walkthrough | BIM overlay công trường, maintenance on equipment |
+
+**≠** Prototype · Mockup · BIM alone (AR có thể *view* BIM)
+
+**Mẹo đề ✓:** Immersive simulate trước build → VR · Overlay trên site thật → AR · Tech hỗ trợ clarity — governance vẫn cần  
+**Bẫy ✗:** Chọn vì “cool” · VR thay prototype validate behavior
+
 ---
 
 ## 9. Governance & Quality
@@ -1019,6 +1038,9 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | scarce resources, resource conflicts | Plan availability · verify with functional managers |
 | shared specialized resources, competing priorities | Identify requirements · không ad hoc negotiation |
 | limited resources, too many wish-list items | MVP / prioritize backlog |
+| immersive walkthrough, simulate before build | **Virtual reality (VR)** |
+| overlay model on site, inspect as-built | **Augmented reality (AR)** |
+| emerging technology, leverage technology | Support value — governance vẫn cần |
 | context cues, hierarchy, indirect communication | Cultural awareness — adjust engagement |
 | differing communication styles, multi-country | Cultural awareness — read context cues |
 | social cues, read the room | EI · stakeholder engagement |
