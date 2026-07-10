@@ -853,17 +853,22 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | **PMP** | Change control, decision log, compliance, accountability |
 | **≠ Management** | Governance = rules of the game; Management = playing the game |
 
-### Discrepancies
+### Discrepancy / Discrepancies
 | | |
 |---|---|
-| **Nghĩa** | **Sai lệch, không khớp** — khác biệt giữa plan vs actual, forecast vs report, sponsor vs team estimate |
-| **≠ Variance** | Variance = chênh số EVM · Discrepancy = inconsistency rộng hơn (scope, schedule, ROI definition…) |
+| **Discrepancy** | **Sai lệch, không khớp** (số ít) — plan/actual/report không align |
+| **Discrepancies** | Nhiều sai lệch — hay gặp trên đề |
+| **Reconcile** | Đối chiếu & **align** — xử lý discrepancy |
+| **≠ Variance** | Variance = chênh số EVM · Discrepancy = inconsistency rộng hơn |
+| **≠ FLR** | Funding limit reconciliation = riêng funding limits |
 
-**Hay gặp:** Forecast ≠ status report · Actual cost ≠ budget · Subsidiary plans không align · ROI measured differently
+**Hay gặp:** Forecast ≠ status report · Actual cost ≠ budget · Subsidiary plans không align · Milestones ≠ vendor order · ROI measured differently
 
-**PM đúng:** **Reconcile** plans · **Discuss** với stakeholders · **Communicate** transparently · **Align** documentation
+**PM đúng:** **Reconcile** · **Discuss** stakeholders · **Communicate** transparently · **Align** documentation · Adjust plan nếu cần
 
-**Sai ✗:** Resolve informally · Freeze/hide · Chỉ escalate hoặc tăng budget mà không address inconsistency
+**Câu mẫu:** Q395 reconcile subsidiary plans · Q44 align docs · Q531 reconciliation process · Q591 adjust plan align vendor
+
+**Sai ✗:** Hide/che · Resolve informally · Chỉ escalate/tăng budget
 
 ### Hazardous
 | | |
