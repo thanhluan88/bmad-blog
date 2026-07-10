@@ -15,6 +15,7 @@ const {
 } = require("./lib/pmp-teach-keywords");
 const {
   buildHeroLead,
+  buildGroundingCard,
   buildSignalCard,
   buildWhyBullets,
   buildTrapsSection,
@@ -518,6 +519,7 @@ function renderLesson(q, prev, next) {
 
         <section id="analysis">
           <h2>${sec.analysis}. Phân tích đáp án — Đáp án đúng: ${escapeHtml(q.correct)}</h2>
+          ${buildGroundingCard(q, analysis)}
           ${buildSignalCard(q, analysis)}
           <h3>Tại sao chọn ${escapeHtml(q.correct)}?</h3>
           <ul>${whyBullets.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul>

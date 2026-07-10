@@ -94,13 +94,18 @@ const STEM_PROFILES = [
     processes: ["Develop Team", "Manage Team"],
     summaryHint: "SME ngại tham gia Agile team — PM giải thích lợi ích teamwork, continuous improvement và feedback sớm; không leo thang sponsor hay chỉ nhắc EQ.",
     whyCorrect: "Expert lo ngại teamwork làm chậm/chất lượng giảm — PM coaching: giải thích Agile delivery cần collaboration, continuous improvement và early feedback loops giúp đạt chất lượng cao hơn, không phải làm việc đơn độc (Build an empowered culture, Develop Team).",
+    groundingIntro:
+      "Dựa trên PMBOK 8 (Develop Team, tr. 112): SME ngại join agile team vì lo teamwork làm chậm và giảm chất lượng. Đáp án đúng phải giải thích vì sao collaboration + continuous improvement + early feedback giúp expert đạt chất lượng cao hơn làm việc đơn độc — không khuyên EQ (A), không giao retrospective khi chưa buy-in (C), không nhờ sponsor sửa thái độ (D).",
+    groundingConclusion:
+      "→ B: explain Agile value (CI + early feedback) trước lecture EQ / ceremony / escalate — Develop Team, PMBOK 8 tr. 112.",
     conceptBlurb:
       "Develop Team (PMBOK 8, tr. 112): PM đánh giá nhu cầu team và coach khi member chưa chắc cách làm việc collaborative — xây empowered culture, không lecture attitude hay escalate sớm.",
     lessonBullets: [
-      "SME lo teamwork làm chậm và giảm chất lượng — misconception về Agile, cần explain value chứ không lecture EQ.",
-      "Đáp án B: continuous improvement + early feedback loops giúp expert đạt chất lượng cao hơn làm việc đơn độc.",
-      "A chỉ nhắc EQ; C giao retrospective; D leo thang sponsor — đều bỏ qua bước explain agile value trước.",
-      "Develop Team + Build an empowered culture: PM coach trực tiếp, servant leadership.",
+      "Signal: SME tin teamwork *làm chậm* và *giảm chất lượng* — hiểu lầm về Agile; PM phải explain value trước mọi ceremony hay escalation.",
+      "B đúng: teamwork + continuous improvement + early feedback loops giúp expert đạt output chất lượng cao hơn làm việc đơn độc — Develop Team + Build an empowered culture.",
+      "PMBOK 8 tr. 112: member chưa chắc cách làm collaborative → PM assess nhu cầu team và coach trực tiếp (servant leadership), không đẩy sang sponsor.",
+      "A sai: khuyên EQ = phán xét thái độ, không trả lời *vì sao* Agile teamwork không compromise quality.",
+      "C/D sai thứ tự: retrospective hoặc sponsor chỉ sau khi SME hiểu value proposition của teamwork Agile.",
     ],
     rejectByAction: {
       escalate: "Leo thang sponsor vì attitude — quá nặng; PM coach và explain value trước.",

@@ -62,6 +62,77 @@ function formatFirstItem(val) {
   return String(val || "").split(",")[0].trim();
 }
 
+function truncateSentence(s, max = 100) {
+  const t = String(s || "").replace(/\s+/g, " ").trim();
+  if (t.length <= max) return t;
+  return `${t.slice(0, max - 1)}…`;
+}
+
+/** PMBOK 8 grounding — profile override or auto from optionAnalysis. */
+function composeGrounding(q, analysis) {
+  const stemProfile = matchStemProfile(q.text);
+  if (stemProfile?.groundingIntro) {
+    return {
+      intro: stemProfile.groundingIntro,
+      conclusion: stemProfile.groundingConclusion || "",
+      bullets: stemProfile.lessonBullets?.slice(0, 5) || [],
+    };
+  }
+
+  const optionAnalysis = analysis.optionAnalysis || [];
+  const correctOpt = optionAnalysis.find((o) => o.isCorrect);
+  const wrongOpts = optionAnalysis.filter((o) => !o.isCorrect);
+  if (!correctOpt && !wrongOpts.length) return { intro: "", conclusion: "", bullets: [] };
+
+  const mapping = analysis.pmbok8 || {};
+  const process = formatFirstItem(mapping.processes || mapping.process);
+  const principle = formatFirstItem(mapping.principles || mapping.principle);
+  const page = analysis.pageInfo?.pages?.[0];
+  const pageRef = page ? `, tr. ${page}` : "";
+  const pmbokLabel = [process, principle].filter(Boolean).join(" + ") || "PMBOK 8";
+  const correctKey = correctOpt?.key || q.correct;
+  const issue = getPrimaryStemIssue(extractStemIssues(q.text), stemProfile);
+  const signalLabel =
+    issue?.label ||
+    stemProfile?.summaryHint?.split("—")[0]?.trim() ||
+    parseSection(analysis.explanation, "Signal trong stem") ||
+    "tình huống trong stem";
+
+  const wrongSummary = wrongOpts
+    .map((o) => `${o.key} (${truncateSentence(o.reason, 72)})`)
+    .join("; ");
+
+  const intro = [
+    `Dựa trên PMBOK 8 (${pmbokLabel}${pageRef}): với ${signalLabel},`,
+    `đáp án đúng là ${correctKey}`,
+    correctOpt?.reason ? `— ${truncateSentence(correctOpt.reason, 120)}` : "",
+    wrongSummary ? `Không chọn: ${wrongSummary}.` : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const conclusion = correctOpt?.reason
+    ? `→ ${correctKey}: ${truncateSentence(correctOpt.reason, 140)}`
+    : `→ ${correctKey}: hành động align signal stem và PMBOK 8.`;
+
+  const bullets = [];
+  pushUnique(bullets, `Signal: ${signalLabel}.`);
+  if (correctOpt?.reason) {
+    pushUnique(bullets, `Đáp án ${correctKey} đúng: ${correctOpt.reason}`);
+  }
+  if (page && process) {
+    pushUnique(
+      bullets,
+      `PMBOK 8 tr. ${page}: ${process}${principle ? ` + ${principle}` : ""}.`,
+    );
+  }
+  for (const w of wrongOpts.slice(0, 3)) {
+    if (w.reason) pushUnique(bullets, `${w.key} sai: ${w.reason}`);
+  }
+
+  return { intro, conclusion, bullets: bullets.slice(0, 5) };
+}
+
 function formatMappingList(val) {
   if (Array.isArray(val)) return val.join(", ");
   return String(val || "");
@@ -141,15 +212,30 @@ function buildSignalCard(q, analysis) {
   const signals = extractStemSignals(q.text);
   const stemProfile = matchStemProfile(q.text);
   const issue = getPrimaryStemIssue(extractStemIssues(q.text), stemProfile);
+  const grounding = composeGrounding(q, analysis);
   const correctKey = (analysis.optionAnalysis || []).find((o) => o.isCorrect)?.key || q.correct;
   const signalText =
     signals.length > 0
       ? signals.slice(0, 4).map((s) => `<strong>${escapeHtml(s)}</strong>`).join(" · ")
       : issue?.label || "Đọc kỹ stem và xác định vấn đề trọng tâm.";
-  const conclusion = `→ <strong>${escapeHtml(correctKey)}</strong>: explain agile value (CI + feedback) trước ceremony / escalate / lecture EQ.`;
+  const rawConclusion =
+    grounding.conclusion || `→ ${correctKey}: hành động align signal stem và PMBOK 8.`;
+  const conclusionHtml = escapeHtml(rawConclusion).replace(
+    `→ ${escapeHtml(correctKey)}:`,
+    `→ <strong>${escapeHtml(correctKey)}</strong>:`,
+  );
   return `<div class="card tip">
             <h4>Signal trong stem Q${q.id}</h4>
-            <p style="margin:0">${signalText}<br><br>${conclusion}</p>
+            <p style="margin:0">${signalText}<br><br>${conclusionHtml}</p>
+          </div>`;
+}
+
+function buildGroundingCard(q, analysis) {
+  const grounding = composeGrounding(q, analysis);
+  if (!grounding.intro) return "";
+  return `<div class="card info">
+            <h4>Grounding PMBOK 8</h4>
+            <p style="margin:0">${escapeHtml(grounding.intro)}</p>
           </div>`;
 }
 
@@ -191,14 +277,14 @@ function buildCompareTable(optionAnalysis, q) {
 }
 
 function buildWhyBullets(analysis, q) {
-  const stemProfile = matchStemProfile(q.text);
-  if (stemProfile?.lessonBullets?.length) {
-    return stemProfile.lessonBullets.slice(0, 5);
+  const grounding = composeGrounding(q, analysis);
+  if (grounding.bullets?.length) {
+    return grounding.bullets;
   }
 
   const bullets = [];
   const correctOpt = (analysis.optionAnalysis || []).find((o) => o.isCorrect);
-  const primary = getPrimaryStemIssue(extractStemIssues(q.text), stemProfile);
+  const primary = getPrimaryStemIssue(extractStemIssues(q.text), matchStemProfile(q.text));
 
   if (primary?.label) {
     pushUnique(bullets, `Bối cảnh: ${primary.label}.`);
@@ -391,6 +477,7 @@ function quizExplMap(optionAnalysis) {
 
 module.exports = {
   buildHeroLead,
+  buildGroundingCard,
   buildConceptIntro,
   buildSignalCard,
   buildActionTypeGrid,
