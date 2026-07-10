@@ -1,15 +1,36 @@
 const fs = require("fs");
 const path = require("path");
-const { SERIES } = require("./pmp-teach-series");
+const { SERIES, GROUPS } = require("./pmp-teach-series");
 
 const dir = path.join(__dirname, "../public/pmp");
 
 function buildSeriesBlock(currentHref) {
   let out = '        <div class="nav-series">Practice Series</div>\n';
-  SERIES.forEach(function (entry) {
-    const cls = entry[0] === currentHref ? ' class="series-current"' : "";
+  out +=
+    '        <a href="pmp-teach-series-index.html" class="nav-series-index">📚 Nhóm theo chủ đề</a>\n';
+  GROUPS.forEach(function (group) {
+    const items = SERIES.slice(group.from - 1, group.to);
+    const hasCurrent = items.some(function (entry) {
+      return entry[0] === currentHref;
+    });
     out +=
-      '        <a href="' + entry[0] + '"' + cls + ">" + entry[1] + "</a>\n";
+      '        <details class="nav-series-group"' +
+      (hasCurrent ? " open" : "") +
+      ">\n";
+    out +=
+      "          <summary>Q" +
+      group.from +
+      "–" +
+      group.to +
+      " · " +
+      group.title +
+      "</summary>\n";
+    items.forEach(function (entry) {
+      const cls = entry[0] === currentHref ? ' class="series-current"' : "";
+      out +=
+        '          <a href="' + entry[0] + '"' + cls + ">" + entry[1] + "</a>\n";
+    });
+    out += "        </details>\n";
   });
   return out;
 }

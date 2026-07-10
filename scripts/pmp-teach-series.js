@@ -111,3 +111,95 @@ module.exports.SERIES = [
   ["pmp-teach-scope-creep.html", "Q109: Scope Creep"],
   ["pmp-teach-return-on-investment.html", "Q110: Return on Investment"],
 ];
+
+/** Practice batches of 10 — topic groups for navigation. */
+module.exports.GROUPS = [
+  {
+    id: "q01-10",
+    from: 1,
+    to: 10,
+    title: "Nền tảng PMBOK 8 & Tổ chức",
+    subtitle: "Project/Program/Portfolio · EEF/OPA · Cấu trúc tổ chức · Sponsor · Focus on Value",
+  },
+  {
+    id: "q11-20",
+    from: 11,
+    to: 20,
+    title: "Nguyên tắc & Khởi tạo",
+    subtitle: "6 Principles · Predictive/Adaptive/Hybrid · Business Case · Assumption Log",
+  },
+  {
+    id: "q21-30",
+    from: 21,
+    to: 30,
+    title: "Kế hoạch & Procurement",
+    subtitle: "Project Management Plan · Sourcing · Make-or-Buy · Change Log · Issue Log",
+  },
+  {
+    id: "q31-40",
+    from: 31,
+    to: 40,
+    title: "Quality · M&C · Thay đổi",
+    subtitle: "Quality Audits · Lessons Learned · Monitor & Control · Change · Close Project",
+  },
+  {
+    id: "q41-50",
+    from: 41,
+    to: 50,
+    title: "Scope & Requirements",
+    subtitle: "Scope Plan · Elicit Requirements · RTM · Design Thinking · Benchmarking",
+  },
+  {
+    id: "q51-60",
+    from: 51,
+    to: 60,
+    title: "WBS · Quality · Schedule",
+    subtitle: "WBS · Verified Deliverables · Schedule Baseline · Rolling Wave · Leads & Lags",
+  },
+  {
+    id: "q61-70",
+    from: 61,
+    to: 70,
+    title: "Schedule & Cost",
+    subtitle: "Fast Tracking · Financial Plan · Estimating · Contingency · Basis of Estimates",
+  },
+  {
+    id: "q71-80",
+    from: 71,
+    to: 80,
+    title: "EVM & Stakeholders",
+    subtitle: "Earned Value · Stakeholder Register · Mapping · Comms Plan · Monitor Engagement",
+  },
+  {
+    id: "q81-90",
+    from: 81,
+    to: 90,
+    title: "Team & Resources",
+    subtitle: "Team Charter · RAM · RBS · Servant Leadership · Distributed Management",
+  },
+  {
+    id: "q91-100",
+    from: 91,
+    to: 100,
+    title: "Team · QC · Risk",
+    subtitle: "Tuckman · Control Charts · Plan Risk → Implement Responses",
+  },
+  {
+    id: "q101-110",
+    from: 101,
+    to: 110,
+    title: "Waterfall Practice",
+    subtitle: "Reserve Analysis · Benefits · Config Mgmt · OBS · Procurement · Scope Creep · ROI",
+  },
+];
+
+module.exports.parseQNum = function parseQNum(label) {
+  const m = /^Q(\d+)/.exec(label);
+  return m ? parseInt(m[1], 10) : null;
+};
+
+module.exports.getGroupForQ = function getGroupForQ(qNum) {
+  return module.exports.GROUPS.find(function (g) {
+    return qNum >= g.from && qNum <= g.to;
+  });
+};
