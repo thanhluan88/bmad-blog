@@ -97,4 +97,5 @@ module.exports.SERIES = [
   ["pmp-teach-identify-risks.html", "Q96: Identify Risks"],
   ["pmp-teach-swot-analysis.html", "Q97: SWOT Analysis"],
   ["pmp-teach-qualitative-risk-analysis.html", "Q98: Qualitative Risk Analysis"],
+  ["pmp-teach-mitigate-risk.html", "Q99: Mitigate Risk"],
 ];

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Lessons Learned Register (Q33)</title>
+  <title>PMBOK 8 — Mitigate Risk (Q99)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,6 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -88,11 +92,11 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Lessons Learned · Q33</div>
+      <div class="brand-sub">Mitigate Risk · Q99</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#knowledge">Manage Project Knowledge</a>
-        <a href="#registers">Register nào?</a>
+        <a href="#mitigate-risk">Mitigate Risk</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -132,7 +136,7 @@
         <a href="pmp-teach-process-improvement.html">Q30: Process Improvement</a>
         <a href="pmp-teach-quality-audits.html">Q31: Quality Audits</a>
         <a href="pmp-teach-checklists.html">Q32: Checklists</a>
-        <a href="pmp-teach-lessons-learned.html" class="series-current">Q33: Lessons Learned</a>
+        <a href="pmp-teach-lessons-learned.html">Q33: Lessons Learned</a>
         <a href="pmp-teach-after-action-review.html">Q34: After-Action Review</a>
         <a href="pmp-teach-monitor-control-performance.html">Q35: Monitor &amp; Control</a>
         <a href="pmp-teach-ishikawa-analysis.html">Q36: Ishikawa Analysis</a>
@@ -197,20 +201,15 @@
         <a href="pmp-teach-identify-risks.html">Q96: Identify Risks</a>
         <a href="pmp-teach-swot-analysis.html">Q97: SWOT Analysis</a>
         <a href="pmp-teach-qualitative-risk-analysis.html">Q98: Qualitative Risk Analysis</a>
-        <a href="pmp-teach-mitigate-risk.html">Q99: Mitigate Risk</a>
+        <a href="pmp-teach-mitigate-risk.html" class="series-current">Q99: Mitigate Risk</a>
       </nav>
 
 
 
 
-
-
-
-
-
       <div class="sidebar-pager">
-        <a href="pmp-teach-checklists.html" class="sidebar-pager-link">← Q32: Checklists</a>
-        <a href="pmp-teach-after-action-review.html" class="sidebar-pager-link">Q34: After-Action Review →</a>
+        <a href="pmp-teach-qualitative-risk-analysis.html" class="sidebar-pager-link">← Q98: Qualitative Risk Analysis</a>
+        <span class="sidebar-pager-link disabled" aria-hidden="true">— →</span>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
@@ -220,113 +219,201 @@
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp" class="mobile-series-nav">← Blog PMP</a>
-        <a href="pmp-teach-checklists.html" class="mobile-series-nav">← Q32: Checklists</a>
-        <a href="pmp-teach-after-action-review.html" class="mobile-series-nav">Q34: After-Action Review →</a>
-        <a href="#knowledge">Knowledge</a>
-        <a href="#registers">Registers</a>
+        <a href="pmp-teach-qualitative-risk-analysis.html" class="mobile-series-nav">← Q98: Qualitative Risk Analysis</a>
+        <a href="#mitigate-risk">Mitigate Risk</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
 
       <main>
-        <header class="hero" id="intro">
+                <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q33 về <strong>Lessons Learned Register</strong> — sau khi facilitate conflict
-            giữa developers và compliance officers và tìm solution, PM cần làm gì với
-            <em>new information</em> gained?
+            Bài học Q99 về <strong>Plan Risk Responses</strong> và chiến lược
+            <strong>Mitigate</strong> — Andre, PM tại BluePeak Telecom,
+            <em>đã xác định</em> một rủi ro có thể trì hoãn deliverable quan trọng.
+            Team có quan điểm khác nhau về cách xử lý. Rủi ro
+            <em>không thể loại bỏ hoàn toàn</em>, nhưng
+            <em>khả năng xảy ra hoặc tác động có thể giảm</em> bằng hành động phù hợp.
+            Andre nên làm gì?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.24–26 &amp; p.123</span>
-            <span class="badge">Manage Project Knowledge</span>
-            <span class="badge">Câu 33 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.96–97 &amp; 99</span>
+            <span class="badge">Uncertainty</span>
+            <span class="badge">Plan Risk Responses · Mitigate</span>
+            <span class="badge">Câu 99 — Practice</span>
           </div>
         </header>
 
-        <section id="knowledge">
-          <h2>1. Manage Project Knowledge</h2>
+                <section id="mitigate-risk">
+          <h2>1. Plan Risk Responses &amp; Mitigate (p.96–97, 99, 203–204)</h2>
           <p>
-            Manage Project Knowledge là process sử dụng existing knowledge và tạo new knowledge
-            để đạt project objectives và hỗ trợ organizational learning. Knowledge được capture
-            <strong>throughout</strong> the project — không chỉ ở closure.
+            <strong>Plan Risk Responses</strong> (p.96–97, 99) phát triển phương án, chọn chiến lược
+            và thống nhất hành động để xử lý rủi ro tổng thể và từng rủi ro riêng lẻ.
+            Với <strong>threat</strong> (mối đe dọa), chiến lược <strong>Mitigate</strong> (p.203–204)
+            <em>giảm xác suất hoặc tác động</em> — thường hiệu quả hơn khi thực hiện sớm.
           </p>
 
+          <div class="approach-grid">
+            <div class="approach-cell pull">
+              <strong>Mitigate the risk (A — đúng)</strong>
+              Giảm likelihood hoặc impact của threat — đơn giản hóa quy trình, tăng testing,
+              chọn seller ổn định hơn. Khớp signal "cannot be fully removed" nhưng "can be reduced".
+            </div>
+            <div class="approach-cell">
+              <strong>Accept the risk (B — bẫy)</strong>
+              Chấp nhận rủi ro — không hành động giảm probability/impact. Stem nói rõ
+              <em>có thể giảm</em> bằng hành động đúng → không phải accept thụ động.
+            </div>
+            <div class="approach-cell">
+              <strong>Transfer the risk (C — bẫy)</strong>
+              Chuyển giao cho bên thứ ba (bảo hiểm, hợp đồng fixed-price). Không giảm trực tiếp
+              likelihood/impact trong team — khác với mitigate.
+            </div>
+            <div class="approach-cell">
+              <strong>Contingency reserve (D — bẫy)</strong>
+              Dự phòng ngân sách/thời gian cho rủi ro đã biết — thường dùng với accept hoặc residual risk,
+              không phải chiến lược <em>giảm</em> probability/impact.
+            </div>
+          </div>
+
           <div class="card tip">
-            <h4>Lessons Learned Register (PMBOK p.123)</h4>
+            <h4>Signal trong stem Q99</h4>
             <p style="margin:0">
-              Records knowledge gained during a project, phase, or iteration to improve future
-              performance for the team and organization.
+              <strong>BluePeak Telecom · risk identified · could delay key deliverable · team disagrees on handling · cannot be fully removed · likelihood or impact can be reduced</strong>
+              → Đã qua identify/analyze, cần <strong>chọn chiến lược phản ứng</strong>.
+              "Reduced" = <strong>Mitigate (A)</strong>. Không accept (B — passive),
+              không transfer (C — shift to third party), không contingency reserve alone (D — budget, not reduce).
             </p>
           </div>
 
-          <p>
-            Keyword trong đề: <strong>new information</strong> sau khi resolve conflict và find
-            solution → document vào lessons learned register và <em>maintain throughout</em> the project.
-          </p>
-        </section>
-
-        <section id="registers">
-          <h2>2. Register / artifact nào?</h2>
-
+          <h3>Threat Response Strategies (p.203–204)</h3>
           <table>
             <thead>
-              <tr><th>Artifact</th><th>Khi nào dùng</th><th>Q33 fit?</th></tr>
+              <tr><th>Chiến lược</th><th>Mục đích</th><th>Ví dụ</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Risk register (A)</strong></td>
-                <td>Identified risks &amp; mitigation strategies</td>
-                <td>Conflict đã resolved — đây là knowledge gained, không phải risk log</td>
+                <td><strong>Mitigate</strong></td>
+                <td>Giảm probability hoặc impact</td>
+                <td>Thêm testing, prototype, chọn vendor ổn định, đơn giản hóa scope</td>
               </tr>
               <tr>
-                <td><strong>Lessons learned register (B)</strong></td>
-                <td>Knowledge gained during project/phase/iteration</td>
-                <td>✓ New info từ facilitated session</td>
+                <td><strong>Transfer</strong></td>
+                <td>Chuyển trách nhiệm/tác động tài chính cho bên thứ ba</td>
+                <td>Bảo hiểm, performance bond, fixed-price contract</td>
               </tr>
               <tr>
-                <td><strong>Archive to OPA at closure (C)</strong></td>
-                <td>End of project — transfer to organizational assets</td>
-                <td>Quá muộn — đề hỏi what to do now, maintain throughout</td>
+                <td><strong>Accept</strong></td>
+                <td>Acknowledge rủi ro — active (reserve) hoặc passive (no action)</td>
+                <td>Contingency reserve nếu accept active; không giảm likelihood/impact</td>
               </tr>
               <tr>
-                <td><strong>Knowledge management plan (D)</strong></td>
-                <td>Plan how to share knowledge — planning artifact</td>
-                <td>Đã execution — cần capture info, không viết plan mới</td>
+                <td><strong>Escalate</strong></td>
+                <td>Rủi ro ngoài phạm vi PM/project</td>
+                <td>Đưa lên program/portfolio hoặc sponsor</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q99?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Mitigate the risk</strong></td>
+                <td>Giảm probability hoặc impact của threat</td>
+                <td>✓ Đúng — "likelihood or impact can be reduced"</td>
+              </tr>
+              <tr>
+                <td><strong>B. Accept the risk</strong></td>
+                <td>Không hành động giảm rủi ro; chấp nhận</td>
+                <td>✗ Stem nói có thể giảm — cần hành động mitigate</td>
+              </tr>
+              <tr>
+                <td><strong>C. Transfer the risk</strong></td>
+                <td>Chuyển cho bên thứ ba</td>
+                <td>✗ Không khớp signal "reduce" trong team/project</td>
+              </tr>
+              <tr>
+                <td><strong>D. Implement a contingency reserve</strong></td>
+                <td>Dự phòng tiền/thời gian — thường với accept</td>
+                <td>✗ Reserve không giảm likelihood/impact — khác mitigate</td>
               </tr>
             </tbody>
           </table>
         </section>
 
-        <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 33</h2>
+                <section id="compare">
+          <h2>2. So sánh: Q98 Qualitative vs Q99 Mitigate (Analyze → Respond)</h2>
+
+          <table>
+            <thead>
+              <tr><th>Câu</th><th>Giai đoạn</th><th>Mục đích</th><th>Signal trong stem</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Q98 — Qualitative (C)</strong></td>
+                <td><strong>Analyze</strong></td>
+                <td>Ưu tiên rủi ro khi budget hạn chế</td>
+                <td><em>Limited budget</em> · cannot address all · probability × impact</td>
+              </tr>
+              <tr>
+                <td><strong>Q99 — Mitigate (A)</strong></td>
+                <td><strong>Respond</strong> — mitigate</td>
+                <td>Giảm likelihood/impact của threat đã xác định</td>
+                <td><em>Cannot be fully removed</em> · <em>can be reduced</em> · delay deliverable</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card info">
+            <h4>Analyze vs Respond — Khi nào chọn cái nào?</h4>
+            <p style="margin:0">
+              <strong>Q98 — Qualitative Analysis:</strong> Nhiều rủi ro, ngân sách hạn chế →
+              <strong>ưu tiên</strong> trước (probability × impact). Chưa chọn chiến lược cụ thể.<br><br>
+              <strong>Q99 — Mitigate:</strong> Một rủi ro cụ thể đã identify; stem hỏi
+              <strong>chiến lược phản ứng</strong> khi có thể <em>giảm</em> likelihood/impact.<br><br>
+              <strong>Accept (bẫy B):</strong> Khi không đáng hoặc không thể giảm — stem nói ngược lại.<br><br>
+              <strong>Transfer (bẫy C):</strong> Khi muốn bên thứ ba gánh tác động tài chính/pháp lý.<br><br>
+              <strong>Contingency reserve (bẫy D):</strong> Dự phòng cho rủi ro chấp nhận — không thay thế mitigate.
+            </p>
+          </div>
+        </section>
+
+                <section id="question">
+          <h2>3. Câu hỏi thực hành — Question 99</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q33</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q99</div>
             <div class="q-text">
-              You are managing a digital banking platform upgrade at Southland Financial Group.
-              Midway through execution, <em>conflict</em> arises between developers and compliance
-              officers over security requirements. You <em>facilitate a session</em> with the team
-              and find a <em>solution</em> to move forward. What will you do with this
-              <em>new information</em>?
+              Andre, the project manager at BluePeak Telecom, identifies a risk that could delay a
+              <em>key deliverable</em>. The team has different views on how to handle it. The risk
+              <em>cannot be fully removed</em>, but its
+              <em>likelihood or impact can be reduced</em> with the right actions.
+              What should Andre do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Update the risk register with the identified risks and mitigation strategies.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Document and maintain a lessons learned register throughout the project.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Ensure all project knowledge is archived into organizational process assets at project closure.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Develop a knowledge management plan to formalize information sharing.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Mitigate the risk</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Accept the risk</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Transfer the risk</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Implement a contingency reserve</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
-        <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+                <section id="analysis">
+          <h2>4. Phân tích đáp án — Đáp án đúng: A</h2>
 
-          <h3>Tại sao chọn B?</h3>
+          <h3>Tại sao chọn A?</h3>
           <ul>
-            <li>New knowledge từ conflict resolution → lessons learned register.</li>
-            <li><em>Throughout the project</em> — không đợi closure.</li>
-            <li>Manage Project Knowledge — improve future performance for team &amp; org (p.24–26, p.123).</li>
+            <li><strong>Mitigate</strong> (p.203–204) giảm probability hoặc impact của threat — khớp trực tiếp "likelihood or impact can be reduced".</li>
+            <li>Plan Risk Responses (p.99) chọn chiến lược sau khi rủi ro đã được identify; stem mô tả một threat cụ thể cần hành động.</li>
+            <li>Risk cannot be fully removed — mitigate không loại bỏ hoàn toàn mà <em>giảm</em>, vẫn còn residual risk.</li>
+            <li>Hiệu quả hơn khi làm sớm: simplify processes, increase testing, select more stable sellers (theo explanation slide).</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -336,169 +423,205 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Risk register</strong></td>
-                <td>Risks &amp; mitigations — conflict đã có solution; đây là captured learning.</td>
+                <td><strong>B. Accept the risk</strong></td>
+                <td>Accept = không giảm likelihood/impact. Stem nói rõ có thể <strong>reduce</strong> bằng right actions → cần mitigate, không passive accept.</td>
               </tr>
               <tr>
-                <td><strong>C. Archive at closure</strong></td>
-                <td>Closure activity — đề hỏi xử lý new info ngay trong execution.</td>
+                <td><strong>C. Transfer the risk</strong></td>
+                <td>Transfer chuyển rủi ro cho bên thứ ba (insurance, contract). Không phải giảm trực tiếp trong project — không khớp signal "reduce with actions".</td>
               </tr>
               <tr>
-                <td><strong>D. Knowledge management plan</strong></td>
-                <td>Planning deliverable — project đang execution, cần document knowledge gained.</td>
+                <td><strong>D. Implement a contingency reserve</strong></td>
+                <td>Contingency reserve là <strong>budget/time buffer</strong> — thường dùng khi accept active. Không giảm probability/impact; khác với mitigate.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q4 OPA &amp; Q32 Checklists</h4>
+            <h4>Q96 → Q98 → Q99 — Risk Management Flow</h4>
             <p style="margin:0">
-              OPA (Q4) nhận knowledge khi archive. Checklists (Q32) dùng lessons learned làm input.
-              Q33: capture vào lessons learned register <em>during</em> project — bước trước khi đưa vào OPA.
+              Q96: Identify → <strong>Risk register</strong>.<br>
+              Q98: Analyze/prioritize → <strong>Qualitative analysis</strong>.<br>
+              Q99: Respond → <strong>Mitigate</strong> khi có thể giảm likelihood/impact.<br>
+              Tiếp theo: Implement responses, monitor risks, update register.
             </p>
           </div>
         </section>
 
-        <section id="drill">
-          <h2>5. Drill — Artifact nào?</h2>
+                <section id="drill">
+          <h2>5. Drill — Mitigate, Accept, Transfer, hay Reserve?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="LL">
-              <span>Knowledge gained after resolving team conflict</span>
+            <div class="classify-row" data-answer="MITIGATE">
+              <span>BluePeak: risk could delay deliverable; cannot remove fully but likelihood/impact can be reduced (Q99)</span>
               <div class="classify-btns">
-                <button data-pick="LL">Lessons learned</button>
-                <button data-pick="RISK">Risk register</button>
-                <button data-pick="OPA">Archive OPA</button>
+                <button data-pick="MITIGATE">Mitigate</button>
+                <button data-pick="ACCEPT">Accept</button>
+                <button data-pick="TRANSFER">Transfer</button>
+                <button data-pick="RESERVE">Reserve</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="RISK">
-              <span>New threat identified with response strategy</span>
+            <div class="classify-row" data-answer="MITIGATE">
+              <span>PM adds extra testing and selects a more stable vendor to lower defect probability</span>
               <div class="classify-btns">
-                <button data-pick="LL">Lessons learned</button>
-                <button data-pick="RISK">Risk register</button>
-                <button data-pick="OPA">Archive OPA</button>
+                <button data-pick="MITIGATE">Mitigate</button>
+                <button data-pick="ACCEPT">Accept</button>
+                <button data-pick="TRANSFER">Transfer</button>
+                <button data-pick="RESERVE">Reserve</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="OPA">
-              <span>Transfer all project docs at project end</span>
+            <div class="classify-row" data-answer="TRANSFER">
+              <span>PM buys insurance and uses fixed-price contract so vendor bears cost overrun</span>
               <div class="classify-btns">
-                <button data-pick="LL">Lessons learned</button>
-                <button data-pick="RISK">Risk register</button>
-                <button data-pick="OPA">Archive OPA</button>
+                <button data-pick="MITIGATE">Mitigate</button>
+                <button data-pick="ACCEPT">Accept</button>
+                <button data-pick="TRANSFER">Transfer</button>
+                <button data-pick="RESERVE">Reserve</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="LL">
-              <span>Maintain register throughout project phases</span>
+            <div class="classify-row" data-answer="ACCEPT">
+              <span>Low-impact risk: PM documents it and takes no further action unless it occurs</span>
               <div class="classify-btns">
-                <button data-pick="LL">Lessons learned</button>
-                <button data-pick="RISK">Risk register</button>
-                <button data-pick="OPA">Archive OPA</button>
+                <button data-pick="MITIGATE">Mitigate</button>
+                <button data-pick="ACCEPT">Accept</button>
+                <button data-pick="TRANSFER">Transfer</button>
+                <button data-pick="RESERVE">Reserve</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="RESERVE">
+              <span>PM sets aside budget in cost baseline for known risk if it materializes (active accept)</span>
+              <div class="classify-btns">
+                <button data-pick="MITIGATE">Mitigate</button>
+                <button data-pick="ACCEPT">Accept</button>
+                <button data-pick="TRANSFER">Transfer</button>
+                <button data-pick="RESERVE">Reserve</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
-        <section id="traps">
+                <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Conflict/security → Risk register (A)</h4>
-            <p style="margin:0">Conflict đã resolved với solution — new information là learning, không phải risk entry.</p>
+            <h4>Bẫy 1: "Cannot remove" → Accept (B)</h4>
+            <p style="margin:0">Cannot be <em>fully</em> removed ≠ accept. Stem thêm <strong>can be reduced</strong> → mitigate (A), không passive accept.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Knowledge → Archive OPA at closure (C)</h4>
-            <p style="margin:0">Archive là bước cuối — đề nhấn maintain <em>throughout</em> the project.</p>
+            <h4>Bẫy 2: Mọi câu risk → Transfer (C)</h4>
+            <p style="margin:0">Transfer khi chuyển cho bên thứ ba. Giảm likelihood/impact trong project = <strong>mitigate</strong>.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Information sharing → KM plan (D)</h4>
-            <p style="margin:0">Plan thuộc planning — đề đang execution, cần capture vào lessons learned register.</p>
+            <h4>Bẫy 3: Contingency reserve = response strategy (D)</h4>
+            <p style="margin:0">Reserve là <strong>công cụ tài chính</strong> (thường với accept), không giảm probability/impact như mitigate.</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: Nhầm Q98 và Q99</h4>
+            <p style="margin:0">Q98: nhiều rủi ro + limited budget → <strong>qualitative analyze</strong>. Q99: một rủi ro + có thể reduce → <strong>mitigate</strong>.</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>New information / knowledge gained during project</strong> → Lessons learned register, maintained throughout (B).</p>
+            <p style="margin:0"><strong>Risk identified · delay deliverable · cannot fully remove · likelihood/impact can be reduced · right actions</strong> → Mitigate the risk (A).</p>
           </div>
         </section>
 
-        <section id="flashcards">
+                <section id="flashcards">
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Lessons learned register? (p.123)</div>
-            <div class="flashcard-back">Records knowledge gained during project/phase/iteration · improve future performance.</div>
+            <div class="flashcard-front">Mitigate — threat strategy? (p.203–204)</div>
+            <div class="flashcard-back"><strong>Giảm probability hoặc impact</strong> của threat. Ví dụ: thêm testing, đơn giản hóa quy trình, chọn seller ổn định. Không loại bỏ hoàn toàn.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q33 đáp án?</div>
-            <div class="flashcard-back"><strong>B</strong> — Document &amp; maintain lessons learned register throughout the project.</div>
+            <div class="flashcard-front">Q99 đáp án?</div>
+            <div class="flashcard-back"><strong>A — Mitigate the risk</strong>. BluePeak · delay deliverable · cannot fully remove · can reduce likelihood/impact.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Mitigate vs Accept vs Transfer?</div>
+            <div class="flashcard-back"><strong>Mitigate:</strong> reduce P or I. <strong>Accept:</strong> no reduction. <strong>Transfer:</strong> third party. <strong>Reserve:</strong> budget for accepted risk.</div>
           </div></div>
         </section>
 
-        <section id="cheatsheet">
+                <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">LESSONS LEARNED REGISTER — Q33 (PMBOK 8, p.24–26 &amp; p.123)
+          <div class="cheat-sheet">MITIGATE THE RISK — Q99
+(PMBOK 8, p.96–97 &amp; 99 Plan Risk Responses · p.203–204 Threats)
 ─────────────────────────────────────────────────────
-PROCESS: Manage Project Knowledge
-  - Use existing knowledge · create new knowledge
-  - Support organizational learning
+DOMAIN: Uncertainty
+PROCESS: Plan Risk Responses (p.99)
+STRATEGY: MITIGATE — reduce PROBABILITY or IMPACT
 
-ARTIFACT: Lessons Learned Register
-  - Knowledge gained during project / phase / iteration
-  - Maintain THROUGHOUT project (not only at closure)
+MITIGATE: Active actions to LOWER likelihood/impact
+  → Simplify processes · increase testing
+  → Select more stable sellers · prototypes
+  → Risk NOT fully removed — residual may remain
 
-SCENARIO: Southland Financial — digital banking upgrade
-           CONFLICT: developers vs compliance (security)
-           PM facilitates session → SOLUTION found
-           What to do with NEW INFORMATION?
-→ B) Document &amp; maintain LESSONS LEARNED REGISTER ✓
+ACCEPT: Acknowledge — NO reduction
+  → Passive: no action
+  → Active: contingency reserve (D is tool, not strategy here)
+
+TRANSFER: Shift to THIRD PARTY
+  → Insurance · performance bond · fixed-price contract
+  → NOT "reduce with project actions"
+
+CONTINGENCY RESERVE: Budget/time buffer
+  → For KNOWN risks (often with accept)
+  → Does NOT reduce probability/impact
+
+SCENARIO: BluePeak Telecom — Andre PM
+           RISK IDENTIFIED — delay KEY DELIVERABLE
+           CANNOT be FULLY REMOVED
+           LIKELIHOOD or IMPACT CAN BE REDUCED
+NEXT → A) MITIGATE THE RISK ✓
 
 NOT:
-  A) Risk register — risks &amp; mitigations; conflict already resolved
-  C) Archive to OPA at closure — too late; ongoing capture needed
-  D) Knowledge management plan — planning artifact, not capture action
+  B) ACCEPT — stem says can reduce
+  C) TRANSFER — third party, not reduce in-project
+  D) CONTINGENCY RESERVE — budget, not mitigate
 
-SIGNAL: "new information" · "knowledge gained" · "solution found"
-        maintain "throughout" / "during" project
+Q98 vs Q99:
+  Q98: many risks + limited budget → QUALITATIVE (analyze)
+  Q99: one risk + can reduce → MITIGATE (respond)
 
-VS Q4: OPA receives archived knowledge at end
-VS Q32: Checklists built FROM lessons learned
-VS Q33: Capture learning INTO lessons learned register NOW
+THREAT STRATEGIES: Escalate · Transfer · Mitigate · Accept
 
-Q33 ANSWER: B
+SIGNAL KEYWORDS:
+  Mitigate:   reduce, lower, likelihood, impact, testing,
+              simplify, cannot fully remove BUT can reduce
+  Accept:     low impact, no action, passive, document only
+  Transfer:   insurance, contract, vendor bears, third party
+  Reserve:    budget set aside, active accept, if occurs
 
-REF: PMBOK Guide, 8th Ed., p.24–26 &amp; p.123</div>
+Q99 ANSWER: A — Mitigate the risk
+
+REF: PMBOK Guide, 8th Ed., p.96–97 &amp; 99 Plan Risk Responses
+      p.203–204 Strategies for threats</div>
         </section>
-
-
-
-
-
-
-
 
 
 
         <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
-          <a class="lesson-pager-btn" href="pmp-teach-checklists.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q32: Checklists</span></a>
-          <span class="lesson-pager-pos">Q33 / 99</span>
-          <a class="lesson-pager-btn next" href="pmp-teach-after-action-review.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q34: After-Action Review</span></a>
+          <a class="lesson-pager-btn" href="pmp-teach-qualitative-risk-analysis.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q98: Qualitative Risk Analysis</span></a>
+          <span class="lesson-pager-pos">Q99 / 99</span>
+          <span class="lesson-pager-btn disabled" aria-hidden="true"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">—</span></span>
         </nav>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-organizational-process-assets.html">Q4: OPA</a>
-          · <a href="pmp-teach-checklists.html">Q32: Checklists</a>
-          · <a href="pmp-full-questions.html#q-33">Luyện câu 33</a>
+          · <a href="pmp-teach-qualitative-risk-analysis.html">Q98: Qualitative Risk Analysis</a>
+          · <a href="pmp-teach-swot-analysis.html">Q97: SWOT Analysis</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
     </div>
   </div>
 
-  <script>
+    <script>
     (function () {
-      const CORRECT = "B";
+      const CORRECT = "A";
       const EXPL = {
-        A: "Risk register cho risks &amp; mitigations — conflict đã resolved, đây là knowledge gained.",
-        B: "Đúng! Document &amp; maintain lessons learned register throughout project (Manage Project Knowledge, p.123).",
-        C: "Archive to OPA là closure activity — đề cần capture knowledge during execution.",
-        D: "Knowledge management plan là planning — cần document new info vào lessons learned register."
+        A: "Đúng! Mitigate giảm probability hoặc impact của threat — khớp 'likelihood or impact can be reduced' (p.203–204).",
+        B: "Accept không giảm likelihood/impact. Stem nói rõ có thể reduce bằng right actions → mitigate, không accept thụ động.",
+        C: "Transfer chuyển rủi ro cho bên thứ ba — không phải giảm trực tiếp trong project như mitigate.",
+        D: "Contingency reserve là dự phòng ngân sách/thời gian — thường với accept, không thay thế chiến lược mitigate."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -514,7 +637,7 @@ REF: PMBOK Guide, 8th Ed., p.24–26 &amp; p.123</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Document and maintain a lessons learned register throughout the project.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>A — Mitigate the risk</strong>" : "");
         });
       });
       let score = 0;
@@ -542,16 +665,18 @@ REF: PMBOK Guide, 8th Ed., p.24–26 &amp; p.123</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>

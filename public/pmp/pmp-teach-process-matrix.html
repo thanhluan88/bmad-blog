@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMBOK 8 — Big Picture: Process Matrix</title>
+  <style>
+    :root {
+      --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
+      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
+      --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
+
+      /* Domain colors */
+      --gov: #2563eb;    --gov-bg: #eff6ff;    --gov-bd: #bfdbfe;
+      --scope: #059669;  --scope-bg: #ecfdf5;  --scope-bd: #a7f3d0;
+      --sched: #d97706;  --sched-bg: #fffbeb;  --sched-bd: #fde68a;
+      --fin: #ca8a04;    --fin-bg: #fefce8;    --fin-bd: #fef08a;
+      --sh: #7c3aed;     --sh-bg: #f5f3ff;     --sh-bd: #ddd6fe;
+      --res: #0891b2;    --res-bg: #ecfeff;    --res-bd: #a5f3fc;
+      --risk: #dc2626;   --risk-bg: #fef2f2;   --risk-bd: #fecaca;
+      --qual: #db2777;   --qual-bg: #fdf2f8;   --qual-bd: #fbcfe8;
+      --proc: #78716c;   --proc-bg: #fafaf9;   --proc-bd: #d6d3d1;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; width: 100%; min-height: 100dvh; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: 100dvh; width: 100%; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } .mobile-nav { display: flex !important; } }
+
+    /* Sidebar */
+    .sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--card); border-right: 1px solid var(--border); padding: 1.25rem 1rem 2rem; }
+    .sidebar .brand { font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .sidebar .brand-sub { font-size: 0.78rem; color: var(--muted); margin: 0.2rem 0 1rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+    .sidebar nav a { display: block; padding: 0.45rem 0.65rem; color: var(--muted); text-decoration: none; border-radius: 8px; font-size: 0.86rem; margin-bottom: 1px; }
+    .sidebar nav a:hover, .sidebar nav a.active { background: var(--primary-bg); color: var(--primary-dark); }
+    .sidebar nav a.active { font-weight: 600; border-left: 3px solid var(--primary); }
+    .sidebar .nav-group { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
+    .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
+    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
+
+    /* Domain legend in sidebar */
+    .domain-legend { margin-top: 1rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.65rem; font-size: 0.8rem; border-radius: 6px; cursor: pointer; transition: background 0.15s; }
+    .legend-item:hover { background: var(--bg); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* Mobile nav */
+    .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
+    .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
+
+    /* Main content */
+    main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
+    .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 68ch; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 99px; background: #fff; border: 1px solid var(--border); color: var(--primary-dark); font-weight: 500; }
+
+    section { margin-bottom: 3rem; scroll-margin-top: 1rem; }
+    section > h2 { font-size: 1.3rem; margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); color: var(--primary-dark); }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
+    section p { margin: 0 0 0.75rem; }
+    section ul, section ol { margin: 0 0 1rem 1.2rem; }
+    section li { margin-bottom: 0.35rem; }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
+    .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
+    .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+
+    /* THE MATRIX */
+    .matrix-wrap { overflow-x: auto; margin: 1rem 0; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
+    .matrix { border-collapse: collapse; min-width: 800px; width: 100%; font-size: 0.78rem; background: var(--card); }
+    .matrix th { background: #1f2937; color: #f9fafb; padding: 0.6rem 0.75rem; text-align: center; font-size: 0.8rem; font-weight: 700; white-space: nowrap; }
+    .matrix th.col-domain { background: #374151; text-align: left; width: 110px; }
+    .matrix th.col-init { background: #1e40af; }
+    .matrix th.col-plan { background: #166534; }
+    .matrix th.col-exec { background: #92400e; }
+    .matrix th.col-mc { background: #6b21a8; }
+    .matrix th.col-close { background: #be123c; }
+    .matrix td { padding: 0.45rem 0.65rem; vertical-align: top; border: 1px solid var(--border); font-size: 0.75rem; line-height: 1.45; }
+    .matrix td.domain-label { font-weight: 700; font-size: 0.78rem; vertical-align: middle; text-align: right; padding-right: 0.85rem; white-space: nowrap; border: none; border-right: 2px solid var(--border); }
+    .matrix tr:hover td { filter: brightness(0.97); }
+    .matrix .process { display: block; margin-bottom: 0.2rem; padding: 0.2rem 0.35rem; border-radius: 4px; cursor: default; transition: background 0.15s; }
+    .matrix .process:last-child { margin-bottom: 0; }
+    .matrix .process:hover { filter: brightness(0.92); }
+    .matrix .num { font-size: 0.65rem; opacity: 0.7; margin-right: 0.2rem; }
+    .matrix td.empty { background: #f9fafb; }
+
+    /* domain color rows */
+    .matrix .gov .domain-label { color: var(--gov); border-right-color: var(--gov-bd); }
+    .matrix .gov .process { background: var(--gov-bg); color: #1e3a8a; border: 1px solid var(--gov-bd); }
+    .matrix .scope .domain-label { color: var(--scope); border-right-color: var(--scope-bd); }
+    .matrix .scope .process { background: var(--scope-bg); color: #064e3b; border: 1px solid var(--scope-bd); }
+    .matrix .sched .domain-label { color: var(--sched); border-right-color: var(--sched-bd); }
+    .matrix .sched .process { background: var(--sched-bg); color: #78350f; border: 1px solid var(--sched-bd); }
+    .matrix .fin .domain-label { color: var(--fin); border-right-color: var(--fin-bd); }
+    .matrix .fin .process { background: var(--fin-bg); color: #713f12; border: 1px solid var(--fin-bd); }
+    .matrix .sh .domain-label { color: var(--sh); border-right-color: var(--sh-bd); }
+    .matrix .sh .process { background: var(--sh-bg); color: #4c1d95; border: 1px solid var(--sh-bd); }
+    .matrix .res .domain-label { color: var(--res); border-right-color: var(--res-bd); }
+    .matrix .res .process { background: var(--res-bg); color: #164e63; border: 1px solid var(--res-bd); }
+    .matrix .risk .domain-label { color: var(--risk); border-right-color: var(--risk-bd); }
+    .matrix .risk .process { background: var(--risk-bg); color: #7f1d1d; border: 1px solid var(--risk-bd); }
+    .matrix .qual .domain-label { color: var(--qual); border-right-color: var(--qual-bd); }
+    .matrix .qual .process { background: var(--qual-bg); color: #831843; border: 1px solid var(--qual-bd); }
+    .matrix .proc .domain-label { color: var(--proc); border-right-color: var(--proc-bd); }
+    .matrix .proc .process { background: var(--proc-bg); color: #44403c; border: 1px solid var(--proc-bd); }
+
+    /* Pattern cards */
+    .pattern-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .pattern-card { padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--card); }
+    .pattern-card .icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .pattern-card strong { display: block; font-size: 0.92rem; margin-bottom: 0.3rem; }
+    .pattern-card p { font-size: 0.83rem; color: var(--muted); margin: 0; }
+
+    /* Drill */
+    .drill-wrap { display: grid; gap: 0.6rem; margin: 1rem 0; }
+    .drill-q { background: var(--card); border: 1.5px solid var(--border); border-radius: 10px; padding: 1rem; }
+    .drill-q .q-stem { font-size: 0.9rem; margin-bottom: 0.75rem; line-height: 1.55; }
+    .drill-q .q-stem em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .drill-opts { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .drill-opt { padding: 0.4rem 0.85rem; border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-family: inherit; background: var(--bg); transition: all 0.15s; }
+    .drill-opt:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
+    .drill-opt.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
+    .drill-opt.wrong { border-color: var(--bad); background: var(--bad-bg); color: #991b1b; opacity: 0.85; }
+    .drill-opt:disabled { cursor: default; }
+    .drill-feedback { display: none; margin-top: 0.6rem; font-size: 0.84rem; padding: 0.6rem 0.85rem; border-radius: 8px; }
+    .drill-feedback.show { display: block; }
+    .drill-feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
+    .drill-feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); margin-top: 0.5rem; }
+
+    /* Cheatsheet */
+    .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.78rem; line-height: 1.55; white-space: pre-wrap; overflow-x: auto; }
+    .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
+  </style>
+  <link rel="stylesheet" href="pmp-teach-fullscreen.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">PMBOK 8 Teach</div>
+      <div class="brand-sub">Process Matrix — Big Picture</div>
+      <nav id="sideNav">
+        <a href="#intro" class="active">Giới thiệu</a>
+        <a href="#matrix">Ma trận 40 processes</a>
+        <a href="#patterns">5 Key Patterns</a>
+        <a href="#drill">Drill — Định vị process</a>
+        <a href="#cheatsheet">Cheat sheet</a>
+      </nav>
+
+      <div class="nav-group">Domain Colors</div>
+      <div class="domain-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--gov)"></div>Governance</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--scope)"></div>Scope</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--sched)"></div>Schedule</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--fin)"></div>Finance</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--sh)"></div>Stakeholders</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--res)"></div>Resources</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--risk)"></div>Risk</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--qual)"></div>Quality</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--proc)"></div>Procurement</div>
+      </div>
+
+      <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
+      <a class="back-link secondary" href="/p/pmp">← Về blog PMP</a>
+    </aside>
+
+    <div>
+      <nav class="mobile-nav">
+        <a href="/p/pmp">← Blog PMP</a>
+        <a href="#matrix">Ma trận</a>
+        <a href="#patterns">Patterns</a>
+        <a href="#drill">Drill</a>
+        <a href="#cheatsheet">Cheat sheet</a>
+      </nav>
+
+      <main>
+        <header class="hero" id="intro">
+          <h1>PMBOK 8 — Process Matrix: Big Picture</h1>
+          <p class="lead">
+            Bức tranh toàn cảnh: 40+ processes của PMBOK 8 được tổ chức theo
+            <strong>9 Focus Groups / Performance Domains</strong> (hàng) &times;
+            <strong>5 Process Groups</strong> (cột). Hiểu được cấu trúc này là
+            nền tảng để định vị bất kỳ câu hỏi thi PMP nào.
+          </p>
+          <div class="badges">
+            <span class="badge">PMBOK Guide 8th Ed</span>
+            <span class="badge">9 Performance Domains</span>
+            <span class="badge">5 Process Groups</span>
+            <span class="badge">Big Picture Orientation</span>
+          </div>
+        </header>
+
+        <!-- SECTION 1: WHY -->
+        <section id="why">
+          <h2>1. Tại sao cần biết ma trận này?</h2>
+          <p>
+            Trên kỳ thi PMP, mỗi tình huống đều có <em>domain</em> (chủ đề) và
+            <em>giai đoạn</em> (phase). Biết process nào thuộc domain nào, nằm ở
+            phase nào giúp bạn:
+          </p>
+          <ul>
+            <li><strong>Nhận ra context ngay</strong> — "đây là Stakeholder domain, Executing phase"</li>
+            <li><strong>Loại trừ đáp án sai</strong> — đáp án nhắc tới process sai giai đoạn/domain</li>
+            <li><strong>Hiểu WHY, không chỉ WHAT</strong> — mỗi process giải quyết vấn đề gì trong lifecycle</li>
+          </ul>
+          <div class="card info">
+            <h4>PMBOK 8 so với PMBOK 6: Cấu trúc mới</h4>
+            <p style="margin:0">
+              PMBOK 6 (47 processes) tổ chức theo 10 knowledge areas.
+              PMBOK 8 tái tổ chức theo <strong>Performance Domains</strong> và
+              nhấn mạnh <em>outcomes thay vì outputs</em>. Các processes vẫn có mặt
+              nhưng được nhóm theo Focus Groups — bạn cần biết cả hai cách đặt tên.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 2: THE MATRIX -->
+        <section id="matrix">
+          <h2>2. Ma trận 40 Processes</h2>
+          <p>Mỗi ô trong bảng = process thuộc domain đó, xảy ra trong giai đoạn đó. Màu = domain.</p>
+
+          <div class="matrix-wrap">
+            <table class="matrix">
+              <thead>
+                <tr>
+                  <th class="col-domain">Domain</th>
+                  <th class="col-init">Initiating</th>
+                  <th class="col-plan">Planning</th>
+                  <th class="col-exec">Executing</th>
+                  <th class="col-mc">Monitoring &amp; Controlling</th>
+                  <th class="col-close">Closing</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- GOVERNANCE -->
+                <tr class="gov">
+                  <td class="domain-label">Governance</td>
+                  <td><span class="process"><span class="num">1.</span>Initiate Project or Phase</span></td>
+                  <td>
+                    <span class="process"><span class="num">2.</span>Integrate &amp; Align Project Plan</span>
+                    <span class="process"><span class="num">3.</span>Plan Sourcing Strategy</span>
+                  </td>
+                  <td>
+                    <span class="process"><span class="num">4.</span>Manage Project Execution</span>
+                    <span class="process"><span class="num">5.</span>Manage Quality Assurance</span>
+                    <span class="process"><span class="num">6.</span>Manage Project Knowledge</span>
+                  </td>
+                  <td>
+                    <span class="process"><span class="num">7.</span>Monitor &amp; Control Project Performance</span>
+                    <span class="process"><span class="num">8.</span>Assess &amp; Implement Changes</span>
+                  </td>
+                  <td><span class="process"><span class="num">9.</span>Close Project or Phase</span></td>
+                </tr>
+                <!-- SCOPE -->
+                <tr class="scope">
+                  <td class="domain-label">Scope</td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">1.</span>Plan Scope Management</span>
+                    <span class="process"><span class="num">2.</span>Elicit &amp; Analyze Requirements</span>
+                    <span class="process"><span class="num">3.</span>Define Scope</span>
+                    <span class="process"><span class="num">4.</span>Develop Scope Structure</span>
+                  </td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">5.</span>Monitor &amp; Control Scope</span>
+                    <span class="process"><span class="num">6.</span>Validate Scope</span>
+                  </td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- SCHEDULE -->
+                <tr class="sched">
+                  <td class="domain-label">Schedule</td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">1.</span>Plan Schedule Management</span>
+                    <span class="process"><span class="num">2.</span>Develop Schedule</span>
+                  </td>
+                  <td class="empty">—</td>
+                  <td><span class="process"><span class="num">3.</span>Monitor &amp; Control Schedule</span></td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- FINANCE -->
+                <tr class="fin">
+                  <td class="domain-label">Finance</td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">1.</span>Plan Financial Management</span>
+                    <span class="process"><span class="num">2.</span>Estimate Costs</span>
+                    <span class="process"><span class="num">3.</span>Develop Budget</span>
+                  </td>
+                  <td class="empty">—</td>
+                  <td><span class="process"><span class="num">4.</span>Monitor &amp; Control Finances</span></td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- STAKEHOLDERS -->
+                <tr class="sh">
+                  <td class="domain-label">Stakeholders</td>
+                  <td><span class="process"><span class="num">1.</span>Identify Stakeholders</span></td>
+                  <td>
+                    <span class="process"><span class="num">2.</span>Plan Stakeholder Engagement</span>
+                    <span class="process"><span class="num">3.</span>Plan Communications Management</span>
+                  </td>
+                  <td>
+                    <span class="process"><span class="num">4.</span>Manage Stakeholder Engagement</span>
+                    <span class="process"><span class="num">5.</span>Manage Communications</span>
+                  </td>
+                  <td>
+                    <span class="process"><span class="num">6.</span>Monitor Stakeholder Engagement</span>
+                    <span class="process"><span class="num">7.</span>Monitor Communications</span>
+                  </td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- RESOURCES -->
+                <tr class="res">
+                  <td class="domain-label">Resources</td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">1.</span>Plan Resource Management</span>
+                    <span class="process"><span class="num">2.</span>Plan Team Management</span>
+                  </td>
+                  <td>
+                    <span class="process"><span class="num">3.</span>Acquire Resources</span>
+                    <span class="process"><span class="num">4.</span>Develop Team</span>
+                    <span class="process"><span class="num">5.</span>Manage Team</span>
+                  </td>
+                  <td><span class="process"><span class="num">6.</span>Monitor &amp; Control Resourcing</span></td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- RISK -->
+                <tr class="risk">
+                  <td class="domain-label">Risk</td>
+                  <td class="empty">—</td>
+                  <td>
+                    <span class="process"><span class="num">1.</span>Plan Risk Management</span>
+                    <span class="process"><span class="num">2.</span>Identify Risks</span>
+                    <span class="process"><span class="num">3.</span>Perform Risk Analysis</span>
+                    <span class="process"><span class="num">4.</span>Plan Risk Responses</span>
+                  </td>
+                  <td><span class="process"><span class="num">5.</span>Implement Risk Responses</span></td>
+                  <td><span class="process"><span class="num">6.</span>Monitor Risks</span></td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- QUALITY -->
+                <tr class="qual">
+                  <td class="domain-label">Quality</td>
+                  <td class="empty">—</td>
+                  <td><span class="process"><span class="num">1.</span>Plan Quality Management</span></td>
+                  <td><span class="process"><span class="num">2.</span>Manage Quality</span></td>
+                  <td><span class="process"><span class="num">3.</span>Control Quality</span></td>
+                  <td class="empty">—</td>
+                </tr>
+                <!-- PROCUREMENT -->
+                <tr class="proc">
+                  <td class="domain-label">Procurement</td>
+                  <td class="empty">—</td>
+                  <td><span class="process"><span class="num">1.</span>Plan Procurement Management</span></td>
+                  <td>
+                    <span class="process"><span class="num">2.</span>Conduct Procurements</span>
+                    <span class="process"><span class="num">3.</span>Manage Procurements</span>
+                  </td>
+                  <td><span class="process"><span class="num">4.</span>Control Procurements</span></td>
+                  <td class="empty">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);margin-top:0.5rem;">
+            Nguồn: PMBOK Guide 8th Ed. Slide: "Focus Groups, Performance Domains" × "Process Groups"
+          </p>
+        </section>
+
+        <!-- SECTION 3: KEY PATTERNS -->
+        <section id="patterns">
+          <h2>3. 5 Key Patterns — Nhìn là nhớ</h2>
+          <p>Thay vì học thuộc từng process, hãy học 5 pattern cấu trúc này. Chúng sẽ giúp bạn suy luận ra vị trí của bất kỳ process nào trong vài giây.</p>
+
+          <div class="pattern-grid">
+            <div class="pattern-card">
+              <div class="icon">📐</div>
+              <strong>Planning là phase đông nhất</strong>
+              <p>7/9 domains đều có processes ở Planning. Scope và Risk đặc biệt planning-heavy (4 processes mỗi domain). Chỉ Governance mới có từ Initiating đến Closing.</p>
+            </div>
+            <div class="pattern-card">
+              <div class="icon">🏛️</div>
+              <strong>Governance: Domain duy nhất span toàn bộ lifecycle</strong>
+              <p>Chỉ Governance có processes ở cả 5 Process Groups — từ Initiate Project đến Close Project. Tất cả domains khác đều bỏ trống ít nhất 2 cột.</p>
+            </div>
+            <div class="pattern-card">
+              <div class="icon">👥</div>
+              <strong>Stakeholders: Bắt đầu sớm nhất (sau Governance)</strong>
+              <p>Identify Stakeholders là process Initiating duy nhất ngoài Governance. Stakeholders cũng active trong cả Executing lẫn M&amp;C — phải manage suốt dự án.</p>
+            </div>
+            <div class="pattern-card">
+              <div class="icon">⚠️</div>
+              <strong>Risk: 4 processes ở Planning, 1 ở Executing</strong>
+              <p>Risk là domain "front-loaded" nhất. 4/6 processes xảy ra trong Planning. Chỉ 1 process ở Executing (Implement Responses) và 1 ở M&amp;C.</p>
+            </div>
+            <div class="pattern-card">
+              <div class="icon">🔒</div>
+              <strong>Schedule &amp; Finance: Chỉ có Planning và M&amp;C</strong>
+              <p>Schedule (3 processes) và Finance (4 processes) không có bất kỳ process Executing hay Closing nào. Chúng là domains "plan then monitor" thuần túy.</p>
+            </div>
+          </div>
+
+          <div class="card tip">
+            <h4>Quy tắc vàng: "M&amp;C mirrors Executing"</h4>
+            <p style="margin:0">
+              Mỗi domain có Executing processes thì thường có M&amp;C counterpart:
+              Stakeholders (Manage → Monitor), Resources (Develop/Manage Team → Monitor &amp; Control),
+              Risk (Implement → Monitor), Quality (Manage → Control), Procurement (Conduct/Manage → Control).
+              Nếu câu hỏi hỏi về <em>tracking/reviewing</em> → M&amp;C. <em>Doing/executing</em> → Executing.
+            </p>
+          </div>
+
+          <h3>Tóm tắt nhanh: Initiating phase</h3>
+          <p style="font-size:0.88rem;">Chỉ <strong>2 domains</strong> có processes Initiating:
+            <span style="color:var(--gov);font-weight:600">Governance</span> (Initiate Project or Phase) và
+            <span style="color:var(--sh);font-weight:600">Stakeholders</span> (Identify Stakeholders).
+            Mọi câu hỏi về "project just started / beginning of project" thường liên quan 2 domains này.
+          </p>
+
+          <h3>Tóm tắt nhanh: Closing phase</h3>
+          <p style="font-size:0.88rem;">Chỉ <strong>1 domain</strong> có process Closing:
+            <span style="color:var(--gov);font-weight:600">Governance</span> (Close Project or Phase).
+            Câu hỏi về closing/lessons learned/final report → Governance domain.
+          </p>
+        </section>
+
+        <!-- SECTION 4: DRILL -->
+        <section id="drill">
+          <h2>4. Drill — Định vị process</h2>
+          <p>Đọc mô tả tình huống → chọn đúng cả Domain + Process Group. Không cần nhớ tên process chính xác — chỉ cần định vị được.</p>
+
+          <div class="drill-wrap" id="drillWrap">
+
+            <div class="drill-q" data-domain="Stakeholders" data-phase="Initiating">
+              <div class="q-stem">PM vừa được assign vào dự án mới. Việc đầu tiên cần làm là xác định những ai có ảnh hưởng đến dự án. Domain &amp; Phase?</div>
+              <div>
+                <div style="font-size:0.78rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;">DOMAIN</div>
+                <div class="drill-opts" data-type="domain">
+                  <button class="drill-opt" data-val="Governance">Governance</button>
+                  <button class="drill-opt" data-val="Stakeholders">Stakeholders</button>
+                  <button class="drill-opt" data-val="Resources">Resources</button>
+                  <button class="drill-opt" data-val="Risk">Risk</button>
+                </div>
+              </div>
+              <div style="margin-top:0.5rem;">
+                <div style="font-size:0.78rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;">PROCESS GROUP</div>
+                <div class="drill-opts" data-type="phase">
+                  <button class="drill-opt" data-val="Initiating">Initiating</button>
+                  <button class="drill-opt" data-val="Planning">Planning</button>
+                  <button class="drill-opt" data-val="Executing">Executing</button>
+                  <button class="drill-opt" data-val="M&C">M&amp;C</button>
+                </div>
+              </div>
+              <div class="drill-feedback" id="fb0"></div>
+            </div>
+
+            <div class="drill-q" data-domain="Risk" data-phase="Planning">
+              <div class="q-stem">Team đang lên kế hoạch cho dự án xây dựng. PM tổ chức workshop để brainstorm tất cả rủi ro có thể xảy ra. Domain &amp; Phase?</div>
+              <div>
+                <div style="font-size:0.78rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;">DOMAIN</div>
+                <div class="drill-opts" data-type="domain">
+                  <button class="drill-opt" data-val="Governance">Governance</button>
+                  <button class="drill-opt" data-val="Scope">Scope</button>
+                  <button class="drill-opt" data-val="Risk">Risk</button>
+                  <button class="drill-opt" data-val="Quality">Quality</button>
+                </div>
+              </div>
+              <div style="margin-top:0.5rem;">
+                <div style="font-size:0.78rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;">PROCESS GROUP</div>
+                <div class="drill-opts" data-type="phase">
+                  <button class="drill-opt" data-val="Initiating">Initiating</button>
+                  <button class="drill-opt" data-val="Planning">Planning</button>
+                  <button class="drill-opt" data-val="Executing">Executing</button>
+                  <button class="drill-opt" data-val="M&C">M&amp;C</button>
+                </div>
+              </div>
+              <div class="drill-feedback" id="fb1"></div>
+            </div>
+
+            <div class="drill-q" data-domain="Finance" data-phase="Planning">
+              <div class="q-stem">PM đang ước tính chi phí cho từng work package trong WBS và tổng hợp thành budget. Domain &amp; Phase?</div>
+              <div>
+                <div style="font-size:0.78rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;">DOMAIN</div>
+                <div class="drill-opts" data-type="domain">
+                  <button class="drill-opt" data-val="Governance">Governance</button>
+                  <button class="drill-opt" data-val="Schedule">Schedule</button>
+                  <button class="drill-opt" data-val="Finance">Finance</button>
+                  <button class="drill-opt" data-val="Scope">Scope</button>
+                </div>
+              </div>
+              <div style="margin-top:0.5rem;">
+                <div style="font-size:0.78rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;">PROCESS GROUP</div>
+                <div class="drill-opts" data-type="phase">
+                  <button class="drill-opt" data-val="Initiating">Initiating</button>
+                  <button class="drill-opt" data-val="Planning">Planning</button>
+                  <button class="drill-opt" data-val="Executing">Executing</button>
+                  <button class="drill-opt" data-val="M&C">M&amp;C</button>
+                </div>
+              </div>
+              <div class="drill-feedback" id="fb2"></div>
+            </div>
+
+            <div class="drill-q" data-domain="Governance" data-phase="Closing">
+              <div class="q-stem">Dự án đã hoàn thành. PM đang lập final report, lưu lessons learned, và giải phóng team. Domain &amp; Phase?</div>
+              <div>
+                <div style="font-size:0.78rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;">DOMAIN</div>
+                <div class="drill-opts" data-type="domain">
+                  <button class="drill-opt" data-val="Governance">Governance</button>
+                  <button class="drill-opt" data-val="Stakeholders">Stakeholders</button>
+                  <button class="drill-opt" data-val="Resources">Resources</button>
+                  <button class="drill-opt" data-val="Quality">Quality</button>
+                </div>
+              </div>
+              <div style="margin-top:0.5rem;">
+                <div style="font-size:0.78rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;">PROCESS GROUP</div>
+                <div class="drill-opts" data-type="phase">
+                  <button class="drill-opt" data-val="Initiating">Initiating</button>
+                  <button class="drill-opt" data-val="Planning">Planning</button>
+                  <button class="drill-opt" data-val="Executing">Executing</button>
+                  <button class="drill-opt" data-val="Closing">Closing</button>
+                </div>
+              </div>
+              <div class="drill-feedback" id="fb3"></div>
+            </div>
+
+            <div class="drill-q" data-domain="Resources" data-phase="Executing">
+              <div class="q-stem">PM tổ chức team-building activities, pair programming sessions để nâng cao kỹ năng của team và tăng cohesion. Domain &amp; Phase?</div>
+              <div>
+                <div style="font-size:0.78rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;">DOMAIN</div>
+                <div class="drill-opts" data-type="domain">
+                  <button class="drill-opt" data-val="Stakeholders">Stakeholders</button>
+                  <button class="drill-opt" data-val="Resources">Resources</button>
+                  <button class="drill-opt" data-val="Quality">Quality</button>
+                  <button class="drill-opt" data-val="Governance">Governance</button>
+                </div>
+              </div>
+              <div style="margin-top:0.5rem;">
+                <div style="font-size:0.78rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;">PROCESS GROUP</div>
+                <div class="drill-opts" data-type="phase">
+                  <button class="drill-opt" data-val="Initiating">Initiating</button>
+                  <button class="drill-opt" data-val="Planning">Planning</button>
+                  <button class="drill-opt" data-val="Executing">Executing</button>
+                  <button class="drill-opt" data-val="M&C">M&amp;C</button>
+                </div>
+              </div>
+              <div class="drill-feedback" id="fb4"></div>
+            </div>
+
+          </div>
+          <p class="drill-score" id="drillScore">0 / 10 đúng (Domain + Phase mỗi câu tính riêng)</p>
+        </section>
+
+        <!-- SECTION 5: CHEATSHEET -->
+        <section id="cheatsheet">
+          <h2>5. Cheat sheet — Pattern summary</h2>
+          <div class="cheat-sheet">PMBOK 8 — PROCESS MATRIX BIG PICTURE
+─────────────────────────────────────────────────────
+STRUCTURE: 9 Domains × 5 Process Groups
+
+ONLY domain spanning full lifecycle:
+  GOVERNANCE   Init → Plan → Exec → M&amp;C → CLOSE
+
+Domains with Initiating processes:
+  GOVERNANCE   Initiate Project or Phase
+  STAKEHOLDERS Identify Stakeholders
+
+Domains with NO Executing processes:
+  SCOPE        Plan only → M&amp;C
+  SCHEDULE     Plan only → M&amp;C
+  FINANCE      Plan only → M&amp;C
+
+RISK: most front-loaded (4 of 6 processes in Planning)
+  Plan: Plan Risk Mgmt, Identify Risks, Risk Analysis, Plan Responses
+  Exec: Implement Risk Responses
+  M&amp;C: Monitor Risks
+
+STAKEHOLDERS: widest Executing spread
+  Exec: Manage Stakeholder Engagement + Manage Communications
+
+RESOURCES: 3 Executing processes (most in Executing)
+  Exec: Acquire Resources, Develop Team, Manage Team
+
+─────────────────────────────────────────────────────
+KEY RULES:
+  Tracking/reviewing/measuring  → M&amp;C phase
+  Doing/implementing/managing   → Executing phase
+  Scheduling/estimating/planning → Planning phase
+  "project just started"        → Initiating (Governance or Stakeholders)
+  "project wrapping up"         → Closing (Governance only)
+
+PLANNING HEADCOUNT BY DOMAIN:
+  Risk        ████████ 4 processes
+  Scope       ████████ 4 processes
+  Governance  ████   2 processes
+  Stakeholders████   2 processes
+  Finance     ██████ 3 processes
+  Resources   ████   2 processes
+  Schedule    ████   2 processes
+  Quality     ██     1 process
+  Procurement ██     1 process
+
+M&amp;C COUNTERPARTS:
+  Stakeholders: Manage Comms → Monitor Comms
+  Resources:    Manage Team → Monitor &amp; Control Resourcing
+  Risk:         Implement Responses → Monitor Risks
+  Quality:      Manage Quality → Control Quality
+  Procurement:  Conduct/Manage → Control Procurements
+
+REF: PMBOK Guide, 8th Ed.
+     Practice Series: Q lessons for individual processes</div>
+        </section>
+
+        <div class="card tip" style="margin-top:2rem;">
+          <h4>Bước tiếp theo</h4>
+          <p style="margin:0">
+            Bạn đã có big picture — giờ là lúc đi sâu từng process qua
+            <a href="pmp-exam-prep-lecture.html#practice-teach">Practice Questions</a>.
+            Mỗi Q lesson tập trung vào 1 process cụ thể với tình huống thực tế,
+            drill phân tích đáp án và flashcard. Hỏi tôi bất kỳ điều gì chưa rõ!
+          </p>
+        </div>
+
+        <footer class="ref-footer">
+          · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
+          · <a href="pmp-mindset-teach.html">PMP Mindset Drill</a>
+          · <a href="pmp-teach-initiate-project.html">Q18: Initiate Project</a>
+          · <a href="pmp-teach-identify-stakeholders.html">Q72: Identify Stakeholders</a>
+          · <a href="pmp-teach-control-charts.html">Q94: Control Charts</a>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      /* --- Sidebar active link on scroll --- */
+      const sections = document.querySelectorAll("main section[id], main header[id]");
+      const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
+        });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
+
+      /* --- Drill logic --- */
+      var totalScore = 0;
+      var totalPossible = 0;
+
+      document.querySelectorAll(".drill-q").forEach(function (qEl, idx) {
+        var correctDomain = qEl.dataset.domain;
+        var correctPhase = qEl.dataset.phase;
+        var domainDone = false;
+        var phaseDone = false;
+        var domainCorrect = false;
+        var phaseCorrect = false;
+        totalPossible += 2;
+
+        function updateScore() {
+          if (domainDone && phaseDone) {
+            var got = (domainCorrect ? 1 : 0) + (phaseCorrect ? 1 : 0);
+            totalScore += got;
+            document.getElementById("drillScore").textContent =
+              totalScore + " / " + (document.querySelectorAll(".drill-q").length * 2) + " đúng (Domain + Phase mỗi câu tính riêng)";
+
+            var fb = document.getElementById("fb" + idx);
+            if (domainCorrect && phaseCorrect) {
+              fb.className = "drill-feedback show ok";
+              fb.innerHTML = "<strong>Chính xác!</strong> " + correctDomain + " domain, " + correctPhase + " phase.";
+            } else {
+              fb.className = "drill-feedback show bad";
+              fb.innerHTML = "<strong>Đáp án đúng:</strong> <strong>" + correctDomain + "</strong> domain, <strong>" + correctPhase + "</strong> phase.";
+            }
+          }
+        }
+
+        qEl.querySelectorAll("[data-type='domain'] .drill-opt").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (domainDone) return;
+            domainDone = true;
+            domainCorrect = btn.dataset.val === correctDomain;
+            qEl.querySelectorAll("[data-type='domain'] .drill-opt").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.val === correctDomain) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong");
+            });
+            updateScore();
+          });
+        });
+
+        qEl.querySelectorAll("[data-type='phase'] .drill-opt").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (phaseDone) return;
+            phaseDone = true;
+            phaseCorrect = btn.dataset.val === correctPhase;
+            qEl.querySelectorAll("[data-type='phase'] .drill-opt").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.val === correctPhase) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong");
+            });
+            updateScore();
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
