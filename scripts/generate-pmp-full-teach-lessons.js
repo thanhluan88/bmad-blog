@@ -1,6 +1,6 @@
 /**
  * Generate PMBOK 8 teach lessons for all questions in pmp-full-questions.json.
- * Usage: node scripts/generate-pmp-full-teach-lessons.js [--force] [--from=N] [--to=N]
+ * Usage: node scripts/generate-pmp-full-teach-lessons.js [--force] [--from=N] [--to=N] [--allow-incomplete]
  */
 const fs = require("fs");
 const path = require("path");
@@ -21,8 +21,8 @@ const {
   buildExcludeRows,
   buildFlashcards,
   buildCheatSheet,
-  highlightStemPhrases,
   composeGrounding,
+  validateTeachGrounding,
   quizExplMap,
   conceptLabel,
 } = require("./lib/pmp-teach-colocation-style");
@@ -35,6 +35,7 @@ const SERIES_JS = path.join(__dirname, "pmp-full-teach-series.js");
 
 const args = process.argv.slice(2);
 const force = args.includes("--force");
+const allowIncomplete = args.includes("--allow-incomplete");
 const fromArg = args.find((a) => a.startsWith("--from="));
 const toArg = args.find((a) => a.startsWith("--to="));
 const fromId = fromArg ? Number(fromArg.split("=")[1]) : 1;
@@ -169,26 +170,17 @@ function renderAnalysisSection(q, analysis) {
 }
 
 function renderExcludeTableFromAnalysis(q, analysis) {
-  const wrong = buildExcludeRows(q, analysis);
-  if (!wrong.length) {
-    return `<p style="font-size:0.86rem;color:var(--muted);margin:0">Chưa có đáp án sai — kiểm tra câu hỏi.</p>`;
-  }
-  const missing = wrong.filter((o) => !o.reason);
-  const rowsHtml = wrong
-    .map((o) => {
-      const reason = o.reason
-        ? mdInline(o.reason)
-        : `<span style="color:var(--muted)">Chưa có lý do grounding — điền <code>excludeReasons.${o.key}</code> trong <code>data/pmp-teach-signals.json</code>.</span>`;
-      return `<tr><td><strong>${o.key}</strong><br><span style="font-size:0.8rem;color:var(--muted)">${highlightOptionText(o.text.slice(0, 80), false)}${o.text.length > 80 ? "…" : ""}</span></td><td>${reason}</td></tr>`;
-    })
-    .join("");
-  const note = missing.length
-    ? `<p style="font-size:0.82rem;color:var(--muted);margin:0.75rem 0 0">Thiếu lý loại trừ cho: ${missing.map((o) => o.key).join(", ")} — chạy grounding prompt và lưu đủ <code>excludeReasons</code>.</p>`
-    : "";
+  const wrong = buildExcludeRows(q, analysis).filter((o) => o.reason);
+  if (!wrong.length) return "";
   return `<table>
             <thead><tr><th>Đáp án</th><th>Tại sao không chọn (grounding AI)</th></tr></thead>
-            <tbody>${rowsHtml}</tbody>
-          </table>${note}`;
+            <tbody>${wrong
+              .map(
+                (o) =>
+                  `<tr><td><strong>${o.key}</strong><br><span style="font-size:0.8rem;color:var(--muted)">${highlightOptionText(o.text.slice(0, 80), false)}${o.text.length > 80 ? "…" : ""}</span></td><td>${mdInline(o.reason)}</td></tr>`,
+              )
+              .join("")}</tbody>
+          </table>`;
 }
 
 function renderOptionsGrid(q) {
@@ -366,6 +358,7 @@ function renderLesson(q, prev, next) {
   ].filter(Boolean);
   const whyBullets = buildWhyBullets(analysis, q);
   const grounding = composeGrounding(q, analysis);
+  const excludeHtml = renderExcludeTableFromAnalysis(q, analysis);
   const sec = sectionNumbers();
 
   const prevLink = prev ? `<a href="${lessonFile(prev.id)}">← Câu ${prev.id}</a>` : "";
@@ -499,7 +492,6 @@ function renderLesson(q, prev, next) {
         <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed · Q${q.id}</h1>
           <p class="lead">${buildHeroLead(q, analysis, mapping)}</p>
-          <p class="lead" style="margin-top:0.75rem">${highlightStemPhrases(q.text, grounding.signalPhrases)}</p>
           <div class="badges">${badges.map((b) => `<span class="badge">${escapeHtml(b)}</span>`).join("")}</div>
           <p class="kw-legend">
             <span><span class="kw-cue">cue</span> từ khóa đề bài</span>
@@ -527,8 +519,7 @@ function renderLesson(q, prev, next) {
             <p style="margin:0"><strong>${escapeHtml(q.correctLabel || q.correct)}</strong></p>
           </div>
           ${renderAnalysisSection(q, analysis)}
-          <h3>Loại trừ từng đáp án</h3>
-          ${renderExcludeTableFromAnalysis(q, analysis)}
+          ${excludeHtml ? `<h3>Loại trừ từng đáp án</h3>\n          ${excludeHtml}` : ""}
         </section>
 
         <section id="flashcards">
@@ -691,6 +682,8 @@ function main() {
   loadCacheFile();
   let written = 0;
   let skipped = 0;
+  let incomplete = 0;
+  const incompleteIds = [];
 
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i];
@@ -702,6 +695,15 @@ function main() {
     }
     const prev = i > 0 ? questions[i - 1] : null;
     const next = i < questions.length - 1 ? questions[i + 1] : null;
+    const analysis = generateTeachAnalysis(q, { preserveOriginal: false });
+    const validation = validateTeachGrounding(q, analysis);
+    if (!validation.ok && !allowIncomplete) {
+      incomplete++;
+      incompleteIds.push(q.id);
+      console.warn(validation.errors.join("; "));
+      skipped++;
+      continue;
+    }
     fs.writeFileSync(outPath, renderLesson(q, prev, next), "utf8");
     written++;
     if (written % 100 === 0) console.log(`  ... ${written} lessons`);
@@ -711,7 +713,10 @@ function main() {
   writeSeriesJs(questions);
   patchFullQuestionsHtml();
 
-  console.log(`Done: ${written} written, ${skipped} skipped`);
+  console.log(`Done: ${written} written, ${skipped} skipped, ${incomplete} incomplete (no write)`);
+  if (incompleteIds.length) {
+    console.log(`Incomplete IDs (fill data/pmp-teach-signals.json then re-run): ${incompleteIds.slice(0, 30).join(", ")}${incompleteIds.length > 30 ? ` … +${incompleteIds.length - 30} more` : ""}`);
+  }
   console.log(`Index: ${INDEX_PATH}`);
   console.log(`Series: ${SERIES_JS}`);
 }

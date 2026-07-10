@@ -12,7 +12,7 @@ description: Regenerate or polish Full Bank teach lessons — PMBOK 8 grounding 
 | Source | Path |
 |--------|------|
 | Questions | `public/pmp/pmp-full-questions.json` |
-| AI grounding store | `data/pmp-teach-signals.json` (optional, by `id`) |
+| AI grounding store | `data/pmp-teach-signals.json` (required per question before generate) |
 | Generator | `scripts/generate-pmp-full-teach-lessons.js` |
 | Sections | `scripts/lib/pmp-teach-colocation-style.js` |
 | Profiles | `scripts/lib/pmp-option-reasoning.js` |
@@ -25,54 +25,54 @@ description: Regenerate or polish Full Bank teach lessons — PMBOK 8 grounding 
 
 **Completion:** Correct key + full option texts listed.
 
-### 2. **Grounding** — ask PMBOK 8
+### 2. **Grounding** — ask PMBOK 8 (retry until complete)
 
 Template: [REFERENCE.md](REFERENCE.md#grounding-prompt).
 
-Store per question in `data/pmp-teach-signals.json`:
+Store in `data/pmp-teach-signals.json`:
 
-- `whyBullets` — **chỉ** lý do đáp án **đúng** (cho *Tại sao chọn {key}?*)
-- `excludeReasons` — map **mọi** đáp án sai `{ "A": "…", "C": "…" }` (cho *Loại trừ từng đáp án*)
-- `guideQuote`, `pmbokConcept` — trích dẫn Guide (câu đầy đủ)
+- `whyBullets` — chỉ lý do đáp án **đúng**
+- `excludeReasons` — **mọi** đáp án sai `{ "A": "…", "B": "…" }`
 
-**Completion:** `whyBullets` không chứa lý do đáp án sai; `excludeReasons` có entry cho **từng** key sai.
+**Retry rule:** Nếu thiếu bất kỳ `excludeReasons.{key}` nào cho đáp án sai → **hỏi lại AI** cho đến khi đủ. **Không** generate lesson với placeholder.
 
-### 3. **Signal** — ask AI (not regex)
+**Completion:** `excludeReasons` có entry cho **từng** key sai; không còn key thiếu.
+
+### 3. **Signal** — ask AI (retry until complete)
 
 Prompt: [REFERENCE.md](REFERENCE.md#signal-prompt).
 
-- `signalPhrases` — **English** substrings verbatim from stem (2–5)
-- `signalAnswer` — **English** (giữ nguyên gốc trao đổi với AI): stem cues → correct action
+- `signalPhrases` — English verbatim from stem (2–5)
+- `signalAnswer` — English (AI exchange)
 
-**Rules:** No regex for signals. `signalAnswer` **English only** — không dịch sang Việt trong Signal card.
+**Retry rule:** Nếu `signalPhrases` hoặc `signalAnswer` trống → **hỏi lại AI** cho đến khi có đủ. **Không** render Signal card rỗng.
 
-**Completion:** `signalPhrases` in stem; `signalAnswer` English.
+**Completion:** `signalPhrases` non-empty, each in stem; `signalAnswer` English.
 
-### 4. Embed into `#analysis`
+### 4. Embed into lesson
 
-| Block | Source | Rule |
-|-------|--------|------|
-| **Signal trong stem** | `signalPhrases` + `signalAnswer` | **English** |
-| **Tại sao chọn {key}?** | `whyBullets` | Chỉ đáp án đúng — **không** giải thích đáp án khác sai |
-| **Trích dẫn Guide** | `guideQuote` / `formatGuideQuote()` | Câu đầy đủ ý |
-| **Loại trừ từng đáp án** | `excludeReasons` | **Đủ** mọi đáp án sai |
-| Quiz `.q-text` | `signalPhrases` highlights | English |
+| Block | Rule |
+|-------|------|
+| Hero `#intro` | **Không** lặp full stem — chỉ `buildHeroLead` + badges (stem chỉ ở `#question` quiz) |
+| Signal card | Bắt buộc có AI signal — không trống |
+| Tại sao chọn | `whyBullets` — chỉ đáp án đúng |
+| Loại trừ | `excludeReasons` đủ mọi đáp án sai — không placeholder |
+| Quiz `.q-text` | `signalPhrases` highlights |
 
-**Omit:** `#drill`, `#traps`, Grounding PMBOK 8 card.
+**Omit:** `#drill`, `#traps`, Grounding card, hero stem duplicate.
 
-**Completion:** Tại sao = đúng only; Loại trừ = all wrong keys with reasoning.
-
-### 5. Flashcard concept
-
-PMBOK 8 citation: process + quoted excerpt (complete sentences) + tr.
-
-### 6. Generate
+### 5. Generate
 
 ```bash
 node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 ```
 
-### 7. Validate
+Default: **skip write** nếu thiếu signal hoặc `excludeReasons` (`validateTeachGrounding`).  
+Override (dev only): `--allow-incomplete`.
+
+**Completion:** Generator reports `written` with 0 `incomplete` for the range.
+
+### 6. Validate
 
 [REFERENCE.md](REFERENCE.md#validation)
 
@@ -80,10 +80,9 @@ node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 
 | Symptom | Action |
 |---------|--------|
-| Signal card in Vietnamese | Rewrite `signalAnswer` in English |
-| Wrong keys in Tại sao bullets | Remove; move to `excludeReasons` |
-| Loại trừ thiếu đáp án | Fill every wrong key in `excludeReasons` |
-| Guide quote cuts mid-sentence | Fill `guideQuote` or fix `formatGuideQuote` |
+| Empty Signal card (Q614) | Retry signal prompt; fill store; re-run generate |
+| Missing excludeReasons | Retry grounding prompt until every wrong key filled |
+| Lesson not updated after `--force` | Check console `incomplete` — fill store first |
 
 ## Resources
 

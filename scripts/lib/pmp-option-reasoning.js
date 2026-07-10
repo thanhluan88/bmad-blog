@@ -125,6 +125,43 @@ const STEM_PROFILES = [
     preferCorrect: ["enforce_wip_governance", "ensure_compliance"],
   },
   {
+    id: "iteration_estimate_refinement",
+    re: /reevaluate their effort estimates|required experience when they executed|iteration retrospective.*overtime|did not have the required experience/i,
+    domains: ["Resources", "Scope"],
+    principles: ["Embed quality", "Build an empowered culture"],
+    processes: ["Develop Team", "Manage Team"],
+    summaryHint:
+      "Retrospective: thiếu kinh nghiệm lần đầu → team tự reevaluate estimates ở planning, không escalate sponsor hay reorder backlog.",
+    whyCorrect:
+      "Team học từ iteration qua retrospective — PM để team reevaluate effort estimates ở planning với kinh nghiệm mới (Develop Team, empowered team).",
+    signalPhrases: [
+      "did not have the required experience when they executed the assigned tasks for the first time",
+      "In the iteration retrospective, the team agreed",
+      "work overtime to accomplish the goal",
+      "What should the project manager do",
+    ],
+    signalAnswer:
+      "Retrospective found first-time tasks took longer due to lack of experience — PM has the team reevaluate effort estimates at next iteration planning using knowledge gained, not escalate to sponsor or reprioritize backlog.",
+    groundingConclusion:
+      "→ C: team reevaluates estimates at iteration planning — apply retrospective learning (Develop Team).",
+    lessonBullets: [
+      "Signal: retrospective + lacked experience on first execution — team should improve estimates, not add sponsor time or reorder backlog.",
+      "C đúng: ask team reevaluate effort estimates during iteration planning using experience from last iteration.",
+      "PMBOK 8: Develop Team — empowered team improves planning from iteration learning.",
+    ],
+    excludeReasonsByKey: {
+      A: "Sponsor-funded training shifts accountability away from team planning — retrospective learning belongs in next iteration planning.",
+      B: "Change request for extra iteration time avoids fixing estimates — does not apply lessons from retrospective.",
+      D: "Reprioritizing backlog delays delivery — team should refine estimates with new knowledge, not defer critical items.",
+    },
+    rejectByAction: {
+      escalate: "Escalating to sponsor for more time — team should refine estimates from retrospective insight.",
+      coach_develop: "External training request bypasses team-owned planning improvement.",
+      prioritize_value: "Reprioritizing backlog avoids improving estimates with new iteration knowledge.",
+    },
+    preferCorrect: ["allow_empower", "facilitate_retro"],
+  },
+  {
     id: "sme_agile_reluctance",
     re: /subject matter expert|\bSME\b.*(?:agile|reluctant|team)|reluctant.*(?:agile|team)|join the agile team|working on a team is demotivat/i,
     domains: ["Resources", "Stakeholders"],

@@ -51,7 +51,28 @@ Wrong-key reasoning → **Loại trừ** table only.
 | C | Retrospective role before SME buy-in. |
 | D | Sponsor escalation too heavy. |
 
-Every wrong key must have a row.
+Every wrong key must have a row — retry grounding AI until complete.
+
+---
+
+## Q614 — empty signal (bad)
+
+```html
+<div class="card tip signal-card">
+  <h4>Signal trong stem Q614</h4>
+  <!-- empty — invalid -->
+</div>
+```
+
+**Fix:** Retry signal prompt; fill `data/pmp-teach-signals.json`; re-run `--force --from=614 --to=614`.
+
+---
+
+## Hero — no stem duplicate
+
+**Bad:** Full English question repeated under `Practice Questions — PMBOK 8th Ed` hero.
+
+**Good:** Hero = title + one-line summary + badges; stem only in `#question` quiz.
 
 ---
 

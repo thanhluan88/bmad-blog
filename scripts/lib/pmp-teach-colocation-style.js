@@ -303,6 +303,7 @@ function buildConceptIntro(q, analysis, mapping) {
 
 function buildSignalCard(q, analysis) {
   const grounding = composeGrounding(q, analysis);
+  if (!hasTeachSignal(grounding)) return "";
   const correctKey = grounding.correctKey || q.correct;
   const phrasesHtml = grounding.signalPhrases.length
     ? `<p class="signal-phrases-en">${grounding.signalPhrases
@@ -423,6 +424,35 @@ function buildExcludeRows(q, analysis) {
     text: o.text || "",
     reason: reasonByKey.get(o.key) || "",
   }));
+}
+
+function hasTeachSignal(grounding) {
+  return Boolean(
+    grounding?.signalAnswer?.trim() &&
+      Array.isArray(grounding?.signalPhrases) &&
+      grounding.signalPhrases.length > 0,
+  );
+}
+
+function validateTeachGrounding(q, analysis) {
+  const grounding = composeGrounding(q, analysis);
+  const errors = [];
+  if (!hasTeachSignal(grounding)) {
+    errors.push(`Q${q.id}: missing signal (need signalPhrases + signalAnswer in store)`);
+  }
+  const wrong = buildExcludeRows(q, analysis);
+  const missing = wrong.filter((o) => !o.reason);
+  if (missing.length) {
+    errors.push(
+      `Q${q.id}: missing excludeReasons for ${missing.map((o) => o.key).join(", ")}`,
+    );
+  }
+  return {
+    ok: errors.length === 0,
+    errors,
+    grounding,
+    missingExcludeKeys: missing.map((o) => o.key),
+  };
 }
 
 function buildTrapsSection(optionAnalysis, q) {
@@ -614,6 +644,8 @@ module.exports = {
   buildCompareTable,
   buildWhyBullets,
   buildExcludeRows,
+  hasTeachSignal,
+  validateTeachGrounding,
   buildDrillHtml,
   buildDrillScript,
   buildFlashcards,

@@ -122,17 +122,27 @@ Complete PMBOK 8 sentence(s) — see `formatGuideQuote()`.
 
 ## Validation
 
-- [ ] Signal card: `signalAnswer` English; `signal-phrases-en` + `signal-answer-en`
+- [ ] Hero **no** full question stem (summary lead + badges only)
+- [ ] Signal card: `signalPhrases` + `signalAnswer` — **never empty**
+- [ ] Loại trừ: every wrong key — **no** placeholder (*Chưa có lý do grounding…*)
+- [ ] `validateTeachGrounding()` passes before write (unless `--allow-incomplete`)
 - [ ] Tại sao chọn: no wrong-key bullets
-- [ ] Loại trừ: row for **each** wrong key with reasoning
 - [ ] Trích dẫn Guide: complete sentence(s)
-- [ ] No `#drill`, `#traps`, Grounding card
+
+## Generator
+
+```bash
+node scripts/generate-pmp-full-teach-lessons.js --force --from=614 --to=614
+```
+
+Default skips write when validation fails. `--allow-incomplete` omits empty blocks without placeholders.
 
 ## Engine
 
 | Piece | File |
 |-------|------|
-| `filterWhyBulletsForCorrect`, `buildExcludeRows` | `pmp-teach-colocation-style.js` |
+| `validateTeachGrounding`, `hasTeachSignal` | `pmp-teach-colocation-style.js` |
+| Skip incomplete writes | `generate-pmp-full-teach-lessons.js` |
 | `excludeReasonsByKey` in profiles | `pmp-option-reasoning.js` |
 | Grounding store | `pmp-teach-signals-store.js` |
 | Guide quote | `formatGuideQuote()` in `pmp-pmbok8-rag-pages.js` |
