@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMBOK 8 — Câu 1: Misdirected Email (Full Bank)</title>
+  <style>
+    :root {
+      --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
+      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
+      --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; width: 100%; min-height: 100dvh; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: 100dvh; width: 100%; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } .mobile-nav { display: flex !important; } }
+    .sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--card); border-right: 1px solid var(--border); padding: 1.25rem 1rem 2rem; }
+    .sidebar .brand { font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .sidebar .brand-sub { font-size: 0.78rem; color: var(--muted); margin: 0.2rem 0 1rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+    .sidebar nav a { display: block; padding: 0.45rem 0.65rem; color: var(--muted); text-decoration: none; border-radius: 8px; font-size: 0.86rem; margin-bottom: 1px; }
+    .sidebar nav a:hover, .sidebar nav a.active { background: var(--primary-bg); color: var(--primary-dark); }
+    .sidebar nav a.active { font-weight: 600; border-left: 3px solid var(--primary); }
+    .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
+    .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
+    .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
+    .sidebar .back-link.secondary { margin-top: 0.5rem; background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); }
+    .sidebar .back-link.secondary:hover { background: var(--primary-bg); }
+    .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
+    .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
+    main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
+    .hero { background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%); border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
+    .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 62ch; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 99px; background: #fff; border: 1px solid var(--border); color: var(--primary-dark); font-weight: 500; }
+    section { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
+    section > h2 { font-size: 1.3rem; margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); color: var(--primary-dark); }
+    section p { margin: 0 0 0.75rem; }
+    section ul { margin: 0 0 1rem 1.2rem; }
+    section li { margin-bottom: 0.35rem; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
+    .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
+    .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
+    .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
+    th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
+    tr:last-child td { border-bottom: none; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
+    .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+    .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
+    .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .opt-btn { display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
+    .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
+    .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
+    .opt-btn.wrong { border-color: var(--bad); background: var(--bad-bg); color: #991b1b; opacity: 0.85; }
+    .opt-btn:disabled { cursor: default; }
+    .feedback { display: none; margin-top: 1rem; padding: 1rem; border-radius: 10px; font-size: 0.9rem; }
+    .feedback.show { display: block; }
+    .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
+    .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
+    .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
+    .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
+    .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
+    .classify-btns button:disabled { cursor: default; }
+    .drill-score { font-size: 0.88rem; color: var(--muted); }
+    .flashcard { perspective: 1000px; height: 170px; cursor: pointer; margin-bottom: 0.75rem; }
+    .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
+    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+    .flashcard-front, .flashcard-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); padding: 1.25rem; display: flex; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border); }
+    .flashcard-front { background: var(--card); font-weight: 600; }
+    .flashcard-back { background: var(--primary-bg); border-color: #fde68a; transform: rotateY(180deg); font-size: 0.88rem; }
+    .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
+    .cheat-sheet { background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem; font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; }
+    .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
+  </style>
+  <link rel="stylesheet" href="pmp-teach-fullscreen.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">PMBOK 8 Teach</div>
+      <div class="brand-sub">Full Bank · Câu 1</div>
+      <nav id="sideNav">
+        <a href="#intro" class="active">Giới thiệu</a>
+        <a href="#accountable">Lead Accountably</a>
+        <a href="#compare">So sánh đáp án</a>
+        <a href="#question">Câu hỏi</a>
+        <a href="#analysis">Phân tích</a>
+        <a href="#drill">Drill</a>
+        <a href="#traps">Bẫy thi</a>
+        <a href="#flashcards">Flashcard</a>
+        <a href="#cheatsheet">Cheat sheet</a>
+        <div class="nav-series">Bộ luyện Full 1.123 câu</div>
+        <a href="pmp-teach-full-q1-misdirected-email.html" class="series-current">Câu 1: Misdirected Email</a>
+        <a href="pmp-full-questions.html#q-1">→ Luyện câu 1 trong bộ đề</a>
+      </nav>
+
+      <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
+      <a class="back-link secondary" href="/p/pmp">← Về blog PMP</a>
+      <a class="back-link secondary" href="pmp-full-questions.html">Luyện 1.123 câu</a>
+    </aside>
+
+    <div>
+      <nav class="mobile-nav">
+        <a href="/p/pmp">← Blog</a>
+        <a href="pmp-full-questions.html#q-1">Câu 1</a>
+        <a href="#accountable">Accountably</a>
+        <a href="#question">Quiz</a>
+        <a href="#drill">Drill</a>
+      </nav>
+
+      <main>
+        <header class="hero" id="intro">
+          <h1>Phân tích Câu 1 — Bộ luyện PMBOK 8</h1>
+          <p class="lead">
+            PM gửi nhầm email <em>critical feedback</em> cho <em>entire global project team</em>
+            thay vì một thành viên. Đề hỏi <strong>what should the project manager do first?</strong>
+            — kiểm tra nguyên tắc <strong>Lead accountably</strong> và quản trị stakeholder khi lỗi do chính PM.
+          </p>
+          <div class="badges">
+            <span class="badge">PMBOK 8, p.48</span>
+            <span class="badge">Stakeholders · Governance</span>
+            <span class="badge">Lead accountably</span>
+            <span class="badge">Manage Stakeholder Engagement</span>
+            <span class="badge">Full Bank Q1</span>
+          </div>
+        </header>
+
+        <section id="accountable">
+          <h2>1. Lead Accountably — Khi PM gây ra lỗi truyền thông</h2>
+          <p>
+            <strong>Be an Accountable Leader</strong> (PMBOK 8, p.48): PM chủ động, minh bạch và chịu trách nhiệm
+            với hành động của mình — đặc biệt khi lỗi ảnh hưởng trust của team và stakeholders.
+          </p>
+          <div class="approach-grid">
+            <div class="approach-cell pull">
+              <strong>B — Acknowledge + apologize (đúng)</strong>
+              Thừa nhận lỗi gửi nhầm email, xin lỗi về hậu quả không mong muốn — FIRST action minh bạch.
+            </div>
+            <div class="approach-cell">
+              <strong>A — Ignore (bẫy)</strong>
+              Passive, giả định mọi người tự hiểu — vi phạm accountable leadership.
+            </div>
+            <div class="approach-cell">
+              <strong>C — Yêu cầu xóa email (bẫy)</strong>
+              Che giấu / kiểm soát thông tin — không minh bạch, làm tổn hại trust.
+            </div>
+            <div class="approach-cell">
+              <strong>D — Chỉ xin lỗi riêng 1 người (bẫy)</strong>
+              Không giải quyết hậu quả với toàn team đã nhận email nhầm.
+            </div>
+          </div>
+          <div class="card tip">
+            <h4>PMBOK 8 mapping</h4>
+            <p style="margin:0">
+              <strong>Domains:</strong> Stakeholders, Governance<br>
+              <strong>Focus Area:</strong> Executing<br>
+              <strong>Process:</strong> Manage Stakeholder Engagement<br>
+              <strong>Principle:</strong> Lead accountably
+            </p>
+          </div>
+        </section>
+
+        <section id="compare">
+          <h2>2. FIRST — PM tự gây lỗi vs lỗi của người khác</h2>
+          <table>
+            <thead><tr><th>Tình huống</th><th>FIRST action</th></tr></thead>
+            <tbody>
+              <tr><td>PM gửi nhầm email nhạy cảm cho cả team</td><td>Acknowledge mistake + apologize (B)</td></tr>
+              <tr><td>Stakeholder conflict cần facilitate</td><td>Meet / facilitate — không ignore</td></tr>
+              <tr><td>Risk đã materialize, có planned response</td><td>Review risk register → implement response</td></tr>
+              <tr><td>Communication breakdown đa văn hóa</td><td>Facilitate norms — không blame một phía</td></tr>
+            </tbody>
+          </table>
+          <div class="card warn">
+            <h4>Keyword FIRST + PM fault</h4>
+            <p style="margin:0">Khi <em>PM realizes</em> mình gây lỗi → thừa nhận ngay, trước khi sửa kỹ thuật (xóa email) hoặc xử lý riêng một người.</p>
+          </div>
+        </section>
+
+        <section id="question">
+          <h2>3. Câu hỏi — Full Bank Q1</h2>
+          <div class="quiz-card" id="mainQuiz">
+            <div class="q-num">pmp-full-questions · Câu 1</div>
+            <div class="q-text">
+              A project manager realizes that an email intended for a specific team member has been
+              mistakenly sent to the <em>entire global project team</em>. This email contains
+              <em>critical feedback</em> regarding a recent incident.
+              What should the project manager do <em>first</em>?
+            </div>
+            <button class="opt-btn" data-opt="A" type="button">A. Ignore the mistake and assume that team members will understand the situation.</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Acknowledge the mistake and apologize for any unintended consequences.</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Request that the unintended email recipients delete the message without reading it.</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Send a private message to the team member apologizing for the critical feedback.</button>
+            <div class="feedback" id="quizFeedback"></div>
+          </div>
+          <p style="font-size:0.86rem;color:var(--muted)">
+            <a href="pmp-full-questions.html#q-1">→ Mở câu 1 trong bộ luyện đầy đủ</a>
+          </p>
+        </section>
+
+        <section id="analysis">
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
+          <ul>
+            <li>Lỗi truyền thông do PM — FIRST là accountability trước stakeholder bị ảnh hưởng (cả team).</li>
+            <li>Acknowledge + apologize giữ trust, phù hợp Manage Stakeholder Engagement.</li>
+            <li>Sau FIRST có thể follow-up riêng với người nhận feedback ban đầu — nhưng không thay thế bước B.</li>
+          </ul>
+          <table>
+            <thead><tr><th>Đáp án</th><th>Tại sao không FIRST</th></tr></thead>
+            <tbody>
+              <tr><td><strong>A</strong></td><td>Ignore = thiếu trách nhiệm, không Lead accountably.</td></tr>
+              <tr><td><strong>C</strong></td><td>Yêu cầu xóa = che giấu; không address trust với team.</td></tr>
+              <tr><td><strong>D</strong></td><td>Chỉ xin lỗi riêng — bỏ qua team đã đọc email nhầm.</td></tr>
+            </tbody>
+          </table>
+          <div class="card info">
+            <h4>Tham khảo PMBOK 8</h4>
+            <p style="margin:0">PMBOK 8, tr. 48 — <em>Be an Accountable Leader</em>: collaborative, transparent leadership builds cohesive teams.</p>
+          </div>
+        </section>
+
+        <section id="drill">
+          <h2>5. Drill — FIRST khi PM mắc lỗi?</h2>
+          <div class="classify-drill" id="classifyDrill">
+            <div class="classify-row" data-answer="ACK"><span>PM sent sensitive email to whole team by mistake</span>
+              <div class="classify-btns"><button data-pick="ACK">Acknowledge</button><button data-pick="IGN">Ignore</button><button data-pick="HID">Cover up</button></div></div>
+            <div class="classify-row" data-answer="IGN"><span>Assume team will understand without PM action</span>
+              <div class="classify-btns"><button data-pick="ACK">Acknowledge</button><button data-pick="IGN">Ignore</button><button data-pick="HID">Cover up</button></div></div>
+            <div class="classify-row" data-answer="HID"><span>Ask everyone to delete the message unread</span>
+              <div class="classify-btns"><button data-pick="ACK">Acknowledge</button><button data-pick="IGN">Ignore</button><button data-pick="HID">Cover up</button></div></div>
+            <div class="classify-row" data-answer="ACK"><span>PM fault + stakeholder trust at risk</span>
+              <div class="classify-btns"><button data-pick="ACK">Acknowledge</button><button data-pick="IGN">Ignore</button><button data-pick="HID">Cover up</button></div></div>
+            <div class="classify-row" data-answer="HID"><span>Only apologize privately to one person (team already exposed)</span>
+              <div class="classify-btns"><button data-pick="ACK">Acknowledge</button><button data-pick="IGN">Ignore</button><button data-pick="HID">Cover up</button></div></div>
+          </div>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
+        </section>
+
+        <section id="traps">
+          <h2>6. Bẫy thi</h2>
+          <div class="card danger"><h4>Bẫy 1: Ignore vì "họ sẽ hiểu"</h4><p style="margin:0">PMI kỳ vọng proactive accountability — không passive (A).</p></div>
+          <div class="card danger"><h4>Bẫy 2: Xóa email = fix kỹ thuật trước accountability</h4><p style="margin:0">FIRST là thừa nhận (B), không phải damage control che giấu (C).</p></div>
+          <div class="card danger"><h4>Bẫy 3: D có "apologize" nhưng sai phạm vi</h4><p style="margin:0">Team global đã nhận email — cần address mistake với nhóm, không chỉ 1 người (D).</p></div>
+          <div class="card tip"><h4>Pattern</h4><p style="margin:0"><strong>PM mistake + FIRST</strong> → Acknowledge + apologize → <strong>B</strong>.</p></div>
+        </section>
+
+        <section id="flashcards">
+          <h2>7. Flashcard</h2>
+          <p class="flash-hint">Nhấn để lật</p>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Full Bank Q1 đáp án?</div>
+            <div class="flashcard-back"><strong>B</strong> — Acknowledge the mistake and apologize for unintended consequences.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Principle nào?</div>
+            <div class="flashcard-back"><strong>Lead accountably</strong> — PMBOK 8, p.48. Domains: Stakeholders, Governance.</div>
+          </div></div>
+        </section>
+
+        <section id="cheatsheet">
+          <h2>8. Cheat sheet</h2>
+          <div class="cheat-sheet">FULL BANK Q1 — MISDIRECTED EMAIL
+─────────────────────────────────────
+Email nhầm · critical feedback · cả global team
+PM REALIZES mistake → FIRST?
+
+ANSWER: B
+  Acknowledge mistake + apologize (unintended consequences)
+
+NOT:
+  A ignore / assume understanding
+  C request delete (cover up)
+  D private apology only (wrong scope)
+
+PMBOK 8:
+  Principle: Lead accountably (p.48)
+  Process: Manage Stakeholder Engagement
+  Domains: Stakeholders, Governance</div>
+        </section>
+
+        <footer class="ref-footer">
+          · <a href="pmp-full-questions.html#q-1">Luyện câu 1</a>
+          · <a href="pmp-teach-accountable-leader.html">Practice Q12: Accountable Leader</a>
+          · <a href="pmp-teach-manage-communications.html">Q79: Manage Communications</a>
+          · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const CORRECT = "B";
+      const EXPL = {
+        A: "Ignore là passive — PM phải Lead accountably, không giả định team tự hiểu.",
+        B: "Đúng! Thừa nhận lỗi và xin lỗi minh bạch — FIRST khi PM gửi nhầm email nhạy cảm.",
+        C: "Yêu cầu xóa email = che giấu, không rebuild trust với team.",
+        D: "Xin lỗi riêng một người không đủ — cả team đã nhận email nhầm."
+      };
+      let answered = false;
+      document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (answered) return;
+          answered = true;
+          const c = btn.dataset.opt;
+          document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (b) {
+            b.disabled = true;
+            if (b.dataset.opt === CORRECT) b.classList.add("correct");
+            else if (b === btn) b.classList.add("wrong");
+          });
+          const fb = document.getElementById("quizFeedback");
+          fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
+          fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Acknowledge and apologize</strong>" : "");
+        });
+      });
+      let score = 0;
+      const total = document.querySelectorAll("#classifyDrill .classify-row").length;
+      document.querySelectorAll("#classifyDrill .classify-row").forEach(function (row) {
+        const ans = row.dataset.answer;
+        let done = false;
+        row.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (done) return;
+            done = true;
+            const ok = btn.dataset.pick === ans;
+            row.querySelectorAll("button").forEach(function (b) {
+              b.disabled = true;
+              if (b.dataset.pick === ans) b.classList.add("correct");
+              else if (b === btn) b.classList.add("wrong-pick");
+            });
+            if (ok) score++;
+            document.getElementById("drillScore").textContent = score + " / " + total + " đúng";
+          });
+        });
+      });
+      document.querySelectorAll(".flashcard").forEach(function (card) {
+        function flip() { card.classList.toggle("flipped"); }
+        card.addEventListener("click", flip);
+        card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+      const sections = document.querySelectorAll("main section[id], main header[id]");
+      const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
+        });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
+    })();
+  </script>
+</body>
+</html>
