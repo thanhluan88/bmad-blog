@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Nominal Group Technique (Q47)</title>
+  <title>PMBOK 8 — Reserve Analysis (Q101)</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -26,7 +26,6 @@
     .sidebar .nav-series { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 1rem 0 0.35rem 0.65rem; }
     .sidebar .series-current { font-weight: 600; color: var(--primary-dark); background: var(--primary-bg); }
     .sidebar .back-link { display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem; background: var(--primary); color: #fff; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-    .sidebar .back-link.secondary { background: var(--card); color: var(--primary-dark); border: 1px solid var(--border); margin-top: 0.5rem; }
     .mobile-nav { display: none; position: sticky; top: 0; z-index: 30; background: var(--card); border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto; }
     .mobile-nav a { white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted); text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
     main { max-width: none; width: 100%; padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; }
@@ -51,6 +50,11 @@
     th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
     th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
     tr:last-child td { border-bottom: none; }
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .approach-grid { grid-template-columns: 1fr; } }
+    .approach-cell { padding: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; }
+    .approach-cell strong { display: block; color: var(--primary-dark); margin-bottom: 0.35rem; }
+    .approach-cell.pull { border-color: var(--ok); background: var(--ok-bg); }
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
@@ -66,8 +70,8 @@
     .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
     .classify-drill { display: grid; gap: 0.5rem; margin: 1rem 0; }
     .classify-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; padding: 0.65rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; }
-    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 420px; }
-    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.68rem; cursor: pointer; font-weight: 600; }
+    .classify-btns { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; max-width: 440px; }
+    .classify-btns button { padding: 0.28rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.6rem; cursor: pointer; font-weight: 600; }
     .classify-btns button.correct { background: var(--ok-bg); border-color: var(--ok); color: #065f46; }
     .classify-btns button.wrong-pick { background: var(--bad-bg); border-color: var(--bad); color: #991b1b; }
     .classify-btns button:disabled { cursor: default; }
@@ -88,11 +92,10 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Nominal Group Technique · Q47</div>
+      <div class="brand-sub">Reserve Analysis · Q101</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
-        <a href="#ngt">Nominal Group</a>
-        <a href="#techniques">So sánh techniques</a>
+        <a href="#compare">So sánh đáp án</a>
         <a href="#question">Câu hỏi thực hành</a>
         <a href="#analysis">Phân tích đáp án</a>
         <a href="#drill">Drill</a>
@@ -146,7 +149,7 @@
         <a href="pmp-teach-requirements-traceability.html">Q44: Requirements RTM</a>
         <a href="pmp-teach-business-requirements.html">Q45: Business Requirements</a>
         <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
-        <a href="pmp-teach-nominal-group-technique.html" class="series-current">Q47: Nominal Group</a>
+        <a href="pmp-teach-nominal-group-technique.html">Q47: Nominal Group</a>
         <a href="pmp-teach-brainstorming.html">Q48: Brainstorming</a>
         <a href="pmp-teach-cost-of-delay.html">Q49: Cost of Delay</a>
         <a href="pmp-teach-benchmarking.html">Q50: Benchmarking</a>
@@ -200,7 +203,7 @@
         <a href="pmp-teach-qualitative-risk-analysis.html">Q98: Qualitative Risk Analysis</a>
         <a href="pmp-teach-mitigate-risk.html">Q99: Mitigate Risk</a>
         <a href="pmp-teach-implement-risk-responses.html">Q100: Implement Risk Responses</a>
-        <a href="pmp-teach-reserve-analysis.html">Q101: Reserve Analysis</a>
+        <a href="pmp-teach-reserve-analysis.html" class="series-current">Q101: Reserve Analysis</a>
       </nav>
 
 
@@ -209,15 +212,9 @@
 
 
 
-
-
-
-
-
-
       <div class="sidebar-pager">
-        <a href="pmp-teach-design-thinking.html" class="sidebar-pager-link">← Q46: Design Thinking</a>
-        <a href="pmp-teach-brainstorming.html" class="sidebar-pager-link">Q48: Brainstorming →</a>
+        <a href="pmp-teach-implement-risk-responses.html" class="sidebar-pager-link">← Q100: Implement Risk Responses</a>
+        <span class="sidebar-pager-link disabled" aria-hidden="true">— →</span>
       </div>
 
       <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
@@ -227,116 +224,203 @@
     <div>
       <nav class="mobile-nav">
         <a href="/p/pmp" class="mobile-series-nav">← Blog PMP</a>
-        <a href="pmp-teach-design-thinking.html" class="mobile-series-nav">← Q46: Design Thinking</a>
-        <a href="pmp-teach-brainstorming.html" class="mobile-series-nav">Q48: Brainstorming →</a>
-        <a href="#ngt">NGT</a>
-        <a href="#techniques">Techniques</a>
+        <a href="pmp-teach-implement-risk-responses.html" class="mobile-series-nav">← Q100: Implement Risk Responses</a>
+        <a href="#reserve-analysis">Reserve Analysis</a>
+        <a href="#compare">So sánh</a>
         <a href="#question">Câu hỏi</a>
         <a href="#drill">Drill</a>
       </nav>
 
       <main>
-        <header class="hero" id="intro">
+                                        <header class="hero" id="intro">
           <h1>Practice Questions — PMBOK 8th Ed</h1>
           <p class="lead">
-            Bài học Q47 về <strong>Nominal Group Technique (NGT)</strong> — VDS: conflicting
-            stakeholder input, khó <em>prioritize features</em>, meetings bị chi phối bởi
-            <em>loudest voices</em>, missed requirements, sắp <em>delivery</em>.
+            Bài học Q101 về <strong>Monitor Risks</strong> và
+            <strong>Reserve Analysis</strong> — Rachel đang monitor risks trên dự án
+            warehouse automation tại HT Authority. Một số rủi ro đã identify
+            <em>vừa xảy ra</em>, gây chi phí đáng kể. Sponsor hỏi dự án có
+            <em>on track</em> không và liệu còn đủ nguồn lực để cover
+            <em>remaining risk responses</em>. Rachel nên làm gì?
           </p>
           <div class="badges">
-            <span class="badge">PMBOK Guide 8, p.40–41 &amp; p.184</span>
-            <span class="badge">Elicit and Analyze Requirements</span>
-            <span class="badge">Câu 47 — Practice</span>
+            <span class="badge">PMBOK Guide 8, p.98 &amp; 100</span>
+            <span class="badge">Uncertainty</span>
+            <span class="badge">Monitor Risks · Reserve Analysis</span>
+            <span class="badge">Câu 101 — Practice</span>
           </div>
         </header>
 
-        <section id="ngt">
-          <h2>1. Nominal group technique (PMBOK p.184)</h2>
+                                        <section id="reserve-analysis">
+          <h2>1. Monitor Risks &amp; Reserve Analysis (p.98, 100, 192)</h2>
           <p>
-            NGT là phương pháp <strong>structured group decision-making</strong> — thu thập input
-            systematically, equalize participation, minimize dominance of vocal members.
+            <strong>Monitor Risks</strong> (p.98, 100) theo dõi việc triển khai risk responses,
+            rủi ro đã identify, rủi ro mới, và đánh giá hiệu quả responses trong suốt dự án.
+            <strong>Reserve analysis</strong> (p.192) — công cụ trong Monitor Risks —
+            đánh giá <em>remaining risk</em> và xác định schedule/budget reserves
+            còn <strong>đủ</strong> cho dự án hay không.
           </p>
 
+          <div class="approach-grid">
+            <div class="approach-cell pull">
+              <strong>Perform reserve analysis (B — đúng)</strong>
+              Sponsor hỏi "enough to cover remaining risk responses" →
+              <strong>reserve analysis</strong> kiểm tra contingency/management reserves
+              còn đủ sau khi risks đã materialize và tốn chi phí.
+            </div>
+            <div class="approach-cell">
+              <strong>Review risk register (A — bẫy)</strong>
+              Register liệt kê risks — hữu ích nhưng không trả lời trực tiếp
+              câu hỏi reserves có <em>đủ</em> để cover remaining responses.
+            </div>
+            <div class="approach-cell">
+              <strong>Project risk assessment (C — bẫy)</strong>
+              Thuật ngữ chung chung — không phải công cụ cụ thể PMBOK cho
+              đánh giá sufficiency của schedule/budget reserves.
+            </div>
+            <div class="approach-cell">
+              <strong>Risk audit (D — bẫy)</strong>
+              Đánh giá <em>hiệu quả</em> risk process và responses — không phải
+              kiểm tra reserves còn đủ hay không.
+            </div>
+          </div>
+
           <div class="card tip">
-            <h4>Nominal group technique</h4>
+            <h4>Signal trong stem Q101</h4>
             <p style="margin:0">
-              Gather ideas <strong>silently/individually first</strong>, then share and discuss.
-              Ensures all ideas considered <em>before</em> open discussion — especially effective
-              in large groups handling controversial topics.
+              <strong>HT Authority · monitoring risks · risks occurred · significant cost · sponsor asks on track · enough to cover remaining risk responses</strong>
+              → Câu hỏi về <strong>reserve sufficiency</strong> sau khi risks materialize →
+              <strong>Perform reserve analysis (B)</strong>.
+              Không chỉ review register (A), không vague assessment (C), không audit (D).
             </p>
           </div>
 
-          <ol>
-            <li>Silent idea generation (everyone writes)</li>
-            <li>Round-robin sharing (no debate yet)</li>
-            <li>Clarify &amp; discuss</li>
-            <li>Vote/rank to prioritize</li>
-          </ol>
-        </section>
-
-        <section id="techniques">
-          <h2>2. Elicitation techniques — when to use which</h2>
-
+          <h3>Monitor Risks — Tools vs Mục đích</h3>
           <table>
             <thead>
-              <tr><th>Technique</th><th>Best for</th><th>Q47 fit?</th></tr>
+              <tr><th>Công cụ / Hành động</th><th>Mục đích</th><th>Q101?</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Nominal group (NGT)</strong></td>
-                <td>Loud voices dominate · equalize participation · prioritize in group</td>
-                <td>✓ (D)</td>
+                <td><strong>Reserve analysis (p.192)</strong></td>
+                <td>Đánh giá remaining risk; reserves còn đủ không</td>
+                <td>✓ Khớp "enough to cover remaining responses"</td>
               </tr>
               <tr>
-                <td>Open brainstorming</td>
-                <td>Free-flowing idea generation</td>
-                <td>Worsens loud-voice dominance (A)</td>
+                <td><strong>Risk register review</strong></td>
+                <td>Cập nhật danh sách risks, status, owners</td>
+                <td>✗ Không đo reserve sufficiency</td>
               </tr>
               <tr>
-                <td>Individual interviews</td>
-                <td>Deep 1-on-1 input, sensitive topics</td>
-                <td>Time pressure + group prioritization needed (B)</td>
+                <td><strong>Risk audit</strong></td>
+                <td>Đánh giá effectiveness của risk management process</td>
+                <td>✗ Khác mục đích sponsor question</td>
               </tr>
               <tr>
-                <td>Focus groups</td>
-                <td>Collect diverse stakeholder perspectives (Q43)</td>
-                <td>Open discussion — vocal members can still dominate (C)</td>
+                <td><strong>Technical performance measure</strong></td>
+                <td>So sánh technical progress vs plan</td>
+                <td>✗ Không liên quan reserves</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Action</th><th>Q101?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A. Review the risk register</strong></td>
+                <td>Xem remaining risks trong register</td>
+                <td>✗ Không trả lời reserves đủ hay không</td>
+              </tr>
+              <tr>
+                <td><strong>B. Perform reserve analysis</strong></td>
+                <td>Đánh giá remaining risk và reserve sufficiency (p.192)</td>
+                <td>✓ Đúng — sponsor hỏi enough to cover</td>
+              </tr>
+              <tr>
+                <td><strong>C. Conduct a project risk assessment</strong></td>
+                <td>Đánh giá rủi ro chung — không cụ thể</td>
+                <td>✗ Không phải tool PMBOK cho reserve question</td>
+              </tr>
+              <tr>
+                <td><strong>D. Perform a risk audit</strong></td>
+                <td>Audit hiệu quả risk process/responses</td>
+                <td>✗ Effectiveness, không phải reserve sufficiency</td>
               </tr>
             </tbody>
           </table>
         </section>
 
-        <section id="question">
-          <h2>3. Câu hỏi thực hành — Question 47</h2>
+                <section id="compare">
+          <h2>2. So sánh: Q100 Implement vs Q101 Monitor (Change Request → Reserve Analysis)</h2>
+
+          <table>
+            <thead>
+              <tr><th>Câu</th><th>Giai đoạn</th><th>Mục đích</th><th>Signal trong stem</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Q100 — Change Request (C)</strong></td>
+                <td><strong>Implement</strong> response</td>
+                <td>CR khi response impact baseline</td>
+                <td><em>Planned response</em> · impacts timeline &amp; budget · ready to proceed</td>
+              </tr>
+              <tr>
+                <td><strong>Q101 — Reserve Analysis (B)</strong></td>
+                <td><strong>Monitor</strong> risks</td>
+                <td>Kiểm tra reserves còn đủ sau risks materialized</td>
+                <td><em>Risks occurred</em> · significant cost · <em>enough to cover remaining</em></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card info">
+            <h4>Monitor Risks — Register vs Reserve vs Audit</h4>
+            <p style="margin:0">
+              <strong>Risk register (A):</strong> Document risks — WHAT risks remain. Không trả lời
+              reserves có đủ tiền/thời gian để respond.<br><br>
+              <strong>Reserve analysis (B):</strong> HOW MUCH reserve còn lại vs remaining risk exposure —
+              trả lời sponsor "enough to cover remaining responses".<br><br>
+              <strong>Risk assessment (C):</strong> Thuật ngữ mơ hồ — exam thường dùng tên process/tool cụ thể PMBOK.<br><br>
+              <strong>Risk audit (D):</strong> Process/responses có hiệu quả không — quality of risk management,
+              không phải reserve sufficiency.
+            </p>
+          </div>
+        </section>
+
+                <section id="question">
+          <h2>3. Câu hỏi thực hành — Question 101</h2>
 
           <div class="quiz-card" id="mainQuiz">
-            <div class="q-num">Practice Questions PMBOK 8th Ed · Q47</div>
+            <div class="q-num">Practice Questions PMBOK 8th Ed · Q101</div>
             <div class="q-text">
-              Stakeholders are providing conflicting input at VDS during requirement discussions,
-              making it difficult to <em>prioritize features</em>. Meetings are being dominated by
-              the highest paid and <em>loudest voices</em> in the room leading to some missed
-              requirements, and time is running out before <em>delivery</em> begins. What should
-              the project manager do?
+              Rachel is monitoring risks on a warehouse automation project at HT Authority.
+              Several identified risks have <em>recently occurred</em>, costing the project a
+              <em>significant amount</em>. Rachel meets with the project sponsor who asks if the
+              project is on track and whether they have
+              <em>enough to cover remaining risk responses</em>.
+              What should Rachel do?
             </div>
 
-            <button class="opt-btn" data-opt="A" type="button">A. Facilitate an open brainstorming session.</button>
-            <button class="opt-btn" data-opt="B" type="button">B. Conduct individual interviews.</button>
-            <button class="opt-btn" data-opt="C" type="button">C. Lead and facilitate a focus group.</button>
-            <button class="opt-btn" data-opt="D" type="button">D. Use the nominal group technique.</button>
+            <button class="opt-btn" data-opt="A" type="button">A. Review the risk register for remaining risks</button>
+            <button class="opt-btn" data-opt="B" type="button">B. Perform reserve analysis</button>
+            <button class="opt-btn" data-opt="C" type="button">C. Conduct a project risk assessment</button>
+            <button class="opt-btn" data-opt="D" type="button">D. Perform a risk audit</button>
 
             <div class="feedback" id="quizFeedback"></div>
           </div>
         </section>
 
-        <section id="analysis">
-          <h2>4. Phân tích đáp án — Đáp án đúng: D</h2>
+                <section id="analysis">
+          <h2>4. Phân tích đáp án — Đáp án đúng: B</h2>
 
-          <h3>Tại sao chọn D?</h3>
+          <h3>Tại sao chọn B?</h3>
           <ul>
-            <li>Loudest voices dominate → NGT equalizes participation, minimizes vocal dominance.</li>
-            <li>Conflicting input + prioritize features → structured group decision-making + vote/rank.</li>
-            <li>Missed requirements → all ideas captured silently before open discussion.</li>
-            <li>Controversial/large group → NGT especially effective (p.184).</li>
+            <li>Monitor Risks (p.100) dùng <strong>reserve analysis</strong> (p.192) để đánh giá remaining risk và reserve sufficiency.</li>
+            <li>Sponsor hỏi cụ thể "enough to cover remaining risk responses" — cần phân tích contingency/management reserves, không chỉ xem danh sách risks.</li>
+            <li>Risks đã materialize và tốn chi phí đáng kể → reserves có thể đã bị dùng — cần re-evaluate còn đủ không.</li>
+            <li>Đây là bước <strong>monitor</strong> trong risk lifecycle — sau plan, identify, analyze, respond, implement.</li>
           </ul>
 
           <h3>Loại trừ từng đáp án</h3>
@@ -346,180 +430,215 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. Open brainstorming</strong></td>
-                <td>Open format — loud voices dominate hơn, không fix problem hiện tại.</td>
+                <td><strong>A. Review risk register</strong></td>
+                <td>Register cho biết <em>risks nào còn lại</em> — không trả lời schedule/budget reserves có <strong>đủ</strong> để fund remaining responses.</td>
               </tr>
               <tr>
-                <td><strong>B. Individual interviews</strong></td>
-                <td>Time running out — sequential 1-on-1 chậm; không group prioritization.</td>
+                <td><strong>C. Project risk assessment</strong></td>
+                <td>Thuật ngữ không cụ thể trong PMBOK cho câu hỏi reserve sufficiency. Exam muốn <strong>reserve analysis</strong>.</td>
               </tr>
               <tr>
-                <td><strong>C. Focus group</strong></td>
-                <td>Facilitated discussion — vẫn có thể bị vocal members dominate (Q43 ≠ Q47).</td>
+                <td><strong>D. Risk audit</strong></td>
+                <td>Audit đánh giá <em>hiệu quả</em> risk process và responses — quality/compliance, không phải "do we have enough reserves".</td>
               </tr>
             </tbody>
           </table>
 
           <div class="card warn">
-            <h4>Liên hệ Q43 vs Q47</h4>
+            <h4>Q95 → Q100 → Q101 — Risk Lifecycle</h4>
             <p style="margin:0">
-              Q43: differing expectations → focus groups + benchmarking (gather). Q47: loud voices
-              dominate meetings → <em>nominal group technique</em> (structured, equal participation).
+              Q95: Plan → risk management plan.<br>
+              Q96–Q99: Identify → Analyze → Respond.<br>
+              Q100: Implement → change request if baseline impact.<br>
+              Q101: <strong>Monitor</strong> → reserve analysis khi sponsor hỏi reserves sufficiency.
             </p>
           </div>
         </section>
 
-        <section id="drill">
-          <h2>5. Drill — Match technique to scenario</h2>
+                <section id="drill">
+          <h2>5. Drill — Reserve Analysis, Register, Audit, hay Assessment?</h2>
           <div class="classify-drill" id="classifyDrill">
-            <div class="classify-row" data-answer="NGT">
-              <span>Loudest voices dominate — need equal participation &amp; prioritize</span>
+            <div class="classify-row" data-answer="RESERVE">
+              <span>HT Authority: risks occurred, sponsor asks if enough to cover remaining responses (Q101)</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="RESERVE">Reserve</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="AUDIT">Audit</button>
+                <button data-pick="ASSESS">Assess</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="FOCUS">
-              <span>Differing stakeholder expectations — collect diverse views</span>
+            <div class="classify-row" data-answer="RESERVE">
+              <span>PM compares remaining contingency reserve balance against updated risk exposure estimates</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="RESERVE">Reserve</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="AUDIT">Audit</button>
+                <button data-pick="ASSESS">Assess</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="INTV">
-              <span>Sensitive topic — deep 1-on-1 confidential input</span>
+            <div class="classify-row" data-answer="REGISTER">
+              <span>PM updates risk register with new risks found during sprint review</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="RESERVE">Reserve</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="AUDIT">Audit</button>
+                <button data-pick="ASSESS">Assess</button>
               </div>
             </div>
-            <div class="classify-row" data-answer="NGT">
-              <span>Large group, controversial — ideas before debate</span>
+            <div class="classify-row" data-answer="AUDIT">
+              <span>PM reviews whether risk responses were implemented effectively and process was followed</span>
               <div class="classify-btns">
-                <button data-pick="BRAIN">Brainstorm</button>
-                <button data-pick="INTV">Interview</button>
-                <button data-pick="FOCUS">Focus</button>
-                <button data-pick="NGT">NGT</button>
+                <button data-pick="RESERVE">Reserve</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="AUDIT">Audit</button>
+                <button data-pick="ASSESS">Assess</button>
+              </div>
+            </div>
+            <div class="classify-row" data-answer="REGISTER">
+              <span>Sponsor wants list of top open risks — PM pulls from risk register</span>
+              <div class="classify-btns">
+                <button data-pick="RESERVE">Reserve</button>
+                <button data-pick="REGISTER">Register</button>
+                <button data-pick="AUDIT">Audit</button>
+                <button data-pick="ASSESS">Assess</button>
               </div>
             </div>
           </div>
-          <p class="drill-score" id="drillScore">0 / 4 đúng</p>
+          <p class="drill-score" id="drillScore">0 / 5 đúng</p>
         </section>
 
-        <section id="traps">
+                <section id="traps">
           <h2>6. Bẫy thi</h2>
           <div class="card danger">
-            <h4>Bẫy 1: Need ideas → Brainstorming (A)</h4>
-            <p style="margin:0">Problem là dominance &amp; missed reqs — open brainstorm làm tệ hơn, không structured.</p>
+            <h4>Bẫy 1: "Remaining risks" → Review register (A)</h4>
+            <p style="margin:0">Register = danh sách risks. Sponsor hỏi <strong>enough to cover</strong> = reserves → <strong>reserve analysis (B)</strong>.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 2: Stakeholders → Interviews (B)</h4>
-            <p style="margin:0">Interviews tốn thời gian — stem nói time running out + cần group prioritization.</p>
+            <h4>Bẫy 2: "Monitoring risks" → Risk audit (D)</h4>
+            <p style="margin:0">Audit = effectiveness của process. Reserve sufficiency = <strong>reserve analysis</strong>.</p>
           </div>
           <div class="card danger">
-            <h4>Bẫy 3: Facilitate → Focus group (C)</h4>
-            <p style="margin:0">Focus group (Q43) gather perspectives — không equalize loud vs quiet voices như NGT.</p>
+            <h4>Bẫy 3: "Risk assessment" sounds right (C)</h4>
+            <p style="margin:0">PMBOK dùng tên cụ thể — <strong>reserve analysis</strong> cho câu hỏi reserves, không phải vague "project risk assessment".</p>
+          </div>
+          <div class="card danger">
+            <h4>Bẫy 4: Nhầm Q68 Contingency và Q101</h4>
+            <p style="margin:0">Q68: thiết lập contingency reserve. Q101: risks đã xảy ra — <strong>monitor</strong> xem reserves còn đủ không (reserve analysis).</p>
           </div>
           <div class="card tip">
             <h4>Pattern</h4>
-            <p style="margin:0"><strong>Loudest voices · dominate meetings · missed requirements · prioritize features</strong> → Nominal group technique (D).</p>
+            <p style="margin:0"><strong>Monitoring · risks occurred · significant cost · enough to cover remaining responses · on track</strong> → Perform reserve analysis (B).</p>
           </div>
         </section>
 
-        <section id="flashcards">
+                <section id="flashcards">
           <h2>7. Flashcard</h2>
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Nominal group technique? (p.184)</div>
-            <div class="flashcard-back">Structured group decision-making · equalize participation · minimize vocal dominance · ideas before discussion.</div>
+            <div class="flashcard-front">Reserve analysis? (p.192)</div>
+            <div class="flashcard-back">Công cụ <strong>Monitor Risks</strong> — đánh giá remaining risk và xác định schedule/budget reserves còn <strong>đủ</strong> cho dự án.</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
-            <div class="flashcard-front">Q47 đáp án?</div>
-            <div class="flashcard-back"><strong>D</strong> — Use the nominal group technique.</div>
+            <div class="flashcard-front">Q101 đáp án?</div>
+            <div class="flashcard-back"><strong>B — Perform reserve analysis</strong>. HT Authority · risks occurred · sponsor asks enough to cover remaining responses.</div>
+          </div></div>
+          <div class="flashcard" tabindex="0"><div class="flashcard-inner">
+            <div class="flashcard-front">Register vs Reserve vs Audit?</div>
+            <div class="flashcard-back"><strong>Register:</strong> list risks. <strong>Reserve analysis:</strong> reserves đủ không. <strong>Audit:</strong> process effectiveness.</div>
           </div></div>
         </section>
 
-        <section id="cheatsheet">
+                <section id="cheatsheet">
           <h2>8. Cheat sheet</h2>
-          <div class="cheat-sheet">NOMINAL GROUP TECHNIQUE — Q47 (PMBOK 8, p.40–41 &amp; p.184)
+          <div class="cheat-sheet">RESERVE ANALYSIS — Q101
+(PMBOK 8, p.98 &amp; 100 Monitor Risks · p.192 Reserve analysis)
 ─────────────────────────────────────────────────────
-PROCESS: Elicit and Analyze Requirements
+DOMAIN: Uncertainty
+PROCESS: Monitor Risks (p.100)
+TOOL: RESERVE ANALYSIS (p.192)
+KEY: Are schedule/budget reserves SUFFICIENT for remaining risk?
 
-NGT (p.184):
-  - Structured GROUP decision-making
-  - Gather input SYSTEMATICALLY
-  - Equalize participation
-  - Minimize dominance of VOCAL members
-  - All ideas BEFORE open discussion
-  - Especially: large groups · controversial topics
+RESERVE ANALYSIS (B):
+  → Evaluate REMAINING risk exposure
+  → Compare vs contingency/management reserves
+  → Answer: enough to cover remaining responses?
 
-SCENARIO: VDS — requirement discussions
-           CONFLICTING input · PRIORITIZE features
-           LOUDEST / highest-paid voices DOMINATE
-           MISSED requirements · TIME running out
-→ D) NOMINAL GROUP TECHNIQUE ✓
+RISK REGISTER (A trap):
+  → Lists identified risks and status
+  → Does NOT measure reserve sufficiency
+
+RISK ASSESSMENT (C trap):
+  → Vague term — not specific PMBOK tool here
+
+RISK AUDIT (D trap):
+  → Effectiveness of risk process/responses
+  → NOT reserve sufficiency
+
+SCENARIO: HT Authority — Rachel PM — MONITORING risks
+           Warehouse automation · RISKS OCCURRED
+           SIGNIFICANT COST · sponsor asks ON TRACK
+           ENOUGH to cover REMAINING risk responses
+NEXT → B) PERFORM RESERVE ANALYSIS ✓
 
 NOT:
-  A) Open brainstorming — worsens loud-voice dominance
-  B) Individual interviews — slow, not group prioritization
-  C) Focus group — open discussion, vocal can dominate (Q43 ≠ Q47)
+  A) REVIEW REGISTER — list risks, not reserve $/time
+  C) PROJECT RISK ASSESSMENT — vague
+  D) RISK AUDIT — effectiveness, not reserves
 
-Q43 vs Q47:
-  Q43 DIFFERING expectations → focus groups + benchmarking
-  Q47 LOUD VOICES dominate   → nominal group technique
+Q100 vs Q101:
+  Q100: implement response + baseline impact → CHANGE REQUEST
+  Q101: monitor + reserves sufficiency → RESERVE ANALYSIS
 
-SIGNAL: "loudest voices" · "dominated by"
-        "missed requirements" · "prioritize features"
-        "conflicting input" · "controversial"
+FULL RISK LIFECYCLE:
+  Q95 Plan → Q96 Identify → Q98 Analyze → Q99 Respond
+  → Q100 Implement → Q101 MONITOR (reserve analysis)
 
-Q47 ANSWER: D
+SIGNAL KEYWORDS:
+  Reserve:    enough to cover, remaining responses, reserves
+              sufficient, occurred, significant cost, on track,
+              contingency, budget, schedule reserve
+  Register:   list risks, update status, remaining risks
+  Audit:      effectiveness, process followed, quality
+  Assessment: vague — usually wrong if reserve analysis fits
 
-REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.184</div>
+Q101 ANSWER: B — Perform reserve analysis
+
+REF: PMBOK Guide, 8th Ed., p.98 &amp; 100 Monitor Risks
+      p.192 Reserve analysis</div>
         </section>
 
 
 
 
-
-
-
-
-
-
-
-
-
+                        <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
+          <a class="lesson-pager-btn" href="pmp-teach-implement-risk-responses.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q100: Implement Risk Responses</span></a>
+          <span class="lesson-pager-pos">Q101 / 101</span>
+          <span class="lesson-pager-btn disabled" aria-hidden="true"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">—</span></span>
+        </nav>
 
         <nav class="lesson-pager" aria-label="Điều hướng Practice Series">
-          <a class="lesson-pager-btn" href="pmp-teach-design-thinking.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q46: Design Thinking</span></a>
-          <span class="lesson-pager-pos">Q47 / 101</span>
-          <a class="lesson-pager-btn next" href="pmp-teach-brainstorming.html"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">Q48: Brainstorming</span></a>
+          <a class="lesson-pager-btn" href="pmp-teach-implement-risk-responses.html"><span class="lesson-pager-dir">← Trước</span><span class="lesson-pager-label">Q100: Implement Risk Responses</span></a>
+          <span class="lesson-pager-pos">Q101 / 101</span>
+          <span class="lesson-pager-btn disabled" aria-hidden="true"><span class="lesson-pager-dir">Sau →</span><span class="lesson-pager-label">—</span></span>
         </nav>
 
         <footer class="ref-footer">
-          · <a href="pmp-teach-elicit-requirements.html">Q43: Elicit Requirements</a>
-          · <a href="pmp-teach-design-thinking.html">Q46: Design Thinking</a>
-          · <a href="pmp-full-questions.html#q-47">Luyện câu 47</a>
+          · <a href="pmp-teach-implement-risk-responses.html">Q100: Implement Risk Responses</a>
+          · <a href="pmp-teach-contingency-reserve.html">Q68: Contingency Reserve</a>
           · <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
     </div>
   </div>
 
-  <script>
+          <script>
     (function () {
-      const CORRECT = "D";
+      const CORRECT = "B";
       const EXPL = {
-        A: "Open brainstorming — loud voices dominate hơn, không fix missed requirements.",
-        B: "Individual interviews — time running out, không group prioritization.",
-        C: "Focus group — open discussion, vocal members vẫn có thể dominate (khác Q43 scenario).",
-        D: "Đúng! NGT equalizes participation, minimizes vocal dominance, structured prioritization (p.184)."
+        A: "Risk register liệt kê remaining risks — không trả lời reserves có đủ để cover remaining responses. Cần reserve analysis.",
+        B: "Đúng! Reserve analysis (p.192) trong Monitor Risks đánh giá remaining risk và xác định schedule/budget reserves còn đủ — khớp sponsor question.",
+        C: "Project risk assessment quá mơ hồ — PMBOK dùng reserve analysis cho câu hỏi reserve sufficiency.",
+        D: "Risk audit đánh giá hiệu quả risk process/responses — không phải kiểm tra reserves còn đủ hay không."
       };
       let answered = false;
       document.querySelectorAll("#mainQuiz .opt-btn").forEach(function (btn) {
@@ -535,7 +654,7 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.184</div>
           const fb = document.getElementById("quizFeedback");
           fb.className = "feedback show " + (c === CORRECT ? "ok" : "bad");
           fb.innerHTML = (c === CORRECT ? "<strong>Chính xác!</strong> " : "<strong>Chưa đúng.</strong> ") + EXPL[c] +
-            (c !== CORRECT ? "<br><br>Đáp án: <strong>D — Use the nominal group technique.</strong>" : "");
+            (c !== CORRECT ? "<br><br>Đáp án: <strong>B — Perform reserve analysis</strong>" : "");
         });
       });
       let score = 0;
@@ -563,16 +682,18 @@ REF: PMBOK Guide, 8th Ed., p.40–41 &amp; p.184</div>
         card.addEventListener("click", flip);
         card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
       });
-      const sections = document.querySelectorAll("section[id], header[id]");
+      const sections = document.querySelectorAll("main section[id], main header[id]");
       const navLinks = document.querySelectorAll("#sideNav a[href^='#']");
-      const observer = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) navLinks.forEach(function (a) {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
-          });
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
         });
-      }, { rootMargin: "-20% 0px -60% 0px" });
-      sections.forEach(function (s) { observer.observe(s); });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>
 </body>
