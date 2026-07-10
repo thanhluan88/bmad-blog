@@ -109,4 +109,5 @@ module.exports.SERIES = [
   ["pmp-teach-source-selection-criteria.html", "Q107: Source Selection Criteria"],
   ["pmp-teach-negotiation.html", "Q108: Negotiation"],
   ["pmp-teach-scope-creep.html", "Q109: Scope Creep"],
+  ["pmp-teach-return-on-investment.html", "Q110: Return on Investment"],
 ];
