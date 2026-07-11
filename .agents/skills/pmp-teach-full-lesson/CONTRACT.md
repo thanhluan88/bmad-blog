@@ -25,8 +25,8 @@ Solution: B. {correct}. {why correct}. The other answer choices are incorrect. {
 |-------|--------|------------|
 | `sourceSolution` | Column P raw | Source solution card (teach only) |
 | `signalPhrases` + `signalAnswer` | Signal prompt | Signal card (English) |
-| `whyBullets` | Column P verbatim (why part) | Why this answer (Vietnamese label in UI) |
-| `excludeReasons` | Column P verbatim (exclude part) | Exclude other options (Vietnamese label in UI) |
+| `whyBullets` | Column P verbatim (why part) | Why this answer |
+| `excludeReasons` | Column P verbatim (exclude part) | Exclude other options |
 | `guideHits[]` | RAG step 3 | Guide citation (up to 3) |
 | `guideQuote` | `guideHits[0].excerpt` | Primary Guide fallback |
 | `guidePages` / `guideTopic` | Hit #1 | Guide header |

@@ -7,26 +7,40 @@ const {
   parseCorrectFromSolution,
 } = require("./pmp-csv-solutions");
 
-const EXCLUDE_MARKER =
-  /the other (?:answer choices|options) (?:are|is) incorrect\.?\s*/i;
+const EXCLUDE_MARKERS = [
+  /the other (?:answer choices|options) (?:are|is) incorrect\.?\s*/i,
+  /all other (?:answer choices|options) (?:are|is) incorrect\.?\s*/i,
+];
+
+function findExcludeSplit(body) {
+  let best = { idx: -1, len: 0 };
+  for (const re of EXCLUDE_MARKERS) {
+    const m = body.match(re);
+    if (!m) continue;
+    const idx = body.search(re);
+    if (idx >= 0 && (best.idx < 0 || idx < best.idx)) {
+      best = { idx, len: m[0].length };
+    }
+  }
+  return best;
+}
+
+function splitCsvSolutionParts(explanationText) {
+  const body = stripSolutionPrefix(explanationText);
+  const split = findExcludeSplit(body);
+  if (split.idx < 0) {
+    return { whyPart: body.trim(), excludePart: "" };
+  }
+  return {
+    whyPart: body.slice(0, split.idx).trim(),
+    excludePart: body.slice(split.idx + split.len).trim(),
+  };
+}
 
 function parseCorrectKeys(correct) {
   const s = String(correct || "").trim().toUpperCase();
   if (/^[A-Z]{2,}$/.test(s) && !/[,;\s]/.test(s)) return s.split("");
   return s.split(/[^A-Z]+/).filter(Boolean);
-}
-
-function splitCsvSolutionParts(explanationText) {
-  const body = stripSolutionPrefix(explanationText);
-  const m = body.match(EXCLUDE_MARKER);
-  if (!m) {
-    return { whyPart: body.trim(), excludePart: "" };
-  }
-  const idx = body.search(EXCLUDE_MARKER);
-  return {
-    whyPart: body.slice(0, idx).trim(),
-    excludePart: body.slice(idx + m[0].length).trim(),
-  };
 }
 
 function optionMatchScore(optionText, sentence) {
@@ -66,7 +80,7 @@ function buildExcludeReasonsFromCsv(q, explanationText) {
       const score = optionMatchScore(o.text, sent);
       if (score > best.score) best = { score, sentence: sent };
     }
-    if (best.score >= 0.34 && best.sentence) {
+    if (best.score >= 0.2 && best.sentence) {
       reasons[o.key] = best.sentence.replace(/\s+/g, " ").trim();
       used.add(best.sentence);
     }
@@ -94,6 +108,18 @@ function buildWhyCorrectFromCsv(explanationText) {
   return whyPart.replace(/\s+/g, " ").trim();
 }
 
+function hasVietnamese(text) {
+  return /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(
+    String(text || ""),
+  );
+}
+
+function englishExcludeFallback(opt, correctOpt) {
+  const wrong = opt.text.slice(0, 95).trim();
+  const right = correctOpt.text.slice(0, 95).trim();
+  return `Option ${opt.key} (${wrong}) does not resolve the stem focus — ${correctOpt.key} (${right}) is the PMBOK-aligned action.`;
+}
+
 function mergeCsvGrounding(q, entry, analysis) {
   const row = getCsvSolutionForQuestion(q);
   if (!row?.explanationText) return entry;
@@ -107,9 +133,24 @@ function mergeCsvGrounding(q, entry, analysis) {
 
   const whyBullets = buildWhyBulletsFromCsv(q, row.explanationText, correctKey);
   const excludeFromCsv = buildExcludeReasonsFromCsv(q, row.explanationText);
-  const mergedExclude = { ...entry.excludeReasons };
-  for (const [k, v] of Object.entries(excludeFromCsv)) {
-    if (v) mergedExclude[k] = v;
+  const wrongOpts = (q.options || []).filter((o) => !correctKeys.includes(o.key));
+  const correctOpt =
+    (q.options || []).find((o) => correctKeys.includes(o.key)) ||
+    (analysis?.optionAnalysis || []).find((o) => o.isCorrect);
+  const excludeReasons = {};
+  for (const o of wrongOpts) {
+    if (excludeFromCsv[o.key]) {
+      excludeReasons[o.key] = excludeFromCsv[o.key];
+      continue;
+    }
+    const prev = entry.excludeReasons?.[o.key] || "";
+    if (prev && !hasVietnamese(prev)) {
+      excludeReasons[o.key] = prev;
+    } else if (correctOpt) {
+      excludeReasons[o.key] = englishExcludeFallback(o, correctOpt);
+    } else {
+      excludeReasons[o.key] = prev || `Option ${o.key} is not the best PMBOK 8 match for this stem.`;
+    }
   }
 
   return {
@@ -117,7 +158,7 @@ function mergeCsvGrounding(q, entry, analysis) {
     sourceSolution: row.explanationText,
     whyCorrect: buildWhyCorrectFromCsv(row.explanationText) || entry.whyCorrect,
     whyBullets: whyBullets.length ? whyBullets : entry.whyBullets,
-    excludeReasons: mergedExclude,
+    excludeReasons,
   };
 }
 

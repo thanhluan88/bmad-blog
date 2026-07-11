@@ -107,6 +107,10 @@ function resolveExcludeReason(q, stemProfile, key, fallback) {
   const stored = getStoredTeachGrounding(q.id);
   const fromStore = stored?.excludeReasons?.[key];
   if (fromStore && !isGenericReasoning(fromStore)) return fromStore;
+  if (stored?.sourceSolution) {
+    if (fallback && !isGenericReasoning(fallback)) return fallback;
+    return "";
+  }
   const fromProfileKey = stemProfile?.excludeReasonsByKey?.[key];
   if (fromProfileKey && !isGenericReasoning(fromProfileKey)) return fromProfileKey;
   const fromProfile = stemProfile?.rejectByAction;
@@ -187,7 +191,7 @@ function composeGrounding(q, analysis) {
     }
   } else {
     if (whyCorrect && !isGenericReasoning(whyCorrect)) {
-      pushUnique(bullets, `Đáp án ${correctKey} đúng: ${whyCorrect}`);
+      pushUnique(bullets, `${correctKey} is correct: ${whyCorrect}`);
     }
     if (page && process && whyCorrect) {
       pushUnique(
@@ -607,9 +611,9 @@ function buildCheatSheet(q, analysis, mapping) {
   const principle = formatMappingList(mapping.principles || mapping.principle);
   const pages = analysis.pageInfo?.pages?.join(", ") || "";
   const signals = extractStemSignals(q.text).join(" | ") || "—";
-  const wrong = (analysis.optionAnalysis || [])
-    .filter((o) => !o.isCorrect)
-    .map((o) => `  ${o.key}) ${o.text.slice(0, 50)}… — ${(o.reason || "").slice(0, 60)}`)
+  const excludeRows = buildExcludeRows(q, analysis)
+    .filter((o) => o.reason)
+    .map((o) => `  ${o.key}) ${o.text.slice(0, 50)}… — ${o.reason.slice(0, 80)}`)
     .join("\n");
 
   return `${concept.toUpperCase()} — Q${q.id}
@@ -628,7 +632,7 @@ SIGNAL KEYWORDS:
 ANSWER → ${q.correct}) ${(q.correctLabel || "").replace(/^[A-Z]\.\s*/, "")}
 
 NOT:
-${wrong || "  (xem bảng loại trừ)"}
+${excludeRows || "  (see exclude table)"}
 
 Q${q.id} ANSWER: ${q.correct}`;
 }
@@ -701,12 +705,11 @@ function buildTeachExplanationMarkdown(q, analysis) {
   if (p8.processes?.length) lines.push(`- Process: ${p8.processes.join(", ")}`);
   if (p8.principles?.length) lines.push(`- Principle: ${p8.principles.join(", ")}`);
   lines.push("");
-  lines.push("**Vì sao chọn đáp án này**");
-  if (grounding.conclusion) lines.push(grounding.conclusion);
+  lines.push("**Why this answer**");
   for (const b of whyBullets) lines.push(`- ${b}`);
   if (excludeRows.length) {
     lines.push("");
-    lines.push("**Loại trừ phương án khác**");
+    lines.push("**Exclude other options**");
     for (const row of excludeRows) {
       lines.push(`- **${row.key}:** ${row.reason}`);
     }

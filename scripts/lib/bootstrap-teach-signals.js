@@ -207,7 +207,16 @@ function bootstrapTeachSignalsStore({ questionsPath, storePath, useCsvSolutions 
       if (hits.length) d.entry.guideHits = hits;
       guideFilled++;
     }
-    store[String(d.q.id)] = { ...d.existingEntry, ...d.entry };
+    store[String(d.q.id)] = (() => {
+      const merged = { ...d.existingEntry, ...d.entry };
+      if (d.entry.sourceSolution) {
+        merged.whyBullets = d.entry.whyBullets;
+        merged.excludeReasons = d.entry.excludeReasons;
+        merged.whyCorrect = d.entry.whyCorrect;
+        merged.sourceSolution = d.entry.sourceSolution;
+      }
+      return merged;
+    })();
     if (d.hadValid && validateSignalPhrases(d.q.text, d.existingEntry?.signalPhrases || []).ok) kept++;
     else added++;
   }

@@ -200,7 +200,7 @@ function renderExcludeTableFromAnalysis(q, analysis) {
   const wrong = buildExcludeRows(q, analysis).filter((o) => o.reason);
   if (!wrong.length) return "";
   return `<table>
-            <thead><tr><th>Đáp án</th><th>Tại sao không chọn</th></tr></thead>
+            <thead><tr><th>Option</th><th>Why not</th></tr></thead>
             <tbody>${wrong
               .map(
                 (o) =>
@@ -286,7 +286,7 @@ function renderExcludeTable(q, explanation) {
   const rows = parseExcludeRows(explanation);
   if (rows.length) {
     return `<table>
-            <thead><tr><th>Đáp án</th><th>Tại sao không chọn</th></tr></thead>
+            <thead><tr><th>Option</th><th>Why not</th></tr></thead>
             <tbody>${rows
               .map(
                 (r) =>
@@ -541,12 +541,12 @@ function renderLesson(q, prev, next) {
           <h2>${sec.analysis}. Phân tích đáp án — Đáp án đúng: ${escapeHtml(q.correct)}</h2>
           ${buildSignalCard(q, analysis)}
           <div class="solution-reasoning-block">
-          <h3>Vì sao chọn đáp án này</h3>
+          <h3>Why this answer</h3>
           <ul>${whyBullets.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul>
-          ${excludeHtml ? `<h3>Loại trừ phương án khác</h3>\n          ${excludeHtml}` : ""}
+          ${excludeHtml ? `<h3>Exclude other options</h3>\n          ${excludeHtml}` : ""}
           </div>
           <div class="card tip">
-            <h4>Đáp án</h4>
+            <h4>Answer</h4>
             <p style="margin:0"><strong>${escapeHtml(q.correctLabel || q.correct)}</strong></p>
           </div>
           ${renderAnalysisSection(q, analysis)}

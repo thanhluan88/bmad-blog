@@ -61,8 +61,7 @@ Follow [RAG.md](RAG.md). Query from solution **why-correct** terms — not stem-
 
 Run [PROMPTS.md](PROMPTS.md) → write store per [CONTRACT.md#store-fields](CONTRACT.md#store-fields).
 
-- `whyBullets` + `excludeReasons` = **verbatim** column P
-- Both sections **adjacent** in output, before Guide citations
+- Why + exclude: **English verbatim** from column P; adjacent before Guide
 
 **Done when:** verbatim why; verbatim exclude for every wrong key; `guideHits.length` ≥ 1.
 
