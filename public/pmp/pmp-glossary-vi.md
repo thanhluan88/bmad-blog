@@ -1292,6 +1292,8 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | reserves depleted | Contingency used up |
 | increase exposure | Risk grows with delay |
 | Governance ≠ bureaucracy | Lightweight traceability |
+| cumbersome process, prone to errors | Retrospective — assess & adjust (Q747) |
+| hard to monitor changes, heavy process | Inspect & adapt — simplify workflow |
 | iterative + incremental | Agile delivery |
 | lines of code, parametric | COCOMO |
 
