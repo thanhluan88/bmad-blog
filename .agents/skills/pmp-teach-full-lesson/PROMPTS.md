@@ -1,32 +1,32 @@
-# Prompts — PMP Teach Full Lesson
+# Prompts
 
 ## Grounding
 
-**Inputs:** stem, options, correct key, **column P** (`sourceSolution`), RAG hits from step 3.
+**Inputs:** stem, options, correct key, column P (`sourceSolution`), RAG hits from step 3.
 
 ```
-Bạn có reference solution từ ngân hàng câu (cột P CSV):
+You have the reference solution from the question bank (CSV column P):
 
 "{sourceSolution}"
 
-Câu hỏi:
+Question:
 "{stem}"
 
-Đáp án đúng: {correctKey}. {correctOptionText}
+Correct answer: {correctKey}. {correctOptionText}
 
-Các đáp án sai:
+Wrong answers:
 {for each wrong key}
 {key}. {optionText}
 
-Dựa trên reference solution TRÊN, trích dữ liệu cho bài giảng.
+Extract lesson grounding from the reference solution above.
 
-**Trích NGUYÊN VĂN từ cột P** (không paraphrase, không thêm PMBOK):
-- `whyBullets` — phần **why correct**: từ sau `Solution: {key}.` đến trước `The other answer choices are incorrect`
-- `excludeReasons` — **mỗi wrong key**: câu loại trừ nguyên văn từ phần sau marker đó
+VERBATIM from column P (no paraphrase, no added PMBOK prose):
+- whyBullets — why-correct section: from after "Solution: {key}." through before "The other answer choices are incorrect"
+- excludeReasons — one verbatim exclude sentence per wrong key from the section after that marker
 
-Signal + `guideHits` vẫn align PMBOK 8 (xem [RAG.md](RAG.md)).
+Signal and guideHits still align to PMBOK 8 — see [RAG.md](RAG.md).
 
-Trả về JSON:
+Return JSON:
 {
   "whyCorrect": "same verbatim text as whyBullets[0] when from CSV",
   "excludeReasons": {
@@ -52,11 +52,10 @@ Trả về JSON:
 }
 ```
 
-**Separation rule:**
-- `whyBullets` → **verbatim** why-correct từ cột P — **không** gộp wrong-key prose
-- `excludeReasons` → **verbatim** mỗi wrong key từ cột P
-
-If `sourceSolution` missing: reason from PMBOK 8 + stem for why/exclude only.
+**Rules:**
+- `whyBullets` → correct answer only, verbatim from column P
+- `excludeReasons` → every wrong key, verbatim from column P
+- If `sourceSolution` missing: derive why/exclude from PMBOK 8 + stem only
 
 ---
 

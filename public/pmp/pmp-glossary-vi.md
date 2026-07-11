@@ -876,16 +876,32 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 ### Delphi Technique
 | | |
 |---|---|
-| **Nghĩa** | Hỏi ý kiến expert **ẩn danh**, nhiều vòng, đạt consensus qua facilitator |
-| **Keyword** | Anonymous, iterative, consensus, facilitated |
-| **Dùng cho** | Estimate, identify risks, forecast khi thiếu data |
+| **Nghĩa** | Kỹ thuật thu thập ý kiến **chuyên gia** qua **nhiều vòng** — phản hồi **ẩn danh** qua facilitator đến khi **hội tụ consensus** |
+| **Phát âm** | /ˈdelfaɪ/ — *del-fai* |
+| **PMBOK 8** | Data gathering / estimating / risk — giảm bias khi **thiếu historical data** hoặc cần forecast |
+| **Cách hoạt động** | Vòng 1: experts trả lời riêng → facilitator tổng hợp (không lộ tên) → vòng sau experts điều chỉnh → lặp đến consensus |
+| **PM role** | **Facilitate** — đảm bảo ẩn danh; không áp estimate/ý kiến cá nhân lên panel |
+| **Dùng cho** | Estimate duration/cost, identify risks, forecast outcome |
+| **Keyword** | anonymous, iterative, consensus, facilitated, panel of experts, multiple rounds |
+| **≠ Brainstorming** | Brainstorm = mở, một phiên, có **dominant voice** |
+| **≠ Nominal Group Technique** | NGT = im lặng viết → round-robin → vote — **một** vòng, không iterative ẩn danh |
+| **≠ Expert judgment (đơn)** | Một SME — không structured multi-round |
+
+| Signal đề | Nghĩ đến |
+|-----------|----------|
+| anonymous · iterative · consensus · facilitated | **Delphi** |
+| panel of experts · multiple rounds · lack historical data | **Delphi** estimate/forecast |
+| debate estimates · facilitated rounds · discuss between rounds | **Wideband Delphi** |
+| open brainstorming · everyone speaks in one meeting | ✗ **không** Delphi |
+
+**Bẫy ✗:** Brainstorm thay Delphi khi stem cần ẩn danh · PM đưa estimate riêng vào panel · Một cuộc họp vote = NGT, không phải Delphi
 
 ### Wideband Delphi
 | | |
 |---|---|
-| **Nghĩa** | Biến thể Delphi — experts **thảo luận/tranh luận** giữa các vòng |
-| **≠ Classic Delphi** | Không hoàn toàn im lặng ẩn danh |
-| **Dùng cho** | Software estimation (Boehm) |
+| **Nghĩa** | Biến thể Delphi — experts **thảo luận/tranh luận** estimate giữa các vòng (có facilitator) |
+| **≠ Classic Delphi** | Classic = **im lặng ẩn danh** giữa các vòng; Wideband = **có debate** |
+| **Nguồn** | Boehm — software estimation |
 | **Mẹo đề** | *debate estimates in facilitated rounds* → Wideband Delphi |
 
 ### Starbursting
@@ -1092,8 +1108,8 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 ### Elicitation & Estimation Techniques
 | Kỹ thuật | Đặc điểm chính |
 |----------|----------------|
-| Delphi | Ẩn danh, nhiều vòng, consensus |
-| Wideband Delphi | Delphi + thảo luận/debate |
+| Delphi | Ẩn danh, nhiều vòng, facilitator, consensus |
+| Wideband Delphi | Delphi + thảo luận/debate giữa các vòng |
 | Starbursting | Câu hỏi 5W1H, questions first |
 | Brainstorming | Ý tưởng tự do, có thể dominant voice |
 | COCOMO | Parametric, software, KLOC |
@@ -1200,7 +1216,8 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | Nếu đề có… | Nghĩ đến… |
 |------------|-----------|
 | power, legitimacy, urgency | Salience model |
-| anonymous, iterative, consensus | Delphi |
+| anonymous, iterative, consensus, facilitated | Delphi |
+| panel of experts, multiple rounds, lack historical data | Delphi (estimate/forecast) |
 | debate estimates, facilitated rounds | Wideband Delphi |
 | Who/What/When/Where/Why/How, questions first | Starbursting |
 | outside team's authority | Escalate (không swarm) |
