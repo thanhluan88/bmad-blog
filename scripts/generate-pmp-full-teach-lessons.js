@@ -26,6 +26,7 @@ const {
   validateTeachGrounding,
   quizExplMap,
   conceptLabel,
+  resolveGuideQuote,
 } = require("./lib/pmp-teach-colocation-style");
 
 const PMP_DIR = path.join(__dirname, "..", "public", "pmp");
@@ -142,15 +143,8 @@ function renderOptionsGridFromAnalysis(optionAnalysis) {
 }
 
 function guideQuoteText(q, analysis) {
-  const stored = getStoredTeachGrounding(q.id);
-  if (stored?.guideQuote) return formatGuideQuote(stored.guideQuote, 600);
-  const insight = parseSection(analysis.explanation || "", "PMBOK 8 — Cơ sở từ Guide");
-  if (insight) {
-    const quote = insight.split("\n").find((l) => l.startsWith("> ") && !l.startsWith("> —"));
-    if (quote) return formatGuideQuote(quote.replace(/^>\s*/, "").trim());
-  }
-  if (analysis.pageInfo?.snippet) return formatGuideQuote(analysis.pageInfo.snippet);
-  return "";
+  const guide = resolveGuideQuote(q, analysis);
+  return guide?.excerpt || "";
 }
 
 function renderSourceSolutionCard(q) {
@@ -166,11 +160,11 @@ function renderSourceSolutionCard(q) {
 }
 
 function renderPmbok8Insight(q, analysis) {
-  const pageInfo = analysis.pageInfo;
-  const excerpt = guideQuoteText(q, analysis);
+  const guide = resolveGuideQuote(q, analysis);
+  const excerpt = guide?.excerpt || "";
   if (!excerpt || excerpt.length < 40) return "";
-  const pages = pageInfo?.pages?.join(", ") || "";
-  const topic = pageInfo?.topic || "";
+  const pages = guide?.pages?.join(", ") || "";
+  const topic = guide?.topic || "";
   return `<div class="card info">
             <h4>Trích dẫn Guide</h4>
             <p style="margin:0">"${highlightReasoning(excerpt)}"</p>

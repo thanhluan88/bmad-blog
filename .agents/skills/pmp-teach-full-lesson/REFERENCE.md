@@ -56,9 +56,19 @@ Trả về JSON:
     "PMBOK 8 process / principle …"
   ],
   "pmbokConcept": "short excerpt for flashcard",
-  "guideQuote": "complete sentence(s) from Guide for Trích dẫn block"
+  "guideQuote": "complete sentence(s) from Guide for Trích dẫn block",
+  "guidePages": [137],
+  "guideTopic": "Monitor Risks"
 }
 ```
+
+**Guide quote alignment (required):**
+1. Extract process/artifact terms from `whyBullets` + `whyCorrect` (risk register, Monitor Risks, Validate Scope…).
+2. RAG query = those terms + primary process — **not** stem keyword meta alone.
+3. Reject snippets: mid-sentence fragments, Licensed To, Figure overview.
+4. `guideTopic` / page citation must match the quote block — do not reuse stem `pageInfo` if different.
+
+Engine: `lookupGuideQuote()` in `pmp-pmbok8-rag-pages.js` · bootstrap fills store automatically.
 
 **Separation rule:**
 - `whyBullets` → **correct answer only**
@@ -143,6 +153,13 @@ All signal content **English**.
 
 Complete PMBOK 8 sentence(s) — `formatGuideQuote()`.
 
+**Source priority:**
+1. Store `guideQuote` + `guidePages` + `guideTopic` (bootstrap / AI)
+2. Runtime `lookupGuideQuote(q, analysis, storeEntry)` — why-aligned RAG
+3. Never stem-only `analysis.pageInfo` when it conflicts with whyBullets
+
+**Validate:** quote topic matches primary process in whyBullets (e.g. risk register → Monitor Risks, not Develop Team).
+
 ## HTML contract — Solution gốc (sourceSolution)
 
 When `sourceSolution` exists in store (CSV column P):
@@ -176,11 +193,24 @@ Placed in `#analysis` after card Đáp án, before Trích dẫn Guide.
       "D": "Letter of intent before formal contract — poor governance."
     },
     "guideQuote": "…"
+    "guidePages": [81],
+    "guideTopic": "Conduct Procurements"
   }
 }
 ```
 
 ---
+
+## Guide quote pipeline
+
+| Step | Command / function |
+|------|-------------------|
+| Why-aligned query | `buildGuideRagQuery(q, analysis, storeEntry)` |
+| Lookup | `lookupGuideQuote(q, analysis, storeEntry)` |
+| Bootstrap fill | `node scripts/bootstrap-pmp-teach-signals.js` |
+| Render | `resolveGuideQuote()` → `#analysis` Trích dẫn Guide |
+
+After bootstrap: `node scripts/generate-pmp-full-teach-lessons.js --force` and `node scripts/generate-pmp-full-from-teach.js --skip-bootstrap`.
 
 ## Validation
 
@@ -231,3 +261,4 @@ node scripts/generate-pmp-exam-latest-from-teach.js
 | Skip incomplete writes | `generate-pmp-full-teach-lessons.js` |
 | Grounding store | `pmp-teach-signals-store.js` |
 | Guide quote | `formatGuideQuote()` in `pmp-pmbok8-rag-pages.js` |
+| Why-aligned guide lookup | `buildGuideRagQuery()` · `lookupGuideQuote()` |

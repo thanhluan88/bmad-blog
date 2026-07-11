@@ -9,7 +9,7 @@ const {
   getPrimaryStemIssue,
 } = require("./pmp-option-reasoning");
 const { extractStemSignals, sanitizeSignalPhrases, validateSignalPhrases } = require("./pmp-teach-keywords");
-const { formatGuideQuote } = require("./pmp-pmbok8-rag-pages");
+const { formatGuideQuote, lookupGuideQuote } = require("./pmp-pmbok8-rag-pages");
 const { getStoredTeachGrounding } = require("./pmp-teach-signals-store");
 
 const ACTION_CONTRAST = {
@@ -574,8 +574,12 @@ function buildFlashcards(q, analysis, mapping) {
   const concept = conceptLabel(mapping, analysis.pageInfo);
   const process = formatFirstItem(mapping.processes || mapping.process);
   const principle = formatFirstItem(mapping.principles || mapping.principle);
-  const pages = analysis.pageInfo?.pages?.slice(0, 2).join(", ") || "";
-  const snippet = formatGuideQuote(stored?.pmbokConcept || analysis.pageInfo?.snippet || "", 220);
+  const guide = resolveGuideQuote(q, analysis);
+  const pages = guide?.pages?.slice(0, 2).join(", ") || analysis.pageInfo?.pages?.slice(0, 2).join(", ") || "";
+  const snippet = formatGuideQuote(
+    stored?.guideQuote || guide?.excerpt || stored?.pmbokConcept || "",
+    220,
+  );
   const excerpt = snippet.replace(/\s+/g, " ");
   const conceptBack = excerpt
     ? `<strong>${escapeHtml(concept)}</strong><br><span style="font-size:0.82rem">${escapeHtml(process)}${principle ? ` · ${escapeHtml(principle)}` : ""}</span><br><em style="font-size:0.8rem;color:var(--muted)">"${escapeHtml(excerpt)}"</em>${pages ? `<br>PMBOK 8, tr. ${escapeHtml(pages)}` : ""}`
@@ -669,17 +673,11 @@ function quizExplMap(q, analysisOrOptions) {
 
 function resolveGuideQuote(q, analysis) {
   const stored = getStoredTeachGrounding(q.id);
-  let excerpt = "";
-  if (stored?.guideQuote) {
-    excerpt = formatGuideQuote(stored.guideQuote, 600);
-  } else if (analysis.pageInfo?.snippet && analysis.pageInfo.snippet.length >= 40) {
-    excerpt = formatGuideQuote(analysis.pageInfo.snippet, 600);
+  const fromLookup = lookupGuideQuote(q, analysis, stored || {});
+  if (fromLookup?.excerpt && fromLookup.pages?.length) {
+    return fromLookup;
   }
-  if (!excerpt || excerpt.length < 40) return null;
-  const pages = analysis.pageInfo?.pages || [];
-  if (!pages.length) return null;
-  const topic = analysis.pageInfo?.topic || "";
-  return { excerpt, pages, topic };
+  return null;
 }
 
 /** Markdown explanation for quiz pages (exam-latest / full) from teach grounding. */
@@ -760,6 +758,7 @@ module.exports = {
   validateTeachGrounding,
   filterWhyBulletsForCorrect,
   buildTeachExplanationMarkdown,
+  resolveGuideQuote,
   buildDrillHtml,
   buildDrillScript,
   buildFlashcards,

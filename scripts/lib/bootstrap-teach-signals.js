@@ -21,6 +21,12 @@ const {
 } = require("./pmp-teach-keywords");
 const { mergeCsvGrounding } = require("./pmp-csv-solution-grounding");
 const { csvSolutionStats } = require("./pmp-csv-solutions");
+const {
+  loadCacheFile,
+  warmupPageCache,
+  lookupGuideQuote,
+  buildGuideRagQuery,
+} = require("./pmp-pmbok8-rag-pages");
 
 function parseCorrectKeys(correct) {
   const s = String(correct || "").trim().toUpperCase();
@@ -152,6 +158,9 @@ function bootstrapTeachSignalsStore({ questionsPath, storePath, useCsvSolutions 
   let added = 0;
   let kept = 0;
 
+  loadCacheFile();
+  const drafts = [];
+
   for (const q of questions) {
     const analysis = generateTeachAnalysis(q, { preserveOriginal: false });
     const profile = matchStemProfile(q.text);
@@ -168,9 +177,35 @@ function bootstrapTeachSignalsStore({ questionsPath, storePath, useCsvSolutions 
     if (useCsvSolutions) {
       entry = mergeCsvGrounding(q, entry, analysis);
     }
-    const hadValid = existing.ok && existingEntry;
-    store[String(q.id)] = { ...existingEntry, ...entry };
-    if (hadValid && validateSignalPhrases(q.text, existingEntry?.signalPhrases || []).ok) kept++;
+    drafts.push({
+      q,
+      analysis,
+      entry,
+      existingEntry,
+      hadValid: existing.ok && existingEntry,
+    });
+  }
+
+  const guideQueries = drafts.map((d) => buildGuideRagQuery(d.q, d.analysis, d.entry));
+  try {
+    const warm = warmupPageCache(guideQueries);
+    if (warm.warmed) console.log(`Guide RAG warmup: ${warm.warmed} new queries`);
+  } catch (err) {
+    console.warn(`Guide RAG warmup skipped: ${err.message?.slice(0, 120)}`);
+  }
+
+  let guideFilled = 0;
+  for (const d of drafts) {
+    const guide = lookupGuideQuote(d.q, d.analysis, d.entry);
+    if (guide?.excerpt) {
+      d.entry.guideQuote = guide.excerpt;
+      d.entry.guidePages = guide.pages;
+      d.entry.guideTopic = guide.topic || "";
+      if (guide.topic) d.entry.pmbokConcept = guide.topic;
+      guideFilled++;
+    }
+    store[String(d.q.id)] = { ...d.existingEntry, ...d.entry };
+    if (d.hadValid && validateSignalPhrases(d.q.text, d.existingEntry?.signalPhrases || []).ok) kept++;
     else added++;
   }
 
@@ -188,7 +223,16 @@ function bootstrapTeachSignalsStore({ questionsPath, storePath, useCsvSolutions 
     else failIds.push(q.id);
   }
 
-  return { storePath, questions: questions.length, added, kept, pass, failIds, csvStats };
+  return {
+    storePath,
+    questions: questions.length,
+    added,
+    kept,
+    pass,
+    failIds,
+    csvStats,
+    guideFilled,
+  };
 }
 
 module.exports = { bootstrapTeachSignalsStore };

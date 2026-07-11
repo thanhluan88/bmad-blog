@@ -19,6 +19,9 @@ if (result.csvStats) {
 }
 console.log(`Entries added/updated: ${result.added}, kept valid: ${result.kept}`);
 console.log(`Validation after bootstrap: ${result.pass}/${result.questions} pass`);
+if (result.guideFilled != null) {
+  console.log(`Guide quotes filled: ${result.guideFilled}/${result.questions}`);
+}
 if (result.failIds.length) {
   console.log(
     `Still failing: ${result.failIds.slice(0, 20).join(", ")}${result.failIds.length > 20 ? ` … +${result.failIds.length - 20}` : ""}`,

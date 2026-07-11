@@ -64,9 +64,15 @@ Store in `data/pmp-teach-signals.json`:
 - `sourceSolution` — raw column P (audit trail)
 - `whyBullets` — correct answer only (≥1)
 - `excludeReasons` — **every** wrong key
-- `guideQuote` — complete Guide sentence(s)
+- `guideQuote` — complete Guide sentence(s) for **Trích dẫn Guide**
+- `guidePages` — page number(s) for that quote (must match quote, not stem RAG)
+- `guideTopic` — process/principle label from quote (e.g. Monitor Risks)
 
-Bootstrap seeds from CSV: `node scripts/bootstrap-pmp-teach-signals.js` (calls `mergeCsvGrounding`).
+Bootstrap auto-fills `guideQuote` via **why-aligned RAG** (`buildGuideRagQuery` from `whyBullets` / `whyCorrect`), not stem-only meta.
+
+**Alignment rule:** If whyBullets mention *risk register* → guideQuote must come from **Monitor/Identify Risks**, not unrelated domain (Develop Team, Stakeholders overview, etc.).
+
+Bootstrap seeds from CSV: `node scripts/bootstrap-pmp-teach-signals.js` (calls `mergeCsvGrounding` + guide lookup).
 
 **Done when:** all wrong keys have `excludeReasons.{key}`.
 
@@ -107,7 +113,7 @@ Exam Latest: separate store — [REFERENCE.md#exam-latest](REFERENCE.md#exam-lat
 | Signal card | Required — keyword highlights in quiz |
 | Tại sao chọn | `whyBullets` — correct only |
 | Loại trừ | Every wrong key — from solution + PMBOK reasoning |
-| Trích dẫn Guide | PMBOK 8 complete sentence(s) |
+| Trích dẫn Guide | PMBOK 8 complete sentence(s) — **aligned with whyBullets** (same process/artifact) |
 | Solution gốc | `sourceSolution` from CSV column P when matched |
 
 **Omit:** `#drill`, `#traps`, Grounding card, hero stem duplicate.
@@ -117,6 +123,8 @@ Exam Latest: separate store — [REFERENCE.md#exam-latest](REFERENCE.md#exam-lat
 | Symptom | Action |
 |---------|--------|
 | Empty Tại sao / Loại trừ | Load column P; run grounding prompt; save store |
+| Tại sao vs Trích dẫn Guide lệch | Re-run bootstrap — `guideQuote` must use `buildGuideRagQuery(whyBullets)`, not stem `pageInfo` |
+| Guide quote mid-sentence / Licensed To | Re-bootstrap; engine rejects fragments via `isMidSentenceFragment` |
 | No Signal | Run signal prompt; re-generate |
 | CSV mismatch (correct key ≠ bank) | Skip CSV for that ID; reason from PMBOK only |
 | `--force` but unchanged | Console `incomplete` — validation blocked write |

@@ -17,6 +17,220 @@ function parseCorrectKeys(correct) {
   return s.split(/[^A-Z]+/).filter(Boolean);
 }
 
+const PMBOK_PROCESS_TERMS = [
+  "Implement Risk Responses",
+  "Monitor Risks",
+  "Plan Risk Management",
+  "Identify Risks",
+  "Develop Team",
+  "Manage Team",
+  "Plan Resources",
+  "Acquire Resources",
+  "Manage Stakeholder Engagement",
+  "Plan Stakeholder Engagement",
+  "Identify Stakeholders",
+  "Perform Integrated Change Control",
+  "Validate Scope",
+  "Control Scope",
+  "Define Scope",
+  "Determine Budget",
+  "Estimate Costs",
+  "Control Costs",
+  "Conduct Procurements",
+  "Plan Procurement Management",
+  "Manage Project Execution",
+  "Close Project or Phase",
+  "Plan Quality Management",
+  "Manage Quality",
+  "Plan Communications Management",
+  "Manage Communications",
+];
+
+const ARTIFACT_TERMS = [
+  "risk register",
+  "issue log",
+  "stakeholder register",
+  "change request",
+  "lessons learned",
+  "product backlog",
+  "definition of done",
+  "communications management plan",
+  "project management plan",
+  "acceptance criteria",
+  "contingency reserve",
+  "management reserve",
+];
+
+const PRINCIPLE_TERMS = [
+  "Lead accountably",
+  "Build an empowered culture",
+  "Focus on value",
+  "Embed quality",
+  "Be an accountable leader",
+  "Adopt a holistic view",
+];
+
+function extractGuideTermsFromText(text) {
+  const lower = String(text || "").toLowerCase();
+  const found = [];
+  for (const t of PMBOK_PROCESS_TERMS) {
+    if (lower.includes(t.toLowerCase())) found.push(t);
+  }
+  for (const t of ARTIFACT_TERMS) {
+    if (lower.includes(t)) found.push(t);
+  }
+  for (const p of PRINCIPLE_TERMS) {
+    if (lower.includes(p.toLowerCase())) found.push(p);
+  }
+  return [...new Set(found)];
+}
+
+/** RAG query aligned with whyBullets / whyCorrect — not stem-only meta. */
+function buildGuideRagQuery(q, analysis, teachEntry = {}) {
+  const whyBlob = [
+    teachEntry.whyCorrect,
+    ...(teachEntry.whyBullets || []),
+    analysis.whyCorrect,
+    analysis.summaryLine,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const fromWhy = extractGuideTermsFromText(whyBlob);
+  const p8 = analysis.pmbok8 || {};
+  const parts = [
+    ...fromWhy,
+    ...(p8.processes || []).slice(0, 2),
+    ...(p8.principles || []).slice(0, 1),
+  ];
+
+  if (/risk register|newly identified risk|undocumented risk|identify.*risk/i.test(whyBlob)) {
+    parts.unshift("Monitor Risks", "Identified risks", "risk register");
+  }
+  if (/stakeholder engagement|stakeholder register|resistant stakeholder/i.test(whyBlob)) {
+    parts.unshift("Manage Stakeholder Engagement", "stakeholder");
+  }
+  if (/retrospective|sprint|agile team|product owner|backlog/i.test(whyBlob)) {
+    parts.unshift("Build empowered culture", "Develop Team", "continuous improvement");
+  }
+  if (/acceptance criteria|quality standard|defect|validate scope/i.test(whyBlob)) {
+    parts.unshift("Validate Scope", "Embed quality", "acceptance criteria");
+  }
+
+  const words = [...new Set(parts.join(" ").split(/\s+/).filter((w) => w.length > 2))];
+  if (words.length >= 4) return words.slice(0, 18).join(" ");
+
+  const meta = {
+    domains: p8.domains || [],
+    processes: p8.processes || [],
+    principles: p8.principles || [],
+  };
+  return buildRagQuery(q, meta);
+}
+
+function isMidSentenceFragment(snippet) {
+  const s = cleanSnippet(snippet);
+  if (!s || s.length < 30) return true;
+  if (/^[a-z]/.test(s)) return true;
+  if (/^register\./i.test(s)) return true;
+  return false;
+}
+
+function guideHitRankScore(hit, queryTerms = []) {
+  let rank = hitRankScore(hit);
+  const s = cleanSnippet(hit.snippet || "");
+  if (isMidSentenceFragment(s)) rank += 50;
+  const lower = s.toLowerCase();
+  for (const term of queryTerms) {
+    if (term.length > 4 && lower.includes(term.toLowerCase())) rank -= 3;
+  }
+  if (/The process of/i.test(s)) rank -= 3;
+  if (/Identified risks are described/i.test(s)) rank -= 5;
+  if (/risk register/i.test(s)) rank -= 4;
+  return rank;
+}
+
+function pickBestGuideHit(hits, query = "") {
+  const terms = query.split(/\s+/).filter((w) => w.length > 3);
+  const ranked = [...(hits || [])].sort(
+    (a, b) => guideHitRankScore(a, terms) - guideHitRankScore(b, terms),
+  );
+  return ranked[0] || null;
+}
+
+function hitToGuideResult(hit, topicFallback) {
+  const page = Number(hit?.printed_page ?? hit?.page);
+  const snippet = cleanSnippet(hit?.snippet);
+  if (!Number.isInteger(page) || page < 1 || page > 401) {
+    return null;
+  }
+  const excerpt = formatGuideQuote(snippet, 600);
+  if (!excerpt || excerpt.length < 40 || isMidSentenceFragment(excerpt)) {
+    return null;
+  }
+  const topic = topicFromSnippet(hit.snippet, topicFallback);
+  return {
+    excerpt,
+    pages: [page],
+    topic,
+    pdfRef: `${PDF_NAME}, tr. ${page} — ${topic}`,
+    snippet,
+  };
+}
+
+/** Guide quote aligned with Tại sao chọn — uses store, then why-aligned RAG, then stem RAG. */
+function lookupGuideQuote(q, analysis, teachEntry = null) {
+  const stored = teachEntry || {};
+  if (stored.guideQuote && stored.guideQuote.length >= 40) {
+    const excerpt = formatGuideQuote(stored.guideQuote, 600);
+    const pages = Array.isArray(stored.guidePages)
+      ? stored.guidePages.filter((p) => Number.isInteger(p) && p > 0)
+      : [];
+    if (excerpt.length >= 40 && pages.length) {
+      return {
+        excerpt,
+        pages,
+        topic: stored.guideTopic || "",
+        pdfRef: pages.length
+          ? `${PDF_NAME}, tr. ${pages.join(", ")}${stored.guideTopic ? ` — ${stored.guideTopic}` : ""}`
+          : null,
+        fromStore: true,
+      };
+    }
+  }
+
+  const p8 = analysis.pmbok8 || {};
+  const topicFallback = buildTopicLabel(p8.domains || [], p8.processes || []);
+  const guideQuery = buildGuideRagQuery(q, analysis, stored);
+  const guideHit = pageCache.get(guideQuery);
+  let best = pickBestGuideHit(guideHit?.hits, guideQuery);
+  let result = best ? hitToGuideResult(best, topicFallback) : null;
+
+  if (!result) {
+    const stemQuery = buildRagQuery(q, {
+      domains: p8.domains || [],
+      processes: p8.processes || [],
+      principles: p8.principles || [],
+    });
+    const stemHit = pageCache.get(stemQuery);
+    best = pickBestGuideHit(stemHit?.hits, guideQuery);
+    result = best ? hitToGuideResult(best, topicFallback) : null;
+  }
+
+  if (!result) return null;
+  return { ...result, query: guideQuery, fromStore: false };
+}
+
+function collectGuideQueriesFromQuestions(questions, getEntry) {
+  return questions.map((q) => {
+    const analysis = getEntry ? getEntry(q)?.analysis : null;
+    const entry = getEntry ? getEntry(q)?.entry : {};
+    if (analysis) return buildGuideRagQuery(q, analysis, entry);
+    const meta = { domains: ["Governance"], processes: [], principles: [] };
+    return buildRagQuery(q, meta);
+  });
+}
+
 function buildRagQuery(q, meta) {
   const { domains, processes, principles } = meta;
   const correctKeys = parseCorrectKeys(q.correct);
@@ -72,6 +286,7 @@ function isLowValueSnippet(snippet) {
   const s = (snippet || "").replace(/\s+/g, " ").trim();
   const lower = s.toLowerCase();
   if (!s) return true;
+  if (isMidSentenceFragment(s)) return true;
   if (/performance domain addresses the processes/.test(lower)) return true;
   if (/section 2 – project management performance domains/.test(lower)) return true;
   if (/processes overview/i.test(lower) && /figure 2-\d+/i.test(lower)) return true;
@@ -164,6 +379,7 @@ function warmupPageCache(queries, options = {}) {
 function cleanSnippet(snippet) {
   return String(snippet || "")
     .replace(/\s+/g, " ")
+    .replace(/^\d+\s+Section\s+\d+\s*[–-]\s*[^.]*\.?\s*/i, "")
     .replace(/Licensed To:[\s\S]*$/i, "")
     .replace(/This copy is a PMI Member benefit[\s\S]*$/i, "")
     .replace(/Figure \d+-\d+\.[\s\S]*$/i, "")
@@ -233,9 +449,12 @@ module.exports = {
   CACHE_PATH,
   RAG_TOP_K,
   buildRagQuery,
+  buildGuideRagQuery,
   buildTopicLabel,
   isLowValueSnippet,
+  isMidSentenceFragment,
   pickBestHit,
+  pickBestGuideHit,
   topicFromSnippet,
   cleanSnippet,
   formatGuideQuote,
@@ -243,6 +462,9 @@ module.exports = {
   saveCacheFile,
   warmupPageCache,
   lookupPmbokPages,
+  lookupGuideQuote,
+  extractGuideTermsFromText,
+  collectGuideQueriesFromQuestions,
   collectQueriesFromQuestions,
   clearPageCache,
 };
