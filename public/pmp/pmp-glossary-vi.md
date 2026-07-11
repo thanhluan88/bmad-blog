@@ -219,6 +219,26 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | **Đúng khi** | Lessons đã ghi, cần team nhớ & áp dụng; handover ops |
 | **Sai khi** | Retrospective superficial → cần **categorize patterns**, không phải storytelling |
 
+### Excerpt
+| | |
+|---|---|
+| **Nghĩa** | **Đoạn trích ngắn** — phần rút gọn từ tài liệu/báo cáo dài |
+| **Phát âm** | /ˈeksərpt/ — *ék-sơpt* (n.) · /ɪkˈsɜːrpt/ — *ik-sơpt* (v.) |
+| **≈** | Summary · extract · relevant section |
+| **PMP** | **Tailor communications** — PM chuẩn bị excerpt phù hợp audience |
+| **≠ Full report** | Excerpt = rút gọn có chủ đích · WPR = chi tiết đầy đủ |
+| **≠ Brief mention** | Brief mention trong report ≠ xử lý đủ formal process |
+
+| Signal | Đáp |
+|--------|-----|
+| Executives concise · teams task-level detail (Q418) | **Tailor** artifacts by group — consistent data → A |
+| Reports too technical · business questions (Q34) | **Update comms plan** — tailor format → C |
+| Raw logs · stakeholder extract themselves (Q34 D) | ✗ — PM tailor, không dump data |
+| Single report · extract what they need (Q418 B) | ✗ — one-size-fits-all |
+| Brief mention of new risks (Q982) | **Document & analyze** ngay → C |
+
+**Bẫy ✗:** Raw logs · Single mega-report · Brief mention only · Separate reports không align
+
 ### Cadence
 | | |
 |---|---|
