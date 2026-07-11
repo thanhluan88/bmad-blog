@@ -1096,19 +1096,46 @@
 
     <!-- Financial Measures -->
     <section id="financial">
-      <h3>Financial Measures of Project Value</h3>
+      <h3>Financial Measures of Project Value — Chỉ số tài chính đánh giá giá trị dự án</h3>
+      <p style="margin-bottom:0.75rem;font-size:0.9rem;line-height:1.6;">Khi đề bài yêu cầu <strong>so sánh/chọn dự án</strong> hoặc <strong>đánh giá business case</strong>, dùng các chỉ số dưới đây. Nhớ quy tắc PMP: với NPV, IRR, ROI, BCR thì <strong>càng cao càng tốt</strong>; với Payback Period thì <strong>càng ngắn càng tốt</strong>. NPV &gt; 0 và BCR &gt; 1 thường là điều kiện tối thiểu để dự án đáng làm.</p>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th class="th-biz">Metric</th><th class="th-biz">Formula / Key fact</th><th class="th-biz">Pick project with…</th></tr></thead>
+          <thead><tr><th class="th-biz">Metric</th><th class="th-biz">Formula / Key fact</th><th class="th-biz">Pick project with…</th><th class="th-biz">Giải thích</th></tr></thead>
           <tbody>
-            <tr><td><strong>Net Present Value (NPV)</strong></td><td>NPV = Σ [Rt / (1+i)^t] − Initial Investment</td><td class="positive">Higher NPV ↑</td></tr>
-            <tr><td><strong>Internal Rate of Return (IRR)</strong></td><td>Discount rate making NPV = 0</td><td class="positive">Higher IRR ↑ (e.g. 12% > 9%)</td></tr>
-            <tr><td><strong>Return on Investment (ROI)</strong></td><td>(Benefit − Cost) / Cost × 100%</td><td class="positive">Higher ROI ↑</td></tr>
-            <tr><td><strong>Payback Period (PBP)</strong></td><td>Time to recover initial investment</td><td class="negative">Lower PBP ↓</td></tr>
-            <tr><td><strong>Benefit-Cost Ratio (BCR)</strong></td><td>BCR = Total Benefit / Cost (e.g. $5M / $2.5M = 2:1)</td><td class="positive">Higher BCR ↑ (&gt;1 is good)</td></tr>
+            <tr>
+              <td><strong>Net Present Value (NPV)</strong><br><span style="font-size:0.82rem;color:var(--muted)">Giá trị hiện tại ròng</span></td>
+              <td>NPV = Σ [Rt / (1+i)^t] − Initial Investment</td>
+              <td class="positive">Higher NPV ↑</td>
+              <td style="font-size:0.88rem;line-height:1.55">Quy đổi mọi dòng tiền thu/chi tương lai về <strong>giá trị hiện tại</strong> (chiết khấu theo lãi suất <em>i</em>), rồi trừ vốn đầu tư ban đầu.<br><strong>NPV &gt; 0:</strong> dự án tạo giá trị — nên chọn.<br><strong>NPV &lt; 0:</strong> tổng thu không bù chi — từ chối.<br>So sánh 2 dự án → chọn <strong>NPV cao hơn</strong>.</td>
+            </tr>
+            <tr>
+              <td><strong>Internal Rate of Return (IRR)</strong><br><span style="font-size:0.82rem;color:var(--muted)">Tỷ suất hoàn vốn nội bộ</span></td>
+              <td>Discount rate making NPV = 0</td>
+              <td class="positive">Higher IRR ↑ (e.g. 12% &gt; 9%)</td>
+              <td style="font-size:0.88rem;line-height:1.55">Lãi suất chiết khấu khiến <strong>NPV = 0</strong> — coi như “lợi suất” nội bộ của dự án.<br>IRR cao = dự án sinh lời tốt hơn so với chi phí vốn.<br>Thường so với <strong>ngưỡng tối thiểu</strong> của tổ chức (hurdle rate): IRR &gt; ngưỡng → chấp nhận.<br>Chọn dự án có <strong>IRR cao hơn</strong> (vd. 12% tốt hơn 9%).</td>
+            </tr>
+            <tr>
+              <td><strong>Return on Investment (ROI)</strong><br><span style="font-size:0.82rem;color:var(--muted)">Tỷ suất sinh lời / hoàn vốn</span></td>
+              <td>(Benefit − Cost) / Cost × 100%</td>
+              <td class="positive">Higher ROI ↑</td>
+              <td style="font-size:0.88rem;line-height:1.55">Lợi nhuận ròng chia cho chi phí bỏ ra, tính theo <strong>phần trăm</strong>.<br>ROI 25% nghĩa là mỗi $1 chi phí mang lại $0,25 lợi nhuận (ngoài hoàn vốn).<br>Dễ hiểu với sponsor nhưng <strong>không tính thời gian</strong> như NPV — đề thi hay dùng kèm NPV/IRR.<br>Chọn <strong>ROI cao hơn</strong>.</td>
+            </tr>
+            <tr>
+              <td><strong>Payback Period (PBP)</strong><br><span style="font-size:0.82rem;color:var(--muted)">Thời gian hoàn vốn</span></td>
+              <td>Time to recover initial investment</td>
+              <td class="negative">Lower PBP ↓</td>
+              <td style="font-size:0.88rem;line-height:1.55">Thời gian cần để <strong>thu hồi đủ vốn đầu tư ban đầu</strong> từ dòng tiền dự án.<br>PBP ngắn = rủi ro thanh khoản thấp hơn, vốn quay vòng nhanh.<br><strong>Ngoại lệ duy nhất:</strong> chỉ số này <em>càng thấp càng tốt</em> (khác NPV/IRR/ROI/BCR).<br>Chọn dự án có <strong>PBP ngắn hơn</strong>.</td>
+            </tr>
+            <tr>
+              <td><strong>Benefit-Cost Ratio (BCR)</strong><br><span style="font-size:0.82rem;color:var(--muted)">Tỷ lệ lợi ích / chi phí</span></td>
+              <td>BCR = Total Benefit / Cost (e.g. $5M / $2.5M = 2:1)</td>
+              <td class="positive">Higher BCR ↑ (&gt;1 is good)</td>
+              <td style="font-size:0.88rem;line-height:1.55">Tổng lợi ích chia tổng chi phí.<br><strong>BCR &gt; 1:</strong> lợi ích lớn hơn chi phí — dự án khả thi (vd. 2:1 = lợi ích gấp đôi chi phí).<br><strong>BCR &lt; 1:</strong> chi phí cao hơn lợi ích — không nên làm.<br>Chọn <strong>BCR cao hơn</strong>; thường dùng khi xếp hạng nhiều dự án cùng portfolio.</td>
+            </tr>
           </tbody>
         </table>
       </div>
+      <p style="margin-top:0.65rem;font-size:0.82rem;color:var(--muted);line-height:1.55"><strong>Mẹo thi PMP:</strong> Nếu câu hỏi cho số liệu NPV/IRR/BCR/PBP — áp dụng quy tắc trên trực tiếp. Nếu mâu thuẫn (NPV cao nhưng PBP dài), ưu tiên <strong>NPV</strong> và chiến lược dài hạn trừ khi đề nhấn mạnh “thu hồi vốn nhanh”.</p>
     </section>
 
     <!-- Prioritization -->
