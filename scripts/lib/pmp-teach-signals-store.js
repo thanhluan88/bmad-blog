@@ -65,6 +65,7 @@ function parseStoreEntry(entry) {
     excludeReasons,
     pmbokConcept: String(entry.pmbokConcept || "").trim(),
     guideQuote: String(entry.guideQuote || "").trim(),
+    sourceSolution: String(entry.sourceSolution || "").trim(),
   };
 }
 

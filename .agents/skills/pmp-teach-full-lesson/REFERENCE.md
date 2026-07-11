@@ -143,6 +143,19 @@ All signal content **English**.
 
 Complete PMBOK 8 sentence(s) — `formatGuideQuote()`.
 
+## HTML contract — Solution gốc (sourceSolution)
+
+When `sourceSolution` exists in store (CSV column P):
+
+```html
+<div class="card source">
+  <h4>Solution gốc (CSV — cột P)</h4>
+  <p class="source-solution">…full explanation_text…</p>
+</div>
+```
+
+Placed in `#analysis` after card Đáp án, before Trích dẫn Guide.
+
 ---
 
 ## Data store example
@@ -178,6 +191,7 @@ Complete PMBOK 8 sentence(s) — `formatGuideQuote()`.
 - [ ] Loại trừ: **every** wrong key
 - [ ] `validateTeachGrounding()` passes before write
 - [ ] Trích dẫn Guide: complete sentence(s)
+- [ ] Solution gốc card when CSV `sourceSolution` present
 
 ---
 

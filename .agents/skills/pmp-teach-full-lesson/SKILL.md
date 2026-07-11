@@ -108,6 +108,7 @@ Exam Latest: separate store — [REFERENCE.md#exam-latest](REFERENCE.md#exam-lat
 | Tại sao chọn | `whyBullets` — correct only |
 | Loại trừ | Every wrong key — from solution + PMBOK reasoning |
 | Trích dẫn Guide | PMBOK 8 complete sentence(s) |
+| Solution gốc | `sourceSolution` from CSV column P when matched |
 
 **Omit:** `#drill`, `#traps`, Grounding card, hero stem duplicate.
 

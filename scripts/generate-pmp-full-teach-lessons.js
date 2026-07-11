@@ -7,6 +7,7 @@ const path = require("path");
 const { generateTeachAnalysis } = require("./lib/pmp-pmbok8-generator");
 const { loadCacheFile, formatGuideQuote } = require("./lib/pmp-pmbok8-rag-pages");
 const { getStoredTeachGrounding } = require("./lib/pmp-teach-signals-store");
+const { stripSolutionPrefix } = require("./lib/pmp-csv-solutions");
 const {
   highlightExamCues,
   highlightQuizStem,
@@ -152,6 +153,18 @@ function guideQuoteText(q, analysis) {
   return "";
 }
 
+function renderSourceSolutionCard(q) {
+  const stored = getStoredTeachGrounding(q.id);
+  const raw = stored?.sourceSolution;
+  if (!raw || raw.length < 40) return "";
+  const body = stripSolutionPrefix(raw).replace(/\s+/g, " ").trim();
+  return `<div class="card source">
+            <h4>Solution gốc (CSV — cột P)</h4>
+            <p class="source-solution" style="margin:0;font-size:0.88rem;line-height:1.65">${highlightReasoning(body)}</p>
+            <p style="margin:0.5rem 0 0;font-size:0.78rem;color:var(--muted)">Nguồn: all_questions_flat · explanation_text — reference trước khi reasoning PMBOK 8.</p>
+          </div>`;
+}
+
 function renderPmbok8Insight(q, analysis) {
   const pageInfo = analysis.pageInfo;
   const excerpt = guideQuoteText(q, analysis);
@@ -167,7 +180,8 @@ function renderPmbok8Insight(q, analysis) {
 
 function renderAnalysisSection(q, analysis) {
   const refs = parseSection(analysis.explanation || "", "Tham khảo");
-  let html = renderPmbok8Insight(q, analysis);
+  let html = renderSourceSolutionCard(q);
+  html += renderPmbok8Insight(q, analysis);
   if (refs) {
     html += `<p style="font-size:0.86rem;color:var(--muted);margin:0">${mdInline(refs).replace(/\n/g, "<br>")}</p>`;
   }
@@ -419,6 +433,7 @@ function renderLesson(q, prev, next) {
     .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
+    .card.source { border-left: 4px solid #7c3aed; background: #f5f3ff; }
     .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
     .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
