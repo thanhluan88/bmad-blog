@@ -85,19 +85,8 @@ function buildWhyBulletsFromCsv(q, explanationText, correctKey) {
   const { whyPart } = splitCsvSolutionParts(explanationText);
   if (!whyPart) return [];
 
-  const bullets = [];
-  const lead = whyPart.replace(/\s+/g, " ").trim();
-  bullets.push(
-    `${correctKey} is correct (reference solution): ${lead.slice(0, 280)}${lead.length > 280 ? "…" : ""}`,
-  );
-
-  const afterCorrect = lead.replace(/^([A-F])\.\s*/i, "").trim();
-  const secondSentence = afterCorrect.split(/(?<=[.!?])\s+/)[1];
-  if (secondSentence && secondSentence.length > 30) {
-    bullets.push(secondSentence.slice(0, 220));
-  }
-
-  return bullets.slice(0, 4);
+  const verbatim = whyPart.replace(/\s+/g, " ").trim();
+  return verbatim ? [verbatim] : [];
 }
 
 function buildWhyCorrectFromCsv(explanationText) {

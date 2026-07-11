@@ -18,20 +18,24 @@ Các đáp án sai:
 {for each wrong key}
 {key}. {optionText}
 
-Dựa trên reference solution TRÊN và PMBOK 8 (process, principle, Guide excerpt nếu có),
-reasoning ra bài giảng — không copy nguyên văn solution nếu lệch PMBOK 8.
+Dựa trên reference solution TRÊN, trích dữ liệu cho bài giảng.
+
+**Trích NGUYÊN VĂN từ cột P** (không paraphrase, không thêm PMBOK):
+- `whyBullets` — phần **why correct**: từ sau `Solution: {key}.` đến trước `The other answer choices are incorrect`
+- `excludeReasons` — **mỗi wrong key**: câu loại trừ nguyên văn từ phần sau marker đó
+
+Signal + `guideHits` vẫn align PMBOK 8 (xem [RAG.md](RAG.md)).
 
 Trả về JSON:
 {
-  "whyCorrect": "why {correctKey} — PMBOK 8 aligned (EN or VI)",
+  "whyCorrect": "same verbatim text as whyBullets[0] when from CSV",
   "excludeReasons": {
-    "A": "one entry per WRONG key only",
+    "A": "verbatim sentence from column P for wrong A",
     "C": "…",
     "D": "…"
   },
   "whyBullets": [
-    "Why {correctKey} is correct: …",
-    "PMBOK 8 process / principle …"
+    "verbatim why-correct excerpt from column P"
   ],
   "pmbokConcept": "short excerpt for flashcard",
   "guideHits": [
@@ -49,12 +53,10 @@ Trả về JSON:
 ```
 
 **Separation rule:**
-- `whyBullets` → **correct answer only**
-- `excludeReasons` → **every wrong key** — seed from CSV "other answer choices are incorrect", refine with PMBOK 8
+- `whyBullets` → **verbatim** why-correct từ cột P — **không** gộp wrong-key prose
+- `excludeReasons` → **verbatim** mỗi wrong key từ cột P
 
-If `sourceSolution` missing: omit first block; reason from PMBOK 8 + stem only.
-
-`guideHits` from step 3 — see [RAG.md](RAG.md). Align query with `whyBullets` terms.
+If `sourceSolution` missing: reason from PMBOK 8 + stem for why/exclude only.
 
 ---
 

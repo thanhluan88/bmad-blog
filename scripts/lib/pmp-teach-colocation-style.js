@@ -704,6 +704,13 @@ function buildTeachExplanationMarkdown(q, analysis) {
   lines.push("**Vì sao chọn đáp án này**");
   if (grounding.conclusion) lines.push(grounding.conclusion);
   for (const b of whyBullets) lines.push(`- ${b}`);
+  if (excludeRows.length) {
+    lines.push("");
+    lines.push("**Loại trừ phương án khác**");
+    for (const row of excludeRows) {
+      lines.push(`- **${row.key}:** ${row.reason}`);
+    }
+  }
   if (grounding.signalPhrases?.length || grounding.signalAnswer) {
     lines.push("");
     lines.push("**Signal trong stem**");
@@ -731,13 +738,6 @@ function buildTeachExplanationMarkdown(q, analysis) {
       lines.push(
         `— PMBOK 8, tr. ${guide.pages.join(", ")}${guide.topic ? ` (${guide.topic})` : ""}`,
       );
-    }
-  }
-  if (excludeRows.length) {
-    lines.push("");
-    lines.push("**Loại trừ phương án khác**");
-    for (const row of excludeRows) {
-      lines.push(`- **${row.key}:** ${row.reason}`);
     }
   }
   if (pages.length) {

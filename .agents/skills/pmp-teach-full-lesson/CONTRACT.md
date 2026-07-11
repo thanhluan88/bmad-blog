@@ -25,8 +25,8 @@ Solution: B. {correct}. {why correct}. The other answer choices are incorrect. {
 |-------|--------|------------|
 | `sourceSolution` | Column P raw | Solution gốc card (teach only) |
 | `signalPhrases` + `signalAnswer` | Signal prompt — stem only | Signal card (English) |
-| `whyBullets` | Grounding — **correct key only** | Tại sao chọn `<ul>` |
-| `excludeReasons` | Grounding — **every wrong key** | Loại trừ table |
+| `whyBullets` | Column P **verbatim** (why-correct part) | Vì sao chọn đáp án này |
+| `excludeReasons` | Column P **verbatim** (exclude part) | Loại trừ phương án khác |
 | `guideHits[]` | RAG step 3 | Trích dẫn Guide (up to 3) |
 | `guideQuote` | `guideHits[0].excerpt` | Primary Guide fallback |
 | `guidePages` / `guideTopic` | From hit #1 | Guide header metadata |
@@ -39,13 +39,12 @@ Solution: B. {correct}. {why correct}. The other answer choices are incorrect. {
     "signalPhrases": ["well-defined remaining scope", "hold contractors accountable"],
     "signalAnswer": "Well-defined scope → FFP minimizes buyer cost risk (Procurement).",
     "whyBullets": [
-      "B is correct: FFP when scope is well-defined — accountability at agreed price.",
-      "PMBOK 8: Conduct Procurements — fixed price when requirements are clear."
+      "B. Recommend a firm-fixed-price contract. A firm-fixed-price contract is appropriate when the scope is well-defined."
     ],
     "excludeReasons": {
-      "A": "T&M when scope uncertain — here scope is well-defined.",
-      "C": "Cost-plus shifts risk to buyer — scope already clear.",
-      "D": "Letter of intent before formal contract — poor governance."
+      "A": "A time-and-materials contract is used when the scope is uncertain.",
+      "C": "A cost-plus contract shifts cost risk to the buyer.",
+      "D": "Issuing a letter of intent before finalizing contract terms creates legal ambiguity."
     },
     "guideHits": [
       { "page": 81, "topic": "Conduct Procurements", "excerpt": "…", "query": "firm-fixed-price well-defined scope" }
@@ -70,10 +69,12 @@ Order: `#intro` → `#question` → `#analysis` → `#flashcards` → `#cheatshe
 | Hero `#intro` | — | Title + summary + badges; **no** full stem |
 | Quiz `#question` | `signalPhrases` | `highlightQuizStem` — short English phrases only |
 | Signal card | `signalPhrases`, `signalAnswer` | All content English |
-| Tại sao chọn | `whyBullets` | Correct key only; `filterWhyBulletsForCorrect()` |
-| Solution gốc | `sourceSolution` | After Đáp án card, before Guide; when CSV matched |
+| **Solution reasoning block** | `whyBullets` + `excludeReasons` | **Liền kề** — Vì sao rồi Loại trừ, trước Guide |
+| Vì sao chọn đáp án này | `whyBullets` | **Nguyên văn** từ cột P (why-correct) |
+| Loại trừ phương án khác | `excludeReasons` | **Nguyên văn** từ cột P; row per wrong key |
+| Đáp án card | — | Correct label |
 | Trích dẫn Guide | `guideHits` | `PMBOK 8, tr. {page}` + excerpt; target 3 distinct pages |
-| Loại trừ | `excludeReasons` | Row per **every** wrong option |
+| Solution gốc | `sourceSolution` | After Guide; when CSV matched |
 
 Guide render priority: store `guideHits` → `lookupGuideHits()` → single `guideQuote` fallback.
 
@@ -88,7 +89,7 @@ Cite **printed `page`** metadata — not `file_page`, not PDF line numbers.
 | Teach `#analysis` | `pmp-teach-full-q{id}.html` | `generate-pmp-full-teach-lessons.js` |
 | Kiểm tra Solution | `pmp-full-questions.html` `#result-{id}` | `generate-pmp-full-from-teach.js` |
 
-Must match per ID: Tại sao, Loại trừ, Trích dẫn Guide.
+Must match per ID: Vì sao chọn đáp án này + Loại trừ phương án khác (liền kề), Trích dẫn Guide.
 
 Spot-check: `pmp-full-questions.html#q-{id}` vs `pmp-teach-full-q{id}.html#analysis`.
 
@@ -99,8 +100,9 @@ Spot-check: `pmp-full-questions.html#q-{id}` vs `pmp-teach-full-q{id}.html#analy
 - [ ] `sourceSolution` present when CSV row matched
 - [ ] Hero **no** full question stem
 - [ ] Signal: 2–5 short keywords + `signalAnswer` (English)
-- [ ] Tại sao: `whyBullets` non-empty — correct only
-- [ ] Loại trừ: **every** wrong key
+- [ ] Vì sao: `whyBullets` **verbatim** từ cột P when CSV matched
+- [ ] Loại trừ: **every** wrong key, **verbatim** từ cột P
+- [ ] Vì sao + Loại trừ **liền kề** trước Trích dẫn Guide
 - [ ] `validateTeachGrounding()` passes before write
 - [ ] Trích dẫn Guide: ≥1 hit, target 3 — `guideHits` with printed `page`
 - [ ] Kiểm tra Solution matches teach `#analysis` for same ID

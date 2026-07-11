@@ -59,7 +59,9 @@ Follow [RAG.md](RAG.md). Query from solution **why-correct** terms — not stem-
 
 Run [PROMPTS.md#grounding](PROMPTS.md#grounding) + [PROMPTS.md#signal](PROMPTS.md#signal) → write store entry per [CONTRACT.md#store-fields](CONTRACT.md#store-fields).
 
-**Done when:** `whyBullets` non-empty; every wrong key in `excludeReasons`; `guideHits.length` ≥ 1.
+`whyBullets` + `excludeReasons` = **nguyên văn** từ cột P; hai mục **liền kề** trong output (trước Guide).
+
+**Done when:** `whyBullets` verbatim; every wrong key in `excludeReasons` verbatim; `guideHits.length` ≥ 1.
 
 ### 5. Validate
 
@@ -99,7 +101,8 @@ Commit when `1123 written, 0 incomplete` and spot-check Kiểm tra = teach.
 
 | Symptom | Fix |
 |---------|-----|
-| Empty Tại sao / Loại trừ | Column P → grounding prompt → store |
+| Empty Vì sao / Loại trừ | Parse verbatim từ cột P → `mergeCsvGrounding()` → store |
+| Paraphrase thay vì nguyên văn | `whyBullets`/`excludeReasons` phải match cột P word-for-word |
 | Tại sao ≠ Guide | Re-bootstrap; query RAG from `whyBullets` terms |
 | Kiểm tra ≠ teach | Run `generate-pmp-full-from-teach.js` after teach regen |
 | No Signal | Signal prompt; `validateSignalPhrases` |
