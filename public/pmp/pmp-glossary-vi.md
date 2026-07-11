@@ -769,6 +769,28 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 
 **Bẫy ✗:** Pay claim không kiểm contract · Issue log only khi stem hỏi resolve · Mediation/arbitration khi no external parties · Litigation đầu tiên
 
+### Remedies · Remediation
+| | |
+|---|---|
+| **Remedies** | **Biện pháp khắc phục hợp đồng** — penalties, damages, termination khi breach |
+| **Remediation** | **Khắc phục/sửa chữa** — fix gap, defect, noncompliance (skill, quality, security) |
+| **≠ Claim** | Claim = seller đòi thêm · Remedy = enforce khi performance fail |
+| **≠ CR** | Remediation có thể cần change control nếu scope/cost đổi |
+
+**Remedies (contract):** Financial penalties · Corrective action · Termination · Withhold payment
+
+**Remediation (gaps):** Skill gap (Q30) · Quality noncompliance (Q782) · Compliance/security (Q885) · Governance weakness (Q1033)
+
+**PM làm gì:**
+| Signal | Đáp |
+|--------|-----|
+| Apply remedies / penalties (Q667) | **Structured performance review** trước → D |
+| Vendor noncompliance (Q782) | **Impact analysis FIRST** → A |
+| Skill gap | Gap analysis + remediation strategies → A |
+| Compliance under remediation | **Report transparently** — không hide → B |
+
+**Bẫy ✗:** Enforce penalties vội · Postpone chỉ vì sponsor · Legal/replace vendor trước impact analysis · Defer compliance · Hide weakness
+
 ---
 
 ## 8. Kỹ thuật & Công cụ
@@ -1164,6 +1186,10 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | contractor submits a claim, additional costs | Claims administration — negotiate first |
 | resolve quickly, no external parties | **Negotiation** — not mediation/arbitration |
 | escalation and claims procedures in contract | Follow contract · structured review |
+| apply remedies, enforce penalties, milestone miss | Structured performance review (Q667) |
+| remediation strategies, skill gap, competency | Gap analysis + collaborate fix (Q30) |
+| compliance under remediation, governance review | Report transparently — không hide |
+| noncompliance, vendor fail quality | Impact analysis FIRST (Q782) |
 | potential claims, contract negotiations | Maintain records + claims management |
 | unexpected site conditions, vendor dispute | Negotiate → escalate per contract |
 | folk wisdom | Không data-driven — thường sai |
