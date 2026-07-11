@@ -56,19 +56,21 @@ Trả về JSON:
     "PMBOK 8 process / principle …"
   ],
   "pmbokConcept": "short excerpt for flashcard",
-  "guideQuote": "complete sentence(s) from Guide for Trích dẫn block",
+  "guideHits": [
+    {
+      "page": 137,
+      "topic": "Monitor Risks",
+      "excerpt": "complete sentence(s) from RAG chunk",
+      "query": "why-aligned search query"
+    }
+  ],
+  "guideQuote": "primary excerpt — same as guideHits[0].excerpt",
   "guidePages": [137],
   "guideTopic": "Monitor Risks"
 }
 ```
 
-**Guide quote alignment (required):**
-1. Extract process/artifact terms from `whyBullets` + `whyCorrect` (risk register, Monitor Risks, Validate Scope…).
-2. RAG query = those terms + primary process — **not** stem keyword meta alone.
-3. Reject snippets: mid-sentence fragments, Licensed To, Figure overview.
-4. `guideTopic` / page citation must match the quote block — do not reuse stem `pageInfo` if different.
-
-Engine: `lookupGuideQuote()` in `pmp-pmbok8-rag-pages.js` · bootstrap fills store automatically.
+**Guide hits (required ≥1, target 3):** from skill `rag-local-pmp` — see [RAG.md](RAG.md). Align query with `whyBullets` terms.
 
 **Separation rule:**
 - `whyBullets` → **correct answer only**
@@ -151,14 +153,27 @@ All signal content **English**.
 
 ## HTML contract — Trích dẫn Guide
 
-Complete PMBOK 8 sentence(s) — `formatGuideQuote()`.
+Up to **3** RAG excerpts — `resolveGuideHits()` / `guideHits[]`.
+
+```html
+<div class="card info">
+  <h4>Trích dẫn Guide</h4>
+  <div>
+    <p><strong>1.</strong> PMBOK 8, tr. 137 — Monitor Risks</p>
+    <p>"A risk register is a repository…"</p>
+  </div>
+  <!-- 2., 3. -->
+</div>
+```
 
 **Source priority:**
-1. Store `guideQuote` + `guidePages` + `guideTopic` (bootstrap / AI)
-2. Runtime `lookupGuideQuote(q, analysis, storeEntry)` — why-aligned RAG
-3. Never stem-only `analysis.pageInfo` when it conflicts with whyBullets
+1. Store `guideHits` (bootstrap / agent RAG)
+2. `lookupGuideHits()` at render
+3. Fallback `guideQuote` single hit
 
-**Validate:** quote topic matches primary process in whyBullets (e.g. risk register → Monitor Risks, not Develop Team).
+Cite **printed page** (`page` metadata) + excerpt — not `file_page`, not PDF line numbers.
+
+**Validate:** topics match `whyBullets` process/artifact.
 
 ## HTML contract — Solution gốc (sourceSolution)
 
@@ -192,7 +207,10 @@ Placed in `#analysis` after card Đáp án, before Trích dẫn Guide.
       "C": "Cost-plus shifts risk to buyer — scope already clear.",
       "D": "Letter of intent before formal contract — poor governance."
     },
-    "guideQuote": "…"
+    "guideHits": [
+      { "page": 81, "topic": "Conduct Procurements", "excerpt": "…", "query": "firm-fixed-price well-defined scope" }
+    ],
+    "guideQuote": "…",
     "guidePages": [81],
     "guideTopic": "Conduct Procurements"
   }
@@ -201,16 +219,41 @@ Placed in `#analysis` after card Đáp án, before Trích dẫn Guide.
 
 ---
 
+## Sync Kiểm tra ↔ teach lesson
+
+Both read **`data/pmp-teach-signals.json`** and **`buildTeachExplanationMarkdown()`** / `composeGrounding()`.
+
+| Surface | File | Trigger |
+|---------|------|---------|
+| Teach `#analysis` | `pmp-teach-full-q{id}.html` | `generate-pmp-full-teach-lessons.js` |
+| Kiểm tra Solution | `pmp-full-questions.html` `#result-{id}` | `generate-pmp-full-from-teach.js` |
+
+**Must match per question ID:**
+- Tại sao / **Vì sao chọn đáp án này**
+- Loại trừ / **Loại trừ phương án khác**
+- Trích dẫn Guide / **Trích dẫn Guide**
+- Solution gốc (teach only; Kiểm tra uses same exclude/why in markdown)
+
+```bash
+node scripts/bootstrap-pmp-teach-signals.js
+node scripts/generate-pmp-full-teach-lessons.js --force
+node scripts/generate-pmp-full-from-teach.js --skip-bootstrap
+```
+
+Spot-check: open `pmp-full-questions.html#q-{id}` → Kiểm tra vs `pmp-teach-full-q{id}.html#analysis`.
+
+---
+
 ## Guide quote pipeline
 
 | Step | Command / function |
 |------|-------------------|
-| Why-aligned query | `buildGuideRagQuery(q, analysis, storeEntry)` |
-| Lookup | `lookupGuideQuote(q, analysis, storeEntry)` |
+| Why-aligned query | `buildGuideRagQuery()` |
+| 3 hits lookup | `lookupGuideHits()` · [RAG.md](RAG.md) |
+| Single primary | `lookupGuideQuote()` |
 | Bootstrap fill | `node scripts/bootstrap-pmp-teach-signals.js` |
-| Render | `resolveGuideQuote()` → `#analysis` Trích dẫn Guide |
-
-After bootstrap: `node scripts/generate-pmp-full-teach-lessons.js --force` and `node scripts/generate-pmp-full-from-teach.js --skip-bootstrap`.
+| Teach render | `resolveGuideHits()` → `#analysis` |
+| Kiểm tra sync | `node scripts/generate-pmp-full-from-teach.js --skip-bootstrap` |
 
 ## Validation
 
@@ -220,7 +263,8 @@ After bootstrap: `node scripts/generate-pmp-full-teach-lessons.js --force` and `
 - [ ] Tại sao: `whyBullets` non-empty — correct only
 - [ ] Loại trừ: **every** wrong key
 - [ ] `validateTeachGrounding()` passes before write
-- [ ] Trích dẫn Guide: complete sentence(s)
+- [ ] Trích dẫn Guide: ≥1 hit, target 3 — `guideHits` with printed `page`
+- [ ] Kiểm tra Solution matches teach `#analysis` for same ID
 - [ ] Solution gốc card when CSV `sourceSolution` present
 
 ---
@@ -261,4 +305,5 @@ node scripts/generate-pmp-exam-latest-from-teach.js
 | Skip incomplete writes | `generate-pmp-full-teach-lessons.js` |
 | Grounding store | `pmp-teach-signals-store.js` |
 | Guide quote | `formatGuideQuote()` in `pmp-pmbok8-rag-pages.js` |
-| Why-aligned guide lookup | `buildGuideRagQuery()` · `lookupGuideQuote()` |
+| Why-aligned guide lookup | `buildGuideRagQuery()` · `lookupGuideHits()` |
+| Kiểm tra rebuild | `generate-pmp-full-from-teach.js` |

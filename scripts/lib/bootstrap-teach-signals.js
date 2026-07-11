@@ -202,6 +202,9 @@ function bootstrapTeachSignalsStore({ questionsPath, storePath, useCsvSolutions 
       d.entry.guidePages = guide.pages;
       d.entry.guideTopic = guide.topic || "";
       if (guide.topic) d.entry.pmbokConcept = guide.topic;
+      const { lookupGuideHits } = require("./pmp-pmbok8-rag-pages");
+      const hits = lookupGuideHits(d.q, d.analysis, d.entry, 3);
+      if (hits.length) d.entry.guideHits = hits;
       guideFilled++;
     }
     store[String(d.q.id)] = { ...d.existingEntry, ...d.entry };

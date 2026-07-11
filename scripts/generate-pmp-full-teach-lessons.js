@@ -27,6 +27,7 @@ const {
   quizExplMap,
   conceptLabel,
   resolveGuideQuote,
+  resolveGuideHits,
 } = require("./lib/pmp-teach-colocation-style");
 
 const PMP_DIR = path.join(__dirname, "..", "public", "pmp");
@@ -160,15 +161,28 @@ function renderSourceSolutionCard(q) {
 }
 
 function renderPmbok8Insight(q, analysis) {
-  const guide = resolveGuideQuote(q, analysis);
-  const excerpt = guide?.excerpt || "";
-  if (!excerpt || excerpt.length < 40) return "";
-  const pages = guide?.pages?.join(", ") || "";
-  const topic = guide?.topic || "";
+  const hits = resolveGuideHits(q, analysis, 3);
+  if (!hits.length) {
+    const guide = resolveGuideQuote(q, analysis);
+    if (!guide?.excerpt || guide.excerpt.length < 40) return "";
+    hits.push({
+      page: guide.pages[0],
+      topic: guide.topic || "",
+      excerpt: guide.excerpt,
+    });
+  }
+  const items = hits
+    .map(
+      (h, i) =>
+        `<div style="margin-top:${i ? "0.85rem" : "0"}">
+            <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>${i + 1}.</strong> PMBOK 8, tr. ${escapeHtml(String(h.page))}${h.topic ? ` — ${escapeHtml(h.topic)}` : ""}</p>
+            <p style="margin:0.35rem 0 0">"${highlightReasoning(h.excerpt)}"</p>
+          </div>`,
+    )
+    .join("");
   return `<div class="card info">
             <h4>Trích dẫn Guide</h4>
-            <p style="margin:0">"${highlightReasoning(excerpt)}"</p>
-            ${pages ? `<p style="margin:0.5rem 0 0;font-size:0.82rem;color:var(--muted)">— PMBOK 8, tr. ${escapeHtml(pages)}${topic ? ` (${escapeHtml(topic)})` : ""}</p>` : ""}
+            ${items}
           </div>`;
 }
 

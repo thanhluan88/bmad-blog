@@ -69,6 +69,16 @@ function parseStoreEntry(entry) {
       ? entry.guidePages.filter((p) => Number.isInteger(p) && p > 0)
       : [],
     guideTopic: String(entry.guideTopic || "").trim(),
+    guideHits: Array.isArray(entry.guideHits)
+      ? entry.guideHits
+          .map((h) => ({
+            page: Number(h.page),
+            topic: String(h.topic || "").trim(),
+            excerpt: String(h.excerpt || h.snippet || "").trim(),
+            query: String(h.query || "").trim(),
+          }))
+          .filter((h) => h.page > 0 && h.excerpt.length > 20)
+      : [],
     sourceSolution: String(entry.sourceSolution || "").trim(),
   };
 }

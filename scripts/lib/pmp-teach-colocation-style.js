@@ -9,7 +9,7 @@ const {
   getPrimaryStemIssue,
 } = require("./pmp-option-reasoning");
 const { extractStemSignals, sanitizeSignalPhrases, validateSignalPhrases } = require("./pmp-teach-keywords");
-const { formatGuideQuote, lookupGuideQuote } = require("./pmp-pmbok8-rag-pages");
+const { formatGuideQuote, lookupGuideQuote, lookupGuideHits } = require("./pmp-pmbok8-rag-pages");
 const { getStoredTeachGrounding } = require("./pmp-teach-signals-store");
 
 const ACTION_CONTRAST = {
@@ -680,6 +680,11 @@ function resolveGuideQuote(q, analysis) {
   return null;
 }
 
+function resolveGuideHits(q, analysis, limit = 3) {
+  const stored = getStoredTeachGrounding(q.id);
+  return lookupGuideHits(q, analysis, stored || {}, limit);
+}
+
 /** Markdown explanation for quiz pages (exam-latest / full) from teach grounding. */
 function buildTeachExplanationMarkdown(q, analysis) {
   const grounding = composeGrounding(q, analysis);
@@ -707,14 +712,26 @@ function buildTeachExplanationMarkdown(q, analysis) {
     }
     if (grounding.signalAnswer) lines.push(grounding.signalAnswer);
   }
-  const guide = resolveGuideQuote(q, analysis);
-  if (guide) {
+  const guideHits = resolveGuideHits(q, analysis, 3);
+  if (guideHits.length) {
     lines.push("");
     lines.push("**Trích dẫn Guide**");
-    lines.push(`"${guide.excerpt}"`);
-    lines.push(
-      `— PMBOK 8, tr. ${guide.pages.join(", ")}${guide.topic ? ` (${guide.topic})` : ""}`,
-    );
+    guideHits.forEach((h, i) => {
+      lines.push(`${i + 1}. "${h.excerpt}"`);
+      lines.push(
+        `— PMBOK 8, tr. ${h.page}${h.topic ? ` (${h.topic})` : ""}`,
+      );
+    });
+  } else {
+    const guide = resolveGuideQuote(q, analysis);
+    if (guide) {
+      lines.push("");
+      lines.push("**Trích dẫn Guide**");
+      lines.push(`"${guide.excerpt}"`);
+      lines.push(
+        `— PMBOK 8, tr. ${guide.pages.join(", ")}${guide.topic ? ` (${guide.topic})` : ""}`,
+      );
+    }
   }
   if (excludeRows.length) {
     lines.push("");
@@ -759,6 +776,7 @@ module.exports = {
   filterWhyBulletsForCorrect,
   buildTeachExplanationMarkdown,
   resolveGuideQuote,
+  resolveGuideHits,
   buildDrillHtml,
   buildDrillScript,
   buildFlashcards,

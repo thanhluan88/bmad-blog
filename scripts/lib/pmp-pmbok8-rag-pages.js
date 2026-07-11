@@ -221,6 +221,65 @@ function lookupGuideQuote(q, analysis, teachEntry = null) {
   return { ...result, query: guideQuery, fromStore: false };
 }
 
+/** Up to 3 Guide excerpts aligned with whyBullets — distinct printed pages. */
+function lookupGuideHits(q, analysis, teachEntry = null, limit = 3) {
+  const stored = teachEntry || {};
+  if (Array.isArray(stored.guideHits) && stored.guideHits.length) {
+    return stored.guideHits.slice(0, limit).map((h) => ({
+      page: Number(h.page),
+      topic: String(h.topic || "").trim(),
+      excerpt: formatGuideQuote(h.excerpt || h.snippet || "", 520),
+      query: h.query || "",
+    })).filter((h) => h.page > 0 && h.excerpt.length >= 40);
+  }
+
+  const p8 = analysis.pmbok8 || {};
+  const topicFallback = buildTopicLabel(p8.domains || [], p8.processes || []);
+  const guideQuery = buildGuideRagQuery(q, analysis, stored);
+  const ranked = [...(pageCache.get(guideQuery)?.hits || [])].sort(
+    (a, b) => guideHitRankScore(a, guideQuery.split(/\s+/)) - guideHitRankScore(b, guideQuery.split(/\s+/)),
+  );
+
+  const hits = [];
+  const seenPages = new Set();
+  for (const hit of ranked) {
+    const item = hitToGuideResult(hit, topicFallback);
+    if (!item?.pages?.[0]) continue;
+    const page = item.pages[0];
+    if (seenPages.has(page)) continue;
+    seenPages.add(page);
+    hits.push({
+      page,
+      topic: item.topic || "",
+      excerpt: item.excerpt,
+      query: guideQuery,
+    });
+    if (hits.length >= limit) break;
+  }
+
+  if (hits.length < limit) {
+    const stemQuery = buildRagQuery(q, {
+      domains: p8.domains || [],
+      processes: p8.processes || [],
+      principles: p8.principles || [],
+    });
+    const stemRanked = [...(pageCache.get(stemQuery)?.hits || [])].sort(
+      (a, b) => guideHitRankScore(a, guideQuery.split(/\s+/)) - guideHitRankScore(b, guideQuery.split(/\s+/)),
+    );
+    for (const hit of stemRanked) {
+      const item = hitToGuideResult(hit, topicFallback);
+      if (!item?.pages?.[0]) continue;
+      const page = item.pages[0];
+      if (seenPages.has(page)) continue;
+      seenPages.add(page);
+      hits.push({ page, topic: item.topic || "", excerpt: item.excerpt, query: stemQuery });
+      if (hits.length >= limit) break;
+    }
+  }
+
+  return hits;
+}
+
 function collectGuideQueriesFromQuestions(questions, getEntry) {
   return questions.map((q) => {
     const analysis = getEntry ? getEntry(q)?.analysis : null;
@@ -380,6 +439,7 @@ function cleanSnippet(snippet) {
   return String(snippet || "")
     .replace(/\s+/g, " ")
     .replace(/^\d+\s+Section\s+\d+\s*[–-]\s*[^.]*\.?\s*/i, "")
+    .replace(/^\d+\s+A Guide to the Project Management Body of Knowledge\s+/i, "")
     .replace(/Licensed To:[\s\S]*$/i, "")
     .replace(/This copy is a PMI Member benefit[\s\S]*$/i, "")
     .replace(/Figure \d+-\d+\.[\s\S]*$/i, "")
@@ -463,6 +523,7 @@ module.exports = {
   warmupPageCache,
   lookupPmbokPages,
   lookupGuideQuote,
+  lookupGuideHits,
   extractGuideTermsFromText,
   collectGuideQueriesFromQuestions,
   collectQueriesFromQuestions,

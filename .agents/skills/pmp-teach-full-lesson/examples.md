@@ -1,5 +1,54 @@
 # Examples
 
+## Q982 — solution + RAG + sync
+
+**Column P (why correct):** Document and analyze newly identified risks → **risk register**, not issue log.
+
+**RAG query:** `Monitor Risks risk register identified risks`
+
+**guideHits (3 distinct pages when available):**
+
+```json
+{
+  "guideHits": [
+    {
+      "page": 137,
+      "topic": "Monitor Risks",
+      "excerpt": "A risk register is a repository in which outputs of risk management processes are recorded.",
+      "query": "Monitor Risks risk register identified risks"
+    }
+  ]
+}
+```
+
+**Signal** (from stem, not solution):
+
+```json
+{
+  "signalPhrases": [
+    "previously undocumented risks",
+    "could significantly affect the project's timeline and budget"
+  ],
+  "signalAnswer": "Undocumented risks with schedule/cost impact → document and analyze in risk register immediately."
+}
+```
+
+**Tại sao chọn** — from solution why-correct only:
+
+- C is correct (reference solution): Document and analyze… formally captured in **risk register**
+
+**Loại trừ** — from solution “other incorrect”:
+
+| Key | From column P |
+|-----|----------------|
+| A | Brief mention in status report defers formal documentation |
+| B | Escalate before documenting skips risk management process |
+| D | Issue log is for materialized problems, not potential risks |
+
+**Sync:** After `generate-pmp-full-from-teach.js`, Kiểm tra on `#q-982` shows same exclude reasons and Guide excerpt as teach page.
+
+---
+
 ## CSV solution → grounding (column P)
 
 **Source:** `all_questions_flat 1.csv` column `explanation_text` (P), matched by stem.
@@ -165,7 +214,24 @@ Plus Signal card with `well-defined remaining scope` phrases and non-empty Tại
 
 ---
 
-## Trích dẫn Guide — complete sentences
+## Trích dẫn Guide — 3 RAG hits + page
+
+**Bad:** one fragment misaligned with Tại sao (`register. Identified risks…` while why says Develop Team)
+
+**Bad:** cite `file_page` or invent PDF line number
+
+**Good — Q982:**
+
+1. PMBOK 8, tr. 137 — Monitor Risks  
+   "A risk register is a repository in which outputs of risk management processes are recorded."
+
+2. (additional hits on distinct pages when RAG returns them)
+
+Align with **whyBullets** — if why mentions risk register, Guide must cite risk/register content.
+
+---
+
+## Trích dẫn Guide — complete sentences (single-hit fallback)
 
 **Bad:** `…Team-building activities can vary from` (cut mid-sentence)
 
