@@ -544,6 +544,19 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | **Nghĩa** | Một cách cụ thể làm adaptive: Scrum, Kanban, sprint, PO, backlog |
 | **Keyword** | Sprint, Scrum, product owner |
 
+### Cumbersome
+| | |
+|---|---|
+| **Nghĩa** | **Cồng kềnh, rườm rà** — process/tool quá nặng, khó dùng, dễ sai |
+| **Phát âm** | /ˈkʌmbərsəm/ — *câm-bơ-səm* |
+| **≈** | Bulky · unwieldy · over-engineered process |
+| **≠ Complex** | Complex = logic khó · Cumbersome = **quá nhiều bước**, khó vận hành |
+| **Mindset** | Governance ≠ bureaucracy — lightweight · inspect & adapt |
+
+**Q747:** Agile team · process cumbersome, prone to errors, hard to monitor changes → **Next retrospective** — assess effectiveness & decide adjustments → **B** ✓
+
+**Bẫy ✗:** Assign one person · Discontinue without assessment · Buy software tool · Thêm bureaucracy
+
 ### Iterative
 | | |
 |---|---|
