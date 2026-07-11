@@ -447,6 +447,104 @@ function mdInlineHighlighted(s) {
     .join("");
 }
 
+function regexToJson(re) {
+  return { source: re.source, flags: re.flags };
+}
+
+/** Browser JS for Kiểm tra solution highlighting — same rules as teach mdInlineHighlighted. */
+function buildQuizHighlightBrowserJs() {
+  const payload = {
+    examCue: EXAM_CUE_PATTERNS.map(regexToJson),
+    pmbok: PMBOK8_TERM_PATTERNS.map(regexToJson),
+    signal: PMI_SIGNAL_PATTERNS.map(regexToJson),
+    trap: TRAP_PATTERNS.map(regexToJson),
+  };
+  return `
+    const PMP_QUIZ_HIGHLIGHT = ${JSON.stringify(payload)};
+
+    function compileHighlightPatterns(arr) {
+      return (arr || []).map((p) => new RegExp(p.source, p.flags));
+    }
+
+    function stripSolutionHighlights(html) {
+      return String(html || "").replace(/<\\/?span class="kw-[^"]*">/gi, "");
+    }
+
+    function applyHighlightPatterns(html, patterns, cls) {
+      let out = html;
+      for (const re of patterns) {
+        out = out.replace(re, (m) => \`<span class="\${cls}">\${m}</span>\`);
+      }
+      return out;
+    }
+
+    function applyHighlightOutsideSpans(html, patterns, cls) {
+      const parts = html.split(/(<span class="kw-[^"]*">[\\s\\S]*?<\\/span>)/gi);
+      return parts
+        .map((part, i) => {
+          if (i % 2 === 1) return part;
+          let out = part;
+          for (const re of patterns) {
+            out = out.replace(re, (m) => \`<span class="\${cls}">\${m}</span>\`);
+          }
+          return out;
+        })
+        .join("");
+    }
+
+    function highlightSolutionText(text) {
+      let html = stripSolutionHighlights(escapeHtml(text));
+      html = applyHighlightPatterns(html, compileHighlightPatterns(PMP_QUIZ_HIGHLIGHT.examCue), "kw-cue");
+      html = applyHighlightPatterns(html, compileHighlightPatterns(PMP_QUIZ_HIGHLIGHT.pmbok), "kw-pmbok");
+      html = applyHighlightOutsideSpans(html, compileHighlightPatterns(PMP_QUIZ_HIGHLIGHT.signal), "kw-signal");
+      html = applyHighlightOutsideSpans(html, compileHighlightPatterns(PMP_QUIZ_HIGHLIGHT.trap), "kw-trap");
+      return html;
+    }
+`;
+}
+
+/** CSS for kw-* inside Kiểm tra solution — matches teach lesson colors. */
+function buildQuizHighlightCss() {
+  return `
+    .solution .kw-cue {
+      background: #fef9c3;
+      color: #854d0e;
+      padding: 0.1rem 0.25rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .solution .kw-signal {
+      background: #ecfdf5;
+      color: #065f46;
+      padding: 0.08rem 0.22rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .solution .kw-trap {
+      background: #fef2f2;
+      color: #991b1b;
+      padding: 0.08rem 0.22rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .solution .kw-pmbok {
+      background: #fffbeb;
+      color: #b45309;
+      padding: 0.08rem 0.22rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .why-sub {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 0.65rem 0 0.25rem;
+      letter-spacing: 0.01em;
+    }
+    .why-sub:first-child { margin-top: 0; }
+`;
+}
+
 module.exports = {
   SIGNAL_PHRASE_MAX_CHARS,
   SIGNAL_PHRASE_MAX_WORDS,
@@ -461,4 +559,6 @@ module.exports = {
   highlightReasoning,
   highlightPmbokTerms,
   mdInlineHighlighted,
+  buildQuizHighlightBrowserJs,
+  buildQuizHighlightCss,
 };

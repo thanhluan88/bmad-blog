@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { buildQuizHighlightBrowserJs, buildQuizHighlightCss } = require("./lib/pmp-teach-keywords");
 
 const CSS_START = "/* PMP_PMBOK8_CSS_START */";
 const CSS_END = "/* PMP_PMBOK8_CSS_END */";
@@ -183,10 +184,12 @@ const BLOCK = `${CSS_START}
       color: #1d4ed8;
       word-break: break-word;
     }
+${buildQuizHighlightCss()}
 ${CSS_END}`;
 
 const HELPERS = `${JS_START}
     const PMP_PMBOK8_DISPLAY_ENABLED = true;
+${buildQuizHighlightBrowserJs()}
 
     function renderPmbok8Badges(q) {
       const p8 = q.pmbok8;
@@ -204,16 +207,28 @@ const HELPERS = `${JS_START}
 
     function inlineFormat(text) {
       return String(text || "")
-        .replace(/\\*\\*([^*]+)\\*\\*/g, "<strong>$1</strong>")
+        .split(/(\\*\\*[^*]+\\*\\*)/g)
+        .map((part) => {
+          if (part.startsWith("**") && part.endsWith("**")) {
+            return \`<strong>\${highlightSolutionText(part.slice(2, -2))}</strong>\`;
+          }
+          return highlightSolutionText(part);
+        })
+        .join("")
         .replace(/\\[([^\\]]+)\\]\\(([^)]+)\\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
     }
 
     function cardClassForHeading(heading) {
       const h = heading.toLowerCase();
       if (h.includes("pmbok 8 mapping")) return "mapping";
+      if (h.includes("why this answer")) return "why";
+      if (h.includes("reference solution")) return "why";
+      if (h.includes("pmbok 8 reasoning")) return "why";
+      if (h.includes("supplementary reasoning")) return "why";
       if (h.includes("vì sao") || h.includes("vi sao")) return "why";
       if (h.includes("signal trong stem")) return "signal";
       if (h.includes("trích dẫn guide") || h.includes("trich dan guide")) return "guide";
+      if (h.includes("exclude other options")) return "reject";
       if (h.includes("loại trừ") || h.includes("loai tru")) return "reject";
       if (h.includes("tham khảo") || h.includes("tham khao")) return "refs";
       if (h.includes("giải thích gốc") || h.includes("giai thich goc")) return "original";
@@ -259,7 +274,12 @@ const HELPERS = `${JS_START}
         bullets = [];
       };
       for (const line of lines) {
-        if (/^→/.test(line)) {
+        const trimmed = line.trim();
+        if (/^\\*\\*[^*]+\\*\\*$/.test(trimmed)) {
+          flush();
+          const sub = trimmed.replace(/^\\*\\*|\\*\\*$/g, "");
+          parts.push(\`<div class="why-sub">\${escapeHtml(sub)}</div>\`);
+        } else if (/^→/.test(line)) {
           flush();
           parts.push(\`<div class="solution-lead">\${inlineFormat(line.replace(/^→\\s*/, ""))}</div>\`);
         } else if (/^-\\s+/.test(line)) {

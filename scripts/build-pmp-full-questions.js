@@ -10,6 +10,8 @@ const HTML_PATH = path.join(__dirname, "..", "public", "pmp", "pmp-full-question
 const JSON_PATH = path.join(__dirname, "..", "public", "pmp", "pmp-full-questions.json");
 const EXPLANATIONS_PATH = path.join(__dirname, "..", "data", "pmp-full-pmbok8-explanations.json");
 
+const { execSync } = require("child_process");
+
 function main() {
   if (!fs.existsSync(EXPLANATIONS_PATH)) {
     throw new Error(`Missing ${EXPLANATIONS_PATH}. Run generate-pmp-full-pmbok8-explanations.js first.`);
@@ -37,6 +39,11 @@ function main() {
     `<p>${subtitle}</p>`,
   );
   fs.writeFileSync(HTML_PATH, html);
+
+  execSync("node scripts/patch-pmp-pmbok8-display.js", {
+    cwd: path.join(__dirname, ".."),
+    stdio: "inherit",
+  });
 
   console.log(`Injected PMBOK 8 into ${HTML_PATH}: ${withP8} mapped, ${rich} rich explanations`);
 }
