@@ -19,6 +19,8 @@ const {
   sanitizeSignalPhrases,
   validateSignalPhrases,
 } = require("./pmp-teach-keywords");
+const { mergeCsvGrounding } = require("./pmp-csv-solution-grounding");
+const { csvSolutionStats } = require("./pmp-csv-solutions");
 
 function parseCorrectKeys(correct) {
   const s = String(correct || "").trim().toUpperCase();
@@ -157,12 +159,12 @@ function bootstrapTeachSignalsStore({ questionsPath, storePath }) {
     const existing = validateTeachGrounding(q, analysis);
     const signalPhrases = resolveSignalPhrases(q, existingEntry, profile);
     const correctKey = parseCorrectKeys(q.correct)[0] || q.correct;
-    const entry = {
+    const entry = mergeCsvGrounding(q, {
       signalPhrases,
       signalAnswer: buildSignalAnswer(q, analysis, correctKey),
       whyBullets: buildWhyBulletsEntry(q, analysis, correctKey),
       excludeReasons: buildExcludeReasons(q, analysis),
-    };
+    }, analysis);
     const hadValid = existing.ok && existingEntry;
     store[String(q.id)] = { ...existingEntry, ...entry };
     if (hadValid && validateSignalPhrases(q.text, existingEntry?.signalPhrases || []).ok) kept++;
@@ -173,6 +175,8 @@ function bootstrapTeachSignalsStore({ questionsPath, storePath }) {
   fs.writeFileSync(storePath, JSON.stringify(store, null, 2), "utf8");
   resetTeachSignalsCache();
 
+  const csvStats = csvSolutionStats(questions);
+
   let pass = 0;
   const failIds = [];
   for (const q of questions) {
@@ -181,7 +185,7 @@ function bootstrapTeachSignalsStore({ questionsPath, storePath }) {
     else failIds.push(q.id);
   }
 
-  return { storePath, questions: questions.length, added, kept, pass, failIds };
+  return { storePath, questions: questions.length, added, kept, pass, failIds, csvStats };
 }
 
 module.exports = { bootstrapTeachSignalsStore };

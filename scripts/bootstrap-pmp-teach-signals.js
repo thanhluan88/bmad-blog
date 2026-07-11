@@ -13,6 +13,7 @@ const result = bootstrapTeachSignalsStore({
 });
 
 console.log(`Store: ${result.storePath}`);
+console.log(`CSV solutions matched: ${result.csvStats.matched}/${result.csvStats.total}`);
 console.log(`Entries added/updated: ${result.added}, kept valid: ${result.kept}`);
 console.log(`Validation after bootstrap: ${result.pass}/${result.questions} pass`);
 if (result.failIds.length) {

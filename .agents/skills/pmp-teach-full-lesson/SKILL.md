@@ -1,35 +1,37 @@
 ---
 name: pmp-teach-full-lesson
-description: Regenerate or polish Full Bank teach lessons — PMBOK 8 grounding (structured HTML), AI-derived signal phrases in English highlighted in quiz stem. Use when user asks pmp-teach-full-q, grounding, signal highlight, colocation-style teach, or PMBOK 8 lesson quality.
+description: Regenerate Full Bank teach lessons from CSV reference solution (column P) plus PMBOK 8 reasoning — grounding, signal keywords, colocation HTML. Use when user asks pmp-teach-full-q, all_questions_flat CSV, solution column P, grounding, or teach lesson quality.
 ---
 
 # PMP Teach Full Lesson
 
-**Colocation-grade** teach **lesson**: PMBOK 8 traceable, **grounding** + **signal** from AI (not engine templates).
+**Colocation-grade** teach **lesson**: anchor on CSV **solution**, reason with PMBOK 8, ship complete **grounding** + **signal**.
 
 ## Hard rules (never ship incomplete)
 
-A lesson is **invalid** if any of these are missing:
+A lesson is **invalid** if any block below is missing — see [REFERENCE.md](REFERENCE.md#validation).
 
 | Block | Requirement |
 |-------|-------------|
 | Signal card | `signalPhrases` + `signalAnswer` (English) |
-| Tại sao chọn | `whyBullets` non-empty — chỉ đáp án **đúng** |
-| Loại trừ | `excludeReasons` for **every** wrong key (e.g. Q611 correct B → need A, C, D) |
+| Tại sao chọn | `whyBullets` — **correct key only** |
+| Loại trừ | `excludeReasons` for **every** wrong key |
 
-**Anti-pattern — Q611 after `--allow-incomplete`:** no Signal card, empty Tại sao chọn, Loại trừ chỉ có D. **Do not commit** lessons like this.
-
-**Never** use `--allow-incomplete` for publish, push, or full-bank regen. That flag is local debug only.
+**Never** use `--allow-incomplete` for publish, push, or full-bank regen.
 
 ## Inputs
 
-| Source | Path |
-|--------|------|
+| Source | Path / column |
+|--------|----------------|
+| Reference **solution** | `all_questions_flat 1.csv` — column **P** (`explanation_text`) |
 | Questions | `public/pmp/pmp-full-questions.json` |
-| AI grounding store | `data/pmp-teach-signals.json` (required per question before generate) |
+| Grounding store | `data/pmp-teach-signals.json` |
+| CSV loader | `scripts/lib/pmp-csv-solutions.js` |
+| CSV → store hints | `scripts/lib/pmp-csv-solution-grounding.js` |
 | Generator | `scripts/generate-pmp-full-teach-lessons.js` |
 | Sections | `scripts/lib/pmp-teach-colocation-style.js` |
-| Profiles | `scripts/lib/pmp-option-reasoning.js` |
+
+**Solution lookup:** match CSV row by **exact question stem** (`question_text` ↔ `q.text`). ~1095/1123 Full Bank rows match; missing rows → note in store, reason from PMBOK 8 only.
 
 ## Workflow (per question — retry until complete)
 
@@ -37,84 +39,75 @@ A lesson is **invalid** if any of these are missing:
 
 `id`, `text`, `options`, `correct`. List correct key + all option texts.
 
-### 2. Grounding — ask PMBOK 8
+**Done when:** stem and all option keys listed.
 
-Template: [REFERENCE.md](REFERENCE.md#grounding-prompt).
+### 2. Load reference solution (column P)
+
+```javascript
+const { getCsvSolutionForQuestion } = require("./scripts/lib/pmp-csv-solutions");
+const row = getCsvSolutionForQuestion(q);
+// row.explanationText — full column P
+```
+
+If no row: proceed with PMBOK 8 only; flag `sourceSolution: null` in store.
+
+**Done when:** `explanation_text` loaded or explicitly missing.
+
+### 3. Grounding — solution + PMBOK 8
+
+Prompt: [REFERENCE.md#grounding-prompt](REFERENCE.md#grounding-prompt).
+
+Use CSV **solution** as reference truth; **reason** into PMBOK 8 terms (process, principle, Guide quote). Do not copy CSV verbatim without PMBOK alignment.
 
 Store in `data/pmp-teach-signals.json`:
 
-- `whyBullets` — chỉ lý do đáp án **đúng** (≥1 bullet)
-- `excludeReasons` — **mọi** đáp án sai `{ "A": "…", "C": "…", "D": "…" }`
+- `sourceSolution` — raw column P (audit trail)
+- `whyBullets` — correct answer only (≥1)
+- `excludeReasons` — **every** wrong key
+- `guideQuote` — complete Guide sentence(s)
 
-**Retry:** thiếu bất kỳ `excludeReasons.{key}` → hỏi lại AI đến khi đủ **tất cả** key sai.
+Bootstrap seeds from CSV: `node scripts/bootstrap-pmp-teach-signals.js` (calls `mergeCsvGrounding`).
 
-### 3. Signal — ask AI (keyword phrases only)
+**Done when:** all wrong keys have `excludeReasons.{key}`.
 
-Prompt: [REFERENCE.md](REFERENCE.md#signal-prompt).
+### 4. Signal — ask AI (keyword phrases only)
 
-- `signalPhrases` — **2–5 short English keyword phrases** verbatim from stem (≤80 chars, ≤12 words each)
-- **Not** full sentences, **not** the entire question, **not** generic `"What should the project manager do"` alone
-- `signalAnswer` — English: how those keyword signals → correct key (PMBOK 8)
+Prompt: [REFERENCE.md#signal-prompt](REFERENCE.md#signal-prompt).
 
-**Anti-pattern — Q123:** whole stem highlighted as one signal.  
-**Good:** `aligns with its broader goals` · `vision and expectations throughout the project timeline`
+2–5 short English phrases from stem (≤80 chars); **not** full stem.
 
-**Retry:** phrase quá dài / generic / <2 phrases → hỏi lại AI.
+**Done when:** `validateSignalPhrases()` passes.
 
-### 4. Validate before write
+### 5. Validate before write
 
-`validateTeachGrounding()` must pass:
+`validateTeachGrounding()` must pass. If fail → fix store, retry — **do not write**.
 
-- signal present
-- `whyBullets` non-empty
-- `excludeReasons` for every wrong key
-
-If validation fails → **do not write**; fix store/profile and retry.
-
-### 5. Generate (single question)
+### 6. Generate
 
 ```bash
 node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 ```
 
-**Completion:** console shows `1 written, 0 incomplete`.
+**Done when:** console `1 written, 0 incomplete`.
 
-### 6. Full bank regen
+### 7. Full bank regen
 
-1. Bootstrap grounding store (if empty or incomplete):
-   ```bash
-   node scripts/bootstrap-pmp-teach-signals.js
-   ```
-   Fills `data/pmp-teach-signals.json` for all questions; refine entries with AI over time.
-2. Run `--force` **without** `--allow-incomplete`.
-3. Generator skips incomplete IDs — fix those in store, re-run bootstrap + generate.
-4. Only commit when `1123 written, 0 incomplete`.
+1. `node scripts/bootstrap-pmp-teach-signals.js` — CSV solution + engine → store
+2. Refine weak rows with AI (steps 3–4)
+3. `node scripts/generate-pmp-full-teach-lessons.js --force` (no `--allow-incomplete`)
+4. Commit only when `1123 written, 0 incomplete`
 
-### 6b. Exam Latest (`pmp-exam-latest.html`)
+Exam Latest: separate store — [REFERENCE.md#exam-latest](REFERENCE.md#exam-latest).
 
-Separate store: `data/pmp-exam-latest-teach-signals.json` (IDs ≠ Full Bank).
-
-```bash
-node scripts/generate-pmp-exam-latest-from-teach.js
-```
-
-1. Bootstrap `pmp-exam-latest-teach-signals.json` (keyword signals, why, exclude)
-2. Write `data/pmp-exam-latest-pmbok8-explanations.json` (teach-style markdown)
-3. Rebuild `public/pmp/pmp-exam-latest.html` via `build-pmp-exam-latest.js`
-
-Requires `public/pmp/pmp-exam-latest-questions.json` (from prior `build-pmp-exam-latest.js`).
-
-**Completion:** `1417 teach-style` explanations, HTML rebuilt.
-
-### 7. Embed rules
+## Embed rules
 
 | Block | Rule |
 |-------|------|
-| Hero `#intro` | Không lặp full stem — `buildHeroLead` + badges only |
-| Signal card | Bắt buộc — không trống |
-| Tại sao chọn | `whyBullets` — chỉ đáp án đúng |
-| Loại trừ | Mọi đáp án sai — không placeholder, không thiếu row |
-| Quiz `.q-text` | `signalPhrases` highlights |
+| Hero `#intro` | No full stem — summary + badges |
+| Signal card | Required — keyword highlights in quiz |
+| Tại sao chọn | `whyBullets` — correct only |
+| Loại trừ | Every wrong key — from solution + PMBOK reasoning |
+| Trích dẫn Guide | PMBOK 8 complete sentence(s) |
 
 **Omit:** `#drill`, `#traps`, Grounding card, hero stem duplicate.
 
@@ -122,12 +115,12 @@ Requires `public/pmp/pmp-exam-latest-questions.json` (from prior `build-pmp-exam
 
 | Symptom | Action |
 |---------|--------|
-| No Signal (Q611) | Run signal prompt; save store; re-generate |
-| Loại trừ thiếu A/C (chỉ có D) | Fill **all** wrong keys in `excludeReasons`; retry grounding |
-| Empty Tại sao chọn | Add `whyBullets` in store or profile |
-| `--force` but file unchanged | Console `incomplete` — validation blocked write |
+| Empty Tại sao / Loại trừ | Load column P; run grounding prompt; save store |
+| No Signal | Run signal prompt; re-generate |
+| CSV mismatch (correct key ≠ bank) | Skip CSV for that ID; reason from PMBOK only |
+| `--force` but unchanged | Console `incomplete` — validation blocked write |
 
 ## Resources
 
-- Prompts + HTML contract: [REFERENCE.md](REFERENCE.md)
-- Examples (Q611 bad/good): [examples.md](examples.md)
+- Prompts, CSV contract, HTML: [REFERENCE.md](REFERENCE.md)
+- Examples: [examples.md](examples.md)

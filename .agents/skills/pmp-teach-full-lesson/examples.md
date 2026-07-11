@@ -1,5 +1,41 @@
 # Examples
 
+## CSV solution → grounding (column P)
+
+**Source:** `all_questions_flat 1.csv` column `explanation_text` (P), matched by stem.
+
+**Q611 excerpt (column P):**
+
+> Solution: B. Recommend a firm-fixed-price contract… FFP when scope is well-defined… The other answer choices are incorrect. Time-and-materials… Cost-plus… Issuing a letter of intent…
+
+**Agent workflow:**
+
+1. Load column P as `sourceSolution`
+2. Grounding prompt: solution + PMBOK 8 → `whyBullets`, `excludeReasons` (A, C, D), `guideQuote`
+3. Signal prompt: stem keywords only (not solution text)
+4. Validate → generate
+
+**Good store entry (after PMBOK refinement):**
+
+```json
+{
+  "sourceSolution": "Solution: B. Recommend a firm-fixed-price contract…",
+  "whyBullets": [
+    "B is correct: FFP when scope is well-defined — buyer cost control.",
+    "PMBOK 8: Conduct Procurements — fixed price for clear scope."
+  ],
+  "excludeReasons": {
+    "A": "T&M when scope uncertain — remaining scope here is well-defined.",
+    "C": "Cost-plus shifts cost risk to buyer — scope already defined.",
+    "D": "Letter of intent without formal contract — legal ambiguity."
+  }
+}
+```
+
+**Bad:** empty `whyBullets`, Loại trừ chỉ D, no `sourceSolution` when CSV row exists.
+
+---
+
 ## Signal — keyword phrases only (not full question)
 
 **Bad — Q123:** entire stem as one `kw-signal` highlight
