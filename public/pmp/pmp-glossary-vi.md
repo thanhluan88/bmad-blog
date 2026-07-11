@@ -1220,6 +1220,10 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | stay vigilant, external environment | Monitor & adapt |
 | overworked demoralized | Engage & acknowledge (Theory Y) |
 | relatable memorable lessons | Storytelling |
+| excerpt, executive summary, concise insights | Tailor status artifacts (Q418) |
+| extract what they need, raw logs | PM tailor comms — không dump data (Q34) |
+| too technical report, business questions | Update comms plan — tailor format (Q34) |
+| brief mention of risks in status report | Document & analyze — không chỉ excerpt (Q982) |
 | correlation vs cause | Causation |
 | hedging, exchange rate | Financial risk response |
 | insurance, fixed-price | Transfer |
