@@ -39,6 +39,7 @@ function main() {
     const boot = bootstrapTeachSignalsStore({
       questionsPath: QUESTIONS_PATH,
       storePath: EXAM_LATEST_STORE_PATH,
+      useCsvSolutions: false,
     });
     console.log(
       `Bootstrap: ${boot.pass}/${boot.questions} pass (${boot.added} updated, ${boot.kept} kept)`,

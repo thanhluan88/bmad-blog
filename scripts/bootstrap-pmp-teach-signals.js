@@ -10,10 +10,13 @@ const QUESTIONS_PATH = path.join(__dirname, "..", "public", "pmp", "pmp-full-que
 const result = bootstrapTeachSignalsStore({
   questionsPath: QUESTIONS_PATH,
   storePath: STORE_PATH,
+  useCsvSolutions: true,
 });
 
 console.log(`Store: ${result.storePath}`);
-console.log(`CSV solutions matched: ${result.csvStats.matched}/${result.csvStats.total}`);
+if (result.csvStats) {
+  console.log(`CSV solutions matched: ${result.csvStats.matched}/${result.csvStats.total}`);
+}
 console.log(`Entries added/updated: ${result.added}, kept valid: ${result.kept}`);
 console.log(`Validation after bootstrap: ${result.pass}/${result.questions} pass`);
 if (result.failIds.length) {

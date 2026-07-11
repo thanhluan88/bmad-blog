@@ -10,6 +10,7 @@ const QUESTIONS_PATH = path.join(__dirname, "..", "public", "pmp", "pmp-exam-lat
 const result = bootstrapTeachSignalsStore({
   questionsPath: QUESTIONS_PATH,
   storePath: EXAM_LATEST_STORE_PATH,
+  useCsvSolutions: false,
 });
 
 console.log(`Store: ${result.storePath}`);

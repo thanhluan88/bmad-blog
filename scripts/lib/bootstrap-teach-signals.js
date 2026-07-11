@@ -143,7 +143,7 @@ function buildWhyBulletsEntry(q, analysis, correctKey) {
   return bullets.slice(0, 5);
 }
 
-function bootstrapTeachSignalsStore({ questionsPath, storePath }) {
+function bootstrapTeachSignalsStore({ questionsPath, storePath, useCsvSolutions = true }) {
   setActiveTeachSignalsStore(storePath);
   const questions = JSON.parse(fs.readFileSync(questionsPath, "utf8"));
   const store = fs.existsSync(storePath)
@@ -159,12 +159,15 @@ function bootstrapTeachSignalsStore({ questionsPath, storePath }) {
     const existing = validateTeachGrounding(q, analysis);
     const signalPhrases = resolveSignalPhrases(q, existingEntry, profile);
     const correctKey = parseCorrectKeys(q.correct)[0] || q.correct;
-    const entry = mergeCsvGrounding(q, {
+    let entry = {
       signalPhrases,
       signalAnswer: buildSignalAnswer(q, analysis, correctKey),
       whyBullets: buildWhyBulletsEntry(q, analysis, correctKey),
       excludeReasons: buildExcludeReasons(q, analysis),
-    }, analysis);
+    };
+    if (useCsvSolutions) {
+      entry = mergeCsvGrounding(q, entry, analysis);
+    }
     const hadValid = existing.ok && existingEntry;
     store[String(q.id)] = { ...existingEntry, ...entry };
     if (hadValid && validateSignalPhrases(q.text, existingEntry?.signalPhrases || []).ok) kept++;
@@ -175,7 +178,7 @@ function bootstrapTeachSignalsStore({ questionsPath, storePath }) {
   fs.writeFileSync(storePath, JSON.stringify(store, null, 2), "utf8");
   resetTeachSignalsCache();
 
-  const csvStats = csvSolutionStats(questions);
+  const csvStats = useCsvSolutions ? csvSolutionStats(questions) : null;
 
   let pass = 0;
   const failIds = [];

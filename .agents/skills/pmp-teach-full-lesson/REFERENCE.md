@@ -188,7 +188,7 @@ node scripts/bootstrap-pmp-teach-signals.js
 node scripts/generate-pmp-full-teach-lessons.js --force
 ```
 
-Bootstrap: CSV column P → `mergeCsvGrounding()` → `data/pmp-teach-signals.json`.
+Bootstrap: CSV column P → `mergeCsvGrounding()` → `data/pmp-teach-signals.json` (**Full Bank only**).
 
 Default **skips write** when validation fails. **Do not** use `--allow-incomplete` for publish.
 
@@ -196,7 +196,9 @@ Default **skips write** when validation fails. **Do not** use `--allow-incomplet
 
 ## Exam Latest
 
-Separate store: `data/pmp-exam-latest-teach-signals.json`. No Full Bank CSV mapping (different question set).
+**Out of scope for CSV:** `all_questions_flat 1.csv` maps only Full Bank (`pmp-full-questions`). Exam Latest uses a separate question set — bootstrap with `useCsvSolutions: false`.
+
+Separate store: `data/pmp-exam-latest-teach-signals.json`.
 
 ```bash
 node scripts/generate-pmp-exam-latest-from-teach.js
