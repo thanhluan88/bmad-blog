@@ -233,6 +233,31 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | **PMP** | Facilitate, understand perspectives — không punish |
 | **≈** | Conflict, disagreement |
 
+### Compromising · Compromise / Reconcile
+| | |
+|---|---|
+| **Nghĩa** | **Đi giữa** — mỗi bên bỏ bớt để chấp nhận giải pháp tạm thời |
+| **Phát âm** | /ˈkɒmprəmaɪzɪŋ/ — *cóm-prơ-maizing* |
+| **PMP (Thomas-Kilmann)** | **Compromise / Reconcile** — kỹ thuật conflict resolution |
+| **Kết quả** | **Lose / Lose** (partial satisfaction) |
+| **PMI ưu tiên** | **Collaborate / problem-solve** (Win/Win) |
+| **≠ Collaborating** | Collaborate = tối ưu chung · Compromise = giải pháp giữa |
+| **≠ Reconcile (data)** | Reconcile discrepancies = đối chiếu số liệu |
+| **≠ without compromising quality** | Không hy sinh chất lượng — khác conflict mode |
+
+**5 techniques:** Avoid · Accommodate · **Compromise** (Lose/Lose) · Force · **Collaborate** ★ (Win/Win)
+
+| Signal | Đáp |
+|--------|-----|
+| compromise/reconcile approach (Q179) | **Listen & acknowledge** trước → B |
+| full support · effective resolution (Q211) | **Constructive dialogue** — không compromise vội → C |
+| scope disagreement · agreement (Q522) | **Consensus** — không press compromise → C |
+| PM demonstrates technique (Q150) | **Collaborate** — không compromise/reconcile → A |
+| compromise design + underlying needs (Q23) | Bẫy từ → **Collaborating** → B |
+| quality dispute · split costs (Q569/Q671) | **Review acceptance criteria** — không split bill |
+
+**Bẫy ✗:** Negotiate compromise satisfies all · Split costs equally · Press for compromise · Stem có chữ *compromise* trong đáp án thường là distractor
+
 ### Scarce
 | | |
 |---|---|
@@ -1184,6 +1209,11 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | risk materialized | Planned response from risk register |
 | offset, savings offset | Bù trừ — cẩn thận optimism bias |
 | discord among stakeholders | Facilitate conflict resolution |
+| compromise/reconcile, conflict management | Listen first — then negotiate (Q179) |
+| split costs, share costs equally | Review acceptance criteria (Q569) |
+| full support, effective conflict resolution | Collaborate / constructive dialogue (Q211) |
+| compromise design, underlying needs | Collaborating — không nhầm compromise (Q23) |
+| without compromising quality | Không hy sinh quality — MVP/prioritize |
 | scarce resources, resource conflicts | Plan availability · verify with functional managers |
 | shared specialized resources, competing priorities | Identify requirements · không ad hoc negotiation |
 | interdisciplinary team, multidisciplinary project | Facilitate · integrate disciplines |
