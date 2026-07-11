@@ -1,28 +1,37 @@
 ---
 name: pmp-teach-full-lesson
-description: Build Full Bank PMP teach lessons from CSV solution (column P) plus local RAG — grounding, signal, Guide quotes, sync with Kiểm tra. Use when pmp-teach-full-q, all_questions_flat, column P, pmp-full-questions Kiểm tra, or teach lesson quality.
+description: Build Full Bank teach lessons — CSV column P → RAG 3 hits → grounding → HTML → sync Kiểm tra. Use for pmp-teach-full-q*, teach lesson quality, or Kiểm tra mismatch.
 ---
 
 # PMP Teach Full Lesson
 
-One **lesson** per question: **solution** (CSV cột P) → **RAG** (3 hits) → **grounding** → HTML teach page → **sync** `Kiểm tra`.
+Pipeline: **solution** (CSV P) → **RAG** (3 hits) → **grounding** → **lesson** → **sync**
+
+## Branches
+
+| Branch | When | Path |
+|--------|------|------|
+| **One question** | Fix or author a single ID | Steps 1–7 with `--from={id} --to={id}`; hand-RAG via MCP |
+| **Full bank** | Regen all 1123 | Bootstrap batch → `--force` → sync; skip hand-RAG |
+
+Exam Latest is out of scope — separate store `data/pmp-exam-latest-teach-signals.json`.
 
 ## Invalid lesson
 
-Missing any block in [REFERENCE.md#validation](REFERENCE.md#validation) → do not write HTML. Never `--allow-incomplete` for publish.
+Any [CONTRACT.md#validation](CONTRACT.md#validation) item fails → do not write HTML. Never `--allow-incomplete` for publish.
 
 ## Inputs
 
 | Source | Path |
 |--------|------|
-| Question bank | `public/pmp/pmp-full-questions.json` (mirror of `pmp-full-questions.html`) |
-| **Solution** | `all_questions_flat 1.csv` column **P** (`explanation_text`) |
+| Question bank | `public/pmp/pmp-full-questions.json` |
+| Solution | `all_questions_flat 1.csv` column **P** (`explanation_text`) |
 | Grounding store | `data/pmp-teach-signals.json` |
 | RAG | Skill `rag-local-pmp` — MCP `search_docs` only |
 
 Stem match: CSV `question_text` ↔ `q.text` (~1095/1123). CSV correct key ≠ bank → skip CSV for that ID.
 
-## Workflow (per question)
+## Steps
 
 ### 1. Load question
 
@@ -35,49 +44,30 @@ From bank: `id`, `text`, `options[]`, `correct`, `correctLabel`.
 ```javascript
 const { getCsvSolutionForQuestion } = require("./scripts/lib/pmp-csv-solutions");
 const row = getCsvSolutionForQuestion(q);
-// row.explanationText — column P verbatim
+// row.explanationText — column P verbatim → sourceSolution
 ```
 
 **Done when:** `sourceSolution` loaded or flagged missing.
 
-### 3. RAG — 3 related Guide hits
+### 3. RAG — 3 Guide hits
 
-Follow [RAG.md](RAG.md). Skill `rag-local-pmp`: `search_docs`, `top_k` 8–12, pick **3** best chunks (distinct printed `page`).
+Follow [RAG.md](RAG.md). Query from solution **why-correct** terms — not stem-only domain labels.
 
-Query from **why terms** in solution (process, artifact, principle) — not generic domain overview.
+**Done when:** 3 hits with printed `page` + excerpt; or ≥1 with documented fallback.
 
-**Done when:** 3 hits with `page` (số trang in PMBOK8) + excerpt; or documented fallback &lt;3.
+### 4. Grounding
 
-### 4. Grounding — reason from solution + RAG
+Run [PROMPTS.md#grounding](PROMPTS.md#grounding) + [PROMPTS.md#signal](PROMPTS.md#signal) → write store entry per [CONTRACT.md#store-fields](CONTRACT.md#store-fields).
 
-Prompt: [REFERENCE.md#grounding-prompt](REFERENCE.md#grounding-prompt).
+**Done when:** `whyBullets` non-empty; every wrong key in `excludeReasons`; `guideHits.length` ≥ 1.
 
-| Store field | Source |
-|-------------|--------|
-| `sourceSolution` | Column P raw |
-| `whyBullets` | **Tại sao chọn** — correct key only; distill from solution “why correct” |
-| `excludeReasons` | Every **wrong** key — from solution “other incorrect” + PMBOK |
-| `signalPhrases` + `signalAnswer` | Stem keywords → correct action (English) |
-| `guideHits` | 3 RAG hits `{page, topic, excerpt, query}` |
-| `guideQuote` | Primary hit excerpt (hit #1) |
-| `guidePages` / `guideTopic` | From hit #1 |
+### 5. Validate
 
-**Done when:** every wrong key has `excludeReasons`; `whyBullets` non-empty; `guideHits.length` ≥ 1.
+`validateTeachGrounding(q, analysis)` — retry grounding prompt if fail.
 
-### 5. Pattern lesson (teach reasoning)
+**Done when:** passes.
 
-Apply exam **pattern** from grounding — same logic as colocation teach pages:
-
-- Signal = stem keywords that point to correct action
-- Tại sao = why correct (not wrong-option prose)
-- Loại trừ = wrong keys only
-- Guide = 3 aligned RAG excerpts with `PMBOK 8, tr. {page}`
-
-Do not paste solution verbatim without PMBOK alignment.
-
-**Done when:** `validateTeachGrounding(q, analysis)` passes.
-
-### 6. Generate lesson HTML
+### 6. Generate lesson
 
 ```bash
 node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
@@ -87,15 +77,13 @@ node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 
 ### 7. Sync Kiểm tra
 
-Teach page and **Kiểm tra** must share one store + one generator pipeline:
-
 ```bash
 node scripts/generate-pmp-full-from-teach.js --skip-bootstrap
 ```
 
-Rebuilds `pmp-full-questions.html` explanations from same `data/pmp-teach-signals.json` + `buildTeachExplanationMarkdown`.
+Both surfaces read `data/pmp-teach-signals.json` + `buildTeachExplanationMarkdown()`.
 
-**Done when:** `#analysis` blocks match `result-*` Solution on same question ID (why, exclude, Guide).
+**Done when:** teach `#analysis` = Kiểm tra `#result-{id}` (why, exclude, Guide).
 
 ## Full bank
 
@@ -119,6 +107,7 @@ Commit when `1123 written, 0 incomplete` and spot-check Kiểm tra = teach.
 
 ## Resources
 
-- [REFERENCE.md](REFERENCE.md) — prompts, HTML, store schema, sync
-- [RAG.md](RAG.md) — `rag-local-pmp`, 3 hits, page citation
-- [examples.md](examples.md) — Q982, Q611 patterns
+- [PROMPTS.md](PROMPTS.md) — grounding + signal prompts
+- [CONTRACT.md](CONTRACT.md) — store fields, HTML rules, validation
+- [RAG.md](RAG.md) — 3-hit lookup, citation
+- [examples.md](examples.md) — Q982 end-to-end + anti-patterns
