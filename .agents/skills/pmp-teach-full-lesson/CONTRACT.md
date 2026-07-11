@@ -6,81 +6,60 @@
 |------|--------|
 | File | `all_questions_flat 1.csv` (repo root) |
 | Column | **P** — `explanation_text` |
-| Match | Normalized stem: CSV `question_text` ↔ `q.text` |
-| Loader | `scripts/lib/pmp-csv-solutions.js` |
+| Role | Lane 1 (**solution**) + correct key; seeds RAG — not pmbok scenario |
 
-Format:
-
-```
-Solution: B. {correct}. {why correct}. The other answer choices are incorrect. {why A wrong}. …
-```
-
-`sourceSolution` = raw column P. Skip when CSV correct key ≠ bank `q.correct`.
+`sourceSolution` = raw column P (audit card below triad).
 
 ---
 
 ## Store fields
 
-| Field | Source | UI section |
-|-------|--------|------------|
-| `sourceSolution` | Column P raw | Source solution card (teach only) |
-| `signalPhrases` + `signalAnswer` | Signal prompt | Signal card (English) |
-| `whyBullets` | Column P verbatim (why part) | Why this answer |
-| `excludeReasons` | Column P verbatim (exclude part) | Exclude other options |
-| `guideHits[]` | RAG step 3 | Guide citation (up to 3) |
-| `guideQuote` | `guideHits[0].excerpt` | Primary Guide fallback |
-| `guidePages` / `guideTopic` | Hit #1 | Guide header |
-| `pmbokConcept` | Grounding | Flashcard |
+| Field | Source | UI (under Why this answer) |
+|-------|--------|----------------------------|
+| `whySolutionBullets[]` | Column P why-correct | **1. Reference solution** |
+| `whyPmbokBullets[]` / `whyBullets[]` | PMBOK chain — [REASONING.md](REASONING.md) | **2. PMBOK 8 reasoning** |
+| `whyWebBullets[]` | [WEB.md](WEB.md) | **3. Supplementary reasoning (web)** |
+| `whyWebSources[]` | Web search (optional) | Sources footnote |
+| `sourceSolution` | Column P raw | Source solution card |
+| `signalPhrases` + `signalAnswer` | Signal prompt | Signal card |
+| `excludeReasons` | Column P exclude | Exclude other options |
+| `guideHits[]` | RAG step 3 | Guide citation |
+
+Legacy: `whyBullets` = `whyPmbokBullets` when latter absent.
 
 ---
 
 ## Lesson layout (`#analysis`)
 
-Order: Signal → **why + exclude block** → answer card → Guide → source solution
+Signal → **why triad** + exclude (adjacent) → answer → Guide → source solution
 
-| Section | Rule |
-|---------|------|
-| Signal card | English only; 2–5 short stem phrases |
-| Why + exclude | **Adjacent**; verbatim column P; before Guide |
-| Answer card | Correct label |
-| Guide citation | `PMBOK 8, p. {page}` + excerpt; target 3 distinct pages |
-| Source solution | Full column P when matched |
-
-**Omit:** `#drill`, `#traps`, standalone grounding card.
-
-Guide priority: store `guideHits` → `lookupGuideHits()` → `guideQuote` fallback.
-
-Cite printed `page` metadata — not `file_page`, not PDF line numbers.
+| Subsection | Rule |
+|------------|------|
+| 1. Reference solution | 1–2 bullets from column P why-correct |
+| 2. PMBOK 8 reasoning | Chain + **bridge** — [WHY.md](WHY.md) |
+| 3. Supplementary (web) | 1–2 bullets + sources; omit if empty (full bank) |
+| Exclude | Every wrong key; English |
 
 ---
 
 ## Sync
 
-| Surface | File | Generator |
-|---------|------|-----------|
-| Teach | `pmp-teach-full-q{id}.html` `#analysis` | `generate-pmp-full-teach-lessons.js` |
-| Quiz | `pmp-full-questions.html` `#result-{id}` | `generate-pmp-full-from-teach.js` |
-
-Must match per ID: why, exclude (adjacent), Guide.
-
-Spot-check: `pmp-full-questions.html#q-{id}` vs `pmp-teach-full-q{id}.html#analysis`.
+Teach `#analysis` triad = quiz `#result-{id}` why block.
 
 ---
 
 ## Validation
 
-- [ ] `sourceSolution` when CSV row matched
-- [ ] Hero has no full question stem
+- [ ] `sourceSolution` when CSV matched
+- [ ] **Triad:** solution + pmbok lanes — [WHY.md#audit-triad](WHY.md#audit-triad)
+- [ ] pmbok: **bridge** + **fit** — [REASONING.md#audit](REASONING.md#audit)
+- [ ] web lane filled (single ID hand-work) or intentionally omitted (full bank)
 - [ ] Signal: 2–5 keywords + English `signalAnswer`
-- [ ] Why: `whyBullets` verbatim from column P when CSV matched
-- [ ] Exclude: every wrong key, verbatim from column P
-- [ ] Why + exclude adjacent before Guide
-- [ ] `validateTeachGrounding()` passes before write
-- [ ] Guide: ≥1 hit, target 3 — `guideHits` with printed `page`
-- [ ] Quiz solution matches teach `#analysis`
-- [ ] Source solution card when `sourceSolution` present
+- [ ] Exclude: every wrong key
+- [ ] `validateTeachGrounding()` passes
+- [ ] Quiz matches teach
 
-Generator skips write on fail. Never `--allow-incomplete` for publish.
+Never `--allow-incomplete` for publish.
 
 ---
 

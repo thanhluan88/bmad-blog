@@ -19,6 +19,8 @@ const {
   buildHeroLead,
   buildSignalCard,
   buildWhyBullets,
+  buildWhyTriad,
+  renderWhyTriadHtml,
   buildExcludeRows,
   buildFlashcards,
   buildCheatSheet,
@@ -383,7 +385,8 @@ function renderLesson(q, prev, next) {
     concept,
     `Full Bank Q${q.id}`,
   ].filter(Boolean);
-  const whyBullets = buildWhyBullets(analysis, q);
+  const whyTriad = buildWhyTriad(analysis, q);
+  const whyHtml = renderWhyTriadHtml(whyTriad, mdInline, escapeHtml);
   const grounding = composeGrounding(q, analysis);
   const excludeHtml = renderExcludeTableFromAnalysis(q, analysis);
   const sec = sectionNumbers();
@@ -442,7 +445,10 @@ function renderLesson(q, prev, next) {
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card.source { border-left: 4px solid #7c3aed; background: #f5f3ff; }
-    .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .why-lane { margin: 0.75rem 0 0; }
+    .why-lane h4 { margin: 0 0 0.35rem; font-size: 0.88rem; color: var(--muted); font-weight: 600; }
+    .why-lane ul { margin: 0; padding-left: 1.2rem; }
+    .why-lane-pmbok h4 { color: var(--primary-dark); }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
     .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
@@ -542,7 +548,7 @@ function renderLesson(q, prev, next) {
           ${buildSignalCard(q, analysis)}
           <div class="solution-reasoning-block">
           <h3>Why this answer</h3>
-          <ul>${whyBullets.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul>
+          ${whyHtml}
           ${excludeHtml ? `<h3>Exclude other options</h3>\n          ${excludeHtml}` : ""}
           </div>
           <div class="card tip">

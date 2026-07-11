@@ -1,52 +1,37 @@
 # RAG — 3 Guide hits
 
-Skill **`rag-local-pmp`** — MCP `search_docs` only. **Never** `ask_docs`.
+`rag-local-pmp` — `search_docs` only. Never `ask_docs`.
 
-Step 3 of [SKILL.md](SKILL.md): after column P loaded, before grounding JSON.
+Step 3 of [SKILL.md](SKILL.md). Hits must **fit** the stem and support a **bridge** — [REASONING.md#bridge](REASONING.md#bridge).
 
 ## Query
 
-Build from **solution why-correct** + correct option text — not stem-only domain labels.
+**Round 1:** column P why-correct — process, artifact, principle, correct-option verb.
 
-Include when present: PMBOK **process**, **artifact**, **principle**, key verb from correct option (first 80 chars).
+**Round 2 (fit fail):** re-query from **stem scenario** — actors, conflict, misconception, correct-action verbs.  
+Example: SME + agile + quality fear → `Agile continuous feedback early feedback teamwork collaboration`.
 
-Avoid: bare `Performance Domain Stakeholders`, `Processes Overview`, diagram-only pages.
+Avoid: bare domain labels (`Performance Domain Resources`), overview pages, diagram chunks.
 
-Engine: `buildGuideRagQuery()` in `scripts/lib/pmp-pmbok8-rag-pages.js`.
+## Pick 3
 
-## MCP call
+1. **Fit** — closest PMBOK idea to stem conflict (not same-domain decoration)
+2. **Prose** — complete sentence(s), grammatical, concise
+3. Distinct printed `page`
 
-```
-search_docs(
-  query = "<process> <artifact> <principle keywords>",
-  top_k = 8,
-  collection = "pmp-docs"
-)
-```
+Reject: fragments, `Licensed To`, `Figure 2-`, hits that cannot support a **bridge**.
 
-Pick **3** chunks:
+**Primary hit (`guideHits[0]`):** best **fit** for stem → answer. Cited in bullet 2 with **bridge**.
 
-1. Relevance to query + complete sentences
-2. **Distinct** printed `page` (metadata `page` = PMBOK8 printed page)
-3. Reject: `Licensed To`, `Figure 2-`, mid-sentence fragments, overview boilerplate
+## Iterate tie-in
 
-## Citation
-
-Cite **`PMBOK 8, p. {page}`** + quoted excerpt. Do not cite `file_page`.
-
-Store shape: [CONTRACT.md#store-fields](CONTRACT.md#store-fields).
-
-## Agent vs bootstrap
-
-| Branch | Method |
-|--------|--------|
-| Single ID | MCP `search_docs` via `rag-local-pmp` |
-| Full bank | `node scripts/bootstrap-pmp-teach-signals.js` — `lookupGuideHits()` |
-
-After store update: lesson regen + quiz sync ([SKILL.md](SKILL.md) steps 6–7).
+| Fail | Action |
+|------|--------|
+| Naked quote — excerpt true but unrelated to stem | Re-RAG stem terms; swap primary hit |
+| Wrong domain | New query from stem nouns + correct action |
+| Fragment | Trim to full sentence or paraphrase |
 
 ## Done when
 
-- 3 hits when quality chunks exist (else ≥1 documented)
-- Each hit: printed `page` + complete-sentence excerpt
-- Topics align with `whyBullets` process/artifact
+- ≥1 hit with printed `page` + prose excerpt (target 3)
+- Primary hit supports an explicit **bridge** from stem to correct action

@@ -406,9 +406,58 @@ function buildCompareTable(optionAnalysis, q) {
 }
 
 function buildWhyBullets(analysis, q) {
+  return buildWhyTriad(analysis, q).pmbok;
+}
+
+function buildWhyTriad(analysis, q) {
+  const stored = getStoredTeachGrounding(q.id);
   const grounding = composeGrounding(q, analysis);
   const correctKey = grounding.correctKey || q.correct;
-  return filterWhyBulletsForCorrect(grounding.bullets, correctKey).slice(0, 5);
+
+  const pmbokRaw =
+    stored?.whyPmbokBullets?.length
+      ? stored.whyPmbokBullets
+      : stored?.whyBullets?.length
+        ? stored.whyBullets
+        : grounding.bullets;
+  const pmbok = filterWhyBulletsForCorrect(pmbokRaw, correctKey).slice(0, 5);
+
+  let solution = stored?.whySolutionBullets?.length ? stored.whySolutionBullets : [];
+  if (!solution.length && grounding.whyCorrect && !isGenericReasoning(grounding.whyCorrect)) {
+    const text = grounding.whyCorrect.replace(/^[A-Z]\.\s*/i, "").trim();
+    if (text) solution = [`${correctKey}. ${truncateSentence(text, 240)}`];
+  }
+
+  const web = stored?.whyWebBullets || [];
+  const webSources = stored?.whyWebSources || [];
+
+  return { solution, pmbok, web, webSources };
+}
+
+function renderWhyTriadHtml(triad, mdInline, escapeHtmlFn) {
+  const esc = escapeHtmlFn || ((s) => String(s));
+  const lanes = [];
+
+  if (triad.solution?.length) {
+    lanes.push(
+      `<div class="why-lane why-lane-solution"><h4>1. Reference solution</h4><ul>${triad.solution.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul></div>`,
+    );
+  }
+  if (triad.pmbok?.length) {
+    lanes.push(
+      `<div class="why-lane why-lane-pmbok"><h4>2. PMBOK 8 reasoning</h4><ul>${triad.pmbok.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul></div>`,
+    );
+  }
+  if (triad.web?.length) {
+    const sources = triad.webSources?.length
+      ? `<p class="why-web-sources" style="font-size:0.82rem;color:var(--muted);margin:0.35rem 0 0 1rem"><em>Sources: ${triad.webSources.map((s) => esc(s)).join("; ")}</em></p>`
+      : "";
+    lanes.push(
+      `<div class="why-lane why-lane-web"><h4>3. Supplementary reasoning (web)</h4><ul>${triad.web.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul>${sources}</div>`,
+    );
+  }
+
+  return lanes.join("\n          ");
 }
 
 function buildExcludeRows(q, analysis) {
@@ -449,7 +498,8 @@ function validateTeachGrounding(q, analysis) {
   if (!signalCheck.ok) {
     errors.push(`Q${q.id}: ${signalCheck.errors.join("; ")}`);
   }
-  const whyBullets = buildWhyBullets(analysis, q);
+  const whyTriad = buildWhyTriad(analysis, q);
+  const whyBullets = whyTriad.pmbok;
   if (!whyBullets.length) {
     errors.push(`Q${q.id}: missing whyBullets (Tại sao chọn is empty)`);
   }
@@ -692,7 +742,8 @@ function resolveGuideHits(q, analysis, limit = 3) {
 /** Markdown explanation for quiz pages (exam-latest / full) from teach grounding. */
 function buildTeachExplanationMarkdown(q, analysis) {
   const grounding = composeGrounding(q, analysis);
-  const whyBullets = buildWhyBullets(analysis, q);
+  const whyTriad = buildWhyTriad(analysis, q);
+  const whyBullets = whyTriad.pmbok;
   const excludeRows = buildExcludeRows(q, analysis).filter((r) => r.reason);
   const p8 = analysis.pmbok8 || {};
   const pages = analysis.pageInfo?.pages || [];
@@ -706,7 +757,24 @@ function buildTeachExplanationMarkdown(q, analysis) {
   if (p8.principles?.length) lines.push(`- Principle: ${p8.principles.join(", ")}`);
   lines.push("");
   lines.push("**Why this answer**");
-  for (const b of whyBullets) lines.push(`- ${b}`);
+  if (whyTriad.solution?.length) {
+    lines.push("");
+    lines.push("**1. Reference solution**");
+    for (const b of whyTriad.solution) lines.push(`- ${b}`);
+  }
+  if (whyTriad.pmbok?.length) {
+    lines.push("");
+    lines.push("**2. PMBOK 8 reasoning**");
+    for (const b of whyTriad.pmbok) lines.push(`- ${b}`);
+  }
+  if (whyTriad.web?.length) {
+    lines.push("");
+    lines.push("**3. Supplementary reasoning (web)**");
+    for (const b of whyTriad.web) lines.push(`- ${b}`);
+    if (whyTriad.webSources?.length) {
+      lines.push(`_Sources: ${whyTriad.webSources.join("; ")}_`);
+    }
+  }
   if (excludeRows.length) {
     lines.push("");
     lines.push("**Exclude other options**");
@@ -773,6 +841,8 @@ module.exports = {
   buildActionTypeGrid,
   buildCompareTable,
   buildWhyBullets,
+  buildWhyTriad,
+  renderWhyTriadHtml,
   buildExcludeRows,
   hasTeachSignal,
   validateTeachGrounding,

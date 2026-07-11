@@ -19,7 +19,7 @@ const {
   sanitizeSignalPhrases,
   validateSignalPhrases,
 } = require("./pmp-teach-keywords");
-const { mergeCsvGrounding } = require("./pmp-csv-solution-grounding");
+const { mergeCsvGrounding, buildWhyChainBullets, splitCsvSolutionParts } = require("./pmp-csv-solution-grounding");
 const { csvSolutionStats } = require("./pmp-csv-solutions");
 const {
   loadCacheFile,
@@ -207,10 +207,27 @@ function bootstrapTeachSignalsStore({ questionsPath, storePath, useCsvSolutions 
       if (hits.length) d.entry.guideHits = hits;
       guideFilled++;
     }
+    const correctKey = parseCorrectKeys(d.q.correct)[0] || d.q.correct;
+    const whyPart = d.entry.sourceSolution
+      ? splitCsvSolutionParts(d.entry.sourceSolution).whyPart
+      : d.entry.whyCorrect || (d.entry.whyBullets || []).join(" ");
+    const chain = buildWhyChainBullets({
+      stem: d.q.text,
+      signalPhrases: d.entry.signalPhrases,
+      whyPart,
+      correctKey,
+      guideHits: d.entry.guideHits || [],
+    });
+    if (chain.length >= 2) {
+      d.entry.whyBullets = chain;
+      d.entry.whyPmbokBullets = chain;
+    }
     store[String(d.q.id)] = (() => {
       const merged = { ...d.existingEntry, ...d.entry };
       if (d.entry.sourceSolution) {
         merged.whyBullets = d.entry.whyBullets;
+        merged.whyPmbokBullets = d.entry.whyPmbokBullets || d.entry.whyBullets;
+        merged.whySolutionBullets = d.entry.whySolutionBullets || d.existingEntry?.whySolutionBullets;
         merged.excludeReasons = d.entry.excludeReasons;
         merged.whyCorrect = d.entry.whyCorrect;
         merged.sourceSolution = d.entry.sourceSolution;

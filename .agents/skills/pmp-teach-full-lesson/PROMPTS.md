@@ -1,85 +1,95 @@
 # Prompts
 
-## Grounding
+## Grounding (triad)
 
-**Inputs:** stem, options, correct key, column P (`sourceSolution`), RAG hits from step 3.
+**Inputs:** stem, options, correct key, column P (`sourceSolution`), `guideHits`, web search results.
+
+See [WHY.md](WHY.md) for three lanes.
 
 ```
-You have the reference solution from the question bank (CSV column P):
-
+Reference solution (CSV column P):
 "{sourceSolution}"
 
-Question:
+Stem:
 "{stem}"
 
-Correct answer: {correctKey}. {correctOptionText}
+Correct: {correctKey}. {correctOptionText}
 
-Wrong answers:
-{for each wrong key}
-{key}. {optionText}
+Primary Guide hit:
+PMBOK 8, p. {guideHits[0].page} — {guideHits[0].topic}
+"{guideHits[0].excerpt}"
 
-Extract lesson grounding from the reference solution above.
-
-VERBATIM from column P (no paraphrase, no added PMBOK prose):
-- whyBullets — why-correct section: from after "Solution: {key}." through before "The other answer choices are incorrect"
-- excludeReasons — one verbatim exclude sentence per wrong key from the section after that marker
-
-Signal and guideHits still align to PMBOK 8 — see [RAG.md](RAG.md).
+Web search notes (if any):
+{webSnippets}
 
 Return JSON:
 {
-  "whyCorrect": "same verbatim text as whyBullets[0] when from CSV",
-  "excludeReasons": {
-    "A": "verbatim sentence from column P for wrong A",
-    "C": "…",
-    "D": "…"
-  },
-  "whyBullets": [
-    "verbatim why-correct excerpt from column P"
+  "whySolutionBullets": [
+    "{correctKey}. {1–2 concise bullets from column P why-correct — faithful, not scenario}"
   ],
-  "pmbokConcept": "short excerpt for flashcard",
-  "guideHits": [
-    {
-      "page": 137,
-      "topic": "Monitor Risks",
-      "excerpt": "complete sentence(s) from RAG chunk",
-      "query": "why-aligned search query"
-    }
+  "whyPmbokBullets": [
+    "Scenario: {stem situation — NOT the correct option}",
+    "PMBOK 8, p. {page} ({topic}): {excerpt} — {bridge}.",
+    "Therefore {correctKey} is correct: {PM action}."
   ],
-  "guideQuote": "primary excerpt — same as guideHits[0].excerpt",
-  "guidePages": [137],
-  "guideTopic": "Monitor Risks"
+  "whyBullets": [ …same as whyPmbokBullets — legacy alias… ],
+  "whyWebBullets": [
+    "{supplementary reasoning from web — exam trap, agile misconception, PM practice}"
+  ],
+  "whyWebSources": ["Site or article title"],
+  "excludeReasons": { "A": "…", "C": "…", "D": "…" },
+  "guideHits": [ … ],
+  "guideQuote": "…",
+  "guidePages": […],
+  "guideTopic": "…"
 }
 ```
 
 **Rules:**
-- `whyBullets` → correct answer only, verbatim from column P
-- `excludeReasons` → every wrong key, verbatim from column P
-- If `sourceSolution` missing: derive why/exclude from PMBOK 8 + stem only
+- **solution** lane = column P why-correct only (1–2 bullets)
+- **pmbok** lane = chain + **bridge** — [REASONING.md](REASONING.md)
+- **web** lane = supplementary; cite source; do not repeat pmbok verbatim
+- `excludeReasons` = every wrong key
+
+After JSON: [WHY.md#audit-triad](WHY.md#audit-triad).
+
+---
+
+## Web
+
+[WEB.md](WEB.md) — run before or after pmbok draft.
+
+```
+Stem conflict: "{stem}"
+Correct action: {correctKey}. {correctOptionText}
+
+Search the web for PMP exam / PM practice context that supports this answer.
+Query example: "{misconception} {correct action verb} PMP exam"
+
+Return:
+{
+  "whyWebBullets": ["1–2 English prose bullets"],
+  "whyWebSources": ["source names"]
+}
+```
 
 ---
 
 ## Signal
 
-Signal comes from **stem keywords**, not CSV solution text.
+From **stem keywords** only — not CSV.
 
 ```
 From this English stem, list 2–5 SHORT verbatim English keyword phrases (signalPhrases)
-that point to answer {correctKey} — NOT the full question, NOT full sentences.
+that point to answer {correctKey}.
 
 Rules:
-- Each phrase: 8–80 characters, max 12 words, must appear verbatim in stem
-- Do NOT use only generic exam wording like "What should the project manager do"
-- Do NOT return the entire stem as one phrase
+- Each phrase: 8–80 chars, max 12 words, verbatim in stem
+- No generic-only phrases like "What should the project manager do"
 
-Write signalAnswer in English: how those keyword signals → {correctKey} (PMBOK 8).
+signalAnswer: English prose — keywords → {correctKey}
 
-Stem:
-"{stem}"
+Stem: "{stem}"
 
-Return JSON:
-{
-  "signalPhrases": ["short phrase 1", "short phrase 2"],
-  "signalAnswer": "English only — how keywords → correct action"
-}
+Return JSON: { "signalPhrases": [...], "signalAnswer": "…" }
 ```

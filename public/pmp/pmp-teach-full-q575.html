@@ -49,7 +49,10 @@
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card.source { border-left: 4px solid #7c3aed; background: #f5f3ff; }
-    .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .why-lane { margin: 0.75rem 0 0; }
+    .why-lane h4 { margin: 0 0 0.35rem; font-size: 0.88rem; color: var(--muted); font-weight: 600; }
+    .why-lane ul { margin: 0; padding-left: 1.2rem; }
+    .why-lane-pmbok h4 { color: var(--primary-dark); }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
     .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
@@ -162,7 +165,8 @@
           </div>
           <div class="solution-reasoning-block">
           <h3>Why this answer</h3>
-          <ul><li>A. Explain its purpose to the steering committee and submit the feature as part of a formal <span class="kw-signal">change request</span> to protect the contingency reserve. The project manager should remind the steering committee that reserves should be used only for risks and that features require a formal change process. This action protects the contingency reserve, maintains financial control, and ensures that adjustments are reviewed and approved through proper governance channels.</li></ul>
+          <div class="why-lane why-lane-solution"><h4>1. Reference solution</h4><ul><li>A. Explain its purpose to the steering committee and submit the feature as part of a formal <span class="kw-signal">change request</span> to protect the contingency reserve.</li><li>The project manager should remind the steering committee that reserves should be used only for risks and that features require a formal change process.</li></ul></div>
+          <div class="why-lane why-lane-pmbok"><h4>2. PMBOK 8 reasoning</h4><ul><li>Scenario: During a monthly steering committee meeting, the project sponsor urges the project manager to release contingency reserves to fund a new feature.</li><li><span class="kw-pmbok">PMBOK 8</span>, p. 46 (Performance Domain: <span class="kw-pmbok">Risk</span>, Monitor Risks): Finally, managing risk is intrinsic to managing scope, as risks can significantly alter a project’s trajectory. — so the scope or plan change must follow the formal change process rather than informal workarounds.</li><li>Therefore A is correct: The project manager should remind the steering committee that reserves should be used only for risks and that features require a formal change process.</li></ul></div>
           <h3>Exclude other options</h3>
           <table>
             <thead><tr><th>Option</th><th>Why not</th></tr></thead>
@@ -183,10 +187,7 @@
             <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>1.</strong> PMBOK 8, tr. 98 — Implement Risk Responses</p>
             <p style="margin:0.35rem 0 0">"5 Implement <span class="kw-pmbok">Risk</span> Responses Implement <span class="kw-pmbok">Risk</span> Responses is the process of implementing sufficient risk response plans."</p>
           </div><div style="margin-top:0.85rem">
-            <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>2.</strong> PMBOK 8, tr. 78 — Performance Domain: Risk, Monitor Risks</p>
-            <p style="margin:0.35rem 0 0">"2 <span class="kw-pmbok">Risk</span> responses are identified and successfully implemented. Review the project’s <span class="kw-signal">issue log</span>, <span class="kw-signal">risk register</span>, and stakeholder register for assessment."</p>
-          </div><div style="margin-top:0.85rem">
-            <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>3.</strong> PMBOK 8, tr. 46 — Performance Domain: Risk, Monitor Risks</p>
+            <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>2.</strong> PMBOK 8, tr. 46 — Performance Domain: Risk, Monitor Risks</p>
             <p style="margin:0.35rem 0 0">"Finally, managing risk is intrinsic to managing scope, as risks can significantly alter a project’s trajectory."</p>
           </div>
           </div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 98: Implement <span class="kw-pmbok">Risk</span> Responses</p>

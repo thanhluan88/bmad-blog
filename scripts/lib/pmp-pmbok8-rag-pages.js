@@ -113,6 +113,18 @@ function buildGuideRagQuery(q, analysis, teachEntry = {}) {
   if (/retrospective|sprint|agile team|product owner|backlog/i.test(whyBlob)) {
     parts.unshift("Build empowered culture", "Develop Team", "continuous improvement");
   }
+  const stemLower = String(q.text || "").toLowerCase();
+  if (/agile|continuous improvement|early feedback|iteration|sprint|retrospective/i.test(stemLower)) {
+    parts.unshift(
+      "Agile continuous feedback",
+      "continuous improvement",
+      "early feedback",
+      "team collaboration",
+    );
+  }
+  if (/teamwork|demotivat|reluctant|join the agile team|highest-quality|quality output/i.test(stemLower)) {
+    parts.unshift("Develop Team", "team building", "collaborative teamwork");
+  }
   if (/acceptance criteria|quality standard|defect|validate scope/i.test(whyBlob)) {
     parts.unshift("Validate Scope", "Embed quality", "acceptance criteria");
   }

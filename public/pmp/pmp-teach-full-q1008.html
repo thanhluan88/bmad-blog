@@ -49,7 +49,10 @@
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card.source { border-left: 4px solid #7c3aed; background: #f5f3ff; }
-    .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .why-lane { margin: 0.75rem 0 0; }
+    .why-lane h4 { margin: 0 0 0.35rem; font-size: 0.88rem; color: var(--muted); font-weight: 600; }
+    .why-lane ul { margin: 0; padding-left: 1.2rem; }
+    .why-lane-pmbok h4 { color: var(--primary-dark); }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
     .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
@@ -162,7 +165,8 @@
           </div>
           <div class="solution-reasoning-block">
           <h3>Why this answer</h3>
-          <ul><li>B. Determine whether the requested change is likely to impact one of the project baselines. If a change might affect a project baseline, a formal process should be followed to document the request and assess and implement the changes. The project management plan should assign someone the responsibility to approve, defer, or reject each request.</li></ul>
+          <div class="why-lane why-lane-solution"><h4>1. Reference solution</h4><ul><li>B. Determine whether the requested change is likely to impact one of the project baselines.</li><li>If a change might affect a project baseline, a formal process should be followed to document the request and assess and implement the changes.</li></ul></div>
+          <div class="why-lane why-lane-pmbok"><h4>2. PMBOK 8 reasoning</h4><ul><li>Scenario: A project manager is receiving numerous change requests for various corrective actions, preventative actions, defect repairs, and updates, long after a project’s baselines have been established.</li><li><span class="kw-pmbok">PMBOK 8</span>, p. 21 (<span class="kw-pmbok">Manage Project Execution</span>): 4 <span class="kw-pmbok">Manage Project Execution</span> The <span class="kw-pmbok">Manage Project Execution</span> process involves leading and performing the work defined in the project management plan and implementing approved changes… — so the scope or plan change must follow the formal change process rather than informal workarounds.</li><li>Therefore B is correct: If a change might affect a project baseline, a formal process should be followed to document the request and assess and implement the changes.</li></ul></div>
           <h3>Exclude other options</h3>
           <table>
             <thead><tr><th>Option</th><th>Why not</th></tr></thead>
@@ -183,8 +187,8 @@
             <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>1.</strong> PMBOK 8, tr. 21 — Manage Project Execution</p>
             <p style="margin:0.35rem 0 0">"4 <span class="kw-pmbok">Manage Project Execution</span> The <span class="kw-pmbok">Manage Project Execution</span> process involves leading and performing the work defined in the project management plan and implementing approved changes to meet the project’s objectives."</p>
           </div><div style="margin-top:0.85rem">
-            <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>2.</strong> PMBOK 8, tr. 38 — Performance Domain: Scope, Manage Project Execution</p>
-            <p style="margin:0.35rem 0 0">"⚫ Project scope. Project scope encompasses the work performed to deliver a product, service, or result with the specified features and functions."</p>
+            <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>2.</strong> PMBOK 8, tr. 141 — Performance Domain: Scope, Manage Project Execution</p>
+            <p style="margin:0.35rem 0 0">"A scope management plan is a component of the program or project management plan that describes how the scope will be defined, developed, monitored, controlled, and validated."</p>
           </div><div style="margin-top:0.85rem">
             <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>3.</strong> PMBOK 8, tr. 42 — Performance Domain: Scope, Manage Project Execution</p>
             <p style="margin:0.35rem 0 0">"This process controls how requests for changes to the detailed project scope statement will be processed while also ensuring the deliverables meet the specified quality requirements and that the scope and quality are aligned to"</p>

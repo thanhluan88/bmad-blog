@@ -1,93 +1,99 @@
 ---
 name: pmp-teach-full-lesson
-description: Lesson pipeline for Full Bank PMP questions — CSV solution → RAG → grounding → HTML → quiz sync. Use for pmp-teach-full-q*, lesson quality, or quiz/teach mismatch.
+description: Lesson pipeline — CSV solution → RAG fit → why triad (solution + PMBOK bridge + web) → iterate → HTML → quiz sync. Use for pmp-teach-full-q*, triad/bridge quality, or quiz/teach mismatch.
 ---
 
 # PMP Teach Full Lesson
 
-**Role:** Project Manager owning one **lesson** deliverable per question.
+**Role:** PM owning one **lesson** per question.
 
-**Pipeline:** solution → RAG → grounding → lesson → **sync**
+**Pipeline:** solution → RAG **fit** → **triad** → **iterate** → lesson → **sync**
 
 ## Branches
 
 | Branch | Trigger | Path |
 |--------|---------|------|
-| **Single ID** | Fix one question | Steps 1–7, `--from={id} --to={id}`, hand-RAG |
-| **Full bank** | Regen 1123 | Bootstrap → `--force` → sync (no hand-RAG) |
+| **Single ID** | Fix one question | Steps 1–9; hand-RAG + **web**; **iterate** until triad passes |
+| **Full bank** | Regen 1123 | Bootstrap → `--force` → sync (web lane optional) |
 
-Exam Latest is **out of scope** (`data/pmp-exam-latest-teach-signals.json`).
+Exam Latest is **out of scope**.
 
 ## Quality gate
 
-Any [CONTRACT.md#validation](CONTRACT.md#validation) item fails → **no HTML write**. Never `--allow-incomplete` for publish.
+[CONTRACT.md#validation](CONTRACT.md#validation) + [WHY.md#audit-triad](WHY.md#audit-triad) fail → no HTML. Never `--allow-incomplete` for publish.
 
 ## Inputs
 
 | Asset | Path |
 |-------|------|
 | Question bank | `public/pmp/pmp-full-questions.json` |
-| Reference solution | `all_questions_flat 1.csv` column **P** (`explanation_text`) |
+| Answer key + reference | `all_questions_flat 1.csv` column **P** |
 | Grounding store | `data/pmp-teach-signals.json` |
-| RAG | Skill `rag-local-pmp` — `search_docs` only |
-
-CSV stem match ~1095/1123. Skip CSV when CSV correct key ≠ bank `q.correct`.
+| RAG | `rag-local-pmp` — `search_docs` only |
+| Web | `WebSearch` — [WEB.md](WEB.md) |
 
 ## Steps
 
 ### 1. Load question
 
-Pull `id`, `text`, `options[]`, `correct`, `correctLabel` from bank.
-
-**Done when:** correct key listed; every wrong option key listed.
+**Done when:** correct key + every wrong key listed.
 
 ### 2. Load solution
 
 ```javascript
 const { getCsvSolutionForQuestion } = require("./scripts/lib/pmp-csv-solutions");
 const row = getCsvSolutionForQuestion(q);
-// row.explanationText → sourceSolution (verbatim)
 ```
 
 **Done when:** `sourceSolution` loaded or absence documented.
 
 ### 3. RAG — 3 Guide hits
 
-Follow [RAG.md](RAG.md). Query from solution **why-correct** terms — not stem-only labels.
+[RAG.md](RAG.md) — query from column P + stem; **fit** for **bridge**.
 
-**Done when:** 3 hits with printed `page` + excerpt, or ≥1 with documented fallback.
+**Done when:** ≥1 hit with printed `page` + prose excerpt; target 3 pages.
 
-### 4. Grounding
+### 4. Triad — three why lanes
 
-Run [PROMPTS.md](PROMPTS.md) → write store per [CONTRACT.md#store-fields](CONTRACT.md#store-fields).
+Build per [WHY.md](WHY.md):
 
-- Why + exclude: **English verbatim** from column P; adjacent before Guide
+| Lane | Source | Store field |
+|------|--------|-------------|
+| 1. solution | Column P why-correct | `whySolutionBullets` |
+| 2. pmbok | [REASONING.md](REASONING.md) chain + **bridge** | `whyPmbokBullets` / `whyBullets` |
+| 3. web | [WEB.md](WEB.md) | `whyWebBullets` |
 
-**Done when:** verbatim why; verbatim exclude for every wrong key; `guideHits.length` ≥ 1.
+Run [PROMPTS.md#grounding](PROMPTS.md#grounding).
 
-### 5. Validate
+**Done when:** solution + pmbok lanes pass; web lane filled (single ID) or omitted (full bank).
 
-`validateTeachGrounding(q, analysis)` — retry step 4 on fail.
+### 5. Iterate
 
-**Done when:** passes.
+[REASONING.md#iterate](REASONING.md#iterate) on pmbok **bridge**/**fit**; [WEB.md](WEB.md) on weak web hits.
 
-### 6. Generate lesson
+**Done when:** [WHY.md#audit-triad](WHY.md#audit-triad) passes.
+
+### 6. Validate
+
+`validateTeachGrounding(q, analysis)` + triad audit.
+
+**Done when:** both pass.
+
+### 7. Generate lesson
 
 ```bash
 node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 ```
 
-**Done when:** `1 written, 0 incomplete`.
+**Done when:** `1 written, 0 incomplete`; HTML shows three labelled subsections.
 
-### 7. Sync quiz
+### 8. Sync quiz
 
 ```bash
 node scripts/generate-pmp-full-from-teach.js --skip-bootstrap
 ```
 
-Shared store + `buildTeachExplanationMarkdown()`.
-
-**Done when:** teach `#analysis` matches quiz `#result-{id}` (why, exclude, Guide).
+**Done when:** teach `#analysis` = quiz `#result-{id}`.
 
 ## Full bank release
 
@@ -97,22 +103,25 @@ node scripts/generate-pmp-full-teach-lessons.js --force
 node scripts/generate-pmp-full-from-teach.js --skip-bootstrap
 ```
 
-**Release criteria:** `1123 written, 0 incomplete`; spot-check quiz = teach on sample IDs.
+**Release criteria:** `1123 written, 0 incomplete`; spot-check **triad** on samples.
 
 ## Defect log
 
 | Symptom | Fix |
 |---------|-----|
-| Empty why / exclude | `mergeCsvGrounding()` from column P → store |
-| Paraphrase vs CSV | `whyBullets` / `excludeReasons` must match column P word-for-word |
-| Why ≠ Guide | Re-bootstrap; RAG query from `whyBullets` terms |
-| Quiz ≠ teach | Run sync after lesson regen |
-| No signal | Signal prompt; `validateSignalPhrases` |
-| Guide fragment | Reject via `isMidSentenceFragment`; re-RAG |
+| Why is one flat list | Split into **triad** lanes — [WHY.md](WHY.md) |
+| Naked PMBOK quote | Add **bridge** in pmbok lane |
+| solution = scenario | Lane 1 from column P only; scenario in pmbok lane 1 |
+| web repeats pmbok | Re-search for exam/practice angle |
+| Quiz ≠ teach | Sync after regen |
 
 ## Reference
 
-- [PROMPTS.md](PROMPTS.md) — grounding + signal
+- [WHY.md](WHY.md) — **triad** structure (solution | pmbok | web)
+- [WEB.md](WEB.md) — internet search lane
+- [REASONING.md](REASONING.md) — pmbok chain, bridge, iterate
+- [PROSE.md](PROSE.md) — prose rules
+- [PROMPTS.md](PROMPTS.md) — grounding + signal + web
 - [CONTRACT.md](CONTRACT.md) — store, layout, validation
 - [RAG.md](RAG.md) — 3-hit lookup
-- [examples.md](examples.md) — Q982
+- [examples.md](examples.md) — Q2 triad

@@ -49,7 +49,10 @@
     .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
     .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
     .card.source { border-left: 4px solid #7c3aed; background: #f5f3ff; }
-    .card h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .why-lane { margin: 0.75rem 0 0; }
+    .why-lane h4 { margin: 0 0 0.35rem; font-size: 0.88rem; color: var(--muted); font-weight: 600; }
+    .why-lane ul { margin: 0; padding-left: 1.2rem; }
+    .why-lane-pmbok h4 { color: var(--primary-dark); }
     .signal-card .signal-phrases-en { margin: 0 0 0.65rem; font-size: 0.9rem; line-height: 1.55; }
     .signal-card .signal-answer-en { margin: 0 0 0.5rem; font-size: 0.92rem; line-height: 1.55; }
     .signal-card .signal-conclusion { font-size: 0.9rem; }
@@ -162,7 +165,8 @@
           </div>
           <div class="solution-reasoning-block">
           <h3>Why this answer</h3>
-          <ul><li>B. $45,000 EMV gives the average cost you would expect if this same uncertain risk situation occurred many times. It is used to help determine contingency reserves by aggregating the EMVs of multiple risks. Expected monetary value (EMV) for a single risk is calculated as: EMV = Probability × Impact. From the scenario: Probability = 30% = 0.30 Impact (cost if it occurs) = $150,000 So: EMV = 0.30 × 150,000 = $45,000 Therefore, the correct option is $45,000. The other options are inaccurate due to errors in calculation.</li></ul>
+          <div class="why-lane why-lane-solution"><h4>1. Reference solution</h4><ul><li>B. $45,000 EMV gives the average cost you would expect if this same uncertain risk situation occurred many times.</li><li>It is used to help determine contingency reserves by aggregating the EMVs of multiple risks.</li></ul></div>
+          <div class="why-lane why-lane-pmbok"><h4>2. PMBOK 8 reasoning</h4><ul><li>Scenario: A project manager is analyzing a potential risk that has a 30% probability of occurring.</li><li><span class="kw-pmbok">PMBOK 8</span>, p. 290 (Performance Domain: <span class="kw-pmbok">Risk</span>, <span class="kw-pmbok">Identify Risks</span>): SWOT analysis used in, 204 <span class="kw-pmbok">Risk</span> impact analysis, 242 <span class="kw-pmbok">Risk</span> management plan, 95–96, 134–136 <span class="kw-pmbok">Risk</span> owners, potential, 137 <span class="kw-pmbok">Risk</span> performance domain, 92–102 AI use cases in, 241–242 check… — which is why this PMBOK guidance applies directly to the stem and supports the correct PM action.</li><li>Therefore B is correct: It is used to help determine contingency reserves by aggregating the EMVs of multiple risks.</li></ul></div>
           <h3>Exclude other options</h3>
           <table>
             <thead><tr><th>Option</th><th>Why not</th></tr></thead>
@@ -180,11 +184,14 @@
           </div><div class="card info">
             <h4>Trích dẫn Guide</h4>
             <div style="margin-top:0">
-            <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>1.</strong> PMBOK 8, tr. 96 — Performance Domain: Risk, Identify Risks</p>
-            <p style="margin:0.35rem 0 0">"3 <span class="kw-pmbok">Perform <span class="kw-pmbok">Risk</span> Analysis</span> <span class="kw-pmbok">Perform <span class="kw-pmbok">Risk</span> Analysis</span> involves an iterative process that combines both qualitative and quantitative risk analysis actions."</p>
+            <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>1.</strong> PMBOK 8, tr. 137 — Performance Domain: Risk, Identify Risks</p>
+            <p style="margin:0.35rem 0 0">"A <span class="kw-signal">risk register</span> is a repository in which outputs of risk management processes are recorded. The <span class="kw-signal">risk register</span> captures details of identified individual project risks."</p>
           </div><div style="margin-top:0.85rem">
             <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>2.</strong> PMBOK 8, tr. 290 — Performance Domain: Risk, Identify Risks</p>
             <p style="margin:0.35rem 0 0">"SWOT analysis used in, 204 <span class="kw-pmbok">Risk</span> impact analysis, 242 <span class="kw-pmbok">Risk</span> management plan, 95–96, 134–136 <span class="kw-pmbok">Risk</span> owners, potential, 137 <span class="kw-pmbok">Risk</span> performance domain, 92–102 AI use cases in, 241–242 checking outcomes of, 102 Focus Areas and, 9 interactions"</p>
+          </div><div style="margin-top:0.85rem">
+            <p style="margin:0;font-size:0.82rem;color:var(--muted)"><strong>3.</strong> PMBOK 8, tr. 96 — Performance Domain: Risk, Identify Risks</p>
+            <p style="margin:0.35rem 0 0">"3 <span class="kw-pmbok">Perform <span class="kw-pmbok">Risk</span> Analysis</span> <span class="kw-pmbok">Perform <span class="kw-pmbok">Risk</span> Analysis</span> involves an iterative process that combines both qualitative and quantitative risk analysis actions."</p>
           </div>
           </div><p style="font-size:0.86rem;color:var(--muted);margin:0">- PMBOK8, tr. 290: Performance Domain: <span class="kw-pmbok">Risk</span>, <span class="kw-pmbok">Identify Risks</span></p>
         </section>
@@ -194,7 +201,7 @@
           <p class="flash-hint">Nhấn để lật</p>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
             <div class="flashcard-front">Q873 — chủ đề PMBOK 8?</div>
-            <div class="flashcard-back"><strong>Identify Risks</strong><br><span style="font-size:0.82rem">Identify Risks · Focus on value</span><br><em style="font-size:0.8rem;color:var(--muted)">"3 Perform Risk Analysis Perform Risk Analysis involves an iterative process that combines both qualitative and quantitative risk analysis actions."</em><br>PMBOK 8, tr. 96</div>
+            <div class="flashcard-back"><strong>Identify Risks</strong><br><span style="font-size:0.82rem">Identify Risks · Focus on value</span><br><em style="font-size:0.8rem;color:var(--muted)">"A risk register is a repository in which outputs of risk management processes are recorded. The risk register captures details of identified individual project risks."</em><br>PMBOK 8, tr. 137</div>
           </div></div>
           <div class="flashcard" tabindex="0"><div class="flashcard-inner">
             <div class="flashcard-front">Q873 — đáp án?</div>
