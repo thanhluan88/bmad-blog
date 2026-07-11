@@ -708,6 +708,26 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 
 **Claims:** Review BOE + contract khi dispute cost — không auto-approve claim
 
+### Funding Strategy
+| | |
+|---|---|
+| **Nghĩa** | **Chiến lược tài trợ** — mô tả **nguồn vốn** & cách huy động cho dự án |
+| **PMBOK 8** | **Output** *Plan Financial Management* p.62–63 · p.122–123 |
+| **≠ FMP** | FMP = quy tắc quản lý tài chính · Funding strategy = **sources** |
+| **≠ FLR** | FLR = fit spend vào limits theo kỳ (Develop Budget) |
+
+**Outputs Plan Financial Management:** FMP + **Funding Strategy**
+
+**Loại nguồn:** Org budget transfer · Customer contract · Government/NGO grants · Donors/benefactors
+
+**Q64 vs Q65:**
+| Câu | Stem | Đáp |
+|-----|------|-----|
+| Q64 | Document **how finances managed** | **FMP** |
+| Q65 | NGOs fund · finalize financial plan | **Note in Funding Strategy** → A |
+
+**Bẫy ✗:** Send FMP to sponsor (Q65 B) · Review charter · Engage experts only · Nhầm với FLR
+
 ### Funding limit reconciliation
 | | |
 |---|---|
@@ -961,7 +981,7 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 
 **Ví dụ:** NGOs (environmental initiatives) · Corporate sponsors · Donors/grants · External funders
 
-**Mẹo đề (Q65):** NGOs funding project + finalizing financial plan → **Note benefactors/NGOs in Funding Strategy** ✓
+**Mẹo đề (Q65):** NGOs funding project + finalizing financial plan → **Note benefactors/NGOs in Funding Strategy** ✓ · Chi tiết: [Funding Strategy](#funding-strategy)
 
 ### Triple Bottom Line (TBL)
 | | |
@@ -1234,7 +1254,9 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | highest business value | Prioritize value — không gold-plate |
 | ROI, benefits realization | Business acumen |
 | benefactors, NGOs funding project | Note in Funding Strategy |
-| funding strategy, funding sources | Plan Financial Management output |
+| funding strategy, funding sources, finalize financial plan | Plan Financial Management output |
+| what document shows how finances managed | Financial Management Plan (Q64) |
+| NGOs, grants, donors, external funders | Funding Strategy |
 | benefactor vs beneficiary | Benefactor = cho · Beneficiary = nhận |
 | returns, repairs after release | Failure costs — External |
 | rework, scrap before delivery | Internal Failure |
