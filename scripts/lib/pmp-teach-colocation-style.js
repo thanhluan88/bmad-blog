@@ -629,15 +629,39 @@ ${wrong || "  (xem bảng loại trừ)"}
 Q${q.id} ANSWER: ${q.correct}`;
 }
 
-function quizExplMap(optionAnalysis) {
+function quizExplMap(q, analysisOrOptions) {
+  const analysis = Array.isArray(analysisOrOptions)
+    ? { optionAnalysis: analysisOrOptions }
+    : analysisOrOptions || {};
+  const grounding = composeGrounding(q, analysis);
+  const correctKeys = String(q.correct || "")
+    .split(",")
+    .map((k) => k.trim().toUpperCase())
+    .filter(Boolean);
+  const wrongByKey = new Map(
+    (grounding.whyWrong || []).filter((w) => w.reason).map((w) => [w.key, w.reason]),
+  );
+  const optionAnalysis = analysis.optionAnalysis || [];
   const expl = {};
-  for (const o of optionAnalysis || []) {
-    if (o.isCorrect) {
-      expl[o.key] = o.reason
-        ? `Đúng! ${o.reason}`
+  for (const o of q.options || optionAnalysis) {
+    const key = o.key;
+    if (correctKeys.includes(key)) {
+      const why =
+        grounding.whyCorrect ||
+        optionAnalysis.find((x) => x.key === key && x.isCorrect)?.reason ||
+        "";
+      expl[key] = why
+        ? why.startsWith("Đúng") || /^[A-Z]\.\s/.test(why)
+          ? why.startsWith("Đúng")
+            ? why
+            : `Đúng! ${why}`
+          : `Đúng! ${why}`
         : "Đúng theo PMBOK 8 và phân tích tình huống.";
     } else {
-      expl[o.key] = o.reason || "Không phải lựa chọn tốt nhất trong tình huống này.";
+      expl[key] =
+        wrongByKey.get(key) ||
+        optionAnalysis.find((x) => x.key === key)?.reason ||
+        "Không phải lựa chọn tốt nhất trong tình huống này.";
     }
   }
   return expl;

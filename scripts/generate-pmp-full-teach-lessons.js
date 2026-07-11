@@ -302,7 +302,7 @@ function quizScript(q, analysis) {
   if (q.type !== "mcq" || !q.options?.length) return "";
   const multi = isMultiSelect(q);
   const correct = q.correct;
-  const expl = quizExplMap(analysis.optionAnalysis || []);
+  const expl = quizExplMap(q, analysis);
   const correctLabel = JSON.stringify(q.correctLabel || q.correct);
   if (multi) {
     return `<script>
