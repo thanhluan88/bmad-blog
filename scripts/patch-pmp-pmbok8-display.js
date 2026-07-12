@@ -226,6 +226,7 @@ ${buildQuizHighlightBrowserJs()}
       if (h.includes("pmbok 8 reasoning")) return "why";
       if (h.includes("supplementary reasoning")) return "why";
       if (h.includes("vì sao") || h.includes("vi sao")) return "why";
+      if (h.includes("giải thích dễ hiểu") || h.includes("giai thich de hieu")) return "why";
       if (h.includes("signal trong stem")) return "signal";
       if (h.includes("trích dẫn guide") || h.includes("trich dan guide")) return "guide";
       if (h.includes("exclude other options")) return "reject";

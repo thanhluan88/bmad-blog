@@ -11,6 +11,7 @@ const {
 const { extractStemSignals, sanitizeSignalPhrases, validateSignalPhrases } = require("./pmp-teach-keywords");
 const { formatGuideQuote, lookupGuideQuote, lookupGuideHits } = require("./pmp-pmbok8-rag-pages");
 const { getStoredTeachGrounding } = require("./pmp-teach-signals-store");
+const { buildPlainViExplanation, plainViMarkdownBullets } = require("./pmp-teach-plain-vi");
 
 const ACTION_CONTRAST = {
   explain_agile_value: { title: "Explain Agile value", blurb: "CI + early feedback — expert vẫn đạt chất lượng cao trong teamwork." },
@@ -312,6 +313,7 @@ function buildSignalCard(q, analysis) {
   const grounding = composeGrounding(q, analysis);
   if (!hasTeachSignal(grounding, q.text)) return "";
   const correctKey = grounding.correctKey || q.correct;
+  const plain = buildPlainViExplanation(q, analysis);
   const phrasesHtml = grounding.signalPhrases.length
     ? `<p class="signal-phrases-en">${grounding.signalPhrases
         .map((p) => `<span class="kw-signal">${escapeHtml(p)}</span>`)
@@ -319,6 +321,9 @@ function buildSignalCard(q, analysis) {
     : "";
   const answerHtml = grounding.signalAnswer
     ? `<p class="signal-answer-en">${escapeHtml(grounding.signalAnswer)}</p>`
+    : "";
+  const viHint = plain.summary
+    ? `<p class="signal-answer-vi" style="margin:0.5rem 0 0;font-size:0.92rem;line-height:1.6;color:var(--text)"><strong>Tóm tắt:</strong> ${escapeHtml(plain.summary)}</p>`
     : "";
   const rawConclusion = grounding.conclusion || `→ ${correctKey}: align PMBOK 8.`;
   const showConclusion =
@@ -334,7 +339,32 @@ function buildSignalCard(q, analysis) {
             <h4>Signal trong stem Q${q.id}</h4>
             ${phrasesHtml}
             ${answerHtml}
+            ${viHint}
             ${conclusionHtml ? `<p class="signal-conclusion" style="margin:0">${conclusionHtml}</p>` : ""}
+          </div>`;
+}
+
+function buildPlainViCard(q, analysis) {
+  const plain = buildPlainViExplanation(q, analysis);
+  const bulletHtml = plain.bullets
+    .map((b) => {
+      const html = escapeHtml(b).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      return `<li>${html}</li>`;
+    })
+    .join("");
+  const excludeHtml = plain.excludes.length
+    ? `<h5 style="margin:1rem 0 0.45rem;font-size:0.88rem;color:var(--muted)">Loại trừ phương án khác</h5>
+            <ul style="margin:0;padding-left:1.2rem;font-size:0.9rem">${plain.excludes
+              .map(
+                (ex) =>
+                  `<li><strong>${escapeHtml(ex.key)}.</strong> ${escapeHtml(ex.reason)}</li>`,
+              )
+              .join("")}</ul>`
+    : "";
+  return `<div class="card tip plain-vi-card" style="border-left:4px solid var(--ok);background:var(--ok-bg)">
+            <h4>Giải thích dễ hiểu</h4>
+            <ul class="plain-vi-bullets" style="margin:0;padding-left:1.2rem;line-height:1.65;font-size:0.92rem">${bulletHtml}</ul>
+            ${excludeHtml}
           </div>`;
 }
 
@@ -440,12 +470,12 @@ function renderWhyTriadHtml(triad, mdInline, escapeHtmlFn) {
 
   if (triad.solution?.length) {
     lanes.push(
-      `<div class="why-lane why-lane-solution"><h4>1. Reference solution</h4><ul>${triad.solution.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul></div>`,
+      `<div class="why-lane why-lane-solution"><h4>1. Đáp án tham chiếu (Reference solution)</h4><ul>${triad.solution.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul></div>`,
     );
   }
   if (triad.pmbok?.length) {
     lanes.push(
-      `<div class="why-lane why-lane-pmbok"><h4>2. PMBOK 8 reasoning</h4><ul>${triad.pmbok.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul></div>`,
+      `<div class="why-lane why-lane-pmbok"><h4>2. Lý luận PMBOK 8 (PMBOK reasoning)</h4><ul>${triad.pmbok.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul></div>`,
     );
   }
   if (triad.web?.length) {
@@ -453,7 +483,7 @@ function renderWhyTriadHtml(triad, mdInline, escapeHtmlFn) {
       ? `<p class="why-web-sources" style="font-size:0.82rem;color:var(--muted);margin:0.35rem 0 0 1rem"><em>Sources: ${triad.webSources.map((s) => esc(s)).join("; ")}</em></p>`
       : "";
     lanes.push(
-      `<div class="why-lane why-lane-web"><h4>3. Supplementary reasoning (web)</h4><ul>${triad.web.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul>${sources}</div>`,
+      `<div class="why-lane why-lane-web"><h4>3. Bổ sung từ nguồn ngoài (Web)</h4><ul>${triad.web.map((b) => `<li>${mdInline(b)}</li>`).join("")}</ul>${sources}</div>`,
     );
   }
 
@@ -749,12 +779,16 @@ function buildTeachExplanationMarkdown(q, analysis) {
   const pages = analysis.pageInfo?.pages || [];
   const topic = analysis.pageInfo?.topic || formatFirstItem(p8.processes) || "PMBOK 8";
 
+  const plain = buildPlainViExplanation(q, analysis);
   const lines = [];
   lines.push("**PMBOK 8 mapping**");
   if (p8.domains?.length) lines.push(`- Domain: ${p8.domains.join(", ")}`);
   if (p8.focusArea) lines.push(`- Focus Area: ${p8.focusArea}`);
   if (p8.processes?.length) lines.push(`- Process: ${p8.processes.join(", ")}`);
   if (p8.principles?.length) lines.push(`- Principle: ${p8.principles.join(", ")}`);
+  lines.push("");
+  lines.push("**Giải thích dễ hiểu**");
+  lines.push(...plainViMarkdownBullets(plain));
   lines.push("");
   lines.push("**Why this answer**");
   if (whyTriad.solution?.length) {
@@ -835,6 +869,7 @@ module.exports = {
   composeGrounding,
   resolveTeachSignals,
   buildHeroLead,
+  buildPlainViCard,
   buildGroundingCard,
   buildConceptIntro,
   buildSignalCard,

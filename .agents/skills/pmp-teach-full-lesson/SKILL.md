@@ -85,7 +85,7 @@ Run [PROMPTS.md#grounding](PROMPTS.md#grounding).
 node scripts/generate-pmp-full-teach-lessons.js --force --from={id} --to={id}
 ```
 
-**Done when:** `1 written, 0 incomplete`; HTML shows three labelled subsections.
+**Done when:** `1 written, 0 incomplete`; HTML shows **Giải thích dễ hiểu** (VI) then English triad.
 
 ### 8. Sync quiz
 

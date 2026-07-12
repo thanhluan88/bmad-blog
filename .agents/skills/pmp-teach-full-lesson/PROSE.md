@@ -6,6 +6,25 @@ Column P sets **correct key** and PM action — not scenario text.
 
 ---
 
+## Plain Vietnamese (dễ hiểu)
+
+Every lesson and quiz sync must include **Giải thích dễ hiểu** before the English triad:
+
+| Block | Content |
+|-------|---------|
+| Tình huống | Stem conflict in plain Vietnamese |
+| Đáp án đúng | Key + short option text |
+| Vì sao | PM rationale from `buildSpecificCorrectRationale` |
+| Lưu ý | FIRST/NEXT when stem asks priority |
+| PMBOK 8 | Process + principle + page |
+| Loại trừ | Wrong keys — Vietnamese via `inferWrongReason` |
+
+Engine: `scripts/lib/pmp-teach-plain-vi.js` → `buildPlainViCard()` in HTML; `**Giải thích dễ hiểu**` in quiz markdown.
+
+English triad stays for reference — label **Chi tiết tiếng Anh**.
+
+---
+
 ## RAG excerpt (Guide hit)
 
 Pick or rewrite until excerpt is **prose** and **fits** the stem ([REASONING.md#bridge](REASONING.md#bridge)):

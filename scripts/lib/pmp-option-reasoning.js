@@ -277,6 +277,9 @@ const STEM_PROFILES = [
       wait_delay: "Chờ đợi thay vì thừa nhận lỗi — stakeholder cần phản hồi kịp thời.",
       document_first: "Ghi nhận thay vì acknowledge trực tiếp — thiếu con người trong phản hồi.",
     },
+    excludeReasonsByKey: {
+      D: "Xin lỗi riêng người nhận là bước bổ sung — không phải FIRST; phải acknowledge công khai với toàn team trước.",
+    },
     preferCorrect: ["apologize_accountable", "communicate_inform"],
   },
   {

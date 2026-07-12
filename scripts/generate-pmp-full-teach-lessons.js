@@ -17,6 +17,7 @@ const {
 } = require("./lib/pmp-teach-keywords");
 const {
   buildHeroLead,
+  buildPlainViCard,
   buildSignalCard,
   buildWhyBullets,
   buildWhyTriad,
@@ -546,10 +547,11 @@ function renderLesson(q, prev, next) {
         <section id="analysis">
           <h2>${sec.analysis}. Phân tích đáp án — Đáp án đúng: ${escapeHtml(q.correct)}</h2>
           ${buildSignalCard(q, analysis)}
+          ${buildPlainViCard(q, analysis)}
           <div class="solution-reasoning-block">
-          <h3>Why this answer</h3>
+          <h3>Chi tiết tiếng Anh — Why this answer</h3>
           ${whyHtml}
-          ${excludeHtml ? `<h3>Exclude other options</h3>\n          ${excludeHtml}` : ""}
+          ${excludeHtml ? `<h3>Loại trừ phương án khác (Exclude)</h3>\n          ${excludeHtml}` : ""}
           </div>
           <div class="card tip">
             <h4>Answer</h4>
