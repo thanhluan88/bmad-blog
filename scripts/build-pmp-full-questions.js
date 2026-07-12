@@ -29,13 +29,17 @@ function main() {
 
   let html = fs.readFileSync(HTML_PATH, "utf8");
   const subtitle =
-    `Bộ gốc — ${merged.length} câu — giải thích theo <strong>PMBOK 8</strong>. Chọn đáp án rồi nhấn <strong>Kiểm tra</strong> để xem phân tích.`;
+    `Bộ gốc — ${merged.length} câu — giải thích theo <strong>PMBOK 8</strong>. Chọn đáp án rồi nhấn <strong>Kiểm tra</strong> để xem phân tích. <a href="pmp-exam-prep-lecture.html" style="color:#b45309;font-weight:600">📖 Bài giảng PMP</a>`;
   html = html.replace(
     /<p>Tài liệu luyện tập trắc nghiệm[\s\S]*?<\/p>/,
     `<p>${subtitle}</p>`,
   );
   html = html.replace(
     /<p>ExamTopics[\s\S]*?<\/p>/,
+    `<p>${subtitle}</p>`,
+  );
+  html = html.replace(
+    /<p>Bộ gốc — \d+ câu[\s\S]*?<\/p>/,
     `<p>${subtitle}</p>`,
   );
   fs.writeFileSync(HTML_PATH, html);

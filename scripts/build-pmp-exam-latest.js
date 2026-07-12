@@ -243,6 +243,16 @@ function buildHtml(template, questions) {
       "<p>Bộ gốc — 1123 câu — giải thích theo <strong>PMBOK 8</strong>. Chọn đáp án rồi nhấn <strong>Kiểm tra</strong> để xem phân tích.</p>",
       `<p>${subtitle}</p>`,
     ],
+    [
+      'href="pmp-exam-prep-lecture.html"',
+      'href="pmp-exam-latest-prep-lecture.html"',
+    ],
+    [
+      "← Về bài giảng / trang học PMP",
+      "← Về bài phân tích / trang học Exam Latest",
+    ],
+    ["← Trang học PMP", "← Trang học Exam Latest"],
+    [">📖 Bài giảng PMP</a>", ">📖 Bài phân tích đề ExamTopics</a>"],
     ['max="1123"', `max="${questions.length}"`],
     ['"pmp-quiz-highlights-v1"', '"pmp-exam-latest-highlights-v1"'],
     ['"pmp-mock-exam-v1"', '"pmp-exam-latest-mock-exam-v1"'],
