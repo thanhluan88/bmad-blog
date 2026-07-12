@@ -109,8 +109,51 @@ function buildPmbokNote(analysis) {
   return parts.join(" · ");
 }
 
+function buildDragDropPlainVi(q, analysis, stored) {
+  const correctKey = parseCorrectKeys(q.correct).join(", ");
+  const isTuckman = /tuckman/i.test(q.text || "") || /tuckman/i.test(stored?.signalAnswer || "");
+  const situation = isTuckman
+    ? "Ghép 5 giai đoạn Tuckman Ladder (phát triển nhóm dự án) với mô tả tương ứng."
+    : "Câu kéo-thả — ghép thuật ngữ đúng với từng mô tả / thứ tự.";
+  const rationale = isTuckman
+    ? "Thứ tự chuẩn Forming → Storming → Norming → Performing → Adjourning; mỗi mô tả khớp đúng đặc điểm giai đoạn (kickoff → xung đột → tập thể → synergy → giải tán)."
+    : stored?.whySolutionBullets?.[0] ||
+      stored?.signalAnswer ||
+      `Ghép đúng theo đáp án ${correctKey}.`;
+  const summary = isTuckman
+    ? "Tuckman: Forming → Storming → Norming → Performing → Adjourning."
+    : truncate(stored?.signalAnswer || rationale, 160);
+  const bullets = [
+    `**Tình huống:** ${situation}`,
+    `**Đáp án đúng (${correctKey}):** ${truncate(q.correctLabel || correctKey, 220)}`,
+    `**Vì sao:** ${rationale}`,
+  ];
+  if (isTuckman) {
+    bullets.push(
+      "**Mẹo:** Storming ≠ Norming (còn jockey/xung đột vs đã làm việc tập thể); Performing = hiệu quả + synergy; Adjourning luôn cuối.",
+    );
+  }
+  const pmbokNote = buildPmbokNote(analysis);
+  if (pmbokNote) bullets.push(`**PMBOK 8:** ${pmbokNote}`);
+  return {
+    situation,
+    answerKey: correctKey,
+    answerText: q.correctLabel || "",
+    rationale,
+    summary,
+    bullets,
+    excludes: [],
+    pmbokNote,
+  };
+}
+
 /** Structured plain-VI explanation for one question. */
 function buildPlainViExplanation(q, analysis) {
+  const stored = getStoredTeachGrounding(q.id);
+  if (q.type === "drag_drop") {
+    return buildDragDropPlainVi(q, analysis, stored);
+  }
+
   const correctKeys = parseCorrectKeys(q.correct);
   const correctKey = correctKeys.join(", ");
   const stemProfile = matchStemProfile(q.text);
@@ -122,7 +165,6 @@ function buildPlainViExplanation(q, analysis) {
   const focusArea = meta.focusArea || "Executing";
   const priorityCue = detectPriorityCue(q.text);
   const agile = isAgileContext(q.text);
-  const stored = getStoredTeachGrounding(q.id);
 
   const situation = describeSituation(q, stemProfile, stemIssues);
   const rationale = buildSpecificCorrectRationale(
