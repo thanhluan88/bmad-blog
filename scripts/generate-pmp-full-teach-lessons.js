@@ -1,12 +1,17 @@
 /**
- * Generate PMBOK 8 teach lessons for all questions in pmp-full-questions.json.
- * Usage: node scripts/generate-pmp-full-teach-lessons.js [--force] [--from=N] [--to=N] [--allow-incomplete]
+ * Generate PMBOK 8 teach lessons (Full Bank or Exam Latest).
+ * Usage: node scripts/generate-pmp-full-teach-lessons.js [--bank=full|latest] [--force] [--from=N] [--to=N] [--allow-incomplete]
  */
 const fs = require("fs");
 const path = require("path");
 const { generateTeachAnalysis } = require("./lib/pmp-pmbok8-generator");
 const { loadCacheFile, formatGuideQuote } = require("./lib/pmp-pmbok8-rag-pages");
-const { getStoredTeachGrounding } = require("./lib/pmp-teach-signals-store");
+const {
+  getStoredTeachGrounding,
+  setActiveTeachSignalsStore,
+  STORE_PATH,
+  EXAM_LATEST_STORE_PATH,
+} = require("./lib/pmp-teach-signals-store");
 const { stripSolutionPrefix } = require("./lib/pmp-csv-solutions");
 const {
   highlightExamCues,
@@ -34,12 +39,49 @@ const {
 } = require("./lib/pmp-teach-colocation-style");
 
 const PMP_DIR = path.join(__dirname, "..", "public", "pmp");
-const JSON_PATH = path.join(PMP_DIR, "pmp-full-questions.json");
-const FULL_HTML = path.join(PMP_DIR, "pmp-full-questions.html");
-const INDEX_PATH = path.join(PMP_DIR, "pmp-teach-full-series-index.html");
-const SERIES_JS = path.join(__dirname, "pmp-full-teach-series.js");
 
 const args = process.argv.slice(2);
+const bankArg = args.find((a) => a.startsWith("--bank="));
+const bankKey = bankArg ? bankArg.split("=")[1] : "full";
+
+const BANK_CONFIG = {
+  full: {
+    questionsPath: path.join(PMP_DIR, "pmp-full-questions.json"),
+    quizHtmlPath: path.join(PMP_DIR, "pmp-full-questions.html"),
+    indexPath: path.join(PMP_DIR, "pmp-teach-full-series-index.html"),
+    seriesJsPath: path.join(__dirname, "pmp-full-teach-series.js"),
+    seriesExport: "FULL_SERIES",
+    lessonPrefix: "pmp-teach-full-q",
+    indexPrefix: "full-q",
+    label: "Full Bank",
+    quizSlug: "pmp-full-questions",
+    prepLectureHref: "pmp-exam-prep-lecture.html",
+    storePath: STORE_PATH,
+    seriesNavLabel: "Bộ luyện Full",
+    indexHeading: "Bài giảng Full Bank PMBOK 8",
+  },
+  latest: {
+    questionsPath: path.join(PMP_DIR, "pmp-exam-latest-questions.json"),
+    quizHtmlPath: path.join(PMP_DIR, "pmp-exam-latest.html"),
+    indexPath: path.join(PMP_DIR, "pmp-teach-latest-series-index.html"),
+    seriesJsPath: path.join(__dirname, "pmp-exam-latest-teach-series.js"),
+    seriesExport: "LATEST_SERIES",
+    lessonPrefix: "pmp-teach-latest-q",
+    indexPrefix: "latest-q",
+    label: "Exam Latest",
+    quizSlug: "pmp-exam-latest",
+    prepLectureHref: "pmp-exam-latest-prep-lecture.html",
+    storePath: EXAM_LATEST_STORE_PATH,
+    seriesNavLabel: "Bộ Exam Latest",
+    indexHeading: "Bài giảng Exam Latest PMBOK 8",
+  },
+};
+
+const cfg = BANK_CONFIG[bankKey] || BANK_CONFIG.full;
+if (!BANK_CONFIG[bankKey]) {
+  console.warn(`Unknown --bank=${bankKey}; using full.`);
+}
+
 const force = args.includes("--force");
 const allowIncomplete = args.includes("--allow-incomplete");
 if (allowIncomplete) {
@@ -52,10 +94,14 @@ const toArg = args.find((a) => a.startsWith("--to="));
 const fromId = fromArg ? Number(fromArg.split("=")[1]) : 1;
 const toId = toArg ? Number(toArg.split("=")[1]) : Infinity;
 
-const questions = JSON.parse(fs.readFileSync(JSON_PATH, "utf8"));
+const questions = JSON.parse(fs.readFileSync(cfg.questionsPath, "utf8"));
 
 function lessonFile(id) {
-  return `pmp-teach-full-q${id}.html`;
+  return `${cfg.lessonPrefix}${id}.html`;
+}
+
+function indexFileName() {
+  return path.basename(cfg.indexPath);
 }
 
 function escapeHtml(s) {
@@ -236,7 +282,7 @@ function renderMcqQuiz(q, signalPhrases) {
     )
     .join("\n            ");
   return `<div class="quiz-card" id="mainQuiz">
-            <div class="q-num">pmp-full-questions · Câu ${q.id}${multi ? " · Chọn nhiều" : ""}</div>
+            <div class="q-num">${cfg.quizSlug} · Câu ${q.id}${multi ? " · Chọn nhiều" : ""}</div>
             <div class="q-text">${highlightQuizStem(q.text, signalPhrases)}</div>
             ${opts}
             <div class="feedback" id="quizFeedback"></div>
@@ -263,7 +309,7 @@ function renderNonMcqAnswer(q) {
 function renderQuizBlock(q, signalPhrases) {
   if (q.type === "mcq" && q.options?.length) return renderMcqQuiz(q, signalPhrases);
   return `<div class="quiz-card">
-            <div class="q-num">pmp-full-questions · Câu ${q.id} · ${escapeHtml(q.type)}</div>
+            <div class="q-num">${cfg.quizSlug} · Câu ${q.id} · ${escapeHtml(q.type)}</div>
             <div class="q-text">${highlightQuizStem(q.text, signalPhrases)}</div>
           </div>
           ${renderNonMcqAnswer(q)}`;
@@ -384,7 +430,7 @@ function renderLesson(q, prev, next) {
     pagesBadge,
     formatMappingList(mapping.domains || mapping.domain),
     concept,
-    `Full Bank Q${q.id}`,
+    `${cfg.label} Q${q.id}`,
   ].filter(Boolean);
   const whyTriad = buildWhyTriad(analysis, q);
   const whyHtml = renderWhyTriadHtml(whyTriad, mdInline, escapeHtml);
@@ -400,7 +446,7 @@ function renderLesson(q, prev, next) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Câu ${q.id}: ${escapeHtml(title)} (Full Bank)</title>
+  <title>PMBOK 8 — Câu ${q.id}: ${escapeHtml(title)} (${cfg.label})</title>
   <style>
     :root {
       --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
@@ -498,26 +544,26 @@ function renderLesson(q, prev, next) {
   <div class="layout">
     <aside class="sidebar">
       <div class="brand">PMBOK 8 Teach</div>
-      <div class="brand-sub">Full Bank · Câu ${q.id}</div>
+      <div class="brand-sub">${cfg.label} · Câu ${q.id}</div>
       <nav id="sideNav">
         <a href="#intro" class="active">Giới thiệu</a>
         <a href="#question">Câu hỏi</a>
         <a href="#analysis">Phân tích</a>
         <a href="#flashcards">Flashcard</a>
         <a href="#cheatsheet">Cheat sheet</a>
-        <div class="nav-series">Bộ luyện Full ${questions.length} câu</div>
+        <div class="nav-series">${cfg.seriesNavLabel} ${questions.length} câu</div>
         <a href="${file}" class="series-current">Câu ${q.id}</a>
-        <a href="pmp-teach-full-series-index.html">→ Index Full Bank</a>
-        <a href="pmp-full-questions.html#q-${q.id}">→ Luyện câu ${q.id}</a>
+        <a href="${indexFileName()}">→ Index ${cfg.label}</a>
+        <a href="${cfg.quizSlug}.html#q-${q.id}">→ Luyện câu ${q.id}</a>
         <div class="lesson-pager">${prevLink}${nextLink}</div>
       </nav>
-      <a class="back-link" href="pmp-exam-prep-lecture.html">← Về bài giảng PMP</a>
-      <a class="back-link secondary" href="pmp-full-questions.html">Luyện ${questions.length} câu</a>
+      <a class="back-link" href="${cfg.prepLectureHref}">← Về bài giảng PMP</a>
+      <a class="back-link secondary" href="${cfg.quizSlug}.html">Luyện ${questions.length} câu</a>
     </aside>
     <div>
       <nav class="mobile-nav">
-        <a href="pmp-teach-full-series-index.html">Index</a>
-        <a href="pmp-full-questions.html#q-${q.id}">Câu ${q.id}</a>
+        <a href="${indexFileName()}">Index</a>
+        <a href="${cfg.quizSlug}.html#q-${q.id}">Câu ${q.id}</a>
         <a href="#question">Quiz</a>
         <a href="#analysis">Phân tích</a>
         ${prev ? `<a href="${lessonFile(prev.id)}">← ${prev.id}</a>` : ""}
@@ -537,10 +583,10 @@ function renderLesson(q, prev, next) {
         </header>
 
         <section id="question">
-          <h2>${sec.question}. Câu hỏi thực hành — Full Bank Q${q.id}</h2>
+          <h2>${sec.question}. Câu hỏi thực hành — ${cfg.label} Q${q.id}</h2>
           ${renderQuizBlock(q, grounding.signalPhrases)}
           <p style="font-size:0.86rem;color:var(--muted)">
-            <a href="pmp-full-questions.html#q-${q.id}">→ Mở câu ${q.id} trong bộ luyện đầy đủ</a>
+            <a href="${cfg.quizSlug}.html#q-${q.id}">→ Mở câu ${q.id} trong bộ luyện</a>
           </p>
         </section>
 
@@ -573,8 +619,8 @@ function renderLesson(q, prev, next) {
 
         <footer class="ref-footer">
           ${prevLink} · ${nextLink} ·
-          <a href="pmp-full-questions.html#q-${q.id}">Luyện câu ${q.id}</a> ·
-          <a href="pmp-teach-full-series-index.html">Index Full Bank</a> ·
+          <a href="${cfg.quizSlug}.html#q-${q.id}">Luyện câu ${q.id}</a> ·
+          <a href="${indexFileName()}">Index ${cfg.label}</a> ·
           <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a>
         </footer>
       </main>
@@ -614,11 +660,11 @@ function renderIndex(all) {
     batches.push({ start: slice[0].id, end: slice[slice.length - 1].id, items: slice });
   }
   const chips = batches
-    .map((b) => `<a class="teach-group-chip" href="#full-q${b.start}-${b.end}">Q${b.start}–${b.end}</a>`)
+    .map((b) => `<a class="teach-group-chip" href="#${cfg.indexPrefix}${b.start}-${b.end}">Q${b.start}–${b.end}</a>`)
     .join("\n            ");
   const groups = batches
     .map(
-      (b) => `          <div id="full-q${b.start}-${b.end}" class="teach-group">
+      (b) => `          <div id="${cfg.indexPrefix}${b.start}-${b.end}" class="teach-group">
             <div class="teach-group-head">
               <h3>Q${b.start}–${b.end}</h3>
             </div>
@@ -645,7 +691,7 @@ ${b.items
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMBOK 8 — Full Bank Teach Index (${all.length} câu)</title>
+  <title>PMBOK 8 — ${cfg.label} Teach Index (${all.length} câu)</title>
   <link rel="stylesheet" href="pmp-teach-fullscreen.css">
   <style>
     body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: #fafaf8; color: #1f2937; }
@@ -669,11 +715,11 @@ ${b.items
 </head>
 <body>
   <div class="wrap">
-    <h1>Bài giảng Full Bank PMBOK 8</h1>
+    <h1>${cfg.indexHeading}</h1>
     <p class="lead">${all.length} câu — mỗi câu có phân tích PMBOK 8, quiz, flashcard và cheat sheet.</p>
     <div class="toolbar">
-      <a href="pmp-exam-prep-lecture.html">← Bài giảng PMP</a>
-      <a href="pmp-full-questions.html" class="secondary">Luyện đề Full Bank</a>
+      <a href="${cfg.prepLectureHref}">← Bài giảng PMP</a>
+      <a href="${cfg.quizSlug}.html" class="secondary">Luyện đề ${cfg.label}</a>
       <a href="${lessonFile(1)}" class="secondary">Bắt đầu Câu 1</a>
     </div>
     <div class="teach-group-jump">
@@ -689,34 +735,37 @@ function writeSeriesJs(all) {
   const lines = all.map(
     (q) => `  ["${lessonFile(q.id)}", "Q${q.id}: ${shortTitle(q).replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"],`,
   );
-  const content = `/** Auto-generated by generate-pmp-full-teach-lessons.js */\nmodule.exports.FULL_SERIES = [\n${lines.join("\n")}\n];\n`;
-  fs.writeFileSync(SERIES_JS, content);
+  const content = `/** Auto-generated by generate-pmp-full-teach-lessons.js --bank=${cfg.id} */\nmodule.exports.${cfg.seriesExport} = [\n${lines.join("\n")}\n];\n`;
+  fs.writeFileSync(cfg.seriesJsPath, content);
 }
 
-function patchFullQuestionsHtml() {
-  let html = fs.readFileSync(FULL_HTML, "utf8");
+function patchQuizHtml() {
+  if (!fs.existsSync(cfg.quizHtmlPath)) return;
+  let html = fs.readFileSync(cfg.quizHtmlPath, "utf8");
   html = html.replace(
     /    const TEACH_LESSONS = \{[\s\S]*?\};\n/,
     "",
   );
   html = html.replace(
-    /    function teachLessonHref\(id\) \{[\s\S]*?\n    \}\n/,
+    /    function teachLessonHref\(id\) \{[\s\S]*?\n    \}/,
     `    function teachLessonHref(id) {
-      return "pmp-teach-full-q" + id + ".html";
-    }
-`,
+      return "${cfg.lessonPrefix}" + id + ".html";
+    }`,
   );
   html = html.replace(
-    /    function renderTeachLink\(id\) \{[\s\S]*?\n    \}\n/,
+    /    function renderTeachLink\(id\) \{[\s\S]*?\n    \}/,
     `    function renderTeachLink(id) {
-      return \`<a class="q-teach-link" href="\${teachLessonHref(id)}" target="_blank" rel="noopener">📖 Bài giảng</a>\`;
-    }
-`,
+      const href = teachLessonHref(id);
+      if (!href) return "";
+      return \`<a class="q-teach-link" href="\${href}" target="_blank" rel="noopener">📖 Bài giảng</a>\`;
+    }`,
   );
-  fs.writeFileSync(FULL_HTML, html);
+  fs.writeFileSync(cfg.quizHtmlPath, html);
 }
 
 function main() {
+  setActiveTeachSignalsStore(cfg.storePath);
+  console.log(`Bank: ${cfg.label} (${questions.length} questions)`);
   loadCacheFile();
   let written = 0;
   let skipped = 0;
@@ -747,16 +796,16 @@ function main() {
     if (written % 100 === 0) console.log(`  ... ${written} lessons`);
   }
 
-  fs.writeFileSync(INDEX_PATH, renderIndex(questions), "utf8");
+  fs.writeFileSync(cfg.indexPath, renderIndex(questions), "utf8");
   writeSeriesJs(questions);
-  patchFullQuestionsHtml();
+  patchQuizHtml();
 
   console.log(`Done: ${written} written, ${skipped} skipped, ${incomplete} incomplete (no write)`);
   if (incompleteIds.length) {
-    console.log(`Incomplete IDs (fill data/pmp-teach-signals.json then re-run): ${incompleteIds.slice(0, 30).join(", ")}${incompleteIds.length > 30 ? ` … +${incompleteIds.length - 30} more` : ""}`);
+    console.log(`Incomplete IDs (fill teach signals store then re-run): ${incompleteIds.slice(0, 30).join(", ")}${incompleteIds.length > 30 ? ` … +${incompleteIds.length - 30} more` : ""}`);
   }
-  console.log(`Index: ${INDEX_PATH}`);
-  console.log(`Series: ${SERIES_JS}`);
+  console.log(`Index: ${cfg.indexPath}`);
+  console.log(`Series: ${cfg.seriesJsPath}`);
 }
 
 main();

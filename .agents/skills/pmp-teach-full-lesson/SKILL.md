@@ -15,8 +15,9 @@ description: Lesson pipeline — CSV solution → RAG fit → why triad (solutio
 |--------|---------|------|
 | **Single ID** | Fix one question | Steps 1–9; hand-RAG + **web**; **iterate** until triad passes |
 | **Full bank** | Regen 1123 | Bootstrap → `--force` → sync (web lane optional) |
+| **Exam Latest** | Regen 1417 | `bootstrap-pmp-exam-latest-teach-signals.js` → `generate-pmp-exam-latest-teach-lessons.js --force` → `generate-pmp-exam-latest-from-teach.js --skip-bootstrap` (no CSV) |
 
-Exam Latest is **out of scope**.
+Exam Latest uses `data/pmp-exam-latest-teach-signals.json` and `pmp-teach-latest-q*.html` — not Full Bank IDs.
 
 ## Quality gate
 
