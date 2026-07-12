@@ -234,7 +234,7 @@ function buildHtml(template, questions) {
 
   const dragCount = questions.filter((q) => q.type === "drag_drop").length;
   const subtitle =
-    `ExamTopics (Lasted version 1) — ${questions.length} câu (${dragCount} kéo-thả) — giải thích theo <strong>PMBOK 8</strong>. Chọn đáp án rồi nhấn <strong>Kiểm tra</strong> để xem phân tích.`;
+    `ExamTopics (Lasted version 1) — ${questions.length} câu (${dragCount} kéo-thả) — giải thích theo <strong>PMBOK 8</strong>. Chọn đáp án rồi nhấn <strong>Kiểm tra</strong> để xem phân tích. <a href="pmp-exam-latest-prep-lecture.html" style="color:#b45309;font-weight:600">📖 Bài phân tích đề ExamTopics</a>`;
 
   const replacements = [
     ["PMP Full Questions — Luyện tập trắc nghiệm", "PMP Exam Latest — Luyện tập trắc nghiệm"],

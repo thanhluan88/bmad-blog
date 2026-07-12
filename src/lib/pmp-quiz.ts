@@ -12,6 +12,9 @@ export const PMP_MINDSET_HTML_PATH = "/pmp/pmp-mindset-teach.html";
 export const PMP_EXAM_PREP_HTML_PATH = "/pmp/pmp-exam-prep-lecture.html";
 export const PMP_EXAM_PREP_TITLE = "Bài giảng PMP — PMBOK 8";
 
+export const PMP_EXAM_LATEST_PREP_HTML_PATH = "/pmp/pmp-exam-latest-prep-lecture.html";
+export const PMP_EXAM_LATEST_PREP_TITLE = "Bài phân tích PMP — ExamTopics Lasted v1";
+
 export const PMP_QUIZ_SLUGS = [PMP_QUIZ_SLUG, PMP_EXAM_LATEST_SLUG] as const;
 export type PmpQuizSlug = (typeof PMP_QUIZ_SLUGS)[number];
 

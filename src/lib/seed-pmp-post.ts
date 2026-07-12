@@ -11,7 +11,10 @@ export const PMP_HUB_POST_CONTENT_MD = `Trang này giúp bạn chọn bộ đề
 
 ## Bài giảng PMP
 
-Trước khi drill hàng trăm câu, nên đọc **[Bài giảng PMP — PMBOK 8](/pmp/pmp-exam-prep-lecture.html)**: format đề thi, 7 Domains, 6 Principles, Practice Questions, PMP Mindset drill và lộ trình 12 ngày.
+Trước khi drill hàng trăm câu, nên đọc:
+
+- **[Bài giảng PMP — PMBOK 8](/pmp/pmp-exam-prep-lecture.html)** (bộ Full 1.123 câu): format đề thi, 7 Domains, 6 Principles, Practice Questions, lộ trình 12 ngày.
+- **[Bài phân tích ExamTopics](/pmp/pmp-exam-latest-prep-lecture.html)** (bộ Latest 1.417 câu): phân tích *PMP Exam - Lasted version 1*, thống kê domain, FIRST/NEXT, 100 câu đầu có link luyện đề.
 
 ## Hai bộ đề
 
