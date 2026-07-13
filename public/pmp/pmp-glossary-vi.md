@@ -19,6 +19,7 @@
 10. [Metrics, Bias & Phân tích](#10-metrics-bias--phân-tích)
 11. [Business Environment & Sustainability](#11-business-environment--sustainability)
 12. [Bảng so sánh nhanh](#12-bảng-so-sánh-nhanh)
+13. [Exam Vocab (phiên gần đây)](#13-exam-vocab-phiên-gần-đây)
 
 ---
 
@@ -1367,6 +1368,205 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | hard to monitor changes, heavy process | Inspect & adapt — simplify workflow |
 | iterative + incremental | Agile delivery |
 | lines of code, parametric | COCOMO |
+| in place, controls/system in place | Đã thiết lập & đang vận hành |
+| citing workload / metrics | Viện lý do — verify căn cứ |
+| overwhelmed by stakeholders/defects | Analyze → prioritize / RCA / triage |
+| Monte Carlo, P50/P75 | Quantitative — present & facilitate decision |
+| closeout, premature closure | Procedures + acceptance — không đóng sớm |
+| intermittent errors in pilot | Pause + root cause — không rollout tiếp |
+| minor concessions vs contract | Enforce contract — không waive quality |
+| punitive audit | Reframe: standards + future performance |
+| alleviate dissatisfaction by removing training | Trap — meet & clarify importance |
+| work/testing spilling over | Fix AC/skill/dependency — không dài sprint |
+| pivot the team (first?) | Impact analysis trước khi pivot |
+| conglomerate + acquisition | Engagement aligned to buyer culture |
+| proportionate to impact | Right-sized workaround hoặc structural |
+| rushed testing / rushed work | Protect DoD/AC — không overtime/mid-sprint add |
+| lump sum (funding trap) | ≠ tạo thêm budget; = fixed-price trong procurement |
+| pinpointed policy vagueness | Clarify/revisit that policy via governance |
+| must be justified by benefits | Quantify measurable value trước |
+| fully justified → change baseline alone | Trap — facilitate stakeholder decision |
+| swarming + outside authority | Escalate sponsor — không swarm |
+| ramp-up time / ramping up | Onboarding curve · OPA/PMO · working agreements |
+| force majeure clauses only | Trap nếu cần scenario + contingency proactive |
+| departmental / budget shortfalls | Governance restore · escalate funding |
+| an initiative / transformation initiative | ≈ project/program effort |
+| susceptible to strikes | Risk factor → identify & register |
+
+---
+
+## 13. Exam Vocab (phiên gần đây)
+
+> Từ vựng ôn theo stem Full Bank — nghĩa exam + mẹo chọn đáp án.
+
+### In place
+| | |
+|---|---|
+| **Nghĩa** | Đã có sẵn, đã thiết lập và **đang vận hành** (process/system/control/artifact) |
+| **≠** | Địa điểm vật lý (*on site*) |
+| **PMP** | *controls / version control / measurement system / artifacts **in place*** |
+| **Mẹo đề** | Planning = *put X in place*; Executing = *confirm X is in place* |
+| **Ví dụ** | Q507 version control · Q635 measurement system · Q710 artifacts before execution |
+
+### Citing
+| | |
+|---|---|
+| **Nghĩa** | Viện dẫn / đưa ra **lý do** (*using X as the stated reason*) — không phải citation học thuật |
+| **PMP** | *citing workload / market shortage / governance / quality metrics* |
+| **Mẹo đề** | **Citing ≠ đúng** — verify căn cứ; data-based citing thường tốt hơn excuse |
+| **Trap** | Downplay / delay *citing misunderstanding* — thiếu process |
+
+### Overwhelmed
+| | |
+|---|---|
+| **Nghĩa** | Quá tải — quá nhiều stakeholder/defect/change/info cùng lúc |
+| **PMP** | Signal cần **prioritize / structure / tailor**, không panic hoặc do nothing |
+| **Pattern** | Stakeholders → analysis (Q311) · Defects → RCA (Q781) · Changes → baseline triage (Q1008) |
+| **Trap** | *Wait to avoid overwhelming staff* trước khi clarify roles (Q904) |
+
+### Monte Carlo
+| | |
+|---|---|
+| **Nghĩa** | Mô phỏng định lượng — nhiều kịch bản ngẫu nhiên → **phạm vi + xác suất** (P50/P75) |
+| **PMP** | Quantitative risk / cost-schedule probability — **sau** qualitative khi cần |
+| **Đúng** | Present outcomes → **facilitate decision** (Q716→B) |
+| **Trap** | Tự tăng baseline vì “fully justified” · dùng trước qualitative · thay PESTLE/critical-path reassessment |
+
+### Closeout
+| | |
+|---|---|
+| **Nghĩa** | Đóng dự án/phase: acceptance, admin, handover, lessons, value — formal package |
+| **PMP** | Follow **documented closeout procedures** trong PM plan |
+| **Mẹo đề** | Eager to close ≠ ready · value → charter/business case (Q805) · residual risk transparent (Q293) |
+| **Trap** | Premature closure khi change/acceptance chưa rõ (Q151) |
+
+### Intermittent
+| | |
+|---|---|
+| **Nghĩa** | Không liên tục / lúc có lúc không — khó reproduce nhưng **vẫn là defect thật** |
+| **PMP** | *intermittent errors* trong pilot → pause + root cause (Q450→C) |
+| **Trap** | Proceed & fix later / manual track while rolling out |
+
+### Concessions
+| | |
+|---|---|
+| **Nghĩa** | Nhượng bộ trong đàm phán — bớt yêu cầu để giảm conflict |
+| **PMP** | *minor concessions* thường **trap** khi requirement **integral to contract** (Q616→A enforce durability) |
+| **≠** | Change/amendment có kiểm soát |
+
+### Punitive
+| | |
+|---|---|
+| **Nghĩa** | Mang tính trừng phạt — stakeholder hiểu audit/review là “bắt tội” |
+| **PMP** | Reframe: **standards met** + **improve future performance** (Q224→D,E) |
+| **Trap** | Audit để *reward* team · chỉ show ROI |
+
+### Alleviate
+| | |
+|---|---|
+| **Nghĩa** | Làm giảm / dịu (concerns, dissatisfaction) — chưa chắc giải tận gốc |
+| **Đúng** | Alleviate concerns bằng dialogue + clarify |
+| **Trap** | *Remove training to alleviate dissatisfaction* (Q289→C) — hạ chuẩn |
+
+### Spilling / Spilling over
+| | |
+|---|---|
+| **Nghĩa** | Việc **tràn sang sprint/iteration sau** (carryover) |
+| **PMP** | Trend spillover → systemic (dependency, AC, story size) |
+| **Đúng** | Upskill / clarify AC (Q213, Q499) |
+| **Trap** | Extend sprint · overtime · absorb impact |
+
+### Pivot
+| | |
+|---|---|
+| **Nghĩa** | Đổi hướng / chuyển trọng tâm team sang việc khác (thường agile) |
+| **PMP** | Giữ flow khi blocked — **sau** khi đã phân tích |
+| **Trap** | *Pivot the team… first?* khi có penalty/compliance/vendor trade-offs → **impact analysis first** (Q1105→A) |
+
+### Conglomerate
+| | |
+|---|---|
+| **Nghĩa** | Tập đoàn đa ngành / lớn — bối cảnh org (M&A, enterprise standards) |
+| **PMP** | Post-acquisition → engagement **aligned to acquiring company culture** (Q282→A) |
+| **Trap** | Blind execute enterprise standards / escalate sponsor quá sớm |
+
+### Proportionate
+| | |
+|---|---|
+| **Nghĩa** | Tương xứng với **mức impact** — right-sized response |
+| **PMP** | Workaround *hoặc* structural change **as needed** (Q894→C) |
+| **Trap** | Always biggest fix · always quickest patch · escalate + suspend |
+| **≠ Proportion** | *Proportion* = tỷ lệ/share (Q502) |
+
+### Rushed
+| | |
+|---|---|
+| **Nghĩa** | Làm vội — tốc độ hơn chất lượng → defects |
+| **PMP** | Protect **DoD / AC** (Q499, Q631) |
+| **Trap** | Mid-sprint pull more work · overtime · longer sprint để “có thời gian test” |
+
+### Lump sum
+| | |
+|---|---|
+| **Nghĩa** | Giá / thanh toán **trọn gói** ≈ **fixed-price** khi scope rõ (seller chịu overrun) |
+| **Procurement** | Scope well-defined → lump sum/FFP · scope mở → cost-plus/T&M |
+| **Trap funding (Q533)** | “Lump sum reallocate all budget” **không tạo thêm tiền** sau budget cuts |
+
+### Pinpointed
+| | |
+|---|---|
+| **Nghĩa** | Đã xác định **chính xác** vị trí vấn đề (policy/defect/cause) |
+| **PMP** | *pinpointed vagueness in policies* → clarify/revisit **đúng** policy (Q925) |
+| **≠** | Suspected / possible |
+
+### Justified / Justification
+| | |
+|---|---|
+| **Nghĩa** | Có căn cứ hợp lệ (benefits, data, governance) — không chỉ “nghe hợp lý” |
+| **PMP** | Change *must be justified by measurable benefits* → quantify value (Q651) |
+| **Trap** | *Fully justified* → PM tự đổi baseline (Q716) · informal release reserves |
+| **Governance** | Justification cho contingency release / extra cost gắn business case |
+
+### Swarming *(xem thêm Swarm ở mục Team)*
+| | |
+|---|---|
+| **Nghĩa** | Cả nhóm đổ vào một blocker |
+| **Trap** | Outside team’s authority → **escalate sponsor** (Q1080→D), không swarm |
+
+### Ramp-up / Ramping up
+| | |
+|---|---|
+| **Nghĩa** | Tăng tốc / làm quen để đạt năng suất bình thường (onboarding curve) |
+| **PMP** | *reduce ramp-up time* → institutionalize via **PMO/OPA** (Q929) · *before execution ramps up* → working agreements (Q105) · PM *ramping up* → engage stakeholders + action plan |
+
+### Force majeure (majeure)
+| | |
+|---|---|
+| **Nghĩa** | Bất khả kháng — sự kiện ngoài tầm kiểm soát theo **contract clause** |
+| **PMP** | Legal shield — **không** thay scenario planning + contingency |
+| **Trap** | Chỉ thêm FM clauses khi stem cần **proactive continuity** (Q881→D) |
+
+### Shortfalls
+| | |
+|---|---|
+| **Nghĩa** | Thiếu hụt (thường tiền/ngân sách) |
+| **PMP** | *departmental shortfalls* ← divert project funds = governance violation (Q498→C) · *budget shortfall* → escalate steering (Q737→D) |
+| **≠ Shortcoming** | Điểm yếu năng lực |
+
+### Initiative
+| | |
+|---|---|
+| **Nghĩa** | Nỗ lực / dự án / chương trình (business wording) ≈ **project/program** |
+| **PMP** | *transformation / product / high-visibility initiative* · *multiple initiatives* = resource contention |
+| **≠** | *Take the initiative* (tính chủ động cá nhân) — hiếm với danh từ *an initiative* |
+
+### Susceptible
+| | |
+|---|---|
+| **Nghĩa** | Dễ bị ảnh hưởng / dễ xảy ra với… (*prone to / vulnerable to*) |
+| **PMP** | *labor … susceptible to strikes* = **risk driver** → identify & register (Q934→C,D) |
+| **≠** | Suspect / suspicious · **≠** *subject to* (regulations) |
+| **Trap** | Escalate trước khi structured risk identification |
 
 ---
 
