@@ -69,6 +69,14 @@
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .quiz-card .q-text.q-prompt { margin-top: 0.75rem; }
+    .score-table-wrap { margin: 0.85rem 0 1rem; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+    .score-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.88rem; margin: 0; border: none; border-radius: 0; }
+    .score-table caption { caption-side: top; text-align: left; font-weight: 700; color: var(--primary-dark); padding: 0.75rem 0.85rem 0.35rem; }
+    .score-table th, .score-table td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; vertical-align: top; }
+    .score-table thead th { background: var(--bg); white-space: nowrap; }
+    .score-table tbody tr:last-child td { border-bottom: none; }
+    .score-table td.num { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
     .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
@@ -143,7 +151,15 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q629</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 629</div>
-            <div class="q-text">A project manager is managing a predictive construction project. The scheduler prepares the following simplified schedule fragment to support impact analysis: ID Activity Predecessor(s) Original Duration (days) Original Finish Notes A Finalize entrance design − 5 Day 5 Includes door and main lobby layout B Structural engineering review A 3 Day 8 Uses finalized entrance design C Electrical and security design A 4 Day 9 Includes cameras and access control D Permitting submission B, C 2 Day 11 Submission to city authorities E Construction of the main entrance D 10 Day 21 Cannot start before permits are approved A key <span class="kw-signal">stakeholder requests an additional security checkpoint near t</span>he main entrance. <span class="kw-signal">The change request would add</span> two days to Activity C, but does <span class="kw-cue">not</span> affect any other durations. <span class="kw-cue">What should the project manager do</span>?</div>
+            <div class="q-text">A project manager is managing a predictive construction project. The scheduler prepares the following simplified schedule fragment to support impact analysis:</div>
+            <div class="score-table-wrap">
+          <table class="score-table">
+            <caption>Schedule fragment</caption>
+            <thead><tr><th>ID</th><th>Activity</th><th>Predecessor(s)</th><th>Duration (days)</th><th>Original Finish</th><th>Notes</th></tr></thead>
+            <tbody><tr><td>A</td><td>Finalize entrance design</td><td>−</td><td class="num">5</td><td>Day 5</td><td>Includes door and main lobby layout</td></tr><tr><td>B</td><td>Structural engineering review</td><td>A</td><td class="num">3</td><td>Day 8</td><td>Uses finalized entrance design</td></tr><tr><td>C</td><td>Electrical and security design</td><td>A</td><td class="num">4</td><td>Day 9</td><td>Includes cameras and access control</td></tr><tr><td>D</td><td>Permitting submission</td><td>B, C</td><td class="num">2</td><td>Day 11</td><td>Submission to city authorities</td></tr><tr><td>E</td><td>Construction of the main entrance</td><td>D</td><td class="num">10</td><td>Day 21</td><td>Cannot start before permits are approved</td></tr></tbody>
+          </table>
+        </div>
+            <div class="q-text q-prompt">A key <span class="kw-signal">stakeholder requests an additional security checkpoint near t</span>he main entrance. <span class="kw-signal">The change request would add</span> two days to Activity C, but does <span class="kw-cue">not</span> affect any other durations. <span class="kw-cue">What should the project manager do</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. Formally submit the <span class="kw-signal">change request</span>, update the impact analysis to show how the change will affect outcomes, and present everything to the change control board for approval.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Reject the change request because it will extend Activity C and therefore <span class="kw-trap">delay</span> the overall project completion by two days.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Notify the stakeholder that the request is approved and will be implemented, as the impact is limited to two days for Activity C.</button>
@@ -151,7 +167,7 @@
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
-            <a href="pmp-full-questions.html#q-629">→ Mở câu 629 trong bộ luyện đầy đủ</a>
+            <a href="pmp-full-questions.html#q-629">→ Mở câu 629 trong bộ luyện</a>
           </p>
         </section>
 

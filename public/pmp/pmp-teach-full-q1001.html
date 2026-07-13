@@ -69,6 +69,14 @@
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .quiz-card .q-text.q-prompt { margin-top: 0.75rem; }
+    .score-table-wrap { margin: 0.85rem 0 1rem; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+    .score-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.88rem; margin: 0; border: none; border-radius: 0; }
+    .score-table caption { caption-side: top; text-align: left; font-weight: 700; color: var(--primary-dark); padding: 0.75rem 0.85rem 0.35rem; }
+    .score-table th, .score-table td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; vertical-align: top; }
+    .score-table thead th { background: var(--bg); white-space: nowrap; }
+    .score-table tbody tr:last-child td { border-bottom: none; }
+    .score-table td.num { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
     .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
@@ -143,7 +151,15 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q1001</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 1001 · Chọn nhiều</div>
-            <div class="q-text">A manufacturing company is designing a new user interface for its internal engineers. The project manager developed a requirements traceability matrix to monitor progress and ensure that all requirements are tracked and met. The CEO has informed the project manager that one of the original design elements must be changed, and the change must be approved by all <span class="kw-signal">stakeholders</span>. Requirements Traceability Matrix Project Name ABC Manufacturing Description New User Interface ID Feature Requirements Source Assigned Status Priority RQ-001 A1 Gather user needs Engineers Business Analyst Completed High A2 Map workflow requirements Engineers Business Analyst Completed Medium A3 Specify design elements CEO / Stakeholders Team Lead Completed High A4 Validate design concept Team Lead Designers <span class="kw-cue">Not</span> Started Medium RQ-002 B1 Build interface prototype Development Team Developer In Progress High B2 Integrate with internal tools Development Team Developer <span class="kw-cue">Not</span> <span class="kw-signal">Started High B3 Conduct usability testing Quality Assurance</span> (QA) Team QA Lead <span class="kw-cue">Not</span> Started Medium RQ-003 C1 Security review Security Security Lead <span class="kw-cue">Not</span> Started High C2 Performance benchmarks Project Manager Engineer <span class="kw-cue">Not</span> Started Medium C3 System compatibility checks Project Manager Engineer <span class="kw-cue">Not</span> Started Medium RQ-004 D1 Deployment preparation Project Manager DevOps <span class="kw-cue">Not</span> Started Medium RQ-005 E1 Post-deployment review Project Manager PMO <span class="kw-cue">Not</span> Started Low Which two actions should the project manager take to update the requirements traceability matrix? (Refer to the table) (<span class="kw-cue">Choose 2</span>)</div>
+            <div class="q-text">A manufacturing company is designing a new user interface for its internal engineers. The project manager developed a requirements traceability matrix to monitor progress and ensure that all requirements are tracked and met. The CEO has informed the project manager that one of the original design elements must be changed, and the change must be approved by all <span class="kw-signal">stakeholders</span>.</div>
+            <div class="score-table-wrap">
+          <table class="score-table">
+            <caption>Requirements Traceability Matrix — Project: ABC Manufacturing · Description: New User Interface</caption>
+            <thead><tr><th>ID</th><th>Feature</th><th>Requirements</th><th>Description</th><th>Source</th><th>Assigned</th><th>Status</th><th>Priority</th></tr></thead>
+            <tbody><tr><td>RQ-001</td><td>A1</td><td>Gather user needs</td><td></td><td>Engineers</td><td>Business Analyst</td><td>Completed</td><td>High</td></tr><tr><td>RQ-001</td><td>A2</td><td>Map workflow requirements</td><td></td><td>Engineers</td><td>Business Analyst</td><td>Completed</td><td>Medium</td></tr><tr><td>RQ-001</td><td>A3</td><td>Specify design elements</td><td></td><td>CEO / Stakeholders</td><td>Team Lead</td><td>Completed</td><td>High</td></tr><tr><td>RQ-001</td><td>A4</td><td>Validate design concept Team Lead</td><td></td><td></td><td>Designers</td><td>Not Started</td><td>Medium</td></tr><tr><td>RQ-002</td><td>B1</td><td>Build interface prototype</td><td></td><td>Development Team</td><td>Developer</td><td>In Progress</td><td>High</td></tr><tr><td>RQ-002</td><td>B2</td><td>Integrate with internal tools</td><td></td><td>Development Team</td><td>Developer</td><td>Not Started</td><td>High</td></tr><tr><td>RQ-002</td><td>B3</td><td>Conduct usability testing</td><td></td><td>Quality Assurance (QA) Team</td><td>QA Lead</td><td>Not Started</td><td>Medium</td></tr><tr><td>RQ-003</td><td>C1</td><td>Security review</td><td></td><td>Security</td><td>Security Lead</td><td>Not Started</td><td>High</td></tr><tr><td>RQ-003</td><td>C2</td><td>Performance benchmarks</td><td></td><td>Project Manager</td><td>Engineer</td><td>Not Started</td><td>Medium</td></tr><tr><td>RQ-003</td><td>C3</td><td>System compatibility checks</td><td></td><td>Project Manager</td><td>Engineer</td><td>Not Started</td><td>Medium</td></tr><tr><td>RQ-004</td><td>D1</td><td>Deployment preparation</td><td></td><td>Project Manager</td><td>DevOps</td><td>Not Started</td><td>Medium</td></tr><tr><td>RQ-005</td><td>E1</td><td>Post-deployment review</td><td></td><td>Project Manager</td><td>PMO</td><td>Not Started</td><td>Low</td></tr></tbody>
+          </table>
+        </div>
+            <div class="q-text q-prompt">Which two actions should the project manager take to update the requirements traceability matrix? (Refer to the table) (<span class="kw-cue">Choose 2</span>)</div>
             <button class="opt-btn" data-opt="A" type="button">A. Change the priority of the &quot;Validate design concept&quot; row to &quot;Low&quot;.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Change the status of the &quot;Specify design elements&quot; to &quot;In Progress&quot;.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Change the assigned individuals for the &quot;Specify design elements&quot; row to &quot;Stakeholders&quot;.</button>
@@ -151,7 +167,7 @@
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
-            <a href="pmp-full-questions.html#q-1001">→ Mở câu 1001 trong bộ luyện đầy đủ</a>
+            <a href="pmp-full-questions.html#q-1001">→ Mở câu 1001 trong bộ luyện</a>
           </p>
         </section>
 

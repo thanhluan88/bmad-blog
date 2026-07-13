@@ -69,6 +69,14 @@
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .quiz-card .q-text.q-prompt { margin-top: 0.75rem; }
+    .score-table-wrap { margin: 0.85rem 0 1rem; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+    .score-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.88rem; margin: 0; border: none; border-radius: 0; }
+    .score-table caption { caption-side: top; text-align: left; font-weight: 700; color: var(--primary-dark); padding: 0.75rem 0.85rem 0.35rem; }
+    .score-table th, .score-table td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; vertical-align: top; }
+    .score-table thead th { background: var(--bg); white-space: nowrap; }
+    .score-table tbody tr:last-child td { border-bottom: none; }
+    .score-table td.num { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
     .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
@@ -143,7 +151,15 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q988</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 988</div>
-            <div class="q-text">A banking company is designing a new user interface for its customers. The project manager needs to monitor progress and ensure that all requirements are tracked and met. To do so, the project manager is developing a requirements traceability matrix. The bank’s president is requesting that data security be of utmost importance. Requirements Traceability Matrix Project Name ABC Bank Software Update Project Owner Bank President Project Description New Software Banking Interface ID Feature Requirements Description Source Status Priority RQ-001 A1 User must be able to view balance User In progress Highest A2 User must be able to transfer funds User <span class="kw-cue">Not</span> started High A3 User must be able to deposit checks User Completed High A4 User must be able to download data IT Dept. Medium RQ-002 B1 System must send bill due date alerts B2 System must send overdraft alerts B3 System must send minimum balance alerts RQ-003 C1 System must prevent <span class="kw-signal">transaction errors C2 System must prevent email delivery</span> failure C3 System must compile transaction history RQ-004 D1 System must support secure multi-factor authentication (MFA) RQ-005 E1 <span class="kw-cue">What should the project manager do</span> to update the requirements traceability matrix (RTM)? (Refer to the RTM)</div>
+            <div class="q-text">A banking company is designing a new user interface for its customers. The project manager needs to monitor progress and ensure that all requirements are tracked and met. To do so, the project manager is developing a requirements traceability matrix. The bank’s president is requesting that data security be of utmost importance.</div>
+            <div class="score-table-wrap">
+          <table class="score-table">
+            <caption>Requirements Traceability Matrix — Project: ABC Bank Software Update · Owner: Bank President · Description: New Software Banking Interface</caption>
+            <thead><tr><th>ID</th><th>Feature</th><th>Requirements</th><th>Description</th><th>Source</th><th>Status</th><th>Priority</th></tr></thead>
+            <tbody><tr><td>RQ-001</td><td>A1</td><td>User must be able to view balance</td><td></td><td>User</td><td>In progress</td><td>Highest</td></tr><tr><td>RQ-001</td><td>A2</td><td>User must be able to transfer funds</td><td></td><td>User</td><td>Not started</td><td>High</td></tr><tr><td>RQ-001</td><td>A3</td><td>User must be able to deposit checks</td><td></td><td>User</td><td>Completed</td><td>High</td></tr><tr><td>RQ-001</td><td>A4</td><td>User must be able to download data</td><td></td><td>IT Dept.</td><td></td><td>Medium</td></tr><tr><td>RQ-002</td><td>B1</td><td>System must send bill due date alerts</td><td></td><td></td><td></td><td></td></tr><tr><td>RQ-002</td><td>B2</td><td>System must send overdraft alerts</td><td></td><td></td><td></td><td></td></tr><tr><td>RQ-002</td><td>B3</td><td>System must send minimum balance alerts</td><td></td><td></td><td></td><td></td></tr><tr><td>RQ-003</td><td>C1</td><td>System must prevent transaction errors</td><td></td><td></td><td></td><td></td></tr><tr><td>RQ-003</td><td>C2</td><td>System must prevent email delivery failure</td><td></td><td></td><td></td><td></td></tr><tr><td>RQ-003</td><td>C3</td><td>System must compile transaction history</td><td></td><td></td><td></td><td></td></tr><tr><td>RQ-004</td><td>D1</td><td>System must support secure multi-factor authentication (MFA)</td><td></td><td></td><td></td><td></td></tr></tbody>
+          </table>
+        </div>
+            <div class="q-text q-prompt"><span class="kw-cue">What should the project manager do</span> to update the requirements traceability matrix (RTM)? (Refer to the RTM)</div>
             <button class="opt-btn" data-opt="A" type="button">A. Update the priority of “User must be able to transfer funds” to Medium and set the priority of “User must be able to download data” to Highest.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Change the priority of “User must be able to view balance” to High and set the priority of “System must support multi-factor authentication (MFA)” to Highest.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Add a new column titled “Order of Completion” and designate “System must support multi-factor authentication (MFA)” as 1.</button>
@@ -151,7 +167,7 @@
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
-            <a href="pmp-full-questions.html#q-988">→ Mở câu 988 trong bộ luyện đầy đủ</a>
+            <a href="pmp-full-questions.html#q-988">→ Mở câu 988 trong bộ luyện</a>
           </p>
         </section>
 

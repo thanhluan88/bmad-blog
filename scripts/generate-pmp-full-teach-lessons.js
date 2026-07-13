@@ -37,6 +37,10 @@ const {
   resolveGuideQuote,
   resolveGuideHits,
 } = require("./lib/pmp-teach-colocation-style");
+const {
+  parseEmbeddedTableForStem,
+  renderStemTableHtml,
+} = require("./lib/pmp-embedded-table-parsers");
 
 const PMP_DIR = path.join(__dirname, "..", "public", "pmp");
 
@@ -273,6 +277,16 @@ function renderOptionsGrid(q) {
     .join("")}</div>`;
 }
 
+function renderQuestionStemBlock(q, signalPhrases) {
+  const table = parseEmbeddedTableForStem(q.text);
+  if (!table) {
+    return `<div class="q-text">${highlightQuizStem(q.text, signalPhrases)}</div>`;
+  }
+  return `${table.intro ? `<div class="q-text">${highlightQuizStem(table.intro, signalPhrases)}</div>` : ""}
+            ${renderStemTableHtml(table)}
+            ${table.questionPrompt ? `<div class="q-text q-prompt">${highlightQuizStem(table.questionPrompt, signalPhrases)}</div>` : ""}`;
+}
+
 function renderMcqQuiz(q, signalPhrases) {
   const multi = isMultiSelect(q);
   const opts = (q.options || [])
@@ -283,7 +297,7 @@ function renderMcqQuiz(q, signalPhrases) {
     .join("\n            ");
   return `<div class="quiz-card" id="mainQuiz">
             <div class="q-num">${cfg.quizSlug} · Câu ${q.id}${multi ? " · Chọn nhiều" : ""}</div>
-            <div class="q-text">${highlightQuizStem(q.text, signalPhrases)}</div>
+            ${renderQuestionStemBlock(q, signalPhrases)}
             ${opts}
             <div class="feedback" id="quizFeedback"></div>
           </div>`;
@@ -310,7 +324,7 @@ function renderQuizBlock(q, signalPhrases) {
   if (q.type === "mcq" && q.options?.length) return renderMcqQuiz(q, signalPhrases);
   return `<div class="quiz-card">
             <div class="q-num">${cfg.quizSlug} · Câu ${q.id} · ${escapeHtml(q.type)}</div>
-            <div class="q-text">${highlightQuizStem(q.text, signalPhrases)}</div>
+            ${renderQuestionStemBlock(q, signalPhrases)}
           </div>
           ${renderNonMcqAnswer(q)}`;
 }
@@ -512,6 +526,14 @@ function renderLesson(q, prev, next) {
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .quiz-card .q-text.q-prompt { margin-top: 0.75rem; }
+    .score-table-wrap { margin: 0.85rem 0 1rem; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+    .score-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.88rem; margin: 0; border: none; border-radius: 0; }
+    .score-table caption { caption-side: top; text-align: left; font-weight: 700; color: var(--primary-dark); padding: 0.75rem 0.85rem 0.35rem; }
+    .score-table th, .score-table td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; vertical-align: top; }
+    .score-table thead th { background: var(--bg); white-space: nowrap; }
+    .score-table tbody tr:last-child td { border-bottom: none; }
+    .score-table td.num { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
     .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }

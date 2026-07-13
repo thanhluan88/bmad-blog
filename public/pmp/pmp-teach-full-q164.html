@@ -69,6 +69,14 @@
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .quiz-card .q-text.q-prompt { margin-top: 0.75rem; }
+    .score-table-wrap { margin: 0.85rem 0 1rem; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+    .score-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.88rem; margin: 0; border: none; border-radius: 0; }
+    .score-table caption { caption-side: top; text-align: left; font-weight: 700; color: var(--primary-dark); padding: 0.75rem 0.85rem 0.35rem; }
+    .score-table th, .score-table td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; vertical-align: top; }
+    .score-table thead th { background: var(--bg); white-space: nowrap; }
+    .score-table tbody tr:last-child td { border-bottom: none; }
+    .score-table td.num { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
     .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
@@ -143,7 +151,15 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q164</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 164</div>
-            <div class="q-text">During a daily coordination meeting, the project manager displays a table that the team developed using three-point estimates for critical path activities. A key <span class="kw-signal">stakeholder insists on using the optimistic estimates to shor</span>ten the overall schedule, <span class="kw-signal">but the risk manager argues</span> that excluding pessimistic values will make the contingency reserve meaningless. <span class="kw-signal">The project sponsor is worried</span> that inflated estimates could delay project approval. Activity Optimistic (days) <span class="kw-cue">Most</span> Likely (days) Pessimistic (days) A 4 8 12 B 5 7 8 C 10 11 14 D 3 6 9 E 4 5 8 <span class="kw-cue">What should the project manager do</span>? (Refer to the table)</div>
+            <div class="q-text">During a daily coordination meeting, the project manager displays a table that the team developed using three-point estimates for critical path activities. A key <span class="kw-signal">stakeholder insists on using the optimistic estimates to shor</span>ten the overall schedule, <span class="kw-signal">but the risk manager argues</span> that excluding pessimistic values will make the contingency reserve meaningless. <span class="kw-signal">The project sponsor is worried</span> that inflated estimates could delay project approval.</div>
+            <div class="score-table-wrap">
+          <table class="score-table">
+            <caption>Three-point activity estimates (days)</caption>
+            <thead><tr><th>Activity</th><th>Optimistic (days)</th><th>Most Likely (days)</th><th>Pessimistic (days)</th></tr></thead>
+            <tbody><tr><td>A</td><td class="num">4</td><td class="num">8</td><td class="num">12</td></tr><tr><td>B</td><td class="num">5</td><td class="num">7</td><td class="num">8</td></tr><tr><td>C</td><td class="num">10</td><td class="num">11</td><td class="num">14</td></tr><tr><td>D</td><td class="num">3</td><td class="num">6</td><td class="num">9</td></tr><tr><td>E</td><td class="num">4</td><td class="num">5</td><td class="num">8</td></tr></tbody>
+          </table>
+        </div>
+            <div class="q-text q-prompt"><span class="kw-cue">What should the project manager do</span>? (Refer to the table)</div>
             <button class="opt-btn" data-opt="A" type="button">A. Develop the baseline using only the optimistic estimates to satisfy stakeholders and secure early approval.</button>
             <button class="opt-btn" data-opt="B" type="button">B. Select the most likely values as the baseline and document optimistic and pessimistic values separately.</button>
             <button class="opt-btn" data-opt="C" type="button">C. Apply the program evaluation review technique (PERT) formula to integrate all three estimates and justify a balanced, data-driven schedule.</button>
@@ -151,7 +167,7 @@
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
-            <a href="pmp-full-questions.html#q-164">→ Mở câu 164 trong bộ luyện đầy đủ</a>
+            <a href="pmp-full-questions.html#q-164">→ Mở câu 164 trong bộ luyện</a>
           </p>
         </section>
 

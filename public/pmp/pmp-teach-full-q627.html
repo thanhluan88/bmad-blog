@@ -69,6 +69,14 @@
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .quiz-card .q-text.q-prompt { margin-top: 0.75rem; }
+    .score-table-wrap { margin: 0.85rem 0 1rem; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+    .score-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.88rem; margin: 0; border: none; border-radius: 0; }
+    .score-table caption { caption-side: top; text-align: left; font-weight: 700; color: var(--primary-dark); padding: 0.75rem 0.85rem 0.35rem; }
+    .score-table th, .score-table td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; vertical-align: top; }
+    .score-table thead th { background: var(--bg); white-space: nowrap; }
+    .score-table tbody tr:last-child td { border-bottom: none; }
+    .score-table td.num { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
     .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
@@ -143,7 +151,15 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q627</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 627</div>
-            <div class="q-text">A project manager is working on a construction project. <span class="kw-signal">The sponsor asks for a mid-project performance update</span>. The project manager prepares the following summary table (values in USD): Work Package Planned Value (PV) Earned Value (EV) Actual Cost (AC) Site Preparation 200,000 200,000 220,000 Foundation 300,000 250,000 260,000 Framing 400,000 300,000 280,000 Roofing 100,000 80,000 90,000 Based on this CPI and the data in the table, which is the <span class="kw-cue">most</span> <span class="kw-signal">appropriate statement to share with the sponsor</span>?</div>
+            <div class="q-text">A project manager is working on a construction project. <span class="kw-signal">The sponsor asks for a mid-project performance update</span>. The project manager prepares the following summary table (values in USD):</div>
+            <div class="score-table-wrap">
+          <table class="score-table">
+            <caption>Work package performance (USD)</caption>
+            <thead><tr><th>Work Package</th><th>Planned Value (PV)</th><th>Earned Value (EV)</th><th>Actual Cost (AC)</th></tr></thead>
+            <tbody><tr><td>Site Preparation</td><td class="num">200,000</td><td class="num">200,000</td><td class="num">220,000</td></tr><tr><td>Foundation</td><td class="num">300,000</td><td class="num">250,000</td><td class="num">260,000</td></tr><tr><td>Framing</td><td class="num">400,000</td><td class="num">300,000</td><td class="num">280,000</td></tr><tr><td>Roofing</td><td class="num">100,000</td><td class="num">80,000</td><td class="num">90,000</td></tr></tbody>
+          </table>
+        </div>
+            <div class="q-text q-prompt">Based on this CPI and the data in the table, which is the <span class="kw-cue">most</span> <span class="kw-signal">appropriate statement to share with the sponsor</span>?</div>
             <button class="opt-btn" data-opt="A" type="button">A. The project is slightly over budget overall but does not require immediate budget re-baselining; the team will continue monitoring costs and looking for efficiencies.</button>
             <button class="opt-btn" data-opt="B" type="button">B. The project is significantly under budget overall; the team will request the finance department to release the unused funds to another project.</button>
             <button class="opt-btn" data-opt="C" type="button">C. The project is extremely over budget; the team must immediately submit a formal change request to increase the total project budget by at least 20%.</button>
@@ -151,7 +167,7 @@
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
-            <a href="pmp-full-questions.html#q-627">→ Mở câu 627 trong bộ luyện đầy đủ</a>
+            <a href="pmp-full-questions.html#q-627">→ Mở câu 627 trong bộ luyện</a>
           </p>
         </section>
 

@@ -69,6 +69,14 @@
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .quiz-card .q-text.q-prompt { margin-top: 0.75rem; }
+    .score-table-wrap { margin: 0.85rem 0 1rem; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+    .score-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.88rem; margin: 0; border: none; border-radius: 0; }
+    .score-table caption { caption-side: top; text-align: left; font-weight: 700; color: var(--primary-dark); padding: 0.75rem 0.85rem 0.35rem; }
+    .score-table th, .score-table td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; vertical-align: top; }
+    .score-table thead th { background: var(--bg); white-space: nowrap; }
+    .score-table tbody tr:last-child td { border-bottom: none; }
+    .score-table td.num { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
     .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
@@ -143,7 +151,15 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q441</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 441</div>
-            <div class="q-text">Below <span class="kw-signal">is a list of project</span> activities and durations in days: Task Duration Start Predecessor(s) A 4 days Project start None B 6 days A C 5 days A D 4 days B E 3 days C F 2 days D and E What is the length of the critical path?</div>
+            <div class="q-text">Below <span class="kw-signal">is a list of project</span> activities and durations in days:</div>
+            <div class="score-table-wrap">
+          <table class="score-table">
+            <caption>Activities and durations</caption>
+            <thead><tr><th>Task</th><th>Duration</th><th>Start</th><th>Predecessor(s)</th></tr></thead>
+            <tbody><tr><td>A</td><td>4 days</td><td>Project start</td><td>None</td></tr><tr><td>B</td><td>6 days</td><td>A</td><td>—</td></tr><tr><td>C</td><td>5 days</td><td>A</td><td>—</td></tr><tr><td>D</td><td>4 days</td><td>B</td><td>—</td></tr><tr><td>E</td><td>3 days</td><td>C</td><td>—</td></tr><tr><td>F</td><td>2 days</td><td>D and E</td><td>—</td></tr></tbody>
+          </table>
+        </div>
+            <div class="q-text q-prompt">What is the length of the critical path?</div>
             <button class="opt-btn" data-opt="A" type="button">A. 13 days</button>
             <button class="opt-btn" data-opt="B" type="button">B. 16 days</button>
             <button class="opt-btn" data-opt="C" type="button">C. 17 days</button>
@@ -151,7 +167,7 @@
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
-            <a href="pmp-full-questions.html#q-441">→ Mở câu 441 trong bộ luyện đầy đủ</a>
+            <a href="pmp-full-questions.html#q-441">→ Mở câu 441 trong bộ luyện</a>
           </p>
         </section>
 
