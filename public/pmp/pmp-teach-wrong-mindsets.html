@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMBOK 8 Teach — Mindset từ câu đã sai (Full Bank)</title>
+  <style>
+    :root {
+      --bg: #fafaf8; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
+      --primary: #d97706; --primary-dark: #b45309; --primary-bg: #fffbeb;
+      --ok: #059669; --ok-bg: #ecfdf5; --bad: #dc2626; --bad-bg: #fef2f2;
+      --info: #2563eb; --info-bg: #eff6ff; --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); --radius: 14px; --sidebar-w: 260px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: 100dvh; }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .mobile-nav { display: flex !important; }
+    }
+    .sidebar {
+      position: sticky; top: 0; height: 100vh; overflow-y: auto;
+      background: var(--card); border-right: 1px solid var(--border);
+      padding: 1.25rem 1rem 2rem;
+    }
+    .sidebar .brand { font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .sidebar .brand-sub { font-size: 0.78rem; color: var(--muted); margin: 0.2rem 0 1rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+    .sidebar nav a {
+      display: block; padding: 0.45rem 0.65rem; color: var(--muted);
+      text-decoration: none; border-radius: 8px; font-size: 0.86rem; margin-bottom: 1px;
+    }
+    .sidebar nav a:hover, .sidebar nav a.active { background: var(--primary-bg); color: var(--primary-dark); }
+    .sidebar nav a.active { font-weight: 600; border-left: 3px solid var(--primary); }
+    .sidebar .back-link {
+      display: block; margin-top: 1.25rem; padding: 0.65rem 0.85rem;
+      background: var(--primary); color: #fff; text-align: center; border-radius: 10px;
+      text-decoration: none; font-weight: 600; font-size: 0.88rem;
+    }
+    .sidebar .back-link.secondary {
+      margin-top: 0.5rem; background: var(--card); color: var(--primary-dark); border: 1px solid var(--border);
+    }
+    .mobile-nav {
+      display: none; position: sticky; top: 0; z-index: 30; background: var(--card);
+      border-bottom: 1px solid var(--border); padding: 0.6rem 0.85rem; gap: 0.4rem; overflow-x: auto;
+    }
+    .mobile-nav a {
+      white-space: nowrap; padding: 0.35rem 0.7rem; background: var(--bg); color: var(--muted);
+      text-decoration: none; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border);
+    }
+    main { padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem; max-width: 920px; }
+    .hero {
+      background: linear-gradient(135deg, #fff 0%, var(--primary-bg) 100%);
+      border: 1px solid #fde68a; border-radius: var(--radius); padding: 1.75rem 1.5rem;
+      margin-bottom: 2rem; box-shadow: var(--shadow);
+    }
+    .hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.35rem, 3vw, 1.75rem); }
+    .hero .lead { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 72ch; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .badge {
+      font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 99px;
+      background: #fff; border: 1px solid var(--border); color: var(--primary-dark); font-weight: 500;
+    }
+    section { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
+    section > h2 {
+      font-size: 1.3rem; margin: 0 0 1rem; padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary); color: var(--primary-dark);
+    }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 0.65rem; }
+    section p { margin: 0 0 0.75rem; }
+    section ul { margin: 0 0 1rem 1.2rem; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.1rem 1.25rem; margin-bottom: 1rem;
+    }
+    .card.tip { border-left: 4px solid var(--ok); background: var(--ok-bg); }
+    .card.warn { border-left: 4px solid var(--primary); background: var(--primary-bg); }
+    .card.danger { border-left: 4px solid var(--bad); background: var(--bad-bg); }
+    .card.info { border-left: 4px solid var(--info); background: var(--info-bg); }
+    .rule {
+      font-family: Consolas, ui-monospace, monospace; font-size: 0.88rem;
+      background: #1f2937; color: #f3f4f6; border-radius: 10px; padding: 0.85rem 1rem; margin: 0.75rem 0;
+    }
+    table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.88rem; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    th, td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
+    th { background: var(--bg); color: var(--primary-dark); font-weight: 600; font-size: 0.82rem; }
+    tr:last-child td { border-bottom: none; }
+    .id-chip {
+      display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 0.1rem 0.45rem;
+      border-radius: 99px; background: var(--primary-bg); color: var(--primary-dark); margin-right: 0.25rem;
+      text-decoration: none;
+    }
+    .id-chip:hover { background: #fde68a; }
+    .quiz-card {
+      background: var(--card); border: 2px solid var(--border); border-radius: var(--radius);
+      padding: 1.25rem; margin-bottom: 1rem;
+    }
+    .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
+    .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .kw-cue { background: #fef9c3; color: #854d0e; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
+    .opt-btn {
+      display: block; width: 100%; text-align: left; padding: 0.7rem 1rem; margin-bottom: 0.45rem;
+      background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer;
+      font-family: inherit; font-size: 0.9rem;
+    }
+    .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); }
+    .opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: #065f46; font-weight: 600; }
+    .opt-btn.wrong { border-color: var(--bad); background: var(--bad-bg); color: #991b1b; opacity: 0.85; }
+    .opt-btn:disabled { cursor: default; }
+    .feedback { display: none; margin-top: 1rem; padding: 1rem; border-radius: 10px; font-size: 0.9rem; }
+    .feedback.show { display: block; }
+    .feedback.ok { background: var(--ok-bg); border: 1px solid #a7f3d0; }
+    .feedback.bad { background: var(--bad-bg); border: 1px solid #fecaca; }
+    .flashcard { perspective: 1000px; height: 140px; cursor: pointer; margin-bottom: 0.75rem; }
+    .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
+    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+    .flashcard-front, .flashcard-back {
+      position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius);
+      padding: 1rem; display: flex; align-items: center; justify-content: center; text-align: center;
+      border: 1px solid var(--border); font-size: 0.88rem;
+    }
+    .flashcard-front { background: var(--card); font-weight: 600; }
+    .flashcard-back { background: var(--primary-bg); border-color: #fde68a; transform: rotateY(180deg); }
+    .flash-hint { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem; }
+    .cheat-sheet {
+      background: #1f2937; color: #f3f4f6; border-radius: var(--radius); padding: 1.25rem;
+      font-family: Consolas, monospace; font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap;
+    }
+    .score-bar {
+      position: sticky; bottom: 0; background: var(--card); border-top: 1px solid var(--border);
+      padding: 0.75rem 1rem; display: flex; gap: 1rem; align-items: center; justify-content: space-between;
+      font-size: 0.9rem; z-index: 20;
+    }
+    .ref-footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 2rem; }
+    .flow {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 1rem 0;
+    }
+    @media (max-width: 700px) { .flow { grid-template-columns: 1fr 1fr; } }
+    .flow-step {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 0.75rem; text-align: center; font-size: 0.8rem;
+    }
+    .flow-step strong { display: block; color: var(--primary-dark); margin-bottom: 0.25rem; }
+  </style>
+  <link rel="stylesheet" href="pmp-teach-fullscreen.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">PMBOK 8 Teach</div>
+      <div class="brand-sub">Mindset · câu đã sai · Full Bank</div>
+      <nav id="sideNav">
+        <a href="#intro" class="active">Giới thiệu</a>
+        <a href="#map">Bản đồ 6 mindset</a>
+        <a href="#m1">1. Risk vs Issue</a>
+        <a href="#m2">2. Authority</a>
+        <a href="#m3">3. Compliance</a>
+        <a href="#m4">4. Change forward</a>
+        <a href="#m5">5. Lessons → action</a>
+        <a href="#m6">6. Value trước scope</a>
+        <a href="#practice">Luyện 6 câu</a>
+        <a href="#flash">Flashcard</a>
+        <a href="#cheat">Cheat sheet</a>
+      </nav>
+      <a class="back-link" href="pmp-full-questions.html">→ Luyện Full Bank</a>
+      <a class="back-link secondary" href="pmp-glossary-vi.html">Glossary</a>
+      <a class="back-link secondary" href="pmp-teach-cheat-sheet.html">Cheat sheet PMP</a>
+    </aside>
+
+    <div>
+      <nav class="mobile-nav">
+        <a href="#intro">Intro</a>
+        <a href="#map">Map</a>
+        <a href="#m1">Risk</a>
+        <a href="#m2">Auth</a>
+        <a href="#m3">Comp</a>
+        <a href="#practice">Quiz</a>
+        <a href="#cheat">Cheat</a>
+      </nav>
+
+      <main>
+        <header class="hero" id="intro">
+          <h1>Mindset PMP từ câu bạn đã sai</h1>
+          <p class="lead">
+            Bài này gom <strong>22 câu Full Bank</strong> có <code>wrong &gt; 0</code> (user <strong>luannt115</strong>)
+            thành <strong>6 mindset</strong> lặp lại. Mục tiêu: nhận diện stem cue → chọn hành động đúng cấp quyền / đúng lúc — không học thuộc từng ID.
+          </p>
+          <div class="badges">
+            <span class="badge">Full Bank</span>
+            <span class="badge">22 wrong</span>
+            <span class="badge">Lead accountably</span>
+            <span class="badge">Focus on value</span>
+          </div>
+        </header>
+
+        <section id="map">
+          <h2>Bản đồ 6 mindset</h2>
+          <div class="card info">
+            <p style="margin:0">Hỏi agent nếu một cue chưa rõ — đây là lớp <em>wisdom</em> trên từng câu teach riêng.</p>
+          </div>
+          <table>
+            <thead>
+              <tr><th>Mindset</th><th>Cue trong stem</th><th>Hành động đúng</th><th>ID mẫu</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Risk vs Issue</strong></td>
+                <td><em>potential / not yet known / could</em></td>
+                <td>Log risk → monitor (chưa pause / revise / escalate vội)</td>
+                <td><a class="id-chip" href="pmp-full-questions.html#q-948">948</a><a class="id-chip" href="pmp-full-questions.html#q-975">975</a></td>
+              </tr>
+              <tr>
+                <td><strong>2. Authority</strong></td>
+                <td><em>outside team’s authority / beyond PM</em></td>
+                <td>Escalate đúng cấp — không swarm / tự sửa schedule</td>
+                <td><a class="id-chip" href="pmp-full-questions.html#q-1080">1080</a><a class="id-chip" href="pmp-full-questions.html#q-1020">1020</a></td>
+              </tr>
+              <tr>
+                <td><strong>3. Compliance continuum</strong></td>
+                <td>regs update / noncompliance / ethics / local vs HQ</td>
+                <td>Monitor · audit · track · OPA/governance · escalation (không exception)</td>
+                <td><a class="id-chip" href="pmp-full-questions.html#q-959">959</a><a class="id-chip" href="pmp-full-questions.html#q-964">964</a><a class="id-chip" href="pmp-full-questions.html#q-1047">1047</a></td>
+              </tr>
+              <tr>
+                <td><strong>4. Change forward</strong></td>
+                <td>đã đổi informal / CCB approved</td>
+                <td>Siết process <em>going forward</em> · audit effectiveness</td>
+                <td><a class="id-chip" href="pmp-full-questions.html#q-978">978</a><a class="id-chip" href="pmp-full-questions.html#q-996">996</a></td>
+              </tr>
+              <tr>
+                <td><strong>5. Lessons → action</strong></td>
+                <td>lessons / failed project / future outcomes</td>
+                <td>Integrate vào plan / risk / share performance — không blame</td>
+                <td><a class="id-chip" href="pmp-full-questions.html#q-942">942</a><a class="id-chip" href="pmp-full-questions.html#q-1006">1006</a></td>
+              </tr>
+              <tr>
+                <td><strong>6. Value trước scope</strong></td>
+                <td>sponsor pushes tech / new idea / metrics</td>
+                <td>Assess value với sponsor · metrics sát priority</td>
+                <td><a class="id-chip" href="pmp-full-questions.html#q-1061">1061</a><a class="id-chip" href="pmp-full-questions.html#q-1060">1060</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="m1">
+          <h2>1. Risk vs Issue — “chưa chắc” thì chưa đổi plan</h2>
+          <div class="rule">could / potential / full impact not yet known  →  RISK REGISTER + MONITOR</div>
+          <div class="card tip">
+            <strong>Đúng (Q948):</strong> Funding delay có thể ảnh hưởng budget/timeline nhưng impact chưa rõ →
+            <em>log risk and monitor</em>.
+          </div>
+          <div class="card danger">
+            <strong>Trap:</strong> Pause toàn bộ · Escalate sponsor ngay · Revise budget/schedule ngay · CR trước khi shortage “chắc”.
+          </div>
+          <div class="card warn">
+            <strong>Q975:</strong> Timber shortage <em>potential</em> → giảm dependency (multi-vendor), không change request sớm.
+          </div>
+          <p>Liên quan glossary: <a href="pmp-glossary-vi.html#susceptible">susceptible</a> (risk driver), force majeure ≠ contingency plan.</p>
+        </section>
+
+        <section id="m2">
+          <h2>2. Authority — swarm không tạo thêm quyền</h2>
+          <div class="rule">outside team’s authority / cannot resolve at PM level  →  ESCALATE</div>
+          <div class="flow">
+            <div class="flow-step"><strong>1. Detect</strong>Blocker / delay</div>
+            <div class="flow-step"><strong>2. Ask</strong>Trong quyền team?</div>
+            <div class="flow-step"><strong>3a. Yes</strong>Swarm / RCA / fix</div>
+            <div class="flow-step"><strong>3b. No</strong>Escalate sponsor</div>
+          </div>
+          <div class="card tip">
+            <strong>Q1080:</strong> Critical task delay + actions <span class="kw-signal">outside authority</span> → escalate sponsor (không swarm session).
+          </div>
+          <div class="card tip">
+            <strong>Q1020:</strong> New law, legal implication beyond PM → escalate + issue log + change process.
+          </div>
+          <div class="card warn">
+            <strong>Q1014 nuance:</strong> Compliance <em>may apply</em>, chưa rõ → research + recommend cho sponsor — không pause charter, không nhét assumption mù.
+          </div>
+        </section>
+
+        <section id="m3">
+          <h2>3. Compliance — hệ thống liên tục, không giấy một lần</h2>
+          <div class="rule">regs change mid-project  →  CONTINUOUS MONITOR + EXPERTS + AUDIT/TRACK</div>
+          <ul>
+            <li><strong>Q959:</strong> Gaps vs updated standards → continuous regulatory monitoring.</li>
+            <li><strong>Q964:</strong> Safeguard noncompliance → schedule an <em>audit</em>.</li>
+            <li><strong>Q1024:</strong> Future regs → tracking system cho backlog alignment.</li>
+            <li><strong>Q1044:</strong> Ethics → OPA tạo governance framework (integrity/transparency).</li>
+            <li><strong>Q1047:</strong> Local vs HQ → legal validate + escalation procedures — <em>không</em> authorize ethics exceptions.</li>
+            <li><strong>Q1083:</strong> Design + safety protocols → đưa team OPA + charter trước khi hire/benchmark.</li>
+          </ul>
+        </section>
+
+        <section id="m4">
+          <h2>4. Change control — đi tiếp đúng process</h2>
+          <div class="rule">informal changes already happened  →  ENFORCE CCB GOING FORWARD (ít khi reverse all)</div>
+          <div class="card tip">
+            <strong>Q978:</strong> Scope đổi không qua CCB → đảm bảo thay đổi <em>tương lai</em> đi formal process.
+          </div>
+          <div class="rule">CCB already approved  →  VERIFY IMPLEMENTATION (quality audit)</div>
+          <div class="card tip">
+            <strong>Q996:</strong> Không chỉ update change log/baseline — <em>run quality audits</em> xem change đã implement hiệu quả.
+          </div>
+        </section>
+
+        <section id="m5">
+          <h2>5. Lessons learned phải actionable</h2>
+          <div class="rule">lessons / failed project  →  INTEGRATE INTO PLANS + RISK + SHARE (no blame)</div>
+          <table>
+            <thead><tr><th>Trap</th><th>Đúng</th></tr></thead>
+            <tbody>
+              <tr><td>Chỉ archive / xem video / interview</td><td>Integrate vào upcoming project plans (Q942)</td></tr>
+              <tr><td>Blame who was wrong / generic docs</td><td>Risk discussions + share for performance (Q1006 A,C)</td></tr>
+              <tr><td>Workshop cuối bắt buộc</td><td>Dùng sớm cho planning &amp; skill</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="m6">
+          <h2>6. Value với sponsor trước khi nhận scope</h2>
+          <div class="rule">sponsor cites new tech / market share  →  ASSESS VALUE → UPDATE PLAN</div>
+          <div class="card tip">
+            <strong>Q1061:</strong> Không báo delay ngay / không team tự cap scope — làm việc với sponsor đánh giá value rồi mới revise strategy.
+          </div>
+          <div class="card tip">
+            <strong>Q1060:</strong> Success metrics = safety incident rate + weather delay days + SPI — không vanity counts.
+          </div>
+          <div class="card warn">
+            <strong>Bonus agile (Q1113):</strong> PO đổi giữa sprint → discuss + assess impact — không ignore, không “agile nên nhận hết và vẫn on time”.
+          </div>
+        </section>
+
+        <section id="practice">
+          <h2>Luyện 6 câu (retrieval)</h2>
+          <p class="flash-hint">Chọn đáp án → nhận feedback ngay. Options cân bằng độ dài để tránh đoán theo format.</p>
+
+          <div class="quiz-card" data-quiz="0">
+            <div class="q-num">Mindset 1 · Q948-style</div>
+            <div class="q-text">Funding approval bị delay; có thể ảnh hưởng budget/timeline nhưng <span class="kw-cue">impact chưa rõ</span>. PM làm gì?</div>
+            <button type="button" class="opt-btn" data-k="A">Pause mọi hoạt động đến khi funding được xác nhận</button>
+            <button type="button" class="opt-btn" data-k="B">Escalate sponsor ngay và xin quyết định tiến/lùi</button>
+            <button type="button" class="opt-btn" data-k="C">Sửa ngay budget và schedule theo tác động dự kiến</button>
+            <button type="button" class="opt-btn" data-k="D">Ghi vào risk register và theo dõi diễn biến tiếp theo</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="1">
+            <div class="q-num">Mindset 2 · Q1080-style</div>
+            <div class="q-text">Critical task chậm iteration; hành động cần thiết <span class="kw-signal">ngoài thẩm quyền team</span>. Next?</div>
+            <button type="button" class="opt-btn" data-k="A">Delay iteration và thông báo stakeholders</button>
+            <button type="button" class="opt-btn" data-k="B">Mời team swarming để tìm giải pháp nội bộ</button>
+            <button type="button" class="opt-btn" data-k="C">Điều chỉnh timeline phản ánh độ trễ hiện tại</button>
+            <button type="button" class="opt-btn" data-k="D">Escalate lên sponsor để xác định bước tiếp theo</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="2">
+            <div class="q-num">Mindset 3 · Q959-style</div>
+            <div class="q-text">Audit phát hiện gap vì <span class="kw-cue">regulatory standards đã cập nhật</span> giữa dự án. PM lẽ ra nên làm gì sớm hơn?</div>
+            <button type="button" class="opt-btn" data-k="A">Thiết lập giám sát regulatory liên tục kèm chuyên gia</button>
+            <button type="button" class="opt-btn" data-k="B">Chỉ tạo template tài liệu compliance toàn diện</button>
+            <button type="button" class="opt-btn" data-k="C">Chỉ họp validation một lần với auditors</button>
+            <button type="button" class="opt-btn" data-k="D">Đợi đến lúc audit rồi mới cập nhật quy trình</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="3">
+            <div class="q-num">Mindset 4 · Q978-style</div>
+            <div class="q-text">PM mới vào execution; phát hiện vài scope change đã làm <span class="kw-cue">không qua CCB</span>. Làm gì?</div>
+            <button type="button" class="opt-btn" data-k="A">Đảo ngược mọi change và khôi phục baseline gốc</button>
+            <button type="button" class="opt-btn" data-k="B">Ghi issue log rồi họp corrective với team</button>
+            <button type="button" class="opt-btn" data-k="C">Escalate từng change để sponsor duyệt/hủy</button>
+            <button type="button" class="opt-btn" data-k="D">Đảm bảo change sau này đi đúng formal change control</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="4">
+            <div class="q-num">Mindset 5 · Q942-style</div>
+            <div class="q-text">Cần dùng lessons learned để <span class="kw-cue">cải thiện dự án tương lai</span>. PM nên?</div>
+            <button type="button" class="opt-btn" data-k="A">Tích hợp findings vào plans cho dự án/giai đoạn sắp tới</button>
+            <button type="button" class="opt-btn" data-k="B">Chỉ xem archive PMIS về risk mitigation cũ</button>
+            <button type="button" class="opt-btn" data-k="C">Chỉ phỏng vấn stakeholder để refine scope mới</button>
+            <button type="button" class="opt-btn" data-k="D">Chỉ xem video các phase từng gặp vấn đề</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="5">
+            <div class="q-num">Mindset 6 · Q1061-style</div>
+            <div class="q-text">Sponsor muốn tech mới (market share); engineers nói cần <span class="kw-cue">recode lớn</span>. PM làm gì?</div>
+            <button type="button" class="opt-btn" data-k="A">Cùng sponsor đánh giá value rồi cập nhật project plan</button>
+            <button type="button" class="opt-btn" data-k="B">Báo stakeholders sẽ phình scope và trễ tiến độ</button>
+            <button type="button" class="opt-btn" data-k="C">Để team tự chốt mức scope tối đa họ chịu được</button>
+            <button type="button" class="opt-btn" data-k="D">Iterate kỹ thuật liên tục mà chưa chốt chiến lược</button>
+            <div class="feedback" data-fb></div>
+          </div>
+        </section>
+
+        <section id="flash">
+          <h2>Flashcard</h2>
+          <p class="flash-hint">Chạm để lật · ôn retrieval trước khi mở Full Bank filter “Sai”</p>
+          <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Cue: potential / not yet known</div>
+              <div class="flashcard-back">Risk register + monitor — chưa pause/revise/escalate</div>
+            </div>
+          </div>
+          <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Cue: outside team’s authority</div>
+              <div class="flashcard-back">Escalate sponsor — không swarm</div>
+            </div>
+          </div>
+          <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Cue: informal scope already done</div>
+              <div class="flashcard-back">Enforce CCB going forward</div>
+            </div>
+          </div>
+          <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Cue: CCB approved — confirm impact minimal</div>
+              <div class="flashcard-back">Quality audit on implemented changes</div>
+            </div>
+          </div>
+          <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Cue: sponsor pushes new tech</div>
+              <div class="flashcard-back">Assess value with sponsor → update plan</div>
+            </div>
+          </div>
+          <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">Cue: local ethics vs corporate</div>
+              <div class="flashcard-back">Legal validate + escalation — no ethics exceptions</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="cheat">
+          <h2>Cheat sheet</h2>
+          <pre class="cheat-sheet">PMP WRONG-SET MINDSET (luannt115 · full · wrong&gt;0)
+
+1 RISK vs ISSUE
+   potential / could / impact unknown → log risk + monitor
+   ✗ pause all  ✗ escalate first  ✗ revise baseline early
+
+2 AUTHORITY
+   outside authority / beyond PM → escalate (+ issue/CR if needed)
+   ✗ swarm  ✗ slip schedule alone
+
+3 COMPLIANCE CONTINUUM
+   regs update → continuous monitor + experts
+   safeguard → audit | future regs → tracking
+   ethics → OPA governance | local vs HQ → legal + escalation
+   ✗ one-shot templates  ✗ authorize exceptions
+
+4 CHANGE FORWARD
+   informal past → enforce CCB going forward
+   CCB approved → quality audit effectiveness
+   ✗ reverse everything first
+
+5 LESSONS → ACTION
+   integrate plans | feed risk | share for performance
+   ✗ blame  ✗ archive-only  ✗ generic docs
+
+6 VALUE BEFORE SCOPE
+   sponsor idea/tech → assess value → update plan
+   metrics → SPI + what sponsor prioritized
+   PO mid-sprint change → discuss impact (Q1113)
+
+Practice IDs: 948 975 1080 1020 959 964 978 996 942 1006 1061 1060 1047 1083 1113</pre>
+        </section>
+
+        <p class="ref-footer">
+          Nguồn stats: quiz <code>full</code> · user <code>luannt115</code> ·
+          <a href="pmp-full-questions.html">Full Bank</a> ·
+          Primary: <a href="https://www.pmi.org/pmbok-guide-standards/foundational/pmbok" target="_blank" rel="noopener">PMBOK Guide — 8th Edition</a> (Lead accountably · Focus on value · Governance).
+          Hỏi thêm agent nếu một mindset còn mơ hồ.
+        </p>
+      </main>
+
+      <div class="score-bar">
+        <span>Quiz: <strong id="scoreText">0 / 6</strong> đúng</span>
+        <a href="pmp-full-questions.html" style="color:var(--primary-dark);font-weight:600;text-decoration:none">Mở Full Bank →</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ANS = {
+      0: { key: "D", ok: "Đúng — uncertainty → risk register + monitor (Q948).", bad: "Pause/escalate/revise khi impact chưa rõ = treat như issue quá sớm." },
+      1: { key: "D", ok: "Đúng — ngoài authority → escalate sponsor (Q1080). Swarm không tạo quyền.", bad: "Swarm/đổi timeline chỉ xử lý triệu chứng khi thiếu authority." },
+      2: { key: "A", ok: "Đúng — continuous regulatory monitoring + experts (Q959).", bad: "Template/họp một lần không bắt kịp standards đổi giữa kỳ." },
+      3: { key: "D", ok: "Đúng — siết formal change control going forward (Q978).", bad: "Reverse all / escalate từng cái quá khứ thường không phải bước first." },
+      4: { key: "A", ok: "Đúng — integrate lessons vào plans sắp tới (Q942).", bad: "Archive/video/interview alone ≠ cải thiện future outcomes." },
+      5: { key: "A", ok: "Đúng — assess value với sponsor rồi update plan (Q1061).", bad: "Báo delay/tự cap scope/iterate mù = bỏ bước value decision." }
+    };
+
+    let correctCount = 0;
+    const answered = new Set();
+
+    document.querySelectorAll(".quiz-card").forEach((card) => {
+      const idx = Number(card.dataset.quiz);
+      const fb = card.querySelector("[data-fb]");
+      card.querySelectorAll(".opt-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (answered.has(idx)) return;
+          answered.add(idx);
+          const a = ANS[idx];
+          const ok = btn.dataset.k === a.key;
+          card.querySelectorAll(".opt-btn").forEach((b) => {
+            b.disabled = true;
+            if (b.dataset.k === a.key) b.classList.add("correct");
+            else if (b === btn && !ok) b.classList.add("wrong");
+          });
+          fb.classList.add("show", ok ? "ok" : "bad");
+          fb.textContent = ok ? a.ok : a.bad + " → " + a.ok;
+          if (ok) correctCount += 1;
+          document.getElementById("scoreText").textContent = correctCount + " / 6";
+        });
+      });
+    });
+
+    const links = document.querySelectorAll("#sideNav a");
+    const sections = [...links].map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+    window.addEventListener("scroll", () => {
+      let cur = sections[0];
+      for (const s of sections) {
+        if (s.getBoundingClientRect().top <= 120) cur = s;
+      }
+      links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + cur.id));
+    });
+  </script>
+</body>
+</html>
