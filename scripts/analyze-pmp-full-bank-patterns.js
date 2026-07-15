@@ -1,26 +1,43 @@
 /**
- * Rich PMI trap taxonomy for lastWrongAttempt >= 1 (exclusive primary, specific-first).
- * Usage: node scripts/analyze-pmp-last-wrong-patterns.js
+ * Classify ALL Full Bank questions (1123) into LWA taxonomy v2 patterns.
+ *
+ * Usage: node scripts/analyze-pmp-full-bank-patterns.js
  */
 const fs = require("fs");
 const path = require("path");
 const { PATTERNS, assign, TAXONOMY_VERSION } = require("./lib/pmp-trap-patterns");
 
 const ROOT = path.join(__dirname, "..");
-const IDS = path.join(ROOT, "data", "pmp-luannt115-full-last-wrong-ids.json");
 const QUESTIONS = path.join(ROOT, "public", "pmp", "pmp-full-questions.json");
 const EXPLAIN = path.join(ROOT, "data", "pmp-full-pmbok8-explanations.json");
 const SIGNALS = path.join(ROOT, "data", "pmp-teach-signals.json");
-const OUT = path.join(ROOT, "data", "pmp-luannt115-full-last-wrong-patterns.json");
+const LWA_PACK = path.join(ROOT, "data", "pmp-luannt115-full-last-wrong-patterns.json");
+const OUT = path.join(ROOT, "data", "pmp-full-bank-patterns.json");
+
+function loadStatsOverlay() {
+  if (!fs.existsSync(LWA_PACK)) return new Map();
+  const pack = JSON.parse(fs.readFileSync(LWA_PACK, "utf8"));
+  return new Map(
+    (pack.rows || []).map((r) => [
+      r.id,
+      {
+        attempts: r.attempts || 0,
+        wrongAttempt: r.wrongAttempt || 0,
+        lastWrongAttempt: r.lastWrongAttempt || 0,
+      },
+    ]),
+  );
+}
 
 function main() {
-  const pack = JSON.parse(fs.readFileSync(IDS, "utf8"));
   const questions = JSON.parse(fs.readFileSync(QUESTIONS, "utf8"));
-  const byId = Object.fromEntries(questions.map((q) => [q.id, q]));
-  const explanations = JSON.parse(fs.readFileSync(EXPLAIN, "utf8"));
+  const explanations = fs.existsSync(EXPLAIN)
+    ? JSON.parse(fs.readFileSync(EXPLAIN, "utf8"))
+    : {};
   const signals = fs.existsSync(SIGNALS)
     ? JSON.parse(fs.readFileSync(SIGNALS, "utf8"))
     : {};
+  const statsById = loadStatsOverlay();
 
   const buckets = Object.fromEntries(
     [...PATTERNS.map((p) => p.id), "other"].map((id) => [
@@ -30,33 +47,41 @@ function main() {
   );
 
   const enriched = [];
-  for (const r of pack.rows) {
-    const q = byId[r.id];
-    const ex = explanations[String(r.id)];
-    const sig = signals[String(r.id)];
+  for (const q of questions) {
+    const ex = explanations[String(q.id)];
+    const sig = signals[String(q.id)];
+    const st = statsById.get(q.id) || {
+      attempts: 0,
+      wrongAttempt: 0,
+      lastWrongAttempt: 0,
+    };
     const patternId = assign(q, ex, sig);
     const row = {
-      ...r,
+      id: q.id,
+      attempts: st.attempts,
+      wrongAttempt: st.wrongAttempt,
+      lastWrongAttempt: st.lastWrongAttempt,
       patternId,
       domain: (ex?.pmbok8?.domains || []).join(", ") || null,
       focus: ex?.pmbok8?.focusArea || null,
       process: (ex?.pmbok8?.processes || [])[0] || null,
-      stem: (q?.text || "").replace(/\s+/g, " ").trim().slice(0, 200),
-      correct: q?.correct,
-      correctLabel: (q?.correctLabel || "").slice(0, 220),
+      stem: String(q.text || "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 200),
+      correct: q.correct,
+      correctLabel: String(q.correctLabel || "").slice(0, 220),
     };
     enriched.push(row);
     const b = buckets[patternId];
     b.count += 1;
-    if (r.lastWrongAttempt >= 3) b.hard += 1;
-    if (r.wrongAttempt > 0) b.open += 1;
+    if (st.lastWrongAttempt >= 3) b.hard += 1;
+    if (st.wrongAttempt > 0) b.open += 1;
     b.rows.push(row);
   }
 
   for (const b of Object.values(buckets)) {
-    b.rows.sort(
-      (a, c) => c.lastWrongAttempt - a.lastWrongAttempt || a.id - c.id,
-    );
+    b.rows.sort((a, c) => a.id - c.id);
     b.sampleIds = b.rows.slice(0, 10).map((r) => ({
       id: r.id,
       lastWrongAttempt: r.lastWrongAttempt,
@@ -84,10 +109,9 @@ function main() {
       total: enriched.length,
       openWrong,
       closed: enriched.length - openWrong,
-      hist: pack.hist,
-      updatedAt: pack.updatedAt,
-      criteria: pack.criteria,
-      sort: pack.sort,
+      updatedAt: new Date().toISOString(),
+      criteria: "all Full Bank questions",
+      sort: "id ASC",
       taxonomyVersion: TAXONOMY_VERSION,
       patternCount: patterns.length,
       otherCount: buckets.other.count,
@@ -123,7 +147,7 @@ function main() {
         patterns: out.summary.patternCount,
         other: out.summary.otherCount,
         otherPct: out.summary.otherPct,
-        patternCounts: out.summary.patternCounts,
+        top: out.summary.patternCounts.slice(0, 8),
       },
       null,
       2,

@@ -9,11 +9,16 @@
 - Lesson 0001 (2026-07-13): multi-attempt historical (`attempts > 1`) snapshot — 8 patterns
 - Lesson 0002 (2026-07-15): `Sai:1` / `wrongAttempt === 1` = **135 IDs** — **22 named patterns + other (~22%)** (LWA taxonomy; không ép 8)
 - Lesson 0003 (2026-07-15): `lastWrongAttempt ≥ 1` = 415 IDs — **26 named patterns + other (~18%)** after /review rejected forced-8
-- Analyzer: `scripts/analyze-pmp-last-wrong-patterns.js` (specific-first; correct-only then distractor fallback)
+- Lesson 0004 (2026-07-15): **all Full Bank 1123** — **26 named + other (~25%)** (`pmp-teach-full-bank-patterns.html`)
+- Shared taxonomy: `scripts/lib/pmp-trap-patterns.js`
+- Analyzer Full Bank: `scripts/analyze-pmp-full-bank-patterns.js`
+- Analyzer LWA: `scripts/analyze-pmp-last-wrong-patterns.js`
 - Lesson generator LWA: `scripts/generate-pmp-last-wrong-patterns-lesson.js`
 - Lesson generator Sai:1: `scripts/generate-pmp-sai1-patterns-lesson.js`
+- Lesson generator Full Bank: `scripts/generate-pmp-full-bank-patterns-lesson.js`
 - Prefer Vietnamese lesson voice with English exam cues highlighted.
 - Browser lessons:
   - `public/pmp/pmp-teach-wrong-patterns.html` (0001)
   - `public/pmp/pmp-teach-sai1-patterns.html` (0002)
   - `public/pmp/pmp-teach-last-wrong-patterns.html` (0003)
+  - `public/pmp/pmp-teach-full-bank-patterns.html` (0004)
