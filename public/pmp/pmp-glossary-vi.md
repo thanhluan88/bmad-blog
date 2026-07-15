@@ -1,6 +1,7 @@
 # PMP Glossary — Khái niệm đã học (Session Study)
 
-> Tài liệu tra cứu nhanh các thuật ngữ PMP/PMBOK 8 đã ôn trong phiên học từ vựng.  
+> Từ điển exam English → VI + stem cues (PMBOK 8).
+> Framework / bảng so sánh đầy đủ → [Cheat Sheet](pmp-teach-cheat-sheet.html).
 > **Cách dùng:** Ctrl+F theo từ khóa tiếng Anh hoặc tiếng Việt.
 
 ---
@@ -18,8 +19,8 @@
 9. [Governance & Quality](#9-governance--quality)
 10. [Metrics, Bias & Phân tích](#10-metrics-bias--phân-tích)
 11. [Business Environment & Sustainability](#11-business-environment--sustainability)
-12. [Bảng so sánh nhanh](#12-bảng-so-sánh-nhanh)
-13. [Exam Vocab (phiên gần đây)](#13-exam-vocab-phiên-gần-đây)
+12. [Exam Vocab (phiên gần đây)](#12-exam-vocab-phiên-gần-đây)
+13. [Keyword → Thuật ngữ](#keyword--thuật-ngữ-tra-cứu-đề-thi)
 
 ---
 
@@ -89,71 +90,20 @@
 | Hành động | Planned response | Resolve ngay |
 
 ### Risk Response Strategies (Threat & Opportunity)
+| | |
+|---|---|
+| **Nghĩa** | Sau identify & analyze → chọn response (threat/opportunity) ghi trong risk register |
+| **Stem cues** | insurance / fixed-price → Transfer · training/backup → Mitigate · remove scope → Avoid · contingency fund → Accept |
+| **Chi tiết** | → [Cheat Sheet · Risk Responses](pmp-teach-cheat-sheet.html#risk-responses) |
 
-Sau identify & analyze → chọn response trong risk register. Risk **materialize** → **planned response** trước khi chỉ ghi log.
-
-#### Threat — 4 chiến lược
-
-| Strategy | Mục tiêu | Ví dụ PMP |
-|----------|----------|-----------|
-| **Avoid** | Đổi plan → loại bỏ threat | Bỏ scope; đổi vendor/công nghệ |
-| **Mitigate** | Giảm probability và/hoặc impact | Cross-train, backup, testing |
-| **Transfer** | Chuyển impact cho bên thứ ba | Insurance, fixed-price contract |
-| **Accept** | Chấp nhận — passive hoặc active + reserve | Contingency fund, workaround |
-
-| Lưu ý | |
-|-------|---|
-| **Mitigate** | Hay gặp nhất trong đề; còn **residual risk** |
-| **Transfer** | Không xóa rủi ro hoàn toàn |
-| **Accept** | ≠ ignore — active accept có contingency |
-
-#### Opportunity — 4 chiến lược
-
-| Threat | Opportunity | Ý chính |
-|--------|-------------|---------|
-| Avoid | **Exploit** | Đảm bảo opportunity xảy ra |
-| Mitigate | **Enhance** | Tăng chance/benefit |
-| Transfer | **Share** | Chia lợi với partner |
-| Accept | **Accept** | Sẵn sàng nắm nếu xảy ra |
-
-#### Residual & Reserve
-
-| Thuật ngữ | Nghĩa |
-|-----------|--------|
-| **Residual risk** | Rủi ro còn lại sau response |
-| **Secondary risk** | Rủi ro mới do chính response |
-| **Contingency reserve** | Known unknowns — thường trong baseline |
-| **Management reserve** | Unknown unknowns — thường ngoài baseline |
-
-#### Mẹo đề
-
-| Keyword | Strategy |
-|---------|----------|
-| Insurance, fixed-price | **Transfer** |
-| Training, backup | **Mitigate** |
-| Remove scope | **Avoid** |
-| Contingency fund | **Accept** (active) |
-| Risk đã xảy ra | Implement **planned response** |
 
 ### Contingency Reserve
 | | |
 |---|---|
-| **Nghĩa** | Dự phòng ứng phó rủi ro — implement risk response hoặc xử lý risk event nếu xảy ra |
-| **PMBOK 8** | *Estimate Costs* p.63 · *Contingency reserve* p.266 |
-| **Cho** | **Known unknowns** — rủi ro đã identify (risk register) |
-
-**Contingency vs Management reserve:**
-| | Contingency | Management |
-|---|-------------|------------|
-| Rủi ro | Đã biết (identified) | Unknown unknowns |
-| Baseline | Thường **trong** | Thường **ngoài** |
-| Ai dùng | PM (risk plan) | Management approval |
-
-**Q68:** Soil instability *may require* foundation work → **Contingency reserve** ✓
-
-**Sai ✗:** +15% all estimates (blanket) · Management reserve (đã identify) · Update baseline (coi chắc chắn)
-
-**Signal:** *potential / may require* → contingency · *unforeseen / unknown* → management reserve
+| **Nghĩa** | Dự phòng cho **known unknowns** (risk đã identify) — thường trong baseline |
+| **≠ Management reserve** | Unknown unknowns — thường ngoài baseline, cần management approval |
+| **Signal** | *may / potential* → Contingency · *unforeseen / unknown* → Management |
+| **Chi tiết** | → [Cheat Sheet · Reserves](pmp-teach-cheat-sheet.html#reserves) |
 
 ---
 
@@ -189,11 +139,9 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 ### Salience Model
 | | |
 |---|---|
-| **Nghĩa** | Phân loại stakeholder theo **Power, Legitimacy, Urgency** |
-| **Definitive** | P + L + U → ưu tiên cao nhất |
-| **≠ Grid model** | Grid = authority × **interest** |
-| **≠ Influence model** | Upward, downward, outward, sideward |
-| **Mẹo đề** | *power, urgency, legitimacy* → Salience |
+| **Nghĩa** | Phân loại SH theo Power · Legitimacy · Urgency |
+| **Chi tiết** | → [Cheat Sheet · Stakeholder Tools](pmp-teach-cheat-sheet.html#stakeholders) |
+
 
 ### Rapport
 | | |
@@ -257,27 +205,10 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 ### Compromising · Compromise / Reconcile
 | | |
 |---|---|
-| **Nghĩa** | **Đi giữa** — mỗi bên bỏ bớt để chấp nhận giải pháp tạm thời |
-| **Phát âm** | /ˈkɒmprəmaɪzɪŋ/ — *cóm-prơ-maizing* |
-| **PMP (Thomas-Kilmann)** | **Compromise / Reconcile** — kỹ thuật conflict resolution |
-| **Kết quả** | **Lose / Lose** (partial satisfaction) |
-| **PMI ưu tiên** | **Collaborate / problem-solve** (Win/Win) |
-| **≠ Collaborating** | Collaborate = tối ưu chung · Compromise = giải pháp giữa |
-| **≠ Reconcile (data)** | Reconcile discrepancies = đối chiếu số liệu |
-| **≠ without compromising quality** | Không hy sinh chất lượng — khác conflict mode |
+| **Nghĩa** | Conflict style: mỗi bên nhường một phần → middle ground (lose–lose nhẹ) |
+| **PMP** | Dùng khi cần giải nhanh / stake ngang nhau; Collaborate = win–win khi cần giải pháp bền |
+| **Chi tiết (5 styles)** | → [Cheat Sheet · Conflict](pmp-teach-cheat-sheet.html#conflict) |
 
-**5 techniques:** Avoid · Accommodate · **Compromise** (Lose/Lose) · Force · **Collaborate** ★ (Win/Win)
-
-| Signal | Đáp |
-|--------|-----|
-| compromise/reconcile approach (Q179) | **Listen & acknowledge** trước → B |
-| full support · effective resolution (Q211) | **Constructive dialogue** — không compromise vội → C |
-| scope disagreement · agreement (Q522) | **Consensus** — không press compromise → C |
-| PM demonstrates technique (Q150) | **Collaborate** — không compromise/reconcile → A |
-| compromise design + underlying needs (Q23) | Bẫy từ → **Collaborating** → B |
-| quality dispute · split costs (Q569/Q671) | **Review acceptance criteria** — không split bill |
-
-**Bẫy ✗:** Negotiate compromise satisfies all · Split costs equally · Press for compromise · Stem có chữ *compromise* trong đáp án thường là distractor
 
 ### Scarce
 | | |
@@ -429,19 +360,12 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | **Keyword** | Lifetime employment, collective decision, job security |
 
 ### Leadership Styles — 8 phong cách
+| | |
+|---|---|
+| **Nghĩa** | Các phong cách lãnh đạo (servant, transformational, transactional, laissez-faire, …) |
+| **Stem cues** | empower / coach → servant · inspire vision → transformational · micromanage → tránh |
+| **Chi tiết** | → [Cheat Sheet · Leadership Styles](pmp-teach-cheat-sheet.html#styles) |
 
-| Style | Định nghĩa | PMP |
-|-------|------------|-----|
-| **Laissez-faire** | Hands-off — team tự quyết | ✗ Sai khi cần facilitate/coach |
-| **Transactional** | Management by exception; focus thành tích/reward | Carrot/stick — ít phù hợp Agile |
-| **Servant leader** | Phục vụ growth, learning, autonomy, well-being | ✓ **Hay đúng** — Agile, Scrum |
-| **Transformational** | Inspirational motivation — vision | ✓ Truyền cảm hứng, change |
-| **Charismatic** | Năng lượng cao, tự tin, conviction mạnh | Tốt nhưng phụ thuộc cá nhân |
-| **Interactional** | Kết hợp transactional + transformational + charismatic | Linh hoạt theo tình huống |
-| **Distributed** | Team quyết định dân chủ | ✓ Self-organizing team |
-| **Autocratic** | Một người quyết định | ✗ **Thường sai** — ≈ Theory X |
-
-**Mẹo đề:** Agile/impediment → **Servant leader** · Vision → **Transformational** · Self-organizing → **Distributed** · Enforce alone → **Autocratic** ✗
 
 ### Democratic
 | | |
@@ -453,26 +377,12 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | **PMP Agile** | ✓ Self-organizing team |
 
 ### Types of Power — 14 loại quyền lực
+| | |
+|---|---|
+| **Nghĩa** | Nguồn quyền lực PM/SH (positional, expert, referent, reward, coercive, …) |
+| **Stem cues** | trust/admiration → referent · specialized skill → expert · punish → coercive |
+| **Chi tiết** | → [Cheat Sheet · Types of Power](pmp-teach-cheat-sheet.html#power) |
 
-| Power | Cách dùng | PMP |
-|-------|-----------|-----|
-| **Positional** | Vị trí chính thức | PM title |
-| **Informational** | Thu thập & phân phối thông tin | ✓ Transparency |
-| **Referent** | Uy tín, credibility | ✓ Trust |
-| **Situational** | Quyền lực tình huống (crisis) | Tạm thời |
-| **Personal** | Charm, sức hút | Charismatic |
-| **Relational** | Networking, alliances | Stakeholder |
-| **Expert** | Skill, experience | ✓ SME — hay đúng |
-| **Reward** | Praise, bonus | Transactional |
-| **Coercive** | Discipline, punish | ✗ Thường sai |
-| **Ingratiating** | Flattery | ✗ |
-| **Pressure-based** | Limit choices | ✗ |
-| **Guilt-based** | Impose obligation | ✗ |
-| **Persuasive** | Lập luận thuyết phục | ✓ Democratic |
-| **Avoiding** | Refuse to participate | ✗ ≈ laissez-faire |
-
-**Power hỗ trợ democratic:** Expert, Referent, Informational, Persuasive  
-**Tránh:** Coercive, Pressure-based, Guilt-based, Avoiding
 
 ### Swarm / Swarming
 | | |
@@ -514,54 +424,23 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 ### Organisational Change Management (OCM)
 | | |
 |---|---|
-| **Nghĩa** | Quản lý thay đổi tổ chức — giúp con người **chấp nhận và áp dụng** thay đổi do dự án mang lại |
-| **PM role** | Communicate, engage stakeholders, assess readiness, support adoption |
-| **Change vs Transition** | **Change** = tình huống mới · **Transition** = hành trình cảm xúc của con người |
+| **Nghĩa** | Quản lý thay đổi tổ chức: readiness, communicate, educate, monitor adoption |
+| **Chi tiết** | → [Cheat Sheet · Change Models](pmp-teach-cheat-sheet.html#change-models) |
 
-**5 Change Models:**
-| Model | Trọng tâm |
-|-------|-----------|
-| PMI Managing Change in Organisations | Readiness, impact, communication |
-| ADKAR (Prosci) | Individual: A→D→K→A→R |
-| Kotter 8 Steps | Organisational leadership |
-| Virginia Satir | Emotional stages |
-| Bridges Transition | Ending → Neutral zone → New beginning |
 
 ### Bridges Transition Model
 | | |
 |---|---|
-| **Tác giả** | William Bridges — focus **transition** (con người), không chỉ change (tình huống) |
+| **Nghĩa** | Transition: Ending → Neutral zone → New beginning (tâm lý mất mát → chuyển tiếp) |
+| **Chi tiết** | → [Cheat Sheet · Change Models](pmp-teach-cheat-sheet.html#change-models) |
 
-**3 giai đoạn:**
-| Giai đoạn | Ý nghĩa | PM làm gì |
-|-----------|---------|-----------|
-| **1. Ending** (*Losing & letting go*) | Kết thúc cách cũ — mất mát, lo sợ | Acknowledge loss; communicate **why** |
-| **2. Neutral Zone** | Vùng trung gian — bối rối, năng suất giảm | Support, training, patience |
-| **3. New Beginning** | Chấp nhận cách mới | Celebrate wins, reinforce, monitor |
-
-**Transition Readiness Process:**
-1. **Communicate** the reason for the change
-2. **Understand the impact** from those affected
-3. **Check** the organisation's readiness for change
-4. **Educate leaders** on how the change will affect their people
-5. **Monitor progress** as people go through the stages of transition
-
-**Mẹo đề:** People resist mid-change → Neutral zone · Assess before rollout → Readiness · No follow-up → ✗
 
 ### ADKAR · Kotter · Virginia Satir
+| | |
+|---|---|
+| **Nghĩa** | ADKAR (cá nhân) · Kotter 8 bước (tổ chức) · Satir (cảm xúc / chaos → tích hợp) |
+| **Chi tiết** | → [Cheat Sheet · Change Models](pmp-teach-cheat-sheet.html#change-models) |
 
-**ADKAR** — thay đổi cá nhân:
-| Chữ | Giai đoạn |
-|-----|-----------|
-| **A** | Awareness — hiểu **why** |
-| **D** | Desire — muốn tham gia |
-| **K** | Knowledge — biết **how** |
-| **A** | Ability — có kỹ năng |
-| **R** | Reinforcement — duy trì lâu dài |
-
-**Kotter 8 Steps:** Urgency → Guiding coalition → Vision → Communicate → Empower → Short-term wins → Consolidate → Anchor in culture
-
-**Virginia Satir:** Late Status Quo → Resistance → Chaos → Integration → New Status Quo
 
 ### Coalition / Guiding coalition
 | | |
@@ -578,17 +457,13 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 
 ## 6. Development Approach & Agile
 
-### Adaptive
+### Adaptive · Agile · Iterative · Incremental
 | | |
 |---|---|
-| **Nghĩa** | Cách tiếp cận PMBOK: linh hoạt, emergent scope, embrace change, backlog |
-| **Quan hệ** | **Ô lớn** — Agile ⊂ Adaptive |
+| **Nghĩa** | Adaptive/Agile = phản ứng uncertainty · Iterative = refine · Incremental = ship phần giá trị |
+| **≠** | Predictive = plan-driven khi requirements ổn định |
+| **Chi tiết** | → [Cheat Sheet · Delivery / Stacey](pmp-teach-cheat-sheet.html#pred-agile) |
 
-### Agile
-| | |
-|---|---|
-| **Nghĩa** | Một cách cụ thể làm adaptive: Scrum, Kanban, sprint, PO, backlog |
-| **Keyword** | Sprint, Scrum, product owner |
 
 ### Cumbersome
 | | |
@@ -603,36 +478,13 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 
 **Bẫy ✗:** Assign one person · Discontinue without assessment · Buy software tool · Thêm bureaucracy
 
-### Iterative
-| | |
-|---|---|
-| **Nghĩa** | Lặp nhiều vòng để **tinh chỉnh** cùng sản phẩm (refine) |
-| **Ẩn dụ** | Vẽ tranh: sketch → màu → hoàn thiện |
 
-### Incremental
-| | |
-|---|---|
-| **Nghĩa** | Giao **từng phần** chức năng có giá trị (MVP, release từng module) |
-| **Ẩn dụ** | Xây nhà: phòng 1 → phòng 2 → phòng 3 |
-| **Thực tế** | Scrum thường = Iterative + Incremental |
 
 ### Stacey Matrix
 | | |
 |---|---|
-| **Nghĩa** | Ma trận Ralph Stacey — chọn approach theo **complexity** × **requirements uncertainty** |
-| **≠ Satir Chaos** | Stacey Chaos = dự án quá rủi ro · Satir Chaos = cảm xúc khi change |
-
-**4 vùng:**
-| Vùng | Approach |
-|------|----------|
-| **Simple** | Predictive / Waterfall |
-| **Complicated** | Hybrid hoặc Agile |
-| **Complex** | Adaptive / Agile |
-| **Chaos** | Quá rủi ro — avoid / rethink |
-
-**Iron Triangle:** Predictive = Scope fixed · Agile = Time & Cost fixed, Scope varies
-
-**Mẹo đề:** Requirements emerge → Complex/Agile · Scope rõ + tech ổn → Simple/Predictive
+| **Nghĩa** | Requirements × Technology uncertainty → Simple / Complicated / Complex / Chaos → chọn approach |
+| **Chi tiết** | → [Cheat Sheet · Predictive vs Agile](pmp-teach-cheat-sheet.html#pred-agile) |
 
 ---
 
@@ -682,24 +534,10 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 ### Theory of Constraints (TOC)
 | | |
 |---|---|
-| **Nghĩa** | **Lý thuyết ràng buộc** (Goldratt) — throughput bị giới hạn bởi **bottleneck/constraint** |
-| **Ẩn dụ** | Chuỗi mạnh bằng mắt xích yếu nhất — tối ưu chỗ khác không giúp nếu constraint còn |
-| **≠ CPM** | CPM = logical path · Critical Chain = + resource constraints + buffers |
-| **≠ Resource leveling** | Leveling cân allocation · TOC **focus constraint** |
+| **Nghĩa** | Hệ thống bị giới hạn bởi bottleneck — identify → exploit → subordinate → elevate → repeat |
+| **PMP** | Critical chain · WIP · drum-buffer-rope |
+| **Mẹo đề** | *weakest link / constraint / bottleneck* → TOC mindset |
 
-**5 bước:** Identify → **Exploit** → **Subordinate** → **Elevate** → Repeat
-
-**Critical Chain:** Schedule method TOC — project / feeding / resource **buffers** bảo vệ end date
-
-**Bottleneck trên đề:**
-| Signal | PM làm |
-|--------|--------|
-| PM là bottleneck, team chờ approval | Empower — distributed management (Q71→D) |
-| External expert bottleneck | Upskill team (Q213→B) |
-| CFD: WIP tăng, Done đứng | Review **WIP limits** (Q456→C) |
-| Process bottleneck (customs…) | Intervention proportionate (Q894→C) |
-
-**Bẫy ✗:** Centralize thêm khi PM đã bottleneck · Thêm resource thay vì fix WIP · Crash mọi task
 
 ### Punch List
 | | |
@@ -710,105 +548,39 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 ### Cost of Quality (CoQ)
 | | |
 |---|---|
-| **Nghĩa** | Chi phí chất lượng — đạt & duy trì chất lượng, hoặc hậu quả khi không đạt |
-| **PMBOK 8** | *Estimate Costs* p.63 · *Cost of quality* p.158–159 |
+| **Nghĩa** | Chi phí đảm bảo/không đảm bảo chất lượng: Prevention · Appraisal · Internal/External Failure |
+| **Stem cues** | training/planning → Prevention · testing → Appraisal · rework → Internal · warranty → External |
+| **Chi tiết** | → [Cheat Sheet](pmp-teach-cheat-sheet.html) (Process / Quality)
 
-**4 loại:**
-| Loại | Keyword | Ví dụ |
-|------|---------|-------|
-| **Prevention** | Ngăn lỗi trước | Training, quality planning, build quality in |
-| **Appraisal** | Test, inspect | Testing, inspection, audit |
-| **Internal Failure** | Trước giao khách | Rework, scrap |
-| **External Failure** | Sau giao khách | Returns, warranty, repairs, replacements |
-
-**Conformance** = Prevention + Appraisal · **Failure** (non-conformance) = Internal + External Failure
-
-**Q67:** Returns/repairs **after release** → **Failure costs** (External Failure) ✓
-
-**Mẹo:** Prevention > Appraisal > Failure · Appraisal = test · Conformance ≠ Failure
 
 ### Cost Aggregation
 | | |
 |---|---|
-| **Nghĩa** | **Tổng hợp chi phí** — roll up estimate từ activity → work package → control account → project |
-| **PMBOK 8** | *Develop Budget* p.64 · *Cost aggregation* p.158 |
-| **Output** | **Cost baseline** — approved budget để monitor & control |
+| **Nghĩa** | Cộng dồn estimate theo WBS → thành phần của Develop Budget / cost baseline |
+| **Signal** | *FIRST · approved budget* → thường Cost Aggregation (vd. Q69) |
 
-**Roll-up:** Activities → Work packages → Control accounts → Project (cost baseline)
-
-**Flow:** Estimate Costs (activities) → **Cost aggregation** → Cost baseline
-
-**Q69:** Activity estimates đã có · cần single approved budget · FIRST → **Perform cost aggregation** ✓
-
-**Sai ✗:** Finalize baseline trước (chưa aggregate) · Update FMP · Review Business Case (initiation)
 
 ### Basis of Estimates (BOE)
 | | |
 |---|---|
-| **Nghĩa** | **Cơ sở ước lượng** — giải thích estimate tính như thế nào, dựa trên gì |
-| **Tên PMBOK** | **Basis of estimates** — không phải “basis estimation” |
-| **Alias** | BOE · *basis estimation* (gọi nhầm, cùng nghĩa) |
-| **Loại** | **Project document** — supporting doc (không phải plan / performance report) |
-| **PMBOK 8** | Input *Develop Budget* p.64 · p.115 |
-| **≠ Cost estimate** | Estimate = con số · BOE = assumption & method |
-| **Biến thể** | Cost basis of estimates · Schedule basis of estimates |
+| **Nghĩa** | Tài liệu giả định/độ tin cậy/phương pháp đằng sau estimate |
+| **Signal** | *question accuracy / how estimates derived* → BOE (vd. Q70) |
 
-**Gồm:** Assumptions · Constraints · Method · Data sources · Range/confidence · Supporting docs
-
-**≠ Nhầm:** FMP (quy tắc tài chính) · Work performance info (monitoring) · Assumption log (track giả định chung)
-
-**Q69 vs Q70:**
-| Câu | Tình huống | Đáp |
-|-----|------------|-----|
-| Q69 | Cần approved budget · FIRST | Cost aggregation |
-| Q70 | Estimates xong · leaders question **accuracy** | **Show basis of estimates** ✓ |
-
-**Sai Q70 ✗:** Aggregate (Q69) · Show FMP · Develop estimates lại (đã xong)
-
-**Claims:** Review BOE + contract khi dispute cost — không auto-approve claim
 
 ### Funding Strategy
 | | |
 |---|---|
-| **Nghĩa** | **Chiến lược tài trợ** — mô tả **nguồn vốn** & cách huy động cho dự án |
-| **PMBOK 8** | **Output** *Plan Financial Management* p.62–63 · p.122–123 |
-| **≠ FMP** | FMP = quy tắc quản lý tài chính · Funding strategy = **sources** |
-| **≠ FLR** | FLR = fit spend vào limits theo kỳ (Develop Budget) |
+| **Nghĩa** | Chiến lược nguồn vốn (sources) — output Plan Financial Management |
+| **≠** | FMP = quy tắc quản lý · FLR = fit spend vào limits theo kỳ |
+| **Signal** | NGO/grants/donors → Funding Strategy (vd. Q65) |
 
-**Outputs Plan Financial Management:** FMP + **Funding Strategy**
-
-**Loại nguồn:** Org budget transfer · Customer contract · Government/NGO grants · Donors/benefactors
-
-**Q64 vs Q65:**
-| Câu | Stem | Đáp |
-|-----|------|-----|
-| Q64 | Document **how finances managed** | **FMP** |
-| Q65 | NGOs fund · finalize financial plan | **Note in Funding Strategy** → A |
-
-**Bẫy ✗:** Send FMP to sponsor (Q65 B) · Review charter · Engage experts only · Nhầm với FLR
 
 ### Funding limit reconciliation
 | | |
 |---|---|
-| **Nghĩa** | **Đối chiếu hạn mức tài trợ** — so planned **cumulative spend** với **funding limits** theo kỳ và điều chỉnh |
-| **Reconcile** | **Đối chiếu & điều chỉnh** để align — planned spend ↔ funding limit |
-| **PMBOK** | Kỹ thuật **Determine Budget** / *Develop Budget* — sau aggregation |
-| **≠ Cost aggregation** | Roll up estimates · FLR = fit **spending profile** vào limits |
-| **≠ Discrepancies** | FLR = riêng funding limits theo kỳ |
+| **Nghĩa** | Đối chiếu cumulative spend với funding limits theo kỳ và điều chỉnh |
+| **PMP** | Phần Develop Budget |
 
-**Funding limit:** Giới hạn tiền org cam kết/chi trong một kỳ (tháng/quý)
-
-**Flow:** Estimate → **Cost aggregation** → **Funding limit reconciliation** → Cost baseline
-
-**Q69 vs FLR vs Q70:**
-| Signal | Đáp |
-|--------|-----|
-| Single approved budget · FIRST | Cost aggregation (Q69) |
-| Question estimate accuracy | Basis of estimates (Q70) |
-| Funding limits · spend profile vượt cap | **Funding limit reconciliation** |
-| Over budget · discrepancies | Reconciliation process (general) |
-
-**Bẫy ✗:** Chỉ CR tăng budget khi vấn đề là phasing · Nhầm FLR với aggregation · Ignore limits khi baseline
 
 ### Reimburse / Cost-reimbursable
 | | |
@@ -877,25 +649,10 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 ### Delphi Technique
 | | |
 |---|---|
-| **Nghĩa** | Kỹ thuật thu thập ý kiến **chuyên gia** qua **nhiều vòng** — phản hồi **ẩn danh** qua facilitator đến khi **hội tụ consensus** |
-| **Phát âm** | /ˈdelfaɪ/ — *del-fai* |
-| **PMBOK 8** | Data gathering / estimating / risk — giảm bias khi **thiếu historical data** hoặc cần forecast |
-| **Cách hoạt động** | Vòng 1: experts trả lời riêng → facilitator tổng hợp (không lộ tên) → vòng sau experts điều chỉnh → lặp đến consensus |
-| **PM role** | **Facilitate** — đảm bảo ẩn danh; không áp estimate/ý kiến cá nhân lên panel |
-| **Dùng cho** | Estimate duration/cost, identify risks, forecast outcome |
-| **Keyword** | anonymous, iterative, consensus, facilitated, panel of experts, multiple rounds |
-| **≠ Brainstorming** | Brainstorm = mở, một phiên, có **dominant voice** |
-| **≠ Nominal Group Technique** | NGT = im lặng viết → round-robin → vote — **một** vòng, không iterative ẩn danh |
-| **≠ Expert judgment (đơn)** | Một SME — không structured multi-round |
+| **Nghĩa** | Ước lượng/ý kiến ẩn danh, nhiều vòng, facilitator → consensus khi thiếu historical data |
+| **≠ Wideband** | Wideband = Delphi + debate giữa các vòng |
+| **Chi tiết** | Estimating tools → [Cheat Sheet](pmp-teach-cheat-sheet.html)
 
-| Signal đề | Nghĩ đến |
-|-----------|----------|
-| anonymous · iterative · consensus · facilitated | **Delphi** |
-| panel of experts · multiple rounds · lack historical data | **Delphi** estimate/forecast |
-| debate estimates · facilitated rounds · discuss between rounds | **Wideband Delphi** |
-| open brainstorming · everyone speaks in one meeting | ✗ **không** Delphi |
-
-**Bẫy ✗:** Brainstorm thay Delphi khi stem cần ẩn danh · PM đưa estimate riêng vào panel · Một cuộc họp vote = NGT, không phải Delphi
 
 ### Wideband Delphi
 | | |
@@ -922,41 +679,16 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 ### Virtual Reality (VR) · Augmented Reality (AR)
 | | |
 |---|---|
-| **VR** | **Thực tế ảo** — môi trường số **immersive** hoàn toàn (headset, simulation) |
-| **AR** | **Thực tế tăng cường** — **phủ digital** lên thế giới thật (overlay on site/product) |
-| **PMBOK 8** | Emerging technologies — leverage để visualize, train, engage, giảm rework |
+| **VR** | Thực tế ảo — immersive 100% số |
+| **AR** | Thực tế tăng cường — overlay lên thế giới thật |
+| **Stem cues** | immersive/simulate → VR · overlay/on-site/BIM → AR |
 
-**So sánh:**
-| | VR | AR |
-|---|----|----|
-| Môi trường | 100% virtual | Real + digital overlay |
-| Keyword | *immersive*, simulate, walkthrough | *overlay*, on-site, inspect vs model |
-| Ví dụ | Safety training, design walkthrough | BIM overlay công trường, maintenance on equipment |
-
-**≠** Prototype · Mockup · BIM alone (AR có thể *view* BIM)
-
-**Mẹo đề ✓:** Immersive simulate trước build → VR · Overlay trên site thật → AR · Tech hỗ trợ clarity — governance vẫn cần  
-**Bẫy ✗:** Chọn vì “cool” · VR thay prototype validate behavior
 
 ### Project Canvas
 | | |
 |---|---|
-| **Nghĩa** | **Khung trực quan một trang** — align thông tin cốt lõi dự án nhanh |
-| **PMBOK 8** | Tool & Technique · Governance · p.189 |
-| **Process** | Initiate Project or Phase (G1) · Integrate and Align Project Plans (G2) |
-| **≠ Charter** | Canvas = collaborative alignment · Charter = formal authorization |
-| **≠ BMC** | Business Model Canvas ≠ Project Canvas |
-
-**9 ô — 3 hàng:**
-| Hàng | Ô |
-|------|---|
-| **Strategy** | Purpose · Objectives (SMART) · Stakeholders |
-| **Delivery** | Scope · Schedule · Budget |
-| **Feasibility & Control** | Risks · Financial analysis · Governance |
-
-**Khi dùng:** Initiation workshop · misalignment sớm · trước charter/PMP chi tiết
-
-**Bẫy ✗:** Canvas thay charter · WBS/baseline chi tiết trong canvas · Skip alignment
+| **Nghĩa** | Khung 1 trang (visual) align khởi tạo / kickoff với stakeholders |
+| **PMP** | Facilitation · charter/kickoff context |
 
 ---
 
@@ -1067,152 +799,7 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 
 ---
 
-## 12. Bảng so sánh nhanh
-
-### Variables Over Time (Predictive)
-| Biến | Xu hướng |
-|------|----------|
-| Cost & Staffing | Thấp → cao (execution) → giảm mạnh (close) |
-| Risk & Uncertainty | Cao (start) → giảm dần |
-
-### Cost of Quality (CoQ)
-| Loại | Keyword | Ví dụ |
-|------|---------|-------|
-| Prevention | Ngăn lỗi trước | Training, planning |
-| Appraisal | Test, inspect | Testing, audit |
-| Internal Failure | Trước giao | Rework, scrap |
-| External Failure | Sau giao | Returns, warranty |
-| Conformance | — | Prevention + Appraisal |
-
-### Develop Budget flow
-| Bước | Process / output |
-|------|------------------|
-| Activity estimates | Estimate Costs |
-| Cost aggregation | Develop Budget (FIRST) |
-| Cost baseline | Approved budget |
-
-### Q69 vs Q70 (Develop Budget)
-| Câu | Signal | Đáp |
-|-----|--------|-----|
-| Q69 | Need approved budget · FIRST | Cost aggregation |
-| Q70 | Question estimate accuracy | Basis of Estimates |
-
-### Change Models
-| Model | Trọng tâm |
-|-------|-----------|
-| Bridges | Transition: Ending → Neutral zone → New beginning |
-| ADKAR | Individual: A→D→K→A→R |
-| Kotter | Organisational: Urgency → Coalition → Vision → Anchor |
-| Satir | Emotional: Status quo → Resistance → Chaos → Integration |
-| PMI OCM | Readiness, impact, communicate, educate, monitor |
-
-### Elicitation & Estimation Techniques
-| Kỹ thuật | Đặc điểm chính |
-|----------|----------------|
-| Delphi | Ẩn danh, nhiều vòng, facilitator, consensus |
-| Wideband Delphi | Delphi + thảo luận/debate giữa các vòng |
-| Starbursting | Câu hỏi 5W1H, questions first |
-| Brainstorming | Ý tưởng tự do, có thể dominant voice |
-| COCOMO | Parametric, software, KLOC |
-| Branch and bound | Optimization, prune branches |
-
-### Stakeholder Models
-| Model | Tiêu chí |
-|-------|----------|
-| Salience | Power, Legitimacy, Urgency |
-| Power/Interest Grid | Authority × Interest |
-| RACI | R, A, C, I (vai trò công việc) |
-
-### S-Curve: Hai ngữ cảnh
-| | EVM S-curve | Monte Carlo S-curve |
-|---|-------------|---------------------|
-| Trục Y | $ tích lũy | Probability % |
-| Trục X | Time | Outcome (cost/duration) |
-| Tool | Control Costs | Quantitative risk |
-
-### Risk Responses (Threat)
-| Strategy | Mục tiêu | Keyword đề |
-|----------|----------|------------|
-| Avoid | Loại bỏ threat | Remove scope, change vendor |
-| Mitigate | Giảm P hoặc I | Training, backup, testing |
-| Transfer | Chuyển impact | Insurance, fixed-price |
-| Accept | Chấp nhận + reserve | Contingency, low impact |
-
-### Risk Responses (Opportunity)
-| Strategy | Mục tiêu |
-|----------|----------|
-| Exploit | Đảm bảo xảy ra |
-| Enhance | Tăng chance/benefit |
-| Share | Chia lợi partner |
-| Accept | Sẵn sàng nắm |
-
-### Leadership Styles
-| Style | PMP thường |
-|-------|------------|
-| Servant leader | ✓ Agile, empower |
-| Transformational | ✓ Vision |
-| Distributed | ✓ Self-organizing |
-| Autocratic | ✗ Micromanage |
-| Laissez-faire | ✗ Hands-off khi cần PM |
-| Transactional | Management by exception |
-
-### Types of Power
-| ✓ Ưu tiên | ✗ Tránh |
-|-----------|---------|
-| Expert, Referent, Informational, Persuasive | Coercive, Guilt-based, Pressure-based, Avoiding |
-
-### Development Approaches
-| Thuật ngữ | Tầng |
-|-----------|------|
-| Adaptive | Development approach (PMBOK) |
-| Agile | Framework/method (subset of adaptive) |
-| Iterative | Delivery technique (refine) |
-| Incremental | Delivery technique (add slices) |
-
-### Stacey Matrix
-| Vùng | Approach |
-|------|----------|
-| Simple | Predictive / Waterfall |
-| Complicated | Hybrid / Agile |
-| Complex | Adaptive / Agile |
-| Chaos | Avoid — quá rủi ro |
-
-### Contract Types (Procurement)
-| Type | Cost risk | Khi nào |
-|------|-----------|---------|
-| Fixed-price | Seller | Scope rõ |
-| Cost-reimbursable | Buyer (reimburse) | Uncertainty cao |
-| T&M | Buyer | Flex hours/materials |
-
-### Claims & Dispute Resolution
-| Bước | Khi nào |
-|------|---------|
-| **Negotiation** | First — direct, no third party |
-| Mediation | Negotiation stalls |
-| Arbitration | Binding external decision |
-| Litigation | Last resort |
-
-### Cognitive & Team Theories
-| Khái niệm | Một câu |
-|-----------|---------|
-| Theory X | Control them — PMP thường sai |
-| Theory Y | Empower them — PMP thường đúng |
-| Theory Z | Long-term loyalty + consensus |
-| Hawthorne | Attention improves performance |
-| Confirmation bias | See what we want to see |
-
-### EVM Forecast
-| Chỉ số | Công thức | Ý nghĩa |
-|--------|-----------|---------|
-| CPI | EV / AC | Hiệu quả chi phí hiện tại |
-| SPI | EV / PV | Hiệu quả tiến độ hiện tại |
-| VAC | BAC − EAC | Dự báo over/under budget cuối dự án |
-| CV | EV − AC | Variance chi phí hiện tại |
-| SV | EV − PV | Variance tiến độ hiện tại |
-
----
-
-## Keyword → Thuật ngữ (tra cức đề thi)
+## Keyword → Thuật ngữ (tra cứu đề thi)
 
 | Nếu đề có… | Nghĩ đến… |
 |------------|-----------|
@@ -1410,7 +997,7 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 
 ---
 
-## 13. Exam Vocab (phiên gần đây)
+## 12. Exam Vocab (phiên gần đây)
 
 > Từ vựng ôn theo stem Full Bank — nghĩa exam + mẹo chọn đáp án.
 
