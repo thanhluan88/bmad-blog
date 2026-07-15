@@ -222,8 +222,7 @@ function buildHtml({ assetPrefix, cssHref, fullscreenHref }) {
       .map((n) => {
         const p = byN(n);
         return `        <article class="pattern-block" id="p-${p.n}">
-          <h3><span class="badge">#${p.n}</span> ${esc(p.en.slice(0, 72))}${p.en.length > 72 ? "…" : ""}</h3>
-          <div class="rule">${esc(p.en)}</div>
+          <h3><span class="badge">#${p.n}</span> ${esc(p.en)}</h3>
           <div class="card tip"><strong>VI:</strong> ${esc(p.vi)}</div>
         </article>`;
       })
