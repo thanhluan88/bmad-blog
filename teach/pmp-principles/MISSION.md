@@ -15,5 +15,4 @@ Pass situational PMP items by retrieving the right exam heuristic in under 5 sec
 - Distinct from PMBOK 8's six Principles on the prep lecture
 
 ## Out of scope
-- Memorizing video timestamps
 - Replacing PMBOK 6 Principles teaching

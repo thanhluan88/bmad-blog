@@ -1,7 +1,7 @@
 # Resources
 
 ## Primary
-- Learner-provided 50-principle outline (timestamps embedded in lesson cards)
+- Learner-provided 50-principle outline
 - [PMBOK® Guide — Eighth Edition (PMI)](https://www.pmi.org/standards/pmbok/)
 
 ## Related in-repo

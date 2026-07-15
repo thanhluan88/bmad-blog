@@ -225,7 +225,6 @@ function buildHtml({ assetPrefix, cssHref, fullscreenHref }) {
           <h3><span class="badge">#${p.n}</span> ${esc(p.en.slice(0, 72))}${p.en.length > 72 ? "…" : ""}</h3>
           <div class="rule">${esc(p.en)}</div>
           <div class="card tip"><strong>VI:</strong> ${esc(p.vi)}</div>
-          <p class="fam-note" style="margin:0.35rem 0 0">⏱ ${esc(p.t)}</p>
         </article>`;
       })
       .join("\n");
@@ -304,7 +303,7 @@ ${familyNav}
           <h1>50 PMP exam mindset principles</h1>
           <p class="lead">
             Bộ nguyên tắc <strong>thi tình huống</strong> (không phải 6 Principles PMBOK 8).
-            Mỗi thẻ: English principle + 1 dòng VI + timestamp video nguồn.
+            Mỗi thẻ: English principle + 1 dòng VI.
             Học theo nhóm → làm quiz retrieval → hỏi agent nếu cue chưa rõ.
           </p>
           <div class="stat-grid">
@@ -369,7 +368,6 @@ IF technical unknown                          → SME / team first (#10/#14)</di
             </ol>
           </div>
           <p class="ref-footer">
-            Timestamps từ video nguồn học viên cung cấp (metadata only).
             Ground thêm:
             <a href="https://www.pmi.org/standards/pmbok/" target="_blank" rel="noopener">PMBOK® Guide — Eighth Edition</a>
             · Teach workspace: <code>teach/pmp-principles/</code>
@@ -425,11 +423,11 @@ function buildReference() {
     "",
     "Not the PMBOK 8 six principles — situational exam heuristics.",
     "",
-    "| # | Time | Principle | VI cue |",
-    "|---|------|-----------|--------|",
+    "| # | Principle | VI cue |",
+    "|---|-----------|--------|",
   ];
   for (const p of PRINCIPLES) {
-    lines.push(`| ${p.n} | ${p.t} | ${p.en.replace(/\|/g, "/")} | ${p.vi.replace(/\|/g, "/")} |`);
+    lines.push(`| ${p.n} | ${p.en.replace(/\|/g, "/")} | ${p.vi.replace(/\|/g, "/")} |`);
   }
   lines.push("");
   return lines.join("\n");
@@ -467,7 +465,6 @@ Pass situational PMP items by retrieving the right exam heuristic in under 5 sec
 - Distinct from PMBOK 8's six Principles on the prep lecture
 
 ## Out of scope
-- Memorizing video timestamps
 - Replacing PMBOK 6 Principles teaching
 `,
   );
@@ -476,10 +473,9 @@ Pass situational PMP items by retrieving the right exam heuristic in under 5 sec
     path.join(TEACH_DIR, "NOTES.md"),
     `# Notes
 
-- Lesson 0001 (2026-07-15): 50 exam mindset principles from learner video outline
+- Lesson 0001 (2026-07-15): 50 exam mindset principles from learner outline
 - Public: \`public/pmp/pmp-teach-50-principles.html\`
 - Generator: \`scripts/generate-pmp-50-principles-lesson.js\`
-- Timestamps are metadata only until a source URL is provided
 `,
   );
 
@@ -488,7 +484,7 @@ Pass situational PMP items by retrieving the right exam heuristic in under 5 sec
     `# Resources
 
 ## Primary
-- Learner-provided 50-principle outline (timestamps embedded in lesson cards)
+- Learner-provided 50-principle outline
 - [PMBOK® Guide — Eighth Edition (PMI)](https://www.pmi.org/standards/pmbok/)
 
 ## Related in-repo
