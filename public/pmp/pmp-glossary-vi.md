@@ -1393,6 +1393,20 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | an initiative / transformation initiative | ≈ project/program effort |
 | susceptible to strikes | Risk factor → identify & register |
 | retrofit / extensive recoding | Assess value with sponsor → update plan (Q1061) |
+| resilience / recover from risks | Anticipate–respond–recover — không xóa uncertainty |
+| caused churn, no AC | Backlog refinement — ready items |
+| temporary work stoppage | Emergency response → update & correct |
+| readiness criteria / ready for sprint | Definition of Ready |
+| client alleges poor accountability | Clarify ownership — WBS dictionary |
+| eliminate / reduce reliance | Upskill or contingency — không bỏ compliance |
+| improvise a solution | Trap — follow plan / planned response |
+| appease the client | Trap — keep AC/compliance |
+| improvement is institutionalized | OPA / training / org practice |
+| quantify measurable value / impact | Số trước change / contingency |
+| maintain goodwill / overlook | Trap — governance first |
+| changes through addendums | Trap nếu scope mở — flexible iterations |
+| plant shutdown and turnaround | Maintenance outage — often FFP |
+| quick turnaround / rework immediately | Verify vs acceptance criteria first |
 
 ---
 
@@ -1577,6 +1591,95 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | **Mindset** | Retrofit = tín hiệu **impact lớn** → assess **value** với sponsor rồi update plan — không nhận scope/báo delay ngay |
 | **Trap** | Alert delay/scope ngay · team tự cap scope · iterate mù chưa chốt strategy (Q1061 B/C/D) |
 | **≠** | Greenfield / build from scratch · cũng ≠ chỉ “upgrade nhỏ” nếu stem nói *extensive* |
+
+### Resilience
+| | |
+|---|---|
+| **Nghĩa** | Khả năng chống chịu và phục hồi — anticipate → respond → recover |
+| **PMP** | Incorporate resilience into PM approach (Q828) · long-term org resilience (Q398) |
+| **Trap** | Eliminate all uncertainty · nhảy operational resilience trước risk processes (Q932) |
+
+### Churn
+| | |
+|---|---|
+| **Nghĩa** | Xáo trộn / rework từ backlog kém sẵn sàng |
+| **Đúng** | Regular refinement → small, clear, testable (Q648→B) |
+| **Trap** | “Create readiness” mà AC vẫn incomplete |
+
+### Stoppage / Work stoppage
+| | |
+|---|---|
+| **Nghĩa** | Tạm ngừng việc — incident đã xảy ra |
+| **Đúng** | Review emergency response plan → update → correct (Q1079→B) |
+| **Trap** | Suspend chờ full assessment · hỏi viability ngay khi temporary |
+
+### Readiness
+| | |
+|---|---|
+| **Nghĩa** | Mức sẵn sàng cho sprint / close / handover / change |
+| **Agile** | Readiness criteria / DoR (Q529, Q648) |
+| **Closing** | Closure / operational criteria (Q444) · confirm readiness (Q293) |
+| **OCM** | Change readiness assessment → gap / interventions (Q1118) |
+
+### Alleges
+| | |
+|---|---|
+| **Nghĩa** | Cáo buộc / claim chưa chứng minh |
+| **PMP** | *alleges poor accountability* → clarify WBS dictionary / ownership (Q687→A) |
+
+### Reliance
+| | |
+|---|---|
+| **Nghĩa** | Sự phụ thuộc (dependency risk) |
+| **Đúng** | Upskill để eliminate reliance (Q213) · contingency/alternatives (Q763) |
+| **Trap** | Lessen reliance để bỏ certification (Q768) |
+
+### Improvise
+| | |
+|---|---|
+| **Nghĩa** | Ứng biến tại chỗ ngoài plan/process |
+| **Trap** | Hầu như luôn sai — dùng planned response / CR / emergency plan |
+
+### Appease
+| | |
+|---|---|
+| **Nghĩa** | Chiều / dỗ bằng nhượng bộ |
+| **Đúng** | Giữ schedule/AC/compliance (Q712→C) |
+| **Trap** | Accelerate / hạ chuẩn để appease client |
+
+### Institutionalized
+| | |
+|---|---|
+| **Nghĩa** | Đưa improvement vào chuẩn org (OPA/training/framework) |
+| **Đúng** | Proposed org practice (Q907) · org training change (Q999) |
+| **Trap** | Chỉ lessons learned / report / workshop execution |
+| **≠** | Financial institution · institutional knowledge = tri thức cần capture vào OPA |
+
+### Quantify
+| | |
+|---|---|
+| **Nghĩa** | Lượng hóa thành số (risk/value/impact) |
+| **Đúng** | Quantify measurable value trước change (Q651) · financial impact → contingency (Q419) |
+
+### Goodwill
+| | |
+|---|---|
+| **Nghĩa** | Thiện chí / giữ hòa khí — relationship pressure |
+| **Trap** | Overlook funds (Q498) · informal scope (Q394) · divert reserves (Q764) · skip CCB (Q623) |
+
+### Addendums
+| | |
+|---|---|
+| **Nghĩa** | Phụ lục bổ sung hợp đồng |
+| **Trap** | Mọi change qua addendums khi còn scope best-effort (Q790→A) |
+| **Đúng** | Flexible scope + fixed iterations (Q790→C) |
+
+### Turnaround(s)
+| | |
+|---|---|
+| **Plant turnaround** | Đợt bảo dưỡng/dừng máy — FFP nếu scope rõ (Q519); sớm hơn → CR (Q539) |
+| **Tight turnaround** | Deadline gấp → conflict action plan (Q108) |
+| **Quick turnaround** | Trap rework ngay — verify AC trước (Q788) |
 
 ---
 
