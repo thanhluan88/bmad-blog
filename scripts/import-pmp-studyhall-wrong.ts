@@ -25,10 +25,10 @@ function markWrong(stats: PmpStatsMap, ids: number[]): PmpStatsMap {
   const next: PmpStatsMap = { ...stats };
   for (const id of ids) {
     const key = String(id);
-    const row = next[key] ?? { attempts: 0, wrong: 0 };
+    const row = next[key] ?? { attempts: 0, wrongAttempt: 0 };
     next[key] = {
       attempts: Math.max(row.attempts, 1),
-      wrong: Math.max(row.wrong, 1),
+      wrongAttempt: Math.max(row.wrongAttempt, 1),
     };
   }
   return next;
@@ -62,10 +62,12 @@ async function main() {
   });
 
   const before = parsePmpStatsMap(existing?.stats ?? {});
-  const beforeWrong = Object.values(before).filter((r) => r.wrong > 0).length;
+  const beforeWrong = Object.values(before).filter((r) => r.wrongAttempt > 0).length;
   const merged = markWrong(before, unique);
-  const afterWrong = Object.values(merged).filter((r) => r.wrong > 0).length;
-  const newlyMarked = unique.filter((id) => (before[String(id)]?.wrong ?? 0) === 0).length;
+  const afterWrong = Object.values(merged).filter((r) => r.wrongAttempt > 0).length;
+  const newlyMarked = unique.filter(
+    (id) => (before[String(id)]?.wrongAttempt ?? 0) === 0,
+  ).length;
 
   await db.pmpQuizStat.upsert({
     where: { quizId_username: { quizId: quiz, username } },

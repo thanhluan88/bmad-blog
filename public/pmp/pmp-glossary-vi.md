@@ -1392,6 +1392,7 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | departmental / budget shortfalls | Governance restore · escalate funding |
 | an initiative / transformation initiative | ≈ project/program effort |
 | susceptible to strikes | Risk factor → identify & register |
+| retrofit / extensive recoding | Assess value with sponsor → update plan (Q1061) |
 
 ---
 
@@ -1567,6 +1568,15 @@ Sau identify & analyze → chọn response trong risk register. Risk **materiali
 | **PMP** | *labor … susceptible to strikes* = **risk driver** → identify & register (Q934→C,D) |
 | **≠** | Suspect / suspicious · **≠** *subject to* (regulations) |
 | **Trap** | Escalate trước khi structured risk identification |
+
+### Retrofit
+| | |
+|---|---|
+| **Nghĩa** | **Cải tạo / lắp thêm / chỉnh để tương thích** — sửa hệ thống *đã có* cho fit yêu cầu/tech mới (không xây mới từ đầu) |
+| **PMP** | *extensive recoding … to **retrofit** the software* = scope/effort lớn để tương thích tech mới (Q1061) |
+| **Mindset** | Retrofit = tín hiệu **impact lớn** → assess **value** với sponsor rồi update plan — không nhận scope/báo delay ngay |
+| **Trap** | Alert delay/scope ngay · team tự cap scope · iterate mù chưa chốt strategy (Q1061 B/C/D) |
+| **≠** | Greenfield / build from scratch · cũng ≠ chỉ “upgrade nhỏ” nếu stem nói *extensive* |
 
 ---
 
