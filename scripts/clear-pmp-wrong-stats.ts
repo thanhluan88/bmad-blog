@@ -58,6 +58,7 @@ function clearWrong(stats: PmpStatsMap): { next: PmpStatsMap; cleared: number } 
     next[id] = {
       attempts: row.attempts,
       wrongAttempt: 0,
+      lastWrongAttempt: row.lastWrongAttempt,
     };
   }
   return { next, cleared };

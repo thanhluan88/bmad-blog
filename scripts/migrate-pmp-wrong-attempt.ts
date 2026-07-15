@@ -36,6 +36,7 @@ function summarize(stats: PmpStatsMap) {
     attempted: rows.filter((r) => r.attempts > 0).length,
     openWrong: rows.filter((r) => r.wrongAttempt > 0).length,
     totalWrongAttempt: rows.reduce((s, r) => s + r.wrongAttempt, 0),
+    historicalWrong: rows.filter((r) => r.lastWrongAttempt > 0).length,
   };
 }
 
@@ -49,14 +50,24 @@ function applyOpenWrongSnapshot(
     raw.wrongOnes || raw.wrongExact1 || raw.ids?.map((id: number) => ({ id, wrong: 1 })) || [];
   const next: PmpStatsMap = {};
   for (const [id, row] of Object.entries(stats)) {
-    next[id] = { attempts: row.attempts, wrongAttempt: 0 };
+    next[id] = {
+      attempts: row.attempts,
+      wrongAttempt: 0,
+      lastWrongAttempt: row.lastWrongAttempt,
+    };
   }
   for (const item of list) {
     const key = String(item.id);
-    const prev = next[key] || { attempts: 0, wrongAttempt: 0 };
+    const prev = next[key] || {
+      attempts: 0,
+      wrongAttempt: 0,
+      lastWrongAttempt: 0,
+    };
+    const wrongAttempt = Math.max(1, Number(item.wrong) || 1);
     next[key] = {
       attempts: Math.max(prev.attempts, Number(item.attempts) || 1),
-      wrongAttempt: Math.max(1, Number(item.wrong) || 1),
+      wrongAttempt,
+      lastWrongAttempt: Math.max(prev.lastWrongAttempt, wrongAttempt),
     };
   }
   return next;

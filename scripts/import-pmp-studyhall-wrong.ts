@@ -25,10 +25,16 @@ function markWrong(stats: PmpStatsMap, ids: number[]): PmpStatsMap {
   const next: PmpStatsMap = { ...stats };
   for (const id of ids) {
     const key = String(id);
-    const row = next[key] ?? { attempts: 0, wrongAttempt: 0 };
+    const row = next[key] ?? {
+      attempts: 0,
+      wrongAttempt: 0,
+      lastWrongAttempt: 0,
+    };
+    const wrongAttempt = Math.max(row.wrongAttempt, 1);
     next[key] = {
       attempts: Math.max(row.attempts, 1),
-      wrongAttempt: Math.max(row.wrongAttempt, 1),
+      wrongAttempt,
+      lastWrongAttempt: Math.max(row.lastWrongAttempt, wrongAttempt),
     };
   }
   return next;

@@ -9,8 +9,9 @@
 - Local repo: `pmbokguide_eighthed_eng.pdf` + `public/pmp/pmp-glossary-vi.html`
   Printed PMBOK 8 + Vietnamese glossary for cue words. Use for: terms in stems (OPA, CCB, float, MSP…).
 - Local practice: `public/pmp/pmp-full-questions.html` (user `luannt115`, quiz `full`)
-  Signals: `attempts > 1` (historical miss) and `Sai: 1` / `wrong > 0` (still wrong). Use for: spaced redrill after each lesson.
-- Lessons: `public/pmp/pmp-teach-wrong-patterns.html` (0001), `public/pmp/pmp-teach-sai1-patterns.html` (0002)
+  Signals: `attempts > 1` (historical miss), `Sai: 1` / `wrong > 0` (still wrong), `lastWrongAttempt ≥ 1` (lifetime). Use for: spaced redrill after each lesson.
+- Lessons: `pmp-teach-wrong-patterns.html` (0001), `pmp-teach-sai1-patterns.html` (0002), `pmp-teach-last-wrong-patterns.html` (0003 · 26+ LWA patterns)
+- Pattern data: `data/pmp-luannt115-full-last-wrong-patterns.json` · regenerate via `scripts/analyze-pmp-last-wrong-patterns.js`
 
 ## Wisdom (Communities)
 

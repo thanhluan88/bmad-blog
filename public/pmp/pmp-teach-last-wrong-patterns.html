@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMP Teach — 26 pattern từ câu từng sai (LWA · luannt115)</title>
+  <link rel="stylesheet" href="pmp-teach-wrong-patterns.css">
+  <link rel="stylesheet" href="pmp-teach-fullscreen.css">
+  <style>
+    .pattern-block { margin-bottom: 1.25rem; }
+    .pattern-block h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+    .fam-note { font-size: 0.85rem; color: var(--muted); margin: 0 0 1rem; }
+    table td { vertical-align: top; font-size: 0.84rem; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">PMP Teach</div>
+      <div class="brand-sub">26 pattern · LWA · Full Bank</div>
+      <nav id="sideNav">
+        <a href="#intro" class="active">Giới thiệu</a>
+        <a href="#map">Bản đồ 26</a>
+        <a href="#fam-lead">Lead people</a>
+        <a href="#fam-process">Protect process</a>
+        <a href="#fam-value">Money &amp; governance</a>
+        <a href="#fam-engage">Engage &amp; tailor</a>
+        <a href="#other">Other / mixed</a>
+        <a href="#practice">Luyện 12 câu</a>
+        <a href="#cheat">Cheat sheet</a>
+        <a href="#next">Next</a>
+      </nav>
+      <a class="back-link" href="pmp-exam-prep-lecture.html">← Bài giảng PMP</a>
+      <a class="back-link secondary" href="pmp-teach-full-last-wrong-index.html">Index từng sai (415)</a>
+      <a class="back-link secondary" href="pmp-full-questions.html">→ Luyện Full Bank</a>
+      <a class="back-link secondary" href="pmp-teach-sai1-patterns.html">Sai:1 đang mở</a>
+      <a class="back-link secondary" href="pmp-glossary-vi.html">Glossary</a>
+    </aside>
+
+    <div>
+      <nav class="mobile-nav">
+        <a href="#intro">Intro</a>
+        <a href="#map">Map</a>
+        <a href="#practice">Quiz</a>
+        <a href="#cheat">Cheat</a>
+        <a href="pmp-exam-prep-lecture.html">Lecture</a>
+      </nav>
+
+      <main>
+        <header class="hero" id="intro">
+          <h1>26 pattern từ câu bạn từng làm sai</h1>
+          <p class="lead">
+            User <strong>luannt115</strong> · Full Bank · tiêu chí
+            <code>lastWrongAttempt ≥ 1</code> (từng sai — không reset khi sau đó đúng),
+            sort <strong>LWA ↓</strong>.
+            Snapshot: <strong>415 câu</strong>
+            (135 đang mở · 280 đã đúng lại).
+            Taxonomy v2: <strong>không ép 8 bucket</strong> —
+            26 trap-pattern cụ thể + 75 mixed (18%).
+          </p>
+          <div class="stat-grid">
+            <div class="stat-box"><strong>415</strong><span>từng sai</span></div>
+            <div class="stat-box"><strong>26</strong><span>named patterns</span></div>
+            <div class="stat-box"><strong>33</strong><span>LWA ≥ 3</span></div>
+            <div class="stat-box"><strong>135</strong><span>đang mở</span></div>
+          </div>
+          <div class="badges">
+            <span class="badge">lastWrongAttempt</span>
+            <span class="badge">specific-first</span>
+            <span class="badge">Lead accountably</span>
+            <span class="badge">Focus on value</span>
+          </div>
+        </header>
+
+        <section id="map">
+          <h2>Bản đồ 26 pattern</h2>
+          <div class="card info">
+            <p style="margin:0" class="fam-note">
+              Review: 415 câu ≠ 8 mental model. Gom theo <em>trap / action</em> (resilience, OPA, money, agile…)
+              — khớp trước trên stem+đáp án đúng, fallback options chỉ khi chưa match.
+              Khác <a href="pmp-teach-sai1-patterns.html">Sai:1</a> (wrongAttempt=1):
+              đây là <strong>toàn bộ lịch sử từng sai</strong>.
+            </p>
+          </div>
+          <table>
+            <thead>
+              <tr><th>Pattern</th><th>Cue</th><th>Hành động đúng</th><th>ID cứng (LWA)</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="#p-money-forecast"><strong>1. Money</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Money &amp; governance · n=61</span></td>
+                <td>budget forward · CPI/SPI · EAC · vendor · unpaid</td>
+                <td>Update forecasts · EVM act · close contracts admin-complete</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-376">376×6</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-422">422×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-533">533×3</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-opa-improve"><strong>2. OPA / lessons → actionable update</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=36</span></td>
+                <td>estimation bias · vague policy · many changes delivered · lessons</td>
+                <td>Update OPA / templates / rewrite policy — actionable</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-981">981×7</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-696">696×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-925">925×3</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-agile-mvp"><strong>3. Agile MVP / backlog / iteration protect</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Engage &amp; tailor · n=32</span></td>
+                <td>MVP · mid-iteration · PO absent · backlog · sprint review</td>
+                <td>PO owns backlog · ship MVP · protect iteration · workshop AC</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-520">520×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-809">809×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-872">872×3</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-change-control"><strong>4. Change control / ICC</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=29</span></td>
+                <td>out of baseline · unauthorized work · new feature request · CCB</td>
+                <td>Stop unauthorized if needed → impact → formal CR/CCB</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-585">585×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-695">695×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-771">771×2</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-verify-scope"><strong>5. Verify scope / acceptance trước 'done'</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=26</span></td>
+                <td>sponsor confirm done · acceptance criteria · close check</td>
+                <td>Review scope &amp; requirements / acceptance before claim success</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-719">719×4</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-534">534×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-253">253×2</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-risk-cadence"><strong>6. Risk cadence</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=20</span></td>
+                <td>risk materialized · new law · risk in reports · reserve</td>
+                <td>Implement planned response · identify/assess · include in reports</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-1005">1005×4</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-396">396×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-575">575×2</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-adapt-comms"><strong>7. Adapt communications + culture</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Engage &amp; tailor · n=17</span></td>
+                <td>preferred channel · multicultural · virtual · language</td>
+                <td>Adapt methods to prefs; culturally responsive protocols</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-359">359×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-658">658×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-924">924×2</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-hybrid-tailor"><strong>8. Tailor / hybrid</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Engage &amp; tailor · n=15</span></td>
+                <td>small low-risk · mixed certainty · predictive+agile</td>
+                <td>Tailor weight · hybrid OK · adaptive estimates where uncertain</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-503">503×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-573">573×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-893">893×2</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-team-stage"><strong>9. Team stage / EI / work environment</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=14</span></td>
+                <td>Tuckman · storming · shouting · noisy workspace · ownership</td>
+                <td>Map stage · EI/self-reg · PM owns environment · facilitate ownership</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-214">214×4</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-71">71×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-141">141×2</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-competency-develop"><strong>10. Competency gap → develop</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=12</span></td>
+                <td>interns · skill gap · training needs · onboarding</td>
+                <td>Gap analysis + develop/remediate (HR/mentor) — don't blame</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-30">30×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-511">511×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-622">622×3</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-governance-roles"><strong>11. Governance / roles / RAM / steering</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Money &amp; governance · n=12</span></td>
+                <td>steering review · RACI/RAM · decision authority · unclear duty</td>
+                <td>Clarify roles (RAM) · prepare governance evidence · decision log</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-224">224×4</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-806">806×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-1080">1080×2</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-transparency-news"><strong>12. Transparency</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=9</span></td>
+                <td>layoff · incomplete info · rumor · morale crash</td>
+                <td>Share known facts + facilitate open discussion</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-305">305×5</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-257">257×4</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-43">43×1</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-engage-plan"><strong>13. Engagement plan</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Engage &amp; tailor · n=8</span></td>
+                <td>resistant stakeholder · conflict interests · power/interest</td>
+                <td>Consult engagement plan; engage per documented strategy</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-255">255×4</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-282">282×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-940">940×2</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-benefits-metrics"><strong>14. Benefits / value metrics (not vanity)</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Money &amp; governance · n=8</span></td>
+                <td>customer satisfaction · Kano · % value · long-term insight</td>
+                <td>Kano/surveys/benchmarking · measure value achieved · SH behavior insight</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-824">824×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-1002">1002×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-1056">1056×3</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-knowledge-transfer"><strong>15. Knowledge transfer</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=7</span></td>
+                <td>turnover · transition · strict domain · KT sessions</td>
+                <td>Prioritize immediate knowledge transfer between people</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-232">232×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-31">31×1</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-55">55×1</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-identify-stakeholders"><strong>16. Identify / re-analyze stakeholders</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Engage &amp; tailor · n=6</span></td>
+                <td>new SH · stale distribution · who needs info now</td>
+                <td>Stakeholder analysis / update register before tweaking list alone</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-746">746×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-173">173×1</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-204">204×1</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-coach-conflict"><strong>17. Coach conflict</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=5</span></td>
+                <td>privately struggling with teammate · interpersonal conflict</td>
+                <td>Coach conflict-resolution techniques; facilitate</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-348">348×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-181">181×1</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-211">211×1</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-quality-sampling"><strong>18. Quality</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=5</span></td>
+                <td>mass production · quality supervisor · prove standards</td>
+                <td>Statistical sampling · independent certification test</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-634">634×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-138">138×1</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-326">326×1</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-compliance-audit"><strong>19. Compliance audit / catch overlooked regs</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=4</span></td>
+                <td>multi regs · process improvement · overlooked requirements</td>
+                <td>Schedule audit / independent certification to prove standards</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-562">562×3</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-918">918×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-964">964×2</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-compliance-ethics"><strong>20. Compliance / ethics</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=3</span></td>
+                <td>regs · HQ vs local · ethics · audit · specialty law</td>
+                <td>Validate + escalate; never authorize ethics/regs exceptions</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-1047">1047×6</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-834">834×1</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-1044">1044×1</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-resilience"><strong>21. Resilience</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=2</span></td>
+                <td>uncertainty · ambiguity · timeline+budget + SH concern</td>
+                <td>Build resilient approach (not 'eliminate all risk')</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-828">828×9</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-398">398×1</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-culture-change"><strong>22. Org culture change</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=2</span></td>
+                <td>hierarchy→agile · restructuring · vision/alignment drift</td>
+                <td>Targeted change activities · clear vision with sponsor/team</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-1051">1051×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-53">53×1</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-own-mistake"><strong>23. Own mistake</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=2</span></td>
+                <td>wrong recipient email · unintended consequence · visible error</td>
+                <td>Acknowledge the mistake and apologize for consequences</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-1">1×1</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-999">999×1</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-charter-authorize"><strong>24. Charter</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=2</span></td>
+                <td>global HQ ops · need formal start · expectations</td>
+                <td>Create project charter to authorize and align</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-797">797×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-221">221×1</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-plan-translate"><strong>25. Translate plan → actionable controls</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=2</span></td>
+                <td>plan too abstract · audits/checklists</td>
+                <td>Iterative translations · audits/checklists from the plan</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-29">29×1</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-42">42×1</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#p-compliance-research"><strong>26. Compliance research before proceed</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=1</span></td>
+                <td>new requirement after charter · specialty regs · ambiguity</td>
+                <td>Research compliance requirement (BA) before authorizing work</td>
+                <td>
+                  <a class="id-chip" href="pmp-full-questions.html#q-1014">1014×2</a>
+                </td>
+              </tr>
+              <tr>
+                <td><a href="#other"><strong>Other / mixed</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">n=75</span></td>
+                <td>edge / multi-signal</td>
+                <td>Ôn qua index LWA ↓ + bài giảng từng câu</td>
+                <td><a class="id-chip" href="pmp-full-questions.html#q-157">157×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-274">274×2</a>
+                  <a class="id-chip" href="pmp-full-questions.html#q-963">963×2</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="ref-footer" style="margin-top:0.75rem">
+            Data: <code>pmp-luannt115-full-last-wrong-patterns.json</code> ·
+            <a href="pmp-teach-full-last-wrong-index.html">415 bài theo LWA ↓</a>
+          </p>
+        </section>
+
+      <section id="fam-lead">
+        <h2>Lead people</h2>
+        <article class="pattern-block" id="p-resilience">
+          <h3>Resilience — anticipate / respond / recover <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 2 câu · hard 1 · open 1</span></h3>
+          <div class="rule">uncertainty · ambiguity · timeline+budget + SH concern  →  Build resilient approach (not 'eliminate all risk')</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-828">Q828</a> (LWA 9):</strong>
+            Cue → <em>Build resilient approach (not 'eliminate all risk')</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-828">828</a> <a class="id-chip" href="pmp-full-questions.html#q-398">398</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Meeting-only · eliminate uncertainty claim</div>
+        </article>
+        <article class="pattern-block" id="p-transparency-news">
+          <h3>Transparency — tin xấu / bất định <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 9 câu · hard 2 · open 2</span></h3>
+          <div class="rule">layoff · incomplete info · rumor · morale crash  →  Share known facts + facilitate open discussion</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-305">Q305</a> (LWA 5):</strong>
+            Cue → <em>Share known facts + facilitate open discussion</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-305">305</a> <a class="id-chip" href="pmp-full-questions.html#q-257">257</a> <a class="id-chip" href="pmp-full-questions.html#q-43">43</a> <a class="id-chip" href="pmp-full-questions.html#q-91">91</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Distract · promise certainty · silence · hide</div>
+        </article>
+        <article class="pattern-block" id="p-own-mistake">
+          <h3>Own mistake — acknowledge + apologize <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 2 câu · hard 0 · open 1</span></h3>
+          <div class="rule">wrong recipient email · unintended consequence · visible error  →  Acknowledge the mistake and apologize for consequences</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-1">Q1</a> (LWA 1):</strong>
+            Cue → <em>Acknowledge the mistake and apologize for consequences</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-1">1</a> <a class="id-chip" href="pmp-full-questions.html#q-999">999</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Hide · blame tool · over-explain without owning</div>
+        </article>
+        <article class="pattern-block" id="p-coach-conflict">
+          <h3>Coach conflict — không làm hộ <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 5 câu · hard 0 · open 1</span></h3>
+          <div class="rule">privately struggling with teammate · interpersonal conflict  →  Coach conflict-resolution techniques; facilitate</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-348">Q348</a> (LWA 2):</strong>
+            Cue → <em>Coach conflict-resolution techniques; facilitate</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-348">348</a> <a class="id-chip" href="pmp-full-questions.html#q-181">181</a> <a class="id-chip" href="pmp-full-questions.html#q-211">211</a> <a class="id-chip" href="pmp-full-questions.html#q-259">259</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> PM takes sides / punish / ignore / solve for them</div>
+        </article>
+        <article class="pattern-block" id="p-competency-develop">
+          <h3>Competency gap → develop <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 12 câu · hard 3 · open 3</span></h3>
+          <div class="rule">interns · skill gap · training needs · onboarding  →  Gap analysis + develop/remediate (HR/mentor) — don't blame</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-30">Q30</a> (LWA 3):</strong>
+            Cue → <em>Gap analysis + develop/remediate (HR/mentor) — don't blame</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-30">30</a> <a class="id-chip" href="pmp-full-questions.html#q-511">511</a> <a class="id-chip" href="pmp-full-questions.html#q-622">622</a> <a class="id-chip" href="pmp-full-questions.html#q-318">318</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Fire / blame / ignore capability gap</div>
+        </article>
+        <article class="pattern-block" id="p-knowledge-transfer">
+          <h3>Knowledge transfer — outgoing / incoming <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 7 câu · hard 0 · open 1</span></h3>
+          <div class="rule">turnover · transition · strict domain · KT sessions  →  Prioritize immediate knowledge transfer between people</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-232">Q232</a> (LWA 2):</strong>
+            Cue → <em>Prioritize immediate knowledge transfer between people</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-232">232</a> <a class="id-chip" href="pmp-full-questions.html#q-31">31</a> <a class="id-chip" href="pmp-full-questions.html#q-55">55</a> <a class="id-chip" href="pmp-full-questions.html#q-101">101</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Delay KT · assume documentation enough under pressure</div>
+        </article>
+        <article class="pattern-block" id="p-team-stage">
+          <h3>Team stage / EI / work environment <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 14 câu · hard 1 · open 4</span></h3>
+          <div class="rule">Tuckman · storming · shouting · noisy workspace · ownership  →  Map stage · EI/self-reg · PM owns environment · facilitate ownership</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-214">Q214</a> (LWA 4):</strong>
+            Cue → <em>Map stage · EI/self-reg · PM owns environment · facilitate ownership</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-214">214</a> <a class="id-chip" href="pmp-full-questions.html#q-71">71</a> <a class="id-chip" href="pmp-full-questions.html#q-141">141</a> <a class="id-chip" href="pmp-full-questions.html#q-256">256</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Micromanage · escalate people issues early · ignore culture</div>
+        </article>
+        <article class="pattern-block" id="p-culture-change">
+          <h3>Org culture change — targeted, not slogans <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 2 câu · hard 0 · open 0</span></h3>
+          <div class="rule">hierarchy→agile · restructuring · vision/alignment drift  →  Targeted change activities · clear vision with sponsor/team</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-1051">Q1051</a> (LWA 2):</strong>
+            Cue → <em>Targeted change activities · clear vision with sponsor/team</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-1051">1051</a> <a class="id-chip" href="pmp-full-questions.html#q-53">53</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Announce values only · ignore process/structure redesign</div>
+        </article>
+      </section>
+
+      <section id="fam-process">
+        <h2>Protect process</h2>
+        <article class="pattern-block" id="p-opa-improve">
+          <h3>OPA / lessons → actionable update <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 36 câu · hard 3 · open 15</span></h3>
+          <div class="rule">estimation bias · vague policy · many changes delivered · lessons  →  Update OPA / templates / rewrite policy — actionable</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-981">Q981</a> (LWA 7):</strong>
+            Cue → <em>Update OPA / templates / rewrite policy — actionable</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-981">981</a> <a class="id-chip" href="pmp-full-questions.html#q-696">696</a> <a class="id-chip" href="pmp-full-questions.html#q-925">925</a> <a class="id-chip" href="pmp-full-questions.html#q-183">183</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Archive-only / refer historical / interview without change</div>
+        </article>
+        <article class="pattern-block" id="p-risk-cadence">
+          <h3>Risk cadence — register &amp; response <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 20 câu · hard 1 · open 6</span></h3>
+          <div class="rule">risk materialized · new law · risk in reports · reserve  →  Implement planned response · identify/assess · include in reports</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-1005">Q1005</a> (LWA 4):</strong>
+            Cue → <em>Implement planned response · identify/assess · include in reports</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-1005">1005</a> <a class="id-chip" href="pmp-full-questions.html#q-396">396</a> <a class="id-chip" href="pmp-full-questions.html#q-575">575</a> <a class="id-chip" href="pmp-full-questions.html#q-939">939</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Invent new ritual · ignore register · lessons instead of act</div>
+        </article>
+        <article class="pattern-block" id="p-change-control">
+          <h3>Change control / ICC <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 29 câu · hard 0 · open 10</span></h3>
+          <div class="rule">out of baseline · unauthorized work · new feature request · CCB  →  Stop unauthorized if needed → impact → formal CR/CCB</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-585">Q585</a> (LWA 2):</strong>
+            Cue → <em>Stop unauthorized if needed → impact → formal CR/CCB</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-585">585</a> <a class="id-chip" href="pmp-full-questions.html#q-695">695</a> <a class="id-chip" href="pmp-full-questions.html#q-771">771</a> <a class="id-chip" href="pmp-full-questions.html#q-880">880</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Absorb scope because 'value' · silent add · informal list</div>
+        </article>
+        <article class="pattern-block" id="p-verify-scope">
+          <h3>Verify scope / acceptance trước 'done' <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 26 câu · hard 2 · open 5</span></h3>
+          <div class="rule">sponsor confirm done · acceptance criteria · close check  →  Review scope &amp; requirements / acceptance before claim success</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-719">Q719</a> (LWA 4):</strong>
+            Cue → <em>Review scope &amp; requirements / acceptance before claim success</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-719">719</a> <a class="id-chip" href="pmp-full-questions.html#q-534">534</a> <a class="id-chip" href="pmp-full-questions.html#q-253">253</a> <a class="id-chip" href="pmp-full-questions.html#q-306">306</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Declare done from timeline or team feeling alone</div>
+        </article>
+        <article class="pattern-block" id="p-quality-sampling">
+          <h3>Quality — sampling / certification evidence <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 5 câu · hard 0 · open 2</span></h3>
+          <div class="rule">mass production · quality supervisor · prove standards  →  Statistical sampling · independent certification test</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-634">Q634</a> (LWA 2):</strong>
+            Cue → <em>Statistical sampling · independent certification test</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-634">634</a> <a class="id-chip" href="pmp-full-questions.html#q-138">138</a> <a class="id-chip" href="pmp-full-questions.html#q-326">326</a> <a class="id-chip" href="pmp-full-questions.html#q-506">506</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Inspect 100% when sampling fits · skip proof of quality</div>
+        </article>
+        <article class="pattern-block" id="p-charter-authorize">
+          <h3>Charter — authorize &amp; align <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 2 câu · hard 0 · open 1</span></h3>
+          <div class="rule">global HQ ops · need formal start · expectations  →  Create project charter to authorize and align</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-797">Q797</a> (LWA 2):</strong>
+            Cue → <em>Create project charter to authorize and align</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-797">797</a> <a class="id-chip" href="pmp-full-questions.html#q-221">221</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Start work without charter · informal kickoff only</div>
+        </article>
+        <article class="pattern-block" id="p-plan-translate">
+          <h3>Translate plan → actionable controls <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 2 câu · hard 0 · open 0</span></h3>
+          <div class="rule">plan too abstract · audits/checklists  →  Iterative translations · audits/checklists from the plan</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-29">Q29</a> (LWA 1):</strong>
+            Cue → <em>Iterative translations · audits/checklists from the plan</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-29">29</a> <a class="id-chip" href="pmp-full-questions.html#q-42">42</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Leave plan on shelf · verbal alignment only</div>
+        </article>
+        <article class="pattern-block" id="p-compliance-ethics">
+          <h3>Compliance / ethics — không exception <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 3 câu · hard 1 · open 1</span></h3>
+          <div class="rule">regs · HQ vs local · ethics · audit · specialty law  →  Validate + escalate; never authorize ethics/regs exceptions</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-1047">Q1047</a> (LWA 6):</strong>
+            Cue → <em>Validate + escalate; never authorize ethics/regs exceptions</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-1047">1047</a> <a class="id-chip" href="pmp-full-questions.html#q-834">834</a> <a class="id-chip" href="pmp-full-questions.html#q-1044">1044</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Local exception / cut compliance for deadline / cover deviation</div>
+        </article>
+        <article class="pattern-block" id="p-compliance-audit">
+          <h3>Compliance audit / catch overlooked regs <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 4 câu · hard 1 · open 0</span></h3>
+          <div class="rule">multi regs · process improvement · overlooked requirements  →  Schedule audit / independent certification to prove standards</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-562">Q562</a> (LWA 3):</strong>
+            Cue → <em>Schedule audit / independent certification to prove standards</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-562">562</a> <a class="id-chip" href="pmp-full-questions.html#q-918">918</a> <a class="id-chip" href="pmp-full-questions.html#q-964">964</a> <a class="id-chip" href="pmp-full-questions.html#q-247">247</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Assume compliant · skip baseline audit</div>
+        </article>
+        <article class="pattern-block" id="p-compliance-research">
+          <h3>Compliance research before proceed <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 1 câu · hard 0 · open 0</span></h3>
+          <div class="rule">new requirement after charter · specialty regs · ambiguity  →  Research compliance requirement (BA) before authorizing work</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-1014">Q1014</a> (LWA 2):</strong>
+            Cue → <em>Research compliance requirement (BA) before authorizing work</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-1014">1014</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Start anyway · assume sponsor already cleared regs</div>
+        </article>
+      </section>
+
+      <section id="fam-value">
+        <h2>Money &amp; governance</h2>
+        <article class="pattern-block" id="p-money-forecast">
+          <h3>Money — forecast / EVM / contract <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 61 câu · hard 7 · open 20</span></h3>
+          <div class="rule">budget forward · CPI/SPI · EAC · vendor · unpaid  →  Update forecasts · EVM act · close contracts admin-complete</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-376">Q376</a> (LWA 6):</strong>
+            Cue → <em>Update forecasts · EVM act · close contracts admin-complete</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-376">376</a> <a class="id-chip" href="pmp-full-questions.html#q-422">422</a> <a class="id-chip" href="pmp-full-questions.html#q-533">533</a> <a class="id-chip" href="pmp-full-questions.html#q-578">578</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Freeze BAC forever · overtime-only · skip admin close</div>
+        </article>
+        <article class="pattern-block" id="p-benefits-metrics">
+          <h3>Benefits / value metrics (not vanity) <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 8 câu · hard 3 · open 1</span></h3>
+          <div class="rule">customer satisfaction · Kano · % value · long-term insight  →  Kano/surveys/benchmarking · measure value achieved · SH behavior insight</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-824">Q824</a> (LWA 3):</strong>
+            Cue → <em>Kano/surveys/benchmarking · measure value achieved · SH behavior insight</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-824">824</a> <a class="id-chip" href="pmp-full-questions.html#q-1002">1002</a> <a class="id-chip" href="pmp-full-questions.html#q-1056">1056</a> <a class="id-chip" href="pmp-full-questions.html#q-608">608</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Vanity SPI-only · ignore outcome metrics</div>
+        </article>
+        <article class="pattern-block" id="p-governance-roles">
+          <h3>Governance / roles / RAM / steering <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 12 câu · hard 1 · open 7</span></h3>
+          <div class="rule">steering review · RACI/RAM · decision authority · unclear duty  →  Clarify roles (RAM) · prepare governance evidence · decision log</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-224">Q224</a> (LWA 4):</strong>
+            Cue → <em>Clarify roles (RAM) · prepare governance evidence · decision log</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-224">224</a> <a class="id-chip" href="pmp-full-questions.html#q-806">806</a> <a class="id-chip" href="pmp-full-questions.html#q-1080">1080</a> <a class="id-chip" href="pmp-full-questions.html#q-110">110</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Freestyle without authority map · skip steering prep</div>
+        </article>
+      </section>
+
+      <section id="fam-engage">
+        <h2>Engage &amp; tailor</h2>
+        <article class="pattern-block" id="p-engage-plan">
+          <h3>Engagement plan — theo chiến lược SH <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 8 câu · hard 1 · open 3</span></h3>
+          <div class="rule">resistant stakeholder · conflict interests · power/interest  →  Consult engagement plan; engage per documented strategy</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-255">Q255</a> (LWA 4):</strong>
+            Cue → <em>Consult engagement plan; engage per documented strategy</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-255">255</a> <a class="id-chip" href="pmp-full-questions.html#q-282">282</a> <a class="id-chip" href="pmp-full-questions.html#q-940">940</a> <a class="id-chip" href="pmp-full-questions.html#q-208">208</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Freestyle escalate / ignore minority SH</div>
+        </article>
+        <article class="pattern-block" id="p-adapt-comms">
+          <h3>Adapt communications + culture <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 17 câu · hard 2 · open 8</span></h3>
+          <div class="rule">preferred channel · multicultural · virtual · language  →  Adapt methods to prefs; culturally responsive protocols</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-359">Q359</a> (LWA 3):</strong>
+            Cue → <em>Adapt methods to prefs; culturally responsive protocols</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-359">359</a> <a class="id-chip" href="pmp-full-questions.html#q-658">658</a> <a class="id-chip" href="pmp-full-questions.html#q-924">924</a> <a class="id-chip" href="pmp-full-questions.html#q-977">977</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> One-size email blast · ignore time zone/culture</div>
+        </article>
+        <article class="pattern-block" id="p-identify-stakeholders">
+          <h3>Identify / re-analyze stakeholders <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 6 câu · hard 0 · open 2</span></h3>
+          <div class="rule">new SH · stale distribution · who needs info now  →  Stakeholder analysis / update register before tweaking list alone</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-746">Q746</a> (LWA 2):</strong>
+            Cue → <em>Stakeholder analysis / update register before tweaking list alone</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-746">746</a> <a class="id-chip" href="pmp-full-questions.html#q-173">173</a> <a class="id-chip" href="pmp-full-questions.html#q-204">204</a> <a class="id-chip" href="pmp-full-questions.html#q-222">222</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Edit distribution list by gut without analysis</div>
+        </article>
+        <article class="pattern-block" id="p-agile-mvp">
+          <h3>Agile MVP / backlog / iteration protect <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 32 câu · hard 3 · open 7</span></h3>
+          <div class="rule">MVP · mid-iteration · PO absent · backlog · sprint review  →  PO owns backlog · ship MVP · protect iteration · workshop AC</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-520">Q520</a> (LWA 3):</strong>
+            Cue → <em>PO owns backlog · ship MVP · protect iteration · workshop AC</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-520">520</a> <a class="id-chip" href="pmp-full-questions.html#q-809">809</a> <a class="id-chip" href="pmp-full-questions.html#q-872">872</a> <a class="id-chip" href="pmp-full-questions.html#q-665">665</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Team absorbs mid-sprint · wait perfect · skip PO</div>
+        </article>
+        <article class="pattern-block" id="p-hybrid-tailor">
+          <h3>Tailor / hybrid — vừa đủ nghi thức <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 15 câu · hard 1 · open 4</span></h3>
+          <div class="rule">small low-risk · mixed certainty · predictive+agile  →  Tailor weight · hybrid OK · adaptive estimates where uncertain</div>
+          <div class="card tip">
+            <strong><a href="pmp-full-questions.html#q-503">Q503</a> (LWA 3):</strong>
+            Cue → <em>Tailor weight · hybrid OK · adaptive estimates where uncertain</em>
+            
+            · cũng xem:
+            <a class="id-chip" href="pmp-full-questions.html#q-503">503</a> <a class="id-chip" href="pmp-full-questions.html#q-573">573</a> <a class="id-chip" href="pmp-full-questions.html#q-893">893</a> <a class="id-chip" href="pmp-full-questions.html#q-159">159</a>
+          </div>
+          <div class="card danger"><strong>Trap:</strong> Copy megaproject ceremony · or zero governance</div>
+        </article>
+      </section>
+
+        <section id="other">
+          <h2>Other / mixed · 75 câu (18%)</h2>
+          <div class="card info">
+            <p style="margin:0">
+              Không nhồi vào 8 (hay 26) bucket giả. Các ID này thường multi-signal hoặc edge
+              (EMV số, charter edge, quality niche…). Ôn trực tiếp trên index / full teach lesson.
+            </p>
+          </div>
+          <div class="card tip">
+            Mẫu:
+            <a class="id-chip" href="pmp-full-questions.html#q-157">157×2</a> <a class="id-chip" href="pmp-full-questions.html#q-274">274×2</a> <a class="id-chip" href="pmp-full-questions.html#q-963">963×2</a> <a class="id-chip" href="pmp-full-questions.html#q-65">65×1</a> <a class="id-chip" href="pmp-full-questions.html#q-77">77×1</a> <a class="id-chip" href="pmp-full-questions.html#q-96">96×1</a> <a class="id-chip" href="pmp-full-questions.html#q-120">120×1</a> <a class="id-chip" href="pmp-full-questions.html#q-124">124×1</a>
+          </div>
+        </section>
+
+        <section id="practice">
+          <h2>Luyện 12 câu (retrieval · interleaved)</h2>
+          <p class="flash-hint">Options cân độ dài. Chọn → feedback ngay. Trộn Lead / Process / Money / Engage.</p>
+
+          <div class="quiz-card" data-quiz="0" data-ans="C">
+            <div class="q-num">resilience · Q828-style</div>
+            <div class="q-text">Uncertainty cao; SH lo <span class="kw-cue">timeline + budget</span>. Approach nào đúng?</div>
+            <button type="button" class="opt-btn" data-k="A">Quy trình cộng tác để loại sạch risk và ambiguity khỏi dự án</button>
+            <button type="button" class="opt-btn" data-k="B">Chỉ tăng số cuộc họp status để “thấy” rủi ro rồi bỏ qua plan</button>
+            <button type="button" class="opt-btn" data-k="C">Đưa resilience vào approach: anticipate → respond → recover</button>
+            <button type="button" class="opt-btn" data-k="D">Đóng băng mọi thay đổi và không nhận SH concerns nữa</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="1" data-ans="B">
+            <div class="q-num">opa-improve · Q981-style</div>
+            <div class="q-text">Agile multi-team; sponsor lo <span class="kw-signal">quá nhiều change đã deliver</span>. PM?</div>
+            <button type="button" class="opt-btn" data-k="A">Chỉ nhắc team đọc SLA/SOW rồi coi như xong</button>
+            <button type="button" class="opt-btn" data-k="B">Cập nhật OPA để còn hiệu lực và khớp mục tiêu công ty</button>
+            <button type="button" class="opt-btn" data-k="C">Bắt buộc mọi người online 100% thời gian làm việc</button>
+            <button type="button" class="opt-btn" data-k="D">Chỉ trỏ sang lessons cũ mà không cập nhật quy trình hiện tại</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="2" data-ans="D">
+            <div class="q-num">money-forecast · Q376-style</div>
+            <div class="q-text">Budget cần quản đi tiếp trong bối cảnh biến động. Hành động ưu tiên?</div>
+            <button type="button" class="opt-btn" data-k="A">Giữ nguyên BAC vì “strategic direction không đổi”</button>
+            <button type="button" class="opt-btn" data-k="B">Ngừng đo EVM để giảm tải báo cáo tài chính</button>
+            <button type="button" class="opt-btn" data-k="C">Chỉ cắt scope ngẫu nhiên mỗi tuần không forecast</button>
+            <button type="button" class="opt-btn" data-k="D">Cập nhật financial forecasts thường xuyên để thấy nhu cầu thực</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="3" data-ans="B">
+            <div class="q-num">transparency-news · Q305-style</div>
+            <div class="q-text">Công ty sắp layoff; team gần delivery lo mất việc. PM?</div>
+            <button type="button" class="opt-btn" data-k="A">Hứa chắc chắn không ai trong team bị cắt để giữ morale</button>
+            <button type="button" class="opt-btn" data-k="B">Cập nhật minh bạch thông tin có sẵn và mở thảo luận với team</button>
+            <button type="button" class="opt-btn" data-k="C">Cấm nói về layoff trong standup và chỉ focus burn-down</button>
+            <button type="button" class="opt-btn" data-k="D">Tạm dừng dự án đến khi HR công bố danh sách chính thức</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="4" data-ans="A">
+            <div class="q-num">change-control · scope-impact</div>
+            <div class="q-text">SH mới muốn đổi ownership mid-flight → ảnh hưởng scope. First move?</div>
+            <button type="button" class="opt-btn" data-k="A">Assess impact on scope rồi formal change path nếu cần</button>
+            <button type="button" class="opt-btn" data-k="B">Accept ngay vì “strategic partner” luôn đúng về scope</button>
+            <button type="button" class="opt-btn" data-k="C">Im lặng thêm work vào sprint mà không ghi CR</button>
+            <button type="button" class="opt-btn" data-k="D">Chỉ cancel feature cũ random để nhường chỗ partner</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="5" data-ans="A">
+            <div class="q-num">compliance-ethics · Q1047-style</div>
+            <div class="q-text">Multinational; local muốn lệch ethics/HQ. Mindset đúng?</div>
+            <button type="button" class="opt-btn" data-k="A">Không authorize ethics exception; escalate/validate theo chuẩn org</button>
+            <button type="button" class="opt-btn" data-k="B">Cho phép local exception nếu giúp giữ tiến độ quý này</button>
+            <button type="button" class="opt-btn" data-k="C">Đổi HQ policy một mình vì “agile nghĩa là linh hoạt”</button>
+            <button type="button" class="opt-btn" data-k="D">Che deviation đến sau audit rồi mới bàn</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="6" data-ans="C">
+            <div class="q-num">agile-mvp · MVP / PO</div>
+            <div class="q-text">Timeline chặt; scope đầy. Cách PMI nhất?</div>
+            <button type="button" class="opt-btn" data-k="A">Ship tất cả stories cùng lúc để “đủ giá trị” ngay ngày 1</button>
+            <button type="button" class="opt-btn" data-k="B">Team tự cắt backlog giữa sprint không hỏi Product Owner</button>
+            <button type="button" class="opt-btn" data-k="C">MVP + PO reprioritize / protect iteration theo backlog</button>
+            <button type="button" class="opt-btn" data-k="D">Pause dự án đến khi mọi requirement hoàn hảo trên giấy</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="7" data-ans="B">
+            <div class="q-num">verify-scope · Q719-style</div>
+            <div class="q-text">Milestone xong; sponsor xin confirm deliverables đạt yêu cầu. Next?</div>
+            <button type="button" class="opt-btn" data-k="A">Tuyên bố success ngay vì timeline đã met</button>
+            <button type="button" class="opt-btn" data-k="B">Rà lại project scope &amp; requirements để xác nhận objectives</button>
+            <button type="button" class="opt-btn" data-k="C">Chỉ hỏi team cảm nhận “ổn không” rồi đóng dự án</button>
+            <button type="button" class="opt-btn" data-k="D">Bắt đầu phase mới trước khi verify acceptance</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="8" data-ans="C">
+            <div class="q-num">coach-conflict · Q257-style</div>
+            <div class="q-text">Senior nói riêng khó làm việc với đồng nghiệp giữa critical phase. PM?</div>
+            <button type="button" class="opt-btn" data-k="A">Chuyển ngay senior sang dự án khác để tránh ồn ào</button>
+            <button type="button" class="opt-btn" data-k="B">Ghi nhận rồi bỏ qua vì “senior nên tự xử”</button>
+            <button type="button" class="opt-btn" data-k="C">Coach kỹ thuật giải quyết xung đột để họ xử lý tình huống</button>
+            <button type="button" class="opt-btn" data-k="D">Họp toàn team tố cáo công khai để “làm gương”</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="9" data-ans="A">
+            <div class="q-num">engage-plan · Q255-style</div>
+            <div class="q-text">Biết trước SH interests xung đột; một SH then trở thành resistant. First?</div>
+            <button type="button" class="opt-btn" data-k="A">Xem stakeholder engagement plan và engage đúng chiến lược đã ghi</button>
+            <button type="button" class="opt-btn" data-k="B">Escalate ngay sponsor để “ép” SH đó im lặng</button>
+            <button type="button" class="opt-btn" data-k="C">Bỏ qua SH resistant vì thiểu số và tiếp tục plan cũ</button>
+            <button type="button" class="opt-btn" data-k="D">Chỉ gửi email one-way rồi đánh dấu đã “manage engagement”</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="10" data-ans="B">
+            <div class="q-num">hybrid-tailor · tailor weight</div>
+            <div class="q-text">Project nhỏ / mixed certainty. Cách đúng?</div>
+            <button type="button" class="opt-btn" data-k="A">Copy full waterfall megaproject ceremony không cắt</button>
+            <button type="button" class="opt-btn" data-k="B">Tailor / hybrid: vừa đủ governance theo rủi ro &amp; certainty</button>
+            <button type="button" class="opt-btn" data-k="C">Zero artifacts vì “agile = không tài liệu gì cả”</button>
+            <button type="button" class="opt-btn" data-k="D">Chỉ predictive cố định dù uncertainty cao ở nhiều phần</button>
+            <div class="feedback" data-fb></div>
+          </div>
+
+          <div class="quiz-card" data-quiz="11" data-ans="D">
+            <div class="q-num">benefits-metrics · value metrics</div>
+            <div class="q-text">Muốn biết value/outcome với khách — không chỉ SPI. Chọn?</div>
+            <button type="button" class="opt-btn" data-k="A">Chỉ theo dõi SPI hàng tuần rồi dừng đo outcome</button>
+            <button type="button" class="opt-btn" data-k="B">Bỏ hết survey vì “team đã biết khách muốn gì”</button>
+            <button type="button" class="opt-btn" data-k="C">Đo LOC và số commit để chứng minh giá trị nghiệp vụ</button>
+            <button type="button" class="opt-btn" data-k="D">Dùng Kano / surveys / KPI để đo value &amp; satisfaction</button>
+            <div class="feedback" data-fb></div>
+          </div>
+        </section>
+
+        <section id="cheat">
+          <h2>Cheat sheet (top by count)</h2>
+          <div class="cheat-sheet">IF budget forward · CPI/SPI · EAC · vendor ·  → Money
+IF estimation bias · vague policy · many chan → OPA / lessons → actionable update
+IF MVP · mid-iteration · PO absent · backlog  → Agile MVP / backlog / iteration protect
+IF out of baseline · unauthorized work · new  → Change control / ICC
+IF sponsor confirm done · acceptance criteria → Verify scope / acceptance trước 'done'
+IF risk materialized · new law · risk in repo → Risk cadence
+IF preferred channel · multicultural · virtua → Adapt communications + culture
+IF small low-risk · mixed certainty · predict → Tailor / hybrid
+IF Tuckman · storming · shouting · noisy work → Team stage / EI / work environment
+IF interns · skill gap · training needs · onb → Competency gap → develop
+IF steering review · RACI/RAM · decision auth → Governance / roles / RAM / steering
+IF layoff · incomplete info · rumor · morale  → Transparency
+IF resistant stakeholder · conflict interests → Engagement plan
+IF customer satisfaction · Kano · % value · l → Benefits / value metrics (not vanity)
+IF ethics / regs pressure                     → NO exception · escalate
+IF other / mixed                              → open Q teach · don’t force bucket</div>
+        </section>
+
+        <section id="next">
+          <h2>Next</h2>
+          <div class="card tip">
+            <ol style="margin:0;padding-left:1.2rem">
+              <li>Làm 12 quiz đến khi đúng hết không nhìn cheat.</li>
+              <li>Mở <a href="pmp-teach-full-last-wrong-index.html">index 415</a> — LWA cao trước.</li>
+              <li>Ưu tiên 135 câu <code>wrongAttempt &gt; 0</code> trong filter Ôn câu sai.</li>
+              <li>Hỏi agent nếu một cue chưa rõ — teacher loop.</li>
+            </ol>
+          </div>
+          <p class="ref-footer">
+            Primary:
+            <a href="https://www.pmi.org/standards/pmbok/" target="_blank" rel="noopener">PMBOK® Guide — Eighth Edition (PMI)</a>
+            · Teach lesson: <code>teach/pmp-wrong-patterns/lessons/0003-lwa-multi-patterns.html</code>
+            · Related:
+            <a href="pmp-exam-prep-lecture.html">Bài giảng PMP</a> ·
+            <a href="pmp-teach-sai1-patterns.html">Sai:1</a> ·
+            <a href="pmp-teach-wrong-patterns.html">attempts&gt;1</a>
+          </p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll(".quiz-card").forEach((card) => {
+      const ans = card.getAttribute("data-ans");
+      const fb = card.querySelector("[data-fb]");
+      card.querySelectorAll(".opt-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (card.dataset.locked === "1") return;
+          card.dataset.locked = "1";
+          const ok = btn.getAttribute("data-k") === ans;
+          btn.classList.add(ok ? "correct" : "wrong");
+          card.querySelectorAll(".opt-btn").forEach((b) => {
+            b.disabled = true;
+            if (b.getAttribute("data-k") === ans) b.classList.add("correct");
+          });
+          fb.className = "feedback " + (ok ? "ok" : "bad");
+          fb.textContent = ok
+            ? "Đúng — giữ cue này dưới 5 giây lần sau."
+            : "Sai — đọc lại rule của pattern, rồi drill lại ID gắn pattern.";
+        });
+      });
+    });
+    const links = [...document.querySelectorAll("#sideNav a")];
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const id = e.target.id;
+          links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0 },
+    );
+    ["intro","map",...["fam-lead","fam-process","fam-value","fam-engage"],"other","practice","cheat","next"]
+      .forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+  </script>
+</body>
+</html>

@@ -7,9 +7,18 @@ function summarizeStats(stats: PmpStatsMap) {
   const rows = Object.values(stats);
   const attempted = rows.filter((r) => r.attempts > 0).length;
   const wrong = rows.filter((r) => r.wrongAttempt > 0).length;
+  const historicalWrong = rows.filter((r) => r.lastWrongAttempt > 0).length;
   const totalAttempts = rows.reduce((sum, r) => sum + r.attempts, 0);
   const totalWrong = rows.reduce((sum, r) => sum + r.wrongAttempt, 0);
-  return { attempted, wrong, totalAttempts, totalWrong };
+  const totalLastWrong = rows.reduce((sum, r) => sum + r.lastWrongAttempt, 0);
+  return {
+    attempted,
+    wrong,
+    historicalWrong,
+    totalAttempts,
+    totalWrong,
+    totalLastWrong,
+  };
 }
 
 async function main() {
@@ -30,8 +39,10 @@ async function main() {
     console.log(`[${row.quizId}] user: ${row.username}`);
     console.log(`  Câu đã làm (có attempts): ${summary.attempted}`);
     console.log(`  Câu sai đang mở (wrongAttempt>0): ${summary.wrong}`);
+    console.log(`  Câu từng sai (lastWrongAttempt>0): ${summary.historicalWrong}`);
     console.log(`  Tổng lượt làm: ${summary.totalAttempts}`);
     console.log(`  Tổng wrongAttempt (open): ${summary.totalWrong}`);
+    console.log(`  Tổng lastWrongAttempt: ${summary.totalLastWrong}`);
     console.log(`  Cập nhật: ${row.updatedAt.toISOString()}`);
     console.log("");
   }

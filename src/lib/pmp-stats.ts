@@ -10,6 +10,11 @@ export type PmpQuestionStat = {
    * Increments on incorrect; resets to 0 on correct (leaves the wrong filter).
    */
   wrongAttempt: number;
+  /**
+   * Lifetime / historical wrong count ("số lần đã làm sai").
+   * Increments on incorrect; never resets on correct.
+   */
+  lastWrongAttempt: number;
 };
 
 const nonNegInt = z.number().int().min(0).max(1_000_000);
@@ -20,36 +25,53 @@ function clampNonNegInt(value: unknown): number {
   return Math.min(1_000_000, Math.floor(n));
 }
 
+/** Seed lastWrongAttempt when the field is missing. */
+export function seedLastWrongAttempt(
+  attempts: number,
+  wrongAttempt: number,
+  existing?: number | null,
+): number {
+  if (existing != null && Number.isFinite(existing)) {
+    return clampNonNegInt(existing);
+  }
+  if (wrongAttempt > 0) return wrongAttempt;
+  if (attempts > 1 && wrongAttempt === 0) return attempts - 1;
+  return 0;
+}
+
 /**
- * Normalize a raw stats row to `{ attempts, wrongAttempt }`.
- * Legacy `{ attempts, wrong }` → wrongAttempt = wrong only
- * (does not treat attempts>1 as currently wrong).
+ * Normalize a raw stats row to `{ attempts, wrongAttempt, lastWrongAttempt }`.
+ * Legacy `{ attempts, wrong }` → wrongAttempt = wrong only.
+ * Missing lastWrongAttempt is seeded from attempts/wrongAttempt.
  */
 export function normalizeQuestionStatRow(raw: unknown): PmpQuestionStat {
   if (!raw || typeof raw !== "object") {
-    return { attempts: 0, wrongAttempt: 0 };
+    return { attempts: 0, wrongAttempt: 0, lastWrongAttempt: 0 };
   }
   const row = raw as Record<string, unknown>;
   const attempts = clampNonNegInt(row.attempts);
 
+  let wrongAttempt: number;
   if ("wrongAttempt" in row && row.wrongAttempt != null) {
-    return {
-      attempts,
-      wrongAttempt: clampNonNegInt(row.wrongAttempt),
-    };
+    wrongAttempt = clampNonNegInt(row.wrongAttempt);
+  } else {
+    wrongAttempt = clampNonNegInt(row.wrong);
   }
 
-  return {
+  const hasExplicitLwa =
+    "lastWrongAttempt" in row && row.lastWrongAttempt != null;
+  const lastWrongAttempt = seedLastWrongAttempt(
     attempts,
-    wrongAttempt: clampNonNegInt(row.wrong),
-  };
+    wrongAttempt,
+    hasExplicitLwa ? clampNonNegInt(row.lastWrongAttempt) : null,
+  );
+
+  return { attempts, wrongAttempt, lastWrongAttempt };
 }
 
 /**
  * Repair rows from the first migration that set wrongAttempt = attempts - 1
  * for already-corrected questions (legacy wrong was 0).
- *
- * Keep open wrongs: wrongAttempt !== attempts - 1 (e.g. attempts=16, wrongAttempt=1).
  */
 export function repairWrongAttemptOvercount(row: PmpQuestionStat): PmpQuestionStat {
   const attempts = row.attempts;
@@ -57,13 +79,22 @@ export function repairWrongAttemptOvercount(row: PmpQuestionStat): PmpQuestionSt
   if (attempts > 1 && wrongAttempt === attempts - 1) {
     wrongAttempt = 0;
   }
-  return { attempts, wrongAttempt };
+  return {
+    attempts,
+    wrongAttempt,
+    lastWrongAttempt: seedLastWrongAttempt(
+      attempts,
+      wrongAttempt,
+      row.lastWrongAttempt,
+    ),
+  };
 }
 
 const questionStatRowInputSchema = z
   .object({
     attempts: nonNegInt,
     wrongAttempt: nonNegInt.optional(),
+    lastWrongAttempt: nonNegInt.optional(),
     wrong: nonNegInt.optional(),
   })
   .transform((row) => normalizeQuestionStatRow(row));
@@ -114,10 +145,10 @@ export function mergeQuestionStatRow(
   const B = normalizeQuestionStatRow(b);
   if (B.attempts > A.attempts) return B;
   if (A.attempts > B.attempts) return A;
-  // Same attempts: prefer still-open wrong so sync races don't drop review items.
   return {
     attempts: A.attempts,
     wrongAttempt: Math.max(A.wrongAttempt, B.wrongAttempt),
+    lastWrongAttempt: Math.max(A.lastWrongAttempt, B.lastWrongAttempt),
   };
 }
 
@@ -127,11 +158,13 @@ export function migratePmpStatsMapToWrongAttempt(raw: unknown): PmpStatsMap {
   const out: PmpStatsMap = {};
   for (const [id, row] of Object.entries(raw as Record<string, unknown>)) {
     const r = row as Record<string, unknown>;
-    // Prefer explicit legacy `wrong` when present (pre-migration dump).
     if ("wrong" in r && r.wrong != null && !("wrongAttempt" in r && r.wrongAttempt != null)) {
+      const attempts = clampNonNegInt(r.attempts);
+      const wrongAttempt = clampNonNegInt(r.wrong);
       out[id] = {
-        attempts: clampNonNegInt(r.attempts),
-        wrongAttempt: clampNonNegInt(r.wrong),
+        attempts,
+        wrongAttempt,
+        lastWrongAttempt: seedLastWrongAttempt(attempts, wrongAttempt, null),
       };
       continue;
     }
@@ -140,14 +173,36 @@ export function migratePmpStatsMapToWrongAttempt(raw: unknown): PmpStatsMap {
   return out;
 }
 
-/** Apply an answer: wrongAttempt += 1 on miss, reset to 0 on correct. */
+/**
+ * Force-seed lastWrongAttempt for every row (DB migration).
+ * Recomputes from attempts/wrongAttempt even if lastWrongAttempt already exists,
+ * so corrected history (attempts>1, wrongAttempt=0) gets attempts-1.
+ */
+export function migratePmpStatsMapToLastWrongAttempt(raw: unknown): PmpStatsMap {
+  const base = migratePmpStatsMapToWrongAttempt(raw);
+  const out: PmpStatsMap = {};
+  for (const [id, row] of Object.entries(base)) {
+    out[id] = {
+      attempts: row.attempts,
+      wrongAttempt: row.wrongAttempt,
+      lastWrongAttempt: seedLastWrongAttempt(row.attempts, row.wrongAttempt, null),
+    };
+  }
+  return out;
+}
+
+/** Apply an answer: open wrong resets on correct; lifetime lastWrongAttempt never resets. */
 export function applyQuestionAttempt(
   row: PmpQuestionStat | undefined,
   isCorrect: boolean,
 ): PmpQuestionStat {
   const next = normalizeQuestionStatRow(row);
   next.attempts += 1;
-  if (isCorrect) next.wrongAttempt = 0;
-  else next.wrongAttempt += 1;
+  if (isCorrect) {
+    next.wrongAttempt = 0;
+  } else {
+    next.wrongAttempt += 1;
+    next.lastWrongAttempt += 1;
+  }
   return next;
 }
