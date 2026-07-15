@@ -69,6 +69,14 @@
     .quiz-card { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
     .quiz-card .q-num { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
     .quiz-card .q-text { font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.65; }
+    .quiz-card .q-text.q-prompt { margin-top: 0.75rem; }
+    .score-table-wrap { margin: 0.85rem 0 1rem; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+    .score-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.88rem; margin: 0; border: none; border-radius: 0; }
+    .score-table caption { caption-side: top; text-align: left; font-weight: 700; color: var(--primary-dark); padding: 0.75rem 0.85rem 0.35rem; }
+    .score-table th, .score-table td { border-bottom: 1px solid var(--border); padding: 0.55rem 0.75rem; vertical-align: top; }
+    .score-table thead th { background: var(--bg); white-space: nowrap; }
+    .score-table tbody tr:last-child td { border-bottom: none; }
+    .score-table td.num { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
     .quiz-card .q-text em { font-style: normal; background: #fef9c3; padding: 0.1rem 0.25rem; border-radius: 4px; }
     .kw-cue { font-style: normal; background: #fef9c3; color: #854d0e; padding: 0.1rem 0.25rem; border-radius: 4px; font-weight: 600; }
     .kw-signal { background: #ecfdf5; color: #065f46; padding: 0.08rem 0.22rem; border-radius: 4px; font-weight: 600; }
@@ -143,7 +151,15 @@
           <h2>1. Câu hỏi thực hành — Full Bank Q619</h2>
           <div class="quiz-card" id="mainQuiz">
             <div class="q-num">pmp-full-questions · Câu 619</div>
-            <div class="q-text">A team is building an internal task-tracking solution to improve organizational workflow management. The team is using the board below to visualize and <span class="kw-signal">track the progress of the work. Backlog Items</span> To Do Work in Progress Done Define user roles and permissions (5) Implement user authentication and access control (8) Develop task creation and assignment feature (5) Research task categorization (3) Integration with existing tools (8) Set up notifications and reminders (5) Conduct security testing on user authentication (5) Create wireframes for the task management system (3) Design the reporting and analytics dashboard (8) Optimize database for performance (8) Deploy <span class="kw-signal">minimum viable product</span> (MVP) version of the solution (13) Set up database schema for task tracking (8) Based on the visual above, which statement about the project’s status is true?</div>
+            <div class="q-text">A team is building an internal task-tracking solution to improve organizational workflow management. The team is using the board below to visualize and track the progress of the work.</div>
+            <div class="score-table-wrap">
+          <table class="score-table">
+            <caption>Task board (story points in parentheses)</caption>
+            <thead><tr><th>Backlog Items</th><th>To Do</th><th>Work in Progress</th><th>Done</th></tr></thead>
+            <tbody><tr><td>Integration with existing tools (8)</td><td>Define user roles and permissions (5)</td><td>Conduct security testing on user authentication (5)</td><td>Research task categorization (3)</td></tr><tr><td>Design the reporting and analytics dashboard (8)</td><td>Implement user authentication and access control (8)</td><td>Set up notifications and reminders (5)</td><td>Create wireframes for the task management system (3)</td></tr><tr><td>Optimize database for performance (8)</td><td>Develop task creation and assignment feature (5)</td><td></td><td>Set up database schema for task tracking (8)</td></tr><tr><td></td><td></td><td></td><td>Deploy minimum viable product (MVP) version of the solution (13)</td></tr></tbody>
+          </table>
+        </div>
+            <div class="q-text q-prompt">Based on the visual above, which statement about the project’s status is true?</div>
             <button class="opt-btn" data-opt="A" type="button">A. The project is only halfway through execution and is at risk of missing the delivery date.</button>
             <button class="opt-btn" data-opt="B" type="button">B. The backlog must be reprioritized to increase the probability of delivering the solution on time.</button>
             <button class="opt-btn" data-opt="C" type="button">C. The project is in good standing, with the <span class="kw-signal">MVP</span> complete and the main features in progress.</button>
@@ -151,7 +167,7 @@
             <div class="feedback" id="quizFeedback"></div>
           </div>
           <p style="font-size:0.86rem;color:var(--muted)">
-            <a href="pmp-full-questions.html#q-619">→ Mở câu 619 trong bộ luyện đầy đủ</a>
+            <a href="pmp-full-questions.html#q-619">→ Mở câu 619 trong bộ luyện</a>
           </p>
         </section>
 
@@ -159,7 +175,7 @@
           <h2>2. Phân tích đáp án — Đáp án đúng: C</h2>
           <div class="card tip signal-card">
             <h4>Signal trong stem Q619</h4>
-            <p class="signal-phrases-en"><span class="kw-signal">minimum viable product</span> · <span class="kw-signal">track the progress of the work. Backlog Items</span> · <span class="kw-signal">Backlog Items To Do Work</span></p>
+            <p class="signal-phrases-en"><span class="kw-signal">minimum viable product</span> · <span class="kw-signal">track the progress of the work. Backlog Items</span></p>
             <p class="signal-answer-en">Stem signals (ngữ cảnh Agile/Scrum) → C: The project is in good standing, with the MVP complete and the main features in progress.</p>
             <p class="signal-answer-vi" style="margin:0.5rem 0 0;font-size:0.92rem;line-height:1.6;color:var(--text)"><strong>Tóm tắt:</strong> Kick-off sản phẩm mới — define MVP trước để Focus on value, tránh commit toàn bộ roadmap quá sớm.</p>
             <p class="signal-conclusion" style="margin:0">→ <strong>C</strong>: Stem signals (ngữ cảnh Agile/Scrum) → C: The project is in good standing, with the MVP complete and the main features in progress.</p>
@@ -230,7 +246,7 @@ PROCESS: Define Scope, Validate Scope, Control Scope
 PRINCIPLE: Adopt a holistic view, Focus on value
 
 SCENARIO:
-A team is building an internal task-tracking solution to improve organizational workflow management. The team is using the board below to visualize and track the progress of the work. Backlog Items To Do Work in Progress…
+A team is building an internal task-tracking solution to improve organizational workflow management. The team is using the board below to visualize and track the progress of the work. Backlog Items: Integration with exis…
 
 SIGNAL KEYWORDS:
   minimum viable product

@@ -569,8 +569,50 @@ function parseFeatureColumnMatrixTable(text) {
   };
 }
 
+/** Kanban / task board: "Backlog Items: a (n); b (n) | To Do: ... | Work in Progress: ... | Done: ..." */
+function parseKanbanBoardTable(text) {
+  const headerRe =
+    /Backlog Items\s*:\s*([\s\S]+?)\s*\|\s*To Do\s*:\s*([\s\S]+?)\s*\|\s*Work in Progress\s*:\s*([\s\S]+?)\s*\|\s*Done\s*:\s*([\s\S]+?)(?=\s+Based on the visual|\s+Based on the board|\s+Which statement|$)/i;
+  const match = text.match(headerRe);
+  if (!match) return null;
+
+  const intro = text.slice(0, match.index).trim().replace(/\s+$/, "");
+  const questionPrompt = text.slice(match.index + match[0].length).trim();
+
+  function splitCards(blob) {
+    return String(blob || "")
+      .split(/\s*;\s*/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+
+  const columns = ["Backlog Items", "To Do", "Work in Progress", "Done"];
+  const cols = [
+    splitCards(match[1]),
+    splitCards(match[2]),
+    splitCards(match[3]),
+    splitCards(match[4]),
+  ];
+  const maxRows = Math.max(...cols.map((c) => c.length), 1);
+  if (cols.every((c) => c.length === 0)) return null;
+
+  const rows = [];
+  for (let i = 0; i < maxRows; i++) {
+    rows.push(cols.map((c) => c[i] || ""));
+  }
+
+  return {
+    intro,
+    questionPrompt,
+    caption: "Task board (story points in parentheses)",
+    columns,
+    rows,
+  };
+}
+
 function parseEmbeddedTable(text) {
   return (
+    parseKanbanBoardTable(text) ||
     parseWorkUnitPerformanceTable(text) ||
     parseProbabilityImpactMatrix(text) ||
     parseRequirementsTraceabilityMatrix(text) ||

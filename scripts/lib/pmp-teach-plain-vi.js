@@ -112,17 +112,35 @@ function buildPmbokNote(analysis) {
 function buildDragDropPlainVi(q, analysis, stored) {
   const correctKey = parseCorrectKeys(q.correct).join(", ");
   const isTuckman = /tuckman/i.test(q.text || "") || /tuckman/i.test(stored?.signalAnswer || "");
+  const termsBlob = (q.dragTerms || []).join(" ");
+  const isAnalysisMatch =
+    /Kano Analysis/i.test(termsBlob) || /Alternatives Analysis/i.test(termsBlob);
+  const isAiHierarchy =
+    /Artificial intelligence \(AI\)/i.test(termsBlob) &&
+    /Machine learning \(ML\)/i.test(termsBlob);
   const situation = isTuckman
     ? "Ghép 5 giai đoạn Tuckman Ladder (phát triển nhóm dự án) với mô tả tương ứng."
-    : "Câu kéo-thả — ghép thuật ngữ đúng với từng mô tả / thứ tự.";
+    : isAnalysisMatch
+      ? "Ghép 3 kỹ thuật phân tích (Alternatives / Kano / Decision Tree) với định nghĩa tương ứng."
+      : isAiHierarchy
+        ? "Ghép 4 khái niệm AI (AI / GenAI / ML / DL) với định nghĩa tương ứng."
+        : "Câu kéo-thả — ghép thuật ngữ đúng với từng mô tả / thứ tự.";
   const rationale = isTuckman
     ? "Thứ tự chuẩn Forming → Storming → Norming → Performing → Adjourning; mỗi mô tả khớp đúng đặc điểm giai đoạn (kickoff → xung đột → tập thể → synergy → giải tán)."
-    : stored?.whySolutionBullets?.[0] ||
-      stored?.signalAnswer ||
-      `Ghép đúng theo đáp án ${correctKey}.`;
+    : isAnalysisMatch
+      ? "Alternatives = chọn options/approaches thực hiện work; Kano = feature theo góc nhìn khách hàng; Decision Tree = chuỗi quyết định khi có bất định → thứ tự A,C,B."
+      : isAiHierarchy
+        ? "AI = thuật ngữ rộng (reason/learn/act); GenAI = tạo nội dung mới (LLM); ML = train từ data để predict; DL = ML đa lớp neural net → thứ tự D,C,A,B."
+        : stored?.whySolutionBullets?.[0] ||
+          stored?.signalAnswer ||
+          `Ghép đúng theo đáp án ${correctKey}.`;
   const summary = isTuckman
     ? "Tuckman: Forming → Storming → Norming → Performing → Adjourning."
-    : truncate(stored?.signalAnswer || rationale, 160);
+    : isAnalysisMatch
+      ? "A Alternatives → C Kano → B Decision Tree (A,C,B)."
+      : isAiHierarchy
+        ? "D AI → C GenAI → A ML → B DL (D,C,A,B)."
+        : truncate(stored?.signalAnswer || rationale, 160);
   const bullets = [
     `**Tình huống:** ${situation}`,
     `**Đáp án đúng (${correctKey}):** ${truncate(q.correctLabel || correctKey, 220)}`,
@@ -132,6 +150,12 @@ function buildDragDropPlainVi(q, analysis, stored) {
     bullets.push(
       "**Mẹo:** Storming ≠ Norming (còn jockey/xung đột vs đã làm việc tập thể); Performing = hiệu quả + synergy; Adjourning luôn cuối.",
     );
+  } else if (isAnalysisMatch) {
+    bullets.push(
+      "**Mẹo:** Alternatives ≠ Decision Tree; Kano luôn gắn customer viewpoint / product features.",
+    );
+  } else if (isAiHierarchy) {
+    bullets.push("**Mẹo:** AI ⊃ ML ⊃ DL; GenAI thường dựa trên DL/LLM — đừng đổi ML với DL.");
   }
   const pmbokNote = buildPmbokNote(analysis);
   if (pmbokNote) bullets.push(`**PMBOK 8:** ${pmbokNote}`);

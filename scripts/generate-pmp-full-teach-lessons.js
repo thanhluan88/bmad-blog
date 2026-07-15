@@ -305,10 +305,26 @@ function renderMcqQuiz(q, signalPhrases) {
 
 function renderNonMcqAnswer(q) {
   if (q.type === "drag_drop") {
+    const slots =
+      Array.isArray(q.slotDescriptions) && q.slotDescriptions.length
+        ? `<ol style="margin:0.75rem 0 0;padding-left:1.25rem">${q.slotDescriptions
+            .map((d, i) => {
+              const key = String(q.correct || "")
+                .split(/[^A-Z]+/)
+                .filter(Boolean)[i];
+              const termIdx = key ? key.charCodeAt(0) - 65 : -1;
+              const term = termIdx >= 0 ? q.dragTerms?.[termIdx] : "";
+              return `<li style="margin:0.35rem 0"><span style="opacity:.85">${escapeHtml(d)}</span>${
+                term ? `<br><strong>→ ${escapeHtml(key)}. ${escapeHtml(term)}</strong>` : ""
+              }</li>`;
+            })
+            .join("")}</ol>`
+        : "";
     return `<div class="card info">
             <h4>Drag &amp; Drop — Đáp án đúng</h4>
             <p style="margin:0"><strong>${escapeHtml(q.correctLabel || q.correct)}</strong></p>
             ${q.dragTerms?.length ? `<p style="margin:0.5rem 0 0">Thuật ngữ: ${escapeHtml(q.dragTerms.join(", "))}</p>` : ""}
+            ${slots}
           </div>`;
   }
   if (q.type === "dropdown") {
