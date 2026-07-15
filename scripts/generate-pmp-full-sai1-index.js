@@ -196,7 +196,7 @@ ${cards}
     </div>
     <div class="toolbar">
       <a href="pmp-exam-prep-lecture.html">← Bài giảng PMP</a>
-      <a href="pmp-teach-sai1-patterns.html" class="secondary">8 pattern Sai:1</a>
+      <a href="pmp-teach-sai1-patterns.html" class="secondary">Pattern Sai:1</a>
       <a href="pmp-full-questions.html" class="secondary">Luyện đề + Ôn câu sai</a>
       <a href="pmp-teach-full-series-index.html" class="secondary">Index Full Bank</a>
       <a href="pmp-teach-wrong-mindsets.html" class="secondary">Mindset từ câu sai</a>
