@@ -1268,6 +1268,118 @@
 | **Tight turnaround** | Deadline gấp → conflict action plan (Q108) |
 | **Quick turnaround** | Trap rework ngay — verify AC trước (Q788) |
 
+### Drivers
+| | |
+|---|---|
+| **Nghĩa** | Nhân tố / lực đẩy gây ra kết quả |
+| **Cost / variance** | Forecast + variance analysis với drivers & impacts (Q484→C) |
+| **Business / compliance** | Traceability matrix (Q921→D) |
+| **Systemic** | RCA trước corrective action (Q1013→B) |
+| **Literal** | *rural drivers* = tài xế (Q853) |
+
+### Outreach
+| | |
+|---|---|
+| **Nghĩa** | Chiến dịch tiếp cận bên ngoài (NGO / marketing) |
+| **Tip** | Xử lý như project bình thường (Q420, Q526, Q956) |
+
+### Momentum
+| | |
+|---|---|
+| **Nghĩa** | Đà tiến độ |
+| **Đúng** | Adjust plan + mitigation (Q272→C) |
+| **Trap** | Mid-sprint add backlog / chỉ visible output / hy sinh DoD (Q631, Q686, Q115) |
+
+### Rigor
+| | |
+|---|---|
+| **Nghĩa** | Mức chặt chẽ của phân tích / governance |
+| **Đúng** | Rigorous = defensible (Q382→A) |
+| **Trap** | Over-process dự án nhỏ (Q503) · redefine rigor thay follow governance (Q379) |
+
+### Incur
+| | |
+|---|---|
+| **Nghĩa** | Phải chịu / phát sinh cost, penalty, delay |
+| **PMP** | Q818, Q1072, Q1094, Q1105 — so sánh trade-off |
+
+### Proxy
+| | |
+|---|---|
+| **Nghĩa** | Thay thế / surrogate (thường không đo đúng) |
+| **Trap** | Velocity = proxy ROI (Q637) · proxy metric / proxy decision (Q1057, Q54) |
+| **≠** | Customer proxy (PO) |
+
+### Taking sides
+| | |
+|---|---|
+| **Nghĩa** | Phe phái — conflict lan nhóm |
+| **Đúng** | Meet riêng · PM neutral (Q292→A) |
+
+### Elaboration
+| | |
+|---|---|
+| **Nghĩa** | Làm rõ chi tiết theo thời gian |
+| **Backlog** | Elaborate trước sprint (Q649, Q672) |
+| **Progressive** | Hybrid / rolling wave (Q415, Q796) |
+| **Trap** | Lách CR sau baseline (Q1035) |
+
+### Conviction
+| | |
+|---|---|
+| **Nghĩa** | Niềm tin vững — gần *convince* trên đề |
+| **Trap** | Convince bằng presentation / authority (Q59, Q299, Q364) |
+
+### Solitary / in isolation
+| | |
+|---|---|
+| **Nghĩa** | Đánh giá tách rời ngữ cảnh tổng |
+| **Đúng** | Consolidate unified status (Q459→C) |
+
+### Spontaneous / ad hoc
+| | |
+|---|---|
+| **Nghĩa** | Tự phát / ngoài plan |
+| **Trap** | Ad hoc decisions (Q85, Q895) · improvise |
+
+### Done drift
+| | |
+|---|---|
+| **Nghĩa** | Chuẩn Done / DoD bị trôi |
+| **Gần** | Requirements drift → continuous feedback (Q783→A) |
+| **Đúng** | Confirm DoD (Q631) |
+
+### Discretion / discretionary
+| | |
+|---|---|
+| **Nghĩa** | Quyền phán đoán; discretionary = không bắt buộc |
+| **Trap** | Cắt discretionary spending ngay khi under budget (Q480→B) |
+| **PO** | At PO’s discretion (Q572) |
+
+### Concede
+| | |
+|---|---|
+| **Nghĩa** | Nhượng bộ / chịu thua |
+| **Trap** | Until one side concedes (Q54) · agree immediately (Q16) |
+
+### The Three Amigos
+| | |
+|---|---|
+| **Nghĩa** | Business + Dev + Test/QA trước build — shared understanding + AC |
+| **Tip** | Hành vi ≈ refinement / DoR (Q648) |
+
+### SAFe
+| | |
+|---|---|
+| **Nghĩa** | Scaled Agile Framework — Agile quy mô lớn |
+| **Trap** | Không mặc định đúng — Q598→Crystal (D) khi stem nhấn flexibility/people |
+
+### Dormancy
+| | |
+|---|---|
+| **Nghĩa** | Risk nằm im / chưa phát hiện (dormancy period) |
+| **Tip** | Vẫn monitor — ≠ bỏ qua · gần *on hold* trap (Q176) |
+
 ---
 
 *Tạo từ phiên học từ vựng PMP — có thể bổ sung thêm thuật ngữ khi ôn tiếp.*
