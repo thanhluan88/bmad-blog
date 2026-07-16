@@ -150,6 +150,114 @@ const QUIZ = [
   },
 ];
 
+/** Short VI stem → correct do (trap comes from pack). */
+const EXAMPLES = {
+  "money-forecast": {
+    stem: "CPI &lt; 1; sponsor hỏi chi phí đến cuối dự án / vendor cần đóng hợp đồng.",
+    do: "Cập nhật forecast / EAC, hành động theo EVM; đóng contract khi admin-complete.",
+  },
+  "agile-mvp": {
+    stem: "Giữa sprint, SH đòi thêm feature; PO vắng; team muốn ‘làm luôn’.",
+    do: "PO sở hữu backlog; bảo vệ iteration; ship MVP; workshop AC — không hấp thụ mid-sprint.",
+  },
+  "change-control": {
+    stem: "Ai đó đã làm việc ngoài baseline / yêu cầu feature mới lớn.",
+    do: "Dừng unauthorized nếu cần → đánh giá impact → CR/CCB chính thức.",
+  },
+  "opa-improve": {
+    stem: "Ước lượng lệch mãi / policy mơ hồ / nhiều change đã xong nhưng không rút bài học.",
+    do: "Cập nhật OPA, template, rewrite policy — hành động được, không chỉ archive.",
+  },
+  "risk-cadence": {
+    stem: "Risk đã xảy ra / luật mới / risk không nằm trong báo cáo.",
+    do: "Thực hiện response đã lên kế hoạch; identify/assess; đưa risk vào reports.",
+  },
+  "verify-scope": {
+    stem: "Team bảo ‘xong rồi’ vì đúng hạn; sponsor chưa confirm acceptance.",
+    do: "Review scope / requirements / acceptance criteria trước khi claim success.",
+  },
+  "hybrid-tailor": {
+    stem: "Dự án nhỏ/low-risk nhưng bị ép copy nghi thức megaproject (hoặc zero governance).",
+    do: "Tailor vừa đủ; hybrid OK; ước lượng adaptive khi bất định.",
+  },
+  "adapt-comms": {
+    stem: "Team đa văn hóa / virtual; ai đó không đọc email dài.",
+    do: "Đổi kênh/phương pháp theo preference; giao thức nhạy văn hóa — không blast one-size.",
+  },
+  "team-stage": {
+    stem: "Storming, cãi nhau to / workspace ồn / thiếu ownership.",
+    do: "Map Tuckman stage; EI/self-reg; PM sở hữu môi trường; facilitate ownership.",
+  },
+  "governance-roles": {
+    stem: "Không rõ ai quyết; steering sắp họp; RACI/RAM mơ hồ.",
+    do: "Làm rõ roles (RAM); chuẩn bị evidence governance; decision log.",
+  },
+  "engage-plan": {
+    stem: "SH kháng cự / xung đột lợi ích; PM muốn escalate ngay theo cảm tính.",
+    do: "Xem engagement plan; engage đúng chiến lược đã ghi — không freestyle.",
+  },
+  "competency-develop": {
+    stem: "Intern / skill gap / onboarding yếu; delivery chậm vì thiếu năng lực.",
+    do: "Gap analysis + develop/remediate (HR/mentor) — không blame/fire trước.",
+  },
+  "transparency-news": {
+    stem: "Tin xấu / rumor / layoff; morale sụp; thông tin còn thiếu.",
+    do: "Chia sẻ facts đã biết + tạo thảo luận mở — không im lặng hay hứa chắc chắn giả.",
+  },
+  "coach-conflict": {
+    stem: "Hai người xung đột cá nhân; một người đến hỏi PM ‘xử giúp’.",
+    do: "Coach kỹ thuật giải quyết xung đột; facilitate — không làm hộ / đứng phe.",
+  },
+  resilience: {
+    stem: "Timeline + budget căng; SH lo lắng; bất định cao.",
+    do: "Xây approach resilient (anticipate/respond/recover) — không claim ‘xóa hết risk’.",
+  },
+  "own-mistake": {
+    stem: "Gửi nhầm email / lỗi nhìn thấy rõ; hậu quả đã xảy ra.",
+    do: "Acknowledge + xin lỗi về hậu quả — không giấu hay đổ lỗi tool.",
+  },
+  "knowledge-transfer": {
+    stem: "Người key sắp nghỉ / handover gấp; domain khó.",
+    do: "Ưu tiên KT người-kề-người ngay — không trì hoãn vì ‘đã có docs’.",
+  },
+  "culture-change": {
+    stem: "Org muốn ‘đổi văn hóa agile’ bằng slogan trên poster.",
+    do: "Hoạt động đổi mới có mục tiêu + vision rõ với sponsor/team — redesign process/structure.",
+  },
+  "quality-sampling": {
+    stem: "Cần chứng minh chất lượng; khối lượng lớn; đòi inspect 100%.",
+    do: "Dùng sampling thống kê / chứng nhận độc lập khi phù hợp — không skip bằng chứng.",
+  },
+  "charter-authorize": {
+    stem: "Team đã bắt đầu làm; chưa có charter / chưa authorize rõ.",
+    do: "Tạo project charter để authorize và align — không kickoff miệng thôi.",
+  },
+  "plan-translate": {
+    stem: "Có plan đẹp nhưng team không biết kiểm soát ngày-ngày thế nào.",
+    do: "Dịch plan thành checklist/audit/control actionable — không để plan trên kệ.",
+  },
+  "compliance-ethics": {
+    stem: "Local muốn lệch ethics/HQ để kịp deadline.",
+    do: "Validate + escalate; không bao giờ authorize exception ethics/regs.",
+  },
+  "compliance-audit": {
+    stem: "Nhiều quy định; nghi có yêu cầu bị bỏ sót; cần chứng minh chuẩn.",
+    do: "Lên lịch audit / chứng nhận độc lập — không assume đã compliant.",
+  },
+  "compliance-research": {
+    stem: "Yêu cầu compliance chưa rõ; sponsor bảo ‘làm đi đã’.",
+    do: "Research requirement (BA) trước khi authorize work — không làm mù.",
+  },
+  "benefits-metrics": {
+    stem: "Báo cáo chỉ khoe SPI xanh; chưa đo value/outcome cho SH.",
+    do: "Đo value đạt được (Kano/survey/benchmark) — tránh vanity metrics.",
+  },
+  "identify-stakeholders": {
+    stem: "Ai đó muốn sửa distribution list theo ‘cảm giác’ trước họp lớn.",
+    do: "Phân tích / cập nhật stakeholder register trước — không edit list theo gut.",
+  },
+};
+
 function esc(s) {
   return String(s || "")
     .replace(/&/g, "&amp;")
@@ -204,21 +312,32 @@ function buildHtml(data, { assetPrefix, cssHref, fullscreenHref }) {
       const blocks = fam.patterns
         .map((p) => {
           const tip = (p.sampleIds || [])[0];
+          const ex = EXAMPLES[p.id];
+          const exampleBody = ex
+            ? `<strong>Ví dụ:</strong> ${ex.stem}
+            <br><strong>→ Làm:</strong> ${ex.do}
+            <br><strong>Tránh:</strong> ${esc(p.trap)}`
+            : `<strong>Cue →</strong> <em>${esc(p.action)}</em>
+            <br><strong>Tránh:</strong> ${esc(p.trap)}`;
           const tipHtml = tip
             ? `<div class="card tip">
-            <strong><a href="${qPrefix}pmp-teach-full-q${tip.id}.html">Q${tip.id}</a>:</strong>
-            Cue → <em>${esc(p.action)}</em>
-            · mẫu:
-            ${(p.sampleIds || [])
-              .slice(0, 5)
-              .map(
-                (x) =>
-                  `<a class="id-chip" href="${qPrefix}pmp-teach-full-q${x.id}.html">${x.id}</a>`,
-              )
-              .join(" ")}
-            · <a href="${qPrefix}pmp-full-questions.html#q-${tip.id}">luyện đề</a>
+            ${exampleBody}
+            <div style="margin-top:0.45rem;font-size:0.8rem">
+              Mẫu:
+              ${(p.sampleIds || [])
+                .slice(0, 5)
+                .map(
+                  (x) =>
+                    `<a class="id-chip" href="${qPrefix}pmp-teach-full-q${x.id}.html">${x.id}</a>`,
+                )
+                .join(" ")}
+              · <a href="${qPrefix}pmp-full-questions.html#q-${tip.id}">luyện đề</a>
+              · <a href="${qPrefix}pmp-teach-full-q${tip.id}.html">Q${tip.id}</a>
+            </div>
           </div>`
-            : "";
+            : ex
+              ? `<div class="card tip">${exampleBody}</div>`
+              : "";
           return `        <article class="pattern-block" id="p-${p.id}">
           <h3>${esc(p.title)} <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· ${p.count} câu${p.open ? ` · ${p.open} đang mở` : ""}</span></h3>
           <div class="rule">${esc(p.cue)}  →  ${esc(p.action)}</div>
@@ -251,7 +370,14 @@ ${buttons}
 
   const cheatLines = sorted
     .slice(0, 14)
-    .map((p) => `IF ${p.cue.slice(0, 42).padEnd(42)} → ${shortTitle(p.title)}`)
+    .map((p) => {
+      const ex = EXAMPLES[p.id];
+      const action = ex ? ex.do.replace(/<[^>]+>/g, "") : p.action;
+      const cue = p.cue.length > 36 ? p.cue.slice(0, 36) + "…" : p.cue;
+      const act = action.length > 52 ? action.slice(0, 52) + "…" : action;
+      return `IF ${cue.padEnd(38)} → ${act}`;
+    })
+    .concat([`IF other / mixed                            → open Q teach · don’t force bucket`])
     .join("\n");
 
   const famIdsJson = JSON.stringify(familiesWithContent.map((f) => f.id));
@@ -308,7 +434,7 @@ ${familyNav}
           <p class="lead">
             Phân tích <strong>${s.total} câu</strong> Full Bank theo taxonomy PMI trap v${s.taxonomyVersion}
             (<strong>${s.patternCount} named + other</strong> — ${other.count} mixed · ${s.otherPct}%).
-            Không giới hạn series 110; không ép 8 bucket.
+            Học map keyword → hành động. Mỗi pattern có <strong>ví dụ tình huống</strong> (cue → làm gì → tránh gì).
             Overlay open/hard từ snapshot LWA khi có.
           </p>
           <div class="stat-grid">
@@ -383,9 +509,8 @@ ${quizHtml}
         </section>
 
         <section id="cheat">
-          <h2>Cheat sheet (top by bank count)</h2>
-          <div class="cheat-sheet">${esc(cheatLines)}
-IF other / mixed                              → open Q teach · don’t force bucket</div>
+          <h2>Cheat sheet (cue → hành động)</h2>
+          <div class="cheat-sheet">${esc(cheatLines)}</div>
         </section>
 
         <section id="next">
