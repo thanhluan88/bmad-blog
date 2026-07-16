@@ -6,6 +6,7 @@
  */
 const fs = require("fs");
 const path = require("path");
+const { EXAMPLES } = require("./lib/pmp-pattern-examples");
 
 const ROOT = path.join(__dirname, "..");
 const LWA_PACK = path.join(ROOT, "data", "pmp-luannt115-full-last-wrong-patterns.json");
@@ -311,20 +312,31 @@ function buildHtml(data, { assetPrefix, cssHref, fullscreenHref }) {
       const blocks = fam.patterns
         .map((p) => {
           const tip = (p.sampleIds || [])[0];
+          const ex = EXAMPLES[p.id];
+          const exampleBody = ex
+            ? `<strong>Ví dụ:</strong> ${ex.stem}
+            <br><strong>→ Làm:</strong> ${ex.do}
+            <br><strong>Tránh:</strong> ${esc(p.trap)}`
+            : `<strong>Cue →</strong> <em>${esc(p.action)}</em>
+            <br><strong>Tránh:</strong> ${esc(p.trap)}`;
           const tipHtml = tip
             ? `<div class="card tip">
-            <strong><a href="${qPrefix}pmp-full-questions.html#q-${tip.id}">Q${tip.id}</a>:</strong>
-            Cue → <em>${esc(p.action)}</em>
-            · mẫu:
-            ${(p.sampleIds || [])
-              .slice(0, 5)
-              .map(
-                (x) =>
-                  `<a class="id-chip" href="${qPrefix}pmp-full-questions.html#q-${x.id}">${x.id}</a>`,
-              )
-              .join(" ")}
+            ${exampleBody}
+            <div style="margin-top:0.45rem;font-size:0.8rem">
+              Mẫu:
+              ${(p.sampleIds || [])
+                .slice(0, 5)
+                .map(
+                  (x) =>
+                    `<a class="id-chip" href="${qPrefix}pmp-full-questions.html#q-${x.id}">${x.id}</a>`,
+                )
+                .join(" ")}
+              · <a href="${qPrefix}pmp-full-questions.html#q-${tip.id}">Q${tip.id}</a>
+            </div>
           </div>`
-            : "";
+            : ex
+              ? `<div class="card tip">${exampleBody}</div>`
+              : "";
           return `        <article class="pattern-block" id="p-${p.id}">
           <h3>${esc(p.title)} <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· ${p.count} câu</span></h3>
           <div class="rule">${esc(p.cue)}  →  ${esc(p.action)}</div>
@@ -357,7 +369,14 @@ ${buttons}
 
   const cheatLines = sorted
     .slice(0, 12)
-    .map((p) => `IF ${p.cue.slice(0, 42).padEnd(42)} → ${shortTitle(p.title)}`)
+    .map((p) => {
+      const ex = EXAMPLES[p.id];
+      const action = ex ? ex.do.replace(/<[^>]+>/g, "") : p.action;
+      const cue = p.cue.length > 36 ? p.cue.slice(0, 36) + "…" : p.cue;
+      const act = action.length > 52 ? action.slice(0, 52) + "…" : action;
+      return `IF ${cue.padEnd(38)} → ${act}`;
+    })
+    .concat([`IF other / mixed                            → open Q teach · don’t force bucket`])
     .join("\n");
 
   const famIdsJson = JSON.stringify(familiesWithContent.map((f) => f.id));
@@ -416,6 +435,7 @@ ${familyNav}
             Snapshot: <strong>${s.total} câu</strong>.
             Taxonomy v${s.taxonomyVersion}: <strong>${s.patternCount} named + other</strong>
             (${other.count} mixed · ${s.otherPct}%) — không ép 8 bucket.
+            Mỗi pattern có <strong>ví dụ tình huống</strong> (cue → làm gì → tránh gì).
           </p>
           <div class="stat-grid">
             <div class="stat-box"><strong>${s.total}</strong><span>Sai:1</span></div>
@@ -490,9 +510,8 @@ ${quizHtml}
         </section>
 
         <section id="cheat">
-          <h2>Cheat sheet (top by count)</h2>
-          <div class="cheat-sheet">${esc(cheatLines)}
-IF other / mixed                              → open Q teach · don’t force bucket</div>
+          <h2>Cheat sheet (cue → hành động)</h2>
+          <div class="cheat-sheet">${esc(cheatLines)}</div>
         </section>
 
         <section id="next">
