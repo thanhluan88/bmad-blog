@@ -1380,6 +1380,15 @@
 | **Nghĩa** | Risk nằm im / chưa phát hiện (dormancy period) |
 | **Tip** | Vẫn monitor — ≠ bỏ qua · gần *on hold* trap (Q176) |
 
+### Osmotic communication
+| | |
+|---|---|
+| **Nghĩa** | Giao tiếp “thấm” / ambient — team colocated bắt thông tin nền mà không cần họp formal |
+| **Nguồn** | Crystal (Cockburn) — colocation, open workspace, information radiator |
+| **Yếu khi** | Remote / silo / timezone → cần sync formal hơn |
+| **≠** | Gossip vô tổ chức · không thay change control / decision log |
+| **Full Bank** | Ít ghi tên; stem gần = colocation, overhear, ambient awareness |
+
 ---
 
 *Tạo từ phiên học từ vựng PMP — có thể bổ sung thêm thuật ngữ khi ôn tiếp.*
