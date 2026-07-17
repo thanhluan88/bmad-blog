@@ -112,10 +112,40 @@ function resetDrillCache() {
   cachePath = null;
 }
 
+/**
+ * Lecture-style mini-drill HTML for each sample ID.
+ * @param {Array<{id: number|string}>} sampleIds
+ * @param {{ qPrefix?: string, esc: (s: string) => string, limit?: number }} opts
+ */
+function renderDrills(sampleIds, { qPrefix = "", esc, limit = 5 } = {}) {
+  if (typeof esc !== "function") {
+    throw new Error("renderDrills requires esc()");
+  }
+  const blocks = (sampleIds || [])
+    .slice(0, limit)
+    .map((s) => {
+      const d = getDrill(s.id);
+      if (!d) return "";
+      const wrongHtml = (d.wrongs || [])
+        .map((w) => `            <span class="opt bad">${esc(w.text)}</span>`)
+        .join("\n");
+      return `          <div class="example">
+            <div class="q"><a href="${qPrefix}pmp-teach-full-q${d.id}.html">Câu ${d.id}</a>: ${esc(d.tinhHuong)}. <strong>PM ${esc(d.ask)}?</strong></div>
+            <span class="opt ok">${esc(d.correctLetter)}. ${esc(d.correctText)} ✓</span>
+${wrongHtml}
+          </div>`;
+    })
+    .filter(Boolean);
+  if (!blocks.length) return "";
+  return `          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+${blocks.join("\n")}`;
+}
+
 module.exports = {
   DEFAULT_PATH,
   loadExplanations,
   getDrill,
+  renderDrills,
   resetDrillCache,
   trimClause,
 };

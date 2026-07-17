@@ -11,6 +11,13 @@
     .pattern-block h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
     .fam-note { font-size: 0.85rem; color: var(--muted); margin: 0 0 1rem; }
     table td { vertical-align: top; font-size: 0.84rem; }
+    .example { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; margin: 0.75rem 0; }
+    .example .q { font-weight: 600; margin-bottom: 0.45rem; font-size: 0.92rem; }
+    .example .opt { display: block; font-size: 0.84rem; margin: 0.2rem 0; padding: 0.2rem 0; }
+    .example .opt.ok { color: var(--ok, #166534); }
+    .example .opt.bad { color: var(--muted); }
+    .example .opt.bad::before { content: "✗ "; color: var(--bad, #b91c1c); }
+    .example .opt.ok::before { content: ""; }
   </style>
 </head>
 <body>
@@ -57,7 +64,8 @@
             (135 đang mở · 280 đã đúng lại).
             Taxonomy v2: <strong>không ép 8 bucket</strong> —
             26 trap-pattern cụ thể + 75 mixed (18%).
-            Mỗi pattern có <strong>ví dụ tình huống</strong> (cue → làm gì → tránh gì).
+            Mỗi pattern có <strong>ví dụ tình huống</strong> và
+            <strong>mini-drill từng câu mẫu</strong> (đáp án đúng + vì sao sai).
           </p>
           <div class="stat-grid">
             <div class="stat-box"><strong>415</strong><span>từng sai</span></div>
@@ -77,21 +85,24 @@
           <h2>Bản đồ 26 pattern</h2>
           <div class="card info">
             <p style="margin:0" class="fam-note">
-              Review: 415 câu ≠ 8 mental model. Gom theo <em>trap / action</em> (resilience, OPA, money, agile…)
-              — khớp trước trên stem+đáp án đúng, fallback options chỉ khi chưa match.
+              Mỗi dòng = <strong>tình huống đề → hành động đúng → tránh gì</strong>
+              (cùng logic bài giảng FIRST / NEXT / BEST).
+              Keyword nhỏ dưới tình huống để scan nhanh.
+              Review: 415 câu ≠ 8 mental model — khớp trap/action trước trên stem+đáp án đúng.
               Khác <a href="../../../public/pmp/pmp-teach-sai1-patterns.html">Sai:1</a> (wrongAttempt=1):
               đây là <strong>toàn bộ lịch sử từng sai</strong>.
             </p>
           </div>
           <table>
             <thead>
-              <tr><th>Pattern</th><th>Cue</th><th>Hành động đúng</th><th>ID cứng (LWA)</th></tr>
+              <tr><th>Pattern</th><th>Tình huống</th><th>Hành động đúng</th><th>Tránh</th><th>ID cứng (LWA)</th></tr>
             </thead>
             <tbody>
               <tr>
                 <td><a href="#p-money-forecast"><strong>1. Money</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Money &amp; governance · n=61</span></td>
-                <td>budget forward · CPI/SPI · EAC · vendor · unpaid</td>
-                <td>Update forecasts · EVM act · close contracts admin-complete</td>
+                <td>CPI &lt; 1; sponsor hỏi chi phí đến cuối dự án / vendor cần đóng hợp đồng.<br><span style="font-size:0.72rem;color:var(--muted)">budget forward · CPI/SPI · EAC · vendor · unpaid</span></td>
+                <td>Cập nhật forecast / EAC, hành động theo EVM; đóng contract khi admin-complete.</td>
+                <td style="font-size:0.78rem">Freeze BAC forever · overtime-only · skip admin close</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-376">376×6</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-422">422×3</a>
@@ -100,8 +111,9 @@
               </tr>
               <tr>
                 <td><a href="#p-opa-improve"><strong>2. OPA / lessons → actionable update</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=36</span></td>
-                <td>estimation bias · vague policy · many changes delivered · lessons</td>
-                <td>Update OPA / templates / rewrite policy — actionable</td>
+                <td>Ước lượng lệch mãi / policy mơ hồ / nhiều change đã xong nhưng không rút bài học.<br><span style="font-size:0.72rem;color:var(--muted)">estimation bias · vague policy · many changes delivered · lessons</span></td>
+                <td>Cập nhật OPA, template, rewrite policy — hành động được, không chỉ archive.</td>
+                <td style="font-size:0.78rem">Archive-only / refer historical / interview without change</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-981">981×7</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-696">696×3</a>
@@ -110,8 +122,9 @@
               </tr>
               <tr>
                 <td><a href="#p-agile-mvp"><strong>3. Agile MVP / backlog / iteration protect</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Engage &amp; tailor · n=32</span></td>
-                <td>MVP · mid-iteration · PO absent · backlog · sprint review</td>
-                <td>PO owns backlog · ship MVP · protect iteration · workshop AC</td>
+                <td>Sprint có impediment / SH đòi thêm mid-iteration; PO vắng.<br><span style="font-size:0.72rem;color:var(--muted)">MVP · mid-iteration · PO absent · backlog · sprint review</span></td>
+                <td>Remove impediment (escalate nếu cần); PO owns backlog; bảo vệ iteration — không hấp thụ mid-sprint.</td>
+                <td style="font-size:0.78rem">Team absorbs mid-sprint · wait perfect · skip PO</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-520">520×3</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-809">809×3</a>
@@ -120,8 +133,9 @@
               </tr>
               <tr>
                 <td><a href="#p-change-control"><strong>4. Change control / ICC</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=29</span></td>
-                <td>out of baseline · unauthorized work · new feature request · CCB</td>
-                <td>Stop unauthorized if needed → impact → formal CR/CCB</td>
+                <td>Change request đã submit / work ngoài baseline / feature mới lớn.<br><span style="font-size:0.72rem;color:var(--muted)">out of baseline · unauthorized work · new feature request · CCB</span></td>
+                <td>Impact assessment → Integrated Change Control (CR/CCB) — không absorb im lặng.</td>
+                <td style="font-size:0.78rem">Absorb scope because 'value' · silent add · informal list</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-585">585×2</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-695">695×2</a>
@@ -130,8 +144,9 @@
               </tr>
               <tr>
                 <td><a href="#p-verify-scope"><strong>5. Verify scope / acceptance trước 'done'</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=26</span></td>
-                <td>sponsor confirm done · acceptance criteria · close check</td>
-                <td>Review scope &amp; requirements / acceptance before claim success</td>
+                <td>Team bảo ‘xong rồi’ vì đúng hạn; sponsor chưa confirm acceptance.<br><span style="font-size:0.72rem;color:var(--muted)">sponsor confirm done · acceptance criteria · close check</span></td>
+                <td>Review scope / requirements / acceptance criteria trước khi claim success.</td>
+                <td style="font-size:0.78rem">Declare done from timeline or team feeling alone</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-719">719×4</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-534">534×3</a>
@@ -140,8 +155,9 @@
               </tr>
               <tr>
                 <td><a href="#p-risk-cadence"><strong>6. Risk cadence</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=20</span></td>
-                <td>risk materialized · new law · risk in reports · reserve</td>
-                <td>Implement planned response · identify/assess · include in reports</td>
+                <td>Risk đã materialize / luật mới / risk thiếu trong báo cáo.<br><span style="font-size:0.72rem;color:var(--muted)">risk materialized · new law · risk in reports · reserve</span></td>
+                <td>Tra risk register → implement planned response; identify/assess nếu mới.</td>
+                <td style="font-size:0.78rem">Invent new ritual · ignore register · lessons instead of act</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1005">1005×4</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-396">396×2</a>
@@ -150,8 +166,9 @@
               </tr>
               <tr>
                 <td><a href="#p-adapt-comms"><strong>7. Adapt communications + culture</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Engage &amp; tailor · n=17</span></td>
-                <td>preferred channel · multicultural · virtual · language</td>
-                <td>Adapt methods to prefs; culturally responsive protocols</td>
+                <td>Team đa văn hóa / virtual; ai đó không đọc email dài.<br><span style="font-size:0.72rem;color:var(--muted)">preferred channel · multicultural · virtual · language</span></td>
+                <td>Đổi kênh/phương pháp theo preference; giao thức nhạy văn hóa — không blast one-size.</td>
+                <td style="font-size:0.78rem">One-size email blast · ignore time zone/culture</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-359">359×3</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-658">658×3</a>
@@ -160,8 +177,9 @@
               </tr>
               <tr>
                 <td><a href="#p-hybrid-tailor"><strong>8. Tailor / hybrid</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Engage &amp; tailor · n=15</span></td>
-                <td>small low-risk · mixed certainty · predictive+agile</td>
-                <td>Tailor weight · hybrid OK · adaptive estimates where uncertain</td>
+                <td>Dự án nhỏ/low-risk nhưng bị ép copy nghi thức megaproject (hoặc zero governance).<br><span style="font-size:0.72rem;color:var(--muted)">small low-risk · mixed certainty · predictive+agile</span></td>
+                <td>Tailor vừa đủ; hybrid OK; ước lượng adaptive khi bất định.</td>
+                <td style="font-size:0.78rem">Copy megaproject ceremony · or zero governance</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-503">503×3</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-573">573×2</a>
@@ -170,8 +188,9 @@
               </tr>
               <tr>
                 <td><a href="#p-team-stage"><strong>9. Team stage / EI / work environment</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=14</span></td>
-                <td>Tuckman · storming · shouting · noisy workspace · ownership</td>
-                <td>Map stage · EI/self-reg · PM owns environment · facilitate ownership</td>
+                <td>Storming, cãi nhau to / workspace ồn / thiếu ownership.<br><span style="font-size:0.72rem;color:var(--muted)">Tuckman · storming · shouting · noisy workspace · ownership</span></td>
+                <td>Map Tuckman stage; EI/self-reg; PM sở hữu môi trường; facilitate ownership.</td>
+                <td style="font-size:0.78rem">Micromanage · escalate people issues early · ignore culture</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-214">214×4</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-71">71×2</a>
@@ -180,8 +199,9 @@
               </tr>
               <tr>
                 <td><a href="#p-competency-develop"><strong>10. Competency gap → develop</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=12</span></td>
-                <td>interns · skill gap · training needs · onboarding</td>
-                <td>Gap analysis + develop/remediate (HR/mentor) — don't blame</td>
+                <td>Intern / skill gap / onboarding yếu; delivery chậm vì thiếu năng lực.<br><span style="font-size:0.72rem;color:var(--muted)">interns · skill gap · training needs · onboarding</span></td>
+                <td>Gap analysis + develop/remediate (HR/mentor) — không blame/fire trước.</td>
+                <td style="font-size:0.78rem">Fire / blame / ignore capability gap</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-30">30×3</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-511">511×3</a>
@@ -190,8 +210,9 @@
               </tr>
               <tr>
                 <td><a href="#p-governance-roles"><strong>11. Governance / roles / RAM / steering</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Money &amp; governance · n=12</span></td>
-                <td>steering review · RACI/RAM · decision authority · unclear duty</td>
-                <td>Clarify roles (RAM) · prepare governance evidence · decision log</td>
+                <td>Không rõ ai quyết; steering sắp họp; RACI/RAM mơ hồ.<br><span style="font-size:0.72rem;color:var(--muted)">steering review · RACI/RAM · decision authority · unclear duty</span></td>
+                <td>Làm rõ roles (RAM); chuẩn bị evidence governance; decision log.</td>
+                <td style="font-size:0.78rem">Freestyle without authority map · skip steering prep</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-224">224×4</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-806">806×2</a>
@@ -200,8 +221,9 @@
               </tr>
               <tr>
                 <td><a href="#p-transparency-news"><strong>12. Transparency</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=9</span></td>
-                <td>layoff · incomplete info · rumor · morale crash</td>
-                <td>Share known facts + facilitate open discussion</td>
+                <td>Tin xấu / rumor / layoff; morale sụp; thông tin còn thiếu.<br><span style="font-size:0.72rem;color:var(--muted)">layoff · incomplete info · rumor · morale crash</span></td>
+                <td>Chia sẻ facts đã biết + tạo thảo luận mở — không im lặng hay hứa chắc chắn giả.</td>
+                <td style="font-size:0.78rem">Distract · promise certainty · silence · hide</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-305">305×5</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-257">257×4</a>
@@ -210,8 +232,9 @@
               </tr>
               <tr>
                 <td><a href="#p-engage-plan"><strong>13. Engagement plan</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Engage &amp; tailor · n=8</span></td>
-                <td>resistant stakeholder · conflict interests · power/interest</td>
-                <td>Consult engagement plan; engage per documented strategy</td>
+                <td>SH kháng cự / xung đột lợi ích; PM muốn escalate ngay theo cảm tính.<br><span style="font-size:0.72rem;color:var(--muted)">resistant stakeholder · conflict interests · power/interest</span></td>
+                <td>Xem engagement plan; engage đúng chiến lược đã ghi — không freestyle.</td>
+                <td style="font-size:0.78rem">Freestyle escalate / ignore minority SH</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-255">255×4</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-282">282×2</a>
@@ -220,8 +243,9 @@
               </tr>
               <tr>
                 <td><a href="#p-benefits-metrics"><strong>14. Benefits / value metrics (not vanity)</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Money &amp; governance · n=8</span></td>
-                <td>customer satisfaction · Kano · % value · long-term insight</td>
-                <td>Kano/surveys/benchmarking · measure value achieved · SH behavior insight</td>
+                <td>Báo cáo chỉ khoe SPI xanh; chưa đo value/outcome cho SH.<br><span style="font-size:0.72rem;color:var(--muted)">customer satisfaction · Kano · % value · long-term insight</span></td>
+                <td>Đo value đạt được (Kano/survey/benchmark) — tránh vanity metrics.</td>
+                <td style="font-size:0.78rem">Vanity SPI-only · ignore outcome metrics</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-824">824×3</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1002">1002×3</a>
@@ -230,8 +254,9 @@
               </tr>
               <tr>
                 <td><a href="#p-knowledge-transfer"><strong>15. Knowledge transfer</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=7</span></td>
-                <td>turnover · transition · strict domain · KT sessions</td>
-                <td>Prioritize immediate knowledge transfer between people</td>
+                <td>Người key sắp nghỉ / handover gấp; domain khó.<br><span style="font-size:0.72rem;color:var(--muted)">turnover · transition · strict domain · KT sessions</span></td>
+                <td>Ưu tiên KT người-kề-người ngay — không trì hoãn vì ‘đã có docs’.</td>
+                <td style="font-size:0.78rem">Delay KT · assume documentation enough under pressure</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-232">232×2</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-31">31×1</a>
@@ -240,8 +265,9 @@
               </tr>
               <tr>
                 <td><a href="#p-identify-stakeholders"><strong>16. Identify / re-analyze stakeholders</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Engage &amp; tailor · n=6</span></td>
-                <td>new SH · stale distribution · who needs info now</td>
-                <td>Stakeholder analysis / update register before tweaking list alone</td>
+                <td>Ai đó muốn sửa distribution list theo ‘cảm giác’ trước họp lớn.<br><span style="font-size:0.72rem;color:var(--muted)">new SH · stale distribution · who needs info now</span></td>
+                <td>Phân tích / cập nhật stakeholder register trước — không edit list theo gut.</td>
+                <td style="font-size:0.78rem">Edit distribution list by gut without analysis</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-746">746×2</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-173">173×1</a>
@@ -250,8 +276,9 @@
               </tr>
               <tr>
                 <td><a href="#p-coach-conflict"><strong>17. Coach conflict</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=5</span></td>
-                <td>privately struggling with teammate · interpersonal conflict</td>
-                <td>Coach conflict-resolution techniques; facilitate</td>
+                <td>2 engineer conflict; PM đã nghe riêng từng bên.<br><span style="font-size:0.72rem;color:var(--muted)">privately struggling with teammate · interpersonal conflict</span></td>
+                <td>Facilitate joint problem-solving session — không escalate sớm / không chọn hộ.</td>
+                <td style="font-size:0.78rem">PM takes sides / punish / ignore / solve for them</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-348">348×2</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-181">181×1</a>
@@ -260,8 +287,9 @@
               </tr>
               <tr>
                 <td><a href="#p-quality-sampling"><strong>18. Quality</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=5</span></td>
-                <td>mass production · quality supervisor · prove standards</td>
-                <td>Statistical sampling · independent certification test</td>
+                <td>Cần chứng minh chất lượng; khối lượng lớn; đòi inspect 100%.<br><span style="font-size:0.72rem;color:var(--muted)">mass production · quality supervisor · prove standards</span></td>
+                <td>Dùng sampling thống kê / chứng nhận độc lập khi phù hợp — không skip bằng chứng.</td>
+                <td style="font-size:0.78rem">Inspect 100% when sampling fits · skip proof of quality</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-634">634×2</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-138">138×1</a>
@@ -270,8 +298,9 @@
               </tr>
               <tr>
                 <td><a href="#p-compliance-audit"><strong>19. Compliance audit / catch overlooked regs</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=4</span></td>
-                <td>multi regs · process improvement · overlooked requirements</td>
-                <td>Schedule audit / independent certification to prove standards</td>
+                <td>Nhiều quy định; nghi có yêu cầu bị bỏ sót; cần chứng minh chuẩn.<br><span style="font-size:0.72rem;color:var(--muted)">multi regs · process improvement · overlooked requirements</span></td>
+                <td>Lên lịch audit / chứng nhận độc lập — không assume đã compliant.</td>
+                <td style="font-size:0.78rem">Assume compliant · skip baseline audit</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-562">562×3</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-918">918×2</a>
@@ -280,8 +309,9 @@
               </tr>
               <tr>
                 <td><a href="#p-compliance-ethics"><strong>20. Compliance / ethics</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=3</span></td>
-                <td>regs · HQ vs local · ethics · audit · specialty law</td>
-                <td>Validate + escalate; never authorize ethics/regs exceptions</td>
+                <td>Local muốn lệch ethics/HQ để kịp deadline.<br><span style="font-size:0.72rem;color:var(--muted)">regs · HQ vs local · ethics · audit · specialty law</span></td>
+                <td>Validate + escalate; không bao giờ authorize exception ethics/regs.</td>
+                <td style="font-size:0.78rem">Local exception / cut compliance for deadline / cover deviation</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1047">1047×6</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-834">834×1</a>
@@ -290,8 +320,9 @@
               </tr>
               <tr>
                 <td><a href="#p-resilience"><strong>21. Resilience</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=2</span></td>
-                <td>uncertainty · ambiguity · timeline+budget + SH concern</td>
-                <td>Build resilient approach (not 'eliminate all risk')</td>
+                <td>Timeline + budget căng; SH lo lắng; bất định cao.<br><span style="font-size:0.72rem;color:var(--muted)">uncertainty · ambiguity · timeline+budget + SH concern</span></td>
+                <td>Xây approach resilient (anticipate/respond/recover) — không claim ‘xóa hết risk’.</td>
+                <td style="font-size:0.78rem">Meeting-only · eliminate uncertainty claim</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-828">828×9</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-398">398×1</a>
@@ -299,8 +330,9 @@
               </tr>
               <tr>
                 <td><a href="#p-culture-change"><strong>22. Org culture change</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=2</span></td>
-                <td>hierarchy→agile · restructuring · vision/alignment drift</td>
-                <td>Targeted change activities · clear vision with sponsor/team</td>
+                <td>Org muốn ‘đổi văn hóa agile’ bằng slogan trên poster.<br><span style="font-size:0.72rem;color:var(--muted)">hierarchy→agile · restructuring · vision/alignment drift</span></td>
+                <td>Hoạt động đổi mới có mục tiêu + vision rõ với sponsor/team — redesign process/structure.</td>
+                <td style="font-size:0.78rem">Announce values only · ignore process/structure redesign</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1051">1051×2</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-53">53×1</a>
@@ -308,8 +340,9 @@
               </tr>
               <tr>
                 <td><a href="#p-own-mistake"><strong>23. Own mistake</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Lead people · n=2</span></td>
-                <td>wrong recipient email · unintended consequence · visible error</td>
-                <td>Acknowledge the mistake and apologize for consequences</td>
+                <td>Gửi nhầm email / lỗi nhìn thấy rõ; hậu quả đã xảy ra.<br><span style="font-size:0.72rem;color:var(--muted)">wrong recipient email · unintended consequence · visible error</span></td>
+                <td>Acknowledge + xin lỗi về hậu quả — không giấu hay đổ lỗi tool.</td>
+                <td style="font-size:0.78rem">Hide · blame tool · over-explain without owning</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1">1×1</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-999">999×1</a>
@@ -317,8 +350,9 @@
               </tr>
               <tr>
                 <td><a href="#p-charter-authorize"><strong>24. Charter</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=2</span></td>
-                <td>global HQ ops · need formal start · expectations</td>
-                <td>Create project charter to authorize and align</td>
+                <td>Team đã bắt đầu làm; chưa có charter / chưa authorize rõ.<br><span style="font-size:0.72rem;color:var(--muted)">global HQ ops · need formal start · expectations</span></td>
+                <td>Tạo project charter để authorize và align — không kickoff miệng thôi.</td>
+                <td style="font-size:0.78rem">Start work without charter · informal kickoff only</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-797">797×2</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-221">221×1</a>
@@ -326,8 +360,9 @@
               </tr>
               <tr>
                 <td><a href="#p-plan-translate"><strong>25. Translate plan → actionable controls</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=2</span></td>
-                <td>plan too abstract · audits/checklists</td>
-                <td>Iterative translations · audits/checklists from the plan</td>
+                <td>Có plan đẹp nhưng team không biết kiểm soát ngày-ngày thế nào.<br><span style="font-size:0.72rem;color:var(--muted)">plan too abstract · audits/checklists</span></td>
+                <td>Dịch plan thành checklist/audit/control actionable — không để plan trên kệ.</td>
+                <td style="font-size:0.78rem">Leave plan on shelf · verbal alignment only</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-29">29×1</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-42">42×1</a>
@@ -335,16 +370,18 @@
               </tr>
               <tr>
                 <td><a href="#p-compliance-research"><strong>26. Compliance research before proceed</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">Protect process · n=1</span></td>
-                <td>new requirement after charter · specialty regs · ambiguity</td>
-                <td>Research compliance requirement (BA) before authorizing work</td>
+                <td>Yêu cầu compliance chưa rõ; sponsor bảo ‘làm đi đã’.<br><span style="font-size:0.72rem;color:var(--muted)">new requirement after charter · specialty regs · ambiguity</span></td>
+                <td>Research requirement (BA) trước khi authorize work — không làm mù.</td>
+                <td style="font-size:0.78rem">Start anyway · assume sponsor already cleared regs</td>
                 <td>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1014">1014×2</a>
                 </td>
               </tr>
               <tr>
                 <td><a href="#other"><strong>Other / mixed</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">n=75</span></td>
-                <td>edge / multi-signal</td>
+                <td>Edge / multi-signal — không nhồi bucket giả</td>
                 <td>Ôn qua index LWA ↓ + bài giảng từng câu</td>
+                <td>Ép vào 1 named pattern</td>
                 <td><a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-157">157×2</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-274">274×2</a>
                   <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-963">963×2</a></td>
@@ -372,6 +409,21 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-828">828</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-398">398</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q828.html">Câu 828</a>: Stakeholder không hài lòng. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Incorporate resilience into the project management approach to help anticipate, respond to, and… ✓</span>
+            <span class="opt bad">&quot;Enhance risk management by scheduling regular team meetings and ensuring clear com…&quot; không phù hợp stakeholder không hài lòng /…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">&quot;Develop a collaborative problem-solving process to eliminate risk, ambiguity, and …&quot; không phù hợp stakeholder không hài lòng /…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q398.html">Câu 398</a>: mức độ uncertainty cao. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Collaborate with internal stakeholders to define and prioritize the value that components' outcomes… ✓</span>
+            <span class="opt bad">&quot;Gather input from external industry sources to supplement organizational strategic…&quot; không phù hợp mức độ uncertainty cao — đáp…</span>
+            <span class="opt bad">&quot;Assess the project value, determine potential benefits and costs with stakeholders…&quot; không phù hợp mức độ uncertainty cao — đáp…</span>
+            <span class="opt bad">&quot;Perform a high-level risk analysis to estimate project uncertainties and potential…&quot; không phù hợp mức độ uncertainty cao — đáp…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Meeting-only · eliminate uncertainty claim</div>
         </article>
         <article class="pattern-block" id="p-transparency-news">
@@ -386,6 +438,42 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-305">305</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-257">257</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-43">43</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-91">91</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q305.html">Câu 305</a>: Due to economic implications, a company announces imminent layoffs. A project is nearing delivery, and the team is worried about losing their jobs. Team morale is very low, and the project manager is experiencing increased delivery delays from the team. Senior leadership has not provided specific details about. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Provide transparent updates on available information and facilitate open team discussions. ✓</span>
+            <span class="opt bad">Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết Schedule individual meetings with team members to understand and address…</span>
+            <span class="opt bad">&quot;Focus the team’s attention on project deliverables to minimize worrying about chan…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q257.html">Câu 257</a>: Midway through a critical project phase, a senior team member privately tells the project manager they are struggling to work effectively with a newly assigned team member. The senior team member feels the new member’s approach is slowing progress and causing misunderstandings. They ask the project manager for advice on how to handle the situation without damaging team morale. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Coach the senior member on applying conflict resolution techniques to address the situation. ✓</span>
+            <span class="opt bad">rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung coaching / phát triển năng lực.</span>
+            <span class="opt bad">&quot;Encourage the senior member to discuss concerns directly with the new member durin…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Meet with the new member to discuss the concerns and agree on steps to…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q43.html">Câu 43</a>: During the final inspection for aircraft certification, the project manager is notified that the standard airworthiness certificate for the aircraft might be delayed. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Inform stakeholders about the potential delay and the steps being taken to address it. ✓</span>
+            <span class="opt bad">&quot;Revisit the contingency plans to minimize the impact of a delay in produ…&quot; cùng nhóm chờ / trì hoãn nhưng lệch trọng tâm —…</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Re-prioritize non-critical tasks and reallocate resources to address the…</span>
+            <span class="opt bad">Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết Fast-track relevant activities to accelerate toward receiving the…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q91.html">Câu 91</a>: Vấn đề chất lượng sau delivery. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Conduct a blameless post-incident review with the team, focusing on process and system factors… ✓</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết Vấn đề chất lượng sau delivery — đáp án đúng cần xử lý trực tiếp trọng tâm…</span>
+            <span class="opt bad">Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết Vấn đề chất lượng sau delivery — đáp án đúng cần xử…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q108.html">Câu 108</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Create an action plan to resolve the conflict and communicate it effectively to all team members… ✓</span>
+            <span class="opt bad">Tập trung &quot;ghi nhận / tài liệu hóa&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm…</span>
+            <span class="opt bad">Tập trung &quot;khuyên phát triển EQ / attitude thay vì explain value&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng…</span>
+            <span class="opt bad">Tập trung &quot;team building / hoạt động nhóm&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng…</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> Distract · promise certainty · silence · hide</div>
         </article>
@@ -402,6 +490,21 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1">1</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-999">999</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q1.html">Câu 1</a>: Lỗi truyền thông. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">B. Acknowledge the mistake and apologize for any unintended consequences. ✓</span>
+            <span class="opt bad">Chờ đợi thay vì thừa nhận lỗi — stakeholder cần phản hồi kịp thời.</span>
+            <span class="opt bad">Che giấu lỗi hoặc yêu cầu xóa thông tin không minh bạch; PMBOK 8 nhấn mạnh Lead accountably và quản trị stakeholder.</span>
+            <span class="opt bad">Xin lỗi riêng người nhận là bước bổ sung — không phải FIRST; phải acknowledge công khai với toàn team trước.</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q999.html">Câu 999</a>: Lỗi truyền thông. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">D. Request a corresponding cross‑cultural practices change to the organization’s training program. ✓</span>
+            <span class="opt bad">Ghi nhận thay vì acknowledge trực tiếp — thiếu con người trong phản hồi.</span>
+            <span class="opt bad">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</span>
+            <span class="opt bad">Tập trung &quot;team building / hoạt động nhóm&quot; không giải quyết lỗi truyền thông / thông tin sai — đáp án đúng cần coaching / phát…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Hide · blame tool · over-explain without owning</div>
         </article>
         <article class="pattern-block" id="p-coach-conflict">
@@ -416,6 +519,42 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-348">348</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-181">181</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-211">211</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-259">259</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q348.html">Câu 348</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Implement structured coaching sessions for team dynamics and establish clearer commitment processes. ✓</span>
+            <span class="opt bad">Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần…</span>
+            <span class="opt bad">Escalate trước khi facilitate — PM nên thử giải quyết ở cấp team trước.</span>
+            <span class="opt bad">&quot;Organize cross-functional workshops to align requirements and implement peer progr…&quot; không phù hợp trễ tiến độ / áp lực schedule…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q181.html">Câu 181</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Create a team charter to establish clear expectations regarding acceptable behavior and conflict… ✓</span>
+            <span class="opt bad">&quot;Schedule a mandatory review of the organization’s employee handbook regarding code…&quot; không phù hợp trễ tiến độ / áp lực schedule…</span>
+            <span class="opt bad">&quot;Demonstrate the principles of project management to reinforce the mindset and guid…&quot; không phù hợp trễ tiến độ / áp lực schedule…</span>
+            <span class="opt bad">Tập trung &quot;cùng phát triển giải pháp / collaborate&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q211.html">Câu 211</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Engage the team in constructive dialogue to understand the issue and consider different insights… ✓</span>
+            <span class="opt bad">&quot;Speak privately with each team member to address their individual concerns without…&quot; không phù hợp xung đột trong team hoặc…</span>
+            <span class="opt bad">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết xung đột trong team hoặc stakeholder — đáp án đúng cần xử lý…</span>
+            <span class="opt bad">&quot;Advise the team to treat differences of opinion as opportunities for increased con…&quot; không phù hợp xung đột trong team hoặc…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q259.html">Câu 259</a>: Xung đột. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">B. Observe the team members' interactions and talk with them about their complaints before applying a… ✓</span>
+            <span class="opt bad">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết xung đột trong team hoặc stakeholder — đáp án đúng cần xử lý trực…</span>
+            <span class="opt bad">&quot;Set up meetings with both team members and human resource management to remind the…&quot; không phù hợp xung đột trong team hoặc…</span>
+            <span class="opt bad">&quot;Explain to the team members that they are wasting time engaging in a conflict and …&quot; không phù hợp xung đột trong team hoặc…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q371.html">Câu 371</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Encourage the team to resolve conflicts independently and build accountability. ✓</span>
+            <span class="opt bad">Tập trung &quot;phối hợp với bên liên quan&quot; không giải quyết xung đột trong team hoặc stakeholder — đáp án đúng cần khuyến khích…</span>
+            <span class="opt bad">&quot;Engage the conflict resolution committee to facilitate agreement on requirements.&quot; không phù hợp xung đột trong team hoặc…</span>
+            <span class="opt bad">Escalate trước khi facilitate — PM nên thử giải quyết ở cấp team trước.</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> PM takes sides / punish / ignore / solve for them</div>
         </article>
@@ -432,6 +571,42 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-30">30</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-511">511</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-622">622</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-318">318</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q30.html">Câu 30</a>: vấn đề chất lượng / defect. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Conduct a competency gap analysis and collaborate with HR to develop cost-effective remediation… ✓</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần khuyến khích…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q511.html">Câu 511</a>: A project manager is producing a project schedule. They create a rough work effort estimate by calculating the number of resources needed to complete the designated number of work units. However, the initial estimate is larger than expected, and the project manager would like to revise it. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Increase the skill proficiency level of the assigned resources. ✓</span>
+            <span class="opt bad">&quot;Increase the number of resources allocated to speed up the work.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung…</span>
+            <span class="opt bad">&quot;Increase the use of technology to automate some of the tasks.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung…</span>
+            <span class="opt bad">&quot;Increase the level of efficiency by breaking the work into smaller units&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q622.html">Câu 622</a>: A global volunteer organization operates a continuous training model to improve volunteer performance across all regions. A new training program has been developed, but the organization wants to ensure that resources are allocated efficiently by targeting training at volunteers who actually need it. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Give trainees a preassessment to identify existing knowledge levels and focus training on those who… ✓</span>
+            <span class="opt bad">&quot;Deliver the training program to all volunteers simultaneously to ensure …&quot; cùng nhóm coaching / phát triển năng lực nhưng lệch…</span>
+            <span class="opt bad">&quot;Survey volunteers before training to collect self-reported data on their…&quot; cùng nhóm coaching / phát triển năng lực nhưng lệch…</span>
+            <span class="opt bad">&quot;Pilot the training with a small group of volunteers first and use their …&quot; cùng nhóm coaching / phát triển năng lực nhưng lệch…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q318.html">Câu 318</a>: thiếu hụt nguồn lực / kỹ năng. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">B. Identify knowledge gaps and provide targeted coaching to stakeholders on agile methodology benefits. ✓</span>
+            <span class="opt bad">&quot;Assess stakeholder communication preferences and adapt meeting formats to increase…&quot; không phù hợp thiếu hụt nguồn lực / kỹ năng…</span>
+            <span class="opt bad">&quot;Implement alternative feedback mechanisms such as recorded sessions and asynchrono…&quot; không phù hợp thiếu hụt nguồn lực / kỹ năng…</span>
+            <span class="opt bad">&quot;Develop stakeholder training programs and establish clear participation …&quot; cùng nhóm coaching / phát triển năng lực nhưng lệch…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q327.html">Câu 327</a>: team mới hình thành. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Prioritize immediate knowledge transfer sessions between outgoing and incoming team members. ✓</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">&quot;Conduct comprehensive technical review with new team member to identify gaps befor…&quot; không phù hợp team mới hình thành — đáp án…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Fire / blame / ignore capability gap</div>
         </article>
         <article class="pattern-block" id="p-knowledge-transfer">
@@ -446,6 +621,42 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-232">232</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-31">31</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-55">55</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-101">101</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q232.html">Câu 232</a>: At project closure, the project manager observes that high team turnover has caused significant loss of knowledge and reduced continuity across initiatives. The sponsor is preparing to launch a new strategic project with newly assigned members and emphasizes that future projects must avoid repeated mistakes and inefficiencies. The sponsor also warns that no additional time has been allocated for extended training or onboarding activities. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Establish a lessons learned register and integrate captured insights into organizational process… ✓</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết Provide structured and secure access to collaborative software to…</span>
+            <span class="opt bad">&quot;Invite team members to record themselves discussing issues as they occur and to sh…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q31.html">Câu 31</a>: A project manager is retiring from a large enterprise. Management wants the project manager to share any tacit knowledge learned while on the job. A key stakeholder stresses the need to take a systematic approach to this task to ensure the company benefits from the project manager's experience. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">B. Ask the project management office (PMO) to identify the structure and typology of people involved… ✓</span>
+            <span class="opt bad">&quot;Leverage collaborative digital tools, schedule virtual knowledge-sharing sessions,…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Devise a method to draw conclusions from data gathered at the closing of previous …&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết Meet one-on-one with the incoming project manager to share insights and…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q55.html">Câu 55</a>: What should the project manager do to create opportunities for knowledge transfer among the software engineers. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Foster open communication among the teams and promote team-building activities and mentoring… ✓</span>
+            <span class="opt bad">&quot;Encourage team members to ask questions of the engineers who have been with their …&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Conduct virtual surveys to encourage team members to share their expertise and exp…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Schedule formal face-to-face meetings with both teams to provide a dedicated space…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q101.html">Câu 101</a>: A project team is completing a software release project, with another release scheduled for the following year. The project manager needs to ensure the team retains the knowledge gained during this project and makes it available as a reference for the next project. The team has documented procedures and created manuals, but they recognize that these do not capture all the tacit knowledge developed during the project. The project manager needs to ensure that as much of the team’s collective knowledge as possible is transferred. What action. <strong>PM làm gì next?</strong></div>
+            <span class="opt ok">B. Conduct brainstorming sessions and retrospectives to identify information that should be collected… ✓</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">&quot;Use project management software to help ensure real-time tracking of milestones ac…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q201.html">Câu 201</a>: A commercial business with franchises across the country is rolling out a nationwide product upgrade. A key stakeholder wants to share their experience about the existing product with employees in other franchises. The sponsor insists on a systematic approach to ensure knowledge is transferred among all employees at all franchise locations. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Develop a formal knowledge transfer framework that collects tacit knowledge, such as personal… ✓</span>
+            <span class="opt bad">Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết Record one-on-one videos to gather first-hand employee experiences…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">&quot;Facilitate face-to-face meetings to replace the existing person-to-person informal…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> Delay KT · assume documentation enough under pressure</div>
         </article>
@@ -462,6 +673,35 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-214">214</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-71">71</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-141">141</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-256">256</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q71.html">Câu 71</a>: In a product development project, the team comprises skilled specialists who consistently seek the project manager’s approval before making routine technical and process decisions. This behavior creates delays and turns the project manager into a bottleneck. Team members appear hesitant to exercise judgment within their expertise. The project manager sees that ownership and autonomy are limited. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Encourage the team to make decisions within agreed boundaries and offer support when they encounter… ✓</span>
+            <span class="opt bad">&quot;Centralize more decisions with the project manager to ensure consistency and reduc…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Ask functional managers to replace team members who seem hesitant to make decision…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q141.html">Câu 141</a>: trễ tiến độ / áp lực schedule. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Reinforce the shared vision by revisiting the team charter and facilitating discussions connecting… ✓</span>
+            <span class="opt bad">&quot;Acknowledge the team members who have adapted well to the new environment to reinf…&quot; không phù hợp trễ tiến độ / áp lực schedule…</span>
+            <span class="opt bad">&quot;Increase meeting frequency to monitor progress more closely and prevent further di…&quot; không phù hợp trễ tiến độ / áp lực schedule…</span>
+            <span class="opt bad">Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng tâm câu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q256.html">Câu 256</a>: Có yêu cầu thay đổi. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Apply emotional intelligence in personal conduct by recognizing the impact of the behavior and… ✓</span>
+            <span class="opt bad">Tập trung &quot;thừa nhận lỗi và giải trình minh bạch&quot; không giải quyết Có yêu cầu thay đổi — đáp án đúng cần khuyên phát triển EQ /…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết Có yêu cầu thay đổi — đáp án đúng cần khuyên phát triển EQ / attitude…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q337.html">Câu 337</a>: SME chưa buy-in Agile teamwork. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Facilitate a team workshop to collaboratively address concerns and define a shared approach for… ✓</span>
+            <span class="opt bad">&quot;Meet privately with individual team members to explain the value of using structur…&quot; không phù hợp SME chưa buy-in Agile…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">&quot;Initiate discussions with senior leaders to gain alignment on the importance of pr…&quot; không phù hợp SME chưa buy-in Agile…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Micromanage · escalate people issues early · ignore culture</div>
         </article>
         <article class="pattern-block" id="p-culture-change">
@@ -476,6 +716,21 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1051">1051</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-53">53</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q1051.html">Câu 1051</a>: A telecom company is restructuring operations after outsourcing facilities management. The project manager has completed stakeholder engagement addressing resistance, aligning proposed changes with the company's cultural values and feedback into the change strategy. The project team needs to prepare to implement targeted interventions. <strong>PM làm gì next?</strong></div>
+            <span class="opt ok">D. Initiate targeted change activities such as process redesign and staff training. ✓</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Revisit stakeholder interviews to confirm alignment with current…</span>
+            <span class="opt bad">&quot;Update the competency framework to reflect revised job descriptions.…&quot; cùng nhóm coaching / phát triển năng lực nhưng lệch trọng…</span>
+            <span class="opt bad">&quot;Compile a summary of engagement outcomes and store it in the repository.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q53.html">Câu 53</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Work with the sponsor and team to create a clear vision statement and ensure group alignment. ✓</span>
+            <span class="opt bad">&quot;Have functional managers correct their team members' descriptions in department me…&quot; không phù hợp xung đột trong team hoặc…</span>
+            <span class="opt bad">&quot;Email the team to clarify the project's objectives and request that they use consi…&quot; không phù hợp xung đột trong team hoặc…</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết xung đột trong team hoặc stakeholder — đáp án đúng cần phối hợp với bên…</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> Announce values only · ignore process/structure redesign</div>
         </article>
@@ -496,6 +751,42 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-981">981</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-696">696</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-925">925</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-183">183</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q981.html">Câu 981</a>: stakeholder không hài lòng / kỳ vọng lệch. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Update the organizational process assets (OPAs) to ensure they remain effective and aligned with… ✓</span>
+            <span class="opt bad">đảm bảo điều kiện/tuân thủ không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung cập nhật tài liệu/kế…</span>
+            <span class="opt bad">Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần xử…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q696.html">Câu 696</a>: ngữ cảnh Agile/Scrum. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Update organizational process assets with revised estimation templates and guidelines. ✓</span>
+            <span class="opt bad">Tập trung &quot;ghi nhận / tài liệu hóa&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</span>
+            <span class="opt bad">&quot;Host knowledge transfer sessions with other teams to share challenges and outcomes.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q925.html">Câu 925</a>: A project team wants to update the organizational process assets (OPAs) with knowledge gained from their current project. They have made improvements in processes and scheduling practices, and have pinpointed vagueness in some organizational policies that should be clarified. The project manager needs to seek broader organizational approval prior to making updates. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">B. Rewrite or revisit the existing policy to clarify vagueness uncovered by this project. ✓</span>
+            <span class="opt bad">&quot;Add the current project’s information to the organization’s knowledge repository.&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết Revise the project management plan to incorporate the most…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q183.html">Câu 183</a>: A manufacturing company is adding a new product line, adopting best industry-standard practices. The project manager needs to prepare a project management plan that lists all resources. The resources should include any additional knowledge that might be critical to the project or beyond the organization's knowledge repository. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Host brainstorming sessions to help make team members’ implicit knowledge more accessible. ✓</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">&quot;Select team members who have a deep knowledge of the industry to minimize the need…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Help project team members understand their roles and responsibilities, including i…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q579.html">Câu 579</a>: A project manager has completed the following steps: deployed a major IT system, obtained formal customer acceptance, and conducted final performance reviews. Two critical closure activities remain before the project can be formally closed. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Transfer the lessons learned register to the lessons learned repository and confirm that all… ✓</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">&quot;Submit a formal project closure report to the sponsor and schedule a post-project …&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Archive-only / refer historical / interview without change</div>
         </article>
         <article class="pattern-block" id="p-risk-cadence">
@@ -510,6 +801,42 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1005">1005</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-396">396</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-575">575</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-939">939</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q1005.html">Câu 1005</a>: Risk đã trigger. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Include a risk impact matrix and a risk register with status updates in project communication… ✓</span>
+            <span class="opt bad">&quot;Use an iterative planning technique, such as rolling wave planning, to focus on ne…&quot; không phù hợp rủi ro đã/sắp xảy ra — đáp án…</span>
+            <span class="opt bad">&quot;Inform stakeholders that a contingency reserve for risks is planned with response …&quot; không phù hợp rủi ro đã/sắp xảy ra — đáp án…</span>
+            <span class="opt bad">&quot;Use the schedule performance index to express the fraction of earned value to plan…&quot; không phù hợp rủi ro đã/sắp xảy ra — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q396.html">Câu 396</a>: mức độ uncertainty cao. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Use expert-based techniques to estimate contingency, such as a percentage of total project costs. ✓</span>
+            <span class="opt bad">&quot;Perform a gate review to maintain alignment with organizational goals and manage r…&quot; không phù hợp mức độ uncertainty cao — đáp…</span>
+            <span class="opt bad">&quot;Assess potential formal and informal risks for their impact on the project schedul…&quot; không phù hợp mức độ uncertainty cao — đáp…</span>
+            <span class="opt bad">&quot;Calculate the expected monetary value (EMV) to determine the contingency reserve n…&quot; không phù hợp mức độ uncertainty cao — đáp…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q575.html">Câu 575</a>: Risk đã trigger. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">A. Explain its purpose to the steering committee and submit the feature as part of a formal change… ✓</span>
+            <span class="opt bad">&quot;Approve the sponsor’s request with assurance from a committee member that the risk…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Reallocate the contingency reserve funds informally to the new feature, and plan t…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Risk đã trigger — đáp án đúng cần leo thang lên cấp trên.</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q939.html">Câu 939</a>: To speed up completion of a mining project, a project team needs to work a full 24-hour day, in three shifts, and in hazardous conditions. Overnight shift teams will require overtime pay, and the company must increase security measures and insurance coverage to support round-the-clock operations. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Document and assess the hazardous conditions, overtime requirements, and increased coverage needs… ✓</span>
+            <span class="opt bad">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</span>
+            <span class="opt bad">Sửa kế hoạch có thể cần thiết nhưng PM nên tham chiếu artifact hiện có (risk register, change control, baseline) trước khi tự ý…</span>
+            <span class="opt bad">Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết Update the procurement management plan to include new vendor contracts…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q948.html">Câu 948</a>: vấn đề chi phí / ngân sách. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Log the funding delay as a risk in the risk register and monitor it for further developments. ✓</span>
+            <span class="opt bad">&quot;Pause all project activities until the funding approval status is confirmed and a …&quot; không phù hợp vấn đề chi phí / ngân sách —…</span>
+            <span class="opt bad">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</span>
+            <span class="opt bad">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết vấn đề chi phí / ngân sách — đáp án đúng cần ghi nhận / cập nhật risk register.</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> Invent new ritual · ignore register · lessons instead of act</div>
         </article>
@@ -526,6 +853,42 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-585">585</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-695">695</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-771">771</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-880">880</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q585.html">Câu 585</a>: A project team completes the assigned development work on a project and the customer's designated point of contact verbally states they are satisfied with the output. Shortly after, the same customer contacts the project manager requesting additional modifications not included in the original scope. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Notify the customer that any further work beyond the agreed scope will be treated as a new change… ✓</span>
+            <span class="opt bad">&quot;Accommodate the additional modifications to maintain a positive customer relations…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</span>
+            <span class="opt bad">rà soát tài liệu/kế hoạch không phù hợp vấn đề trong đề bài — đáp án đúng tập trung change control / change request.</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q695.html">Câu 695</a>: Vấn đề chất lượng sau delivery. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Evaluate the cost of quality and sustainability tradeoffs and request a corresponding change to the… ✓</span>
+            <span class="opt bad">&quot;Facilitate a resolution workshop between quality assurance and operation…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality…</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo chất lượng / kiểm…</span>
+            <span class="opt bad">&quot;Add both the quality assurance and the operations recommendations to the…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q771.html">Câu 771</a>: The project sponsor meets with the client to showcase a prototype. During the demonstration, the project sponsor promises to deliver two months earlier than the baseline. Upon being informed of this promise, the engineering team advises this commitment is unrealistic. The project management office stresses that formal governance must approve any change in schedule. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Explain to the sponsor and client that acceleration requires an impact analysis and change request… ✓</span>
+            <span class="opt bad">Tập trung &quot;phối hợp với bên liên quan&quot; không giải quyết Commit to the sponsor’s promise and work with the engineering team to…</span>
+            <span class="opt bad">Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết Request additional budget to hire additional qualified resources and pay…</span>
+            <span class="opt bad">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Meet with the client to address the unrealistic nature of compressing the…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q880.html">Câu 880</a>: A foreign government has expressed interest in owning a share of the newly merged company. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Assess the impact on the project scope that may result from external investment. ✓</span>
+            <span class="opt bad">Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải quyết Collaborate with the IT manager to implement necessary measures…</span>
+            <span class="opt bad">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết Meet with key stakeholders to determine internal and external investment…</span>
+            <span class="opt bad">Tập trung &quot;tham chiếu artifact / kế hoạch đã có&quot; không giải quyết Revise the project’s business case to ensure alignment with…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q908.html">Câu 908</a>: ngữ cảnh Agile/Scrum. <strong>PM làm gì next?</strong></div>
+            <span class="opt ok">A. Request a scope change to remove outdated work items and match new needs. ✓</span>
+            <span class="opt bad">&quot;Reorder the delivery queue with technical dependencies and available resources.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án…</span>
+            <span class="opt bad">&quot;Extend the timeline to accommodate revised system features and rollout goals.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng…</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Absorb scope because 'value' · silent add · informal list</div>
         </article>
         <article class="pattern-block" id="p-verify-scope">
@@ -540,6 +903,42 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-719">719</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-534">534</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-253">253</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-306">306</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q719.html">Câu 719</a>: vấn đề chất lượng / defect. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Review the project scope and requirements to confirm that all objectives have been achieved… ✓</span>
+            <span class="opt bad">rà soát tài liệu/kế hoạch không phù hợp vấn đề chất lượng / defect — đáp án đúng tập trung rà soát tài liệu/kế hoạch.</span>
+            <span class="opt bad">Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý…</span>
+            <span class="opt bad">Tập trung &quot;họp / thảo luận trực tiếp&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm câu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q534.html">Câu 534</a>: ngữ cảnh Agile/Scrum. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">B. Organize a workshop with the product owner and team to create the backlog and acceptance criteria. ✓</span>
+            <span class="opt bad">rà soát tài liệu/kế hoạch không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung đảm bảo chất lượng / kiểm soát quality.</span>
+            <span class="opt bad">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần đảm bảo chất lượng / kiểm…</span>
+            <span class="opt bad">&quot;Meeting with the project team to identify the mandatory project requirements and d…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q253.html">Câu 253</a>: Stakeholder không hài lòng. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Review the acceptance criteria and benefits realization plan with the stakeholder to demonstrate… ✓</span>
+            <span class="opt bad">Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần đảm bảo chất…</span>
+            <span class="opt bad">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</span>
+            <span class="opt bad">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần đảm bảo…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q306.html">Câu 306</a>: Thành viên quá tải/bất mãn. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Adjust story complexity assignments based on expertise while developing cross-training plans. ✓</span>
+            <span class="opt bad">&quot;Implement pair programming sessions between the struggling member and experienced …&quot; không phù hợp thành viên quá tải hoặc bất…</span>
+            <span class="opt bad">&quot;Arrange formal domain training while temporarily redistributing complex …&quot; cùng nhóm coaching / phát triển năng lực nhưng lệch…</span>
+            <span class="opt bad">&quot;Facilitate knowledge sharing sessions where stakeholders explain domain concepts.&quot; không phù hợp thành viên quá tải hoặc bất mãn…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q334.html">Câu 334</a>: trễ tiến độ / áp lực schedule. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Assess the director's capacity constraints and negotiate for dedicated product owner support. ✓</span>
+            <span class="opt bad">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</span>
+            <span class="opt bad">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</span>
+            <span class="opt bad">&quot;Facilitate stakeholder alignment sessions to distribute product ownership responsi…&quot; không phù hợp trễ tiến độ / áp lực schedule…</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> Declare done from timeline or team feeling alone</div>
         </article>
@@ -556,6 +955,42 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-634">634</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-138">138</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-326">326</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-506">506</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q634.html">Câu 634</a>: Vấn đề chất lượng sau delivery. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Apply statistical sampling to inspect a representative subset of products and use the results to… ✓</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp…</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp trọng tâm…</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần xử lý trực tiếp…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q138.html">Câu 138</a>: A company is expanding its shipping services. This expansion will extend support into an unfamiliar regional market. The project manager needs to align and maintain the project outcomes with both internal and external stakeholder expectations. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Implement a quality-driven approach to address stakeholders' expectations and ensure their… ✓</span>
+            <span class="opt bad">&quot;Apply a waterfall approach to ensure that the project complies with all …&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch…</span>
+            <span class="opt bad">&quot;Experiment with project specifications to ensure the deliverables meet and exceed …&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Differentiate between the roles and responsibilities of internal and external stak…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q326.html">Câu 326</a>: vấn đề chất lượng / defect. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Ask the quality assurance engineer to assist the software developer as soon as possible. ✓</span>
+            <span class="opt bad">&quot;Reassign the automation work to the engineer as soon as the presentation is finished.&quot; không phù hợp vấn đề chất lượng / defect…</span>
+            <span class="opt bad">&quot;Immediately train the software developer on automation testing and then …&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality…</span>
+            <span class="opt bad">&quot;Reschedule the automation testing for when the quality assurance enginee…&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q506.html">Câu 506</a>: vấn đề chất lượng / defect. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Define quality standards and select appropriate quality tools and techniques for assurance and… ✓</span>
+            <span class="opt bad">&quot;Begin conducting quality inspections and statistical sampling of the sel…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch…</span>
+            <span class="opt bad">&quot;Perform a quality audit to confirm that the team’s processes already ali…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q725.html">Câu 725</a>: vấn đề chất lượng / defect. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">D. Use inspections and statistical sampling to assess the defect and confirm compliance with quality… ✓</span>
+            <span class="opt bad">&quot;Determine whether the improvements are necessary by reviewing adherence …&quot; cùng nhóm đảm bảo chất lượng / kiểm soát quality…</span>
+            <span class="opt bad">Tập trung &quot;bổ sung register và reevaluate&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo chất lượng /…</span>
+            <span class="opt bad">Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết vấn đề chất lượng / defect — đáp án đúng cần đảm bảo chất lượng /…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Inspect 100% when sampling fits · skip proof of quality</div>
         </article>
         <article class="pattern-block" id="p-charter-authorize">
@@ -570,6 +1005,21 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-797">797</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-221">221</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q797.html">Câu 797</a>: A multinational company has a global headquarters, with regional offices worldwide. The operations director of one regional office approves a project to establish a local project management office (PMO). The project manager is in the initiation phase and needs to align stakeholders on the project’s benefits and its alignment with business strategy. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Create the project charter to formally authorize the project and align stakeholder expectations. ✓</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">&quot;Prepare the benefits management plan to track expected outcomes and benefits reali…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Draft the project management plan to define how the PMO project will be executed a…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q221.html">Câu 221</a>: Stakeholder không hài lòng. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Prepare a project charter to formalize initiation and align the team with stakeholders. ✓</span>
+            <span class="opt bad">Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần…</span>
+            <span class="opt bad">&quot;Develop a business case to capture expected benefits and present it for …&quot; cùng nhóm tham chiếu artifact / kế hoạch đã có nhưng…</span>
+            <span class="opt bad">&quot;Build a detailed schedule to confirm delivery expectations with the stakeholders’ …&quot; không phù hợp stakeholder không hài lòng /…</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> Start work without charter · informal kickoff only</div>
         </article>
@@ -586,6 +1036,21 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-29">29</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-42">42</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q29.html">Câu 29</a>: What can the project manager do to ensure that project processes are aligned with stakeholder expectations. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Perform iterative translations of the project management plan into activities that incorporate the… ✓</span>
+            <span class="opt bad">&quot;Create project deliverables that meet specifications defined in the project manage…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Assure stakeholders that future outputs will meet the specified requirem…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch…</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo chất lượng / kiểm soát quality&quot; không giải quyết Schedule quality assurance tasks to be performed by the…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q42.html">Câu 42</a>: What should the project manager have done to align stakeholder expectations with the project vision. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Use audits and checklists to translate the project management plan into executable activities for… ✓</span>
+            <span class="opt bad">&quot;Adjust the project scope baseline to provide stakeholders with a clearer view of t…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Establish a performance measurement baseline that includes flexibility in both the…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Define clear boundaries within the contractual agreements of third-party suppliers…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Leave plan on shelf · verbal alignment only</div>
         </article>
         <article class="pattern-block" id="p-compliance-ethics">
@@ -600,6 +1065,28 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1047">1047</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-834">834</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1044">1044</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q1047.html">Câu 1047</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A,D. Engage the legal and compliance departments to validate that governance aligns with corporate and… ✓</span>
+            <span class="opt bad">&quot;Authorize local compliance owners to approve corporate ethics exceptions for their…&quot; không phù hợp xung đột trong team hoặc…</span>
+            <span class="opt bad">&quot;Adjust the governance plan for local labor practices to ensure cultural …&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch…</span>
+            <span class="opt bad">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết xung đột trong team hoặc stakeholder — đáp án đúng cần đảm bảo tuân…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q834.html">Câu 834</a>: đạo đức / tuân thủ. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Escalate the issue via compliance and governance channels to set standards and clarify allowed… ✓</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">&quot;Temporarily suspend all regional reporting activity until a detailed legal review …&quot; không phù hợp đạo đức / tuân thủ — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết đạo đức / tuân thủ — đáp án đúng cần leo thang lên cấp trên.</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q1044.html">Câu 1044</a>: Vấn đề đạo đức. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Use organizational process assets (OPAs) to create a governance framework that emphasizes… ✓</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết đạo đức / tuân thủ — đáp án đúng cần thừa nhận lỗi và giải trình minh…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết đạo đức / tuân thủ — đáp án đúng cần thừa nhận lỗi và giải trình minh…</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> Local exception / cut compliance for deadline / cover deviation</div>
         </article>
@@ -616,6 +1103,35 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-562">562</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-918">918</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-964">964</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-247">247</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q562.html">Câu 562</a>: The delivery date is approaching for a manufacturing project, and the deliverables are set to be completed on time. However, the deliverables cannot be handed to the distribution center until the project manager validates the project’s readiness for transition. The project manager must first demonstrate that the project will deliver measurable value. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">C. Conduct an independent product certification test to prove that quality standards are met. ✓</span>
+            <span class="opt bad">&quot;Audit project records to confirm that deliverables meet the organization…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch…</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Survey the stakeholders for agreement that the deliverables demonstrate…</span>
+            <span class="opt bad">&quot;Verify that all regulatory, legal, and contractual obligations have been…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q918.html">Câu 918</a>: A project manager is assigned to lead a process improvement initiative for a company that has operated successfully for more than a decade. The sponsor emphasizes reducing customer wait times, increasing customer value, and accelerating performance improvement across the organization. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">D. Schedule a process audit to set baselines and identify opportunities for improvement. ✓</span>
+            <span class="opt bad">&quot;Implement a platform for real-time customer interaction and capturing customer fee…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết Facilitate workshops to identify knowledge gaps and provide employee…</span>
+            <span class="opt bad">Thiếu hành động chủ động — PM phải xử lý vấn đề trong đề bài, không bỏ qua/trì hoãn.</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q964.html">Câu 964</a>: vấn đề chi phí / ngân sách. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Schedule an audit to catch any compliance requirements that might have been overlooked. ✓</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết vấn đề chi phí / ngân sách — đáp án đúng cần đảm bảo tuân thủ /…</span>
+            <span class="opt bad">&quot;Classify the compliance categories to address each area systematically, including …&quot; không phù hợp vấn đề chi phí / ngân sách —…</span>
+            <span class="opt bad">&quot;Survey stakeholders for input on control mechanisms that could be set up…&quot; cùng nhóm đảm bảo tuân thủ / compliance nhưng lệch…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q247.html">Câu 247</a>: A national grocery chain is rebranding. The project team reports its progress updates to the stakeholders on a regular basis. Nonetheless, several stakeholders express frustration that the progress does not meet the expectations and the vision set at project initiation. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">B. Review the project management plan, then implement active listening techniques to address the gaps… ✓</span>
+            <span class="opt bad">&quot;Execute an alternative analysis to identify where the expectations became misalign…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết Schedule an audit to objectively identify any gaps, nonconformities,…</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Implement backlog refinement to review the content in the backlog and…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Assume compliant · skip baseline audit</div>
         </article>
         <article class="pattern-block" id="p-compliance-research">
@@ -630,6 +1146,14 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1014">1014</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q1014.html">Câu 1014</a>: đạo đức / tuân thủ. <strong>PM làm gì next?</strong></div>
+            <span class="opt ok">C. Ask the business analyst to research the compliance requirement and its consequences, then provide… ✓</span>
+            <span class="opt bad">Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết đạo đức / tuân thủ — đáp án đúng cần xử lý trực tiếp trọng tâm…</span>
+            <span class="opt bad">Tập trung &quot;tham chiếu artifact / kế hoạch đã có&quot; không giải quyết đạo đức / tuân thủ — đáp án đúng cần xử lý trực tiếp trọng tâm…</span>
+            <span class="opt bad">Tập trung &quot;tiếp tục theo kế hoạch hiện tại&quot; không giải quyết đạo đức / tuân thủ — đáp án đúng cần xử lý trực tiếp trọng tâm câu…</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> Start anyway · assume sponsor already cleared regs</div>
         </article>
@@ -650,6 +1174,42 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-376">376</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-422">422</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-533">533</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-578">578</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q376.html">Câu 376</a>: Which two actions should the project manager adopt to manage the budget going forward? (Choose 2). <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D,B. Regularly update financial forecasts in order to assess the most accurate picture of future needs. ✓</span>
+            <span class="opt bad">&quot;Maintain the project’s strategic direction, ensuring alignment with business goals…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Pause production to examine alternative software solutions and their licensing pri…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q422.html">Câu 422</a>: trễ tiến độ / áp lực schedule. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Shift to a master services agreement with appendices for the additional work as required. ✓</span>
+            <span class="opt bad">&quot;Create a request for quotation (RFQ) to formulate a list of new vendors.&quot; không phù hợp trễ tiến độ / áp lực schedule — đáp án…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q533.html">Câu 533</a>: vấn đề chi phí / ngân sách. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Engage high net-worth individuals and institutional investors and offer naming rights or long-term… ✓</span>
+            <span class="opt bad">&quot;Adopt a fixed budget approach to apply internally owned assets, ensuring all overs…&quot; không phù hợp vấn đề chi phí / ngân sách —…</span>
+            <span class="opt bad">&quot;Begin a crowdfunding campaign that capitalizes on community interest to generate e…&quot; không phù hợp vấn đề chi phí / ngân sách —…</span>
+            <span class="opt bad">&quot;Adopt a lump sum approach to reallocate the entirety of the project’s budget and r…&quot; không phù hợp vấn đề chi phí / ngân sách —…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q578.html">Câu 578</a>: vấn đề vendor / procurement. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Perform administrative closure of all procurements for the project. ✓</span>
+            <span class="opt bad">&quot;Evaluate the invoices to determine the scope of work completed.&quot; không phù hợp vấn đề vendor / procurement — đáp án đúng tập…</span>
+            <span class="opt bad">Tập trung &quot;xác nhận đã hoàn thành (không xử lý mới)&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực…</span>
+            <span class="opt bad">Tập trung &quot;quản lý vendor / procurement&quot; không giải quyết vấn đề vendor / procurement — đáp án đúng cần xử lý trực tiếp trọng tâm…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q733.html">Câu 733</a>: trễ tiến độ / áp lực schedule. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Evaluate both qualitative and quantitative project benefits, considering their alignment with the… ✓</span>
+            <span class="opt bad">&quot;Calculate the tangible benefits and divide them by the total project expenses to m…&quot; không phù hợp trễ tiến độ / áp lực schedule…</span>
+            <span class="opt bad">Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử…</span>
+            <span class="opt bad">&quot;Compare the actual project outcomes with the initial budget to evaluate the projec…&quot; không phù hợp trễ tiến độ / áp lực schedule…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Freeze BAC forever · overtime-only · skip admin close</div>
         </article>
         <article class="pattern-block" id="p-benefits-metrics">
@@ -665,6 +1225,42 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-824">824</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1002">1002</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1056">1056</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-608">608</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q824.html">Câu 824</a>: A project is in the early stages of planning. The project manager must define the project scope statement and weigh the expected value of the deliverables against the performance indices. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Document the scope items in percentages to help measure how much expected value is achieved. ✓</span>
+            <span class="opt bad">Thay đổi phạm vi cần quy trình change control và thống nhất stakeholder — không phải phản ứng mặc định khi gặp trở ngại.</span>
+            <span class="opt bad">&quot;Provide detailed descriptions of all scope components so that exactly what is bein…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Make all assumptions and constraints explicit so that the scope has a realistic fo…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q1002.html">Câu 1002</a>: A marketing firm focused on long-term success is evaluating past project performance. The project sponsor wants to ensure that strategies shown to produce better outcomes are applied to the current project. The sponsor has asked the project manager to determine whether key stakeholders are making informed decisions and implementing effective change strategies. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Conduct interviews and surveys for insight into stakeholders' behaviors to ensure they align with… ✓</span>
+            <span class="opt bad">&quot;Control project costs and leverage technology until stakeholders' observed behavio…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Define strategic goals more clearly through the use of project milestones to impro…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Develop workgroups to assess past performance and identify strategies so key stake…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q1056.html">Câu 1056</a>: A project manager is initiating a critical customer service improvement project. The sponsor wants to measure success beyond cost and schedule, focusing on stakeholder value outcomes. Although the project management office recommends including customer-focused metrics, the operations director argues that earned value measures are sufficient. The project manager must define success metrics that reflect governance priorities. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Combine customer satisfaction survey scores and resolution time with earned value metrics. ✓</span>
+            <span class="opt bad">&quot;Define the success metrics after the first stage gate when customer satisfaction i…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Adopt industry benchmarks for both operational and customer satisfaction success m…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Use earned value metrics along with the number of completed daily service calls fo…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q608.html">Câu 608</a>: A company initiates a project to meet a goal of increasing customer satisfaction scores. The project manager needs to identify. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Apply surveys and questionnaires, Kano analysis, and benchmarking to collect, categorize, and… ✓</span>
+            <span class="opt bad">&quot;Conduct stakeholder interviews and review historical project data to capture requi…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Facilitate focus groups with key stakeholders to gather detailed qualitative requi…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết Use root cause analysis and fishbone diagrams to…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q1061.html">Câu 1061</a>: A company’s software development project was launched before the availability of a new popular networking technology. The project sponsor is encouraging use of the technology, citing anticipated market share. However, the company's design might not work well with this new technology. The engineers’ consensus is that extensive recoding will be required to retrofit the software and make it compatible. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Work with the sponsor to assess the value of the new technology for this software and update the… ✓</span>
+            <span class="opt bad">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết Alert stakeholders to expect an expansion of scope and delays in the timeline caused…</span>
+            <span class="opt bad">Tập trung &quot;phối hợp với bên liên quan&quot; không giải quyết Work with the project team to determine the maximum change in scope they…</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Use an iterative approach to the development cycle to continuously assess…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Vanity SPI-only · ignore outcome metrics</div>
         </article>
         <article class="pattern-block" id="p-governance-roles">
@@ -679,6 +1275,42 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-224">224</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-806">806</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-1080">1080</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-110">110</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q224.html">Câu 224</a>: A project manager is notified that the steering committee will be conducting a formal review of a project to ensure the project is adhering to the statement of work. When the project manager notifies the customer that the audit is scheduled, the customer responds negatively, believing the audit is a punitive measure. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D,E. Help the customer understand the value of ensuring that project standards are being met. ✓</span>
+            <span class="opt bad">Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết Facilitate a meeting between the steering committee and the customer to…</span>
+            <span class="opt bad">Tập trung &quot;thông báo một chiều (inform/notify)&quot; không giải quyết Inform the customer about the way audit results will be used to…</span>
+            <span class="opt bad">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết Share with the customer a chart that measures the project's…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q806.html">Câu 806</a>: A steering committee member recommends adding new equipment to the project scope that could provide downstream marketing benefits. However, the equipment is still in early development and will not be available within the project timeline. Including it would delay project completion beyond the approved schedule. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Explain that adding the equipment is not feasible within the timeline and refer to the business case ✓</span>
+            <span class="opt bad">Tập trung &quot;change control / change request&quot; không giải quyết Submit a change request to include the equipment because of the…</span>
+            <span class="opt bad">Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết Conduct a survey of the steering committee to evaluate preferences and reach…</span>
+            <span class="opt bad">Tập trung &quot;leo thang lên cấp trên&quot; không giải quyết Ask the sponsor to intervene with the steering committee to avoid delays in…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q1080.html">Câu 1080</a>: ngữ cảnh Agile/Scrum. <strong>PM làm gì next?</strong></div>
+            <span class="opt ok">D. Escalate the issue to the project sponsor to determine the next steps. ✓</span>
+            <span class="opt bad">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần leo thang lên cấp trên.</span>
+            <span class="opt bad">&quot;Invite the project team to a swarming session to identify a solution.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập…</span>
+            <span class="opt bad">Tập trung &quot;chờ / trì hoãn&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần leo thang lên cấp trên.</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q110.html">Câu 110</a>: A project team is implementing a large-scale enterprise resource planning (ERP) system in the manufacturing industry. This is a high-priority project for the organization, in. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Schedule steering committee meetings with the project sponsor and other stakeholders to discuss the… ✓</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Compare the priorities of executive leadership with those of other…</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Analyze the differing needs and expectations of all stakeholders and…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q269.html">Câu 269</a>: Stakeholder không hài lòng. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">A. Develop a stakeholder register to classify stakeholders, and the RACI (responsible, accountable,… ✓</span>
+            <span class="opt bad">Tập trung &quot;khuyến khích collaboration / hợp tác&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo…</span>
+            <span class="opt bad">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần ưu tiên theo…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> Freestyle without authority map · skip steering prep</div>
         </article>
@@ -699,6 +1331,42 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-255">255</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-282">282</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-940">940</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-208">208</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q255.html">Câu 255</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Consult the stakeholder engagement plan and engage the resistant stakeholder in accordance with the… ✓</span>
+            <span class="opt bad">Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần tham chiếu artifact / kế…</span>
+            <span class="opt bad">Escalate trước khi facilitate — PM nên thử giải quyết ở cấp team trước.</span>
+            <span class="opt bad">Escalate trước khi facilitate — PM nên thử giải quyết ở cấp team trước.</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q282.html">Câu 282</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Develop a stakeholder engagement strategy that ensures alignment with the acquiring company’s… ✓</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần engagement…</span>
+            <span class="opt bad">&quot;Schedule a facilitated session with stakeholders to clarify the sources of disagre…&quot; không phù hợp stakeholder không hài lòng /…</span>
+            <span class="opt bad">Tập trung &quot;lắng nghe và hỗ trợ cá nhân&quot; không giải quyết stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng cần engagement…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q940.html">Câu 940</a>: A major city and a national government agency are partnering on a new project. Each party has different risk tolerances, priorities, and internal processes, making it difficult to agree on how to handle shared risks. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Collaborate with representatives from both parties to develop a shared risk management plan that… ✓</span>
+            <span class="opt bad">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết Apply the city's existing risk management framework as the default…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q208.html">Câu 208</a>: During initiation of a project to develop a new HR system, the project manager is mapping stakeholders using a power/interest grid. The HR director is the customer and is highly engaged, but the IT security officer is the sponsor and has shown limited day‑to‑day availability so far. The project manager needs to engage the IT security officer based on the current level of power and interest. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Keep the officer satisfied through focused, periodic engagement. ✓</span>
+            <span class="opt bad">&quot;Manage the officer closely with frequent, intensive involvement.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung…</span>
+            <span class="opt bad">&quot;Keep the officer informed with periodic project status summaries.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập trung…</span>
+            <span class="opt bad">&quot;Monitor the officer with minimal effort until they show further interest.&quot; không phù hợp vấn đề trong đề bài — đáp án đúng tập…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q335.html">Câu 335</a>: Stakeholder không hài lòng. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Resistant ✓</span>
+            <span class="opt bad">&quot;Leading&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Resistant&quot;.</span>
+            <span class="opt bad">&quot;Neutral&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Resistant&quot;.</span>
+            <span class="opt bad">&quot;Supportive&quot; không phù hợp stakeholder không hài lòng / kỳ vọng lệch — đáp án đúng tập trung &quot;Resistant&quot;.</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Freestyle escalate / ignore minority SH</div>
         </article>
         <article class="pattern-block" id="p-adapt-comms">
@@ -713,6 +1381,42 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-359">359</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-658">658</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-924">924</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-977">977</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q359.html">Câu 359</a>: Stakeholder không hài lòng. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Adapt communication methods to match stakeholder preferences while ensuring compliance requirements. ✓</span>
+            <span class="opt bad">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</span>
+            <span class="opt bad">&quot;Schedule regular informal meetings to build rapport and proactively address concer…&quot; không phù hợp stakeholder không hài lòng /…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q658.html">Câu 658</a>: Team phân tán. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Account for time zones, tool availability, and potential constraints when planning the meeting. ✓</span>
+            <span class="opt bad">One kickoff meeting does not sustain ongoing engagement for a new virtual team.</span>
+            <span class="opt bad">Copying a past team's communications plan ignores current context and team needs.</span>
+            <span class="opt bad">&quot;Select a single official project language to simplify communication across the team.&quot; không phù hợp team phân tán / virtual —…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q924.html">Câu 924</a>: A project manager is leading a global team in developing a new product for worldwide sale. The team consists of members from three continents. During a critical phase of the project, a misunderstanding stemming from differences in communication styles arises that threatens to derail progress. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Engage an expert to review the communications management plan and facilitate a discussion to… ✓</span>
+            <span class="opt bad">Tập trung &quot;bổ sung nguồn lực / hire&quot; không giải quyết Hire a translation expert who can reframe each team’s language and word…</span>
+            <span class="opt bad">đề xuất/yêu cầu formal không phù hợp vấn đề trong đề bài — đáp án đúng tập trung &quot;Engage an expert to review the communications…</span>
+            <span class="opt bad">&quot;Involve a member of each team in decision-making processes to help reinforce owner…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q977.html">Câu 977</a>: In response to persistent delays on some scheduled tasks in a project, a project manager wants to identify. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Review the communications management plan to determine how stakeholders should be informed and… ✓</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">&quot;Reference the project management plan to identify which subsidiary plans address s…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết Check the stakeholder engagement plan to confirm stakeholder…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q1043.html">Câu 1043</a>: ngữ cảnh Agile/Scrum. <strong>PM làm gì next?</strong></div>
+            <span class="opt ok">B. Conduct a cultural assessment using surveys and interviews with employees. ✓</span>
+            <span class="opt bad">&quot;Update job descriptions to include agile responsibilities for team members.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng…</span>
+            <span class="opt bad">Tập trung &quot;coaching / phát triển năng lực&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu…</span>
+            <span class="opt bad">&quot;Draft a cultural change strategy to address the resistance from engineers.&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập…</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> One-size email blast · ignore time zone/culture</div>
         </article>
@@ -729,6 +1433,42 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-746">746</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-173">173</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-204">204</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-222">222</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q746.html">Câu 746</a>: A new product development project has been launched. The project sponsor is confident that the project will be successful. However, key investors are less confident and require more information about the project before making an investment. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Present detailed market analysis, business plan, and risk management strategies to investors. ✓</span>
+            <span class="opt bad">Tập trung &quot;thông báo / truyền đạt thông tin&quot; không giải quyết Develop and present a comprehensive cost-benefit analysis with…</span>
+            <span class="opt bad">&quot;Assess and describe all identified risks associated with product development to in…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết Plan stakeholder engagement activities to involve investors…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q173.html">Câu 173</a>: Có yêu cầu thay đổi. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Help the project sponsor understand the different tools and techniques available and why this one… ✓</span>
+            <span class="opt bad">cập nhật tài liệu/kế hoạch không phù hợp yêu cầu thay đổi phạm vi/kế hoạch — đáp án đúng tập trung &quot;Help the project sponsor…</span>
+            <span class="opt bad">&quot;Let the team know that the sponsor is unhappy and switch from iterative planning t…&quot; không phù hợp yêu cầu thay đổi phạm vi/kế…</span>
+            <span class="opt bad">&quot;Pause the project work until the scrum master has a chance to review the complete …&quot; không phù hợp yêu cầu thay đổi phạm vi/kế…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q204.html">Câu 204</a>: A multinational corporation is running a large, complex project that requires cooperation across divisions. The project has many stakeholders, but some contribute more directly to the project activities than others. The project manager needs to choose a classification model that will provide a clear picture of the relative importance of the various types of stakeholders. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Choose the salience model to classify stakeholders based on their power, the urgency of their… ✓</span>
+            <span class="opt bad">&quot;Choose the grid model to group stakeholders by their level of authority, interest …&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">&quot;Choose the influence model to separate stakeholders by their upward, downward, out…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết Choose the prioritization model to reprioritize stakeholders in response…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q222.html">Câu 222</a>: Stakeholder/phòng ban mới. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Conduct stakeholder analysis to identify current information needs and requirements. ✓</span>
+            <span class="opt bad">&quot;Review and update the communications management plan to reflect needs.…&quot; cùng nhóm phân tích stakeholder và cập nhật kế hoạch…</span>
+            <span class="opt bad">&quot;Implement stakeholder feedback system to validate communication effectiveness.&quot; không phù hợp stakeholder không hài lòng / kỳ…</span>
+            <span class="opt bad">&quot;Establish role-based communication protocols for appropriate distribution.&quot; không phù hợp stakeholder không hài lòng / kỳ vọng…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q566.html">Câu 566</a>: mức độ uncertainty cao. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Refer to the project charter to identify stakeholders named during project initiation. ✓</span>
+            <span class="opt bad">Tập trung &quot;engagement stakeholder / làm rõ kỳ vọng&quot; không giải quyết mức độ uncertainty cao — đáp án đúng cần tham chiếu artifact…</span>
+            <span class="opt bad">&quot;Consult the project sponsor to confirm missing or unclear stakeholder information.&quot; không phù hợp mức độ uncertainty cao — đáp…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Edit distribution list by gut without analysis</div>
         </article>
         <article class="pattern-block" id="p-agile-mvp">
@@ -744,6 +1484,42 @@
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-520">520</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-809">809</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-872">872</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-665">665</a>
             </div>
           </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q520.html">Câu 520</a>: Stakeholder không hài lòng. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Consult with the product owner to identify the minimum viable product needed for launch and… ✓</span>
+            <span class="opt bad">Leo thang quá sớm khi PM chưa thử các biện pháp trong phạm vi quyền hạn; chỉ escalate khi vượt quyền hoặc cần quyết định cấp trên.</span>
+            <span class="opt bad">&quot;Revise the project schedule immediately to compress delivery and reassure stakehol…&quot; không phù hợp stakeholder không hài lòng /…</span>
+            <span class="opt bad">&quot;Conduct a stakeholder workshop to redefine the project scope and obtain agreement …&quot; không phù hợp stakeholder không hài lòng /…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q809.html">Câu 809</a>: ngữ cảnh Agile/Scrum. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Complete the sprint review and release the MVP with the completed features. ✓</span>
+            <span class="opt bad">&quot;Reschedule the MVP release review until all the agreed-on features have …&quot; cùng nhóm define MVP / minimum viable product nhưng…</span>
+            <span class="opt bad">Tập trung &quot;sửa kế hoạch / baseline / schedule&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần define MVP / minimum…</span>
+            <span class="opt bad">Tập trung &quot;change control / change request&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần define MVP / minimum viable…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q872.html">Câu 872</a>: ngữ cảnh Agile/Scrum. <strong>PM làm gì first?</strong></div>
+            <span class="opt ok">A. Launch the product in Region X and plan future iterations to address noncompliance in other regions. ✓</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu…</span>
+            <span class="opt bad">&quot;Connect with all regional sales teams and customers to reach an agreement on the e…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q665.html">Câu 665</a>: ngữ cảnh Agile/Scrum. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Engage the product owner and demonstrate the new packaging format to confirm it meets scope and… ✓</span>
+            <span class="opt bad">Tập trung &quot;change control / change request&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu…</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần xử lý trực tiếp trọng tâm câu hỏi.</span>
+            <span class="opt bad">&quot;Implement the new format immediately since it resolves the issue and meets the pro…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q677.html">Câu 677</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">A. Ask the product owner to work more closely with both customers to understand their needs and… ✓</span>
+            <span class="opt bad">&quot;Facilitate a joint meeting with both customers to resolve the priority c…&quot; cùng nhóm ưu tiên theo giá trị / MVP nhưng lệch trọng…</span>
+            <span class="opt bad">Escalate trước khi facilitate — PM nên thử giải quyết ở cấp team trước.</span>
+            <span class="opt bad">&quot;Split the product backlog into two customer-specific tracks and allow each custome…&quot; không phù hợp xung đột trong team hoặc…</span>
+          </div>
           <div class="card danger"><strong>Trap:</strong> Team absorbs mid-sprint · wait perfect · skip PO</div>
         </article>
         <article class="pattern-block" id="p-hybrid-tailor">
@@ -758,6 +1534,42 @@
               · cũng xem:
               <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-503">503</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-573">573</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-893">893</a> <a class="id-chip" href="../../../public/pmp/pmp-full-questions.html#q-159">159</a>
             </div>
+          </div>
+          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q503.html">Câu 503</a>: A project manager is leading a small internal project with limited scope, low complexity, and minimal risks. Despite this, the sponsor insists on a comprehensive, detailed risk management plan. The project manager worries that creating such a plan will consume limited resources, delay deliverables, and reduce efficiency. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Explain that the project scope does not justify a detailed plan and suggest adopting an adaptive… ✓</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết Develop a comprehensive risk management plan to demonstrate rigorous…</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">&quot;Reallocate resources and request additional budget approval to prepare the compreh…&quot; không phù hợp vấn đề trong đề bài — đáp án…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q573.html">Câu 573</a>: Risk đã trigger. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">D. Use a predictive approach with fixed deployment sequences and incorporate continuous improvement… ✓</span>
+            <span class="opt bad">Tập trung &quot;trao quyền / để team tự quyết&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng…</span>
+            <span class="opt bad">Tập trung &quot;đảm bảo tuân thủ / compliance&quot; không giải quyết trễ tiến độ / áp lực schedule — đáp án đúng cần xử lý trực tiếp trọng…</span>
+            <span class="opt bad">&quot;Adopt a program management structure that separates planning and deployment into i…&quot; không phù hợp trễ tiến độ / áp lực schedule…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q893.html">Câu 893</a>: ngữ cảnh Agile/Scrum. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Coordinate with the benefits owner to map agile release outcomes to the benefit realization plan… ✓</span>
+            <span class="opt bad">&quot;Limit agile releases until all planned features are complete so benefits can be re…&quot; không phù hợp ngữ cảnh Agile/Scrum — đáp án…</span>
+            <span class="opt bad">đề xuất/yêu cầu formal không phù hợp ngữ cảnh Agile/Scrum — đáp án đúng tập trung phối hợp với bên liên quan.</span>
+            <span class="opt bad">Tập trung &quot;tham chiếu artifact / kế hoạch đã có&quot; không giải quyết ngữ cảnh Agile/Scrum — đáp án đúng cần phối hợp với bên liên…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q159.html">Câu 159</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">C. Facilitate structured root cause analysis workshops to uncover why stakeholders interpret the… ✓</span>
+            <span class="opt bad">Ghi nhận lessons learned / cập nhật log là quan trọng nhưng thường là bước sau khi đã xử lý tình huống — không phải hành động ưu…</span>
+            <span class="opt bad">Tập trung &quot;ưu tiên theo giá trị / MVP&quot; không giải quyết xung đột trong team hoặc stakeholder — đáp án đúng cần facilitate…</span>
+            <span class="opt bad">&quot;Reissue the original project vision statement and require formal acknowledgment fr…&quot; không phù hợp xung đột trong team hoặc…</span>
+          </div>
+          <div class="example">
+            <div class="q"><a href="../../../public/pmp/pmp-teach-full-q186.html">Câu 186</a>: Xung đột. <strong>PM làm gì?</strong></div>
+            <span class="opt ok">B. Publish the team issue resolution process on information radiators so both teams can access and… ✓</span>
+            <span class="opt bad">Tập trung &quot;facilitate retrospective / phân tích root cause&quot; không giải quyết xung đột trong team hoặc stakeholder — đáp án đúng…</span>
+            <span class="opt bad">&quot;Assign a dedicated liaison between the two teams to manage cross-team issue commun…&quot; không phù hợp xung đột trong team hoặc…</span>
+            <span class="opt bad">&quot;Establish a weekly cross-team coordination meeting to surface and address ongoing …&quot; không phù hợp xung đột trong team hoặc…</span>
           </div>
           <div class="card danger"><strong>Trap:</strong> Copy megaproject ceremony · or zero governance</div>
         </article>

@@ -8,6 +8,7 @@
 const fs = require("fs");
 const path = require("path");
 const { EXAMPLES } = require("./lib/pmp-pattern-examples");
+const { renderDrills } = require("./lib/pmp-drill-from-explanation");
 
 const ROOT = path.join(__dirname, "..");
 const PACK = path.join(ROOT, "data", "pmp-luannt115-full-last-wrong-patterns.json");
@@ -265,10 +266,16 @@ function buildHtml({ assetPrefix, cssHref, fullscreenHref }) {
     .map((p, i) => {
       const fam =
         FAMILIES.find((f) => f.ids.includes(p.id))?.label || "Other";
+      const ex = EXAMPLES[p.id];
+      const sitRaw = ex
+        ? ex.stem.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+        : p.cue;
+      const act = ex ? ex.do : p.action;
       return `              <tr>
                 <td><a href="#p-${p.id}"><strong>${i + 1}. ${esc(shortTitle(p.title))}</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">${esc(fam)} · n=${p.count}</span></td>
-                <td>${esc(p.cue)}</td>
-                <td>${esc(p.action)}</td>
+                <td>${esc(sitRaw)}<br><span style="font-size:0.72rem;color:var(--muted)">${esc(p.cue)}</span></td>
+                <td>${esc(act)}</td>
+                <td style="font-size:0.78rem">${esc(p.trap)}</td>
                 <td>
                   ${idChips(p.sampleIds, 3, qPrefix)}
                 </td>
@@ -312,10 +319,12 @@ function buildHtml({ assetPrefix, cssHref, fullscreenHref }) {
           : ex
             ? `<div class="card tip">${exampleBody}</div>`
             : "";
+        const drillsHtml = renderDrills(p.sampleIds, { qPrefix, esc });
         return `        <article class="pattern-block" id="p-${p.id}">
           <h3>${esc(p.title)} <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· ${p.count} câu · hard ${p.hard} · open ${p.open}</span></h3>
           <div class="rule">${esc(p.cue)}  →  ${esc(p.action)}</div>
           ${tipHtml}
+${drillsHtml}
           <div class="card danger"><strong>Trap:</strong> ${esc(p.trap)}</div>
         </article>`;
       })
@@ -364,6 +373,13 @@ ${buttons}
     .pattern-block h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
     .fam-note { font-size: 0.85rem; color: var(--muted); margin: 0 0 1rem; }
     table td { vertical-align: top; font-size: 0.84rem; }
+    .example { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; margin: 0.75rem 0; }
+    .example .q { font-weight: 600; margin-bottom: 0.45rem; font-size: 0.92rem; }
+    .example .opt { display: block; font-size: 0.84rem; margin: 0.2rem 0; padding: 0.2rem 0; }
+    .example .opt.ok { color: var(--ok, #166534); }
+    .example .opt.bad { color: var(--muted); }
+    .example .opt.bad::before { content: "✗ "; color: var(--bad, #b91c1c); }
+    .example .opt.ok::before { content: ""; }
   </style>
 </head>
 <body>
@@ -407,7 +423,8 @@ ${familyNav}
             (${s.openWrong} đang mở · ${s.closed} đã đúng lại).
             Taxonomy v${s.taxonomyVersion}: <strong>không ép 8 bucket</strong> —
             ${s.patternCount} trap-pattern cụ thể + ${other.count} mixed (${s.otherPct}%).
-            Mỗi pattern có <strong>ví dụ tình huống</strong> (cue → làm gì → tránh gì).
+            Mỗi pattern có <strong>ví dụ tình huống</strong> và
+            <strong>mini-drill từng câu mẫu</strong> (đáp án đúng + vì sao sai).
           </p>
           <div class="stat-grid">
             <div class="stat-box"><strong>${s.total}</strong><span>từng sai</span></div>
@@ -427,22 +444,25 @@ ${familyNav}
           <h2>Bản đồ ${s.patternCount} pattern</h2>
           <div class="card info">
             <p style="margin:0" class="fam-note">
-              Review: 415 câu ≠ 8 mental model. Gom theo <em>trap / action</em> (resilience, OPA, money, agile…)
-              — khớp trước trên stem+đáp án đúng, fallback options chỉ khi chưa match.
+              Mỗi dòng = <strong>tình huống đề → hành động đúng → tránh gì</strong>
+              (cùng logic bài giảng FIRST / NEXT / BEST).
+              Keyword nhỏ dưới tình huống để scan nhanh.
+              Review: 415 câu ≠ 8 mental model — khớp trap/action trước trên stem+đáp án đúng.
               Khác <a href="${assetPrefix}pmp-teach-sai1-patterns.html">Sai:1</a> (wrongAttempt=1):
               đây là <strong>toàn bộ lịch sử từng sai</strong>.
             </p>
           </div>
           <table>
             <thead>
-              <tr><th>Pattern</th><th>Cue</th><th>Hành động đúng</th><th>ID cứng (LWA)</th></tr>
+              <tr><th>Pattern</th><th>Tình huống</th><th>Hành động đúng</th><th>Tránh</th><th>ID cứng (LWA)</th></tr>
             </thead>
             <tbody>
 ${mapRows}
               <tr>
                 <td><a href="#other"><strong>Other / mixed</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">n=${other.count}</span></td>
-                <td>edge / multi-signal</td>
+                <td>Edge / multi-signal — không nhồi bucket giả</td>
                 <td>Ôn qua index LWA ↓ + bài giảng từng câu</td>
+                <td>Ép vào 1 named pattern</td>
                 <td>${idChips(other.sampleIds, 3, qPrefix)}</td>
               </tr>
             </tbody>
