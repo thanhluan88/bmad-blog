@@ -190,14 +190,20 @@ function buildHtml(data, { assetPrefix, cssHref, fullscreenHref }) {
     .join("\n");
 
   const mapRows = sorted
-    .map(
-      (p, i) => `              <tr>
+    .map((p, i) => {
+      const ex = EXAMPLES[p.id];
+      const sitRaw = ex
+        ? ex.stem.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+        : p.cue;
+      const act = ex ? ex.do : p.action;
+      return `              <tr>
                 <td><a href="#p-${p.id}"><strong>${i + 1}. ${esc(shortTitle(p.title))}</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">n=${p.count}${p.open ? ` · open ${p.open}` : ""}</span></td>
-                <td>${esc(p.cue)}</td>
-                <td>${esc(p.action)}</td>
+                <td>${esc(sitRaw)}<br><span style="font-size:0.72rem;color:var(--muted)">${esc(p.cue)}</span></td>
+                <td>${esc(act)}</td>
+                <td style="font-size:0.78rem">${esc(p.trap)}</td>
                 <td>${idChips(p.sampleIds, 3, qPrefix)}</td>
-              </tr>`,
-    )
+              </tr>`;
+    })
     .join("\n");
 
   const familySections = familiesWithContent
@@ -404,20 +410,23 @@ ${familyNav}
           <h2>Bản đồ pattern (count ↓)</h2>
           <div class="card info">
             <p style="margin:0" class="fam-note">
-              Cùng taxonomy với LWA/Sai:1 remediation — nhưng cover <strong>mọi câu</strong> trong ngân hàng.
-              Click mẫu ID → bài giảng Full Bank; sau đó drill quiz.
+              Mỗi dòng = <strong>tình huống đề → hành động đúng → tránh gì</strong>
+              (cùng logic bài giảng FIRST / NEXT / BEST).
+              Keyword nhỏ dưới tình huống để scan nhanh.
+              Click pattern / mẫu ID → chi tiết + drill.
             </p>
           </div>
           <table>
             <thead>
-              <tr><th>Pattern</th><th>Cue</th><th>Hành động đúng</th><th>Mẫu ID</th></tr>
+              <tr><th>Pattern</th><th>Tình huống</th><th>Hành động đúng</th><th>Tránh</th><th>Mẫu ID</th></tr>
             </thead>
             <tbody>
 ${mapRows}
               <tr>
                 <td><a href="#other"><strong>Other / mixed</strong></a><br><span style="font-size:0.72rem;color:var(--muted)">n=${other.count}</span></td>
-                <td>edge / multi-signal</td>
+                <td>Edge / multi-signal — không nhồi bucket giả</td>
                 <td>Ôn qua index Full Bank + teach từng câu</td>
+                <td>Ép vào 1 named pattern</td>
                 <td>${idChips(other.sampleIds, 3, qPrefix)}</td>
               </tr>
             </tbody>
