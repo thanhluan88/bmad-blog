@@ -8,6 +8,7 @@
 const fs = require("fs");
 const path = require("path");
 const { EXAMPLES } = require("./lib/pmp-pattern-examples");
+const { getDrill } = require("./lib/pmp-drill-from-explanation");
 
 const ROOT = path.join(__dirname, "..");
 const PACK = path.join(ROOT, "data", "pmp-full-bank-patterns.json");
@@ -173,6 +174,28 @@ function idChips(samples, limit = 4, qPrefix = "") {
     .join("\n                  ");
 }
 
+/** Lecture-style mini-drill for each sample ID (up to 5 per pattern). */
+function renderDrills(sampleIds, qPrefix = "") {
+  const blocks = (sampleIds || [])
+    .slice(0, 5)
+    .map((s) => {
+      const d = getDrill(s.id);
+      if (!d) return "";
+      const wrongHtml = (d.wrongs || [])
+        .map((w) => `            <span class="opt bad">${esc(w.text)}</span>`)
+        .join("\n");
+      return `          <div class="example">
+            <div class="q"><a href="${qPrefix}pmp-teach-full-q${d.id}.html">Câu ${d.id}</a>: ${esc(d.tinhHuong)}. <strong>PM ${esc(d.ask)}?</strong></div>
+            <span class="opt ok">${esc(d.correctLetter)}. ${esc(d.correctText)} ✓</span>
+${wrongHtml}
+          </div>`;
+    })
+    .filter(Boolean);
+  if (!blocks.length) return "";
+  return `          <h4 style="margin:0.75rem 0 0.35rem;font-size:0.85rem;color:var(--muted)">Drill từng câu mẫu</h4>
+${blocks.join("\n")}`;
+}
+
 function buildHtml(data, { assetPrefix, cssHref, fullscreenHref }) {
   const qPrefix = assetPrefix;
   const byId = Object.fromEntries(data.patterns.map((p) => [p.id, p]));
@@ -237,10 +260,12 @@ function buildHtml(data, { assetPrefix, cssHref, fullscreenHref }) {
             : ex
               ? `<div class="card tip">${exampleBody}</div>`
               : "";
+          const drillsHtml = renderDrills(p.sampleIds, qPrefix);
           return `        <article class="pattern-block" id="p-${p.id}">
           <h3>${esc(p.title)} <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· ${p.count} câu${p.open ? ` · ${p.open} đang mở` : ""}</span></h3>
           <div class="rule">${esc(p.cue)}  →  ${esc(p.action)}</div>
           ${tipHtml}
+${drillsHtml}
           <div class="card danger"><strong>Trap:</strong> ${esc(p.trap)}</div>
         </article>`;
         })
@@ -388,7 +413,8 @@ ${familyNav}
           <p class="lead">
             Phân tích <strong>${s.total} câu</strong> Full Bank theo taxonomy PMI trap v${s.taxonomyVersion}
             (<strong>${s.patternCount} named + other</strong> — ${other.count} mixed · ${s.otherPct}%).
-            Học map keyword → hành động. Mỗi pattern có <strong>ví dụ tình huống</strong>.
+            Học map keyword → hành động. Mỗi pattern có <strong>ví dụ tình huống</strong>
+            và <strong>mini-drill từng câu mẫu</strong> (đáp án đúng + vì sao sai).
             Dùng <a href="#next-heuristics">NEXT heuristics</a> khi stem hỏi bước tiếp theo.
             Overlay open/hard từ snapshot LWA khi có.
           </p>
