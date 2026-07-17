@@ -266,11 +266,9 @@ ${buttons}
     .map((p) => {
       const ex = EXAMPLES[p.id];
       const action = ex ? ex.do.replace(/<[^>]+>/g, "") : p.action;
-      const cue = p.cue.length > 36 ? p.cue.slice(0, 36) + "…" : p.cue;
-      const act = action.length > 52 ? action.slice(0, 52) + "…" : action;
-      return `IF ${cue.padEnd(38)} → ${act}`;
+      return `IF ${p.cue} → ${action}`;
     })
-    .concat([`IF other / mixed                            → open Q teach · don’t force bucket`])
+    .concat([`IF other / mixed → open Q teach · don’t force bucket`])
     .join("\n");
 
   const famIdsJson = JSON.stringify(familiesWithContent.map((f) => f.id));
