@@ -271,6 +271,54 @@ ${buttons}
     .concat([`IF other / mixed → open Q teach · don’t force bucket`])
     .join("\n");
 
+  /** Lecture-style NEXT table: curated first rows + top bank patterns. */
+  const NEXT_CORE = [
+    {
+      sit: "Risk đã materialize",
+      next: "Tra risk register → implement planned response",
+      href: "#p-risk-cadence",
+    },
+    {
+      sit: "Đã nghe 2 bên conflict",
+      next: "Facilitate joint problem-solving session",
+      href: "#p-coach-conflict",
+    },
+    {
+      sit: "Change request submitted",
+      next: "Perform Integrated Change Control",
+      href: "#p-change-control",
+    },
+    {
+      sit: "Sprint có impediment",
+      next: "Remove impediment / escalate nếu PM không giải quyết được",
+      href: "#p-agile-mvp",
+    },
+  ];
+  const nextCoreIds = new Set([
+    "risk-cadence",
+    "coach-conflict",
+    "change-control",
+    "agile-mvp",
+  ]);
+  const nextExtraRows = sorted
+    .filter((p) => !nextCoreIds.has(p.id) && EXAMPLES[p.id])
+    .slice(0, 10)
+    .map((p) => {
+      const ex = EXAMPLES[p.id];
+      const sit = esc(ex.stem.replace(/&lt;/g, "<").replace(/&gt;/g, ">"));
+      return `              <tr>
+                <td><a href="#p-${p.id}">${sit}</a></td>
+                <td>${esc(ex.do)}</td>
+              </tr>`;
+    })
+    .join("\n");
+  const nextCoreRows = NEXT_CORE.map(
+    (r) => `              <tr>
+                <td><a href="${r.href}">${esc(r.sit)}</a></td>
+                <td>${esc(r.next)}</td>
+              </tr>`,
+  ).join("\n");
+
   const famIdsJson = JSON.stringify(familiesWithContent.map((f) => f.id));
   const namedWithCount = sorted.length;
 
@@ -287,6 +335,13 @@ ${buttons}
     .pattern-block h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
     .fam-note { font-size: 0.85rem; color: var(--muted); margin: 0 0 1rem; }
     table td { vertical-align: top; font-size: 0.84rem; }
+    .example { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; margin: 0.75rem 0; }
+    .example .q { font-weight: 600; margin-bottom: 0.45rem; font-size: 0.92rem; }
+    .example .opt { display: block; font-size: 0.84rem; margin: 0.2rem 0; padding: 0.2rem 0; }
+    .example .opt.ok { color: var(--ok, #166534); }
+    .example .opt.bad { color: var(--muted); }
+    .example .opt.bad::before { content: "✗ "; color: var(--bad, #b91c1c); }
+    .example .opt.ok::before { content: ""; }
   </style>
 </head>
 <body>
@@ -299,6 +354,7 @@ ${buttons}
         <a href="#map">Bản đồ pattern</a>
 ${familyNav}
         <a href="#other">Other / mixed</a>
+        <a href="#next-heuristics">NEXT heuristics</a>
         <a href="#practice">Luyện ${QUIZ.length} câu</a>
         <a href="#cheat">Cheat sheet</a>
         <a href="#next">Next</a>
@@ -314,6 +370,7 @@ ${familyNav}
       <nav class="mobile-nav">
         <a href="#intro">Intro</a>
         <a href="#map">Map</a>
+        <a href="#next-heuristics">NEXT</a>
         <a href="#practice">Quiz</a>
         <a href="#cheat">Cheat</a>
         <a href="${assetPrefix}pmp-exam-prep-lecture.html#practice-teach">Lecture</a>
@@ -325,7 +382,8 @@ ${familyNav}
           <p class="lead">
             Phân tích <strong>${s.total} câu</strong> Full Bank theo taxonomy PMI trap v${s.taxonomyVersion}
             (<strong>${s.patternCount} named + other</strong> — ${other.count} mixed · ${s.otherPct}%).
-            Học map keyword → hành động. Mỗi pattern có <strong>ví dụ tình huống</strong> (cue → làm gì → tránh gì).
+            Học map keyword → hành động. Mỗi pattern có <strong>ví dụ tình huống</strong>.
+            Dùng <a href="#next-heuristics">NEXT heuristics</a> khi stem hỏi bước tiếp theo.
             Overlay open/hard từ snapshot LWA khi có.
           </p>
           <div class="stat-grid">
@@ -393,6 +451,49 @@ ${familySections}
           </div>
         </section>
 
+        <section id="next-heuristics">
+          <h2>NEXT — “Bước TIẾP THEO?”</h2>
+          <p class="fam-note">
+            Giả định bạn <strong>đã làm bước trước</strong>. Tìm artifact đã có — rồi chọn NEXT đúng.
+            Cùng khung với <a href="${assetPrefix}pmp-exam-prep-lecture.html#practice-teach">bài giảng Practice</a>.
+          </p>
+          <table>
+            <thead><tr><th>Tình huống</th><th>NEXT đúng</th></tr></thead>
+            <tbody>
+${nextCoreRows}
+${nextExtraRows}
+            </tbody>
+          </table>
+
+          <div class="example">
+            <div class="q"><a href="${qPrefix}pmp-full-questions.html#q-7">Câu 7</a>: 2 engineer conflict, PM đã nghe riêng từng bên. <strong>Next?</strong></div>
+            <span class="opt ok">B. Facilitate joint problem-solving session ✓</span>
+            <span class="opt bad">Escalate manager — chưa thử facilitate</span>
+            <span class="opt bad">Chọn 1 phương án cho team — không empowered</span>
+          </div>
+
+          <div class="example">
+            <div class="q">Risk đã materialize (đã có trong register). <strong>Next?</strong></div>
+            <span class="opt ok">Tra risk register → implement planned response ✓</span>
+            <span class="opt bad">Invent giải pháp mới — bỏ qua response đã plan</span>
+            <span class="opt bad">Chỉ mở lessons learned — chưa act trên risk hiện tại</span>
+          </div>
+
+          <div class="example">
+            <div class="q">Change request đã submitted. <strong>Next?</strong></div>
+            <span class="opt ok">Perform Integrated Change Control (impact → CR/CCB) ✓</span>
+            <span class="opt bad">Absorb scope vì “có value” — silent change</span>
+            <span class="opt bad">Team làm luôn trong sprint — bỏ qua baseline</span>
+          </div>
+
+          <div class="example">
+            <div class="q">Sprint có impediment / blocker. <strong>Next?</strong></div>
+            <span class="opt ok">Remove impediment / escalate nếu PM không tự giải quyết được ✓</span>
+            <span class="opt bad">Team tự hấp thụ thêm work mid-sprint</span>
+            <span class="opt bad">Đợi retrospective mới bàn — quá muộn</span>
+          </div>
+        </section>
+
         <section id="practice">
           <h2>Luyện ${QUIZ.length} câu (retrieval)</h2>
           <p class="flash-hint">Options cân độ dài. Chọn → feedback ngay.</p>
@@ -457,7 +558,7 @@ ${quizHtml}
       },
       { rootMargin: "-40% 0px -50% 0px", threshold: 0 },
     );
-    ["intro","map",...${famIdsJson},"other","practice","cheat","next"]
+    ["intro","map",...${famIdsJson},"other","next-heuristics","practice","cheat","next"]
       .forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
   </script>
 </body>

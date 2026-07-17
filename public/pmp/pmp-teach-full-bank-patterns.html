@@ -11,6 +11,13 @@
     .pattern-block h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
     .fam-note { font-size: 0.85rem; color: var(--muted); margin: 0 0 1rem; }
     table td { vertical-align: top; font-size: 0.84rem; }
+    .example { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; margin: 0.75rem 0; }
+    .example .q { font-weight: 600; margin-bottom: 0.45rem; font-size: 0.92rem; }
+    .example .opt { display: block; font-size: 0.84rem; margin: 0.2rem 0; padding: 0.2rem 0; }
+    .example .opt.ok { color: var(--ok, #166534); }
+    .example .opt.bad { color: var(--muted); }
+    .example .opt.bad::before { content: "✗ "; color: var(--bad, #b91c1c); }
+    .example .opt.ok::before { content: ""; }
   </style>
 </head>
 <body>
@@ -26,6 +33,7 @@
         <a href="#fam-value">Money &amp; governance</a>
         <a href="#fam-engage">Engage &amp; tailor</a>
         <a href="#other">Other / mixed</a>
+        <a href="#next-heuristics">NEXT heuristics</a>
         <a href="#practice">Luyện 6 câu</a>
         <a href="#cheat">Cheat sheet</a>
         <a href="#next">Next</a>
@@ -41,6 +49,7 @@
       <nav class="mobile-nav">
         <a href="#intro">Intro</a>
         <a href="#map">Map</a>
+        <a href="#next-heuristics">NEXT</a>
         <a href="#practice">Quiz</a>
         <a href="#cheat">Cheat</a>
         <a href="pmp-exam-prep-lecture.html#practice-teach">Lecture</a>
@@ -52,7 +61,8 @@
           <p class="lead">
             Phân tích <strong>1123 câu</strong> Full Bank theo taxonomy PMI trap v2
             (<strong>26 named + other</strong> — 281 mixed · 25%).
-            Học map keyword → hành động. Mỗi pattern có <strong>ví dụ tình huống</strong> (cue → làm gì → tránh gì).
+            Học map keyword → hành động. Mỗi pattern có <strong>ví dụ tình huống</strong>.
+            Dùng <a href="#next-heuristics">NEXT heuristics</a> khi stem hỏi bước tiếp theo.
             Overlay open/hard từ snapshot LWA khi có.
           </p>
           <div class="stat-grid">
@@ -354,8 +364,8 @@
           <h3>Coach conflict — không làm hộ <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 15 câu · 1 đang mở</span></h3>
           <div class="rule">privately struggling with teammate · interpersonal conflict  →  Coach conflict-resolution techniques; facilitate</div>
           <div class="card tip">
-            <strong>Ví dụ:</strong> Hai người xung đột cá nhân; một người đến hỏi PM ‘xử giúp’.
-            <br><strong>→ Làm:</strong> Coach kỹ thuật giải quyết xung đột; facilitate — không làm hộ / đứng phe.
+            <strong>Ví dụ:</strong> 2 engineer conflict; PM đã nghe riêng từng bên.
+            <br><strong>→ Làm:</strong> Facilitate joint problem-solving session — không escalate sớm / không chọn hộ.
             <br><strong>Tránh:</strong> PM takes sides / punish / ignore / solve for them
             <div style="margin-top:0.45rem;font-size:0.8rem">
               Mẫu:
@@ -454,8 +464,8 @@
           <h3>Risk cadence — register &amp; response <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 58 câu · 6 đang mở</span></h3>
           <div class="rule">risk materialized · new law · risk in reports · reserve  →  Implement planned response · identify/assess · include in reports</div>
           <div class="card tip">
-            <strong>Ví dụ:</strong> Risk đã xảy ra / luật mới / risk không nằm trong báo cáo.
-            <br><strong>→ Làm:</strong> Thực hiện response đã lên kế hoạch; identify/assess; đưa risk vào reports.
+            <strong>Ví dụ:</strong> Risk đã materialize / luật mới / risk thiếu trong báo cáo.
+            <br><strong>→ Làm:</strong> Tra risk register → implement planned response; identify/assess nếu mới.
             <br><strong>Tránh:</strong> Invent new ritual · ignore register · lessons instead of act
             <div style="margin-top:0.45rem;font-size:0.8rem">
               Mẫu:
@@ -470,8 +480,8 @@
           <h3>Change control / ICC <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 87 câu · 10 đang mở</span></h3>
           <div class="rule">out of baseline · unauthorized work · new feature request · CCB  →  Stop unauthorized if needed → impact → formal CR/CCB</div>
           <div class="card tip">
-            <strong>Ví dụ:</strong> Ai đó đã làm việc ngoài baseline / yêu cầu feature mới lớn.
-            <br><strong>→ Làm:</strong> Dừng unauthorized nếu cần → đánh giá impact → CR/CCB chính thức.
+            <strong>Ví dụ:</strong> Change request đã submit / work ngoài baseline / feature mới lớn.
+            <br><strong>→ Làm:</strong> Impact assessment → Integrated Change Control (CR/CCB) — không absorb im lặng.
             <br><strong>Tránh:</strong> Absorb scope because 'value' · silent add · informal list
             <div style="margin-top:0.45rem;font-size:0.8rem">
               Mẫu:
@@ -702,8 +712,8 @@
           <h3>Agile MVP / backlog / iteration protect <span style="font-weight:500;color:var(--muted);font-size:0.9rem">· 89 câu · 7 đang mở</span></h3>
           <div class="rule">MVP · mid-iteration · PO absent · backlog · sprint review  →  PO owns backlog · ship MVP · protect iteration · workshop AC</div>
           <div class="card tip">
-            <strong>Ví dụ:</strong> Giữa sprint, SH đòi thêm feature; PO vắng; team muốn ‘làm luôn’.
-            <br><strong>→ Làm:</strong> PO sở hữu backlog; bảo vệ iteration; ship MVP; workshop AC — không hấp thụ mid-sprint.
+            <strong>Ví dụ:</strong> Sprint có impediment / SH đòi thêm mid-iteration; PO vắng.
+            <br><strong>→ Làm:</strong> Remove impediment (escalate nếu cần); PO owns backlog; bảo vệ iteration — không hấp thụ mid-sprint.
             <br><strong>Tránh:</strong> Team absorbs mid-sprint · wait perfect · skip PO
             <div style="margin-top:0.45rem;font-size:0.8rem">
               Mẫu:
@@ -744,6 +754,103 @@
           <div class="card tip">
             Mẫu:
             <a class="id-chip" href="pmp-teach-full-q9.html">9</a> <a class="id-chip" href="pmp-teach-full-q11.html">11</a> <a class="id-chip" href="pmp-teach-full-q16.html">16</a> <a class="id-chip" href="pmp-teach-full-q17.html">17</a> <a class="id-chip" href="pmp-teach-full-q18.html">18</a> <a class="id-chip" href="pmp-teach-full-q19.html">19</a> <a class="id-chip" href="pmp-teach-full-q20.html">20</a> <a class="id-chip" href="pmp-teach-full-q21.html">21</a> <a class="id-chip" href="pmp-teach-full-q25.html">25</a> <a class="id-chip" href="pmp-teach-full-q26.html">26</a>
+          </div>
+        </section>
+
+        <section id="next-heuristics">
+          <h2>NEXT — “Bước TIẾP THEO?”</h2>
+          <p class="fam-note">
+            Giả định bạn <strong>đã làm bước trước</strong>. Tìm artifact đã có — rồi chọn NEXT đúng.
+            Cùng khung với <a href="pmp-exam-prep-lecture.html#practice-teach">bài giảng Practice</a>.
+          </p>
+          <table>
+            <thead><tr><th>Tình huống</th><th>NEXT đúng</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><a href="#p-risk-cadence">Risk đã materialize</a></td>
+                <td>Tra risk register → implement planned response</td>
+              </tr>
+              <tr>
+                <td><a href="#p-coach-conflict">Đã nghe 2 bên conflict</a></td>
+                <td>Facilitate joint problem-solving session</td>
+              </tr>
+              <tr>
+                <td><a href="#p-change-control">Change request submitted</a></td>
+                <td>Perform Integrated Change Control</td>
+              </tr>
+              <tr>
+                <td><a href="#p-agile-mvp">Sprint có impediment</a></td>
+                <td>Remove impediment / escalate nếu PM không giải quyết được</td>
+              </tr>
+              <tr>
+                <td><a href="#p-money-forecast">CPI &lt; 1; sponsor hỏi chi phí đến cuối dự án / vendor cần đóng hợp đồng.</a></td>
+                <td>Cập nhật forecast / EAC, hành động theo EVM; đóng contract khi admin-complete.</td>
+              </tr>
+              <tr>
+                <td><a href="#p-opa-improve">Ước lượng lệch mãi / policy mơ hồ / nhiều change đã xong nhưng không rút bài học.</a></td>
+                <td>Cập nhật OPA, template, rewrite policy — hành động được, không chỉ archive.</td>
+              </tr>
+              <tr>
+                <td><a href="#p-verify-scope">Team bảo ‘xong rồi’ vì đúng hạn; sponsor chưa confirm acceptance.</a></td>
+                <td>Review scope / requirements / acceptance criteria trước khi claim success.</td>
+              </tr>
+              <tr>
+                <td><a href="#p-hybrid-tailor">Dự án nhỏ/low-risk nhưng bị ép copy nghi thức megaproject (hoặc zero governance).</a></td>
+                <td>Tailor vừa đủ; hybrid OK; ước lượng adaptive khi bất định.</td>
+              </tr>
+              <tr>
+                <td><a href="#p-adapt-comms">Team đa văn hóa / virtual; ai đó không đọc email dài.</a></td>
+                <td>Đổi kênh/phương pháp theo preference; giao thức nhạy văn hóa — không blast one-size.</td>
+              </tr>
+              <tr>
+                <td><a href="#p-team-stage">Storming, cãi nhau to / workspace ồn / thiếu ownership.</a></td>
+                <td>Map Tuckman stage; EI/self-reg; PM sở hữu môi trường; facilitate ownership.</td>
+              </tr>
+              <tr>
+                <td><a href="#p-governance-roles">Không rõ ai quyết; steering sắp họp; RACI/RAM mơ hồ.</a></td>
+                <td>Làm rõ roles (RAM); chuẩn bị evidence governance; decision log.</td>
+              </tr>
+              <tr>
+                <td><a href="#p-engage-plan">SH kháng cự / xung đột lợi ích; PM muốn escalate ngay theo cảm tính.</a></td>
+                <td>Xem engagement plan; engage đúng chiến lược đã ghi — không freestyle.</td>
+              </tr>
+              <tr>
+                <td><a href="#p-competency-develop">Intern / skill gap / onboarding yếu; delivery chậm vì thiếu năng lực.</a></td>
+                <td>Gap analysis + develop/remediate (HR/mentor) — không blame/fire trước.</td>
+              </tr>
+              <tr>
+                <td><a href="#p-transparency-news">Tin xấu / rumor / layoff; morale sụp; thông tin còn thiếu.</a></td>
+                <td>Chia sẻ facts đã biết + tạo thảo luận mở — không im lặng hay hứa chắc chắn giả.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="example">
+            <div class="q"><a href="pmp-full-questions.html#q-7">Câu 7</a>: 2 engineer conflict, PM đã nghe riêng từng bên. <strong>Next?</strong></div>
+            <span class="opt ok">B. Facilitate joint problem-solving session ✓</span>
+            <span class="opt bad">Escalate manager — chưa thử facilitate</span>
+            <span class="opt bad">Chọn 1 phương án cho team — không empowered</span>
+          </div>
+
+          <div class="example">
+            <div class="q">Risk đã materialize (đã có trong register). <strong>Next?</strong></div>
+            <span class="opt ok">Tra risk register → implement planned response ✓</span>
+            <span class="opt bad">Invent giải pháp mới — bỏ qua response đã plan</span>
+            <span class="opt bad">Chỉ mở lessons learned — chưa act trên risk hiện tại</span>
+          </div>
+
+          <div class="example">
+            <div class="q">Change request đã submitted. <strong>Next?</strong></div>
+            <span class="opt ok">Perform Integrated Change Control (impact → CR/CCB) ✓</span>
+            <span class="opt bad">Absorb scope vì “có value” — silent change</span>
+            <span class="opt bad">Team làm luôn trong sprint — bỏ qua baseline</span>
+          </div>
+
+          <div class="example">
+            <div class="q">Sprint có impediment / blocker. <strong>Next?</strong></div>
+            <span class="opt ok">Remove impediment / escalate nếu PM không tự giải quyết được ✓</span>
+            <span class="opt bad">Team tự hấp thụ thêm work mid-sprint</span>
+            <span class="opt bad">Đợi retrospective mới bàn — quá muộn</span>
           </div>
         </section>
 
@@ -814,10 +921,10 @@
         <section id="cheat">
           <h2>Cheat sheet (cue → hành động)</h2>
           <div class="cheat-sheet">IF budget forward · CPI/SPI · EAC · vendor · unpaid → Cập nhật forecast / EAC, hành động theo EVM; đóng contract khi admin-complete.
-IF MVP · mid-iteration · PO absent · backlog · sprint review → PO sở hữu backlog; bảo vệ iteration; ship MVP; workshop AC — không hấp thụ mid-sprint.
-IF out of baseline · unauthorized work · new feature request · CCB → Dừng unauthorized nếu cần → đánh giá impact → CR/CCB chính thức.
+IF MVP · mid-iteration · PO absent · backlog · sprint review → Remove impediment (escalate nếu cần); PO owns backlog; bảo vệ iteration — không hấp thụ mid-sprint.
+IF out of baseline · unauthorized work · new feature request · CCB → Impact assessment → Integrated Change Control (CR/CCB) — không absorb im lặng.
 IF estimation bias · vague policy · many changes delivered · lessons → Cập nhật OPA, template, rewrite policy — hành động được, không chỉ archive.
-IF risk materialized · new law · risk in reports · reserve → Thực hiện response đã lên kế hoạch; identify/assess; đưa risk vào reports.
+IF risk materialized · new law · risk in reports · reserve → Tra risk register → implement planned response; identify/assess nếu mới.
 IF sponsor confirm done · acceptance criteria · close check → Review scope / requirements / acceptance criteria trước khi claim success.
 IF small low-risk · mixed certainty · predictive+agile → Tailor vừa đủ; hybrid OK; ước lượng adaptive khi bất định.
 IF preferred channel · multicultural · virtual · language → Đổi kênh/phương pháp theo preference; giao thức nhạy văn hóa — không blast one-size.
@@ -826,7 +933,7 @@ IF steering review · RACI/RAM · decision authority · unclear duty → Làm r�
 IF resistant stakeholder · conflict interests · power/interest → Xem engagement plan; engage đúng chiến lược đã ghi — không freestyle.
 IF interns · skill gap · training needs · onboarding → Gap analysis + develop/remediate (HR/mentor) — không blame/fire trước.
 IF layoff · incomplete info · rumor · morale crash → Chia sẻ facts đã biết + tạo thảo luận mở — không im lặng hay hứa chắc chắn giả.
-IF privately struggling with teammate · interpersonal conflict → Coach kỹ thuật giải quyết xung đột; facilitate — không làm hộ / đứng phe.
+IF privately struggling with teammate · interpersonal conflict → Facilitate joint problem-solving session — không escalate sớm / không chọn hộ.
 IF other / mixed → open Q teach · don’t force bucket</div>
         </section>
 
@@ -883,7 +990,7 @@ IF other / mixed → open Q teach · don’t force bucket</div>
       },
       { rootMargin: "-40% 0px -50% 0px", threshold: 0 },
     );
-    ["intro","map",...["fam-lead","fam-process","fam-value","fam-engage"],"other","practice","cheat","next"]
+    ["intro","map",...["fam-lead","fam-process","fam-value","fam-engage"],"other","next-heuristics","practice","cheat","next"]
       .forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
   </script>
 </body>

@@ -9,20 +9,20 @@ const EXAMPLES = {
     do: "Cập nhật forecast / EAC, hành động theo EVM; đóng contract khi admin-complete.",
   },
   "agile-mvp": {
-    stem: "Giữa sprint, SH đòi thêm feature; PO vắng; team muốn ‘làm luôn’.",
-    do: "PO sở hữu backlog; bảo vệ iteration; ship MVP; workshop AC — không hấp thụ mid-sprint.",
+    stem: "Sprint có impediment / SH đòi thêm mid-iteration; PO vắng.",
+    do: "Remove impediment (escalate nếu cần); PO owns backlog; bảo vệ iteration — không hấp thụ mid-sprint.",
   },
   "change-control": {
-    stem: "Ai đó đã làm việc ngoài baseline / yêu cầu feature mới lớn.",
-    do: "Dừng unauthorized nếu cần → đánh giá impact → CR/CCB chính thức.",
+    stem: "Change request đã submit / work ngoài baseline / feature mới lớn.",
+    do: "Impact assessment → Integrated Change Control (CR/CCB) — không absorb im lặng.",
   },
   "opa-improve": {
     stem: "Ước lượng lệch mãi / policy mơ hồ / nhiều change đã xong nhưng không rút bài học.",
     do: "Cập nhật OPA, template, rewrite policy — hành động được, không chỉ archive.",
   },
   "risk-cadence": {
-    stem: "Risk đã xảy ra / luật mới / risk không nằm trong báo cáo.",
-    do: "Thực hiện response đã lên kế hoạch; identify/assess; đưa risk vào reports.",
+    stem: "Risk đã materialize / luật mới / risk thiếu trong báo cáo.",
+    do: "Tra risk register → implement planned response; identify/assess nếu mới.",
   },
   "verify-scope": {
     stem: "Team bảo ‘xong rồi’ vì đúng hạn; sponsor chưa confirm acceptance.",
@@ -57,8 +57,8 @@ const EXAMPLES = {
     do: "Chia sẻ facts đã biết + tạo thảo luận mở — không im lặng hay hứa chắc chắn giả.",
   },
   "coach-conflict": {
-    stem: "Hai người xung đột cá nhân; một người đến hỏi PM ‘xử giúp’.",
-    do: "Coach kỹ thuật giải quyết xung đột; facilitate — không làm hộ / đứng phe.",
+    stem: "2 engineer conflict; PM đã nghe riêng từng bên.",
+    do: "Facilitate joint problem-solving session — không escalate sớm / không chọn hộ.",
   },
   resilience: {
     stem: "Timeline + budget căng; SH lo lắng; bất định cao.",
