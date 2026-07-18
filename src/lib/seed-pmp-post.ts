@@ -13,7 +13,7 @@ export const PMP_HUB_POST_CONTENT_MD = `Trang này giúp bạn chọn bộ đề
 
 Trước khi drill hàng trăm câu, nên đọc:
 
-- **[Bài giảng PMP — PMBOK 8](/pmp/pmp-exam-prep-lecture.html)** (bộ Full 1.123 câu): format đề thi, 7 Domains, 6 Principles, Practice & Patterns Full Bank, lộ trình 12 ngày.
+- **[Bài giảng PMP — PMBOK 8](/pmp/pmp-exam-prep-lecture.html)** (bộ Full 1.123 câu): format đề thi, 7 Domains, 6 Principles, Practice & Patterns Full Bank.
 - **[Index bài giảng Full Bank (1.123 câu)](/pmp/pmp-teach-full-series-index.html)** — mỗi câu có phân tích PMBOK 8, quiz, flashcard và cheat sheet.
 - **[50 exam mindset principles](/pmp/pmp-teach-50-principles.html)** — heuristics chọn đáp án tình huống (FIRST/NEXT, CR, PO backlog, servant leader…).
 - **[Pattern Full Bank (26+other)](/pmp/pmp-teach-full-bank-patterns.html)** — trap-pattern PMI trên toàn bộ 1.123 câu.
