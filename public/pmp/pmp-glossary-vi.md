@@ -1080,6 +1080,53 @@
 | **Yếu khi** | Remote / silo / timezone → cần sync formal hơn |
 | **≠** | Gossip vô tổ chức · không thay change control / decision log |
 
+### Sabotage
+| | |
+|---|---|
+| **Nghĩa** | Cố ý phá hoại / làm hỏng tiến độ, kết quả, hoặc quan hệ |
+| **Gần** | Undermine = làm suy yếu trust / transparency / adoption |
+| **≠** | Cản trở vô tình · resistance thông thường |
+
+### Imminent
+| | |
+|---|---|
+| **Nghĩa** | Sắp xảy ra / cận kề |
+| **Ví dụ** | *imminent layoffs* |
+| **≠** | Possible / someday |
+
+### Codify
+| | |
+|---|---|
+| **Nghĩa** | Hệ thống hóa / ghi thành chuẩn (manuals, procedures, OPA) |
+| **Gần** | Explicit knowledge · institutionalize |
+| **≠** | Chỉ share tacit / brainstorm miệng |
+
+### Intertwine
+| | |
+|---|---|
+| **Nghĩa** | Xen kẽ / đan xen — gắn chặt, khó tách |
+| **Ví dụ** | Scope–schedule–cost–risk *intertwined* |
+| **Gần** | Interrelated · holistic view |
+
+### Probe
+| | |
+|---|---|
+| **Nghĩa** | Thăm dò / thử nhỏ trước khi kết luận hoặc scale |
+| **Complexity** | Probe–Sense–Respond (Cynefin Complex) |
+| **Giao tiếp** | Probing questions — hỏi sâu |
+
+### Clash
+| | |
+|---|---|
+| **Nghĩa** | Va chạm / xung đột (người hoặc lịch/resource) |
+| **Ví dụ** | *clash over ownership* · *schedule clashes* |
+
+### Remediate / Remediation
+| | |
+|---|---|
+| **Nghĩa** | Khắc phục / sửa để đạt chuẩn (skill, quality, compliance) |
+| **≠** | Mitigate = giảm risk · Remediate = sửa cái đã lệch chuẩn |
+
 ---
 
 *Tạo từ phiên học từ vựng PMP — có thể bổ sung thêm thuật ngữ khi ôn tiếp.*
