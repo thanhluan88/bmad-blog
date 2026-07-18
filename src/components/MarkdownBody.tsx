@@ -22,7 +22,21 @@ function getYoutubeVideoId(href: string): string | null {
 
 export function MarkdownBody({ content, className = "" }: MarkdownBodyProps) {
   return (
-    <div className={`max-w-none font-sans ${className}`} data-markdown-body>
+    <div
+      className={[
+        "max-w-none font-sans",
+        // list-outside + pl-* so nested lists indent visibly (list-inside collapses nest)
+        "[&>ul]:mb-4 [&>ol]:mb-4",
+        "[&_ul]:list-outside [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-6 [&_ul]:text-muted",
+        "[&_ol]:list-outside [&_ol]:list-decimal [&_ol]:space-y-1 [&_ol]:pl-6 [&_ol]:text-muted",
+        "[&_li>ul]:my-1 [&_li>ol]:my-1",
+        "[&_ul_ul]:list-[circle] [&_ul_ul_ul]:list-[square]",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      data-markdown-body
+    >
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeSanitize]}
@@ -45,14 +59,9 @@ export function MarkdownBody({ content, className = "" }: MarkdownBodyProps) {
               {children}
             </p>
           ),
-          ul: ({ children }) => (
-            <ul className="mb-4 list-inside list-disc space-y-1 text-muted">{children}</ul>
-          ),
-          ol: ({ children }) => (
-            <ol className="mb-4 list-inside list-decimal space-y-1 text-muted">
-              {children}
-            </ol>
-          ),
+          ul: ({ children }) => <ul>{children}</ul>,
+          ol: ({ children }) => <ol>{children}</ol>,
+          li: ({ children }) => <li className="leading-relaxed">{children}</li>,
           code: ({ children, className: langClass }) =>
             langClass ? (
               <code
