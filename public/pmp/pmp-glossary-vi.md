@@ -39,12 +39,12 @@
 | **PMP** | *"reserves are quickly depleted"* → quỹ dự phòng bị dùng hết nhanh |
 | **Đối lập** | Replenish (bổ sung lại) |
 
-### Exposure
+### Exposure / Risk exposure
 | | |
 |---|---|
-| **Nghĩa** | Mức độ phơi nhiễm trước rủi ro/tác động — càng chậm xử lý, exposure càng tăng |
-| **PMP** | Financial exposure, currency exposure, risk exposure |
-| **≠ Impact** | Exposure = đang đứng trong vùng rủi ro; Impact = hậu quả nếu xảy ra |
+| **Nghĩa** | Mức phơi nhiễm / rủi ro còn mở |
+| **≠ Impact** | Impact = hậu quả nếu xảy ra |
+| **≠ Appetite / threshold** | Appetite = sẵn sàng chấp nhận · Threshold = ngưỡng action |
 
 ### Offset
 | | |
@@ -1166,6 +1166,43 @@
 | **Nghĩa** | Memorandum of Agreement — thỏa thuận hợp tác giữa các bên |
 | **Gần** | MOU (Memorandum of Understanding) |
 | **≠** | Full commercial contract / SOW |
+
+### Articulate
+| | |
+|---|---|
+| **Nghĩa** | Diễn đạt rõ / nói thành lời rõ ràng |
+| **Ví dụ** | *clearly articulated business case* · concerns not articulated |
+
+### Discourse
+| | |
+|---|---|
+| **Nghĩa** | Diễn ngôn / thảo luận có chủ đề |
+| **Gần** | Dialogue · discussion |
+| **≠** | Discord = bất hòa |
+
+### Risk appetite
+| | |
+|---|---|
+| **Nghĩa** | Mức sẵn sàng chấp nhận rủi ro (khẩu vị rủi ro) |
+| **≠** | Threshold = ngưỡng cụ thể kích hoạt action |
+
+### Risk threshold
+| | |
+|---|---|
+| **Nghĩa** | Ngưỡng rủi ro — vượt thì phải response / escalate |
+| **Gần** | Risk tolerance |
+
+### Risk exposure
+| | |
+|---|---|
+| **Nghĩa** | Mức phơi nhiễm / rủi ro còn mở |
+| **≠** | Impact · appetite · threshold |
+
+### Terminology
+| | |
+|---|---|
+| **Nghĩa** | Hệ thuật ngữ / cách gọi tên dùng chung |
+| **Gần** | Glossary · common language |
 
 ---
 
