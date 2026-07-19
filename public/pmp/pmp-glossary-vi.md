@@ -1127,6 +1127,46 @@
 | **Nghĩa** | Khắc phục / sửa để đạt chuẩn (skill, quality, compliance) |
 | **≠** | Mitigate = giảm risk · Remediate = sửa cái đã lệch chuẩn |
 
+### Nuanced / Nuances
+| | |
+|---|---|
+| **Nghĩa** | Tinh tế / nhiều sắc thái — khác biệt nhỏ nhưng quan trọng |
+| **Ví dụ** | *cultural nuances* |
+
+### Impartiality
+| | |
+|---|---|
+| **Nghĩa** | Tính công bằng / không thiên vị |
+| **Gần** | Neutral · unbiased · objective |
+| **≠** | Taking sides · favoritism |
+
+### Postmortem(s)
+| | |
+|---|---|
+| **Nghĩa** | Phân tích sau sự cố / thất bại để học cho lần sau |
+| **Gần** | Lessons learned · after-action · retrospective |
+| **≠** | Triage khi sự cố vẫn đang diễn ra |
+
+### Prompt lists
+| | |
+|---|---|
+| **Nghĩa** | Danh sách gợi ý theo chủ đề khi identify risks |
+| **Ví dụ** | PESTLE · TECOP · VUCA |
+| **≠** | Risk register · “prompt” AI |
+
+### VRIO
+| | |
+|---|---|
+| **Nghĩa** | Khung Valuable · Rare · Inimitable · Organized — đánh giá capability / competitive advantage |
+| **≠** | SWOT · PESTLE |
+
+### MOA(s)
+| | |
+|---|---|
+| **Nghĩa** | Memorandum of Agreement — thỏa thuận hợp tác giữa các bên |
+| **Gần** | MOU (Memorandum of Understanding) |
+| **≠** | Full commercial contract / SOW |
+
 ---
 
 *Tạo từ phiên học từ vựng PMP — có thể bổ sung thêm thuật ngữ khi ôn tiếp.*
