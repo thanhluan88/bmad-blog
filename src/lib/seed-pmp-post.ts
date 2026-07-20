@@ -17,9 +17,6 @@ Trước khi drill hàng trăm câu, nên đọc:
 - **[Index bài giảng Full Bank (1.123 câu)](/pmp/pmp-teach-full-series-index.html)** — mỗi câu có phân tích PMBOK 8, quiz, flashcard và cheat sheet.
 - **[50 exam mindset principles](/pmp/pmp-teach-50-principles.html)** — heuristics chọn đáp án tình huống (FIRST/NEXT, CR, PO backlog, servant leader…).
 - **[Pattern Full Bank (26+other)](/pmp/pmp-teach-full-bank-patterns.html)** — trap-pattern PMI trên toàn bộ 1.123 câu.
-- **[26+ pattern từng sai](/pmp/pmp-teach-last-wrong-patterns.html)** — \`lastWrongAttempt >= 1\`, sort giảm dần ([index 415 câu](/pmp/pmp-teach-full-last-wrong-index.html)).
-- **[Pattern Sai:1 (22+other)](/pmp/pmp-teach-sai1-patterns.html)** — ôn mindset từ 135 câu Sai:1 đang mở (Full Bank).
-- **[Index ôn Sai:1 (135 câu)](/pmp/pmp-teach-full-sai1-index.html)** — drill từng câu trong filter Ôn câu sai.
 - **[Bài phân tích ExamTopics](/pmp/pmp-exam-latest-prep-lecture.html)** (bộ Latest 1.417 câu): phân tích *PMP Exam - Lasted version 1*, thống kê domain, FIRST/NEXT, 100 câu đầu có link luyện đề.
 
 ## Hai bộ đề
