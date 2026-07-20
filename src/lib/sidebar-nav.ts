@@ -9,7 +9,7 @@ export type SidebarNavItem = {
   id: string;
   title: string;
   href: string;
-  publishedAt: Date | null;
+  updatedAt: Date;
 };
 
 const SIDEBAR_HREF_OVERRIDES: Record<string, string> = {
@@ -19,8 +19,8 @@ const SIDEBAR_HREF_OVERRIDES: Record<string, string> = {
 export async function getSidebarNavItems(): Promise<SidebarNavItem[]> {
   const posts = await db.post.findMany({
     where: { status: "PUBLISHED" },
-    select: { id: true, title: true, slug: true, publishedAt: true },
-    orderBy: [{ publishedAt: "desc" }, { updatedAt: "desc" }],
+    select: { id: true, title: true, slug: true, updatedAt: true },
+    orderBy: { updatedAt: "desc" },
   });
 
   return posts
@@ -29,6 +29,6 @@ export async function getSidebarNavItems(): Promise<SidebarNavItem[]> {
       id: post.id,
       title: post.title,
       href: SIDEBAR_HREF_OVERRIDES[post.slug] ?? `/p/${post.slug}`,
-      publishedAt: post.publishedAt,
+      updatedAt: post.updatedAt,
     }));
 }

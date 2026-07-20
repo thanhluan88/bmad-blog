@@ -72,17 +72,13 @@ export function SidebarMenu({ items }: Props) {
                       <span className="line-clamp-2 leading-snug">{item.title}</span>
                       <time
                         dateTime={
-                          item.publishedAt
-                            ? typeof item.publishedAt === "string"
-                              ? item.publishedAt
-                              : item.publishedAt.toISOString()
-                            : ""
+                          typeof item.updatedAt === "string"
+                            ? item.updatedAt
+                            : item.updatedAt.toISOString()
                         }
                         className="mt-1 block text-xs text-muted"
                       >
-                        {item.publishedAt
-                          ? formatUpdatedAt(item.publishedAt)
-                          : "Chưa có ngày"}
+                        {formatUpdatedAt(item.updatedAt)}
                       </time>
                     </Link>
                   </li>
