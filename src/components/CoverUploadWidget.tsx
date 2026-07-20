@@ -9,6 +9,7 @@ type CoverUploadWidgetProps = {
   postId: string;
   initialCoverUrl?: string | null;
   onCoverAttached: (objectPath: string, publicUrl: string) => void;
+  onCoverRemoved?: () => void;
   /** When false, upload is disabled and a setup hint is shown */
   uploadConfigured?: boolean;
 };
@@ -19,6 +20,7 @@ export function CoverUploadWidget({
   postId,
   initialCoverUrl,
   onCoverAttached,
+  onCoverRemoved,
   uploadConfigured = true,
 }: CoverUploadWidgetProps) {
   const [state, setState] = useState<UploadState>(initialCoverUrl ? "success" : "idle");
@@ -84,6 +86,13 @@ export function CoverUploadWidget({
     fileInputRef.current?.click();
   };
 
+  const handleRemove = () => {
+    setCoverUrl(null);
+    setState("idle");
+    setErrorMessage(null);
+    onCoverRemoved?.();
+  };
+
   if (!uploadConfigured) {
     return (
       <div className="space-y-2">
@@ -141,13 +150,24 @@ export function CoverUploadWidget({
             </>
           )}
           {(state === "idle" || state === "success") && (
-            <button
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-              className="rounded-md border border-zinc-300 px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800 disabled:opacity-50"
-            >
-              {state === "success" ? "カバーを変更" : "カバーをアップロード"}
-            </button>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="rounded-md border border-zinc-300 px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800 disabled:opacity-50"
+              >
+                {state === "success" ? "カバーを変更" : "カバーをアップロード"}
+              </button>
+              {state === "success" && coverUrl && (
+                <button
+                  type="button"
+                  onClick={handleRemove}
+                  className="rounded-md border border-red-300 px-3 py-2 text-sm font-medium text-red-700 hover:bg-red-50 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-950/30"
+                >
+                  カバーを削除
+                </button>
+              )}
+            </div>
           )}
         </div>
       </div>

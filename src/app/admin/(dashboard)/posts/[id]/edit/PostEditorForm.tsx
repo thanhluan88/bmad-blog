@@ -189,6 +189,10 @@ export function PostEditorForm({ post, uploadConfigured = true }: { post: Post; 
               setCoverObject(obj);
               setCoverImageUrl(url);
             }}
+            onCoverRemoved={() => {
+              setCoverObject(null);
+              setCoverImageUrl(null);
+            }}
             uploadConfigured={uploadConfigured}
           />
           <div>

@@ -1,4 +1,4 @@
-import { put } from "@vercel/blob";
+import { del, put } from "@vercel/blob";
 
 /**
  * Builds object path for cover upload: covers/{postId}/{timestamp}-{sanitizedFilename}
@@ -62,4 +62,12 @@ export async function uploadCoverToBlob(
     objectPath: blob.pathname,
     publicUrl,
   };
+}
+
+/**
+ * Deletes a blob object by pathname. Best-effort — callers should not fail the
+ * main operation if the blob is already gone.
+ */
+export async function deleteBlobObject(pathname: string, token: string): Promise<void> {
+  await del(pathname, { token });
 }

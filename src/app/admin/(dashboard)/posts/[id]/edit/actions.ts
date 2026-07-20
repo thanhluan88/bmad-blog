@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { Prisma } from "@prisma/client";
 import { requireAuth, requirePostOwnership } from "@/lib/rbac";
 import { db } from "@/lib/db";
+import { deleteBlobObject } from "@/lib/storage";
 import { draftPostSchema, publishPostSchema, slugSchema } from "@/lib/validation";
 
 export type FormState = {
@@ -11,6 +12,28 @@ export type FormState = {
   code?: string;
   errors?: { title?: string; slug?: string; contentMd?: string };
 };
+
+async function cleanupReplacedCoverObject(
+  previousObject: string | null | undefined,
+  nextObject: string | null,
+): Promise<void> {
+  if (!previousObject?.trim()) return;
+  if (previousObject === nextObject) return;
+
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) return;
+
+  try {
+    await deleteBlobObject(previousObject, token);
+  } catch (err) {
+    console.error("[admin/posts/edit] Failed to delete old cover blob", {
+      route: "admin/posts/edit",
+      errorCode: "STORAGE_DELETE_ERROR",
+      objectPath: previousObject,
+      message: err instanceof Error ? err.message : String(err),
+    });
+  }
+}
 
 export async function updateDraftPost(
   postId: string,
@@ -57,10 +80,17 @@ export async function updateDraftPost(
       return { success: false, code: "SLUG_TAKEN", errors: { slug: "このスラッグは既に使用されています" } };
     }
 
+    const current = await db.post.findUnique({
+      where: { id: postId },
+      select: { coverObject: true },
+    });
+
     await db.post.update({
       where: { id: postId },
       data: { title, slug, contentMd, coverObject, coverImageUrl },
     });
+
+    await cleanupReplacedCoverObject(current?.coverObject, coverObject);
 
     revalidatePath(`/admin/posts/${postId}/edit`);
     revalidatePath("/admin/posts");
@@ -165,6 +195,11 @@ export async function publishPost(
       return { success: false, errors: { slug: "Slug already in use" } };
     }
 
+    const current = await db.post.findUnique({
+      where: { id: postId },
+      select: { coverObject: true },
+    });
+
     await db.post.update({
       where: { id: postId },
       data: {
@@ -177,6 +212,8 @@ export async function publishPost(
         publishedAt: new Date(),
       },
     });
+
+    await cleanupReplacedCoverObject(current?.coverObject, coverObject);
 
     revalidatePath(`/admin/posts/${postId}/edit`);
     revalidatePath("/admin/posts");
