@@ -17,6 +17,9 @@ type Props = {
   posts: Post[];
 };
 
+const postLinkClass =
+  "block rounded-lg px-3 py-2.5 text-sm text-foreground/90 transition-colors hover:bg-surface-elevated";
+
 export function SidebarMenu({ posts }: Props) {
   const {
     isOpen,
@@ -65,57 +68,53 @@ export function SidebarMenu({ posts }: Props) {
         <div className="flex h-full flex-col p-5 pt-5 md:pt-20">
           <p className="mb-4 text-xs font-medium text-muted">Menu</p>
           <nav className="flex-1 overflow-y-auto">
-            <ul className="space-y-1">
+            <ul className="space-y-0.5">
               <li>
                 <Link
                   href={`/p/${PMP_HUB_SLUG}`}
                   onClick={closeOnNavigate}
-                  className="block rounded-xl bg-accent px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-hover"
+                  className={postLinkClass}
                 >
-                  {PMP_HUB_POST_TITLE}
+                  <span className="line-clamp-2 leading-snug">{PMP_HUB_POST_TITLE}</span>
                 </Link>
               </li>
-              <li className="mt-2">
+              <li>
                 <Link
                   href={PMP_EXAM_PREP_HTML_PATH}
                   onClick={closeOnNavigate}
-                  className="block rounded-lg border border-accent/30 bg-accent/10 px-3 py-2.5 text-sm font-medium text-foreground/90 transition-colors hover:bg-accent/15"
+                  className={postLinkClass}
                 >
-                  {PMP_EXAM_PREP_TITLE}
+                  <span className="line-clamp-2 leading-snug">{PMP_EXAM_PREP_TITLE}</span>
                 </Link>
               </li>
-            </ul>
-            {posts.length > 0 && (
-              <ul className="mt-6 space-y-0.5">
-                {posts.map((post) => (
-                  <li key={post.id}>
-                    <Link
-                      href={`/p/${post.slug}`}
-                      onClick={closeOnNavigate}
-                      className="block rounded-lg px-3 py-2.5 text-sm text-foreground/90 transition-colors hover:bg-surface-elevated"
+              {posts.map((post) => (
+                <li key={post.id}>
+                  <Link
+                    href={`/p/${post.slug}`}
+                    onClick={closeOnNavigate}
+                    className={postLinkClass}
+                  >
+                    <span className="line-clamp-2 leading-snug">{post.title}</span>
+                    <time
+                      dateTime={
+                        post.publishedAt
+                          ? typeof post.publishedAt === "string"
+                            ? post.publishedAt
+                            : post.publishedAt.toISOString()
+                          : ""
+                      }
+                      className="mt-1 block text-xs text-muted"
                     >
-                      <span className="line-clamp-2 leading-snug">{post.title}</span>
-                      <time
-                        dateTime={
-                          post.publishedAt
-                            ? typeof post.publishedAt === "string"
-                              ? post.publishedAt
-                              : post.publishedAt.toISOString()
-                            : ""
-                        }
-                        className="mt-1 block text-xs text-muted"
-                      >
-                        {post.publishedAt
-                          ? formatUpdatedAt(post.publishedAt)
-                          : "Chưa có ngày"}
-                      </time>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
+                      {post.publishedAt
+                        ? formatUpdatedAt(post.publishedAt)
+                        : "Chưa có ngày"}
+                    </time>
+                  </Link>
+                </li>
+              ))}
+            </ul>
             {posts.length === 0 && (
-              <p className="mt-6 px-3 text-sm text-muted">Chưa có bài viết khác</p>
+              <p className="mt-3 px-3 text-sm text-muted">Chưa có bài viết khác</p>
             )}
           </nav>
         </div>
