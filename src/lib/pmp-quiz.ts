@@ -10,6 +10,7 @@ export const PMP_MINDSET_SLUG = "pmp-mindset";
 export const PMP_MINDSET_HTML_PATH = "/pmp/pmp-mindset-teach.html";
 
 export const PMP_EXAM_PREP_HTML_PATH = "/pmp/pmp-exam-prep-lecture.html";
+export const PMP_EXAM_PREP_SLUG = "pmp-exam-prep-lecture";
 export const PMP_EXAM_PREP_TITLE = "Bài giảng PMP — PMBOK 8";
 
 export const PMP_EXAM_LATEST_PREP_HTML_PATH = "/pmp/pmp-exam-latest-prep-lecture.html";
@@ -37,6 +38,12 @@ export function shouldShowPostInSidebar(slug: string): boolean {
   if (slug === PMP_HUB_SLUG) return false;
   if (slug === PMP_MINDSET_SLUG) return false;
   return !(PMP_QUIZ_SLUGS as readonly string[]).includes(slug);
+}
+
+/** Sidebar nav: hub + blog posts; hide quiz embeds and mindset drill. */
+export function shouldShowInSidebarNav(slug: string): boolean {
+  if (isPmpMindsetSlug(slug)) return false;
+  return !isPmpQuizSlug(slug);
 }
 
 export function isPmpMindsetSlug(slug: string): boolean {

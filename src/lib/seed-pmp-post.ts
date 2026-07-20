@@ -1,6 +1,8 @@
 import type { PrismaClient } from "@prisma/client";
 import {
   PMP_EXAM_LATEST_SLUG,
+  PMP_EXAM_PREP_SLUG,
+  PMP_EXAM_PREP_TITLE,
   PMP_HUB_SLUG,
   PMP_MINDSET_SLUG,
   PMP_QUIZ_SLUG,
@@ -59,6 +61,11 @@ export const PMP_MINDSET_POST_CONTENT_MD = `Bài học tương tác giúp bạn 
 > Mẹo: hoàn thành drill 10 câu trong bài học, sau đó chuyển sang [luyện đề đầy đủ](/p/pmp).
 `;
 
+export const PMP_EXAM_PREP_POST_CONTENT_MD = `[Mở bài giảng PMP — PMBOK 8](/pmp/pmp-exam-prep-lecture.html)
+
+Bài giảng tương tác: format đề thi, 7 Domains, 6 Principles, Practice & Patterns Full Bank (1.123 câu).
+`;
+
 async function upsertQuizPost(
   db: PrismaClient,
   slug: string,
@@ -79,7 +86,6 @@ async function upsertQuizPost(
         title,
         contentMd,
         status: "PUBLISHED",
-        publishedAt: new Date(),
       },
     });
     console.log(`Updated PMP post: /p/${slug}`);
@@ -116,6 +122,15 @@ export async function seedPmpPost(db: PrismaClient) {
     PMP_HUB_SLUG,
     PMP_HUB_POST_TITLE,
     PMP_HUB_POST_CONTENT_MD,
+    admin.id,
+    admin.email,
+  );
+
+  await upsertQuizPost(
+    db,
+    PMP_EXAM_PREP_SLUG,
+    PMP_EXAM_PREP_TITLE,
+    PMP_EXAM_PREP_POST_CONTENT_MD,
     admin.id,
     admin.email,
   );

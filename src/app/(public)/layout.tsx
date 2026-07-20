@@ -1,5 +1,4 @@
-import { db } from "@/lib/db";
-import { shouldShowPostInSidebar } from "@/lib/pmp-quiz";
+import { getSidebarNavItems } from "@/lib/sidebar-nav";
 import { incrementPageViewsAndGetTotal } from "@/lib/site-stats";
 import { MenuInteractionProvider } from "@/components/MenuInteractionProvider";
 import { SidebarMenu } from "@/components/SidebarMenu";
@@ -17,14 +16,9 @@ export default async function PublicLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let posts: { id: string; title: string; slug: string; publishedAt: Date | null }[] = [];
+  let items: Awaited<ReturnType<typeof getSidebarNavItems>> = [];
   try {
-    const allPosts = await db.post.findMany({
-      where: { status: "PUBLISHED" },
-      select: { id: true, title: true, slug: true, publishedAt: true },
-      orderBy: { publishedAt: "desc" },
-    });
-    posts = allPosts.filter((post) => shouldShowPostInSidebar(post.slug));
+    items = await getSidebarNavItems();
   } catch {
     // Sidebar empty on error
   }
@@ -36,7 +30,7 @@ export default async function PublicLayout({
       <PublicLayoutShell>
         <BlogChromeHotzones />
         <BlogHeader />
-        <SidebarMenu posts={posts} />
+        <SidebarMenu items={items} />
         <PublicMainShell>{children}</PublicMainShell>
         <BlogFooter visitCount={visitCount} />
       </PublicLayoutShell>

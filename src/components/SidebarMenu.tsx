@@ -3,24 +3,16 @@
 import Link from "next/link";
 import { useBlogMenu } from "@/components/MenuInteractionProvider";
 import { formatUpdatedAt } from "@/lib/format";
-import { PMP_EXAM_PREP_HTML_PATH, PMP_EXAM_PREP_TITLE, PMP_HUB_SLUG } from "@/lib/pmp-quiz";
-import { PMP_HUB_POST_TITLE } from "@/lib/seed-pmp-post";
-
-type Post = {
-  id: string;
-  title: string;
-  slug: string;
-  publishedAt: Date | string | null;
-};
+import type { SidebarNavItem } from "@/lib/sidebar-nav";
 
 type Props = {
-  posts: Post[];
+  items: SidebarNavItem[];
 };
 
 const postLinkClass =
   "block rounded-lg px-3 py-2.5 text-sm text-foreground/90 transition-colors hover:bg-surface-elevated";
 
-export function SidebarMenu({ posts }: Props) {
+export function SidebarMenu({ items }: Props) {
   const {
     isOpen,
     setIsOpen,
@@ -68,53 +60,36 @@ export function SidebarMenu({ posts }: Props) {
         <div className="flex h-full flex-col p-5 pt-5 md:pt-20">
           <p className="mb-4 text-xs font-medium text-muted">Menu</p>
           <nav className="flex-1 overflow-y-auto">
-            <ul className="space-y-0.5">
-              <li>
-                <Link
-                  href={`/p/${PMP_HUB_SLUG}`}
-                  onClick={closeOnNavigate}
-                  className={postLinkClass}
-                >
-                  <span className="line-clamp-2 leading-snug">{PMP_HUB_POST_TITLE}</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={PMP_EXAM_PREP_HTML_PATH}
-                  onClick={closeOnNavigate}
-                  className={postLinkClass}
-                >
-                  <span className="line-clamp-2 leading-snug">{PMP_EXAM_PREP_TITLE}</span>
-                </Link>
-              </li>
-              {posts.map((post) => (
-                <li key={post.id}>
-                  <Link
-                    href={`/p/${post.slug}`}
-                    onClick={closeOnNavigate}
-                    className={postLinkClass}
-                  >
-                    <span className="line-clamp-2 leading-snug">{post.title}</span>
-                    <time
-                      dateTime={
-                        post.publishedAt
-                          ? typeof post.publishedAt === "string"
-                            ? post.publishedAt
-                            : post.publishedAt.toISOString()
-                          : ""
-                      }
-                      className="mt-1 block text-xs text-muted"
+            {items.length > 0 ? (
+              <ul className="space-y-0.5">
+                {items.map((item) => (
+                  <li key={item.id}>
+                    <Link
+                      href={item.href}
+                      onClick={closeOnNavigate}
+                      className={postLinkClass}
                     >
-                      {post.publishedAt
-                        ? formatUpdatedAt(post.publishedAt)
-                        : "Chưa có ngày"}
-                    </time>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            {posts.length === 0 && (
-              <p className="mt-3 px-3 text-sm text-muted">Chưa có bài viết khác</p>
+                      <span className="line-clamp-2 leading-snug">{item.title}</span>
+                      <time
+                        dateTime={
+                          item.publishedAt
+                            ? typeof item.publishedAt === "string"
+                              ? item.publishedAt
+                              : item.publishedAt.toISOString()
+                            : ""
+                        }
+                        className="mt-1 block text-xs text-muted"
+                      >
+                        {item.publishedAt
+                          ? formatUpdatedAt(item.publishedAt)
+                          : "Chưa có ngày"}
+                      </time>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="px-3 text-sm text-muted">Chưa có bài viết</p>
             )}
           </nav>
         </div>
