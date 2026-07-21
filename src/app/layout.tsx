@@ -13,7 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Thanh Luan Blog",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://thanhluan-blog.vercel.app",
+  ),
+  title: {
+    default: "Thanh Luan Blog",
+    template: "%s | Thanh Luan Blog",
+  },
   description: "Ghi chép cá nhân và luyện thi PMP",
 };
 

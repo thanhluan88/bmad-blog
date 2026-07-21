@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import { ChromeAwarePageFrame } from "@/components/ChromeAwarePageFrame";
 import { MarkdownBody } from "@/components/MarkdownBody";
 import { PmpInteractiveEmbed } from "@/components/PmpInteractiveEmbed";
@@ -28,9 +30,7 @@ const QUIZ_TITLES: Record<string, string> = {
   [PMP_MINDSET_SLUG]: "PMP Mindset",
 };
 
-export default async function PublicPostPage({ params }: Props) {
-  const { slug } = await params;
-
+const getPublishedPost = cache(async (slug: string) => {
   const dbPost = await db.post.findFirst({
     where: { slug, status: "PUBLISHED" },
     select: { id: true, title: true, contentMd: true, coverImageUrl: true },
@@ -41,6 +41,57 @@ export default async function PublicPostPage({ params }: Props) {
     dbPost && fallback
       ? { ...dbPost, title: fallback.title, contentMd: fallback.contentMd }
       : dbPost ?? fallback;
+
+  return post;
+});
+
+function getPostDescription(contentMd: string): string {
+  const text = contentMd
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[#>*_~`|=-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!text) return "Ghi chép cá nhân và luyện thi PMP";
+  return text.length > 160 ? `${text.slice(0, 157).trimEnd()}...` : text;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPublishedPost(slug);
+
+  if (!post) return {};
+
+  const description = getPostDescription(post.contentMd);
+  const coverUrl = post.coverImageUrl?.trim() || undefined;
+  const canonicalPath = `/p/${slug}`;
+
+  return {
+    title: post.title,
+    description,
+    alternates: { canonical: canonicalPath },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description,
+      url: canonicalPath,
+      images: coverUrl ? [{ url: coverUrl, alt: post.title }] : undefined,
+    },
+    twitter: {
+      card: coverUrl ? "summary_large_image" : "summary",
+      title: post.title,
+      description,
+      images: coverUrl ? [coverUrl] : undefined,
+    },
+  };
+}
+
+export default async function PublicPostPage({ params }: Props) {
+  const { slug } = await params;
+  const post = await getPublishedPost(slug);
 
   if (!post) {
     notFound();
